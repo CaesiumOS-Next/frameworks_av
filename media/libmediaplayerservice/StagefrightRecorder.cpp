@@ -2137,6 +2137,14 @@ status_t StagefrightRecorder::setupVideoEncoder(
         format->setInt32("android._input-metadata-buffer-type", mMetaDataStoredInVideoBuffers);
     }
 
+    if (mOutputFormat == OUTPUT_FORMAT_MPEG_4) {
+        format->setInt32("feature-nal-length-bitstream", 1);
+        format->setInt32("nal-length-in-bytes", 4);
+        if (mVideoEncoder == VIDEO_ENCODER_HEVC) {
+            format->setInt32("vendor.qti-ext-enc-nal-length-bs.num-bytes", 4);
+        }
+    }
+
     uint32_t flags = 0;
     if (cameraSource == NULL) {
         flags |= MediaCodecSource::FLAG_USE_SURFACE_INPUT;

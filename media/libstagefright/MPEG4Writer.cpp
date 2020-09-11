@@ -2273,6 +2273,9 @@ MPEG4Writer::Track::Track(
     mIsMPEG4 = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_MPEG4) ||
                !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_AAC);
 
+    if (!mMeta->findInt32(kKeyFeatureNalLengthBitstream, &mNalLengthBitstream)) {
+        mMeta->findInt32(kKeyVendorFeatureNalLength, &mNalLengthBitstream);
+    }
     // store temporal layer count
     if (mIsVideo) {
         int32_t count;

@@ -800,6 +800,7 @@ static std::vector<std::pair<const char *, uint32_t>> int32Mappings {
         { "dvb-teletext-page-number", kKeyDvbTeletextPageNumber},
         { "profile", kKeyAudioProfile },
         { "level", kKeyAudioLevel },
+        { "vendor.qti-ext-enc-nal-length-bs.num-bytes",  kKeyVendorFeatureNalLength },
     }
 };
 
@@ -2063,6 +2064,10 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
     }
 
     // reassemble the csd data into its original form
+    int32_t nalLengthBitstream = 0;
+    if (! msg->findInt32("feature-nal-length-bitstream", &nalLengthBitstream)) {
+        msg->findInt32("vendor.qti-ext-enc-nal-length-bs.num-bytes", &nalLengthBitstream);
+    }
     sp<ABuffer> csd0, csd1, csd2;
     if (msg->findBuffer("csd-0", &csd0)) {
         int csd0size = csd0->size();

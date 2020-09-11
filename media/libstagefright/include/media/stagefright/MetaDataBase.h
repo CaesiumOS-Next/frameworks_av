@@ -296,6 +296,8 @@ enum {
 
     // DVB teletext page number
     kKeyDvbTeletextPageNumber = 'ttxp', // int32_t, DVB teletext page number
+
+    kKeyVendorFeatureNalLength = 'vfnl', // int32_t key to check nal length enable
 };
 
 enum {
