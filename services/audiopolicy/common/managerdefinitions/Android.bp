@@ -50,6 +50,7 @@ cc_library {
         "libmedia_helper",
         "libutils",
         "libxml2",
+        "server_configurable_flags",
     ],
     export_shared_lib_headers: [
         "libaudiofoundation",
