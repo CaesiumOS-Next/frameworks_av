@@ -220,6 +220,13 @@ public:
      */
     void processMuteEvent_l(const sp<IAudioManager>& audioManager, mute_state_t muteState) final;
 
+    // VolumePortInterface implementation
+    void setPortVolume(float volume) override {
+        mVolume = volume;
+        signal();
+    }
+    float getPortVolume() const override { return mVolume; }
+
 protected:
 
     DISALLOW_COPY_AND_ASSIGN(Track);
@@ -399,6 +406,8 @@ private:
     // access these two variables only when holding player thread lock.
     std::unique_ptr<os::PersistableBundle> mMuteEventExtras;
     mute_state_t        mMuteState;
+
+    float mVolume = 0.0f;
 };  // end of Track
 
 
