@@ -65,6 +65,13 @@ public:
     void processMuteEvent_l(const sp<IAudioManager>& audioManager,
                             mute_state_t muteState)
                             /* REQUIRES(MmapPlaybackThread::mLock) */ final;
+
+    // VolumePortInterface implementation
+    void setPortVolume(float volume) override {
+        mVolume = volume;
+    }
+    float getPortVolume() const override { return mVolume; }
+
 private:
     DISALLOW_COPY_AND_ASSIGN(MmapTrack);
 
@@ -87,6 +94,8 @@ private:
             /* GUARDED_BY(MmapPlaybackThread::mLock) */;
     mute_state_t mMuteState
             /* GUARDED_BY(MmapPlaybackThread::mLock) */;
+
+    float mVolume = 0.0f;
 };  // end of Track
 
 } // namespace android
