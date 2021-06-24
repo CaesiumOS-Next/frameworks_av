@@ -842,7 +842,10 @@ Track::Track(
         mFastIndex = i;
         thread->fastTrackAvailMask_l() &= ~(1 << i);
     }
-
+    if (attr.usage == AUDIO_USAGE_CALL_ASSISTANT || attr.usage == AUDIO_USAGE_VIRTUAL_SOURCE) {
+        // Audio patch and call assistant volume are always max
+        mVolume = 1.0f;
+    }
     mServerLatencySupported = checkServerLatencySupported(format, flags);
 #ifdef TEE_SINK
     mTee.setId(std::string("_") + std::to_string(mThreadIoHandle)
@@ -923,7 +926,7 @@ void Track::appendDumpHeader(String8& result) const
     result.appendFormat("Type     Id Active Client Session Port Id S  Flags "
                         "  Format Chn mask  SRate "
                         "ST Usg CT "
-                        " G db  L dB  R dB  VS dB "
+                        " G db  L dB  R dB  VS dB  PortVol dB "
                         "  Server FrmCnt  FrmRdy F Underruns  Flushed BitPerfect"
                         "%s\n",
                         isServerLatencySupported() ? "   Latency" : "");
@@ -1009,7 +1012,7 @@ void Track::appendDump(String8& result, bool active) const
     result.appendFormat("%7s %6u %7u %7u %2s 0x%03X "
                         "%08X %08X %6u "
                         "%2u %3x %2x "
-                        "%5.2g %5.2g %5.2g %5.2g%c "
+                        "%5.2g %5.2g %5.2g %5.2g%c %11.2g "
                         "%08X %6zu%c %6zu %c %9u%c %7u %10s",
             active ? "yes" : "no",
             (mClient == 0) ? getpid() : mClient->pid(),
@@ -1031,6 +1034,7 @@ void Track::appendDump(String8& result, bool active) const
             20.0 * log10(float_from_gain(gain_minifloat_unpack_right(vlr))),
             20.0 * log10(vsVolume.first), // VolumeShaper(s) total volume
             vsVolume.second ? 'A' : ' ',  // if any VolumeShapers active
+            20.0 * log10(mVolume),
 
             mCblk->mServer,
             bufferSizeInFrames,
@@ -3514,6 +3518,11 @@ MmapTrack::MmapTrack(IAfThreadBase* thread,
 {
     // Once this item is logged by the server, the client can add properties.
     mTrackMetrics.logConstructor(creatorPid, uid(), id());
+    if (isOut && (attr.usage == AUDIO_USAGE_CALL_ASSISTANT
+            || attr.usage == AUDIO_USAGE_VIRTUAL_SOURCE)) {
+        // Audio patch and call assistant volume are always max
+        mVolume = 1.0f;
+    }
 }
 
 MmapTrack::~MmapTrack()
@@ -3592,8 +3601,8 @@ void MmapTrack::processMuteEvent_l(const sp<IAudioManager>& audioManager, mute_s
 
 void MmapTrack::appendDumpHeader(String8& result) const
 {
-    result.appendFormat("Client Session Port Id  Format Chn mask  SRate Flags %s\n",
-                        isOut() ? "Usg CT": "Source");
+    result.appendFormat("Client Session Port Id  Format Chn mask  SRate Flags %s  %s\n",
+                        isOut() ? "Usg CT": "Source", isOut() ? "PortVol dB" : "");
 }
 
 void MmapTrack::appendDump(String8& result, bool active __unused) const
@@ -3608,6 +3617,7 @@ void MmapTrack::appendDump(String8& result, bool active __unused) const
             mAttr.flags);
     if (isOut()) {
         result.appendFormat("%3x %2x", mAttr.usage, mAttr.content_type);
+        result.appendFormat("%11.2g", 20.0 * log10(mVolume));
     } else {
         result.appendFormat("%6x", mAttr.source);
     }
