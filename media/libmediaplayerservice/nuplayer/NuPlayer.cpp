@@ -2001,6 +2001,14 @@ status_t NuPlayer::instantiateDecoder(
         } else {
             mSource->setOffloadAudio(false /* offload */);
 
+            AString mime;
+            if (format->findString("mime", &mime)) {
+                if (!strcasecmp(mime.c_str(), MEDIA_MIMETYPE_AUDIO_MPEGH_MHA1)
+                        || !strcasecmp(mime.c_str(), MEDIA_MIMETYPE_AUDIO_MPEGH_MHM1)) {
+                    format->setInt32("pcm-encoding", kAudioEncodingPcmFloat);
+                }
+            }
+
             *decoder = new Decoder(notify, mSource, mPID, mUID, mRenderer);
             ALOGV("instantiateDecoder audio Decoder");
         }
