@@ -1222,6 +1222,33 @@ audio_io_handle_t AudioRecord::getInputPrivate() const
     return mInput;
 }
 
+status_t AudioRecord::setParameters(const String8& keyValuePairs) {
+    AutoMutex lock(mLock);
+    if (mInput == AUDIO_IO_HANDLE_NONE) {
+        return NO_INIT;
+    }
+    if (mAudioRecord == nullptr) {
+        return NO_INIT;
+    }
+    return statusTFromBinderStatus(mAudioRecord->setParameters(keyValuePairs));
+}
+
+String8 AudioRecord::getParameters(const String8& keys) {
+    AutoMutex lock(mLock);
+    if (mInput == AUDIO_IO_HANDLE_NONE) {
+        return String8::empty();
+    }
+    if (mAudioRecord == nullptr) {
+        return String8::empty();
+    }
+    String8 result;
+    status_t status = statusTFromBinderStatus(mAudioRecord->getParameters(keys, &result));
+    if (status != NO_ERROR) {
+        return String8::empty();
+    }
+    return result;
+}
+
 // -------------------------------------------------------------------------
 
 ssize_t AudioRecord::read(void* buffer, size_t userSize, bool blocking)
