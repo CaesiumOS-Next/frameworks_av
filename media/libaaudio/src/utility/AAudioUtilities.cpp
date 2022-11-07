@@ -383,6 +383,8 @@ audio_channel_mask_t AAudioConvert_aaudioToAndroidChannelLayoutMask(
                 return AUDIO_CHANNEL_OUT_7POINT1POINT2;
             case AAUDIO_CHANNEL_7POINT1POINT4:
                 return AUDIO_CHANNEL_OUT_7POINT1POINT4;
+            case AAUDIO_CHANNEL_13POINT_360RA:
+                return AUDIO_CHANNEL_OUT_13POINT_360RA;
             case AAUDIO_CHANNEL_9POINT1POINT4:
                 return AUDIO_CHANNEL_OUT_9POINT1POINT4;
             case AAUDIO_CHANNEL_9POINT1POINT6:
@@ -464,6 +466,8 @@ aaudio_channel_mask_t AAudioConvert_androidToAAudioChannelLayoutMask(
                 return AAUDIO_CHANNEL_7POINT1POINT2;
             case AUDIO_CHANNEL_OUT_7POINT1POINT4:
                 return AAUDIO_CHANNEL_7POINT1POINT4;
+            case AUDIO_CHANNEL_OUT_13POINT_360RA:
+                return AAUDIO_CHANNEL_13POINT_360RA;
             case AUDIO_CHANNEL_OUT_9POINT1POINT4:
                 return AAUDIO_CHANNEL_9POINT1POINT4;
             case AUDIO_CHANNEL_OUT_9POINT1POINT6:
