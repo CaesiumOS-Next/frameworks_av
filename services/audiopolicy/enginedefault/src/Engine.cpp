@@ -675,6 +675,7 @@ sp<DeviceDescriptor> Engine::getDeviceForInputSource(audio_source_t inputSource)
         device = availableDevices.getFirstExistingDevice(
                                         getLastRemovableInputMediaDevices());
         orderedTypes = {
+                AUDIO_DEVICE_IN_HDMI,
                 AUDIO_DEVICE_IN_WIRED_HEADSET,
                 AUDIO_DEVICE_IN_USB_HEADSET, AUDIO_DEVICE_IN_USB_DEVICE,
                 AUDIO_DEVICE_IN_BLUETOOTH_BLE, AUDIO_DEVICE_IN_BUILTIN_MIC};
@@ -739,8 +740,27 @@ sp<DeviceDescriptor> Engine::getDeviceForInputSource(audio_source_t inputSource)
         }
         break;
 
-    case AUDIO_SOURCE_VOICE_RECOGNITION:
     case AUDIO_SOURCE_UNPROCESSED:
+        if (audio_is_bluetooth_out_sco_device(commDeviceType)) {
+            device = availableDevices.getDevice(
+                    AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET, String8(""), AUDIO_FORMAT_DEFAULT);
+            if (device != nullptr) break;
+        }
+        device = availableDevices.getFirstExistingDevice(
+                                        getLastRemovableInputMediaDevices());
+        orderedTypes = {
+                AUDIO_DEVICE_IN_HDMI,
+                AUDIO_DEVICE_IN_WIRED_HEADSET,
+                AUDIO_DEVICE_IN_USB_HEADSET, AUDIO_DEVICE_IN_USB_DEVICE,
+                AUDIO_DEVICE_IN_BLUETOOTH_BLE, AUDIO_DEVICE_IN_BUILTIN_MIC};
+        if (!(device != nullptr &&
+              find(orderedTypes.begin(), orderedTypes.end(), device->type()) != orderedTypes.end())) {
+            // If last removable device is none or not supported,
+            // set supported device based on priority.
+            device = availableDevices.getFirstExistingDevice(orderedTypes);
+        }
+        break;
+    case AUDIO_SOURCE_VOICE_RECOGNITION:
         if (audio_is_bluetooth_out_sco_device(commDeviceType)) {
             device = availableDevices.getDevice(
                     AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET, String8(""), AUDIO_FORMAT_DEFAULT);
@@ -776,6 +796,7 @@ sp<DeviceDescriptor> Engine::getDeviceForInputSource(audio_source_t inputSource)
     case AUDIO_SOURCE_CAMCORDER:
         // For a device without built-in mic, adding usb device
         device = availableDevices.getFirstExistingDevice({
+                AUDIO_DEVICE_IN_HDMI,
                 AUDIO_DEVICE_IN_BACK_MIC, AUDIO_DEVICE_IN_BUILTIN_MIC,
                 AUDIO_DEVICE_IN_USB_DEVICE});
         break;
