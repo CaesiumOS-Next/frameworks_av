@@ -159,8 +159,8 @@ class MultiAccessUnitSkipCutBuffer : public SkipCutBuffer {
 
 public:
     explicit MultiAccessUnitSkipCutBuffer(
-            int32_t skip, int32_t cut, size_t num16BitChannels):
-        SkipCutBuffer(skip, cut, num16BitChannels),
+            int32_t skip, int32_t cut, size_t numChannels, int32_t encoding):
+        SkipCutBuffer(skip, cut, numChannels, encoding),
         mFrontPaddingDelay(0), mSize(0) {
     }
     void clearAll() {
@@ -176,7 +176,7 @@ public:
 
     void submitMultiAccessUnits(
             const sp<MediaCodecBuffer>& buffer,
-            int32_t sampleRate, size_t num16BitChannels,
+            int32_t sampleRate, size_t numChannels,
             std::shared_ptr<const C2AccessUnitInfos::output> &infos) {
         if (infos == nullptr) {
             // there is nothing to do more.
@@ -190,8 +190,27 @@ public:
         uint32_t frontPadding = mFrontPadding;
         int32_t lastEmptyAccessUnitIndex = -1;
         int64_t byteInUs = 0;
-        if (sampleRate > 0 && num16BitChannels > 0) {
-            byteInUs = (1000000u / (sampleRate * num16BitChannels * 2));
+
+        switch(mEncoding) {
+            case AudioEncoding::kAudioEncodingPcm8bit:
+                mDataSize = sizeof(int8_t);
+                break;
+            case AudioEncoding::kAudioEncodingPcmFloat:
+                mDataSize = sizeof(float);
+                break;
+            case AudioEncoding::kAudioEncodingPcm24bitPacked:
+                mDataSize = sizeof(uint8_t) * 3;
+                break;
+            case AudioEncoding::kAudioEncodingPcm32bit:
+                mDataSize = sizeof(int32_t);
+                break;
+            case AudioEncoding::kAudioEncodingPcm16bit:
+            default:
+                mDataSize = sizeof(int16_t);
+        }
+
+        if (sampleRate > 0 && numChannels > 0) {
+            byteInUs = (1000000u / (sampleRate * numChannels * mDataSize));
         }
         if (frontPadding > 0) {
             mInfos.clear();
@@ -314,6 +333,7 @@ protected:
                 });
     }
     std::list<C2AccessUnitInfosStruct> mInfos;
+    int32_t mEncoding;
     int64_t mFrontPaddingDelay;
     size_t mSize;
 };
@@ -332,14 +352,18 @@ void OutputBuffers::initSkipCutBuffer(
     mPadding = padding;
     mSampleRate = sampleRate;
     mChannelCount = channelCount;
+    if (!mFormat || !mFormat->findInt32(KEY_PCM_ENCODING, &mEncoding)) {
+        mEncoding = AudioEncoding::kAudioEncodingPcm16bit;
+    }
     setSkipCutBuffer(delay, padding);
 }
 
-void OutputBuffers::updateSkipCutBuffer(int32_t sampleRate, int32_t channelCount) {
+void OutputBuffers::updateSkipCutBuffer(int32_t sampleRate, int32_t channelCount,
+            int32_t encoding) {
     if (mSkipCutBuffer == nullptr) {
         return;
     }
-    if (mSampleRate == sampleRate && mChannelCount == channelCount) {
+    if (mSampleRate == sampleRate && mChannelCount == channelCount && mEncoding == encoding) {
         return;
     }
     int32_t delay = mDelay;
@@ -359,9 +383,13 @@ void OutputBuffers::updateSkipCutBuffer(const sp<AMessage> &format) {
             && mediaType == MIMETYPE_AUDIO_RAW) {
         int32_t channelCount;
         int32_t sampleRate;
+        int32_t encoding;
         if (format->findInt32(KEY_CHANNEL_COUNT, &channelCount)
                 && format->findInt32(KEY_SAMPLE_RATE, &sampleRate)) {
-            updateSkipCutBuffer(sampleRate, channelCount);
+            if (!format->findInt32(KEY_PCM_ENCODING, &encoding)) {
+                encoding = mEncoding;
+            }
+            updateSkipCutBuffer(sampleRate, channelCount, encoding);
         }
     }
 }
@@ -388,7 +416,7 @@ void OutputBuffers::setSkipCutBuffer(int32_t skip, int32_t cut) {
             ALOGD("[%s] Replacing SkipCutBuffer holding %zu bytes", mName, prevSize);
         }
     }
-    mSkipCutBuffer = new MultiAccessUnitSkipCutBuffer(skip, cut, mChannelCount);
+    mSkipCutBuffer = new MultiAccessUnitSkipCutBuffer(skip, cut, mChannelCount, mEncoding);
 }
 
 bool OutputBuffers::convert(
