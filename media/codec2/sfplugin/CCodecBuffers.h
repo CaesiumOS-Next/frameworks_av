@@ -25,6 +25,7 @@
 #include <C2Config.h>
 #include <DataConverter.h>
 #include <media/stagefright/foundation/AMessage.h>
+#include <media/stagefright/foundation/MediaDefs.h>
 #include <media/MediaCodecBuffer.h>
 
 #include "Codec2Buffer.h"
@@ -391,7 +392,8 @@ protected:
     /**
      * Update the SkipCutBuffer object. No-op if it's never initialized.
      */
-    void updateSkipCutBuffer(int32_t sampleRate, int32_t channelCount);
+    void updateSkipCutBuffer(int32_t sampleRate, int32_t channelCount,
+            int32_t encoding = AudioEncoding::kAudioEncodingPcm16bit);
 
     bool submit(const sp<MediaCodecBuffer> &buffer, int32_t sampleRate,
             int32_t channelCount, std::shared_ptr<const C2AccessUnitInfos::output> &infos);
@@ -415,8 +417,10 @@ private:
     int32_t mPadding;
     int32_t mSampleRate;
     int32_t mChannelCount;
+    int32_t mEncoding;
 
-    void setSkipCutBuffer(int32_t skip, int32_t cut);
+    void setSkipCutBuffer(int32_t skip, int32_t cut,
+            int32_t encoding = AudioEncoding::kAudioEncodingPcm16bit);
 
     // DataConverter
     sp<DataConverter> mDataConverter;
