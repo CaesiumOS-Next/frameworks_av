@@ -88,7 +88,8 @@ status_t EngineBase::setDeviceConnectionState(const sp<DeviceDescriptor> devDesc
 product_strategy_t EngineBase::getProductStrategyForAttributes(
         const audio_attributes_t &attr, bool fallbackOnDefault) const
 {
-    return mProductStrategies.getProductStrategyForAttributes(attr, fallbackOnDefault);
+    return mProductStrategies.getProductStrategyForAttributes(attr,
+            AudioProductStrategy::DEFAULT_ZONE_ID, fallbackOnDefault);
 }
 
 audio_stream_type_t EngineBase::getStreamTypeForAttributes(const audio_attributes_t &attr) const
@@ -259,7 +260,8 @@ engineConfig::ParsingResult EngineBase::processParsingResult(
         loadVolumeConfig(mVolumeGroups, volumeConfig);
     }
     for (auto& strategyConfig : result.parsedConfig->productStrategies) {
-        sp<ProductStrategy> strategy = new ProductStrategy(strategyConfig.name, strategyConfig.id);
+        sp<ProductStrategy> strategy = new ProductStrategy(strategyConfig.name, strategyConfig.id,
+                strategyConfig.zoneId);
         for (const auto &group : strategyConfig.attributesGroups) {
             const auto &iter = std::find_if(begin(mVolumeGroups), end(mVolumeGroups),
                                          [&group](const auto &volumeGroup) {
@@ -349,7 +351,7 @@ status_t EngineBase::listAudioProductStrategies(AudioProductStrategyVector &stra
         const auto &productStrategy = iter.second;
         strategies.push_back(
         {productStrategy->getName(), productStrategy->listVolumeGroupAttributes(),
-         productStrategy->getId()});
+         productStrategy->getId(), productStrategy->getZoneId()});
     }
     return NO_ERROR;
 }
@@ -409,7 +411,8 @@ volume_group_t EngineBase::getVolumeGroupForAttributes(
 volume_group_t EngineBase::getVolumeGroupForStreamType(
         audio_stream_type_t stream, bool fallbackOnDefault) const
 {
-    return mProductStrategies.getVolumeGroupForStreamType(stream, fallbackOnDefault);
+    return mProductStrategies.getVolumeGroupForStreamType(stream,
+            AudioProductStrategy::DEFAULT_ZONE_ID, fallbackOnDefault);
 }
 
 status_t EngineBase::listAudioVolumeGroups(AudioVolumeGroupVector &groups) const
