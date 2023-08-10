@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #include "hidl/HidlSupport.h"
 #define LOG_TAG "MediaCodec"
 #define ATRACE_TAG  ATRACE_TAG_VIDEO
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#define MM_FWK_ATRACE_TAG ATRACE_TAG_ALWAYS
+// Mediatek Android Patch End.
 #include <utils/Log.h>
 #include <utils/Trace.h>
 
@@ -87,6 +90,68 @@
 #include <private/android_filesystem_config.h>
 #include <server_configurable_flags/get_flags.h>
 #include <utils/Singleton.h>
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+enum FWKVerboseLevel {
+    FWK_VERBOSE_DEFAULT = 1, //default
+    FWK_VERBOSE_TRACE = 2  //tracing
+};
+
+static int32_t sVerboseLog = 0;
+#ifdef ALOGV
+#undef ALOGV
+#endif
+#define ALOGV(...) ALOGV_IF((sVerboseLog >= FWK_VERBOSE_DEFAULT), __VA_ARGS__)
+// Mediatek Android Patch End.
+
+#define CONVERT_TIME_UNIT_TO_MS 1000000
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+static uint32_t sSerialNum = 0;
+static bool sEnableAtrace = false;
+#define NUM_OUTPUT_BUFFER_TIMESTAMPS 100
+#define NUM_INPUT_BUFFER_TIMESTAMPS 32
+#define kInvalidPts (-100)
+#define FWK_VIDEO_LOGV(x, ...)  ALOGV_IF(((sVerboseLog >= FWK_VERBOSE_DEFAULT) && (mDomain == DOMAIN_VIDEO)), "[FWK]%02d " x, mSerialNum, ##__VA_ARGS__)
+#define FWK_VIDEO_LOGV_TRACE(x, ...)  ALOGV_IF(((sVerboseLog  >= FWK_VERBOSE_TRACE) && (mDomain == DOMAIN_VIDEO)), "[FWK]%02d " x, mSerialNum, ##__VA_ARGS__)
+#define FWK_LOGV(x, ...)  ALOGV("[FWK]%02d " x, mSerialNum, ##__VA_ARGS__)
+#define FWK_LOGV_TRACE(x, ...)  ALOGV_IF((sVerboseLog  >= FWK_VERBOSE_TRACE), "[FWK]%02d " x, mSerialNum, ##__VA_ARGS__)
+#define ATRACE_NAME_(name, enable) ScopedTrace_  PASTE(___tracer, __LINE__)(MM_FWK_ATRACE_TAG, name, enable)
+#define FWK_MM_ATRACE_CALL(x, ...) \
+    ATRACE_NAME_( \
+        (std::string("") + std::to_string(mSerialNum) + "_MC_" +  __func__ + ((mDomain == DOMAIN_VIDEO)? "_video " : "_non-video ") + \
+            ((x == kInvalidPts)? "" : std::to_string(x))).c_str() ,\
+        sEnableAtrace);
+#define FWK_BC_MM_ATRACE_CALL(x, ...) \
+    ATRACE_NAME_( \
+        (std::string("MC_BC_") +  __func__ + ((mIsVideo)? "_video " : "_non-video ") + \
+            ((x == kInvalidPts)? "" : std::to_string(x))).c_str() ,\
+        sEnableAtrace);
+#define FWK_MM_ATRACE_CALL_OK(x, ...) \
+    if (sEnableAtrace) { \
+        atrace_instant(MM_FWK_ATRACE_TAG, \
+            (std::string("") + std::to_string(mSerialNum) + "_MC_" + __func__ + ((mDomain == DOMAIN_VIDEO)? "_video" : "_non-video") + \
+                "_ok " + ((x == kInvalidPts)? "" : std::to_string(x))).c_str() ); \
+    }
+#define FWK_MM_ATRACE_NAME(...) \
+    ATRACE_NAME_( \
+        (std::string("") + std::to_string(mSerialNum) + "_MC_" + __VA_ARGS__ + ((mDomain == DOMAIN_VIDEO)? "_video " : "_non-video ")).c_str() ,\
+        sEnableAtrace);
+#define FWK_MM_ATRACE_NAME_INSTANT(x, y, ...) \
+    if (sEnableAtrace) { \
+        atrace_instant(MM_FWK_ATRACE_TAG, \
+            (std::string("")  + std::to_string(mSerialNum) + "_MC_" + x + ((mDomain == DOMAIN_VIDEO)? "_video " : "_non-video ") + y).c_str()); \
+    }
+#define FWK_MM_ATRACE_NAME2(x, y, ...) \
+    ATRACE_NAME_( \
+        (std::string("") + std::to_string(mSerialNum) + "_MC_" + x + ((mDomain == DOMAIN_VIDEO)? "_video " : "_non-video ") + y).c_str() ,\
+        sEnableAtrace);
+#define FWK_MM_ATRACE_NAME_TIME(x, y, ...) \
+    ATRACE_NAME_( \
+        (std::string("") + std::to_string(mSerialNum) + "_MC_" + x + ((mDomain == DOMAIN_VIDEO)? "_video " : "_non-video ") + \
+            ((y == kInvalidPts)? "" : std::to_string(y))).c_str(),\
+        sEnableAtrace);
+// Mediatek Android Patch End.
 
 namespace android {
 
@@ -331,6 +396,27 @@ static const C2MemoryUsage kDefaultReadWriteUsage{
     C2MemoryUsage::CPU_READ, C2MemoryUsage::CPU_WRITE};
 
 ////////////////////////////////////////////////////////////////////////////////
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+class ScopedTrace_ {
+public:
+    inline ScopedTrace_(uint64_t tag, const char* name, bool enable) :
+        mTag(tag),
+        mEnable(enable) {
+        if (mEnable)
+            atrace_begin(mTag, name);
+    }
+
+    inline ~ScopedTrace_() {
+        if (mEnable)
+            atrace_end(mTag);
+    }
+
+private:
+    uint64_t mTag;
+    bool mEnable;
+};
+// Mediatek Android Patch End.
 
 /*
  * Implementation of IResourceManagerClient interrface that facilitates
@@ -936,19 +1022,49 @@ BufferCallback::BufferCallback(const sp<AMessage> &notify)
 
 void BufferCallback::onInputBufferAvailable(
         size_t index, const sp<MediaCodecBuffer> &buffer) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    int32_t mIsVideo = 0;
+    buffer->meta()->findInt32("mIsVideo", &mIsVideo);
+    FWK_BC_MM_ATRACE_CALL(kInvalidPts);
+    // Mediatek Android Patch End.
+
     sp<AMessage> notify(mNotify->dup());
     notify->setInt32("what", kWhatFillThisBuffer);
     notify->setSize("index", index);
     notify->setObject("buffer", buffer);
+
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    if (sVerboseLog && mIsVideo) {
+            ALOGV("[FWK][BC][%s]: called PTS idx = %zu", __FUNCTION__, index);
+    }
+    // Mediatek Android Patch End.
+
     notify->post();
 }
 
 void BufferCallback::onOutputBufferAvailable(
         size_t index, const sp<MediaCodecBuffer> &buffer) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    int32_t mIsVideo = 0;
+    int64_t timeUs = 0;
+    if (sVerboseLog || sEnableAtrace) {
+        buffer->meta()->findInt32("mIsVideo", &mIsVideo);
+        buffer->meta()->findInt64("timeUs", &timeUs);
+    }
+    FWK_BC_MM_ATRACE_CALL(timeUs);
+    // Mediatek Android Patch End.
+
     sp<AMessage> notify(mNotify->dup());
     notify->setInt32("what", kWhatDrainThisBuffer);
     notify->setSize("index", index);
     notify->setObject("buffer", buffer);
+
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    if (sVerboseLog && mIsVideo) {
+        ALOGV("[FWK][BC][%s]: called PTS = %" PRId64 " us", __FUNCTION__, timeUs);
+    }
+    // Mediatek Android Patch End.
+
     notify->post();
 }
 
@@ -1511,7 +1627,16 @@ MediaCodec::MediaCodec(
       mIndexOfFirstFrameWhenLowLatencyOn(-1),
       mInputBufferCounter(0),
       mGetCodecBase(getCodecBase),
-      mGetCodecInfo(getCodecInfo) {
+      mGetCodecInfo(getCodecInfo),
+      // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+      mOutTimestamp(std::vector<int64_t>(NUM_OUTPUT_BUFFER_TIMESTAMPS, -1)),
+      mInTimestamp(std::vector<int64_t>(NUM_INPUT_BUFFER_TIMESTAMPS, -1)) {
+      // Mediatek Android Patch End.
+    sVerboseLog = property_get_int32("media.framework.verbose.log", 0);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    sEnableAtrace = property_get_bool("media.framework.enable.atrace", 0) ||
+        atrace_is_tag_enabled(ATRACE_TAG_VIDEO);
+    // Mediatek Android Patch End.
     mCodecId = GenerateCodecId();
     mResourceManagerProxy = std::make_shared<ResourceManagerServiceProxy>(pid, uid,
             ::ndk::SharedRefBase::make<ResourceManagerClient>(this, pid, uid));
@@ -2142,6 +2267,12 @@ void MediaCodec::processRenderedFrames(const sp<AMessage> &msg) {
                 ALOGE("processRenderedFrames: no media time found");
                 continue;
             }
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+            const char * strToApk = (mOnFrameRenderedNotification != NULL)? "y" : "n";
+            std::string strTime = std::to_string(renderTimeNs) + ", " + std::to_string(mediaTimeUs) + ", toApk: " + strToApk;
+            FWK_MM_ATRACE_NAME_INSTANT(__func__, strTime.c_str());
+            FWK_VIDEO_LOGV("%s renderTimeUs: %" PRId64 ", mediaTimeUs: %" PRId64 ", toApk: %s", __func__, renderTimeNs, mediaTimeUs, strToApk);
+            // Mediatek Android Patch End.
             // Tunneled frames use INT64_MAX to indicate end-of-stream, so don't report it as a
             // rendered frame.
             if (!mTunneled || mediaTimeUs != INT64_MAX) {
@@ -2351,7 +2482,13 @@ void MediaCodec::PostReplyWithError(const sp<AReplyToken> &replyID, int32_t err)
 }
 
 static CodecBase *CreateCCodec() {
-    return new CCodec;
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    if (sVerboseLog || sEnableAtrace) {
+        return new CCodec(sSerialNum++ % 100);
+    } else {
+        return new CCodec;
+    }
+    // Mediatek Android Patch End.
 }
 
 //static
@@ -2456,6 +2593,12 @@ status_t MediaCodec::init(const AString &name) {
         return NAME_NOT_FOUND;
     }
 
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    if (sVerboseLog || sEnableAtrace) {
+        mSerialNum = mCodec->getSerialNum();
+    }
+    // Mediatek Android Patch End.
+
     if (mDomain == DOMAIN_VIDEO) {
         // video codec needs dedicated looper
         if (mCodecLooper == NULL) {
@@ -2544,6 +2687,10 @@ status_t MediaCodec::setCallback(const sp<AMessage> &callback) {
 }
 
 status_t MediaCodec::setOnFrameRenderedNotification(const sp<AMessage> &notify) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_LOGV("%s", __func__);
+    // Mediatek Android Patch End.
     sp<AMessage> msg = new AMessage(kWhatSetNotification, this);
     msg->setMessage("on-frame-rendered", notify);
     return msg->post();
@@ -2727,6 +2874,11 @@ status_t MediaCodec::configure(
         const sp<ICrypto> &crypto,
         const sp<IDescrambler> &descrambler,
         uint32_t flags) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV("%s %s", __func__, format->debugString(2).c_str());
+    // Mediatek Android Patch End.
+
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::configure#native");
     // Update the codec importance.
     updateCodecImportance(format);
@@ -3410,6 +3562,11 @@ uint64_t MediaCodec::getGraphicBufferSize() {
 }
 
 status_t MediaCodec::start() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV("%s", __func__);
+    // Mediatek Android Patch End.
+
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::start#native");
     sp<AMessage> msg = new AMessage(kWhatStart, this);
 
@@ -3468,6 +3625,10 @@ status_t MediaCodec::start() {
 }
 
 status_t MediaCodec::stop() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV("%s", __func__);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::stop#native");
     sp<AMessage> msg = new AMessage(kWhatStop, this);
 
@@ -3501,12 +3662,20 @@ status_t MediaCodec::reclaim(bool force) {
 }
 
 status_t MediaCodec::release() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV(" %s", __func__);
+    // Mediatek Android Patch End.
     sp<AMessage> msg = new AMessage(kWhatRelease, this);
     sp<AMessage> response;
     return PostAndAwaitResponse(msg, &response);
 }
 
 status_t MediaCodec::releaseAsync(const sp<AMessage> &notify) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV("%s", __func__);
+    // Mediatek Android Patch End.
     sp<AMessage> msg = new AMessage(kWhatRelease, this);
     msg->setMessage("async", notify);
     sp<AMessage> response;
@@ -3514,6 +3683,10 @@ status_t MediaCodec::releaseAsync(const sp<AMessage> &notify) {
 }
 
 status_t MediaCodec::reset() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV(" %s", __func__);
+    // Mediatek Android Patch End.
     /* When external-facing MediaCodec object is created,
        it is already initialized.  Thus, reset is essentially
        release() followed by init(), plus clearing the state */
@@ -3554,6 +3727,11 @@ status_t MediaCodec::queueInputBuffer(
         int64_t presentationTimeUs,
         uint32_t flags,
         AString *errorDetailMsg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(presentationTimeUs);
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
+
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::queueInputBuffer#native");
     if (errorDetailMsg != NULL) {
         errorDetailMsg->clear();
@@ -3567,7 +3745,11 @@ status_t MediaCodec::queueInputBuffer(
     msg->setInt32("flags", flags);
     msg->setPointer("errorDetailMsg", errorDetailMsg);
     sp<AMessage> response;
-    return PostAndAwaitResponse(msg, &response);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    status_t ret = PostAndAwaitResponse(msg, &response);
+    FWK_VIDEO_LOGV("[%s]: called idx #%zu (%" PRId64 " ms), queue pts = %" PRId64 " us", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, presentationTimeUs);
+    return ret;
+    // Mediatek Android Patch End.
 }
 
 status_t MediaCodec::queueInputBuffers(
@@ -3576,6 +3758,9 @@ status_t MediaCodec::queueInputBuffers(
         size_t size,
         const sp<BufferInfosWrapper> &infos,
         AString *errorDetailMsg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::queueInputBuffers#native");
     sp<AMessage> msg = new AMessage(kWhatQueueInputBuffer, this);
     uint32_t bufferFlags = 0;
@@ -3610,8 +3795,16 @@ status_t MediaCodec::queueInputBuffers(
     msg->setInt32("flags", bufferFlags);
     msg->setObject("accessUnitInfo", infos);
     msg->setPointer("errorDetailMsg", errorDetailMsg);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(minTimeUs);
+    // Mediatek Android Patch End.
+
     sp<AMessage> response;
-    return PostAndAwaitResponse(msg, &response);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    status_t ret = PostAndAwaitResponse(msg, &response);
+    FWK_VIDEO_LOGV("[%s]: called idx #%u (%" PRId64 " ms), queue pts = %" PRId64 " us", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, minTimeUs);
+    return ret;
+    // Mediatek Android Patch End.
 }
 
 status_t MediaCodec::queueSecureInputBuffer(
@@ -3626,6 +3819,10 @@ status_t MediaCodec::queueSecureInputBuffer(
         int64_t presentationTimeUs,
         uint32_t flags,
         AString *errorDetailMsg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(presentationTimeUs);
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::queueSecureInputBuffer#native");
     if (errorDetailMsg != NULL) {
         errorDetailMsg->clear();
@@ -3647,7 +3844,9 @@ status_t MediaCodec::queueSecureInputBuffer(
 
     sp<AMessage> response;
     status_t err = PostAndAwaitResponse(msg, &response);
-
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s]: called idx #%zu (%" PRId64 " ms), queue pts = %" PRId64 " us", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, presentationTimeUs);
+    // Mediatek Android Patch End.
     return err;
 }
 
@@ -3658,6 +3857,9 @@ status_t MediaCodec::queueSecureInputBuffers(
         const sp<BufferInfosWrapper> &auInfo,
         const sp<CryptoInfosWrapper> &cryptoInfos,
         AString *errorDetailMsg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::queueSecureInputBuffers#native");
     if (errorDetailMsg != NULL) {
         errorDetailMsg->clear();
@@ -3697,9 +3899,15 @@ status_t MediaCodec::queueSecureInputBuffers(
     msg->setObject("accessUnitInfo", auInfo);
     msg->setObject("cryptoInfos", cryptoInfos);
     msg->setPointer("errorDetailMsg", errorDetailMsg);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(minTimeUs);
+    // Mediatek Android Patch End.
 
     sp<AMessage> response;
     status_t err = PostAndAwaitResponse(msg, &response);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s]: called idx #%zu (%" PRId64 " ms), queue pts = %" PRId64 " us", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, minTimeUs);
+    // Mediatek Android Patch End.
 
     return err;
 }
@@ -3710,6 +3918,9 @@ status_t MediaCodec::queueBuffer(
         const sp<BufferInfosWrapper> &bufferInfos,
         const sp<AMessage> &tunings,
         AString *errorDetailMsg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::queueBuffer#native");
     if (errorDetailMsg != NULL) {
         errorDetailMsg->clear();
@@ -3726,6 +3937,12 @@ status_t MediaCodec::queueBuffer(
     if (OK != (err = generateFlagsFromAccessUnitInfo(msg, bufferInfos))) {
         return err;
     }
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    int64_t minTimeUs = -1;
+    msg->findInt64("timeUs", &minTimeUs);
+    FWK_MM_ATRACE_CALL(minTimeUs);
+    // Mediatek Android Patch End.
+
     msg->setObject("accessUnitInfo", bufferInfos);
     if (tunings && tunings->countEntries() > 0) {
         msg->setMessage("tunings", tunings);
@@ -3733,6 +3950,9 @@ status_t MediaCodec::queueBuffer(
     msg->setPointer("errorDetailMsg", errorDetailMsg);
     sp<AMessage> response;
     err = PostAndAwaitResponse(msg, &response);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s]: called idx #%zu (%" PRId64 " ms), queue pts = %" PRId64 " us", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, minTimeUs);
+    // Mediatek Android Patch End.
 
     return err;
 }
@@ -3746,6 +3966,9 @@ status_t MediaCodec::queueEncryptedBuffer(
         const sp<CryptoInfosWrapper> &cryptoInfos,
         const sp<AMessage> &tunings,
         AString *errorDetailMsg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::queueEncryptedBuffer#native");
     if (errorDetailMsg != NULL) {
         errorDetailMsg->clear();
@@ -3770,6 +3993,13 @@ status_t MediaCodec::queueEncryptedBuffer(
     if (OK != (err = generateFlagsFromAccessUnitInfo(msg, bufferInfos))) {
         return err;
     }
+
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    int64_t minTimeUs = -1;
+    msg->findInt64("timeUs", &minTimeUs);
+    FWK_MM_ATRACE_CALL(minTimeUs);
+    // Mediatek Android Patch End.
+
     if (tunings && tunings->countEntries() > 0) {
         msg->setMessage("tunings", tunings);
     }
@@ -3777,21 +4007,35 @@ status_t MediaCodec::queueEncryptedBuffer(
 
     sp<AMessage> response;
     err = PostAndAwaitResponse(msg, &response);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s]: called idx #%zu (%" PRId64 " ms), queue pts = %" PRId64 " us", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, minTimeUs);
+    // Mediatek Android Patch End.
 
     return err;
 }
 
 status_t MediaCodec::dequeueInputBuffer(size_t *index, int64_t timeoutUs) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
     sp<AMessage> msg = new AMessage(kWhatDequeueInputBuffer, this);
     msg->setInt64("timeoutUs", timeoutUs);
 
     sp<AMessage> response;
     status_t err;
     if ((err = PostAndAwaitResponse(msg, &response)) != OK) {
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("[%s] %s: called (%" PRId64 " ms), no input buffer ready (timeout: %" PRId64 " us)", mComponentName.c_str(), __FUNCTION__, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, timeoutUs);
+        // Mediatek Android Patch End.
         return err;
     }
 
     CHECK(response->findSize("index", index));
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s] %s: called  (%" PRId64 " ms), dequeue index = %zu (timeout: %" PRId64 " us)", mComponentName.c_str(), __FUNCTION__, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, *index, timeoutUs);
+    FWK_MM_ATRACE_CALL_OK(kInvalidPts);
+    // Mediatek Android Patch End.
 
     return OK;
 }
@@ -3803,6 +4047,16 @@ status_t MediaCodec::dequeueOutputBuffer(
         int64_t *presentationTimeUs,
         uint32_t *flags,
         int64_t timeoutUs) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    int64_t interval = mPreviousDequeueOutputTimeNs > 0 ? (nowNs -mPreviousDequeueOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS : -1 ;
+    if (mDomain == DOMAIN_VIDEO) {
+        mPreviousDequeueOutputTimeNs = nowNs;
+    }
+    // Mediatek Android Patch End.
+
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::dequeueOutputBuffer#native");
     sp<AMessage> msg = new AMessage(kWhatDequeueOutputBuffer, this);
     msg->setInt64("timeoutUs", timeoutUs);
@@ -3810,6 +4064,11 @@ status_t MediaCodec::dequeueOutputBuffer(
     sp<AMessage> response;
     status_t err;
     if ((err = PostAndAwaitResponse(msg, &response)) != OK) {
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("[%s] %s: called #-1 size: 0 (%" PRId64 " ms), no output buffer ready (timeout: %" PRId64 " us), interval = [r2d: %" PRId64 ", d2d: %" PRId64 "]",
+            mComponentName.c_str(), __FUNCTION__, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, timeoutUs,
+            (nowNs - mPreviousRenderOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS, interval);
+        // Mediatek Android Patch End.
         return err;
     }
 
@@ -3818,38 +4077,92 @@ status_t MediaCodec::dequeueOutputBuffer(
     CHECK(response->findSize("size", size));
     CHECK(response->findInt64("timeUs", presentationTimeUs));
     CHECK(response->findInt32("flags", (int32_t *)flags));
-
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s] %s: called #%zu size: %zu (%" PRId64 " ms), dequeue pts = %" PRId64 ", interval = [r2d: %" PRId64 ", d2d: %" PRId64 "]",
+        mComponentName.c_str(), __FUNCTION__, *index, *size, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, *presentationTimeUs,
+        (nowNs - mPreviousRenderOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS, interval);
+    FWK_MM_ATRACE_CALL_OK(*presentationTimeUs);
+    // Mediatek Android Patch End.
     return OK;
 }
 
 status_t MediaCodec::renderOutputBufferAndRelease(size_t index) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(mOutTimestamp[index]);
+    // Mediatek Android Patch End.
     ScopedTrace (ATRACE_TAG, "MediaCodec::renderOutputBufferAndRelease#native");
     sp<AMessage> msg = new AMessage(kWhatReleaseOutputBuffer, this);
     msg->setSize("index", index);
     msg->setInt32("render", true);
 
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    int64_t interval = mPreviousRenderOutputTimeNs > 0 ? (nowNs -mPreviousRenderOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS : -1 ;
+    if (mDomain == DOMAIN_VIDEO) {
+        mPreviousRenderOutputTimeNs = nowNs;
+    }
     sp<AMessage> response;
-    return PostAndAwaitResponse(msg, &response);
+    status_t ret = PostAndAwaitResponse(msg, &response);
+    if (mDomain == DOMAIN_VIDEO) {
+        FWK_LOGV("[%s]: called - render idx #%zu (%" PRId64 " ms), render pts = %" PRId64 "(diff:%" PRId64 "), interval = [d2r: %" PRId64 ", r2r: %" PRId64 "]", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, mOutTimestamp[index], mOutTimestamp[index] - mPreviousRenderPtsUs,
+            (mPreviousRenderOutputTimeNs - mPreviousDequeueOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS, interval);
+        mPreviousRenderPtsUs = mOutTimestamp[index];
+    }
+    return ret;
+    // Mediatek Android Patch End.
 }
 
 status_t MediaCodec::renderOutputBufferAndRelease(size_t index, int64_t timestampNs) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    std::string strTime = std::to_string(timestampNs) + ", " + std::to_string(mOutTimestamp[index]);
+    FWK_MM_ATRACE_NAME2(__func__, strTime.c_str());
+    // Mediatek Android Patch End.
+
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::renderOutputBufferAndRelease#native");
     sp<AMessage> msg = new AMessage(kWhatReleaseOutputBuffer, this);
     msg->setSize("index", index);
     msg->setInt32("render", true);
     msg->setInt64("timestampNs", timestampNs);
-
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    int64_t interval = mPreviousRenderOutputTimeNs > 0 ? (nowNs -mPreviousRenderOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS : -1 ;
+    if (mDomain == DOMAIN_VIDEO) {
+        mPreviousRenderOutputTimeNs = nowNs;
+    }
     sp<AMessage> response;
-    return PostAndAwaitResponse(msg, &response);
+    status_t ret =  PostAndAwaitResponse(msg, &response);
+    if (mDomain == DOMAIN_VIDEO) {
+        FWK_LOGV("[%s]: called - render idx #%zu (%" PRId64 " ms), render pts = %" PRId64 "(diff:%" PRId64 "), timeNs = %" PRId64 "(diff:%" PRId64 "), interval = [d2r: %" PRId64 ", r2r: %" PRId64 "]", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, mOutTimestamp[index], mOutTimestamp[index] - mPreviousRenderPtsUs, timestampNs, timestampNs - mPreviousRenderTimestampNs,
+            (mPreviousRenderOutputTimeNs - mPreviousDequeueOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS, interval);
+        mPreviousRenderPtsUs = mOutTimestamp[index];
+        mPreviousRenderTimestampNs = timestampNs;
+    }
+    return ret;
+    // Mediatek Android Patch End.
 }
 
 status_t MediaCodec::releaseOutputBuffer(size_t index) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(mOutTimestamp[index]);
+    // Mediatek Android Patch End.
+
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::releaseOutputBuffer#native");
     sp<AMessage> msg = new AMessage(kWhatReleaseOutputBuffer, this);
     msg->setSize("index", index);
-
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    int64_t interval = mPreviousRenderOutputTimeNs > 0 ? (nowNs -mPreviousRenderOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS : -1 ;
+    if (mDomain == DOMAIN_VIDEO) {
+        mPreviousRenderOutputTimeNs = nowNs;
+    }
     sp<AMessage> response;
-    return PostAndAwaitResponse(msg, &response);
+    status_t ret = PostAndAwaitResponse(msg, &response);
+    if (mDomain == DOMAIN_VIDEO) {
+        FWK_LOGV("[%s]: called - drop #%zu (%" PRId64 " ms), drop pts = %" PRId64 ", interval = [d2r: %" PRId64 ", r2r: %" PRId64 "]", __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, mOutTimestamp[index],
+            (mPreviousRenderOutputTimeNs - mPreviousDequeueOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS, interval);
+    }
+    return ret;
+    // Mediatek Android Patch End.
 }
 
 status_t MediaCodec::signalEndOfInputStream() {
@@ -3978,6 +4291,10 @@ status_t MediaCodec::getOutputBuffers(Vector<sp<MediaCodecBuffer> > *buffers) co
 }
 
 status_t MediaCodec::getOutputBuffer(size_t index, sp<MediaCodecBuffer> *buffer) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(mOutTimestamp[index]);
+    FWK_VIDEO_LOGV("%s pts: %" PRId64 "", __func__, mOutTimestamp[index]);
+    // Mediatek Android Patch End.
     sp<AMessage> format;
     return getBufferAndFormat(kPortIndexOutput, index, buffer, &format);
 }
@@ -3988,6 +4305,10 @@ status_t MediaCodec::getOutputFormat(size_t index, sp<AMessage> *format) {
 }
 
 status_t MediaCodec::getInputBuffer(size_t index, sp<MediaCodecBuffer> *buffer) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV("%s", __func__);
+    // Mediatek Android Patch End.
     sp<AMessage> format;
     return getBufferAndFormat(kPortIndexInput, index, buffer, &format);
 }
@@ -4052,6 +4373,10 @@ status_t MediaCodec::getBufferAndFormat(
 }
 
 status_t MediaCodec::flush() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    FWK_VIDEO_LOGV("%s", __func__);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::flush#native");
     sp<AMessage> msg = new AMessage(kWhatFlush, this);
 
@@ -4733,6 +5058,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatStartCompleted:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    const char * str = "kWhatStartCompleted";
+                    FWK_MM_ATRACE_NAME(str);
+                    FWK_VIDEO_LOGV("%s", str);
+                    // Mediatek Android Patch End.
+
                     if (mState == RELEASING || mState == UNINITIALIZED) {
                         // In case a kWhatRelease message came in and replied,
                         // we log a warning and ignore.
@@ -4790,6 +5121,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatOutputFramesRendered:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    const char * str = "kWhatOutputFramesRendered";
+                    FWK_MM_ATRACE_NAME(str);
+                    FWK_VIDEO_LOGV_TRACE("%s", str);
+                    // Mediatek Android Patch End.
+
                     // ignore these in all states except running
                     if (mState != STARTED) {
                         break;
@@ -4813,6 +5150,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatFirstTunnelFrameReady:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    const char * str = "kWhatFirstTunnelFrameReady";
+                    FWK_MM_ATRACE_NAME(str);
+                    FWK_VIDEO_LOGV("%s", str);
+                    // Mediatek Android Patch End.
+
                     if (mState != STARTED) {
                         break;
                     }
@@ -4855,6 +5198,14 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatFillThisBuffer:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    size_t index = 0;
+                    const char * str = "kWhatFillThisBuffer";
+                    msg->findSize("index", &index);
+                    FWK_MM_ATRACE_NAME_TIME(str, mInTimestamp[index]);
+                    FWK_VIDEO_LOGV_TRACE("%s", str);
+                    // Mediatek Android Patch End.
+
                     /* size_t index = */updateBuffers(kPortIndexInput, msg);
 
                     bool inStateToReturnBuffers =
@@ -4929,6 +5280,22 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatDrainThisBuffer:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    size_t index;
+                    int64_t timeUs = -100;;
+                    const char * str = "kWhatDrainThisBuffer";
+                    sp<RefBase> obj;
+                    msg->findSize("index", &index);
+                    msg->findObject("buffer", &obj);
+                    sp<MediaCodecBuffer> buffer = static_cast<MediaCodecBuffer *>(obj.get());
+                    buffer->meta()->findInt64("timeUs", &timeUs);
+                    FWK_MM_ATRACE_NAME_TIME(str, timeUs);
+                    if (mDomain == DOMAIN_VIDEO) {
+                        mOutTimestamp[index] = timeUs;
+                        FWK_LOGV_TRACE("%s", str);
+                    }
+                    // Mediatek Android Patch End.
+
                     if ((mFlags & kFlagUseBlockModel) == 0 && mTunneled) {
                         sp<RefBase> obj;
                         CHECK(msg->findObject("buffer", &obj));
@@ -5057,6 +5424,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatStopCompleted:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    const char * str = "kWhatStopCompleted";
+                    FWK_MM_ATRACE_NAME(str);
+                    FWK_VIDEO_LOGV("%s", str);
+                    // Mediatek Android Patch End.
+
                     if (mState != STOPPING) {
                         ALOGW("Received kWhatStopCompleted in state %d/%s",
                               mState, stateString(mState).c_str());
@@ -5101,6 +5474,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatReleaseCompleted:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    const char * str = "kWhatReleaseCompleted";
+                    FWK_MM_ATRACE_NAME(str);
+                    FWK_VIDEO_LOGV("%s", str);
+                    // Mediatek Android Patch End.
+
                     if (mState != RELEASING) {
                         ALOGW("Received kWhatReleaseCompleted in state %d/%s",
                               mState, stateString(mState).c_str());
@@ -5132,6 +5511,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                 case kWhatFlushCompleted:
                 {
+                    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                    const char * str = "kWhatFlushCompleted";
+                    FWK_MM_ATRACE_NAME(str);
+                    FWK_VIDEO_LOGV("%s", str);
+                    // Mediatek Android Patch End.
+
                     if (mState != FLUSHING) {
                         ALOGW("received FlushCompleted message in state %d/%s",
                                 mState, stateString(mState).c_str());
@@ -5248,6 +5633,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
         case kWhatConfigure:
         {
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+            const char * str = "kWhatConfigure";
+            FWK_MM_ATRACE_NAME(str);
+            FWK_VIDEO_LOGV("%s", str);
+            // Mediatek Android Patch End.
+
             if (mState != INITIALIZED) {
                 mErrorLog.log(LOG_TAG, base::StringPrintf(
                         "configure() is valid only at Initialized state; currently %s",
@@ -5571,6 +5962,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
         }
         case kWhatStart:
         {
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+            const char * str = "kWhatStart";
+            FWK_MM_ATRACE_NAME(str);
+            FWK_VIDEO_LOGV("%s", str);
+            // Mediatek Android Patch End.
+
             if (mState == FLUSHED) {
                 setState(STARTED);
                 if (mHavePendingInputBuffers) {
@@ -5619,6 +6016,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
         }
         case kWhatRelease:
         {
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+            const char * str = "kWhatRelease";
+            FWK_MM_ATRACE_NAME(str);
+            FWK_VIDEO_LOGV("%s", str);
+            // Mediatek Android Patch End.
+
             State targetState =
                 (msg->what() == kWhatStop) ? INITIALIZED : UNINITIALIZED;
 
@@ -6079,6 +6482,12 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
         case kWhatFlush:
         {
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+            const char * str = "kWhatFlush";
+            FWK_MM_ATRACE_NAME(str);
+            FWK_VIDEO_LOGV("%s", str);
+            // Mediatek Android Patch End.
+
             if (!isExecuting()) {
                 mErrorLog.log(LOG_TAG, base::StringPrintf(
                         "flush() is valid only at Executing states; currently %s",
@@ -6648,6 +7057,13 @@ status_t MediaCodec::onQueueInputBuffer(const sp<AMessage> &msg) {
     CHECK(msg->findSize("index", &index));
     CHECK(msg->findInt64("timeUs", &timeUs));
     CHECK(msg->findInt32("flags", (int32_t *)&flags));
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(timeUs);
+    if (mDomain == DOMAIN_VIDEO) {
+        mInTimestamp[index] = timeUs;
+    }
+    // Mediatek Android Patch End.
+
     std::shared_ptr<C2Buffer> c2Buffer;
     sp<hardware::HidlMemory> memory;
     sp<RefBase> obj;
@@ -6913,6 +7329,10 @@ status_t MediaCodec::onQueueInputBuffer(const sp<AMessage> &msg) {
     int32_t usedMaxInputSize = mApiUsageMetrics.inputBufferSize.usedMax;
     mApiUsageMetrics.inputBufferSize.usedMax = size > usedMaxInputSize ? size : usedMaxInputSize;
 
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    info->mData->meta()->setInt32("mIsVideo", mDomain == DOMAIN_VIDEO);
+    // Mediatek Android Patch End.
+
     if (hasCryptoOrDescrambler() && !c2Buffer && !memory) {
         AString *errorDetailMsg;
         CHECK(msg->findPointer("errorDetailMsg", (void **)&errorDetailMsg));
@@ -6940,6 +7360,9 @@ status_t MediaCodec::onQueueInputBuffer(const sp<AMessage> &msg) {
                         (mFlags & kFlagIsSecure),
                         errorDetailMsg);
         } else {
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+            const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+            // Mediatek Android Patch End.
             err = mBufferChannel->queueSecureInputBuffer(
                 buffer,
                 (mFlags & kFlagIsSecure),
@@ -6950,17 +7373,26 @@ status_t MediaCodec::onQueueInputBuffer(const sp<AMessage> &msg) {
                 subSamples,
                 numSubSamples,
                 errorDetailMsg);
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+                FWK_VIDEO_LOGV_TRACE("[%s]: called mBufferChannel->queueSecureInputBuffer %" PRId64 " #%zu (%" PRId64 " ms)",
+                    __FUNCTION__, timeUs, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS);
+            // Mediatek Android Patch End.
         }
         if (err != OK) {
             mediametrics_setInt32(mMetricsHandle, kCodecQueueSecureInputBufferError, err);
             ALOGW("Log queueSecureInputBuffer error: %d", err);
         }
     } else {
+        const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
         err = mBufferChannel->queueInputBuffer(buffer);
         if (err != OK) {
             mediametrics_setInt32(mMetricsHandle, kCodecQueueInputBufferError, err);
             ALOGW("Log queueInputBuffer error: %d", err);
         }
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV_TRACE("[%s]: called  mBufferChannel->queueInputBuffer %" PRId64 " #%zu (%" PRId64 " ms)",
+            __FUNCTION__, timeUs, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS);
+        // Mediatek Android Patch End.
     }
 
     if (err == OK) {
@@ -7346,18 +7778,43 @@ status_t MediaCodec::handleSetSurface(const sp<Surface> &surface) {
 }
 
 void MediaCodec::onInputBufferAvailable() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
+
     int32_t index;
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    std::string allIndexStr;
+    // Mediatek Android Patch End.
     while ((index = dequeuePortBuffer(kPortIndexInput)) >= 0) {
         sp<AMessage> msg = mCallback->dup();
         msg->setInt32("callbackID", CB_INPUT_AVAILABLE);
         msg->setInt32("index", index);
         msg->post();
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        allIndexStr += std::to_string(index) + ",";
+        // Mediatek Android Patch End.
     }
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s]: called (%" PRId64 " ms) idx = %s", __FUNCTION__, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, allIndexStr.c_str());
+    // Mediatek Android Patch End.
 }
 
 void MediaCodec::onOutputBufferAvailable() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL(kInvalidPts);
+    // Mediatek Android Patch End.
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::onOutputBufferAvailable#native");
     int32_t index;
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    int64_t interval = mPreviousDequeueOutputTimeNs > 0 ? (nowNs -mPreviousDequeueOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS : -1 ;
+    if (mDomain == DOMAIN_VIDEO) {
+        mPreviousDequeueOutputTimeNs = nowNs;
+    }
+    // Mediatek Android Patch End.
+
     while ((index = dequeuePortBuffer(kPortIndexOutput)) >= 0) {
         if (discardDecodeOnlyOutputBuffer(index)) {
             continue;
@@ -7393,6 +7850,11 @@ void MediaCodec::onOutputBufferAvailable() {
         statsBufferReceived(timeUs, buffer);
 
         msg->post();
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("[%s]: called #%u (%" PRId64 " ms), dequeue pts = %" PRId64 ", interval = [r2d: %" PRId64 ", d2d: %" PRId64 "]",
+            __FUNCTION__, index, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/CONVERT_TIME_UNIT_TO_MS, timeUs,
+            (mPreviousDequeueOutputTimeNs - mPreviousRenderOutputTimeNs)/CONVERT_TIME_UNIT_TO_MS, interval);
+        // Mediatek Android Patch End.
     }
 }
 void MediaCodec::onCryptoError(const sp<AMessage> & msg) {
@@ -7465,6 +7927,9 @@ void MediaCodec::postActivityNotificationIfPossible() {
 }
 
 status_t MediaCodec::setParameters(const sp<AMessage> &params) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("%s %s", __func__, params->debugString(2).c_str());
+    // Mediatek Android Patch End.
     sp<AMessage> msg = new AMessage(kWhatSetParameters, this);
     msg->setMessage("params", params);
 

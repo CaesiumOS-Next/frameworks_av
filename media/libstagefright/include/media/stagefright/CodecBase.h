@@ -340,6 +340,10 @@ struct CodecBase : public AHandler, /* static */ ColorUtils {
      */
     virtual std::vector<InstanceResourceInfo> getRequiredSystemResources();
 
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    uint32_t getSerialNum() { return mSerialNum; };
+    // Mediatek Android Patch End.
+
     typedef CodecBase *(*CreateCodecFunc)(void);
     typedef PersistentSurface *(*CreateInputSurfaceFunc)(void);
 
@@ -348,6 +352,9 @@ protected:
     virtual ~CodecBase() = default;
 
     std::unique_ptr<CodecCallback> mCallback;
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    uint32_t mSerialNum = 0;
+    // Mediatek Android Patch End.
 
 private:
     DISALLOW_EVIL_CONSTRUCTORS(CodecBase);

@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "ACodec"
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#define ATRACE_TAG ATRACE_TAG_VIDEO
+#define MM_FWK_ATRACE_TAG ATRACE_TAG_ALWAYS
+#include <cutils/properties.h>
+// Mediatek Android Patch End.
 
 #ifdef __LP64__
 #define OMX_ANDROID_COMPILE_AS_32BIT_ON_64BIT_PLATFORMS
@@ -67,9 +72,53 @@
 #include "include/SharedMemoryBuffer.h"
 #include <media/stagefright/omx/OMXUtils.h>
 
+static bool sVerboseLog = false;
+#ifdef ALOGV
+#undef ALOGV
+#endif
+#define ALOGV(...) ALOGV_IF(sVerboseLog, __VA_ARGS__)
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+static bool sEnableAtrace = false;
+#define ATRACE_NAME_(name, enable) ScopedTrace_ PASTE(___tracer, __LINE__)(MM_FWK_ATRACE_TAG, name, enable)
+#define FWK_MM_ATRACE_CALL(x, ...) \
+    ATRACE_NAME_( \
+        (std::string("AC_") +  __func__ + ((mCodec->mIsVideo)? "_video " : "_non-video ")).c_str() ,\
+        sEnableAtrace);
+#define FWK_MM_ATRACE_NAME(...) \
+    ATRACE_NAME_( \
+        (std::string("AC_") + __VA_ARGS__).c_str() ,\
+        sEnableAtrace);
+#define FWK_MM_ATRACE_INSTANT(...) \
+    if (sEnableAtrace) { \
+        atrace_instant(MM_FWK_ATRACE_TAG, (std::string("AC_") +  __VA_ARGS__).c_str()); \
+    }
+// Mediatek Android Patch End.
+
 #include <server_configurable_flags/get_flags.h>
 
 namespace android {
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+class ScopedTrace_ {
+public:
+    inline ScopedTrace_(uint64_t tag, const char* name, bool enable) :
+        mTag(tag),
+        mEnable(enable) {
+        if (mEnable)
+            atrace_begin(mTag, name);
+    }
+
+    inline ~ScopedTrace_() {
+        if (mEnable)
+            atrace_end(mTag);
+    }
+
+private:
+    uint64_t mTag;
+    bool mEnable;
+};
+// Mediatek Android Patch End.
 
 typedef hardware::media::omx::V1_0::IGraphicBufferSource HGraphicBufferSource;
 
@@ -609,6 +658,12 @@ ACodec::ACodec()
       mDescribeHDR10PlusInfoIndex((OMX_INDEXTYPE)0),
       mStateGeneration(0),
       mVendorExtensionsStatus(kExtensionsUnchecked) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    sVerboseLog = (bool)property_get_int32("media.framework.verbose.log", 0);
+    sEnableAtrace = property_get_bool("media.framework.enable.atrace", 0) ||
+        atrace_is_tag_enabled(ATRACE_TAG_VIDEO);
+    // Mediatek Android Patch End.
+
     memset(&mLastHDRStaticInfo, 0, sizeof(mLastHDRStaticInfo));
 
     mUninitializedState = new UninitializedState(this);
@@ -1067,6 +1122,14 @@ status_t ACodec::allocateBuffersOnPort(OMX_U32 portIndex) {
         return err;
     }
 
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    if (sVerboseLog || sEnableAtrace) {
+        if ((mBuffers[portIndex].size() > 0) && (portIndex == kPortIndexInput)) {
+            mBuffers[portIndex][0].mData->meta()->setInt32("mIsVideo", mIsVideo);
+        }
+    }
+    // Mediatek Android Patch End.
+
     std::vector<ACodecBufferChannel::BufferAndId> array(mBuffers[portIndex].size());
     for (size_t i = 0; i < mBuffers[portIndex].size(); ++i) {
         array[i] = {mBuffers[portIndex][i].mData, mBuffers[portIndex][i].mBufferID};
@@ -1477,11 +1540,18 @@ ACodec::BufferInfo *ACodec::dequeueBufferFromNativeWindow() {
 
     int fenceFd = -1;
     do {
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        {
+        FWK_MM_ATRACE_NAME("calling mNativeWindow->dequeueBuffer");
+        // Mediatek Android Patch End.
         status_t err = mNativeWindow->dequeueBuffer(mNativeWindow.get(), &buf, &fenceFd);
         if (err != 0) {
             ALOGE("dequeueBuffer failed: %s(%d).", asString(err), err);
             return NULL;
         }
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        }
+        // Mediatek Android Patch End.
 
         bool stale = false;
         for (size_t i = mBuffers[kPortIndexOutput].size(); i > 0;) {
@@ -1643,7 +1713,14 @@ void ACodec::pollForRenderedFrames() {
             latchOrPresentTimeNs != NATIVE_WINDOW_TIMESTAMP_INVALID) {
             renderedFrameInfos.push_back(RenderedFrameInfo(frame.mediaTimeUs,
                                                            latchOrPresentTimeNs));
+        } 
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        else {
+            std::string str = "[FWK] non-APK drop frame, " + std::to_string(frame.desiredRenderTimeNs) + ", " + std::to_string(frame.mediaTimeUs);
+            FWK_MM_ATRACE_INSTANT(str.c_str());
+            ALOGV("%s", str.c_str());
         }
+        // Mediatek Android Patch End.
 
         mTrackedFrames.pop_front();
     }
@@ -6283,6 +6360,9 @@ void ACodec::BaseState::postFillThisBuffer(BufferInfo *info) {
 }
 
 void ACodec::BaseState::onInputBufferFilled(const sp<AMessage> &msg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     IOMX::buffer_id bufferID;
     CHECK(msg->findInt32("buffer-id", (int32_t*)&bufferID));
     sp<MediaCodecBuffer> buffer;
@@ -6620,6 +6700,9 @@ bool ACodec::BaseState::onOMXFillBufferDone(
         OMX_U32 flags,
         int64_t timeUs,
         int fenceFd) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     ALOGV("[%s] onOMXFillBufferDone %u time %" PRId64 " us, flags = 0x%08x",
          mCodec->mComponentName.c_str(), bufferID, timeUs, flags);
 
@@ -6800,6 +6883,9 @@ bool ACodec::BaseState::onOMXFillBufferDone(
 }
 
 void ACodec::BaseState::onOutputBufferDrained(const sp<AMessage> &msg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     IOMX::buffer_id bufferID;
     CHECK(msg->findInt32("buffer-id", (int32_t*)&bufferID));
     sp<RefBase> obj;
@@ -6880,8 +6966,16 @@ void ACodec::BaseState::onOutputBufferDrained(const sp<AMessage> &msg) {
         err = native_window_get_next_frame_id(mCodec->mNativeWindow.get(), &frameId);
 
         info->checkReadFence("onOutputBufferDrained before queueBuffer");
+
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        {
+        FWK_MM_ATRACE_NAME("calling mCodec->mNativeWindow->queueBuffer");
+        // Mediatek Android Patch End.
         err = mCodec->mNativeWindow->queueBuffer(
                     mCodec->mNativeWindow.get(), info->mGraphicBuffer.get(), info->mFenceFd);
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        }
+        // Mediatek Android Patch End.
 
         int64_t mediaTimeUs = -1;
         buffer->meta()->findInt64("timeUs", &mediaTimeUs);

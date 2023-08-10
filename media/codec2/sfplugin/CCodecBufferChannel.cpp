@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #include <utils/Errors.h>
 #define LOG_TAG "CCodecBufferChannel"
-#define ATRACE_TAG  ATRACE_TAG_VIDEO
+#define ATRACE_TAG ATRACE_TAG_VIDEO
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#define MM_FWK_ATRACE_TAG ATRACE_TAG_ALWAYS
+// Mediatek Android Patch End.
 #include <utils/Log.h>
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
 #include <utils/Trace.h>
+// Mediatek Android Patch End.
 
 #include <algorithm>
 #include <atomic>
@@ -64,6 +69,31 @@
 
 #include "CCodecBufferChannel.h"
 #include "Codec2Buffer.h"
+
+static bool sVerboseLog = false;
+#ifdef ALOGV
+#undef ALOGV
+#endif
+#define ALOGV(...) ALOGV_IF(sVerboseLog, __VA_ARGS__)
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+static bool sEnableAtrace = false;
+#define FWK_VIDEO_LOGV(x, ...)  ALOGV_IF((sVerboseLog && mIsVideo), "[FWK]%02d " x, mSerialNum, ##__VA_ARGS__)
+#define FWK_LOGW(x, ...)  ALOGW("[FWK]%02d " x, mSerialNum, ##__VA_ARGS__)
+#define ATRACE_NAME_(name, enable) ScopedTrace_ PASTE(___tracer, __LINE__)(MM_FWK_ATRACE_TAG, name, enable)
+#define FWK_MM_ATRACE_CALL(x, ...) \
+    ATRACE_NAME_( \
+        (std::string("") + std::to_string(mSerialNum) + "_CCBC_" +  __func__ + ((mIsVideo)? "_video " : "_non-video ")).c_str() ,\
+        sEnableAtrace);
+#define FWK_MM_ATRACE_NAME(...) \
+    ATRACE_NAME_( \
+        (std::string("") + std::to_string(mSerialNum) + "_CCBC_" + __VA_ARGS__ + ((mIsVideo)? "_video " : "_non-video ")).c_str() ,\
+        sEnableAtrace);
+#define FWK_MM_ATRACE_INSTANT(...) \
+    if (sEnableAtrace) { \
+        atrace_instant(MM_FWK_ATRACE_TAG, (std::string("") + std::to_string(mSerialNum) + "_CCBC_" +  __VA_ARGS__).c_str()); \
+    }
+// Mediatek Android Patch End.
 
 namespace android {
 
@@ -221,6 +251,27 @@ private:
 
 }  // namespace
 
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+class ScopedTrace_ {
+public:
+    inline ScopedTrace_(uint64_t tag, const char* name, bool enable) :
+        mTag(tag),
+        mEnable(enable) {
+        if (mEnable)
+            atrace_begin(mTag, name);
+    }
+
+    inline ~ScopedTrace_() {
+        if (mEnable)
+            atrace_end(mTag);
+    }
+
+private:
+    uint64_t mTag;
+    bool mEnable;
+};
+// Mediatek Android Patch End.
+
 CCodecBufferChannel::QueueGuard::QueueGuard(
         CCodecBufferChannel::QueueSync &sync) : mSync(sync) {
     Mutex::Autolock l(mSync.mGuardLock);
@@ -279,6 +330,14 @@ CCodecBufferChannel::Input::Input() : extraBuffers("extra") {}
 
 // CCodecBufferChannel
 
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+CCodecBufferChannel::CCodecBufferChannel(
+        const std::shared_ptr<CCodecCallback> &callback, uint32_t serialNum)
+    : CCodecBufferChannel(callback) {
+    mSerialNum = serialNum;
+}
+// Mediatek Android Patch End.
+
 CCodecBufferChannel::CCodecBufferChannel(
         const std::shared_ptr<CCodecCallback> &callback)
     : mHeapSeqNum(-1),
@@ -292,6 +351,11 @@ CCodecBufferChannel::CCodecBufferChannel(
       mMetaMode(MODE_NONE),
       mInputMetEos(false),
       mSendEncryptedInfoBuffer(false) {
+    sVerboseLog = (bool)property_get_int32("media.framework.verbose.log", 0);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    sEnableAtrace = property_get_bool("media.framework.enable.atrace", 0) ||
+        atrace_is_tag_enabled(ATRACE_TAG_VIDEO);
+    // Mediatek Android Patch End.
     {
         Mutexed<Input>::Locked input(mInput);
         input->buffers.reset(new DummyInputBuffers(""));
@@ -366,6 +430,10 @@ status_t CCodecBufferChannel::queueInputBufferInternal(
         sp<MediaCodecBuffer> buffer,
         std::shared_ptr<C2LinearBlock> encryptedBlock,
         size_t blockSize) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
+
     int64_t timeUs;
     CHECK(buffer->meta()->findInt64("timeUs", &timeUs));
 
@@ -795,13 +863,22 @@ status_t CCodecBufferChannel::attachEncryptedBuffer(
             IMemoryToSharedBuffer(
                     mDecryptDestination, mHeapSeqNum, &dst.nonsecureMemory);
         }
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("+decrypt start");
+        // Mediatek Android Patch End.
         result = mCrypto->decrypt(
                 key, iv, mode, pattern, src, 0, subSamples, numSubSamples,
                 dst, errorDetailMsg);
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("-decrypt end");
+        // Mediatek Android Patch End.
         if (result < 0) {
             ALOGI("[%s] attachEncryptedBuffer: decrypt failed: result = %zd", mName, result);
             return result;
         }
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("decrypt succeeded, %zd bytes", result);
+        // Mediatek Android Patch End.
     } else {
         // Here we cast CryptoPlugin::SubSample to hardware::cas::native::V1_0::SubSample
         // directly, the structure definitions should match as checked in DescramblerImpl.cpp.
@@ -828,6 +905,9 @@ status_t CCodecBufferChannel::attachEncryptedBuffer(
             codecDataOffset = key[2] | (key[3] << 8);
         }
 
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("+descramble start");
+        // Mediatek Android Patch End.
         auto returnVoid = mDescrambler->descramble(
                 sctrl,
                 hidlSubSamples,
@@ -842,6 +922,9 @@ status_t CCodecBufferChannel::attachEncryptedBuffer(
                     result = (ssize_t)_bytesWritten;
                     detailedError = _detailedError;
                 });
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        FWK_VIDEO_LOGV("-descramble end");
+        // Mediatek Android Patch End.
         if (errorDetailMsg) {
             errorDetailMsg->setTo(detailedError.c_str(), detailedError.size());
         }
@@ -882,6 +965,10 @@ status_t CCodecBufferChannel::attachEncryptedBuffer(
 }
 
 status_t CCodecBufferChannel::queueInputBuffer(const sp<MediaCodecBuffer> &buffer) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
+
     QueueGuard guard(mSync);
     if (!guard.isRunning()) {
         ALOGD("[%s] No more buffers should be queued at current state.", mName);
@@ -895,6 +982,10 @@ status_t CCodecBufferChannel::queueSecureInputBuffer(
         const uint8_t *iv, CryptoPlugin::Mode mode, CryptoPlugin::Pattern pattern,
         const CryptoPlugin::SubSample *subSamples, size_t numSubSamples,
         AString *errorDetailMsg) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
+
     QueueGuard guard(mSync);
     if (!guard.isRunning()) {
         ALOGD("[%s] No more buffers should be queued at current state.", mName);
@@ -962,9 +1053,20 @@ status_t CCodecBufferChannel::queueSecureInputBuffer(
             }
             hardware::drm::V1_0::SharedBuffer source;
             encryptedBuffer->fillSourceBuffer(&source);
-            result = mCrypto->decrypt(
-                    key, iv, mode, pattern, source, buffer->offset(),
-                    subSamples, numSubSamples, destination, errorDetailMsg);
+            // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+            {
+                FWK_MM_ATRACE_NAME("calling mCrypto->decrypt");
+                const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+
+                result = mCrypto->decrypt(
+                        key, iv, mode, pattern, source, buffer->offset(),
+                        subSamples, numSubSamples, destination, errorDetailMsg);
+                FWK_VIDEO_LOGV("[%s] : [%s] called mCrypto->decrypt  (%" PRId64 " ms)", __FUNCTION__, mName, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/1000000);
+                if((systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/1000000 > 16){
+                    FWK_LOGW("[%s] : [%s] called mCrypto->decrypt Over DRM Criteria. (%" PRId64 " ms)", __FUNCTION__, mName, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/1000000);
+                }
+            }
+            // Mediatek Android Patch End.
             if (result < 0) {
                 ALOGI("[%s] decrypt failed: result=%zd", mName, result);
                 return result;
@@ -1182,6 +1284,9 @@ void CCodecBufferChannel::feedInputBufferIfAvailable() {
 }
 
 void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     if (mInputMetEos) {
         return;
     }
@@ -1239,6 +1344,9 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
 
 status_t CCodecBufferChannel::renderOutputBuffer(
         const sp<MediaCodecBuffer> &buffer, int64_t timestampNs) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     std::string traceStr;
     if (ATRACE_ENABLED()) {
         traceStr = android::base::StringPrintf(
@@ -1246,7 +1354,9 @@ status_t CCodecBufferChannel::renderOutputBuffer(
     }
     ScopedTrace trace(ATRACE_TAG, traceStr.c_str());
 
-    ALOGV("[%s] renderOutputBuffer: %p", mName, buffer.get());
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s] %s: called renderOutputBuffer: %p", __FUNCTION__, mName, buffer.get());
+    // Mediatek Android Patch End.
     std::shared_ptr<C2Buffer> c2Buffer;
     bool released = false;
     {
@@ -1465,6 +1575,9 @@ status_t CCodecBufferChannel::renderOutputBuffer(
     qbi.setSurfaceDamage(Region::INVALID_REGION); // we don't have dirty regions
     qbi.getFrameTimestamps = true; // we need to know when a frame is rendered
     IGraphicBufferProducer::QueueBufferOutput qbo;
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+    // Mediatek Android Patch End.
     status_t result = std::atomic_load(&mComponent)->queueToOutputSurface(block, qbi, &qbo);
     if (result != OK) {
         ALOGI("[%s] queueBuffer failed: %d", mName, result);
@@ -1490,7 +1603,9 @@ status_t CCodecBufferChannel::renderOutputBuffer(
         // when the frame is queued to the non-display surface
         mCCodecCallback->onOutputFramesRendered(mediaTimeUs, timestampNs);
     }
-
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_VIDEO_LOGV("[%s] : [%s] renderOutputBuffer done: %p, pts: %" PRId64 " @%" PRId64 " (queue: %" PRId64 " ms)", __FUNCTION__, mName, buffer.get(), mediaTimeUs, timestampNs, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/1000000);
+    // Mediatek Android Patch End.
     return OK;
 }
 
@@ -1543,6 +1658,9 @@ void CCodecBufferChannel::trackReleasedFrame(const IGraphicBufferProducer::Queue
 }
 
 void CCodecBufferChannel::processRenderedFrames(const FrameEventHistoryDelta& deltas) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     // Grab the latch times and present fences from the frame event deltas
     for (const auto& delta : deltas) {
         for (auto& frame : mTrackedFrames) {
@@ -1568,6 +1686,14 @@ void CCodecBufferChannel::processRenderedFrames(const FrameEventHistoryDelta& de
         if (renderTimeNs != -1) {
             mCCodecCallback->onOutputFramesRendered(frame.mediaTimeUs, renderTimeNs);
         }
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        else
+        {
+            std::string str = "non-APK drop frame, " + std::to_string(frame.desiredRenderTimeNs) + ", " + std::to_string(frame.mediaTimeUs);
+            FWK_MM_ATRACE_INSTANT(str.c_str());
+            FWK_VIDEO_LOGV("%s", str.c_str());
+        }
+        // Mediatek Android Patch End.
         mTrackedFrames.pop_front();
     }
 }
@@ -1633,7 +1759,12 @@ void CCodecBufferChannel::onBufferAttachedToOutputSurface(uint32_t generation) {
 }
 
 status_t CCodecBufferChannel::discardBuffer(const sp<MediaCodecBuffer> &buffer) {
-    ALOGV("[%s] discardBuffer: %p", mName, buffer.get());
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    if (mComponentName.find("c2.android.raw.decoder") == std::string::npos)
+        FWK_VIDEO_LOGV("[%s] %s: called discardBuffer: %p", __FUNCTION__, mName, buffer.get());
+    // Mediatek Android Patch End.
+
     bool released = false;
     {
         Mutexed<Input>::Locked input(mInput);
@@ -1698,6 +1829,19 @@ status_t CCodecBufferChannel::start(
     C2PortActualDelayTuning::output outputDelay(0);
     C2ActualPipelineDelayTuning pipelineDelay(0);
     C2SecureModeTuning secureMode(C2Config::SM_UNPROTECTED);
+
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    if (sVerboseLog || sEnableAtrace) {
+        AString mediaType;
+        if ((outputFormat != nullptr) && (outputFormat->findString(KEY_MIME, &mediaType))) {
+            outputFormat->setInt32("mIsVideo", mediaType.startsWith("video/"));
+        }
+        if ((inputFormat != nullptr) && (inputFormat->findString(KEY_MIME, &mediaType))) {
+            mIsVideo = mediaType.startsWith("video/");
+            inputFormat->setInt32("mIsVideo", mIsVideo);
+        }
+    }
+    // Mediatek Android Patch End.
 
     c2_status_t err = std::atomic_load(&mComponent)->query(
             {
@@ -2410,6 +2554,10 @@ bool CCodecBufferChannel::handleWork(
         const sp<AMessage> &inputFormat,
         const sp<AMessage> &outputFormat,
         const C2StreamInitDataInfo::output *initData) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
+
     std::string traceStr;
     if (ATRACE_ENABLED()) {
         traceStr = android::base::StringPrintf(
@@ -2766,6 +2914,9 @@ bool CCodecBufferChannel::handleWork(
 }
 
 void CCodecBufferChannel::sendOutputBuffers() {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     std::string traceStr;
     if (ATRACE_ENABLED()) {
         traceStr = android::base::StringPrintf(

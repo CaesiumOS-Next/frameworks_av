@@ -166,6 +166,10 @@ private:
     bool hasCryptoOrDescrambler() {
         return mCrypto != NULL || mDescrambler != NULL;
     }
+
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    bool mIsVideo = false;
+    // Mediatek Android Patch End.
 };
 
 }  // namespace android

@@ -832,6 +832,16 @@ private:
     // Default frame-rate.
     float mFrameRate = 30.0;
 
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    std::vector<int64_t> mOutTimestamp;
+    std::vector<int64_t> mInTimestamp;
+    int64_t mPreviousDequeueOutputTimeNs = 0;
+    int64_t mPreviousRenderOutputTimeNs = 0;
+    int64_t mPreviousRenderPtsUs = 0;
+    int64_t mPreviousRenderTimestampNs = 0;
+    uint32_t mSerialNum = 0;
+    // Mediatek Android Patch End.
+
     DISALLOW_EVIL_CONSTRUCTORS(MediaCodec);
 };
 

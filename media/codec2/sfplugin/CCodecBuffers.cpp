@@ -32,9 +32,23 @@
 #include <media/stagefright/MediaCodecConstants.h>
 #include <media/stagefright/SkipCutBuffer.h>
 #include <mediadrm/ICrypto.h>
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#include <cutils/properties.h>
+// Mediatek Android Patch End.
 
 #include "CCodecBuffers.h"
 #include "Codec2Mapper.h"
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+static bool sVerboseLog = false;
+static bool sEnableAtrace = false;
+#define SET_ISVIDEO_FLAG(x) \
+    if (sVerboseLog || sEnableAtrace) { \
+        int32_t isVideo = 0; \
+        mFormat->findInt32("mIsVideo", &isVideo); \
+        x->meta()->setInt32("mIsVideo", isVideo); \
+    }
+// Mediatek Android Patch End.
 
 namespace android {
 
@@ -321,7 +335,12 @@ protected:
 // OutputBuffers
 
 OutputBuffers::OutputBuffers(const char *componentName, const char *name)
-    : CCodecBuffers(componentName, name) { }
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    : CCodecBuffers(componentName, name) {
+    sVerboseLog = property_get_bool("media.framework.verbose.log", 0);
+    sEnableAtrace = property_get_bool("media.framework.enable.atrace", 0);
+    // Mediatek Android Patch End.
+}
 
 OutputBuffers::~OutputBuffers() = default;
 
@@ -557,6 +576,14 @@ OutputBuffers::BufferAction OutputBuffers::popFromStashAndRegister(
         }
         return RETRY;
     }
+
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    if (sVerboseLog || sEnableAtrace) {
+        int32_t isVideo = 0;
+        mFormat->findInt32("mIsVideo", &isVideo);
+        (*outBuffer)->meta()->setInt32("mIsVideo", isVideo);
+    }
+    // Mediatek Android Patch End.
 
     // Append information from the front stash entry to outBuffer.
     (*outBuffer)->meta()->setInt64("timeUs", entry.timestamp);
@@ -916,6 +943,10 @@ bool InputBuffersArray::requestNewBuffer(size_t *index, sp<MediaCodecBuffer> *bu
         c2Buffer->setFormat(mFormat);
         handleImageData(c2Buffer);
         *buffer = c2Buffer;
+        // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+        SET_ISVIDEO_FLAG(c2Buffer);
+        // Mediatek Android Patch End.
+
         return true;
     }
     return false;
@@ -950,6 +981,9 @@ sp<Codec2Buffer> InputBuffersArray::createNewBuffer() {
 bool SlotInputBuffers::requestNewBuffer(size_t *index, sp<MediaCodecBuffer> *buffer) {
     sp<Codec2Buffer> newBuffer = createNewBuffer();
     *index = mImpl.assignSlot(newBuffer);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    SET_ISVIDEO_FLAG(newBuffer);
+    // Mediatek Android Patch End.
     *buffer = newBuffer;
     return true;
 }
@@ -992,6 +1026,10 @@ bool LinearInputBuffers::requestNewBuffer(size_t *index, sp<MediaCodecBuffer> *b
         return false;
     }
     *index = mImpl.assignSlot(newBuffer);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    SET_ISVIDEO_FLAG(newBuffer);
+    // Mediatek Android Patch End.
+
     *buffer = newBuffer;
     return true;
 }
@@ -1169,6 +1207,9 @@ bool GraphicMetadataInputBuffers::requestNewBuffer(
         return false;
     }
     *index = mImpl.assignSlot(newBuffer);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    SET_ISVIDEO_FLAG(newBuffer);
+    // Mediatek Android Patch End.
     *buffer = newBuffer;
     return true;
 }
@@ -1239,6 +1280,9 @@ bool GraphicInputBuffers::requestNewBuffer(size_t *index, sp<MediaCodecBuffer> *
     }
     *index = mImpl.assignSlot(newBuffer);
     handleImageData(newBuffer);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    SET_ISVIDEO_FLAG(newBuffer);
+    // Mediatek Android Patch End.
     *buffer = newBuffer;
     return true;
 }

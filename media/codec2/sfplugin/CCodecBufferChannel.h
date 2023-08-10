@@ -56,6 +56,9 @@ class CCodecBufferChannel
     : public BufferChannelBase, public std::enable_shared_from_this<CCodecBufferChannel> {
 public:
     explicit CCodecBufferChannel(const std::shared_ptr<CCodecCallback> &callback);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    explicit CCodecBufferChannel(const std::shared_ptr<CCodecCallback> &callback, uint32_t serialNum);
+    // Mediatek Android Patch End.
     virtual ~CCodecBufferChannel();
 
     // BufferChannelBase interface
@@ -327,6 +330,11 @@ private:
                             int64_t mediaTimeUs, int64_t desiredRenderTimeNs);
     void processRenderedFrames(const FrameEventHistoryDelta& delta);
     int64_t getRenderTimeNs(const TrackedFrame& frame);
+
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    bool mIsVideo = false;
+    uint32_t mSerialNum = 0;
+    // Mediatek Android Patch End.
 
     QueueSync mSync;
     sp<MemoryDealer> mDealer;

@@ -996,6 +996,14 @@ private:
 
 // CCodec
 
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+CCodec::CCodec(uint32_t serialNum)
+    : mChannel(new CCodecBufferChannel(std::make_shared<CCodecCallbackImpl>(this), serialNum)),
+      mConfig(new CCodecConfig) {
+      mSerialNum = serialNum;
+}
+// Mediatek Android Patch End.
+
 CCodec::CCodec()
     : mChannel(new CCodecBufferChannel(std::make_shared<CCodecCallbackImpl>(this))),
       mConfig(new CCodecConfig) {

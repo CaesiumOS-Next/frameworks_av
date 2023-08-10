@@ -48,6 +48,9 @@ struct MediaCodecInfo;
 class CCodec : public CodecBase {
 public:
     CCodec();
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    CCodec(uint32_t serialNum);
+    // Mediatek Android Patch End.
 
     virtual std::shared_ptr<BufferChannelBase> getBufferChannel() override;
     virtual void initiateAllocateComponent(const sp<AMessage> &msg) override;

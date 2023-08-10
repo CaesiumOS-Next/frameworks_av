@@ -13,8 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//#define LOG_NDEBUG 0
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#define LOG_NDEBUG 0
+// Mediatek Android Patch End.
 #define LOG_TAG "GraphicsTracker"
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#define MM_FWK_ATRACE_TAG ATRACE_TAG_ALWAYS
+// Mediatek Android Patch End.
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -27,10 +32,59 @@
 
 #include <C2BlockInternal.h>
 #include <codec2/aidl/GraphicsTracker.h>
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#include <cutils/properties.h>
+// Mediatek Android Patch End.
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+#define MM_FWK_ATRACE_TAG ATRACE_TAG_ALWAYS
+static bool sVerboseLog = false;
+static bool sEnableAtrace = false;
+#ifdef ALOGV
+#undef ALOGV
+#endif
+#define ALOGV(...) ALOGV_IF(sVerboseLog, __VA_ARGS__)
+
+#include <utils/Trace.h>
+
+#define ATRACE_NAME_(name, enable) ScopedTrace_ PASTE(___tracer, __LINE__)(MM_FWK_ATRACE_TAG, name, enable)
+#define FWK_MM_ATRACE_CALL(x, ...) \
+    ATRACE_NAME_( \
+        (std::string("GT_") +  __func__).c_str(), sEnableAtrace);
+#define FWK_MM_ATRACE_NAME(...) \
+    ATRACE_NAME_( \
+        (std::string("GT_") + __VA_ARGS__).c_str(), sEnableAtrace);
+#define FWK_MM_ATRACE_INSTANT(...) \
+    if (sEnableAtrace) { \
+        atrace_instant(MM_FWK_ATRACE_TAG, (std::string("GT_") +  __VA_ARGS__).c_str()); \
+    }
+// Mediatek Android Patch End.
+
 
 namespace aidl::android::hardware::media::c2::implementation {
 
 namespace {
+
+// Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+class ScopedTrace_ {
+public:
+    inline ScopedTrace_(uint64_t tag, const char* name, bool enable) :
+        mTag(tag),
+        mEnable(enable) {
+        if (mEnable)
+            atrace_begin(mTag, name);
+    }
+
+    inline ~ScopedTrace_() {
+        if (mEnable)
+            atrace_end(mTag);
+    }
+
+private:
+    uint64_t mTag;
+    bool mEnable;
+};
+// Mediatek Android Patch End.
 
 static constexpr int kMaxDequeueMin = 1;
 static constexpr int kMaxDequeueMax = ::android::BufferQueueDefs::NUM_BUFFER_SLOTS - 2;
@@ -268,6 +322,12 @@ GraphicsTracker::GraphicsTracker(int maxDequeueCount)
     mDequeueable{maxDequeueCount},
     mTotalDequeued{0}, mTotalCancelled{0}, mTotalDropped{0}, mTotalReleased{0},
     mInConfig{false}, mStopped{false}, mStopRequested{false}, mAllocAfterStopRequested{0} {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    sVerboseLog = (bool)property_get_int32("media.framework.verbose.log", 0);
+    sEnableAtrace = property_get_bool("media.framework.enable.atrace", 0) ||
+        atrace_is_tag_enabled(ATRACE_TAG_VIDEO);
+    // Mediatek Android Patch End.
+
     if (maxDequeueCount < kMaxDequeueMin) {
         mMaxDequeue = kMaxDequeueMin;
         mMaxDequeueCommitted = kMaxDequeueMin;
@@ -1080,6 +1140,9 @@ void GraphicsTracker::commitRender(const std::shared_ptr<BufferCache> &cache,
 c2_status_t GraphicsTracker::render(const C2ConstGraphicBlock& blk,
                                    const IGraphicBufferProducer::QueueBufferInput &input,
                                    IGraphicBufferProducer::QueueBufferOutput *output) {
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    FWK_MM_ATRACE_CALL();
+    // Mediatek Android Patch End.
     uint64_t bid;
     c2_status_t res = retrieveAHardwareBufferId(blk, &bid);
     if (res != C2_OK) {
@@ -1136,7 +1199,18 @@ c2_status_t GraphicsTracker::render(const C2ConstGraphicBlock& blk,
         oldBuffer = buffer;
         buffer = newBuffer;
     }
-    ::android::status_t renderRes = cache->mIgbp->queueBuffer(buffer->mSlot, input, output);
+    // Mediatek Android Patch Begin, {DTV04070834}, {MM FWK log and Atrace}
+    ::android::status_t renderRes = ::android::UNKNOWN_ERROR;
+    {
+        FWK_MM_ATRACE_NAME("calling cache->mIgbp->queueBuffer");
+        const int64_t nowNs = systemTime(SYSTEM_TIME_MONOTONIC);
+        renderRes = cache->mIgbp->queueBuffer(buffer->mSlot, input, output);
+        ALOGV("[FWK][%s]: called ts: %" PRId64 ", bqslot #%d, producer->queue: %" PRId64 " ms", __FUNCTION__, input.timestamp, buffer->mSlot, (systemTime(SYSTEM_TIME_MONOTONIC) - nowNs)/1000000);
+        std::string str = "ts:" + std::to_string(input.timestamp) + ", bqslot:#" + std::to_string(buffer->mSlot) +
+            ", frmNum:" + std::to_string(output->nextFrameNumber - 1);
+        FWK_MM_ATRACE_INSTANT(str.c_str());
+    }
+    // Mediatek Android Patch End.
     ALOGV("render done: migration(%d), render(err = %d)", !fromCache, renderRes);
     if (renderRes != ::android::OK) {
         CHECK(renderRes != ::android::BAD_VALUE);
