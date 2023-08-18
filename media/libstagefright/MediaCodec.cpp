@@ -5664,7 +5664,7 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
             sp<AReplyToken> replyID;
             CHECK(msg->senderAwaitsResponse(&replyID));
 
-            if (!isExecuting()) {
+            if (!isExecuting() && mState != UNINITIALIZED) {
                 mErrorLog.log(LOG_TAG, base::StringPrintf(
                         "releaseOutputBuffer() is valid only at Executing states; currently %s",
                         apiStateString().c_str()));
@@ -6223,7 +6223,7 @@ void MediaCodec::setState(State newState) {
 
     if (newState == UNINITIALIZED) {
         // return any straggling buffers, e.g. if we got here on an error
-        returnBuffersToCodec();
+        returnBuffersToCodec(true);
 
         // The component is gone, mediaserver's probably back up already
         // but should definitely be back up should we try to instantiate
@@ -6262,6 +6262,7 @@ void MediaCodec::returnBuffersToCodecOnPort(int32_t portIndex, bool isReclaim) {
             if (isReclaim && info->mOwnedByClient) {
                 ALOGD("port %d buffer %zu still owned by client when codec is reclaimed",
                         portIndex, i);
+                continue;
             } else {
                 ALOGV("returnBuffersToCodecOnPort: mPortBuffers[%s][%zu] NOT owned by client",
                       portIndex == kPortIndexInput ? "in" : "out", i);
@@ -6679,7 +6680,7 @@ status_t MediaCodec::onReleaseOutputBuffer(const sp<AMessage> &msg) {
         render = 0;
     }
 
-    if (!isExecuting()) {
+    if (!isExecuting() && mState != UNINITIALIZED) {
         mErrorLog.log(LOG_TAG, base::StringPrintf(
                 "releaseOutputBuffer() is valid at Executing states; currently %s",
                 apiStateString().c_str()));
