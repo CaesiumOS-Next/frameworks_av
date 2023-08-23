@@ -35,7 +35,11 @@
 
 #define FILEREAD_MAX_LAYERS 2
 
-#define DRC_DEFAULT_MOBILE_REF_LEVEL 64  /* 64*-0.25dB = -16 dB below full scale for mobile conf */
+/*[Amlogic start]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/* Change-Id: I377c25d7c96c73fd69133ff433d32123aef3e173 */
+/* OTT-46828 */
+#define DRC_DEFAULT_MOBILE_REF_LEVEL 92  /* 92*-0.25dB = -23 dB below full scale for mobile conf */
+/*[Amlogic end]-----------------------------------------------------------*/
 #define DRC_DEFAULT_MOBILE_DRC_CUT   127 /* maximum compression of dynamic range for mobile conf */
 #define DRC_DEFAULT_MOBILE_DRC_BOOST 127 /* maximum compression of dynamic range for mobile conf */
 #define DRC_DEFAULT_MOBILE_DRC_HEAVY 1   /* switch for heavy compression for mobile conf */
