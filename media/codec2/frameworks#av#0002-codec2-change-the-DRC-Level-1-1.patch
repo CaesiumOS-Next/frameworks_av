@@ -1,0 +1,40 @@
+From a4935f8de4b8e0f05637eaf216d51ac8da4364a4 Mon Sep 17 00:00:00 2001
+From: Xiushan Lu <xiushan.lu@amlogic.com>
+Date: Wed, 23 Aug 2023 14:05:38 +0800
+Subject: [PATCH] audio: aac c2 codec, change the DRC Level [1/1]
+
+PD#OTT-46828
+
+Problem:
+The MP4 AAC Loudness is not same as ddp.
+Loudness_-23dBFS_-15dBFS_aac.mp4
+
+Solution:
+change the FDK AAC DRC Reference level as -23dB
+
+Verify:
+Local test is passed.
+
+Change-Id: I377c25d7c96c73fd69133ff433d32123aef3e173
+Signed-off-by: Xiushan Lu <xiushan.lu@amlogic.com>
+
+diff --git a/media/codec2/components/aac/C2SoftAacDec.cpp b/media/codec2/components/aac/C2SoftAacDec.cpp
+index c770d0c8bf..de5b576934 100644
+--- a/media/codec2/components/aac/C2SoftAacDec.cpp
++++ b/media/codec2/components/aac/C2SoftAacDec.cpp
+@@ -35,7 +35,11 @@
+
+ #define FILEREAD_MAX_LAYERS 2
+
+-#define DRC_DEFAULT_MOBILE_REF_LEVEL 64  /* 64*-0.25dB = -16 dB below full scale for mobile conf */
++/*[Amlogic start]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
++/* Change-Id: I377c25d7c96c73fd69133ff433d32123aef3e173 */
++/* OTT-46828 */
++#define DRC_DEFAULT_MOBILE_REF_LEVEL 92  /* 92*-0.25dB = -23 dB below full scale for mobile conf */
++/*[Amlogic end]-----------------------------------------------------------*/
+ #define DRC_DEFAULT_MOBILE_DRC_CUT   127 /* maximum compression of dynamic range for mobile conf */
+ #define DRC_DEFAULT_MOBILE_DRC_BOOST 127 /* maximum compression of dynamic range for mobile conf */
+ #define DRC_DEFAULT_MOBILE_DRC_HEAVY 1   /* switch for heavy compression for mobile conf */
+--
+2.29.0
+
