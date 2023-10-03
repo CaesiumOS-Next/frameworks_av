@@ -3512,9 +3512,13 @@ bool AudioPolicyManager::checkCloseInput(const sp<AudioInputDescriptor>& input) 
         return true;
     }
     for (const auto& client : input->clientsList()) {
-        sp<DeviceDescriptor> device =
-            mEngine->getInputDeviceForAttributes(client->attributes(), client->uid(),
-                                                 client->session());
+        bool active;
+        sp<DeviceDescriptor> device = findPreferredDevice(input, client->attributes().source,
+                active, mAvailableInputDevices);
+        if (device == nullptr) {
+            device = mEngine->getInputDeviceForAttributes(client->attributes(), client->uid(),
+                    client->session());
+        }
         if (!input->supportedDevices().contains(device)) {
             return true;
         }
@@ -7796,6 +7800,11 @@ sp<DeviceDescriptor> AudioPolicyManager::getNewInputDevice(
         attributes.source = AUDIO_SOURCE_VOICE_COMMUNICATION;
     }
     if (attributes.source != AUDIO_SOURCE_DEFAULT) {
+        bool active;
+        device = findPreferredDevice(inputDesc, attributes.source, active, mAvailableInputDevices);
+        if (device != nullptr) {
+            return device;
+        }
         device = mEngine->getInputDeviceForAttributes(attributes, uid, session);
     }
 

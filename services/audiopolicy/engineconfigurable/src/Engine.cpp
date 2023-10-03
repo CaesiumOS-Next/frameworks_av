@@ -477,23 +477,9 @@ sp<DeviceDescriptor> Engine::getInputDeviceForAttributes(const audio_attributes_
     const auto availableInputDevices = getApmObserver()->getAvailableInputDevices();
     const auto &inputs = getApmObserver()->getInputs();
     std::string address;
-    //
-    // Explicit Routing ??? what is the priority of explicit routing? Shall it be considered
-    // first as it used to be by APM?
-    //
-    // Honor explicit routing requests only if all active clients have a preferred route in which
-    // case the last active client route is used
-    sp<DeviceDescriptor> device =
-            findPreferredDevice(inputs, attr.source, availableInputDevices);
-    if (device != nullptr) {
-        return device;
-    }
 
-    device = policyMixes.getDeviceAndMixForInputSource(attr,
-                                                       availableInputDevices,
-                                                       uid,
-                                                       session,
-                                                       mix);
+    sp<DeviceDescriptor> device = policyMixes.getDeviceAndMixForInputSource(attr,
+            availableInputDevices, uid, session, mix);
     if (device != nullptr) {
         return device;
     }
