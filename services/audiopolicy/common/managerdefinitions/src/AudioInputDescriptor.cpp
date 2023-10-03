@@ -415,7 +415,7 @@ RecordClientVector AudioInputDescriptor::clientsList(bool activeOnly, audio_sour
     for (const auto &client : getClientIterable()) {
         if ((!activeOnly || client->active())
             && (source == AUDIO_SOURCE_DEFAULT || source == client->source())
-            && (!preferredDeviceOnly || client->hasPreferredDevice())) {
+               && (!preferredDeviceOnly || client->hasPreferredDevice())) {
             clients.push_back(client);
         }
     }
