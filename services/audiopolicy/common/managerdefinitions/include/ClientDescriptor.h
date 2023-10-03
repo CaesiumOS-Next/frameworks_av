@@ -201,8 +201,10 @@ public:
     RecordClientDescriptor(audio_port_handle_t portId, audio_unique_id_t riid, uid_t uid,
                         audio_session_t sessionId, audio_attributes_t attributes,
                         audio_config_base_t config, audio_port_handle_t preferredDeviceId,
-                        audio_source_t source, audio_input_flags_t flags, bool isSoundTrigger) :
-        ClientDescriptor(portId, uid, sessionId, attributes, config, preferredDeviceId),
+                        audio_source_t source, audio_input_flags_t flags, bool isSoundTrigger,
+                        bool isPreferredDeviceForExclusiveUse = false) :
+        ClientDescriptor(portId, uid, sessionId, attributes, config, preferredDeviceId,
+                         isPreferredDeviceForExclusiveUse),
         mRIId(riid), mSource(source), mFlags(flags), mIsSoundTrigger(isSoundTrigger),
         mAppState(APP_STATE_IDLE) {}
     ~RecordClientDescriptor() override = default;

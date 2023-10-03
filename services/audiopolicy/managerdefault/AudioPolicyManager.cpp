@@ -2928,6 +2928,7 @@ status_t AudioPolicyManager::getInputForAttr(const audio_attributes_t *attr,
     audio_port_handle_t requestedDeviceId = *selectedDeviceId;
     uid_t uid = VALUE_OR_RETURN_STATUS(aidl2legacy_int32_t_uid_t(attributionSource.uid));
     bool isSoundTrigger;
+    bool isPreferredDeviceForExclusiveUse;
 
     // The supplied portId must be AUDIO_PORT_HANDLE_NONE
     if (*portId != AUDIO_PORT_HANDLE_NONE) {
@@ -3087,10 +3088,14 @@ exit:
     isSoundTrigger = attributes.source == AUDIO_SOURCE_HOTWORD &&
         mSoundTriggerSessions.indexOfKey(session) >= 0;
     *portId = PolicyAudioPort::getNextUniqueId();
-
+    // Multiple assistants support with diversity of processing requested (AEC done by app or not,
+    // specific channels expected is leading to have several devices for exclusive usage)
+    isPreferredDeviceForExclusiveUse = (explicitRoutingDevice != nullptr) &&
+            (attributes.source == AUDIO_SOURCE_HOTWORD ||
+            attributes.source == AUDIO_SOURCE_VOICE_RECOGNITION);
     clientDesc = new RecordClientDescriptor(*portId, riid, uid, session, attributes, *config,
                                             requestedDeviceId, attributes.source, flags,
-                                            isSoundTrigger);
+                                            isSoundTrigger, isPreferredDeviceForExclusiveUse);
     inputDesc = mInputs.valueFor(*input);
     // Move (if found) effect for the client session to its input
     mEffects.moveEffectsForIo(session, *input, &mInputs, mpClientInterface);
@@ -7796,6 +7801,16 @@ sp<DeviceDescriptor> AudioPolicyManager::getNewInputDevice(
         attributes.source = AUDIO_SOURCE_VOICE_COMMUNICATION;
     }
     if (attributes.source != AUDIO_SOURCE_DEFAULT) {
+        size_t activeClients = inputDesc->clientsList(true /*activeOnly*/).size();
+        size_t activeClientsWithExclusiveRouting = inputDesc->clientsList(true /*activeOnly*/,
+                attributes.source, /* preferredDeviceOnly= */ false,
+                /* exclusivePreferredDevice= */ true).size();
+        if (activeClients > 0 && activeClients == activeClientsWithExclusiveRouting) {
+            device = mAvailableInputDevices.getDeviceFromId(topClient->preferredDeviceId());
+            if (device != nullptr) {
+                return device;
+            }
+        }
         device = mEngine->getInputDeviceForAttributes(attributes, uid, session);
     }
 

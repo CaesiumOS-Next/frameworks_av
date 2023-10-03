@@ -409,13 +409,16 @@ RecordClientVector AudioInputDescriptor::getClientsForSession(
 }
 
 RecordClientVector AudioInputDescriptor::clientsList(bool activeOnly, audio_source_t source,
-                                                     bool preferredDeviceOnly) const
+                                                     bool preferredDeviceOnly,
+                                                     bool exclusivePreferredDevice) const
 {
     RecordClientVector clients;
     for (const auto &client : getClientIterable()) {
         if ((!activeOnly || client->active())
             && (source == AUDIO_SOURCE_DEFAULT || source == client->source())
-            && (!preferredDeviceOnly || client->hasPreferredDevice())) {
+               && (!preferredDeviceOnly || (client->hasPreferredDevice()
+                       && !client->isPreferredDeviceForExclusiveUse()))
+                   && (!exclusivePreferredDevice || client->isPreferredDeviceForExclusiveUse())) {
             clients.push_back(client);
         }
     }

@@ -117,7 +117,8 @@ public:
 
     RecordClientVector getClientsForSession(audio_session_t session);
     RecordClientVector clientsList(bool activeOnly = false,
-        audio_source_t source = AUDIO_SOURCE_DEFAULT, bool preferredDeviceOnly = false) const;
+        audio_source_t source = AUDIO_SOURCE_DEFAULT, bool preferredDeviceOnly = false,
+                bool exclusivePreferredDevice = false) const;
 
     void setAppState(audio_port_handle_t portId, app_state_t state);
 
