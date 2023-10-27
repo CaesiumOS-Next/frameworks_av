@@ -304,6 +304,9 @@ int DeviceVector::do_compare(const void* lhs, const void* rhs) const {
     ret = compare_type(rdevice->getId(), ldevice->getId());
     if (ret != 0)
         return ret;
+    ret = compare_type(ldevice->getTagName(), rdevice->getTagName());
+    if (ret != 0)
+        return ret;
     // fallback to default sort using pointer address
     return SortedVector::do_compare(lhs, rhs);
 }
