@@ -24,6 +24,7 @@
 #include <ProductStrategy.h>
 #include <VolumeGroup.h>
 #include <LastRemovableMediaDevices.h>
+#include <LastRemovableInputMediaDevices.h>
 
 namespace android {
 namespace audio_policy {
@@ -101,6 +102,11 @@ public:
             device_out_group_t group = GROUP_NONE,
             std::vector<audio_devices_t> excludedDevices = {}) const {
         return mLastRemovableMediaDevices.getLastRemovableMediaDevices(group, excludedDevices);
+    }
+
+    std::vector<audio_devices_t> getLastRemovableInputMediaDevices() const
+    {
+        return mLastRemovableInputMediaDevices.getLastRemovableInputMediaDevices();
     }
 
     void dump(String8 *dst) const override;
@@ -210,6 +216,7 @@ private:
     CapturePresetDevicesRoleMap mCapturePresetDevicesRoleMap;
     VolumeGroupMap mVolumeGroups;
     LastRemovableMediaDevices mLastRemovableMediaDevices;
+    LastRemovableInputMediaDevices mLastRemovableInputMediaDevices;
     audio_mode_t mPhoneState = AUDIO_MODE_NORMAL;  /**< current phone state. */
 
     /** current forced use configuration. */

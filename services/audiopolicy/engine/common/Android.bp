@@ -33,6 +33,7 @@ cc_library_static {
     srcs: [
         "src/EngineBase.cpp",
         "src/LastRemovableMediaDevices.cpp",
+        "src/LastRemovableInputMediaDevices.cpp",
         "src/ProductStrategy.cpp",
         "src/VolumeCurve.cpp",
         "src/VolumeGroup.cpp",

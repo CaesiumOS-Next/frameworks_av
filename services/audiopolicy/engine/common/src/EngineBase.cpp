@@ -80,6 +80,8 @@ status_t EngineBase::setDeviceConnectionState(const sp<DeviceDescriptor> devDesc
         // LE audio broadcast device has a specific policy depending on active strategies and
         // devices and does not follow the rule of last connected removable device.
         mLastRemovableMediaDevices.setRemovableMediaDevices(devDesc, state);
+    } else if ((deviceType != AUDIO_DEVICE_NONE) && audio_is_input_device(deviceType)) {
+        mLastRemovableInputMediaDevices.setRemovableInputMediaDevices(devDesc, state);
     }
 
     return NO_ERROR;

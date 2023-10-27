@@ -623,6 +623,7 @@ sp<DeviceDescriptor> Engine::getDeviceForInputSource(audio_source_t inputSource)
     DeviceVector availablePrimaryDevices = primaryOutput == nullptr ? DeviceVector()
             : availableInputDevices.getDevicesFromHwModule(primaryOutput->getModuleHandle());
     sp<DeviceDescriptor> device;
+    std::vector<audio_devices_t> orderedTypes;
 
     // when a call is active, force device selection to match source VOICE_COMMUNICATION
     // for most other input sources to avoid rerouting call TX audio
@@ -671,10 +672,18 @@ sp<DeviceDescriptor> Engine::getDeviceForInputSource(audio_source_t inputSource)
                     AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET, String8(""), AUDIO_FORMAT_DEFAULT);
             if (device != nullptr) break;
         }
-        device = availableDevices.getFirstExistingDevice({
+        device = availableDevices.getFirstExistingDevice(
+                                        getLastRemovableInputMediaDevices());
+        orderedTypes = {
                 AUDIO_DEVICE_IN_WIRED_HEADSET,
                 AUDIO_DEVICE_IN_USB_HEADSET, AUDIO_DEVICE_IN_USB_DEVICE,
-                AUDIO_DEVICE_IN_BLUETOOTH_BLE, AUDIO_DEVICE_IN_BUILTIN_MIC});
+                AUDIO_DEVICE_IN_BLUETOOTH_BLE, AUDIO_DEVICE_IN_BUILTIN_MIC};
+        if (!(device != nullptr &&
+              find(orderedTypes.begin(), orderedTypes.end(), device->type()) != orderedTypes.end())) {
+            // If last removable device is none or not supported,
+            // set supported device based on priority.
+            device = availableDevices.getFirstExistingDevice(orderedTypes);
+        }
         break;
 
     case AUDIO_SOURCE_VOICE_COMMUNICATION:
@@ -714,10 +723,18 @@ sp<DeviceDescriptor> Engine::getDeviceForInputSource(audio_source_t inputSource)
                     __func__);
             FALLTHROUGH_INTENDED;
         default:    // FORCE_NONE
-            device = availableDevices.getFirstExistingDevice({
+            device = availableDevices.getFirstExistingDevice(
+                                            getLastRemovableInputMediaDevices());
+            orderedTypes = {
                     AUDIO_DEVICE_IN_WIRED_HEADSET, AUDIO_DEVICE_IN_USB_HEADSET,
                     AUDIO_DEVICE_IN_USB_DEVICE, AUDIO_DEVICE_IN_BLUETOOTH_BLE,
-                    AUDIO_DEVICE_IN_BUILTIN_MIC});
+                    AUDIO_DEVICE_IN_BUILTIN_MIC};
+            if (!(device != nullptr &&
+                  find(orderedTypes.begin(), orderedTypes.end(), device->type()) != orderedTypes.end())) {
+                // If last removable device is none or not supported,
+                // set supported device based on priority.
+                device = availableDevices.getFirstExistingDevice(orderedTypes);
+            }
             break;
         }
         break;
