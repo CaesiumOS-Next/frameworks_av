@@ -1595,6 +1595,15 @@ status_t AudioSystem::getMaxVolumeIndexForAttributes(const audio_attributes_t& a
     return OK;
 }
 
+status_t AudioSystem::setVolumeGroupMaxVolumeIndex(volume_group_t groupId, int index) {
+    const sp<IAudioPolicyService> aps = get_audio_policy_service();
+    if (aps == 0) return PERMISSION_DENIED;
+
+    int32_t groupIdAidl = VALUE_OR_RETURN_STATUS(legacy2aidl_volume_group_t_int32_t(groupId));
+    int32_t indexAidl = VALUE_OR_RETURN_STATUS(convertIntegral<int32_t>(index));
+    return statusTFromBinderStatus(aps->setVolumeGroupMaxVolumeIndex(groupIdAidl, indexAidl));
+}
+
 status_t AudioSystem::getMinVolumeIndexForAttributes(const audio_attributes_t& attr, int& index) {
     const sp<IAudioPolicyService> aps = get_audio_policy_service();
     if (aps == nullptr) return AudioPolicyServiceTraits::getError();
@@ -1604,6 +1613,69 @@ status_t AudioSystem::getMinVolumeIndexForAttributes(const audio_attributes_t& a
     int32_t indexAidl;
     RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(
             aps->getMinVolumeIndexForAttributes(attrAidl, &indexAidl)));
+    index = VALUE_OR_RETURN_STATUS(convertIntegral<int>(indexAidl));
+    return OK;
+}
+
+status_t AudioSystem::setVolumeGroupMinVolumeIndex(volume_group_t groupId, int index) {
+    const sp<IAudioPolicyService> aps = get_audio_policy_service();
+    if (aps == 0) return PERMISSION_DENIED;
+
+    int32_t groupIdAidl = VALUE_OR_RETURN_STATUS(legacy2aidl_volume_group_t_int32_t(groupId));
+    int32_t indexAidl = VALUE_OR_RETURN_STATUS(convertIntegral<int32_t>(index));
+    return statusTFromBinderStatus(aps->setVolumeGroupMinVolumeIndex(groupIdAidl, indexAidl));
+}
+
+status_t AudioSystem::setVolumeGroupVolumeIndex(volume_group_t groupId,
+                                                int index, bool muted,
+                                                audio_devices_t device) {
+    const sp<IAudioPolicyService> aps = get_audio_policy_service();
+    if (aps == 0) return PERMISSION_DENIED;
+
+    int32_t groupIdAidl = VALUE_OR_RETURN_STATUS(legacy2aidl_volume_group_t_int32_t(groupId));
+    int32_t indexAidl = VALUE_OR_RETURN_STATUS(convertIntegral<int32_t>(index));
+    AudioDeviceDescription deviceAidl = VALUE_OR_RETURN_STATUS(
+            legacy2aidl_audio_devices_t_AudioDeviceDescription(device));
+    return statusTFromBinderStatus(
+            aps->setVolumeGroupVolumeIndex(groupIdAidl, deviceAidl, indexAidl, muted));
+}
+
+status_t AudioSystem::getVolumeGroupVolumeIndex(volume_group_t groupId,
+                                                int& index,
+                                                audio_devices_t device) {
+    const sp<IAudioPolicyService> aps = get_audio_policy_service();
+    if (aps == 0) return PERMISSION_DENIED;
+
+    int32_t groupIdAidl = VALUE_OR_RETURN_STATUS(legacy2aidl_volume_group_t_int32_t(groupId));
+    AudioDeviceDescription deviceAidl = VALUE_OR_RETURN_STATUS(
+            legacy2aidl_audio_devices_t_AudioDeviceDescription(device));
+    int32_t indexAidl;
+    RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(
+            aps->getVolumeGroupVolumeIndex(groupIdAidl, deviceAidl, &indexAidl)));
+    index = VALUE_OR_RETURN_STATUS(convertIntegral<int>(indexAidl));
+    return OK;
+}
+
+status_t AudioSystem::getVolumeGroupMaxVolumeIndex(volume_group_t groupId, int& index) {
+    const sp<IAudioPolicyService> aps = get_audio_policy_service();
+    if (aps == 0) return PERMISSION_DENIED;
+
+    int32_t groupIdAidl = VALUE_OR_RETURN_STATUS(legacy2aidl_volume_group_t_int32_t(groupId));
+    int32_t indexAidl;
+    RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(
+            aps->getVolumeGroupMaxVolumeIndex(groupIdAidl, &indexAidl)));
+    index = VALUE_OR_RETURN_STATUS(convertIntegral<int>(indexAidl));
+    return OK;
+}
+
+status_t AudioSystem::getVolumeGroupMinVolumeIndex(volume_group_t groupId, int& index) {
+    const sp<IAudioPolicyService> aps = get_audio_policy_service();
+    if (aps == 0) return PERMISSION_DENIED;
+
+    int32_t groupIdAidl = VALUE_OR_RETURN_STATUS(legacy2aidl_volume_group_t_int32_t(groupId));
+    int32_t indexAidl;
+    RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(
+            aps->getVolumeGroupMinVolumeIndex(groupIdAidl, &indexAidl)));
     index = VALUE_OR_RETURN_STATUS(convertIntegral<int>(indexAidl));
     return OK;
 }

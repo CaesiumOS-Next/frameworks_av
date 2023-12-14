@@ -144,6 +144,36 @@ interface IAudioPolicyService {
 
     int getMinVolumeIndexForAttributes(in AudioAttributes attr);
 
+    /**
+     * @FlaggedApi("android.media.audiopolicy.volume_group_management_update")
+     */
+    void setVolumeGroupVolumeIndex(int /* volume_group_id */ groupId,
+                                   in AudioDeviceDescription device,
+                                   int index, boolean muted);
+    /**
+     * @FlaggedApi("android.media.audiopolicy.volume_group_management_update")
+     */
+    int getVolumeGroupVolumeIndex(int /* volume_group_id */ groupId,
+                                  in AudioDeviceDescription device);
+    /**
+     * @FlaggedApi("android.media.audiopolicy.volume_group_management_update")
+     */
+    int getVolumeGroupMaxVolumeIndex(int /* volume_group_id */ groupId);
+    /**
+     * @FlaggedApi("android.media.audiopolicy.volume_group_management_update")
+     */
+    int getVolumeGroupMinVolumeIndex(int /* volume_group_id */ groupId);
+
+    /**
+     * @FlaggedApi("android.media.audiopolicy.volume_group_management_update")
+     */
+    void setVolumeGroupMaxVolumeIndex(int /* volume_group_id */ groupId, int maxIndex);
+
+    /**
+     * @FlaggedApi("android.media.audiopolicy.volume_group_management_update")
+     */
+    void setVolumeGroupMinVolumeIndex(int /* volume_group_id */ groupId, int minIndex);
+
     int /* product_strategy_t */ getStrategyForStream(AudioStreamType stream);
 
     AudioDevice[] getDevicesForAttributes(in AudioAttributes attr, boolean forVolume);

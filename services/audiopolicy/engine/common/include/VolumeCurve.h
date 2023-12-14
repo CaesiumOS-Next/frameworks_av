@@ -108,6 +108,16 @@ public:
         mIndexCur[device] = index;
     }
 
+    int setVolumeIndexMin(int index) {
+        mIndexMin = index;
+        return NO_ERROR;
+    }
+
+    int setVolumeIndexMax(int index) {
+        mIndexMax = index;
+        return NO_ERROR;
+    }
+
     int getVolumeIndexMin() const { return mIndexMin; }
 
     int getVolumeIndexMax() const { return mIndexMax; }
