@@ -839,6 +839,7 @@ DeviceVector Engine::getDevicesForProductStrategy(product_strategy_t strategy) c
 }
 
 DeviceVector Engine::getOutputDevicesForAttributes(const audio_attributes_t &attributes,
+                                                   uid_t uid __unused,
                                                    const sp<DeviceDescriptor> &preferredDevice,
                                                    bool fromCache) const
 {
@@ -867,7 +868,7 @@ DeviceVector Engine::getOutputDevicesForAttributes(const audio_attributes_t &att
 DeviceVector Engine::getOutputDevicesForStream(audio_stream_type_t stream, bool fromCache) const
 {
     auto attributes = getAttributesForStreamType(stream);
-    return getOutputDevicesForAttributes(attributes, nullptr, fromCache);
+    return getOutputDevicesForAttributes(attributes, /* uid */ 0, nullptr, fromCache);
 }
 
 sp<DeviceDescriptor> Engine::getInputDeviceForAttributes(const audio_attributes_t &attr,
