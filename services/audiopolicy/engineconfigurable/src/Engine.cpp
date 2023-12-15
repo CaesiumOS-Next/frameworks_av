@@ -37,8 +37,12 @@
 
 #include <cinttypes>
 
+#include <android_media_audiopolicy.h>
+
 using std::string;
 using std::map;
+
+namespace audio_flags = android::media::audiopolicy;
 
 namespace android {
 namespace audio_policy {
@@ -465,17 +469,14 @@ DeviceVector Engine::getDevicesForProductStrategy(product_strategy_t ps) const
     }
     return selectedDevices;
 }
-
-DeviceVector Engine::getOutputDevicesForAttributes(const audio_attributes_t &attributes,
-                                                   const sp<DeviceDescriptor> &preferredDevice,
-                                                   bool fromCache) const
+DeviceVector Engine::getOutputDevicesForStrategy(product_strategy_t strategy,
+        const sp<DeviceDescriptor> &preferredDevice, bool fromCache) const
 {
     // First check for explict routing device
     if (preferredDevice != nullptr) {
         ALOGV("%s explicit Routing on device %s", __func__, preferredDevice->toString().c_str());
         return DeviceVector(preferredDevice);
     }
-    product_strategy_t strategy = getProductStrategyForAttributes(attributes);
     const DeviceVector availableOutputDevices = getApmObserver()->getAvailableOutputDevices();
     const SwAudioOutputCollection &outputs = getApmObserver()->getOutputs();
     //
@@ -491,6 +492,23 @@ DeviceVector Engine::getOutputDevicesForAttributes(const audio_attributes_t &att
     return fromCache? getCachedDevices(strategy) : getDevicesForProductStrategy(strategy);
 }
 
+DeviceVector Engine::getOutputDevicesForAttributes(const audio_attributes_t &attributes, uid_t uid,
+                                                   const sp<DeviceDescriptor> &preferredDevice,
+                                                   bool fromCache) const
+{
+    // First check for explict routing device
+    if (preferredDevice != nullptr) {
+        ALOGV("%s explicit Routing on device %s", __func__, preferredDevice->toString().c_str());
+        return DeviceVector(preferredDevice);
+    }
+    product_strategy_t strategy;
+    if (!audio_flags::multi_zone_audio()) {
+        uid = 0;
+    }
+    strategy = getProductStrategyForAttributes(attributes, uid);
+    return getOutputDevicesForStrategy(strategy, preferredDevice, fromCache);
+}
+
 DeviceVector Engine::getCachedDevices(product_strategy_t ps) const
 {
     return mDevicesForStrategies.find(ps) != mDevicesForStrategies.end() ?
@@ -500,7 +518,7 @@ DeviceVector Engine::getCachedDevices(product_strategy_t ps) const
 DeviceVector Engine::getOutputDevicesForStream(audio_stream_type_t stream, bool fromCache) const
 {
     auto attributes = EngineBase::getAttributesForStreamType(stream);
-    return getOutputDevicesForAttributes(attributes, nullptr, fromCache);
+    return getOutputDevicesForAttributes(attributes, /* uid */ 0,  nullptr, fromCache);
 }
 
 sp<DeviceDescriptor> Engine::getInputDeviceForAttributes(const audio_attributes_t &attr,
