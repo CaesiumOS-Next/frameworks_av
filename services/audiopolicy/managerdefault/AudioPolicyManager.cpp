@@ -42,7 +42,6 @@
 #include <android/media/audio/common/AudioMMapPolicy.h>
 #include <android/media/audio/common/AudioPort.h>
 #include <com_android_media_audio.h>
-#include <android_media_audiopolicy.h>
 #include <com_android_media_audioserver.h>
 #include <cutils/bitops.h>
 #include <error/expected_utils.h>
@@ -59,9 +58,6 @@
 #include "TypeConverter.h"
 
 namespace android {
-
-
-namespace audio_flags = android::media::audiopolicy;
 
 using android::media::audio::common::AudioDevice;
 using android::media::audio::common::AudioDeviceAddress;
@@ -477,8 +473,7 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
         (void)updateCallRouting(false /*fromCache*/);
         // Reconnect Audio Source
         for (const auto &strategy : mEngine->getOrderedProductStrategies()) {
-            auto attributes = mEngine->getAllAttributesForProductStrategy(strategy).front();
-            checkAudioSourceForAttributes(attributes);
+            checkAudioSourceForStrategy(strategy);
         }
         if (state == AUDIO_POLICY_DEVICE_STATE_UNAVAILABLE) {
             cleanUpForDevice(device);
@@ -597,6 +592,7 @@ status_t AudioPolicyManager::handleDeviceConfigChange(audio_devices_t device,
        sp<SwAudioOutputDescriptor> desc = mOutputs.valueAt(i);
        // mute media strategies to avoid sending the music tail into
        // the earpiece or headset.
+       // Only for default zone
        if (desc->isStrategyActive(musicStrategy)) {
            uint32_t tempRecommendedMuteDuration = desc->getRecommendedMuteDurationMs();
            uint32_t tempMuteDurationMs = tempRecommendedMuteDuration > 0 ?
@@ -607,8 +603,7 @@ status_t AudioPolicyManager::handleDeviceConfigChange(audio_devices_t device,
        }
        setStrategyMute(musicStrategy, true, desc);
        setStrategyMute(musicStrategy, false, desc, MUTE_TIME_MS,
-          mEngine->getOutputDevicesForAttributes(attributes_initializer(AUDIO_USAGE_MEDIA),
-                                              nullptr, true /*fromCache*/).types());
+          mEngine->getOutputDevicesForStrategy(musicStrategy, nullptr, true /*fromCache*/).types());
     }
     // Wait for the muted audio to propagate down the audio path see checkDeviceMuteStrategies().
     // We assume that MUTE_TIME_MS is way larger than muteWaitMs so that unmuting still
@@ -684,7 +679,8 @@ DeviceVector AudioPolicyManager::selectBestRxSinkDevicesForCall(bool fromCache)
 {
     DeviceVector rxSinkdevices{};
     rxSinkdevices = mEngine->getOutputDevicesForAttributes(
-                attributes_initializer(AUDIO_USAGE_VOICE_COMMUNICATION), nullptr, fromCache);
+                attributes_initializer(AUDIO_USAGE_VOICE_COMMUNICATION), /* uid= */ 0, nullptr,
+                fromCache);
     if (!rxSinkdevices.isEmpty() && mAvailableOutputDevices.contains(rxSinkdevices.itemAt(0))) {
         auto rxSinkDevice = rxSinkdevices.itemAt(0);
         auto telephonyRxModule = mHwModules.getModuleForDeviceType(
@@ -838,7 +834,8 @@ void AudioPolicyManager::connectTelephonyRxAudioSource(uint32_t delayMs)
     if (fix_call_audio_patch()) {
         if (mCallRxSourceClient != nullptr) {
             DeviceVector rxDevices =
-                  mEngine->getOutputDevicesForAttributes(aa, nullptr, false /*fromCache*/);
+                  mEngine->getOutputDevicesForAttributes(aa, /* uid= */ 0,  nullptr,
+                                                         false /*fromCache*/);
             ALOG_ASSERT(!rxDevices.isEmpty() || !mCallRxSourceClient->isConnected(),
                         "connectTelephonyRxAudioSource(): no device found for call RX source");
             sp<DeviceDescriptor> rxDevice = rxDevices.itemAt(0);
@@ -957,6 +954,7 @@ void AudioPolicyManager::setPhoneState(audio_mode_t state)
     int delayMs = 0;
     if (isStateInCall(state)) {
         nsecs_t sysTime = systemTime();
+        // Phone managed only on default zone currently
         auto musicStrategy = streamToStrategy(AUDIO_STREAM_MUSIC);
         auto sonificationStrategy = streamToStrategy(AUDIO_STREAM_ALARM);
         for (size_t i = 0; i < mOutputs.size(); i++) {
@@ -972,12 +970,12 @@ void AudioPolicyManager::setPhoneState(audio_mode_t state)
             }
             setStrategyMute(musicStrategy, true, desc);
             setStrategyMute(musicStrategy, false, desc, MUTE_TIME_MS,
-                mEngine->getOutputDevicesForAttributes(attributes_initializer(AUDIO_USAGE_MEDIA),
-                                                       nullptr, true /*fromCache*/).types());
+                mEngine->getOutputDevicesForStrategy(musicStrategy, nullptr,
+                                                     true /*fromCache*/).types());
             setStrategyMute(sonificationStrategy, true, desc);
             setStrategyMute(sonificationStrategy, false, desc, MUTE_TIME_MS,
-                mEngine->getOutputDevicesForAttributes(attributes_initializer(AUDIO_USAGE_ALARM),
-                                                       nullptr, true /*fromCache*/).types());
+                mEngine->getOutputDevicesForStrategy(sonificationStrategy, nullptr,
+                                                     true /*fromCache*/).types());
         }
     }
 
@@ -1385,8 +1383,8 @@ status_t AudioPolicyManager::getOutputForAttrInt(
     }
     // explicit routing managed by getDeviceForStrategy in APM is now handled by engine
     // in order to let the choice of the order to future vendor engine
-    outputDevices = mEngine->getOutputDevicesForAttributes(*resultAttr, requestedDevice, false);
-
+    outputDevices = mEngine->getOutputDevicesForAttributes(*resultAttr, enforceUid(uid),
+            requestedDevice, false);
     if ((resultAttr->flags & AUDIO_FLAG_HW_AV_SYNC) != 0) {
         *flags = (audio_output_flags_t)(*flags | AUDIO_OUTPUT_FLAG_HW_AV_SYNC);
     }
@@ -2094,7 +2092,8 @@ status_t AudioPolicyManager::setMsdOutputPatches(const DeviceVector *outputDevic
         // occur on checkForDeviceAndOutputChanges(). Device connection events may
         // therefore invalidate explicit routing requests.
         devices = mEngine->getOutputDevicesForAttributes(
-                    attributes_initializer(AUDIO_USAGE_MEDIA), nullptr, false /*fromCache*/);
+                    attributes_initializer(AUDIO_USAGE_MEDIA), /* uid= */ 0, nullptr,
+                    false /*fromCache*/);
         LOG_ALWAYS_FATAL_IF(devices.isEmpty(), "no output device to set MSD patch");
     }
     std::vector<PatchBuilder> patchesToCreate;
@@ -3620,7 +3619,7 @@ status_t AudioPolicyManager::setDeviceAbsoluteVolumeEnabled(audio_devices_t devi
     }
 
     const DeviceVector devices = mEngine->getOutputDevicesForAttributes(
-            attributesToDriveAbs, nullptr /* preferredDevice */, true /* fromCache */);
+            attributesToDriveAbs, /* uid */ 0, nullptr /* preferredDevice */, true /* fromCache */);
     changed &= devices.types().contains(deviceType);
     // if something changed on the output device for the changed attributes, apply the stream
     // volumes regarding the new absolute mode to all the outputs without any delay
@@ -3721,7 +3720,8 @@ status_t AudioPolicyManager::setVolumeIndexForAttributes(const audio_attributes_
     auto curCurvAttrs = curves.getAttributes();
     if (!curCurvAttrs.empty() && curCurvAttrs.front() != defaultAttr) {
         auto attr = curCurvAttrs.front();
-        curSrcDevices = mEngine->getOutputDevicesForAttributes(attr, nullptr, false).types();
+        curSrcDevices = mEngine->getOutputDevicesForAttributes(attr, /* uid_t= */ 0, nullptr,
+                false).types();
     } else if (!curves.getStreamTypes().empty()) {
         auto stream = curves.getStreamTypes().front();
         curSrcDevices = mEngine->getOutputDevicesForStream(stream, false).types();
@@ -3879,7 +3879,7 @@ status_t AudioPolicyManager::getVolumeIndexForAttributes(const audio_attributes_
     DeviceTypeSet deviceTypes = {device};
     if (device == AUDIO_DEVICE_OUT_DEFAULT_FOR_VOLUME) {
         deviceTypes = mEngine->getOutputDevicesForAttributes(
-                attr, nullptr, true /*fromCache*/).types();
+                attr, /* uid */ 0, nullptr, true /*fromCache*/).types();
     }
     return getVolumeIndex(getVolumeCurves(attr), index, deviceTypes);
 }
@@ -3923,7 +3923,8 @@ audio_io_handle_t AudioPolicyManager::selectOutputForMusicEffects()
     // 5: the first output in the list
 
     DeviceVector devices = mEngine->getOutputDevicesForAttributes(
-                attributes_initializer(AUDIO_USAGE_MEDIA), nullptr, false /*fromCache*/);
+                attributes_initializer(AUDIO_USAGE_MEDIA), /* uid */ 0, nullptr,
+                false /*fromCache*/);
     SortedVector<audio_io_handle_t> outputs = getOutputsForDevices(devices, mOutputs);
 
     if (outputs.size() == 0) {
@@ -5954,10 +5955,7 @@ void AudioPolicyManager::clearAudioPatches(uid_t uid)
 
 void AudioPolicyManager::checkStrategyRoute(product_strategy_t ps, audio_io_handle_t ouptutToSkip)
 {
-    // Take the first attributes following the product strategy as it is used to retrieve the routed
-    // device. All attributes wihin a strategy follows the same "routing strategy"
-    auto attributes = mEngine->getAllAttributesForProductStrategy(ps).front();
-    DeviceVector devices = mEngine->getOutputDevicesForAttributes(attributes, nullptr, false);
+    DeviceVector devices = mEngine->getOutputDevicesForStrategy(ps, nullptr, false);
     SortedVector<audio_io_handle_t> outputs = getOutputsForDevices(devices, mOutputs);
     std::map<audio_io_handle_t, DeviceVector> outputsToReopen;
     for (size_t j = 0; j < mOutputs.size(); j++) {
@@ -6129,8 +6127,8 @@ status_t AudioPolicyManager::connectAudioSource(const sp<SourceClientDescriptor>
                 sourceDesc->srcDevice()->type(),
                 String8(sourceDesc->srcDevice()->address().c_str()),
                 AUDIO_FORMAT_DEFAULT);
-    DeviceVector sinkDevices =
-            mEngine->getOutputDevicesForAttributes(attributes, nullptr, false /*fromCache*/);
+    DeviceVector sinkDevices = mEngine->getOutputDevicesForAttributes(attributes, sourceDesc->uid(),
+            nullptr, false /*fromCache*/);
     ALOG_ASSERT(!sinkDevices.isEmpty(), "connectAudioSource(): no device found for attributes");
     sp<DeviceDescriptor> sinkDevice = sinkDevices.itemAt(0);
     if (!mAvailableOutputDevices.contains(sinkDevice)) {
@@ -6589,7 +6587,8 @@ void AudioPolicyManager::checkVirtualizerClientRoutes() {
         const sp<SwAudioOutputDescriptor>& desc = mOutputs[i];
         for (const sp<TrackClientDescriptor>& client : desc->getClientIterable()) {
             audio_attributes_t attr = client->attributes();
-            DeviceVector devices = mEngine->getOutputDevicesForAttributes(attr, nullptr, false);
+            DeviceVector devices = mEngine->getOutputDevicesForAttributes(attr, client->uid(),
+                    nullptr, false);
             AudioDeviceTypeAddrVector devicesTypeAddress = devices.toTypeAddrVector();
             audio_config_base_t clientConfig = client->config();
             audio_config_t config = audio_config_initializer(&clientConfig);
@@ -6631,7 +6630,8 @@ status_t AudioPolicyManager::getSpatializerOutput(const audio_config_base_t *mix
                                                         audio_io_handle_t *output) {
     *output = AUDIO_IO_HANDLE_NONE;
 
-    DeviceVector devices = mEngine->getOutputDevicesForAttributes(*attr, nullptr, false);
+    DeviceVector devices = mEngine->getOutputDevicesForAttributes(*attr, /* uid */ 0, nullptr,
+                                                                  false);
     AudioDeviceTypeAddrVector devicesTypeAddress = devices.toTypeAddrVector();
     audio_config_t *configPtr = nullptr;
     audio_config_t config;
@@ -7512,8 +7512,9 @@ bool AudioPolicyManager::followsSameRouting(const audio_attributes_t &lAttr,
             mEngine->getProductStrategyForAttributes(rAttr);
 }
 
-void AudioPolicyManager::checkAudioSourceForAttributes(const audio_attributes_t &attr)
+void AudioPolicyManager::checkAudioSourceForStrategy(const product_strategy_t psId)
 {
+    auto attr = mEngine->getAllAttributesForProductStrategy(psId).front();
     for (size_t i = 0; i < mAudioSources.size(); i++)  {
         sp<SourceClientDescriptor> sourceDesc = mAudioSources.valueAt(i);
         if (sourceDesc != nullptr && followsSameRouting(attr, sourceDesc->attributes())
@@ -7535,12 +7536,11 @@ void AudioPolicyManager::clearAudioSourcesForOutput(audio_io_handle_t output)
     }
 }
 
-void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t &attr)
+void AudioPolicyManager::checkOutputForStrategy(const product_strategy_t psId)
 {
-    auto psId = mEngine->getProductStrategyForAttributes(attr);
-
-    DeviceVector oldDevices = mEngine->getOutputDevicesForAttributes(attr, 0, true /*fromCache*/);
-    DeviceVector newDevices = mEngine->getOutputDevicesForAttributes(attr, 0, false /*fromCache*/);
+    auto attr = mEngine->getAllAttributesForProductStrategy(psId).front();
+    auto oldDevices = mEngine->getOutputDevicesForStrategy(psId, 0, true /*fromCache*/);
+    auto newDevices = mEngine->getOutputDevicesForStrategy(psId, 0, false /*fromCache*/);
 
     SortedVector<audio_io_handle_t> srcOutputs = getOutputsForDevices(oldDevices, mPreviousOutputs);
     SortedVector<audio_io_handle_t> dstOutputs = getOutputsForDevices(newDevices, mOutputs);
@@ -7662,9 +7662,8 @@ void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t &attr
 void AudioPolicyManager::checkOutputForAllStrategies()
 {
     for (const auto &strategy : mEngine->getOrderedProductStrategies()) {
-        auto attributes = mEngine->getAllAttributesForProductStrategy(strategy).front();
-        checkOutputForAttributes(attributes);
-        checkAudioSourceForAttributes(attributes);
+        checkOutputForStrategy(strategy);
+        checkAudioSourceForStrategy(strategy);
     }
 }
 
@@ -7860,8 +7859,7 @@ DeviceVector AudioPolicyManager::getNewOutputDevices(const sp<SwAudioOutputDescr
                 mOutputs.isStrategyActiveOnSameModule(productStrategy, outputDesc))) {
             // Retrieval of devices for voice DL is done on primary output profile, cannot
             // check the route (would force modifying configuration file for this profile)
-            auto attr = mEngine->getAllAttributesForProductStrategy(productStrategy).front();
-            devices = mEngine->getOutputDevicesForAttributes(attr, nullptr, fromCache);
+            devices = mEngine->getOutputDevicesForStrategy(productStrategy, nullptr, fromCache);
             break;
         }
     }
@@ -7942,10 +7940,13 @@ status_t AudioPolicyManager::getDevicesForAttributes(
 
 void AudioPolicyManager::handleNotificationRoutingForStream(audio_stream_type_t stream) {
     switch(stream) {
-    case AUDIO_STREAM_MUSIC:
-        checkOutputForAttributes(attributes_initializer(AUDIO_USAGE_NOTIFICATION));
+    case AUDIO_STREAM_MUSIC: {
+        auto psId = mEngine->getProductStrategyForAttributes(
+                attributes_initializer(AUDIO_USAGE_NOTIFICATION));
+        checkOutputForStrategy(psId);
         updateDevicesAndOutputs();
         break;
+    }
     default:
         break;
     }
@@ -8037,9 +8038,8 @@ uint32_t AudioPolicyManager::checkDeviceMuteStrategies(const sp<AudioOutputDescr
 
     auto productStrategies = mEngine->getOrderedProductStrategies();
     for (const auto &productStrategy : productStrategies) {
-        auto attributes = mEngine->getAllAttributesForProductStrategy(productStrategy).front();
-        DeviceVector curDevices =
-                mEngine->getOutputDevicesForAttributes(attributes, nullptr, false/*fromCache*/);
+        DeviceVector curDevices = mEngine->getOutputDevicesForStrategy(
+                productStrategy, nullptr, false/*fromCache*/);
         curDevices = curDevices.filter(outputDesc->supportedDevices());
         bool mute = shouldMute && curDevices.containsAtLeastOne(devices) && curDevices != devices;
         bool doMute = false;
@@ -8524,12 +8524,13 @@ float AudioPolicyManager::computeVolume(IVolumeCurves &curves,
         // when the phone is ringing we must consider that music could have been paused just before
         // by the music application and behave as if music was active if the last music track was
         // just stopped
+        // Only for default zone
         if (isStreamActive(AUDIO_STREAM_MUSIC, SONIFICATION_HEADSET_MUSIC_DELAY)
                 || mLimitRingtoneVolume) {
             volumeDb += SONIFICATION_HEADSET_VOLUME_FACTOR_DB;
-            DeviceTypeSet musicDevice =
-                    mEngine->getOutputDevicesForAttributes(attributes_initializer(AUDIO_USAGE_MEDIA),
-                                                           nullptr, true /*fromCache*/).types();
+            DeviceTypeSet musicDevice = mEngine->getOutputDevicesForAttributes(
+                    attributes_initializer(AUDIO_USAGE_MEDIA), /* uid */ 0, nullptr,
+                    true /*fromCache*/).types();
             auto &musicCurves = getVolumeCurves(AUDIO_STREAM_MUSIC);
             float musicVolDb = computeVolume(musicCurves,
                                              musicVolumeSrc,
@@ -9129,7 +9130,7 @@ bool AudioPolicyManager::areAllActiveTracksRerouted(const sp<SwAudioOutputDescri
         sp<DeviceDescriptor> preferredDevice =
                 mAvailableOutputDevices.getDeviceFromId(client->preferredDeviceId());
         if (mEngine->getOutputDevicesForAttributes(
-                client->attributes(), preferredDevice, false) == routedDevices) {
+                client->attributes(), client->uid(), preferredDevice, false) == routedDevices) {
             return false;
         }
     }
@@ -9304,7 +9305,7 @@ status_t AudioPolicyManager::getDevicesForAttributes(
         // will take an active setPreferredDevice, if such exists.
 
         devices = mEngine->getOutputDevicesForAttributes(
-                attr, nullptr /* preferredDevice */, false /* fromCache */);
+                attr, /* uid */ 0, nullptr /* preferredDevice */, false /* fromCache */);
     }
 
     if (forVolume) {
