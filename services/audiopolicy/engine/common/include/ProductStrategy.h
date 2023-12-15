@@ -113,7 +113,7 @@ private:
 
     product_strategy_t mId;
 
-    int mZoneId;
+    const int mZoneId;
 
     std::string mDeviceAddress; /**< Device address applicable for this strategy, maybe empty */
 

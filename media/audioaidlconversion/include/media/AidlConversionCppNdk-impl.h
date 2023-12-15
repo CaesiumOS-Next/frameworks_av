@@ -76,6 +76,7 @@
 #include PREFIX(android/media/audio/common/MicrophoneInfo.h)
 #undef PREFIX
 
+#include <cutils/multiuser.h>
 #include <system/audio.h>
 #include <system/audio_effect.h>
 #include <system/audio_policy.h>
@@ -117,6 +118,9 @@ ConversionResult<int32_t> legacy2aidl_pid_t_int32_t(pid_t legacy);
 
 ConversionResult<uid_t> aidl2legacy_int32_t_uid_t(int32_t aidl);
 ConversionResult<int32_t> legacy2aidl_uid_t_int32_t(uid_t legacy);
+
+ConversionResult<userid_t> aidl2legacy_int32_t_userid_t(int32_t aidl);
+ConversionResult<int32_t> legacy2aidl_userid_t_int32_t(userid_t legacy);
 
 ConversionResult<::android::String8> aidl2legacy_string_view_String8(std::string_view aidl);
 ConversionResult<std::string> legacy2aidl_String8_string(const ::android::String8& legacy);
