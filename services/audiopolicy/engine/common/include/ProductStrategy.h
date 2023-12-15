@@ -105,6 +105,8 @@ private:
 
     product_strategy_t mId;
 
+    const int mZoneId;
+
     std::string mDeviceAddress; /**< Device address applicable for this strategy, maybe empty */
 
     /**
