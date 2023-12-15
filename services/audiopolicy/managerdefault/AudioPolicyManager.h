@@ -381,6 +381,16 @@ public:
             return mEngine->listAudioProductStrategies(strategies);
         }
 
+        virtual status_t setProductStrategiesZoneIdForUserId(int zoneId, userid_t userId)
+        {
+            return mEngine->setProductStrategiesZoneIdForUserId(zoneId, userId);
+        }
+
+        virtual status_t resetProductStrategiesZoneIdForUserId(userid_t userId)
+        {
+            return mEngine->resetProductStrategiesZoneIdForUserId(userId);
+        }
+
         virtual status_t getProductStrategyFromAudioAttributes(
                 const audio_attributes_t &aa, product_strategy_t &productStrategy,
                 bool fallbackOnDefault)
