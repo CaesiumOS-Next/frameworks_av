@@ -1385,8 +1385,12 @@ status_t AudioPolicyManager::getOutputForAttrInt(
     }
     // explicit routing managed by getDeviceForStrategy in APM is now handled by engine
     // in order to let the choice of the order to future vendor engine
-    outputDevices = mEngine->getOutputDevicesForAttributes(*resultAttr, requestedDevice, false);
-
+    if (audio_flags::multi_zone_audio()) {
+        outputDevices = mEngine->getOutputDevicesForAttributes(*resultAttr, uid, requestedDevice,
+                                                               false);
+    } else {
+        outputDevices = mEngine->getOutputDevicesForAttributes(*resultAttr, requestedDevice, false);
+    }
     if ((resultAttr->flags & AUDIO_FLAG_HW_AV_SYNC) != 0) {
         *flags = (audio_output_flags_t)(*flags | AUDIO_OUTPUT_FLAG_HW_AV_SYNC);
     }
@@ -7926,6 +7930,12 @@ bool AudioPolicyManager::streamsMatchForvolume(audio_stream_type_t stream1,
 
 status_t AudioPolicyManager::getDevicesForAttributes(
         const audio_attributes_t &attr, AudioDeviceTypeAddrVector *devices, bool forVolume) {
+    return getDevicesForAttributes(attr, /* uid_t */ 0, forVolume, devices);
+}
+
+status_t AudioPolicyManager::getDevicesForAttributes(
+        const audio_attributes_t &attr, uid_t uid, bool forVolume,
+        AudioDeviceTypeAddrVector *devices) {
     if (devices == nullptr) {
         return BAD_VALUE;
     }
