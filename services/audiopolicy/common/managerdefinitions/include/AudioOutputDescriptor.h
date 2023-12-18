@@ -170,7 +170,8 @@ public:
                            const DeviceTypeSet& deviceTypes,
                            uint32_t delayMs,
                            bool force,
-                           bool isVoiceVolSrc = false);
+                           bool isVoiceVolSrc = false,
+                           bool hasVolSrcPriority = true);
 
     /**
      * @brief setStopTime set the stop time due to the client stoppage or a re routing of this
@@ -304,6 +305,9 @@ public:
         return false;
     }
 
+    sp<TrackClientDescriptor> getHighestPriorityClientForVolumeSource(
+            VolumeSource vs, bool activeOnly = false) const;
+
     TrackClientVector clientsList(bool activeOnly = false,
                                   product_strategy_t strategy = PRODUCT_STRATEGY_NONE,
                                   bool preferredDeviceOnly = false) const;
@@ -415,7 +419,8 @@ public:
                            const DeviceTypeSet& device,
                            uint32_t delayMs,
                            bool force,
-                           bool isVoiceVolSrc = false);
+                           bool isVoiceVolSrc = false,
+                           bool hasVolSrcPriority = true);
 
     virtual void toAudioPortConfig(struct audio_port_config *dstConfig,
                            const struct audio_port_config *srcConfig = NULL) const;
@@ -539,7 +544,8 @@ public:
                            const DeviceTypeSet& deviceTypes,
                            uint32_t delayMs,
                            bool force,
-                           bool isVoiceVolSrc = false);
+                           bool isVoiceVolSrc = false,
+                           bool hasVolSrcPriority = true);
 
     virtual void toAudioPortConfig(struct audio_port_config *dstConfig,
                            const struct audio_port_config *srcConfig = NULL) const;
@@ -607,6 +613,37 @@ public:
      * @param disconnectedDevice device to be disconnected
      */
     void clearSessionRoutesForDevice(const sp<DeviceDescriptor> &disconnectedDevice);
+
+    /**
+     * Check if the gain can be applied for a given volume source and given device. When using
+     * HW Gain, the device port is the bottleneck. Any attempt to change it may affect all the
+     * SW output routed to this device port. Hence, priority rule of strategies is enforce by this
+     * API.
+     * @param deiveUsingHwGain for which the gain change is request
+     * @param vs volume source to change
+     * @return true if it can be applied on the device in respect of priority rule, false otherwise.
+     */
+    bool canSetHwVolumeForVolumeSource(const sp<DeviceDescriptor> &deviceUsingHwGain,
+            VolumeSource vs) const;
+
+    /**
+     * @param vs to consider
+     * @param deviceUsingHwGain to consider
+     * @param activeOnly
+     * @return the client with the highest priority strategy running on a given device if requested
+     * active if requested and following the requested volume source.
+     */
+    sp<TrackClientDescriptor> getHighestPriorityClientForVolumeSource(
+            VolumeSource vs, const sp<DeviceDescriptor> &deviceUsingHwGain = nullptr,
+            bool activeOnly = false) const;
+
+    /**
+     * @param routedDevice to consider
+     * @param activeOnly
+     * @return the list of active (if requested) clients routed on the given device (if requested).
+     */
+    TrackClientVector clientsList(const sp<DeviceDescriptor> &routedDevice = nullptr,
+            bool activeOnly = false) const;
 
     /**
      * returns the A2DP output handle if it is open or 0 otherwise
