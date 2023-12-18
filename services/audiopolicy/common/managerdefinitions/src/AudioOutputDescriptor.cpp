@@ -246,6 +246,21 @@ TrackClientVector AudioOutputDescriptor::clientsList(bool activeOnly, product_st
     return clients;
 }
 
+sp<TrackClientDescriptor> AudioOutputDescriptor::getHighestPriorityClientForVolumeSource(
+        VolumeSource vs, bool activeOnly) const
+{
+    sp<TrackClientDescriptor> clientForVolume = nullptr;
+    for (const auto &client : getClientIterable()) {
+        if ((!activeOnly || client->active()) && (vs == client->volumeSource())) {
+            // strategies are ordered, the lowest id the highest priority
+            if (clientForVolume == nullptr || clientForVolume->strategy() > client->strategy()) {
+                clientForVolume = client;
+            }
+        }
+    }
+    return clientForVolume;
+}
+
 size_t AudioOutputDescriptor::sameExclusivePreferredDevicesCount() const
 {
     audio_port_handle_t deviceId = AUDIO_PORT_HANDLE_NONE;
@@ -1132,6 +1147,68 @@ std::string SwAudioOutputDescriptor::info() const {
     result.append(isDuplicated() ? "duplicating" : mProfile->getTagName());
     result.append("]]");
     return result;
+}
+
+TrackClientVector SwAudioOutputCollection::clientsList(const sp<DeviceDescriptor> &routedDevice,
+        bool activeOnly) const {
+    TrackClientVector clients{};
+    for (size_t i = 0; i < this->size(); i++) {
+        const sp<SwAudioOutputDescriptor> desc = this->valueAt(i);
+        if (deviceUsingHwGain != nullptr
+                && (desc->devices().empty() || desc->devices().itemAt(0) != routedDevice)) {
+            continue;
+        }
+        auto descClients = desc->clientsList(activeOnly);
+        clients.insert(clients.end(), descClients.begin(), descClients.end());
+    }
+    return clients;
+}
+
+sp<TrackClientDescriptor> SwAudioOutputCollection::getHighestPriorityClientForVolumeSource(
+        VolumeSource vs, const sp<DeviceDescriptor> &deviceUsingHwGain, bool activeOnly) const {
+    sp<TrackClientDescriptor> clientForVolume = nullptr;
+    for (size_t i = 0; i < this->size(); i++) {
+        const sp <SwAudioOutputDescriptor> desc = this->valueAt(i);
+        if (deviceUsingHwGain != nullptr
+                && (desc->devices().empty() || desc->devices().itemAt(0) != deviceUsingHwGain)) {
+            continue;
+        }
+        auto client = desc->getHighestPriorityClientForVolumeSource(vs, activeOnly);
+        if (client == nullptr) {
+            continue;
+        }
+        if (clientForVolume == nullptr || clientForVolume->strategy() > client->strategy()) {
+            clientForVolume = client;
+        }
+    }
+    return clientForVolume;
+}
+
+bool SwAudioOutputCollection::canSetHwVolumeForVolumeSource(
+        const sp<DeviceDescriptor> &deviceUsingHwGain, VolumeSource vs) const {
+    auto highestPrioActiveClientForVolume =
+            getHighestPriorityClientForVolumeSource(vs, deviceUsingHwGain, /* active= */ true);
+    if (highestPrioActiveClientForVolume == nullptr) {
+        return false;
+    }
+    auto activeClientsForSink = clientsList(deviceUsingHwGain, /* active= */ true);
+    for (const auto& activeClientForSink: activeClientsForSink) {
+        bool isHigherPriority =
+                activeClientForSink->strategy() < highestPrioActiveClientForVolume->strategy();
+        if (isHigherPriority && (activeClientForSink->volumeSource() != vs)) {
+            ALOGV("%s: found higher priority client on output with \n"
+                  "Strategy=%d volumeGroup=%d attributes=%s\n"
+                  "(\nrequester:\n strategy=%d volumeGroup=%d attributes=%s)\n"
+                  " on output, bailing out", __func__, activeClientForSink->strategy(),
+                  activeClientForSink->volumeSource(),
+                  toString(activeClientForSink->attributes()).c_str(),
+                  highestPrioActiveClientForVolume->strategy(),
+                  highestPrioActiveClientForVolume->volumeSource(),
+                  toString(highestPrioActiveClientForVolume->attributes()).c_str());
+            return false;
+        }
+    }
+    return true;
 }
 
 void SwAudioOutputCollection::dump(String8 *dst) const
