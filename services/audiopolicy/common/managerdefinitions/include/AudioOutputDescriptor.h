@@ -291,6 +291,10 @@ public:
         return false;
     }
 
+    sp<TrackClientDescriptor> getHighestPriorityClientForVolumeSource(
+            VolumeSource vs, bool activeOnly = false) const;
+    bool canSetHwVolumeForVolumeSource(VolumeSource vs) const;
+
     TrackClientVector clientsList(bool activeOnly = false,
                                   product_strategy_t strategy = PRODUCT_STRATEGY_NONE,
                                   bool preferredDeviceOnly = false) const;
