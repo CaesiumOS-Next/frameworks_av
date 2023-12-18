@@ -3733,18 +3733,14 @@ status_t AudioPolicyManager::setVolumeGroupVolumeIndex(volume_group_t group,
         ALOGE("%s failed to set curve index for group %d device 0x%X", __func__, group, device);
         return status;
     }
-    product_strategy_t strategy = PRODUCT_STRATEGY_NONE;
     DeviceTypeSet curSrcDevices;
     auto curCurvAttrs = curves.getAttributes();
     if (!curCurvAttrs.empty() && curCurvAttrs.front() != defaultAttr) {
         auto attr = curCurvAttrs.front();
         curSrcDevices = mEngine->getOutputDevicesForAttributes(attr, nullptr, false).types();
-        strategy = mEngine->getProductStrategyForAttributes(attr, /* fallbackOnDefault= */ true);
     } else if (!curves.getStreamTypes().empty()) {
         auto stream = curves.getStreamTypes().front();
         curSrcDevices = mEngine->getOutputDevicesForStream(stream, false).types();
-        strategy = mEngine->getProductStrategyForAttributes(
-                mEngine->getAttributesForStreamType(stream), /* fallbackOnDefault= */ true);
     } else {
         ALOGE("%s: Invalid src %d: no valid attributes nor stream",__func__, vs);
         return BAD_VALUE;
@@ -3761,6 +3757,7 @@ status_t AudioPolicyManager::setVolumeGroupVolumeIndex(volume_group_t group,
     // - For default requested device (AUDIO_DEVICE_OUT_DEFAULT_FOR_VOLUME), apply volume only if
     // no specific device volume value exists for currently selected device.
     // - Only apply the volume if the requested device is the desired device for volume control.
+    DeviceVector processedDeviceUsingHwGain{};
     for (size_t i = 0; i < mOutputs.size(); i++) {
         sp<SwAudioOutputDescriptor> desc = mOutputs.valueAt(i);
         DeviceTypeSet curDevices = desc->devices().types();
@@ -3792,42 +3789,16 @@ status_t AudioPolicyManager::setVolumeGroupVolumeIndex(volume_group_t group,
         // If a higher priority strategy is active, and the output is routed to a device with a
         // HW Gain management, do not change the volume
         if (desc->useHwGain()) {
-            applyVolume = false;
             bool swMute = com_android_media_audio_ring_my_car() ? curves.isMuted() : (index == 0);
             // If the volume source is active with higher priority source, ensure at least Sw Muted
             desc->setSwMute(swMute, vs, curves.getStreamTypes(), curDevices, 0 /*delayMs*/);
-            for (const auto &productStrategy : mEngine->getOrderedProductStrategies()) {
-                auto activeClients = desc->clientsList(true /*activeOnly*/, productStrategy,
-                                                       false /*preferredDevice*/);
-                if (activeClients.empty()) {
-                    continue;
-                }
-                bool isPreempted = false;
-                bool isHigherPriority = productStrategy < strategy;
-                for (const auto &client : activeClients) {
-                    if (isHigherPriority && (client->volumeSource() != activityVs)) {
-                        ALOGV("%s: Strategy=%d (\nrequester:\n"
-                              " volumeGroup=%d)\n"
-                              " higher priority source active:\n"
-                              " volumeGroup=%d attributes=%s) \n"
-                              " on output %zu, bailing out", __func__, productStrategy, group,
-                              client->volumeSource(), toString(client->attributes()).c_str(), i);
-                        applyVolume = false;
-                        isPreempted = true;
-                        break;
-                    }
-                    // However, continue for loop to ensure no higher prio clients running on output
-                    if (client->volumeSource() == activityVs) {
-                        applyVolume = true;
-                    }
-                }
-                if (isPreempted || applyVolume) {
-                    break;
-                }
-            }
-            if (!applyVolume) {
+            auto deviceUsingHwGain = desc->devices().itemAt(0);
+            if (processedDeviceUsingHwGain.contains(deviceUsingHwGain)) {
+                ALOGVV("%s: skipping io %d: as gain already set for %s",__func__, desc->mIoHandle,
+                       deviceUsingHwGain->toString().c_str());
                 continue; // next output
             }
+            processedDeviceUsingHwGain.add(deviceUsingHwGain);
         }
         //FIXME: workaround for truncated touch sounds
         // delayed volume change for system stream to be removed when the problem is
@@ -8664,7 +8635,14 @@ status_t AudioPolicyManager::checkAndSetVolume(IVolumeCurves &curves,
                outputDesc->getMuteCount(volumeSource), outputDesc->isActive(volumeSource));
         return NO_ERROR;
     }
-
+    if (outputDesc->useHwGain()) {
+        auto routedDevice = outputDesc->devices().itemAt(0);
+        if (!mOutputs.canSetHwVolumeForVolumeSource(routedDevice, volumeSource)) {
+            ALOGV("%s: skipping volume source %d muted count %d active=%d", __func__, volumeSource,
+                   outputDesc->getMuteCount(volumeSource), outputDesc->isActive(volumeSource));
+            return NO_ERROR;
+        }
+    }
     bool isVoiceVolSrc;
     bool isBtScoVolSrc;
     if (!isVolumeConsistentForCalls(
