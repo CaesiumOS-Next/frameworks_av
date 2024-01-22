@@ -42,7 +42,7 @@ public:
                         audio_config_base_t *mixerConfig,
                         const sp<DeviceDescriptorBase>& /*device*/,
                         uint32_t * /*latencyMs*/,
-                        audio_output_flags_t flags,
+                        audio_output_flags_t * /*flags*/,
                         audio_attributes_t /*attributes*/) override {
         if (module >= mNextModuleHandle) {
             ALOGE("%s: Module handle %d has not been allocated yet (next is %d)",
