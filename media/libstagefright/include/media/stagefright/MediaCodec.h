@@ -425,6 +425,7 @@ private:
         kWhatDequeueInputTimedOut           = 'dITO',
         kWhatDequeueOutputTimedOut          = 'dOTO',
         kWhatCodecNotify                    = 'codc',
+        kWhatUninitialized                  = 'unin',
         kWhatRequestIDRFrame                = 'ridr',
         kWhatRequestActivityNotification    = 'racN',
         kWhatGetName                        = 'getN',
@@ -819,6 +820,11 @@ private:
     CodecErrorLog mErrorLog;
     // Required resource info for this codec.
     Mutexed<std::vector<InstanceResourceInfo>> mRequiredResourceInfo;
+
+    void postDeferredMessages();
+    status_t onReturnInputBuffer(const sp<AMessage> &msg);
+    int32_t mStateGeneration;
+    bool mUninitializedPending;
 
     DISALLOW_EVIL_CONSTRUCTORS(MediaCodec);
 };

@@ -328,6 +328,8 @@ static const int kNumBuffersAlign = 16;
 static const C2MemoryUsage kDefaultReadWriteUsage{
     C2MemoryUsage::CPU_READ, C2MemoryUsage::CPU_WRITE};
 
+static const int64_t kUnintializedDelayUs = 1000000;
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
@@ -1328,6 +1330,8 @@ MediaCodec::MediaCodec(
       mGetCodecBase(getCodecBase),
       mGetCodecInfo(getCodecInfo) {
     mCodecId = GenerateCodecId();
+    mStateGeneration = 0;
+    mUninitializedPending = false;
     mResourceManagerProxy = std::make_shared<ResourceManagerServiceProxy>(pid, uid,
             ::ndk::SharedRefBase::make<ResourceManagerClient>(this, pid, uid));
     if (!mGetCodecBase) {
@@ -3345,6 +3349,8 @@ status_t MediaCodec::reset() {
     mDequeueInputTimeoutGeneration = 0;
     mDequeueOutputTimeoutGeneration = 0;
     mHaveInputSurface = false;
+    mStateGeneration = 0;
+    mUninitializedPending = false;
 
     if (err == OK) {
         err = init(mInitName);
@@ -4104,6 +4110,19 @@ inline MediaResourceParcel getMediaResourceParcel(const InstanceResourceInfo& re
 
 void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
     switch (msg->what()) {
+        case kWhatUninitialized:
+        {
+            int32_t generation;
+            CHECK(msg->findInt32("generation", &generation));
+            ALOGE("kWhatUninitialized, uninitialized pending: %d, generation: %d vs %d",
+                    mUninitializedPending, generation, mStateGeneration);
+            if (generation != mStateGeneration || !mUninitializedPending) {
+                break;
+            }
+            setState(UNINITIALIZED);
+            break;
+        }
+
         case kWhatCodecNotify:
         {
             int32_t what;
@@ -4116,10 +4135,10 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                     int32_t err, actionCode;
                     CHECK(msg->findInt32("err", &err));
                     CHECK(msg->findInt32("actionCode", &actionCode));
-
-                    ALOGE("Codec reported err %#x/%s, actionCode %d, while in state %d/%s",
+                    ALOGE("Codec reported err %#x/%s, actionCode %d, while in state %d/%s pending: %d",
                                               err, StrMediaError(err).c_str(), actionCode,
-                                              mState, stateString(mState).c_str());
+                                              mState, stateString(mState).c_str(),
+                                              hasPendingBuffer());
                     if (err == DEAD_OBJECT) {
                         mFlags |= kFlagSawMediaServerDie;
                         mFlags &= ~kFlagIsComponentAllocated;
@@ -4209,6 +4228,8 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                                 }
                                 if (mReplyID) {
                                     postPendingRepliesAndDeferredMessages(origin + ":dead");
+                                } else if (!mDeferredMessages.empty()) {
+                                    postDeferredMessages();
                                 } else {
                                     ALOGD("no pending replies: %s:dead following %s",
                                           origin.c_str(), mLastReplyOrigin.c_str());
@@ -4265,7 +4286,17 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                                                         stateString(mState).c_str());
                                 flushMediametrics();
                                 initMediametrics();
-                                setState(UNINITIALIZED);
+                                if (hasPendingBuffer()) {
+                                    setState(INITIALIZED);
+                                    mUninitializedPending = true;
+                                    sp<AMessage> msg = new AMessage(kWhatUninitialized, this);
+                                    msg->setInt32("generation", mStateGeneration);
+                                    msg->post(kUnintializedDelayUs);
+                                    ALOGW("delay %.3f secs to uninitialize",
+                                            kUnintializedDelayUs / 1E6);
+                                } else {
+                                    setState(UNINITIALIZED);
+                                }
                                 break;
                             }
                             break;
@@ -4296,7 +4327,9 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                                 setState(INITIALIZED);
                                 break;
                             default:
-                                setState(UNINITIALIZED);
+                                if (!mUninitializedPending) {
+                                    setState(UNINITIALIZED);
+                                }
                                 break;
                             }
                             break;
@@ -4871,6 +4904,8 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                     setState(INITIALIZED);
                     if (mReplyID) {
                         postPendingRepliesAndDeferredMessages("kWhatStopCompleted");
+                    } else if (!mDeferredMessages.empty()) {
+                        postDeferredMessages();
                     } else {
                         ALOGW("kWhatStopCompleted: presumably an error occurred earlier, "
                               "but the operation completed anyway. (last reply origin=%s)",
@@ -4901,7 +4936,10 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
                     if (mReplyID != nullptr) {
                         postPendingRepliesAndDeferredMessages("kWhatReleaseCompleted");
+                    } else if (!mDeferredMessages.empty()) {
+                        postDeferredMessages();
                     }
+
                     if (mAsyncReleaseCompleteNotification != nullptr) {
                         flushMediametrics();
                         mAsyncReleaseCompleteNotification->post();
@@ -5662,6 +5700,16 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
             sp<AReplyToken> replyID;
             CHECK(msg->senderAwaitsResponse(&replyID));
 
+            if (mUninitializedPending) {
+                (void)onReturnInputBuffer(msg);
+                if (!hasPendingBuffer()) {
+                    ALOGW("set state to UNINITIALIZED for uninitialized pending");
+                    setState(UNINITIALIZED);
+                }
+                PostReplyWithError(replyID, getStickyError());
+                break;
+            }
+
             if (!isExecuting()) {
                 mErrorLog.log(LOG_TAG, base::StringPrintf(
                         "queueInputBuffer() is valid only at Executing states; currently %s",
@@ -6330,6 +6378,9 @@ void MediaCodec::setState(State newState) {
         mState = newState;
     }
 
+    mStateGeneration++;
+    mUninitializedPending = false;
+
     if (mBatteryChecker != nullptr) {
         mBatteryChecker->setExecuting(isExecuting());
     }
@@ -6389,6 +6440,22 @@ size_t MediaCodec::updateBuffers(
     mAvailPortBuffers[portIndex].push_back(index);
 
     return index;
+}
+
+status_t MediaCodec::onReturnInputBuffer(const sp<AMessage> &msg) {
+    size_t index;
+    CHECK(msg->findSize("index", &index));
+    if (index >= mPortBuffers[kPortIndexInput].size()) {
+        return -ERANGE;
+    }
+    BufferInfo *info = &mPortBuffers[kPortIndexInput][index];
+    {
+        // synchronization boundary for getBufferAndFormat
+        Mutex::Autolock al(mBufferLock);
+        info->mOwnedByClient = false;
+        info->mData.clear();
+    }
+    return OK;
 }
 
 status_t MediaCodec::onQueueInputBuffer(const sp<AMessage> &msg) {
@@ -7294,6 +7361,15 @@ void MediaCodec::postPendingRepliesAndDeferredMessages(
         response->setInt32("err", err);
     }
     postPendingRepliesAndDeferredMessages(origin, response);
+}
+
+void MediaCodec::postDeferredMessages() {
+    ALOGV_IF(!mDeferredMessages.empty(),
+            "posting %zu deferred messages", mDeferredMessages.size());
+    for (sp<AMessage> msg : mDeferredMessages) {
+        msg->post();
+    }
+    mDeferredMessages.clear();
 }
 
 void MediaCodec::postPendingRepliesAndDeferredMessages(
