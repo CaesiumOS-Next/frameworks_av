@@ -49,6 +49,8 @@ struct CompToFiles {
 };
 
 std::vector<CompToFiles> gCompToFiles = {
+        {"eac3-joc", "bbb_eac3_stereo_192kbps_48000kHz.eac3",
+         "bbb_eac3_stereo_192kbps_48000kHz.info"},
         {"mp4a-latm", "bbb_aac_stereo_128kbps_48000hz.aac", "bbb_aac_stereo_128kbps_48000hz.info"},
         {"mpeg", "bbb_mp3_stereo_192kbps_48000hz.mp3", "bbb_mp3_stereo_192kbps_48000hz.info"},
         {"3gpp", "sine_amrnb_1ch_12kbps_8000hz.amrnb", "sine_amrnb_1ch_12kbps_8000hz.info"},
