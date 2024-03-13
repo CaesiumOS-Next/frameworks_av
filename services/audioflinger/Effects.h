@@ -177,7 +177,7 @@ protected:
 // the attached track(s) to accumulate their auxiliary channel.
 class EffectModule : public IAfEffectModule, public EffectBase {
 public:
-    EffectModule(const sp<EffectCallbackInterface>& callabck,
+    EffectModule(const sp<EffectCallbackInterface>& callback,
                     effect_descriptor_t *desc,
                     int id,
                     audio_session_t sessionId,
@@ -265,6 +265,13 @@ private:
 
     status_t setVolumeInternal(uint32_t *left, uint32_t *right, bool controller);
 
+    bool shouldDispatchAddRemoveToHal(bool isAdded) const override  {
+        const bool currentHalStreamMatchesThreadId = (getCallback()->io() == mCurrentHalStream);
+        return isAdded != currentHalStreamMatchesThreadId;
+    }
+    void setAddedRemovedToHal(bool isAdded) override {
+        mCurrentHalStream = isAdded ? getCallback()->io() : AUDIO_IO_HANDLE_NONE;
+    }
 
     effect_config_t     mConfig;    // input and output audio configuration
     sp<EffectHalInterface> mEffectInterface; // Effect module HAL
@@ -304,6 +311,22 @@ private:
     static constexpr pid_t INVALID_PID = (pid_t)-1;
     // this tid is allowed to call setVolume() without acquiring the mutex.
     pid_t mSetVolumeReentrantTid = INVALID_PID;
+};
+
+class DeviceEffectModule : public EffectModule {
+public:
+    DeviceEffectModule(const sp<EffectCallbackInterface>& callback, effect_descriptor_t *desc,
+            int id, audio_port_handle_t deviceId) REQUIRES(audio_utils::EffectChain_Mutex) :
+        EffectModule(callback, desc, id, AUDIO_SESSION_DEVICE, /* pinned */ false, deviceId) {}
+
+private:
+    bool shouldDispatchAddRemoveToHal(bool isAdded) const override {
+        return isAdded != mAddedToHal;
+    }
+    void setAddedRemovedToHal(bool isAdded) override {
+        mAddedToHal = isAdded;
+    }
+    bool mAddedToHal = false;
 };
 
 // The EffectHandle class implements the IEffect interface. It provides resources

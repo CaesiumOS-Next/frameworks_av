@@ -1040,12 +1040,14 @@ void EffectModule::addEffectToHal_l()
 {
     if ((mDescriptor.flags & EFFECT_FLAG_TYPE_MASK) == EFFECT_FLAG_TYPE_PRE_PROC ||
          (mDescriptor.flags & EFFECT_FLAG_TYPE_MASK) == EFFECT_FLAG_TYPE_POST_PROC) {
-        if (mCurrentHalStream == getCallback()->io()) {
+        if (!shouldDispatchAddRemoveToHal(/* isAdded= */ true)) {
             return;
         }
 
-        (void)getCallback()->addEffectToHal(mEffectInterface);
-        mCurrentHalStream = getCallback()->io();
+        status_t status = getCallback()->addEffectToHal(mEffectInterface);
+        if (status == NO_ERROR) {
+            setAddedRemovedToHal(/* isAdded= */ true);
+        }
     }
 }
 
@@ -1141,11 +1143,11 @@ status_t EffectModule::removeEffectFromHal_l()
 {
     if ((mDescriptor.flags & EFFECT_FLAG_TYPE_MASK) == EFFECT_FLAG_TYPE_PRE_PROC ||
              (mDescriptor.flags & EFFECT_FLAG_TYPE_MASK) == EFFECT_FLAG_TYPE_POST_PROC) {
-        if (mCurrentHalStream != getCallback()->io()) {
-            return (mCurrentHalStream == AUDIO_IO_HANDLE_NONE) ? NO_ERROR : INVALID_OPERATION;
+        if (!shouldDispatchAddRemoveToHal(/* isAdded= */ false)) {
+            return (getCallback()->io() == AUDIO_IO_HANDLE_NONE) ? NO_ERROR : INVALID_OPERATION;
         }
         getCallback()->removeEffectFromHal(mEffectInterface);
-        mCurrentHalStream = AUDIO_IO_HANDLE_NONE;
+        setAddedRemovedToHal(/* isAdded= */ false);
     }
     return NO_ERROR;
 }
@@ -3449,10 +3451,9 @@ NO_THREAD_SAFETY_ANALYSIS
             ALOGV("%s reusing HAL effect", __func__);
         } else {
             mDevicePort = *port;
-            mHalEffect = new EffectModule(mMyCallback,
+            mHalEffect = new DeviceEffectModule(mMyCallback,
                                       const_cast<effect_descriptor_t *>(&mDescriptor),
-                                      mMyCallback->newEffectId(), AUDIO_SESSION_DEVICE,
-                                      false /* pinned */, port->id);
+                                      mMyCallback->newEffectId(), port->id);
             if (audio_is_input_device(mDevice.mType)) {
                 mHalEffect->setInputDevice(mDevice);
             } else {

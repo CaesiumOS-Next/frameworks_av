@@ -153,7 +153,7 @@ class IAfEffectModule : public virtual IAfEffectBase {
 
 public:
     static sp<IAfEffectModule> create(
-            const sp<EffectCallbackInterface>& callabck,
+            const sp<EffectCallbackInterface>& callback,
             effect_descriptor_t *desc,
             int id,
             audio_session_t sessionId,
@@ -211,6 +211,8 @@ private:
     virtual status_t stop_l() = 0;
     virtual void addEffectToHal_l() = 0;
     virtual void release_l() = 0;
+    virtual bool shouldDispatchAddRemoveToHal(bool isAdded) const = 0;
+    virtual void setAddedRemovedToHal(bool isAdded) = 0;
 };
 
 class IAfEffectChain : public RefBase {
