@@ -177,7 +177,7 @@ protected:
 // the attached track(s) to accumulate their auxiliary channel.
 class EffectModule : public IAfEffectModule, public EffectBase {
 public:
-    EffectModule(const sp<EffectCallbackInterface>& callabck,
+    EffectModule(const sp<EffectCallbackInterface>& callback,
                     effect_descriptor_t *desc,
                     int id,
                     audio_session_t sessionId,
@@ -225,7 +225,7 @@ public:
             REQUIRES(audio_utils::EffectChain_Mutex) EXCLUDES_EffectBase_Mutex;
     bool isOffloaded_l() const final
             REQUIRES(audio_utils::EffectChain_Mutex) EXCLUDES_EffectBase_Mutex;
-    void addEffectToHal_l() final REQUIRES(audio_utils::EffectChain_Mutex);
+    void addEffectToHal_l() override REQUIRES(audio_utils::EffectChain_Mutex);
     void release_l() final REQUIRES(audio_utils::EffectChain_Mutex);
 
     sp<IAfEffectModule> asEffectModule() final { return this; }
@@ -247,6 +247,9 @@ public:
 
     void dump(int fd, const Vector<String16>& args) const final;
 
+protected:
+    sp<EffectHalInterface> mEffectInterface; // Effect module HAL
+
 private:
 
     // Maximum time allocated to effect engines to complete the turn off sequence
@@ -256,7 +259,7 @@ private:
 
     status_t start_ll() REQUIRES(audio_utils::EffectChain_Mutex, audio_utils::EffectBase_Mutex);
     status_t stop_ll() REQUIRES(audio_utils::EffectChain_Mutex, audio_utils::EffectBase_Mutex);
-    status_t removeEffectFromHal_l() REQUIRES(audio_utils::EffectChain_Mutex);
+    status_t removeEffectFromHal_l() override REQUIRES(audio_utils::EffectChain_Mutex);
     status_t sendSetAudioDevicesCommand(const AudioDeviceTypeAddrVector &devices, uint32_t cmdCode);
     effect_buffer_access_e requiredEffectBufferAccessMode() const {
         return mConfig.inputCfg.buffer.raw == mConfig.outputCfg.buffer.raw
@@ -265,9 +268,7 @@ private:
 
     status_t setVolumeInternal(uint32_t *left, uint32_t *right, bool controller);
 
-
     effect_config_t     mConfig;    // input and output audio configuration
-    sp<EffectHalInterface> mEffectInterface; // Effect module HAL
     sp<EffectBufferHalInterface> mInBuffer;  // Buffers for interacting with HAL
     sp<EffectBufferHalInterface> mOutBuffer;
     status_t            mStatus;    // initialization status
@@ -304,6 +305,18 @@ private:
     static constexpr pid_t INVALID_PID = (pid_t)-1;
     // this tid is allowed to call setVolume() without acquiring the mutex.
     pid_t mSetVolumeReentrantTid = INVALID_PID;
+};
+
+class HwAccDeviceEffectModule : public EffectModule {
+public:
+    HwAccDeviceEffectModule(const sp<EffectCallbackInterface>& callback, effect_descriptor_t *desc,
+            int id, audio_port_handle_t deviceId) :
+        EffectModule(callback, desc, id, AUDIO_SESSION_DEVICE, /* pinned */ false, deviceId) {}
+    void addEffectToHal_l() final REQUIRES(audio_utils::EffectChain_Mutex);
+
+private:
+    status_t removeEffectFromHal_l() final REQUIRES(audio_utils::EffectChain_Mutex);
+    bool mAddedToHal = false;
 };
 
 // The EffectHandle class implements the IEffect interface. It provides resources
