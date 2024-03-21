@@ -487,6 +487,20 @@ void AudioMixerBase::setParameter(int name, int target, int param, void *value)
     }
 }
 
+void AudioMixerBase::dump(int fd) {
+    for (const auto &pair : mTracks) {
+        const std::shared_ptr<TrackBase> &t = pair.second;
+        t->dump(fd);
+    }
+}
+
+void AudioMixerBase::TrackBase::dump(int fd) {
+    if (mResampler.get() != nullptr && enabled) {
+        dprintf(fd, "AudioResampler connected to session id %d\n", sessionId);
+        mResampler->dump(fd);
+    }
+}
+
 bool AudioMixerBase::TrackBase::setResampler(uint32_t trackSampleRate, uint32_t devSampleRate)
 {
     if (trackSampleRate != devSampleRate || mResampler.get() != nullptr) {

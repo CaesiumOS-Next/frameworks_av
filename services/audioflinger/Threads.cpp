@@ -6544,6 +6544,7 @@ void MixerThread::dumpInternals_l(int fd, const Vector<String16>& args)
      dprintf(fd, "HAL does %ssupport Bluetooth latency modes\n", mOutput != nullptr &&
              mOutput->audioHwDev->supportsBluetoothVariableLatency() ? "" : "not ");
      dprintf(fd, "Supported latency modes: %s\n", toString(mSupportedLatencyModes).c_str());
+     mAudioMixer->dump(fd);
 }
 
 uint32_t MixerThread::idleSleepTimeUs() const
