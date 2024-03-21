@@ -608,6 +608,15 @@ size_t AudioMixerBase::getUnreleasedFrames(int name) const
     return 0;
 }
 
+AudioResampler* AudioMixerBase::getResampler(int name) const
+{
+    const auto it = mTracks.find(name);
+    if (it != mTracks.end()) {
+        return it->second->mResampler.get();
+    }
+    return nullptr;
+}
+
 std::string AudioMixerBase::trackNames() const
 {
     std::stringstream ss;

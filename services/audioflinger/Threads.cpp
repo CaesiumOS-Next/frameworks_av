@@ -6147,6 +6147,9 @@ PlaybackThread::mixer_state MixerThread::prepareTracks_l(
                 AudioMixer::RESAMPLE,
                 AudioMixer::SAMPLE_RATE,
                 (void *)(uintptr_t)reqSampleRate);
+            if (!track->mResampler) {
+                track->mResampler = mAudioMixer->getResampler(trackId);
+            }
 
             mAudioMixer->setParameter(
                 trackId,

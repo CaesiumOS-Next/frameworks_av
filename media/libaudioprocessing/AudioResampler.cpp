@@ -314,6 +314,21 @@ void AudioResampler::reset() {
     mBuffer.frameCount = 0;
 }
 
+std::string AudioResampler::dumpHeader() {
+    std::string str_header = " Quality";
+    return str_header;
+}
+
+std::string AudioResampler::dump() {
+    std::string res;
+    int value = mQuality;
+    std::string str_header = " Quality";
+    std::string str_value = std::to_string(value);
+    res.append(str_header.size() - str_value.size(), ' ');
+    res.append(str_value);
+    return res;
+}
+
 // ----------------------------------------------------------------------------
 
 size_t AudioResamplerOrder1::resample(int32_t* out, size_t outFrameCount,

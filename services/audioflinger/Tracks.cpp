@@ -1005,8 +1005,9 @@ void Track::appendDumpHeader(String8& result) const
                         "ST Usg CT "
                         " G db  L dB  R dB  VS dB  PortVol dB "
                         "  Server FrmCnt  FrmRdy F Underruns  Flushed BitPerfect InternalMute"
-                        "%s\n",
-                        isServerLatencySupported() ? "   Latency" : "");
+                        "%s%s\n",
+                        isServerLatencySupported() ? "   Latency" : "",
+                        mResampler ? mResampler->dumpHeader().c_str() : "");
 }
 
 void Track::appendDump(String8& result, bool active) const
@@ -1136,6 +1137,7 @@ void Track::appendDump(String8& result, bool active) const
             result.appendFormat("%10s", mCblk->mServer != 0 ? "unavail" : "new");
         }
     }
+    result.appendFormat("%s", mResampler ? mResampler->dump().c_str() : "");
     result.append("\n");
 }
 

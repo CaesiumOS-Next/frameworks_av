@@ -136,6 +136,7 @@ public:
     }
 
     size_t      getUnreleasedFrames(int name) const;
+    AudioResampler *getResampler(int name) const;
 
     std::string trackNames() const;
 

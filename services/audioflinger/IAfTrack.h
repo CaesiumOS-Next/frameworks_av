@@ -121,6 +121,7 @@ public:
     virtual audio_attributes_t attributes() const = 0;
     virtual bool isSpatialized() const = 0;
     virtual bool isBitPerfect() const = 0;
+    AudioResampler* mResampler;
 
     // not currently implemented in TrackBase, but overridden.
     virtual void destroy() {};  // MmapTrack doesn't implement.

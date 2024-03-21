@@ -49,6 +49,29 @@ public:
         DYN_HIGH_QUALITY=7,
     };
 
+    virtual std::string toString(src_quality q) {
+        switch (q) {
+            case DEFAULT_QUALITY:
+                return "Default quality";
+            case LOW_QUALITY:
+                return "Low quality";
+            case MED_QUALITY:
+                return "Med quality";
+            case HIGH_QUALITY:
+                return "High quality";
+            case VERY_HIGH_QUALITY:
+                return "Very high quality";
+            case DYN_LOW_QUALITY:
+                return "Dyn low quality";
+            case DYN_MED_QUALITY:
+                return "Dyn med quality";
+            case DYN_HIGH_QUALITY:
+                return "Dyn high quality";
+            default:
+                return std::string("Unknown quality: ").append(std::to_string(static_cast<int>(q)));
+        }
+    }
+
     static const CONSTEXPR float UNITY_GAIN_FLOAT = 1.0f;
 
     static AudioResampler* create(audio_format_t format, int inChannelCount,
@@ -59,6 +82,8 @@ public:
     virtual void init() = 0;
     virtual void setSampleRate(int32_t inSampleRate);
     virtual void setVolume(float left, float right);
+    virtual std::string dumpHeader();
+    virtual std::string dump();
 
     // Resample int16_t samples from provider and accumulate into 'out'.
     // A mono provider delivers a sequence of samples.
