@@ -314,6 +314,10 @@ void AudioResampler::reset() {
     mBuffer.frameCount = 0;
 }
 
+void AudioResampler::dump(int fd) {
+    dprintf(fd, "  Quality: %s\n", toString(mQuality).c_str());
+}
+
 // ----------------------------------------------------------------------------
 
 size_t AudioResamplerOrder1::resample(int32_t* out, size_t outFrameCount,

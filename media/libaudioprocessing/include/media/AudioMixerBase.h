@@ -129,6 +129,8 @@ public:
 
     virtual void setParameter(int name, int target, int param, void *value);
 
+    void        dump(int fd);
+
     void        process() {
         preProcess();
         (this->*mHook)();
@@ -241,6 +243,8 @@ public:
         template <int MIXTYPE, bool USEFLOATVOL, bool ADJUSTVOL,
             typename TO, typename TI, typename TA>
         void volumeMix(TO *out, size_t outFrames, const TI *in, TA *aux, bool ramp);
+
+        void        dump(int fd);
 
         uint32_t    needs;
 
