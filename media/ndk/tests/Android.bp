@@ -30,6 +30,7 @@ cc_test {
     ],
 
     shared_libs: [
+        "libbinder_ndk",
         "liblog",
         "libmediandk",
         "libutils",
@@ -37,5 +38,7 @@ cc_test {
 
     srcs: [
         "NdkMediaFormat_test.cpp",
+        "NdkMediaCodec_test.cpp",
+        "media_codec_decoder_ndk.cpp",
     ],
 }
