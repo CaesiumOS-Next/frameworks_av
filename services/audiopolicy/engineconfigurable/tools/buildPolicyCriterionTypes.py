@@ -44,7 +44,6 @@ from collections import OrderedDict
 # At last, the output of the script shall be set also:
 #           --outputfile <path/to/out/vendor/etc/audio_criterion_types.xml>
 #
-
 def parseArgs():
     argparser = argparse.ArgumentParser(description="Parameter-Framework XML \
                                         audio criterion type file generator.\n\
@@ -105,9 +104,9 @@ def generateXmlCriterionTypesFile(criterionTypes, addressCriteria, criterionType
                     value_node.set('numerical', str(value))
                     value_node.set('literal', key)
 
-                    if criterion_type.get('name') == "OutputDevicesMaskType":
+                    if criterion_type.get('name') == "AvailableOutputDevicesType":
                         value_node.set('android_type', output_devices_type_value[key])
-                    if criterion_type.get('name') == "InputDevicesMaskType":
+                    if criterion_type.get('name') == "AvailableInputDevicesType":
                         value_node.set('android_type', input_devices_type_value[key])
 
     if addressCriteria:
@@ -149,12 +148,12 @@ def parseAndroidAudioPolicyConfigurationFile(audiopolicyconfigurationfile):
     # extract all devices addresses from audio policy configuration file
     #
     address_criteria_mapping_table = {
-        'sink' : "OutputDevicesAddressesType",
-        'source' : "InputDevicesAddressesType"}
+        'sink' : "AvailableOutputDevicesAddressesType",
+        'source' : "AvailableInputDevicesAddressesType"}
 
     address_criteria = {
-        'OutputDevicesAddressesType' : [],
-        'InputDevicesAddressesType' : []}
+        'AvailableOutputDevicesAddressesType' : [],
+        'AvailableInputDevicesAddressesType' : []}
 
     old_working_dir = os.getcwd()
     print("Current working directory %s" % old_working_dir)
@@ -194,14 +193,14 @@ def parseAndroidAudioFile(androidaudiobaseheaderFile, androidaudiocommonbasehead
     # Adaptation table between Android Enumeration prefix and Audio PFW Criterion type names
     #
     criterion_mapping_table = {
-        'HAL_AUDIO_MODE' : "AndroidModeType",
-        'AUDIO_DEVICE_OUT' : "OutputDevicesMaskType",
-        'AUDIO_DEVICE_IN' : "InputDevicesMaskType"}
+        'HAL_AUDIO_MODE' : "TelephonyModeType",
+        'AUDIO_DEVICE_OUT' : "AvailableOutputDevicesType",
+        'AUDIO_DEVICE_IN' : "AvailableInputDevicesType"}
 
     all_criteria = {
-        'AndroidModeType' : {},
-        'OutputDevicesMaskType' : {},
-        'InputDevicesMaskType' : {}}
+        'TelephonyModeType' : {},
+        'AvailableOutputDevicesType' : {},
+        'AvailableInputDevicesType' : {}}
 
     #
     # _CNT, _MAX, _ALL and _NONE are prohibited values as ther are just helpers for enum users.
@@ -225,13 +224,17 @@ def parseAndroidAudioFile(androidaudiobaseheaderFile, androidaudiocommonbasehead
                 androidaudiobaseheaderFile.name, line_number, line))
 
             criterion_name = criterion_mapping_table[match.groupdict()['type']]
-            criterion_literal = \
-                ''.join((w.capitalize() for w in match.groupdict()['literal'].split('_')))
+            criterion_literal = ''.join(match.groupdict()['literal'])
             criterion_numerical_value = match.groupdict()['values']
 
-            # for AUDIO_DEVICE_IN: rename default to stub
-            if criterion_name == "InputDevicesMaskType":
-                if criterion_literal == "Default":
+            if criterion_name == "AvailableInputDevicesType":
+                # Remove ambient and in_communication since they were deprecated
+                logging.info("Remove deprecated device {}".format(criterion_literal))
+                if criterion_literal == "AMBIENT" or criterion_literal == "COMMUNICATION":
+                    logging.info("Remove deprecated device {}".format(criterion_literal))
+                    continue
+                # for AUDIO_DEVICE_IN: rename default to stub
+                elif criterion_literal == "DEFAULT":
                     criterion_numerical_value = str(int("0x40000000", 0))
                     input_devices_type_value[criterion_literal] = "0xC0000000"
                 else:
@@ -255,8 +258,8 @@ def parseAndroidAudioFile(androidaudiobaseheaderFile, androidaudiocommonbasehead
                             .format(criterion_numerical_value, criterion_literal, criterion_name))
                         continue
 
-            if criterion_name == "OutputDevicesMaskType":
-                if criterion_literal == "Default":
+            if criterion_name == "AvailableOutputDevicesType":
+                if criterion_literal == "DEFAULT":
                     criterion_numerical_value = str(int("0x40000000", 0))
                     output_devices_type_value[criterion_literal] = "0x40000000"
                 else:
@@ -317,8 +320,7 @@ def parseAndroidAudioFile(androidaudiobaseheaderFile, androidaudiocommonbasehead
                 androidaudiocommonbaseheaderFile.name, line_number, line))
 
             criterion_name = criterion_mapping_table[match.groupdict()['type']]
-            criterion_literal = \
-                ''.join((w.capitalize() for w in match.groupdict()['literal'].split('_')))
+            criterion_literal = ''.join(match.groupdict()['literal'])
             criterion_numerical_value = match.groupdict()['values']
 
             try:
