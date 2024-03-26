@@ -14,21 +14,21 @@
      limitations under the License.
 -->
 <criterion_types>
-    <criterion_type name="OutputDevicesMaskType" type="inclusive"/>
-    <criterion_type name="InputDevicesMaskType" type="inclusive"/>
-    <criterion_type name="OutputDevicesAddressesType" type="inclusive">
+    <criterion_type name="AvailableOutputDevicesType" type="inclusive"/>
+    <criterion_type name="AvailableInputDevicesType" type="inclusive"/>
+    <criterion_type name="AvailableOutputDevicesAddressesType" type="inclusive">
         <values>
             <!-- legacy remote submix -->
             <value literal="0" numerical="1"/>
         </values>
     </criterion_type>
-    <criterion_type name="InputDevicesAddressesType" type="inclusive">
+    <criterion_type name="AvailableInputDevicesAddressesType" type="inclusive">
         <values>
             <!-- legacy remote submix -->
             <value literal="0" numerical="1"/>
         </values>
     </criterion_type>
-    <criterion_type name="AndroidModeType" type="exclusive"/>
+    <criterion_type name="TelephonyModeType" type="exclusive"/>
     <criterion_type name="BooleanType" type="exclusive">
         <values>
             <value literal="False" numerical="0"/>
