@@ -229,9 +229,14 @@ def parseAndroidAudioFile(androidaudiobaseheaderFile, androidaudiocommonbasehead
                 ''.join((w.capitalize() for w in match.groupdict()['literal'].split('_')))
             criterion_numerical_value = match.groupdict()['values']
 
-            # for AUDIO_DEVICE_IN: rename default to stub
             if criterion_name == "InputDevicesMaskType":
-                if criterion_literal == "Default":
+                # Remove ambient and in_communication since they were deprecated
+                logging.info("Remove deprecated device {}".format(criterion_literal))
+                if criterion_literal == "Ambient" or criterion_literal == "Communication":
+                    logging.info("Remove deprecated device {}".format(criterion_literal))
+                    continue
+                # for AUDIO_DEVICE_IN: rename default to stub
+                elif criterion_literal == "Default":
                     criterion_numerical_value = str(int("0x40000000", 0))
                     input_devices_type_value[criterion_literal] = "0xC0000000"
                 else:
