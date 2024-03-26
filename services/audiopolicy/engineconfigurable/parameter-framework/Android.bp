@@ -50,11 +50,7 @@ prebuilt_etc {
 genrule {
     name: "buildcommontypesstructure_gen",
     defaults: ["buildcommontypesstructurerule"],
-}
-
-filegroup {
-    name: "product_strategies_structure_template",
-    srcs: ["examples/common/Structure/ProductStrategies.xml.in"],
+    out: ["PolicySubsystem-CommonTypes.xml"],
 }
 
 filegroup {
