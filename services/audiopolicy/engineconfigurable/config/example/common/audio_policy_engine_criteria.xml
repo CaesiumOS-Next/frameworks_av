@@ -14,11 +14,11 @@
      limitations under the License.
 -->
 <criteria>
-    <criterion name="AvailableInputDevices" type="InputDevicesMaskType" default="none"/>
-    <criterion name="AvailableOutputDevices" type="OutputDevicesMaskType" default="none"/>
-    <criterion name="AvailableOutputDevicesAddresses" type="OutputDevicesAddressesType" default="none"/>
-    <criterion name="AvailableInputDevicesAddresses" type="InputDevicesAddressesType" default="none"/>
-    <criterion name="TelephonyMode" type="AndroidModeType" default="Normal"/>
+    <criterion name="AvailableInputDevices" type="AvailableInputDevicesType"/>
+    <criterion name="AvailableOutputDevices" type="AvailableOutputDevicesType"/>
+    <criterion name="AvailableOutputDevicesAddresses" type="AvailableOutputDevicesAddressesType"/>
+    <criterion name="AvailableInputDevicesAddresses" type="AvailableInputDevicesAddressesType"/>
+    <criterion name="TelephonyMode" type="TelephonyModeType" default="Normal"/>
     <criterion name="ForceUseForCommunication" type="ForceUseForCommunicationType" default="ForceNone"/>
     <criterion name="ForceUseForMedia" type="ForceUseForMediaType" default="ForceNone"/>
     <criterion name="ForceUseForRecord" type="ForceUseForRecordType" default="ForceNone"/>
