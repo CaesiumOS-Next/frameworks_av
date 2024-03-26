@@ -26,6 +26,40 @@ package {
 // Tools for audio policy engine criterion type configuration file
 //
 python_binary_host {
+    name: "buildPolicyAidlCriterionTypes",
+    main: "buildPolicyAidlCriterionTypes.py",
+    srcs: [
+        "buildPolicyAidlCriterionTypes.py",
+    ],
+}
+
+genrule_defaults {
+    name: "buildpolicyaidlcriteriontypesrule",
+    tools: ["buildPolicyAidlCriterionTypes"],
+    cmd: "cp $(locations :audio_policy_configuration_files) $(genDir)/. && " +
+        "cp $(location :audio_policy_configuration_top_file) $(genDir)/audio_policy_configuration.xml && " +
+        "$(location buildPolicyAidlCriterionTypes) " +
+        " --androidaudiobaseheader $(location :libaudio_system_audio_base) " +
+        " --androidaudiocommonbaseheader $(location :libaudio_system_audio_common_base) " +
+        "--audiopolicyconfigurationfile $(genDir)/audio_policy_configuration.xml " +
+        "--criteriontypes $(location :audio_policy_engine_aidl_criterion_types_template) " +
+        "--outputfile $(out)",
+    srcs: [
+        // The commented inputs must be provided to use this genrule_defaults
+        // @todo uncomment if 1428659 is merged":android_audio_base_header_file",
+        ":audio_policy_engine_aidl_criterion_types_template",
+        ":libaudio_system_audio_base",
+        ":libaudio_system_audio_common_base",
+        // ":audio_policy_configuration_top_file",
+        // ":audio_policy_configuration_files",
+    ],
+    out: ["audio_policy_engine_criterion_types.xml"],
+}
+
+//##################################################################################################
+// Legacy tools for audio policy engine criterion type configuration file
+//
+python_binary_host {
     name: "buildPolicyCriterionTypes",
     main: "buildPolicyCriterionTypes.py",
     srcs: [
@@ -36,6 +70,40 @@ python_binary_host {
 genrule_defaults {
     name: "buildpolicycriteriontypesrule",
     tools: ["buildPolicyCriterionTypes"],
+    cmd: "cp $(locations :audio_policy_configuration_files) $(genDir)/. && " +
+        "cp $(location :audio_policy_configuration_top_file) $(genDir)/audio_policy_configuration.xml && " +
+        "$(location buildPolicyCriterionTypes) " +
+        " --androidaudiobaseheader $(location :libaudio_system_audio_base) " +
+        " --androidaudiocommonbaseheader $(location :libaudio_system_audio_common_base) " +
+        "--audiopolicyconfigurationfile $(genDir)/audio_policy_configuration.xml " +
+        "--criteriontypes $(location :audio_policy_engine_criterion_types_template) " +
+        "--outputfile $(out)",
+    srcs: [
+        // The commented inputs must be provided to use this genrule_defaults
+        // @todo uncomment if 1428659 is merged":android_audio_base_header_file",
+        ":audio_policy_engine_criterion_types_template",
+        ":libaudio_system_audio_base",
+        ":libaudio_system_audio_common_base",
+        // ":audio_policy_configuration_top_file",
+        // ":audio_policy_configuration_files",
+    ],
+    out: ["audio_policy_engine_criterion_types.xml"],
+}
+
+//##################################################################################################
+// Tools for audio policy engine criterion type configuration file
+//
+python_binary_host {
+    name: "capBuildPolicyCriterionTypes",
+    main: "capBuildPolicyCriterionTypes.py",
+    srcs: [
+        "capBuildPolicyCriterionTypes.py",
+    ],
+}
+
+genrule_defaults {
+    name: "capbuildpolicycriteriontypesrule",
+    tools: ["capBuildPolicyCriterionTypes"],
     cmd: "cp $(locations :audio_policy_configuration_files) $(genDir)/. && " +
         "cp $(location :audio_policy_configuration_top_file) $(genDir)/audio_policy_configuration.xml && " +
         "$(location buildPolicyCriterionTypes) " +
@@ -106,7 +174,7 @@ genrule_defaults {
 }
 
 //##################################################################################################
-// Tools for policy parameter-framework product strategies structure file generation
+// Legacy tools for policy parameter-framework product strategies structure file generation
 //
 python_binary_host {
     name: "buildStrategiesStructureFile",
@@ -133,6 +201,31 @@ genrule_defaults {
 }
 
 //##################################################################################################
+// Tools for policy parameter-framework product strategies structure file generation
+//
+python_binary_host {
+    name: "capBuildStrategiesStructureFile",
+    main: "capBuildStrategiesStructureFile.py",
+    srcs: [
+        "capBuildStrategiesStructureFile.py",
+    ],
+}
+
+genrule_defaults {
+    name: "capbuildstrategiesstructurerule",
+    tools: ["capBuildStrategiesStructureFile"],
+    cmd: "cp $(locations :audio_policy_engine_configuration_files) $(genDir) && ls -l $(genDir) &&" +
+        "$(location capBuildStrategiesStructureFile) " +
+        "--audiopolicyengineconfigurationfile $(genDir)/audio_policy_engine_configuration.xml " +
+        "--outputfile $(out)",
+    srcs: [
+        // The commented inputs must be provided to use this genrule_defaults
+        // ":audio_policy_engine_configuration_files",
+    ],
+    out: ["ProductStrategies.xml"],
+}
+
+//##################################################################################################
 // Tools for policy parameter-framework common type structure file generation
 //
 python_binary_host {
@@ -154,5 +247,4 @@ genrule_defaults {
         ":common_types_structure_template",
         ":libaudio_system_audio_base",
     ],
-    out: ["PolicySubsystem-CommonTypes.xml"],
 }
