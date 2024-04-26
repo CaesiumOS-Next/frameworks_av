@@ -144,9 +144,25 @@ interface IAudioPolicyService {
 
     int getMinVolumeIndexForAttributes(in AudioAttributes attr);
 
+    /**
+     * Set the volume for the given group id, device and index. UID is given as the attenuation
+     * depends on the device. Routing rules may be registered for a given UID / User ID. Thus,
+     * AudioPolicy will re-check the device for which the attenuation shall be taken.
+     */
+    void setVolumeIndexForGroup(int groupId, int uid, in AudioDeviceDescription device,
+                                int index, boolean muted);
+
     int /* product_strategy_t */ getStrategyForStream(AudioStreamType stream);
 
     AudioDevice[] getDevicesForAttributes(in AudioAttributes attr, boolean forVolume);
+
+    /**
+     * Requests the devices that would be used for routing (if forVolume is false) or for volume
+     * operations for the given attributes and UID (as routing rules may be registered on
+     * UID / User ID)
+     */
+    AudioDevice[] getDevicesForAttributesAndUid(in AudioAttributes attr, int uid,
+                        boolean forVolume);
 
     int /* audio_io_handle_t */ getOutputForEffect(in EffectDescriptor desc);
 
@@ -420,13 +436,27 @@ interface IAudioPolicyService {
      * Query how the direct playback is currently supported on the device.
      */
     AudioDirectMode getDirectPlaybackSupport(in AudioAttributes attr,
-                                              in AudioConfig config);
+                                             in AudioConfig config);
+
+    /**
+     * Query how the direct playback is currently supported on the device routed for the given
+     * attributes and UID (as routing rules may be registered on UID / User ID)
+     */
+    AudioDirectMode getDirectPlaybackSupportWithUid(in AudioAttributes attr, int uid,
+                    in AudioConfig config);
 
     /**
      * Query audio profiles available for direct playback on the current output device(s)
      * for the specified audio attributes.
      */
     AudioProfile[] getDirectProfilesForAttributes(in AudioAttributes attr);
+
+    /**
+     * Query audio profiles available for direct playback on the current output device(s)
+     * for the specified audio attributes and UID (as routing rules may be registered on
+     * UID / User ID).
+     */
+    AudioProfile[] getDirectProfilesForAttributesAndUid(in AudioAttributes attr, int uid);
 
     /**
      * Return a list of AudioMixerAttributes that can be used to set preferred mixer attributes
