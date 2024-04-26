@@ -91,6 +91,8 @@ BINDER_METHOD_ENTRY(setVolumeIndexForAttributes) \
 BINDER_METHOD_ENTRY(getVolumeIndexForAttributes) \
 BINDER_METHOD_ENTRY(getMaxVolumeIndexForAttributes) \
 BINDER_METHOD_ENTRY(getMinVolumeIndexForAttributes) \
+BINDER_METHOD_ENTRY(setVolumeIndexForGroup) \
+BINDER_METHOD_ENTRY(getVolumeIndexForGroup) \
 BINDER_METHOD_ENTRY(getStrategyForStream) \
 BINDER_METHOD_ENTRY(getDevicesForAttributes) \
 BINDER_METHOD_ENTRY(getOutputForEffect) \
@@ -1352,6 +1354,8 @@ status_t AudioPolicyService::onTransact(
         case TRANSACTION_getVolumeIndexForAttributes:
         case TRANSACTION_getMinVolumeIndexForAttributes:
         case TRANSACTION_getMaxVolumeIndexForAttributes:
+        case TRANSACTION_setVolumeIndexForGroup:
+        case TRANSACTION_getVolumeIndexForGroup:
         case TRANSACTION_isStreamActive:
         case TRANSACTION_isStreamActiveRemotely:
         case TRANSACTION_isSourceActive:
