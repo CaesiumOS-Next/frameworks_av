@@ -70,6 +70,8 @@ class AudioSystemTest : public ::testing::Test {
     void createPlaybackSession(void);
     void createRecordSession(void);
 
+    int getZoneForVolumeGroup(volume_group_t vg);
+
     sp<IAudioFlinger> mAF;
     sp<AudioPlayback> mPlayback;
     sp<OnAudioDeviceUpdateNotifier> mCbPlayback;
@@ -103,6 +105,24 @@ void AudioSystemTest::createRecordSession(void) {
     EXPECT_EQ(OK, mCapture->getAudioRecordHandle()->addAudioDeviceCallback(mCbRecord));
     EXPECT_EQ(OK, mCapture->start()) << "record creation failed";
     EXPECT_EQ(OK, mCbRecord->waitForAudioDeviceCb());
+}
+
+int AudioSystemTest::getZoneForVolumeGroup(volume_group_t vg) {
+    AudioProductStrategyVector strategies;
+    EXPECT_EQ(OK, AudioSystem::listAudioProductStrategies(strategies));
+    int zoneId = -1;
+    for (const auto& strategy : strategies) {
+        for (const auto &group : strategy.getVolumeGroupAttributes()) {
+            if (group.getGroupId() == vg) {
+                zoneId = strategy.getZoneId();
+                break;
+            }
+        }
+    }
+    int defaultZoneId = AudioProductStrategy::DEFAULT_ZONE_ID;
+    EXPECT_GE(zoneId, defaultZoneId)
+            << "Could not find zone id for volume group " << vg;
+    return zoneId;
 }
 
 // UNIT TESTS
@@ -427,7 +447,8 @@ TEST_F(AudioSystemTest, DevicesForRoleAndStrategy) {
     }
 }
 
-TEST_F(AudioSystemTest, VolumeIndexForAttributes) {
+TEST_F_WITH_FLAGS(AudioSystemTest, VolumeIndexForAttributesWithoutZones,
+        REQUIRES_FLAGS_ENABLED(ACONFIG_FLAG(android.media.audiopolicy, multi_zone_audio))) {
     std::optional<audio_port_v7> speakerPort = audio_port_v7{};
     if (getPortByAttributes(AUDIO_PORT_ROLE_SINK, AUDIO_PORT_TYPE_DEVICE, AUDIO_DEVICE_OUT_SPEAKER,
                             "", *speakerPort) != OK) {
@@ -453,6 +474,65 @@ TEST_F(AudioSystemTest, VolumeIndexForAttributes) {
             int indexTest;
             EXPECT_EQ(OK, AudioSystem::getStreamVolumeIndex(streamType, &indexTest,
                                                             speakerPort->ext.device.type));
+            EXPECT_EQ(index, indexTest);
+        }
+    }
+}
+
+/**
+ * @RequiresFlagsEnabled("android.media.audiopolicy.volume_group_management_update")
+ */
+TEST_F_WITH_FLAGS(AudioSystemTest, VolumeIndexForVolumeGroup,
+        REQUIRES_FLAGS_ENABLED(ACONFIG_FLAG(android.media.audiopolicy,
+                                            volume_group_management_update))) {
+    AudioVolumeGroupVector groups;
+    EXPECT_EQ(OK, AudioSystem::listAudioVolumeGroups(groups));
+    for (const auto& group : groups) {
+        if (group.getStreamTypes().empty()) continue;
+        volume_group_t vg = group.getId();
+        audio_stream_type_t streamType = group.getStreamTypes()[0];
+        if (streamType >= AUDIO_STREAM_PUBLIC_CNT) continue;
+
+        int index;
+        EXPECT_EQ(OK, AudioSystem::getVolumeIndexForGroup(vg, index, AUDIO_DEVICE_OUT_SPEAKER));
+
+        int indexTest;
+        EXPECT_EQ(OK, AudioSystem::getStreamVolumeIndex(streamType, &indexTest,
+                                                        AUDIO_DEVICE_OUT_SPEAKER));
+        EXPECT_EQ(index, indexTest);
+    }
+}
+
+TEST_F_WITH_FLAGS(AudioSystemTest, VolumeIndexForAttributes,
+        REQUIRES_FLAGS_ENABLED(ACONFIG_FLAG(android.media.audiopolicy, multi_zone_audio))) {
+    std::optional<audio_port_v7> speakerPort = audio_port_v7{};
+    if (getPortByAttributes(AUDIO_PORT_ROLE_SINK, AUDIO_PORT_TYPE_DEVICE, AUDIO_DEVICE_OUT_SPEAKER,
+            "", *speakerPort) != OK) {
+        speakerPort.reset();
+    }
+    AudioVolumeGroupVector groups;
+    ASSERT_EQ(OK, AudioSystem::listAudioVolumeGroups(groups));
+    for (const auto& group : groups) {
+        if (group.getAudioAttributes().empty()) continue;
+        const audio_attributes_t attr = group.getAudioAttributes()[0];
+        if (attr == AUDIO_ATTRIBUTES_INITIALIZER) continue;
+        audio_stream_type_t streamType;
+        AudioSystem::getStreamTypeForAttributes(attr, streamType);
+        if (streamType >= AUDIO_STREAM_PUBLIC_CNT) continue;
+        int zoneId = getZoneForVolumeGroup(group.getId());
+        if (zoneId != AudioProductStrategy::DEFAULT_ZONE_ID) continue;
+
+        volume_group_t vg;
+        EXPECT_EQ(OK, AudioSystem::getVolumeGroupFromAudioAttributes(attr, vg));
+        EXPECT_EQ(group.getId(), vg);
+
+        if (speakerPort.has_value()) {
+            int index;
+            EXPECT_EQ(OK, AudioSystem::getVolumeIndexForAttributes(attr, index,
+                    speakerPort->ext.device.type));
+            int indexTest;
+            EXPECT_EQ(OK, AudioSystem::getStreamVolumeIndex(streamType, &indexTest,
+                    speakerPort->ext.device.type));
             EXPECT_EQ(index, indexTest);
         }
     }
