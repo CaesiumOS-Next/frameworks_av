@@ -192,6 +192,7 @@ struct MediaCodecInfo : public RefBase {
     Attributes getAttributes() const;
     void getSupportedMediaTypes(Vector<AString> *mediaTypes) const;
     const sp<Capabilities> getCapabilitiesFor(const char *mediaType) const;
+    const std::shared_ptr<CodecCapabilities> getCodecCapsFor(const char *mediaType) const;
     const char *getCodecName() const;
 
     /**
@@ -233,10 +234,12 @@ private:
     AString mOwner;
     Attributes mAttributes;
     KeyedVector<AString, sp<Capabilities> > mCaps;
+    KeyedVector<AString, std::shared_ptr<CodecCapabilities>> mCodecCaps;
     Vector<AString> mAliases;
     uint32_t mRank;
 
     ssize_t getCapabilityIndex(const char *mediaType) const;
+    ssize_t getCodecCapIndex(const char *mediaType) const;
 
     /**
      * Construct an `MediaCodecInfo` object. After the construction, its
@@ -263,6 +266,15 @@ private:
  * `MediaCodecListBuilderBase::buildMediaCodecList()`.
  */
 struct MediaCodecInfoWriter {
+    /**
+     * Get CodecCapabilities from Capabilities.
+     */
+    static std::shared_ptr<CodecCapabilities> GetCodecCapsFromCaps(AString mediaType,
+            sp<MediaCodecInfo::Capabilities> caps, bool isEncoder, int maxSupportedInstances = 0);
+    /**
+     * Construct the mCodecCaps map.
+     */
+    void setCodecCapsMap(int maxSupportedInstances = 0);
     /**
      * Set the name of the codec.
      *
