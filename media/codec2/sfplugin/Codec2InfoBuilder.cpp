@@ -16,6 +16,9 @@
 
 //#define LOG_NDEBUG 0
 #define LOG_TAG "Codec2InfoBuilder"
+
+#include <cstdlib>
+
 #include <log/log.h>
 
 #include <strings.h>
@@ -502,12 +505,16 @@ status_t Codec2InfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
         return OK;
     }
 
+    int32_t maxSupportedInstances = 0;
     MediaCodecsXmlParser::AttributeMap settings = parser.getServiceAttributeMap();
     for (const auto &v : settings) {
         if (!hasPrefix(v.first, "media-type-")
                 && !hasPrefix(v.first, "domain-")
                 && !hasPrefix(v.first, "variant-")) {
             writer->addGlobalSetting(v.first.c_str(), v.second.c_str());
+            if (v.first == "max-concurrent-instances") {
+                maxSupportedInstances = (int32_t)strtol(v.second.c_str(), NULL, 10);
+            }
         }
     }
 
@@ -631,6 +638,7 @@ status_t Codec2InfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
 
             ALOGV("adding codec entry for '%s'", nameOrAlias.c_str());
             std::unique_ptr<MediaCodecInfoWriter> codecInfo = writer->addMediaCodecInfo();
+            codecInfo->SetMaxSupportedInstances(maxSupportedInstances);
             codecInfo->setName(nameOrAlias.c_str());
             codecInfo->setOwner(("codec2::" + trait.owner).c_str());
 
@@ -796,6 +804,7 @@ status_t Codec2InfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
                     }
                 }
             }
+            codecInfo->createCodecCaps();
         }
     }
     return OK;
