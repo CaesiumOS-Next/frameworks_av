@@ -21,6 +21,8 @@
 #define OMX_ANDROID_COMPILE_AS_32BIT_ON_64BIT_PLATFORMS
 #endif
 
+#include <cstdlib>
+
 #include <android-base/properties.h>
 #include <utils/Log.h>
 
@@ -128,9 +130,13 @@ status_t OmxInfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
         ALOGE("IOmxStore reports parsing error.");
         return NO_INIT;
     }
+    int32_t maxSupportedInstances = 0;
     for (const auto& p : serviceAttributes) {
         writer->addGlobalSetting(
                 p.key.c_str(), p.value.c_str());
+        if (p.key == "max-concurrent-instances") {
+            maxSupportedInstances = (int32_t)strtol(p.value.c_str(), NULL, 10);
+        }
     }
 
     // Convert roles to lists of codecs
@@ -184,6 +190,7 @@ status_t OmxInfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
                 c2i = codecName2Info.insert(std::make_pair(
                         nodeName, writer->addMediaCodecInfo())).first;
                 info = c2i->second.get();
+                info->SetMaxSupportedInstances(maxSupportedInstances);
                 info->setName(nodeName.c_str());
                 info->setOwner(node.owner.c_str());
                 info->setRank(rank);
@@ -217,6 +224,8 @@ status_t OmxInfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
                 ALOGW("Fail to add media type %s to codec %s",
                         typeName.c_str(), nodeName.c_str());
                 info->removeMediaType(typeName.c_str());
+            } else {
+                info->createCodecCaps();
             }
         }
     }
