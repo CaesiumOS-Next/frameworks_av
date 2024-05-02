@@ -138,7 +138,15 @@ void MediaCodecInfo::CapabilitiesWriter::addColorFormat(uint32_t format) {
 }
 
 MediaCodecInfo::CapabilitiesWriter::CapabilitiesWriter(
-        MediaCodecInfo::Capabilities* cap) : mCap(cap) {
+        MediaCodecInfo::Capabilities* cap, std::shared_ptr<CodecCapabilities> codecCap,
+        const char *mediaType, bool isEncoder, int maxSupportedInstances)
+        : mCap(cap), mCodecCap(codecCap), mMediaType(mediaType), mIsEncoder(isEncoder),
+        mCodecListMaxSupportedInstances(maxSupportedInstances) {
+}
+
+MediaCodecInfo::CapabilitiesWriter::~CapabilitiesWriter() {
+    MediaCodecInfoWriter::BuildCodecCapabilities(
+            mCodecCap, mMediaType, mCap, mIsEncoder, mCodecListMaxSupportedInstances);
 }
 
 MediaCodecInfo::Attributes MediaCodecInfo::getAttributes() const {
@@ -169,6 +177,15 @@ MediaCodecInfo::getCapabilitiesFor(const char *mediaType) const {
     return NULL;
 }
 
+const std::shared_ptr<CodecCapabilities> MediaCodecInfo::getCodecCapsFor(
+        const char *mediaType) const {
+    ssize_t ix = getCodecCapIndex(mediaType);
+    if (ix >= 0) {
+        return mCodecCaps.valueAt(ix);
+    }
+    return nullptr;
+}
+
 const char *MediaCodecInfo::getCodecName() const {
     return mName.c_str();
 }
@@ -178,7 +195,7 @@ const char *MediaCodecInfo::getOwnerName() const {
 }
 
 // static
-sp<MediaCodecInfo> MediaCodecInfo::FromParcel(const Parcel &parcel) {
+sp<MediaCodecInfo> MediaCodecInfo::FromParcel(const Parcel &parcel, int maxSupportedInstances) {
     AString name = AString::FromParcel(parcel);
     AString owner = AString::FromParcel(parcel);
     Attributes attributes = static_cast<Attributes>(parcel.readInt32());
@@ -201,6 +218,10 @@ sp<MediaCodecInfo> MediaCodecInfo::FromParcel(const Parcel &parcel) {
             return NULL;
         if (info != NULL) {
             info->mCaps.add(mediaType, caps);
+            std::shared_ptr<CodecCapabilities> codecCaps = std::make_shared<CodecCapabilities>();
+            MediaCodecInfoWriter::BuildCodecCapabilities(codecCaps, mediaType.c_str(), caps,
+                    info->isEncoder(), maxSupportedInstances);
+            info->mCodecCaps.add(mediaType, codecCaps);
         }
     }
     return info;
@@ -234,6 +255,25 @@ ssize_t MediaCodecInfo::getCapabilityIndex(const char *mediaType) const {
     return -1;
 }
 
+ssize_t MediaCodecInfo::getCodecCapIndex(const char *mediaType) const {
+    if (mediaType == nullptr) {
+        return -1;
+    }
+
+    if (mCodecCaps.size() != mCaps.size()) {
+        ALOGE("Size of mCodecCaps and mCaps do not match, which are %zu and %zu",
+                mCodecCaps.size(), mCaps.size());
+    }
+
+    for (size_t ix = 0; ix < mCodecCaps.size(); ix++) {
+        if (mCodecCaps.keyAt(ix).equalsIgnoreCase(mediaType)) {
+            return ix;
+        }
+    }
+
+    return -1;
+}
+
 MediaCodecInfo::MediaCodecInfo()
     : mAttributes((MediaCodecInfo::Attributes)0),
       mRank(0x100) {
@@ -261,26 +301,57 @@ void MediaCodecInfoWriter::setRank(uint32_t rank) {
 }
 
 std::unique_ptr<MediaCodecInfo::CapabilitiesWriter>
-        MediaCodecInfoWriter::addMediaType(const char *mediaType) {
+        MediaCodecInfoWriter::addMediaType(const char *mediaType, int maxSupportedInstances) {
+    std::shared_ptr<CodecCapabilities> codecCaps = std::make_shared<CodecCapabilities>();
     ssize_t ix = mInfo->getCapabilityIndex(mediaType);
     if (ix >= 0) {
+        mInfo->mCodecCaps.replaceValueAt(ix, codecCaps);
         return std::unique_ptr<MediaCodecInfo::CapabilitiesWriter>(
-                new MediaCodecInfo::CapabilitiesWriter(
-                mInfo->mCaps.valueAt(ix).get()));
+                new MediaCodecInfo::CapabilitiesWriter(mInfo->mCaps.valueAt(ix).get(),
+                codecCaps, mediaType, mInfo->isEncoder(), maxSupportedInstances));
     }
     sp<MediaCodecInfo::Capabilities> caps = new MediaCodecInfo::Capabilities();
     mInfo->mCaps.add(AString(mediaType), caps);
+    mInfo->mCodecCaps.add(AString(mediaType), codecCaps);
     return std::unique_ptr<MediaCodecInfo::CapabilitiesWriter>(
-            new MediaCodecInfo::CapabilitiesWriter(caps.get()));
+            new MediaCodecInfo::CapabilitiesWriter(caps.get(), codecCaps, mediaType,
+            mInfo->isEncoder(), maxSupportedInstances));
 }
 
 bool MediaCodecInfoWriter::removeMediaType(const char *mediaType) {
     ssize_t ix = mInfo->getCapabilityIndex(mediaType);
     if (ix >= 0) {
         mInfo->mCaps.removeItemsAt(ix);
+        mInfo->mCodecCaps.removeItemsAt(ix);
         return true;
     }
     return false;
+}
+
+void MediaCodecInfoWriter::BuildCodecCapabilities(std::shared_ptr<CodecCapabilities> codecCaps,
+        const char *mediaType, sp<MediaCodecInfo::Capabilities> caps, bool isEncoder,
+        int maxSupportedInstances) {
+    Vector<ProfileLevel> profileLevels_;
+    Vector<uint32_t> colorFormats_;
+    caps->getSupportedProfileLevels(&profileLevels_);
+    caps->getSupportedColorFormats(&colorFormats_);
+
+    std::vector<ProfileLevel> profileLevels;
+    std::vector<uint32_t> colorFormats;
+    for (ProfileLevel pl : profileLevels_) {
+        profileLevels.push_back(pl);
+    }
+    for (uint32_t cf : colorFormats_) {
+        colorFormats.push_back(cf);
+    }
+
+    sp<AMessage> defaultFormat = new AMessage();
+    defaultFormat->setString("mime", mediaType);
+
+    sp<AMessage> capabilitiesInfo = caps->getDetails();
+
+    codecCaps->init(profileLevels, colorFormats, isEncoder, defaultFormat,
+            capabilitiesInfo, maxSupportedInstances);
 }
 
 MediaCodecInfoWriter::MediaCodecInfoWriter(MediaCodecInfo* info) :

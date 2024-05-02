@@ -170,17 +170,47 @@ struct MediaCodecInfo : public RefBase {
          */
         void addColorFormat(uint32_t format);
 
+        ~CapabilitiesWriter();
+
     private:
         /**
          * The associated `Capabilities` object.
          */
         Capabilities* mCap;
+
+        /**
+         * The associated `CodecCapabilities` object.
+         */
+        std::shared_ptr<CodecCapabilities> mCodecCap;
+
+        /**
+         * The media type of the Capabilities.
+         */
+        const char* mMediaType;
+
+        /**
+         * If the Capabilities is for an encoder or not.
+         */
+        const bool mIsEncoder;
+
+        /**
+         * The 'maxSupportedInstances' setting from 'MediaCodecList' object.
+         */
+        const int mCodecListMaxSupportedInstances;
+
         /**
          * Construct a writer for the given `Capabilities` object.
          *
          * @param cap The `Capabilities` object to be written to.
+         *
+         * @param codecCap The `CodecCapabilities` object to be parsed from the 'Capabilities' object.
+         *
+         * @param isEncoder If the 'Capabilities' object is for an Encoder or not
+         *
+         * @param maxSupportedInstances The maxSupportedInstances setting from the 'MediaCodecList'.
          */
-        CapabilitiesWriter(Capabilities* cap);
+        CapabilitiesWriter(Capabilities* cap, std::shared_ptr<CodecCapabilities> codecCap,
+                const char* mediaType, bool isEncoder, int maxSupportedInstances = 0);
 
         friend MediaCodecInfoWriter;
     };
@@ -192,6 +222,7 @@ struct MediaCodecInfo : public RefBase {
     Attributes getAttributes() const;
     void getSupportedMediaTypes(Vector<AString> *mediaTypes) const;
     const sp<Capabilities> getCapabilitiesFor(const char *mediaType) const;
+    const std::shared_ptr<CodecCapabilities> getCodecCapsFor(const char *mediaType) const;
     const char *getCodecName() const;
 
     /**
@@ -225,7 +256,7 @@ struct MediaCodecInfo : public RefBase {
     /**
      * Serialization over Binder
      */
-    static sp<MediaCodecInfo> FromParcel(const Parcel &parcel);
+    static sp<MediaCodecInfo> FromParcel(const Parcel &parcel, int maxSupportedInstances = 0);
     status_t writeToParcel(Parcel *parcel) const;
 
 private:
@@ -233,10 +264,12 @@ private:
     AString mOwner;
     Attributes mAttributes;
     KeyedVector<AString, sp<Capabilities> > mCaps;
+    KeyedVector<AString, std::shared_ptr<CodecCapabilities>> mCodecCaps;
     Vector<AString> mAliases;
     uint32_t mRank;
 
     ssize_t getCapabilityIndex(const char *mediaType) const;
+    ssize_t getCodecCapIndex(const char *mediaType) const;
 
     /**
      * Construct an `MediaCodecInfo` object. After the construction, its
@@ -263,6 +296,16 @@ private:
  * `MediaCodecListBuilderBase::buildMediaCodecList()`.
  */
 struct MediaCodecInfoWriter {
+    /**
+     * Get CodecCapabilities from Capabilities.
+     */
+    static void BuildCodecCapabilities(
+            std::shared_ptr<CodecCapabilities> codecCaps, const char *mediaType,
+            sp<MediaCodecInfo::Capabilities> caps, bool isEncoder, int maxSupportedInstances = 0);
+    /**
+     * Construct the mCodecCaps map.
+     */
+    void setCodecCapsMap(int maxSupportedInstances = 0);
     /**
      * Set the name of the codec.
      *
@@ -299,12 +342,13 @@ struct MediaCodecInfoWriter {
      * `CapabilitiesWriter` associated with the media type.
      *
      * @param[in] mediaType The name of a new media type to add.
+     * @param[in] maxSupportedInstances The maxSupportedInstances setting from MediaCodecList.
      * @return writer The `CapabilitiesWriter` object for modifying the
      * `Capabilities` associated with the media type. `writer` will be valid
      * regardless of whether `mediaType` already exists or not.
      */
     std::unique_ptr<MediaCodecInfo::CapabilitiesWriter> addMediaType(
-            const char* mediaType);
+            const char* mediaType, int maxSupportedInstances = 0);
     /**
      * Remove a media type.
      *
