@@ -293,6 +293,9 @@ enum C2ParamIndexKind : C2Param::type_index_t {
 
     // allow tunnel peek behavior to be unspecified for app compatibility
     kParamIndexTunnelPeekMode, // tunnel mode, enum
+
+    // audio session id for related audio path
+    kParamIndexAudioSessionId,
 };
 
 }
@@ -2662,6 +2665,10 @@ C2ENUM(C2PlatformConfig::encoding_quality_level_t, uint32_t,
 typedef C2StreamParam<C2Info, C2SimpleValueStruct<int32_t>, kParamIndexAverageBlockQuantization>
         C2AndroidStreamAverageBlockQuantizationInfo;
 constexpr char C2_PARAMKEY_AVERAGE_QP[] = "coded.average-qp";
+
+
+typedef C2PortParam<C2Tuning, C2Uint32Value, kParamIndexAudioSessionId> C2AudioSessionId;
+constexpr char C2_PARAMKEY_AUDIO_SESSION_ID[] = "input.audio-session-id";
 
 /// @}
 
