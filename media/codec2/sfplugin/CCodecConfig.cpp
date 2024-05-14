@@ -1047,6 +1047,9 @@ void CCodecConfig::initializeStandardParams() {
             return C2Value();
         }));
 
+    add(ConfigMapper(KEY_AUDIO_SESSION_ID, C2_PARAMKEY_AUDIO_SESSION_ID, "value")
+        .limitTo(D::DECODER & (D::CONFIG | D::PARAM)));
+
     /* still to do
        not yet used by MediaCodec, but defined as MediaFormat
     KEY_AUDIO_SESSION_ID // we use "audio-hw-sync"
