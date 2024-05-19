@@ -82,9 +82,11 @@ public:
     //  keyHwAvSync: get HW synchronization source identifier from a device
     //  keyMonoOutput: Enable mono audio playback
     //  keyStreamHwAvSync: set HW synchronization source identifier on a stream
+    //  keyStreamSessionId: set a session id on a stream
     static const char * const keyHwAvSync;
     static const char * const keyMonoOutput;
     static const char * const keyStreamHwAvSync;
+    static const char * const keyStreamSessionId;
 
     //  keys for presentation selection
     //  keyPresentationId: Audio presentation identifier

@@ -58,6 +58,7 @@ const char * const AudioParameter::keyAudioLanguagePreferred =
         AUDIO_PARAMETER_KEY_AUDIO_LANGUAGE_PREFERRED;
 const char * const AudioParameter::keyMonoOutput = AUDIO_PARAMETER_MONO_OUTPUT;
 const char * const AudioParameter::keyStreamHwAvSync = AUDIO_PARAMETER_STREAM_HW_AV_SYNC;
+const char * const AudioParameter::keyStreamSessionId = AUDIO_PARAMETER_STREAM_SESSION_ID;
 const char * const AudioParameter::keyDeviceConnect = AUDIO_PARAMETER_DEVICE_CONNECT;
 const char * const AudioParameter::keyDeviceDisconnect = AUDIO_PARAMETER_DEVICE_DISCONNECT;
 const char * const AudioParameter::keyStreamConnect = AUDIO_PARAMETER_DEVICE_CONNECT;

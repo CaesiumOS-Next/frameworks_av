@@ -1153,6 +1153,12 @@ status_t AudioFlinger::createTrack(const media::CreateTrackRequest& _input,
         }
         if ((output.flags & AUDIO_OUTPUT_FLAG_HW_AV_SYNC) == AUDIO_OUTPUT_FLAG_HW_AV_SYNC) {
             setAudioHwSyncForSession_l(thread, sessionId);
+        } else if ((output.flags & AUDIO_OUTPUT_FLAG_DIRECT) == AUDIO_OUTPUT_FLAG_DIRECT) {
+            ALOGI("setAudioSessionId: %d", sessionId);
+            AudioParameter param = AudioParameter();
+            param.addInt(String8(AudioParameter::keyStreamSessionId), sessionId);
+            String8 keyValuePairs = param.toString();
+            thread->setParameters(keyValuePairs);
         }
     }
 
