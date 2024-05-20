@@ -27,6 +27,7 @@
 #include <numeric>
 #include <thread>
 #include <chrono>
+#include <regex>
 
 #include <android_media_codec.h>
 
@@ -186,6 +187,7 @@ CCodecBufferChannel::CCodecBufferChannel(
       mRenderingDepth(3u),
       mMetaMode(MODE_NONE),
       mInputMetEos(false),
+      mIsHWDecoder(false),
       mSendEncryptedInfoBuffer(false) {
     {
         Mutexed<Input>::Locked input(mInput);
@@ -223,6 +225,8 @@ void CCodecBufferChannel::setComponent(
     mComponent = component;
     mComponentName = component->getName() + StringPrintf("#%d", int(uintptr_t(component.get()) % 997));
     mName = mComponentName.c_str();
+    std::regex pattern{"c2\\.qti\\..*\\.decoder.*"};
+    mIsHWDecoder = std::regex_match(mComponentName, pattern);
 }
 
 status_t CCodecBufferChannel::setInputSurface(
@@ -1683,7 +1687,11 @@ status_t CCodecBufferChannel::start(
         if (!buffersBoundToCodec
                 && !input->frameReassembler
                 && (hasCryptoOrDescrambler() || conforming)) {
-            input->buffers.reset(new SlotInputBuffers(mName));
+            if (!secure && mIsHWDecoder) {
+                input->buffers.reset(new LinearInputBuffers(mName));
+            } else {
+                input->buffers.reset(new SlotInputBuffers(mName));
+            }
         } else if (graphic) {
             if (mInputSurface) {
                 input->buffers.reset(new DummyInputBuffers(mName));

@@ -398,6 +398,7 @@ private:
 
     std::atomic_bool mInputMetEos;
     std::once_flag mRenderWarningFlag;
+    bool mIsHWDecoder;
 
     sp<ICrypto> mCrypto;
     sp<IDescrambler> mDescrambler;
