@@ -1741,6 +1741,9 @@ sp<IAfEffectHandle> IAfEffectHandle::create(
         const sp<media::IEffectClient>& effectClient,
         int32_t priority, bool notifyFramesProcessed)
 {
+    if (client == nullptr && effectClient == nullptr) {
+        return sp<InternalEffectHandle>::make(effect, notifyFramesProcessed);
+    }
     return sp<EffectHandle>::make(
             effect, client, effectClient, priority, notifyFramesProcessed);
 }
@@ -1748,12 +1751,14 @@ sp<IAfEffectHandle> IAfEffectHandle::create(
 EffectHandle::EffectHandle(const sp<IAfEffectBase>& effect,
                                          const sp<Client>& client,
                                          const sp<media::IEffectClient>& effectClient,
-                                         int32_t priority, bool notifyFramesProcessed)
-    : BnEffect(),
+                                         int32_t priority, bool notifyFramesProcessed,
+                                         bool isInternal,
+                                         audio_utils::MutexOrder mutexOrder)
+    : BnEffect(), mMutex(audio_utils::mutex{mutexOrder}),
     mEffect(effect), mEffectClient(media::EffectClientAsyncProxy::makeIfNeeded(effectClient)),
     mClient(client), mCblk(nullptr),
     mPriority(priority), mHasControl(false), mEnabled(false), mDisconnected(false),
-    mNotifyFramesProcessed(notifyFramesProcessed)
+    mNotifyFramesProcessed(notifyFramesProcessed), mIsInternal(isInternal)
 {
     ALOGV("constructor %p client %p", this, client.get());
     setMinSchedulerPolicy(SCHED_NORMAL, ANDROID_PRIORITY_AUDIO);
@@ -1920,7 +1925,7 @@ Status EffectHandle::disconnect()
 
 void EffectHandle::disconnect(bool unpinIfLast)
 {
-    audio_utils::lock_guard _l(mutex());
+    audio_utils::unique_lock _l(mutex());
     ALOGV("disconnect(%s) %p", unpinIfLast ? "true" : "false", this);
     if (mDisconnected) {
         if (unpinIfLast) {
@@ -1932,11 +1937,19 @@ void EffectHandle::disconnect(bool unpinIfLast)
     {
         sp<IAfEffectBase> effect = mEffect.promote();
         if (effect != 0) {
+            // Unlock e.g. for device effect: may need to acquire AudioFlinger lock
+            // Also Internal Effect Handle would require Proxy lock (and vice versa).
+            if (isInternal()) {
+                _l.unlock();
+            }
             if (effect->disconnectHandle(this, unpinIfLast) > 0) {
                 ALOGW("%s Effect handle %p disconnected after thread destruction",
                     __func__, this);
             }
             effect->updatePolicyState();
+            if (isInternal()) {
+                _l.lock();
+            }
         }
     }
 
@@ -3482,8 +3495,7 @@ NO_THREAD_SAFETY_ANALYSIS
             }
             mHalEffect->configure_l();
         }
-        *handle = new EffectHandle(mHalEffect, nullptr, nullptr, 0 /*priority*/,
-                                   mNotifyFramesProcessed);
+        *handle = new InternalEffectHandle(mHalEffect, mNotifyFramesProcessed);
         status = (*handle)->initCheck();
         if (status == OK) {
             status = mHalEffect->addHandle((*handle).get());
@@ -3530,15 +3542,16 @@ NO_THREAD_SAFETY_ANALYSIS
     return status;
 }
 
-void DeviceEffectProxy::onReleasePatch(audio_patch_handle_t patchHandle) {
-    sp<IAfEffectHandle> effect;
+sp<IAfEffectHandle> DeviceEffectProxy::onReleasePatch(audio_patch_handle_t patchHandle) {
+    sp<IAfEffectHandle> disconnectedHandle;
     {
         audio_utils::lock_guard _l(proxyMutex());
         if (mEffectHandles.find(patchHandle) != mEffectHandles.end()) {
-            effect = mEffectHandles.at(patchHandle);
+            disconnectedHandle = std::move(mEffectHandles.at(patchHandle));
             mEffectHandles.erase(patchHandle);
         }
     }
+    return disconnectedHandle;
 }
 
 
