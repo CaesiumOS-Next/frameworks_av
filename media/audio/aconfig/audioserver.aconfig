@@ -30,3 +30,11 @@ flag {
         "This feature helps reduce audio glitching caused by low priority blocking threads."
     bug: "209491695"
 }
+
+flag {
+    name: "portid_volume_management"
+    namespace: "media_audio"
+    description:
+        "Allows to manage volume by port id within audio flinger instead of legacy stream type."
+    bug: "317212590"
+}
