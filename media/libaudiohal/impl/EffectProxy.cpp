@@ -192,7 +192,7 @@ Descriptor::Common EffectProxy::buildDescriptorCommon(
         const AudioUuid& uuid, const std::vector<Descriptor>& subEffectDescs) {
     Descriptor::Common swCommon;
     const Flags& firstFlag = subEffectDescs[0].common.flags;
-    bool offloadExist = false;
+    bool offloadExist = false, noVolumeCtrl = false;
     for (const auto& desc : subEffectDescs) {
         if (desc.common.flags.offloadIndication) {
             offloadExist = true;
@@ -207,9 +207,16 @@ Descriptor::Common EffectProxy::buildDescriptorCommon(
             ALOGW("Inconsistent flags %s vs %s", desc.common.flags.toString().c_str(),
                   firstFlag.toString().c_str());
         }
+        // Set to NONE if any sub-effect not supporting any Volume command
+        if (desc.common.flags.volume == Flags::Volume::NONE) {
+            noVolumeCtrl = true;
+        }
     }
 
     swCommon.flags.offloadIndication = offloadExist;
+    if (noVolumeCtrl) {
+        swCommon.flags.volume = Flags::Volume::NONE;
+    }
     // replace implementation UUID with proxy UUID.
     swCommon.id.uuid = uuid;
     swCommon.id.proxy = std::nullopt;
