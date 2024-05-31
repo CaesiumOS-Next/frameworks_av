@@ -57,4 +57,11 @@ cc_library_shared {
     defaults: [
         "aconfig_lib_cc_static_link.defaults",
     ],
+    required: [
+        "ParameterFrameworkConfigurationPolicy.xml",
+        "PolicyClass.xml",
+        "PolicySubsystem-CommonTypes.xml",
+        "PolicySubsystem.xml",
+        "ProductStrategies.xml",
+    ],
 }
