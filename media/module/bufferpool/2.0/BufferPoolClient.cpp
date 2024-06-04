@@ -762,18 +762,29 @@ ResultStatus BufferPoolClient::Impl::fetchBufferHandle(
     } else {
         connection = mRemoteConnection;
     }
-    ResultStatus status;
-    Return<void> transResult = connection->fetch(
-            transactionId, bufferId,
-            [&status, &handle]
-            (ResultStatus outStatus, Buffer outBuffer) {
-                status = outStatus;
-                if (status == ResultStatus::OK) {
-                    *handle = native_handle_clone(
-                            outBuffer.buffer.getNativeHandle());
-                }
-            });
-    return transResult.isOk() ? status : ResultStatus::CRITICAL_ERROR;
+    if (!connection) {
+        ALOGE("connection null: fetchBufferHandle()");
+        return ResultStatus::CRITICAL_ERROR;
+    }
+    std::vector<FetchInfo> infos;
+    std::vector<FetchResult> results;
+    infos.emplace_back(FetchInfo{ToAidl(transactionId), ToAidl(bufferId)});
+    ndk::ScopedAStatus status = connection->fetch(infos, &results);
+    if (!status.isOk()) {
+        BufferPoolStatus svcSpecific = status.getServiceSpecificError();
+        return svcSpecific ? svcSpecific : ResultStatus::CRITICAL_ERROR;
+    }
+    if (results[0].getTag() == FetchResult::buffer) {
+        if (results[0].get<FetchResult::buffer>().buffer.has_value()) {
+            *handle = ::android::dupFromAidl(results[0].get<FetchResult::buffer>().buffer.value());
+        } else {
+            // TODO: Support HardwareBuffer
+            ALOGW("handle nullptr");
+            *handle = nullptr;
+        }
+        return ResultStatus::OK;
+    }
+    return results[0].get<FetchResult::failure>();
 }
 
 
