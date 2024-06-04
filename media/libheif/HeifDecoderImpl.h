@@ -82,6 +82,7 @@ private:
     size_t mNumSlices;
     uint32_t mSliceHeight;
     bool mAsyncDecodeDone;
+    size_t mRetryLeft;
 
     bool decodeAsync();
     bool getScanlineInner(uint8_t* dst);
