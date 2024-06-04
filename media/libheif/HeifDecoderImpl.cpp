@@ -40,6 +40,8 @@ HeifDecoder* createHeifDecoder() {
 
 namespace android {
 
+static const size_t kDefaultRetryNum = 100;
+
 void initFrameInfo(HeifFrameInfo *info, const VideoFrame *videoFrame) {
     info->mWidth = videoFrame->mDisplayWidth;
     info->mHeight = videoFrame->mDisplayHeight;
@@ -317,7 +319,8 @@ HeifDecoderImpl::HeifDecoderImpl() :
     mAvailableLines(0),
     mNumSlices(1),
     mSliceHeight(0),
-    mAsyncDecodeDone(false) {
+    mAsyncDecodeDone(false),
+    mRetryLeft(kDefaultRetryNum) {
 }
 
 HeifDecoderImpl::~HeifDecoderImpl() {
@@ -521,6 +524,8 @@ bool HeifDecoderImpl::decodeAsync() {
         weakRetriever = mRetriever;
     }
 
+    bool hasError = false;
+
     for (size_t i = 1; i < mNumSlices; i++) {
         sp<MediaMetadataRetriever> retriever = weakRetriever.promote();
         if (retriever == nullptr) {
@@ -540,9 +545,14 @@ bool HeifDecoderImpl::decodeAsync() {
             Mutex::Autolock autolock(mLock);
 
             if (frameMemory == nullptr || frameMemory->unsecurePointer() == nullptr) {
-                mAsyncDecodeDone = true;
-                mScanlineReady.signal();
-                break;
+                if (mRetryLeft > 0) {
+                    mRetryLeft--;
+                    i = -1;
+                    continue;
+                } else {
+                    hasError = true;
+                    break;
+                }
             }
             mFrameMemory = frameMemory;
             mAvailableLines = bottom;
@@ -552,12 +562,13 @@ bool HeifDecoderImpl::decodeAsync() {
     }
     // Hold on to mDataSource in case the client wants to redecode.
 
+    if (!hasError)
     {
         Mutex::Autolock _l(mRetrieverLock);
         mRetriever.clear();
     }
 
-    return false;
+    return hasError;
 }
 
 bool HeifDecoderImpl::decode(HeifFrameInfo* frameInfo) {
@@ -613,7 +624,8 @@ bool HeifDecoderImpl::decode(HeifFrameInfo* frameInfo) {
             mFrameMemory = frameMemory;
             mAvailableLines = mSliceHeight;
             mThread = new DecodeThread(this);
-            if (mThread->run("HeifDecode", ANDROID_PRIORITY_FOREGROUND) == OK) {
+            if (mThread->run("HeifDecode", ANDROID_PRIORITY_FOREGROUND) == OK &&
+                    mAvailableLines >= mImageInfo.mHeight) {
                 mFrameDecoded = true;
                 return true;
             }
