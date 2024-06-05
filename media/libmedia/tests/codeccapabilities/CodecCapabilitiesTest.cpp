@@ -35,3 +35,99 @@
 #include <media/stagefright/foundation/AString.h>
 
 using namespace android;
+
+class AudioCapsAACTest : public testing::Test {
+protected:
+    AudioCapsAACTest() {
+        std::string mediaType = MIMETYPE_AUDIO_AAC;
+
+        sp<AMessage> details = new AMessage;
+        details->setString("bitrate-range", "8000-960000");
+        details->setString("max-channel-count", "8");
+        details->setString("sample-rate-ranges",
+                "7350,8000,11025,12000,16000,22050,24000,32000,44100,48000");
+
+        std::vector<ProfileLevel> profileLevel{
+            ProfileLevel(2, 0),
+            ProfileLevel(5, 0),
+            ProfileLevel(29, 0),
+            ProfileLevel(23, 0),
+            ProfileLevel(39, 0),
+            ProfileLevel(20, 0),
+            ProfileLevel(42, 0),
+        };
+
+        audioCaps = AudioCapabilities::Create(mediaType, profileLevel, details);
+    }
+
+    std::shared_ptr<AudioCapabilities> audioCaps;
+};
+
+TEST_F(AudioCapsAACTest, AudioCaps_AAC_Bitrate) {
+    const Range<int>& bitrateRange = audioCaps->getBitrateRange();
+    EXPECT_EQ(bitrateRange.lower(), 8000) << "bitrate range1 does not match. lower: "
+            << bitrateRange.lower();
+    EXPECT_EQ(bitrateRange.upper(), 510000) << "bitrate range1 does not match. upper: "
+            << bitrateRange.upper();
+}
+
+TEST_F(AudioCapsAACTest, AudioCaps_AAC_InputChannelCount) {
+    int maxInputChannelCount = audioCaps->getMaxInputChannelCount();
+    EXPECT_EQ(maxInputChannelCount, 8);
+    int minInputChannelCount = audioCaps->getMinInputChannelCount();
+    EXPECT_EQ(minInputChannelCount, 1);
+}
+
+TEST_F(AudioCapsAACTest, AudioCaps_AAC_SupportedSampleRates) {
+    const std::vector<int>& sampleRates = audioCaps->getSupportedSampleRates();
+    EXPECT_EQ(sampleRates.at(0), 7350);
+    EXPECT_EQ(sampleRates.at(2), 11025);
+
+    EXPECT_EQ(audioCaps->isSampleRateSupported(6000), false) << "isSampleRateSupported failed";
+    EXPECT_EQ(audioCaps->isSampleRateSupported(8000), true) << "isSampleRateSupported failed";
+    EXPECT_EQ(audioCaps->isSampleRateSupported(12000), true) << "isSampleRateSupported failed";
+    EXPECT_EQ(audioCaps->isSampleRateSupported(44000), false) << "isSampleRateSupported failed";
+    EXPECT_EQ(audioCaps->isSampleRateSupported(48000), true) << "isSampleRateSupported failed";
+}
+
+class AudioCapsRAWTest : public testing::Test {
+protected:
+    AudioCapsRAWTest() {
+        std::string mediaType = MIMETYPE_AUDIO_RAW;
+
+        sp<AMessage> details = new AMessage;
+        details->setString("bitrate-range", "1-10000000");
+        details->setString("max-channel-count", "12");
+        details->setString("sample-rate-ranges", "8000-192000");
+
+        std::vector<ProfileLevel> profileLevel;
+
+        audioCaps = AudioCapabilities::Create(mediaType, profileLevel, details);
+    }
+
+    std::shared_ptr<AudioCapabilities> audioCaps;
+};
+
+TEST_F(AudioCapsRAWTest, AudioCaps_RAW_Bitrate) {
+    const Range<int>& bitrateRange = audioCaps->getBitrateRange();
+    EXPECT_EQ(bitrateRange.lower(), 1);
+    EXPECT_EQ(bitrateRange.upper(), 10000000);
+}
+
+TEST_F(AudioCapsRAWTest, AudioCaps_RAW_InputChannelCount) {
+    int maxInputChannelCount = audioCaps->getMaxInputChannelCount();
+    EXPECT_EQ(maxInputChannelCount, 12);
+    int minInputChannelCount = audioCaps->getMinInputChannelCount();
+    EXPECT_EQ(minInputChannelCount, 1);
+}
+
+TEST_F(AudioCapsRAWTest, AudioCaps_RAW_SupportedSampleRates) {
+    const std::vector<Range<int>>& sampleRateRanges = audioCaps->getSupportedSampleRateRanges();
+    EXPECT_EQ(sampleRateRanges.size(), 1);
+    EXPECT_EQ(sampleRateRanges.at(0).lower(), 8000);
+    EXPECT_EQ(sampleRateRanges.at(0).upper(), 192000);
+
+    EXPECT_EQ(audioCaps->isSampleRateSupported(7000), false);
+    EXPECT_EQ(audioCaps->isSampleRateSupported(10000), true);
+    EXPECT_EQ(audioCaps->isSampleRateSupported(193000), false);
+}
