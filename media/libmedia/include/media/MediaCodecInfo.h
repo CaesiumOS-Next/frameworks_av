@@ -46,7 +46,8 @@ struct MediaCodecListWriter;
 
 struct MediaCodecInfo : public RefBase {
 
-    // Map MediaCodecInfo::ProfileLevel to android::ProfileLevel.
+    // Moved to CodecCapabilitiesUtils.h
+    // Map MediaCodecInfo::ProfileLevel to android::ProfileLevel to maintain compatibility.
     typedef ::android::ProfileLevel ProfileLevel;
 
     struct CapabilitiesWriter;
