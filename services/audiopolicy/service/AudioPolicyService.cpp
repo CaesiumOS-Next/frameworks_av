@@ -189,6 +189,10 @@ static auto& getIAudioPolicyServiceStatistics() {
     return methodStatistics;
 }
 
+namespace {
+const bool kEnableCarPlayWa(property_get_bool("ro.config.assitant_always_active", false));
+} // anonymous namespace
+
 // ----------------------------------------------------------------------------
 
 static AudioPolicyInterface* createAudioPolicyManager(AudioPolicyClientInterface *clientInterface)
@@ -949,9 +953,13 @@ void AudioPolicyService::updateUidStates_l()
                         topStartNs = current->startTimeNs;
                     }
                 }
-                if (isAssistant) {
+                // CP is always on TOP due to virtual cluster display
+                // As a temporary workaround, CP sets as active only when it starts is Voice Session
+                // Enforce assistant on top on both TOP UID AND Active.
+                // Note that primary assistant is automatically added as active.
+                if (isAssistant && (!kEnableCarPlayWa || isActiveAssistant)) {
                     isAssistantOnTop = true;
-                    if (isActiveAssistant) {
+                    if (!kEnableCarPlayWa && isActiveAssistant) {
                         useActiveAssistantList = true;
                     } else if (!useActiveAssistantList) {
                         if (current->startTimeNs > latestAssistantStartNs) {
@@ -1041,6 +1049,8 @@ void AudioPolicyService::updateUidStates_l()
             current->attributionSource.uid == topSensitiveActive->attributionSource.uid;
         bool isTopOrLatestAssistant = latestActiveAssistant == nullptr ? false :
             current->attributionSource.uid == latestActiveAssistant->attributionSource.uid;
+        bool isVoiceCommunicationUid = currentUid == mPhoneStateOwnerUid;
+        bool isAssistant = mUidPolicy->isAssistantUid(currentUid);
 
         // TODO: b/339112720
         // Refine this logic when we have the correct phone state owner UID. The current issue is
@@ -1062,19 +1072,25 @@ void AudioPolicyService::updateUidStates_l()
         //     The assistant is not on TOP
         //         AND is on TOP or latest started
         //         AND there is no active privacy sensitive capture or call
+        //         AND not an assistant
+        //             OR PhoneStateOwner is not active
+        //             OR not IN COMMUNICATION mode (carplay does not have record client for comm)
         //             OR client has CAPTURE_AUDIO_OUTPUT privileged permission
         //     The assistant is on TOP
         //         AND is ongoing communication owner
         //         AND is on TOP or latest started
+        //             OR active sensitive client is VoiceComm UID
         const bool allowSensitiveCapture =
             !isSensitiveActive || isTopOrLatestSensitive || current->canCaptureOutput;
         bool allowCapture = false;
         if (!isAssistantOnTop) {
             allowCapture = (isTopOrLatestActive || isTopOrLatestSensitive) &&
-                           allowSensitiveCapture && canCaptureIfInCallOrCommunication;
+                           allowSensitiveCapture && canCaptureIfInCallOrCommunication &&
+                           (!isAssistant || !(isPhoneStateOwnerActive || isInCommunication));
         } else {
-            allowCapture = isInCommunication && isTopOrLatestSensitive &&
-                           canCaptureIfInCallOrCommunication;
+            allowCapture = (isInCommunication && isTopOrLatestSensitive &&
+                           canCaptureIfInCallOrCommunication) ||
+                           (isPhoneStateOwnerActive && isVoiceCommunicationUid);
         }
 
         if (!current->hasOp()) {
@@ -1090,6 +1106,7 @@ void AudioPolicyService::updateUidStates_l()
             //            AND the source is VOICE_RECOGNITION or HOTWORD
             //     OR there is no active privacy sensitive capture or call
             //          OR client has CAPTURE_AUDIO_OUTPUT privileged permission
+            //     AND mode is not in communication (carplay does not have record client)
             //            AND is latest TOP assistant AND
             //               uses VOICE_RECOGNITION OR uses HOTWORD
             //            OR there is no TOP assistant and uses HOTWORD
@@ -1098,20 +1115,34 @@ void AudioPolicyService::updateUidStates_l()
                     allowCapture = true;
                 }
             } else if (allowSensitiveCapture
-                    && canCaptureIfInCallOrCommunication) {
+                    && canCaptureIfInCallOrCommunication && !isInCommunication) {
                 if (isTopOrLatestAssistant
                     && (source == AUDIO_SOURCE_VOICE_RECOGNITION
                         || source == AUDIO_SOURCE_HOTWORD)) {
                         allowCapture = true;
-                } else if (!isAssistantOnTop && (source == AUDIO_SOURCE_HOTWORD)) {
+                } else if (!isAssistantOnTop && (source == AUDIO_SOURCE_HOTWORD
+                        || (kEnableCarPlayWa && source == AUDIO_SOURCE_VOICE_RECOGNITION))) {
                     allowCapture = true;
                 }
             }
+            ALOGV_IF(current->attributes.source != AUDIO_SOURCE_ECHO_REFERENCE,
+                     "%s: Capture is %s for UID %d and source %d (NOT USING ActiveAssistantList) "
+                     "(sInCommunication= %d, "
+                     "allowSensitiveCapture=%d isAssistantOnTop=%d isTopOrLatestActive=%d, "
+                     "isAssistant=%d isPhoneStateOwnerActive=%d"
+                     ", isTopOrLatestAssistant=%d, onlyHotwordActive=%d "
+                     "isA11yOnTop=%d mUidPolicy->isA11yUid(currentUid)=%d",
+                     __func__, (allowCapture ? "ALLOWED" : "SILENCED"), currentUid,
+                     current->attributes.source, isInCommunication,
+                     allowSensitiveCapture, isAssistantOnTop, isTopOrLatestActive, isAssistant,
+                     isPhoneStateOwnerActive, isTopOrLatestAssistant, onlyHotwordActive,
+                     isA11yOnTop, mUidPolicy->isA11yUid(currentUid));
         } else if (useActiveAssistantList && mUidPolicy->isActiveAssistantUid(currentUid)) {
             // For assistant on active list and on top allow capture if:
             //     An accessibility service is on TOP
             //         AND the source is VOICE_RECOGNITION or HOTWORD
             //     OR there is no active privacy sensitive capture or call
+            //         AND mode is not in communciation (carplaydoes not have record client)
             //             OR client has CAPTURE_AUDIO_OUTPUT privileged permission
             //         AND uses VOICE_RECOGNITION OR uses HOTWORD
             if (isA11yOnTop) {
@@ -1119,12 +1150,22 @@ void AudioPolicyService::updateUidStates_l()
                     allowCapture = true;
                 }
             } else if (allowSensitiveCapture
-                        && canCaptureIfInCallOrCommunication) {
+                        && canCaptureIfInCallOrCommunication && !isInCommunication) {
                 if ((source == AUDIO_SOURCE_VOICE_RECOGNITION) || (source == AUDIO_SOURCE_HOTWORD))
                 {
                     allowCapture = true;
                 }
             }
+            ALOGV_IF(current->attributes.source != AUDIO_SOURCE_ECHO_REFERENCE,
+                     "%s: Capture is %s for UID %d and source %d (USING ActiveAssistantList)"
+                     "(sInCommunication= %d, "
+                     "allowSensitiveCapture=%d isAssistantOnTop=%d isTopOrLatestActive=%d, "
+                     "isAssistant=%d isPhoneStateOwnerActive=%d"
+                     ", isTopOrLatestAssistant=%d, onlyHotwordActive=%d",
+                     __func__, (allowCapture ? "ALLOWED" : "SILENCED"), currentUid,
+                     current->attributes.source, isInCommunication,
+                     allowSensitiveCapture, isAssistantOnTop, isTopOrLatestActive, isAssistant,
+                     isPhoneStateOwnerActive, isTopOrLatestAssistant, onlyHotwordActive);
         } else if (mUidPolicy->isA11yUid(currentUid)) {
             // For accessibility service allow capture if:
             //     The assistant is not on TOP
@@ -1142,21 +1183,55 @@ void AudioPolicyService::updateUidStates_l()
                     allowCapture = true;
                 }
             }
+            ALOGV_IF(current->attributes.source != AUDIO_SOURCE_ECHO_REFERENCE,
+                     "%s: Capture is %s for UID %d and source %d (A11yUID)(sInCommunication= %d, "
+                     "allowSensitiveCapture=%d isAssistantOnTop=%d isPhoneStateOwnerActive=%d"
+                      ", isTopOrLatestAssistant=%d, onlyHotwordActive=%d",
+                     __func__, (allowCapture ? "ALLOWED" : "SILENCED"), currentUid,
+                     current->attributes.source, isInCommunication,
+                     allowSensitiveCapture, isAssistantOnTop, isPhoneStateOwnerActive,
+                     isTopOrLatestAssistant, onlyHotwordActive);
         } else if (source == AUDIO_SOURCE_HOTWORD) {
             // For HOTWORD source allow capture when not on TOP if:
             //     All active clients are using HOTWORD source
+            //     AND mode is not in communciation (carplaydoes not have record client)
             //     AND no call is active
             //         OR client has CAPTURE_AUDIO_OUTPUT privileged permission
             if (onlyHotwordActive
-                    && canCaptureIfInCallOrCommunication) {
+                    && canCaptureIfInCallOrCommunication && !isInCommunication) {
                 allowCapture = true;
             }
+            ALOGV_IF(current->attributes.source != AUDIO_SOURCE_ECHO_REFERENCE,
+                     "%s: Capture is %s for UID %d and source %d (HOTWORD ONLY)"
+                     "(sInCommunication= %d, "
+                     "allowSensitiveCapture=%d isAssistantOnTop=%d isTopOrLatestActive=%d, "
+                     "isTopOrLatestSensitive=%d, "
+                     "isAssistant=%d isPhoneStateOwnerActive=%d"
+                     ", isTopOrLatestAssistant=%d, onlyHotwordActive=%d",
+                     __func__, (allowCapture ? "ALLOWED" : "SILENCED"), currentUid,
+                     current->attributes.source, isInCommunication,
+                     allowSensitiveCapture, isAssistantOnTop, isTopOrLatestActive,
+                     isTopOrLatestSensitive, isAssistant,
+                     isPhoneStateOwnerActive, isTopOrLatestAssistant, onlyHotwordActive);
         } else if (mUidPolicy->isCurrentImeUid(currentUid)) {
             // For current InputMethodService allow capture if:
             //     A RTT call is active AND the source is VOICE_RECOGNITION
-            if (rttCallActive && source == AUDIO_SOURCE_VOICE_RECOGNITION) {
+            if ((rttCallActive || (kEnableCarPlayWa && !isAssistantOnTop))
+                    && source == AUDIO_SOURCE_VOICE_RECOGNITION) {
                 allowCapture = true;
             }
+        } else {
+            ALOGV_IF(current->attributes.source != AUDIO_SOURCE_ECHO_REFERENCE,
+                     "%s: capture is %s for UID %d and source %d (sInCommunication= %d, "
+                     "allowSensitiveCapture=%d isAssistantOnTop=%d isTopOrLatestActive=%d, "
+                     "isTopOrLatestSensitive=%d, "
+                     "isAssistant=%d isPhoneStateOwnerActive=%d"
+                     ", isTopOrLatestAssistant=%d, onlyHotwordActive=%d",
+                     __func__, (allowCapture ? "ALLOWED" : "SILENCED"), currentUid,
+                     current->attributes.source, isInCommunication,
+                     allowSensitiveCapture, isAssistantOnTop, isTopOrLatestActive,
+                     isTopOrLatestSensitive, isAssistant,
+                     isPhoneStateOwnerActive, isTopOrLatestAssistant, onlyHotwordActive);
         }
         setAppState_l(current,
                       allowCapture ? apmStatFromAmState(mUidPolicy->getUidState(currentUid)) :

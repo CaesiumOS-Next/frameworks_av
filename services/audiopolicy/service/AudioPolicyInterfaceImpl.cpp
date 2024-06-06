@@ -2252,6 +2252,7 @@ Status AudioPolicyService::setActiveAssistantServicesUids(
 
     audio_utils::lock_guard _l(mMutex);
     mUidPolicy->setActiveAssistantUids(activeUids);
+    updateUidStates_l();
     return Status::ok();
 }
 
