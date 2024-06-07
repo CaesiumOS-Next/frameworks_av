@@ -523,11 +523,10 @@ media_status_t MPEG4Extractor::getTrackMetaData(
     }
 
     [this, &track] {
-        int64_t duration;
+        int64_t duration = track->mMdhdDuration;
         int32_t samplerate;
         // Only for audio track.
-        if (track->elst_needs_processing && mHeaderTimescale != 0 &&
-            AMediaFormat_getInt64(track->meta, AMEDIAFORMAT_KEY_DURATION, &duration) &&
+        if (track->elst_needs_processing && mHeaderTimescale != 0 && duration != 0 &&
             AMediaFormat_getInt32(track->meta, AMEDIAFORMAT_KEY_SAMPLE_RATE, &samplerate)) {
             // Elst has to be processed only the first time this function is called.
             track->elst_needs_processing = false;
@@ -1646,6 +1645,13 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
                     return ERROR_MALFORMED;
                 }
                 AMediaFormat_setInt64(mLastTrack->meta, AMEDIAFORMAT_KEY_DURATION, durationUs);
+                // This value in AMEDIAFORMAT_KEY_DURATION should be updated from the track header
+                // instead, which contains the correct playback duration. The duration in this
+                // header is the total duration of the samples available, which could be more than
+                // the playback duration. Store this track's mdhd duration to calculate the padding.
+                mLastTrack->mMdhdDuration = (int64_t)durationUs;
+            } else {
+                mLastTrack->mMdhdDuration = 0;
             }
 
             uint8_t lang[2];
