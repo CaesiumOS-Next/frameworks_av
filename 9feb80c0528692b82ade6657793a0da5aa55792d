@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ff6f5c2_5e56086f",
+        "filename": "media/libmedia/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-12T21:58:56Z",
+      "side": 1,
+      "message": "please consider adding `android.hidl.token@1.0-utils` in shared_libs instead of directly adding the include dir.",
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efed73f6_0558aa09",
+        "filename": "media/libmedia/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-12T21:58:56Z",
+      "side": 1,
+      "message": "do we need it here? if so please consider replacing this with `android.hidl.token@1.0-utils` in shared_libs; otherwise please remove.",
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bfc9d0_4051b341",
+        "filename": "media/libmedia/tests/codeccapabilities/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-12T21:58:56Z",
+      "side": 1,
+      "message": "do we need these?",
+      "range": {
+        "startLine": 8,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 6
+      },
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a5ebf0_6d32b5d3",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-12T21:58:56Z",
+      "side": 1,
+      "message": "nit: 2024?",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "34619b28_22e641ad",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+              "range": {
+                "startLine": 2,
+                "startChar": 0,
+                "endLine": 3,
+                "endChar": 0
+              },
+              "replacement": " * Copyright (C) 2024 The Android Open Source Project\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8134f8ad_4a7b4e2a",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-12T21:58:56Z",
+      "side": 1,
+      "message": "probably not intended?",
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
