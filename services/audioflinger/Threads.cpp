@@ -4578,7 +4578,11 @@ NO_THREAD_SAFETY_ANALYSIS  // manual locking of AudioFlinger
 
         // FIXME Note that the above .clear() is no longer necessary since effectChains
         // is now local to this block, but will keep it for now (at least until merge done).
+
+        mThreadloopExecutor.process();
     }
+    mThreadloopExecutor.process(); // process any remaining deferred actions.
+    // deferred actions after this point are ignored.
 
     threadLoop_exit();
 
@@ -8728,11 +8732,14 @@ unlock:
             mIoJitterMs.add(jitterMs);
             mProcessTimeMs.add(processMs);
         }
+       mThreadloopExecutor.process();
         // update timing info.
         mLastIoBeginNs = lastIoBeginNs;
         mLastIoEndNs = lastIoEndNs;
         lastLoopCountRead = loopCount;
     }
+    mThreadloopExecutor.process(); // process any remaining deferred actions.
+    // deferred actions after this point are ignored.
 
     standbyIfNotAlreadyInStandby();
 
@@ -10518,7 +10525,10 @@ bool MmapThread::threadLoop()
         unlockEffectChains(effectChains);
         // Effect chains will be actually deleted here if they were removed from
         // mEffectChains list during mixing or effects processing
+        mThreadloopExecutor.process();
     }
+    mThreadloopExecutor.process(); // process any remaining deferred actions.
+    // deferred actions after this point are ignored.
 
     threadLoop_exit();
 
