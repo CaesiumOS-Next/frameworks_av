@@ -51,6 +51,24 @@
       "message": "looks like this needs to go in internal first anyway...",
       "revId": "0c10122747744deba302fb9db2c01ba6bd20c99e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "701929b9_e9dd255c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-06-12T14:40:48Z",
+      "side": 1,
+      "message": "this code has been significantly rewritten internally, including deleting this class. i\u0027ll probably come back to this last, after all the others are done, and either do it internally-only or hope that the internal changes are in AOSP by then!",
+      "parentUuid": "37337f68_0bbfa96e",
+      "revId": "0c10122747744deba302fb9db2c01ba6bd20c99e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
