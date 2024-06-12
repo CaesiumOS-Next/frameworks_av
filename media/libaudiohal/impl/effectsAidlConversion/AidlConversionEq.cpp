@@ -262,9 +262,12 @@ status_t AidlConversionEq::getParameter(EffectParamWriter& param) {
         }
         case EQ_PARAM_GET_NUM_OF_PRESETS: {
             Parameter aidlParam = VALUE_OR_RETURN_STATUS(getAidlParameter(Equalizer::presets));
-            const auto& presets = VALUE_OR_RETURN_STATUS(GET_PARAMETER_SPECIFIC_FIELD(
+            auto presets = VALUE_OR_RETURN_STATUS(GET_PARAMETER_SPECIFIC_FIELD(
                     aidlParam, Equalizer, equalizer, Equalizer::presets,
                     std::vector<Equalizer::Preset>));
+            // it was assumed the presets index start with 0 and end with NUM_OF_PRESETS - 1, so
+            // filter out presets with negative index (one example is preset {-1, "custom"})
+            std::erase_if(presets, [](const auto& preset) { return preset.index < 0; });
             uint16_t num = presets.size();
             return param.writeToValue(&num);
         }
