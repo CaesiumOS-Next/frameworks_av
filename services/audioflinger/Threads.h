@@ -569,6 +569,10 @@ public:
     void stopMelComputation_l() override
             REQUIRES(audio_utils::AudioFlinger_Mutex);
 
+    audio_utils::DeferredExecutor& getThreadloopExecutor() override {
+        return mThreadloopExecutor;
+    }
+
 protected:
 
                 // entry describing an effect being suspended in mSuspendedSessions keyed vector
@@ -874,6 +878,7 @@ protected:
                 };
 
                 SimpleLog mLocalLog;  // locked internally
+    audio_utils::DeferredExecutor mThreadloopExecutor; // locked internally
 
     private:
     void dumpBase_l(int fd, const Vector<String16>& args) REQUIRES(mutex());
