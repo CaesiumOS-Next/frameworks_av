@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bea6cb4_9d34008d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1725318
+      },
+      "writtenOn": "2024-06-12T09:00:24Z",
+      "side": 1,
+      "message": "Hi Mikhail please kindly help review this change, buganizer raised in https://partnerissuetracker.corp.google.com/u/0/issues/346698514",
+      "revId": "3bfe0217564e918813e07bfb63d1a7ffc5f21907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
