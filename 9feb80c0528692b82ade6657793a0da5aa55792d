@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "991eb9a5_6e155501",
+        "filename": "media/libmedia/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T18:10:23Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "0ff6f5c2_5e56086f",
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efed73f6_0558aa09",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24dfce0d_c90b344a",
+        "filename": "media/libmedia/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T18:10:23Z",
+      "side": 1,
+      "message": "Removed unused header IOMX.h from MediaCodecInfo.cpp. Removed the field here.",
+      "parentUuid": "efed73f6_0558aa09",
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1bfc9d0_4051b341",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-06-12T21:58:56Z",
       "side": 1,
       "message": "do we need these?",
+      "range": {
+        "startLine": 8,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 6
+      },
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22120f97_87113c5d",
+        "filename": "media/libmedia/tests/codeccapabilities/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T18:10:23Z",
+      "side": 1,
+      "message": "Removed. It is not in MTS.",
+      "parentUuid": "c1bfc9d0_4051b341",
       "range": {
         "startLine": 8,
         "startChar": 2,
@@ -99,6 +159,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa96c81d_79ba99fa",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T18:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8a5ebf0_6d32b5d3",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8134f8ad_4a7b4e2a",
@@ -112,6 +196,24 @@
       "writtenOn": "2024-06-12T21:58:56Z",
       "side": 1,
       "message": "probably not intended?",
+      "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa5d6a4_bacf3fd1",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T18:10:23Z",
+      "side": 1,
+      "message": "This constexpr is never used and conflicts with the one in MediaErrors.h. Removing it here.",
+      "parentUuid": "8134f8ad_4a7b4e2a",
       "revId": "9feb80c0528692b82ade6657793a0da5aa55792d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
