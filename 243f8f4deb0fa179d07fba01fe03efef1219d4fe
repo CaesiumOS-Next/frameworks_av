@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba109288_aae94286",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T20:16:31Z",
+      "side": 0,
+      "message": "please keep it as is, and clean up MediaCodecConstants in a separate CL",
+      "fixSuggestions": [
+        {
+          "fixId": "31eefa6a_ae3b5434",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+              "range": {
+                "startLine": 885,
+                "startChar": 0,
+                "endLine": 887,
+                "endChar": 0
+              },
+              "replacement": "inline constexpr int32_t INFO_OUTPUT_FORMAT_CHANGED \u003d -2;\ninline constexpr int32_t INFO_TRY_AGAIN_LATER       \u003d -1;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "243f8f4deb0fa179d07fba01fe03efef1219d4fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
