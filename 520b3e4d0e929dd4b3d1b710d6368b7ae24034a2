@@ -45,6 +45,30 @@
       },
       "revId": "520b3e4d0e929dd4b3d1b710d6368b7ae24034a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bb6d997_f9b3c78a",
+        "filename": "media/libaudiohal/impl/effectsAidlConversion/AidlConversionEq.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-06-13T14:58:53Z",
+      "side": 1,
+      "message": "I think we do not need a validation here because `-1: custom` could be possible current preset (means user adjusted the equalizer bar value?)",
+      "parentUuid": "d36eba2b_58055b9a",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 74
+      },
+      "revId": "520b3e4d0e929dd4b3d1b710d6368b7ae24034a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
