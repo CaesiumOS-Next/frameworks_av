@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11fb5b85_a5d37cb6",
+        "filename": "media/libaudiohal/impl/effectsAidlConversion/AidlConversionEq.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-06-13T17:27:57Z",
+      "side": 1,
+      "message": "IMHO we can leave the preset index setting validation to the audio effect HAL and expect an error with illegal index?\nThe reason we had to add a filter for -1 index with `EQ_PARAM_GET_NUM_OF_PRESETS` was because we do not have a dedicate parameter for the total number of presets available to client. If there is a parameter defined in HAL AIDL, we should leave the validation in HAL implementation (I think it can be confusing to have validation cross layers), is this make sense?",
+      "parentUuid": "b1fbdc3f_26b7572d",
+      "range": {
+        "startLine": 58,
+        "startChar": 22,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "revId": "520b3e4d0e929dd4b3d1b710d6368b7ae24034a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d36eba2b_58055b9a",
