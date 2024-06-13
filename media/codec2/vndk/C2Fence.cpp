@@ -28,8 +28,6 @@
 
 #include <utility>
 
-#define MAX_FENCE_FDS 1
-
 class C2Fence::Impl {
 public:
     enum type_t : uint32_t {
@@ -65,7 +63,7 @@ public:
     Impl() = default;
 
     static type_t GetTypeFromNativeHandle(const native_handle_t* nh) {
-        if (nh && nh->numFds >= 0 && nh->numFds <= MAX_FENCE_FDS && nh->numInts > 0) {
+        if (nh && nh->numFds >= 0 && nh->numInts > 0) {
             return static_cast<type_t>(nh->data[nh->numFds]);
         }
         return INVALID_FENCE;
@@ -258,9 +256,6 @@ public:
     SyncFenceImpl(int fenceFd) :
         mFence(sp<Fence>::make(fenceFd)) {
         mListFences.clear();
-        if (mFence) {
-            mListFences.push_back(mFence);
-        }
     }
 
     SyncFenceImpl(const std::vector<int>& fenceFds, int mergedFd) {
@@ -300,7 +295,7 @@ public:
             fds.push_back(dup(nh->data[i]));
         }
         std::shared_ptr<SyncFenceImpl> p = (nh->numFds == 1)?
-                (std::make_shared<SyncFenceImpl>(fds.back())):
+                (std::make_shared<SyncFenceImpl>(nh->data[0])):
                 (std::make_shared<SyncFenceImpl>(fds, (dup(nh->data[nh->numFds-1]))));
         if (!p) {
             ALOGE("Failed to allocate sync fence impl");
