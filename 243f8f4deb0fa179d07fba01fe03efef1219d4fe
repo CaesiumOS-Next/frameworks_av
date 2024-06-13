@@ -34,6 +34,24 @@
       ],
       "revId": "243f8f4deb0fa179d07fba01fe03efef1219d4fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "244a1e91_2dda4470",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:35:56Z",
+      "side": 0,
+      "message": "Done. Moved to aosp/3132820",
+      "parentUuid": "ba109288_aae94286",
+      "revId": "243f8f4deb0fa179d07fba01fe03efef1219d4fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

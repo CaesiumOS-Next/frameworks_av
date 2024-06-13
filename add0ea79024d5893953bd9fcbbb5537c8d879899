@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc1e48e_32c82d89",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:35:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7844cf5_c99ade6a",
+      "revId": "add0ea79024d5893953bd9fcbbb5537c8d879899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "907a28f5_e429547a",
@@ -49,6 +67,30 @@
       "writtenOn": "2024-06-13T20:16:31Z",
       "side": 1,
       "message": "android",
+      "range": {
+        "startLine": 49,
+        "startChar": 59,
+        "endLine": 49,
+        "endChar": 65
+      },
+      "revId": "add0ea79024d5893953bd9fcbbb5537c8d879899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff6e0bca_4b49d2a0",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:35:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "907a28f5_e429547a",
       "range": {
         "startLine": 49,
         "startChar": 59,
@@ -96,6 +138,30 @@
           ]
         }
       ],
+      "revId": "add0ea79024d5893953bd9fcbbb5537c8d879899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc9a590_24c9fe0c",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:35:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d3bb1b1_f9535d17",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 24
+      },
       "revId": "add0ea79024d5893953bd9fcbbb5537c8d879899",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
