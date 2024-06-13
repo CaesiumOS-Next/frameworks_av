@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0522e27f_0cf3b14d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T22:42:26Z",
+      "side": 1,
+      "message": "INFO_OUTPUT_BUFFERS_CHANGED",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "d91402ef6400d2b1dc71e2a752dfa5bae386bc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
