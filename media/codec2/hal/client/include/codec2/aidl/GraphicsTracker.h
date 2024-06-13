@@ -115,6 +115,13 @@ public:
     c2_status_t deallocate(uint64_t bufId, const sp<Fence> &fence);
 
     /**
+     * Get the current usage of the consumer.
+     *
+     * @param[out] usage  current usage of the consumer
+     */
+    void getConsumerUsage(uint64_t* usage);
+
+    /**
      * Render a GraphicBlock which is associated to a pending allocated buffer
      *
      * @param[in] block         GraphicBlock

@@ -41,6 +41,8 @@ public:
     ::ndk::ScopedAStatus getWaitableFd(
             ::ndk::ScopedFileDescriptor* _aidl_return) override;
 
+    ::ndk::ScopedAStatus getConsumerUsage(int64_t* _aidl_return) override;
+
     /**
      * Configuring Surface/BufferQueue for the interface.
      *
@@ -117,6 +119,13 @@ public:
      *                            cancellation of displaying
      */
     bool deallocate(const uint64_t id, const ::android::sp<::android::Fence> &fence);
+
+    /**
+     * Get the usage of the consumer.
+     *
+     * @param   usage             out param for the usage of the consumer.
+     */
+    void getConsumerUsage_(uint64_t* usage);
 
     /**
      * Display a graphic buffer to BufferQueue.

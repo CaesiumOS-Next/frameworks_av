@@ -838,6 +838,11 @@ c2_status_t GraphicsTracker::deallocate(uint64_t bid, const sp<Fence> &fence) {
     return C2_OK;
 }
 
+void GraphicsTracker::getConsumerUsage(uint64_t* usage) {
+    if (mBufferCache->mIgbp)
+        mBufferCache->mIgbp->getConsumerUsage(usage);
+}
+
 c2_status_t GraphicsTracker::requestRender(uint64_t bid, std::shared_ptr<BufferCache> *cache,
                                           std::shared_ptr<BufferItem> *pBuffer,
                                           bool *fromCache,

@@ -65,6 +65,7 @@ public:
         std::shared_ptr<C2GraphicBlock> *block /* nonnull */,
         C2Fence *fence /* nonnull */) override;
 
+    virtual void getConsumerUsage(uint64_t *consumerUsage);
     // Do we need this?
     void invalidate();
 

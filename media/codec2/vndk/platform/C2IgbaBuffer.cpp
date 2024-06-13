@@ -297,3 +297,9 @@ c2_status_t C2IgbaBlockPool::_fetchGraphicBlock(
 void C2IgbaBlockPool::invalidate() {
     mValid = false;
 }
+
+void C2IgbaBlockPool::getConsumerUsage(uint64_t *consumerUsage) {
+    int64_t usage = 0;
+    mIgba->getConsumerUsage(&usage);
+    *consumerUsage = usage;
+}

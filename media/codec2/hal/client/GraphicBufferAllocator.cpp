@@ -76,6 +76,13 @@ public:
     return ::ndk::ScopedAStatus::fromServiceSpecificError(ret);
 }
 
+::ndk::ScopedAStatus GraphicBufferAllocator::getConsumerUsage(int64_t* _aidl_return) {
+    uint64_t usage;
+    getConsumerUsage_(&usage);
+    *_aidl_return = usage;
+    return ::ndk::ScopedAStatus::ok();
+}
+
 bool GraphicBufferAllocator::configure(
         const ::android::sp<IGraphicBufferProducer>& igbp,
         uint32_t generation,
@@ -131,6 +138,10 @@ bool GraphicBufferAllocator::deallocate(const uint64_t id,
         return false;
     }
     return true;
+}
+
+void GraphicBufferAllocator::getConsumerUsage_(uint64_t* usage) {
+    mGraphicsTracker->getConsumerUsage(usage);
 }
 
 c2_status_t GraphicBufferAllocator::displayBuffer(
