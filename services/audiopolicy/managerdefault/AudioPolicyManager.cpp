@@ -383,6 +383,8 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
                 return INVALID_OPERATION;
             }
 
+            ALOGV("%s() connecting device %s", __func__, device->toString().c_str());
+
             if (mAvailableInputDevices.add(device) < 0) {
                 return NO_MEMORY;
             }
@@ -6638,8 +6640,8 @@ status_t AudioPolicyManager::checkInputsForDevice(const sp<DeviceDescriptor>& de
 
                 if (profile->supportsDevice(device)) {
                     profiles.add(profile);
-                    ALOGV("checkInputsForDevice(): adding profile %zu from module %s",
-                          profile_index, hwModule->getName());
+                    ALOGV("checkInputsForDevice(): adding profile %s from module %s",
+                          profile->getTagName().c_str(), hwModule->getName());
                 }
             }
         }
@@ -6679,7 +6681,9 @@ status_t AudioPolicyManager::checkInputsForDevice(const sp<DeviceDescriptor>& de
 
             desc = new AudioInputDescriptor(profile, mpClientInterface);
             audio_io_handle_t input = AUDIO_IO_HANDLE_NONE;
-            status = desc->open(nullptr, device, AUDIO_SOURCE_MIC, AUDIO_INPUT_FLAG_NONE, &input);
+            ALOGV("%s opening input for profile %s", __func__, profile->getTagName().c_str());
+            status = desc->open(nullptr, device, AUDIO_SOURCE_MIC,
+                                (audio_input_flags_t) profile->getFlags(), &input);
 
             if (status == NO_ERROR) {
                 const String8& address = String8(device->address().c_str());
