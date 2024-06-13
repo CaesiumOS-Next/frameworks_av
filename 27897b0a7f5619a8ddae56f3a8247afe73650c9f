@@ -16,6 +16,47 @@
       "message": "Hi AOSP team, can you help me to review? thank you!",
       "revId": "27897b0a7f5619a8ddae56f3a8247afe73650c9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63cdb3bd_86008ea7",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7867,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-06-13T14:15:34Z",
+      "side": 1,
+      "message": "please update the comment too",
+      "range": {
+        "startLine": 7867,
+        "startChar": 22,
+        "endLine": 7867,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a955ac1f_cc9ff7d1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7868,
+                "startChar": 0,
+                "endLine": 7869,
+                "endChar": 0
+              },
+              "replacement": "                // intended to be played.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "27897b0a7f5619a8ddae56f3a8247afe73650c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
