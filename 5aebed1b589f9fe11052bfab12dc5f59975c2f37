@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "762ad92f_718e8664",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21e05950_ad16eca4",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "5aebed1b589f9fe11052bfab12dc5f59975c2f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eab77b7_5768676d",
@@ -55,6 +79,24 @@
       "writtenOn": "2024-06-13T00:41:21Z",
       "side": 1,
       "message": "nit: `// namespace android`",
+      "revId": "5aebed1b589f9fe11052bfab12dc5f59975c2f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1707fe07_79e95cbc",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eab77b7_5768676d",
       "revId": "5aebed1b589f9fe11052bfab12dc5f59975c2f37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

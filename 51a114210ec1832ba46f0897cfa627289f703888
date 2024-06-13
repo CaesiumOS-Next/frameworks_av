@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4067b578_fc17151f",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:36:23Z",
+      "side": 1,
+      "message": "Done.\nThe AI suggested fix surprises me. It can work without any change. Even the include line is inserted to the appropriate line to obey the ascending order of initials.",
+      "parentUuid": "e87dcbac_b3a74349",
+      "range": {
+        "startLine": 37,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 5
+      },
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96e72ea8_9b695ce5",
@@ -71,6 +95,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a64ac40c_b0fb7024",
+        "filename": "media/libmedia/include/media/AudioCapabilities.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:36:23Z",
+      "side": 1,
+      "message": "After reconsideration, it seems returning a const ref make more sense. As we don\u0027t want the caller to modify the returned result.\nWorking on updating all the applicable APIs.",
+      "parentUuid": "96e72ea8_9b695ce5",
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "802f7886_e2da93f7",
         "filename": "media/libmedia/include/media/AudioCapabilities.h",
         "patchSetId": 19
@@ -82,6 +124,30 @@
       "writtenOn": "2024-06-13T00:41:21Z",
       "side": 1,
       "message": "nit: semicolon not needed",
+      "range": {
+        "startLine": 119,
+        "startChar": 26,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9b55234_2c5c861e",
+        "filename": "media/libmedia/include/media/AudioCapabilities.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "802f7886_e2da93f7",
       "range": {
         "startLine": 119,
         "startChar": 26,
@@ -122,6 +188,24 @@
       "writtenOn": "2024-06-13T00:41:21Z",
       "side": 1,
       "message": "Is the change in this file intended?",
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0fc0e3_17990d17",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-13T22:36:23Z",
+      "side": 1,
+      "message": "Yes, these are constants ported from MediaCodecInfo.java and MediaFormat.java.",
+      "parentUuid": "a26c2553_2e4b99a3",
       "revId": "51a114210ec1832ba46f0897cfa627289f703888",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
