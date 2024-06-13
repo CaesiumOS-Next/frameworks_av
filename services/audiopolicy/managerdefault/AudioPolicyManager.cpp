@@ -383,6 +383,8 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
                 return INVALID_OPERATION;
             }
 
+            ALOGV("%s() connecting device %s", __func__, device->toString().c_str());
+
             if (mAvailableInputDevices.add(device) < 0) {
                 return NO_MEMORY;
             }
@@ -6638,8 +6640,8 @@ status_t AudioPolicyManager::checkInputsForDevice(const sp<DeviceDescriptor>& de
 
                 if (profile->supportsDevice(device)) {
                     profiles.add(profile);
-                    ALOGV("checkInputsForDevice(): adding profile %zu from module %s",
-                          profile_index, hwModule->getName());
+                    ALOGV("%s : adding profile %s from module %s", __func__,
+                          profile->getTagName().c_str(), hwModule->getName());
                 }
             }
         }
@@ -6672,14 +6674,16 @@ status_t AudioPolicyManager::checkInputsForDevice(const sp<DeviceDescriptor>& de
             }
 
             if (!profile->canOpenNewIo()) {
-                ALOGW("Max Input number %u already opened for this profile %s",
-                      profile->maxOpenCount, profile->getTagName().c_str());
+                ALOGW("%s Max Input number %u already opened for this profile %s",
+                      __func__, profile->maxOpenCount, profile->getTagName().c_str());
                 continue;
             }
 
             desc = new AudioInputDescriptor(profile, mpClientInterface);
             audio_io_handle_t input = AUDIO_IO_HANDLE_NONE;
-            status = desc->open(nullptr, device, AUDIO_SOURCE_MIC, AUDIO_INPUT_FLAG_NONE, &input);
+            ALOGV("%s opening input for profile %s", __func__, profile->getTagName().c_str());
+            status = desc->open(nullptr, device, AUDIO_SOURCE_MIC,
+                                (audio_input_flags_t) profile->getFlags(), &input);
 
             if (status == NO_ERROR) {
                 const String8& address = String8(device->address().c_str());
@@ -6690,7 +6694,8 @@ status_t AudioPolicyManager::checkInputsForDevice(const sp<DeviceDescriptor>& de
                 }
                 updateAudioProfiles(device, input, profile);
                 if (!profile->hasValidAudioProfile()) {
-                    ALOGW("checkInputsForDevice() direct input missing param");
+                    ALOGW("%s direct input missing param for profile %s", __func__,
+                            profile->getTagName().c_str());
                     desc->close();
                     input = AUDIO_IO_HANDLE_NONE;
                 }
@@ -6701,18 +6706,20 @@ status_t AudioPolicyManager::checkInputsForDevice(const sp<DeviceDescriptor>& de
             } // endif input != 0
 
             if (input == AUDIO_IO_HANDLE_NONE) {
-                ALOGW("%s could not open input for device %s", __func__,
-                       device->toString().c_str());
+                ALOGW("%s could not open input for device %s on profile %s", __func__,
+                       device->toString().c_str(), profile->getTagName().c_str());
                 profiles.removeAt(profile_index);
                 profile_index--;
             } else {
                 if (audio_device_is_digital(device->type())) {
                     device->importAudioPortAndPickAudioProfile(profile);
                 }
-                ALOGV("checkInputsForDevice(): adding input %d", input);
+                ALOGV("%s: adding input %d for profile %s", __func__,
+                        input, profile->getTagName().c_str());
 
                 if (checkCloseInput(desc)) {
-                    ALOGV("%s closing input %d", __func__, input);
+                    ALOGV("%s closing input %d for profile %s", __func__, input,
+                            profile->getTagName().c_str());
                     closeInput(input);
                 }
             }
