@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e05950_ad16eca4",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T00:41:21Z",
+      "side": 1,
+      "message": "nit: 2024?",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "390b054c_d7e6e07d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 2,
+                "startChar": 0,
+                "endLine": 3,
+                "endChar": 0
+              },
+              "replacement": " * Copyright 2024, The Android Open Source Project\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5aebed1b589f9fe11052bfab12dc5f59975c2f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eab77b7_5768676d",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T00:41:21Z",
+      "side": 1,
+      "message": "nit: `// namespace android`",
+      "revId": "5aebed1b589f9fe11052bfab12dc5f59975c2f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

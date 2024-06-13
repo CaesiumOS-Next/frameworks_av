@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e87dcbac_b3a74349",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T00:41:21Z",
+      "side": 1,
+      "message": "maybe use std::regex?",
+      "range": {
+        "startLine": 37,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2c1f0463_4827869e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "#include \u003cregex\u003e\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "std::optional\u003cRange\u003cint\u003e\u003e ParseIntRange(const std::string\u0026 str) {\n  if (str.empty()) {\n    ALOGW(\"could not parse integer range: %s\", str.c_str());\n    return std::nullopt;\n  }\n  int lower, upper;\n  std::regex regex(\"([0-9]+)-([0-9]+)\");\n  std::smatch match;\n  if (std::regex_match(str, match, regex)) {\n    lower \u003d std::stoi(match[1]);\n    upper \u003d std::stoi(match[2]);\n  } else {\n    lower \u003d upper \u003d std::stoi(str);\n  }\n  return std::make_optional\u003cRange\u003cint\u003e\u003e(lower, upper);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e72ea8_9b695ce5",
+        "filename": "media/libmedia/include/media/AudioCapabilities.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T00:41:21Z",
+      "side": 1,
+      "message": "do we want to return a copy or a const ref here?",
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802f7886_e2da93f7",
+        "filename": "media/libmedia/include/media/AudioCapabilities.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T00:41:21Z",
+      "side": 1,
+      "message": "nit: semicolon not needed",
+      "range": {
+        "startLine": 119,
+        "startChar": 26,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75fcfb9_942646ed",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T00:41:21Z",
+      "side": 1,
+      "message": "please split the test cases, e.g.: AudioCaps_AAC_Bitrate, AudioCaps_RAW_SampleRate, etc.\n\nYou may find TEST_F useful so that the code for AudioCap object creation can be reused.",
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26c2553_2e4b99a3",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-13T00:41:21Z",
+      "side": 1,
+      "message": "Is the change in this file intended?",
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
