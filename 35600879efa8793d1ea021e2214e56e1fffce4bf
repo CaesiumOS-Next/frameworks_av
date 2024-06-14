@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f123c933_d2b2546b",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-14T20:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c06d56d3_d76bd317",
+      "revId": "35600879efa8793d1ea021e2214e56e1fffce4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca5520ee_a24deae5",
@@ -49,6 +67,24 @@
       "writtenOn": "2024-06-14T00:43:44Z",
       "side": 1,
       "message": "use stoi?",
+      "revId": "35600879efa8793d1ea021e2214e56e1fffce4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f6f593_47456597",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-14T20:19:41Z",
+      "side": 1,
+      "message": "Using stoi will trigger a warning in Gerrit saying stoi is going to be abandoned.",
+      "parentUuid": "ca5520ee_a24deae5",
       "revId": "35600879efa8793d1ea021e2214e56e1fffce4bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -70,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "675181b9_a6947dbf",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-14T20:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dc9494c_825b1e77",
+      "revId": "35600879efa8793d1ea021e2214e56e1fffce4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0526d76_988f080f",
@@ -83,6 +137,24 @@
       "writtenOn": "2024-06-14T00:43:44Z",
       "side": 1,
       "message": "please also add asString_DtsProfile()",
+      "revId": "35600879efa8793d1ea021e2214e56e1fffce4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aafdd89_82c7b98b",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-14T20:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0526d76_988f080f",
       "revId": "35600879efa8793d1ea021e2214e56e1fffce4bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
