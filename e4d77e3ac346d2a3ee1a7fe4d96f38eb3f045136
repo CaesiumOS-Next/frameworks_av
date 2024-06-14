@@ -16,6 +16,23 @@
       "message": "Not a cause of regression on git_main because these aosp CLs were cherry-picked **from** git_main.",
       "revId": "e4d77e3ac346d2a3ee1a7fe4d96f38eb3f045136",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aa405a4_b3798645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-14T03:41:42Z",
+      "side": 1,
+      "message": "From the AOSP CL here\n\nhttps://android-review.git.corp.google.com/c/platform/frameworks/av/+/3132813\n\nFollowing the automerger link, one can see that git_main is a skipped merge\n\nhttps://android-build.googleplex.com/builds/automerger/mergepath?host\u003dandroid\u0026branch\u003dmain\u0026project\u003dplatform%2Fframeworks%2Fav\u0026numeric_change_id\u003d3132813\u0026check_merged_in\u003dtrue",
+      "revId": "e4d77e3ac346d2a3ee1a7fe4d96f38eb3f045136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
