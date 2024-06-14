@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48eee17d_fbd10b60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-14T03:36:01Z",
+      "side": 1,
+      "message": "Not a cause of regression on git_main because these aosp CLs were cherry-picked **from** git_main.",
+      "revId": "e4d77e3ac346d2a3ee1a7fe4d96f38eb3f045136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
