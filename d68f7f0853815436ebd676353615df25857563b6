@@ -59,6 +59,100 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62ece064_cd835c77",
+        "filename": "media/codec2/vndk/C2Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-15T02:42:41Z",
+      "side": 1,
+      "message": "Nice to have this here!",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22bb0c98_478dd1b8",
+        "filename": "media/codec2/vndk/C2Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-15T02:42:41Z",
+      "side": 1,
+      "message": "If this is not needed by all android platform, better to introduce compile flag?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "14eee474_cf958192",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/vndk/C2Fence.cpp",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "#ifdef __ANDROID_API_T__\n"
+            },
+            {
+              "path": "media/codec2/vndk/C2Fence.cpp",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            },
+            {
+              "path": "media/codec2/vndk/C2Fence.cpp",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "#ifdef __ANDROID_API_T__\n"
+            },
+            {
+              "path": "media/codec2/vndk/C2Fence.cpp",
+              "range": {
+                "startLine": 97,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca17023b_ab1ca963",
