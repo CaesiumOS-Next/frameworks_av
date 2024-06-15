@@ -61,6 +61,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "48913d06_d18cbbb8",
+        "filename": "media/codec2/tests/vndk/C2FenceTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-06-15T08:08:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64fdbb69_be9beca7",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 27
+      },
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "62ece064_cd835c77",
         "filename": "media/codec2/vndk/C2Fence.cpp",
         "patchSetId": 5
@@ -155,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b46cb9f_1d25b7d3",
+        "filename": "media/codec2/vndk/C2Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-06-15T08:08:24Z",
+      "side": 1,
+      "message": "This is needed for understanding T magic number (coming from a T HAL) on a current system image, therefore, we cannot prefix this for T only.;\n\nAlso, given that we never send fence from SW codec, we don\u0027t need to worry about mainline using these new values on an older device. However, if that is what you are pointing to, we will need to do the opposite.",
+      "parentUuid": "22bb0c98_478dd1b8",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca17023b_ab1ca963",
         "filename": "media/codec2/vndk/include/C2FenceFactory.h",
         "patchSetId": 5
@@ -190,6 +238,30 @@
           ]
         }
       ],
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6650656_62f4398b",
+        "filename": "media/codec2/vndk/include/C2FenceFactory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-06-15T08:08:24Z",
+      "side": 1,
+      "message": "Done. The statement that \"caller is responsible for closing the fds\" also tells that these are dupped.",
+      "parentUuid": "ca17023b_ab1ca963",
+      "range": {
+        "startLine": 27,
+        "startChar": 13,
+        "endLine": 27,
+        "endChar": 30
+      },
       "revId": "d68f7f0853815436ebd676353615df25857563b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
