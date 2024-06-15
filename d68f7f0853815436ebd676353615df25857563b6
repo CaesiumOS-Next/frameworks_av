@@ -16,6 +16,88 @@
       "message": "Adding you for preliminary feedback. I am still testing.",
       "revId": "d68f7f0853815436ebd676353615df25857563b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64fdbb69_be9beca7",
+        "filename": "media/codec2/tests/vndk/C2FenceTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-15T02:36:49Z",
+      "side": 1,
+      "message": "handle non-null check here?",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "895334f9_e96dd575",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/tests/vndk/C2FenceTest.cpp",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 87,
+                "endChar": 0
+              },
+              "replacement": "    ASSERT_NOT_NULL(handle);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca17023b_ab1ca963",
+        "filename": "media/codec2/vndk/include/C2FenceFactory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-15T02:36:49Z",
+      "side": 1,
+      "message": "Are they fds? fences here do not specify it.\nAlso it is unclear whether the returned fds are duped or not.",
+      "range": {
+        "startLine": 27,
+        "startChar": 13,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7145ad87_5423cdc8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/vndk/include/C2FenceFactory.h",
+              "range": {
+                "startLine": 27,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": " * This will return the fds used when creating the  sync fence. Specifically,\n * for an unordered mult-sync fence, the merged singular fence will not be\n * returned. On the other hand, for a single fd sync fence, the file descriptor\n * will still be returned.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
