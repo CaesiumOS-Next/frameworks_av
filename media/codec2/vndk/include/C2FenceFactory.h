@@ -23,13 +23,18 @@
 #include <android-base/unique_fd.h>
 
 /*
- * Create a list of fds from fence
+ * Extract a list of sync fence fds from a multi sync C2Fence. This will return
+ * the fences used when creating the multi sync fence. Specifically, if the
+ * C2Fence was created while also creating a merged singular fence, that singular
+ * fence will not be returned. On the other hand, if the C2Fence was created
+ * without merging, still all sync fence fds used in the creation will be returned.
  *
  * \param fence   C2Fence object from which associated
  *                file descriptors need to be extracted
- * \return a vector of fds otherwise return vector of size 0
+ * \return a vector of sync fence fds. This will be a vector of size 0 if C2Fence
+ *         is not a multi sync fence. The caller is responsible for closing the
+ *         fds in the returned vector.
  */
-
 std::vector<int> ExtractFdsFromCodec2SyncFence(const C2Fence& fence);
 
 class C2SurfaceSyncMemory;
@@ -54,20 +59,72 @@ struct _C2FenceFactory {
             uint32_t waitId);
 
     /*
-     * Create C2Fence from a fence file fd.
+     * Create C2Fence from a sync fence fd.
      *
-     * \param fenceFd           Fence file descriptor.
+     * \param fenceFd           Sync fence file descriptor.
      *                          It will be owned and closed by the returned fence object.
      */
     static C2Fence CreateSyncFence(int fenceFd);
 
     /*
-     * Create C2Fence from list of fence file fds.
+     * Create C2Fence from list of sync fence fds, while also merging them to
+     * create a singular fence, which can be used as a backward compatible sync
+     * fence.
      *
-     * \param fenceFds          Vector of file descriptor for fence.
-     *                          It will be owned and closed by the returned fence object.
+     * \param fenceFds   Vector of sync fence file descriptors.
+     *                   All file descriptors will be owned (and closed) by
+     *                   the returned fence object.
      */
-    static C2Fence CreateMultipleFdSyncFence(const std::vector<int>& fenceFds);
+    [[deprecated("Use CreateUnorderedMultiSyncFence instead.")]]
+    static C2Fence CreateMultipleFdSyncFence(const std::vector<int>& fenceFds) {
+        return CreateUnorderedMultiSyncFence(fenceFds);
+    }
+
+    /*
+     * Create C2Fence from list of unordered sync fence fds, while also merging
+     * them to create a singular fence, which can be used as a backward compatible
+     * sync fence.
+     *
+     * \param fenceFds   Vector of sync fence file descriptors.
+     *                   All file descriptors will be owned (and closed) by
+     *                   the returned fence object.
+     * \param status     Pointer to a status field. If not null, it will be
+     *                   updated with the status of the operation. Possible values
+     *                   are:
+     *                   - C2_OK: The operation succeeded.
+     *                   - C2_NO_MEMORY: The operation failed because of lack of
+     *                     memory.
+     *                   - C2_CORRUPTED: The operation failed because the sync
+     *                     fence fds could bot be merged.
+     * \return           A C2Fence object representing the sync fence fds, or
+     *                   an empty C2Fence if the operation failed. It is possible
+     *                   for the operation to fail but still return a possibly
+     *                   valid C2Fence object, e.g. if the merge operation failed
+     *                   only partially.
+     */
+    static C2Fence CreateUnorderedMultiSyncFence(
+            const std::vector<int>& fenceFds, c2_status_t *status = nullptr /* nullable */);
+
+    /*
+     * Create C2Fence from list of sync fence fds. Waiting for the last fence
+     * must guarantee that all other fences are also signaled.
+     *
+     * \param fenceFds   Vector of sync fence file descriptors.
+     *                   All file descriptors will be owned (and closed) by
+     *                   the returned fence object.
+     * \param status     Pointer to a status field. If not null, it will be
+     *                   updated with the status of the operation. Possible values
+     *                   are:
+     *                   - C2_OK: The operation succeeded.
+     *                   - C2_NO_MEMORY: The operation failed because of lack of
+     *                     memory.
+     * \return           A C2Fence object representing the sync fence fds, or
+     *                   an empty C2Fence if the operation failed.  It is possible
+     *                   for the operation to succeed but still return an empty
+     *                   C2Fence object, e.g. if all fence fds were invalid.
+     */
+    static C2Fence CreateMultiSyncFence(
+            const std::vector<int>& fenceFds, c2_status_t *status = nullptr /* nullable */);
 
     /*
      * Create C2Fence from an fd created by pipe()/pipe2() syscall.
@@ -97,13 +154,18 @@ struct _C2FenceFactory {
 
     /*
      * Create C2Fence from a native handle.
-
+     *
      * \param handle           A native handle representing a fence
-     *                         The fd in the native handle will be duplicated, so the caller will
-     *                         still own the handle and have to close it.
+     * \param takeOwnership    If true, the native handle and the file descriptors
+     *                         within will be owned by the returned fence object.
+     *                         If false (default), the caller will still own the
+     *                         handle and its file descriptors and will have to
+     *                         close it.
+     *                         In either case the caller is responsible for
+     *                         deleting the native handle.
      */
-    static C2Fence CreateFromNativeHandle(const native_handle_t* handle);
+    static C2Fence CreateFromNativeHandle(
+            const native_handle_t* handle, bool takeOwnership = false);
 };
-
 
 #endif // STAGEFRIGHT_CODEC2_FENCE_FACTORY_H_
