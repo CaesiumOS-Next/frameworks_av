@@ -45,6 +45,7 @@ cc_test {
         "C2SampleComponent_test.cpp",
         "C2UtilTest.cpp",
         "vndk/C2BufferTest.cpp",
+        "vndk/C2FenceTest.cpp",
     ],
 
     shared_libs: [
