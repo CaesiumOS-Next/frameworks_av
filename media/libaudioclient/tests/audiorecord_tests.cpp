@@ -101,10 +101,12 @@ TEST_F(AudioRecordTest, TestAudioCbNotifier) {
     EXPECT_EQ(OK, mAC->getAudioRecordHandle()->addAudioDeviceCallback(cb));
     EXPECT_EQ(OK, mAC->start()) << "record creation failed";
     EXPECT_EQ(OK, cb->waitForAudioDeviceCb());
-    EXPECT_EQ(AUDIO_IO_HANDLE_NONE, cbOld->mAudioIo);
-    EXPECT_EQ(AUDIO_PORT_HANDLE_NONE, cbOld->mDeviceId);
-    EXPECT_NE(AUDIO_IO_HANDLE_NONE, cb->mAudioIo);
-    EXPECT_NE(AUDIO_PORT_HANDLE_NONE, cb->mDeviceId);
+    const auto [oldAudioIo, oldDeviceId] = cbOld->getLastPortAndDevice();
+    EXPECT_EQ(AUDIO_IO_HANDLE_NONE, oldAudioIo);
+    EXPECT_EQ(AUDIO_PORT_HANDLE_NONE, oldDeviceId);
+    const auto [audioIo, deviceId] = cb->getLastPortAndDevice();
+    EXPECT_NE(AUDIO_IO_HANDLE_NONE, audioIo);
+    EXPECT_NE(AUDIO_PORT_HANDLE_NONE, deviceId);
     EXPECT_EQ(BAD_VALUE, mAC->getAudioRecordHandle()->removeAudioDeviceCallback(nullptr));
     EXPECT_EQ(INVALID_OPERATION, mAC->getAudioRecordHandle()->removeAudioDeviceCallback(cbOld));
     EXPECT_EQ(OK, mAC->getAudioRecordHandle()->removeAudioDeviceCallback(cb));

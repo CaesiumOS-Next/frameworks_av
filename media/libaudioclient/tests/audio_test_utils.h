@@ -19,14 +19,13 @@
 
 #include <sys/stat.h>
 #include <unistd.h>
-#include <atomic>
-#include <chrono>
-#include <cinttypes>
 #include <deque>
 #include <memory>
 #include <mutex>
 #include <thread>
+#include <tuple>
 
+#include <android-base/thread_annotations.h>
 #include <binder/MemoryDealer.h>
 #include <media/AidlConversion.h>
 #include <media/AudioRecord.h>
@@ -63,13 +62,15 @@ std::string dumpPatch(const audio_patch& patch);
 
 class OnAudioDeviceUpdateNotifier : public AudioSystem::AudioDeviceCallback {
   public:
-    audio_io_handle_t mAudioIo = AUDIO_IO_HANDLE_NONE;
-    audio_port_handle_t mDeviceId = AUDIO_PORT_HANDLE_NONE;
-    std::mutex mMutex;
-    std::condition_variable mCondition;
-
     void onAudioDeviceUpdate(audio_io_handle_t audioIo, audio_port_handle_t deviceId);
     status_t waitForAudioDeviceCb(audio_port_handle_t expDeviceId = AUDIO_PORT_HANDLE_NONE);
+    std::tuple<audio_io_handle_t, audio_port_handle_t> getLastPortAndDevice();
+
+  private:
+    audio_io_handle_t mAudioIo GUARDED_BY(mMutex) = AUDIO_IO_HANDLE_NONE;
+    audio_port_handle_t mDeviceId GUARDED_BY(mMutex) = AUDIO_PORT_HANDLE_NONE;
+    std::mutex mMutex;
+    std::condition_variable mCondition;
 };
 
 // Simple AudioPlayback class.
@@ -92,9 +93,8 @@ class AudioPlayback : public AudioTrack::IAudioTrackCallback {
     virtual void onBufferEnd() override;
     void stop();
 
-    bool mStopPlaying;
+    bool mStopPlaying GUARDED_BY(mMutex);
     std::mutex mMutex;
-    std::condition_variable mCondition;
 
     enum State {
         PLAY_NO_INIT,
@@ -198,7 +198,7 @@ class AudioCapture : public AudioRecord::IAudioRecordCallback {
 
     std::mutex mMutex;
     std::condition_variable mCondition;
-    std::deque<RawBuffer> mBuffersReceived;
+    std::deque<RawBuffer> mBuffersReceived GUARDED_BY(mMutex);
 };
 
 #endif  // AUDIO_TEST_UTILS_H_
