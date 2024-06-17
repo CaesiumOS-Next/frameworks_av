@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95efd47_97fd1f4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-06-17T09:21:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a0a244e4_c1e29445",
+      "revId": "b521fcfe0493a86b83b48c9599338870e7022b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "120d5c68_20f818cf",
@@ -64,6 +82,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "668702c3_da24189d",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-06-17T09:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b09a1e6_c33658ec",
+      "range": {
+        "startLine": 2593,
+        "startChar": 16,
+        "endLine": 2596,
+        "endChar": 49
+      },
+      "revId": "b521fcfe0493a86b83b48c9599338870e7022b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb79a532_7634e65e",
@@ -77,6 +119,30 @@
       "writtenOn": "2024-06-10T10:48:22Z",
       "side": 1,
       "message": "nit;\n\nALOGE(\"Ignoring param key %s as buffer size %d is less than expected buffer size %d\", PARAMETER_KEY_QP_OFFSET_MAP, mapSize, expectedMapSize);",
+      "range": {
+        "startLine": 2611,
+        "startChar": 27,
+        "endLine": 2611,
+        "endChar": 88
+      },
+      "revId": "b521fcfe0493a86b83b48c9599338870e7022b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f626dc_0e5c88fa",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2611,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-06-17T09:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb79a532_7634e65e",
       "range": {
         "startLine": 2611,
         "startChar": 27,
@@ -133,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e70e5d2_db80a698",
+        "filename": "media/codec2/sfplugin/CCodecConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-06-17T09:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9991dcea_291b8fe4",
+      "range": {
+        "startLine": 1912,
+        "startChar": 28,
+        "endLine": 1912,
+        "endChar": 33
+      },
+      "revId": "b521fcfe0493a86b83b48c9599338870e7022b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "152e07fc_92cdcc97",
@@ -146,6 +236,30 @@
       "writtenOn": "2024-06-10T10:48:22Z",
       "side": 1,
       "message": "nit; for better error logging use box in aloge?",
+      "range": {
+        "startLine": 1915,
+        "startChar": 24,
+        "endLine": 1915,
+        "endChar": 29
+      },
+      "revId": "b521fcfe0493a86b83b48c9599338870e7022b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228dd37e_630341b9",
+        "filename": "media/codec2/sfplugin/CCodecConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1915,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-06-17T09:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "152e07fc_92cdcc97",
       "range": {
         "startLine": 1915,
         "startChar": 24,
