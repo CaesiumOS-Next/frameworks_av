@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43e44962_274f8619",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2024-06-17T10:25:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120d5c68_20f818cf",
+      "range": {
+        "startLine": 2588,
+        "startChar": 16,
+        "endLine": 2591,
+        "endChar": 81
+      },
+      "revId": "b521fcfe0493a86b83b48c9599338870e7022b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b09a1e6_c33658ec",
@@ -166,6 +190,30 @@
       "writtenOn": "2024-06-10T10:48:22Z",
       "side": 1,
       "message": "same crop attributes?",
+      "range": {
+        "startLine": 1893,
+        "startChar": 16,
+        "endLine": 1893,
+        "endChar": 19
+      },
+      "revId": "b521fcfe0493a86b83b48c9599338870e7022b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21de22a1_e43c29c2",
+        "filename": "media/codec2/sfplugin/CCodecConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1893,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2024-06-17T10:25:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf19e0f6_bf06e30a",
       "range": {
         "startLine": 1893,
         "startChar": 16,
