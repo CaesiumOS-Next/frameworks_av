@@ -425,13 +425,13 @@ DeviceVector Engine::getDevicesForStrategyInt(legacy_strategy strategy,
         }
         if (devices2.isEmpty()) {
             devices2 = availableOutputDevices.getFirstDevicesFromTypes({
+                        AUDIO_DEVICE_OUT_HDMI_EARC, AUDIO_DEVICE_OUT_HDMI_ARC,
                         AUDIO_DEVICE_OUT_DGTL_DOCK_HEADSET, AUDIO_DEVICE_OUT_SPEAKER});
         }
         DeviceVector devices3;
         if (strategy == STRATEGY_MEDIA) {
             // ARC, SPDIF and AUX_LINE can co-exist with others.
             devices3 = availableOutputDevices.getDevicesFromTypes({
-                    AUDIO_DEVICE_OUT_HDMI_ARC, AUDIO_DEVICE_OUT_HDMI_EARC,
                     AUDIO_DEVICE_OUT_SPDIF, AUDIO_DEVICE_OUT_AUX_LINE,
                     });
         }
