@@ -7952,6 +7952,39 @@ status_t AudioPolicyManager::checkAndSetVolume(IVolumeCurves &curves,
                     isSingleDeviceType(deviceTypes, audio_is_bluetooth_out_sco_device))) {
         volumeDb = 0.0f;
     }
+
+    bool tvProduct = property_get_bool("ro.vendor.platform.has.tvuimode", false /* default_value */);
+    if (tvProduct) {
+        DeviceTypeSet curSrcDevicesVector = mEngine->getOutputDevicesForStream(AUDIO_STREAM_MUSIC, false).types();
+        audio_devices_t curDevice = Volume::getDeviceForVolume(curSrcDevicesVector);
+        audio_devices_t outputDescDevices = deviceTypesToBitMask(outputDesc->devices().types());
+        if ((curDevice & outputDescDevices) != 0  && outputDesc->getPolicyAudioPort() != nullptr) {
+            auto setSinkGainToHal = [this](auto &volumeDb, auto curDevice, auto outputDesc, auto outputDescDevices) {
+                DeviceTypeSet   curDeviceVector {curDevice};
+                device_category devCategory = Volume::getDeviceCategory(curDeviceVector);
+                auto &volCurves = getVolumeCurves(AUDIO_STREAM_MUSIC);
+                int volumeIndex = volCurves.getVolumeIndex(curDeviceVector);
+                float musicVolumeDb = volCurves.volIndexToDb(devCategory, volumeIndex);
+                ALOGV("[checkAndSetVolume:%d] volumeDb:%f volume:%d, curDevice:%#x, devCategory:%d, outputDescDevices:%#x",
+                    __LINE__, volumeDb, volumeIndex, curDevice, devCategory, outputDescDevices);
+                ALOGV("[checkAndSetVolume:%d] musicVolumeDb:%f, profile:%s", __LINE__, musicVolumeDb,
+                    outputDesc->getAudioPort()->getName().c_str());
+                outputDesc->updateGain(curDevice, musicVolumeDb);
+                // for CTS case: testAudioTrackMuteFromStreamVolumeNotification, testMediaPlayerMuteFromStreamVolumeNotification
+                if (volumeDb > VOLUME_MIN_DB) {
+                    volumeDb = 0.0f;
+                }
+            };
+            if (curDevice == AUDIO_DEVICE_OUT_SPEAKER || curDevice == AUDIO_DEVICE_OUT_SPDIF ||
+                curDevice == AUDIO_DEVICE_OUT_WIRED_HEADPHONE || curDevice == AUDIO_DEVICE_OUT_WIRED_HEADSET  ||
+                (curDevice & AUDIO_DEVICE_OUT_ALL_A2DP) != 0 || (curDevice & AUDIO_DEVICE_OUT_ALL_USB) != 0) {
+                setSinkGainToHal(volumeDb, curDevice, outputDesc, outputDescDevices);
+            } else if (curDevice == AUDIO_DEVICE_OUT_HDMI_ARC) {
+                volumeDb = 0.0f;
+            }
+        }
+    }
+
     const bool muted = (index == 0) && (volumeDb != 0.0f);
     outputDesc->setVolume(volumeDb, muted, volumeSource, curves.getStreamTypes(),
             deviceTypes, delayMs, force, isVoiceVolSrc);
