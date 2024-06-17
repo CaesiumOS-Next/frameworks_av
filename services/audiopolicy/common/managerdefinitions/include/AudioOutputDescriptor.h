@@ -335,6 +335,8 @@ public:
         return result;
     }
 
+    virtual bool updateGain(audio_devices_t device, float volumeDb);
+
 protected:
     const sp<PolicyAudioPort> mPolicyAudioPort;
     AudioPolicyClientInterface * const mClientInterface;
@@ -472,6 +474,8 @@ public:
     uint32_t getRecommendedMuteDurationMs() const override;
 
     void setTracksInvalidatedStatusByStrategy(product_strategy_t strategy);
+
+    bool updateGain(audio_devices_t device, float volumeDb);
 
     bool isConfigurationMatched(const audio_config_base_t& config, audio_output_flags_t flags);
 
