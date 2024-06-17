@@ -201,6 +201,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2543cbae_9dce59bb",
+        "filename": "media/codec2/vndk/C2Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-17T17:13:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9b46cb9f_1d25b7d3",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 44
+      },
+      "revId": "d68f7f0853815436ebd676353615df25857563b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca17023b_ab1ca963",
