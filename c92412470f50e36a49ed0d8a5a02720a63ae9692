@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3e1704d_e9f29455",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6453,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-18T09:57:20Z",
+      "side": 1,
+      "message": "doing the similar change for onNewAudioModulesAvailableInt ..",
+      "revId": "c92412470f50e36a49ed0d8a5a02720a63ae9692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
