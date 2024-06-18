@@ -33,6 +33,42 @@
       "message": "Please file an issue for this CL.",
       "revId": "6a5f33fd543b49a9f775bc2709e52b7ec6215cb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5891d18a_13663abc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2024-06-18T23:07:07Z",
+      "side": 1,
+      "message": "Please see https://issuetracker.google.com/issues/347963251.",
+      "parentUuid": "bcad8018_bf12cb92",
+      "revId": "6a5f33fd543b49a9f775bc2709e52b7ec6215cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73b7cfbe_2aebe0f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2024-06-18T23:07:07Z",
+      "side": 1,
+      "message": "If a device doesn\u0027t have an eac3-joc decoder, then the new tests won\u0027t run.",
+      "parentUuid": "6b4baca6_1a9d1e43",
+      "revId": "6a5f33fd543b49a9f775bc2709e52b7ec6215cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
