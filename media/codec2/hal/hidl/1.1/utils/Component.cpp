@@ -527,18 +527,7 @@ Return<Status> Component::start() {
 
 Return<Status> Component::stop() {
     InputBufferManager::unregisterFrameData(mListener);
-    Status status = static_cast<Status>(mComponent->stop());
-    {
-        std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
-        for (auto it = mBlockPools.begin(); it != mBlockPools.end(); ++it) {
-            if (it->second->getAllocatorId() == C2PlatformAllocatorStore::BUFFERQUEUE) {
-                std::shared_ptr<C2BufferQueueBlockPool> bqPool =
-                        std::static_pointer_cast<C2BufferQueueBlockPool>(it->second);
-                bqPool->clearDeferredBlocks();
-            }
-        }
-    }
-    return status;
+    return static_cast<Status>(mComponent->stop());
 }
 
 Return<Status> Component::reset() {
