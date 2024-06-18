@@ -712,7 +712,6 @@ void SimpleC2Component::WorkHandler::onMessageReceived(const sp<AMessage> &msg) 
         case kWhatStop: {
             int32_t err = thiz->onStop();
             thiz->mOutputBlockPool.reset();
-            mRunning = false;
             Reply(msg, &err);
             break;
         }
