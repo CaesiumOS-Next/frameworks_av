@@ -1894,8 +1894,16 @@ status_t AudioTrack::createTrack_l()
     input.sessionId = mSessionId;
     input.audioTrackCallback = mAudioTrackCallback;
 
+    auto aidlInput = input.toAidl();
+    if (!aidlInput.ok()) {
+        errorMessage = StringPrintf("%s(%d): Could not create track due to invalid input", __func__,
+                                    mPortId);
+        status = BAD_VALUE;
+        goto exit;
+    }
+
     media::CreateTrackResponse response;
-    status = audioFlinger->createTrack(VALUE_OR_FATAL(input.toAidl()), response);
+    status = audioFlinger->createTrack(aidlInput.value(), response);
 
     IAudioFlinger::CreateTrackOutput output{};
     if (status == NO_ERROR) {
