@@ -1,6 +1,69 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a55a78_1e1221f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "better than it was before, not sure if you want to add more thread safety.",
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8ec063_a63f76a2",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit: no need for parens.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 5
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbaacff2_09217155",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit\n\n    return { mAudioIo, mDeviceId };",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 57,
+        "endChar": 41
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3a32183_8ef6648e",
@@ -20,6 +83,241 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61570065_542cf760",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit: no need for additional parens.\n\nthere are a lot of other shared variables above, not sure if you want to protect them as well.",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 9
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21bf8725_4091b6ee",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit: could just use pair here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ec0fdca_c7a0039c",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "override EXCLUDES(mMutex) here.  EXCLUDES(mMutex) for 66 and 67.",
+      "range": {
+        "startLine": 65,
+        "startChar": 84,
+        "endLine": 65,
+        "endChar": 86
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7169d8d_3a43d4b7",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit:\n\n    override EXCLUDES(mMutex) here\n    EXCLUDES(mMutex) below\n    const EXCLUDES(mMutex) getLastPortAndDevice",
+      "range": {
+        "startLine": 65,
+        "startChar": 84,
+        "endLine": 65,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dd60b313_151bd264",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "    void onAudioDeviceUpdate(audio_io_handle_t audioIo, audio_port_handle_t deviceId) override\n        EXCLUDES(mMutex);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d76084_275de09a",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit: mutable?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7652297e_45090847",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 73,
+                "endChar": 0
+              },
+              "replacement": "    mutable std::mutex mMutex;\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 98,
+                "endChar": 0
+              },
+              "replacement": "    mutable bool mStopPlaying GUARDED_BY(mMutex);\n    mutable std::mutex mMutex;\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": "    mutable std::mutex mMutex;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32885fdf_b11f3472",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "EXCLUDES(mMutex) here, waitForConsumption, stop.",
+      "range": {
+        "startLine": 93,
+        "startChar": 39,
+        "endLine": 93,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "32dee1f6_d35c1f55",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 94,
+                "endChar": 0
+              },
+              "replacement": "    virtual void onBufferEnd() override EXCLUDES(mMutex);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07236bb_146acf89",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit: EXCLUDES(mMutex), and on line 161 and 147.",
+      "range": {
+        "startLine": 159,
+        "startChar": 13,
+        "endLine": 159,
+        "endChar": 27
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "773c787a_d7eca4ac",
         "filename": "media/libaudioclient/tests/audio_test_utils.h",
         "patchSetId": 1
@@ -31,6 +329,47 @@
       "writtenOn": "2024-06-18T01:06:45Z",
       "side": 1,
       "message": "Guarded by here? (and maybe other non-const fields)",
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd109353_51fca385",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-18T01:31:30Z",
+      "side": 1,
+      "message": "nit: this should be GUARDED_BY(mMutex).\n\nit is only strict if you don\u0027t have timeouts (and you might miss setting the bool), but since you do have timeouts, it is optional.",
+      "range": {
+        "startLine": 195,
+        "startChar": 9,
+        "endLine": 195,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b542e7b9_6a25847c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 195,
+                "startChar": 0,
+                "endLine": 196,
+                "endChar": 0
+              },
+              "replacement": "    bool mStopRecording GUARDED_BY(mMutex);\n"
+            }
+          ]
+        }
+      ],
       "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
