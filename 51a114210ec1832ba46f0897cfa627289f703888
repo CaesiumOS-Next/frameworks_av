@@ -111,6 +111,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3f3ec66_7f7eb96d",
+        "filename": "media/libmedia/include/media/AudioCapabilities.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-18T19:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64ac40c_b0fb7024",
+      "revId": "51a114210ec1832ba46f0897cfa627289f703888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "802f7886_e2da93f7",
