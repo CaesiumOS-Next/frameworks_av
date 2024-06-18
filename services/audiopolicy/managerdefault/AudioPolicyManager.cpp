@@ -6386,6 +6386,27 @@ void AudioPolicyManager::onNewAudioModulesAvailableInt(DeviceVector *newDevices)
             if (!mConfig->getOutputDevices().contains(supportedDevice)) {
                 continue;
             }
+
+            //  Open the mmap output on new module availability if
+            // 1) Mmap output has dynamic profiles or
+            // 2) Devices supported for mmap output are not yet added to mAvailableOutputDevices
+            if (outProfile->isMmap()) {
+                bool openMMapOutput = outProfile->hasDynamicAudioProfile();
+                for (const auto &device : availProfileDevices) {
+                    if (!device->isAttached()) {
+                        openMMapOutput = true;
+                        ALOGI("%s open mmap output for device %s ", __func__,
+                                device->toString().c_str());
+                        break;
+                    }
+                }
+                if (!openMMapOutput) {
+                    ALOGV("%s skip opening output for mmap profile %s", __func__,
+                            outProfile->getTagName().c_str());
+                    continue;
+                }
+            }
+
             sp<SwAudioOutputDescriptor> outputDesc = new SwAudioOutputDescriptor(outProfile,
                                                                                  mpClientInterface);
             audio_io_handle_t output = AUDIO_IO_HANDLE_NONE;
@@ -6445,6 +6466,27 @@ void AudioPolicyManager::onNewAudioModulesAvailableInt(DeviceVector *newDevices)
                     __func__, inProfile->getTagName().c_str());
                 continue;
             }
+
+            //  Open the mmap input on new module availability if
+            // 1) Mmap input has dynamic profiles or
+            // 2) Devices supported for mmap input are not yet added to mAvailableInputDevices
+            if (inProfile->isMmap()) {
+                bool openMMapInput = inProfile->hasDynamicAudioProfile();
+                for (const auto &device : availProfileDevices) {
+                    if (!device->isAttached()) {
+                        openMMapInput = true;
+                        ALOGI("%s open mmap input for device %s ", __func__,
+                                device->toString().c_str());
+                        break;
+                    }
+                }
+                if (!openMMapInput) {
+                    ALOGV("%s skip opening input for mmap profile %s", __func__,
+                            inProfile->getTagName().c_str());
+                    continue;
+                }
+            }
+
             sp<AudioInputDescriptor> inputDesc =
                     new AudioInputDescriptor(inProfile, mpClientInterface);
 
@@ -6599,7 +6641,11 @@ status_t AudioPolicyManager::checkOutputsForDevice(const sp<DeviceDescriptor>& d
             if (j != outputs.size()) {
                 continue;
             }
-
+            if (profile->isMmap() && !profile->hasDynamicAudioProfile()) {
+                ALOGV("%s skip opening output for mmap profile %s",
+                      __func__, profile->getTagName().c_str());
+                continue;
+            }
             if (!profile->canOpenNewIo()) {
                 ALOGW("Max Output number %u already opened for this profile %s",
                       profile->maxOpenCount, profile->getTagName().c_str());
@@ -6750,6 +6796,11 @@ status_t AudioPolicyManager::checkInputsForDevice(const sp<DeviceDescriptor>& de
                 continue;
             }
 
+            if (profile->isMmap() && !profile->hasDynamicAudioProfile()) {
+                ALOGV("%s skip opening input for mmap profile %s",
+                      __func__, profile->getTagName().c_str());
+                continue;
+            }
             if (!profile->canOpenNewIo()) {
                 ALOGW("Max Input number %u already opened for this profile %s",
                       profile->maxOpenCount, profile->getTagName().c_str());
