@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a6dfd37_a69cfbb4",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4889,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-06-19T11:26:02Z",
+      "side": 1,
+      "message": "- Just to confirm, we don\u0027t need to worry about the case where these values are equal?\n- Would it be helpful to log a warning when the track header duration is less than the first sample offset? I\u0027m not sure if this would help identify that something has gone wrong in logging.",
+      "range": {
+        "startLine": 4889,
+        "startChar": 16,
+        "endLine": 4889,
+        "endChar": 58
+      },
+      "revId": "49ac855d45beb644b6b3568fa8c149eb81506456",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
