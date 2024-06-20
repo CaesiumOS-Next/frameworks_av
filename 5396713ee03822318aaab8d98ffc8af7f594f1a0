@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e8c2ca2_8138ed93",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-20T22:43:32Z",
+      "side": 1,
+      "message": "destroyed",
+      "revId": "5396713ee03822318aaab8d98ffc8af7f594f1a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a9f0aca_548b49b1",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-20T22:43:32Z",
+      "side": 1,
+      "message": "no capital T",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "602a7bd2_59800bbc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/vndk/include/C2BqBufferPriv.h",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": " * If the docder HAL destoyed the C2GraphicBlock without transferring to a\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5396713ee03822318aaab8d98ffc8af7f594f1a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
