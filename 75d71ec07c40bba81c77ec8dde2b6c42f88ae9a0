@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ba5df8_4a256f60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-20T23:22:02Z",
+      "side": 1,
+      "message": "Please add `Bug: 348099828` and `Test: repro steps from the bug`",
+      "revId": "75d71ec07c40bba81c77ec8dde2b6c42f88ae9a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
