@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb09ae44_406d5fa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-06-20T07:38:32Z",
+      "side": 1,
+      "message": "Do you plan to guard APIs or code in java framework.jar with this flag?\nIf it only guards modifications in native audioserver then it should be defined in media/audio/aconfig/audioserver.aconfig",
+      "revId": "8f268a6ff60c937e5f61266bd19e18b42714cc0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
