@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d12ab7_52e48544",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6635,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-20T21:02:04Z",
+      "side": 1,
+      "message": "This is going to be skipped for mmap profiles, as I understand it. I guess, that means that corresponding mix ports will not have their profiles populated. I think, this may be important for \"hifi\" mix ports that in some implementations skip SRC paths in DSP and thus must show actual sampling rates and other parameters of the connected device.",
+      "range": {
+        "startLine": 6635,
+        "startChar": 0,
+        "endLine": 6635,
+        "endChar": 72
+      },
+      "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
