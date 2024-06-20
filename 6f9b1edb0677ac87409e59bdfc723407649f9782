@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "313694bb_9ed18da5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-20T20:51:58Z",
+      "side": 1,
+      "message": "Makes sense. Ideally, the checks could be made on each input parameter directly, however using conversion code for validation is fine, too.",
+      "revId": "6f9b1edb0677ac87409e59bdfc723407649f9782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
