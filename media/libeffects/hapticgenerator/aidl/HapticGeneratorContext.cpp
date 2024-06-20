@@ -113,9 +113,9 @@ IEffect::Status HapticGeneratorContext::process(float* in, float* out, int sampl
     RETURN_VALUE_IF(!in, status, "nullInput");
     RETURN_VALUE_IF(!out, status, "nullOutput");
     status = {EX_ILLEGAL_STATE, 0, 0};
-    RETURN_VALUE_IF(getInputFrameSize() != getOutputFrameSize(), status, "FrameSizeMismatch");
     auto frameSize = getInputFrameSize();
     RETURN_VALUE_IF(0 == frameSize, status, "zeroFrameSize");
+    RETURN_VALUE_IF(0 == getOutputFrameSize(), status, "zeroFrameSize");
 
     // The audio data must not be modified but just written to
     // output buffer according the access mode.
@@ -129,13 +129,15 @@ IEffect::Status HapticGeneratorContext::process(float* in, float* out, int sampl
         return status;
     }
 
+    size_t hapticSampleCount = mFrameCount * mParams.mHapticChannelCount;
+
     if (mParams.mMaxVibratorScale == HapticGenerator::VibratorScale::MUTE) {
         // Haptic channels are muted, not need to generate haptic data.
-        return {STATUS_OK, samples, samples};
+        memset(out, 0, hapticSampleCount * sizeof(float));
+        return {STATUS_OK, samples, static_cast<int32_t>(hapticSampleCount)};
     }
 
     // Resize buffer if the haptic sample count is greater than buffer size.
-    size_t hapticSampleCount = mFrameCount * mParams.mHapticChannelCount;
     if (hapticSampleCount > mInputBuffer.size()) {
         // The inputBuffer and outputBuffer must have the same size, which must be at least
         // the haptic sample count.
@@ -156,16 +158,16 @@ IEffect::Status HapticGeneratorContext::process(float* in, float* out, int sampl
     ::android::os::scaleHapticData(
             hapticOutBuffer, hapticSampleCount,
             {/*level=*/static_cast<::android::os::HapticLevel>(mParams.mMaxVibratorScale) },
-            mParams.mVibratorInfo.qFactor);
+            mParams.mVibratorInfo.maxAmplitude);
 
     // For haptic data, the haptic playback thread will copy the data from effect input
     // buffer, which contains haptic data at the end of the buffer, directly to sink buffer.
     // In that case, copy haptic data to input buffer instead of output buffer.
     // Note: this may not work with rpc/binder calls
     for (size_t i = 0; i < hapticSampleCount; ++i) {
-        in[samples + i] = hapticOutBuffer[i];
+        out[i] = hapticOutBuffer[i];
     }
-    return {STATUS_OK, samples, static_cast<int32_t>(samples + hapticSampleCount)};
+    return {STATUS_OK, samples, static_cast<int32_t>(hapticSampleCount)};
 }
 
 void HapticGeneratorContext::init_params(media::audio::common::AudioChannelLayout inputChMask,
@@ -183,7 +185,6 @@ void HapticGeneratorContext::init_params(media::audio::common::AudioChannelLayou
         // By default, use the first audio channel to generate haptic channels.
         mParams.mHapticChannelSource[i] = 0;
     }
-
     mState = HAPTIC_GENERATOR_STATE_INITIALIZED;
 }
 
