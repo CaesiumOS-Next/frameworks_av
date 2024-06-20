@@ -44,7 +44,78 @@ class GraphicBuffer;
  *
  * If a specific HGBP is configured, the HGBP acts as an allocator for creating graphic blocks.
  *
- * TODO: add more ducumentation(graphic block life-cycle, waitable object and workaounds)
+ *
+ * HGBP/IGBP and the BlockPool
+ *
+ * GraphicBuffer(s) from BufferQueue(IGBP/IGBC) are based on slot id.
+ * A created GraphicBuffer occupies a slot(so the GraphicBuffer has a slot-id).
+ * A GraphicBuffer is produced and consumed and recyled based on the slot-id
+ * w.r.t. BufferQueue.
+ *
+ * HGBP::dequeueBuffer() returns a slot id where the slot has an available GraphicBuffer.
+ * If it is necessary, HGBP allocates a new GraphicBuffer to the slot and indicates
+ * that a new buffer is allocated as return flag.
+ * To retrieve the GraphicBuffer, HGBP::requestBuffer() along with the slot id
+ * is required. In order to save HGBP remote calls, the blockpool caches the
+ * allocated GraphicBuffer(s) along with the slot infomation.
+ *
+ * The blockpool provides C2GraphicBlock upon \fetchGraphicBlock().
+ * The C2GraphicBlock has a native handle, which is extracted from a GraphicBuffer
+ * and then cloned for independent life-cycle with the GraphicBuffer. The GraphicBuffer
+ * is provided by HGBP::dequeueBuffer() if there is a HGBP configured.
+ *
+ *
+ * Life-cycle of C2GraphicBlock
+ *
+ * The decoder HAL will write a decoded frame into C2GraphicBlock. After
+ * completing to write, the block will transferred to a system process.(to
+ * MediaCodec). The system process will render the frame into the output surface
+ * via IGBP::queueBuffer()(note this is not hidlized.).
+ *
+ * If The docder HAL destoyed the C2GraphicBlock without transferring to a
+ * system process. The destroy request will be tossed into the BlockPool. Then
+ * The BlockPool will return the associated GraphicBuffer(and/or the slot) to
+ * HGBP in order to re-cycle via HGBP::cancelBuffer().
+ *
+ *
+ * Clearing the Cache(GraphicBuffer)
+ *
+ * When the output surface is swtiched to a new surface, The GraphicBuffers from
+ * the old surface is either migrated or cleared.
+ *
+ * The GraphicBuffer(s) still in use are migrated to a new surface during
+ * configuration via HGBP::attachBuffer(). The GraphicBuffer(s) not in use are
+ * cleared from the cache inside the BlockPool.
+ *
+ * Since we can configure null-surface as a new surface, in the case all
+ * GraphicBuffer(s) in the cache are cleared.
+ *
+ *
+ * Workaround w.r.t. b/322731059 (Deferring cleaning the cache)
+ *
+ * We found some vendor devices are experiencing crashes while clearing the
+ * cache. Even though we cloned the handle from the cache and granted
+ * C2GraphicBlock a separate life-cycle with the cached GrpahicBuffer,
+ * clearing the cached GraphicBuffer which is currently processed from the swcodec
+ * crashes the process. In theory this should not happen, and we don't know the
+ * exact reason for this. (Google devices never experienced this.)
+ *
+ * Rather we workarounded the crash by deferring the cleaning of the cache.
+ * Workaround is no default behavior, to enable the deffering
+ * configure a specific system property as below.
+ *
+ *        'debug.codec2.bqpool_dealloc_after_stop' = 1
+ *
+ * Configuring the debug flag will call \::setDeferDeallocationAfterStop()
+ * after the blockpool creation. This will enable the deferring.
+ *
+ * After enabling the deferring, clearing the GraphicBuffer is delayed until
+ *  1) \::clearDeferredBlocks() is called.
+ *        Typical after HAL processes stop()  request.
+ *  2) Or a new ::fetchGraphicBlock() is called.
+ *
+ *  Since the deferring will delay the deallocation, the deferring will result
+ *  in more memory consumtion during the brief period.
  */
 class C2BufferQueueBlockPool : public C2BlockPool {
 public:
