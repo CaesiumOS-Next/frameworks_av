@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf4d0bf_568aa240",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-20T20:56:10Z",
+      "side": 1,
+      "message": "missing `\\\"%s\\\"` for the profile. Quotes because profile names can contain spaces. Here and in the added logs below.",
+      "range": {
+        "startLine": 1533,
+        "startChar": 29,
+        "endLine": 1533,
+        "endChar": 30
+      },
+      "revId": "f0561f0cfee8ac825b476a3ccb40e3bbc179ac10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cf6930_17fe117c",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-20T20:56:10Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"priortize\" -- should it be \"prioritize\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"priortize\" -- should it be \"prioritize\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 1548,
+        "startChar": 48,
+        "endLine": 1548,
+        "endChar": 57
+      },
+      "revId": "f0561f0cfee8ac825b476a3ccb40e3bbc179ac10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08ebdd9_fcfaeb6f",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 6478,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-20T20:56:10Z",
+      "side": 1,
+      "message": "`\\\"%s\\\"`. Same for the logs below.",
+      "range": {
+        "startLine": 6478,
+        "startChar": 75,
+        "endLine": 6478,
+        "endChar": 76
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cb5e4ed5_b166952f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6478,
+                "startChar": 0,
+                "endLine": 6479,
+                "endChar": 0
+              },
+              "replacement": "                ALOGW(\"Cannot open input stream for device \\\"%s\\\" for profile %s on hw module %s\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f0561f0cfee8ac825b476a3ccb40e3bbc179ac10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
