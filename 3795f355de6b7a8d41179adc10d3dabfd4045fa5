@@ -135,6 +135,30 @@
       },
       "revId": "3795f355de6b7a8d41179adc10d3dabfd4045fa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba7f209_db13d426",
+        "filename": "media/module/extractors/mp4/SampleTable.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-06-20T12:04:14Z",
+      "side": 1,
+      "message": "This is seeking through the sample table, not the entire file. I\u0027m trying to see if the duration can be calculated while populating the entries, since `seekTo` may be inefficient to calculate the total duration.",
+      "parentUuid": "6f8aad45_72a8995e",
+      "range": {
+        "startLine": 1015,
+        "startChar": 19,
+        "endLine": 1015,
+        "endChar": 45
+      },
+      "revId": "3795f355de6b7a8d41179adc10d3dabfd4045fa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
