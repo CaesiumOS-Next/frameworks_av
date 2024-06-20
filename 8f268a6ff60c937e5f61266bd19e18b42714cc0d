@@ -16,6 +16,24 @@
       "message": "Do you plan to guard APIs or code in java framework.jar with this flag?\nIf it only guards modifications in native audioserver then it should be defined in media/audio/aconfig/audioserver.aconfig",
       "revId": "8f268a6ff60c937e5f61266bd19e18b42714cc0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3af891_10b9ae50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-06-20T07:45:11Z",
+      "side": 1,
+      "message": "Scope is limited to native, moving to media/audio/aconfig/audioserver.aconfig",
+      "parentUuid": "bb09ae44_406d5fa3",
+      "revId": "8f268a6ff60c937e5f61266bd19e18b42714cc0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
