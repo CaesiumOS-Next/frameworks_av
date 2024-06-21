@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f83320_fe1b85c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T20:32:54Z",
+      "side": 1,
+      "message": "Andy, could you PTAL? I ran CTS tests locally on a Pixel device, did not notice any issues.",
+      "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
