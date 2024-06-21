@@ -16,6 +16,23 @@
       "message": "Andy, could you PTAL? I ran CTS tests locally on a Pixel device, did not notice any issues.",
       "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d64e5df_909d03c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-06-21T21:00:07Z",
+      "side": 1,
+      "message": "I guess the primary side-effect might be power.",
+      "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
