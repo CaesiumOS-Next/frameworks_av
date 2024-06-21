@@ -22,6 +22,30 @@
       },
       "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71ce4fa_92a9e7a2",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6635,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-06-21T03:11:31Z",
+      "side": 1,
+      "message": "As per my understanding \"hifi\" and \"mmap\" are going to be different mix ports. \n\nMMAP is supposed to be meant to be used for clients using MAP_NOIRQ flags and speicifying supported samplerates/other params.\n\nFor hifi_playback paths, I have not seen any specific flags defined, and profiles are kept empty, so it can be retrieved based on device ports. So, fundamentally \"hifi\" and \"mmap\" are different and I think we are not going to touch \"hifi\" path with this change.\n\nAlso, as this whole logic of opening outputs and closing the outputs, is needed only to see if the any existing playback can be routed to 1 of newly opened output.\n\nFor MMAP, we should not be doing that, unless the client explicitly asks for mmap flags. \n\nAfter, connection, if client tries to open a mmap, they can do that anyway.",
+      "parentUuid": "c4d12ab7_52e48544",
+      "range": {
+        "startLine": 6635,
+        "startChar": 0,
+        "endLine": 6635,
+        "endChar": 72
+      },
+      "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
