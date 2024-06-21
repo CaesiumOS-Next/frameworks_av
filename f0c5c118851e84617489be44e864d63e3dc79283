@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d712e5d_5db22b15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:20:16Z",
+      "side": 1,
+      "message": "As of now, the problem still exists because the framework still uses the legacy path even using the AIDL HAL. In fact, for QC some metrics got regressed because in the AIDL opening an MMap No IRQ stream requires creating the shared memory region (this was a separate operation in the HIDL API).\n\nAs a long term solution we need to avoid using this legacy probing path when using the AIDL HAL. Maybe, as a short term solution we can update this patch to only avoid opening MMap I/Os for probing when they don\u0027t have dynamic profiles?",
+      "parentUuid": "84ebf8f3_710226b6",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4d12ab7_52e48544",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 5
