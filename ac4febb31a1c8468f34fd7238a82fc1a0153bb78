@@ -22,6 +22,30 @@
       },
       "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de99ace_344fd456",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2611,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-06-21T06:12:51Z",
+      "side": 1,
+      "message": "Length of the qp-map is the number of 16x16 blocks in one frame.\nHere\u0027s the link of javadoc: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/MediaCodec.java;l\u003d5114;drc\u003d6a4bef0f90e822e19866e53a98b85029bff04ea0",
+      "parentUuid": "6328c35f_f50c47fb",
+      "range": {
+        "startLine": 2611,
+        "startChar": 38,
+        "endLine": 2611,
+        "endChar": 80
+      },
+      "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
