@@ -158,7 +158,6 @@ cc_library_shared {
         "libvulkan",
         "libgui",
         "liblog",
-        "libprocessgroup",
         "libstagefright_foundation",
         "libsync",
         "libui",
