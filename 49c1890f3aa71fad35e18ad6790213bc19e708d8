@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab4a954f_78935a34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1068291
+      },
+      "writtenOn": "2024-06-21T12:40:25Z",
+      "side": 1,
+      "message": "PTAL. I\u0027ve removed the changes to `SampleTable`, so the logic is the same as earlier, except we use a variable in `Track` instead of relying on the value in `AMEDIAFORMAT_KEY_DURATION`.",
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
