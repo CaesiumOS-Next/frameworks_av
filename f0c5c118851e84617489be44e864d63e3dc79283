@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cec00652_249c543d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T16:58:46Z",
+      "side": 1,
+      "message": "I think the idea is that MMap profiles served by the DSP have their profiles filled out statically, like here, both for output and input mix ports: https://cs.android.com/android/platform/superproject/main/+/main:device/google/redfin/audio/audio_policy_configuration.xml;l\u003d72;drc\u003d53acf6b56a56ef4e84b3b10ac425c9a7ade15aa7\n\nAFAIK, none of AOSP non-primary modules (the USB module being the primary concern) support MMap. Thus, in my understanding this should work fine unless for some reason MMap mix ports have dynamic profiles. Are there any examples of devices that use them in such configuration?",
+      "parentUuid": "f62f73f4_4f6dfe22",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4d12ab7_52e48544",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 5
