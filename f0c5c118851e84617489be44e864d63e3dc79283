@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f62f73f4_4f6dfe22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-06-21T16:52:57Z",
+      "side": 1,
+      "message": "how are the profile properties (SR, sample format, channel masks) populated for MMAP dynamic IOs? If we do not populate them, we will fail to match an open stream request form a mmap client to the matching mmap profile",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4d12ab7_52e48544",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 5
