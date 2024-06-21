@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84ebf8f3_710226b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-06-21T17:14:26Z",
+      "side": 1,
+      "message": "I think it would be too constraining to mandate that MMAP IOs are never using dynamic profiles. \nDoes this problem still exist with AIDL HALs were we do not need to open the stream to probe for port properties?",
+      "parentUuid": "cec00652_249c543d",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4d12ab7_52e48544",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 5
