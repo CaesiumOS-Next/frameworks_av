@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a6a047_28a11fac",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "http://go/cppref/cpp/thread/condition_variable/notify_all mentions that holding a lock while calling `notify_all` may lead to pessimization on the receiving end.",
+      "parentUuid": "4d8ec063_a63f76a2",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 5
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbaacff2_09217155",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-18T01:31:30Z",
       "side": 1,
       "message": "nit\n\n    return { mAudioIo, mDeviceId };",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 57,
+        "endChar": 41
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3f7bef1_6a93d0d6",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbaacff2_09217155",
       "range": {
         "startLine": 57,
         "startChar": 11,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0604b025_1a415885",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "I actually prefer to use parentheses unless I really mean using an `initializer_list`. The style guide allows both.",
+      "parentUuid": "b3a32183_8ef6648e",
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61570065_542cf760",
@@ -104,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b342b60_ef00a55a",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "On parens: same note about `notify_all`.\n\nAbout other variables: good question. We will probably need to make another round of changes if the test will remain flaky on bots. At least, it has already improved in local runs.",
+      "parentUuid": "61570065_542cf760",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 9
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21bf8725_4091b6ee",
@@ -117,6 +207,30 @@
       "writtenOn": "2024-06-18T01:31:30Z",
       "side": 1,
       "message": "nit: could just use pair here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e60cd2_57f37403",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21bf8725_4091b6ee",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -191,6 +305,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd7794bb_d9080777",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Agree with `override` and `const`, but I think `EXCLUDES` is superfluous since it\u0027s a very simple class where methods do not actually call each other.",
+      "parentUuid": "c7169d8d_3a43d4b7",
+      "range": {
+        "startLine": 65,
+        "startChar": 84,
+        "endLine": 65,
+        "endChar": 86
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ad1682_e7aaf21a",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "The class is tiny and the code is obvious enough IMO.",
+      "parentUuid": "5ec0fdca_c7a0039c",
+      "range": {
+        "startLine": 65,
+        "startChar": 84,
+        "endLine": 65,
+        "endChar": 86
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52d76084_275de09a",
@@ -252,6 +414,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8666224c_63e533b8",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52d76084_275de09a",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 22
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32885fdf_b11f3472",
@@ -293,6 +479,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb26c2a_a359bb0a",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32885fdf_b11f3472",
+      "range": {
+        "startLine": 93,
+        "startChar": 39,
+        "endLine": 93,
+        "endChar": 40
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c07236bb_146acf89",
@@ -306,6 +516,30 @@
       "writtenOn": "2024-06-18T01:31:30Z",
       "side": 1,
       "message": "nit: EXCLUDES(mMutex), and on line 161 and 147.",
+      "range": {
+        "startLine": 159,
+        "startChar": 13,
+        "endLine": 159,
+        "endChar": 27
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da5ed599_36fd9f98",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c07236bb_146acf89",
       "range": {
         "startLine": 159,
         "startChar": 13,
@@ -374,6 +608,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54dc5883_7a9ee0cd",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Added for `mStopRecording`. I think we might want to revisit these tests once again if these fixes will not prevent all flakes.",
+      "parentUuid": "773c787a_d7eca4ac",
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d400c062_04844240",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd109353_51fca385",
+      "range": {
+        "startLine": 195,
+        "startChar": 9,
+        "endLine": 195,
+        "endChar": 23
+      },
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "107a4aac_c049eb8c",
@@ -387,6 +663,24 @@
       "writtenOn": "2024-06-18T01:06:45Z",
       "side": 1,
       "message": "is this is a valid assertion (that after consuming the data, we should have received all the callbacks), or should we block?",
+      "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e967f2_03a663c5",
+        "filename": "media/libaudioclient/tests/audiorecord_tests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T17:30:07Z",
+      "side": 1,
+      "message": "I agree that this should be synchronized properly. Currently this does not seem to cause any test issues. I have created b/348658586 for Ittiam to fix that (they have originally contributed these tests).",
+      "parentUuid": "107a4aac_c049eb8c",
       "revId": "102b87e7580db155fb4015c7d4a37adcae23f36e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
