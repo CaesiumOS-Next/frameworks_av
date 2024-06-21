@@ -42,7 +42,6 @@ cc_test {
         "libgui",
         "liblog",
         "libnativewindow",
-        "libprocessgroup",
         "libsync",
         "libui",
         "libutils",

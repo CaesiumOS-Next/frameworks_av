@@ -46,7 +46,6 @@ cc_fuzz {
         "libGLESv3",
         "libui",
         "libbase",
-        "libprocessgroup",
         "libsync",
     ],
     fuzz_config: {
