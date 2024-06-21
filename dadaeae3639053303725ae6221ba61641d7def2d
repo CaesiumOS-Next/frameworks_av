@@ -33,6 +33,23 @@
       "message": "I guess the primary side-effect might be power.",
       "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7228c864_1ce8ba94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-21T22:43:00Z",
+      "side": 1,
+      "message": "quic_mpang@quicinc.com: Could you please help in getting Qualcomm-Review.\n\nAlso, as Andy has noted, could you please check if you see any difference in power consumption with this change?",
+      "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
