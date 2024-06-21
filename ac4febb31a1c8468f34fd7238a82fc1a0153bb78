@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6328c35f_f50c47fb",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2611,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-21T04:01:23Z",
+      "side": 1,
+      "message": "Aligning 16 bytes for width and height.\nIs there any logic behind this?",
+      "range": {
+        "startLine": 2611,
+        "startChar": 38,
+        "endLine": 2611,
+        "endChar": 80
+      },
+      "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
