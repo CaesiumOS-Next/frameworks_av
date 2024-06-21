@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "474d0fcc_77f597eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-06-21T14:04:20Z",
+      "side": 1,
+      "message": "is the same, not will be the same?\n\nis it the case that:\n\nKEY_DURATION reflects the duration of the container.\nIndividual tracks within the container may be shorter and require padding to align with the container\u0027s duration.\n\n(and all of the discussion has been around padding needed if the data is shorter then the container duration -- what are the semantics if the data is longer than the container duration?)",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ab4a954f_78935a34",
@@ -14,6 +37,87 @@
       "writtenOn": "2024-06-21T12:40:25Z",
       "side": 1,
       "message": "PTAL. I\u0027ve removed the changes to `SampleTable`, so the logic is the same as earlier, except we use a variable in `Track` instead of relying on the value in `AMEDIAFORMAT_KEY_DURATION`.",
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2968e0f8_0d5e27c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-06-21T14:04:20Z",
+      "side": 1,
+      "message": "if my understanding is correct...\n\nit seems that my misunderstanding has been between \"track duration\", which can be thought of as \"playback duration\", and \"how much data do I have for playback\" which is the sum of the sample times (which you\u0027ve also been calling duration).\n\nthe code and comments don\u0027t do an effective job of differentiating these. I think that part of this is that all are just \"duration\", part is lack of documentation/comments.\n\nI think the path forward is:\n-- comments in the code explaining the differences\n-- better variable/field names",
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85dc84ba_d0808915",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-06-21T14:04:20Z",
+      "side": 1,
+      "message": "Now i\u0027m very confused.\n\nthe other comments have lead me to believe that we can\u0027t use AMEDIAFORMAT_KEY_DURATION, but here we are setting it and this new mdhd_duration field.",
+      "range": {
+        "startLine": 1647,
+        "startChar": 15,
+        "endLine": 1648,
+        "endChar": 65
+      },
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7905ab8_5ac9c79f",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-06-21T14:04:20Z",
+      "side": 1,
+      "message": "seems to me that we should set AMEDIAFORMAT_KEY_DURATION to 0 here so that\nwe\u0027re equivalent on each branch of this if().",
+      "range": {
+        "startLine": 1650,
+        "startChar": 16,
+        "endLine": 1650,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a7240ccb_9e367224",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 1651,
+                "startChar": 0,
+                "endLine": 1651,
+                "endChar": 0
+              },
+              "replacement": "                AMediaFormat_setInt64(mLastTrack-\u003emeta, AMEDIAFORMAT_KEY_DURATION, 0);\n"
+            }
+          ]
+        }
+      ],
       "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

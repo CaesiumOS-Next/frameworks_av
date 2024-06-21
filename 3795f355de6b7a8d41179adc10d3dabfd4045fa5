@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b3f6c3d_41b77586",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-06-21T14:04:20Z",
+      "side": 1,
+      "message": "\u003d\u003d So, we don\u0027t need the value in this key anymore.\nfrom that description, it sounds more like \"can\u0027t use\" rather than \"don\u0027t need\".\n\nI want to see the explanation of why we can\u0027t use that key as comments in the code.\nw/o the comments -- the next person to look at this will wonder why we\u0027re recalculating instead of using the value stored in the track metadata.",
+      "parentUuid": "a29b97c6_2625ab96",
+      "range": {
+        "startLine": 533,
+        "startChar": 11,
+        "endLine": 533,
+        "endChar": 42
+      },
+      "revId": "3795f355de6b7a8d41179adc10d3dabfd4045fa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd7475a3_ba3c8384",
         "filename": "media/module/extractors/mp4/SampleTable.cpp",
         "patchSetId": 3
