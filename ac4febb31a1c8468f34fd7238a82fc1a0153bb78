@@ -94,6 +94,30 @@
       },
       "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45a439a2_401137ca",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2611,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-21T22:59:39Z",
+      "side": 1,
+      "message": "This seems ALIGN16(width)*ALIGN16(height). I\u0027m fine with either defining ALIGN16 or expectedMapSize. using inline function is also fine.",
+      "parentUuid": "4a47593f_b19ed3a5",
+      "range": {
+        "startLine": 2611,
+        "startChar": 38,
+        "endLine": 2611,
+        "endChar": 80
+      },
+      "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
