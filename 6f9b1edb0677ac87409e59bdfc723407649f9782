@@ -16,6 +16,24 @@
       "message": "Makes sense. Ideally, the checks could be made on each input parameter directly, however using conversion code for validation is fine, too.",
       "revId": "6f9b1edb0677ac87409e59bdfc723407649f9782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f508aee5_097cc3e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590836
+      },
+      "writtenOn": "2024-06-21T10:21:36Z",
+      "side": 1,
+      "message": "So to identify which input param is invalid, specific log will be added by the \u0027toAidl\u0027 method.\n\n\nI will add the remaining checks as well for this.",
+      "parentUuid": "313694bb_9ed18da5",
+      "revId": "6f9b1edb0677ac87409e59bdfc723407649f9782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
