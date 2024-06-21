@@ -70,6 +70,30 @@
       },
       "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a47593f_b19ed3a5",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2611,
+      "author": {
+        "id": 1392607
+      },
+      "writtenOn": "2024-06-21T22:49:35Z",
+      "side": 1,
+      "message": "What about making 16 as a macro or const value instead of a magic number here?",
+      "parentUuid": "4d306ff4_eb30354e",
+      "range": {
+        "startLine": 2611,
+        "startChar": 38,
+        "endLine": 2611,
+        "endChar": 80
+      },
+      "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
