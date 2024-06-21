@@ -46,6 +46,30 @@
       },
       "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d306ff4_eb30354e",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2611,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-21T22:15:18Z",
+      "side": 1,
+      "message": "I suggest define this as macro or template function somewhere.",
+      "parentUuid": "3de99ace_344fd456",
+      "range": {
+        "startLine": 2611,
+        "startChar": 38,
+        "endLine": 2611,
+        "endChar": 80
+      },
+      "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
