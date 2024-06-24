@@ -57,6 +57,70 @@
       ],
       "revId": "5396713ee03822318aaab8d98ffc8af7f594f1a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b9358c_6d4ae59e",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-24T23:03:17Z",
+      "side": 1,
+      "message": "Typically",
+      "range": {
+        "startLine": 114,
+        "startChar": 10,
+        "endLine": 114,
+        "endChar": 17
+      },
+      "revId": "5396713ee03822318aaab8d98ffc8af7f594f1a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f789ff2e_08277eea",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-24T23:03:17Z",
+      "side": 1,
+      "message": "a stop() (and remove a unnecessary white space)",
+      "range": {
+        "startLine": 114,
+        "startChar": 38,
+        "endLine": 114,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c7fdbcfe_83ce2ea4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/vndk/include/C2BqBufferPriv.h",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 115,
+                "endChar": 0
+              },
+              "replacement": " *        Typical after HAL processes a stop() request.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5396713ee03822318aaab8d98ffc8af7f594f1a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
