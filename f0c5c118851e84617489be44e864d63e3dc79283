@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "205b291e_7c66f692",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-24T03:59:41Z",
+      "side": 1,
+      "message": "Another point, I want to add here is that QC uses MMAP as a direct output (MMAP_NOIRQ | DIRECT), \n\nEven the xml Mikhail pointed is using the same combination of flags.\n\nAnd, as per logic of checkOutputsForDevice, direct outputs are closed after being opened (if none of ongoing session is moved to this new output), ideally, on attaching a device new output should not be moved to mmap, I commented here : https://android-review.googlesource.com/c/platform/frameworks/av/+/3133376/5/services/audiopolicy/managerdefault/AudioPolicyManager.cpp#6635",
+      "parentUuid": "3d712e5d_5db22b15",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "f0c5c118851e84617489be44e864d63e3dc79283",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4d12ab7_52e48544",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 5
