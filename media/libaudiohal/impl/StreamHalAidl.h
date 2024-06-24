@@ -243,6 +243,8 @@ class StreamHalAidl : public virtual StreamHalInterface, public ConversionHelper
 
     status_t exit();
 
+    status_t close();
+
     void onAsyncTransferReady();
     void onAsyncDrainReady();
     void onAsyncError();
@@ -461,7 +463,7 @@ class StreamInHalAidl : public StreamInHalInterface, public StreamHalAidl {
             const std::shared_ptr<::aidl::android::media::audio::IHalAdapterVendorExtension>& vext,
             const sp<MicrophoneInfoProvider>& micInfoProvider);
 
-    ~StreamInHalAidl() override = default;
+    ~StreamInHalAidl() override;
 };
 
 } // namespace android
