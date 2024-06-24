@@ -104,10 +104,6 @@ StreamHalAidl::StreamHalAidl(
 
 StreamHalAidl::~StreamHalAidl() {
     ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
-    if (mStream != nullptr) {
-        ndk::ScopedAStatus status = mStream->close();
-        ALOGE_IF(!status.isOk(), "%s: status %s", __func__, status.getDescription().c_str());
-    }
 }
 
 status_t StreamHalAidl::getBufferSize(size_t *size) {
@@ -479,6 +475,13 @@ status_t StreamHalAidl::exit() {
     return statusTFromBinderStatus(mStream->prepareToClose());
 }
 
+status_t StreamHalAidl::close() {
+    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    TIME_CHECK();
+    if (!mStream) return NO_INIT;
+    return statusTFromBinderStatus(mStream->close());
+}
+
 void StreamHalAidl::onAsyncTransferReady() {
     if (auto state = getState(); state == StreamDescriptor::State::TRANSFERRING) {
         // Retrieve the current state together with position counters unconditionally
@@ -678,6 +681,7 @@ StreamOutHalAidl::~StreamOutHalAidl() {
     if (auto broker = mCallbackBroker.promote(); broker != nullptr) {
         broker->clearCallbacks(static_cast<StreamOutHalInterface*>(this));
     }
+    close();
 }
 
 status_t StreamOutHalAidl::setParameters(const String8& kvPairs) {
@@ -1039,6 +1043,10 @@ StreamInHalAidl::StreamInHalAidl(
         : StreamHalAidl("StreamInHalAidl", true /*isInput*/, config, nominalLatency,
                 std::move(context), getStreamCommon(stream), vext),
           mStream(stream), mMicInfoProvider(micInfoProvider) {}
+
+StreamInHalAidl::~StreamInHalAidl() {
+    close();
+}
 
 status_t StreamInHalAidl::setGain(float gain) {
     TIME_CHECK();
