@@ -118,6 +118,30 @@
       },
       "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a4e7ea_3d09f8ee",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2611,
+      "author": {
+        "id": 1392607
+      },
+      "writtenOn": "2024-06-24T17:29:26Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, I agree this is nicer. Hi \nSuyog, could you modify?",
+      "parentUuid": "45a439a2_401137ca",
+      "range": {
+        "startLine": 2611,
+        "startChar": 38,
+        "endLine": 2611,
+        "endChar": 80
+      },
+      "revId": "ac4febb31a1c8468f34fd7238a82fc1a0153bb78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
