@@ -582,6 +582,7 @@ void MPEG4Writer::initInternal(int fd, bool isFirstSession) {
         mAreGeoTagsAvailable = false;
         mSwitchPending = false;
         mIsFileSizeLimitExplicitlyRequested = false;
+        mNewFdAvailable = false;
     }
 
     // Verify mFd is seekable
@@ -1260,6 +1261,10 @@ status_t MPEG4Writer::switchFd() {
     Mutex::Autolock l(mLock);
     if (mSwitchPending) {
         return OK;
+    }
+    // Wait for the signal only if the new file is not available.
+    if (!mNewFdAvailable) {
+        mFdCond.waitRelative(mLock, 1000000000);
     }
 
     if (mNextFd == -1) {
@@ -2012,6 +2017,7 @@ void MPEG4Writer::notifyApproachingLimit() {
         mMaxFileSizeLimitBytes);
     notify(MEDIA_RECORDER_EVENT_INFO, MEDIA_RECORDER_INFO_MAX_FILESIZE_APPROACHING, 0);
     mSendNotify = true;
+    mNewFdAvailable = false;
 }
 
 void MPEG4Writer::write(const void *data, size_t size) {
@@ -2433,6 +2439,8 @@ status_t MPEG4Writer::setNextFd(int fd) {
         return INVALID_OPERATION;
     }
     mNextFd = dup(fd);
+    mFdCond.signal();
+    mNewFdAvailable = true;
     return OK;
 }
 

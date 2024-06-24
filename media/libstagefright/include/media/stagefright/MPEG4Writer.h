@@ -144,6 +144,8 @@ private:
     std::mutex mFallocMutex;
     bool mPreAllocFirstTime; // Pre-allocate space for file and track headers only once per file.
     uint64_t mPrevAllTracksTotalMetaDataSizeEstimate;
+    Condition mFdCond; // Guarded by mLock.
+    bool mNewFdAvailable; // Guarded by mLock.
 
     List<Track *> mTracks;
 
