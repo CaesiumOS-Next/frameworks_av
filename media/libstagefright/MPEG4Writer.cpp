@@ -1261,6 +1261,10 @@ status_t MPEG4Writer::switchFd() {
     if (mSwitchPending) {
         return OK;
     }
+    // Wait for the signal only if the new file is not available.
+    if (!newFdAvailable) {
+        mFdCond.waitRelative(mLock, 1000000000);
+    }
 
     if (mNextFd == -1) {
         ALOGW("No FileDescriptor for next recording");
@@ -2012,6 +2016,7 @@ void MPEG4Writer::notifyApproachingLimit() {
         mMaxFileSizeLimitBytes);
     notify(MEDIA_RECORDER_EVENT_INFO, MEDIA_RECORDER_INFO_MAX_FILESIZE_APPROACHING, 0);
     mSendNotify = true;
+    newFdAvailable = false;
 }
 
 void MPEG4Writer::write(const void *data, size_t size) {
@@ -2433,6 +2438,8 @@ status_t MPEG4Writer::setNextFd(int fd) {
         return INVALID_OPERATION;
     }
     mNextFd = dup(fd);
+    mFdCond.signal();
+    newFdAvailable = true;
     return OK;
 }
 
