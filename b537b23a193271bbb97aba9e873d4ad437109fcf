@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e0d827_0962187f",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-06-24T12:24:01Z",
+      "side": 1,
+      "message": "Add a comment that we need to wait only if the new file is not available.",
+      "range": {
+        "startLine": 1265,
+        "startChar": 0,
+        "endLine": 1265,
+        "endChar": 26
+      },
+      "revId": "b537b23a193271bbb97aba9e873d4ad437109fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "676a35a5_96f5b0b5",
+        "filename": "media/libstagefright/include/media/stagefright/MPEG4Writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-06-24T12:24:01Z",
+      "side": 1,
+      "message": "Please rename the condition variable and prefix `m` to both member variables.",
+      "range": {
+        "startLine": 147,
+        "startChar": 14,
+        "endLine": 147,
+        "endChar": 16
+      },
+      "revId": "b537b23a193271bbb97aba9e873d4ad437109fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
