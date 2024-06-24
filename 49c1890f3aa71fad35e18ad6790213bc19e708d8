@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8e7142fc_7f7c58f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-06-24T09:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "474d0fcc_77f597eb",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ab4a954f_78935a34",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -58,6 +82,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff813e8_5164439d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-06-24T09:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2968e0f8_0d5e27c3",
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85dc84ba_d0808915",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-06-21T14:04:20Z",
       "side": 1,
       "message": "Now i\u0027m very confused.\n\nthe other comments have lead me to believe that we can\u0027t use AMEDIAFORMAT_KEY_DURATION, but here we are setting it and this new mdhd_duration field.",
+      "range": {
+        "startLine": 1647,
+        "startChar": 15,
+        "endLine": 1648,
+        "endChar": 65
+      },
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf6238b2_461f8fa7",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-06-24T09:24:56Z",
+      "side": 1,
+      "message": "The next CL that corrects the playback for trimmed iPhone videos removes the set of this key from here and moves it to the track header parse. I\u0027ve left it because the older implementation still needs a global value set.",
+      "parentUuid": "85dc84ba_d0808915",
       "range": {
         "startLine": 1647,
         "startChar": 15,
@@ -118,6 +184,30 @@
           ]
         }
       ],
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaccce5f_484bbde8",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-06-24T09:24:56Z",
+      "side": 1,
+      "message": "That would be setting a value in a key that wouldn\u0027t have been populated otherwise, so `AMediaFormat_getInt64` will now return a value instead of `false`. The key wouldn\u0027t have a value set earlier as well if the condition failed.\n\nI am setting the variable `mMdhdDuration` so that the conditions do not fail during the padding calculation.",
+      "parentUuid": "a7905ab8_5ac9c79f",
+      "range": {
+        "startLine": 1650,
+        "startChar": 16,
+        "endLine": 1650,
+        "endChar": 46
+      },
       "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
