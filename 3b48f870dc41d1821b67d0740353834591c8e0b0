@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb57aabd_f1ef8933",
+        "filename": "services/camera/libcameraservice/fuzzer/DepthProcessorFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1353865
+      },
+      "writtenOn": "2024-06-24T17:38:40Z",
+      "side": 1,
+      "message": "Should we check for max?",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c8248432_af9fa0aa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/camera/libcameraservice/fuzzer/DepthProcessorFuzzer.cpp",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 71,
+                "endChar": 0
+              },
+              "replacement": "    inputFrame.mMainJpegSize \u003d std::min(buffer.size(), UINT32_MAX);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
