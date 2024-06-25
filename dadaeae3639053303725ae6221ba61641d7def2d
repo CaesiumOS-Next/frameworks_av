@@ -50,6 +50,24 @@
       "message": "quic_mpang@quicinc.com: Could you please help in getting Qualcomm-Review.\n\nAlso, as Andy has noted, could you please check if you see any difference in power consumption with this change?",
       "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afda8e1_454599e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3145791
+      },
+      "writtenOn": "2024-06-25T04:26:06Z",
+      "side": 1,
+      "message": "Hi Mikhail, power consumption might not be impacted, because change only makes mLastReplyLifeTimeNs smaller, not impact the frequency of calling get timestamp from Nuplayer",
+      "parentUuid": "7228c864_1ce8ba94",
+      "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
