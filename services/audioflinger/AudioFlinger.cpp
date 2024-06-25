@@ -3781,7 +3781,8 @@ audio_unique_id_t AudioFlinger::nextUniqueId(audio_unique_id_use_t use)
 
 IAfPlaybackThread* AudioFlinger::primaryPlaybackThread_l() const
 {
-    audio_utils::lock_guard lock(hardwareMutex());
+    // use unique_lock as we may selectively unlock.
+    audio_utils::unique_lock lock(hardwareMutex());
     if (mPrimaryHardwareDev == nullptr) {
         return nullptr;
     }
@@ -3790,7 +3791,9 @@ IAfPlaybackThread* AudioFlinger::primaryPlaybackThread_l() const
         if(thread->isDuplicating()) {
             continue;
         }
+        lock.unlock();
         AudioStreamOut *output = thread->getOutput();
+        lock.lock();
         if (output != NULL && output->audioHwDev == mPrimaryHardwareDev) {
             return thread;
         }
