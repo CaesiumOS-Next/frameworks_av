@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "95675856ea133ca1e8441891cefaa1069b51ac66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd463dfc_a978318d",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-06-25T13:38:22Z",
+      "side": 1,
+      "message": "I thought the problem we were solving was that the samples were shorter than the playback duration. That is the scenario where we would need to pad to get to the true playback duration. and all of the other comments have been talking about padding.\n\nThis comment implies that the sample data exceeds the playback duration, which would lead to clipping not padding.",
+      "range": {
+        "startLine": 1650,
+        "startChar": 19,
+        "endLine": 1651,
+        "endChar": 100
+      },
+      "revId": "95675856ea133ca1e8441891cefaa1069b51ac66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
