@@ -40,6 +40,30 @@
       ],
       "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a23049dc_327cbd97",
+        "filename": "services/camera/libcameraservice/fuzzer/DepthProcessorFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2046581
+      },
+      "writtenOn": "2024-06-25T15:50:03Z",
+      "side": 1,
+      "message": "On L57, the fuzzer ensures that `buffer.size()` would not exceed 80% of `size`.",
+      "parentUuid": "bb57aabd_f1ef8933",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 45
+      },
+      "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
