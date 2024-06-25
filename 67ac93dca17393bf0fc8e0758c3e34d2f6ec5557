@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a95636d_ff4c8d5b",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-06-25T08:44:59Z",
+      "side": 1,
+      "message": "- Add a constant `FD_MAX_WAIT_NANOS \u003d 1000000000` or similar and use it here? The reason is that I\u0027m not sure if it will be obvious to the reader that this is in nanoseconds.\n- What\u0027s the reason for choosing one second here?",
+      "range": {
+        "startLine": 1266,
+        "startChar": 36,
+        "endLine": 1266,
+        "endChar": 46
+      },
+      "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4defbcf7_06d0b4d0",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-06-25T08:44:59Z",
+      "side": 1,
+      "message": "Hm, why is this reset here?\n\n`newFdAvailable` seems to be equal to `mNextFd !\u003d -1`, except that it\u0027s set to false here as well, so it would be nice to remove this line and just use `mNextFd` if possible. But I\u0027m not sure if that\u0027s a safe change because I didn\u0027t follow why this line is here.",
+      "range": {
+        "startLine": 2019,
+        "startChar": 0,
+        "endLine": 2019,
+        "endChar": 27
+      },
+      "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0727feef_88ee8fee",
+        "filename": "media/libstagefright/include/media/stagefright/MPEG4Writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-06-25T08:44:59Z",
+      "side": 1,
+      "message": "Nits:\n- Please add the `m` prefix.\n- Should `mFdAvailable` be initialized in `initInternal` like the private fields?\n- I\u0027m not sure about conventions here but would it make sense to add a comment to say these are guarded by `mLock`?",
+      "range": {
+        "startLine": 148,
+        "startChar": 23,
+        "endLine": 148,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9ece6d62_a6c64d46",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/include/media/stagefright/MPEG4Writer.h",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 149,
+                "endChar": 0
+              },
+              "replacement": "    bool mFdAvailable \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
