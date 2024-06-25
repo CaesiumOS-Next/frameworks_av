@@ -68,6 +68,24 @@
       "parentUuid": "7228c864_1ce8ba94",
       "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "550dc1b4_fb5b8518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3145791
+      },
+      "writtenOn": "2024-06-25T07:29:18Z",
+      "side": 1,
+      "message": "please let me know if you need the power consumption test result",
+      "parentUuid": "0afda8e1_454599e0",
+      "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
