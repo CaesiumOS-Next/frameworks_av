@@ -86,6 +86,24 @@
       "parentUuid": "0afda8e1_454599e0",
       "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47cfbf33_2ff70e4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-25T17:56:25Z",
+      "side": 1,
+      "message": "The change of the last reply lifetime potentially affects how often the framework calls into the HAL. With larger lifetime, more requests done by the app will end up just taking the last cached value, while the shorter lifetime may force the framework to ask the HAL more often. I don\u0027t think that it will have a significant impact on power, but if you have an established way of running the same test scenario with and without this change and checking if there is any significant change in power consumption figures, that would be great.",
+      "parentUuid": "550dc1b4_fb5b8518",
+      "revId": "dadaeae3639053303725ae6221ba61641d7def2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
