@@ -278,7 +278,8 @@ bool IAfThreadBase::isValidPcmSinkChannelMask(audio_channel_mask_t channelMask) 
             return false;
         }
         // check that channelMask is the "canonical" one we expect for the channelCount.
-        return audio_channel_position_mask_is_out_canonical(channelMask);
+        return audio_channel_position_mask_is_out_canonical(channelMask) ||
+                audio_utils::channels::IChannelMix::isOutputChannelMaskSupported(channelMask);
         }
     case AUDIO_CHANNEL_REPRESENTATION_INDEX:
         if (kEnableExtendedChannels) {
