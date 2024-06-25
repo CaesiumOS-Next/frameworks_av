@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f9d9fb_26b90cc4",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-25T17:52:19Z",
+      "side": 1,
+      "message": "Sorry for the confusion.\n\nSince ALIGN16 is ((((x) + 15) \u003e\u003e 4) \u003c\u003c 4),\nthis may lead to the confusion.\n\nBetter to have the original here, but with some comments regarding qpOffsetMapSize\n\n```\n// qpOffsetMapSize related comment...\nint expectedMapSize \u003d ((width + 15) / 16) * ((height + 15) / 16);\n```",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 36
+      },
+      "revId": "f012a10a3545307d0b3984b5ae933ef6d187c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
