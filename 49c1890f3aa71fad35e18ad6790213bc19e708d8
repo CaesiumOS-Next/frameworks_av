@@ -149,6 +149,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e4c2e12_9ff79e38",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-06-25T13:30:31Z",
+      "side": 1,
+      "message": "I think it\u0027s a bit confusing that this CL description describes how `AMEDIAFORMAT_KEY_DURATION` should contain the duration from the track header, but the change to actually change it to contain that is in a separate CL (this CL seems to still set it to the media header duration). \n\nMaybe both changes should be merged into a single CL that is easier to describe and more of an \u0027atomic\u0027 change?",
+      "parentUuid": "cf6238b2_461f8fa7",
+      "range": {
+        "startLine": 1647,
+        "startChar": 15,
+        "endLine": 1648,
+        "endChar": 65
+      },
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7905ab8_5ac9c79f",
         "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
         "patchSetId": 5
