@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6daa1836_d9422749",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-25T23:51:45Z",
+      "side": 1,
+      "message": "Please add `Bug: 349413905` and `Test: ` + how this can be tested.",
+      "revId": "506e6d2038a8912a630770d7e47661e6439c0b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
