@@ -295,6 +295,19 @@ void InputBufferManager::_onBufferDestroyed(const C2Buffer* buf, void* arg) {
                    << std::dec << ").";
         return;
     }
+    
+    // Check if the buffer is the same as the one we are tracking.
+    std::shared_ptr<C2Buffer> findTrackedBuffer = (*findBufferId)->buffer.lock();
+    if (findTrackedBuffer != nullptr && findTrackedBuffer.get() != buf) {
+        LOG(DEBUG) << "InputBufferManager::_onBufferDestroyed -- "
+                   << "received invalid buffer: "
+                   << "buf @ 0x" << std::hex << buf
+                   << " (frameIndex = " << std::dec << bufferId->frameIndex
+                   << ", bufferIndex = " << bufferId->bufferIndex
+                   << ", listener @ 0x" << std::hex << bufferId->listener.unsafe_get()
+                   << std::dec << ").";
+        return;
+    }
 
     bufferIds.erase(findBufferId);
     if (bufferIds.empty()) {
