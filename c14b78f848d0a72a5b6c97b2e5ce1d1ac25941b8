@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b702c184_373f82f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-26T18:21:26Z",
+      "side": 1,
+      "message": "Eric, could you please approve, this is a CP of ag/28017110",
+      "revId": "c14b78f848d0a72a5b6c97b2e5ce1d1ac25941b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
