@@ -322,14 +322,16 @@ DeviceVector Engine::getDevicesForStrategyInt(legacy_strategy strategy,
                     AUDIO_DEVICE_OUT_DGTL_DOCK_HEADSET, AUDIO_DEVICE_OUT_SPEAKER});
         }
 
-        // if SCO headset is connected and we are told to use it, play ringtone over
-        // speaker and BT SCO
-        if (!availableOutputDevices.getDevicesFromTypes(getAudioDeviceOutAllScoSet()).isEmpty()) {
+        // if SCO/BLE headset is connected and we are told to use it, play ringtone over
+        // speaker and BT SCO/BLE
+        if (!availableOutputDevices.getDevicesFromTypes(getAudioDeviceOutAllScoSet()).isEmpty() ||
+                !availableOutputDevices.getDevicesFromTypes(
+                getAudioDeviceOutAllBleSet()).isEmpty()) {
             DeviceVector devices2;
             devices2 = availableOutputDevices.getFirstDevicesFromTypes({
                     AUDIO_DEVICE_OUT_BLUETOOTH_SCO_CARKIT, AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET,
-                    AUDIO_DEVICE_OUT_BLUETOOTH_SCO});
-            // Use ONLY Bluetooth SCO output when ringing in vibration mode
+                    AUDIO_DEVICE_OUT_BLUETOOTH_SCO, AUDIO_DEVICE_OUT_BLE_HEADSET});
+            // Use ONLY Bluetooth SCO/LEA output when ringing in vibration mode
             if (!((getForceUse(AUDIO_POLICY_FORCE_FOR_SYSTEM) == AUDIO_POLICY_FORCE_SYSTEM_ENFORCED)
                     && (strategy == STRATEGY_ENFORCED_AUDIBLE))) {
                 if (getForceUse(AUDIO_POLICY_FORCE_FOR_VIBRATE_RINGING)
@@ -340,8 +342,10 @@ DeviceVector Engine::getDevicesForStrategyInt(legacy_strategy strategy,
                     }
                 }
             }
-            // Use both Bluetooth SCO and phone default output when ringing in normal mode
+            // Use both Bluetooth SCO/LEA and phone default output when ringing in normal mode
             if (audio_is_bluetooth_out_sco_device(getPreferredDeviceTypeForLegacyStrategy(
+                    availableOutputDevices, STRATEGY_PHONE))
+                    || audio_is_ble_out_device(getPreferredDeviceTypeForLegacyStrategy(
                     availableOutputDevices, STRATEGY_PHONE))) {
                 if (strategy == STRATEGY_SONIFICATION) {
                     devices.replaceDevicesByType(
