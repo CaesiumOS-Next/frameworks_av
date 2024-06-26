@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e44efe6_4ab9c828",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-06-26T02:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6daa1836_d9422749",
+      "revId": "506e6d2038a8912a630770d7e47661e6439c0b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cfe2c5a_a9ad5cd1",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-25T23:57:58Z",
       "side": 1,
       "message": "nit: already in stream state",
+      "range": {
+        "startLine": 451,
+        "startChar": 23,
+        "endLine": 451,
+        "endChar": 37
+      },
+      "revId": "506e6d2038a8912a630770d7e47661e6439c0b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22f5c3ba_36b0d5a8",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-06-26T02:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cfe2c5a_a9ad5cd1",
       "range": {
         "startLine": 451,
         "startChar": 23,
