@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b746636_41dbb203",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-27T09:12:12Z",
+      "side": 1,
+      "message": "done. \n\nhowever, regarding \\ \" %s \\\" , APM already is using profile name prints, none of existing print use priniting in quotes, to keep in symmetry with existing logs, we can skip adding quotes.",
+      "parentUuid": "cbf4d0bf_568aa240",
+      "range": {
+        "startLine": 1533,
+        "startChar": 29,
+        "endLine": 1533,
+        "endChar": 30
+      },
+      "revId": "f0561f0cfee8ac825b476a3ccb40e3bbc179ac10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96cf6930_17fe117c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-20T20:56:10Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"priortize\" -- should it be \"prioritize\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"priortize\" -- should it be \"prioritize\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 1548,
+        "startChar": 48,
+        "endLine": 1548,
+        "endChar": 57
+      },
+      "revId": "f0561f0cfee8ac825b476a3ccb40e3bbc179ac10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7903bd3a_c5eed733",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-27T09:12:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "96cf6930_17fe117c",
       "range": {
         "startLine": 1548,
         "startChar": 48,
@@ -84,6 +132,30 @@
           ]
         }
       ],
+      "revId": "f0561f0cfee8ac825b476a3ccb40e3bbc179ac10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ad744e_670f7762",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 6478,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-27T09:12:12Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d6610?q\u003d%20profile-%3EgetName%20filepath:%20audio\u0026sq\u003d\n\n\nAPM already is using profile name prints, none of existing print use priniting in quotes, to keep in symmetry with existing logs, we can skip adding quotes.",
+      "parentUuid": "a08ebdd9_fcfaeb6f",
+      "range": {
+        "startLine": 6478,
+        "startChar": 75,
+        "endLine": 6478,
+        "endChar": 76
+      },
       "revId": "f0561f0cfee8ac825b476a3ccb40e3bbc179ac10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
