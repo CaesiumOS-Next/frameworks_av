@@ -1,0 +1,443 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106cafac_62b88202",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "nit: camelCase",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddda92e2_a5eee0c1",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "nit: const ref here and below",
+      "range": {
+        "startLine": 100,
+        "startChar": 28,
+        "endLine": 100,
+        "endChar": 37
+      },
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3fb310_b98ca0a3",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "nit: you can use android::base::EqualsIgnoreCase [1] here and below:\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:system/libbase/include/android-base/strings.h;drc\u003d50251b5af2588301c8a477ea5a7f6b7d0050c49c;l\u003d128",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "de40527c_9a7b3ae5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 153,
+                "startChar": 0,
+                "endLine": 154,
+                "endChar": 0
+              },
+              "replacement": "    if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_MPEG)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 161,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_AMR_NB)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 164,
+                "startChar": 0,
+                "endLine": 165,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_AMR_WB)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 168,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_AAC)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_VORBIS)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_OPUS)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 185,
+                "startChar": 0,
+                "endLine": 186,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_RAW)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_FLAC)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 193,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_G711_ALAW)\n            || base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_G711_MLAW)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 198,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_MSGSM)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 202,
+                "startChar": 0,
+                "endLine": 203,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_AC3)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 204,
+                "startChar": 0,
+                "endLine": 205,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_EAC3)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 206,
+                "startChar": 0,
+                "endLine": 207,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_EAC3_JOC)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 211,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_AC4)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 214,
+                "startChar": 0,
+                "endLine": 215,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_DTS)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 219,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_DTS_HD)) {\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "    } else if (base::EqualsIgnoreCase(mediaType, MIMETYPE_AUDIO_DTS_UHD)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ed34a8_041b979e",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "inputChannelsCopy?",
+      "range": {
+        "startLine": 281,
+        "startChar": 28,
+        "endLine": 281,
+        "endChar": 43
+      },
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d5d547_2dcd3db4",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "maybe `entryValue` or `valueStr`?",
+      "range": {
+        "startLine": 317,
+        "startChar": 12,
+        "endLine": 317,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5d6fa00c_6b9c55a8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 317,
+                "startChar": 0,
+                "endLine": 320,
+                "endChar": 0
+              },
+              "replacement": "    AString entryValue;\n    if (format-\u003efindString(\"channel-ranges\", \u0026entryValue)) {\n        std::vector\u003cstd::string\u003e channelStrings \u003d base::Split(std::string(entryValue.c_str()), \",\");\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 329,
+                "startChar": 0,
+                "endLine": 331,
+                "endChar": 0
+              },
+              "replacement": "    } else if (format-\u003efindString(\"channel-range\", \u0026entryValue)) {\n        std::optional\u003cRange\u003cint\u003e\u003e oneRange \u003d ParseIntRange(std::string(entryValue.c_str()));\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 334,
+                "startChar": 0,
+                "endLine": 336,
+                "endChar": 0
+              },
+              "replacement": "    } else if (format-\u003efindString(\"max-channel-count\", \u0026entryValue)) {\n        maxInputChannels \u003d std::atoi(entryValue.c_str());\n"
+            },
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 346,
+                "startChar": 0,
+                "endLine": 348,
+                "endChar": 0
+              },
+              "replacement": "    if (format-\u003efindString(\"bitrate-range\", \u0026entryValue)) {\n        std::optional\u003cRange\u003cint\u003e\u003e parsedBitrate \u003d ParseIntRange(entryValue.c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bafe71e_522684d9",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "maybe unnecessary to initialize the size",
+      "fixSuggestions": [
+        {
+          "fixId": "fd751741_61c6adb4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/AudioCapabilities.cpp",
+              "range": {
+                "startLine": 320,
+                "startChar": 0,
+                "endLine": 321,
+                "endChar": 0
+              },
+              "replacement": "        std::vector\u003cRange\u003cint\u003e\u003e channelRanges;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af663e23_91d08369",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "maybe return const ref?",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "794dee41_7aa81fc2",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "return const ref?",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a6adec6_6e61d8a8",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:12:22Z",
+      "side": 1,
+      "message": "nit: ptr instead of ref for out params",
+      "fixSuggestions": [
+        {
+          "fixId": "c0b09c74_b5c54efb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 135,
+                "startChar": 0,
+                "endLine": 137,
+                "endChar": 0
+              },
+              "replacement": "void sortDistinctRanges(std::vector\u003cRange\u003cT\u003e\u003e *ranges) {\n    std::sort(ranges-\u003ebegin(), ranges-\u003eend(),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
