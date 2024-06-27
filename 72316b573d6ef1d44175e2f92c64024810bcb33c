@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41baee56_4419fd92",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T21:37:00Z",
+      "side": 1,
+      "message": "requestBuffer()?",
+      "range": {
+        "startLine": 65,
+        "startChar": 24,
+        "endLine": 65,
+        "endChar": 37
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d30ca68_d6fc8f65",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T21:37:00Z",
+      "side": 1,
+      "message": "```suggestion\n * The decoder HAL writes a decoded frame into C2GraphicBlock. Upon\n * completion, the component sends the block to the client in the remote process\n * (i.e. to MediaCodec). The remote process renders the frame into the output surface\n * via IGBP::queueBuffer() (Note: this is not hidlized.).\n```",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 55
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e007ec_9d6a390c",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T21:37:00Z",
+      "side": 1,
+      "message": "```suggestion\n * If the decoder HAL destroys the C2GraphicBlock without transferring to the\n * client, the destroy request goes to the BlockPool. Then\n * the BlockPool free the associated GraphicBuffer from a slot to\n * HGBP in order to recycle via HGBP::cancelBuffer().\n```",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 54
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191d2c79_c9a42ea7",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T21:37:00Z",
+      "side": 1,
+      "message": "```suggestion\n * When the surface is switched to a null surface, all the\n * GraphicBuffers in the cache are cleared.\n *\n```",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42cfb7ec_ca28793e",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T21:37:00Z",
+      "side": 1,
+      "message": "```suggestion\n * Some vendor devices have issues with graphic buffer lifecycle management,\n * where the graphic buffers get released even when the cloned native handles\n * in the remote process are not closed yet. This issue led to rare crashes \n * for those devices when the cache is cleared early.\n```",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 66
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be97191_3345dca5",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T21:37:00Z",
+      "side": 1,
+      "message": "```suggestion\n * The workaround is not enabled by default, and can be enabled via a\n * system property as shown below:\n```",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 49
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
