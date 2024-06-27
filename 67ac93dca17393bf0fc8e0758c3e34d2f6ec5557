@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1c0bfa_18e33f43",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 3263990
+      },
+      "writtenOn": "2024-06-27T06:36:29Z",
+      "side": 1,
+      "message": "It is possible that the application hasn\u0027t set the file descriptor even after an approaching file size. In this case, it should still fail as before and not wait indefinitely hence the timeout. While debugging this issue on Shiba we observed that the delay in handling the \u0027setNextFd\u0027 message from application was always less than 1 second. So, we have used this value for timeout.",
+      "parentUuid": "2a95636d_ff4c8d5b",
+      "range": {
+        "startLine": 1266,
+        "startChar": 36,
+        "endLine": 1266,
+        "endChar": 46
+      },
+      "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4defbcf7_06d0b4d0",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-25T08:44:59Z",
       "side": 1,
       "message": "Hm, why is this reset here?\n\n`newFdAvailable` seems to be equal to `mNextFd !\u003d -1`, except that it\u0027s set to false here as well, so it would be nice to remove this line and just use `mNextFd` if possible. But I\u0027m not sure if that\u0027s a safe change because I didn\u0027t follow why this line is here.",
+      "range": {
+        "startLine": 2019,
+        "startChar": 0,
+        "endLine": 2019,
+        "endChar": 27
+      },
+      "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6332002_42bbae5d",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 3263990
+      },
+      "writtenOn": "2024-06-27T06:36:29Z",
+      "side": 1,
+      "message": "ACK. Updated the code to use mNextFd for conditional wait in switchFd.  \n\nPreviously, we tracked if notifyApproachingLimit has been sent to the app using newFdAvailable without a timeout in the wait. However, when a timeout was introduced, both newFdAvailable and mNextFd are equal.",
+      "parentUuid": "4defbcf7_06d0b4d0",
       "range": {
         "startLine": 2019,
         "startChar": 0,
@@ -84,6 +132,30 @@
           ]
         }
       ],
+      "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "703af171_80843fcf",
+        "filename": "media/libstagefright/include/media/stagefright/MPEG4Writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 3263990
+      },
+      "writtenOn": "2024-06-27T06:36:29Z",
+      "side": 1,
+      "message": "There doesn\u0027t seem to such a convention in the writer class. Additionally, the mLock mutex is protecting other methods and variables as well.  Adding a comment \u0027guarded by mLock\u0027 to our variable(mFdCond) might be confusing.",
+      "parentUuid": "0727feef_88ee8fee",
+      "range": {
+        "startLine": 148,
+        "startChar": 23,
+        "endLine": 148,
+        "endChar": 31
+      },
       "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
