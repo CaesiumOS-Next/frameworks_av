@@ -1100,6 +1100,54 @@ protected:
     C2BlockPool() = default;
 };
 
+class C2BlockPoolQueryIntf {
+public:
+    enum alloc_type_t : uint32_t  {
+        ALLOC_TYPE_LINEAR = 0,
+        ALLOC_TYPE_MAPPING,
+        ALLOC_TYPE_RINGBUFFER,
+    };
+
+    enum mem_usage_limit_type_t : uint32_t {
+        LIMIT_NONE = 0,
+        LIMIT_BY_FETCHED_BLOCK_COUNT,
+        LIMIT_BY_MEMORY_COSUMPTION,
+    };
+
+    struct MemLimit {
+        mem_usage_limit_type_t mLimitType;
+        size_t mLimit;
+    };
+
+    alloc_type_t queueAllocType();
+    bool queryBlockingFetch();
+    bool queryBlockingFetchFence();
+    bool queryFetchBlockWithFence(bool *config);
+    void queryMemLimit(MemLimit *limit, size_t *config);
+
+    c2_status_t configFetchBlockWithFence(bool config);
+    c2_status_t configMemLimit(size_t config);
+
+    struct BlockPoolMemUsageStat {
+        size_t mAllocatedBlockCount;
+        size_t mRecycledBlockCount;
+        size_t mActiveBlockCount;
+        size_t mTotalBlockCount;
+
+        size_t mActiveEstimatedBytes;
+        size_t mTotalEstimatedBytes;
+    };
+
+    c2_status_t queryMemUsage(BlockPoolMemUsageStat *stat);
+
+    // create interface for query
+    static c2_status_t CreateBlockPoolQueryIntf(
+            std::shared_ptr<C2BlockPool> pool,
+            std::shared_ptr<C2BlockPoolQueryIntf> *intf);
+protected:
+    C2BlockPoolQueryIntf() = default;
+};
+
 /// @}
 
 // ================================================================================================
