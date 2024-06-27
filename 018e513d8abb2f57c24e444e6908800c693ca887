@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "913ef05a_c557c26d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-27T08:45:50Z",
+      "side": 1,
+      "message": "Eric, update the change to skip opening mmap only if profiles are static, please review.",
+      "revId": "018e513d8abb2f57c24e444e6908800c693ca887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
