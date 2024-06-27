@@ -438,6 +438,132 @@
       ],
       "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b73b3db_ff19d6ef",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:24:48Z",
+      "side": 1,
+      "message": "nit: Aac",
+      "fixSuggestions": [
+        {
+          "fixId": "f6030aaf_497ec162",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "class AudioCapsAacTest : public testing::Test {\n"
+            },
+            {
+              "path": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": "    AudioCapsAacTest() {\n"
+            },
+            {
+              "path": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(AudioCapsAacTest, AudioCaps_AAC_Bitrate) {\n"
+            },
+            {
+              "path": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(AudioCapsAacTest, AudioCaps_AAC_InputChannelCount) {\n"
+            },
+            {
+              "path": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(AudioCapsAacTest, AudioCaps_AAC_SupportedSampleRates) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68be788_eb4d3432",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:24:48Z",
+      "side": 1,
+      "message": "maybe just check the whole vector?",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b92a76d_76cbfaf1",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:24:48Z",
+      "side": 1,
+      "message": "for true/false please use EXPECT_TRUE/FALSE\n\nalso more descriptive messages, e.g. \"isSampleRateSupported returned true for unsupported sample rate\"",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c0f7b1_101253d7",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-06-27T07:24:48Z",
+      "side": 1,
+      "message": "nit: Raw",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
