@@ -16,6 +16,75 @@
       "message": "Hi Mikhail, Eric,\n\nupdated the change as per comments, please review.",
       "revId": "9d2424ee431950434c78d6801aa8414b4fb543f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b4003dd_2a855179",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1541,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-27T22:03:38Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Build Warnings: data argument not used by format string [-Wformat-extra-args]\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    data argument not used by format string [-Wformat-extra-args]\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P76823301/targets/aosp_cf_x86_64_phone-trunk_staging-userdebug, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the aosp-main branch.",
+      "range": {
+        "startLine": 1541,
+        "startChar": 18,
+        "endLine": 1541,
+        "endChar": 46
+      },
+      "revId": "9d2424ee431950434c78d6801aa8414b4fb543f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3014332_bd6eb672",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-27T22:03:38Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Build Warnings: more \u0027%\u0027 conversions than data arguments [-Werror,-Wformat-insufficient-args]\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    more \u0027%\u0027 conversions than data arguments [-Werror,-Wformat-insufficient-args]\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P76823301/targets/aosp_cf_x86_64_phone-trunk_staging-userdebug, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the aosp-main branch.",
+      "range": {
+        "startLine": 1548,
+        "startChar": 82,
+        "endLine": 1548,
+        "endChar": 95
+      },
+      "revId": "9d2424ee431950434c78d6801aa8414b4fb543f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a32507_b1708195",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1549,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-27T22:03:38Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Build Warnings: format specifies type \u0027int\u0027 but the argument has type \u0027const value_type *\u0027 (aka \u0027const char *\u0027) [-Wformat]\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    format specifies type \u0027int\u0027 but the argument has type \u0027const value_type *\u0027 (aka \u0027const char *\u0027) [-Wformat]\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P76823301/targets/aosp_cf_x86_64_phone-trunk_staging-userdebug, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the aosp-main branch.",
+      "range": {
+        "startLine": 1549,
+        "startChar": 43,
+        "endLine": 1549,
+        "endChar": 71
+      },
+      "revId": "9d2424ee431950434c78d6801aa8414b4fb543f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
