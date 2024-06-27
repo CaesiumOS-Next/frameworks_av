@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc7a1647_71a58e77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-27T19:37:06Z",
+      "side": 1,
+      "message": "Could you file an issue and add the bug id to the commit message?",
+      "revId": "442cd10ed1ade8cdc68894d6f2076ec750649ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
