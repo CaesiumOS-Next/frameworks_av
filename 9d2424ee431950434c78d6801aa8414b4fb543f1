@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e456b3_3285c422",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-27T09:18:30Z",
+      "side": 1,
+      "message": "Hi Mikhail, Eric,\n\nupdated the change as per comments, please review.",
+      "revId": "9d2424ee431950434c78d6801aa8414b4fb543f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
