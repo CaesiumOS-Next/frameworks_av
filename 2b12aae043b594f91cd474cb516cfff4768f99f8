@@ -105,6 +105,24 @@
       "parentUuid": "a4b0db4b_91e54e32",
       "revId": "2b12aae043b594f91cd474cb516cfff4768f99f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c573c75_d6fe09e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2007245
+      },
+      "writtenOn": "2024-06-27T07:41:10Z",
+      "side": 1,
+      "message": "Sorry for the late reply, we still need audio.timestamp.corrected_output_device to be set to a correct property context.\nI have uploaded a new CL https://android-review.googlesource.com/c/platform/system/sepolicy/+/3150160, could you help to review it ?\nThank you.",
+      "parentUuid": "fdec82ac_01dc6167",
+      "revId": "2b12aae043b594f91cd474cb516cfff4768f99f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
