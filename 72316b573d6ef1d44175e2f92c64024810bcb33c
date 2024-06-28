@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba2e470_9d16317e",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-28T23:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41baee56_4419fd92",
+      "range": {
+        "startLine": 65,
+        "startChar": 24,
+        "endLine": 65,
+        "endChar": 37
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d30ca68_d6fc8f65",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-27T21:37:00Z",
       "side": 1,
       "message": "```suggestion\n * The decoder HAL writes a decoded frame into C2GraphicBlock. Upon\n * completion, the component sends the block to the client in the remote process\n * (i.e. to MediaCodec). The remote process renders the frame into the output surface\n * via IGBP::queueBuffer() (Note: this is not hidlized.).\n```",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 55
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6753f68a_bd8212ff",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-28T23:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d30ca68_d6fc8f65",
       "range": {
         "startLine": 70,
         "startChar": 2,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f46a49_db1c711c",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-28T23:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83e007ec_9d6a390c",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 54
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "191d2c79_c9a42ea7",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-06-27T21:37:00Z",
       "side": 1,
       "message": "```suggestion\n * When the surface is switched to a null surface, all the\n * GraphicBuffers in the cache are cleared.\n *\n```",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8652f1be_3e62d026",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-28T23:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "191d2c79_c9a42ea7",
       "range": {
         "startLine": 90,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36974489_8b62d917",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-28T23:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42cfb7ec_ca28793e",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 66
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1be97191_3345dca5",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-06-27T21:37:00Z",
       "side": 1,
       "message": "```suggestion\n * The workaround is not enabled by default, and can be enabled via a\n * system property as shown below:\n```",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 49
+      },
+      "revId": "72316b573d6ef1d44175e2f92c64024810bcb33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02468481_2f8e8aa8",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-06-28T23:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1be97191_3345dca5",
       "range": {
         "startLine": 104,
         "startChar": 0,
