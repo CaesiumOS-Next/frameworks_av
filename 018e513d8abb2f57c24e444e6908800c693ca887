@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a14a67e7_03e1bc2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-06-28T12:17:51Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/tests/audiopolicymanager_tests.cpp;l\u003d3205?q\u003dGetOutputForAttrForMMapWithPolicyMatched\n\nThis testcase is failing, \n\nwhich expects \"sCarBusMmapOutput\" to be there in device ports, \nthen tries to open an output with this map mix and device port.\n\n\nHowever, as in test_car_ap_atmos_offload_configuration.xml, the \"bus8_mmap_out\" is attached device, so It will be only added in mAvailableOutputDevices (only if there is valid connection of this device port to any mix port ), \n\nBecause we skip opening the mmap_out profile, the corresponding bus8_mmap_out is not added to output devices, which inturn provides devices through listAudioPorts.\n\n\nI have modified the logic in onNewAudioModuleAvailable API, \n\nskip open output / input only if \nit is static \u0026\u0026 device is related to port is not reached yet. \n\naudiopolicy_test are passing now.",
+      "parentUuid": "e8524bfb_cb094344",
+      "revId": "018e513d8abb2f57c24e444e6908800c693ca887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "913ef05a_c557c26d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
