@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43e7f53f_eb131638",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-28T16:41:52Z",
+      "side": 1,
+      "message": "Thank you Jaideep! I think we are almost done.",
+      "revId": "df9e5bbd7d158aa94e85540b9434891950d555f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bf36a19_70c752f8",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 6407,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-06-28T16:41:52Z",
+      "side": 1,
+      "message": "This can be simplified. First, there is no need to run the loop if `openMMapOutput` is initially `true`. Second, we can add a method to `DeviceVector` which checks if all devices are attached, and use it here. This will result in the following code:\n\n```\nif (outProfile-\u003eisMmap() \u0026\u0026 !outProfile-\u003ehasDynamicAudioProfile() \n    \u0026\u0026 availProfileDevices-\u003eallDevicesAreAttached()) {\n    ALOGV(\"%s skip opening output for mmap profile %s\", __func__,\n           outProfile-\u003egetTagName().c_str());\n    continue;\n}\n```\n\nI think, the condition is as descriptive as the comment, so it should not be needed.\n\nSame for the input.",
+      "range": {
+        "startLine": 6394,
+        "startChar": 0,
+        "endLine": 6407,
+        "endChar": 17
+      },
+      "revId": "df9e5bbd7d158aa94e85540b9434891950d555f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
