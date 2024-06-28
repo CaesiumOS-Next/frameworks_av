@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6f07c7_fa159e5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-06-28T17:23:55Z",
+      "side": 1,
+      "message": "Not sure you\u0027re looking for a review yet, but LGTM in any case",
+      "revId": "09a5c6e39c7cbf0fa4f02a8dcf02e5ff7ea05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
