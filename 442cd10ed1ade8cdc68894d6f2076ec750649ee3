@@ -16,6 +16,24 @@
       "message": "Could you file an issue and add the bug id to the commit message?",
       "revId": "442cd10ed1ade8cdc68894d6f2076ec750649ee3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b663e7b9_dce19171",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3502816
+      },
+      "writtenOn": "2024-06-28T12:50:22Z",
+      "side": 1,
+      "message": "I\u0027ve filed a new issue and explained more details about this patch: https://issuetracker.google.com/issues/349968669",
+      "parentUuid": "dc7a1647_71a58e77",
+      "revId": "442cd10ed1ade8cdc68894d6f2076ec750649ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
