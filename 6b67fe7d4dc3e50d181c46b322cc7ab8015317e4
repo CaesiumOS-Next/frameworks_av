@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bba16db_026f0d5f",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "106cafac_62b88202",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddda92e2_a5eee0c1",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-27T07:12:22Z",
       "side": 1,
       "message": "nit: const ref here and below",
+      "range": {
+        "startLine": 100,
+        "startChar": 28,
+        "endLine": 100,
+        "endChar": 37
+      },
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea8539ed_62560902",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddda92e2_a5eee0c1",
       "range": {
         "startLine": 100,
         "startChar": 28,
@@ -242,6 +284,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec33cab0_d5b173ff",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de3fb310_b98ca0a3",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 18
+      },
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97ed34a8_041b979e",
@@ -255,6 +321,30 @@
       "writtenOn": "2024-06-27T07:12:22Z",
       "side": 1,
       "message": "inputChannelsCopy?",
+      "range": {
+        "startLine": 281,
+        "startChar": 28,
+        "endLine": 281,
+        "endChar": 43
+      },
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "389b98e3_72413a9b",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97ed34a8_041b979e",
       "range": {
         "startLine": 281,
         "startChar": 28,
@@ -336,6 +426,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc42adf_57c22b47",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d5d547_2dcd3db4",
+      "range": {
+        "startLine": 317,
+        "startChar": 12,
+        "endLine": 317,
+        "endChar": 16
+      },
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bafe71e_522684d9",
@@ -371,6 +485,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f1a888_0415e36d",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Yes, thanks for catching this. I got a similar issue in VideoCapabilities. This one is not caught by the tests.",
+      "parentUuid": "4bafe71e_522684d9",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af663e23_91d08369",
@@ -388,6 +520,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6305a061_c9e62fd6",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af663e23_91d08369",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "794dee41_7aa81fc2",
@@ -401,6 +551,24 @@
       "writtenOn": "2024-06-27T07:12:22Z",
       "side": 1,
       "message": "return const ref?",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11cf19b5_b4411d23",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "794dee41_7aa81fc2",
       "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -436,6 +604,24 @@
           ]
         }
       ],
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8abe29b_34fa1664",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a6adec6_6e61d8a8",
       "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -515,6 +701,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d69a32_8a318ecd",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b73b3db_ff19d6ef",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f68be788_eb4d3432",
@@ -528,6 +732,24 @@
       "writtenOn": "2024-06-27T07:24:48Z",
       "side": 1,
       "message": "maybe just check the whole vector?",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bdd0ce0_ad485c15",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f68be788_eb4d3432",
       "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -549,6 +771,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "458c9783_5d4ff05e",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b92a76d_76cbfaf1",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17c0f7b1_101253d7",
@@ -562,6 +802,24 @@
       "writtenOn": "2024-06-27T07:24:48Z",
       "side": 1,
       "message": "nit: Raw",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f04d634_324a893f",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-06-29T00:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c0f7b1_101253d7",
       "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
