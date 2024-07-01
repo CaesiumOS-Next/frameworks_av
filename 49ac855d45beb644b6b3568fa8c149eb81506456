@@ -22,6 +22,30 @@
       },
       "revId": "49ac855d45beb644b6b3568fa8c149eb81506456",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf3a3f0_ded54917",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4889,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-07-01T09:51:33Z",
+      "side": 1,
+      "message": "* I\u0027ve changed the condition to `\u003e\u003d` so the call to `addOneElstTableEntry` will be as it was earlier except when there is an overflow.\n* I\u0027ve added a warning as well with the values causing the overflow.",
+      "parentUuid": "3a6dfd37_a69cfbb4",
+      "range": {
+        "startLine": 4889,
+        "startChar": 16,
+        "endLine": 4889,
+        "endChar": 58
+      },
+      "revId": "49ac855d45beb644b6b3568fa8c149eb81506456",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
