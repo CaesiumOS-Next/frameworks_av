@@ -54,7 +54,6 @@
 #include "effectsAidlConversion/AidlConversionVisualizer.h"
 
 using ::aidl::android::aidl_utils::statusTFromBinderStatus;
-using ::aidl::android::hardware::audio::effect::CommandId;
 using ::aidl::android::hardware::audio::effect::Descriptor;
 using ::aidl::android::hardware::audio::effect::IEffect;
 using ::aidl::android::hardware::audio::effect::IFactory;
@@ -307,7 +306,6 @@ status_t EffectHalAidl::getDescriptor(effect_descriptor_t* pDescriptor) {
 
 status_t EffectHalAidl::close() {
     TIME_CHECK();
-    mEffect->command(CommandId::STOP);
     return statusTFromBinderStatus(mEffect->close());
 }
 

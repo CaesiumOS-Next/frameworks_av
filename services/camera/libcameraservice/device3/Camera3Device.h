@@ -97,10 +97,6 @@ class Camera3Device :
         return mInterface->getTransportType();
     }
 
-    bool isHalBufferManagedStream(int32_t streamId) const {
-        return mInterface->isHalBufferManagedStream(streamId);
-    };
-
     /**
      * CameraDeviceBase interface
      */
@@ -489,9 +485,6 @@ class Camera3Device :
 
         /////////////////////////////////////////////////////////////////////
 
-        //Check if a stream is hal buffer managed
-        bool isHalBufferManagedStream(int32_t streamId) const;
-
         // Get a vector of (frameNumber, streamId) pair of currently inflight
         // buffers
         void getInflightBufferKeys(std::vector<std::pair<int32_t, int32_t>>* out);
@@ -563,9 +556,7 @@ class Camera3Device :
 
         uint32_t mNextStreamConfigCounter = 1;
 
-        // TODO: This can be removed after flags::session_hal_buf_manager is removed
         bool mUseHalBufManager = false;
-        std::set<int32_t > mHalBufManagedStreamIds;
         bool mIsReconfigurationQuerySupported;
 
         const bool mSupportOfflineProcessing;
@@ -966,11 +957,11 @@ class Camera3Device :
         void     setPaused(bool paused);
 
         /**
-         * Set Hal buffer managed streams
-         * @param halBufferManagedStreams The streams for which hal buffer manager is enabled
+         * Set Hal buffer manager behavior
+         * @param enabled Whether HAL buffer manager is enabled for the current session.
          *
          */
-        void setHalBufferManagedStreams(const std::set<int32_t> &halBufferManagedStreams);
+        void setHalBufferManager(bool enabled);
 
         /**
          * Wait until thread processes the capture request with settings'
@@ -1226,7 +1217,6 @@ class Camera3Device :
         std::map<int32_t, std::set<std::string>> mGroupIdPhysicalCameraMap;
 
         bool               mUseHalBufManager = false;
-        std::set<int32_t > mHalBufManagedStreamIds;
         const bool         mSupportCameraMute;
         const bool         mOverrideToPortrait;
         const bool         mSupportSettingsOverride;
@@ -1417,7 +1407,6 @@ class Camera3Device :
 
     // Whether HAL request buffers through requestStreamBuffers API
     bool mUseHalBufManager = false;
-    std::set<int32_t > mHalBufManagedStreamIds;
     bool mSessionHalBufManager = false;
     // Lock to ensure requestStreamBuffers() callbacks are serialized
     std::mutex mRequestBufferInterfaceLock;
@@ -1540,9 +1529,6 @@ class Camera3Device :
     // Whether the camera device runs at fixed frame rate based on AE_MODE and
     // AE_TARGET_FPS_RANGE
     bool mIsFixedFps = false;
-
-    // Flag to indicate that we shouldn't forward extension related metadata
-    bool mSupportsExtensionKeys = false;
 
     // Injection camera related methods.
     class Camera3DeviceInjectionMethods : public virtual RefBase {

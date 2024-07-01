@@ -32,7 +32,6 @@
 #include <private/media/VideoFrame.h>
 #include <utils/Log.h>
 #include <utils/RefBase.h>
-#include <algorithm>
 #include <vector>
 
 HeifDecoder* createHeifDecoder() {
@@ -43,10 +42,7 @@ namespace android {
 
 void initFrameInfo(HeifFrameInfo *info, const VideoFrame *videoFrame) {
     info->mWidth = videoFrame->mDisplayWidth;
-    // Number of scanlines is mDisplayHeight. Clamp it to mHeight to guard
-    // against malformed streams claiming that mDisplayHeight is greater than
-    // mHeight.
-    info->mHeight = std::min(videoFrame->mDisplayHeight, videoFrame->mHeight);
+    info->mHeight = videoFrame->mDisplayHeight;
     info->mRotationAngle = videoFrame->mRotationAngle;
     info->mBytesPerPixel = videoFrame->mBytesPerPixel;
     info->mDurationUs = videoFrame->mDurationUs;
@@ -750,9 +746,7 @@ bool HeifDecoderImpl::getScanlineInner(uint8_t* dst) {
                    (videoFrame->mRowBytes * (mCurScanline + videoFrame->mDisplayTop)) +
                    (videoFrame->mBytesPerPixel * videoFrame->mDisplayLeft);
     mCurScanline++;
-    // Do not try to copy more than |videoFrame->mWidth| pixels.
-    uint32_t width = std::min(videoFrame->mDisplayWidth, videoFrame->mWidth);
-    memcpy(dst, src, videoFrame->mBytesPerPixel * width);
+    memcpy(dst, src, videoFrame->mBytesPerPixel * videoFrame->mDisplayWidth);
     return true;
 }
 

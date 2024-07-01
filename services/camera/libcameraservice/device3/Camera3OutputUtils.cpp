@@ -45,17 +45,13 @@
 #include <camera/CameraUtils.h>
 #include <camera/StringUtils.h>
 #include <camera_metadata_hidden.h>
-#include <com_android_internal_camera_flags.h>
 
 #include "device3/Camera3OutputUtils.h"
-#include "utils/SessionConfigurationUtils.h"
 
 #include "system/camera_metadata.h"
 
 using namespace android::camera3;
-using namespace android::camera3::SessionConfigurationUtils;
 using namespace android::hardware::camera;
-namespace flags = com::android::internal::camera::flags;
 
 namespace android {
 namespace camera3 {
@@ -499,8 +495,7 @@ void removeInFlightMapEntryLocked(CaptureOutputStates& states, int idx) {
     states.inflightIntf.onInflightEntryRemovedLocked(duration);
 }
 
-void removeInFlightRequestIfReadyLocked(CaptureOutputStates& states, int idx,
-        std::vector<BufferToReturn> *returnableBuffers) {
+void removeInFlightRequestIfReadyLocked(CaptureOutputStates& states, int idx) {
     InFlightRequestMap& inflightMap = states.inflightMap;
     const InFlightRequest &request = inflightMap.valueAt(idx);
     const uint32_t frameNumber = inflightMap.keyAt(idx);
@@ -538,13 +533,11 @@ void removeInFlightRequestIfReadyLocked(CaptureOutputStates& states, int idx,
         assert(request.requestStatus != OK ||
                request.pendingOutputBuffers.size() == 0);
 
-        collectReturnableOutputBuffers(
-            states.useHalBufManager, states.halBufManagedStreamIds,
-            states.listener,
+        returnOutputBuffers(
+            states.useHalBufManager, states.listener,
             request.pendingOutputBuffers.array(),
             request.pendingOutputBuffers.size(), /*timestamp*/0, /*readoutTimestamp*/0,
             /*requested*/true, request.requestTimeNs, states.sessionStatsBuilder,
-            /*out*/ returnableBuffers,
             /*timestampIncreasing*/true,
             request.outputSurfaces, request.resultExtras,
             request.errorBufStrategy, request.transform);
@@ -639,7 +632,6 @@ void processCaptureResult(CaptureOutputStates& states, const camera_capture_resu
     // in-flight request and they will be returned when the shutter timestamp
     // arrives. Update the in-flight status and remove the in-flight entry if
     // all result data and shutter timestamp have been received.
-    std::vector<BufferToReturn> returnableBuffers{};
     nsecs_t shutterTimestamp = 0;
     {
         std::lock_guard<std::mutex> l(states.inflightLock);
@@ -801,11 +793,9 @@ void processCaptureResult(CaptureOutputStates& states, const camera_capture_resu
         request.pendingOutputBuffers.appendArray(result->output_buffers,
                 result->num_output_buffers);
         if (shutterTimestamp != 0) {
-            collectAndRemovePendingOutputBuffers(
-                states.useHalBufManager, states.halBufManagedStreamIds,
-                states.listener,
-                request, states.sessionStatsBuilder,
-                /*out*/ &returnableBuffers);
+            returnAndRemovePendingOutputBuffers(
+                states.useHalBufManager, states.listener,
+                request, states.sessionStatsBuilder);
         }
 
         if (result->result != NULL && !isPartialResult) {
@@ -830,17 +820,8 @@ void processCaptureResult(CaptureOutputStates& states, const camera_capture_resu
                     request.physicalMetadatas);
             }
         }
-        removeInFlightRequestIfReadyLocked(states, idx, &returnableBuffers);
-        if (!flags::return_buffers_outside_locks()) {
-            finishReturningOutputBuffers(returnableBuffers,
-                states.listener, states.sessionStatsBuilder);
-        }
+        removeInFlightRequestIfReadyLocked(states, idx);
     } // scope for states.inFlightLock
-
-    if (flags::return_buffers_outside_locks()) {
-        finishReturningOutputBuffers(returnableBuffers,
-                states.listener, states.sessionStatsBuilder);
-    }
 
     if (result->input_buffer != NULL) {
         if (hasInputBufferInRequest) {
@@ -862,17 +843,16 @@ void processCaptureResult(CaptureOutputStates& states, const camera_capture_resu
     }
 }
 
-void collectReturnableOutputBuffers(
+void returnOutputBuffers(
         bool useHalBufManager,
-        const std::set<int32_t> &halBufferManagedStreams,
         sp<NotificationListener> listener,
         const camera_stream_buffer_t *outputBuffers, size_t numBuffers,
         nsecs_t timestamp, nsecs_t readoutTimestamp, bool requested,
         nsecs_t requestTimeNs, SessionStatsBuilder& sessionStatsBuilder,
-        /*out*/ std::vector<BufferToReturn> *returnableBuffers,
         bool timestampIncreasing, const SurfaceMap& outputSurfaces,
-        const CaptureResultExtras &resultExtras,
+        const CaptureResultExtras &inResultExtras,
         ERROR_BUF_STRATEGY errorBufStrategy, int32_t transform) {
+
     for (size_t i = 0; i < numBuffers; i++)
     {
         Camera3StreamInterface *stream = Camera3Stream::cast(outputBuffers[i].stream);
@@ -882,7 +862,7 @@ void collectReturnableOutputBuffers(
         if (outputBuffers[i].status == CAMERA_BUFFER_STATUS_ERROR &&
                 errorBufStrategy == ERROR_BUF_RETURN_NOTIFY) {
             if (listener != nullptr) {
-                CaptureResultExtras extras = resultExtras;
+                CaptureResultExtras extras = inResultExtras;
                 extras.errorStreamId = streamId;
                 listener->notifyError(
                         hardware::camera2::ICameraDeviceCallbacks::ERROR_CAMERA_BUFFER,
@@ -891,9 +871,7 @@ void collectReturnableOutputBuffers(
         }
 
         if (outputBuffers[i].buffer == nullptr) {
-            if (!useHalBufManager &&
-                    !(flags::session_hal_buf_manager() &&
-                            contains(halBufferManagedStreams, streamId))) {
+            if (!useHalBufManager) {
                 // With HAL buffer management API, HAL sometimes will have to return buffers that
                 // has not got a output buffer handle filled yet. This is though illegal if HAL
                 // buffer management API is not being used.
@@ -907,35 +885,22 @@ void collectReturnableOutputBuffers(
         }
 
         const auto& it = outputSurfaces.find(streamId);
+        status_t res = OK;
 
         // Do not return the buffer if the buffer status is error, and the error
         // buffer strategy is CACHE.
         if (outputBuffers[i].status != CAMERA_BUFFER_STATUS_ERROR ||
                 errorBufStrategy != ERROR_BUF_CACHE) {
             if (it != outputSurfaces.end()) {
-                returnableBuffers->emplace_back(stream,
+                res = stream->returnBuffer(
                         outputBuffers[i], timestamp, readoutTimestamp, timestampIncreasing,
-                        it->second, resultExtras,
-                        transform, requested ? requestTimeNs : 0);
+                        it->second, inResultExtras.frameNumber, transform);
             } else {
-                returnableBuffers->emplace_back(stream,
+                res = stream->returnBuffer(
                         outputBuffers[i], timestamp, readoutTimestamp, timestampIncreasing,
-                        std::vector<size_t> (), resultExtras,
-                        transform, requested ? requestTimeNs : 0 );
+                        std::vector<size_t> (), inResultExtras.frameNumber, transform);
             }
         }
-    }
-}
-
-void finishReturningOutputBuffers(const std::vector<BufferToReturn> &returnableBuffers,
-        sp<NotificationListener> listener, SessionStatsBuilder& sessionStatsBuilder) {
-    for (auto& b : returnableBuffers) {
-        const int streamId = b.stream->getId();
-
-        status_t res = b.stream->returnBuffer(b.buffer, b.timestamp,
-                b.readoutTimestamp, b.timestampIncreasing,
-                b.surfaceIds, b.resultExtras.frameNumber, b.transform);
-
         // Note: stream may be deallocated at this point, if this buffer was
         // the last reference to it.
         bool dropped = false;
@@ -946,55 +911,50 @@ void finishReturningOutputBuffers(const std::vector<BufferToReturn> &returnableB
             ALOGE("Can't return buffer to its stream: %s (%d)", strerror(-res), res);
             dropped = true;
         } else {
-            if (b.buffer.status == CAMERA_BUFFER_STATUS_ERROR || b.timestamp == 0) {
+            if (outputBuffers[i].status == CAMERA_BUFFER_STATUS_ERROR || timestamp == 0) {
                 dropped = true;
             }
         }
-        if (b.requestTimeNs > 0) {
+        if (requested) {
             nsecs_t bufferTimeNs = systemTime();
-            int32_t captureLatencyMs = ns2ms(bufferTimeNs - b.requestTimeNs);
+            int32_t captureLatencyMs = ns2ms(bufferTimeNs - requestTimeNs);
             sessionStatsBuilder.incCounter(streamId, dropped, captureLatencyMs);
         }
 
         // Long processing consumers can cause returnBuffer timeout for shared stream
         // If that happens, cancel the buffer and send a buffer error to client
-        if (b.surfaceIds.size() > 0 && res == TIMED_OUT &&
-                b.buffer.status == CAMERA_BUFFER_STATUS_OK) {
+        if (it != outputSurfaces.end() && res == TIMED_OUT &&
+                outputBuffers[i].status == CAMERA_BUFFER_STATUS_OK) {
             // cancel the buffer
-            camera_stream_buffer_t sb = b.buffer;
+            camera_stream_buffer_t sb = outputBuffers[i];
             sb.status = CAMERA_BUFFER_STATUS_ERROR;
-            b.stream->returnBuffer(sb, /*timestamp*/0, /*readoutTimestamp*/0,
-                    b.timestampIncreasing, std::vector<size_t> (),
-                    b.resultExtras.frameNumber, b.transform);
+            stream->returnBuffer(sb, /*timestamp*/0, /*readoutTimestamp*/0,
+                    timestampIncreasing, std::vector<size_t> (),
+                    inResultExtras.frameNumber, transform);
 
             if (listener != nullptr) {
-                CaptureResultExtras extras = b.resultExtras;
+                CaptureResultExtras extras = inResultExtras;
                 extras.errorStreamId = streamId;
                 listener->notifyError(
                         hardware::camera2::ICameraDeviceCallbacks::ERROR_CAMERA_BUFFER,
                         extras);
             }
         }
-
     }
 }
 
-void collectAndRemovePendingOutputBuffers(bool useHalBufManager,
-        const std::set<int32_t> &halBufferManagedStreams,
+void returnAndRemovePendingOutputBuffers(bool useHalBufManager,
         sp<NotificationListener> listener, InFlightRequest& request,
-        SessionStatsBuilder& sessionStatsBuilder,
-        std::vector<BufferToReturn> *returnableBuffers) {
+        SessionStatsBuilder& sessionStatsBuilder) {
     bool timestampIncreasing =
             !((request.zslCapture && request.stillCapture) || request.hasInputBuffer);
     nsecs_t readoutTimestamp = request.resultExtras.hasReadoutTimestamp ?
             request.resultExtras.readoutTimestamp : 0;
-    collectReturnableOutputBuffers(useHalBufManager, halBufferManagedStreams, listener,
+    returnOutputBuffers(useHalBufManager, listener,
             request.pendingOutputBuffers.array(),
             request.pendingOutputBuffers.size(),
             request.shutterTimestamp, readoutTimestamp,
-            /*requested*/true, request.requestTimeNs, sessionStatsBuilder,
-            /*out*/ returnableBuffers,
-            timestampIncreasing,
+            /*requested*/true, request.requestTimeNs, sessionStatsBuilder, timestampIncreasing,
             request.outputSurfaces, request.resultExtras,
             request.errorBufStrategy, request.transform);
 
@@ -1013,9 +973,6 @@ void collectAndRemovePendingOutputBuffers(bool useHalBufManager,
 void notifyShutter(CaptureOutputStates& states, const camera_shutter_msg_t &msg) {
     ATRACE_CALL();
     ssize_t idx;
-
-    std::vector<BufferToReturn> returnableBuffers{};
-    CaptureResultExtras pendingNotificationResultExtras{};
 
     // Set timestamp for the request in the in-flight tracking
     // and get the request ID to send upstream
@@ -1083,13 +1040,9 @@ void notifyShutter(CaptureOutputStates& states, const camera_shutter_msg_t &msg)
                             states.lastCompletedReprocessFrameNumber;
                     r.resultExtras.lastCompletedZslFrameNumber =
                             states.lastCompletedZslFrameNumber;
-                    if (flags::return_buffers_outside_locks()) {
-                        pendingNotificationResultExtras = r.resultExtras;
-                    } else {
-                        states.listener->notifyShutter(r.resultExtras, msg.timestamp);
-                    }
+                    states.listener->notifyShutter(r.resultExtras, msg.timestamp);
                 }
-                // send pending result and buffers; this queues them up for delivery later
+                // send pending result and buffers
                 const auto& cameraIdsWithZoom = getCameraIdsWithZoomLocked(
                         inflightMap, r.pendingMetadata, r.cameraIdsWithZoom);
                 sendCaptureResult(states,
@@ -1098,35 +1051,16 @@ void notifyShutter(CaptureOutputStates& states, const camera_shutter_msg_t &msg)
                     r.hasInputBuffer, r.zslCapture && r.stillCapture,
                     r.rotateAndCropAuto, cameraIdsWithZoom, r.physicalMetadatas);
             }
-            collectAndRemovePendingOutputBuffers(
-                    states.useHalBufManager, states.halBufManagedStreamIds,
-                    states.listener, r, states.sessionStatsBuilder, &returnableBuffers);
+            returnAndRemovePendingOutputBuffers(
+                    states.useHalBufManager, states.listener, r, states.sessionStatsBuilder);
 
-            if (!flags::return_buffers_outside_locks()) {
-                finishReturningOutputBuffers(returnableBuffers,
-                        states.listener, states.sessionStatsBuilder);
-            }
-
-            removeInFlightRequestIfReadyLocked(states, idx, &returnableBuffers);
-
+            removeInFlightRequestIfReadyLocked(states, idx);
         }
     }
     if (idx < 0) {
         SET_ERR("Shutter notification for non-existent frame number %d",
                 msg.frame_number);
     }
-    // Call notifyShutter outside of in-flight mutex
-    if (flags::return_buffers_outside_locks() && pendingNotificationResultExtras.isValid()) {
-        states.listener->notifyShutter(pendingNotificationResultExtras, msg.timestamp);
-    }
-
-    // With no locks held, finish returning buffers to streams, which may take a while since
-    // binder calls are involved
-    if (flags::return_buffers_outside_locks()) {
-        finishReturningOutputBuffers(returnableBuffers,
-                states.listener, states.sessionStatsBuilder);
-    }
-
 }
 
 void notifyError(CaptureOutputStates& states, const camera_error_msg_t &msg) {
@@ -1172,8 +1106,6 @@ void notifyError(CaptureOutputStates& states, const camera_error_msg_t &msg) {
             break;
         case hardware::camera2::ICameraDeviceCallbacks::ERROR_CAMERA_REQUEST:
         case hardware::camera2::ICameraDeviceCallbacks::ERROR_CAMERA_RESULT:
-        {
-            std::vector<BufferToReturn> returnableBuffers{};
             {
                 std::lock_guard<std::mutex> l(states.inflightLock);
                 ssize_t idx = states.inflightMap.indexOfKey(msg.frame_number);
@@ -1210,12 +1142,7 @@ void notifyError(CaptureOutputStates& states, const camera_error_msg_t &msg) {
 
                         // Check whether the buffers returned. If they returned,
                         // remove inflight request.
-                        removeInFlightRequestIfReadyLocked(states, idx, &returnableBuffers);
-                        if (!flags::return_buffers_outside_locks()) {
-                            finishReturningOutputBuffers(returnableBuffers,
-                                    states.listener, states.sessionStatsBuilder);
-                        }
-
+                        removeInFlightRequestIfReadyLocked(states, idx);
                     }
                 } else {
                     resultExtras.frameNumber = msg.frame_number;
@@ -1224,12 +1151,6 @@ void notifyError(CaptureOutputStates& states, const camera_error_msg_t &msg) {
                             resultExtras.frameNumber);
                 }
             }
-
-            if (flags::return_buffers_outside_locks()) {
-                finishReturningOutputBuffers(returnableBuffers,
-                        states.listener, states.sessionStatsBuilder);
-            }
-
             resultExtras.errorStreamId = streamId;
             if (states.listener != nullptr) {
                 states.listener->notifyError(errorCode, resultExtras);
@@ -1238,7 +1159,6 @@ void notifyError(CaptureOutputStates& states, const camera_error_msg_t &msg) {
                         states.cameraId.c_str(), __FUNCTION__);
             }
             break;
-        }
         case hardware::camera2::ICameraDeviceCallbacks::ERROR_CAMERA_BUFFER:
             // Do not depend on HAL ERROR_CAMERA_BUFFER to send buffer error
             // callback to the app. Rather, use STATUS_ERROR of image buffers.
@@ -1268,24 +1188,17 @@ void notify(CaptureOutputStates& states, const camera_notify_msg *msg) {
 
 void flushInflightRequests(FlushInflightReqStates& states) {
     ATRACE_CALL();
-    std::vector<BufferToReturn> returnableBuffers{};
     { // First return buffers cached in inFlightMap
         std::lock_guard<std::mutex> l(states.inflightLock);
         for (size_t idx = 0; idx < states.inflightMap.size(); idx++) {
             const InFlightRequest &request = states.inflightMap.valueAt(idx);
-            collectReturnableOutputBuffers(
-                states.useHalBufManager, states.halBufManagedStreamIds,
-                states.listener,
+            returnOutputBuffers(
+                states.useHalBufManager, states.listener,
                 request.pendingOutputBuffers.array(),
                 request.pendingOutputBuffers.size(), /*timestamp*/0, /*readoutTimestamp*/0,
                 /*requested*/true, request.requestTimeNs, states.sessionStatsBuilder,
-                /*out*/ &returnableBuffers,
                 /*timestampIncreasing*/true, request.outputSurfaces, request.resultExtras,
                 request.errorBufStrategy);
-            if (!flags::return_buffers_outside_locks()) {
-                finishReturningOutputBuffers(returnableBuffers,
-                        states.listener, states.sessionStatsBuilder);
-            }
             ALOGW("%s: Frame %d |  Timestamp: %" PRId64 ", metadata"
                     " arrived: %s, buffers left: %d.\n", __FUNCTION__,
                     states.inflightMap.keyAt(idx), request.shutterTimestamp,
@@ -1295,10 +1208,6 @@ void flushInflightRequests(FlushInflightReqStates& states) {
 
         states.inflightMap.clear();
         states.inflightIntf.onInflightMapFlushedLocked();
-    }
-    if (flags::return_buffers_outside_locks()) {
-        finishReturningOutputBuffers(returnableBuffers,
-                states.listener, states.sessionStatsBuilder);
     }
 
     // Then return all inflight buffers not returned by HAL

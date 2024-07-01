@@ -27,10 +27,6 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     SubmitInfo submitInfo;
     submitInfo.mRequestId = fdp.ConsumeIntegral<int32_t>();
     submitInfo.mLastFrameNumber = fdp.ConsumeIntegral<int64_t>();
-    if (fdp.ConsumeBool()) {
-        invokeReadWriteParcel<SubmitInfo>(&submitInfo);
-    } else {
-        invokeNewReadWriteParcel<SubmitInfo>(&submitInfo, fdp);
-    }
+    invokeReadWriteParcel<SubmitInfo>(&submitInfo);
     return 0;
 }
