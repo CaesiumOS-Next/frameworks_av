@@ -20,7 +20,6 @@
 
 #include "Vibrator.h"
 
-#include <android/os/ExternalVibrationScale.h>
 #include <android/os/IExternalVibratorService.h>
 #include <binder/IServiceManager.h>
 #include <utils/Log.h>
@@ -45,17 +44,12 @@ static sp<os::IExternalVibratorService> getExternalVibratorService() {
 }
 
 os::HapticScale onExternalVibrationStart(const sp<os::ExternalVibration>& externalVibration) {
-    if (externalVibration->getAudioAttributes().flags & AUDIO_FLAG_MUTE_HAPTIC) {
-        ALOGD("%s, mute haptic according to audio attributes flag", __func__);
-        return os::HapticScale::mute();
-    }
     const sp<os::IExternalVibratorService> evs = getExternalVibratorService();
     if (evs != nullptr) {
-
-        os::ExternalVibrationScale ret;
+        int32_t ret;
         binder::Status status = evs->onExternalVibrationStart(*externalVibration, &ret);
         if (status.isOk()) {
-            ALOGD("%s, start external vibration with intensity as %d", __func__, ret.scaleLevel);
+            ALOGD("%s, start external vibration with intensity as %d", __func__, ret);
             return os::ExternalVibration::externalVibrationScaleToHapticScale(ret);
         }
     }
@@ -63,7 +57,7 @@ os::HapticScale onExternalVibrationStart(const sp<os::ExternalVibration>& extern
             __func__,
             evs == nullptr ? "external vibration service not found"
                            : "error when querying intensity");
-    return os::HapticScale::mute();
+    return os::HapticScale::MUTE;
 }
 
 void onExternalVibrationStop(const sp<os::ExternalVibration>& externalVibration) {

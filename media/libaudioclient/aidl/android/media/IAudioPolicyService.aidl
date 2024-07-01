@@ -263,8 +263,6 @@ interface IAudioPolicyService {
 
     void registerPolicyMixes(in AudioMix[] mixes, boolean registration);
 
-    List<AudioMix> getRegisteredPolicyMixes();
-
     void updatePolicyMixes(in AudioMixUpdate[] updates);
 
     void setUidDeviceAffinities(int /* uid_t */ uid, in AudioDevice[] devices);

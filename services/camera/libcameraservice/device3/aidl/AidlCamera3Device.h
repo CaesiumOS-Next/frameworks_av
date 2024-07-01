@@ -289,9 +289,6 @@ class AidlCamera3Device :
     // capture requests.
     bool mBatchSizeLimitEnabled = false;
 
-    // Whether the HAL supports reporting sensor readout timestamp
-    bool mSensorReadoutTimestampSupported = true;
-
 }; // class AidlCamera3Device
 
 }; // namespace android

@@ -479,8 +479,6 @@ public:
 
     static status_t registerPolicyMixes(const Vector<AudioMix>& mixes, bool registration);
 
-    static status_t getRegisteredPolicyMixes(std::vector<AudioMix>& mixes);
-
     static status_t updatePolicyMixes(
         const std::vector<
                 std::pair<AudioMix, std::vector<AudioMixMatchCriterion>>>& mixesWithUpdates);

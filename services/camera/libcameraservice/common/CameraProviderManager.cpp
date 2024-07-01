@@ -33,7 +33,6 @@
 #include <future>
 #include <inttypes.h>
 #include <android_companion_virtualdevice_flags.h>
-#include <android_companion_virtualdevice_build_flags.h>
 #include <android/binder_manager.h>
 #include <android/hidl/manager/1.2/IServiceManager.h>
 #include <hidl/ServiceManagement.h>
@@ -140,7 +139,7 @@ status_t CameraProviderManager::tryToInitAndAddHidlProvidersLocked(
 }
 
 std::shared_ptr<aidl::android::hardware::camera::provider::ICameraProvider>
-CameraProviderManager::AidlServiceInteractionProxyImpl::getService(
+CameraProviderManager::AidlServiceInteractionProxyImpl::getAidlService(
         const std::string& serviceName) {
     using aidl::android::hardware::camera::provider::ICameraProvider;
 
@@ -148,35 +147,19 @@ CameraProviderManager::AidlServiceInteractionProxyImpl::getService(
     if (flags::lazy_aidl_wait_for_service()) {
         binder = AServiceManager_waitForService(serviceName.c_str());
     } else {
-        binder = AServiceManager_checkService(serviceName.c_str());
+        binder = AServiceManager_getService(serviceName.c_str());
     }
 
     if (binder == nullptr) {
-        ALOGE("%s: AIDL Camera provider HAL '%s' is not actually available, despite waiting "
-              "indefinitely?", __FUNCTION__, serviceName.c_str());
+        ALOGD("%s: AIDL Camera provider HAL '%s' is not actually available", __FUNCTION__,
+              serviceName.c_str());
         return nullptr;
     }
     std::shared_ptr<ICameraProvider> interface =
             ICameraProvider::fromBinder(ndk::SpAIBinder(binder));
 
     return interface;
-}
-
-std::shared_ptr<aidl::android::hardware::camera::provider::ICameraProvider>
-CameraProviderManager::AidlServiceInteractionProxyImpl::tryGetService(
-        const std::string& serviceName) {
-    using aidl::android::hardware::camera::provider::ICameraProvider;
-
-    std::shared_ptr<ICameraProvider> interface = ICameraProvider::fromBinder(
-                    ndk::SpAIBinder(AServiceManager_checkService(serviceName.c_str())));
-    if (interface == nullptr) {
-        ALOGD("%s: AIDL Camera provider HAL '%s' is not actually available", __FUNCTION__,
-              serviceName.c_str());
-        return nullptr;
-    }
-
-    return interface;
-}
+};
 
 static std::string getFullAidlProviderName(const std::string instance) {
     std::string aidlHalServiceDescriptor =
@@ -459,30 +442,18 @@ status_t  CameraProviderManager::createDefaultRequest(const std::string& cameraI
     return OK;
 }
 
-status_t CameraProviderManager::getSessionCharacteristics(
-        const std::string& id, const SessionConfiguration& configuration, bool overrideForPerfClass,
-        bool overrideToPortrait, CameraMetadata* sessionCharacteristics /*out*/) const {
+status_t CameraProviderManager::getSessionCharacteristics(const std::string& id,
+        const SessionConfiguration &configuration, bool overrideForPerfClass,
+        metadataGetter getMetadata,
+        CameraMetadata* sessionCharacteristics /*out*/) const {
     if (!flags::feature_combination_query()) {
         return INVALID_OPERATION;
     }
-
     std::lock_guard<std::mutex> lock(mInterfaceMutex);
     auto deviceInfo = findDeviceInfoLocked(id);
     if (deviceInfo == nullptr) {
         return NAME_NOT_FOUND;
     }
-
-    metadataGetter getMetadata = [this, overrideToPortrait](const std::string& id,
-                                                            bool overrideForPerfClass) {
-        CameraMetadata metadata;
-        status_t ret = this->getCameraCharacteristicsLocked(id, overrideForPerfClass, &metadata,
-                                                            overrideToPortrait);
-        if (ret != OK) {
-            ALOGE("%s: Could not get CameraCharacteristics for device %s", __FUNCTION__,
-                  id.c_str());
-        }
-        return metadata;
-    };
 
     return deviceInfo->getSessionCharacteristics(configuration,
             overrideForPerfClass, getMetadata, sessionCharacteristics);
@@ -1836,12 +1807,17 @@ status_t CameraProviderManager::ProviderInfo::DeviceInfo3::addReadoutTimestampTa
     auto& c = mCameraCharacteristics;
 
     auto entry = c.find(ANDROID_SENSOR_READOUT_TIMESTAMP);
-    if (entry.count == 0) {
-        uint8_t defaultReadoutTimestamp = readoutTimestampSupported ?
-                                          ANDROID_SENSOR_READOUT_TIMESTAMP_HARDWARE :
-                                          ANDROID_SENSOR_READOUT_TIMESTAMP_NOT_SUPPORTED;
-        res = c.update(ANDROID_SENSOR_READOUT_TIMESTAMP, &defaultReadoutTimestamp, 1);
+    if (entry.count != 0) {
+        ALOGE("%s: CameraCharacteristics must not contain ANDROID_SENSOR_READOUT_TIMESTAMP!",
+                __FUNCTION__);
     }
+
+    uint8_t readoutTimestamp = ANDROID_SENSOR_READOUT_TIMESTAMP_NOT_SUPPORTED;
+    if (readoutTimestampSupported) {
+        readoutTimestamp = ANDROID_SENSOR_READOUT_TIMESTAMP_HARDWARE;
+    }
+
+    res = c.update(ANDROID_SENSOR_READOUT_TIMESTAMP, &readoutTimestamp, 1);
 
     return res;
 }
@@ -2125,14 +2101,8 @@ status_t CameraProviderManager::tryToInitializeAidlProviderLocked(
         const std::string& providerName, const sp<ProviderInfo>& providerInfo) {
     using aidl::android::hardware::camera::provider::ICameraProvider;
 
-    std::shared_ptr<ICameraProvider> interface;
-    if (flags::delay_lazy_hal_instantiation()) {
-        // Only get remote instance if already running. Lazy Providers will be
-        // woken up later.
-        interface = mAidlServiceProxy->tryGetService(providerName);
-    } else {
-        interface = mAidlServiceProxy->getService(providerName);
-    }
+    std::shared_ptr<ICameraProvider> interface =
+            mAidlServiceProxy->getAidlService(providerName.c_str());
 
     if (interface == nullptr) {
         ALOGW("%s: AIDL Camera provider HAL '%s' is not actually available", __FUNCTION__,
@@ -3279,8 +3249,7 @@ void CameraProviderManager::filterLogicalCameraIdsLocked(
 }
 
 bool CameraProviderManager::isVirtualCameraHalEnabled() {
-    return vd_flags::virtual_camera_service_discovery() &&
-           vd_flags::virtual_camera_service_build_flag();
+    return vd_flags::virtual_camera_service_discovery();
 }
 
 } // namespace android

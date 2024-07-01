@@ -880,7 +880,7 @@ status_t CameraMetadata::getTagFromName(const char *name,
     return OK;
 }
 
-metadata_vendor_id_t CameraMetadata::getVendorId() const {
+metadata_vendor_id_t CameraMetadata::getVendorId() {
     return get_camera_metadata_vendor_id(mBuffer);
 }
 
