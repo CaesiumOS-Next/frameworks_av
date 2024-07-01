@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc732e3_9206320b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-01T16:37:40Z",
+      "side": 1,
+      "message": "CP from https://partner-android-review.git.corp.google.com/c/platform/frameworks/av/+/2858825 and verified with Pixel 9",
+      "revId": "78cb79558cfe4844d1e4eb662e127131a1484630",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
