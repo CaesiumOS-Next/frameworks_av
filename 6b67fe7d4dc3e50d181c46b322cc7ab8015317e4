@@ -521,6 +521,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f0ee78_cabefb01",
+        "filename": "media/libmedia/AudioCapabilities.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-07-02T23:52:14Z",
+      "side": 1,
+      "message": "Added AudioCapsRawTest#AudioCaps_Raw_SupportedSampleRates to test it",
+      "parentUuid": "9d490e46_6ae91b20",
+      "revId": "6b67fe7d4dc3e50d181c46b322cc7ab8015317e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af663e23_91d08369",
