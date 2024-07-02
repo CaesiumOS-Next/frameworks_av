@@ -33,6 +33,23 @@
       "message": "OWNERS PTAL...",
       "revId": "eb1c0bf3b2e8a3673df309454018e6327c82d4d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2898998b_4c1f8938",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-07-02T16:33:20Z",
+      "side": 1,
+      "message": "OWNERS: PTAL at this janitorial change (removing an empty library from your list of libraries to link against). we\u0027ll global approve and submit this later this week (or you can +2 and we submit it today).",
+      "revId": "eb1c0bf3b2e8a3673df309454018e6327c82d4d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
