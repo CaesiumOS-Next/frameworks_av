@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "204005fd_d3c59d5b",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-07-02T00:54:04Z",
+      "side": 1,
+      "message": "can we do a bulk comparison? e.g. `EXPECT_EQ(sampleRates, {7350, 8000, ... });",
+      "range": {
+        "startLine": 83,
+        "startChar": 6,
+        "endLine": 92,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3a223726_464ac1e3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+              "range": {
+                "startLine": 83,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(sampleRates, std::vector\u003cint\u003e({7350, 8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000}));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "68ff5498f970c83f992ba15ea0597094b9178449",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
