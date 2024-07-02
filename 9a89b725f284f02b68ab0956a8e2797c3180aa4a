@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b48b30ca_54272187",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-02T08:12:35Z",
+      "side": 1,
+      "message": "why log an error if it is an expected event on duplicating outputs?\nIf you believe this should not happen we need to track this with another bug but I think a temporary route to an unspecified device (if it maps to NONE for audio device ID) can be expected on any output streams, not just duplicating.",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "9a89b725f284f02b68ab0956a8e2797c3180aa4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "062bcee4_216e9d5e",
+        "filename": "media/libaaudio/src/legacy/AudioStreamLegacy.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-02T08:12:35Z",
+      "side": 1,
+      "message": "I don\u0027t think we should log an error for an expected event.",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 69
+      },
+      "revId": "9a89b725f284f02b68ab0956a8e2797c3180aa4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
