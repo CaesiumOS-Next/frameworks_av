@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47fb2bcf_3d0c5342",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-02T18:17:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60af8886_0e894959",
+      "revId": "0f862d81fd1c0a774829c0367fad37976d5495a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22d49542_6ddc9688",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-07-02T00:48:26Z",
       "side": 1,
       "message": "nit: maybe remove Rather?",
+      "range": {
+        "startLine": 102,
+        "startChar": 3,
+        "endLine": 102,
+        "endChar": 9
+      },
+      "revId": "0f862d81fd1c0a774829c0367fad37976d5495a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9cb4a8_1fe33d85",
+        "filename": "media/codec2/vndk/include/C2BqBufferPriv.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-02T18:17:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22d49542_6ddc9688",
       "range": {
         "startLine": 102,
         "startChar": 3,
