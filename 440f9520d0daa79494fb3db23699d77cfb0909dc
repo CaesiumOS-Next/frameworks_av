@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11297a7a_e6e5e088",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-07-03T18:22:14Z",
+      "side": 1,
+      "message": "There seem to be merge conflicts with downstream, so I will need submit these changes there first.",
+      "revId": "440f9520d0daa79494fb3db23699d77cfb0909dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
