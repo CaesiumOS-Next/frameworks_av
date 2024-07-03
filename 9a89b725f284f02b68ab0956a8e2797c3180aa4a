@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e83e851_fab49319",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-07-03T18:31:59Z",
+      "side": 1,
+      "message": "Note that this is just a copy of ag/28014107\n\nShould I make the changes in main first?\n\n\u003e If you believe this should not happen we need to track this with another bug\n\nThat is b/343736245\nThis patch is just a workaround.",
+      "parentUuid": "b48b30ca_54272187",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "9a89b725f284f02b68ab0956a8e2797c3180aa4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "062bcee4_216e9d5e",
         "filename": "media/libaaudio/src/legacy/AudioStreamLegacy.cpp",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-02T08:12:35Z",
       "side": 1,
       "message": "I don\u0027t think we should log an error for an expected event.",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 69
+      },
+      "revId": "9a89b725f284f02b68ab0956a8e2797c3180aa4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c132cb47_e76f763a",
+        "filename": "media/libaaudio/src/legacy/AudioStreamLegacy.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-07-03T18:31:59Z",
+      "side": 1,
+      "message": "OK, I will change it ALOGD in main.",
+      "parentUuid": "062bcee4_216e9d5e",
       "range": {
         "startLine": 266,
         "startChar": 0,
