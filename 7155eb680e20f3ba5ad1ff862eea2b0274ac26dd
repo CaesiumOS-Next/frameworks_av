@@ -1,0 +1,144 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1654e969_1f2d578a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-03T01:51:21Z",
+      "side": 1,
+      "message": "some minor nits, feel free to ignore.",
+      "revId": "7155eb680e20f3ba5ad1ff862eea2b0274ac26dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1b335b_dc30869b",
+        "filename": "media/libaudioclient/tests/audio_test_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-03T01:51:21Z",
+      "side": 1,
+      "message": "uint32_t is the return value, would ~0 be more idiomatic?",
+      "range": {
+        "startLine": 626,
+        "startChar": 48,
+        "endLine": 626,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8c8e14c9_90b717c9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.cpp",
+              "range": {
+                "startLine": 626,
+                "startChar": 0,
+                "endLine": 627,
+                "endChar": 0
+              },
+              "replacement": "    return mReceivedCbMarkerAtPosition.value_or(UINT32_MAX);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7155eb680e20f3ba5ad1ff862eea2b0274ac26dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e939c98_5953072e",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-03T01:51:21Z",
+      "side": 1,
+      "message": "nit: initialize here?",
+      "range": {
+        "startLine": 203,
+        "startChar": 26,
+        "endLine": 203,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b6350e52_290427ea",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 203,
+                "startChar": 0,
+                "endLine": 205,
+                "endChar": 0
+              },
+              "replacement": "    uint32_t mMarkerPeriod GUARDED_BY(mMutex) \u003d 0;\n    uint32_t mMarkerPosition GUARDED_BY(mMutex) \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7155eb680e20f3ba5ad1ff862eea2b0274ac26dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cd8c73_993c02d0",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-03T01:51:21Z",
+      "side": 1,
+      "message": "comment on concurrent access?",
+      "range": {
+        "startLine": 208,
+        "startChar": 29,
+        "endLine": 208,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3550e149_d946f507",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 208,
+                "startChar": 0,
+                "endLine": 211,
+                "endChar": 0
+              },
+              "replacement": "    int64_t mNumFramesReceived GUARDED_BY(mMutex);\n    int64_t mNumFramesLost GUARDED_BY(mMutex);\n    bool mBufferOverrun GUARDED_BY(mMutex);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7155eb680e20f3ba5ad1ff862eea2b0274ac26dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
