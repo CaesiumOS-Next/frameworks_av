@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ffcf477_1f7503d1",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-07-03T19:52:18Z",
+      "side": 1,
+      "message": "Can we just return the first tag that matches the first device? I don\u0027t see a reason to scope it and hard-code it to just the \u0027calibration\u0027 tag?",
+      "range": {
+        "startLine": 481,
+        "startChar": 4,
+        "endLine": 481,
+        "endChar": 64
+      },
+      "revId": "6071599a33773d0559c54a90b4eebc7e8385c468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
