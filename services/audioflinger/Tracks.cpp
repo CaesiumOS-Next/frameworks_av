@@ -314,17 +314,6 @@ status_t TrackBase::setSyncEvent(
     return NO_ERROR;
 }
 
-void TrackBase::deferRestartIfDisabled()
-{
-    const auto thread = mThread.promote();
-    if (thread == nullptr) return;
-    thread->getThreadloopExecutor().defer(
-            [track = wp<TrackBase>::fromExisting(this)] {
-            const auto actual = track.promote();
-            if (actual) actual->restartIfDisabled();
-        });
-}
-
 PatchTrackBase::PatchTrackBase(const sp<ClientProxy>& proxy,
         IAfThreadBase* thread, const Timeout& timeout)
     : mProxy(proxy)
@@ -2314,7 +2303,7 @@ ssize_t OutputTrack::write(void* data, uint32_t frames)
                 waitTimeLeftMs = 0;
             }
             if (status == NOT_ENOUGH_DATA) {
-                deferRestartIfDisabled();
+                restartIfDisabled();
                 continue;
             }
         }
@@ -2326,7 +2315,7 @@ ssize_t OutputTrack::write(void* data, uint32_t frames)
         buf.mFrameCount = outFrames;
         buf.mRaw = NULL;
         mClientProxy->releaseBuffer(&buf);
-        deferRestartIfDisabled();
+        restartIfDisabled();
         pInBuffer->frameCount -= outFrames;
         pInBuffer->raw = (int8_t *)pInBuffer->raw + outFrames * mFrameSize;
         mOutBuffer.frameCount -= outFrames;
@@ -2581,7 +2570,7 @@ status_t PatchTrack::obtainBuffer(Proxy::Buffer* buffer,
     const size_t originalFrameCount = buffer->mFrameCount;
     do {
         if (status == NOT_ENOUGH_DATA) {
-            deferRestartIfDisabled();
+            restartIfDisabled();
             buffer->mFrameCount = originalFrameCount; // cleared on error, must be restored.
         }
         status = mProxy->obtainBuffer(buffer, timeOut);
@@ -2592,7 +2581,7 @@ status_t PatchTrack::obtainBuffer(Proxy::Buffer* buffer,
 void PatchTrack::releaseBuffer(Proxy::Buffer* buffer)
 {
     mProxy->releaseBuffer(buffer);
-    deferRestartIfDisabled();
+    restartIfDisabled();
 
     // Check if the PatchTrack has enough data to write once in releaseBuffer().
     // If not, prevent an underrun from occurring by moving the track into FS_FILLING;

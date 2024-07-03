@@ -448,7 +448,7 @@ private:
     void                queueBuffer(Buffer& inBuffer);
     void                clearBufferQueue();
 
-    void restartIfDisabled() override;
+    void                restartIfDisabled();
 
     // Maximum number of pending buffers allocated by OutputTrack::write()
     static const uint8_t kMaxOverFlowBuffers = 10;
@@ -512,7 +512,7 @@ public:
     void releaseBuffer(Proxy::Buffer* buffer) final;
 
 private:
-    void restartIfDisabled() override;
+            void restartIfDisabled();
 };  // end of PatchTrack
 
 } // namespace android
