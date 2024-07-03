@@ -16,7 +16,6 @@
 
 // #define LOG_NDEBUG 0
 #define LOG_TAG "C2SoftDav1dDec"
-#include <android-base/properties.h>
 #include <cutils/properties.h>
 #include <thread>
 
@@ -32,10 +31,6 @@
 #include "C2SoftDav1dDec.h"
 
 namespace android {
-
-// The number of threads used for the dav1d decoder.
-static const int NUM_THREADS_DAV1D_DEFAULT = 0;
-static const char NUM_THREADS_DAV1D_PROPERTY[] = "debug.dav1d.numthreads";
 
 // codecname set and passed in as a compile flag from Android.bp
 constexpr char COMPONENT_NAME[] = CODECNAME;
@@ -512,19 +507,6 @@ c2_status_t C2SoftDav1dDec::onFlush_sm() {
     return C2_OK;
 }
 
-static int GetCPUCoreCount() {
-    int cpuCoreCount = 1;
-#if defined(_SC_NPROCESSORS_ONLN)
-    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-    // _SC_NPROC_ONLN must be defined...
-    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-    CHECK(cpuCoreCount >= 1);
-    ALOGV("Number of CPU cores: %d", cpuCoreCount);
-    return cpuCoreCount;
-}
-
 bool C2SoftDav1dDec::initDecoder() {
 #ifdef FILE_DUMP_ENABLE
     mC2SoftDav1dDump.initDumping();
@@ -542,11 +524,10 @@ bool C2SoftDav1dDec::initDecoder() {
 
     Dav1dSettings lib_settings;
     dav1d_default_settings(&lib_settings);
-    int cpu_count = GetCPUCoreCount();
+    int cpu_count = getCpuCoreCount();
     lib_settings.n_threads = std::max(cpu_count / 2, 1);  // use up to half the cores by default.
 
-    int32_t numThreads =
-            android::base::GetIntProperty(NUM_THREADS_DAV1D_PROPERTY, NUM_THREADS_DAV1D_DEFAULT);
+    int32_t numThreads = getNumThreads();
     if (numThreads > 0) lib_settings.n_threads = numThreads;
 
     lib_settings.max_frame_delay = mActualOutputDelayInfo->value;

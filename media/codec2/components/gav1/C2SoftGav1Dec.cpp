@@ -40,9 +40,6 @@
 
 namespace android {
 
-// Property used to control the number of threads used in the gav1 decoder.
-constexpr char kNumThreadsProperty[] = "debug.c2.gav1.numthreads";
-
 // codecname set and passed in as a compile flag from Android.bp
 constexpr char COMPONENT_NAME[] = CODECNAME;
 
@@ -480,19 +477,6 @@ c2_status_t C2SoftGav1Dec::onFlush_sm() {
   return C2_OK;
 }
 
-static int GetCPUCoreCount() {
-  int cpuCoreCount = 1;
-#if defined(_SC_NPROCESSORS_ONLN)
-  cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-  // _SC_NPROC_ONLN must be defined...
-  cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-  CHECK(cpuCoreCount >= 1);
-  ALOGV("Number of CPU cores: %d", cpuCoreCount);
-  return cpuCoreCount;
-}
-
 bool C2SoftGav1Dec::initDecoder() {
   mSignalledError = false;
   mSignalledOutputEos = false;
@@ -509,8 +493,8 @@ bool C2SoftGav1Dec::initDecoder() {
   }
 
   libgav1::DecoderSettings settings = {};
-  settings.threads = GetCPUCoreCount();
-  int32_t numThreads = android::base::GetIntProperty(kNumThreadsProperty, 0);
+  settings.threads = getCpuCoreCount();
+  int32_t numThreads = getNumThreads();
   if (numThreads > 0 && numThreads < settings.threads) {
     settings.threads = numThreads;
   }

@@ -430,21 +430,6 @@ C2R C2SoftVpxEnc::IntfImpl::CodedColorAspectsSetter(
     return C2R::Ok();
 }
 
-#if 0
-static size_t getCpuCoreCount() {
-    long cpuCoreCount = 1;
-#if defined(_SC_NPROCESSORS_ONLN)
-    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-    // _SC_NPROC_ONLN must be defined...
-    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-    CHECK(cpuCoreCount >= 1);
-    ALOGV("Number of CPU cores: %ld", cpuCoreCount);
-    return (size_t)cpuCoreCount;
-}
-#endif
-
 C2SoftVpxEnc::C2SoftVpxEnc(const char* name, c2_node_id_t id,
                            const std::shared_ptr<IntfImpl>& intfImpl)
     : SimpleC2Component(

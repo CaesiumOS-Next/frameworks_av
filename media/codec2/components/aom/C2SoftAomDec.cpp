@@ -309,19 +309,6 @@ c2_status_t C2SoftAomDec::onFlush_sm() {
     return C2_OK;
 }
 
-static int GetCPUCoreCount() {
-    int cpuCoreCount = 1;
-#if defined(_SC_NPROCESSORS_ONLN)
-    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-    // _SC_NPROC_ONLN must be defined...
-    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-    CHECK(cpuCoreCount >= 1);
-    ALOGV("Number of CPU cores: %d", cpuCoreCount);
-    return cpuCoreCount;
-}
-
 status_t C2SoftAomDec::initDecoder() {
     mSignalledError = false;
     mSignalledOutputEos = false;
@@ -336,7 +323,7 @@ status_t C2SoftAomDec::initDecoder() {
 
     aom_codec_dec_cfg_t cfg;
     memset(&cfg, 0, sizeof(aom_codec_dec_cfg_t));
-    cfg.threads = GetCPUCoreCount();
+    cfg.threads = getCpuCoreCount();
     cfg.allow_lowbitdepth = 1;
 
     aom_codec_flags_t flags;

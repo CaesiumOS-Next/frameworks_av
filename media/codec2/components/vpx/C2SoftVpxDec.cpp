@@ -423,19 +423,6 @@ c2_status_t C2SoftVpxDec::onFlush_sm() {
     return C2_OK;
 }
 
-static int GetCPUCoreCount() {
-    int cpuCoreCount = 1;
-#if defined(_SC_NPROCESSORS_ONLN)
-    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-    // _SC_NPROC_ONLN must be defined...
-    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-    CHECK(cpuCoreCount >= 1);
-    ALOGV("Number of CPU cores: %d", cpuCoreCount);
-    return cpuCoreCount;
-}
-
 status_t C2SoftVpxDec::initDecoder() {
 #ifdef VP9
     mMode = MODE_VP9;
@@ -465,7 +452,7 @@ status_t C2SoftVpxDec::initDecoder() {
 
     vpx_codec_dec_cfg_t cfg;
     memset(&cfg, 0, sizeof(vpx_codec_dec_cfg_t));
-    cfg.threads = mCoreCount = GetCPUCoreCount();
+    cfg.threads = mCoreCount = getCpuCoreCount();
 
     vpx_codec_flags_t flags;
     memset(&flags, 0, sizeof(vpx_codec_flags_t));

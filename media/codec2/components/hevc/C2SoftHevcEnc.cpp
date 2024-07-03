@@ -561,21 +561,6 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
     std::shared_ptr<C2StreamPictureQuantizationTuning::output> mPictureQuantization;
 };
 
-static size_t GetCPUCoreCount() {
-    long cpuCoreCount = 0;
-
-#if defined(_SC_NPROCESSORS_ONLN)
-    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-    // _SC_NPROC_ONLN must be defined...
-    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-
-    if (cpuCoreCount < 1)
-        cpuCoreCount = 1;
-    return (size_t)cpuCoreCount;
-}
-
 C2SoftHevcEnc::C2SoftHevcEnc(const char* name, c2_node_id_t id,
                              const std::shared_ptr<IntfImpl>& intfImpl)
     : SimpleC2Component(
@@ -648,7 +633,7 @@ static int getQpFromQuality(int quality) {
 }
 c2_status_t C2SoftHevcEnc::initEncParams() {
     mCodecCtx = nullptr;
-    mNumCores = std::min(GetCPUCoreCount(), (size_t) CODEC_MAX_CORES);
+    mNumCores = std::min((size_t) getCpuCoreCount(), (size_t) CODEC_MAX_CORES);
     memset(&mEncParams, 0, sizeof(ihevce_static_cfg_params_t));
 
     // default configuration

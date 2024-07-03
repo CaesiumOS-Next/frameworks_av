@@ -582,19 +582,6 @@ namespace {
 // From external/libavc/encoder/ih264e_bitstream.h
 constexpr uint32_t MIN_STREAM_SIZE = 0x800;
 
-static size_t GetCPUCoreCount() {
-    long cpuCoreCount = 1;
-#if defined(_SC_NPROCESSORS_ONLN)
-    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-    // _SC_NPROC_ONLN must be defined...
-    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-    CHECK(cpuCoreCount >= 1);
-    ALOGV("Number of CPU cores: %ld", cpuCoreCount);
-    return (size_t)cpuCoreCount;
-}
-
 }  // namespace
 
 C2SoftAvcEnc::C2SoftAvcEnc(
@@ -657,7 +644,7 @@ void  C2SoftAvcEnc::initEncParams() {
     mMemRecords = nullptr;
     mNumMemRecords = DEFAULT_MEM_REC_CNT;
     mHeaderGenerated = 0;
-    mNumCores = GetCPUCoreCount();
+    mNumCores = getCpuCoreCount();
     mArch = DEFAULT_ARCH;
     mSliceMode = DEFAULT_SLICE_MODE;
     mSliceParam = DEFAULT_SLICE_PARAM;

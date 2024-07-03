@@ -311,19 +311,6 @@ private:
     std::shared_ptr<C2StreamPixelFormatInfo::output> mPixelFormat;
 };
 
-static size_t getCpuCoreCount() {
-    long cpuCoreCount = 1;
-#if defined(_SC_NPROCESSORS_ONLN)
-    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
-#else
-    // _SC_NPROC_ONLN must be defined...
-    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
-#endif
-    CHECK(cpuCoreCount >= 1);
-    ALOGV("Number of CPU cores: %ld", cpuCoreCount);
-    return (size_t)cpuCoreCount;
-}
-
 static void *ivd_aligned_malloc(void *ctxt, WORD32 alignment, WORD32 size) {
     (void) ctxt;
     return memalign(alignment, size);

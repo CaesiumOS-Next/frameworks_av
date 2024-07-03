@@ -97,6 +97,9 @@ void convertPlanar8ToYV12(uint8_t* dstY, uint8_t* dstU, uint8_t* dstV, const uin
                           size_t dstUStride, size_t dstVStride, uint32_t width, uint32_t height,
                           bool isMonochrome, CONV_FORMAT_T format);
 
+int getCpuCoreCount();
+int getNumThreads();
+
 class SimpleC2Component
         : public C2Component, public std::enable_shared_from_this<SimpleC2Component> {
 public:

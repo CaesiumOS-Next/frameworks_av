@@ -19,6 +19,7 @@
 #include <log/log.h>
 
 #include <android/hardware_buffer.h>
+#include <android-base/properties.h>
 #include <cutils/properties.h>
 #include <media/stagefright/foundation/AMessage.h>
 #include <media/stagefright/foundation/AUtils.h>
@@ -45,6 +46,7 @@ namespace android {
 
 constexpr uint8_t kNeutralUVBitDepth8 = 128;
 constexpr uint16_t kNeutralUVBitDepth10 = 512;
+constexpr char kNumThreadsProperty[] = "debug.swcodec.numthreads";
 
 void convertYUV420Planar8ToYV12(uint8_t *dstY, uint8_t *dstU, uint8_t *dstV, const uint8_t *srcY,
                                 const uint8_t *srcU, const uint8_t *srcV, size_t srcYStride,
@@ -631,6 +633,25 @@ void convertPlanar8ToYV12(uint8_t* dstY, uint8_t* dstU, uint8_t* dstV, const uin
                                    isMonochrome);
     }
 }
+
+int getCpuCoreCount() {
+    int cpuCoreCount = 1;
+#if defined(_SC_NPROCESSORS_ONLN)
+    cpuCoreCount = sysconf(_SC_NPROCESSORS_ONLN);
+#else
+    // _SC_NPROC_ONLN must be defined...
+    cpuCoreCount = sysconf(_SC_NPROC_ONLN);
+#endif
+    CHECK(cpuCoreCount >= 1);
+    ALOGV("Number of CPU cores: %d", cpuCoreCount);
+    return cpuCoreCount;
+}
+
+int getNumThreads(){
+    int32_t numThreads = android::base::GetIntProperty(kNumThreadsProperty, 0);
+    return numThreads;
+}
+
 std::unique_ptr<C2Work> SimpleC2Component::WorkQueue::pop_front() {
     std::unique_ptr<C2Work> work = std::move(mQueue.front().work);
     mQueue.pop_front();
