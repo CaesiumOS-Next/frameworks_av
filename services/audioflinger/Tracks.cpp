@@ -87,6 +87,7 @@ TrackBase::TrackBase(
             const audio_attributes_t& attr,
             uint32_t sampleRate,
             audio_format_t format,
+            audio_format_t sourceFormat,
             audio_channel_mask_t channelMask,
             size_t frameCount,
             void *buffer,
@@ -109,6 +110,7 @@ TrackBase::TrackBase(
         mAttr(attr),
         mSampleRate(sampleRate),
         mFormat(format),
+        mSourceFormat(sourceFormat),
         mChannelMask(channelMask),
         mChannelCount(isOut ?
                 audio_channel_count_from_out_mask(channelMask) :
@@ -699,6 +701,7 @@ sp<IAfTrack> IAfTrack::create(
         const audio_attributes_t& attr,
         uint32_t sampleRate,
         audio_format_t format,
+        audio_format_t sourceFormat,
         audio_channel_mask_t channelMask,
         size_t frameCount,
         void *buffer,
@@ -722,6 +725,7 @@ sp<IAfTrack> IAfTrack::create(
             attr,
             sampleRate,
             format,
+            sourceFormat,
             channelMask,
             frameCount,
             buffer,
@@ -747,6 +751,7 @@ Track::Track(
             const audio_attributes_t& attr,
             uint32_t sampleRate,
             audio_format_t format,
+            audio_format_t sourceFormat,
             audio_channel_mask_t channelMask,
             size_t frameCount,
             void *buffer,
@@ -762,7 +767,7 @@ Track::Track(
             float speed,
             bool isSpatialized,
             bool isBitPerfect)
-    :   TrackBase(thread, client, attr, sampleRate, format, channelMask, frameCount,
+    :   TrackBase(thread, client, attr, sampleRate, format, sourceFormat, channelMask, frameCount,
                   // TODO: Using unsecurePointer() has some associated security pitfalls
                   //       (see declaration for details).
                   //       Either document why it is safe in this case or address the
@@ -1640,6 +1645,7 @@ void Track::copyMetadataTo(MetadataInserter& backInserter) const
     }
 
     metadata.channel_mask = mChannelMask;
+    metadata.source_format = mSourceFormat;
     strncpy(metadata.tags, mAttr.tags, AUDIO_ATTRIBUTES_TAGS_MAX_SIZE);
     *backInserter++ = metadata;
 }
@@ -2185,7 +2191,7 @@ OutputTrack::OutputTrack(
             const AttributionSourceState& attributionSource)
     :   Track(playbackThread, NULL, AUDIO_STREAM_PATCH,
               audio_attributes_t{} /* currently unused for output track */,
-              sampleRate, format, channelMask, frameCount,
+              sampleRate, format, AUDIO_FORMAT_DEFAULT /* sourceFormat */, channelMask, frameCount,
               nullptr /* buffer */, (size_t)0 /* bufferSize */, nullptr /* sharedBuffer */,
               AUDIO_SESSION_NONE, getpid(), attributionSource, AUDIO_OUTPUT_FLAG_NONE,
               TYPE_OUTPUT),
@@ -2488,7 +2494,7 @@ PatchTrack::PatchTrack(IAfPlaybackThread* playbackThread,
                                                      float speed)
     :   Track(playbackThread, NULL, streamType,
               audio_attributes_t{} /* currently unused for patch track */,
-              sampleRate, format, channelMask, frameCount,
+              sampleRate, format, AUDIO_FORMAT_DEFAULT /* sourceFormat */, channelMask, frameCount,
               buffer, bufferSize, nullptr /* sharedBuffer */,
               AUDIO_SESSION_NONE, getpid(), audioServerAttributionSource(getpid()), flags,
               TYPE_PATCH, AUDIO_PORT_HANDLE_NONE, frameCountToBeReady, speed),
@@ -2773,7 +2779,7 @@ RecordTrack::RecordTrack(
             track_type type,
             audio_port_handle_t portId,
             int32_t startFrames)
-    :   TrackBase(thread, client, attr, sampleRate, format,
+    :   TrackBase(thread, client, attr, sampleRate, format, AUDIO_FORMAT_DEFAULT,
                   channelMask, frameCount, buffer, bufferSize, sessionId,
                   creatorPid,
                   VALUE_OR_FATAL(aidl2legacy_int32_t_uid_t(attributionSource.uid)),
@@ -3470,6 +3476,7 @@ sp<IAfMmapTrack> IAfMmapTrack::create(IAfThreadBase* thread,
           const audio_attributes_t& attr,
           uint32_t sampleRate,
           audio_format_t format,
+          audio_format_t sourceFormat,
           audio_channel_mask_t channelMask,
           audio_session_t sessionId,
           bool isOut,
@@ -3482,6 +3489,7 @@ sp<IAfMmapTrack> IAfMmapTrack::create(IAfThreadBase* thread,
             attr,
             sampleRate,
             format,
+            sourceFormat,
             channelMask,
             sessionId,
             isOut,
@@ -3494,13 +3502,14 @@ MmapTrack::MmapTrack(IAfThreadBase* thread,
         const audio_attributes_t& attr,
         uint32_t sampleRate,
         audio_format_t format,
+        audio_format_t sourceFormat,
         audio_channel_mask_t channelMask,
         audio_session_t sessionId,
         bool isOut,
         const AttributionSourceState& attributionSource,
         pid_t creatorPid,
         audio_port_handle_t portId)
-    :   TrackBase(thread, NULL, attr, sampleRate, format,
+    :   TrackBase(thread, NULL, attr, sampleRate, format, sourceFormat,
                   channelMask, (size_t)0 /* frameCount */,
                   nullptr /* buffer */, (size_t)0 /* bufferSize */,
                   sessionId, creatorPid,

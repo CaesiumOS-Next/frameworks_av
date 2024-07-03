@@ -2022,12 +2022,15 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
             format->findInt32(KEY_PCM_ENCODING, &pcmEncoding) ?
                     audioFormatFromEncoding(pcmEncoding) : AUDIO_FORMAT_PCM_16_BIT;
 
+    AString mime;
+    CHECK(format->findString("mime", &mime));
+    audio_format_t sourceAudioFormat = AUDIO_FORMAT_DEFAULT;
+    status_t sourceAudioFormatError = mapMimeToAudioFormat(sourceAudioFormat, mime.c_str());
+
     if (offloadingAudio()) {
-        AString mime;
-        CHECK(format->findString("mime", &mime));
         status_t err = mapMimeToAudioFormat(audioFormat, mime.c_str());
 
-        if (err != OK) {
+        if (sourceAudioFormatError != OK) {
             ALOGE("Couldn't map mime \"%s\" to a valid "
                     "audio_format", mime.c_str());
             onDisableOffloadAudio();
@@ -2164,6 +2167,7 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
                     numChannels,
                     (audio_channel_mask_t)channelMask,
                     audioFormat,
+                    sourceAudioFormat,
                     0 /* bufferCount - unused */,
                     mUseAudioCallback ? &NuPlayer::Renderer::AudioSinkCallback : NULL,
                     mUseAudioCallback ? this : NULL,

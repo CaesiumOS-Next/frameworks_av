@@ -2370,6 +2370,7 @@ sp<IAfTrack> PlaybackThread::createTrack_l(
         const audio_attributes_t& attr,
         uint32_t *pSampleRate,
         audio_format_t format,
+        audio_format_t sourceFormat,
         audio_channel_mask_t channelMask,
         size_t *pFrameCount,
         size_t *pNotificationFrameCount,
@@ -2710,7 +2711,7 @@ sp<IAfTrack> PlaybackThread::createTrack_l(
         }
         *afTrackFlags = trackFlags;
 
-        track = IAfTrack::create(this, client, streamType, attr, sampleRate, format,
+        track = IAfTrack::create(this, client, streamType, attr, sampleRate, format, sourceFormat,
                           channelMask, frameCount,
                           nullptr /* buffer */, (size_t)0 /* bufferSize */, sharedBuffer,
                           sessionId, creatorPid, attributionSource, trackFlags,
@@ -10372,7 +10373,7 @@ status_t MmapThread::start(const AudioClient& client,
 
     // Given that MmapThread::mAttr is mutable, should a MmapTrack have attributes ?
     sp<IAfMmapTrack> track = IAfMmapTrack::create(
-            this, attr == nullptr ? mAttr : *attr, mSampleRate, mFormat,
+            this, attr == nullptr ? mAttr : *attr, mSampleRate, mFormat, mSourceFormat,
                                         mChannelMask, mSessionId, isOutput(),
                                         client.attributionSource,
                                         IPCThreadState::self()->getCallingPid(), portId);

@@ -39,6 +39,7 @@ public:
                                 const audio_attributes_t& mAttr,
                                 uint32_t sampleRate,
                                 audio_format_t format,
+                                audio_format_t sourceFormat,
                                 audio_channel_mask_t channelMask,
                                 size_t frameCount,
                                 void *buffer,
@@ -351,6 +352,7 @@ protected:
     const uint32_t      mSampleRate;    // initial sample rate only; for tracks which
                         // support dynamic rates, the current value is in control block
     const audio_format_t mFormat;
+    const audio_format_t mSourceFormat; // the format prior to transformation to mFormat
     const audio_channel_mask_t mChannelMask;
     const uint32_t      mChannelCount;
     const size_t        mFrameSize; // AudioFlinger's view of frame size in shared memory,

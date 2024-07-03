@@ -60,6 +60,8 @@ ConversionResult<media::CreateTrackRequest> IAudioFlinger::CreateTrackInput::toA
     // Do not be mislead by 'Input'--this is an input to 'createTrack', which creates output tracks.
     aidl.config = VALUE_OR_RETURN(legacy2aidl_audio_config_t_AudioConfig(
                     config, false /*isInput*/));
+    aidl.sourceConfig = VALUE_OR_RETURN(legacy2aidl_audio_config_t_AudioConfig(
+                    sourceConfig, false /*isInput*/));
     aidl.clientInfo = VALUE_OR_RETURN(legacy2aidl_AudioClient_AudioClient(clientInfo));
     aidl.sharedBuffer = VALUE_OR_RETURN(legacy2aidl_NullableIMemory_SharedFileRegion(sharedBuffer));
     aidl.notificationsPerBuffer = VALUE_OR_RETURN(convertIntegral<int32_t>(notificationsPerBuffer));
@@ -81,6 +83,8 @@ IAudioFlinger::CreateTrackInput::fromAidl(const media::CreateTrackRequest& aidl)
     // Do not be mislead by 'Input'--this is an input to 'createTrack', which creates output tracks.
     legacy.config = VALUE_OR_RETURN(
             aidl2legacy_AudioConfig_audio_config_t(aidl.config, false /*isInput*/));
+    legacy.sourceConfig = VALUE_OR_RETURN(
+            aidl2legacy_AudioConfig_audio_config_t(aidl.sourceConfig, false /*isInput*/));
     legacy.clientInfo = VALUE_OR_RETURN(aidl2legacy_AudioClient_AudioClient(aidl.clientInfo));
     legacy.sharedBuffer = VALUE_OR_RETURN(aidl2legacy_NullableSharedFileRegion_IMemory(aidl.sharedBuffer));
     legacy.notificationsPerBuffer = VALUE_OR_RETURN(

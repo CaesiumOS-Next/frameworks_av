@@ -30,6 +30,7 @@ public:
                             const audio_attributes_t& attr,
                             uint32_t sampleRate,
                             audio_format_t format,
+                            audio_format_t sourceFormat,
                             audio_channel_mask_t channelMask,
                             audio_session_t sessionId,
                             bool isOut,
