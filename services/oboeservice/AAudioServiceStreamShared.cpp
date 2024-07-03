@@ -154,6 +154,8 @@ aaudio_result_t AAudioServiceStreamShared::open(const aaudio::AAudioStreamReques
         goto error;
     }
 
+    setSourceFormat(configurationInput.getSourceFormat());
+
     setSampleRate(configurationInput.getSampleRate());
     if (getSampleRate() == AAUDIO_UNSPECIFIED) {
         setSampleRate(endpoint->getSampleRate());

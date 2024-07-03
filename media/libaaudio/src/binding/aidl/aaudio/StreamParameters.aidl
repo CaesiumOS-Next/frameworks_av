@@ -24,6 +24,7 @@ parcelable StreamParameters {
     int                                       deviceId;  //             = AAUDIO_UNSPECIFIED;
     int /* aaudio_sharing_mode_t */           sharingMode;  //          = AAUDIO_SHARING_MODE_SHARED;
     AudioFormatDescription                    audioFormat;  //          = AUDIO_FORMAT_DEFAULT;
+    AudioFormatDescription                    sourceFormat;  //         = AUDIO_FORMAT_DEFAULT;
     int /* aaudio_direction_t */              direction;  //            = AAUDIO_DIRECTION_OUTPUT;
     int /* aaudio_usage_t */                  usage;  //                = AAUDIO_UNSPECIFIED;
     int /* aaudio_content_type_t */           contentType;  //          = AAUDIO_UNSPECIFIED;

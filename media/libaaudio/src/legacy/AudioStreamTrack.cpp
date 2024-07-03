@@ -110,6 +110,8 @@ aaudio_result_t AudioStreamTrack::open(const AudioStreamBuilder& builder)
             ? AUDIO_FORMAT_PCM_FLOAT
             : getFormat();
 
+    const audio_format_t sourceFormat = getSourceFormat();
+
     // Setup the callback if there is one.
     wp<AudioTrack::IAudioTrackCallback> callback;
     // Note that TRANSFER_SYNC does not allow FAST track
@@ -160,6 +162,7 @@ aaudio_result_t AudioStreamTrack::open(const AudioStreamBuilder& builder)
             AUDIO_STREAM_DEFAULT,  // ignored because we pass attributes below
             getSampleRate(),
             format,
+            sourceFormat,
             channelMask,
             frameCount,
             flags,

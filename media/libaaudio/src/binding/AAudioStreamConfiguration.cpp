@@ -44,6 +44,13 @@ AAudioStreamConfiguration::AAudioStreamConfiguration(const StreamParameters& par
         ALOGE("audioFormat (%s) aidl2legacy conversion failed",
               parcelable.hardwareAudioFormat.toString().c_str());
     }
+    auto convSourceFormat = android::aidl2legacy_AudioFormatDescription_audio_format_t(
+            parcelable.sourceFormat);
+    setSourceFormat(convSourceFormat.ok() ? convSourceFormat.value() : AUDIO_FORMAT_INVALID);
+    if (!convSourceFormat.ok()) {
+        ALOGE("sourceFormat (%s) aidl2legacy conversion failed",
+              parcelable.hardwareAudioFormat.toString().c_str());
+    }
     static_assert(sizeof(aaudio_direction_t) == sizeof(parcelable.direction));
     setDirection(parcelable.direction);
     static_assert(sizeof(audio_usage_t) == sizeof(parcelable.usage));

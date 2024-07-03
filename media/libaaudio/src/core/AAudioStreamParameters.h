@@ -57,6 +57,14 @@ public:
         mAudioFormat = audioFormat;
     }
 
+    audio_format_t getSourceFormat() const {
+        return mSourceFormat;
+    }
+
+    void setSourceFormat(audio_format_t audioFormat) {
+        mSourceFormat = audioFormat;
+    }
+
     aaudio_sharing_mode_t getSharingMode() const {
         return mSharingMode;
     }
@@ -220,6 +228,7 @@ private:
     int32_t                         mDeviceId             = AAUDIO_UNSPECIFIED;
     aaudio_sharing_mode_t           mSharingMode          = AAUDIO_SHARING_MODE_SHARED;
     audio_format_t                  mAudioFormat          = AUDIO_FORMAT_DEFAULT;
+    audio_format_t                  mSourceFormat          = AUDIO_FORMAT_DEFAULT;
     aaudio_direction_t              mDirection            = AAUDIO_DIRECTION_OUTPUT;
     aaudio_usage_t                  mUsage                = AAUDIO_UNSPECIFIED;
     aaudio_content_type_t           mContentType          = AAUDIO_UNSPECIFIED;

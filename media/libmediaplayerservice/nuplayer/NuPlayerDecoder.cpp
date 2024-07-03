@@ -40,6 +40,7 @@
 #include <media/stagefright/MediaDefs.h>
 #include <media/stagefright/MediaErrors.h>
 #include <media/stagefright/SurfaceUtils.h>
+#include <media/stagefright/Utils.h>
 #include <mpeg2ts/ATSParser.h>
 #include <gui/Surface.h>
 
@@ -826,8 +827,14 @@ void NuPlayer::Decoder::handleOutputFormatChange(const sp<AMessage> &format) {
         notify->setMessage("format", format);
         notify->post();
     } else if (mRenderer != NULL) {
+        audio_format_t sourceAudioFormat;
         uint32_t flags;
         int64_t durationUs;
+
+        AString sourceAudioMime;
+        mSource->getFormat(true /* audio */)->findString("mime", &sourceAudioMime);
+        status_t err = mapMimeToAudioFormat(sourceAudioFormat, sourceAudioMime.c_str());
+
         bool hasVideo = (mSource->getFormat(false /* audio */) != NULL);
         if (getAudioDeepBufferSetting() // override regardless of source duration
                 || (mSource->getDuration(&durationUs) == OK
@@ -840,7 +847,7 @@ void NuPlayer::Decoder::handleOutputFormatChange(const sp<AMessage> &format) {
         sp<AMessage> reply = new AMessage(kWhatAudioOutputFormatChanged, this);
         reply->setInt32("generation", mBufferGeneration);
         mRenderer->changeAudioFormat(
-                format, false /* offloadOnly */, hasVideo,
+                format, sourceAudioFormat, false /* offloadOnly */, hasVideo,
                 flags, mSource->isStreaming(), reply);
     }
 }

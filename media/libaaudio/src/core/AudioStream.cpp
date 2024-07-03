@@ -81,6 +81,7 @@ aaudio_result_t AudioStream::open(const AudioStreamBuilder& builder)
     mSampleRate = builder.getSampleRate();
     mDeviceId = builder.getDeviceId();
     mFormat = builder.getFormat();
+    mSourceFormat = builder.getSourceFormat();
     mSharingMode = builder.getSharingMode();
     mSharingModeMatchRequired = builder.isSharingModeMatchRequired();
     mPerformanceMode = builder.getPerformanceMode();

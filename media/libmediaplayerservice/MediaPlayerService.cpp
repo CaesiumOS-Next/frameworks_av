@@ -2084,15 +2084,15 @@ void MediaPlayerService::AudioOutput::close_l()
 
 status_t MediaPlayerService::AudioOutput::open(
         uint32_t sampleRate, int channelCount, audio_channel_mask_t channelMask,
-        audio_format_t format, int bufferCount,
+        audio_format_t format, audio_format_t sourceFormat, int bufferCount,
         AudioCallback cb, void *cookie,
         audio_output_flags_t flags,
         const audio_offload_info_t *offloadInfo,
         bool doNotReconnect,
         uint32_t suggestedFrameCount)
 {
-    ALOGV("open(%u, %d, 0x%x, 0x%x, %d, %d 0x%x)", sampleRate, channelCount, channelMask,
-                format, bufferCount, mSessionId, flags);
+    ALOGV("open(%u, %d, 0x%x, 0x%x, 0x%x, %d, %d 0x%x)", sampleRate, channelCount, channelMask,
+                format, sourceFormat, bufferCount, mSessionId, flags);
 
     // offloading is only supported in callback mode for now.
     // offloadInfo must be present if offload flag is set
@@ -2210,6 +2210,7 @@ status_t MediaPlayerService::AudioOutput::open(
                     mStreamType,
                     sampleRate,
                     format,
+                    sourceFormat,
                     channelMask,
                     frameCount,
                     flags,
@@ -2236,6 +2237,7 @@ status_t MediaPlayerService::AudioOutput::open(
                     mStreamType,
                     sampleRate,
                     format,
+                    sourceFormat,
                     channelMask,
                     frameCount,
                     flags,
