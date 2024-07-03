@@ -16,6 +16,47 @@
       "message": "Clean cherry-pick from internal ag/28044037.",
       "revId": "750b754572a263b95a3729b3c837e3f7a468feaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0deffe7a_6e3ae3dd",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-03T18:20:37Z",
+      "side": 1,
+      "message": "EffectCallback was shared by effects in the same chain, so `shouldDispatchAddRemoveToHal` will return false for the second effect in the effect.\nThere is a bug reported for the Noise Suppression can not be added to GoogleMeet, it should be easily reproduced with a GoogleMeet call with this change.",
+      "range": {
+        "startLine": 625,
+        "startChar": 26,
+        "endLine": 625,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7c9c8296_996db698",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Effects.h",
+              "range": {
+                "startLine": 624,
+                "startChar": 0,
+                "endLine": 626,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "750b754572a263b95a3729b3c837e3f7a468feaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
