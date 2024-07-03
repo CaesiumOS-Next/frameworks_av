@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d7a965_422167f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963880
+      },
+      "writtenOn": "2024-07-03T11:01:05Z",
+      "side": 1,
+      "message": "OK, thanks.\nI will try to add AUDIO_POLICY_FORCE_BT_LE to implement the corresponding logic, and update the change after passing the verification.",
+      "revId": "fea3e5d99c47f22ad5812ed77bf4eb6c7215516d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18e7cfa_9c6598fd",
