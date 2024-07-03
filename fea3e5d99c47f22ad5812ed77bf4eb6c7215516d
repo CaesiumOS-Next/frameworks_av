@@ -33,6 +33,67 @@
       "message": "Hi Eric Laurent, please help review the current changes and https://android-review.googlesource.com/c/platform/frameworks/base/+/3146179, thank you.",
       "revId": "fea3e5d99c47f22ad5812ed77bf4eb6c7215516d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18e7cfa_9c6598fd",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-03T08:57:12Z",
+      "side": 1,
+      "message": "This will work unless we have both SCO and LE devices connected in which case we will always favor SCO which is not necessarily what the user wants.\nThe user choice in ca of dual mode headsets is handled by the BT stack and the active profile selection communicated to java AudioService. If we want to reflect this here, we need to use a new forced usage for AUDIO_POLICY_FORCE_FOR_VIBRATE_RINGING and add AUDIO_POLICY_FORCE_BT_LE and select the device according to this",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 83
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "273e1753_38ebd81c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 334,
+                "endChar": 0
+              },
+              "replacement": "                    AUDIO_DEVICE_OUT_BLUETOOTH_SCO});\n"
+            },
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 345,
+                "startChar": 0,
+                "endLine": 346,
+                "endChar": 0
+              },
+              "replacement": "            // Use both Bluetooth SCO and phone default output when ringing in normal mode\n"
+            },
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 348,
+                "startChar": 0,
+                "endLine": 350,
+                "endChar": 0
+              },
+              "replacement": "                    || availableOutputDevices.getDevicesFromTypes(\n                    getAudioDeviceOutAllBleSet()).size() \u003e 0) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fea3e5d99c47f22ad5812ed77bf4eb6c7215516d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
