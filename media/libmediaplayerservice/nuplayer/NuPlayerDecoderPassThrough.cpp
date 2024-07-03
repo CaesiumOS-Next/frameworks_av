@@ -74,7 +74,7 @@ void NuPlayer::DecoderPassThrough::onConfigure(const sp<AMessage> &format) {
     // Opening again might be relevant if decoder is instantiated after shutdown and
     // format is different.
     status_t err = mRenderer->openAudioSink(
-            format, true /* offloadOnly */, hasVideo,
+            format, AUDIO_FORMAT_DEFAULT /* sourceAudioFormat */, true /* offloadOnly */, hasVideo,
             AUDIO_OUTPUT_FLAG_NONE /* flags */, NULL /* isOffloaded */, mSource->isStreaming());
     if (err != OK) {
         handleError(err);
