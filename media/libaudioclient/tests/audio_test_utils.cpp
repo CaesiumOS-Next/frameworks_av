@@ -364,12 +364,20 @@ void AudioCapture::onOverrun() {
 
 void AudioCapture::onMarker(uint32_t markerPosition) {
     ALOGV("received Callback at position %d", markerPosition);
-    mReceivedCbMarkerAtPosition = markerPosition;
+    {
+        std::lock_guard l(mMutex);
+        mReceivedCbMarkerAtPosition = markerPosition;
+    }
+    mMarkerCondition.notify_all();
 }
 
 void AudioCapture::onNewPos(uint32_t markerPosition) {
     ALOGV("received Callback at position %d", markerPosition);
-    mReceivedCbMarkerCount++;
+    {
+        std::lock_guard l(mMutex);
+        mReceivedCbMarkerCount = mReceivedCbMarkerCount.value_or(0) + 1;
+    }
+    mMarkerCondition.notify_all();
 }
 
 void AudioCapture::onNewIAudioRecord() {
@@ -396,8 +404,6 @@ AudioCapture::AudioCapture(audio_source_t inputSource, uint32_t sampleRate, audi
     mBufferOverrun = false;
     mMarkerPosition = 0;
     mMarkerPeriod = 0;
-    mReceivedCbMarkerAtPosition = -1;
-    mReceivedCbMarkerCount = 0;
     mState = REC_NO_INIT;
     mStopRecording = false;
 }
@@ -588,6 +594,46 @@ status_t AudioCapture::audioProcess() {
         }
     }
     return OK;
+}
+
+uint32_t AudioCapture::getMarkerPeriod() const {
+    std::lock_guard l(mMutex);
+    return mMarkerPeriod;
+}
+
+uint32_t AudioCapture::getMarkerPosition() const {
+    std::lock_guard l(mMutex);
+    return mMarkerPosition;
+}
+
+void AudioCapture::setMarkerPeriod(uint32_t markerPeriod) {
+    std::lock_guard l(mMutex);
+    mMarkerPeriod = markerPeriod;
+}
+
+void AudioCapture::setMarkerPosition(uint32_t markerPosition) {
+    std::lock_guard l(mMutex);
+    mMarkerPosition = markerPosition;
+}
+
+uint32_t AudioCapture::waitAndGetReceivedCbMarkerAtPosition() const {
+    std::unique_lock lock(mMutex);
+    android::base::ScopedLockAssertion lock_assertion(mMutex);
+    mMarkerCondition.wait_for(lock, std::chrono::seconds(3), [this]() {
+        android::base::ScopedLockAssertion lock_assertion(mMutex);
+        return mReceivedCbMarkerAtPosition.has_value();
+    });
+    return mReceivedCbMarkerAtPosition.value_or(-1);
+}
+
+uint32_t AudioCapture::waitAndGetReceivedCbMarkerCount() const {
+    std::unique_lock lock(mMutex);
+    android::base::ScopedLockAssertion lock_assertion(mMutex);
+    mMarkerCondition.wait_for(lock, std::chrono::seconds(3), [this]() {
+        android::base::ScopedLockAssertion lock_assertion(mMutex);
+        return mReceivedCbMarkerCount.has_value();
+    });
+    return mReceivedCbMarkerCount.value_or(0);
 }
 
 status_t listAudioPorts(std::vector<audio_port_v7>& portsVec) {

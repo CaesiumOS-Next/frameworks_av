@@ -146,8 +146,8 @@ class AudioCapture : public AudioRecord::IAudioRecordCallback {
     ~AudioCapture();
     size_t onMoreData(const AudioRecord::Buffer& buffer) override EXCLUDES(mMutex);
     void onOverrun() override;
-    void onMarker(uint32_t markerPosition) override;
-    void onNewPos(uint32_t newPos) override;
+    void onMarker(uint32_t markerPosition) override EXCLUDES(mMutex);
+    void onNewPos(uint32_t newPos) override EXCLUDES(mMutex);
     void onNewIAudioRecord() override;
     status_t create();
     status_t setRecordDuration(float durationInSec);
@@ -160,17 +160,16 @@ class AudioCapture : public AudioRecord::IAudioRecordCallback {
     status_t obtainBuffer(RawBuffer& buffer);
     status_t audioProcess();
     status_t stop() EXCLUDES(mMutex);
+    uint32_t getMarkerPeriod() const EXCLUDES(mMutex);
+    uint32_t getMarkerPosition() const EXCLUDES(mMutex);
+    void setMarkerPeriod(uint32_t markerPeriod) EXCLUDES(mMutex);
+    void setMarkerPosition(uint32_t markerPosition) EXCLUDES(mMutex);
+    uint32_t waitAndGetReceivedCbMarkerAtPosition() const EXCLUDES(mMutex);
+    uint32_t waitAndGetReceivedCbMarkerCount() const EXCLUDES(mMutex);
 
     uint32_t mFrameCount;
     uint32_t mNotificationFrames;
     int64_t mNumFramesToRecord;
-    int64_t mNumFramesReceived;
-    int64_t mNumFramesLost;
-    uint32_t mMarkerPosition;
-    uint32_t mMarkerPeriod;
-    uint32_t mReceivedCbMarkerAtPosition;
-    uint32_t mReceivedCbMarkerCount;
-    bool mBufferOverrun;
 
     enum State {
         REC_NO_INIT,
@@ -199,6 +198,16 @@ class AudioCapture : public AudioRecord::IAudioRecordCallback {
     mutable std::mutex mMutex;
     std::condition_variable mCondition;
     std::deque<RawBuffer> mBuffersReceived GUARDED_BY(mMutex);
+
+    mutable std::condition_variable mMarkerCondition;
+    uint32_t mMarkerPeriod GUARDED_BY(mMutex);
+    uint32_t mMarkerPosition GUARDED_BY(mMutex);
+    std::optional<uint32_t> mReceivedCbMarkerCount GUARDED_BY(mMutex);
+    std::optional<uint32_t> mReceivedCbMarkerAtPosition GUARDED_BY(mMutex);
+
+    int64_t mNumFramesReceived;
+    int64_t mNumFramesLost;
+    bool mBufferOverrun;
 };
 
 #endif  // AUDIO_TEST_UTILS_H_
