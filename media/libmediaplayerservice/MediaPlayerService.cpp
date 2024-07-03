@@ -2084,7 +2084,7 @@ void MediaPlayerService::AudioOutput::close_l()
 
 status_t MediaPlayerService::AudioOutput::open(
         uint32_t sampleRate, int channelCount, audio_channel_mask_t channelMask,
-        audio_format_t format, int bufferCount,
+        audio_format_t format, audio_format_t sourceFormat, int bufferCount,
         AudioCallback cb, void *cookie,
         audio_output_flags_t flags,
         const audio_offload_info_t *offloadInfo,
@@ -2210,6 +2210,7 @@ status_t MediaPlayerService::AudioOutput::open(
                     mStreamType,
                     sampleRate,
                     format,
+                    sourceFormat,
                     channelMask,
                     frameCount,
                     flags,
@@ -2236,6 +2237,7 @@ status_t MediaPlayerService::AudioOutput::open(
                     mStreamType,
                     sampleRate,
                     format,
+                    sourceFormat,
                     channelMask,
                     frameCount,
                     flags,
