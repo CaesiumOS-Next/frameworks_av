@@ -1019,6 +1019,7 @@ public:
                                 const audio_attributes_t& attr,
                                 uint32_t *sampleRate,
                                 audio_format_t format,
+                                audio_format_t sourceFormat,
                                 audio_channel_mask_t channelMask,
                                 size_t *pFrameCount,
                                 size_t *pNotificationFrameCount,
@@ -2337,6 +2338,7 @@ class MmapThread : public ThreadBase, public virtual IAfMmapThread
                  */
     audio_port_handle_t mDeviceId GUARDED_BY(mutex()) = AUDIO_PORT_HANDLE_NONE;
 
+    audio_format_t mSourceFormat GUARDED_BY(mutex());
     audio_attributes_t mAttr GUARDED_BY(mutex());
     audio_session_t mSessionId GUARDED_BY(mutex());
     audio_port_handle_t mPortId GUARDED_BY(mutex());
