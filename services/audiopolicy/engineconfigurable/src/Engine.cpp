@@ -476,6 +476,16 @@ sp<DeviceDescriptor> Engine::getInputDeviceForAttributes(const audio_attributes_
         return device;
     }
 
+    std::size_t pos;
+    std::string tags { attr.tags };
+    if ((pos = tags.find("calibration")) != std::string::npos) {
+        // TODO: use constants instead
+        device = availableInputDevices.getDeviceFromTagName("Echo-Reference-Calibration");
+        if (device != nullptr) {
+            return device;
+        }
+    }
+
     audio_devices_t deviceType = getPropertyForKey<audio_devices_t, audio_source_t>(attr.source);
 
     if (audio_is_remote_submix_device(deviceType)) {
