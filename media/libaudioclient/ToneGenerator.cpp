@@ -1334,6 +1334,7 @@ bool ToneGenerator::initAudioTrack() {
             AUDIO_STREAM_DEFAULT,
             0,    // sampleRate
             AUDIO_FORMAT_PCM_16_BIT,
+            AUDIO_FORMAT_DEFAULT, /* sourceFormat */
             AUDIO_CHANNEL_OUT_MONO,
             frameCount,
             AUDIO_OUTPUT_FLAG_NONE,

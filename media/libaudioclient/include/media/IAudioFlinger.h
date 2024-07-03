@@ -81,6 +81,7 @@ public:
         /* input */
         audio_attributes_t attr;
         audio_config_t config;
+        audio_config_t sourceConfig;
         AudioClient clientInfo;
         sp<IMemory> sharedBuffer;
         uint32_t notificationsPerBuffer;
