@@ -258,6 +258,7 @@ aaudio_result_t AAudioServiceEndpointMMAP::openWithConfig(
 
     setFormat(config->format);
     setSampleRate(config->sample_rate);
+    setSourceFormat(getSourceFormat());
     setHardwareSampleRate(getSampleRate());
     setHardwareFormat(getFormat());
     setHardwareSamplesPerFrame(AAudioConvert_channelMaskToCount(getChannelMask()));

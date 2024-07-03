@@ -364,6 +364,9 @@ void OboeserviceFuzzer::process(const uint8_t *data, size_t size) {
             ? fdp.ConsumeIntegral<int32_t>()
             : kAAudioFormats[fdp.ConsumeIntegralInRange<int32_t>(0, kNumAAudioFormats - 1)]));
 
+    request.getConfiguration().setSourceFormat((audio_format_t)
+            kAAudioFormats[fdp.ConsumeIntegralInRange<int32_t>(0, kNumAAudioFormats - 1)]);
+
     // TODO b/182392769: use attribution source util
     android::content::AttributionSourceState attributionSource;
     attributionSource.uid = getuid();

@@ -108,6 +108,8 @@ aaudio_result_t AudioStreamInternal::open(const AudioStreamBuilder &builder) {
     // Request FLOAT for the shared mixer or the device.
     request.getConfiguration().setFormat(AUDIO_FORMAT_PCM_FLOAT);
 
+    request.getConfiguration().setSourceFormat(getSourceFormat());
+
     // TODO b/182392769: use attribution source util
     AttributionSourceState attributionSource;
     attributionSource.uid = VALUE_OR_FATAL(android::legacy2aidl_uid_t_int32_t(getuid()));

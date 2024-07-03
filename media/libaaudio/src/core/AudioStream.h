@@ -244,6 +244,10 @@ public:
         return mFormat;
     }
 
+    audio_format_t getSourceFormat()  const {
+        return mSourceFormat;
+    }
+
     audio_format_t getHardwareFormat()  const {
         return mHardwareFormat;
     }
@@ -603,6 +607,11 @@ protected:
     }
 
     // This should not be called after the open() call.
+    void setSourceFormat(audio_format_t format) {
+        mSourceFormat = format;
+    }
+
+    // This should not be called after the open() call.
     void setHardwareFormat(audio_format_t format) {
         mHardwareFormat = format;
     }
@@ -767,6 +776,7 @@ private:
     aaudio_sharing_mode_t       mSharingMode = AAUDIO_SHARING_MODE_SHARED;
     bool                        mSharingModeMatchRequired = false; // must match sharing mode requested
     audio_format_t              mFormat = AUDIO_FORMAT_DEFAULT;
+    audio_format_t              mSourceFormat = AUDIO_FORMAT_DEFAULT;
     audio_format_t              mHardwareFormat = AUDIO_FORMAT_DEFAULT;
     aaudio_performance_mode_t   mPerformanceMode = AAUDIO_PERFORMANCE_MODE_NONE;
     int32_t                     mFramesPerBurst = 0;

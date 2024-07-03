@@ -451,6 +451,7 @@ int64_t NuPlayer::Renderer::getVideoLateByUs() {
 
 status_t NuPlayer::Renderer::openAudioSink(
         const sp<AMessage> &format,
+        audio_format_t sourceAudioFormat,
         bool offloadOnly,
         bool hasVideo,
         uint32_t flags,
@@ -458,6 +459,7 @@ status_t NuPlayer::Renderer::openAudioSink(
         bool isStreaming) {
     sp<AMessage> msg = new AMessage(kWhatOpenAudioSink, this);
     msg->setMessage("format", format);
+    msg->setInt32("sourceAudioFormat", sourceAudioFormat);
     msg->setInt32("offload-only", offloadOnly);
     msg->setInt32("has-video", hasVideo);
     msg->setInt32("flags", flags);
@@ -503,6 +505,7 @@ void NuPlayer::Renderer::dump(AString& logString) {
 
 void NuPlayer::Renderer::changeAudioFormat(
         const sp<AMessage> &format,
+        audio_format_t sourceAudioFormat,
         bool offloadOnly,
         bool hasVideo,
         uint32_t flags,
@@ -510,6 +513,7 @@ void NuPlayer::Renderer::changeAudioFormat(
         const sp<AMessage> &notify) {
     sp<AMessage> meta = new AMessage;
     meta->setMessage("format", format);
+    meta->setInt32("sourceAudioFormat", sourceAudioFormat);
     meta->setInt32("offload-only", offloadOnly);
     meta->setInt32("has-video", hasVideo);
     meta->setInt32("flags", flags);
@@ -529,6 +533,9 @@ void NuPlayer::Renderer::onMessageReceived(const sp<AMessage> &msg) {
             sp<AMessage> format;
             CHECK(msg->findMessage("format", &format));
 
+            audio_format_t sourceAudioFormat;
+            CHECK(msg->findInt32("sourceAudioFormat", (int32_t *)&sourceAudioFormat));
+
             int32_t offloadOnly;
             CHECK(msg->findInt32("offload-only", &offloadOnly));
 
@@ -541,7 +548,8 @@ void NuPlayer::Renderer::onMessageReceived(const sp<AMessage> &msg) {
             uint32_t isStreaming;
             CHECK(msg->findInt32("isStreaming", (int32_t *)&isStreaming));
 
-            status_t err = onOpenAudioSink(format, offloadOnly, hasVideo, flags, isStreaming);
+            status_t err = onOpenAudioSink(format, sourceAudioFormat, offloadOnly, hasVideo, flags,
+                                           isStreaming);
 
             sp<AMessage> response = new AMessage;
             response->setInt32("err", err);
@@ -1990,6 +1998,7 @@ void NuPlayer::Renderer::cancelAudioOffloadPauseTimeout() {
 
 status_t NuPlayer::Renderer::onOpenAudioSink(
         const sp<AMessage> &format,
+        audio_format_t sourceAudioFormat,
         bool offloadOnly,
         bool hasVideo,
         uint32_t flags,
@@ -2078,6 +2087,7 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
                     numChannels,
                     (audio_channel_mask_t)channelMask,
                     audioFormat,
+                    sourceAudioFormat,
                     0 /* bufferCount - unused */,
                     &NuPlayer::Renderer::AudioSinkCallback,
                     this,
@@ -2164,6 +2174,7 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
                     numChannels,
                     (audio_channel_mask_t)channelMask,
                     audioFormat,
+                    sourceAudioFormat,
                     0 /* bufferCount - unused */,
                     mUseAudioCallback ? &NuPlayer::Renderer::AudioSinkCallback : NULL,
                     mUseAudioCallback ? this : NULL,
@@ -2200,6 +2211,9 @@ void NuPlayer::Renderer::onChangeAudioFormat(
     sp<AMessage> format;
     CHECK(meta->findMessage("format", &format));
 
+    audio_format_t sourceAudioFormat;
+    CHECK(meta->findInt32("sourceAudioFormat", (int32_t *)&sourceAudioFormat));
+
     int32_t offloadOnly;
     CHECK(meta->findInt32("offload-only", &offloadOnly));
 
@@ -2212,7 +2226,8 @@ void NuPlayer::Renderer::onChangeAudioFormat(
     uint32_t isStreaming;
     CHECK(meta->findInt32("isStreaming", (int32_t *)&isStreaming));
 
-    status_t err = onOpenAudioSink(format, offloadOnly, hasVideo, flags, isStreaming);
+    status_t err = onOpenAudioSink(format, sourceAudioFormat, offloadOnly, hasVideo, flags,
+                                   isStreaming);
 
     if (err != OK) {
         notify->setInt32("err", err);

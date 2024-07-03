@@ -328,6 +328,7 @@ public:
                         AudioTrack( audio_stream_type_t streamType,
                                     uint32_t sampleRate,
                                     audio_format_t format,
+                                    audio_format_t sourceFormat,
                                     audio_channel_mask_t channelMask,
                                     size_t frameCount    = 0,
                                     audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
@@ -357,6 +358,7 @@ public:
                         AudioTrack( audio_stream_type_t streamType,
                                     uint32_t sampleRate,
                                     audio_format_t format,
+                                    audio_format_t sourceFormat,
                                     audio_channel_mask_t channelMask,
                                     const sp<IMemory>& sharedBuffer,
                                     audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
@@ -402,6 +404,7 @@ public:
             status_t    set(audio_stream_type_t streamType,
                             uint32_t sampleRate,
                             audio_format_t format,
+                            audio_format_t sourceFormat,
                             audio_channel_mask_t channelMask,
                             size_t frameCount   = 0,
                             audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
@@ -423,6 +426,7 @@ public:
                 audio_stream_type_t streamType;
                 uint32_t sampleRate;
                 audio_format_t format;
+                audio_format_t sourceFormat;
                 audio_channel_mask_t channelMask;
                 size_t frameCount;
                 audio_output_flags_t flags;
@@ -443,8 +447,8 @@ public:
         private:
             // Note: Consumes parameters
             void        set(SetParams& s) {
-                (void)set(s.streamType, s.sampleRate, s.format, s.channelMask, s.frameCount,
-                          s.flags, std::move(s.callback), s.notificationFrames,
+                (void)set(s.streamType, s.sampleRate, s.format, s.sourceFormat, s.channelMask,
+                          s.frameCount, s.flags, std::move(s.callback), s.notificationFrames,
                           std::move(s.sharedBuffer), s.threadCanCallJava, s.sessionId,
                           s.transferType, s.offloadInfo, std::move(s.attributionSource),
                           s.pAttributes, s.doNotReconnect, s.maxRequiredSpeed, s.selectedDeviceId);
@@ -456,6 +460,7 @@ public:
             status_t    set(audio_stream_type_t streamType,
                             uint32_t sampleRate,
                             audio_format_t format,
+                            audio_format_t sourceFormat,
                             uint32_t channelMask,
                             size_t frameCount   = 0,
                             audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
@@ -1304,6 +1309,7 @@ public:
 
     // constant after constructor or set()
     audio_format_t          mFormat;                // as requested by client, not forced to 16-bit
+    audio_format_t          mSourceFormat;
     // mOriginalStreamType == AUDIO_STREAM_DEFAULT implies this AudioTrack has valid attributes
     audio_stream_type_t     mOriginalStreamType = AUDIO_STREAM_DEFAULT;
     audio_stream_type_t     mStreamType = AUDIO_STREAM_DEFAULT;

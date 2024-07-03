@@ -32,6 +32,7 @@ import android.media.audio.common.AudioConfig;
 parcelable CreateTrackRequest {
     AudioAttributes attr;
     AudioConfig config;
+    AudioConfig sourceConfig;
     AudioClient clientInfo;
     @nullable SharedFileRegion sharedBuffer;
     int notificationsPerBuffer;

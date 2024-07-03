@@ -258,6 +258,7 @@ AudioTrack::AudioTrack(
         audio_stream_type_t streamType,
         uint32_t sampleRate,
         audio_format_t format,
+        audio_format_t sourceFormat,
         audio_channel_mask_t channelMask,
         size_t frameCount,
         audio_output_flags_t flags,
@@ -282,10 +283,11 @@ AudioTrack::AudioTrack(
 
     // make_unique does not aggregate init until c++20
     mSetParams = std::unique_ptr<SetParams>{
-            new SetParams{streamType, sampleRate, format, channelMask, frameCount, flags, callback,
-                          notificationFrames, 0 /*sharedBuffer*/, false /*threadCanCallJava*/,
-                          sessionId, transferType, offloadInfo, attributionSource, pAttributes,
-                          doNotReconnect, maxRequiredSpeed, selectedDeviceId}};
+            new SetParams{streamType, sampleRate, format, sourceFormat, channelMask, frameCount,
+                          flags, callback, notificationFrames, 0 /*sharedBuffer*/,
+                          false /*threadCanCallJava*/, sessionId, transferType, offloadInfo,
+                          attributionSource, pAttributes, doNotReconnect, maxRequiredSpeed,
+                          selectedDeviceId}};
 }
 
 namespace {
@@ -332,6 +334,7 @@ AudioTrack::AudioTrack(
         audio_stream_type_t streamType,
         uint32_t sampleRate,
         audio_format_t format,
+        audio_format_t sourceFormat,
         audio_channel_mask_t channelMask,
         const sp<IMemory>& sharedBuffer,
         audio_output_flags_t flags,
@@ -355,10 +358,11 @@ AudioTrack::AudioTrack(
     mAttributes = AUDIO_ATTRIBUTES_INITIALIZER;
 
     mSetParams = std::unique_ptr<SetParams>{
-            new SetParams{streamType, sampleRate, format, channelMask, 0 /*frameCount*/, flags,
-                          callback, notificationFrames, sharedBuffer, false /*threadCanCallJava*/,
-                          sessionId, transferType, offloadInfo, attributionSource, pAttributes,
-                          doNotReconnect, maxRequiredSpeed, AUDIO_PORT_HANDLE_NONE}};
+            new SetParams{streamType, sampleRate, format, sourceFormat, channelMask,
+                          0 /*frameCount*/, flags, callback, notificationFrames, sharedBuffer,
+                          false /*threadCanCallJava*/, sessionId, transferType, offloadInfo,
+                          attributionSource, pAttributes, doNotReconnect, maxRequiredSpeed,
+                          AUDIO_PORT_HANDLE_NONE}};
 }
 
 void AudioTrack::onFirstRef() {
@@ -426,6 +430,7 @@ status_t AudioTrack::set(
         audio_stream_type_t streamType,
         uint32_t sampleRate,
         audio_format_t format,
+        audio_format_t sourceFormat,
         audio_channel_mask_t channelMask,
         size_t frameCount,
         audio_output_flags_t flags,
@@ -452,11 +457,11 @@ status_t AudioTrack::set(
     pid_t pid = VALUE_OR_FATAL(aidl2legacy_int32_t_pid_t(attributionSource.pid));
     std::string errorMessage;
     // Note mPortId is not valid until the track is created, so omit mPortId in ALOG for set.
-    ALOGV("%s(): streamType %d, sampleRate %u, format %#x, channelMask %#x, frameCount %zu, "
-          "flags %#x, notificationFrames %d, sessionId %d, transferType %d, uid %d, pid %d",
-          __func__,
-          streamType, sampleRate, format, channelMask, frameCount, flags, notificationFrames,
-          sessionId, transferType, attributionSource.uid, attributionSource.pid);
+    ALOGV("%s(): streamType %d, sampleRate %u, format %#x, sourceFormat %#x, channelMask %#x, "
+          " frameCount %zu, flags %#x, notificationFrames %d, sessionId %d, transferType %d, "
+          " uid %d, pid %d", __func__, streamType, sampleRate, format, sourceFormat, channelMask,
+          frameCount, flags, notificationFrames, sessionId, transferType, attributionSource.uid,
+          attributionSource.pid);
 
     mThreadCanCallJava = threadCanCallJava;
 
@@ -506,6 +511,7 @@ status_t AudioTrack::set(
     }
 
     mFormat = format;
+    mSourceFormat = sourceFormat;
     mOrigFlags = mFlags = flags;
 
     switch (transferType) {
@@ -739,6 +745,7 @@ status_t AudioTrack::set(
         audio_stream_type_t streamType,
         uint32_t sampleRate,
         audio_format_t format,
+        audio_format_t sourceFormat,
         uint32_t channelMask,
         size_t frameCount,
         audio_output_flags_t flags,
@@ -766,10 +773,11 @@ status_t AudioTrack::set(
     } else if (user) {
         LOG_ALWAYS_FATAL("Callback data provided without callback pointer!");
     }
-    return set(streamType, sampleRate, format, static_cast<audio_channel_mask_t>(channelMask),
-               frameCount, flags, mLegacyCallbackWrapper, notificationFrames, sharedBuffer,
-               threadCanCallJava, sessionId, transferType, offloadInfo, attributionSource,
-               pAttributes, doNotReconnect, maxRequiredSpeed, selectedDeviceId);
+    return set(streamType, sampleRate, format, sourceFormat,
+               static_cast<audio_channel_mask_t>(channelMask), frameCount, flags,
+               mLegacyCallbackWrapper, notificationFrames, sharedBuffer, threadCanCallJava,
+               sessionId, transferType, offloadInfo, attributionSource, pAttributes,
+               doNotReconnect, maxRequiredSpeed, selectedDeviceId);
 }
 
 // -------------------------------------------------------------------------
@@ -1869,6 +1877,8 @@ status_t AudioTrack::createTrack_l()
     input.config.channel_mask = mChannelMask;
     input.config.format = mFormat;
     input.config.offload_info = mOffloadInfoCopy;
+    input.sourceConfig = AUDIO_CONFIG_INITIALIZER;
+    input.sourceConfig.format = mSourceFormat;
     input.clientInfo.attributionSource = mClientAttributionSource;
     input.clientInfo.clientTid = -1;
     if (mFlags & AUDIO_OUTPUT_FLAG_FAST) {

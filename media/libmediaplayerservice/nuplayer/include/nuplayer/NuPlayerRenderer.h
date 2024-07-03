@@ -76,6 +76,7 @@ struct NuPlayer::Renderer : public AHandler {
 
     status_t openAudioSink(
             const sp<AMessage> &format,
+            audio_format_t sourceAudioFormat,
             bool offloadOnly,
             bool hasVideo,
             uint32_t flags,
@@ -88,6 +89,7 @@ struct NuPlayer::Renderer : public AHandler {
     // re-open audio sink after all pending audio buffers played.
     void changeAudioFormat(
             const sp<AMessage> &format,
+            audio_format_t sourceAudioFormat,
             bool offloadOnly,
             bool hasVideo,
             uint32_t flags,
@@ -308,6 +310,7 @@ private:
     void onAudioTearDown(AudioTearDownReason reason);
     status_t onOpenAudioSink(
             const sp<AMessage> &format,
+            audio_format_t sourceAudioFormat,
             bool offloadOnly,
             bool hasVideo,
             uint32_t flags,
