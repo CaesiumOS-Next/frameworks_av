@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11847e14_57c67989",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-07-03T13:31:28Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "e751a90a_ef067814",
+      "range": {
+        "startLine": 1266,
+        "startChar": 36,
+        "endLine": 1266,
+        "endChar": 46
+      },
+      "revId": "67ac93dca17393bf0fc8e0758c3e34d2f6ec5557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4defbcf7_06d0b4d0",
