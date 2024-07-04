@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c924abb_c8aae5da",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a0cfc20_70155ec7",
+      "range": {
+        "startLine": 328,
+        "startChar": 26,
+        "endLine": 328,
+        "endChar": 33
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a38ddcf7_eee59c24",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d026fd_c464fc75",
+        "filename": "media/libaudioclient/IAudioFlinger.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a38ddcf7_eee59c24",
+      "range": {
+        "startLine": 355,
+        "startChar": 16,
+        "endLine": 355,
+        "endChar": 35
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fefa59f_725b5f35",
@@ -78,6 +126,30 @@
       "writtenOn": "2024-07-04T12:32:46Z",
       "side": 1,
       "message": "audio_port_handle_t",
+      "range": {
+        "startLine": 143,
+        "startChar": 30,
+        "endLine": 143,
+        "endChar": 37
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ece3e9_7f8b6929",
+        "filename": "media/libaudioclient/include/media/AudioSystem.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fefa59f_725b5f35",
       "range": {
         "startLine": 143,
         "startChar": 30,
@@ -111,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "466fdf9d_20ff5333",
+        "filename": "services/audioflinger/AudioFlinger.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 3742,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a1a8c2_509543ed",
+      "range": {
+        "startLine": 3742,
+        "startChar": 30,
+        "endLine": 3742,
+        "endChar": 31
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "472fdd4c_42f7c7bd",
@@ -134,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d004c8_e2f2994e",
+        "filename": "services/audioflinger/AudioFlinger.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 3766,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "472fdd4c_42f7c7bd",
+      "range": {
+        "startLine": 3766,
+        "startChar": 23,
+        "endLine": 3766,
+        "endChar": 41
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8d84da6_c6bd98b5",
@@ -147,6 +267,30 @@
       "writtenOn": "2024-07-04T12:32:46Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 743,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 101
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f85ecc_153fd7ea",
+        "filename": "services/audioflinger/AudioFlinger.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8d84da6_c6bd98b5",
       "range": {
         "startLine": 743,
         "startChar": 0,
@@ -204,6 +348,30 @@
           ]
         }
       ],
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bc3b335_4f0d5bac",
+        "filename": "services/audioflinger/IAfThread.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37a0e967_287d7495",
+      "range": {
+        "startLine": 676,
+        "startChar": 23,
+        "endLine": 676,
+        "endChar": 42
+      },
       "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -274,6 +442,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40d6208d_58486a36",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 11197,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "@Eric; how shall I handle volume for a mmapthread and its tracks?",
+      "range": {
+        "startLine": 11185,
+        "startChar": 0,
+        "endLine": 11197,
+        "endChar": 5
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8af450c4_7a5d4664",
         "filename": "services/audioflinger/Threads.h",
         "patchSetId": 13
@@ -285,6 +476,30 @@
       "writtenOn": "2024-07-04T12:32:46Z",
       "side": 1,
       "message": "see comment in IAfThread.h",
+      "range": {
+        "startLine": 2354,
+        "startChar": 28,
+        "endLine": 2354,
+        "endChar": 49
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420a3fd6_81fbb056",
+        "filename": "services/audioflinger/Threads.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2354,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8af450c4_7a5d4664",
       "range": {
         "startLine": 2354,
         "startChar": 28,
@@ -318,6 +533,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9cd6e7_46f7c96b",
+        "filename": "services/audioflinger/Threads.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de07c54f_2dfa7553",
+      "range": {
+        "startLine": 2379,
+        "startChar": 24,
+        "endLine": 2379,
+        "endChar": 30
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "066bd59c_7de9f7b5",
@@ -331,6 +570,30 @@
       "writtenOn": "2024-07-04T12:32:46Z",
       "side": 1,
       "message": "portsOnlyInCommand2",
+      "range": {
+        "startLine": 2609,
+        "startChar": 45,
+        "endLine": 2609,
+        "endChar": 66
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df463af5_984f5ec4",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2609,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T16:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "066bd59c_7de9f7b5",
       "range": {
         "startLine": 2609,
         "startChar": 45,
