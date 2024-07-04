@@ -16,6 +16,47 @@
       "message": "Hi Eric Laurent, I have re-uploaded the modifications, please help me review it again, thank you.\nhttps://android-review.googlesource.com/c/platform/system/media/+/3158802\nhttps://android-review.googlesource.com/c/platform/frameworks/base/+/3146179\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3147377",
       "revId": "87d5e7ae377f2e9e1f3c8032f051b2bf9408bba6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64c66f21_4687ae18",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-04T11:18:03Z",
+      "side": 1,
+      "message": "e should add BLE SPEAKER here in the absence of a UX rule preventing from using them for calls",
+      "range": {
+        "startLine": 365,
+        "startChar": 20,
+        "endLine": 365,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "af8159bd_2780436c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 365,
+                "startChar": 0,
+                "endLine": 366,
+                "endChar": 0
+              },
+              "replacement": "                    AUDIO_DEVICE_OUT_BLE_HEADSET, AUDIO_DEVICE_OUT_BLE_SPEAKER});\n"
+            }
+          ]
+        }
+      ],
+      "revId": "87d5e7ae377f2e9e1f3c8032f051b2bf9408bba6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
