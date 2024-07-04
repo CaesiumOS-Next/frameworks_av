@@ -57,6 +57,30 @@
       ],
       "revId": "750b754572a263b95a3729b3c837e3f7a468feaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0020738_a48fefdf",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-04T06:27:23Z",
+      "side": 1,
+      "message": "Good catch, got it. Did not catch this bug with device effects since not chained. I reproduced with non device pre proc. Will fix it.\nBTW: was it already merged internally? if yes, I will submit a revert and a fix, otherwise I will update using this CL.",
+      "parentUuid": "0deffe7a_6e3ae3dd",
+      "range": {
+        "startLine": 625,
+        "startChar": 26,
+        "endLine": 625,
+        "endChar": 43
+      },
+      "revId": "750b754572a263b95a3729b3c837e3f7a468feaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
