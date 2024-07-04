@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a21104b_9ed39588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963880
+      },
+      "writtenOn": "2024-07-04T09:42:05Z",
+      "side": 1,
+      "message": "Hi Eric Laurent, I have re-uploaded the modifications, please help me review it again, thank you.\nhttps://android-review.googlesource.com/c/platform/system/media/+/3158802\nhttps://android-review.googlesource.com/c/platform/frameworks/base/+/3146179\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3147377",
+      "revId": "87d5e7ae377f2e9e1f3c8032f051b2bf9408bba6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
