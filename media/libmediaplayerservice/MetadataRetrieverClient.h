@@ -66,6 +66,7 @@ public:
 private:
     friend class MediaPlayerService;
 
+    static MetadataRetrieverClient *create(pid_t pid);
     explicit MetadataRetrieverClient(pid_t pid);
     virtual ~MetadataRetrieverClient();
 
@@ -76,6 +77,10 @@ private:
 
     // Keep the shared memory copy of album art
     sp<IMemory>                            mAlbumArt;
+
+    // Record the current metadata retriever count
+    static int                             sRetrieverCount;
+    static Mutex                           sRetrieverCountMutex;
 };
 
 }; // namespace android

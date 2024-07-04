@@ -45,6 +45,52 @@
 
 namespace android {
 
+int     MetadataRetrieverClient::sRetrieverCount = 0;
+Mutex   MetadataRetrieverClient::sRetrieverCountMutex;
+
+MetadataRetrieverClient *MetadataRetrieverClient::create(pid_t pid)
+{
+    // Bugfix:
+    // There is a rule in MetadataRetrieverClient.cpp:
+    // ONLY a retriever is running in getFrameAtTime/Index/... at the same time.
+    // All other retrievers who want to getFrame would be block on lock at
+    // MetadataRetrieverClient::sLock.
+
+    // The mediaserver stuck case:
+    // 1. APP starts a batch of retriever getFrame requests which is more than
+    //    binder threadpool size(16).
+    // 2. The 1st request get MetadataRetrieverClient::sLock and hold it,
+    //    then process getFrame;
+    // 3. All other requests would be wait to get MetadataRetrieverClient::sLock;
+
+    // In this case, All retriever getFrame requests are running in 16 binder threads.
+    // IT MEANS THERE IS NO IDLE BINDER THREAD FOR A NEW mediaserver BINDER REQUEST.
+
+    // Now the 1st request processing stuck in getFrame, the processing:
+    // 1. getFrame: binder-call media.extractor to read a frame with CallbackDataSource;
+    // 2. media.extractor binder callback to read data;
+    // 3. But mediaserver there is no idle binder thread to process the binder callback.
+    // mediaserver wouldn't response any binder request.
+
+    // Therefore, at least one idle Binder thread is kept to respond to other requests.
+
+    Mutex::Autolock lock(MetadataRetrieverClient::sRetrieverCountMutex);
+    if (MetadataRetrieverClient::sRetrieverCount >=
+            ProcessState::self()->getThreadPoolMaxTotalThreadCount() - 1) {
+        ALOGE("Reach at the max retrievers:%d at the same time, can't new more",
+                MetadataRetrieverClient::sRetrieverCount);
+        return NULL;
+    }
+
+    // update the count record
+    MetadataRetrieverClient::sRetrieverCount++;
+    ALOGI("Now there are retriever count: %d, max support count: %d at the same time",
+            MetadataRetrieverClient::sRetrieverCount,
+            ProcessState::self()->getThreadPoolMaxTotalThreadCount() - 1);
+
+    return new MetadataRetrieverClient(pid);
+}
+
 MetadataRetrieverClient::MetadataRetrieverClient(pid_t pid)
 {
     ALOGV("MetadataRetrieverClient constructor pid(%d)", pid);
@@ -57,6 +103,10 @@ MetadataRetrieverClient::~MetadataRetrieverClient()
 {
     ALOGV("MetadataRetrieverClient destructor");
     disconnect();
+
+    // retriever is deleting, update the count
+    Mutex::Autolock lock(sRetrieverCountMutex);
+    sRetrieverCount--;
 }
 
 status_t MetadataRetrieverClient::dump(int fd, const Vector<String16>& /*args*/)
