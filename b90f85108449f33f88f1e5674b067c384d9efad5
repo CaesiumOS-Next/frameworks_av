@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6fffe9_636ef879",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-04T12:35:14Z",
+      "side": 1,
+      "message": "please add space after comma",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 80
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "adb8dbcb_745be5c2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 365,
+                "startChar": 0,
+                "endLine": 366,
+                "endChar": 0
+              },
+              "replacement": "                    AUDIO_DEVICE_OUT_BLE_HEADSET, AUDIO_DEVICE_OUT_BLE_SPEAKER});\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b90f85108449f33f88f1e5674b067c384d9efad5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
