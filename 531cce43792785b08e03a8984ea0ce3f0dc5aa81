@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "531cce43792785b08e03a8984ea0ce3f0dc5aa81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806774d3_df1f962b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-07-05T15:55:20Z",
+      "side": 1,
+      "message": "Please update the description to note that this includes re-applying aosp/2998978\n\nPlease also link this against b/329121650 instead of b/329266978 (it\u0027s kinda confusing having two bugs tracking the same thing, so let\u0027s just use the public one so dolby can keep track)",
+      "revId": "531cce43792785b08e03a8984ea0ce3f0dc5aa81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
