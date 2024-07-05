@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b4f0aa8_86c21629",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 11206,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-05T09:24:51Z",
+      "side": 1,
+      "message": "given current implementation of MmapThread::start(), all mmap tracks declare the same audio attributes to audio policy manager when getOutputForAttr is called.\nSo all tracks will use the same volume and we can use the first one encountered.\nPlease add a comment explaining why we just need to use the first volume.\nIf the way we handle different use cases on the same MMAP stream in the future changes, we will modify this.",
+      "range": {
+        "startLine": 11206,
+        "startChar": 0,
+        "endLine": 11206,
+        "endChar": 77
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6a8fdccf_a6290783",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 11206,
+                "startChar": 0,
+                "endLine": 11207,
+                "endChar": 0
+              },
+              "replacement": "                // todo: check it at least one is different from mHalVolFloat\n"
+            }
+          ]
+        }
+      ],
+      "revId": "62a22cd713410f3532e582e6e354b077045e0ffa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
