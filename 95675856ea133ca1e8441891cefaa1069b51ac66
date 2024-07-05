@@ -39,6 +39,30 @@
       },
       "revId": "95675856ea133ca1e8441891cefaa1069b51ac66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8e5ef85_57948a15",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-07-05T05:14:44Z",
+      "side": 1,
+      "message": "Padding is the term used here even when the sample data exceeds the playback duration. The playback will remove padding samples and play the samples.",
+      "parentUuid": "cd463dfc_a978318d",
+      "range": {
+        "startLine": 1650,
+        "startChar": 19,
+        "endLine": 1651,
+        "endChar": 100
+      },
+      "revId": "95675856ea133ca1e8441891cefaa1069b51ac66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

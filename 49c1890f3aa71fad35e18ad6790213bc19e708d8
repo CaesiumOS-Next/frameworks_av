@@ -195,6 +195,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a1a99f_71aeeee8",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-07-05T05:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f188e421_8e76eba5",
+      "range": {
+        "startLine": 1647,
+        "startChar": 15,
+        "endLine": 1648,
+        "endChar": 65
+      },
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7905ab8_5ac9c79f",
@@ -250,6 +274,30 @@
       "side": 1,
       "message": "That would be setting a value in a key that wouldn\u0027t have been populated otherwise, so `AMediaFormat_getInt64` will now return a value instead of `false`. The key wouldn\u0027t have a value set earlier as well if the condition failed.\n\nI am setting the variable `mMdhdDuration` so that the conditions do not fail during the padding calculation.",
       "parentUuid": "a7905ab8_5ac9c79f",
+      "range": {
+        "startLine": 1650,
+        "startChar": 16,
+        "endLine": 1650,
+        "endChar": 46
+      },
+      "revId": "49c1890f3aa71fad35e18ad6790213bc19e708d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6620f933_c5750df5",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-07-05T05:14:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eaccce5f_484bbde8",
       "range": {
         "startLine": 1650,
         "startChar": 16,
