@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d79d7b2_964ada6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-08T17:31:09Z",
+      "side": 1,
+      "message": "thanks for the update.  a couple of nits - I discussed with Shunkai and it might be easier to read if we split the methods into the add remove separately, even though that increases the line count.",
+      "revId": "b879904ae3cc45efb8c1bf1b82306cebd0e5866f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae51fd3_7f34e691",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-08T17:31:09Z",
+      "side": 1,
+      "message": "nit: aesthetically, would it be easier to read as `shouldAddToHal()` here\n\nand should `shouldRemoveFromHal()` on line 1146?",
+      "range": {
+        "startLine": 1043,
+        "startChar": 13,
+        "endLine": 1043,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "22a80973_3295a44c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Effects.cpp",
+              "range": {
+                "startLine": 1043,
+                "startChar": 0,
+                "endLine": 1044,
+                "endChar": 0
+              },
+              "replacement": "        if (!shouldAddToHal()) {\n"
+            },
+            {
+              "path": "services/audioflinger/Effects.cpp",
+              "range": {
+                "startLine": 1146,
+                "startChar": 0,
+                "endLine": 1147,
+                "endChar": 0
+              },
+              "replacement": "        if (!shouldRemoveFromHal()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b879904ae3cc45efb8c1bf1b82306cebd0e5866f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f7e60de_1b1356d0",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 3454,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-08T17:31:09Z",
+      "side": 1,
+      "message": "nit: sp\u003cDeviceEffectModule\u003e::make(...",
+      "range": {
+        "startLine": 3454,
+        "startChar": 23,
+        "endLine": 3454,
+        "endChar": 47
+      },
+      "revId": "b879904ae3cc45efb8c1bf1b82306cebd0e5866f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
