@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a7a6276_8b602211",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-07-08T22:15:52Z",
+      "side": 1,
+      "message": "nit: maybe define operator\u003d\u003d to do the bulk comparison. you can do it in a separate CL.",
+      "revId": "dbedd4e10a82a9b91c8d4d8c42ba1735ff558325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
