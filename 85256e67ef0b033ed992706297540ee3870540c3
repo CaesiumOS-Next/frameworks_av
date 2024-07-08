@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea52d614_8039543a",
+        "filename": "services/audioflinger/AudioFlinger.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 3747,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-08T16:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "669efc06_881b3716",
+      "range": {
+        "startLine": 3747,
+        "startChar": 0,
+        "endLine": 3747,
+        "endChar": 68
+      },
+      "revId": "85256e67ef0b033ed992706297540ee3870540c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ab71512_36261c51",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-08T15:47:29Z",
       "side": 1,
       "message": "we should dump the audio attributes in mAttr here",
+      "range": {
+        "startLine": 11361,
+        "startChar": 0,
+        "endLine": 11361,
+        "endChar": 54
+      },
+      "revId": "85256e67ef0b033ed992706297540ee3870540c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fff6f05_7cd21327",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 11361,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-08T16:15:53Z",
+      "side": 1,
+      "message": "it is already done by MmapThread::dumpInternals_l right before",
+      "parentUuid": "9ab71512_36261c51",
       "range": {
         "startLine": 11361,
         "startChar": 0,
@@ -94,6 +142,30 @@
           ]
         }
       ],
+      "revId": "85256e67ef0b033ed992706297540ee3870540c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222728d5_fbf1b326",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 2191,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-08T16:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44517c47_504a5b26",
+      "range": {
+        "startLine": 2191,
+        "startChar": 0,
+        "endLine": 2191,
+        "endChar": 75
+      },
       "revId": "85256e67ef0b033ed992706297540ee3870540c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
