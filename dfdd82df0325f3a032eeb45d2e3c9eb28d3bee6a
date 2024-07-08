@@ -478,6 +478,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27b8078f_96987bd8",
+        "filename": "services/audioflinger/PlaybackTracks.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-08T13:34:18Z",
+      "side": 1,
+      "message": "done using attr usage only",
+      "parentUuid": "ae809ae2_fa17c47a",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 410,
+        "endChar": 25
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eabe06cf_4672e08d",
         "filename": "services/audioflinger/Threads.cpp",
         "patchSetId": 13
@@ -523,6 +547,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c04ee0e9_d4392136",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2289,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-08T13:34:18Z",
+      "side": 1,
+      "message": "great idea",
+      "parentUuid": "d9e47db0_6058312f",
+      "range": {
+        "startLine": 2289,
+        "startChar": 0,
+        "endLine": 2289,
+        "endChar": 53
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40d6208d_58486a36",
@@ -536,6 +584,30 @@
       "writtenOn": "2024-07-04T16:18:06Z",
       "side": 1,
       "message": "@Eric; how shall I handle volume for a mmapthread and its tracks?",
+      "range": {
+        "startLine": 11185,
+        "startChar": 0,
+        "endLine": 11197,
+        "endChar": 5
+      },
+      "revId": "dfdd82df0325f3a032eeb45d2e3c9eb28d3bee6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2cbbce7_e82097bf",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 11197,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-08T13:34:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40d6208d_58486a36",
       "range": {
         "startLine": 11185,
         "startChar": 0,
