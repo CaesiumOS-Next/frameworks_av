@@ -23,13 +23,6 @@
 
 using namespace aaudio;
 
-// TODO These defines should be moved to a central place in audio.
-#define SAMPLES_PER_FRAME_MIN        1
-#define SAMPLES_PER_FRAME_MAX        FCC_LIMIT
-#define SAMPLE_RATE_HZ_MIN           8000
-// HDMI supports up to 32 channels at 1536000 Hz.
-#define SAMPLE_RATE_HZ_MAX           1600000
-
 void AAudioStreamParameters::copyFrom(const AAudioStreamParameters &other) {
     mSamplesPerFrame      = other.mSamplesPerFrame;
     mSampleRate           = other.mSampleRate;
