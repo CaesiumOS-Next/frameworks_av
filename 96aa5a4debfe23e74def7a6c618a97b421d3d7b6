@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52bf9614_f1b5e690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-09T13:28:55Z",
+      "side": 1,
+      "message": "Francois,\n\nCan you extract the 3 following CLs from this dependency chain and rebase than on main:\nhttps://android-review.git.corp.google.com/c/platform/frameworks/av/+/3006543\nhttps://android-review.git.corp.google.com/c/platform/frameworks/av/+/3117217\nhttps://android-review.git.corp.google.com/c/platform/frameworks/av/+/3006544",
+      "revId": "96aa5a4debfe23e74def7a6c618a97b421d3d7b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
