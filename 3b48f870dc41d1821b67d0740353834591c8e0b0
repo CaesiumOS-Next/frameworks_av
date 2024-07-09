@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d3d6973_9c8e90a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1353865
+      },
+      "writtenOn": "2024-07-09T17:59:40Z",
+      "side": 1,
+      "message": "As fuzzers get updated, consider adding the fuzzer annotations in the corresponding bp fuzz_config (vector, service_privilege, users, etc). Example is keystoreGetWifiHidl_fuzzer definition in https://cs.android.com/android/platform/superproject/main/+/main:system/security/keystore/tests/fuzzer/Android.bp;l\u003d50?q\u003dfuzzer%20users%20vector%20file:bp\u0026ss\u003dandroid.",
+      "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "202574f9_9eba21b1",
