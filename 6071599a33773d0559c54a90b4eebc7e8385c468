@@ -46,6 +46,30 @@
       },
       "revId": "6071599a33773d0559c54a90b4eebc7e8385c468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc847a4a_62c2a56d",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-07-09T19:24:27Z",
+      "side": 1,
+      "message": "The tags are from audio_attributes_t: https://cs.android.com/android/platform/superproject/main/+/main:system/media/audio/include/system/audio.h;l\u003d127?q\u003daudio_attributes_t\n\nAnd we use the \"Echo-Reference-Calibration\" below (line 483). Maybe it\u0027s better to make them constants",
+      "parentUuid": "e5a09779_10a50af8",
+      "range": {
+        "startLine": 481,
+        "startChar": 4,
+        "endLine": 481,
+        "endChar": 64
+      },
+      "revId": "6071599a33773d0559c54a90b4eebc7e8385c468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
