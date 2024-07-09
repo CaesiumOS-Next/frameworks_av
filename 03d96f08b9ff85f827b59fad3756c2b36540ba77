@@ -80,6 +80,30 @@
       ],
       "revId": "03d96f08b9ff85f827b59fad3756c2b36540ba77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09007eb1_2148fb09",
+        "filename": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-07-09T18:02:29Z",
+      "side": 0,
+      "message": "This was added because there are some high definition HDMI pass-through modes that use very high sample rates. We kept having to bump this limit because it was blocking some Android TV devices. Since this is just a top-level sanity check, I just set it very high. The APM and HAL will ultimately decide if a rate is supported.",
+      "parentUuid": "3e39ad74_b249c050",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "03d96f08b9ff85f827b59fad3756c2b36540ba77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
