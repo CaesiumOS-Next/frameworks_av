@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6db0bca9_33f3a1bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-09T17:43:33Z",
+      "side": 1,
+      "message": "Thanks!  This will need to land in internal main first, to avoid the automerger conflict.",
+      "revId": "64b0f5549454055067b4825168d304ee10314031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
