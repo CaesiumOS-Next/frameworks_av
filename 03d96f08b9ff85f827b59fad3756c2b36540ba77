@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e39ad74_b249c050",
+        "filename": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-09T02:27:09Z",
+      "side": 0,
+      "message": "Phil is there a practical use for this?  I would be inclined not to support a mixed sample rate greater than 384K due to lack of testing, compatibility, and practical use case.  The buffers get consumed pretty rapidly so they need to be large.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "186a41b5_9af091c2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "            stream \u003d new AudioStreamRecord();\n"
+            },
+            {
+              "path": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+              "range": {
+                "startLine": 73,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "            stream \u003d new AudioStreamTrack();\n"
+            },
+            {
+              "path": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": "    result \u003d builder_createStream(getDirection(), sharingMode, audioStream);\n"
+            },
+            {
+              "path": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+              "range": {
+                "startLine": 203,
+                "startChar": 0,
+                "endLine": 205,
+                "endChar": 0
+              },
+              "replacement": "                result \u003d builder_createStream(getDirection(), sharingMode, audioStream);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "03d96f08b9ff85f827b59fad3756c2b36540ba77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
