@@ -1921,6 +1921,7 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                   ++numTimesBecameEmpty;
                 }
                 mLastCommand = command;
+                status_t status = command->mStatus;
 
                 switch (command->mCommand) {
                 case SET_VOLUME: {
@@ -1928,7 +1929,7 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set volume stream %d, \
                             volume %f, output %d", data->mStream, data->mVolume, data->mIO);
                     ul.unlock();
-                    command->mStatus = AudioSystem::setStreamVolume(data->mStream,
+                    status = AudioSystem::setStreamVolume(data->mStream,
                                                                     data->mVolume,
                                                                     data->mIO);
                     ul.lock();
@@ -1938,7 +1939,7 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set parameters string %s, io %d",
                             data->mKeyValuePairs.c_str(), data->mIO);
                     ul.unlock();
-                    command->mStatus = AudioSystem::setParameters(data->mIO, data->mKeyValuePairs);
+                    status = AudioSystem::setParameters(data->mIO, data->mKeyValuePairs);
                     ul.lock();
                     }break;
                 case SET_VOICE_VOLUME: {
@@ -1946,7 +1947,7 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set voice volume volume %f",
                             data->mVolume);
                     ul.unlock();
-                    command->mStatus = AudioSystem::setVoiceVolume(data->mVolume);
+                    status = AudioSystem::setVoiceVolume(data->mVolume);
                     ul.lock();
                     }break;
                 case STOP_OUTPUT: {
@@ -1978,10 +1979,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing create audio patch");
                     sp<IAudioFlinger> af = AudioSystem::get_audio_flinger();
                     if (af == 0) {
-                        command->mStatus = PERMISSION_DENIED;
+                        status = PERMISSION_DENIED;
                     } else {
                         ul.unlock();
-                        command->mStatus = af->createAudioPatch(&data->mPatch, &data->mHandle);
+                        status = af->createAudioPatch(&data->mPatch, &data->mHandle);
                         ul.lock();
                     }
                     } break;
@@ -1990,10 +1991,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing release audio patch");
                     sp<IAudioFlinger> af = AudioSystem::get_audio_flinger();
                     if (af == 0) {
-                        command->mStatus = PERMISSION_DENIED;
+                        status = PERMISSION_DENIED;
                     } else {
                         ul.unlock();
-                        command->mStatus = af->releaseAudioPatch(data->mHandle);
+                        status = af->releaseAudioPatch(data->mHandle);
                         ul.lock();
                     }
                     } break;
@@ -2034,10 +2035,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set port config");
                     sp<IAudioFlinger> af = AudioSystem::get_audio_flinger();
                     if (af == 0) {
-                        command->mStatus = PERMISSION_DENIED;
+                        status = PERMISSION_DENIED;
                     } else {
                         ul.unlock();
-                        command->mStatus = af->setAudioPortConfig(&data->mConfig);
+                        status = af->setAudioPortConfig(&data->mConfig);
                         ul.lock();
                     }
                     } break;
@@ -2150,8 +2151,22 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                 {
                     audio_utils::lock_guard _l(command->mMutex);
                     if (command->mWaitStatus) {
+                        command->mStatus = status;
                         command->mWaitStatus = false;
                         command->mCond.notify_one();
+                    } else if (command->mCommand == CREATE_AUDIO_PATCH && status == NO_ERROR) {
+                        // Because of special handling in insertCommand_l() the CREATE_AUDIO_PATCH
+                        // command wait status can be only false in case timeout (see TIMED_OUT)
+                        // happened.
+                        CreateAudioPatchData *data = (CreateAudioPatchData *)command->mParam.get();
+                        ALOGW("AudioCommandThread() no caller awaiting for handle(%d) after \
+                            processing create audio patch, going to release it", data->mHandle);
+                        sp<AudioCommand> command2 = new AudioCommand();
+                        command2->mCommand = RELEASE_AUDIO_PATCH;
+                        ReleaseAudioPatchData *data2 = new ReleaseAudioPatchData();
+                        data2->mHandle = data->mHandle;
+                        command2->mParam = data2;
+                        insertCommand_l(command2, 0);
                     }
                 }
                 waitTime = -1;
@@ -2669,7 +2684,8 @@ void AudioPolicyService::AudioCommandThread::insertCommand_l(sp<AudioCommand>& c
 
     // Disable wait for status if delay is not 0.
     // Except for create audio patch command because the returned patch handle
-    // is needed by audio policy manager
+    // is needed by audio policy manager. Audio patch created after timeout
+    // (see TIMED_OUT) will be released from threadLoop().
     if (delayMs != 0 && command->mCommand != CREATE_AUDIO_PATCH) {
         command->mWaitStatus = false;
     }
