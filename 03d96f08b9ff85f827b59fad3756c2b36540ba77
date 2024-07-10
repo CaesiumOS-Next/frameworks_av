@@ -104,6 +104,30 @@
       },
       "revId": "03d96f08b9ff85f827b59fad3756c2b36540ba77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8ff2fe_2a225700",
+        "filename": "media/libaaudio/src/core/AudioStreamBuilder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-10T01:55:13Z",
+      "side": 0,
+      "message": "addressed in comment:\nhttps://android-review.git.corp.google.com/c/platform/system/media/+/3163337/comment/2410bcc4_9ff26301/",
+      "parentUuid": "09007eb1_2148fb09",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "03d96f08b9ff85f827b59fad3756c2b36540ba77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
