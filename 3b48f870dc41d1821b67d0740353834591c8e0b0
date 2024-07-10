@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "292ceec7_4f7a107f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046581
+      },
+      "writtenOn": "2024-07-10T08:56:54Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "1d3d6973_9c8e90a1",
+      "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "202574f9_9eba21b1",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af4290fa_4cd5a1da",
+        "filename": "services/camera/libcameraservice/fuzzer/DepthProcessorFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2046581
+      },
+      "writtenOn": "2024-07-10T08:56:54Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "202574f9_9eba21b1",
+      "range": {
+        "startLine": 57,
+        "startChar": 16,
+        "endLine": 57,
+        "endChar": 20
+      },
       "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -137,6 +179,30 @@
       "writtenOn": "2024-07-08T16:58:58Z",
       "side": 1,
       "message": "The name of the const is somewhat misleading because \u0027inputFrame.mMainJpegSize\u0027 is already in bytes. The previous calculation is just estimating that in worst case scenario we could have both the depth and confidence maps as large as the main jpeg. Maybe we can rename it to something like \u0027kTotalDepthJpegBufferCount\u0027 and leave the comment that we are assuming depth and confidence will be of similar/same size.",
+      "range": {
+        "startLine": 71,
+        "startChar": 57,
+        "endLine": 71,
+        "endChar": 71
+      },
+      "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a153421_6d3c2342",
+        "filename": "services/camera/libcameraservice/fuzzer/DepthProcessorFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2046581
+      },
+      "writtenOn": "2024-07-10T08:56:54Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "9f3de9ef_d63406e3",
       "range": {
         "startLine": 71,
         "startChar": 57,
