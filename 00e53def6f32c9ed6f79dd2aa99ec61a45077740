@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "212eb926_8214255f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-07-10T21:55:31Z",
+      "side": 1,
+      "message": "feels like it should be ok;\nI think that this now producing \"T\" instead of \"const T\" should be ok with any downstream consumers that were expecting \"const T\"; since the downstream const means that the callee won\u0027t modify.\n\nNeed to have wonsik or sungtak look at this to verify, since it\u0027s there code.",
+      "revId": "00e53def6f32c9ed6f79dd2aa99ec61a45077740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
