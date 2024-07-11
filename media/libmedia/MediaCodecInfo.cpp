@@ -18,6 +18,8 @@
 #define LOG_TAG "MediaCodecInfo"
 #include <utils/Log.h>
 
+#include <media/IOMX.h>
+
 #include <media/MediaCodecInfo.h>
 
 #include <media/stagefright/foundation/ADebug.h>
