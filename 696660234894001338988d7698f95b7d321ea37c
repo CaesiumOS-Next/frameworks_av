@@ -74,6 +74,30 @@
       ],
       "revId": "696660234894001338988d7698f95b7d321ea37c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a0fcf5_93aeec45",
+        "filename": "services/mediametrics/include/mediametricsservice/TimedAction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1107261
+      },
+      "writtenOn": "2024-07-11T03:57:35Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "e1de1272_10722c77",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 79
+      },
+      "revId": "696660234894001338988d7698f95b7d321ea37c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
