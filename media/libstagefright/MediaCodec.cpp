@@ -2444,7 +2444,8 @@ status_t MediaCodec::configure(
             mediametrics_setInt32(nextMetricsHandle, kCodecCrypto, 1);
         }
     } else if (mFlags & kFlagIsSecure) {
-        ALOGW("Crypto or descrambler should be given for secure codec");
+        ALOGE("Crypto or descrambler should be given for secure codec");
+        return INVALID_OPERATION;
     }
 
     if (mConfigureMsg != nullptr) {
