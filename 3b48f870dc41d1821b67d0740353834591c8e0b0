@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73eecaa0_6835f938",
+        "filename": "services/camera/libcameraservice/fuzzer/DepthProcessorFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2046581
+      },
+      "writtenOn": "2024-07-11T05:34:59Z",
+      "side": 1,
+      "message": "Marking this comment as resolved.",
+      "parentUuid": "a23049dc_327cbd97",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 45
+      },
+      "revId": "3b48f870dc41d1821b67d0740353834591c8e0b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f3de9ef_d63406e3",
