@@ -1273,7 +1273,6 @@ public:
     sp<IMemory>               mCblkMemoryObtainBufferRef GUARDED_BY(mLock);
     sp<AudioTrackClientProxy> mProxyObtainBufferRef GUARDED_BY(mLock);
 
-    sp<AudioTrackThread>    mAudioTrackThread;
     bool                    mThreadCanCallJava;
 
     float                   mVolume[2];
@@ -1539,6 +1538,9 @@ private:
         wp<media::IAudioTrackCallback> mCallback;
     };
     sp<AudioTrackCallback> mAudioTrackCallback = sp<AudioTrackCallback>::make();
+
+    // last to ensure thread joined before other member variables are destroyed.
+    sp<AudioTrackThread> mAudioTrackThread;
 };
 
 }; // namespace android
