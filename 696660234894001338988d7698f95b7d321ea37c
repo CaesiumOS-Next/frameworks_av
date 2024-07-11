@@ -16,6 +16,64 @@
       "message": "Andy, could you review this change？",
       "revId": "696660234894001338988d7698f95b7d321ea37c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f96d128_8a929a73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-11T03:39:31Z",
+      "side": 1,
+      "message": "Good catch, thanks for the CL.",
+      "revId": "696660234894001338988d7698f95b7d321ea37c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1de1272_10722c77",
+        "filename": "services/mediametrics/include/mediametricsservice/TimedAction.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-11T03:39:31Z",
+      "side": 1,
+      "message": "nit: perhaps the following comment might be clear:\n\n    // As TimerClock is system_clock (which is not monotonic), libcxx\u0027s implementation\n    // of condition_variable::wait_until(l, std::chrono::time_point\u003cTimerClock\u003e::max())\n    // is susceptible to integer overflow due conversion to relative time and back.\n    // The non-timed wait(l) is used instead.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 79
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d5e47c0c_84b7155c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/mediametrics/include/mediametricsservice/TimedAction.h",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "                // As TimerClock is system_clock (which is not monotonic), libcxx\u0027s\n                // implementation of condition_variable::wait_until(l, std::chrono::time_point)\n                // recalculates the \u0027until\u0027 time into the wait duration and then goes back to the\n                // absolute timestamp when calling pthread_cond_timedwait(); this back-and-forth\n                // calculation sometimes loses the \u0027max\u0027 value because enough time passes in\n                // between, and instead passes incorrect timestamp into the syscall, causing a\n                // crash. Mitigating it by explicitly calling the non-timed wait here.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "696660234894001338988d7698f95b7d321ea37c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
