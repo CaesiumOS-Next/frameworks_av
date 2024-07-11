@@ -1061,6 +1061,7 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
     if (mInputMetEos) {
         return;
     }
+    size_t numFreeOutputSlots = 0;
     {
         Mutexed<Output>::Locked output(mOutput);
         if (!output->buffers ||
@@ -1068,10 +1069,16 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
                 (!output->bounded && output->buffers->numActiveSlots() >= output->numSlots)) {
             return;
         }
+        if (output->numSlots > output->buffers->numActiveSlots()) {
+            numFreeOutputSlots = output->numSlots - output->buffers->numActiveSlots();
+        }
     }
     if (android::media::codec::provider_->input_surface_throttle()
             && mInputSurface != nullptr) {
-        mInputSurface->onInputBufferEmptied();
+        ALOGV("[%s] request more buffers from input surface (%zu)", mName, numFreeOutputSlots + 1);
+        for (size_t i = 0; i <= numFreeOutputSlots; ++i) {
+            mInputSurface->onInputBufferEmptied();
+        }
     }
     size_t numActiveSlots = 0;
     while (!mPipelineWatcher.lock()->pipelineFull()) {
