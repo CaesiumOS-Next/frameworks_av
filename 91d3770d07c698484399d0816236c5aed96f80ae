@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c4fefe4_1c55830f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-11T17:05:08Z",
+      "side": 1,
+      "message": "ChangeID I5e1757eef9c02ed6754b51215e0e61c19cc0cb54 was merged into 24D1",
+      "revId": "91d3770d07c698484399d0816236c5aed96f80ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
