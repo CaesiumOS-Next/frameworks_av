@@ -541,14 +541,4 @@ DeviceVector DeviceVector::filterForEngine() const
     return filteredDevices;
 }
 
-bool DeviceVector::areAllDevicesAttached() const
-{
-    for (const auto &device : *this) {
-        if (!device->isAttached()) {
-            return false;
-        }
-    }
-    return true;
-}
-
 } // namespace android
