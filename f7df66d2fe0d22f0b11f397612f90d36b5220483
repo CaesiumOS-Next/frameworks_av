@@ -22,6 +22,30 @@
       },
       "revId": "f7df66d2fe0d22f0b11f397612f90d36b5220483",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6cc44e6_55b2e8c4",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-12T11:13:40Z",
+      "side": 1,
+      "message": "I splitted the mutex CL as requested. The one introducing the new mutex is this one:\nhttps://android-review.googlesource.com/c/platform/system/media/+/3104717",
+      "parentUuid": "64605a2a_fff3a510",
+      "range": {
+        "startLine": 440,
+        "startChar": 25,
+        "endLine": 440,
+        "endChar": 75
+      },
+      "revId": "f7df66d2fe0d22f0b11f397612f90d36b5220483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
