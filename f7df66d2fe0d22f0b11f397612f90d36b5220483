@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64605a2a_fff3a510",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-12T02:24:49Z",
+      "side": 1,
+      "message": "Hi Francois, I didn\u0027t find this mutex order here:\nhttps://android-review.git.corp.google.com/c/platform/system/media/+/3145437/3/audio_utils/include/audio_utils/mutex.h\n\nDid you forgot to amend the CL?",
+      "range": {
+        "startLine": 440,
+        "startChar": 25,
+        "endLine": 440,
+        "endChar": 75
+      },
+      "revId": "f7df66d2fe0d22f0b11f397612f90d36b5220483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
