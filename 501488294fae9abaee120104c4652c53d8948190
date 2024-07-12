@@ -40,6 +40,30 @@
       ],
       "revId": "501488294fae9abaee120104c4652c53d8948190",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b5334e_b26e67d5",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-12T22:03:14Z",
+      "side": 1,
+      "message": "I think the mutex annotation for EffectModule is not there yet for `EffectBase_Mutex`, since this is a clean upstream CP, added `GUARDED_BY(audio_utils::EffectChain_Mutex)` for now in:\nhttps://android-review.git.corp.google.com/c/platform/frameworks/av/+/3170999",
+      "parentUuid": "7a769045_c28f52b4",
+      "range": {
+        "startLine": 317,
+        "startChar": 37,
+        "endLine": 317,
+        "endChar": 38
+      },
+      "revId": "501488294fae9abaee120104c4652c53d8948190",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
