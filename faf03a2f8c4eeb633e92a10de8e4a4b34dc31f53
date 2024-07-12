@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a38a8913_1031d00e",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-12T22:05:54Z",
+      "side": 1,
+      "message": "nit: alignment",
+      "range": {
+        "startLine": 270,
+        "startChar": 14,
+        "endLine": 270,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c0054325_16dec1e0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Effects.h",
+              "range": {
+                "startLine": 270,
+                "startChar": 0,
+                "endLine": 271,
+                "endChar": 0
+              },
+              "replacement": "                                  bool controller /* the volume controller effect of the chain */)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "faf03a2f8c4eeb633e92a10de8e4a4b34dc31f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
