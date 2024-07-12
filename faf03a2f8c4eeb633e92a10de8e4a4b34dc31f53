@@ -40,6 +40,30 @@
       ],
       "revId": "faf03a2f8c4eeb633e92a10de8e4a4b34dc31f53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93fa7845_f80a2c66",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-12T23:15:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a38a8913_1031d00e",
+      "range": {
+        "startLine": 270,
+        "startChar": 14,
+        "endLine": 270,
+        "endChar": 31
+      },
+      "revId": "faf03a2f8c4eeb633e92a10de8e4a4b34dc31f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
