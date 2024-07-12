@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a769045_c28f52b4",
+        "filename": "services/audioflinger/Effects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-12T19:19:51Z",
+      "side": 1,
+      "message": "nit: can we use GUARDED_BY( audio_utils::EffectBase_Mutex)",
+      "range": {
+        "startLine": 317,
+        "startChar": 37,
+        "endLine": 317,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "794ac351_b744692c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Effects.h",
+              "range": {
+                "startLine": 317,
+                "startChar": 0,
+                "endLine": 318,
+                "endChar": 0
+              },
+              "replacement": "    std::string mEffectInterfaceDebug GUARDED_BY(audio_utils::EffectBase_Mutex);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "501488294fae9abaee120104c4652c53d8948190",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
