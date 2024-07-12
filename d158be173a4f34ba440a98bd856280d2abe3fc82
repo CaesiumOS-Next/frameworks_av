@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd3ba97_d76e86dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-12T19:12:00Z",
+      "side": 1,
+      "message": "The ChangeID I711f288b11fc303b3c428c64c4a8a687afde5872 needs to be updated to as it was merged and reverted internally.\nI submit some change with change ID I91a267046b494d3ce7bbf4bdeebcdf75094f5758 here: https://android-review.googlesource.com/c/platform/frameworks/av/+/3168901, this is independent change so should be fine to merge, I will abandon this one later once the new CL merged.",
+      "revId": "d158be173a4f34ba440a98bd856280d2abe3fc82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
