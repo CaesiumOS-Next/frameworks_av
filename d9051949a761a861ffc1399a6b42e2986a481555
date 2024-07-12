@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "042a9635_1b7ebdb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-07-12T03:48:49Z",
+      "side": 1,
+      "message": "I have confirmed that for some reason this CL causes the Pixel HAL to perform some unusual activity which gets blocked by SELinux and causes extra denial logs that got caught by the test. Will investigate why is this happening.",
+      "revId": "d9051949a761a861ffc1399a6b42e2986a481555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
