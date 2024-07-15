@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8383d3a4_64a6b662",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2257,
+      "author": {
+        "id": 1986205
+      },
+      "writtenOn": "2024-07-15T08:37:47Z",
+      "side": 1,
+      "message": "Assuming that mInputSurface is empty seems contradictory, as it implies that hasInputSurface is true.\nHere hasInputSurface represents no input surface",
+      "range": {
+        "startLine": 2257,
+        "startChar": 9,
+        "endLine": 2257,
+        "endChar": 25
+      },
+      "revId": "b6ea30fb2790746aa4ee2f8d20f341304541490a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b520d2_413d6e34",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2467,
+      "author": {
+        "id": 1986205
+      },
+      "writtenOn": "2024-07-15T08:37:47Z",
+      "side": 1,
+      "message": "Here hasInputSurface represents an input surface\nThis statement is evidently conflicting.",
+      "range": {
+        "startLine": 2467,
+        "startChar": 8,
+        "endLine": 2467,
+        "endChar": 23
+      },
+      "revId": "b6ea30fb2790746aa4ee2f8d20f341304541490a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
