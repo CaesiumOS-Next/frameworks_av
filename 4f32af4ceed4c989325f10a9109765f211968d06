@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb73db1_5852d792",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-15T18:13:59Z",
+      "side": 1,
+      "message": "Eric/Andy, please help review, this topic has been merged internally: https://googleplex-android-review.git.corp.google.com/q/topic:%22locking_reordering_for_device_effects%22",
+      "revId": "4f32af4ceed4c989325f10a9109765f211968d06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
