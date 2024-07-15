@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28320c94_90a6f062",
+        "filename": "services/audioflinger/AudioFlinger.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 3788,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-15T18:31:11Z",
+      "side": 1,
+      "message": "Marking this as resolved as the unlock has been removed now",
+      "parentUuid": "65c24953_00489895",
+      "range": {
+        "startLine": 3788,
+        "startChar": 0,
+        "endLine": 3788,
+        "endChar": 22
+      },
+      "revId": "2ae259ecdde206f8076a88027468d0762239c0d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fb7be9c_13f6ba62",
