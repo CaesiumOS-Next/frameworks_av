@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e66b66_83bf387e",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2257,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-07-15T22:56:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8383d3a4_64a6b662",
+      "range": {
+        "startLine": 2257,
+        "startChar": 9,
+        "endLine": 2257,
+        "endChar": 25
+      },
+      "revId": "b6ea30fb2790746aa4ee2f8d20f341304541490a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77b520d2_413d6e34",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-15T08:37:47Z",
       "side": 1,
       "message": "Here hasInputSurface represents an input surface\nThis statement is evidently conflicting.",
+      "range": {
+        "startLine": 2467,
+        "startChar": 8,
+        "endLine": 2467,
+        "endChar": 23
+      },
+      "revId": "b6ea30fb2790746aa4ee2f8d20f341304541490a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a68b676_ea0542ae",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2467,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-07-15T22:56:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "77b520d2_413d6e34",
       "range": {
         "startLine": 2467,
         "startChar": 8,
