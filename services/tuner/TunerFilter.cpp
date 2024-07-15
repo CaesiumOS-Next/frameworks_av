@@ -259,13 +259,11 @@ TunerFilter::~TunerFilter() {
         }
     }
 
-    if (mFilterCallback != nullptr) {
-        mFilterCallback->detachCallbacks();
-    }
     auto res = mFilter->close();
     mStarted = false;
     mShared = false;
     mClientPid = -1;
+    mFilterCallback = nullptr;
 
     return res;
 }
