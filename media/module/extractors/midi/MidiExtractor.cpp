@@ -151,9 +151,9 @@ MidiEngine::MidiEngine(CDataSource *dataSource,
             mEasHandle(NULL),
             mEasConfig(NULL),
             mIsInitialized(false) {
-    Watchdog watchdog(kTimeout);
-
     mIoWrapper = new MidiIoWrapper(dataSource);
+
+    Watchdog watchdog(kTimeout);
     // spin up a new EAS engine
     EAS_I32 temp;
     EAS_RESULT result = EAS_Init(&mEasData);
