@@ -142,7 +142,7 @@ status_t MidiSource::init()
 
 // MidiEngine
 using namespace std::chrono_literals;
-static constexpr auto kTimeout = 10s;
+static constexpr auto kTimeout = 60s;
 
 MidiEngine::MidiEngine(CDataSource *dataSource,
         AMediaFormat *fileMetadata,
