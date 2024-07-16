@@ -88,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc3d7f5_003d65cc",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1478901
+      },
+      "writtenOn": "2024-07-16T10:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ed9d64c_2f0f9a06",
+      "range": {
+        "startLine": 374,
+        "startChar": 8,
+        "endLine": 375,
+        "endChar": 69
+      },
+      "revId": "57297de4ccc9c58e894f3d6ba304ca156bde5aac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98ffc8ad_2c9e93c9",
@@ -313,6 +337,30 @@
       "writtenOn": "2024-03-25T21:30:59Z",
       "side": 1,
       "message": "re-architect it such that you check if the formats aren\u0027t the same, and if they aren\u0027t the same, then return false if either the HW_AV_SYNC and COMPRESSED_OFFLOAD or both formats aren\u0027t PCM\n```suggestion\n        if (!is_mix_loopback(mix-\u003emRouteFlags) \u0026\u0026\n            config.format !\u003d mix-\u003emFormat.format \u0026\u0026\n            config.format !\u003d AUDIO_CONFIG_BASE_INITIALIZER.format) {\n            if (hasFlag(attributes.flags, AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) ||\n                hasFlag(attributes.flags, AUDIO_OUTPUT_FLAG_HW_AV_SYNC)) {\n                return false;\n            }\n            if (!audio_is_linear_pcm(config.format) ||\n                  !audio_is_linear_pcm(mix-\u003emFormat.format)) {\n                return false;\n            }\n        }\n\n```",
+      "range": {
+        "startLine": 376,
+        "startChar": 12,
+        "endLine": 389,
+        "endChar": 13
+      },
+      "revId": "57297de4ccc9c58e894f3d6ba304ca156bde5aac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7627017_ae5efff5",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1478901
+      },
+      "writtenOn": "2024-07-16T10:06:33Z",
+      "side": 1,
+      "message": "In direct output case, return false if format are same.\nIn mixed output case, return false if format are PCM(which can be resampled).\nI think 1st draft will be more clearly for readability, so just modified the comments and utile function.",
+      "parentUuid": "66c90eb8_a2d0f328",
       "range": {
         "startLine": 376,
         "startChar": 12,

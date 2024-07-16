@@ -70,6 +70,30 @@
       },
       "revId": "177886c9fe9efc27fb9d84eda3f505b377644d79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731f1690_3eeb1306",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1478901
+      },
+      "writtenOn": "2024-07-16T10:06:33Z",
+      "side": 0,
+      "message": "Since flags in audio_attributes_t can not identify COMPRESS_OFFLOAD, so I add a new parameter for audio_output_flags_t which came from AudioPolicyManger, then check is mixed output by audio_output_flags_t.\nBesides, here is the CL for the utile function.\nhttps://android-review.googlesource.com/c/platform/system/media/+/3175639",
+      "parentUuid": "6c5de9cb_cff1379a",
+      "range": {
+        "startLine": 377,
+        "startChar": 93,
+        "endLine": 377,
+        "endChar": 94
+      },
+      "revId": "177886c9fe9efc27fb9d84eda3f505b377644d79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
