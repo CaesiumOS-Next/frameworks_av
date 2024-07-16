@@ -34,6 +34,47 @@
       "parentUuid": "f49067c3_67a0824a",
       "revId": "3caa1c2eb7aadbe6d199c38c12fd6482c7b15c2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a58e2f7_8a1b7a2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-16T23:40:55Z",
+      "side": 1,
+      "message": "I must have mistaken this cl with another one, please ignore the Merged-In comment.\nAlso I noticed there were several cls need to upstream:\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3177968\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3177969\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3177970\n\nplease rebase your work on these changes as they changed the way we handle haptic data, thanks!",
+      "parentUuid": "e0cae69a_3e294caa",
+      "revId": "3caa1c2eb7aadbe6d199c38c12fd6482c7b15c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dae2cf7_fb96ea41",
+        "filename": "media/libeffects/hapticgenerator/aidl/HapticGeneratorContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-16T23:40:55Z",
+      "side": 1,
+      "message": "I think this change will cause problem, pls refer to the comment above about how haptic audio was added, also refer to the EffectHalAidl processing here:\nhttps://android-review.git.corp.google.com/c/platform/frameworks/av/+/3177969/1/media/libaudiohal/impl/EffectHalAidl.cpp#274",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 36
+      },
+      "revId": "3caa1c2eb7aadbe6d199c38c12fd6482c7b15c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
