@@ -292,7 +292,7 @@ binder::Status CameraDeviceClient::submitRequestList(
     }
 
     List<const CameraDeviceBase::PhysicalCameraSettingsList> metadataRequestList;
-    std::list<SurfaceMap> surfaceMapList;
+    std::list<const SurfaceMap> surfaceMapList;
     submitInfo->mRequestId = mRequestIdCounter;
     uint32_t loopCounter = 0;
 
