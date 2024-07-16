@@ -16,6 +16,29 @@
       "message": "nit: maybe define operator\u003d\u003d to do the bulk comparison. you can do it in a separate CL.",
       "revId": "dbedd4e10a82a9b91c8d4d8c42ba1735ff558325",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96540e93_1188d821",
+        "filename": "media/libmedia/tests/codeccapabilities/CodecCapabilitiesTest.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-07-16T17:37:11Z",
+      "side": 1,
+      "message": "in the future, you can use EXPECT_THAT from gmock instead that allows you to add vector values inline.",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 134,
+        "endChar": 13
+      },
+      "revId": "dbedd4e10a82a9b91c8d4d8c42ba1735ff558325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
