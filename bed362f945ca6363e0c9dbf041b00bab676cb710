@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77454aaf_93edaa65",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-07-16T16:55:13Z",
+      "side": 1,
+      "message": "i don\u0027t agree with this change.",
+      "range": {
+        "startLine": 145,
+        "startChar": 24,
+        "endLine": 145,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "44de4bdc_546e27de",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/midi/MidiExtractor.cpp",
+              "range": {
+                "startLine": 145,
+                "startChar": 0,
+                "endLine": 146,
+                "endChar": 0
+              },
+              "replacement": "static constexpr auto kTimeout \u003d 60.0s;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bed362f945ca6363e0c9dbf041b00bab676cb710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
