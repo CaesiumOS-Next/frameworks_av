@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74044a78_4279a5fc",
+        "filename": "services/audiopolicy/common/managerdefinitions/include/EffectDescriptor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-07-16T23:19:50Z",
+      "side": 1,
+      "message": "Does it make sense to introduce a new method if we could just add the second parameter with a default value being nullptr to hasOrphansForSession?",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 82
+      },
+      "revId": "808da2149f9841e5fbad13379bdf850df278d08d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
