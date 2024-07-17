@@ -20,6 +20,7 @@
 #include <sys/types.h>
 
 #include <android/IDataSource.h>
+#include <android/IMediaMetadataRetrieverSignal.h>
 #include <binder/Parcel.h>
 #include <media/IMediaHTTPService.h>
 #include <media/IMediaMetadataRetriever.h>
@@ -33,6 +34,7 @@ enum {
     SET_DATA_SOURCE_URL,
     SET_DATA_SOURCE_FD,
     SET_DATA_SOURCE_CALLBACK,
+    ACQUIRE_RESOURCE,
     GET_FRAME_AT_TIME,
     GET_IMAGE_AT_INDEX,
     GET_IMAGE_RECT_AT_INDEX,
@@ -110,6 +112,15 @@ public:
         }
         remote()->transact(SET_DATA_SOURCE_CALLBACK, data, &reply);
         return reply.readInt32();
+    }
+
+    bool acquireResource(const sp<IMediaMetadataRetrieverSignal>& signal)
+    {
+        Parcel data, reply;
+        data.writeInterfaceToken(IMediaMetadataRetriever::getInterfaceDescriptor());
+        data.writeStrongBinder(IInterface::asBinder(signal));
+        remote()->transact(ACQUIRE_RESOURCE, data, &reply);
+        return reply.readBool();
     }
 
     sp<IMemory> getFrameAtTime(int64_t timeUs, int option, int colorFormat, bool metaOnly)
@@ -303,6 +314,17 @@ status_t BnMediaMetadataRetriever::onTransact(
                 }
                 reply->writeInt32(setDataSource(source, mime));
             }
+            return NO_ERROR;
+        } break;
+        case ACQUIRE_RESOURCE:{
+            CHECK_INTERFACE(IMediaMetadataRetriever, data, reply);
+            sp<IMediaMetadataRetrieverSignal> signal =
+                interface_cast<IMediaMetadataRetrieverSignal>(data.readStrongBinder());
+            if (signal == NULL)  {
+                reply->writeInt32(false);
+                return NO_ERROR;
+            }
+            reply->writeBool(acquireResource(signal));
             return NO_ERROR;
         } break;
         case GET_FRAME_AT_TIME: {

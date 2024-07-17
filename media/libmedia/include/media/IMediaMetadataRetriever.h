@@ -26,6 +26,7 @@
 namespace android {
 class Parcel;
 class IDataSource;
+class IMediaMetadataRetrieverSignal;
 struct IMediaHTTPService;
 
 class IMediaMetadataRetriever: public IInterface
@@ -42,6 +43,9 @@ public:
     virtual status_t        setDataSource(int fd, int64_t offset, int64_t length) = 0;
     virtual status_t        setDataSource(
             const sp<IDataSource>& dataSource, const char *mime) = 0;
+
+    virtual bool            acquireResource(
+            const sp<IMediaMetadataRetrieverSignal> &signal) = 0;
     virtual sp<IMemory>     getFrameAtTime(
             int64_t timeUs, int option, int colorFormat, bool metaOnly) = 0;
     virtual sp<IMemory>     getImageAtIndex(
