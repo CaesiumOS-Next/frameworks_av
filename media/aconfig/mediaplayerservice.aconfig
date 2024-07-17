@@ -1,0 +1,13 @@
+# Flags for mediaplayerservice
+
+package: "android.media.mediaplayerservice"
+container: "system"
+
+flag {
+  name: "enable_media_metadata_retriever_async_request"
+  namespace: "mediaplayerservice"
+  description:
+    "Enable Using asynchrony signal to impl retriever serialize calls"
+    "instead of using a global lock waiting in retriever binder threads."
+  bug: "351114873"
+}
