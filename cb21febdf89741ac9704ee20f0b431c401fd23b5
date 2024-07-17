@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b947ccd0_4f00b05f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-17T18:59:16Z",
+      "side": 1,
+      "message": "Hi Mikhail, this is the followup of comment: https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3177968/comment/74044a78_4279a5fc/, thanks",
+      "revId": "cb21febdf89741ac9704ee20f0b431c401fd23b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
