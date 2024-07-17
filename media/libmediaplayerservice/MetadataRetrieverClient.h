@@ -25,6 +25,7 @@
 #include <utils/KeyedVector.h>
 #include <binder/IMemory.h>
 
+#include <android/IMediaMetadataRetrieverSignal.h>
 #include <media/MediaMetadataRetrieverInterface.h>
 
 
@@ -50,6 +51,11 @@ public:
 
     virtual status_t                setDataSource(int fd, int64_t offset, int64_t length);
     virtual status_t                setDataSource(const sp<IDataSource>& source, const char *mime);
+
+    virtual bool                    isReady();
+    virtual int                     addSignal(const sp<IMediaMetadataRetrieverSignal>& signal);
+    virtual void                    removeSignal(int signalId);
+
     virtual sp<IMemory>             getFrameAtTime(
             int64_t timeUs, int option, int colorFormat, bool metaOnly);
     virtual sp<IMemory>             getImageAtIndex(
@@ -63,19 +69,68 @@ public:
 
     virtual status_t                dump(int fd, const Vector<String16>& args);
 
+    static  void                    removeSignalImpl(int signalId);
 private:
     friend class MediaPlayerService;
+    friend class AutoSignalSetReadyHelper;
 
     explicit MetadataRetrieverClient(pid_t pid);
     virtual ~MetadataRetrieverClient();
 
     mutable Mutex                          mLock;
-    static  Mutex                          sLock;
     sp<MediaMetadataRetrieverBase>         mRetriever;
     pid_t                                  mPid;
 
     // Keep the shared memory copy of album art
     sp<IMemory>                            mAlbumArt;
+
+    // RetrieverSignal class is a Bp retriever signal which is related with APP Bn retriever signal.
+    // It would be used to notify APP the retriever server is ready.
+    class RetrieverSignal : public RefBase {
+    public:
+        class DeathNotifier : public IBinder::DeathRecipient {
+            public:
+                DeathNotifier(RetrieverSignal &parent) : mParent(parent) {}
+                virtual ~DeathNotifier() {}
+                virtual void binderDied(const wp<IBinder> &who) { return mParent.binderDied(); }
+            private:
+                RetrieverSignal &mParent;
+        }; // End of class DeathNotifier
+
+        RetrieverSignal(int signalId, const sp<IMediaMetadataRetrieverSignal> &signal) :
+            mSignalId(signalId),
+            mRetrieverSignal(signal),
+            mDeathNotifier(sp<DeathNotifier>::make(*this)) {
+            // set binder death notifier
+            IInterface::asBinder(mRetrieverSignal)->linkToDeath(mDeathNotifier);;
+        }
+
+        virtual ~RetrieverSignal() {
+            IInterface::asBinder(mRetrieverSignal)->unlinkToDeath(mDeathNotifier);
+            mRetrieverSignal.clear();
+            mDeathNotifier.clear();
+        }
+
+        int id() const { return mSignalId; }
+        sp<IMediaMetadataRetrieverSignal>& getSignal() { return mRetrieverSignal; }
+
+        void binderDied()
+        {
+            ALOGD("Retriever signal(id:%d) is death, remove the signal", id());
+            return MetadataRetrieverClient::removeSignalImpl(id());
+        }
+
+    private:
+        sp<IMediaMetadataRetrieverSignal> mRetrieverSignal; // The Bp retriever signal.
+        sp<DeathNotifier>                 mDeathNotifier;   // The binder death notifier.
+        int                               mSignalId;        // The ID of the signal.
+    }; // End of class RetrieverSignal
+
+    // Record added metadata retriever signals
+    static Mutex                           sLock;
+    static bool                            sReady;
+    static int                             sRetrieverSignalId;
+    static std::list<sp<RetrieverSignal>>  sRetrieverSignals;
 };
 
 }; // namespace android

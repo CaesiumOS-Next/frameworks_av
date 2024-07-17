@@ -20,6 +20,7 @@
 #include <sys/types.h>
 
 #include <android/IDataSource.h>
+#include <android/IMediaMetadataRetrieverSignal.h>
 #include <binder/Parcel.h>
 #include <media/IMediaHTTPService.h>
 #include <media/IMediaMetadataRetriever.h>
@@ -33,6 +34,9 @@ enum {
     SET_DATA_SOURCE_URL,
     SET_DATA_SOURCE_FD,
     SET_DATA_SOURCE_CALLBACK,
+    IS_READY,
+    ADD_SIGNAL,
+    REMOVE_SIGNAL,
     GET_FRAME_AT_TIME,
     GET_IMAGE_AT_INDEX,
     GET_IMAGE_RECT_AT_INDEX,
@@ -110,6 +114,32 @@ public:
         }
         remote()->transact(SET_DATA_SOURCE_CALLBACK, data, &reply);
         return reply.readInt32();
+    }
+
+    bool isReady()
+    {
+        Parcel data, reply;
+        data.writeInterfaceToken(IMediaMetadataRetriever::getInterfaceDescriptor());
+        remote()->transact(IS_READY, data, &reply);
+        return reply.readBool();
+    }
+
+    int addSignal(const sp<IMediaMetadataRetrieverSignal>& signal)
+    {
+        Parcel data, reply;
+        data.writeInterfaceToken(IMediaMetadataRetriever::getInterfaceDescriptor());
+        data.writeStrongBinder(IInterface::asBinder(signal));
+        remote()->transact(ADD_SIGNAL, data, &reply);
+        return reply.readInt32();
+    }
+
+    void removeSignal(int signalId)
+    {
+        Parcel data, reply;
+        data.writeInterfaceToken(IMediaMetadataRetriever::getInterfaceDescriptor());
+        data.writeInt32(signalId);
+        remote()->transact(REMOVE_SIGNAL, data, &reply);
+        return;
     }
 
     sp<IMemory> getFrameAtTime(int64_t timeUs, int option, int colorFormat, bool metaOnly)
@@ -303,6 +333,30 @@ status_t BnMediaMetadataRetriever::onTransact(
                 }
                 reply->writeInt32(setDataSource(source, mime));
             }
+            return NO_ERROR;
+        } break;
+        case IS_READY:{
+            CHECK_INTERFACE(IMediaMetadataRetriever, data, reply);
+            bool ready = isReady();
+            reply->writeBool(ready);
+            return NO_ERROR;
+        } break;
+        case ADD_SIGNAL: {
+            CHECK_INTERFACE(IMediaMetadataRetriever, data, reply);
+            sp<IMediaMetadataRetrieverSignal> signal =
+                interface_cast<IMediaMetadataRetrieverSignal>(data.readStrongBinder());
+            if (signal == NULL)  {
+                reply->writeInt32(BAD_VALUE);
+                return NO_ERROR;
+            }
+
+            reply->writeInt32(addSignal(signal));
+            return NO_ERROR;
+        } break;
+        case REMOVE_SIGNAL:{
+            CHECK_INTERFACE(IMediaMetadataRetriever, data, reply);
+            int signalId = data.readInt32();
+            removeSignal(signalId);
             return NO_ERROR;
         } break;
         case GET_FRAME_AT_TIME: {

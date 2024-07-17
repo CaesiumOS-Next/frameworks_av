@@ -45,6 +45,11 @@
 
 namespace android {
 
+Mutex MetadataRetrieverClient::sLock;
+bool  MetadataRetrieverClient::sReady = true;
+int   MetadataRetrieverClient::sRetrieverSignalId = 0;
+std::list<sp<MetadataRetrieverClient::RetrieverSignal>> MetadataRetrieverClient::sRetrieverSignals;
+
 MetadataRetrieverClient::MetadataRetrieverClient(pid_t pid)
 {
     ALOGV("MetadataRetrieverClient constructor pid(%d)", pid);
@@ -191,15 +196,105 @@ status_t MetadataRetrieverClient::setDataSource(
     return ret;
 }
 
-Mutex MetadataRetrieverClient::sLock;
+bool MetadataRetrieverClient::isReady()
+{
+    Mutex::Autolock l(sLock);
+    return sReady;
+}
+
+int MetadataRetrieverClient::addSignal(const sp<IMediaMetadataRetrieverSignal> &signal)
+{
+    Mutex::Autolock l(sLock);
+    int id = sRetrieverSignalId++;
+
+    // add retriever signal
+    sRetrieverSignals.push_back(sp<RetrieverSignal>::make(id, signal));
+    ALOGD("Add metadata retriever signal(id: %d), now retriever signals size: %zu",
+            id, sRetrieverSignals.size());
+
+    return id;
+}
+
+void MetadataRetrieverClient::removeSignal(int signalId)
+{
+    return removeSignalImpl(signalId);
+}
+
+void MetadataRetrieverClient::removeSignalImpl(int signalId)
+{
+    Mutex::Autolock l(sLock);
+
+    auto search = std::find_if(sRetrieverSignals.begin(), sRetrieverSignals.end(),
+            [=](sp<RetrieverSignal> &it) { return signalId == it->id(); });
+
+    if (search == sRetrieverSignals.end()) {
+        ALOGE("Remove metadata retriever signal id: %d is invalid or has removed", signalId);
+        return;
+    }
+
+    // remove retriever signal
+    sRetrieverSignals.erase(search);
+    ALOGD("Remove metadata retriever signal(id: %d), now retriever signals size: %zu",
+        signalId, sRetrieverSignals.size());
+
+    return;
+}
+
+// AutoSignalSetReadyHelper class providers check the ready method
+// and helps auto set the ready new flags and signal to notify bp metadata retriever.
+class AutoSignalSetReadyHelper {
+public:
+    AutoSignalSetReadyHelper() {}
+    ~AutoSignalSetReadyHelper() {
+        Mutex::Autolock lk(MetadataRetrieverClient::sLock);
+
+        // Leave the processing, set retriever is ready
+        MetadataRetrieverClient::sReady = true;
+
+        // If there is a bp retriever waiting for processing,
+        // we should make a notify to the bp retriever.
+
+        if (MetadataRetrieverClient::sRetrieverSignals.empty()) {
+            return;
+        }
+
+        ALOGD("Callback signal(id: %d) to notify bp metadata retriever, "
+            "and there are (%zu) bp retrievers are waiting",
+            MetadataRetrieverClient::sRetrieverSignals.front()->id(),
+            MetadataRetrieverClient::sRetrieverSignals.size());
+
+        // callback signal to notify bp metadata retriever
+        MetadataRetrieverClient::sRetrieverSignals.front()->getSignal()->signal();
+        MetadataRetrieverClient::sRetrieverSignals.pop_front();
+    }
+
+    bool checkReadyAndSet() {
+        Mutex::Autolock lk(MetadataRetrieverClient::sLock);
+
+        if (!MetadataRetrieverClient::sReady) {
+            // retriever isn't ready,
+            // there is a processing task now.
+            return false;
+        }
+
+        // retriever is ready, set it and return ready now.
+        MetadataRetrieverClient::sReady = false;
+        return true;
+    }
+}; // End of class AutoSignalSetReadyHelper
 
 sp<IMemory> MetadataRetrieverClient::getFrameAtTime(
         int64_t timeUs, int option, int colorFormat, bool metaOnly)
 {
     ALOGV("getFrameAtTime: time(%lld us) option(%d) colorFormat(%d), metaOnly(%d)",
             (long long)timeUs, option, colorFormat, metaOnly);
+    AutoSignalSetReadyHelper signal;
+    if (!signal.checkReadyAndSet()) {
+        ALOGE("retriever isn't ready");
+        return NULL;
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -216,8 +311,13 @@ sp<IMemory> MetadataRetrieverClient::getImageAtIndex(
         int index, int colorFormat, bool metaOnly, bool thumbnail) {
     ALOGV("getImageAtIndex: index(%d) colorFormat(%d), metaOnly(%d) thumbnail(%d)",
             index, colorFormat, metaOnly, thumbnail);
+    AutoSignalSetReadyHelper signal;
+    if (!signal.checkReadyAndSet()) {
+        ALOGE("retriever isn't ready");
+        return NULL;
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -234,8 +334,13 @@ sp<IMemory> MetadataRetrieverClient::getImageRectAtIndex(
         int index, int colorFormat, int left, int top, int right, int bottom) {
     ALOGV("getImageRectAtIndex: index(%d) colorFormat(%d), rect {%d, %d, %d, %d}",
             index, colorFormat, left, top, right, bottom);
+    AutoSignalSetReadyHelper signal;
+    if (!signal.checkReadyAndSet()) {
+        ALOGE("retriever isn't ready");
+        return NULL;
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -252,8 +357,13 @@ sp<IMemory> MetadataRetrieverClient::getFrameAtIndex(
             int index, int colorFormat, bool metaOnly) {
     ALOGV("getFrameAtIndex: index(%d), colorFormat(%d), metaOnly(%d)",
             index, colorFormat, metaOnly);
+    AutoSignalSetReadyHelper signal;
+    if (!signal.checkReadyAndSet()) {
+        ALOGE("retriever isn't ready");
+        return NULL;
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;

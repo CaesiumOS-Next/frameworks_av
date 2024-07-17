@@ -25,6 +25,7 @@
 #include <media/mediametadataretriever.h>
 #include <media/IMediaHTTPService.h>
 #include <media/IMediaPlayerService.h>
+#include <android/BnMediaMetadataRetrieverSignal.h>
 #include <utils/Log.h>
 #include <dlfcn.h>
 
@@ -137,6 +138,73 @@ status_t MediaMetadataRetriever::setDataSource(
     return mRetriever->setDataSource(dataSource, mime);
 }
 
+// AutoCheckRetrieverReadyHelper class is used to assist in checking
+// whether metadata retriever server is ready.
+//
+// It make sure that the retriever getFrame series calls is serialize
+// in the metadata retriever server.
+//
+// getFrame series calls would blocks until the metadata retriever is ready.
+// And It checks the ready when receive a signal from server every time.
+class AutoCheckRetrieverReadyHelper {
+public:
+     // BnMediaMetadataRetrieverSignal is used to receive the signal from
+     // metadata retriever server.
+    class RetrieverSignal : public BnMediaMetadataRetrieverSignal {
+    public:
+        RetrieverSignal(AutoCheckRetrieverReadyHelper &parent) : mParent(parent) {}
+        virtual ~RetrieverSignal() {}
+        virtual ::android::binder::Status signal() {
+            mParent.signal();
+            return binder::Status::ok();
+        }
+
+    private:
+        AutoCheckRetrieverReadyHelper &mParent;
+    }; // End of class RetrieverSignal
+
+    AutoCheckRetrieverReadyHelper(sp<IMediaMetadataRetriever> &retriever) :
+        mRetriever(retriever),
+        mRetrieverSignal(sp<RetrieverSignal>::make(*this)),
+        mMutex(),
+        mCond(),
+        mId(-1) {
+        // Block here until the metadata retriever is ready,
+        // and add a callback retriever signal to server.
+        //
+        // Once receive a signal from server,
+        // we will check the retriever is ready once again.
+        std::unique_lock lk(mMutex);
+        mCond.wait(lk, [&]() {
+            if (mRetriever->isReady()) { // metadata retriever server is ready
+                return true;
+            }
+
+            // server isn't ready now, wait for signal
+            mId = mRetriever->addSignal(mRetrieverSignal);
+            ALOGD("Metadata retriever server isn't ready now, "
+            "Bp metadata retriever suc add signal(id:%d) into server", mId);
+
+            return false;
+        });
+    }
+
+    ~AutoCheckRetrieverReadyHelper() {}
+
+private:
+    void signal() {
+        ALOGD("Bp metadata retriever receives a signal(id:%d) from server", mId);
+        mCond.notify_all();
+    }
+
+    sp<IMediaMetadataRetriever>      &mRetriever;
+    sp<IMediaMetadataRetrieverSignal> mRetrieverSignal;
+
+    std::condition_variable           mCond;
+    std::mutex                        mMutex;
+    int                               mId;
+}; // End of class AutoCheckRetrieverReadyHelper
+
 sp<IMemory> MediaMetadataRetriever::getFrameAtTime(
         int64_t timeUs, int option, int colorFormat, bool metaOnly)
 {
@@ -147,6 +215,9 @@ sp<IMemory> MediaMetadataRetriever::getFrameAtTime(
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    AutoCheckRetrieverReadyHelper ready(mRetriever);
+
     return mRetriever->getFrameAtTime(timeUs, option, colorFormat, metaOnly);
 }
 
@@ -159,6 +230,9 @@ sp<IMemory> MediaMetadataRetriever::getImageAtIndex(
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    AutoCheckRetrieverReadyHelper ready(mRetriever);
+
     return mRetriever->getImageAtIndex(index, colorFormat, metaOnly, thumbnail);
 }
 
@@ -171,6 +245,9 @@ sp<IMemory> MediaMetadataRetriever::getImageRectAtIndex(
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    AutoCheckRetrieverReadyHelper ready(mRetriever);
+
     return mRetriever->getImageRectAtIndex(
             index, colorFormat, left, top, right, bottom);
 }
@@ -184,6 +261,9 @@ sp<IMemory>  MediaMetadataRetriever::getFrameAtIndex(
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    AutoCheckRetrieverReadyHelper ready(mRetriever);
+
     return mRetriever->getFrameAtIndex(index, colorFormat, metaOnly);
 }
 
