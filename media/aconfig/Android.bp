@@ -50,3 +50,35 @@ cc_aconfig_library {
     ],
     aconfig_declarations: "aconfig_codec_fwk_flags",
 }
+
+// mediaplayerservice flags
+cc_defaults {
+    name: "mediaplayerservice-aconfig-cc-defaults",
+    host_supported: true,
+}
+
+aconfig_declarations {
+    name: "aconfig_mediaplayerservice_flags",
+    package: "android.media.mediaplayerservice",
+    container: "system",
+    srcs: ["mediaplayerservice.aconfig"],
+}
+
+java_aconfig_library {
+    name: "android.media.mediaplayerservice-aconfig-java",
+    aconfig_declarations: "aconfig_mediaplayerservice_flags",
+    defaults: ["framework-minus-apex-aconfig-java-defaults"],
+}
+
+cc_aconfig_library {
+    name: "android.media.mediaplayerservice-aconfig-cc",
+    defaults: ["mediaplayerservice-aconfig-cc-defaults"],
+    min_sdk_version: "30",
+    vendor_available: true,
+    double_loadable: true,
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.media",
+    ],
+    aconfig_declarations: "aconfig_mediaplayerservice_flags",
+}
