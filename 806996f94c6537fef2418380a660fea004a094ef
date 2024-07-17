@@ -16,6 +16,23 @@
       "message": "I thought the plan was that the app would use the AudioRecord.setPreferredDevice API to select the flexconnect device. There is no need to modify the audio policy for this",
       "revId": "806996f94c6537fef2418380a660fea004a094ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b977ff_25561bcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-17T16:48:42Z",
+      "side": 1,
+      "message": "you must also update services/audiopolicy/enginedefault/src/Engine.cpp",
+      "revId": "806996f94c6537fef2418380a660fea004a094ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
