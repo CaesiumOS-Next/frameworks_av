@@ -45,6 +45,7 @@ cc_defaults {
         "android.hardware.media.omx@1.0",
         "av-types-aidl-cpp",
         "framework-permission-aidl-cpp",
+        "android.media.mediaplayerservice-aconfig-cc",
         "libaudioclient_aidl_conversion",
         "libbase",
         "libbinder_ndk",
