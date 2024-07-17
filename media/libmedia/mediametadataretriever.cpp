@@ -20,6 +20,8 @@
 
 #include <inttypes.h>
 
+#include <android_media_mediaplayerservice.h>
+#include <android/BnMediaMetadataRetrieverSignal.h>
 #include <binder/IServiceManager.h>
 #include <binder/IPCThreadState.h>
 #include <media/mediametadataretriever.h>
@@ -139,17 +141,91 @@ status_t MediaMetadataRetriever::setDataSource(
     return mRetriever->setDataSource(dataSource, mime);
 }
 
+// AutoAcquireRetrieverResourceHelper class is used to assist in acquire
+// metadata retriever resource
+//
+// It make sure that the retriever getFrame series calls is serialize
+// in the metadata retriever server.
+//
+// getFrame series calls would blocks until suc to acquire retriever resource,
+// The Bn retriever would signal to client when there is resource available.
+// And It'll try to acquire resource again once receive a signal from server.
+class AutoAcquireRetrieverResourceHelper {
+public:
+     // BnMediaMetadataRetrieverSignal is used to receive the signal from
+     // metadata retriever server.
+    class RetrieverSignal : public BnMediaMetadataRetrieverSignal {
+    public:
+        RetrieverSignal(AutoAcquireRetrieverResourceHelper &parent) : mParent(parent) {}
+        virtual ~RetrieverSignal() {}
+        virtual ::android::binder::Status signal() {
+            mParent.signal();
+            return binder::Status::ok();
+        }
+
+    private:
+        AutoAcquireRetrieverResourceHelper &mParent;
+    }; // End of class RetrieverSignal
+
+    AutoAcquireRetrieverResourceHelper(sp<IMediaMetadataRetriever>& retriever)
+        : mRetriever(retriever),
+          mRetrieverSignal(sp<RetrieverSignal>::make(*this)),
+          mMutex(),
+          mCond() {
+        // Block here until until suc to acquire retriever resource,
+        // and add a callback retriever signal to server.
+        //
+        // Once receive a signal from server,
+        // we will try to acquire metadata retriever resource again.
+        std::unique_lock lk(mMutex);
+        mCond.wait(lk, [&]() {
+            if (mRetriever->acquireResource(mRetrieverSignal)) {
+                // success acquire metadata retriever resource.
+                return true;
+            }
+
+            // acquire metadata retriever resource failed,
+            // waiting for retriever signal notify.
+            ALOGD("Metadata retriever server is busy, bp retriever is waiting a signal");
+
+            return false;
+        });
+    }
+
+    ~AutoAcquireRetrieverResourceHelper() {}
+
+private:
+    void signal() {
+        ALOGD("Bp metadata retriever receives a signal from server, "
+                "try to acquire resource again");
+        mCond.notify_all();
+    }
+
+    sp<IMediaMetadataRetriever>      &mRetriever;
+    sp<IMediaMetadataRetrieverSignal> mRetrieverSignal;
+
+    std::condition_variable           mCond;
+    std::mutex                        mMutex;
+}; // End of class AutoAcquireRetrieverResourceHelper
+
 sp<IMemory> MediaMetadataRetriever::getFrameAtTime(
         int64_t timeUs, int option, int colorFormat, bool metaOnly)
 {
     ALOGV("getFrameAtTime: time(%" PRId64 " us) option(%d) colorFormat(%d) metaOnly(%d)",
             timeUs, option, colorFormat, metaOnly);
     Mutex::Autolock _l(mLock);
-    Mutex::Autolock _gLock(sLock);
     if (mRetriever == 0) {
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    std::unique_ptr<Mutex::Autolock> _glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        AutoAcquireRetrieverResourceHelper helper(mRetriever);
+    } else {
+        _glock.reset(new Mutex::Autolock(sLock));
+    }
+
     return mRetriever->getFrameAtTime(timeUs, option, colorFormat, metaOnly);
 }
 
@@ -158,11 +234,18 @@ sp<IMemory> MediaMetadataRetriever::getImageAtIndex(
     ALOGV("getImageAtIndex: index(%d) colorFormat(%d) metaOnly(%d) thumbnail(%d)",
             index, colorFormat, metaOnly, thumbnail);
     Mutex::Autolock _l(mLock);
-    Mutex::Autolock _gLock(sLock);
     if (mRetriever == 0) {
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    std::unique_ptr<Mutex::Autolock> _glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        AutoAcquireRetrieverResourceHelper helper(mRetriever);
+    } else {
+        _glock.reset(new Mutex::Autolock(sLock));
+    }
+
     return mRetriever->getImageAtIndex(index, colorFormat, metaOnly, thumbnail);
 }
 
@@ -171,11 +254,18 @@ sp<IMemory> MediaMetadataRetriever::getImageRectAtIndex(
     ALOGV("getImageRectAtIndex: index(%d) colorFormat(%d) rect {%d, %d, %d, %d}",
             index, colorFormat, left, top, right, bottom);
     Mutex::Autolock _l(mLock);
-    Mutex::Autolock _gLock(sLock);
     if (mRetriever == 0) {
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    std::unique_ptr<Mutex::Autolock> _glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        AutoAcquireRetrieverResourceHelper helper(mRetriever);
+    } else {
+        _glock.reset(new Mutex::Autolock(sLock));
+    }
+
     return mRetriever->getImageRectAtIndex(
             index, colorFormat, left, top, right, bottom);
 }
@@ -185,11 +275,18 @@ sp<IMemory>  MediaMetadataRetriever::getFrameAtIndex(
     ALOGV("getFrameAtIndex: index(%d), colorFormat(%d) metaOnly(%d)",
             index, colorFormat, metaOnly);
     Mutex::Autolock _l(mLock);
-    Mutex::Autolock _gLock(sLock);
     if (mRetriever == 0) {
         ALOGE("retriever is not initialized");
         return NULL;
     }
+
+    std::unique_ptr<Mutex::Autolock> _glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        AutoAcquireRetrieverResourceHelper helper(mRetriever);
+    } else {
+        _glock.reset(new Mutex::Autolock(sLock));
+    }
+
     return mRetriever->getFrameAtIndex(index, colorFormat, metaOnly);
 }
 

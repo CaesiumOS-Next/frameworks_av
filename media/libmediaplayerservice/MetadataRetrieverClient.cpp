@@ -25,6 +25,7 @@
 #include <unistd.h>
 
 #include <string.h>
+#include <android_media_mediaplayerservice.h>
 #include <cutils/atomic.h>
 #include <cutils/properties.h>
 #include <binder/MemoryBase.h>
@@ -44,6 +45,15 @@
 #include "MediaPlayerFactory.h"
 
 namespace android {
+
+// Max metadata retrievers that can be running to
+// getframe or image at the same time.
+static const int MAX_METADATA_RETRIEVERS = 1;
+
+Mutex MetadataRetrieverClient::sLock;
+int   MetadataRetrieverClient::sRunningRetrieverCount = 0;
+int   MetadataRetrieverClient::sRetrieverSignalId = 0;
+std::list<sp<MetadataRetrieverClient::RetrieverSignal>> MetadataRetrieverClient::sRetrieverSignals;
 
 MetadataRetrieverClient::MetadataRetrieverClient(pid_t pid)
 {
@@ -191,15 +201,103 @@ status_t MetadataRetrieverClient::setDataSource(
     return ret;
 }
 
-Mutex MetadataRetrieverClient::sLock;
+bool MetadataRetrieverClient::acquireResource(
+        const sp<IMediaMetadataRetrieverSignal> &signal)
+{
+    Mutex::Autolock lock(sLock);
+
+    // If count of the running getFrame/Image retriever task reaches MAX,
+    // record the retriever to the signal list.
+    // There would be a signal send to them once the runnings are done.
+    if (sRunningRetrieverCount >= MAX_METADATA_RETRIEVERS) {
+        sRetrieverSignals.push_back(sp<RetrieverSignal>::make(sRetrieverSignalId++, signal));
+        ALOGD("Add metadata retriever signal(id: %d), now retriever signals size: %zu",
+                sRetrieverSignals.front()->id(), sRetrieverSignals.size());
+        return false;
+    }
+
+    // If none task is running, success to acquire the resource.
+    // And update the running retriever count
+    sRunningRetrieverCount++;
+
+    return true;
+}
+
+void MetadataRetrieverClient::handleDiedSignal(int id)
+{
+    Mutex::Autolock lock(sLock);
+
+    // Needn't signal to this retriever anymore,
+    // remove it from the signal list.
+
+    ALOGW("Retriever signal(id:%d) is death, remove the signal", id);
+
+    auto search = std::find_if(sRetrieverSignals.begin(), sRetrieverSignals.end(),
+            [=](sp<RetrieverSignal> &it) { return id == it->id(); });
+
+    if (search == sRetrieverSignals.end()) {
+        ALOGW("Remove metadata retriever signal id: %d is invalid or has removed", id);
+        return;
+    }
+
+    // Remove the death retriever signal
+    sRetrieverSignals.erase(search);
+    ALOGD("Remove metadata retriever signal(id: %d), now retriever signals size: %zu",
+            id, sRetrieverSignals.size());
+
+    return;
+}
+
+void MetadataRetrieverClient::signal()
+{
+    Mutex::Autolock lock(sLock);
+
+    // One task is done, update count
+    sRunningRetrieverCount--;
+
+    // If there is a bp retriever waiting for processing,
+    // we should make a notify to the bp retriever.
+
+    if (sRetrieverSignals.empty()) {
+        return;
+    }
+
+    ALOGD("Callback signal(id: %d) to notify metadata retriever, "
+            "and (%zu) retrievers are still waiting signal",
+            sRetrieverSignals.front()->id(), sRetrieverSignals.size() - 1);
+
+    // callback signal to notify bp metadata retriever
+    sRetrieverSignals.front()->getSignal()->signal();
+    sRetrieverSignals.pop_front();
+
+    return;
+}
+
+// AutoSignalHelper help auto signal to notify bp retriever once the task is done.
+// And auto clear the running retriever signal and busy flag.
+class AutoSignalHelper {
+public:
+    AutoSignalHelper() {}
+    ~AutoSignalHelper() {
+        MetadataRetrieverClient::signal();
+    }
+}; // End of class AutoSignalHelper
 
 sp<IMemory> MetadataRetrieverClient::getFrameAtTime(
         int64_t timeUs, int option, int colorFormat, bool metaOnly)
 {
     ALOGV("getFrameAtTime: time(%lld us) option(%d) colorFormat(%d), metaOnly(%d)",
             (long long)timeUs, option, colorFormat, metaOnly);
+
+    std::unique_ptr<AutoSignalHelper> signal;
+    std::unique_ptr<Mutex::Autolock>  glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        signal.reset(new AutoSignalHelper);
+    } else {
+        glock.reset(new Mutex::Autolock(sLock));
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -216,8 +314,16 @@ sp<IMemory> MetadataRetrieverClient::getImageAtIndex(
         int index, int colorFormat, bool metaOnly, bool thumbnail) {
     ALOGV("getImageAtIndex: index(%d) colorFormat(%d), metaOnly(%d) thumbnail(%d)",
             index, colorFormat, metaOnly, thumbnail);
+
+    std::unique_ptr<AutoSignalHelper> signal;
+    std::unique_ptr<Mutex::Autolock>  glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        signal.reset(new AutoSignalHelper);
+    } else {
+        glock.reset(new Mutex::Autolock(sLock));
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -234,8 +340,16 @@ sp<IMemory> MetadataRetrieverClient::getImageRectAtIndex(
         int index, int colorFormat, int left, int top, int right, int bottom) {
     ALOGV("getImageRectAtIndex: index(%d) colorFormat(%d), rect {%d, %d, %d, %d}",
             index, colorFormat, left, top, right, bottom);
+
+    std::unique_ptr<AutoSignalHelper> signal;
+    std::unique_ptr<Mutex::Autolock>  glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        signal.reset(new AutoSignalHelper);
+    } else {
+        glock.reset(new Mutex::Autolock(sLock));
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -252,8 +366,16 @@ sp<IMemory> MetadataRetrieverClient::getFrameAtIndex(
             int index, int colorFormat, bool metaOnly) {
     ALOGV("getFrameAtIndex: index(%d), colorFormat(%d), metaOnly(%d)",
             index, colorFormat, metaOnly);
+
+    std::unique_ptr<AutoSignalHelper> signal;
+    std::unique_ptr<Mutex::Autolock>  glock;
+    if (android::media::mediaplayerservice::enable_media_metadata_retriever_async_request()) {
+        signal.reset(new AutoSignalHelper);
+    } else {
+        glock.reset(new Mutex::Autolock(sLock));
+    }
+
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
