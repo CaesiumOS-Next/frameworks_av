@@ -78,6 +78,14 @@ filegroup {
     path: "aidl",
 }
 
+filegroup {
+    name: "mediametadataretrieversignal_aidl",
+    srcs: [
+        "aidl/android/IMediaMetadataRetrieverSignal.aidl",
+    ],
+    path: "aidl",
+}
+
 cc_library_shared {
     name: "libmedia_omx",
     vendor_available: true,
@@ -346,6 +354,7 @@ cc_library {
 
     srcs: [
         ":mediaextractorservice_aidl",
+        ":mediametadataretrieversignal_aidl",
         "IDataSource.cpp",
         "BufferingSettings.cpp",
         "mediaplayer.cpp",
