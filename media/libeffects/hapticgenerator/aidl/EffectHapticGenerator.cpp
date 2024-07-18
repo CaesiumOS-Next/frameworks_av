@@ -77,6 +77,7 @@ ndk::ScopedAStatus HapticGeneratorImpl::commandImpl(CommandId command) {
             mContext->enable();
             break;
         case CommandId::STOP:
+            mContext->reset();
             mContext->disable();
             break;
         case CommandId::RESET:
