@@ -16,6 +16,23 @@
       "message": "I have created an ABTD run http://go/abtd-run/L06100030005248461 to verify that this time the CL will not break the health test.",
       "revId": "0881647a7bd066bb2c439a13d9e75a9e43ac7139",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd95184_c2cad8be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-07-18T20:04:34Z",
+      "side": 1,
+      "message": "Hi Shunkai, could you please approve re-landing of the change which was previously reverted? I have verified with an ABTD run that it should not break the tests that got broken the last time.",
+      "revId": "0881647a7bd066bb2c439a13d9e75a9e43ac7139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
