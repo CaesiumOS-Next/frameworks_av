@@ -46,6 +46,30 @@
       },
       "revId": "8e2cb8f45f7c1a891d504acb3a0bf9e3c76ce3a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972758d1_bdfa9cc3",
+        "filename": "media/libstagefright/webm/WebmWriter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-07-18T16:43:41Z",
+      "side": 1,
+      "message": "I too feel it is better to stick to something that is working so far in mpeg4 writer and land this.\n\nAny other approach would need to be verified for both 6t4bit and 32bit and also needs to change mpeg4writer too.",
+      "parentUuid": "a670d914_fb9aff05",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 87
+      },
+      "revId": "8e2cb8f45f7c1a891d504acb3a0bf9e3c76ce3a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
