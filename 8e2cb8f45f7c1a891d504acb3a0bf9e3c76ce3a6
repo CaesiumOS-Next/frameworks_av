@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba1c099_f4b20825",
+        "filename": "media/libstagefright/webm/WebmWriter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-07-18T08:23:21Z",
+      "side": 1,
+      "message": "This could still overflow for values that are 1000 times larger than the reported 89158000000 us. Should we put the intermediate size value `size2` in a larger data type to account for that?",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 87
+      },
+      "revId": "8e2cb8f45f7c1a891d504acb3a0bf9e3c76ce3a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
