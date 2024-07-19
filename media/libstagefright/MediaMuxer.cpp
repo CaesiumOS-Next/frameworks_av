@@ -96,6 +96,7 @@ MediaMuxer::MediaMuxer(int fd, OutputFormat format)
 MediaMuxer::~MediaMuxer() {
     Mutex::Autolock autoLock(mMuxerLock);
 
+    mState = UNINITIALIZED;
     // Clean up all the internal resources.
     mFileMeta.clear();
     mWriter.clear();
