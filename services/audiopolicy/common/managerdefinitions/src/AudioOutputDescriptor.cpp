@@ -524,6 +524,14 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool muted,
     StreamTypeVector streams = streamTypes;
     if (!AudioOutputDescriptor::setVolume(
             volumeDb, muted, vs, streamTypes, deviceTypes, delayMs, force, isVoiceVolSrc)) {
+        // Force VOICE_CALL to track BLUETOOTH_SCO stream volume when bluetooth audio is enabled
+        if (hasStream(streamTypes, AUDIO_STREAM_BLUETOOTH_SCO)) {
+            VolumeSource callVolSrc = getVoiceSource();
+            if (callVolSrc != VOLUME_SOURCE_NONE && volumeDb != getCurVolume(callVolSrc)) {
+                setCurVolume(callVolSrc, volumeDb, true);
+                mClientInterface->setStreamVolume(AUDIO_STREAM_VOICE_CALL, Volume::DbToAmpl(volumeDb), mIoHandle, delayMs);
+            }
+        }
         return false;
     }
     if (streams.empty()) {
@@ -575,6 +583,7 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool muted,
             setCurVolume(callVolSrc, getCurVolume(vs), true);
         }
     }
+
     for (const auto &stream : streams) {
         ALOGV("%s output %d for volumeSource %d, volume %f, delay %d stream=%s", __func__,
               mIoHandle, vs, volumeDb, delayMs, toString(stream).c_str());
