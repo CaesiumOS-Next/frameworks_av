@@ -160,7 +160,7 @@ bool AudioOutputDescriptor::isFixedVolume(const DeviceTypeSet& deviceTypes __unu
 
 bool AudioOutputDescriptor::setVolume(float volumeDb, bool /*muted*/,
                                       VolumeSource volumeSource,
-                                      const StreamTypeVector &/*streams*/,
+                                      const StreamTypeVector &streams,
                                       const DeviceTypeSet& deviceTypes,
                                       uint32_t delayMs,
                                       bool force,
@@ -175,7 +175,13 @@ bool AudioOutputDescriptor::setVolume(float volumeDb, bool /*muted*/,
     // We actually change the volume if:
     // - the float value returned by computeVolume() changed
     // - the force flag is set
-    if (volumeDb != getCurVolume(volumeSource) || force) {
+    // - need force VOICE_CALL to track BLUETOOTH_SCO stream volume when bluetooth audio is enabled
+    //   and VOICE_CALL stream volume is changed
+    VolumeSource callVolSrc = getVoiceSource();
+    float voiceVolumeDb = (callVolSrc == VOLUME_SOURCE_NONE) ? volumeDb : getCurVolume(callVolSrc);
+    if (volumeDb != getCurVolume(volumeSource) || force
+            || (hasStream(streams, AUDIO_STREAM_BLUETOOTH_SCO)
+            && volumeDb != voiceVolumeDb)) {
         ALOGV("%s for volumeSrc %d, volume %f, delay %d", __func__, volumeSource, volumeDb, delayMs);
         setCurVolume(volumeSource, volumeDb, isVoiceVolSrc);
         return true;
