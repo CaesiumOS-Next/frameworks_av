@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55291974_09da48dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-07-20T00:09:22Z",
+      "side": 1,
+      "message": "Could you please point out to an example of such caller?",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ccb8fb_e6b12061",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-07-20T00:09:22Z",
+      "side": 1,
+      "message": "The risk here is that if the original call comes via Binder, there is a 5 s timeout enforced by TimeCheck to complete the operation. Since we have already waited for 3 s (from my understanding), if the release takes unexpectedly long time, the audio server process will crash due to TimeCheck. We should better make the patch release asynchronously.",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 65
+      },
+      "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
