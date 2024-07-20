@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a518b13_d6262217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2024-07-20T13:58:41Z",
+      "side": 1,
+      "message": "Hi AOSP Team, During recent testing we discovered this issue. AudioOutputDescriptor::setVolume will determine whether the volume has been modified. If the volume has not been modified, there will be no way to reach the logic related to hasStream(streams, AUDIO_STREAM_BLUETOOTH_SCO). But if there is setVolume source voice after setVolume source bluetoothsco, the volume of voice will be inconsistent with bluetoothsco.\nPlease help with review, thanks.",
+      "revId": "41d0b54b63b4059010633b9d715a35d8648fa473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
