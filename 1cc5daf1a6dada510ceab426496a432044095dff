@@ -63,6 +63,24 @@
       "message": "Whether it should be modified in this way, there is no need to pay attention to the return value of AudioOutputDescriptor::setVolume. As long as the voice volume is inconsistent with the bluetooth sco volume, it needs to be set.\nThere may be a problem in your internal modification method. If the return value of AudioOutputDescriptor::setVolume is true, the voice volume will not be updated.",
       "revId": "1cc5daf1a6dada510ceab426496a432044095dff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b22fee12_d87d3c9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-22T14:38:53Z",
+      "side": 1,
+      "message": "I don\u0027t understand your concern about voice volume. If AudioOutputDescriptor::setVolume() returns true, the voice volume is updated at line 572.",
+      "parentUuid": "faadd34e_6dd6bb70",
+      "revId": "1cc5daf1a6dada510ceab426496a432044095dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
