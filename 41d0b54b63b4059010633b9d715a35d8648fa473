@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8de9df59_d6efd8f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2024-07-22T12:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b008d1a5_fe03fead",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "41d0b54b63b4059010633b9d715a35d8648fa473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1a518b13_d6262217",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -98,6 +122,30 @@
           ]
         }
       ],
+      "revId": "41d0b54b63b4059010633b9d715a35d8648fa473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e3a8234_b3f96a9c",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioOutputDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2024-07-22T12:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27bb9da_2ff0de53",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 55
+      },
       "revId": "41d0b54b63b4059010633b9d715a35d8648fa473",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
