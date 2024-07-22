@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "838f8902_8f4ccd30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2024-07-22T12:41:05Z",
+      "side": 1,
+      "message": "Yes, it is important to make the volume of the voice stream consistent with the volume of the bluetooth sco stream again.\nI have uploaded the log in issues/354658582",
+      "revId": "e2801579fb668cee8b67a5be312b393109da5278",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
