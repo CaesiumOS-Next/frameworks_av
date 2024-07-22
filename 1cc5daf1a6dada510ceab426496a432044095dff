@@ -99,6 +99,24 @@
       "parentUuid": "b22fee12_d87d3c9c",
       "revId": "1cc5daf1a6dada510ceab426496a432044095dff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7626c4dc_f601c15d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-22T15:22:56Z",
+      "side": 1,
+      "message": "What I suggested is just to duplicate the code that sets voice volume in case the SCO SW gain does not change and keep the rest unchanged.\n\nWhat you did seems to work too and avoids the code duplication. I am just not sure about the possible side effect of setting the voice volume systematically with regard to the HW gain handling and exit at line 566",
+      "parentUuid": "07d043ca_fc7e8bf4",
+      "revId": "1cc5daf1a6dada510ceab426496a432044095dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
