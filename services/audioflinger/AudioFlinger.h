@@ -631,8 +631,7 @@ private:
     // always take mMutex before mHardwareMutex
 
     std::atomic<AudioHwDevice*> mPrimaryHardwareDev = nullptr;
-    DefaultKeyedVector<audio_module_handle_t, AudioHwDevice*> mAudioHwDevs
-            GUARDED_BY(hardwareMutex()) {nullptr /* defValue */};
+    DefaultKeyedVector<audio_module_handle_t, AudioHwDevice*> mAudioHwDevs{nullptr /* defValue */};
 
     static bool inputBufferSizeDevsCmp(const AudioHwDevice* lhs, const AudioHwDevice* rhs);
     std::set<AudioHwDevice*, decltype(&inputBufferSizeDevsCmp)>
