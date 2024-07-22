@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f11cc5b_57355b57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2024-07-22T15:51:18Z",
+      "side": 1,
+      "message": "I have uploaded new modifications, please help to merge the current modifications or your internal modifications. Thank you.",
+      "revId": "e3b284d5032ad4c5a3d3a43b073827596c5bceb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
