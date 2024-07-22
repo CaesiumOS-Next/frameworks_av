@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea52dc4_83461252",
+        "filename": "media/libaudioclient/tests/audioeffect_tests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-22T16:27:33Z",
+      "side": 1,
+      "message": "`isEffectExistsOnAudioSession` return a `status_t`, should we change the method name, something like `createAndInitCheckEffect`?",
+      "range": {
+        "startLine": 560,
+        "startChar": 14,
+        "endLine": 560,
+        "endChar": 42
+      },
+      "revId": "5a71b4bdfb24d955a3908aa7a9bf80d2a5bf158a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
