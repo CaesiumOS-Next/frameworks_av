@@ -1550,6 +1550,7 @@ status_t CCodecBufferChannel::start(
     C2PortActualDelayTuning::output outputDelay(0);
     C2ActualPipelineDelayTuning pipelineDelay(0);
     C2SecureModeTuning secureMode(C2Config::SM_UNPROTECTED);
+    C2StreamPictureSizeInfo::input picSize;
 
     c2_status_t err = mComponent->query(
             {
@@ -1562,6 +1563,7 @@ status_t CCodecBufferChannel::start(
                 &pipelineDelay,
                 &outputDelay,
                 &secureMode,
+                &picSize,
             },
             {},
             C2_DONT_BLOCK,
@@ -1574,11 +1576,16 @@ status_t CCodecBufferChannel::start(
         return UNKNOWN_ERROR;
     }
 
+    bool isHeic = mComponent->getName().find(".heic") != std::string::npos;
     uint32_t inputDelayValue = inputDelay ? inputDelay.value : 0;
     uint32_t pipelineDelayValue = pipelineDelay ? pipelineDelay.value : 0;
     uint32_t outputDelayValue = outputDelay ? outputDelay.value : 0;
 
     size_t numInputSlots = inputDelayValue + pipelineDelayValue + kSmoothnessFactor;
+    // TODO: remove > 12MP resolution check and keep check for only heic session
+    if (isHeic && ((picSize.width * picSize.height) > (4000 * 3000))) {
+        numInputSlots = inputDelayValue + pipelineDelayValue;
+    }
     size_t numOutputSlots = outputDelayValue + kSmoothnessFactor;
 
     // TODO: get this from input format
