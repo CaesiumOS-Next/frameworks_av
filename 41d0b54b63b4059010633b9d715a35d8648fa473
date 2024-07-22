@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b008d1a5_fe03fead",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-22T08:34:44Z",
+      "side": 1,
+      "message": "please indicate the buganizer issue number or create one if none exists",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "41d0b54b63b4059010633b9d715a35d8648fa473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1a518b13_d6262217",
@@ -14,6 +37,67 @@
       "writtenOn": "2024-07-20T13:58:41Z",
       "side": 1,
       "message": "Hi AOSP Team, During recent testing we discovered this issue. AudioOutputDescriptor::setVolume will determine whether the volume has been modified. If the volume has not been modified, there will be no way to reach the logic related to hasStream(streams, AUDIO_STREAM_BLUETOOTH_SCO). But if there is setVolume source voice after setVolume source bluetoothsco, the volume of voice will be inconsistent with bluetoothsco.\nPlease help with review, thanks.",
+      "revId": "41d0b54b63b4059010633b9d715a35d8648fa473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b27bb9da_2ff0de53",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioOutputDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-22T08:34:44Z",
+      "side": 1,
+      "message": "note that what is important here is to return true from this method, not to set the volume again for BT SCO volume source.\n\nWe have a different fix internally that modifies the calling site in     if SwAudioOutputDescriptor::setVolume() as follows:\n(!AudioOutputDescriptor::setVolume(\n            volumeDb, muted, vs, streamTypes, deviceTypes, delayMs, force, isVoiceVolSrc)) {\n+        if (hasStream(streamTypes, AUDIO_STREAM_BLUETOOTH_SCO)) {\n+            VolumeSource callVolSrc \u003d getVoiceSource();\n+            if (callVolSrc !\u003d VOLUME_SOURCE_NONE \u0026\u0026 volumeDb !\u003d getCurVolume(callVolSrc)) {\n+                setCurVolume(callVolSrc, volumeDb, true);\n+                mClientInterface-\u003esetStreamVolume(AUDIO_STREAM_VOICE_CALL, Volume::DbToAmpl(volumeDb), mIoHandle, delayMs);\n+            }\n+        }\n        return false;\n    }",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bf7bec13_54a80772",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/common/managerdefinitions/src/AudioOutputDescriptor.cpp",
+              "range": {
+                "startLine": 180,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": "    if (volumeDb !\u003d getCurVolume(volumeSource) || force) {\n"
+            },
+            {
+              "path": "services/audiopolicy/common/managerdefinitions/src/AudioOutputDescriptor.cpp",
+              "range": {
+                "startLine": 575,
+                "startChar": 0,
+                "endLine": 584,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/common/managerdefinitions/src/AudioOutputDescriptor.cpp",
+              "range": {
+                "startLine": 587,
+                "startChar": 0,
+                "endLine": 588,
+                "endChar": 0
+              },
+              "replacement": "        mClientInterface-\u003esetStreamVolume(stream, Volume::DbToAmpl(volumeDb), mIoHandle, delayMs);\n"
+            }
+          ]
+        }
+      ],
       "revId": "41d0b54b63b4059010633b9d715a35d8648fa473",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
