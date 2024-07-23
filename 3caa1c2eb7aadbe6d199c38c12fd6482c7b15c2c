@@ -75,6 +75,30 @@
       },
       "revId": "3caa1c2eb7aadbe6d199c38c12fd6482c7b15c2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c61db8b3_edbdd6de",
+        "filename": "media/libeffects/hapticgenerator/aidl/HapticGeneratorContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 2051456
+      },
+      "writtenOn": "2024-07-23T11:30:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dae2cf7_fb96ea41",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 36
+      },
+      "revId": "3caa1c2eb7aadbe6d199c38c12fd6482c7b15c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
