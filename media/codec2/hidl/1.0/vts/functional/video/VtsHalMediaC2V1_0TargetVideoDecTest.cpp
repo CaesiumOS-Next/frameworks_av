@@ -734,7 +734,7 @@ TEST_P(Codec2VideoDecHidlTest, AdaptiveDecodeTest) {
             }
             if (timestampMax < timestamp) timestampMax = timestamp;
         }
-        timestampOffset = timestampMax + 33333;
+        timestampOffset = timestampMax;
         eleInfo.close();
 
         // Reset Total frames before second decode loop

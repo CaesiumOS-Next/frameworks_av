@@ -36,7 +36,8 @@ public:
     void *callbackLoop() override;
 
 private:
-    uint8_t        *mDistributionBuffer = nullptr;
+    AudioStreamInternalCapture  mStreamInternalCapture;
+    uint8_t                    *mDistributionBuffer = nullptr;
 };
 
 } /* namespace aaudio */

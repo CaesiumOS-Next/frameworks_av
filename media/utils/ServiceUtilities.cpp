@@ -62,7 +62,7 @@ static String16 resolveCallingPackage(PermissionController& permissionController
 }
 
 static bool checkRecordingInternal(const String16& opPackageName, pid_t pid,
-        uid_t uid, bool start, bool isHotwordSource) {
+        uid_t uid, bool start) {
     // Okay to not track in app ops as audio server or media server is us and if
     // device is rooted security model is considered compromised.
     // system_server loses its RECORD_AUDIO permission when a secondary
@@ -87,21 +87,16 @@ static bool checkRecordingInternal(const String16& opPackageName, pid_t pid,
     }
 
     AppOpsManager appOps;
-    const int32_t opRecordAudio = appOps.permissionToOpCode(sAndroidPermissionRecordAudio);
-
+    const int32_t op = appOps.permissionToOpCode(sAndroidPermissionRecordAudio);
     if (start) {
-        const int32_t op = isHotwordSource ?
-                AppOpsManager::OP_RECORD_AUDIO_HOTWORD : opRecordAudio;
         if (appOps.startOpNoThrow(op, uid, resolvedOpPackageName, /*startIfModeDefault*/ false)
                 != AppOpsManager::MODE_ALLOWED) {
             ALOGE("Request denied by app op: %d", op);
             return false;
         }
     } else {
-        // Always use OP_RECORD_AUDIO for checks at creation time.
-        if (appOps.checkOp(opRecordAudio, uid, resolvedOpPackageName)
-                != AppOpsManager::MODE_ALLOWED) {
-            ALOGE("Request denied by app op: %d", opRecordAudio);
+        if (appOps.checkOp(op, uid, resolvedOpPackageName) != AppOpsManager::MODE_ALLOWED) {
+            ALOGE("Request denied by app op: %d", op);
             return false;
         }
     }
@@ -110,15 +105,14 @@ static bool checkRecordingInternal(const String16& opPackageName, pid_t pid,
 }
 
 bool recordingAllowed(const String16& opPackageName, pid_t pid, uid_t uid) {
-    return checkRecordingInternal(opPackageName, pid, uid, /*start*/ false,
-            /*is_hotword_source*/ false);
+    return checkRecordingInternal(opPackageName, pid, uid, /*start*/ false);
 }
 
-bool startRecording(const String16& opPackageName, pid_t pid, uid_t uid, bool isHotwordSource) {
-     return checkRecordingInternal(opPackageName, pid, uid, /*start*/ true, isHotwordSource);
+bool startRecording(const String16& opPackageName, pid_t pid, uid_t uid) {
+     return checkRecordingInternal(opPackageName, pid, uid, /*start*/ true);
 }
 
-void finishRecording(const String16& opPackageName, uid_t uid, bool isHotwordSource) {
+void finishRecording(const String16& opPackageName, uid_t uid) {
     // Okay to not track in app ops as audio server is us and if
     // device is rooted security model is considered compromised.
     if (isAudioServerOrRootUid(uid)) return;
@@ -131,8 +125,7 @@ void finishRecording(const String16& opPackageName, uid_t uid, bool isHotwordSou
     }
 
     AppOpsManager appOps;
-    const int32_t op = isHotwordSource ? AppOpsManager::OP_RECORD_AUDIO_HOTWORD
-            : appOps.permissionToOpCode(sAndroidPermissionRecordAudio);
+    const int32_t op = appOps.permissionToOpCode(sAndroidPermissionRecordAudio);
     appOps.finishOp(op, uid, resolvedOpPackageName);
 }
 
@@ -266,7 +259,7 @@ status_t checkIMemory(const sp<IMemory>& iMemory)
     return NO_ERROR;
 }
 
-sp<content::pm::IPackageManagerNative> MediaPackageManager::retrievePackageManager() {
+sp<content::pm::IPackageManagerNative> MediaPackageManager::retreivePackageManager() {
     const sp<IServiceManager> sm = defaultServiceManager();
     if (sm == nullptr) {
         ALOGW("%s: failed to retrieve defaultServiceManager", __func__);
@@ -283,27 +276,27 @@ sp<content::pm::IPackageManagerNative> MediaPackageManager::retrievePackageManag
 std::optional<bool> MediaPackageManager::doIsAllowed(uid_t uid) {
     if (mPackageManager == nullptr) {
         /** Can not fetch package manager at construction it may not yet be registered. */
-        mPackageManager = retrievePackageManager();
+        mPackageManager = retreivePackageManager();
         if (mPackageManager == nullptr) {
             ALOGW("%s: Playback capture is denied as package manager is not reachable", __func__);
             return std::nullopt;
         }
     }
 
-    // Retrieve package names for the UID and transform to a std::vector<std::string>.
-    Vector<String16> str16PackageNames;
-    PermissionController{}.getPackagesForUid(uid, str16PackageNames);
     std::vector<std::string> packageNames;
-    for (const auto& str16PackageName : str16PackageNames) {
-        packageNames.emplace_back(String8(str16PackageName).string());
+    auto status = mPackageManager->getNamesForUids({(int32_t)uid}, &packageNames);
+    if (!status.isOk()) {
+        ALOGW("%s: Playback capture is denied for uid %u as the package names could not be "
+              "retrieved from the package manager: %s", __func__, uid, status.toString8().c_str());
+        return std::nullopt;
     }
     if (packageNames.empty()) {
         ALOGW("%s: Playback capture for uid %u is denied as no package name could be retrieved "
-              "from the package manager.", __func__, uid);
+              "from the package manager: %s", __func__, uid, status.toString8().c_str());
         return std::nullopt;
     }
     std::vector<bool> isAllowed;
-    auto status = mPackageManager->isAudioPlaybackCaptureAllowed(packageNames, &isAllowed);
+    status = mPackageManager->isAudioPlaybackCaptureAllowed(packageNames, &isAllowed);
     if (!status.isOk()) {
         ALOGW("%s: Playback capture is denied for uid %u as the manifest property could not be "
               "retrieved from the package manager: %s", __func__, uid, status.toString8().c_str());

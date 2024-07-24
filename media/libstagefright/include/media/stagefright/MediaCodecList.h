@@ -88,7 +88,7 @@ private:
     static sp<IMediaCodecList> sCodecList;
     static sp<IMediaCodecList> sRemoteList;
 
-    status_t mInitCheck{NO_INIT};
+    status_t mInitCheck;
 
     sp<AMessage> mGlobalSettings;
     std::vector<sp<MediaCodecInfo> > mCodecInfos;

@@ -253,8 +253,6 @@ public:
     // Called to tally underrun frames in playback.
     virtual void tallyUnderrunFrames(size_t /* frames */) {}
 
-    audio_channel_mask_t channelMask() const { return mChannelMask; }
-
 protected:
     DISALLOW_COPY_AND_ASSIGN(TrackBase);
 
@@ -279,6 +277,8 @@ protected:
     uint32_t channelCount() const { return mChannelCount; }
 
     size_t frameSize() const { return mFrameSize; }
+
+    audio_channel_mask_t channelMask() const { return mChannelMask; }
 
     virtual uint32_t sampleRate() const { return mSampleRate; }
 

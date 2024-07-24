@@ -14,11 +14,4 @@ cc_library {
     export_include_dirs: ["include"],
 
     cflags: ["-Werror"],
-
-    host_supported: true,
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }

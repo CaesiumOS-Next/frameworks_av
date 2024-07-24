@@ -244,12 +244,11 @@ status_t AudioPolicyService::getOutputForAttr(audio_attributes_t *attr,
         uid = callingUid;
     }
     if (!mPackageManager.allowPlaybackCapture(uid)) {
-        attr->flags = static_cast<audio_flags_mask_t>(attr->flags | AUDIO_FLAG_NO_MEDIA_PROJECTION);
+        attr->flags |= AUDIO_FLAG_NO_MEDIA_PROJECTION;
     }
     if (((attr->flags & (AUDIO_FLAG_BYPASS_INTERRUPTION_POLICY|AUDIO_FLAG_BYPASS_MUTE)) != 0)
             && !bypassInterruptionPolicyAllowed(pid, uid)) {
-        attr->flags = static_cast<audio_flags_mask_t>(
-                attr->flags & ~(AUDIO_FLAG_BYPASS_INTERRUPTION_POLICY|AUDIO_FLAG_BYPASS_MUTE));
+        attr->flags &= ~(AUDIO_FLAG_BYPASS_INTERRUPTION_POLICY|AUDIO_FLAG_BYPASS_MUTE);
     }
     AutoCallerClear acc;
     AudioPolicyInterface::output_type_t outputType;
@@ -573,8 +572,7 @@ status_t AudioPolicyService::startInput(audio_port_handle_t portId)
     }
 
     // check calling permissions
-    if (!(startRecording(client->opPackageName, client->pid, client->uid,
-            client->attributes.source == AUDIO_SOURCE_HOTWORD)
+    if (!(startRecording(client->opPackageName, client->pid, client->uid)
             || client->attributes.source == AUDIO_SOURCE_FM_TUNER)) {
         ALOGE("%s permission denied: recording not allowed for uid %d pid %d",
                 __func__, client->uid, client->pid);
@@ -662,8 +660,7 @@ status_t AudioPolicyService::startInput(audio_port_handle_t portId)
         client->active = false;
         client->startTimeNs = 0;
         updateUidStates_l();
-        finishRecording(client->opPackageName, client->uid,
-                        client->attributes.source == AUDIO_SOURCE_HOTWORD);
+        finishRecording(client->opPackageName, client->uid);
     }
 
     return status;
@@ -689,8 +686,7 @@ status_t AudioPolicyService::stopInput(audio_port_handle_t portId)
     updateUidStates_l();
 
     // finish the recording app op
-    finishRecording(client->opPackageName, client->uid,
-                    client->attributes.source == AUDIO_SOURCE_HOTWORD);
+    finishRecording(client->opPackageName, client->uid);
     AutoCallerClear acc;
     return mAudioPolicyManager->stopInput(portId);
 }
@@ -1261,7 +1257,7 @@ status_t AudioPolicyService::registerPolicyMixes(const Vector<AudioMix>& mixes, 
 }
 
 status_t AudioPolicyService::setUidDeviceAffinities(uid_t uid,
-        const AudioDeviceTypeAddrVector& devices) {
+        const Vector<AudioDeviceTypeAddr>& devices) {
     Mutex::Autolock _l(mLock);
     if(!modifyAudioRoutingAllowed()) {
         return PERMISSION_DENIED;
@@ -1286,7 +1282,7 @@ status_t AudioPolicyService::removeUidDeviceAffinities(uid_t uid) {
 }
 
 status_t AudioPolicyService::setUserIdDeviceAffinities(int userId,
-        const AudioDeviceTypeAddrVector& devices) {
+        const Vector<AudioDeviceTypeAddr>& devices) {
     Mutex::Autolock _l(mLock);
     if(!modifyAudioRoutingAllowed()) {
         return PERMISSION_DENIED;
@@ -1498,36 +1494,33 @@ bool AudioPolicyService::isCallScreenModeSupported()
     return mAudioPolicyManager->isCallScreenModeSupported();
 }
 
-status_t AudioPolicyService::setDevicesRoleForStrategy(product_strategy_t strategy,
-                                                       device_role_t role,
-                                                       const AudioDeviceTypeAddrVector &devices)
+status_t AudioPolicyService::setPreferredDeviceForStrategy(product_strategy_t strategy,
+                                                   const AudioDeviceTypeAddr &device)
 {
     if (mAudioPolicyManager == NULL) {
         return NO_INIT;
     }
     Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->setDevicesRoleForStrategy(strategy, role, devices);
+    return mAudioPolicyManager->setPreferredDeviceForStrategy(strategy, device);
 }
 
-status_t AudioPolicyService::removeDevicesRoleForStrategy(product_strategy_t strategy,
-                                                          device_role_t role)
+status_t AudioPolicyService::removePreferredDeviceForStrategy(product_strategy_t strategy)
 {
     if (mAudioPolicyManager == NULL) {
         return NO_INIT;
     }
     Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->removeDevicesRoleForStrategy(strategy, role);
+    return mAudioPolicyManager->removePreferredDeviceForStrategy(strategy);
 }
 
-status_t AudioPolicyService::getDevicesForRoleAndStrategy(product_strategy_t strategy,
-                                                          device_role_t role,
-                                                          AudioDeviceTypeAddrVector &devices)
+status_t AudioPolicyService::getPreferredDeviceForStrategy(product_strategy_t strategy,
+                                                   AudioDeviceTypeAddr &device)
 {
     if (mAudioPolicyManager == NULL) {
         return NO_INIT;
     }
     Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->getDevicesForRoleAndStrategy(strategy, role, devices);
+    return mAudioPolicyManager->getPreferredDeviceForStrategy(strategy, device);
 }
 
 status_t AudioPolicyService::registerSoundTriggerCaptureStateListener(
@@ -1536,57 +1529,6 @@ status_t AudioPolicyService::registerSoundTriggerCaptureStateListener(
 {
     *result = mCaptureStateNotifier.RegisterListener(listener);
     return NO_ERROR;
-}
-
-status_t AudioPolicyService::setDevicesRoleForCapturePreset(
-        audio_source_t audioSource, device_role_t role, const AudioDeviceTypeAddrVector &devices)
-{
-    if (mAudioPolicyManager == nullptr) {
-        return NO_INIT;
-    }
-    Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->setDevicesRoleForCapturePreset(audioSource, role, devices);
-}
-
-status_t AudioPolicyService::addDevicesRoleForCapturePreset(
-        audio_source_t audioSource, device_role_t role, const AudioDeviceTypeAddrVector &devices)
-{
-    if (mAudioPolicyManager == nullptr) {
-        return NO_INIT;
-    }
-    Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->addDevicesRoleForCapturePreset(audioSource, role, devices);
-}
-
-status_t AudioPolicyService::removeDevicesRoleForCapturePreset(
-        audio_source_t audioSource, device_role_t role, const AudioDeviceTypeAddrVector& devices)
-{
-    if (mAudioPolicyManager == nullptr) {
-        return NO_INIT;
-    }
-    Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->removeDevicesRoleForCapturePreset(audioSource, role, devices);
-}
-
-status_t AudioPolicyService::clearDevicesRoleForCapturePreset(audio_source_t audioSource,
-                                                              device_role_t role)
-{
-    if (mAudioPolicyManager == nullptr) {
-        return NO_INIT;
-    }
-    Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->clearDevicesRoleForCapturePreset(audioSource, role);
-}
-
-status_t AudioPolicyService::getDevicesForRoleAndCapturePreset(audio_source_t audioSource,
-                                                               device_role_t role,
-                                                               AudioDeviceTypeAddrVector &devices)
-{
-    if (mAudioPolicyManager == nullptr) {
-        return NO_INIT;
-    }
-    Mutex::Autolock _l(mLock);
-    return mAudioPolicyManager->getDevicesForRoleAndCapturePreset(audioSource, role, devices);
 }
 
 } // namespace android

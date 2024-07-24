@@ -1,4 +1,4 @@
-cc_library {
+cc_library_shared {
     name: "libcodec2_soft_av1dec_gav1",
     defaults: [
         "libcodec2_soft-defaults",
@@ -13,4 +13,8 @@ cc_library {
 
     srcs: ["C2SoftGav1Dec.cpp"],
     static_libs: ["libgav1"],
+
+    include_dirs: [
+        "external/libgav1/libgav1/",
+    ],
 }

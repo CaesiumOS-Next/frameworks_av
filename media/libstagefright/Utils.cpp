@@ -1663,16 +1663,13 @@ static void convertMessageToMetaDataColorAspects(const sp<AMessage> &msg, sp<Met
         meta->setInt32(kKeyColorMatrix, colorAspects.mMatrixCoeffs);
     }
 }
-/* Converts key and value pairs in AMessage format to MetaData format.
- * Also checks for the presence of required keys.
- */
-status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
+
+void convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
     AString mime;
     if (msg->findString("mime", &mime)) {
         meta->setCString(kKeyMIMEType, mime.c_str());
     } else {
-        ALOGE("did not find mime type");
-        return BAD_VALUE;
+        ALOGW("did not find mime type");
     }
 
     convertMessageToMetaDataFromMappings(msg, meta);
@@ -1721,8 +1718,7 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
             meta->setInt32(kKeyWidth, width);
             meta->setInt32(kKeyHeight, height);
         } else {
-            ALOGE("did not find width and/or height");
-            return BAD_VALUE;
+            ALOGV("did not find width and/or height");
         }
 
         int32_t sarWidth, sarHeight;
@@ -1807,14 +1803,14 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
             }
         }
     } else if (mime.startsWith("audio/")) {
-        int32_t numChannels, sampleRate;
-        if (!msg->findInt32("channel-count", &numChannels) ||
-                !msg->findInt32("sample-rate", &sampleRate)) {
-            ALOGE("did not find channel-count and/or sample-rate");
-            return BAD_VALUE;
+        int32_t numChannels;
+        if (msg->findInt32("channel-count", &numChannels)) {
+            meta->setInt32(kKeyChannelCount, numChannels);
         }
-        meta->setInt32(kKeyChannelCount, numChannels);
-        meta->setInt32(kKeySampleRate, sampleRate);
+        int32_t sampleRate;
+        if (msg->findInt32("sample-rate", &sampleRate)) {
+            meta->setInt32(kKeySampleRate, sampleRate);
+        }
         int32_t bitsPerSample;
         if (msg->findInt32("bits-per-sample", &bitsPerSample)) {
             meta->setInt32(kKeyBitsPerSample, bitsPerSample);
@@ -1929,8 +1925,7 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
                     }
                 }
             } else {
-                ALOGE("We need csd-2!!. %s", msg->debugString().c_str());
-                return BAD_VALUE;
+                ALOGW("We need csd-2!!. %s", msg->debugString().c_str());
             }
         } else if (mime == MEDIA_MIMETYPE_VIDEO_VP9) {
             meta->setData(kKeyVp9CodecPrivate, 0, csd0->data(), csd0->size());
@@ -1996,7 +1991,6 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
     ALOGI("converted %s to:", msg->debugString(0).c_str());
     meta->dumpToLog();
 #endif
-    return OK;
 }
 
 status_t sendMetaDataToHal(sp<MediaPlayerBase::AudioSink>& sink,
@@ -2142,10 +2136,8 @@ status_t getAudioOffloadInfo(const sp<MetaData>& meta, bool hasVideo,
     }
     info->sample_rate = srate;
 
-    int32_t rawChannelMask;
-    audio_channel_mask_t cmask = meta->findInt32(kKeyChannelMask, &rawChannelMask) ?
-            static_cast<audio_channel_mask_t>(rawChannelMask) : CHANNEL_MASK_USE_CHANNEL_ORDER;
-    if (cmask == CHANNEL_MASK_USE_CHANNEL_ORDER) {
+    int32_t cmask = 0;
+    if (!meta->findInt32(kKeyChannelMask, &cmask) || cmask == CHANNEL_MASK_USE_CHANNEL_ORDER) {
         ALOGV("track of type '%s' does not publish channel mask", mime);
 
         // Try a channel count instead

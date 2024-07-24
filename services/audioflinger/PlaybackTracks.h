@@ -26,11 +26,10 @@ public:
     bool hasOpPlayAudio() const;
 
     static sp<OpPlayAudioMonitor> createIfNeeded(
-            uid_t uid, const audio_attributes_t& attr, int id, audio_stream_type_t streamType,
-            const std::string& opPackageName);
+            uid_t uid, const audio_attributes_t& attr, int id, audio_stream_type_t streamType);
 
 private:
-    OpPlayAudioMonitor(uid_t uid, audio_usage_t usage, int id, const String16& opPackageName);
+    OpPlayAudioMonitor(uid_t uid, audio_usage_t usage, int id);
     void onFirstRef() override;
     static void getPackagesForUid(uid_t uid, Vector<String16>& packages);
 
@@ -50,10 +49,10 @@ private:
     void checkPlayAudioForUsage();
 
     std::atomic_bool mHasOpPlayAudio;
+    Vector<String16> mPackages;
     const uid_t mUid;
     const int32_t mUsage; // on purpose not audio_usage_t because always checked in appOps as int32_t
     const int mId; // for logging purposes only
-    const String16 mOpPackageName;
 };
 
 // playback track
@@ -78,8 +77,7 @@ public:
                                 audio_port_handle_t portId = AUDIO_PORT_HANDLE_NONE,
                                 /** default behaviour is to start when there are as many frames
                                   * ready as possible (aka. Buffer is full). */
-                                size_t frameCountToBeReady = SIZE_MAX,
-                                const std::string opPackageName = "");
+                                size_t frameCountToBeReady = SIZE_MAX);
     virtual             ~Track();
     virtual status_t    initCheck() const;
 
@@ -117,12 +115,6 @@ public:
             int         auxEffectId() const { return mAuxEffectId; }
     virtual status_t    getTimestamp(AudioTimestamp& timestamp);
             void        signal();
-            status_t    getDualMonoMode(audio_dual_mono_mode_t* mode);
-            status_t    setDualMonoMode(audio_dual_mono_mode_t mode);
-            status_t    getAudioDescriptionMixLevel(float* leveldB);
-            status_t    setAudioDescriptionMixLevel(float leveldB);
-            status_t    getPlaybackRateParameters(audio_playback_rate_t* playbackRate);
-            status_t    setPlaybackRateParameters(const audio_playback_rate_t& playbackRate);
 
 // implement FastMixerState::VolumeProvider interface
     virtual gain_minifloat_packed_t getVolumeLR();
@@ -154,7 +146,7 @@ public:
      */
     bool            readAndClearHasChanged() { return !mChangeNotified.test_and_set(); }
 
-    using SourceMetadatas = std::vector<playback_track_metadata_v7_t>;
+    using SourceMetadatas = std::vector<playback_track_metadata_t>;
     using MetadataInserter = std::back_insert_iterator<SourceMetadatas>;
     /** Copy the track metadata in the provided iterator. Thread safe. */
     virtual void    copyMetadataTo(MetadataInserter& backInserter) const;
@@ -286,10 +278,6 @@ protected:
     sp<os::ExternalVibration>    mExternalVibration;
     /** How many frames should be in the buffer before the track is considered ready */
     const size_t        mFrameCountToBeReady;
-
-    audio_dual_mono_mode_t mDualMonoMode = AUDIO_DUAL_MONO_MODE_OFF;
-    float               mAudioDescriptionMixLevel = -std::numeric_limits<float>::infinity();
-    audio_playback_rate_t  mPlaybackRateParameters = AUDIO_PLAYBACK_RATE_INITIALIZER;
 
 private:
     void                interceptBuffer(const AudioBufferProvider::Buffer& buffer);

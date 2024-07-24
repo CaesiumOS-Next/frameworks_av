@@ -40,13 +40,9 @@ DeviceDescriptorBase::DeviceDescriptorBase(const AudioDeviceTypeAddr &deviceType
                                          AUDIO_PORT_ROLE_SOURCE),
         mDeviceTypeAddr(deviceTypeAddr)
 {
-    if (mDeviceTypeAddr.address().empty() && audio_is_remote_submix_device(mDeviceTypeAddr.mType)) {
-        mDeviceTypeAddr.setAddress("0");
+    if (mDeviceTypeAddr.mAddress.empty() && audio_is_remote_submix_device(mDeviceTypeAddr.mType)) {
+        mDeviceTypeAddr.mAddress = "0";
     }
-}
-
-void DeviceDescriptorBase::setAddress(const std::string &address) {
-    mDeviceTypeAddr.setAddress(address);
 }
 
 void DeviceDescriptorBase::toAudioPortConfig(struct audio_port_config *dstConfig,
@@ -127,16 +123,18 @@ void DeviceDescriptorBase::dump(std::string *dst, int spaces, int index,
             "%*s- supported encapsulation metadata types: %u",
             spaces, "", mEncapsulationMetadataTypes));
 
-    if (mDeviceTypeAddr.address().size() != 0) {
+    if (mDeviceTypeAddr.mAddress.size() != 0) {
         dst->append(base::StringPrintf(
                 "%*s- address: %-32s\n", spaces, "", mDeviceTypeAddr.getAddress()));
     }
     AudioPort::dump(dst, spaces, verbose);
 }
 
-std::string DeviceDescriptorBase::toString(bool includeSensitiveInfo) const
+std::string DeviceDescriptorBase::toString() const
 {
-    return mDeviceTypeAddr.toString(includeSensitiveInfo);
+    std::stringstream sstream;
+    sstream << "type:0x" << std::hex << type() << ",@:" << mDeviceTypeAddr.mAddress;
+    return sstream.str();
 }
 
 void DeviceDescriptorBase::log() const

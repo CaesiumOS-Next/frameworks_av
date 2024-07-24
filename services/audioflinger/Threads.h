@@ -864,8 +864,7 @@ public:
                                 uid_t uid,
                                 status_t *status /*non-NULL*/,
                                 audio_port_handle_t portId,
-                                const sp<media::IAudioTrackCallback>& callback,
-                                const std::string& opPackageName);
+                                const sp<media::IAudioTrackCallback>& callback);
 
                 AudioStreamOut* getOutput() const;
                 AudioStreamOut* clearOutput();
@@ -939,11 +938,6 @@ public:
                                 return audio_is_output_devices(mTimestampCorrectedDevice)
                                         && outDeviceTypes().count(mTimestampCorrectedDevice) != 0;
                             }
-
-                void setDownStreamPatch(const struct audio_patch *patch) {
-                    Mutex::Autolock _l(mLock);
-                    mDownStreamPatch = *patch;
-                }
 
 protected:
     // updated by readOutputParameters_l()
@@ -1192,7 +1186,7 @@ private:
 
     Mutex                                    mAudioTrackCbLock;
     // Record of IAudioTrackCallback
-    std::map<sp<Track>, sp<media::IAudioTrackCallback>> mAudioTrackCallbacks;
+    std::set<sp<media::IAudioTrackCallback>> mAudioTrackCallbacks;
 
 private:
     // The HAL output sink is treated as non-blocking, but current implementation is blocking
@@ -1223,10 +1217,6 @@ protected:
                 // volumes last sent to audio HAL with stream->setVolume()
                 float mLeftVolFloat;
                 float mRightVolFloat;
-
-                // audio patch used by the downstream software patch.
-                // Only used if ThreadBase::mIsMsdDevice is true.
-                struct audio_patch mDownStreamPatch;
 };
 
 class MixerThread : public PlaybackThread {

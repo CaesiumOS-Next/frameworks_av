@@ -48,7 +48,7 @@ cc_library_shared {
     ],
 }
 
-cc_library {
+cc_library_shared {
     name: "libaudioclient",
 
     aidl: {

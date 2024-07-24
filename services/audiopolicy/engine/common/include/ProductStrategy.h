@@ -28,10 +28,7 @@
 #include <utils/String8.h>
 #include <media/AudioAttributes.h>
 #include <media/AudioContainers.h>
-#include <media/AudioDeviceTypeAddr.h>
 #include <media/AudioPolicy.h>
-
-#include <vector>
 
 namespace android {
 
@@ -167,8 +164,7 @@ private:
     product_strategy_t mDefaultStrategy = PRODUCT_STRATEGY_NONE;
 };
 
-class ProductStrategyPreferredRoutingMap : public std::map<product_strategy_t,
-                                                           AudioDeviceTypeAddrVector>
+class ProductStrategyPreferredRoutingMap : public std::map<product_strategy_t, AudioDeviceTypeAddr>
 {
 public:
     void dump(String8 *dst, int spaces = 0) const;

@@ -1430,13 +1430,7 @@ sp<ABuffer> ElementaryStreamQueue::dequeueAccessUnitH264() {
                 if (mSampleDecryptor != NULL && (nalType == 1 || nalType == 5)) {
                     uint8_t *nalData = mBuffer->data() + pos.nalOffset;
                     size_t newSize = mSampleDecryptor->processNal(nalData, pos.nalSize);
-                    // Note: the data can shrink due to unescaping, but it can never grow
-                    if (newSize > pos.nalSize) {
-                        // don't log unless verbose, since this can get called a lot if
-                        // the caller is trying to resynchronize
-                        ALOGV("expected sample size < %u, got %zu", pos.nalSize, newSize);
-                        return NULL;
-                    }
+                    // Note: the data can shrink due to unescaping
                     memcpy(accessUnit->data() + dstOffset + 4,
                             nalData,
                             newSize);

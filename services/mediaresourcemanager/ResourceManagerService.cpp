@@ -575,19 +575,13 @@ Status ResourceManagerService::reclaimResource(
         }
     }
 
-    *_aidl_return = reclaimInternal(clients);
-    return Status::ok();
-}
-
-bool ResourceManagerService::reclaimInternal(
-        const Vector<std::shared_ptr<IResourceManagerClient>> &clients) {
     if (clients.size() == 0) {
-        return false;
+        return Status::ok();
     }
 
     std::shared_ptr<IResourceManagerClient> failedClient;
     for (size_t i = 0; i < clients.size(); ++i) {
-        String8 log = String8::format("reclaimResource from client %p", clients[i].get());
+        log = String8::format("reclaimResource from client %p", clients[i].get());
         mServiceLog->add(log);
         bool success;
         Status status = clients[i]->reclaimResource(&success);
@@ -598,7 +592,8 @@ bool ResourceManagerService::reclaimInternal(
     }
 
     if (failedClient == NULL) {
-        return true;
+        *_aidl_return = true;
+        return Status::ok();
     }
 
     {
@@ -623,7 +618,7 @@ bool ResourceManagerService::reclaimInternal(
         }
     }
 
-    return false;
+    return Status::ok();
 }
 
 Status ResourceManagerService::overridePid(
@@ -683,36 +678,6 @@ Status ResourceManagerService::markClientForPendingRemoval(int32_t pid, int64_t 
 
     ResourceInfo &info = infos.editValueAt(index);
     info.pendingRemoval = true;
-    return Status::ok();
-}
-
-Status ResourceManagerService::reclaimResourcesFromClientsPendingRemoval(int32_t pid) {
-    String8 log = String8::format("reclaimResourcesFromClientsPendingRemoval(pid %d)", pid);
-    mServiceLog->add(log);
-
-    Vector<std::shared_ptr<IResourceManagerClient>> clients;
-    {
-        Mutex::Autolock lock(mLock);
-        if (!mProcessInfo->isValidPid(pid)) {
-            ALOGE("Rejected reclaimResourcesFromClientsPendingRemoval call with invalid pid.");
-            return Status::fromServiceSpecificError(BAD_VALUE);
-        }
-
-        for (MediaResource::Type type : {MediaResource::Type::kSecureCodec,
-                                         MediaResource::Type::kNonSecureCodec,
-                                         MediaResource::Type::kGraphicMemory,
-                                         MediaResource::Type::kDrmSession}) {
-            std::shared_ptr<IResourceManagerClient> client;
-            if (getBiggestClient_l(pid, type, &client, true /* pendingRemovalOnly */)) {
-                clients.add(client);
-                break;
-            }
-        }
-    }
-
-    if (!clients.empty()) {
-        reclaimInternal(clients);
-    }
     return Status::ok();
 }
 
@@ -839,8 +804,7 @@ bool ResourceManagerService::getBiggestClient_l(
         bool pendingRemovalOnly) {
     ssize_t index = mMap.indexOfKey(pid);
     if (index < 0) {
-        ALOGE_IF(!pendingRemovalOnly,
-                 "getBiggestClient_l: can't find resource info for pid %d", pid);
+        ALOGE("getBiggestClient_l: can't find resource info for pid %d", pid);
         return false;
     }
 
@@ -864,9 +828,7 @@ bool ResourceManagerService::getBiggestClient_l(
     }
 
     if (clientTemp == NULL) {
-        ALOGE_IF(!pendingRemovalOnly,
-                 "getBiggestClient_l: can't find resource type %s for pid %d",
-                 asString(type), pid);
+        ALOGE("getBiggestClient_l: can't find resource type %s for pid %d", asString(type), pid);
         return false;
     }
 

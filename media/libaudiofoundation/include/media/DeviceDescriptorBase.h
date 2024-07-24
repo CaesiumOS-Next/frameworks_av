@@ -41,8 +41,8 @@ public:
     virtual ~DeviceDescriptorBase() {}
 
     audio_devices_t type() const { return mDeviceTypeAddr.mType; }
-    const std::string& address() const { return mDeviceTypeAddr.address(); }
-    void setAddress(const std::string &address);
+    std::string address() const { return mDeviceTypeAddr.mAddress; }
+    void setAddress(const std::string &address) { mDeviceTypeAddr.mAddress = address; }
     const AudioDeviceTypeAddr& getDeviceTypeAddr() const { return mDeviceTypeAddr; }
 
     // AudioPortConfig
@@ -61,14 +61,7 @@ public:
     void dump(std::string *dst, int spaces, int index,
               const char* extraInfo = nullptr, bool verbose = true) const;
     void log() const;
-
-    /**
-     * Return a string to describe the DeviceDescriptor.
-     *
-     * @param includeSensitiveInfo sensitive information will be added when it is true.
-     * @return a string that can be used to describe the DeviceDescriptor.
-     */
-    std::string toString(bool includeSensitiveInfo = false) const;
+    std::string toString() const;
 
     bool equals(const sp<DeviceDescriptorBase>& other) const;
 

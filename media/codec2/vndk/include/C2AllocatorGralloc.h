@@ -84,12 +84,7 @@ public:
 
     virtual ~C2AllocatorGralloc() override;
 
-    virtual bool checkHandle(const C2Handle* const o) const override { return CheckHandle(o); }
-
-    static bool CheckHandle(const C2Handle* const o);
-
-    // deprecated
-    static bool isValid(const C2Handle* const o) { return CheckHandle(o); }
+    static bool isValid(const C2Handle* const o);
 
 private:
     class Impl;

@@ -27,19 +27,13 @@
 
 namespace android {
 
-class AudioDeviceTypeAddr : public Parcelable {
-public:
+struct AudioDeviceTypeAddr : public Parcelable {
     AudioDeviceTypeAddr() = default;
 
-    AudioDeviceTypeAddr(audio_devices_t type, const std::string& address);
+    AudioDeviceTypeAddr(audio_devices_t type, const std::string& address) :
+            mType(type), mAddress(address) {}
 
     const char* getAddress() const;
-
-    const std::string& address() const;
-
-    void setAddress(const std::string& address);
-
-    bool isAddressSensitive();
 
     bool equals(const AudioDeviceTypeAddr& other) const;
 
@@ -47,23 +41,14 @@ public:
 
     bool operator<(const AudioDeviceTypeAddr& other) const;
 
-    bool operator==(const AudioDeviceTypeAddr& rhs) const;
-
-    bool operator!=(const AudioDeviceTypeAddr& rhs) const;
-
     void reset();
-
-    std::string toString(bool includeSensitiveInfo=false) const;
 
     status_t readFromParcel(const Parcel *parcel) override;
 
     status_t writeToParcel(Parcel *parcel) const override;
 
     audio_devices_t mType = AUDIO_DEVICE_NONE;
-
-private:
     std::string mAddress;
-    bool mIsAddressSensitive;
 };
 
 using AudioDeviceTypeAddrVector = std::vector<AudioDeviceTypeAddr>;
@@ -73,15 +58,4 @@ using AudioDeviceTypeAddrVector = std::vector<AudioDeviceTypeAddr>;
  */
 DeviceTypeSet getAudioDeviceTypes(const AudioDeviceTypeAddrVector& deviceTypeAddrs);
 
-/**
- * Return a collection of AudioDeviceTypeAddrs that are shown in `devices` but not
- * in `devicesToExclude`
- */
-AudioDeviceTypeAddrVector excludeDeviceTypeAddrsFrom(
-        const AudioDeviceTypeAddrVector& devices,
-        const AudioDeviceTypeAddrVector& devicesToExclude);
-
-std::string dumpAudioDeviceTypeAddrVector(const AudioDeviceTypeAddrVector& deviceTypeAddrs,
-                                          bool includeSensitiveInfo=false);
-
-} // namespace android
+}

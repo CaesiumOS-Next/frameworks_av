@@ -71,8 +71,7 @@ public:
             std::vector<SoftwarePatch> *patches) const;
 
     // Notifies patch panel about all opened and closed streams.
-    void notifyStreamOpened(AudioHwDevice *audioHwDevice, audio_io_handle_t stream,
-                            struct audio_patch *patch);
+    void notifyStreamOpened(AudioHwDevice *audioHwDevice, audio_io_handle_t stream);
     void notifyStreamClosed(audio_io_handle_t stream);
 
     void dump(int fd) const;
@@ -227,8 +226,7 @@ private:
     AudioHwDevice* findAudioHwDeviceByModule(audio_module_handle_t module);
     sp<DeviceHalInterface> findHwDeviceByModule(audio_module_handle_t module);
     void addSoftwarePatchToInsertedModules(
-            audio_module_handle_t module, audio_patch_handle_t handle,
-            const struct audio_patch *patch);
+            audio_module_handle_t module, audio_patch_handle_t handle);
     void removeSoftwarePatchFromInsertedModules(audio_patch_handle_t handle);
     void erasePatch(audio_patch_handle_t handle);
 

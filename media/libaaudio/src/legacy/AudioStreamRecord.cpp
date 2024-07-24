@@ -282,7 +282,7 @@ aaudio_result_t AudioStreamRecord::open(const AudioStreamBuilder& builder)
             : (aaudio_session_id_t) mAudioRecord->getSessionId();
     setSessionId(actualSessionId);
 
-    mAudioRecord->addAudioDeviceCallback(this);
+    mAudioRecord->addAudioDeviceCallback(mDeviceCallback);
 
     return AAUDIO_OK;
 }
@@ -291,22 +291,14 @@ aaudio_result_t AudioStreamRecord::release_l() {
     // TODO add close() or release() to AudioFlinger's AudioRecord API.
     //  Then call it from here
     if (getState() != AAUDIO_STREAM_STATE_CLOSING) {
-        mAudioRecord->removeAudioDeviceCallback(this);
+        mAudioRecord->removeAudioDeviceCallback(mDeviceCallback);
         logReleaseBufferState();
-        // Data callbacks may still be running!
+        mAudioRecord.clear();
+        mFixedBlockWriter.close();
         return AudioStream::release_l();
     } else {
         return AAUDIO_OK; // already released
     }
-}
-
-void AudioStreamRecord::close_l() {
-    mAudioRecord.clear();
-    // Do not close mFixedBlockWriter because a data callback
-    // thread might still be running if someone else has a reference
-    // to mAudioRecord.
-    // It has a unique_ptr to its buffer so it will clean up by itself.
-    AudioStream::close_l();
 }
 
 const void * AudioStreamRecord::maybeConvertDeviceData(const void *audioData, int32_t numFrames) {

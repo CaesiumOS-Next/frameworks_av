@@ -25,10 +25,8 @@
 #include <binder/Status.h>
 #include <utils/StrongPointer.h>
 
-#include <media/AudioSystem.h>
-#include <media/PlayerBase.h>
-#include <media/VolumeShaper.h>
-
+#include "media/VolumeShaper.h"
+#include "media/PlayerBase.h"
 #include "utility/AAudioUtilities.h"
 #include "utility/MonotonicCounter.h"
 
@@ -47,8 +45,7 @@ constexpr pid_t        CALLBACK_THREAD_NONE = 0;
 /**
  * AAudio audio stream.
  */
-// By extending AudioDeviceCallback, we also inherit from RefBase.
-class AudioStream : public android::AudioSystem::AudioDeviceCallback {
+class AudioStream {
 public:
 
     AudioStream();
@@ -120,17 +117,6 @@ public:
     virtual void logOpen();
     void logReleaseBufferState();
 
-    /* Note about naming for "release"  and "close" related methods.
-     *
-     * These names are intended to match the public AAudio API.
-     * The original AAudio API had an AAudioStream_close() function that
-     * released the hardware and deleted the stream. That made it difficult
-     * because apps want to release the HW ASAP but are not in a rush to delete
-     * the stream object. So in R we added an AAudioStream_release() function
-     * that just released the hardware.
-     * The AAudioStream_close() method releases if needed and then closes.
-     */
-
     /**
      * Free any hardware or system resources from the open() call.
      * It is safe to call release_l() multiple times.
@@ -140,27 +126,22 @@ public:
         return AAUDIO_OK;
     }
 
-    /**
-     * Free any resources not already freed by release_l().
-     * Assume release_l() already called.
-     */
-    virtual void close_l() {
-        // Releasing the stream will set the state to CLOSING.
-        assert(getState() == AAUDIO_STREAM_STATE_CLOSING);
-        // setState() prevents a transition from CLOSING to any state other than CLOSED.
+    aaudio_result_t closeFinal() {
         // State is checked by destructor.
         setState(AAUDIO_STREAM_STATE_CLOSED);
+        return AAUDIO_OK;
     }
 
     /**
      * Release then close the stream.
+     * @return AAUDIO_OK or negative error.
      */
-    void releaseCloseFinal() {
-        if (getState() != AAUDIO_STREAM_STATE_CLOSING) { // not already released?
-            // Ignore result and keep closing.
-            (void) release_l();
+    aaudio_result_t releaseCloseFinal() {
+        aaudio_result_t result = release_l(); // TODO review locking
+        if (result == AAUDIO_OK) {
+          result = closeFinal();
         }
-        close_l();
+        return result;
     }
 
     // This is only used to identify a stream in the logs without
@@ -347,10 +328,6 @@ public:
      */
     bool collidesWithCallback() const;
 
-    // Implement AudioDeviceCallback
-    void onAudioDeviceUpdate(audio_io_handle_t audioIo,
-            audio_port_handle_t deviceId) override {};
-
     // ============== I/O ===========================
     // A Stream will only implement read() or write() depending on its direction.
     virtual aaudio_result_t write(const void *buffer __unused,
@@ -389,7 +366,7 @@ public:
      */
     void registerPlayerBase() {
         if (getDirection() == AAUDIO_DIRECTION_OUTPUT) {
-            mPlayerBase->registerWithAudioManager(this);
+            mPlayerBase->registerWithAudioManager();
         }
     }
 
@@ -418,33 +395,21 @@ public:
      */
     aaudio_result_t systemStopFromCallback();
 
-    /**
-     * Safely RELEASE a stream after taking mStreamLock and checking
-     * to make sure we are not being called from a callback.
-     * @return AAUDIO_OK or a negative error
-     */
     aaudio_result_t safeRelease();
-
-    /**
-     * Safely RELEASE and CLOSE a stream after taking mStreamLock and checking
-     * to make sure we are not being called from a callback.
-     * @return AAUDIO_OK or a negative error
-     */
-    aaudio_result_t safeReleaseClose();
 
 protected:
 
     // PlayerBase allows the system to control the stream volume.
     class MyPlayerBase : public android::PlayerBase {
     public:
-        MyPlayerBase() {};
+        explicit MyPlayerBase(AudioStream *parent);
 
-        virtual ~MyPlayerBase() = default;
+        virtual ~MyPlayerBase();
 
         /**
          * Register for volume changes and remote control.
          */
-        void registerWithAudioManager(const android::sp<AudioStream>& parent);
+        void registerWithAudioManager();
 
         /**
          * UnRegister.
@@ -455,6 +420,8 @@ protected:
          * Just calls unregisterWithAudioManager().
          */
         void destroy() override;
+
+        void clearParentReference() { mParent = nullptr; }
 
         // Just a stub. The ability to start audio through PlayerBase is being deprecated.
         android::status_t playerStart() override {
@@ -471,10 +438,18 @@ protected:
             return android::NO_ERROR;
         }
 
-        android::status_t playerSetVolume() override;
+        android::status_t playerSetVolume() override {
+            // No pan and only left volume is taken into account from IPLayer interface
+            mParent->setDuckAndMuteVolume(mVolumeMultiplierL  /* * mPanMultiplierL */);
+            return android::NO_ERROR;
+        }
 
 #if AAUDIO_USE_VOLUME_SHAPER
-        ::android::binder::Status applyVolumeShaper();
+        ::android::binder::Status applyVolumeShaper(
+                const ::android::media::VolumeShaper::Configuration& configuration,
+                const ::android::media::VolumeShaper::Operation& operation) {
+            return mParent->applyVolumeShaper(configuration, operation);
+        }
 #endif
 
         aaudio_result_t getResult() {
@@ -482,12 +457,9 @@ protected:
         }
 
     private:
-        // Use a weak pointer so the AudioStream can be deleted.
-
-        std::mutex               mParentLock;
-        android::wp<AudioStream> mParent;
-        aaudio_result_t          mResult = AAUDIO_OK;
-        bool                     mRegistered = false;
+        AudioStream          *mParent;
+        aaudio_result_t       mResult = AAUDIO_OK;
+        bool                  mRegistered = false;
     };
 
     /**

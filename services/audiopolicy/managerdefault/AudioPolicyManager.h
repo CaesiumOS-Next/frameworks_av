@@ -263,42 +263,17 @@ public:
         virtual status_t registerPolicyMixes(const Vector<AudioMix>& mixes);
         virtual status_t unregisterPolicyMixes(Vector<AudioMix> mixes);
         virtual status_t setUidDeviceAffinities(uid_t uid,
-                const AudioDeviceTypeAddrVector& devices);
+                const Vector<AudioDeviceTypeAddr>& devices);
         virtual status_t removeUidDeviceAffinities(uid_t uid);
         virtual status_t setUserIdDeviceAffinities(int userId,
-                const AudioDeviceTypeAddrVector& devices);
+                const Vector<AudioDeviceTypeAddr>& devices);
         virtual status_t removeUserIdDeviceAffinities(int userId);
 
-        virtual status_t setDevicesRoleForStrategy(product_strategy_t strategy,
-                                                   device_role_t role,
-                                                   const AudioDeviceTypeAddrVector &devices);
-
-        virtual status_t removeDevicesRoleForStrategy(product_strategy_t strategy,
-                                                      device_role_t role);
-
-
-        virtual status_t getDevicesForRoleAndStrategy(product_strategy_t strategy,
-                                                      device_role_t role,
-                                                      AudioDeviceTypeAddrVector &devices);
-
-        virtual status_t setDevicesRoleForCapturePreset(audio_source_t audioSource,
-                                                        device_role_t role,
-                                                        const AudioDeviceTypeAddrVector &devices);
-
-        virtual status_t addDevicesRoleForCapturePreset(audio_source_t audioSource,
-                                                        device_role_t role,
-                                                        const AudioDeviceTypeAddrVector &devices);
-
-        virtual status_t removeDevicesRoleForCapturePreset(
-                audio_source_t audioSource, device_role_t role,
-                const AudioDeviceTypeAddrVector& devices);
-
-        virtual status_t clearDevicesRoleForCapturePreset(audio_source_t audioSource,
-                                                          device_role_t role);
-
-        virtual status_t getDevicesForRoleAndCapturePreset(audio_source_t audioSource,
-                                                           device_role_t role,
-                                                           AudioDeviceTypeAddrVector &devices);
+        virtual status_t setPreferredDeviceForStrategy(product_strategy_t strategy,
+                                                   const AudioDeviceTypeAddr &device);
+        virtual status_t removePreferredDeviceForStrategy(product_strategy_t strategy);
+        virtual status_t getPreferredDeviceForStrategy(product_strategy_t strategy,
+                                                   AudioDeviceTypeAddr &device);
 
         virtual status_t startAudioSource(const struct audio_port_config *source,
                                           const audio_attributes_t *attributes,
@@ -556,20 +531,6 @@ protected:
          */
         void updateCallAndOutputRouting(bool forceVolumeReeval = true, uint32_t delayMs = 0);
 
-        bool isCallRxAudioSource(const sp<SourceClientDescriptor> &source) {
-            return mCallRxSourceClientPort != AUDIO_PORT_HANDLE_NONE
-                && source == mAudioSources.valueFor(mCallRxSourceClientPort);
-        }
-
-        void connectTelephonyRxAudioSource();
-
-        void disconnectTelephonyRxAudioSource();
-
-        /**
-         * @brief updates routing for all inputs.
-         */
-        void updateInputRouting();
-
         /**
          * @brief checkOutputForAttributes checks and if necessary changes outputs used for the
          * given audio attributes.
@@ -579,16 +540,6 @@ protected:
          * @param attr to be considered
          */
         void checkOutputForAttributes(const audio_attributes_t &attr);
-
-        /**
-         * @brief checkAudioSourceForAttributes checks if any AudioSource following the same routing
-         * as the given audio attributes is not routed and try to connect it.
-         * It must be called once checkOutputForAttributes has been called for orphans AudioSource,
-         * aka AudioSource not attached to any Audio Output (e.g. AudioSource connected to direct
-         * Output which has been disconnected (and output closed) due to sink device unavailable).
-         * @param attr to be considered
-         */
-        void checkAudioSourceForAttributes(const audio_attributes_t &attr);
 
         bool followsSameRouting(const audio_attributes_t &lAttr,
                                 const audio_attributes_t &rAttr) const;
@@ -758,7 +709,6 @@ protected:
 
         sp<SourceClientDescriptor> getSourceForAttributesOnOutput(audio_io_handle_t output,
                                                                   const audio_attributes_t &attr);
-        void clearAudioSourcesForOutput(audio_io_handle_t output);
 
         void cleanUpForDevice(const sp<DeviceDescriptor>& deviceDesc);
 
@@ -805,6 +755,7 @@ protected:
         SoundTriggerSessionCollection mSoundTriggerSessions;
 
         sp<AudioPatch> mCallTxPatch;
+        sp<AudioPatch> mCallRxPatch;
 
         HwAudioOutputCollection mHwOutputs;
         SourceClientCollection mAudioSources;
@@ -836,14 +787,6 @@ protected:
         std::unordered_set<audio_format_t> mManualSurroundFormats;
 
         std::unordered_map<uid_t, audio_flags_mask_t> mAllowedCapturePolicies;
-
-        // Cached product strategy ID corresponding to legacy strategy STRATEGY_PHONE
-        product_strategy_t mCommunnicationStrategy;
-
-        // The port handle of the hardware audio source created internally for the Call RX audio
-        // end point.
-        audio_port_handle_t mCallRxSourceClientPort = AUDIO_PORT_HANDLE_NONE;
-
 private:
         void onNewAudioModulesAvailableInt(DeviceVector *newDevices);
 
@@ -995,11 +938,10 @@ private:
                 sp<AudioPatch> *patchDescPtr);
 
         bool areAllDevicesSupported(
-                const AudioDeviceTypeAddrVector& devices,
+                const Vector<AudioDeviceTypeAddr>& devices,
                 std::function<bool(audio_devices_t)> predicate,
                 const char* context);
 
-        bool isScoRequestedForComm() const;
 };
 
 };

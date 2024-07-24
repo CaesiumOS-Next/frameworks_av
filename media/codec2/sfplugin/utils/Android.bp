@@ -1,4 +1,4 @@
-cc_library {
+cc_library_shared {
     name: "libsfplugin_ccodec_utils",
     vendor_available: true,
     min_sdk_version: "29",

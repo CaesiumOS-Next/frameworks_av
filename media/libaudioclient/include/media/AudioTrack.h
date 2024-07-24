@@ -26,8 +26,6 @@
 #include <media/Modulo.h>
 #include <utils/threads.h>
 
-#include <string>
-
 #include "android/media/BnAudioTrackCallback.h"
 #include "android/media/IAudioTrackCallback.h"
 
@@ -179,8 +177,6 @@ public:
      */
                         AudioTrack();
 
-                        AudioTrack(const std::string& opPackageName);
-
     /* Creates an AudioTrack object and registers it with AudioFlinger.
      * Once created, the track needs to be started before it can be used.
      * Unspecified values are set to appropriate default values.
@@ -262,8 +258,7 @@ public:
                                     const audio_attributes_t* pAttributes = NULL,
                                     bool doNotReconnect = false,
                                     float maxRequiredSpeed = 1.0f,
-                                    audio_port_handle_t selectedDeviceId = AUDIO_PORT_HANDLE_NONE,
-                                    const std::string& opPackageName = "");
+                                    audio_port_handle_t selectedDeviceId = AUDIO_PORT_HANDLE_NONE);
 
     /* Creates an audio track and registers it with AudioFlinger.
      * With this constructor, the track is configured for static buffer mode.
@@ -293,8 +288,7 @@ public:
                                     pid_t pid = -1,
                                     const audio_attributes_t* pAttributes = NULL,
                                     bool doNotReconnect = false,
-                                    float maxRequiredSpeed = 1.0f,
-                                    const std::string& opPackageName = "");
+                                    float maxRequiredSpeed = 1.0f);
 
     /* Terminates the AudioTrack and unregisters it from AudioFlinger.
      * Also destroys all resources associated with the AudioTrack.
@@ -328,27 +322,6 @@ public:
                             uint32_t sampleRate,
                             audio_format_t format,
                             audio_channel_mask_t channelMask,
-                            size_t frameCount   = 0,
-                            audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
-                            callback_t cbf      = NULL,
-                            void* user          = NULL,
-                            int32_t notificationFrames = 0,
-                            const sp<IMemory>& sharedBuffer = 0,
-                            bool threadCanCallJava = false,
-                            audio_session_t sessionId  = AUDIO_SESSION_ALLOCATE,
-                            transfer_type transferType = TRANSFER_DEFAULT,
-                            const audio_offload_info_t *offloadInfo = NULL,
-                            uid_t uid = AUDIO_UID_INVALID,
-                            pid_t pid = -1,
-                            const audio_attributes_t* pAttributes = NULL,
-                            bool doNotReconnect = false,
-                            float maxRequiredSpeed = 1.0f,
-                            audio_port_handle_t selectedDeviceId = AUDIO_PORT_HANDLE_NONE);
-    // FIXME(b/169889714): Vendor code depends on the old method signature at link time
-            status_t    set(audio_stream_type_t streamType,
-                            uint32_t sampleRate,
-                            audio_format_t format,
-                            uint32_t channelMask,
                             size_t frameCount   = 0,
                             audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
                             callback_t cbf      = NULL,
@@ -513,18 +486,6 @@ public:
      */
             uint32_t    getOriginalSampleRate() const;
 
-    /* Sets the Dual Mono mode presentation on the output device. */
-            status_t    setDualMonoMode(audio_dual_mono_mode_t mode);
-
-    /* Returns the Dual Mono mode presentation setting. */
-            status_t    getDualMonoMode(audio_dual_mono_mode_t* mode) const;
-
-    /* Sets the Audio Description Mix level in dB. */
-            status_t    setAudioDescriptionMixLevel(float leveldB);
-
-    /* Returns the Audio Description Mix level in dB. */
-            status_t    getAudioDescriptionMixLevel(float* leveldB) const;
-
     /* Set source playback rate for timestretch
      * 1.0 is normal speed: < 1.0 is slower, > 1.0 is faster
      * 1.0 is normal pitch: < 1.0 is lower pitch, > 1.0 is higher pitch
@@ -538,7 +499,7 @@ public:
             status_t    setPlaybackRate(const AudioPlaybackRate &playbackRate);
 
     /* Return current playback rate */
-            const AudioPlaybackRate& getPlaybackRate();
+            const AudioPlaybackRate& getPlaybackRate() const;
 
     /* Enables looping and sets the start and end points of looping.
      * Only supported for static buffer mode.
@@ -1082,12 +1043,6 @@ public:
 
             void     updateRoutedDeviceId_l();
 
-            /* Sets the Dual Mono mode presentation on the output device. */
-            status_t setDualMonoMode_l(audio_dual_mono_mode_t mode);
-
-            /* Sets the Audio Description Mix level in dB. */
-            status_t setAudioDescriptionMixLevel_l(float leveldB);
-
     // Next 4 fields may be changed if IAudioTrack is re-created, but always != 0
     sp<IAudioTrack>         mAudioTrack;
     sp<IMemory>             mCblkMemory;
@@ -1281,8 +1236,6 @@ public:
 
     sp<media::VolumeHandler>       mVolumeHandler;
 
-    const std::string      mOpPackageName;
-
 private:
     class DeathNotifier : public IBinder::DeathRecipient {
     public:
@@ -1299,10 +1252,6 @@ private:
     pid_t                   mClientPid;
 
     wp<AudioSystem::AudioDeviceCallback> mDeviceCallback;
-
-    // Cached values to restore along with the AudioTrack.
-    audio_dual_mono_mode_t mDualMonoMode = AUDIO_DUAL_MONO_MODE_OFF;
-    float mAudioDescriptionMixLeveldB = -std::numeric_limits<float>::infinity();
 
 private:
     class MediaMetrics {

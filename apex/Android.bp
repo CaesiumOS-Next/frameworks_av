@@ -64,9 +64,10 @@ apex {
     ],
 }
 
-linker_config {
+prebuilt_etc {
     name: "media-linker-config",
-    src: "linker.config.json",
+    src: "linker.config.txt",
+    filename: "linker.config.txt",
     installable: false,
 }
 

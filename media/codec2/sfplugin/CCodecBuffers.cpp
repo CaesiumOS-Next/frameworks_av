@@ -96,9 +96,6 @@ void CCodecBuffers::handleImageData(const sp<Codec2Buffer> &buffer) {
                 int32_t vstride = int32_t(offsetDelta / stride);
                 newFormat->setInt32(KEY_SLICE_HEIGHT, vstride);
                 ALOGD("[%s] updating vstride = %d", mName, vstride);
-                buffer->setRange(
-                        img->mPlane[0].mOffset,
-                        buffer->size() - img->mPlane[0].mOffset);
             }
         }
         setFormat(newFormat);
@@ -277,6 +274,8 @@ OutputBuffers::BufferAction OutputBuffers::popFromStashAndRegister(
 
     // The output format can be processed without a registered slot.
     if (outputFormat) {
+        ALOGD("[%s] popFromStashAndRegister: output format changed to %s",
+                mName, outputFormat->debugString().c_str());
         updateSkipCutBuffer(outputFormat, entry.notify);
     }
 
@@ -304,10 +303,6 @@ OutputBuffers::BufferAction OutputBuffers::popFromStashAndRegister(
     }
 
     if (!entry.notify) {
-        if (outputFormat) {
-            ALOGD("[%s] popFromStashAndRegister: output format changed to %s",
-                    mName, outputFormat->debugString().c_str());
-        }
         mPending.pop_front();
         return DISCARD;
     }
@@ -324,10 +319,6 @@ OutputBuffers::BufferAction OutputBuffers::popFromStashAndRegister(
     // Append information from the front stash entry to outBuffer.
     (*outBuffer)->meta()->setInt64("timeUs", entry.timestamp);
     (*outBuffer)->meta()->setInt32("flags", entry.flags);
-    if (outputFormat) {
-        ALOGD("[%s] popFromStashAndRegister: output format changed to %s",
-                mName, outputFormat->debugString().c_str());
-    }
     ALOGV("[%s] popFromStashAndRegister: "
           "out buffer index = %zu [%p] => %p + %zu (%lld)",
           mName, *index, outBuffer->get(),
@@ -498,12 +489,11 @@ void FlexBuffersImpl::flush() {
     mBuffers.clear();
 }
 
-size_t FlexBuffersImpl::numActiveSlots() const {
+size_t FlexBuffersImpl::numClientBuffers() const {
     return std::count_if(
             mBuffers.begin(), mBuffers.end(),
             [](const Entry &entry) {
-                return (entry.clientBuffer != nullptr
-                        || !entry.compBuffer.expired());
+                return (entry.clientBuffer != nullptr);
             });
 }
 
@@ -649,11 +639,11 @@ void BuffersArrayImpl::grow(
     }
 }
 
-size_t BuffersArrayImpl::numActiveSlots() const {
+size_t BuffersArrayImpl::numClientBuffers() const {
     return std::count_if(
             mBuffers.begin(), mBuffers.end(),
             [](const Entry &entry) {
-                return entry.ownedByClient || !entry.compBuffer.expired();
+                return entry.ownedByClient;
             });
 }
 
@@ -703,8 +693,8 @@ void InputBuffersArray::flush() {
     mImpl.flush();
 }
 
-size_t InputBuffersArray::numActiveSlots() const {
-    return mImpl.numActiveSlots();
+size_t InputBuffersArray::numClientBuffers() const {
+    return mImpl.numClientBuffers();
 }
 
 sp<Codec2Buffer> InputBuffersArray::createNewBuffer() {
@@ -741,8 +731,8 @@ std::unique_ptr<InputBuffers> SlotInputBuffers::toArrayMode(size_t) {
     return nullptr;
 }
 
-size_t SlotInputBuffers::numActiveSlots() const {
-    return mImpl.numActiveSlots();
+size_t SlotInputBuffers::numClientBuffers() const {
+    return mImpl.numClientBuffers();
 }
 
 sp<Codec2Buffer> SlotInputBuffers::createNewBuffer() {
@@ -793,8 +783,8 @@ std::unique_ptr<InputBuffers> LinearInputBuffers::toArrayMode(size_t size) {
     return std::move(array);
 }
 
-size_t LinearInputBuffers::numActiveSlots() const {
-    return mImpl.numActiveSlots();
+size_t LinearInputBuffers::numClientBuffers() const {
+    return mImpl.numClientBuffers();
 }
 
 // static
@@ -970,8 +960,8 @@ std::unique_ptr<InputBuffers> GraphicMetadataInputBuffers::toArrayMode(
     return std::move(array);
 }
 
-size_t GraphicMetadataInputBuffers::numActiveSlots() const {
-    return mImpl.numActiveSlots();
+size_t GraphicMetadataInputBuffers::numClientBuffers() const {
+    return mImpl.numClientBuffers();
 }
 
 sp<Codec2Buffer> GraphicMetadataInputBuffers::createNewBuffer() {
@@ -1035,8 +1025,8 @@ std::unique_ptr<InputBuffers> GraphicInputBuffers::toArrayMode(size_t size) {
     return std::move(array);
 }
 
-size_t GraphicInputBuffers::numActiveSlots() const {
-    return mImpl.numActiveSlots();
+size_t GraphicInputBuffers::numClientBuffers() const {
+    return mImpl.numClientBuffers();
 }
 
 sp<Codec2Buffer> GraphicInputBuffers::createNewBuffer() {
@@ -1125,8 +1115,8 @@ void OutputBuffersArray::getArray(Vector<sp<MediaCodecBuffer>> *array) const {
     mImpl.getArray(array);
 }
 
-size_t OutputBuffersArray::numActiveSlots() const {
-    return mImpl.numActiveSlots();
+size_t OutputBuffersArray::numClientBuffers() const {
+    return mImpl.numClientBuffers();
 }
 
 void OutputBuffersArray::realloc(const std::shared_ptr<C2Buffer> &c2buffer) {
@@ -1236,8 +1226,8 @@ std::unique_ptr<OutputBuffersArray> FlexOutputBuffers::toArrayMode(size_t size) 
     return array;
 }
 
-size_t FlexOutputBuffers::numActiveSlots() const {
-    return mImpl.numActiveSlots();
+size_t FlexOutputBuffers::numClientBuffers() const {
+    return mImpl.numClientBuffers();
 }
 
 // LinearOutputBuffers

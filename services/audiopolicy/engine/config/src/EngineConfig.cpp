@@ -228,8 +228,7 @@ static status_t parseAttributes(const _xmlNode *cur, audio_attributes_t &attribu
             std::string flags = getXmlAttribute(cur, "value");
 
             ALOGV("%s flags %s",  __FUNCTION__, flags.c_str());
-            attributes.flags = static_cast<audio_flags_mask_t>(
-                    AudioFlagConverter::maskFromString(flags, " "));
+            attributes.flags = AudioFlagConverter::maskFromString(flags, " ");
         }
         if (!xmlStrcmp(cur->name, (const xmlChar *)("Bundle"))) {
             std::string bundleKey = getXmlAttribute(cur, "key");

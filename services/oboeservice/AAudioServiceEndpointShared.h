@@ -35,13 +35,12 @@ namespace aaudio {
 class AAudioServiceEndpointShared : public AAudioServiceEndpoint {
 
 public:
-    explicit AAudioServiceEndpointShared(AudioStreamInternal *streamInternal);
 
     std::string dump() const override;
 
     aaudio_result_t open(const aaudio::AAudioStreamRequest &request) override;
 
-    void close() override;
+    aaudio_result_t close() override;
 
     aaudio_result_t startStream(android::sp<AAudioServiceStreamBase> stream,
                                 audio_port_handle_t *clientHandle) override;
@@ -58,15 +57,15 @@ public:
 protected:
 
     AudioStreamInternal *getStreamInternal() const {
-        return mStreamInternal.get();
+        return mStreamInternal;
     };
 
     aaudio_result_t          startSharingThread_l();
 
     aaudio_result_t          stopSharingThread();
 
-    // An MMAP stream that is shared by multiple clients.
-    android::sp<AudioStreamInternal> mStreamInternal;
+    // pointer to object statically allocated in subclasses
+    AudioStreamInternal     *mStreamInternal = nullptr;
 
     std::atomic<bool>        mCallbackEnabled{false};
 
