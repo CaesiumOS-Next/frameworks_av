@@ -1,0 +1,103 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b097cd82_d182c703",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-07-24T18:41:07Z",
+      "side": 1,
+      "message": "Adding Sungtak \u0026 Wonsik who owns this existing interface, to confirm desired name for new method.",
+      "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7aa223_e5a31c61",
+        "filename": "media/module/codecserviceregistrant/fuzzer/codecServiceRegistrant_fuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-07-24T18:41:07Z",
+      "side": 1,
+      "message": "does this method need to get predeclared somewhere?\n\nThe best would be to declare this method somewhere - even in this code - since we likely don\u0027t want it in CodecServiceRegistrant.h. Then add a doxygen comment on what the purpose of this new (sub)method.",
+      "range": {
+        "startLine": 174,
+        "startChar": 2,
+        "endLine": 174,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b49f00a9_0e53a77f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecserviceregistrant/fuzzer/codecServiceRegistrant_fuzzer.cpp",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 177,
+                "endChar": 0
+              },
+              "replacement": "\nvoid RegisterCodecServicesActual() {\n  android::CodecServiceRegistrant::RegisterCodecServices();\n}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84f1c22_96bd8f87",
+        "filename": "media/module/codecserviceregistrant/include/codecserviceregistrant/CodecServiceRegistrant.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-07-24T18:41:07Z",
+      "side": 1,
+      "message": "could we add some comments here as to what this method does? It seems this is meant for the platform registration of codec services. Also, why is this method suddenly needed if this CL really adds RegisterCodecServicesActual().\n\nRegarding the naming, I think \"Actual\" is quite misleading. A better name could be:\n\nRegisterCodecServicesWithExistingThreadpool?",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3f5d058a_a4669191",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecserviceregistrant/include/codecserviceregistrant/CodecServiceRegistrant.h",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "// This function is used to register codec services with the platform.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
