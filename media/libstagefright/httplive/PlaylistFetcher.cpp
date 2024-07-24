@@ -1089,7 +1089,10 @@ bool PlaylistFetcher::initDownloadState(
     mSegmentFirstPTS = -1LL;
 
     if (mPlaylist != NULL && mSeqNumber < 0) {
-        CHECK_GE(mStartTimeUs, 0LL);
+        if (mStartTimeUs < 0LL) {
+            ALOGE("Start time [%jd] is invalid!", mStartTimeUs);
+            return false;
+        }
 
         if (mSegmentStartTimeUs < 0) {
             if (!mPlaylist->isComplete() && !mPlaylist->isEvent()) {
@@ -2080,16 +2083,26 @@ status_t PlaylistFetcher::extractAndQueueAccessUnits(
 
         // adts_fixed_header
 
-        CHECK_EQ(bits.getBits(12), 0xfffu);
+        uint32_t adts_fixed_header = bits.getBits(12);
+        if (adts_fixed_header != 0xfffu) {
+            ALOGE("Invalid adts fixed header: %x", adts_fixed_header);
+            return ERROR_MALFORMED;
+        }
         bits.skipBits(3);  // ID, layer
         bool protection_absent __unused = bits.getBits(1) != 0;
 
         unsigned profile = bits.getBits(2);
-        CHECK_NE(profile, 3u);
+        if (profile == 3u) {
+            ALOGE("Invalid profile (3)");
+            return ERROR_MALFORMED;
+        }
         unsigned sampling_freq_index = bits.getBits(4);
         bits.getBits(1);  // private_bit
         unsigned channel_configuration = bits.getBits(3);
-        CHECK_NE(channel_configuration, 0u);
+        if (channel_configuration == 0u) {
+            ALOGE("Invalid channel configuration (0)");
+            return ERROR_MALFORMED;
+        }
         bits.skipBits(2);  // original_copy, home
 
         sp<MetaData> meta = new MetaData();
