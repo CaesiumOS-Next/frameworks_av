@@ -90,6 +90,13 @@ public:
     void onBufferReleased(uint32_t generation);
 
     /**
+     * Notifies a buffer being attached to the consumer.
+     *
+     * @param   generation        generation # for the BufferQueue.
+     */
+    void onBufferAttached(uint32_t generation);
+
+    /**
      * Allocates a buffer.
      *
      * @param   width             width of the requested buffer.

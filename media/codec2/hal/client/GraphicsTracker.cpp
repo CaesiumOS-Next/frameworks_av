@@ -672,6 +672,9 @@ c2_status_t GraphicsTracker::_allocate(const std::shared_ptr<BufferCache> &cache
         if (status == ::android::TIMED_OUT || status == ::android::WOULD_BLOCK) {
             ALOGW("BQ might not be ready for dequeueBuffer()");
             return C2_BLOCKING;
+        } else if (status == ::android::INVALID_OPERATION) {
+            ALOGW("BQ failed dequeueBuffer(). This might be resolved after some delay");
+            return C2_BLOCKING;
         }
         ALOGE("BQ in inconsistent status. dequeueBuffer() error %d", (int)status);
         return C2_CORRUPTED;
@@ -992,6 +995,11 @@ void GraphicsTracker::onReleased(uint32_t generation) {
     {
         std::unique_lock<std::mutex> l(mLock);
         if (mBufferCache->mGeneration == generation) {
+            if (mBufferCache->mAttached > 0) {
+                ALOGV("buffer previously attached: ignore release here");
+                mBufferCache->mAttached--;
+                return;
+            }
             if (!adjustDequeueConfLocked(&updateDequeue)) {
                 mDequeueable++;
                 writeIncDequeueableLocked(1);
@@ -1000,6 +1008,14 @@ void GraphicsTracker::onReleased(uint32_t generation) {
     }
     if (updateDequeue) {
         updateDequeueConf();
+    }
+}
+
+void GraphicsTracker::onAttached(uint32_t generation) {
+    std::unique_lock<std::mutex> l(mLock);
+    if (mBufferCache->mGeneration == generation) {
+        ALOGV("buffer attached");
+        mBufferCache->mAttached++;
     }
 }
 
