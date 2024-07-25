@@ -992,6 +992,11 @@ void GraphicsTracker::onReleased(uint32_t generation) {
     {
         std::unique_lock<std::mutex> l(mLock);
         if (mBufferCache->mGeneration == generation) {
+            if (mBufferCache->mAttached > 0) {
+                ALOGV("buffer previously attached: ignore release here");
+                mBufferCache->mAttached--;
+                return;
+            }
             if (!adjustDequeueConfLocked(&updateDequeue)) {
                 mDequeueable++;
                 writeIncDequeueableLocked(1);
@@ -1000,6 +1005,14 @@ void GraphicsTracker::onReleased(uint32_t generation) {
     }
     if (updateDequeue) {
         updateDequeueConf();
+    }
+}
+
+void GraphicsTracker::onAttached(uint32_t generation) {
+    std::unique_lock<std::mutex> l(mLock);
+    if (mBufferCache->mGeneration == generation) {
+        ALOGV("buffer attached");
+        mBufferCache->mAttached++;
     }
 }
 

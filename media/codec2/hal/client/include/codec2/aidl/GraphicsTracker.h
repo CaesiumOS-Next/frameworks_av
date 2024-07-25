@@ -143,6 +143,14 @@ public:
     void onReleased(uint32_t generation);
 
     /**
+     * Notifies when a Buffer is attached to Graphics(consumer side).
+     * Release signal after attach should be ignored.
+     *
+     * @param[in] generation    generation id for specifying Graphics(BQ)
+     */
+    void onAttached(uint32_t generation);
+
+    /**
      * Get waitable fd for events.(allocate is ready, end of life cycle)
      *
      * @param[out]  pipeFd      a file descriptor created from pipe2()
@@ -217,7 +225,9 @@ private:
 
         BlockedSlot mBlockedSlots[kNumSlots];
 
-        BufferCache() : mBqId{0ULL}, mGeneration{0}, mIgbp{nullptr} {}
+        int mAttached;
+
+        BufferCache() : mBqId{0ULL}, mGeneration{0}, mIgbp{nullptr}, mAttached{0} {}
         BufferCache(uint64_t bqId, uint32_t generation, const sp<IGraphicBufferProducer>& igbp) :
             mBqId{bqId}, mGeneration{generation}, mIgbp{igbp} {}
 

@@ -23,6 +23,8 @@
 #include <codec2/aidl/GraphicBufferAllocator.h>
 #include <codec2/aidl/GraphicsTracker.h>
 
+#include <com_android_graphics_libgui_flags.h>
+
 namespace aidl::android::hardware::media::c2::implementation {
 
 class OnBufferReleasedListener : public ::android::BnProducerListener {
@@ -42,6 +44,15 @@ public:
         }
     }
     virtual bool needsReleaseNotify() { return true; }
+#if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_CONSUMER_ATTACH_CALLBACK)
+    virtual void onBufferAttached() {
+        auto p = mAllocator.lock();
+        if (p) {
+            p->onBufferAttached(mGeneration);
+        }
+    }
+    virtual bool needsAttachNotify() { return true; }
+#endif
 };
 
 ::ndk::ScopedAStatus GraphicBufferAllocator::allocate(
@@ -115,6 +126,10 @@ const ::android::sp<::android::IProducerListener> GraphicBufferAllocator::create
 
 void GraphicBufferAllocator::onBufferReleased(uint32_t generation) {
     mGraphicsTracker->onReleased(generation);
+}
+
+void GraphicBufferAllocator::onBufferAttached(uint32_t generation) {
+    mGraphicsTracker->onAttached(generation);
 }
 
 c2_status_t GraphicBufferAllocator::allocate(
