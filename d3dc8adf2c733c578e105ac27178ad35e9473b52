@@ -46,6 +46,30 @@
       },
       "revId": "d3dc8adf2c733c578e105ac27178ad35e9473b52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a6b4548_5b0b3867",
+        "filename": "services/audioflinger/AudioFlinger.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1958513
+      },
+      "writtenOn": "2024-07-26T22:41:31Z",
+      "side": 0,
+      "message": "Sorry for the change, but I noticed that all calls to getAudioHWDevs already do hold mHardwareMutex, so I updated the REQUIRES value to incorporate the necessary mutex. Does this solution work for you?",
+      "parentUuid": "8a34bdee_4998ded3",
+      "range": {
+        "startLine": 635,
+        "startChar": 10,
+        "endLine": 635,
+        "endChar": 40
+      },
+      "revId": "d3dc8adf2c733c578e105ac27178ad35e9473b52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
