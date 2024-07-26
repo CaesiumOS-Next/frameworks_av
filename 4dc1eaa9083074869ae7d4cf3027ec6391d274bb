@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6018ecc_365ee7e1",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-07-26T10:08:04Z",
+      "side": 1,
+      "message": "test this condition first here and below",
+      "range": {
+        "startLine": 458,
+        "startChar": 24,
+        "endLine": 458,
+        "endChar": 77
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d32b990d_0772cf5f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+              "range": {
+                "startLine": 457,
+                "startChar": 0,
+                "endLine": 459,
+                "endChar": 0
+              },
+              "replacement": "                if (config.format !\u003d AUDIO_CONFIG_BASE_INITIALIZER.format \u0026\u0026\n                        !(config.format \u003d\u003d mix-\u003emFormat.format)) {\n"
+            },
+            {
+              "path": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+              "range": {
+                "startLine": 462,
+                "startChar": 0,
+                "endLine": 465,
+                "endChar": 0
+              },
+              "replacement": "                if (config.format !\u003d AUDIO_CONFIG_BASE_INITIALIZER.format \u0026\u0026\n                        !(audio_is_linear_pcm(config.format) \u0026\u0026\n                          audio_is_linear_pcm(mix-\u003emFormat.format))) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4dc1eaa9083074869ae7d4cf3027ec6391d274bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
