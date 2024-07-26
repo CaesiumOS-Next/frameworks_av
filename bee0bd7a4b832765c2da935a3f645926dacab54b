@@ -34,6 +34,24 @@
       "parentUuid": "f8f0ac56_8f680a9f",
       "revId": "bee0bd7a4b832765c2da935a3f645926dacab54b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2630086d_1b71f269",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1141048
+      },
+      "writtenOn": "2024-07-26T15:56:28Z",
+      "side": 1,
+      "message": "Yes, typically any change that needs to be merged should be tracked by corresponding buganizer bug. You can reference the bug via a \"Bug: \u003cbuganizer id\u003e\" tag in the commit message. Once the patch is merged the bug can move in fixed state.",
+      "parentUuid": "661d0d05_b2b1468c",
+      "revId": "bee0bd7a4b832765c2da935a3f645926dacab54b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
