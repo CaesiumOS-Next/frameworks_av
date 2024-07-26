@@ -357,6 +357,7 @@ cc_library {
     ],
 
     cflags: [
+        "-DCOM_ANDROID_GRAPHICS_LIBGUI_FLAGS_BQ_CONSUMER_ATTACH_CALLBACK=true",
         "-Wno-multichar",
         "-Werror",
         "-Wno-error=deprecated-declarations",
