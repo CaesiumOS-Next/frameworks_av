@@ -16,6 +16,24 @@
       "message": "It seems like we are missing a buganizer tag in the commit message. Do we have a bug for tracking this?",
       "revId": "bee0bd7a4b832765c2da935a3f645926dacab54b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "661d0d05_b2b1468c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1943370
+      },
+      "writtenOn": "2024-07-26T04:46:07Z",
+      "side": 1,
+      "message": "We do not have one as of now. We encountered this during our camera bringup activity on A14 and thought of proposing a fix and submitted this without a bug. Do you suggest to create one under the public tracker for frameworks?",
+      "parentUuid": "f8f0ac56_8f680a9f",
+      "revId": "bee0bd7a4b832765c2da935a3f645926dacab54b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
