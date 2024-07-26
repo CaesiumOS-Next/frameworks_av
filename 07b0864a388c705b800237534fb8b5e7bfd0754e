@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94df07f0_19a1f0a6",
+        "filename": "media/module/codecserviceregistrant/fuzzer/codecServiceRegistrant_fuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2046581
+      },
+      "writtenOn": "2024-07-26T05:45:10Z",
+      "side": 1,
+      "message": "**Lajos**,\nsince *_CodecServiceRegistrant.cpp_* is directly included in the fuzzer, there is no need to predeclare this function.\nPer your suggestion, I have added a doxygen comment above it to indicate its purpose.",
+      "parentUuid": "5b7aa223_e5a31c61",
+      "range": {
+        "startLine": 174,
+        "startChar": 2,
+        "endLine": 174,
+        "endChar": 29
+      },
+      "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f84f1c22_96bd8f87",
         "filename": "media/module/codecserviceregistrant/include/codecserviceregistrant/CodecServiceRegistrant.h",
         "patchSetId": 4
@@ -96,6 +120,30 @@
           ]
         }
       ],
+      "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6315e6d_b328ba97",
+        "filename": "media/module/codecserviceregistrant/include/codecserviceregistrant/CodecServiceRegistrant.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2046581
+      },
+      "writtenOn": "2024-07-26T05:45:10Z",
+      "side": 1,
+      "message": "**Lajos**,\nAdded the comment to indicate the function\u0027s purpose.\nAs per **Ray**\u0027s suggestion, I have made this change. **Ray**\u0027s reference CL is [here](https://android-review.googlesource.com/c/platform/frameworks/av/+/3073317).\n\nRenamed `RegisterCodecServicesActual()` to `RegisterCodecServicesWithExistingThreadpool()`.",
+      "parentUuid": "f84f1c22_96bd8f87",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 37
+      },
       "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
