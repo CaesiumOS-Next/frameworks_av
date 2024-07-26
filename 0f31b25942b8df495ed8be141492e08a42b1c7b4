@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0569e794_8bb87591",
+        "filename": "services/audiopolicy/service/AudioPolicyService.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-07-26T15:21:46Z",
+      "side": 1,
+      "message": "Please remove tab characters",
+      "range": {
+        "startLine": 849,
+        "startChar": 0,
+        "endLine": 850,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c9cc6e7b_c4117529",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.h",
+              "range": {
+                "startLine": 849,
+                "startChar": 0,
+                "endLine": 851,
+                "endChar": 0
+              },
+              "replacement": "         * group (and associated given port of the client\u0027s track) can have different volumes for\n         * each output (destination device) it is attached to.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f31b25942b8df495ed8be141492e08a42b1c7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
