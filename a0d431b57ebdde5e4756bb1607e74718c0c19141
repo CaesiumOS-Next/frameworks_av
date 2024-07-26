@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a79cca5_cfe13b0b",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-26T13:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33f1e7a4_228166ed",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 5
+      },
+      "revId": "a0d431b57ebdde5e4756bb1607e74718c0c19141",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a26dc551_97e41363",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-25T20:13:48Z",
       "side": 1,
       "message": "Missing conversion via `legacy2aidl_audio_io_handle_t_int32_t`",
+      "range": {
+        "startLine": 337,
+        "startChar": 43,
+        "endLine": 337,
+        "endChar": 49
+      },
+      "revId": "a0d431b57ebdde5e4756bb1607e74718c0c19141",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a251e5fb_4c053a7e",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-26T13:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a26dc551_97e41363",
       "range": {
         "startLine": 337,
         "startChar": 43,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a884c12e_9bf29aaf",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioFlingerService.aidl",
+        "patchSetId": 18
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-26T13:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "701f505e_ff76015f",
+      "range": {
+        "startLine": 103,
+        "startChar": 49,
+        "endLine": 104,
+        "endChar": 54
+      },
+      "revId": "a0d431b57ebdde5e4756bb1607e74718c0c19141",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ed3cc3_50de1575",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-07-25T20:13:48Z",
       "side": 1,
       "message": "Further down, the APM interface calls this argument `volume`, not `value`. I would prefer to use `volume` everywhere if possible.",
+      "range": {
+        "startLine": 106,
+        "startChar": 76,
+        "endLine": 106,
+        "endChar": 81
+      },
+      "revId": "a0d431b57ebdde5e4756bb1607e74718c0c19141",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d913207_3e6d1e1e",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioFlingerService.aidl",
+        "patchSetId": 18
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-26T13:17:20Z",
+      "side": 1,
+      "message": "done everywhere",
+      "parentUuid": "f8ed3cc3_50de1575",
       "range": {
         "startLine": 106,
         "startChar": 76,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e69cd8c_63e20530",
+        "filename": "services/audioflinger/AudioFlinger.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-26T13:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bfaf146_379eaa9d",
+      "range": {
+        "startLine": 1565,
+        "startChar": 0,
+        "endLine": 1565,
+        "endChar": 5
+      },
+      "revId": "a0d431b57ebdde5e4756bb1607e74718c0c19141",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0480ea33_4eb9de50",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-07-25T20:13:48Z",
       "side": 1,
       "message": "Is this actually used? I can see usages of `VolumePortsData::dumpPorts` but not of this one.",
+      "range": {
+        "startLine": 739,
+        "startChar": 0,
+        "endLine": 742,
+        "endChar": 5
+      },
+      "revId": "a0d431b57ebdde5e4756bb1607e74718c0c19141",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18de0cc6_062ae63d",
+        "filename": "services/audioflinger/AudioFlinger.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-07-26T13:17:20Z",
+      "side": 1,
+      "message": "good catch, not anymore",
+      "parentUuid": "0480ea33_4eb9de50",
       "range": {
         "startLine": 739,
         "startChar": 0,
