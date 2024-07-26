@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c51aa36_6b117e85",
+        "filename": "media/codec2/hidl/1.0/utils/InputBufferManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1837035
+      },
+      "writtenOn": "2024-07-26T13:41:07Z",
+      "side": 1,
+      "message": "after this checking, bufferId must be in the cache.",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 5
+      },
+      "revId": "7e8d8c524b9940f604cbb5636aa56ae35a712ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a62fd8c6_4c296f55",
         "filename": "media/codec2/hidl/1.0/utils/InputBufferManager.cpp",
         "patchSetId": 4
@@ -37,6 +60,30 @@
       "writtenOn": "2024-07-25T19:09:49Z",
       "side": 1,
       "message": "and 2) removing buffer from mCache even if the frame is no longer in the map.\n\nPerhaps it is moving the removal of such buffers from mCache to here instead of inunregisterFrameData.",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 4
+      },
+      "revId": "7e8d8c524b9940f604cbb5636aa56ae35a712ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e96be11f_8bd4ca5c",
+        "filename": "media/codec2/hidl/1.0/utils/InputBufferManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1837035
+      },
+      "writtenOn": "2024-07-26T13:41:07Z",
+      "side": 1,
+      "message": "But not only cache, _unregisterFrameData also erases some other variables. Does Google want to move them all here?",
+      "parentUuid": "a62fd8c6_4c296f55",
       "range": {
         "startLine": 314,
         "startChar": 0,
