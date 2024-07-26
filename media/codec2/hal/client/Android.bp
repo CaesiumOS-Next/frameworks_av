@@ -29,6 +29,10 @@ cc_library {
         "output.cpp",
     ],
 
+    cflags: [
+        "-DCOM_ANDROID_GRAPHICS_LIBGUI_FLAGS_BQ_CONSUMER_ATTACH_CALLBACK=true",
+    ],
+
     defaults: [
         "libcodec2-aidl-client-defaults",
     ],
