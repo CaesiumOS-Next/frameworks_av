@@ -512,9 +512,19 @@ public:
         uint64_t usage = mConfig.mUsage;
         (void)(*node)->setConsumerUsage((int64_t)usage);
 
+        // AIDL does not define legacy dataspace.
+        android_dataspace_t dataspace = mDataSpace;
+        if (android::media::codec::provider_->dataspace_v0_partial()) {
+            ColorUtils::convertDataSpaceToV0(dataspace);
+        }
         return fromAidlStatus(mSource->configure(
+<<<<<<< PATCH SET (f7cd8a CCodec: convert dataspace to V0)
+                mNode, static_cast<::aidl::android::hardware::graphics::common::Dataspace>(
+                        dataspace)));
+=======
                 (*node), static_cast<::aidl::android::hardware::graphics::common::Dataspace>(
                         mDataSpace)));
+>>>>>>> BASE      (6c356f Merge "Remove NDK exports" into main)
     }
 
     void disconnect() override {
