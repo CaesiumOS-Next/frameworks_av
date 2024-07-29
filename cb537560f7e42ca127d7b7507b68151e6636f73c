@@ -69,6 +69,30 @@
       },
       "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552df4db_5c0f3559",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-07-29T17:24:43Z",
+      "side": 1,
+      "message": "After 3s timeout in AudioCommandThread process, the binder process (whose transaction is being monitored by mentioned 5s TimeCheck) gets unblocked (so far binder was awaiting 3s in AudioPolicyService::AudioCommandThread::sendCommand() for CREATE_AUDIO_PATCH cmd result) and executes further asynchronously (has 5-3\u003d2s remaining to finalize the transaction). Since this (emergency/fallback) call to af-\u003ereleaseAudioPatch() is done from AudioCommandThread process, it does not affect binder process.",
+      "parentUuid": "37ccb8fb_e6b12061",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 65
+      },
+      "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
