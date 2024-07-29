@@ -33,6 +33,7 @@
 #include <media/stagefright/foundation/ABuffer.h>
 #include <media/stagefright/foundation/AMessage.h>
 #include <media/stagefright/foundation/AUtils.h>
+#include <media/stagefright/foundation/ColorUtils.h>
 #include <mediadrm/ICrypto.h>
 #include <nativebase/nativebase.h>
 #include <ui/GraphicBufferMapper.h>
@@ -1209,6 +1210,10 @@ c2_status_t SetMetadataToGralloc4Handle(
     if (!buffer) {
         // Gralloc4 not supported; nothing to do
         return err;
+    }
+    // Use V0 dataspaces for Gralloc4+
+    if (android::media::codec::provider_->dataspace_v0_partial()) {
+        ColorUtils::convertDataSpaceToV0(dataSpace);
     }
     status_t status = mapper.setDataspace(buffer.get(), static_cast<ui::Dataspace>(dataSpace));
     if (status != OK) {
