@@ -39,7 +39,7 @@ struct HapticGeneratorParam {
     int mHapticChannelSource[2];
 
     int mHapticChannelCount;
-    int mAudioChannelCount;
+    int mInputChannelCount;
 
     std::map<int, HapticGenerator::VibratorScale> mHapticScales;
     // max intensity will be used to scale haptic data.
