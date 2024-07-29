@@ -141,23 +141,23 @@ IEffect::Status HapticGeneratorContext::process(float* in, float* out, int sampl
     RETURN_VALUE_IF(!in, status, "nullInput");
     RETURN_VALUE_IF(!out, status, "nullOutput");
     status = {EX_ILLEGAL_STATE, 0, 0};
-    RETURN_VALUE_IF(getInputFrameSize() != getOutputFrameSize(), status, "FrameSizeMismatch");
-    auto frameSize = getInputFrameSize();
-    RETURN_VALUE_IF(0 == frameSize, status, "zeroFrameSize");
+    RETURN_VALUE_IF(0 == getInputFrameSize(), status, "zero input frame size");
+    RETURN_VALUE_IF(0 == getOutputFrameSize(), status, "zero output frame size");
 
     if (mState != HAPTIC_GENERATOR_STATE_ACTIVE) {
         LOG(WARNING) << " HapticGenerator in wrong state " << mState;
         return status;
     }
 
+    const size_t hapticSampleCount = mFrameCount * mParams.mHapticChannelCount;
+    const int outputSampleCount = hapticSampleCount + samples;
+
     if (mParams.mMaxVibratorScale == HapticGenerator::VibratorScale::MUTE) {
         // Haptic channels are muted, not need to generate haptic data.
-        return {STATUS_OK, samples, samples};
+        return {STATUS_OK, samples, outputSampleCount};
     }
 
     // Resize buffer if the haptic sample count is greater than buffer size.
-    const size_t hapticSampleCount = mFrameCount * mParams.mHapticChannelCount;
-    const size_t audioSampleCount = mFrameCount * mParams.mAudioChannelCount;
     if (hapticSampleCount > mInputBuffer.size()) {
         // The inputBuffer and outputBuffer must have the same size, which must be at least
         // the haptic sample count.
@@ -169,7 +169,7 @@ IEffect::Status HapticGeneratorContext::process(float* in, float* out, int sampl
     for (int64_t i = 0; i < mFrameCount; ++i) {
         for (int j = 0; j < mParams.mHapticChannelCount; ++j) {
             mInputBuffer[i * mParams.mHapticChannelCount + j] =
-                    in[i * mParams.mAudioChannelCount + mParams.mHapticChannelSource[j]];
+                    in[i * mParams.mInputChannelCount + mParams.mHapticChannelSource[j]];
         }
     }
 
@@ -185,16 +185,17 @@ IEffect::Status HapticGeneratorContext::process(float* in, float* out, int sampl
     // In AIDL only output buffer is send back to the audio framework via FMQ. Here the effect copy
     // the generated haptic data to the target position of output buffer, the framework then append
     // it to the same position of input buffer.
-    memcpy_to_float_from_float_with_clamping(out + audioSampleCount, hapticOutBuffer,
+    const size_t inputSampleCount = mFrameCount * mParams.mInputChannelCount;
+    memcpy_to_float_from_float_with_clamping(out + inputSampleCount, hapticOutBuffer,
                                              hapticSampleCount, 2.f /* absMax */);
-    return {STATUS_OK, samples, samples};
+    return {STATUS_OK, samples, outputSampleCount};
 }
 
 void HapticGeneratorContext::init_params(const Parameter::Common& common) {
     mSampleRate = common.input.base.sampleRate;
     mFrameCount = common.input.frameCount;
 
-    mParams.mAudioChannelCount = ::aidl::android::hardware::audio::common::getChannelCount(
+    mParams.mInputChannelCount = ::aidl::android::hardware::audio::common::getChannelCount(
             common.input.base.channelMask,
             ~media::audio::common::AudioChannelLayout::LAYOUT_HAPTIC_AB);
     mParams.mHapticChannelCount = ::aidl::android::hardware::audio::common::getChannelCount(
@@ -348,7 +349,7 @@ std::string HapticGeneratorContext::paramToString(const struct HapticGeneratorPa
     std::stringstream ss;
     ss << "\t\ttHapticGenerator Parameters:\n";
     ss << "\t\t- mHapticChannelCount: " << param.mHapticChannelCount << '\n';
-    ss << "\t\t- mAudioChannelCount: " << param.mAudioChannelCount << '\n';
+    ss << "\t\t- mInputChannelCount: " << param.mInputChannelCount << '\n';
     ss << "\t\t- mHapticChannelSource: " << param.mHapticChannelSource[0] << ", "
        << param.mHapticChannelSource[1] << '\n';
     ss << "\t\t- mMaxVibratorScale: " << ::android::internal::ToString(param.mMaxVibratorScale)
