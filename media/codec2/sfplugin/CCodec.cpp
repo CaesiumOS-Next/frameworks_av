@@ -485,9 +485,12 @@ public:
         uint64_t usage = mConfig.mUsage;
         (void)mNode->setConsumerUsage((int64_t)usage);
 
+        // AIDL does not define legacy dataspace.
+        android_dataspace_t dataspace = mDataSpace;
+        ColorUtils::convertDataSpaceToV0(dataspace);
         return fromAidlStatus(mSource->configure(
                 mNode, static_cast<::aidl::android::hardware::graphics::common::Dataspace>(
-                        mDataSpace)));
+                        dataspace)));
     }
 
     void disconnect() override {
