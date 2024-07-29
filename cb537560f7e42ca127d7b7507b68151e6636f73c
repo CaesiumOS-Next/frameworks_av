@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf7e10a3_04d3a5e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-07-29T17:02:07Z",
+      "side": 1,
+      "message": "My case that reproduced the TIMED_OUT(-110) error was the call from system_server to audioserver after Car Service has crashed while radio playback ongoing (HwAudioSource.start()):\n\n(system_server binder) AudioSystem::registerPolicyMixes() -\u003e \n    (audioserver binder - \"the caller\") AudioPolicyManager::unregisterPolicyMixes() -\u003e\n        (audioserver audiopolicy command thread) AudioFlinger::createAudioPatch()\n\nBut it can be also simply the case while starting audio source where binder call to AudioPolicyManager::startAudioSource() -\u003e connectAudioSource() involves audio patches creation.\nSo I will put this as example in this commit msg.\n\nBTW, I have put detailed analysis of my case into: https://partnerissuetracker.corp.google.com/issues/356095582\n* currently the description might be hardly readable, have to format it (but not able to edit it right now)",
+      "parentUuid": "55291974_09da48dd",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37ccb8fb_e6b12061",
