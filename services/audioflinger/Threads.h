@@ -699,8 +699,8 @@ protected:
                 size_t                  mBufferSize;       // HAL buffer size for read() or write()
 
      // output device types and addresses
-    AudioDeviceTypeAddrVector mOutDeviceTypeAddrs GUARDED_BY(mutex());
-    AudioDeviceTypeAddr mInDeviceTypeAddr GUARDED_BY(mutex());   // input device type and address
+    AudioDeviceTypeAddrVector mOutDeviceTypeAddrs;
+    AudioDeviceTypeAddr mInDeviceTypeAddr;   // input device type and address
     Vector<sp<ConfigEvent>> mConfigEvents GUARDED_BY(mutex());
 
     // events awaiting system ready
