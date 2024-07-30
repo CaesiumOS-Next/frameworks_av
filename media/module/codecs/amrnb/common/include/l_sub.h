@@ -146,14 +146,13 @@ extern "C"
     {
         Word32 L_diff;
 
-        L_diff = L_var1 - L_var2;
+        *pOverflow = __builtin_sub_overflow(L_var1, L_var2, &L_diff);
 
         if ((L_var1 ^ L_var2) < 0)
         {
             if ((L_diff ^ L_var1) & MIN_32)
             {
                 L_diff = (L_var1 < 0L) ? MIN_32 : MAX_32;
-                *pOverflow = 1;
             }
         }
 
