@@ -31,6 +31,7 @@
 #include <Utils.h>
 #include <utils/Log.h>
 
+#include "AidlUtils.h"
 #include "DeviceHalAidl.h"
 #include "EffectHalAidl.h"
 #include "StreamHalAidl.h"
@@ -123,11 +124,18 @@ status_t DeviceHalAidl::getAudioRoutes(std::vector<media::AudioRoute> *routes) {
 }
 
 status_t DeviceHalAidl::getSupportedModes(std::vector<media::audio::common::AudioMode> *modes) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
-    if (mTelephony == nullptr) return INVALID_OPERATION;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
+    if (mTelephony == nullptr) {
+        ALOGE("%s: telephony not initialized", PREFIX(mInstance));
+        return INVALID_OPERATION;
+    }
     if (modes == nullptr) {
+        ALOGE("%s: uninitialized modes", PREFIX(mInstance));
         return BAD_VALUE;
     }
     std::vector<AudioMode> aidlModes;
@@ -145,48 +153,73 @@ status_t DeviceHalAidl::getSupportedDevices(uint32_t*) {
 }
 
 status_t DeviceHalAidl::initCheck() {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     std::lock_guard l(mLock);
     return mMapper.initialize();
 }
 
 status_t DeviceHalAidl::setVoiceVolume(float volume) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: volume %f", PREFIX(mInstance), volume);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
-    if (mTelephony == nullptr) return INVALID_OPERATION;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
+    if (mTelephony == nullptr) {
+        ALOGE("%s: telephony not initialized", PREFIX(mInstance));
+        return INVALID_OPERATION;
+    }
     ITelephony::TelecomConfig inConfig{ .voiceVolume = Float{volume} }, outConfig;
     RETURN_STATUS_IF_ERROR(
             statusTFromBinderStatus(mTelephony->setTelecomConfig(inConfig, &outConfig)));
     ALOGW_IF(outConfig.voiceVolume.has_value() && volume != outConfig.voiceVolume.value().value,
             "%s: the resulting voice volume %f is not the same as requested %f",
-            __func__, outConfig.voiceVolume.value().value, volume);
+            PREFIX(mInstance), outConfig.voiceVolume.value().value, volume);
     return OK;
 }
 
 status_t DeviceHalAidl::setMasterVolume(float volume) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: volume %f", PREFIX(mInstance), volume);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     return statusTFromBinderStatus(mModule->setMasterVolume(volume));
 }
 
 status_t DeviceHalAidl::getMasterVolume(float *volume) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
+
+    ALOGD("%s : Module: %s", __func__, mInstance.c_str());
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (volume == nullptr) {
+        ALOGE("%s: uninitialized volumes", PREFIX(mInstance));
         return BAD_VALUE;
     }
     return statusTFromBinderStatus(mModule->getMasterVolume(volume));
 }
 
 status_t DeviceHalAidl::setMode(audio_mode_t mode) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: mode %d", PREFIX(mInstance), mode);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     AudioMode audioMode = VALUE_OR_FATAL(::aidl::android::legacy2aidl_audio_mode_t_AudioMode(mode));
     if (mTelephony != nullptr) {
         RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(mTelephony->switchAudioMode(audioMode)));
@@ -195,90 +228,121 @@ status_t DeviceHalAidl::setMode(audio_mode_t mode) {
 }
 
 status_t DeviceHalAidl::setMicMute(bool state) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: mute %d", PREFIX(mInstance), state);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     return statusTFromBinderStatus(mModule->setMicMute(state));
 }
 
 status_t DeviceHalAidl::getMicMute(bool *state) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (state == nullptr) {
+        ALOGE("%s: uninitialized mute state", PREFIX(mInstance));
         return BAD_VALUE;
     }
     return statusTFromBinderStatus(mModule->getMicMute(state));
 }
 
 status_t DeviceHalAidl::setMasterMute(bool state) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: mute %d", PREFIX(mInstance), state);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     return statusTFromBinderStatus(mModule->setMasterMute(state));
 }
 
 status_t DeviceHalAidl::getMasterMute(bool *state) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (state == nullptr) {
+        ALOGE("%s: uninitialized mute state", PREFIX(mInstance));
         return BAD_VALUE;
     }
     return statusTFromBinderStatus(mModule->getMasterMute(state));
 }
 
 status_t DeviceHalAidl::setParameters(const String8& kvPairs) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     AudioParameter parameters(kvPairs);
-    ALOGD("%s: parameters: \"%s\"", __func__, parameters.toString().c_str());
+    ALOGD("%s: parameters: \"%s\"", PREFIX(mInstance), parameters.toString().c_str());
 
     if (status_t status = filterAndUpdateBtA2dpParameters(parameters); status != OK) {
-        ALOGW("%s: filtering or updating BT A2DP parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndUpdateBtA2dpParameters failed: %d", PREFIX(mInstance), status);
     }
     if (status_t status = filterAndUpdateBtHfpParameters(parameters); status != OK) {
-        ALOGW("%s: filtering or updating BT HFP parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndUpdateBtHfpParameters failed: %d", PREFIX(mInstance), status);
     }
     if (status_t status = filterAndUpdateBtLeParameters(parameters); status != OK) {
-        ALOGW("%s: filtering or updating BT LE parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndUpdateBtLeParameters failed: %d", PREFIX(mInstance), status);
     }
     if (status_t status = filterAndUpdateBtScoParameters(parameters); status != OK) {
-        ALOGW("%s: filtering or updating BT SCO parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndUpdateBtScoParameters failed: %d", PREFIX(mInstance), status);
     }
     if (status_t status = filterAndUpdateScreenParameters(parameters); status != OK) {
-        ALOGW("%s: filtering or updating screen parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndUpdateScreenParameters failed: %d", PREFIX(mInstance), status);
     }
     if (status_t status = filterAndUpdateTelephonyParameters(parameters); status != OK) {
-        ALOGW("%s: filtering or updating telephony parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndUpdateTelephonyParameters failed: %d", PREFIX(mInstance), status);
     }
     return parseAndSetVendorParameters(mVendorExt, mModule, parameters);
 }
 
 status_t DeviceHalAidl::getParameters(const String8& keys, String8 *values) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: keys: \"%s\"", PREFIX(mInstance), keys.c_str());
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (values == nullptr) {
+        ALOGE("%s: invalid values", PREFIX(mInstance));
         return BAD_VALUE;
     }
     AudioParameter parameterKeys(keys), result;
     if (status_t status = filterAndRetrieveBtA2dpParameters(parameterKeys, &result); status != OK) {
-        ALOGW("%s: filtering or retrieving BT A2DP parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndRetrieveBtA2dpParameters failed: %d", PREFIX(mInstance), status);
     }
     if (status_t status = filterAndRetrieveBtLeParameters(parameterKeys, &result); status != OK) {
-        ALOGW("%s: filtering or retrieving BT LE parameters failed: %d", __func__, status);
+        ALOGW("%s: filterAndRetrieveBtLeParameters failed: %d", PREFIX(mInstance), status);
     }
     *values = result.toString();
     return parseAndGetVendorParameters(mVendorExt, mModule, parameterKeys, values);
 }
 
 status_t DeviceHalAidl::getInputBufferSize(struct audio_config* config, size_t* size) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (config == nullptr || size == nullptr) {
+        ALOGE("%s: invalid config or size", PREFIX(mInstance));
         return BAD_VALUE;
     }
     constexpr bool isInput = true;
@@ -427,10 +491,15 @@ status_t DeviceHalAidl::openOutputStream(
         audio_output_flags_t flags, struct audio_config* config,
         const char* address,
         sp<StreamOutHalInterface>* outStream) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: handle: %d devices %0x flags %0x", PREFIX(mInstance), handle, devices, flags);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (outStream == nullptr || config == nullptr) {
+        ALOGE("%s: invalid outStream or config", PREFIX(mInstance));
         return BAD_VALUE;
     }
     constexpr bool isInput = false;
@@ -479,7 +548,7 @@ status_t DeviceHalAidl::openOutputStream(
     StreamContextAidl context(ret.desc, isOffload);
     if (!context.isValid()) {
         ALOGE("%s: Failed to created a valid stream context from the descriptor: %s",
-                __func__, ret.desc.toString().c_str());
+                PREFIX(mInstance), ret.desc.toString().c_str());
         return NO_INIT;
     }
     auto stream = sp<StreamOutHalAidl>::make(*config, std::move(context), aidlPatch.latenciesMs[0],
@@ -508,10 +577,15 @@ status_t DeviceHalAidl::openInputStream(
         const char* address, audio_source_t source,
         audio_devices_t outputDevice, const char* outputDeviceAddress,
         sp<StreamInHalInterface>* inStream) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s: handle: %d devices %0x flags %0x", PREFIX(mInstance), handle, devices, flags);
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (inStream == nullptr || config == nullptr) {
+        ALOGE("%s: invalid inStream or config", PREFIX(mInstance));
         return BAD_VALUE;
     }
     constexpr bool isInput = true;
@@ -554,7 +628,7 @@ status_t DeviceHalAidl::openInputStream(
     StreamContextAidl context(ret.desc, false /*isAsynchronous*/);
     if (!context.isValid()) {
         ALOGE("%s: Failed to created a valid stream context from the descriptor: %s",
-                __func__, ret.desc.toString().c_str());
+                PREFIX(mInstance), ret.desc.toString().c_str());
         return NO_INIT;
     }
     *inStream = sp<StreamInHalAidl>::make(*config, std::move(context), aidlPatch.latenciesMs[0],
@@ -568,7 +642,12 @@ status_t DeviceHalAidl::openInputStream(
 }
 
 status_t DeviceHalAidl::supportsAudioPatches(bool* supportsPatches) {
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (supportsPatches == nullptr) {
+        ALOGE("%s: uninitialized patches", PREFIX(mInstance));
         return BAD_VALUE;
     }
     *supportsPatches = true;
@@ -580,13 +659,23 @@ status_t DeviceHalAidl::createAudioPatch(unsigned int num_sources,
                                          unsigned int num_sinks,
                                          const struct audio_port_config* sinks,
                                          audio_patch_handle_t* patch) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: sources: %d sinks %d", PREFIX(mInstance), num_sources, num_sinks);
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
-    if (num_sinks > AUDIO_PATCH_PORTS_MAX || num_sources > AUDIO_PATCH_PORTS_MAX ||
-        sources == nullptr || sinks == nullptr || patch == nullptr) {
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
+    if (num_sinks > AUDIO_PATCH_PORTS_MAX || num_sources > AUDIO_PATCH_PORTS_MAX) {
+        ALOGE("%s: invalid sources %d or sinks %d ", PREFIX(mInstance), num_sources, num_sinks);
         return BAD_VALUE;
     }
+
+    if (sources == nullptr || sinks == nullptr || patch == nullptr) {
+        ALOGE("%s: uninitialized sources %d or sinks %d or patches %d", PREFIX(mInstance),
+                (sources == nullptr), (sinks == nullptr), (patch == nullptr));
+        return BAD_VALUE;
+    }
+
     // When the patch handle (*patch) is AUDIO_PATCH_HANDLE_NONE, it means
     // the framework wants to create a new patch. The handle has to be generated
     // by the HAL. Since handles generated this way can only be unique within
@@ -648,9 +737,13 @@ status_t DeviceHalAidl::createAudioPatch(unsigned int num_sources,
 }
 
 status_t DeviceHalAidl::releaseAudioPatch(audio_patch_handle_t patch) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s: patch: %d", PREFIX(mInstance), patch);
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     static_assert(AUDIO_PATCH_HANDLE_NONE == 0);
     if (patch == AUDIO_PATCH_HANDLE_NONE) {
         return BAD_VALUE;
@@ -673,7 +766,13 @@ status_t DeviceHalAidl::releaseAudioPatch(audio_patch_handle_t patch) {
 }
 
 status_t DeviceHalAidl::getAudioPort(struct audio_port* port) {
+
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (port == nullptr) {
+        ALOGE("%s: port not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     audio_port_v7 portV7;
@@ -683,10 +782,15 @@ status_t DeviceHalAidl::getAudioPort(struct audio_port* port) {
 }
 
 status_t DeviceHalAidl::getAudioPort(struct audio_port_v7 *port) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (port == nullptr) {
+        ALOGE("%s: port not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     bool isInput = VALUE_OR_RETURN_STATUS(::aidl::android::portDirection(port->role, port->type)) ==
@@ -695,7 +799,7 @@ status_t DeviceHalAidl::getAudioPort(struct audio_port_v7 *port) {
             ::aidl::android::legacy2aidl_audio_port_v7_AudioPort(*port, isInput));
     if (aidlPort.ext.getTag() != AudioPortExt::device) {
         ALOGE("%s: provided port is not a device port (module %s): %s",
-                __func__, mInstance.c_str(), aidlPort.toString().c_str());
+                PREFIX(mInstance), mInstance.c_str(), aidlPort.toString().c_str());
         return BAD_VALUE;
     }
     const auto& matchDevice = aidlPort.ext.get<AudioPortExt::device>().device;
@@ -714,11 +818,16 @@ status_t DeviceHalAidl::getAudioPort(struct audio_port_v7 *port) {
 
 status_t DeviceHalAidl::getAudioMixPort(const struct audio_port_v7 *devicePort,
                                         struct audio_port_v7 *mixPort) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (devicePort == nullptr || mixPort == nullptr ||
             devicePort->type != AUDIO_PORT_TYPE_DEVICE || mixPort->type != AUDIO_PORT_TYPE_MIX) {
+        ALOGE("%s: invalid device or mix port", PREFIX(mInstance));
         return BAD_VALUE;
     }
     const int32_t aidlHandle = VALUE_OR_RETURN_STATUS(
@@ -736,10 +845,16 @@ status_t DeviceHalAidl::getAudioMixPort(const struct audio_port_v7 *devicePort,
 }
 
 status_t DeviceHalAidl::setAudioPortConfig(const struct audio_port_config* config) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (config == nullptr) {
+        ALOGE("%s: config not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     bool isInput = VALUE_OR_RETURN_STATUS(::aidl::android::portDirection(
@@ -753,9 +868,14 @@ status_t DeviceHalAidl::setAudioPortConfig(const struct audio_port_config* confi
 }
 
 MicrophoneInfoProvider::Info const* DeviceHalAidl::getMicrophoneInfo() {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (!mModule) return {};
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return {};
+    }
     std::lock_guard l(mLock);
     if (mMicrophones.status == Microphones::Status::UNKNOWN) {
         TIME_CHECK();
@@ -767,7 +887,7 @@ MicrophoneInfoProvider::Info const* DeviceHalAidl::getMicrophoneInfo() {
         } else if (status == INVALID_OPERATION) {
             mMicrophones.status = Microphones::Status::NOT_SUPPORTED;
         } else {
-            ALOGE("%s: Unexpected status from 'IModule.getMicrophones': %d", __func__, status);
+            ALOGE("%s: Unexpected status from HAL: %d", PREFIX(mInstance), status);
             return {};
         }
     }
@@ -779,10 +899,16 @@ MicrophoneInfoProvider::Info const* DeviceHalAidl::getMicrophoneInfo() {
 
 status_t DeviceHalAidl::getMicrophones(
         std::vector<audio_microphone_characteristic_t>* microphones) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (microphones == nullptr) {
+        ALOGE("%s: microphones not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     auto staticInfo = getMicrophoneInfo();
@@ -801,10 +927,16 @@ status_t DeviceHalAidl::getMicrophones(
 
 status_t DeviceHalAidl::addDeviceEffect(
         const struct audio_port_config *device, sp<EffectHalInterface> effect) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (device == nullptr || effect == nullptr) {
+        ALOGE("%s: device or effect not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     bool isInput = VALUE_OR_RETURN_STATUS(::aidl::android::portDirection(
@@ -814,7 +946,7 @@ status_t DeviceHalAidl::addDeviceEffect(
                     *device, isInput, 0));
     if (requestedPortConfig.ext.getTag() != AudioPortExt::Tag::device) {
         ALOGE("%s: provided port config is not a device port config: %s",
-                __func__, requestedPortConfig.toString().c_str());
+                PREFIX(mInstance), requestedPortConfig.toString().c_str());
         return BAD_VALUE;
     }
     AudioPortConfig devicePortConfig;
@@ -832,10 +964,16 @@ status_t DeviceHalAidl::addDeviceEffect(
 }
 status_t DeviceHalAidl::removeDeviceEffect(
         const struct audio_port_config *device, sp<EffectHalInterface> effect) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (device == nullptr || effect == nullptr) {
+        ALOGE("%s: device or effect not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     bool isInput = VALUE_OR_RETURN_STATUS(::aidl::android::portDirection(
@@ -845,7 +983,7 @@ status_t DeviceHalAidl::removeDeviceEffect(
                     *device, isInput, 0));
     if (requestedPortConfig.ext.getTag() != AudioPortExt::Tag::device) {
         ALOGE("%s: provided port config is not a device port config: %s",
-                __func__, requestedPortConfig.toString().c_str());
+                PREFIX(mInstance), requestedPortConfig.toString().c_str());
         return BAD_VALUE;
     }
     AudioPortConfig devicePortConfig;
@@ -863,9 +1001,14 @@ status_t DeviceHalAidl::removeDeviceEffect(
 status_t DeviceHalAidl::getMmapPolicyInfos(
         media::audio::common::AudioMMapPolicyType policyType,
         std::vector<media::audio::common::AudioMMapPolicyInfo>* policyInfos) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     AudioMMapPolicyType mmapPolicyType = VALUE_OR_RETURN_STATUS(
             cpp2ndk_AudioMMapPolicyType(policyType));
 
@@ -883,9 +1026,14 @@ status_t DeviceHalAidl::getMmapPolicyInfos(
 }
 
 int32_t DeviceHalAidl::getAAudioMixerBurstCount() {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     int32_t mixerBurstCount = 0;
     if (mModule->getAAudioMixerBurstCount(&mixerBurstCount).isOk()) {
         return mixerBurstCount;
@@ -894,9 +1042,14 @@ int32_t DeviceHalAidl::getAAudioMixerBurstCount() {
 }
 
 int32_t DeviceHalAidl::getAAudioHardwareBurstMinUsec() {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     int32_t hardwareBurstMinUsec = 0;
     if (mModule->getAAudioHardwareBurstMinUsec(&hardwareBurstMinUsec).isOk()) {
         return hardwareBurstMinUsec;
@@ -905,9 +1058,14 @@ int32_t DeviceHalAidl::getAAudioHardwareBurstMinUsec() {
 }
 
 error::Result<audio_hw_sync_t> DeviceHalAidl::getHwAvSync() {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     int32_t aidlHwAvSync;
     RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(mModule->generateHwAvSyncId(&aidlHwAvSync)));
     return VALUE_OR_RETURN_STATUS(
@@ -916,14 +1074,22 @@ error::Result<audio_hw_sync_t> DeviceHalAidl::getHwAvSync() {
 
 status_t DeviceHalAidl::dump(int fd, const Vector<String16>& args) {
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     return mModule->dump(fd, Args(args).args(), args.size());
 }
 
 status_t DeviceHalAidl::supportsBluetoothVariableLatency(bool* supports) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+
+    ALOGD("%s", PREFIX(mInstance));
+
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (supports == nullptr) {
         return BAD_VALUE;
     }
@@ -932,32 +1098,39 @@ status_t DeviceHalAidl::supportsBluetoothVariableLatency(bool* supports) {
 
 status_t DeviceHalAidl::getSoundDoseInterface(const std::string& module,
                                               ::ndk::SpAIBinder* soundDoseBinder)  {
+
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
+
     if (soundDoseBinder == nullptr) {
         return BAD_VALUE;
     }
     if (mSoundDose == nullptr) {
-        ALOGE("%s failed to retrieve the sound dose interface for module %s",
-                __func__, module.c_str());
+        ALOGE("%s failed to retrieve the sound dose interface", PREFIX(mInstance));
         return BAD_VALUE;
     }
 
     if (mSoundDose == nullptr) {
-        ALOGE("%s failed to return the sound dose interface for module %s: not implemented",
-                  __func__,
-                  module.c_str());
+        ALOGE("%s failed to return the sound dose interface not implemented",
+                  PREFIX(mInstance));
         return NO_INIT;
     }
 
     *soundDoseBinder = mSoundDose->asBinder();
-    ALOGI("%s using audio AIDL HAL sound dose interface", __func__);
+    ALOGI("%s using audio AIDL HAL sound dose interface", PREFIX(mInstance));
     return OK;
 }
 
 status_t DeviceHalAidl::prepareToDisconnectExternalDevice(const struct audio_port_v7* port) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (port == nullptr) {
+        ALOGE("%s: port not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     const bool isInput = VALUE_OR_RETURN_STATUS(
@@ -966,10 +1139,13 @@ status_t DeviceHalAidl::prepareToDisconnectExternalDevice(const struct audio_por
     AudioPort aidlPort = VALUE_OR_RETURN_STATUS(
             ::aidl::android::legacy2aidl_audio_port_v7_AudioPort(*port, isInput));
     if (aidlPort.ext.getTag() != AudioPortExt::device) {
-        ALOGE("%s: provided port is not a device port (module %s): %s",
-              __func__, mInstance.c_str(), aidlPort.toString().c_str());
+        ALOGE("%s: provided port is not a device port: %s",
+              PREFIX(mInstance), aidlPort.toString().c_str());
         return BAD_VALUE;
     }
+
+    ALOGD("%s: device %s", PREFIX(mInstance), aidlPort.toString().c_str());
+
     status_t status = NO_ERROR;
     {
         std::lock_guard l(mLock);
@@ -990,10 +1166,14 @@ status_t DeviceHalAidl::prepareToDisconnectExternalDevice(const struct audio_por
 }
 
 status_t DeviceHalAidl::setConnectedState(const struct audio_port_v7 *port, bool connected) {
-    ALOGD("%p %s::%s", this, getClassName().c_str(), __func__);
+    ALOGD("%s", PREFIX(mInstance));
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     if (port == nullptr) {
+        ALOGE("%s: port not initialized", PREFIX(mInstance));
         return BAD_VALUE;
     }
     if (!connected) {
@@ -1012,8 +1192,8 @@ status_t DeviceHalAidl::setConnectedState(const struct audio_port_v7 *port, bool
     AudioPort aidlPort = VALUE_OR_RETURN_STATUS(
             ::aidl::android::legacy2aidl_audio_port_v7_AudioPort(*port, isInput));
     if (aidlPort.ext.getTag() != AudioPortExt::device) {
-        ALOGE("%s: provided port is not a device port (module %s): %s",
-                __func__, mInstance.c_str(), aidlPort.toString().c_str());
+        ALOGE("%s: provided port is not a device port: %s",
+                PREFIX(mInstance), aidlPort.toString().c_str());
         return BAD_VALUE;
     }
     std::lock_guard l(mLock);
@@ -1022,7 +1202,10 @@ status_t DeviceHalAidl::setConnectedState(const struct audio_port_v7 *port, bool
 
 status_t DeviceHalAidl::setSimulateDeviceConnections(bool enabled) {
     TIME_CHECK();
-    if (mModule == nullptr) return NO_INIT;
+    if (mModule == nullptr) {
+        ALOGE("%s: module not initialized", PREFIX(mInstance));
+        return NO_INIT;
+    }
     {
         std::lock_guard l(mLock);
         mMapper.resetUnusedPatchesAndPortConfigs();
@@ -1031,9 +1214,9 @@ status_t DeviceHalAidl::setSimulateDeviceConnections(bool enabled) {
     status_t status = statusTFromBinderStatus(mModule->setModuleDebug(debug));
     // This is important to log as it affects HAL behavior.
     if (status == OK) {
-        ALOGI("%s: set enabled: %d", __func__, enabled);
+        ALOGI("%s: set enabled: %d", PREFIX(mInstance), enabled);
     } else {
-        ALOGW("%s: set enabled to %d failed: %d", __func__, enabled, status);
+        ALOGW("%s: set enabled to %d failed: %d", PREFIX(mInstance), enabled, status);
     }
     return status;
 }
@@ -1048,7 +1231,7 @@ status_t DeviceHalAidl::filterAndRetrieveBtA2dpParameters(
                             mBluetoothA2dp->supportsOffloadReconfiguration(&supports)));
             result->addInt(key, supports ? 1 : 0);
         } else {
-            ALOGI("%s: no IBluetoothA2dp on %s", __func__, mInstance.c_str());
+            ALOGI("%s: no IBluetoothA2dp", PREFIX(mInstance));
             result->addInt(key, 0);
         }
     }
@@ -1065,7 +1248,7 @@ status_t DeviceHalAidl::filterAndRetrieveBtLeParameters(
                             mBluetoothLe->supportsOffloadReconfiguration(&supports)));
             result->addInt(key, supports ? 1 : 0);
         } else {
-            ALOGI("%s: no mBluetoothLe on %s", __func__, mInstance.c_str());
+            ALOGI("%s: no mBluetoothLe", PREFIX(mInstance));
             result->addInt(key, 0);
         }
     }
@@ -1077,7 +1260,7 @@ status_t DeviceHalAidl::filterAndUpdateBtA2dpParameters(AudioParameter &paramete
     std::optional<std::vector<VendorParameter>> reconfigureOffload;
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyBtA2dpSuspended),
-                    [&a2dpEnabled](const String8& trueOrFalse) {
+                    [&a2dpEnabled, this](const String8& trueOrFalse) {
                         if (trueOrFalse == AudioParameter::valueTrue) {
                             a2dpEnabled = false;  // 'suspended' == true
                             return OK;
@@ -1085,7 +1268,8 @@ status_t DeviceHalAidl::filterAndUpdateBtA2dpParameters(AudioParameter &paramete
                             a2dpEnabled = true;  // 'suspended' == false
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance),
                                 AudioParameter::keyBtA2dpSuspended, trueOrFalse.c_str());
                         return BAD_VALUE;
                     }));
@@ -1113,7 +1297,7 @@ status_t DeviceHalAidl::filterAndUpdateBtHfpParameters(AudioParameter &parameter
     IBluetooth::HfpConfig hfpConfig;
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyBtHfpEnable),
-                    [&hfpConfig](const String8& trueOrFalse) {
+                    [&hfpConfig, this](const String8& trueOrFalse) {
                         if (trueOrFalse == AudioParameter::valueTrue) {
                             hfpConfig.isEnabled = Boolean{ .value = true };
                             return OK;
@@ -1121,7 +1305,8 @@ status_t DeviceHalAidl::filterAndUpdateBtHfpParameters(AudioParameter &parameter
                             hfpConfig.isEnabled = Boolean{ .value = false };
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance),
                                 AudioParameter::keyBtHfpEnable, trueOrFalse.c_str());
                         return BAD_VALUE;
                     }));
@@ -1152,7 +1337,7 @@ status_t DeviceHalAidl::filterAndUpdateBtLeParameters(AudioParameter &parameters
     std::optional<std::vector<VendorParameter>> reconfigureOffload;
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyBtLeSuspended),
-                    [&leEnabled](const String8& trueOrFalse) {
+                    [&leEnabled, this](const String8& trueOrFalse) {
                         if (trueOrFalse == AudioParameter::valueTrue) {
                             leEnabled = false;  // 'suspended' == true
                             return OK;
@@ -1160,7 +1345,8 @@ status_t DeviceHalAidl::filterAndUpdateBtLeParameters(AudioParameter &parameters
                             leEnabled = true;  // 'suspended' == false
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance),
                                 AudioParameter::keyBtLeSuspended, trueOrFalse.c_str());
                         return BAD_VALUE;
                     }));
@@ -1192,7 +1378,7 @@ status_t DeviceHalAidl::filterAndUpdateBtScoParameters(AudioParameter &parameter
     IBluetooth::ScoConfig scoConfig;
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyBtSco),
-                    [&scoConfig](const String8& onOrOff) {
+                    [&scoConfig, this](const String8& onOrOff) {
                         if (onOrOff == AudioParameter::valueOn) {
                             scoConfig.isEnabled = Boolean{ .value = true };
                             return OK;
@@ -1200,8 +1386,8 @@ status_t DeviceHalAidl::filterAndUpdateBtScoParameters(AudioParameter &parameter
                             scoConfig.isEnabled = Boolean{ .value = false };
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
-                                AudioParameter::keyBtSco, onOrOff.c_str());
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance), AudioParameter::keyBtSco, onOrOff.c_str());
                         return BAD_VALUE;
                     }));
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
@@ -1212,7 +1398,7 @@ status_t DeviceHalAidl::filterAndUpdateBtScoParameters(AudioParameter &parameter
                     }));
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyBtNrec),
-                    [&scoConfig](const String8& onOrOff) {
+                    [&scoConfig, this](const String8& onOrOff) {
                         if (onOrOff == AudioParameter::valueOn) {
                             scoConfig.isNrecEnabled = Boolean{ .value = true };
                             return OK;
@@ -1220,13 +1406,13 @@ status_t DeviceHalAidl::filterAndUpdateBtScoParameters(AudioParameter &parameter
                             scoConfig.isNrecEnabled = Boolean{ .value = false };
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
-                                AudioParameter::keyBtNrec, onOrOff.c_str());
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance), AudioParameter::keyBtNrec, onOrOff.c_str());
                         return BAD_VALUE;
                     }));
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyBtScoWb),
-                    [&scoConfig](const String8& onOrOff) {
+                    [&scoConfig, this](const String8& onOrOff) {
                         if (onOrOff == AudioParameter::valueOn) {
                             scoConfig.mode = IBluetooth::ScoConfig::Mode::SCO_WB;
                             return OK;
@@ -1234,8 +1420,8 @@ status_t DeviceHalAidl::filterAndUpdateBtScoParameters(AudioParameter &parameter
                             scoConfig.mode = IBluetooth::ScoConfig::Mode::SCO;
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
-                                AudioParameter::keyBtScoWb, onOrOff.c_str());
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance), AudioParameter::keyBtScoWb, onOrOff.c_str());
                         return BAD_VALUE;
                     }));
     if (mBluetooth != nullptr && scoConfig != IBluetooth::ScoConfig{}) {
@@ -1248,7 +1434,7 @@ status_t DeviceHalAidl::filterAndUpdateBtScoParameters(AudioParameter &parameter
 status_t DeviceHalAidl::filterAndUpdateScreenParameters(AudioParameter &parameters) {
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyScreenState),
-                    [&](const String8& onOrOff) -> status_t {
+                    [&, this](const String8& onOrOff) -> status_t {
                         std::optional<bool> isTurnedOn;
                         if (onOrOff == AudioParameter::valueOn) {
                             isTurnedOn = true;
@@ -1256,7 +1442,8 @@ status_t DeviceHalAidl::filterAndUpdateScreenParameters(AudioParameter &paramete
                             isTurnedOn = false;
                         }
                         if (!isTurnedOn.has_value()) {
-                            ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                            ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                    PREFIX(mInstance),
                                     AudioParameter::keyScreenState, onOrOff.c_str());
                             return BAD_VALUE;
                         }
@@ -1265,7 +1452,7 @@ status_t DeviceHalAidl::filterAndUpdateScreenParameters(AudioParameter &paramete
                     }));
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<int>(
                     parameters, String8(AudioParameter::keyScreenRotation),
-            [&](int rotationDegrees) -> status_t {
+            [&, this](int rotationDegrees) -> status_t {
                 IModule::ScreenRotation rotation;
                 switch (rotationDegrees) {
                     case 0: rotation = IModule::ScreenRotation::DEG_0; break;
@@ -1273,7 +1460,8 @@ status_t DeviceHalAidl::filterAndUpdateScreenParameters(AudioParameter &paramete
                     case 180: rotation = IModule::ScreenRotation::DEG_180; break;
                     case 270: rotation = IModule::ScreenRotation::DEG_270; break;
                     default:
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value %d",
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value %d",
+                                PREFIX(mInstance),
                                 AudioParameter::keyScreenRotation, rotationDegrees);
                         return BAD_VALUE;
                 }
@@ -1287,7 +1475,7 @@ status_t DeviceHalAidl::filterAndUpdateTelephonyParameters(AudioParameter &param
     ITelephony::TelecomConfig telConfig;
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyTtyMode),
-                    [&telConfig](const String8& mode) {
+                    [&telConfig, this](const String8& mode) {
                         if (mode == AudioParameter::valueTtyModeOff) {
                             telConfig.ttyMode = TtyMode::OFF;
                             return OK;
@@ -1301,13 +1489,13 @@ status_t DeviceHalAidl::filterAndUpdateTelephonyParameters(AudioParameter &param
                             telConfig.ttyMode = TtyMode::VCO;
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
-                                AudioParameter::keyTtyMode, mode.c_str());
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance), AudioParameter::keyTtyMode, mode.c_str());
                         return BAD_VALUE;
                     }));
     (void)VALUE_OR_RETURN_STATUS(filterOutAndProcessParameter<String8>(
                     parameters, String8(AudioParameter::keyHacSetting),
-                    [&telConfig](const String8& onOrOff) {
+                    [&telConfig, this](const String8& onOrOff) {
                         if (onOrOff == AudioParameter::valueHacOn) {
                             telConfig.isHacEnabled = Boolean{ .value = true };
                             return OK;
@@ -1315,8 +1503,8 @@ status_t DeviceHalAidl::filterAndUpdateTelephonyParameters(AudioParameter &param
                             telConfig.isHacEnabled = Boolean{ .value = false };
                             return OK;
                         }
-                        ALOGE("setParameters: parameter key \"%s\" has invalid value \"%s\"",
-                                AudioParameter::keyHacSetting, onOrOff.c_str());
+                        ALOGE("%s setParameters: parameter key \"%s\" has invalid value \"%s\"",
+                                PREFIX(mInstance), AudioParameter::keyHacSetting, onOrOff.c_str());
                         return BAD_VALUE;
                     }));
     if (mTelephony != nullptr && telConfig != ITelephony::TelecomConfig{}) {
