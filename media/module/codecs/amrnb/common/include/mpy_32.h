@@ -229,14 +229,10 @@ extern "C"
         product32 = ((Word32) L_var1_hi * L_var2_lo) >> 15;
 
         /* L_product = L_mac (L_product, result, 1, pOverflow); */
-        L_sum = L_product + (product32 << 1);
-
-        if ((L_product ^ product32) > 0)
+        if (__builtin_add_overflow(L_product, (product32 << 1), &L_sum))
         {
-            if ((L_sum ^ L_product) < 0)
-            {
-                L_sum = (L_product < 0) ? MIN_32 : MAX_32;
-            }
+            // saturating...
+            L_sum = (L_product < 0) ? MIN_32 : MAX_32;
         }
 
         L_product = L_sum;
@@ -245,14 +241,10 @@ extern "C"
         product32 = ((Word32) L_var1_lo * L_var2_hi) >> 15;
 
         /* L_product = L_mac (L_product, result, 1, pOverflow); */
-        L_sum = L_product + (product32 << 1);
-
-        if ((L_product ^ product32) > 0)
+        if (__builtin_add_overflow(L_product, (product32 << 1), &L_sum))
         {
-            if ((L_sum ^ L_product) < 0)
-            {
-                L_sum = (L_product < 0) ? MIN_32 : MAX_32;
-            }
+            // saturating...
+            L_sum = (L_product < 0) ? MIN_32 : MAX_32;
         }
 
         /*----------------------------------------------------------------------------

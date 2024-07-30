@@ -145,15 +145,11 @@ extern "C"
     {
         Word32 L_sum;
 
-        L_sum = L_var1 + L_var2;
-
-        if ((L_var1 ^ L_var2) >= 0)
+        if (__builtin_add_overflow(L_var1, L_var2, &L_sum))
         {
-            if ((L_sum ^ L_var1) < 0)
-            {
-                L_sum = (L_var1 < 0) ? MIN_32 : MAX_32;
-                *pOverflow = 1;
-            }
+            // saturating...
+            L_sum = (L_var1 < 0) ? MIN_32 : MAX_32;
+            *pOverflow = 1;
         }
 
         return (L_sum);

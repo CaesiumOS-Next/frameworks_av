@@ -179,15 +179,11 @@ extern "C"
 
         result = ((Word32)L_var1_lo * var2) >> 15;
 
-        L_sum  =  L_product + (result << 1);
-
-        if ((L_product ^ result) > 0)
+        if (__builtin_add_overflow(L_product, (result << 1), &L_sum))
         {
-            if ((L_sum ^ L_product) < 0)
-            {
-                L_sum = (L_product < 0) ? MIN_32 : MAX_32;
-                *pOverflow = 1;
-            }
+            // saturating...
+            L_sum = (L_product < 0) ? MIN_32 : MAX_32;
+            *pOverflow = 1;
         }
         return (L_sum);
 

@@ -150,16 +150,12 @@ extern "C"
         result = (Word32) var1 * var2;
         if (result != (Word32) 0x40000000L)
         {
-            L_sum = (result << 1) + L_var3;
-
             /* Check if L_sum and L_var_3 share the same sign */
-            if ((L_var3 ^ result) > 0)
+            if (__builtin_add_overflow((result << 1), L_var3, &L_sum))
             {
-                if ((L_sum ^ L_var3) < 0)
-                {
-                    L_sum = (L_var3 < 0) ? MIN_32 : MAX_32;
-                    *pOverflow = 1;
-                }
+                // saturating...
+                L_sum = (L_var3 < 0) ? MIN_32 : MAX_32;
+                *pOverflow = 1;
             }
         }
         else
