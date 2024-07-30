@@ -61,7 +61,7 @@ flag {
 }
 
 flag {
-  name: "native_capabilites"
+  name: "native_capabilities"
   namespace: "codec_fwk"
   description: "Feature flag for native codec capabilities"
   bug: "306023029"
