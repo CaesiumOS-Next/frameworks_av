@@ -718,6 +718,10 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
     if (mInputMetEos) {
         return;
     }
+    if (android::media::codec::provider_->input_surface_throttle()
+            && mInputSurface != nullptr) {
+        mInputSurface->onInputBufferEmptied();
+    }
     {
         Mutexed<Output>::Locked output(mOutput);
         if (!output->buffers ||
