@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92acc683_143fb68e",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-07-30T08:47:56Z",
+      "side": 1,
+      "message": "should we move to once we get result from HAL, so HAL\u0027s response can be printed as well? \nsame for all getter APIs.",
+      "revId": "8f7246d2dd463ccd58ee35cdb34632fef471519e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
