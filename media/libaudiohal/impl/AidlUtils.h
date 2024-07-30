@@ -25,6 +25,12 @@
 
 namespace android {
 
+/*
+* Prefix macro used with DeviceHalAidl and Hal2AidlMapper to
+* print function names along with Module name.
+*/
+#define PREFIX(instance) (std::string(__func__) + " [Module: " + instance + "]").c_str()
+
 class HalDeathHandler {
   public:
     static HalDeathHandler& getInstance();
