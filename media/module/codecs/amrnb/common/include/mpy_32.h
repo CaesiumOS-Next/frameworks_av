@@ -229,7 +229,7 @@ extern "C"
         product32 = ((Word32) L_var1_hi * L_var2_lo) >> 15;
 
         /* L_product = L_mac (L_product, result, 1, pOverflow); */
-        L_sum = L_product + (product32 << 1);
+        __builtin_add_overflow(L_product, (product32 << 1), &L_sum);
 
         if ((L_product ^ product32) > 0)
         {
@@ -245,7 +245,7 @@ extern "C"
         product32 = ((Word32) L_var1_lo * L_var2_hi) >> 15;
 
         /* L_product = L_mac (L_product, result, 1, pOverflow); */
-        L_sum = L_product + (product32 << 1);
+        __builtin_add_overflow(L_product, (product32 << 1), &L_sum);
 
         if ((L_product ^ product32) > 0)
         {

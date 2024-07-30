@@ -569,7 +569,7 @@ __attribute__((no_sanitize("integer")))
 static_vo Word32 L_add (Word32 L_var1, Word32 L_var2)
 {
     Word32 L_var_out;
-    L_var_out = L_var1 + L_var2;
+    __builtin_add_overflow(L_var1, L_var2, &L_var_out);
     if (((L_var1 ^ L_var2) & MIN_32) == 0)
     {
         if ((L_var_out ^ L_var1) & MIN_32)
@@ -616,7 +616,7 @@ __attribute__((no_sanitize("integer")))
 static_vo Word32 L_sub (Word32 L_var1, Word32 L_var2)
 {
     Word32 L_var_out;
-    L_var_out = L_var1 - L_var2;
+    __builtin_sub_overflow(L_var1, L_var2, &L_var_out);
     if (((L_var1 ^ L_var2) & MIN_32) != 0)
     {
         if ((L_var_out ^ L_var1) & MIN_32)
