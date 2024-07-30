@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ccba7e_5313c5b1",
+        "filename": "media/module/codecserviceregistrant/fuzzer/codecServiceRegistrant_fuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-07-30T21:56:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94df07f0_19a1f0a6",
+      "range": {
+        "startLine": 174,
+        "startChar": 2,
+        "endLine": 174,
+        "endChar": 29
+      },
+      "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f84f1c22_96bd8f87",
@@ -138,6 +162,30 @@
       "side": 1,
       "message": "**Lajos**,\nAdded the comment to indicate the function\u0027s purpose.\nAs per **Ray**\u0027s suggestion, I have made this change. **Ray**\u0027s reference CL is [here](https://android-review.googlesource.com/c/platform/frameworks/av/+/3073317).\n\nRenamed `RegisterCodecServicesActual()` to `RegisterCodecServicesWithExistingThreadpool()`.",
       "parentUuid": "f84f1c22_96bd8f87",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 37
+      },
+      "revId": "07b0864a388c705b800237534fb8b5e7bfd0754e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71643850_746e937e",
+        "filename": "media/module/codecserviceregistrant/include/codecserviceregistrant/CodecServiceRegistrant.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-07-30T21:56:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6315e6d_b328ba97",
       "range": {
         "startLine": 21,
         "startChar": 16,
