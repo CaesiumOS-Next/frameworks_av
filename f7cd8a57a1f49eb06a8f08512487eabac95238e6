@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c794ed0_edefe4c1",
+        "filename": "media/codec2/sfplugin/Codec2Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-07-30T22:01:05Z",
+      "side": 1,
+      "message": "This setter does not need v0 dataspace (see https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/ui/include/ui/GraphicBufferMapper.h;drc\u003d434bc98a0fec826dfdffc19658ba12b9a9da606c;l\u003d158). It is an implementation error in the setter that it only handles v0 dataspace. As such I would prefer not fixing that issue here as to not mask that error.",
+      "range": {
+        "startLine": 1220,
+        "startChar": 29,
+        "endLine": 1220,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c8f98f05_aeb1c599",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/Codec2Buffer.cpp",
+              "range": {
+                "startLine": 1216,
+                "startChar": 0,
+                "endLine": 1220,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f7cd8a57a1f49eb06a8f08512487eabac95238e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
