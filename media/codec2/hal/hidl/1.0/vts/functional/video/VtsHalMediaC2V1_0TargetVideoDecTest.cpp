@@ -105,6 +105,7 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
         getParams();
 
         mDisableTest = false;
+        mTunnel = false;
         mClient = android::Codec2Client::CreateFromService(
                 mInstanceName.c_str(),
                 !bool(android::Codec2Client::CreateFromService("default", true)));
@@ -147,6 +148,13 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
         if (secureModeTuning.value == C2Config::SM_READ_PROTECTED ||
             secureModeTuning.value == C2Config::SM_READ_PROTECTED_WITH_ENCRYPTED) {
             mDisableTest = true;
+        }
+
+        std::vector<std::unique_ptr<C2Param>> outParams;
+        c2err = mComponent->query({}, {C2PortTunnelHandleTuning::output::PARAM_TYPE}, C2_DONT_BLOCK,
+                                  &outParams);
+        if (c2err == C2_OK && outParams.size() == 1u) {
+            mTunnel = true;
         }
 
         bool valid = getFileNames(mStreamIndex);
@@ -308,6 +316,7 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
 
     bool mEos;
     bool mDisableTest;
+    bool mTunnel;
     bool mMd5Enable;
     bool mTimestampDevTest;
     uint64_t mTimestampUs;
@@ -609,6 +618,7 @@ class Codec2VideoDecDecodeTest : public Codec2VideoDecHidlTestBase,
 TEST_P(Codec2VideoDecDecodeTest, DecodeTest) {
     description("Decodes input file");
     if (mDisableTest) GTEST_SKIP() << "Test is disabled";
+    if (mTunnel) GTEST_SKIP() << "Test is disabled for tunnel component";
 
     bool signalEOS = std::get<3>(GetParam());
     surfaceMode_t surfMode = std::get<4>(GetParam());
@@ -703,6 +713,7 @@ TEST_P(Codec2VideoDecDecodeTest, DecodeTest) {
 TEST_P(Codec2VideoDecHidlTest, AdaptiveDecodeTest) {
     description("Adaptive Decode Test");
     if (mDisableTest) GTEST_SKIP() << "Test is disabled";
+    if (mTunnel) GTEST_SKIP() << "Test is disabled for tunnel component";
     if (!(strcasestr(mMime.c_str(), "avc") || strcasestr(mMime.c_str(), "hevc") ||
           strcasestr(mMime.c_str(), "vp8") || strcasestr(mMime.c_str(), "vp9") ||
           strcasestr(mMime.c_str(), "mpeg2") || strcasestr(mMime.c_str(), "av01"))) {
@@ -810,6 +821,7 @@ TEST_P(Codec2VideoDecHidlTest, AdaptiveDecodeTest) {
 TEST_P(Codec2VideoDecHidlTest, ThumbnailTest) {
     description("Test Request for thumbnail");
     if (mDisableTest) GTEST_SKIP() << "Test is disabled";
+    if (mTunnel) GTEST_SKIP() << "Test is disabled for tunnel component";
 
     android::Vector<FrameInfo> Info;
     int32_t numCsds = populateInfoVector(mInfoFile, &Info, mTimestampDevTest, &mTimestampUslist);
@@ -884,6 +896,7 @@ TEST_P(Codec2VideoDecHidlTest, EOSTest) {
 TEST_P(Codec2VideoDecHidlTest, FlushTest) {
     description("Tests Flush calls");
     if (mDisableTest) GTEST_SKIP() << "Test is disabled";
+    if (mTunnel) GTEST_SKIP() << "Test is disabled for tunnel component";
 
     ASSERT_EQ(mComponent->start(), C2_OK);
 
@@ -952,6 +965,7 @@ TEST_P(Codec2VideoDecHidlTest, FlushTest) {
 TEST_P(Codec2VideoDecHidlTest, DecodeTestEmptyBuffersInserted) {
     description("Decode with multiple empty input frames");
     if (mDisableTest) GTEST_SKIP() << "Test is disabled";
+    if (mTunnel) GTEST_SKIP() << "Test is disabled for tunnel component";
 
     std::ifstream eleStream, eleInfo;
 
@@ -1019,6 +1033,7 @@ class Codec2VideoDecCsdInputTests : public Codec2VideoDecHidlTestBase,
 TEST_P(Codec2VideoDecCsdInputTests, CSDFlushTest) {
     description("Tests codecs for flush at different states");
     if (mDisableTest) GTEST_SKIP() << "Test is disabled";
+    if (mTunnel) GTEST_SKIP() << "Test is disabled for tunnel component";
 
     android::Vector<FrameInfo> Info;
 
