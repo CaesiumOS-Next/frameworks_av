@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276bdff4_5f543f14",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-31T18:06:44Z",
+      "side": 1,
+      "message": "maybe have a helper method like `isInPausedState`?",
+      "range": {
+        "startLine": 422,
+        "startChar": 8,
+        "endLine": 424,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3bac6232_d15a2a9d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 422,
+                "startChar": 0,
+                "endLine": 425,
+                "endChar": 0
+              },
+              "replacement": "    if (isInPausedState(state)) {\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 489,
+                "startChar": 0,
+                "endLine": 492,
+                "endChar": 0
+              },
+              "replacement": "    if (isInPausedState(state)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "111839b1aca19c8a9df15a139f4a798292a3c476",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
