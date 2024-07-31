@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30eb475f_1c87e217",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2467,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-31T20:36:16Z",
+      "side": 1,
+      "message": "Is it safe not to hold the lock until checking hasInputSurface?",
+      "range": {
+        "startLine": 2257,
+        "startChar": 0,
+        "endLine": 2467,
+        "endChar": 26
+      },
+      "revId": "d4ba8464d8af1112c4e711bd1a23a69f08ae2f75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
