@@ -574,6 +574,9 @@ public:
      * If the track was previously paused, volume is ramped up over the first mix buffer.
      */
             status_t        start();
+private:
+            status_t        start_l();
+public:
 
     /* Stop a track.
      * In static buffer mode, the track is stopped immediately.
@@ -612,7 +615,9 @@ public:
      * and then the track is marked as paused.  It can be resumed with ramp up by start().
      */
             void        pause();
-
+        private:
+            void        pause_l();
+        public:
     /* Pause and wait (with timeout) for the audio track to ramp to silence.
      *
      * \param timeout is the time limit to wait before returning.
