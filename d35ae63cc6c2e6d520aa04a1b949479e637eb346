@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32aa5932_33760388",
+        "filename": "camera/CameraBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 2027575
+      },
+      "writtenOn": "2024-07-31T13:43:40Z",
+      "side": 1,
+      "message": "a comment!",
+      "range": {
+        "startLine": 291,
+        "startChar": 1,
+        "endLine": 291,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "40c38220_086ff639",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "camera/CameraBase.cpp",
+              "range": {
+                "startLine": 291,
+                "startChar": 0,
+                "endLine": 291,
+                "endChar": 0
+              },
+              "replacement": "// This is a temporary hack to allow Camera2 to be built with the CameraBase\n// class.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d35ae63cc6c2e6d520aa04a1b949479e637eb346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
