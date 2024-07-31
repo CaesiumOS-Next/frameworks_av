@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa4aeb94_6cc4975d",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2845,
+      "author": {
+        "id": 1883619
+      },
+      "writtenOn": "2024-07-31T21:00:27Z",
+      "side": 1,
+      "message": "Although, we came up with this patch but I didn\u0027t really get why would one need to pause the offload or direct track when setting the output device.\n\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/2733395\n\nWe didn\u0027t the intention from the above gerrit.",
+      "revId": "f3a292b65f7d10f366e483669a47894f74909d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
