@@ -57,6 +57,24 @@
       "parentUuid": "fa4aeb94_6cc4975d",
       "revId": "f3a292b65f7d10f366e483669a47894f74909d46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802ca680_30ae6a7c",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2845,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-07-31T22:04:04Z",
+      "side": 1,
+      "message": "Actually, We didn\u0027t really face any issue when setOutputDevice API is called without pause or stop.\nAgree, there is audio data drop when paused.\n\nso then, do we have revisit the CL 2733395?\n\nAll our test cases with test apps are facing issues, due to this uncertainity.",
+      "parentUuid": "861c2bd0_5b0b0793",
+      "revId": "f3a292b65f7d10f366e483669a47894f74909d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
