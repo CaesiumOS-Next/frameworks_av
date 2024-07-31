@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6331749_22a173e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-07-31T00:32:40Z",
+      "side": 1,
+      "message": "I don\u0027t know if Gantry picks up the aconfig modification correctly",
+      "revId": "1de70780ac72c9ca397a4fe4efc6a4bf1ed0e6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
