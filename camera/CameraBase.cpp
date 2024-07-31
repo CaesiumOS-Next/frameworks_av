@@ -288,4 +288,6 @@ status_t CameraBase<TCam, TCamTraits>::getCameraInfo(int cameraId,
 
 template class CameraBase<Camera>;
 
+template class CameraBase<Camera2>;
+
 } // namespace android
