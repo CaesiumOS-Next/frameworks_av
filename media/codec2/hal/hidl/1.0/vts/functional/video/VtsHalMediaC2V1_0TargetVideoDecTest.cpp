@@ -149,6 +149,15 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
             mDisableTest = true;
         }
 
+        C2TunneledModeStruct tunneledModeStruct{};
+        std::vector <C2Param *> params = {reinterpret_cast<C2Param *>(&tunneledModeStruct)};
+        mComponent->query(params, {}, C2_MAY_BLOCK, nullptr);
+        if (tunneledModeStruct.mode != C2TunneledModeStruct::NONE) {
+            ALOGV("Disabling test for tunneled decoders, tunneled mode = %d",
+                  tunneledModeStruct.mode);
+            mDisableTest = true;
+        }
+
         bool valid = getFileNames(mStreamIndex);
         if (!valid) {
             GTEST_SKIP() << "No test file for  mime " << mMime << " index: " << mStreamIndex;
