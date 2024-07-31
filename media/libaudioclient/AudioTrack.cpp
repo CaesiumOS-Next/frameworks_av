@@ -1673,15 +1673,8 @@ status_t AudioTrack::setOutputDevice(audio_port_handle_t deviceId) {
         mSelectedDeviceId = deviceId;
         if (mStatus == NO_ERROR) {
             if (isOffloadedOrDirect_l()) {
-                if (isPlaying_l()) {
-                    ALOGW("%s(%d). Offloaded or Direct track is not STOPPED or FLUSHED. "
-                          "State: %s.",
-                            __func__, mPortId, stateToString(mState));
-                    result = INVALID_OPERATION;
-                } else {
-                    ALOGD("%s(%d): creating a new AudioTrack", __func__, mPortId);
-                    result = restoreTrack_l("setOutputDevice", true /* forceRestore */);
-                }
+                ALOGD("%s(%d): creating a new AudioTrack", __func__, mPortId);
+                result = restoreTrack_l("setOutputDevice", true /* forceRestore */);
             } else {
                 // allow track invalidation when track is not playing to propagate
                 // the updated mSelectedDeviceId
@@ -2846,6 +2839,14 @@ status_t AudioTrack::restoreTrack_l(const char *from, bool forceRestore)
         return result;
     }
 
+    bool isTrackPausedInternal = false;
+    if (forceRestore && isOffloadedOrDirect_l() && isPlaying_()) {
+        // do internal pause
+        mAudioTrack->pause();
+        isTrackPausedInternal = true;
+        ALOGV("%s(%d): do internal pause", __func__, mPortId);
+    }
+
     // Save so we can return count since creation.
     mUnderrunCountOffset = getUnderrunCount_l();
 
@@ -2934,7 +2935,8 @@ retry:
                     "%s(%d) startThresholdInFrames changing from %u to %u",
                     __func__, mPortId, originalStartThresholdInFrames, currentThreshold);
         }
-        if (mState == STATE_ACTIVE) {
+
+        if (mState == STATE_ACTIVE || isTrackPausedInternal) {
             mAudioTrack->start(&result);
         }
         // server resets to zero so we offset
