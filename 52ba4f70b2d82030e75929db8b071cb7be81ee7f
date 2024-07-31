@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6f15a4e_d37f62f6",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-07-31T18:11:59Z",
+      "side": 1,
+      "message": "Thanks for the contributions!\nnit: maybe a helper method like `isStreamDrained()`?",
+      "range": {
+        "startLine": 802,
+        "startChar": 8,
+        "endLine": 802,
+        "endChar": 91
+      },
+      "revId": "52ba4f70b2d82030e75929db8b071cb7be81ee7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
