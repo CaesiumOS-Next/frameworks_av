@@ -50,6 +50,30 @@
       ],
       "revId": "111839b1aca19c8a9df15a139f4a798292a3c476",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c4944a_61e7963f",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-07-31T20:03:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "276bdff4_5f543f14",
+      "range": {
+        "startLine": 422,
+        "startChar": 8,
+        "endLine": 424,
+        "endChar": 50
+      },
+      "revId": "111839b1aca19c8a9df15a139f4a798292a3c476",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
