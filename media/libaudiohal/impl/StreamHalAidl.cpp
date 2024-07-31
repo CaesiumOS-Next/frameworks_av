@@ -798,9 +798,10 @@ status_t StreamOutHalAidl::supportsDrain(bool *supportsDrain) {
 status_t StreamOutHalAidl::drain(bool earlyNotify) {
     if (!mStream) return NO_INIT;
 
-    if(const auto state = getState(); state == StreamDescriptor::State::IDLE) {
-        ALOGD("%p %s stream already in IDLE state", this, __func__);
-        if(mContext.isAsynchronous()) onDrainReady();
+    if (const auto state = getState();
+        state == StreamDescriptor::State::IDLE || state == StreamDescriptor::State::STANDBY) {
+        ALOGD("%p %s stream already in %s", this, __func__, toString(state).c_str());
+        if (mContext.isAsynchronous()) onDrainReady();
         return OK;
     }
 
