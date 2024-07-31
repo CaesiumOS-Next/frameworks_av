@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "740b34d6_55c12f9a",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2843,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-31T21:13:03Z",
+      "side": 1,
+      "message": "nit: perhaps just.\n\n    isOffloadOrDirect_l() \u0026\u0026 isPlaying_l()",
+      "range": {
+        "startLine": 2843,
+        "startChar": 8,
+        "endLine": 2843,
+        "endChar": 24
+      },
+      "revId": "f3a292b65f7d10f366e483669a47894f74909d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa4aeb94_6cc4975d",
         "filename": "media/libaudioclient/AudioTrack.cpp",
         "patchSetId": 7
@@ -14,6 +37,24 @@
       "writtenOn": "2024-07-31T21:00:27Z",
       "side": 1,
       "message": "Although, we came up with this patch but I didn\u0027t really get why would one need to pause the offload or direct track when setting the output device.\n\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/2733395\n\nWe didn\u0027t the intention from the above gerrit.",
+      "revId": "f3a292b65f7d10f366e483669a47894f74909d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861c2bd0_5b0b0793",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2845,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-31T21:13:03Z",
+      "side": 1,
+      "message": "i thought there was some reason you needed to issue a hw pause to the track.  now that you mention it, there are 2 other issues with attempting to restore a direct or offloaded track which is actively playing.\n\n    1) you drop a lot of audio data (offloaded).\n    2) the timestamps go back to 0. this is not an issue if you are flushed or stopped because the new track starts at timestamp 0 which is what the app expects anyhow.",
+      "parentUuid": "fa4aeb94_6cc4975d",
       "revId": "f3a292b65f7d10f366e483669a47894f74909d46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
