@@ -742,7 +742,10 @@ status_t AudioTrack::set(
 status_t AudioTrack::start()
 {
     AutoMutex lock(mLock);
+    return start_l();
+}
 
+status_t AudioTrack::start_l() {
     if (mState == STATE_ACTIVE) {
         return INVALID_OPERATION;
     }
@@ -1050,7 +1053,10 @@ void AudioTrack::pause()
             .set(AMEDIAMETRICS_PROP_EXECUTIONTIMENS, (int64_t)(systemTime() - beginNs))
             .set(AMEDIAMETRICS_PROP_STATE, stateToString(mState))
             .record(); });
+    pause_l();
+}
 
+void AudioTrack::pause_l() {
     ALOGV("%s(%d): prior state:%s", __func__, mPortId, stateToString(mState));
 
     if (mState == STATE_ACTIVE) {
@@ -1673,14 +1679,16 @@ status_t AudioTrack::setOutputDevice(audio_port_handle_t deviceId) {
         mSelectedDeviceId = deviceId;
         if (mStatus == NO_ERROR) {
             if (isOffloadedOrDirect_l()) {
+                bool isPaused = false;
                 if (isPlaying_l()) {
-                    ALOGW("%s(%d). Offloaded or Direct track is not STOPPED or FLUSHED. "
-                          "State: %s.",
-                            __func__, mPortId, stateToString(mState));
-                    result = INVALID_OPERATION;
-                } else {
-                    ALOGD("%s(%d): creating a new AudioTrack", __func__, mPortId);
-                    result = restoreTrack_l("setOutputDevice", true /* forceRestore */);
+                    ALOGV("%s(%d): do internal pause", __func__, mPortId);
+                    pause_l();
+                    isPaused = true;
+                }
+                ALOGD("%s(%d): creating a new AudioTrack", __func__, mPortId);
+                result = restoreTrack_l("setOutputDevice", true /* forceRestore */);
+                if (isPaused) {
+                    start_l();
                 }
             } else {
                 // allow track invalidation when track is not playing to propagate
