@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6fe54a8_b0983df6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-31T19:28:36Z",
+      "side": 1,
+      "message": "Can you please put the bug number here?\n\nBug: 354116302",
+      "revId": "013a6331d9b913d1016f32e68e4ee1c157cd50d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a24059d5_7a2c3bb2",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-07-31T19:28:36Z",
+      "side": 1,
+      "message": "nit: I would prefer that this pause logic be put inside restoreTrack_l() so that it is more general to cases where forceRestore is true.\n\nmaybe mAudioTrack-\u003epause() will be sufficient.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudioclient/AudioTrack.cpp;drc\u003dcdf9df34fc5ee1629b45ae6a88e92e36a09e11d7;l\u003d2848\n\nand note we also call mAudioTrack-\u003estart(\u0026result); again here within restoreTrack_l().\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudioclient/AudioTrack.cpp;drc\u003dcdf9df34fc5ee1629b45ae6a88e92e36a09e11d7;l\u003d2938",
+      "range": {
+        "startLine": 1682,
+        "startChar": 0,
+        "endLine": 1682,
+        "endChar": 38
+      },
+      "revId": "013a6331d9b913d1016f32e68e4ee1c157cd50d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
