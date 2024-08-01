@@ -152,6 +152,7 @@ namespace {
 }
 
 int C2SyncVariables::lock() {
+    ALOGD("C2SyncVar lock %p", this);
     uint32_t old = FUTEX_UNLOCKED;
 
     // see if we can lock uncontended immediately (if previously unlocked)
@@ -190,6 +191,7 @@ int C2SyncVariables::lock() {
 }
 
 int C2SyncVariables::unlock() {
+    ALOGD("C2SyncVar unlock %p", this);
     // TRICKY: here we assume that we are holding this lock
 
     // unlock the lock immediately (since we were holding it)
@@ -314,6 +316,7 @@ void C2SyncVariables::notifyAll() {
 void C2SyncVariables::invalidate() {
     mCond++;
     (void) syscall(__NR_futex, &mCond, FUTEX_REQUEUE, INT_MAX, (void *)INT_MAX, &mLock, 0);
+    ALOGD("C2SyncVar invalidating %p", this);
 }
 
 void C2SyncVariables::clearLockIfNecessary() {
@@ -325,6 +328,7 @@ void C2SyncVariables::clearLockIfNecessary() {
 
     bool locked = tryLockFor(kTestLockDurationMs);
     unlock();
+    ALOGD("C2SyncVar checking lock is held for clearing: locked(%d) %p", locked, this);
 
     if (!locked) {
         ALOGW("A dead process might be holding the lock");
