@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6459be01_3ca1eacf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1148858
+      },
+      "writtenOn": "2024-08-01T20:24:40Z",
+      "side": 1,
+      "message": "Hello. \n\nThe function configureVideoTunnel(...) is not propagated by the codec2 framework to C2Component nor C2ComponentInterface, which is what our codec2 components use. We don\u0027t have a way to implement the function configureVideoTunnel(..) and return C2_OK for the tunnel decoders. The default implementation in C2Component returns C2_OMMITTED so this patch fails to skip the tests for tunnel decoders since the variable mTunnel is always false.\n\nI think the best way for the vts suite to evaluate whether a particular decoder is tunneled or not would be replicating something like what is done in function CCodec::configureTunnelVideoPlayback(..).\n\nhttps://android.googlesource.com/platform/frameworks/av/+/1720e4cb724865a5995b9b7362b87614bdb0915a/media/codec2/sfplugin/CCodec.cpp#2955\n\nThanks,",
+      "revId": "5ae83b5c18fea5b5ce5bdedcb91910cab1d46454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
