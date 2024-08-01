@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2180d9b_de6dd544",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-01T16:27:23Z",
+      "side": 1,
+      "message": "I will leave Mikhail for the +2",
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031e76b2_bdc59ad0",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-01T16:27:23Z",
+      "side": 1,
+      "message": "thanks for the update, I think this can be `constexpr`, same for others",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 0
+      },
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
