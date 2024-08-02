@@ -1069,10 +1069,6 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
             return;
         }
     }
-    if (android::media::codec::provider_->input_surface_throttle()
-            && mInputSurface != nullptr) {
-        mInputSurface->onInputBufferEmptied();
-    }
     size_t numActiveSlots = 0;
     while (!mPipelineWatcher.lock()->pipelineFull()) {
         sp<MediaCodecBuffer> inBuffer;
@@ -2631,6 +2627,11 @@ void CCodecBufferChannel::sendOutputBuffers() {
                 }
             }
             mCallback->onOutputBufferAvailable(index, outBuffer);
+            output.unlock();
+            if (android::media::codec::provider_->input_surface_throttle()
+                    && mInputSurface != nullptr) {
+                mInputSurface->onInputBufferEmptied();
+            }
             break;
         }
         case OutputBuffers::REALLOCATE:
