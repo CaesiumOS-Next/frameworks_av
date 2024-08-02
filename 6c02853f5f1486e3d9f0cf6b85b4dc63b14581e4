@@ -34,6 +34,24 @@
       "parentUuid": "098c0c8f_debfe164",
       "revId": "6c02853f5f1486e3d9f0cf6b85b4dc63b14581e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae7e019_38216a29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-08-02T03:39:55Z",
+      "side": 1,
+      "message": "```\nGraphicsTracker: do not call cancelBuffer() after being stopped`\n\nWhen two codecs are using the same surface as below scenario, a buffer in Codec #2 can go inconsistent. Eventually the process using Codec #2 will be aborted. Fix this by not calling cancelBuffer() after GraphicsTracker is stopped.\n1. Codec #1: stop using the surface (disconnect)\n2. Codec #2: start to use the surface. (connect)\n3. Codec #1: cancelBuffer() to the surface in HAL block dtor\n4. Codec #2: a buffer by dequeueBuffer() is gone mistakenly by 3\n```\n\nSorry, I corrected the description again.",
+      "parentUuid": "b021352e_7af2b5a1",
+      "revId": "6c02853f5f1486e3d9f0cf6b85b4dc63b14581e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
