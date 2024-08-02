@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8f7a21_874d3fb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101326
+      },
+      "writtenOn": "2024-08-02T22:25:29Z",
+      "side": 1,
+      "message": "Hi Haripriya, the change doesn\u0027t build because queried was previously defined.  It needs to either be reset, or a new variable be used.  The patch works for us after renaming \u0027queried\u0027:\n\n--- a/media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp\n+++ b/media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp\n@@ -147,12 +147,16 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {\n             mDisableTest \u003d true;\n         }\n\n-        std::vector\u003cstd::unique_ptr\u003cC2Param\u003e\u003e queried;\n-        mComponent-\u003equery({}, {C2PortTunnelHandleTuning::output::PARAM_TYPE}, C2_DONT_BLOCK,\n-                          \u0026queried);\n-        if (queried.size() \u003d\u003d 1u) {\n+        std::vector\u003cstd::unique_ptr\u003cC2Param\u003e\u003e queriedTunnel;\n+        c2err \u003d mComponent-\u003equery({}, {C2PortTunnelHandleTuning::output::PARAM_TYPE}, C2_DONT_BLOCK,\n+                          \u0026queriedTunnel);\n+        if (queriedTunnel.size() \u003d\u003d 1u) {\n             mTunnel \u003d true;\n         }\n\nThanks,\nJerry",
+      "revId": "e8af4894723f93954da471eadadedba66d2224b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09741459_b4ce96a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101326
+      },
+      "writtenOn": "2024-08-02T22:25:29Z",
+      "side": 1,
+      "message": "Hi Haripriya, the change doesn\u0027t build because queried is previously defined.  It needs to either be reset, or a new variable be used.  This extra patch works for us:\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d Summary \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTotal Run time: 5m 7s\n1/1 modules completed\nTotal Tests       : 608\nPASSED            : 236\nFAILED            : 0\nIGNORED           : 372\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d End of Results \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nThanks,\nJerry",
+      "revId": "e8af4894723f93954da471eadadedba66d2224b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
