@@ -1,0 +1,155 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c26c117f_a54b2170",
+        "filename": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-05T12:36:10Z",
+      "side": 1,
+      "message": "strongly prefer a construct like:\n\n\n        if (__builtin_sub_overflow(L_var1, L_var2, \u0026L_diff))\n        {\n            // saturating...\n            L_diff \u003d (L_var1 \u003c 0L) ? MIN_32 : MAX_32;\n            *pOverflow \u003d 1;\n        }\n\nwhich completely eliminates the xor games that the original code was playing.",
+      "range": {
+        "startLine": 162,
+        "startChar": 7,
+        "endLine": 170,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dc3cafea_26d93b8d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "        if (__builtin_add_overflow(L_var1, L_var2, \u0026L_sum))\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "            // saturating...\n            L_sum \u003d (L_var1 \u003c 0) ? MIN_32 : MAX_32;\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 162,
+                "startChar": 0,
+                "endLine": 165,
+                "endChar": 0
+              },
+              "replacement": "        if (__builtin_sub_overflow(L_var1, L_var2, \u0026L_diff))\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 166,
+                "startChar": 0,
+                "endLine": 170,
+                "endChar": 0
+              },
+              "replacement": "            // saturating...\n            L_diff \u003d (L_var1 \u003c 0L) ? MIN_32 : MAX_32;\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 205,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": "            if (__builtin_add_overflow((result \u003c\u003c 1), L_var3, \u0026L_sum))\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 214,
+                "endChar": 0
+              },
+              "replacement": "                // saturating...\n                L_sum \u003d (L_var3 \u003c 0) ? MIN_32 : MAX_32;\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 345,
+                "startChar": 0,
+                "endLine": 348,
+                "endChar": 0
+              },
+              "replacement": "        if (__builtin_add_overflow(L_product, (product32 \u003c\u003c 1), \u0026L_sum))\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 349,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": "            // saturating...\n            L_sum \u003d (L_product \u003c 0) ? MIN_32 : MAX_32;\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 361,
+                "startChar": 0,
+                "endLine": 364,
+                "endChar": 0
+              },
+              "replacement": "        if (__builtin_add_overflow(L_product, (product32 \u003c\u003c 1), \u0026L_sum))\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 365,
+                "startChar": 0,
+                "endLine": 369,
+                "endChar": 0
+              },
+              "replacement": "            // saturating...\n            L_sum \u003d (L_product \u003c 0) ? MIN_32 : MAX_32;\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 416,
+                "startChar": 0,
+                "endLine": 419,
+                "endChar": 0
+              },
+              "replacement": "        if (__builtin_add_overflow(L_product, (result \u003c\u003c 1), \u0026L_sum))\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+              "range": {
+                "startLine": 420,
+                "startChar": 0,
+                "endLine": 424,
+                "endChar": 0
+              },
+              "replacement": "            // saturating...\n            L_sum \u003d (L_product \u003c 0) ? MIN_32 : MAX_32;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "002477ee7280ad06a0ac51f13b9a405be2970f21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
