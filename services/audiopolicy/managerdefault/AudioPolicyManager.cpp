@@ -1629,6 +1629,7 @@ audio_io_handle_t AudioPolicyManager::getOutputForDevices(
 
     audio_stream_type_t stream = mEngine->getStreamTypeForAttributes(*attr);
 
+    bool forceDeepBuffer = false;
     // only allow deep buffering for music stream type
     if (stream != AUDIO_STREAM_MUSIC) {
         *flags = (audio_output_flags_t)(*flags &~AUDIO_OUTPUT_FLAG_DEEP_BUFFER);
@@ -1636,7 +1637,7 @@ audio_io_handle_t AudioPolicyManager::getOutputForDevices(
             *flags == AUDIO_OUTPUT_FLAG_NONE &&
             property_get_bool("audio.deep_buffer.media", false /* default_value */)) {
         // use DEEP_BUFFER as default output for music stream type
-        *flags = (audio_output_flags_t)AUDIO_OUTPUT_FLAG_DEEP_BUFFER;
+        forceDeepBuffer = true;
     }
     if (stream == AUDIO_STREAM_TTS) {
         *flags = AUDIO_OUTPUT_FLAG_TTS;
@@ -1719,6 +1720,13 @@ audio_io_handle_t AudioPolicyManager::getOutputForDevices(
             // at this stage we should ignore the DIRECT flag as no direct output could be
             // found earlier
             *flags = (audio_output_flags_t) (*flags & ~AUDIO_OUTPUT_FLAG_DIRECT);
+            if (forceDeepBuffer) {
+                *flags = (audio_output_flags_t)AUDIO_OUTPUT_FLAG_DEEP_BUFFER;
+            } else if (*flags == AUDIO_OUTPUT_FLAG_NONE) {
+                *flags = (audio_output_flags_t)AUDIO_OUTPUT_FLAG_PRIMARY;
+            }
+            ALOGV("%s forced deep-buffer (%s) flags (%0x)", __func__,
+                    forceDeepBuffer ? "yes": "no" , *flags);
             output = selectOutput(
                     outputs, *flags, config->format, channelMask, config->sample_rate, session);
         }
