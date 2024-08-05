@@ -1508,6 +1508,13 @@ status_t AudioPolicyManager::openDirectOutput(audio_stream_type_t stream,
     if (profile == nullptr) {
         return NAME_NOT_FOUND;
     }
+    if (((flags & AUDIO_OUTPUT_FLAG_DIRECT) == 0) &&
+         (profile->getFlags() & AUDIO_OUTPUT_FLAG_DIRECT)) {
+        ALOGD("%s reject direct profile %s with flags %0x, as not requested with flags %0x",
+                __func__, profile->getName().c_str(), profile->getFlags(), flags);
+        profile = nullptr;
+        return NAME_NOT_FOUND;
+    }
 
     // exclusive outputs for MMAP and Offload are enforced by different session ids.
     for (size_t i = 0; i < mOutputs.size(); i++) {
