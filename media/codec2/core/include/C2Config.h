@@ -243,6 +243,8 @@ enum C2ParamIndexKind : C2Param::type_index_t {
     kParamIndexDrcOutputLoudness, // drc, float (dBFS)
     kParamIndexDrcAlbumMode, // drc, enum
     kParamIndexAudioFrameSize, // int
+    kParamIndexAudioPresentationPresentationId, // int
+    kParamIndexAudioPresentationProgramId, // int
 
     /* ============================== platform-defined parameters ============================== */
 
@@ -2268,6 +2270,21 @@ typedef C2StreamParam<C2Info, C2SimpleArrayStruct<C2AccessUnitInfosStruct>,
 
 constexpr char C2_PARAMKEY_INPUT_ACCESS_UNIT_INFOS[] = "input.access-unit-infos";
 constexpr char C2_PARAMKEY_OUTPUT_ACCESS_UNIT_INFOS[] = "output.access-unit-infos";
+
+/**
+ * Audio presentation presentation-id.
+ */
+typedef C2StreamParam<C2Setting, C2Int32Value, kParamIndexAudioPresentationPresentationId>
+        C2StreamAudioPresentationPresentationId;
+constexpr char C2_PARAMKEY_AUDIO_PRESENTATION_PRESENTATION_ID[]
+               = "coded.audio-presentation-presentation-id";
+
+/**
+ * Audio presentation program-id.
+ */
+typedef C2StreamParam<C2Setting, C2Int32Value, kParamIndexAudioPresentationProgramId>
+        C2StreamAudioPresentationProgramId;
+constexpr char C2_PARAMKEY_AUDIO_PRESENTATION_PROGRAM_ID[] = "coded.audio-presentation-program-id";
 
 /* --------------------------------------- AAC components --------------------------------------- */
 
