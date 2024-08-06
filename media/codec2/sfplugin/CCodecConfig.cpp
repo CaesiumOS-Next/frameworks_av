@@ -734,6 +734,13 @@ void CCodecConfig::initializeStandardParams() {
         .limitTo(D::AUDIO & D::READ)
         .withMappers(pcmEncodingMapper, pcmEncodingReverse));
 
+    add(ConfigMapper(KEY_AUDIO_PRESENTATION_PRESENTATION_ID,
+            C2_PARAMKEY_AUDIO_PRESENTATION_PRESENTATION_ID, "value")
+        .limitTo(D::AUDIO));
+    add(ConfigMapper(KEY_AUDIO_PRESENTATION_PROGRAM_ID,
+            C2_PARAMKEY_AUDIO_PRESENTATION_PROGRAM_ID,      "value")
+        .limitTo(D::AUDIO));
+
     add(ConfigMapper(KEY_IS_ADTS, C2_PARAMKEY_AAC_PACKAGING, "value")
         .limitTo(D::AUDIO & D::CODED)
         .withMappers([](C2Value v) -> C2Value {

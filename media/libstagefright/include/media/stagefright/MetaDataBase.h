@@ -296,6 +296,10 @@ enum {
 
     // DVB teletext page number
     kKeyDvbTeletextPageNumber = 'ttxp', // int32_t, DVB teletext page number
+
+    // Audio Presentation
+    kKeyAudioPresentationPresentationId = 'apti', // int32_t audio presentation presentation-id
+    kKeyAudioPresentationProgramId      = 'apgi', // int32_t audio presentation program-id
 };
 
 enum {
