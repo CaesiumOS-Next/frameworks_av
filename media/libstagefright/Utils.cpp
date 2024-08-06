@@ -1033,6 +1033,16 @@ status_t convertMetaDataToMessage(
         msg->setString("language", lang);
     }
 
+    int32_t audioPresentationPresentationId;
+    if (meta->findInt32(kKeyAudioPresentationPresentationId, &audioPresentationPresentationId)) {
+        msg->setInt32("audio-presentation-presentation-id", audioPresentationPresentationId);
+    }
+
+    int32_t audioPresentationProgramId;
+    if (meta->findInt32(kKeyAudioPresentationProgramId, &audioPresentationProgramId)) {
+        msg->setInt32("audio-presentation-program-id", audioPresentationProgramId);
+    }
+
     if (!strncasecmp("video/", mime, 6) ||
             !strncasecmp("image/", mime, 6)) {
         int32_t width, height;
@@ -1837,6 +1847,16 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
     AString lang;
     if (msg->findString("language", &lang)) {
         meta->setCString(kKeyMediaLanguage, lang.c_str());
+    }
+
+    int32_t audioPresentationPresentationId;
+    if (msg->findInt32("audio-presentation-presentation-id", &audioPresentationPresentationId)) {
+        meta->setInt32(kKeyAudioPresentationPresentationId, audioPresentationPresentationId);
+    }
+
+    int32_t audioPresentationProgramId;
+    if (msg->findInt32("audio-presentation-program-id", &audioPresentationProgramId)) {
+        meta->setInt32(kKeyAudioPresentationProgramId, audioPresentationProgramId);
     }
 
     if (mime.startsWith("video/") || mime.startsWith("image/")) {
