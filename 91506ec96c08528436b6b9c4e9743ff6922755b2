@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c1081d_3575a35a",
+        "filename": "media/libstagefright/MediaCodecSource.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-07T15:04:08Z",
+      "side": 1,
+      "message": "i prefer this to the previous CHECK().\n\nis BAD_VALUE the appropriate thing to return?\n\nif mPuller !\u003d null, ut there\u0027s no buffer to be had, this routine returns OK, having done nothing. should we behave the same way here?",
+      "range": {
+        "startLine": 707,
+        "startChar": 6,
+        "endLine": 708,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0c1c4d18_440e3b70",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodecSource.cpp",
+              "range": {
+                "startLine": 706,
+                "startChar": 0,
+                "endLine": 707,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libstagefright/MediaCodecSource.cpp",
+              "range": {
+                "startLine": 710,
+                "startChar": 0,
+                "endLine": 710,
+                "endChar": 0
+              },
+              "replacement": "    MediaBufferBase* mbuf \u003d NULL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "91506ec96c08528436b6b9c4e9743ff6922755b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
