@@ -40,6 +40,30 @@
       ],
       "revId": "15b183e283ca1f8e9bd706b80526170815fd0d43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "241be18f_c4e4d3e1",
+        "filename": "media/libstagefright/MediaCodecSource.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 2010871
+      },
+      "writtenOn": "2024-08-07T05:57:07Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "1717adcf_389c1b87",
+      "range": {
+        "startLine": 707,
+        "startChar": 3,
+        "endLine": 707,
+        "endChar": 27
+      },
+      "revId": "15b183e283ca1f8e9bd706b80526170815fd0d43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
