@@ -704,6 +704,9 @@ void MediaCodecSource::resume(int64_t resumeStartTimeUs) {
 
 status_t MediaCodecSource::feedEncoderInputBuffers() {
     MediaBufferBase* mbuf = NULL;
+    if (mPuller == NULL) {
+        return BAD_VALUE;
+    }
     while (!mAvailEncoderInputIndices.empty() && mPuller->readBuffer(&mbuf)) {
         if (!mEncoder) {
             return BAD_VALUE;
