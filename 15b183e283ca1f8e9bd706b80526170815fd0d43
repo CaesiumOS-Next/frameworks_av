@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1717adcf_389c1b87",
+        "filename": "media/libstagefright/MediaCodecSource.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-07T02:56:24Z",
+      "side": 1,
+      "message": "seems to me that this could return an error condition\nrather than crashing the process.\nmuch as is done with line 709..711.",
+      "range": {
+        "startLine": 707,
+        "startChar": 3,
+        "endLine": 707,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "29e113a9_84c96e09",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodecSource.cpp",
+              "range": {
+                "startLine": 707,
+                "startChar": 0,
+                "endLine": 708,
+                "endChar": 0
+              },
+              "replacement": "    if (mPuller \u003d\u003d NULL) {\n        return BAD_VALUE;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "15b183e283ca1f8e9bd706b80526170815fd0d43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
