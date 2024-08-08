@@ -10202,6 +10202,7 @@ void MmapThread::disconnect()
     } else {
         AudioSystem::releaseInput(localPortId);
     }
+    mPortId = AUDIO_PORT_HANDLE_NONE;
 }
 
 
@@ -10368,6 +10369,18 @@ status_t MmapThread::start(const AudioClient& client,
         }
         eraseClientSilencedState_l(portId);
         return PERMISSION_DENIED;
+    }
+
+    if (mPortId == AUDIO_PORT_HANDLE_NONE) {
+        ALOGE("%s: aaudio disconnect, release portId=%d", __FUNCTION__, portId);
+        mLock.unlock();
+        if (isOutput()) {
+            AudioSystem::releaseOutput(portId);
+        } else {
+            AudioSystem::releaseInput(portId);
+        }
+        mLock.lock();
+        return OK;
     }
 
     // Given that MmapThread::mAttr is mutable, should a MmapTrack have attributes ?
