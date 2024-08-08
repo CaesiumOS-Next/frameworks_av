@@ -22,6 +22,30 @@
       },
       "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77ec792c_42866d15",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-08T06:09:29Z",
+      "side": 1,
+      "message": "We have referred to the code in the\nhttps://android.googlesource.com/platform/frameworks/av/+/1720e4cb724865a5995b9b7362b87614bdb0915a/media/codec2/sfplugin/CCodec.cpp#2955 \nIt appears that using (c2err \u003d\u003d C2_OK \u0026\u0026 outParams.size() \u003d\u003d 1u) is sufficient to check for the presence of tunneled decoders. We tested the changes on Pixel devices, and non-tunneled codecs are not being skipped with this check.",
+      "parentUuid": "765ba164_77059a1a",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
