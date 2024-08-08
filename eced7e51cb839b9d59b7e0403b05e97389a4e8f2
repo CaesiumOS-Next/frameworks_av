@@ -46,6 +46,30 @@
       },
       "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c055710_5fab7f85",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-08T17:49:14Z",
+      "side": 1,
+      "message": "ok, the same code configures the codec C2PortTunneledModeTuning::output before querying C2PortTunnelHandleTuning::output. In general, was wondering if it would be better to check for the configuration value than checking the result(C2PortTunnelHandleTuning::output) of the configuration? Was only referring to C2 configuration for tunnelled codecs here\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/codec2/core/include/C2Config.h;drc\u003d340c3f680a2f4834658124f9b7cb0bbe14f1ddce;l\u003d2515\n\nThanks",
+      "parentUuid": "77ec792c_42866d15",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
