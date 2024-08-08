@@ -472,6 +472,9 @@ void* AudioStream::wrapUserThread() {
         // Run callback loop. This may take a very long time.
         procResult = mThreadProc(mThreadArg);
         mThreadRegistrationResult = unregisterThread();
+    } else {
+        setDisconnected();
+        maybeCallErrorCallback(AAUDIO_ERROR_DISCONNECTED);
     }
     return procResult;
 }
