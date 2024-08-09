@@ -94,6 +94,30 @@
       },
       "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "031dddeb_4c24f9a5",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-09T17:03:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "560b3a6d_3b8ece26",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
