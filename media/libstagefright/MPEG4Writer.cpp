@@ -3776,6 +3776,14 @@ status_t MPEG4Writer::Track::threadEntry() {
             if (mStszTableEntries->count() == 0) {
                 mFirstSampleTimeRealUs = systemTime() / 1000;
                 if (timestampUs < 0 && mFirstSampleStartOffsetUs == 0) {
+                    if (timestampUs == INT64_MIN) {
+                        copy->release();
+                        mSource->stop();
+                        mOwner->notify(MEDIA_RECORDER_TRACK_EVENT_ERROR,
+                                       MEDIA_RECORDER_TRACK_ERROR_GENERAL, ERROR_MALFORMED);
+                        mIsMalformed = true;
+                        break;
+                    }
                     mFirstSampleStartOffsetUs = -timestampUs;
                     timestampUs = 0;
                 }
