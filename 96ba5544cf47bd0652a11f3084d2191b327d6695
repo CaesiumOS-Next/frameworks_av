@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25afca3c_4753bf82",
+        "filename": "media/module/codecs/amrnb/common/include/l_add.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-08-09T17:03:20Z",
+      "side": 1,
+      "message": "Ray,\nLooking at the AMRNB workspace, there are a lot of unused headers.\n\nFor example, deleting the following, I was able to still successfully run \"$mma\" in the amrnb folder.\n\ncommon/include/l_add.h\ncommon/include/l_add_c.h\ncommon/include/l_mac.h\ncommon/include/l_msu.h\ncommon/include/l_mult.h\ncommon/include/l_shl.h\ncommon/include/l_shr.h\ncommon/include/l_sub.h\n\nThere may be more headers that are unused.\n\nCan you please suggest what is your preference here?\n- Do not make any changes in the files that are not currently used and in a follow up cleanup CL remove those files?\n- Or Make the changes like it is done here?\n\nThanks.",
+      "parentUuid": "a34433b6_2b35a866",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 59
+      },
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f102305b_0a936e8d",
         "filename": "media/module/codecs/amrnb/common/include/l_mac.h",
         "patchSetId": 3
