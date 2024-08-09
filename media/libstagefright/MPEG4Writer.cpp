@@ -3776,6 +3776,10 @@ status_t MPEG4Writer::Track::threadEntry() {
             if (mStszTableEntries->count() == 0) {
                 mFirstSampleTimeRealUs = systemTime() / 1000;
                 if (timestampUs < 0 && mFirstSampleStartOffsetUs == 0) {
+                  if (timestampUs == INT64_MIN) {
+                    copy->release();
+                    return -EINVAL;
+                  }
                     mFirstSampleStartOffsetUs = -timestampUs;
                     timestampUs = 0;
                 }
