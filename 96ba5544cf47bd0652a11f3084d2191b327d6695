@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e9e615d_b23a56ee",
+        "filename": "media/module/codecs/amrnb/common/include/l_add.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-08-09T20:20:12Z",
+      "side": 1,
+      "message": "Haripriya,\nPlease remove the changes in the unused headers from this CL and rebase this on aosp/main.\nThanks.",
+      "parentUuid": "04169306_456bb985",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 59
+      },
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f102305b_0a936e8d",
         "filename": "media/module/codecs/amrnb/common/include/l_mac.h",
         "patchSetId": 3
