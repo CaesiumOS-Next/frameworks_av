@@ -150,6 +150,30 @@
       ],
       "revId": "002477ee7280ad06a0ac51f13b9a405be2970f21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdfb998_c0dc81bb",
+        "filename": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-09T09:55:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c26c117f_a54b2170",
+      "range": {
+        "startLine": 162,
+        "startChar": 7,
+        "endLine": 170,
+        "endChar": 9
+      },
+      "revId": "002477ee7280ad06a0ac51f13b9a405be2970f21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
