@@ -70,6 +70,30 @@
       },
       "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560b3a6d_3b8ece26",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-09T05:57:34Z",
+      "side": 1,
+      "message": "Configuration is not required to identify a tunneled component. Any component advertising either C2TunneledModeStruct or C2PortTunnelHandleTuning is deemed to be a tunneled component, for which output verification is being skipped using this check.\n \nVendor has confirmed that this query is able to identify tunneled component. For configuration we will have to check different syncTypes which we feel is not required for this test.",
+      "parentUuid": "5c055710_5fab7f85",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "eced7e51cb839b9d59b7e0403b05e97389a4e8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
