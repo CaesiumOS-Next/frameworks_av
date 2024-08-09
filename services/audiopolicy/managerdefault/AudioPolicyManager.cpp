@@ -7127,8 +7127,15 @@ void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t &attr
             if (status != OK) {
                 continue;
             }
+<<<<<<< HEAD   (43147f Merge "codec2: BufferPoolClient: fix NPE in fetchBufferHandl)
             if (client->getPrimaryMix() != primaryMix || client->hasLostPrimaryMix()) {
                 if (desc->isStrategyActive(psId) && maxLatency < desc->latency()) {
+=======
+            if ((client->getPrimaryMix() && client->getPrimaryMix() != primaryMix)
+                    || client->hasLostPrimaryMix()) {
+                invalidate = true;
+                if (desc->isStrategyActive(psId)) {
+>>>>>>> CHANGE (ffd364 Fix audio glitch when starting/stopping HFP call)
                     maxLatency = desc->latency();
                 }
                 invalidatedOutputs.push_back(desc);
