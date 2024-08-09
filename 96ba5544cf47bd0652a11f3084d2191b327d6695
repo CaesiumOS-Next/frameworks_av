@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04169306_456bb985",
+        "filename": "media/module/codecs/amrnb/common/include/l_add.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T17:14:45Z",
+      "side": 1,
+      "message": "we can\u0027t test the correctness of the changes here in l_add.h (and the other unused files). Even though we are pretty sure it is correct, we can\u0027t demonstrate it.\n\nproceed with:\n-- no changes to those files\n-- remove those files.\n\nremoval is appropriately a separate CL, as you suggest.",
+      "parentUuid": "25afca3c_4753bf82",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 59
+      },
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f102305b_0a936e8d",
         "filename": "media/module/codecs/amrnb/common/include/l_mac.h",
         "patchSetId": 3
