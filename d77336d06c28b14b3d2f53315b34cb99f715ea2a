@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06cb4fb7_25a8103b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T19:14:37Z",
+      "side": 1,
+      "message": "+nchalko for the 2-googler review policy",
+      "revId": "d77336d06c28b14b3d2f53315b34cb99f715ea2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
