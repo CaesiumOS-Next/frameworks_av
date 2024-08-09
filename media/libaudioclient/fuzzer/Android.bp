@@ -38,7 +38,6 @@ cc_fuzz {
         "libaudioclient",
         "libbase",
         "libcgrouprc",
-        "libcgrouprc_format",
         "libcutils",
         "libjsoncpp",
         "liblog",

@@ -58,7 +58,6 @@ cc_fuzz {
         "libaudioutils",
         "libbase_ndk",
         "libcgrouprc",
-        "libcgrouprc_format",
         "libcutils",
         "libjsoncpp",
         "liblog",
