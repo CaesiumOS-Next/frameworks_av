@@ -1,0 +1,256 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d6ddbb_3cac04db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T15:25:05Z",
+      "side": 1,
+      "message": "looking for your thoughts on the question about the changes to unused (and uncompiled) code...",
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a34433b6_2b35a866",
+        "filename": "media/module/codecs/amrnb/common/include/l_add.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T15:25:05Z",
+      "side": 1,
+      "message": "this is probably the correct re-expression of things.\nbut when I was looking at this myself, this block doesn\u0027t seem\nto be compiled, let alone tested.\n\ndo you know whether this code executed in your testing?\n\ni inserted the following into my local tree:\n#error this tries to exploit undefined behavior\n\nand the system built, indicating that this code is not used.\nBy having the #error in there, it would force a fix in the future if the code\nwas ever enabled.",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7643dad6_eedfe7ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecs/amrnb/common/include/l_add.h",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 149,
+                "endChar": 0
+              },
+              "replacement": "        if (__builtin_add_overflow(L_var1, L_var2, \u0026L_sum)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f102305b_0a936e8d",
+        "filename": "media/module/codecs/amrnb/common/include/l_mac.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T15:25:05Z",
+      "side": 1,
+      "message": "same story about #error here.",
+      "range": {
+        "startLine": 154,
+        "startChar": 11,
+        "endLine": 154,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "917f3bbe_438ff294",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecs/amrnb/common/include/l_mac.h",
+              "range": {
+                "startLine": 154,
+                "startChar": 0,
+                "endLine": 154,
+                "endChar": 0
+              },
+              "replacement": "#if defined(PV_ARM_GCC_V5)\n            // TODO(gargvarun): Add support for __builtin_add_overflow for ARM\n            // GCC.\n            L_sum \u003d (L_var3 \u003c 0) ? MIN_32 : MAX_32;\n#else\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/l_mac.h",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819358ae_b8f61123",
+        "filename": "media/module/codecs/amrnb/common/include/l_sub.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T15:25:05Z",
+      "side": 1,
+      "message": "same not-even-compiled / #error issue here",
+      "range": {
+        "startLine": 149,
+        "startChar": 7,
+        "endLine": 149,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "68c6bfe3_1b1f140e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecs/amrnb/common/include/l_sub.h",
+              "range": {
+                "startLine": 149,
+                "startChar": 0,
+                "endLine": 149,
+                "endChar": 0
+              },
+              "replacement": "#if defined(PV_ARM_V5) || defined(PV_ARM_GCC_V5)\n        // TODO(gmorgan): This is a temporary fix to get the code to compile\n        // with the ARM compiler.  The code is not even compiled with the ARM\n        // compiler, so this is a temporary fix.\n        #error \"This code is not compiled with the ARM compiler.\"\n#else\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/l_sub.h",
+              "range": {
+                "startLine": 157,
+                "startChar": 0,
+                "endLine": 157,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94390f92_65e89474",
+        "filename": "media/module/codecs/amrnb/common/include/mpy_32.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T15:25:05Z",
+      "side": 1,
+      "message": "more unused code.",
+      "range": {
+        "startLine": 232,
+        "startChar": 7,
+        "endLine": 232,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "96a894c4_73b4a342",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecs/amrnb/common/include/mpy_32.h",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "        L_sum \u003d L_product + (product32 \u003c\u003c 1);\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/include/mpy_32.h",
+              "range": {
+                "startLine": 244,
+                "startChar": 0,
+                "endLine": 249,
+                "endChar": 0
+              },
+              "replacement": "        L_sum \u003d L_product + (product32 \u003c\u003c 1);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2d55fc_82268dde",
+        "filename": "media/module/codecs/amrnb/common/include/mpy_32_16.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-09T15:25:05Z",
+      "side": 1,
+      "message": "unused code.",
+      "range": {
+        "startLine": 182,
+        "startChar": 6,
+        "endLine": 183,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b09cbc01_bc8d959f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecs/amrnb/common/include/mpy_32_16.h",
+              "range": {
+                "startLine": 182,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": "        L_sum \u003d L_product + (result \u003c\u003c 1);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
