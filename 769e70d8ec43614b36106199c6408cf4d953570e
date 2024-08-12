@@ -34,6 +34,24 @@
       "parentUuid": "49af2987_8dd30567",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b04f0f_6579469c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-12T21:40:24Z",
+      "side": 1,
+      "message": "Thanks for taking a look, we want to make sure we did not lose coverage of the vts tests. Since timestamp checks cannot be done, we can disable the check. But still we can have the codecs running other tests now or added in future. \nWould you be able to check the latest patch? we can make a decision after that.\nThanks",
+      "parentUuid": "50236be4_f8ec3bee",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
