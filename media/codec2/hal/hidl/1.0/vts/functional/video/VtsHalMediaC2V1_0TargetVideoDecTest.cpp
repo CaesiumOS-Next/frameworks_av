@@ -139,9 +139,27 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
         mReorderDepth = -1;
         mTimestampDevTest = false;
         mMd5Offset = 0;
+        mIsTunneledCodec = false;
+
+        std::vector<std::shared_ptr<C2ParamDescriptor>> params;
+        c2err = mComponent->querySupportedParams(&params);
+        for (const auto &paramDesc : params) {
+            if (C2PortTunneledModeTuning::output::PARAM_TYPE == paramDesc->index() ||
+                    C2PortTunnelHandleTuning::output::PARAM_TYPE == paramDesc->index()) {
+                queried.clear();
+                // we are not configuring this codec to be in tunneled mode, but if the codec
+                // by default operates in tunnel mode, then we have to do the test differently.
+                c2err = mComponent->query({},
+                        {C2PortTunnelHandleTuning::output::PARAM_TYPE}, C2_DONT_BLOCK, &queried);
+                if (c2err == C2_OK && queried.size() == 1u) {
+                    mIsTunneledCodec = true;
+                }
+                break;
+            }
+        }
+
         mMd5Enable = false;
         mRefMd5 = nullptr;
-
         C2SecureModeTuning secureModeTuning{};
         mComponent->query({&secureModeTuning}, {}, C2_MAY_BLOCK, nullptr);
         if (secureModeTuning.value == C2Config::SM_READ_PROTECTED ||
@@ -308,6 +326,7 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
 
     bool mEos;
     bool mDisableTest;
+    bool mIsTunneledCodec;
     bool mMd5Enable;
     bool mTimestampDevTest;
     uint64_t mTimestampUs;
@@ -612,11 +631,14 @@ TEST_P(Codec2VideoDecDecodeTest, DecodeTest) {
 
     bool signalEOS = std::get<3>(GetParam());
     surfaceMode_t surfMode = std::get<4>(GetParam());
-    mTimestampDevTest = true;
+    // Disable checking timestamp as tunneled codecs doesn't populate
+    // output buffers in C2Work.
+    mTimestampDevTest = mIsTunneledCodec ? false : true;
 
     android::Vector<FrameInfo> Info;
 
-    mMd5Enable = true;
+    // Disable md5 checks as tunneled codecs doesn't populate output buffers in C2Work
+    mMd5Enable = mIsTunneledCodec ? false : true;
     if (!mChksumFile.compare(sResourceDir)) mMd5Enable = false;
 
     uint32_t format = HAL_PIXEL_FORMAT_YCBCR_420_888;
@@ -712,7 +734,9 @@ TEST_P(Codec2VideoDecHidlTest, AdaptiveDecodeTest) {
     typedef std::unique_lock<std::mutex> ULock;
     ASSERT_EQ(mComponent->start(), C2_OK);
 
-    mTimestampDevTest = true;
+    // Disable checking timestamp as tunneled codecs doesn't populate
+    // output buffers in C2Work.
+    mTimestampDevTest = mIsTunneledCodec ? false : true;
     uint32_t timestampOffset = 0;
     uint32_t offset = 0;
     android::Vector<FrameInfo> Info;
