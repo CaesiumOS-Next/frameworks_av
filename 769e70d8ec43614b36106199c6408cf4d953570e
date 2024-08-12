@@ -16,6 +16,24 @@
       "message": "Hi Jerry, in C2 we believe we can still run the tests on tunneled decoders. But can disable checking md5 at the output. Would you be able to verify the this patch?",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50236be4_f8ec3bee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101326
+      },
+      "writtenOn": "2024-08-12T20:51:44Z",
+      "side": 1,
+      "message": "Hi Arun, thanks for the CL.  The tunneled tests failed before the md5sum check.\n \nFor tunneling, there is a worklet returned which contains metadata information, but the buffer list is empty. The test accumulates a list of video timestamps here (mTimestampUslist) but it doesn\u0027t process this list because the condition above is never true. Because of that, the test fails this check:\n\nif (!codecConfig \u0026\u0026 !work-\u003eworklets.front()-\u003eoutput.buffers.empty()) {\n\nmTimestampDevTest could be disabled but there is nothing left to test...\n\nif (mTimestampDevTest) EXPECT_EQ(mTimestampUslist.empty(), true);\n\nThanks,\nJerry",
+      "parentUuid": "49af2987_8dd30567",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
