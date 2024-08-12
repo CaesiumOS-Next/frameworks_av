@@ -52,6 +52,24 @@
       "parentUuid": "50236be4_f8ec3bee",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6387417_e0ad0402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101326
+      },
+      "writtenOn": "2024-08-12T23:19:08Z",
+      "side": 1,
+      "message": "I checked out the patch.  The patch still isn\u0027t working somehow.  Let me explain.\n\n1) the check for tunnel doesn\u0027t work somehow.  tunneledMode with a value of 0 is always logged.  if I switch to Haripriya\u0027s method, then it works.\n\n2) with 1) changed, mTimestampDevTest seems to always logged as true, somehow.  However, even if I hacked mTimestampDevTest to set to false, the tests still failing the same way (from what I can tell).  Moving the mTimestampDevTest \u003d false hack above the if(!codecConfig \u0026\u0026...) check, then tests seem to be passing (still running through the package but looking good).\n\nHope I didn\u0027t confuse you.  Let me know if you want me to clarify anything.\n\nThanks!",
+      "parentUuid": "27b04f0f_6579469c",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
