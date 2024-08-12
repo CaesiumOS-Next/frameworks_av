@@ -139,9 +139,20 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
         mReorderDepth = -1;
         mTimestampDevTest = false;
         mMd5Offset = 0;
+        mIsTunneledCodec = false;
+
+        queried.clear();
+        c2err = mComponent->query(
+                {}, {C2PortTunneledModeTuning::output::PARAM_TYPE}, C2_MAY_BLOCK, &queried);
+        if (c2err == C2_OK && !queried.empty() && queried.front() != nullptr) {
+            C2TunneledModeStruct::mode_t tunneledMode =
+                    ((C2PortTunneledModeTuning::output*)queried.front().get())->m.mode;
+            mIsTunneledCodec = (tunneledMode != C2TunneledModeStruct::NONE)? true : false;
+            ALOGV("Disable checkout output md5 for tunneled decoders, tunneled mode = %d",
+                    tunneledMode);
+        }
         mMd5Enable = false;
         mRefMd5 = nullptr;
-
         C2SecureModeTuning secureModeTuning{};
         mComponent->query({&secureModeTuning}, {}, C2_MAY_BLOCK, nullptr);
         if (secureModeTuning.value == C2Config::SM_READ_PROTECTED ||
@@ -308,6 +319,7 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
 
     bool mEos;
     bool mDisableTest;
+    bool mIsTunneledCodec;
     bool mMd5Enable;
     bool mTimestampDevTest;
     uint64_t mTimestampUs;
@@ -616,7 +628,7 @@ TEST_P(Codec2VideoDecDecodeTest, DecodeTest) {
 
     android::Vector<FrameInfo> Info;
 
-    mMd5Enable = true;
+    mMd5Enable = mIsTunneledCodec ? false : true;
     if (!mChksumFile.compare(sResourceDir)) mMd5Enable = false;
 
     uint32_t format = HAL_PIXEL_FORMAT_YCBCR_420_888;
