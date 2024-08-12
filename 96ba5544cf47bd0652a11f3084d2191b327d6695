@@ -131,6 +131,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d18a7cc_94f85d9a",
+        "filename": "media/module/codecs/amrnb/common/include/l_add.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-12T06:45:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e9e615d_b23a56ee",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 59
+      },
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f102305b_0a936e8d",
@@ -178,6 +202,30 @@
           ]
         }
       ],
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b16a2a7_3fb28d24",
+        "filename": "media/module/codecs/amrnb/common/include/l_mac.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-12T06:45:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f102305b_0a936e8d",
+      "range": {
+        "startLine": 154,
+        "startChar": 11,
+        "endLine": 154,
+        "endChar": 34
+      },
       "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -233,6 +281,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9844e6_ce95ee3e",
+        "filename": "media/module/codecs/amrnb/common/include/l_sub.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-12T06:45:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "819358ae_b8f61123",
+      "range": {
+        "startLine": 149,
+        "startChar": 7,
+        "endLine": 149,
+        "endChar": 27
+      },
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94390f92_65e89474",
@@ -284,6 +356,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9566e24_98af7365",
+        "filename": "media/module/codecs/amrnb/common/include/mpy_32.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-12T06:45:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94390f92_65e89474",
+      "range": {
+        "startLine": 232,
+        "startChar": 7,
+        "endLine": 232,
+        "endChar": 26
+      },
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b2d55fc_82268dde",
@@ -321,6 +417,30 @@
           ]
         }
       ],
+      "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27ac21f_29779602",
+        "filename": "media/module/codecs/amrnb/common/include/mpy_32_16.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-08-12T06:45:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b2d55fc_82268dde",
+      "range": {
+        "startLine": 182,
+        "startChar": 6,
+        "endLine": 183,
+        "endChar": 9
+      },
       "revId": "96ba5544cf47bd0652a11f3084d2191b327d6695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
