@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef02235_e11b49f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-13T21:52:59Z",
+      "side": 1,
+      "message": "Please add `Test:`",
+      "revId": "ae946f56cddea8912b8998dbf8edf3f039ffe130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f306fd54_e7892e8c",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-13T21:52:59Z",
+      "side": 1,
+      "message": "`State` is a small type, so it can be passed by value.",
+      "range": {
+        "startLine": 224,
+        "startChar": 18,
+        "endLine": 224,
+        "endChar": 81
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0a8d9f15_a4958d8f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.h",
+              "range": {
+                "startLine": 224,
+                "startChar": 0,
+                "endLine": 225,
+                "endChar": 0
+              },
+              "replacement": "            ::aidl::android::hardware::audio::core::StreamDescriptor::State state) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ae946f56cddea8912b8998dbf8edf3f039ffe130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
