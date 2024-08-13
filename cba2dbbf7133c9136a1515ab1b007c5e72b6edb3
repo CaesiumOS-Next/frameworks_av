@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf85003_7e2b6e45",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-13T20:45:25Z",
+      "side": 1,
+      "message": "i\u0027d think we need to know what values come back, not just that there is a single value.",
+      "range": {
+        "startLine": 154,
+        "startChar": 38,
+        "endLine": 154,
+        "endChar": 60
+      },
+      "revId": "cba2dbbf7133c9136a1515ab1b007c5e72b6edb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "537e7d3b_49ded9a2",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-13T20:45:25Z",
+      "side": 1,
+      "message": "is a clearer expression of this:\n\nmTimestampDevTest \u003d !mIsTunneledCodec;\n\nsimilarly at line 641, 739.",
+      "range": {
+        "startLine": 636,
+        "startChar": 4,
+        "endLine": 636,
+        "endChar": 29
+      },
+      "revId": "cba2dbbf7133c9136a1515ab1b007c5e72b6edb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
