@@ -16,6 +16,23 @@
       "message": "Modified CP from internal ag/28596137 (see PS2 vs PS1).",
       "revId": "7b188ed97b4133597e8e4006c843878e9498965e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "221a2b6f_cb7284a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-13T19:14:12Z",
+      "side": 1,
+      "message": "Filed b/359617482 for the Bloat Buster crash.",
+      "revId": "7b188ed97b4133597e8e4006c843878e9498965e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
