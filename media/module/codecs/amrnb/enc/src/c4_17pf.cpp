@@ -497,7 +497,7 @@ extern "C"
                             s = ((Word32) alp * sq1) << 1;
 
                             /* s = L_msu(s, sq, alp_16, pOverflow); */
-                            s -= (((Word32) sq * alp_16) << 1);
+                            __builtin_sub_overflow(s, (((Word32) sq * alp_16) << 1), &s);
 
                             if (s > 0)
                             {
@@ -610,7 +610,7 @@ extern "C"
                             s = ((Word32) alp * sq1) << 1;
 
                             /* s = L_msu(s, sq, alp_16, pOverflow); */
-                            s -= (((Word32) sq * alp_16) << 1);
+                            __builtin_sub_overflow(s, (((Word32) sq * alp_16) << 1), &s);
 
                             if (s > 0)
                             {
@@ -630,7 +630,7 @@ extern "C"
                         s = ((Word32) alpk * sq) << 1;
 
                         /* s = L_msu(s, psk, alp, pOverflow); */
-                        s -= (((Word32) psk * alp) << 1);
+                        __builtin_sub_overflow(s, (((Word32) psk * alp) << 1), &s);
 
                         if (s > 0)
                         {

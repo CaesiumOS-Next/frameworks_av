@@ -229,20 +229,20 @@ void Residu(
 
         for (j = M >> 1; j != 0; j--)
         {
-            s1 += ((Word32) * (p_coef) * *(p_input1++));
-            s2 += ((Word32) * (p_coef) * *(p_input2++));
-            s3 += ((Word32) * (p_coef) * *(p_input3++));
-            s4 += ((Word32) * (p_coef--) * *(p_input4++));
-            s1 += ((Word32) * (p_coef) * *(p_input1++));
-            s2 += ((Word32) * (p_coef) * *(p_input2++));
-            s3 += ((Word32) * (p_coef) * *(p_input3++));
-            s4 += ((Word32) * (p_coef--) * *(p_input4++));
+            __builtin_add_overflow(s1, ((Word32) * (p_coef) * *(p_input1++)), &s1);
+            __builtin_add_overflow(s2, ((Word32) * (p_coef) * *(p_input2++)), &s2);
+            __builtin_add_overflow(s3, ((Word32) * (p_coef) * *(p_input3++)), &s3);
+            __builtin_add_overflow(s4, ((Word32) * (p_coef--) * *(p_input4++)), &s4);
+            __builtin_add_overflow(s1, ((Word32) * (p_coef) * *(p_input1++)), &s1);
+            __builtin_add_overflow(s2, ((Word32) * (p_coef) * *(p_input2++)), &s2);
+            __builtin_add_overflow(s3, ((Word32) * (p_coef) * *(p_input3++)), &s3);
+            __builtin_add_overflow(s4, ((Word32) * (p_coef--) * *(p_input4++)), &s4);
         }
 
-        s1 += (((Word32) * (p_coef)) * *(p_input1));
-        s2 += (((Word32) * (p_coef)) * *(p_input2));
-        s3 += (((Word32) * (p_coef)) * *(p_input3));
-        s4 += (((Word32) * (p_coef)) * *(p_input4));
+        __builtin_add_overflow(s1, ((Word32) * (p_coef) * *(p_input1)), &s1);
+        __builtin_add_overflow(s2, ((Word32) * (p_coef) * *(p_input2)), &s2);
+        __builtin_add_overflow(s3, ((Word32) * (p_coef) * *(p_input3)), &s3);
+        __builtin_add_overflow(s4, ((Word32) * (p_coef) * *(p_input4)), &s4);
 
         *(p_residual_ptr--) = (Word16)(s1 >> 12);
         *(p_residual_ptr--) = (Word16)(s2 >> 12);

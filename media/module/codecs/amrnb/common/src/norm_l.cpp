@@ -211,7 +211,8 @@ Word16 norm_l(Word32 L_var1)
     if (L_var1)
     {
 
-        Word32 y = L_var1 - (L_var1 < 0);
+        Word32 y;
+        __builtin_sub_overflow(L_var1, (L_var1 < 0), &y);
         L_var1 = y ^(y >> 31);
 
 

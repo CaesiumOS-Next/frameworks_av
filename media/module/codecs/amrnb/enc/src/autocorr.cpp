@@ -343,7 +343,7 @@ Word16 Autocorr(
         temp = (amrnb_fxp_mac_16_by_16bb((Word32) * (p_x++), (Word32) * (p_wind++), 0x04000)) >> 15;
         *(p_y++) = temp;
 
-        sum += ((Word32)temp * temp) << 1;
+        __builtin_add_overflow(sum, ((Word32)temp * temp) << 1, &sum);
         if (sum < 0)
         {
             /*
@@ -395,10 +395,10 @@ Word16 Autocorr(
         {
             temp = *p_y >> 2;
             *(p_y++) = temp;
-            sum += ((Word32)temp * temp) << 1;
+            __builtin_add_overflow(sum, ((Word32)temp * temp) << 1, &sum);
             temp = *p_y >> 2;
             *(p_y++) = temp;
-            sum += ((Word32)temp * temp) << 1;
+            __builtin_add_overflow(sum, ((Word32)temp * temp) << 1, &sum);
         }
         if (sum > 0)
         {

@@ -186,7 +186,8 @@ Word32 L_abs(Word32 L_var1)
     ; Function body here
     ----------------------------------------------------------------------------*/
 
-    Word32 y = L_var1 - (L_var1 < 0);
+    Word32 y;
+    __builtin_sub_overflow(L_var1, (L_var1 < 0), &y);
     y = y ^(y >> 31);
     return (y);
 

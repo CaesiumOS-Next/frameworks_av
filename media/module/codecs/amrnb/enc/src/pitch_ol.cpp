@@ -1002,7 +1002,7 @@ Word16 Pitch_ol(       /* o   : open loop pitch lag                         */
 
     for (i = -pit_max; i < L_frame; i++)
     {
-        t0 += (((Word32) * (p_signal)) * *(p_signal)) << 1;
+        __builtin_add_overflow(t0, (((Word32) * (p_signal)) * *(p_signal)) << 1, &t0);
         p_signal++;
         if (t0 < 0)
         {

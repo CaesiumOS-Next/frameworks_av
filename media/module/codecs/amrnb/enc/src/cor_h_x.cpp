@@ -275,15 +275,15 @@ void cor_h_x(
 
             for (j = (L_CODE - i - 1) >> 1; j != 0; j--)
             {
-                s += ((Word32) * (p_x++) * *(p_ptr++)) << 1;
-                s += ((Word32) * (p_x++) * *(p_ptr++)) << 1;
+                __builtin_add_overflow(s, ((Word32) * (p_x++) * *(p_ptr++)) << 1, &s);
+                __builtin_add_overflow(s, ((Word32) * (p_x++) * *(p_ptr++)) << 1, &s);
             }
 
-            s += ((Word32) * (p_x++) * *(p_ptr++)) << 1;
+            __builtin_add_overflow(s, ((Word32) * (p_x++) * *(p_ptr++)) << 1, &s);
 
             if (!((L_CODE - i) & 1))    /* if even number of iterations */
             {
-                s += ((Word32) * (p_x++) * *(p_ptr++)) << 1;
+                __builtin_add_overflow(s, ((Word32) * (p_x++) * *(p_ptr++)) << 1, &s);
             }
 
             y32[i] = s;
@@ -299,7 +299,7 @@ void cor_h_x(
             }
         }
 
-        tot += (max >> 1);
+        __builtin_add_overflow(tot, (max >> 1), &tot);
     }
 
 
@@ -310,10 +310,13 @@ void cor_h_x(
 
     for (i = L_CODE >> 1; i != 0; i--)
     {
+        Word32 result;
         s = L_shl(*(p_y32++), j, pOverflow);
-        *(p_ptr++) = (s + 0x00008000) >> 16;
+        __builtin_add_overflow(s, 0x00008000, &result);
+        *(p_ptr++) = result >> 16;
         s = L_shl(*(p_y32++), j, pOverflow);
-        *(p_ptr++) = (s + 0x00008000) >> 16;
+        __builtin_add_overflow(s, 0x00008000, &result);
+        *(p_ptr++) = result >> 16;
     }
 
     return;

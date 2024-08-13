@@ -967,7 +967,7 @@ void dtx_buffer(dtx_encState *st,   /* i/o : State struct                    */
 
     for (i = L_FRAME; i != 0; i--)
     {
-        L_frame_en += (((Word32) * p_speech) * *(p_speech)) << 1;
+        __builtin_add_overflow(L_frame_en, (((Word32) * p_speech) * *(p_speech)) << 1, &L_frame_en);
         p_speech++;
         if (L_frame_en < 0)
         {

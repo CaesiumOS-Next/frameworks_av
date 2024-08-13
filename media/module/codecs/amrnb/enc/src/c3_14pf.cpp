@@ -487,7 +487,7 @@ static void search_3i40(
                             s = ((Word32) alp * sq1) << 1;
 
                             /* s = L_msu(s, sq, alp_16, pOverflow); */
-                            s -= (((Word32) sq * alp_16) << 1);
+                            __builtin_sub_overflow(s, (((Word32) sq * alp_16) << 1), &s);
 
                             if (s > 0)
                             {

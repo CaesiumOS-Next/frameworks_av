@@ -693,7 +693,7 @@ extern "C"
                     L_temp = ((Word32) alp * sq1) << 1;
 
                     /* s = L_msu(L_temp, sq, alp_16, pOverflow); */
-                    s = L_temp - (((Word32) sq * alp_16) << 1);
+                    __builtin_sub_overflow(L_temp, (((Word32) sq * alp_16) << 1), &s);
 
                     if (s > 0)
                     {
