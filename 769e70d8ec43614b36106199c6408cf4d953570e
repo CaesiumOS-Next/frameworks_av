@@ -106,6 +106,24 @@
       "parentUuid": "8dfab1aa_8bfb4838",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5ecbca_a7f8a1cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-13T20:57:13Z",
+      "side": 1,
+      "message": "Hi Jerry, if the codec operates by default in tunnelled mode, then shouldn\u0027t the mode values for C2PortTunneledModeTuning be other than NONE?",
+      "parentUuid": "e51330ff_b2d1c4ac",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
