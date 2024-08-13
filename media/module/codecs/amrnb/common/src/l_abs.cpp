@@ -186,8 +186,9 @@ Word32 L_abs(Word32 L_var1)
     ; Function body here
     ----------------------------------------------------------------------------*/
 
-    Word32 y = L_var1 - (L_var1 < 0);
-    y = y ^(y >> 31);
-    return (y);
+    if (L_var1 >= 0) return L_var1;
+    if (L_var1 != 0x80000000) return -L_var1;
+    // min_int winds up with same value
+    return 0x80000000;
 
 }
