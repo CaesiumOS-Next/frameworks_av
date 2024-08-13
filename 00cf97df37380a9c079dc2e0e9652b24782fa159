@@ -20,6 +20,162 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57686cf6_1ec6334f",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-13T21:51:25Z",
+      "side": 1,
+      "message": "Superfluous `;` being added, please remove.",
+      "range": {
+        "startLine": 425,
+        "startChar": 96,
+        "endLine": 425,
+        "endChar": 97
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "56a536a2_675f0172",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 425,
+                "startChar": 0,
+                "endLine": 426,
+                "endChar": 0
+              },
+              "replacement": "                true /*safeFromNonWorkerThread*/);  // The workers stops its I/O activity first.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "932aaa3a_2b8ce345",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-13T21:51:25Z",
+      "side": 1,
+      "message": "This should be an `else` branch. This will also allow moving `state` inside the `if` condition.",
+      "range": {
+        "startLine": 428,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 35
+      },
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "965392cc_a21277b0",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-13T21:51:25Z",
+      "side": 1,
+      "message": "I would put this branch first.",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "392ec87c_2e32a3f1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 491,
+                "startChar": 0,
+                "endLine": 494,
+                "endChar": 0
+              },
+              "replacement": "        // The workers stops its I/O activity first.\n        return sendCommand(makeHalCommand\u003cHalCommand::Tag::flush\u003e(), reply,\n                true /*safeFromNonWorkerThread*/);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f112a0d8_354502ed",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-13T21:51:25Z",
+      "side": 1,
+      "message": "Same note here.",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 497,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2847f591_fd561da4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 428,
+                "startChar": 0,
+                "endLine": 430,
+                "endChar": 0
+              },
+              "replacement": "    ALOGD(\"%s: already stream in one of the PAUSED kind of states, current state: %s\",\n            __func__, toString(state).c_str());\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 496,
+                "startChar": 0,
+                "endLine": 498,
+                "endChar": 0
+              },
+              "replacement": "    ALOGD(\"%s: already stream in one of the flushable state: current state: %s\",\n            __func__, toString(state).c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "031e76b2_bdc59ad0",
         "filename": "media/libaudiohal/impl/StreamHalAidl.h",
         "patchSetId": 7
