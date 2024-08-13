@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5c5e789_9de05020",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-13T23:19:09Z",
+      "side": 1,
+      "message": "I would propose doing this in a way that leaves all the string building work to the formatting function:\n\n```c++\n// Example: AUGMENT_LOG(I, \"hello!\");\n// Example: AUGMENT_LOG(W, \"value: %d\", value);\n#define AUGMENT_LOG(lfn, ...)                                           \\\n    ALOG##lfn(\"%s %s::%s \" __android_second(0, __VA_ARGS__, \"\"),        \\\n            mInstance.c_str(), getClassName().c_str(), __func__ __android_rest(__VA_ARGS__))\n// Example: AUGMENT_LOG_IF(D, value \u003c 0, \"negative\");\n// Example: AUGMENT_LOG_IF(E, value \u003c 0, \"bad value: %d\", value);\n#define AUGMENT_LOG_IF(lfn, cond, ...)                                  \\\n    ALOG##lfn##_IF(cond, \"%s %s::%s \" __android_second(0, __VA_ARGS__, \"\"), \\\n            mInstance.c_str(), getClassName().c_str(), __func__ __android_rest(__VA_ARGS__))\n// Used to register an entry into the function\n#define LOG_ENTRY() ALOGD(\"%s %s::%s\", mInstance.c_str(), getClassName().c_str(), __func__)\n```",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 35
+      },
+      "revId": "7c953ea47c81d506f5e507cbc6f9da8b1da44971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
