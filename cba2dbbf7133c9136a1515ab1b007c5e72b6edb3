@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4f3234e_23c76d1b",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-13T21:38:39Z",
+      "side": 1,
+      "message": "We query a single param and got the param, it only says that the parameter is present. In these tests, there is an inherant assumption that codecs supporting these parameters always tunnel. If thats the case, this additional query is not needed.",
+      "parentUuid": "abf85003_7e2b6e45",
+      "range": {
+        "startLine": 154,
+        "startChar": 38,
+        "endLine": 154,
+        "endChar": 60
+      },
+      "revId": "cba2dbbf7133c9136a1515ab1b007c5e72b6edb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "537e7d3b_49ded9a2",
         "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-13T20:45:25Z",
       "side": 1,
       "message": "is a clearer expression of this:\n\nmTimestampDevTest \u003d !mIsTunneledCodec;\n\nsimilarly at line 641, 739.",
+      "range": {
+        "startLine": 636,
+        "startChar": 4,
+        "endLine": 636,
+        "endChar": 29
+      },
+      "revId": "cba2dbbf7133c9136a1515ab1b007c5e72b6edb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13980fad_57b0555f",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-13T21:38:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "537e7d3b_49ded9a2",
       "range": {
         "startLine": 636,
         "startChar": 4,
