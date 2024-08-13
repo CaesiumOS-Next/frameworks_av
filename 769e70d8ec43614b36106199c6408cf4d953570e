@@ -124,6 +124,24 @@
       "parentUuid": "e51330ff_b2d1c4ac",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc22eec_8c640740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101326
+      },
+      "writtenOn": "2024-08-13T22:18:46Z",
+      "side": 1,
+      "message": "Hi Arun, (just in case you are still looking for an answer) the parameter C2PortTunneledModeTuning contains the sync handle (either av or hw, depending on whether we\u0027re doing video tunneling or tuner hal). That parameter is provided by the user of the c2 component, which for the majority of the time (except with vts) is the Android media framework. So it says NONE because it hasn\u0027t been initialized by the caller, that handle typically comes from the audio hal or the audio tuner hal so it needs to be retrieved.",
+      "parentUuid": "ca5ecbca_a7f8a1cf",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
