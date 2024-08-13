@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adedf8d4_d52279fc",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-13T16:53:37Z",
+      "side": 1,
+      "message": "comment this is L0-3?",
+      "range": {
+        "startLine": 341,
+        "startChar": 30,
+        "endLine": 341,
+        "endChar": 31
+      },
+      "revId": "8007a3eb5bb265e725352083a40c2436d1d76ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
