@@ -178,6 +178,24 @@
       "parentUuid": "5160fd4f_cdebd0ff",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b88fe85_55264a96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-14T16:49:56Z",
+      "side": 1,
+      "message": "Hi Jerry, Could you please let us know why the codec tries to tunnel without a valid configuration?",
+      "parentUuid": "fe5bce88_18f1274c",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
