@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbbe9ef3_d7ad8844",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:41:39Z",
+      "side": 1,
+      "message": "Thank you Ajender! I have run CTS and there seem to be no regressions. Please obtain `Qualcomm-Review` in order to submit.",
+      "revId": "d8075c8d56331116573c9fbe497775606bbdf577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
