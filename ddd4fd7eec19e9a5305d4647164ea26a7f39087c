@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96768d78_42813bed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2024-08-14T23:56:34Z",
+      "side": 1,
+      "message": "Here\u0027s one where it\u0027s mostly deleting constants that aren\u0027t used any more.",
+      "revId": "ddd4fd7eec19e9a5305d4647164ea26a7f39087c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
