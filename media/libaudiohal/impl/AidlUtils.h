@@ -25,6 +25,28 @@
 
 namespace android {
 
+/*
+ * Helper macro to add module name, function name in logs for DeviceHalAidl
+ * and Hal2AidlMapper.
+ * print function names along with Module name.
+ *
+ * Usage:
+ *  AUGMENT_LOG(I, "hello!");
+ *  AUGMENT_LOG(W, "value: %d", value);
+ *
+ * AUGMENT_LOG_IF(D, value < 0, "negative");
+ * AUGMENT_LOG_IF(E, value < 0, "bad value: %d", value);
+ */
+
+#define AUGMENT_LOG(level, ...)                                                             \
+    ALOG##level("[Module:%s] :%s " __android_second(0, __VA_ARGS__, ""), mInstance.c_str(), \
+                __func__ __android_rest(__VA_ARGS__))
+
+#define AUGMENT_LOG_IF(level, cond, ...)                                            \
+    ALOG##level##_IF(cond, "[Module:%s] :%s " __android_second(0, __VA_ARGS__, ""), \
+                     mInstance.c_str(), __func__ __android_rest(__VA_ARGS__))
+// Used to register an entry into the function
+#define LOG_ENTRY() ALOGD("[Module:%s] :%s", mInstance.c_str(), __func__)
 class HalDeathHandler {
   public:
     static HalDeathHandler& getInstance();
