@@ -41,7 +41,7 @@ class StreamHalInterface;
 // but still consider some of the outputs to be valid (for example, in 'open{Input|Output}Stream'),
 // 'Hal2AidlMapper' follows the Binder convention. It means that if a method returns an error,
 // the outputs may not be initialized at all and should not be considered by the caller.
-class Hal2AidlMapper {
+class Hal2AidlMapper : public ConversionHelperAidl {
   public:
     using Cleanups = Cleanups<Hal2AidlMapper>;
 

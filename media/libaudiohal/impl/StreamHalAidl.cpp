@@ -77,7 +77,7 @@ StreamHalAidl::StreamHalAidl(
         int32_t nominalLatency, StreamContextAidl&& context,
         const std::shared_ptr<IStreamCommon>& stream,
         const std::shared_ptr<IHalAdapterVendorExtension>& vext)
-        : ConversionHelperAidl(className),
+        : ConversionHelperAidl(className, (isInput ? "In" : "Out")),
           mIsInput(isInput),
           mConfig(configToBase(config)),
           mContext(std::move(context)),
