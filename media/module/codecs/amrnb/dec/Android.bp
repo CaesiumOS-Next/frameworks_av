@@ -87,11 +87,12 @@ cc_library_static {
         "-Werror",
     ],
 
-    //sanitize: {
-    //    misc_undefined: [
-    //        "signed-integer-overflow",
-    //    ],
-    //},
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+            "unsigned-integer-overflow",
+        ],
+    },
 
     shared_libs: [
         "libstagefright_amrnb_common",
@@ -134,9 +135,10 @@ cc_test {
         },
     },
 
-    //sanitize: {
-    //    misc_undefined: [
-    //        "signed-integer-overflow",
-    //    ],
-    //},
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+            "unsigned-integer-overflow",
+        ],
+    },
 }
