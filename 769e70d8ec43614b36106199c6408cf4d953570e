@@ -160,6 +160,24 @@
       "parentUuid": "bfc22eec_8c640740",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5bce88_18f1274c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-14T00:12:16Z",
+      "side": 1,
+      "message": "to me, the obvious answer here is ... because the codec is broken.",
+      "parentUuid": "5160fd4f_cdebd0ff",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
