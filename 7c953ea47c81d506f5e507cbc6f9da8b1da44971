@@ -22,6 +22,30 @@
       },
       "revId": "7c953ea47c81d506f5e507cbc6f9da8b1da44971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e95aeca_6ae00d2c",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-14T04:25:08Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, I will try this.",
+      "parentUuid": "b5c5e789_9de05020",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 35
+      },
+      "revId": "7c953ea47c81d506f5e507cbc6f9da8b1da44971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

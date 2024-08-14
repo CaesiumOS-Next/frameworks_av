@@ -34,6 +34,24 @@
       "parentUuid": "92acc683_143fb68e",
       "revId": "8f7246d2dd463ccd58ee35cdb34632fef471519e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a1aaa5_93c0dfa2",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-14T04:25:08Z",
+      "side": 1,
+      "message": "For getter APIs, printing the logs in the beginning does not give anything helpful (apart from a marker that function is called).\n\nIf we print after hal calls, it would be more helpful that we can get HAL returned value for these getter APIs.",
+      "parentUuid": "49f87462_0e689c91",
+      "revId": "8f7246d2dd463ccd58ee35cdb34632fef471519e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
