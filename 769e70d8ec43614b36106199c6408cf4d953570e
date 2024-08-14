@@ -214,6 +214,24 @@
       "parentUuid": "8b88fe85_55264a96",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "637ee469_7e7af0dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-14T18:57:07Z",
+      "side": 1,
+      "message": "Thanks, there is a difference in the way this works in MediaCodec and C2. The default setting on C2 codecs is described in the bug. In C2, same codec can operate in tunneled or non-tunneled mode. For VTS\u0027s to properly identify C2 codecs that supports only tunneling, the default values should be proper. Then with these changes in VTS, we can have a good method to identify the tunneled only codecs.\nPlease see the comments in the bug and let us know your thoughts.\nThanks",
+      "parentUuid": "9df93c67_e06ecb23",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
