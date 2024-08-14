@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c4f8302_3b7688e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-14T01:22:22Z",
+      "side": 1,
+      "message": "Cherry pick from ag/28597416, conflicts resolved between PS2 and PS1.",
+      "revId": "e5ca886da3a7626357b78b3e97e48d08ce183820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
