@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f90823c_c64f1ca2",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 10205,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-08-14T01:06:45Z",
+      "side": 1,
+      "message": "I think this should be after line 10194 so that it will be under the lock.\nDoes that work for you.",
+      "range": {
+        "startLine": 10205,
+        "startChar": 4,
+        "endLine": 10205,
+        "endChar": 11
+      },
+      "revId": "f17efbb9417ec07bfe2b7d27a5c80ede4caf7793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655b9e90_b63baeaf",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 10383,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-08-14T01:06:45Z",
+      "side": 1,
+      "message": "If the error callback is fired then it would be OK to return OK here.\nBut if the callback is not fired then we should return AAUDIO_ERROR_DISCONNECTED.",
+      "range": {
+        "startLine": 10383,
+        "startChar": 15,
+        "endLine": 10383,
+        "endChar": 17
+      },
+      "revId": "f17efbb9417ec07bfe2b7d27a5c80ede4caf7793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
