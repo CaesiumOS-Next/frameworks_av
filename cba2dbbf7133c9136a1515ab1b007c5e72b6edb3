@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "095fe554_1c7ed7f4",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-08-14T22:31:18Z",
+      "side": 1,
+      "message": "This method is not used anymore in the latest patch set.",
+      "parentUuid": "e4f3234e_23c76d1b",
+      "range": {
+        "startLine": 154,
+        "startChar": 38,
+        "endLine": 154,
+        "endChar": 60
+      },
+      "revId": "cba2dbbf7133c9136a1515ab1b007c5e72b6edb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "537e7d3b_49ded9a2",
         "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
         "patchSetId": 5
