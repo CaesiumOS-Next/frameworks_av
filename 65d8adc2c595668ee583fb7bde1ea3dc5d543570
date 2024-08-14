@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d3aebe_b6d38a28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-08-14T04:21:38Z",
+      "side": 1,
+      "message": "Could you add `Flag: EXEMPT refactor`?",
+      "revId": "65d8adc2c595668ee583fb7bde1ea3dc5d543570",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
