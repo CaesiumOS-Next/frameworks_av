@@ -196,6 +196,24 @@
       "parentUuid": "fe5bce88_18f1274c",
       "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df93c67_e06ecb23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101326
+      },
+      "writtenOn": "2024-08-14T17:27:11Z",
+      "side": 1,
+      "message": "Hi Arun, in our integration, we advertise a list of tunneled and non-tunneled codecs. The tunneled codecs are not able to populate output buffers as they ONLY operate in tunnel mode. As mentioned before, they require the caller to provide the hardware handle required to perform audio/video synchronization via the parameter C2PortTunneledModeTuning, so if the caller hasn\u0027t provided that information the tunneled codec would return NONE (when querying that parameter). The reason why there is a separation between the tunneled and non-tunneled codecs is per Android requirements. \"OEMs should create a separate video decoder to support tunneled video playback. This decoder should advertise that it\u0027s capable of tunneled playback in the media_codecs.xml file\".  Let us know if you have further questions or concerns.  Thanks!",
+      "parentUuid": "8b88fe85_55264a96",
+      "revId": "769e70d8ec43614b36106199c6408cf4d953570e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
