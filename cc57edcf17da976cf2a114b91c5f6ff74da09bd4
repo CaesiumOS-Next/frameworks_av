@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04996637_72516c2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-14T00:55:01Z",
+      "side": 1,
+      "message": "question: not sure if we got chance to verify this CL on actual device with AIDL audio hal enabled to avoid regression?\n\nCc @lsandrade@google.com for potential merge conflict.",
+      "revId": "cc57edcf17da976cf2a114b91c5f6ff74da09bd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
