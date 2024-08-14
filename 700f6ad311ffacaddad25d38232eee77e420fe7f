@@ -16,6 +16,24 @@
       "message": "having a log entry here doesn\u0027t provide any meaningful info, instead if moved to 364 line, it can give better view about HAL status. same for other getter APIs.",
       "revId": "700f6ad311ffacaddad25d38232eee77e420fe7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe37399f_eb3c7bbb",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T17:42:21Z",
+      "side": 1,
+      "message": "Since there are macros such as `VALUE_OR_RETURN_STATUS` and `RETURN_STATUS_IF_ERROR` that can return from the function prior to the line 364, we should preserve this one, and add another log at the end. The one that prints the status can be made of `I` priority so that we still have it in release builds.",
+      "parentUuid": "85f03178_6542fe5d",
+      "revId": "700f6ad311ffacaddad25d38232eee77e420fe7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

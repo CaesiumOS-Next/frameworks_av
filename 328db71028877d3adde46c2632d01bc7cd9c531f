@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f74f757_96b8f731",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T17:42:21Z",
+      "side": 1,
+      "message": "Relying on the existence of `mInstance` out of the blue is not a good approach. We need to have this log machinery defined alongside the class that defines `mInstance`. Currently there is no such class, so we need to have it and make `DeviceHalAidl` and `Hal2AidlMapper` inherit from it. This is similar to `ConversionHelperAidl` which defines `mClassName` (https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudiohal/impl/ConversionHelperAidl.h;drc\u003de12539747de611be840a344dca67b249d38780de;l\u003d50), and in fact we can just add `mInstance` field to it and make sure that all classes that need to use these macros do inherit from it. This will also allow us to have the class name in these logs as well—this may be important for Stream classes.",
+      "range": {
+        "startLine": 42,
+        "startChar": 73,
+        "endLine": 42,
+        "endChar": 82
+      },
+      "revId": "328db71028877d3adde46c2632d01bc7cd9c531f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74209ea7_98ac40a0",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T17:42:21Z",
+      "side": 1,
+      "message": "Since this check if 4 lines now, I think we can make it a macro, too. It needs to be defined in this file since `mModule` is specific to `DeviceHalAidl`:\n\n```\n#define MODULE_CHECK() \\\n    if (mModule \u003d\u003d nullptr) { \\\n        AUGMENT_LOG(E, \"module not initialized\"); \\\n        return NO_INIT; \\\n    }\n```",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 5
+      },
+      "revId": "328db71028877d3adde46c2632d01bc7cd9c531f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33305559_418abdc2",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T17:42:21Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need to add these semicolons everywhere here. If we want, we can have them in the macro implementation. That will make the log statements to look more straightforward.",
+      "range": {
+        "startLine": 133,
+        "startChar": 24,
+        "endLine": 133,
+        "endChar": 26
+      },
+      "revId": "328db71028877d3adde46c2632d01bc7cd9c531f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

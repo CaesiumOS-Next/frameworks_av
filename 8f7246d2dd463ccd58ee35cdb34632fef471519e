@@ -52,6 +52,24 @@
       "parentUuid": "49f87462_0e689c91",
       "revId": "8f7246d2dd463ccd58ee35cdb34632fef471519e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c1b0b8_293c1b1a",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T17:42:21Z",
+      "side": 1,
+      "message": "I would say that for methods with parameters, we print them, so it\u0027s useful. For methods with no parameters, we don\u0027t have anything extra to print, bug we still log for consistency so that we know that the method has been called.\n\nErrors are usually printed by the HAL implementation itself as it has more context which it can add to the log. Moreover, since calls on our side are usually wrapped into `RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(...))`, the code for printing the status on our side will look heavy.",
+      "parentUuid": "68a1aaa5_93c0dfa2",
+      "revId": "8f7246d2dd463ccd58ee35cdb34632fef471519e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
