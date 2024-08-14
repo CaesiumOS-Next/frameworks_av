@@ -16,6 +16,24 @@
       "message": "question: not sure if we got chance to verify this CL on actual device with AIDL audio hal enabled to avoid regression?\n\nCc @lsandrade@google.com for potential merge conflict.",
       "revId": "cc57edcf17da976cf2a114b91c5f6ff74da09bd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027a04e3_609a70b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-08-14T13:08:24Z",
+      "side": 1,
+      "message": "Keeping this open till the CL is validated on a device with AIDL enabled.",
+      "parentUuid": "04996637_72516c2c",
+      "revId": "cc57edcf17da976cf2a114b91c5f6ff74da09bd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
