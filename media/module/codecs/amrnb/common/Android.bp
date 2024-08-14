@@ -105,10 +105,10 @@ cc_library {
     },
 
     //addressing b/25409744
-    //sanitize: {
-    //    misc_undefined: [
-    //        "signed-integer-overflow",
-    //        "unsigned-integer-overflow",
-    //    ],
-    //},
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+            "unsigned-integer-overflow",
+        ],
+    },
 }
