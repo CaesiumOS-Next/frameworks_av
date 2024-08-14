@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0243ada3_e3a295a7",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-08-14T13:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57686cf6_1ec6334f",
+      "range": {
+        "startLine": 425,
+        "startChar": 96,
+        "endLine": 425,
+        "endChar": 97
+      },
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "932aaa3a_2b8ce345",
@@ -72,6 +96,30 @@
       "writtenOn": "2024-08-13T21:51:25Z",
       "side": 1,
       "message": "This should be an `else` branch. This will also allow moving `state` inside the `if` condition.",
+      "range": {
+        "startLine": 428,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 35
+      },
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae02cc2_4512f39e",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-08-14T13:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "932aaa3a_2b8ce345",
       "range": {
         "startLine": 428,
         "startChar": 0,
@@ -119,6 +167,30 @@
           ]
         }
       ],
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e2c117_8e33c2bd",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-08-14T13:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "965392cc_a21277b0",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 2
+      },
       "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -174,6 +246,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff0cf9e_d361cf90",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-08-14T13:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f112a0d8_354502ed",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 497,
+        "endChar": 35
+      },
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "031e76b2_bdc59ad0",
@@ -211,6 +307,30 @@
       "side": 1,
       "message": "make it a ```constexpr``` function ?",
       "parentUuid": "031e76b2_bdc59ad0",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 0
+      },
+      "revId": "00cf97df37380a9c079dc2e0e9652b24782fa159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f405fd_b8b611ad",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-08-14T13:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b21ea61e_ca8d976d",
       "range": {
         "startLine": 233,
         "startChar": 0,
