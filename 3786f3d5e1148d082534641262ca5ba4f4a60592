@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dde7e668_e3a7a052",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:41:53Z",
+      "side": 1,
+      "message": "Please obtain `Qualcomm-Review` in order to submit.",
+      "revId": "3786f3d5e1148d082534641262ca5ba4f4a60592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
