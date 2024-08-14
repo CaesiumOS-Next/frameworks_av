@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2427864_18858f40",
+        "filename": "services/audiopolicy/engine/common/src/EngineDefaultConfig.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:23:23Z",
+      "side": 1,
+      "message": "Please add a note which enum this one tracks.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 22
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d99c68_02f576f0",
+        "filename": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:23:23Z",
+      "side": 1,
+      "message": "Please sort.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 44
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a23cf7_0953be22",
+        "filename": "services/audiopolicy/engineconfigurable/config/include/CapEngineConfig.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:23:23Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"defintiion\" -- should it be \"definition\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"defintiion\" -- should it be \"definition\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 36,
+        "startChar": 27,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe419549_6ab0ff21",
+        "filename": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:23:23Z",
+      "side": 1,
+      "message": "According to https://en.cppreference.com/w/cpp/string/byte/tolower, this needs to be `unsigned char` to avoid UB.",
+      "range": {
+        "startLine": 72,
+        "startChar": 22,
+        "endLine": 72,
+        "endChar": 26
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e18932be_b81e1a9d",
+        "filename": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:23:23Z",
+      "side": 1,
+      "message": "Does not seem to be used.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ad4bc84d_1b5a3934",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 94,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5efb0c_cc006219",
+        "filename": "services/audiopolicy/engineconfigurable/parameter-framework/plugin/ProductStrategy.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-14T20:23:23Z",
+      "side": 1,
+      "message": "Please remove.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4fc5f870_063abee9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/parameter-framework/plugin/ProductStrategy.cpp",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/parameter-framework/plugin/ProductStrategy.cpp",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "ProductStrategy::ProductStrategy(const std::string \u0026mappingValue,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/parameter-framework/plugin/ProductStrategy.cpp",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "bool ProductStrategy::sendToHW(std::string \u0026 /*error*/)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
