@@ -831,7 +831,7 @@ class StreamHalAidlVendorParametersTest : public testing::Test {
         struct audio_config config = AUDIO_CONFIG_INITIALIZER;
         ::aidl::android::hardware::audio::core::StreamDescriptor descriptor;
         mStream = sp<StreamHalAidl>::make("test", false /*isInput*/, config, 0 /*nominalLatency*/,
-                                          StreamContextAidl(descriptor, false /*isAsynchronous*/),
+                                          StreamContextAidl(descriptor, false /*isAsynchronous*/, 0),
                                           mStreamCommon, mVendorExt);
     }
     void TearDown() override {
