@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f03178_6542fe5d",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-14T09:41:33Z",
+      "side": 1,
+      "message": "having a log entry here doesn\u0027t provide any meaningful info, instead if moved to 364 line, it can give better view about HAL status. same for other getter APIs.",
+      "revId": "700f6ad311ffacaddad25d38232eee77e420fe7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
