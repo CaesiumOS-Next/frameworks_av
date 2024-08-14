@@ -26,9 +26,10 @@ const struct usb_interface_descriptor mtp_interface_desc = {
     .bDescriptorType = USB_DT_INTERFACE,
     .bInterfaceNumber = 0,
     .bNumEndpoints = 3,
-    .bInterfaceClass = USB_CLASS_STILL_IMAGE,
-    .bInterfaceSubClass = 1,
-    .bInterfaceProtocol = 1,
+    // USB_CLASS_STILL_IMAGE does not work well under MacOS
+    .bInterfaceClass = USB_CLASS_VENDOR_SPEC,
+    .bInterfaceSubClass = USB_SUBCLASS_VENDOR_SPEC,
+    .bInterfaceProtocol = 0,
     .iInterface = 1,
 };
 
