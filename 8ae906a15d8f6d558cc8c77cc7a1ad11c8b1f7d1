@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca2b8803_e54bddad",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-15T16:41:42Z",
+      "side": 1,
+      "message": "nit: maybe can be removed",
+      "range": {
+        "startLine": 150,
+        "startChar": 75,
+        "endLine": 150,
+        "endChar": 91
+      },
+      "revId": "8ae906a15d8f6d558cc8c77cc7a1ad11c8b1f7d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
