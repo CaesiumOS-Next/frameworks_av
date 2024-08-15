@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b3007a2_2f1c5595",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-15T15:58:00Z",
+      "side": 1,
+      "message": "I found one more place that can be improved with the fuzzer makefiles.  This increases robustness to changes made in the AudioFlinger Android.bp by using libaudioflinger_dependencies",
+      "revId": "85c06c9c658f896efcc8b5fc9195b31ddb277531",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
