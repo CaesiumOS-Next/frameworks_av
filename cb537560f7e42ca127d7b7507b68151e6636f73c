@@ -117,6 +117,30 @@
       },
       "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea67837c_7b7e78da",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-15T22:42:36Z",
+      "side": 1,
+      "message": "OK, I see, indeed here \u0027sendCommand\u0027 times out after 3s and returns the control back to the Binder thread handling the transaction: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp;l\u003d2488;drc\u003dcb899108c8f94f083e50c271d3175af3fe5c0c39.\n\nOne thing I still want to change here is to avoid calling into the audioflinger for a cleanup right here. It would be better if we just create the patch release command and enqueue it. This has two benefits: 1) reuse of the existing code for patch release handling, and 2) better responsiveness of the loop to exit requests.",
+      "parentUuid": "2dd243ef_5f5ac3f3",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 65
+      },
+      "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

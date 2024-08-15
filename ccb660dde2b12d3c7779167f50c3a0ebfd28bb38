@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "134f4d49_fc5ea714",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-15T22:42:36Z",
+      "side": 1,
+      "message": "Apologies for a delayed reply, I was on vacation.\n\nI definitely agree with the idea of doing a cleanup, but I see that all this logic is quite delicate and we should be careful in modifying it to avoid creating surprises.",
+      "revId": "ccb660dde2b12d3c7779167f50c3a0ebfd28bb38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faec9d60_22093335",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2154,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-15T22:42:36Z",
+      "side": 1,
+      "message": "I think we should preserve the behavior that `command-\u003emStatus` is updated regardless of `command-\u003emWaitStatus`. I see that whenever the code which creates a command sets `mWaitStatus`, it then uses the value of `mStatus` which is returned by `AudioCommandThread::sendCommand`. The weird thing is that if there is a non-zero delay, then `insertCommand_l` will reset `mWaitStatus`: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp;l\u003d2674;drc\u003defb735f4d5a2f04550e33e8aa9485f906018fe4e. But the caller does not know about that and will still use `mStatus`! This logic is prone to surprises, for sure, so let\u0027s not disrupt it.",
+      "range": {
+        "startLine": 2154,
+        "startChar": 24,
+        "endLine": 2154,
+        "endChar": 50
+      },
+      "revId": "ccb660dde2b12d3c7779167f50c3a0ebfd28bb38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d77b3f8_2199f6c3",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-15T22:42:36Z",
+      "side": 1,
+      "message": "We need to add a comment that thanks to the special handling of `CREATE_AUDIO_PATCH` in `insertCommand_l`, `mWaitStatus` can only be `false` if there was a timeout. Please also add a comment into `insertCommand_l` that `threadLoop` depends on this special handling of `CREATE_AUDIO_PATCH`.",
+      "range": {
+        "startLine": 2157,
+        "startChar": 30,
+        "endLine": 2157,
+        "endChar": 93
+      },
+      "revId": "ccb660dde2b12d3c7779167f50c3a0ebfd28bb38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
