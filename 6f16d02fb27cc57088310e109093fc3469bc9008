@@ -1,6 +1,156 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c961040_7f26a14b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-16T16:34:35Z",
+      "side": 1,
+      "message": "Thank you Jaideep, we are almost there.",
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84ba4ae3_bbf6a3f0",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-16T16:34:35Z",
+      "side": 1,
+      "message": "I think, `mInstance` was only used for logs and you have replaced its explicit usage with the new macros. Should be safe to remove.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 26
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c25b132_44a2e42f",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-16T16:34:35Z",
+      "side": 1,
+      "message": "supportsPatches, otherwise the message can be confusing",
+      "range": {
+        "startLine": 606,
+        "startChar": 40,
+        "endLine": 606,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1eb44704_517c8b0c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+              "range": {
+                "startLine": 606,
+                "startChar": 0,
+                "endLine": 607,
+                "endChar": 0
+              },
+              "replacement": "        AUGMENT_LOG(E, \": uninitialized supportsPatches\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b696127_278d9f69",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-16T16:34:35Z",
+      "side": 1,
+      "message": "Since we do have a space in the format string of our macro, no need to have an extra space here (please also fix similar entries below).",
+      "range": {
+        "startLine": 1007,
+        "startChar": 23,
+        "endLine": 1007,
+        "endChar": 25
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ed6d92_9aa4dc25",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-16T16:34:35Z",
+      "side": 1,
+      "message": "What\u0027s up with formatting here?",
+      "range": {
+        "startLine": 1198,
+        "startChar": 37,
+        "endLine": 1198,
+        "endChar": 42
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a028196_38238dab",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-16T16:34:35Z",
+      "side": 1,
+      "message": "Same here, `mInstance` can be removed because it was only used in logs, now it is systematically extracted from the `ConversionHelperAidl` by your new macros.",
+      "range": {
+        "startLine": 103,
+        "startChar": 56,
+        "endLine": 103,
+        "endChar": 76
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aee040dc_ca6a9830",
@@ -14,6 +164,24 @@
       "writtenOn": "2024-08-16T08:53:26Z",
       "side": 1,
       "message": "className will be already StreamInHalAidl/StreamOutHalAidl for streams, mInstance does not mean much like modules.\n\nhowever we can consider to use mInstance as ioHandle, which can be more meaningful in context of streams\n\nor\n\nmay be we can keep it mInstance field empty if not applicable.",
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb59efad_4c8aea45",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-16T16:34:35Z",
+      "side": 1,
+      "message": "I think having the I/O handle here is an excellent idea, please use it.",
+      "parentUuid": "aee040dc_ca6a9830",
       "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
