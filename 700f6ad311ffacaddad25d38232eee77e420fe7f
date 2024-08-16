@@ -34,6 +34,24 @@
       "parentUuid": "85f03178_6542fe5d",
       "revId": "700f6ad311ffacaddad25d38232eee77e420fe7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d85411_ee0a709e",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-16T06:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe37399f_eb3c7bbb",
+      "revId": "700f6ad311ffacaddad25d38232eee77e420fe7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
