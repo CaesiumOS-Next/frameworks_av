@@ -122,17 +122,16 @@ status_t AudioPolicyManager::setDeviceConnectionState(audio_devices_t device,
     }
 }
 
-void AudioPolicyManager::broadcastDeviceConnectionState(const sp<DeviceDescriptor> &device,
+status_t AudioPolicyManager::broadcastDeviceConnectionState(const sp<DeviceDescriptor> &device,
                                                         media::DeviceConnectedState state)
 {
     audio_port_v7 devicePort;
     device->toAudioPort(&devicePort);
-    if (status_t status = mpClientInterface->setDeviceConnectedState(&devicePort, state);
-            status != OK) {
-        ALOGE("Error %d while setting connected state %d for device %s",
-                status, static_cast<int>(state),
-                device->getDeviceTypeAddr().toString(false).c_str());
-    }
+    status_t status = mpClientInterface->setDeviceConnectedState(&devicePort, state);
+    ALOGE_IF(status != OK, "Error %d while setting connected state %d for device %s", status,
+             static_cast<int>(state), device->getDeviceTypeAddr().toString(false).c_str());
+
+    return status;
 }
 
 status_t AudioPolicyManager::setDeviceConnectionStateInt(
@@ -213,7 +212,15 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
 
             // Before checking outputs, broadcast connect event to allow HAL to retrieve dynamic
             // parameters on newly connected devices (instead of opening the outputs...)
-            broadcastDeviceConnectionState(device, media::DeviceConnectedState::CONNECTED);
+            if (status_t status = broadcastDeviceConnectionState(
+                        device, media::DeviceConnectedState::CONNECTED);
+                status != OK && device->isDynamic()) {
+                mAvailableOutputDevices.remove(device);
+		mHwModules.cleanUpForDevice(device);
+                ALOGD("%s() dynamic device %s format %x connection failed", __func__,
+                      device->toString().c_str(), device->getEncodedFormat());
+                return status;
+            }
 
             if (checkOutputsForDevice(device, state, outputs) != NO_ERROR) {
                 mAvailableOutputDevices.remove(device);
@@ -398,7 +405,14 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
 
             // Before checking intputs, broadcast connect event to allow HAL to retrieve dynamic
             // parameters on newly connected devices (instead of opening the inputs...)
-            broadcastDeviceConnectionState(device, media::DeviceConnectedState::CONNECTED);
+            if (status_t status = broadcastDeviceConnectionState(
+                        device, media::DeviceConnectedState::CONNECTED);
+                status != OK && device->isDynamic()) {
+                mAvailableInputDevices.remove(device);
+                ALOGD("%s() dynamic device %s format %x connection failed", __func__,
+                      device->toString().c_str(), device->getEncodedFormat());
+                return status;
+            }
             // Propagate device availability to Engine
             setEngineDeviceConnectionState(device, state);
 
