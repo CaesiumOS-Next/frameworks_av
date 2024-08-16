@@ -16,6 +16,23 @@
       "message": "Here\u0027s one where it\u0027s mostly deleting constants that aren\u0027t used any more.",
       "revId": "ddd4fd7eec19e9a5305d4647164ea26a7f39087c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6368707e_10d1b661",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-08-16T22:36:12Z",
+      "side": 1,
+      "message": "Global approval since this is a safe change cleaning up code that was hidden by the reduction in severity of this warning.",
+      "revId": "ddd4fd7eec19e9a5305d4647164ea26a7f39087c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
