@@ -2648,8 +2648,29 @@ class AudioPolicyManagerTestClientOpenFails : public AudioPolicyManagerTestClien
 
     void setSimulateFailure(bool simulateFailure) { mSimulateFailure = simulateFailure; }
 
+    void setSimulateBroadcastDeviceFailure(audio_devices_t device, status_t status) {
+        if (status != NO_ERROR) {
+            // simulate device connect error
+            mSimulateBroadcastDeviceFailure[device] = status;
+        } else {
+            // remove device connection fixed error
+            mSimulateBroadcastDeviceFailure.erase(device);
+        }
+    }
+
+    status_t setDeviceConnectedState(const struct audio_port_v7* port,
+                                     media::DeviceConnectedState state) override {
+        if (mSimulateBroadcastDeviceFailure.find(port->ext.device.type) !=
+            mSimulateBroadcastDeviceFailure.end()) {
+            // If a simulated error exists, return an error value
+            return mSimulateBroadcastDeviceFailure[port->ext.device.type];
+        }
+        return AudioPolicyManagerTestClient::setDeviceConnectedState(port, state);
+    }
+
   private:
     bool mSimulateFailure = false;
+    std::map<audio_devices_t, status_t> mSimulateBroadcastDeviceFailure;
 };
 
 }  // namespace
@@ -2669,6 +2690,9 @@ class AudioPolicyManagerTestDeviceConnectionFailed :
     }
     void setSimulateOpenFailure(bool simulateFailure) {
         mFullClient->setSimulateFailure(simulateFailure); }
+
+    void setSimulateBroadcastDeviceFailure(audio_devices_t device, status_t status) {
+        mFullClient->setSimulateBroadcastDeviceFailure(device, status); }
 
     static const std::string sBluetoothConfig;
 
@@ -2710,6 +2734,22 @@ TEST_P(AudioPolicyManagerTestDeviceConnectionFailed, SetDeviceConnectedStateHasA
         EXPECT_EQ(type, port->ext.device.type);
         EXPECT_EQ(0, strncmp(port->ext.device.address, address.c_str(),
                         AUDIO_DEVICE_MAX_ADDRESS_LEN)) << "\"" << port->ext.device.address << "\"";
+    }
+    setSimulateOpenFailure(false);
+
+    // simulate broadcastDeviceConnectionState return failure
+    setSimulateBroadcastDeviceFailure(type, INVALID_OPERATION);
+    ASSERT_EQ(INVALID_OPERATION, mManager->setDeviceConnectionState(
+            type, AUDIO_POLICY_DEVICE_STATE_AVAILABLE,
+            address.c_str(), name.c_str(), format));
+
+    // if broadcast is fail, device should not be added to available devices list
+    if (audio_is_output_device(type)) {
+        auto availableDevices = mManager->getAvailableOutputDevices();
+        EXPECT_FALSE(availableDevices.containsDeviceWithType(type));
+    } else if (audio_is_input_device(type)) {
+        auto availableDevices = mManager->getAvailableInputDevices();
+        EXPECT_FALSE(availableDevices.containsDeviceWithType(type));
     }
 }
 
