@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee040dc_ca6a9830",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-16T08:53:26Z",
+      "side": 1,
+      "message": "className will be already StreamInHalAidl/StreamOutHalAidl for streams, mInstance does not mean much like modules.\n\nhowever we can consider to use mInstance as ioHandle, which can be more meaningful in context of streams\n\nor\n\nmay be we can keep it mInstance field empty if not applicable.",
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
