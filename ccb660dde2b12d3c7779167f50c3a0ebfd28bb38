@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c83a25f_73a49623",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2154,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-08-16T17:37:26Z",
+      "side": 1,
+      "message": "The main reason I did this change is because the race which might happen after the command is inserted to the queue by sendCommand()-\u003einsertCommand_l() and before sendCommand() returns (command-\u003emStatus). It looks that for \"non-waiting\" type of command (command-\u003emWaitStatus \u003d false (set after command created, before inserted to the queue)) following scenarios are possible:\n\n- sendCommand() returns NO_ERROR ( https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/service/AudioPolicyService.h;l\u003d648 ) (when command thread is too slow to finish call to audioflinger before sendCommand() return, I assume most of the cases)\n- sendCommand() returns audioflinger call result (when command thread is fast enough to finish audioflinger call before sendCommand() return)\n\nNow with proposed change (command-\u003emStatus \u003d status set only for \"waiting\" commands under command-\u003emLock) it is at least secured that for \"non-waiting\" commands sendCommand() returned status will be always NO_ERROR and for \"waiting\" commands the status will be audioflinger call result (or TIMED_OUT in case hang happens).",
+      "parentUuid": "faec9d60_22093335",
+      "range": {
+        "startLine": 2154,
+        "startChar": 24,
+        "endLine": 2154,
+        "endChar": 50
+      },
+      "revId": "ccb660dde2b12d3c7779167f50c3a0ebfd28bb38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d77b3f8_2199f6c3",
         "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
         "patchSetId": 5
