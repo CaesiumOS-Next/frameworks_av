@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d48c17f_e9678bc1",
+        "filename": "media/libaaudio/src/legacy/AudioStreamTrack.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-08-19T09:33:02Z",
+      "side": 1,
+      "message": "the \u0027primary\u0027 output is not supposed to be forced. It is only a deprecated way of indicating that this output should be used for call routing which is not used any more with AIDL HALs. There must be a better way to fix this problem.",
+      "range": {
+        "startLine": 99,
+        "startChar": 20,
+        "endLine": 99,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fa9de56a_d3057dc3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaaudio/src/legacy/AudioStreamTrack.cpp",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": "            // Use primary output to avoid AAudio using direct output.\n            // This is a deprecated way of indicating that this output should be used for call\n            // routing which is not used any more with AIDL HALs.\n            flags \u003d AUDIO_OUTPUT_FLAG_PRIMARY | AUDIO_OUTPUT_FLAG_FAST;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f4c78b67d494317b97477cf246d7b221bfef0c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
