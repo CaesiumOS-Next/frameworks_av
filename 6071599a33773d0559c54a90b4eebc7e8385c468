@@ -70,6 +70,30 @@
       },
       "revId": "6071599a33773d0559c54a90b4eebc7e8385c468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea763375_0241ee24",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-08-19T19:44:13Z",
+      "side": 1,
+      "message": "Done. Now it returns the first device with address that matches the tag.",
+      "parentUuid": "dc847a4a_62c2a56d",
+      "range": {
+        "startLine": 481,
+        "startChar": 4,
+        "endLine": 481,
+        "endChar": 64
+      },
+      "revId": "6071599a33773d0559c54a90b4eebc7e8385c468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -33,6 +33,42 @@
       "message": "you must also update services/audiopolicy/enginedefault/src/Engine.cpp",
       "revId": "806996f94c6537fef2418380a660fea004a094ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dfed5cf_82e669dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-08-19T19:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38b977ff_25561bcd",
+      "revId": "806996f94c6537fef2418380a660fea004a094ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7a21a9_2e2c5e65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-08-19T19:44:13Z",
+      "side": 1,
+      "message": "Yes setPreferredDevice can be used to select the device. But similar to remote_submix_device below, we also use the address tag to match the device.\n\nhttps://screenshot.googleplex.com/BxqnfezsgYByEai.png",
+      "parentUuid": "14299df5_dca3e3ed",
+      "revId": "806996f94c6537fef2418380a660fea004a094ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
