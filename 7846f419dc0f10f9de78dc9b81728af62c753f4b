@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dcaed87_d045d83c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-19T19:49:59Z",
+      "side": 1,
+      "message": "looks good, just some possible thoughts here.",
+      "revId": "7846f419dc0f10f9de78dc9b81728af62c753f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5689f470_c7022ff0",
+        "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-19T19:49:59Z",
+      "side": 1,
+      "message": "nit: can this be done with the using keyword if the Impl is dropped in the base class?",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bd61c589_dee24642",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "    ndk::ScopedAStatus getVendorParameters(const std::vector\u003cstd::string\u003e\u0026 in_parameterIds) {\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "    ndk::ScopedAStatus setVendorParameters(const std::vector\u003cVendorParameter\u003e\u0026 in_parameters,\n                                          bool async) {\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+              "range": {
+                "startLine": 223,
+                "startChar": 0,
+                "endLine": 224,
+                "endChar": 0
+              },
+              "replacement": "        return getVendorParameters(in_parameterIds);\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+              "range": {
+                "startLine": 227,
+                "startChar": 0,
+                "endLine": 228,
+                "endChar": 0
+              },
+              "replacement": "        return setVendorParameters(in_parameters, async);\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+              "range": {
+                "startLine": 582,
+                "startChar": 0,
+                "endLine": 583,
+                "endChar": 0
+              },
+              "replacement": "        return getVendorParameters(in_parameterIds);\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+              "range": {
+                "startLine": 586,
+                "startChar": 0,
+                "endLine": 587,
+                "endChar": 0
+              },
+              "replacement": "        return setVendorParameters(in_parameters, async);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7846f419dc0f10f9de78dc9b81728af62c753f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "512e1301_64da758a",
+        "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-19T19:49:59Z",
+      "side": 1,
+      "message": "nit: would it be more general to put this as member variable initialization? \n\n\"If a member has a default member initializer and also appears in the member initialization list in a constructor, the default member initializer is ignored for that constructor.\"\n\n\nhttps://en.cppreference.com/w/cpp/language/data_members#Member_initialization",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 56
+      },
+      "revId": "7846f419dc0f10f9de78dc9b81728af62c753f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b0200a4_4025ae36",
+        "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-08-19T19:49:59Z",
+      "side": 1,
+      "message": "nit: this busy waits, is it intentional or do you want to yield?",
+      "range": {
+        "startLine": 896,
+        "startChar": 1,
+        "endLine": 896,
+        "endChar": 17
+      },
+      "revId": "7846f419dc0f10f9de78dc9b81728af62c753f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
