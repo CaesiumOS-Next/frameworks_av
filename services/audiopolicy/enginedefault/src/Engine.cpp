@@ -836,6 +836,43 @@ sp<DeviceDescriptor> Engine::getInputDeviceForAttributes(const audio_attributes_
         return device;
     }
 
+    device = getDeviceForInputSource(attr.source);
+
+    if (device->type() == AUDIO_DEVICE_IN_ECHO_REFERENCE) {
+        std::string tags { attr.tags }; // tags separate by ';'
+        std::size_t posBegin = 0; // fisrt index of current tag, inclusive
+        std::size_t posEnd; // last index of current tag, exclusive
+
+        while (posBegin < tags.size()) {
+            // ';' is used as the delimiter of tags
+            // find the first delimiter after posBegin
+            posEnd = tags.find(';', posBegin);
+
+            if (posEnd == std::string::npos) { // no more delimiter found
+                std::string tag = tags.substr(posBegin); // last tag
+
+                // get the input device whose address matches the tag
+                device = availableInputDevices.getDevice(AUDIO_DEVICE_IN_ECHO_REFERENCE,
+                        String8(tag.c_str()), AUDIO_FORMAT_DEFAULT);
+                if (device != nullptr) {
+                    return device;
+                }
+            }
+
+            // get next tag
+            std::string tag = tags.substr(posBegin, posEnd - posBegin);
+            // get the input device whose address matches the tag
+            device = availableInputDevices.getDevice(AUDIO_DEVICE_IN_ECHO_REFERENCE,
+                    String8(tag.c_str()), AUDIO_FORMAT_DEFAULT);
+            if (device != nullptr) {
+                return device;
+            }
+
+            // update posBegin for next tag
+            posBegin = posEnd + 1;
+        }
+    }
+
     device = policyMixes.getDeviceAndMixForInputSource(attr,
                                                        availableInputDevices,
                                                        uid,
