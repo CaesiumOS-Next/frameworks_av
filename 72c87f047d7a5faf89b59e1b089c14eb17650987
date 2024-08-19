@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6224ba1a_45275433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "Shunkai, could you please provide a second review.",
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ef883c_be74130f",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "There is `instance:` in the log macros:\n\n```\n...[instance:%s] ...\", getInstanceName().c_str()\n```\n\nWe need to remove either of these. From the fact that we intend to use `ioHandle:` prefix for streams, I think we need to remove the prefix from the log macros, for example:\n\n```\n#define LOG_ENTRY() \\\n    ALOGD(\"[%s] %s::%s\", getInstanceName().c_str(), getClassName().c_str(), __func__)\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 44,
+        "endLine": 117,
+        "endChar": 66
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f68904_597f636e",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "Same note about `instance:` prefix",
+      "range": {
+        "startLine": 103,
+        "startChar": 45,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279fd4ed_23843088",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "No need to log `this` since we have the instance name.",
+      "range": {
+        "startLine": 777,
+        "startChar": 16,
+        "endLine": 777,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3ce73917_6783aa57",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+              "range": {
+                "startLine": 776,
+                "startChar": 0,
+                "endLine": 778,
+                "endChar": 0
+              },
+              "replacement": "    AUGMENT_LOG(D, \"handle %d, device %s, flags %s, source %s, config %s, mixport config %s\",\n                ioHandle, device.toString().c_str(), flags.toString().c_str(),\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+              "range": {
+                "startLine": 857,
+                "startChar": 0,
+                "endLine": 858,
+                "endChar": 0
+              },
+              "replacement": "        AUGMENT_LOG(D, \"returning suggested config for the stream: %s\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4566b51_6abede06",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "Same note about `this`",
+      "range": {
+        "startLine": 857,
+        "startChar": 75,
+        "endLine": 857,
+        "endChar": 80
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5262e2bc_7b8d9fbc",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "Extra space",
+      "range": {
+        "startLine": 896,
+        "startChar": 30,
+        "endLine": 896,
+        "endChar": 31
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0acc0d6_9915f329",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "This looks odd. I would suggest adding a `LOG_ENTRY_V` macro for this use case.",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 23
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb46cd0_46ec866f",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T17:25:12Z",
+      "side": 1,
+      "message": "Please restore logging of the state value: `toString(state).c_str()`",
+      "range": {
+        "startLine": 823,
+        "startChar": 53,
+        "endLine": 823,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ac2b1f57_0b9f22a6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 823,
+                "startChar": 0,
+                "endLine": 824,
+                "endChar": 0
+              },
+              "replacement": "        AUGMENT_LOG(D, \"stream already in %s state\", toString(state).c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
