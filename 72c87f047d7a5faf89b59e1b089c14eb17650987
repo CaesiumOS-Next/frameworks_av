@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf623770_49dee836",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T18:00:30Z",
+      "side": 1,
+      "message": "Looks like an include for the helper header is missing",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04ef883c_be74130f",
         "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
         "patchSetId": 9
@@ -156,6 +179,52 @@
         "startChar": 30,
         "endLine": 896,
         "endChar": 31
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebfd60f9_601e51da",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T18:00:30Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Build Warnings: more \u0027%\u0027 conversions than data arguments [-Werror,-Wformat-insufficient-args]\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    more \u0027%\u0027 conversions than data arguments [-Werror,-Wformat-insufficient-args]\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P79442632/targets/aosp_cf_x86_64_phone-trunk_staging-userdebug, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the aosp-main branch.",
+      "range": {
+        "startLine": 1027,
+        "startChar": 90,
+        "endLine": 1027,
+        "endChar": 93
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1cd59d2_2b29bb35",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T18:00:30Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Build Warnings: format specifies type \u0027int\u0027 but the argument has type \u0027size_t\u0027 (aka \u0027unsigned long\u0027) [-Werror,-Wformat]\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    format specifies type \u0027int\u0027 but the argument has type \u0027size_t\u0027 (aka \u0027unsigned long\u0027) [-Werror,-Wformat]\n      124 |     AUGMENT_LOG(I, \"size: %d\", *size);\n          |                           ~~   ^~~~~\n          |                           %zu\n    frameworks/av/media/libaudiohal/impl/AidlUtils.h:44:41: note: expanded from macro \u0027AUGMENT_LOG\u0027\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P79442632/targets/aosp_cf_x86_64_phone-trunk_staging-userdebug, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the aosp-main branch.",
+      "range": {
+        "startLine": 124,
+        "startChar": 31,
+        "endLine": 124,
+        "endChar": 38
       },
       "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
