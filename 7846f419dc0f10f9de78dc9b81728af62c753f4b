@@ -111,6 +111,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1c9ea9fe_099e8a7f",
+        "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T20:13:55Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion!",
+      "parentUuid": "5689f470_c7022ff0",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 61
+      },
+      "revId": "7846f419dc0f10f9de78dc9b81728af62c753f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "512e1301_64da758a",
         "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
         "patchSetId": 1
@@ -134,6 +158,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8ea84c8d_9f52b799",
+        "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T20:13:55Z",
+      "side": 1,
+      "message": "Good point, I think it\u0027s more flexible approach, done.",
+      "parentUuid": "512e1301_64da758a",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 56
+      },
+      "revId": "7846f419dc0f10f9de78dc9b81728af62c753f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6b0200a4_4025ae36",
         "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
         "patchSetId": 1
@@ -145,6 +193,30 @@
       "writtenOn": "2024-08-19T19:49:59Z",
       "side": 1,
       "message": "nit: this busy waits, is it intentional or do you want to yield?",
+      "range": {
+        "startLine": 896,
+        "startChar": 1,
+        "endLine": 896,
+        "endChar": 17
+      },
+      "revId": "7846f419dc0f10f9de78dc9b81728af62c753f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "627cf835_20ad2193",
+        "filename": "media/libaudiohal/tests/CoreAudioHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T20:13:55Z",
+      "side": 1,
+      "message": "You are right. If both threads get scheduled on the same CPU, this test will end up running really slow. Added yield.",
+      "parentUuid": "6b0200a4_4025ae36",
       "range": {
         "startLine": 896,
         "startChar": 1,
