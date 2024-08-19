@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92a1cd8_6cec7937",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T22:16:54Z",
+      "side": 1,
+      "message": "It\u0027s tricky because the `__VA_ARGS__` macro thing does not support `0` actual parameters, so we can\u0027t write `AUGMENT_LOG(D)`, it won\u0027t compile. This probably can be solved by making `AUGMENT_LOG` even more complicated looking that it currently is by defining it as `AUGMENT_LOG(...)` and handling the case when there is only the level specified, but I don\u0027t think it\u0027s worth it.",
+      "parentUuid": "d704ac7b_ef16ce22",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 9
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf623770_49dee836",
@@ -84,6 +108,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8a54819_9e4b75dc",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T22:16:54Z",
+      "side": 1,
+      "message": "BTW, please remove colons from these error messages.",
+      "range": {
+        "startLine": 75,
+        "startChar": 24,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0450dd56_e61b9a2e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "        AUGMENT_LOG(E, \"module not initialized\"); \\\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "        AUGMENT_LOG(E, \"telephony not initialized\"); \\\n"
+            }
+          ]
+        }
+      ],
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4162f1ac_269904e8",
         "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
         "patchSetId": 9
@@ -95,6 +170,30 @@
       "writtenOn": "2024-08-19T22:05:44Z",
       "side": 1,
       "message": "Is `RETURN_IF(condition, retCode, message)` good enough for them?",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8759b902_fab02605",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T22:16:54Z",
+      "side": 1,
+      "message": "Shunkai, is this macro already available in the system libs or do we need to implement it? In the latter case, let\u0027s leave that for another CL.",
+      "parentUuid": "4162f1ac_269904e8",
       "range": {
         "startLine": 73,
         "startChar": 0,
@@ -151,6 +250,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc9e1eaa_fb70f750",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T22:16:54Z",
+      "side": 1,
+      "message": "As I have explained, this will make the implementation of these macros to be unnecessary complicated.",
+      "parentUuid": "8c63ef1b_331b6f21",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 40
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41588aab_a88fbbd8",
@@ -187,6 +310,30 @@
       "writtenOn": "2024-08-19T22:05:44Z",
       "side": 1,
       "message": "I feel like define a `RETURN_IF(condition, retCode, message)` seems more consistency, so this will be:\n```\nRETURN_IF(mModule \u003d\u003d nullptr, NO_INIT, \"module not initialized\");\nRETURN_IF(state \u003d\u003d nullptr, BAD_VALUE, \"uninitialized mute state\");\n```",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 0
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca28f7ea_1dc3f0c8",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-19T22:16:54Z",
+      "side": 1,
+      "message": "It may be a \"good\" return (no error), or a bad one, so we also need to specify the log level (or derive it from the error code value, but I\u0027m not sure it\u0027s easy to do in macros). I think, we should do a second round of improvements in a separate CL.",
+      "parentUuid": "13dcccd8_f673fb03",
       "range": {
         "startLine": 249,
         "startChar": 0,
