@@ -22,6 +22,30 @@
       },
       "revId": "d8010c8f741d34f3e5262985960b36dcc9e1e8b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d55e1e2_940fecf4",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:39:09Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d1623?q\u003dgetOutputForDevices%20filepath:AudioPolicyManager.cpp\n\n\nAPM already does that:\n\n\n    // open a direct output if required by specified parameters\n    //force direct flag if offload flag is set: offloading implies a direct output stream\n    // and all common behaviors are driven by checking only the direct flag\n    // this should normally be set appropriately in the policy configuration file\n    if ((*flags \u0026 AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) !\u003d 0) {\n        *flags \u003d (audio_output_flags_t)(*flags | AUDIO_OUTPUT_FLAG_DIRECT);\n    }",
+      "parentUuid": "22bb56a1_170f5eca",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1511,
+        "endChar": 52
+      },
+      "revId": "d8010c8f741d34f3e5262985960b36dcc9e1e8b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
