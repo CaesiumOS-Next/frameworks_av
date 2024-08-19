@@ -164,6 +164,30 @@
       },
       "revId": "328db71028877d3adde46c2632d01bc7cd9c531f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58b043b_af50f799",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "moved to macro, removed from individual logs.",
+      "parentUuid": "4df2c949_2ef333f4",
+      "range": {
+        "startLine": 133,
+        "startChar": 24,
+        "endLine": 133,
+        "endChar": 26
+      },
+      "revId": "328db71028877d3adde46c2632d01bc7cd9c531f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

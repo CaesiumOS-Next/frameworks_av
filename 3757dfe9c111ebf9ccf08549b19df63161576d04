@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "606bf542_b920ba7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "Mikhail, addressed the comments, looks okay at my end.\ncould you please check it in cuttlefish env once?",
+      "revId": "3757dfe9c111ebf9ccf08549b19df63161576d04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dd59dfc_d07a86f8",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "84ba4ae3_bbf6a3f0",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 26
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c25b132_44a2e42f",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3884f5f7_804442e0",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0c25b132_44a2e42f",
+      "range": {
+        "startLine": 606,
+        "startChar": 40,
+        "endLine": 606,
+        "endChar": 47
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b696127_278d9f69",
@@ -95,6 +143,30 @@
       "writtenOn": "2024-08-16T16:34:35Z",
       "side": 1,
       "message": "Since we do have a space in the format string of our macro, no need to have an extra space here (please also fix similar entries below).",
+      "range": {
+        "startLine": 1007,
+        "startChar": 23,
+        "endLine": 1007,
+        "endChar": 25
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d661fc2f_92689dec",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b696127_278d9f69",
       "range": {
         "startLine": 1007,
         "startChar": 23,
@@ -128,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46fe431a_d6b8828a",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "90ed6d92_9aa4dc25",
+      "range": {
+        "startLine": 1198,
+        "startChar": 37,
+        "endLine": 1198,
+        "endChar": 42
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a028196_38238dab",
@@ -141,6 +237,30 @@
       "writtenOn": "2024-08-16T16:34:35Z",
       "side": 1,
       "message": "Same here, `mInstance` can be removed because it was only used in logs, now it is systematically extracted from the `ConversionHelperAidl` by your new macros.",
+      "range": {
+        "startLine": 103,
+        "startChar": 56,
+        "endLine": 103,
+        "endChar": 76
+      },
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5380b95f_a1188098",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a028196_38238dab",
       "range": {
         "startLine": 103,
         "startChar": 56,
@@ -182,6 +302,24 @@
       "side": 1,
       "message": "I think having the I/O handle here is an excellent idea, please use it.",
       "parentUuid": "aee040dc_ca6a9830",
+      "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b81706c1_e9966426",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-19T09:48:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bb59efad_4c8aea45",
       "revId": "6f16d02fb27cc57088310e109093fc3469bc9008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
