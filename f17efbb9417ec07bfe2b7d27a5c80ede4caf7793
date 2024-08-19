@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4800c97_ff78f01a",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 10205,
+      "author": {
+        "id": 1478901
+      },
+      "writtenOn": "2024-08-19T08:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f90823c_c64f1ca2",
+      "range": {
+        "startLine": 10205,
+        "startChar": 4,
+        "endLine": 10205,
+        "endChar": 11
+      },
+      "revId": "f17efbb9417ec07bfe2b7d27a5c80ede4caf7793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "655b9e90_b63baeaf",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-14T01:06:45Z",
       "side": 1,
       "message": "If the error callback is fired then it would be OK to return OK here.\nBut if the callback is not fired then we should return AAUDIO_ERROR_DISCONNECTED.",
+      "range": {
+        "startLine": 10383,
+        "startChar": 15,
+        "endLine": 10383,
+        "endChar": 17
+      },
+      "revId": "f17efbb9417ec07bfe2b7d27a5c80ede4caf7793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47bb5e08_e588bb28",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 10383,
+      "author": {
+        "id": 1478901
+      },
+      "writtenOn": "2024-08-19T08:50:04Z",
+      "side": 1,
+      "message": "AAUDIO_ERROR_DISCONNECTED is defined in AAudio.h which can not be referenced in AudioFlinger.",
+      "parentUuid": "655b9e90_b63baeaf",
       "range": {
         "startLine": 10383,
         "startChar": 15,
