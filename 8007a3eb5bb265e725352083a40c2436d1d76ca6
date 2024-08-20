@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9e1c876_490a2b2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1692997
+      },
+      "writtenOn": "2024-08-20T01:04:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e2cff68_2f802e03",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 6
+      },
+      "revId": "8007a3eb5bb265e725352083a40c2436d1d76ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9007a921_12dd9b12",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-15T21:40:15Z",
       "side": 1,
       "message": "Please use `::android::MEDIA_MIMETYPE_AUDIO_AC4`",
+      "range": {
+        "startLine": 742,
+        "startChar": 63,
+        "endLine": 742,
+        "endChar": 72
+      },
+      "revId": "8007a3eb5bb265e725352083a40c2436d1d76ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8bb363_ea875923",
+        "filename": "media/audioaidlconversion/AidlConversionCppNdk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1692997
+      },
+      "writtenOn": "2024-08-20T01:04:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9007a921_12dd9b12",
       "range": {
         "startLine": 742,
         "startChar": 63,
