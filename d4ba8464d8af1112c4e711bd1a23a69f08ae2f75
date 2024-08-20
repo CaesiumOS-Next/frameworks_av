@@ -22,6 +22,30 @@
       },
       "revId": "d4ba8464d8af1112c4e711bd1a23a69f08ae2f75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10051f25_806935cc",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2467,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T00:32:48Z",
+      "side": 1,
+      "message": "it\u0027s safe here",
+      "parentUuid": "30eb475f_1c87e217",
+      "range": {
+        "startLine": 2257,
+        "startChar": 0,
+        "endLine": 2467,
+        "endChar": 26
+      },
+      "revId": "d4ba8464d8af1112c4e711bd1a23a69f08ae2f75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
