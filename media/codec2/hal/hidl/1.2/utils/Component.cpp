@@ -522,6 +522,7 @@ Return<Status> Component::start() {
 }
 
 Return<Status> Component::stop() {
+    LOG(ERROR) << "comp stopped";
     InputBufferManager::unregisterFrameData(mListener);
     Status status = static_cast<Status>(mComponent->stop());
     {
@@ -538,6 +539,7 @@ Return<Status> Component::stop() {
 }
 
 Return<Status> Component::reset() {
+    LOG(ERROR) << "comp resetted";
     Status status = static_cast<Status>(mComponent->reset());
     {
         std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
@@ -551,6 +553,7 @@ Return<Status> Component::reset() {
 }
 
 Return<Status> Component::release() {
+    LOG(ERROR) << "comp released";
     Status status = static_cast<Status>(mComponent->release());
     {
         std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
@@ -676,6 +679,7 @@ void Component::initListener(const sp<Component>& self) {
 }
 
 Component::~Component() {
+    LOG(ERROR) << "Component destructed";
     InputBufferManager::unregisterFrameData(mListener);
     mStore->reportComponentDeath(this);
 }
