@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92cb0fd1_3219ff2b",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-08-20T21:46:22Z",
+      "side": 1,
+      "message": "see if you can simplify this code without the copy+paste",
+      "range": {
+        "startLine": 482,
+        "startChar": 1,
+        "endLine": 501,
+        "endChar": 0
+      },
+      "revId": "0cf7670d6b8859e5b1ce59dba203587feef278f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b78f8dab_c046d22f",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-08-20T21:46:22Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 851,
+        "startChar": 0,
+        "endLine": 869,
+        "endChar": 13
+      },
+      "revId": "0cf7670d6b8859e5b1ce59dba203587feef278f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
