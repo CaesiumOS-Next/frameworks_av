@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bed067e_c440d03e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T21:47:23Z",
+      "side": 1,
+      "message": "Please implement an automatic test for this in https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/tests/audiopolicymanager_tests.cpp. There is https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/tests/AudioPolicyManagerTestClient.h that can be used to simulate errors with calls to setDeviceConnectedState",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "cc34388e4d7bfebb8e948ac1b870089ac2c9cdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fac3497_a09e36a4",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T21:47:23Z",
+      "side": 1,
+      "message": "Should we return `INVALID_OPERATION` for consistency?",
+      "range": {
+        "startLine": 222,
+        "startChar": 23,
+        "endLine": 222,
+        "endChar": 29
+      },
+      "revId": "cc34388e4d7bfebb8e948ac1b870089ac2c9cdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
