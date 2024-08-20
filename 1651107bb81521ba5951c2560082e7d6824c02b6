@@ -39,6 +39,30 @@
       },
       "revId": "1651107bb81521ba5951c2560082e7d6824c02b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af68c569_8a251a73",
+        "filename": "media/codec2/sfplugin/CCodecConfig.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1896,
+      "author": {
+        "id": 1392607
+      },
+      "writtenOn": "2024-08-20T22:13:21Z",
+      "side": 1,
+      "message": "Thank you for pointing this out. Considering change to `strtok_r` instead of `strtok` which is thread safe.\n\nram.mohan@ittiam.com",
+      "parentUuid": "1863b815_1c972406",
+      "range": {
+        "startLine": 1896,
+        "startChar": 28,
+        "endLine": 1896,
+        "endChar": 34
+      },
+      "revId": "1651107bb81521ba5951c2560082e7d6824c02b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
