@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a641f5_43833e66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-08-20T10:22:19Z",
+      "side": 1,
+      "message": "I think the right place to fix this is in the PatchPanel class based on the result of thread-\u003esendCreateAudioPatchConfigEvent() that\u0027s where the 2 second timeout can occur. also note that a recent change changed the command timeout to 4 seconds for audio patch creation (commit 3fddffeed45be9187dfca38e00ddc2d7a01f6f4c)",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
