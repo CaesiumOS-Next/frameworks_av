@@ -16,6 +16,24 @@
       "message": "I think the right place to fix this is in the PatchPanel class based on the result of thread-\u003esendCreateAudioPatchConfigEvent() that\u0027s where the 2 second timeout can occur. also note that a recent change changed the command timeout to 4 seconds for audio patch creation (commit 3fddffeed45be9187dfca38e00ddc2d7a01f6f4c)",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2537eea3_98226fe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T22:50:22Z",
+      "side": 1,
+      "message": "I\u0027m also concerned about embedding the rollback logic inside the command dispatcher. However, there might be some ambiguity at the level of the command sender because the original \u0027status\u0027 is overridden with the `TIMED_OUT` status by `AudioCommandThread::sendCommand`: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/service/AudioPolicyService.cpp;l\u003d2488;drc\u003dcb899108c8f94f083e50c271d3175af3fe5c0c39, so the sender will not know whether the patch creation / update was successful or not. Would it make sense to extend AudioCommand to also carry the original status?",
+      "parentUuid": "e7a641f5_43833e66",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
