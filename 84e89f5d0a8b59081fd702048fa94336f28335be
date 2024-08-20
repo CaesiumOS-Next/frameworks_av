@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26052dc3_126b2aa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:38:53Z",
+      "side": 1,
+      "message": "@Eric, could you please share your inputs on this as well? This is for the same AAudio bug.",
+      "revId": "84e89f5d0a8b59081fd702048fa94336f28335be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
