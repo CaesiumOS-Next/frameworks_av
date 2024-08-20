@@ -32,6 +32,7 @@
 #include <media/stagefright/foundation/base64.h>
 #include <thread>
 #include "fuzzer/FuzzedDataProvider.h"
+#include <android_media_stagefright_flags.h>
 
 constexpr int32_t kUuidSize = 16;
 constexpr int32_t kMaxSleepTimeInMs = 100;
