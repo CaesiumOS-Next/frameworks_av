@@ -106,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f85e1b_089256d1",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Missed in manual copy, updated.",
+      "parentUuid": "bf623770_49dee836",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8a54819_9e4b75dc",
@@ -153,6 +177,30 @@
           ]
         }
       ],
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ad3965f_56171c78",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b8a54819_9e4b75dc",
+      "range": {
+        "startLine": 75,
+        "startChar": 24,
+        "endLine": 75,
+        "endChar": 26
+      },
       "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -227,6 +275,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5433f3e_32657602",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Missed removal for AidlUtil;s macro update in manual copy, updated now.\n\nClient can pass instance / ioHandle prefix.",
+      "parentUuid": "04ef883c_be74130f",
+      "range": {
+        "startLine": 117,
+        "startChar": 44,
+        "endLine": 117,
+        "endChar": 66
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c63ef1b_331b6f21",
@@ -287,6 +359,30 @@
       "writtenOn": "2024-08-19T22:05:44Z",
       "side": 1,
       "message": "`AUGMENT_LOG_IF(E, volume \u003d\u003d nullptr, BAD_VALUE, \"uninitialized volumes\")`",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 0
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d483a70f_0dda144b",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "AUGMENT_LOG_IF, does not make function to exit, we need to return BAD_VALUE, so won\u0027t be possible with AUGMENT_LOG_IF (unless we provide support in those macros to exit based on some true/false values)",
+      "parentUuid": "41588aab_a88fbbd8",
       "range": {
         "startLine": 198,
         "startChar": 0,
@@ -385,6 +481,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07d823ee_2ea8a2da",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "intentionally moved to line 262, once we have the parameter list.",
+      "parentUuid": "f8839a9f_25c179d4",
+      "range": {
+        "startLine": 258,
+        "startChar": 4,
+        "endLine": 258,
+        "endChar": 14
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "680d37da_e09803fd",
@@ -398,6 +518,30 @@
       "writtenOn": "2024-08-19T22:05:44Z",
       "side": 1,
       "message": "need a `LOG_ENTRY` here?",
+      "range": {
+        "startLine": 718,
+        "startChar": 0,
+        "endLine": 718,
+        "endChar": 4
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2affbb24_323a1ac5",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Added verbose logging",
+      "parentUuid": "680d37da_e09803fd",
       "range": {
         "startLine": 718,
         "startChar": 0,
@@ -431,6 +575,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3944cdd_63c71a85",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Added verbose logging",
+      "parentUuid": "e8314dd4_0af1f2da",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 997,
+        "endChar": 4
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63c8dbd6_1edc6c52",
@@ -444,6 +612,30 @@
       "writtenOn": "2024-08-19T22:05:44Z",
       "side": 1,
       "message": "`LOG_ENTRY();`",
+      "range": {
+        "startLine": 1018,
+        "startChar": 0,
+        "endLine": 1018,
+        "endChar": 4
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ce0ab0_5d17a1b3",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Added verbose logging",
+      "parentUuid": "63c8dbd6_1edc6c52",
       "range": {
         "startLine": 1018,
         "startChar": 0,
@@ -477,6 +669,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebedab87_202bc297",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Added verbose logging",
+      "parentUuid": "40182d25_40b3988d",
+      "range": {
+        "startLine": 1056,
+        "startChar": 0,
+        "endLine": 1056,
+        "endChar": 4
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14752af0_44363789",
@@ -500,6 +716,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a13a6102_bd025837",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1087,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Added verbose logging",
+      "parentUuid": "14752af0_44363789",
+      "range": {
+        "startLine": 1087,
+        "startChar": 0,
+        "endLine": 1087,
+        "endChar": 4
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6f68904_597f636e",
@@ -513,6 +753,30 @@
       "writtenOn": "2024-08-19T17:25:12Z",
       "side": 1,
       "message": "Same note about `instance:` prefix",
+      "range": {
+        "startLine": 103,
+        "startChar": 45,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3444bb_11ec01e2",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Modified AidlUtils, clients need to pass the prefix.",
+      "parentUuid": "f6f68904_597f636e",
       "range": {
         "startLine": 103,
         "startChar": 45,
@@ -574,6 +838,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c673584_965c1b8f",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "279fd4ed_23843088",
+      "range": {
+        "startLine": 777,
+        "startChar": 16,
+        "endLine": 777,
+        "endChar": 22
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4566b51_6abede06",
@@ -587,6 +875,30 @@
       "writtenOn": "2024-08-19T17:25:12Z",
       "side": 1,
       "message": "Same note about `this`",
+      "range": {
+        "startLine": 857,
+        "startChar": 75,
+        "endLine": 857,
+        "endChar": 80
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc62e08_6d9fe09c",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c4566b51_6abede06",
       "range": {
         "startLine": 857,
         "startChar": 75,
@@ -620,6 +932,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "337fc106_6eaf1de7",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5262e2bc_7b8d9fbc",
+      "range": {
+        "startLine": 896,
+        "startChar": 30,
+        "endLine": 896,
+        "endChar": 31
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efa25535_7de2f96d",
@@ -633,6 +969,30 @@
       "writtenOn": "2024-08-19T22:05:44Z",
       "side": 1,
       "message": "nit: maybe these can be just `\"` now, same for other cases (line#898, #653, etc.)?",
+      "range": {
+        "startLine": 938,
+        "startChar": 19,
+        "endLine": 938,
+        "endChar": 22
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84acaf35_7145f7ed",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "efa25535_7de2f96d",
       "range": {
         "startLine": 938,
         "startChar": 19,
@@ -666,6 +1026,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc5f8be5_cfd90c77",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ebfd60f9_601e51da",
+      "range": {
+        "startLine": 1027,
+        "startChar": 90,
+        "endLine": 1027,
+        "endChar": 93
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1cd59d2_2b29bb35",
@@ -689,6 +1073,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d836cb_9984bf76",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f1cd59d2_2b29bb35",
+      "range": {
+        "startLine": 124,
+        "startChar": 31,
+        "endLine": 124,
+        "endChar": 38
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0acc0d6_9915f329",
@@ -702,6 +1110,30 @@
       "writtenOn": "2024-08-19T17:25:12Z",
       "side": 1,
       "message": "This looks odd. I would suggest adding a `LOG_ENTRY_V` macro for this use case.",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 23
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "016462ea_0bbf8f74",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d0acc0d6_9915f329",
       "range": {
         "startLine": 326,
         "startChar": 0,
@@ -749,6 +1181,30 @@
           ]
         }
       ],
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e6bfb8_40f7ff24",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:20:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7cb46cd0_46ec866f",
+      "range": {
+        "startLine": 823,
+        "startChar": 53,
+        "endLine": 823,
+        "endChar": 55
+      },
       "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
