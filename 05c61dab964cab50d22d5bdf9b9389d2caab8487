@@ -1,0 +1,148 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d59a7a_03de9e06",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:28:45Z",
+      "side": 1,
+      "message": "use any_of?",
+      "range": {
+        "startLine": 129,
+        "startChar": 3,
+        "endLine": 135,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "305e2ff8_e51b1201",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/EncoderCapabilities.cpp",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "        ok \u003d std::any_of(mProfileLevels.begin(), mProfileLevels.end(),\n                [\u0026profile](ProfileLevel pl) { return pl.mProfile \u003d\u003d profile.value(); });\n"
+            }
+          ]
+        }
+      ],
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d336c76c_d635bff2",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:28:45Z",
+      "side": 1,
+      "message": "remove opt post-fix, and use tmp or value for findInt32()",
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f81ad1a_cce208c5",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:28:45Z",
+      "side": 1,
+      "message": "nit: duplicate; also please sort",
+      "fixSuggestions": [
+        {
+          "fixId": "29eba58b_e9bbee2f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilities.h",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "#include \u003cmedia/AudioCapabilities.h\u003e\n"
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilities.h",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace1429b_746c0ca1",
+        "filename": "media/libmedia/include/media/EncoderCapabilities.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:28:45Z",
+      "side": 1,
+      "message": "nit: sBitrateModes?",
+      "range": {
+        "startLine": 75,
+        "startChar": 32,
+        "endLine": 75,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ec4049c6_ef3080c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/EncoderCapabilities.h",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "    inline static const Feature sBitrateModes[] \u003d {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
