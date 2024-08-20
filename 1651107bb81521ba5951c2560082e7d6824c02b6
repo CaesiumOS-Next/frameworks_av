@@ -16,6 +16,29 @@
       "message": "Hi Lajos. Could you help to +2 again. Your original +2 expired after uploading the new patchset. Thank you!",
       "revId": "1651107bb81521ba5951c2560082e7d6824c02b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1863b815_1c972406",
+        "filename": "media/codec2/sfplugin/CCodecConfig.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1896,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-20T21:34:55Z",
+      "side": 1,
+      "message": "This is not a thread safe method. We are seeing stability issues with the change.",
+      "range": {
+        "startLine": 1896,
+        "startChar": 28,
+        "endLine": 1896,
+        "endChar": 34
+      },
+      "revId": "1651107bb81521ba5951c2560082e7d6824c02b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
