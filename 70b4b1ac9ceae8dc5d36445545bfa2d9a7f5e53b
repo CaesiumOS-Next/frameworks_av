@@ -1,0 +1,340 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700ebbd4_786fca70",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:37:36Z",
+      "side": 1,
+      "message": "nit: sDecoderFeatures, or DECODER_FEATURES",
+      "fixSuggestions": [
+        {
+          "fixId": "058c42cb_1051b6f7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "static const std::vector\u003cFeature\u003e DECODER_FEATURES \u003d {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "static const std::vector\u003cFeature\u003e ENCODER_FEATURES \u003d {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 116,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "        return ENCODER_FEATURES;\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 118,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": "        return DECODER_FEATURES;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "452255d0_81e9bc02",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:37:36Z",
+      "side": 1,
+      "message": "please use all_of",
+      "range": {
+        "startLine": 132,
+        "startChar": 20,
+        "endLine": 138,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4b350452_c5558273",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": "    return std::all_of(getValidFeatures().begin(), getValidFeatures().end(),\n            [this](Feature feat) { return feat.mDefault || !isFeatureRequired(feat.mName); });\n"
+            }
+          ]
+        }
+      ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99620550_716408b7",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:37:36Z",
+      "side": 1,
+      "message": "nit: you can use android::base::EqualsIgnoreCase instead",
+      "fixSuggestions": [
+        {
+          "fixId": "f140be6d_51a40e3b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "#include \u003candroid-base/stringprintf.h\u003e\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 145,
+                "startChar": 0,
+                "endLine": 146,
+                "endChar": 0
+              },
+              "replacement": "    if (!android::base::EqualsIgnoreCase(mMediaType, mediaType)) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 187,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": "                if (!android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_VIDEO_H263)\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 258,
+                "startChar": 0,
+                "endLine": 259,
+                "endChar": 0
+              },
+              "replacement": "        if (android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_AUDIO_AAC)) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 266,
+                "endChar": 0
+              },
+              "replacement": "        if (android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_AUDIO_DTS)\n                || android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_AUDIO_DTS_HD)\n                || android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_AUDIO_DTS_UHD)) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 271,
+                "startChar": 0,
+                "endLine": 272,
+                "endChar": 0
+              },
+              "replacement": "        if (android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_VIDEO_H263)) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 280,
+                "startChar": 0,
+                "endLine": 281,
+                "endChar": 0
+              },
+              "replacement": "        if (android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_VIDEO_MPEG4)) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 288,
+                "startChar": 0,
+                "endLine": 289,
+                "endChar": 0
+              },
+              "replacement": "        if (android::base::EqualsIgnoreCase(mMediaType, MIMETYPE_VIDEO_HEVC)) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 421,
+                "startChar": 0,
+                "endLine": 422,
+                "endChar": 0
+              },
+              "replacement": "    if (android::base::StartsWithIgnoreCase(mediaTypeAStr, \"audio/\")) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 424,
+                "startChar": 0,
+                "endLine": 426,
+                "endChar": 0
+              },
+              "replacement": "    } else if (android::base::StartsWithIgnoreCase(mediaTypeAStr, \"video/\")\n            || android::base::EqualsIgnoreCase(mediaTypeAStr, MIMETYPE_IMAGE_ANDROID_HEIC)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8805035_cb6bbdfc",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 54
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:37:36Z",
+      "side": 1,
+      "message": "please remove",
+      "fixSuggestions": [
+        {
+          "fixId": "fe61b524_f4dbcf4d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilities.h",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "248017a7_ce7f7887",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 54
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:37:36Z",
+      "side": 1,
+      "message": "maybe it\u0027s sufficient to define it in CodecCapabilties.cpp; I don\u0027t see usage outside of the file.",
+      "fixSuggestions": [
+        {
+          "fixId": "db9d1035_f6cdab15",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+              "range": {
+                "startLine": 473,
+                "startChar": 0,
+                "endLine": 479,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ff34cb_0c505861",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 54
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:37:36Z",
+      "side": 1,
+      "message": "please align indentation",
+      "fixSuggestions": [
+        {
+          "fixId": "fc7a2a72_689cd249",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+              "range": {
+                "startLine": 728,
+                "startChar": 0,
+                "endLine": 729,
+                "endChar": 0
+              },
+              "replacement": "inline constexpr char FEATURE_DynamicTimestamp[]      \u003d \"dynamic-timestamp\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
