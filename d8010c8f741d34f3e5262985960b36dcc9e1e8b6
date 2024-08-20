@@ -70,6 +70,30 @@
       },
       "revId": "d8010c8f741d34f3e5262985960b36dcc9e1e8b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20feba2_31721200",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-20T04:27:47Z",
+      "side": 1,
+      "message": "I think it is client\u0027s responsibility to pass the relevant flags, if they want to use offload, like NuPlayer uses COMPRESS_OFFLOAD when they try to open in offload mode\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp;l\u003d2069?q\u003dAUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD%20filepath:mediaplayer",
+      "parentUuid": "ba11b11a_ae772f45",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1511,
+        "endChar": 52
+      },
+      "revId": "d8010c8f741d34f3e5262985960b36dcc9e1e8b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
