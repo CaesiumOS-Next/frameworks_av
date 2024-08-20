@@ -1069,10 +1069,6 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
             return;
         }
     }
-    if (android::media::codec::provider_->input_surface_throttle()
-            && mInputSurface != nullptr) {
-        mInputSurface->onInputBufferEmptied();
-    }
     size_t numActiveSlots = 0;
     while (!mPipelineWatcher.lock()->pipelineFull()) {
         sp<MediaCodecBuffer> inBuffer;
@@ -1483,6 +1479,7 @@ void CCodecBufferChannel::onBufferAttachedToOutputSurface(uint32_t generation) {
 status_t CCodecBufferChannel::discardBuffer(const sp<MediaCodecBuffer> &buffer) {
     ALOGV("[%s] discardBuffer: %p", mName, buffer.get());
     bool released = false;
+    bool outputReleased = false;
     {
         Mutexed<Input>::Locked input(mInput);
         if (input->buffers && input->buffers->releaseBuffer(buffer, nullptr, true)) {
@@ -1493,6 +1490,7 @@ status_t CCodecBufferChannel::discardBuffer(const sp<MediaCodecBuffer> &buffer) 
         Mutexed<Output>::Locked output(mOutput);
         if (output->buffers && output->buffers->releaseBuffer(buffer, nullptr)) {
             released = true;
+            outputReleased = true;
         }
     }
     if (released) {
@@ -1500,6 +1498,10 @@ status_t CCodecBufferChannel::discardBuffer(const sp<MediaCodecBuffer> &buffer) 
         feedInputBufferIfAvailable();
     } else {
         ALOGD("[%s] MediaCodec discarded an unknown buffer", mName);
+    }
+    if (outputReleased && android::media::codec::provider_->input_surface_throttle()
+            && mInputSurface != nullptr) {
+        mInputSurface->onInputBufferEmptied();
     }
     return OK;
 }
