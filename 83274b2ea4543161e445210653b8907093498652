@@ -1,0 +1,160 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e29857d_9b9176a8",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T20:52:29Z",
+      "side": 1,
+      "message": "Colon not needed.",
+      "range": {
+        "startLine": 905,
+        "startChar": 24,
+        "endLine": 905,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fa8389e1_2e65e153",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+              "range": {
+                "startLine": 905,
+                "startChar": 0,
+                "endLine": 906,
+                "endChar": 0
+              },
+              "replacement": "        AUGMENT_LOG(E, \"provided port config is not a device port config: %s\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f0e0aff_3b6ab112",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T20:52:29Z",
+      "side": 1,
+      "message": "Colon not needed",
+      "range": {
+        "startLine": 475,
+        "startChar": 28,
+        "endLine": 475,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "89f44564_fd6d1346",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+              "range": {
+                "startLine": 475,
+                "startChar": 0,
+                "endLine": 476,
+                "endChar": 0
+              },
+              "replacement": "            AUGMENT_LOG(D, \"device port config does not have audio or gain config specified\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2943f1f9_85575514",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T20:52:29Z",
+      "side": 1,
+      "message": "Colon not needed.",
+      "range": {
+        "startLine": 653,
+        "startChar": 38,
+        "endLine": 653,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "26c62db0_74204668",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+              "range": {
+                "startLine": 653,
+                "startChar": 0,
+                "endLine": 654,
+                "endChar": 0
+              },
+              "replacement": "    AUGMENT_LOG_IF(W, ports.empty(), \"returned an empty list of audio ports\");\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+              "range": {
+                "startLine": 1107,
+                "startChar": 0,
+                "endLine": 1108,
+                "endChar": 0
+              },
+              "replacement": "    AUGMENT_LOG_IF(W, mRoutes.empty(), \": returned an empty list of audio routes\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b84c5a_d5c4df3e",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T20:52:29Z",
+      "side": 1,
+      "message": "Extra space",
+      "range": {
+        "startLine": 928,
+        "startChar": 26,
+        "endLine": 928,
+        "endChar": 27
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
