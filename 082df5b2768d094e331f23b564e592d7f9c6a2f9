@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca95d078_62b98ed4",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 46
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "nit: NAN",
+      "revId": "082df5b2768d094e331f23b564e592d7f9c6a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

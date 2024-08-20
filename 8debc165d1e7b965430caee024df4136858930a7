@@ -1,0 +1,368 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "accf6b41_465f496e",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "maybe easier to read using std::regex, here and other parser code below",
+      "fixSuggestions": [
+        {
+          "fixId": "f4a1de2c_450a2672",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 71,
+                "endChar": 0
+              },
+              "replacement": "    std::regex regex(\"([0-9]+)([xX])([0-9]+)\");\n    std::smatch match;\n    if (std::regex_match(str, match, regex)) {\n        int w \u003d std::atoi(match[1].str().c_str());\n        int h \u003d std::atoi(match[3].str().c_str());\n        return std::make_optional(VideoSize(w, h));\n    } else {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "    std::regex regex(\"([0-9]+)([:/])([0-9]+)\");\n    std::smatch match;\n    if (std::regex_match(str, match, regex)) {\n        int numerator \u003d std::atoi(match[1].str().c_str());\n        int denominator \u003d std::atoi(match[3].str().c_str());\n        return std::make_optional(Rational(numerator, denominator));\n    } else {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64455ec3_d9201b96",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "nit: maybe use GetIntProperty",
+      "fixSuggestions": [
+        {
+          "fixId": "a792c8fc_86389f00",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 244,
+                "startChar": 0,
+                "endLine": 246,
+                "endChar": 0
+              },
+              "replacement": "    int value \u003d base::GetIntProperty(\"media.resolution.limit.32bit\", 4096);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af214e82_b010629f",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "maybe we should fail gracefully?",
+      "fixSuggestions": [
+        {
+          "fixId": "59e5b368_a8d39acd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 256,
+                "endChar": 0
+              },
+              "replacement": "    if ((value \u0026 (value - 1)) !\u003d 0) {\n        ALOGW(\"value %d is not a power of two\", value);\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68fe9633_48f6bee4",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "this will crash the app if the app queries for unsupported w/h. I don\u0027t think that\u0027s intended?",
+      "fixSuggestions": [
+        {
+          "fixId": "166c55bd_b7e338f5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 241,
+                "startChar": 0,
+                "endLine": 242,
+                "endChar": 0
+              },
+              "replacement": "    if (!supports(width, height, 0)) {\n        return Range(0, 0);\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059a7ea9_9ccb103d",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9039a6b_d03297e5",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "regex may be helpful here",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2df3f16_5ad4f752",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "needed? feels like a carry-over from Java",
+      "fixSuggestions": [
+        {
+          "fixId": "62503f93_ff5625fc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 277,
+                "startChar": 0,
+                "endLine": 279,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781cfcd9_1b44ea0a",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "is this immutable? if so please mark all getters const",
+      "fixSuggestions": [
+        {
+          "fixId": "7475dee2_b939e1af",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 296,
+                "startChar": 0,
+                "endLine": 296,
+                "endChar": 0
+              },
+              "replacement": "/**\n * Immutable class for describing a rational number.\n */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d2c65b_7d3332e1",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "maybe we can replace usage of this with std::gcd",
+      "fixSuggestions": [
+        {
+          "fixId": "69e47ea1_c1f65864",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 307,
+                "startChar": 0,
+                "endLine": 327,
+                "endChar": 0
+              },
+              "replacement": "    static int32_t GCD(int32_t numerator, int32_t denominator);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96268f21_9f0df8e6",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-20T20:04:28Z",
+      "side": 1,
+      "message": "maybe need std::hash\u003cRational\u003e implemented instead of hashCode method",
+      "fixSuggestions": [
+        {
+          "fixId": "67e70683_78cc5971",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 277,
+                "startChar": 0,
+                "endLine": 279,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 477,
+                "startChar": 0,
+                "endLine": 486,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 733,
+                "startChar": 0,
+                "endLine": 733,
+                "endChar": 0
+              },
+              "replacement": "\ntemplate \u003ctypename H\u003e\nH AbslHashValue(H h, const Rational \u0026r) {\n    // Bias the hash code for the first (2^16) values for both numerator and denominator\n    // ToDo: In Java, it uses a unsigned right shift \u003e\u003e\u003e which C++ does not have.\n    //       int numeratorFlipped \u003d mNumerator \u003c\u003c 16 | mNumerator \u003e\u003e\u003e 16;\n    int numeratorFlipped \u003d r.mNumerator \u003c\u003c 16 | r.mNumerator \u003e\u003e 16;\n\n    return H::combine(std::move(h), r.mDenominator, numeratorFlipped);\n}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
