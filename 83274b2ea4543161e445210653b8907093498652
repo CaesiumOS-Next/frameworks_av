@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a02553d_36b934cf",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-20T23:09:46Z",
+      "side": 1,
+      "message": "Good catch! We only need it in `AUGMENT_LOG[_IF]` because there is a message appended afterwards. For entry records it is not needed.",
+      "parentUuid": "36cca148_3c8938b6",
+      "range": {
+        "startLine": 51,
+        "startChar": 24,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb5347ac_5eaa05dc",
         "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
         "patchSetId": 10
