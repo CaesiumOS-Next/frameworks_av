@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36cca148_3c8938b6",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-20T22:52:13Z",
+      "side": 1,
+      "message": "do we need this extra tail space? same for line#55",
+      "range": {
+        "startLine": 51,
+        "startChar": 24,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb5347ac_5eaa05dc",
         "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
         "patchSetId": 10

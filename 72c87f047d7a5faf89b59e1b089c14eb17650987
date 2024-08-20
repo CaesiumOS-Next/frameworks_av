@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "828d147e_0581bd13",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-20T22:52:13Z",
+      "side": 1,
+      "message": "I think `__VA_OPT__` can be used here:\n```\n#define AUGMENT_LOG(level, ...)                                                     \\\n    ALOG##level(\"[%s] : %s::%s: \" __VA_OPT__(__android_second(0, __VA_ARGS__, \"\")), \\\n                getInstanceName().c_str(), getClassName().c_str(),                  \\\n                __func__ __VA_OPT__(__android_rest(__VA_ARGS__)))\n\n#define LOG_ENTRY(...) AUGMENT_LOG(D __VA_OPT__(, __VA_ARGS__))\n```\n\nDon\u0027t want to block this CL, I will upload a followup CL for this",
+      "parentUuid": "b92a1cd8_6cec7937",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 9
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf623770_49dee836",
@@ -252,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca4f9bb_67068429",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-20T22:52:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8759b902_fab02605",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04ef883c_be74130f",
@@ -336,6 +384,30 @@
       "side": 1,
       "message": "As I have explained, this will make the implementation of these macros to be unnecessary complicated.",
       "parentUuid": "8c63ef1b_331b6f21",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 40
+      },
+      "revId": "72c87f047d7a5faf89b59e1b089c14eb17650987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ff2fd4_6b39a0a7",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-20T22:52:13Z",
+      "side": 1,
+      "message": "replied in AidlUtils.h",
+      "parentUuid": "bc9e1eaa_fb70f750",
       "range": {
         "startLine": 187,
         "startChar": 4,
