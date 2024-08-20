@@ -93,6 +93,30 @@
       },
       "revId": "f17efbb9417ec07bfe2b7d27a5c80ede4caf7793",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65470d23_f6aded13",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 10383,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-08-20T00:11:06Z",
+      "side": 1,
+      "message": "Good point. It could return OK or NO_ERROR or some AudioFlinger error like NO_INIT.",
+      "parentUuid": "47bb5e08_e588bb28",
+      "range": {
+        "startLine": 10383,
+        "startChar": 15,
+        "endLine": 10383,
+        "endChar": 17
+      },
+      "revId": "f17efbb9417ec07bfe2b7d27a5c80ede4caf7793",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
