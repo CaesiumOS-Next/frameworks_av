@@ -50,3 +50,22 @@ cc_aconfig_library {
     ],
     aconfig_declarations: "aconfig_codec_fwk_flags",
 }
+
+// Media stagefright
+aconfig_declarations {
+    name: "android.media.stagefright.flags-aconfig",
+    package: "android.media.stagefright.flags",
+    container: "system",
+    srcs: ["editing.aconfig",],
+}
+
+cc_aconfig_library {
+    name: "android.media.stagefright.flags-aconfig-cc",
+    aconfig_declarations: "android.media.stagefright.flags-aconfig",
+}
+
+java_aconfig_library {
+    name: "android.media.stagefright.flags-aconfig-java",
+    aconfig_declarations: "android.media.stagefright.flags-aconfig",
+    defaults: ["framework-minus-apex-aconfig-java-defaults"],
+}

@@ -31,6 +31,7 @@
 #include <thread>
 #include "CameraService.h"
 #include "fuzzer/FuzzedDataProvider.h"
+#include <android_media_stagefright_flags.h>
 
 using namespace std;
 using namespace android;
