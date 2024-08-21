@@ -286,7 +286,7 @@ status_t DeviceHalAidl::setParameters(const String8& kvPairs) {
 }
 
 status_t DeviceHalAidl::getParameters(const String8& keys, String8 *values) {
-    AUGMENT_LOG(D, "keys: \"%s\"", keys.c_str());
+    LOG_ENTRY("keys: \"%s\"", keys.c_str());
 
     TIME_CHECK();
     RETURN_IF_MODULE_NOT_INIT(NO_INIT);
@@ -461,7 +461,8 @@ status_t DeviceHalAidl::openOutputStream(
         const char* address,
         sp<StreamOutHalInterface>* outStream,
         const std::vector<playback_track_metadata_v7_t>& sourceMetadata) {
-    AUGMENT_LOG(D, "handle: %d devices %0x flags %0x", handle, devices, flags);
+    LOG_ENTRY("handle: %d devices %0x flags %0x", handle, devices, flags);
+
     TIME_CHECK();
     RETURN_IF_MODULE_NOT_INIT(NO_INIT);
     if (outStream == nullptr || config == nullptr) {
@@ -550,7 +551,7 @@ status_t DeviceHalAidl::openInputStream(
         const char* address, audio_source_t source,
         audio_devices_t outputDevice, const char* outputDeviceAddress,
         sp<StreamInHalInterface>* inStream) {
-    AUGMENT_LOG(D, "handle: %d devices %0x flags %0x", handle, devices, flags);
+    LOG_ENTRY("handle: %d devices %0x flags %0x", handle, devices, flags);
     TIME_CHECK();
     RETURN_IF_MODULE_NOT_INIT(NO_INIT);
     if (inStream == nullptr || config == nullptr) {
@@ -626,7 +627,7 @@ status_t DeviceHalAidl::createAudioPatch(unsigned int num_sources,
                                          unsigned int num_sinks,
                                          const struct audio_port_config* sinks,
                                          audio_patch_handle_t* patch) {
-    AUGMENT_LOG(D, "sources: %d sinks %d", num_sources, num_sinks);
+    LOG_ENTRY("sources: %d sinks %d", num_sources, num_sinks);
     TIME_CHECK();
     RETURN_IF_MODULE_NOT_INIT(NO_INIT);
     if (num_sinks > AUDIO_PATCH_PORTS_MAX || num_sources > AUDIO_PATCH_PORTS_MAX) {
@@ -701,7 +702,7 @@ status_t DeviceHalAidl::createAudioPatch(unsigned int num_sources,
 }
 
 status_t DeviceHalAidl::releaseAudioPatch(audio_patch_handle_t patch) {
-    AUGMENT_LOG(D, "patch: %d", patch);
+    LOG_ENTRY("patch: %d", patch);
 
     TIME_CHECK();
     RETURN_IF_MODULE_NOT_INIT(NO_INIT);
