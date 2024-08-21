@@ -31,28 +31,34 @@ namespace android {
  * print function names along with instance name.
  *
  * Usage:
+ *  AUGMENT_LOG(D);
  *  AUGMENT_LOG(I, "hello!");
  *  AUGMENT_LOG(W, "value: %d", value);
  *
- * AUGMENT_LOG_IF(D, value < 0, "negative");
- * AUGMENT_LOG_IF(E, value < 0, "bad value: %d", value);
+ *  AUGMENT_LOG_IF(D, value < 0, "negative");
+ *  AUGMENT_LOG_IF(E, value < 0, "bad value: %d", value);
+ *
+ *  LOG_ENTRY();
+ *  LOG_ENTRY("%d", value);
+ *  LOG_ENTRY_V();
+ *  LOG_ENTRY_V("%d", value);
  */
 
-#define AUGMENT_LOG(level, ...)                                                                    \
-    ALOG##level("[%s] : %s::%s: " __android_second(0, __VA_ARGS__, ""), getInstanceName().c_str(), \
-                getClassName().c_str(), __func__ __android_rest(__VA_ARGS__))
+#define AUGMENT_LOG(level, ...)                                                    \
+    ALOG##level("[%s] : %s::%s " __VA_OPT__(__android_second(0, __VA_ARGS__, "")), \
+                getInstanceName().c_str(), getClassName().c_str(),                 \
+                __func__ __VA_OPT__(__android_rest(__VA_ARGS__)))
 
-#define AUGMENT_LOG_IF(level, cond, ...)                                           \
-    ALOG##level##_IF(cond, "[%s] : %s::%s: " __android_second(0, __VA_ARGS__, ""), \
-                     getInstanceName().c_str(), getClassName().c_str(),            \
-                     __func__ __android_rest(__VA_ARGS__))
+#define AUGMENT_LOG_IF(level, cond, ...)                                                      \
+    ALOG##level##_IF(cond, "[%s] : %s::%s " __VA_OPT__(__android_second(0, __VA_ARGS__, "")), \
+                     getInstanceName().c_str(), getClassName().c_str(),                       \
+                     __func__ __VA_OPT__(__android_rest(__VA_ARGS__)))
+
 // Used to register an entry into the function
-#define LOG_ENTRY() \
-    ALOGD("[%s] : %s::%s ", getInstanceName().c_str(), getClassName().c_str(), __func__)
+#define LOG_ENTRY(...) AUGMENT_LOG(D __VA_OPT__(, __VA_ARGS__))
 
 // entry logging as verbose level
-#define LOG_ENTRY_V() \
-    ALOGV("[%s] : %s::%s ", getInstanceName().c_str(), getClassName().c_str(), __func__)
+#define LOG_ENTRY_V(...) AUGMENT_LOG(V __VA_OPT__(, __VA_ARGS__))
 
 class HalDeathHandler {
   public:
