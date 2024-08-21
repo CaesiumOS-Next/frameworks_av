@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b3bc5e5_24eca81b",
+        "filename": "services/audiopolicy/engine/common/src/EngineDefaultConfig.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-21T12:43:29Z",
+      "side": 1,
+      "message": "Done and also moved since I just realized I copied / pasted, I do not want if avoidable to have duplicated enums",
+      "parentUuid": "f2427864_18858f40",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 22
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84d99c68_02f576f0",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-14T20:23:23Z",
       "side": 1,
       "message": "Please sort.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 44
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71213d3_716b07ae",
+        "filename": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-21T12:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84d99c68_02f576f0",
       "range": {
         "startLine": 46,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e64bd1f8_945b8b8c",
+        "filename": "services/audiopolicy/engineconfigurable/config/include/CapEngineConfig.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-21T12:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74a23cf7_0953be22",
+      "range": {
+        "startLine": 36,
+        "startChar": 27,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe419549_6ab0ff21",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-08-14T20:23:23Z",
       "side": 1,
       "message": "According to https://en.cppreference.com/w/cpp/string/byte/tolower, this needs to be `unsigned char` to avoid UB.",
+      "range": {
+        "startLine": 72,
+        "startChar": 22,
+        "endLine": 72,
+        "endChar": 26
+      },
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de5fcf44_3e85b2cb",
+        "filename": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-21T12:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe419549_6ab0ff21",
       "range": {
         "startLine": 72,
         "startChar": 22,
@@ -130,6 +226,30 @@
           ]
         }
       ],
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ef6d17_00d02859",
+        "filename": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-21T12:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e18932be_b81e1a9d",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 6
+      },
       "revId": "21997830453fac0318302999bec241589a14eb03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -191,6 +311,30 @@
           ]
         }
       ],
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f55511_2c7c63f9",
+        "filename": "services/audiopolicy/engineconfigurable/parameter-framework/plugin/ProductStrategy.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-21T12:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5efb0c_cc006219",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 18
+      },
       "revId": "21997830453fac0318302999bec241589a14eb03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
