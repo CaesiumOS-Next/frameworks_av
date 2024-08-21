@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f871b4_4f1590c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-08-21T08:39:51Z",
+      "side": 1,
+      "message": "add:\nMerged-In: I6fd89f7a9be6bc461df9db171df8f1afd75aa2f8",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 68
+      },
+      "revId": "4a2f487a10de58aff5c7e9ae0ebc7dcb37a3b08e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
