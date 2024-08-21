@@ -16,6 +16,24 @@
       "message": "Could you add `Flag: EXEMPT refactor`?",
       "revId": "65d8adc2c595668ee583fb7bde1ea3dc5d543570",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e6dd20_98470f05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-21T20:14:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20d3aebe_b6d38a28",
+      "revId": "65d8adc2c595668ee583fb7bde1ea3dc5d543570",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
