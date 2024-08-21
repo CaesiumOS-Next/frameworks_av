@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b1275ed_784bce28",
+        "filename": "media/module/libmediatranscoding/transcoder/VideoTrackTranscoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-08-21T08:45:28Z",
+      "side": 1,
+      "message": "I think this needs a comment to explain why we are sleeping and why it\u0027s for 10 ms. I don\u0027t understand the details in https://b.corp.google.com/issues/264938310#comment13, but this seems like a fudge factor rather than something that would guarantee things happen in the right order. If someone comes across this line in future they need to be able to understand why it\u0027s there so it\u0027s maintainable.",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 67
+      },
+      "revId": "23a81448c1857cff0aa99b786bb0fb8395099df6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
