@@ -138,8 +138,14 @@ public:
                                       audio_format_t format,
                                       audio_channel_mask_t channelMask);
 
-    /* How data is transferred from AudioRecord
+    /* Checks for erroneous status, marks error in MediaMetrics, logs the error message.
+     * Updates and returns mStatus.
      */
+    status_t logIfErrorAndReturnStatus(status_t status, const std::string& errorMessage,
+                                       const std::string& func);
+
+    /* How data is transferred from AudioRecord
+    */
     enum transfer_type {
         TRANSFER_DEFAULT,   // not specified explicitly; determine from the other parameters
         TRANSFER_CALLBACK,  // callback EVENT_MORE_DATA
