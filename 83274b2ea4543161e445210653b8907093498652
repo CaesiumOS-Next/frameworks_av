@@ -231,6 +231,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b9f74d_f39ca930",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-21T16:50:32Z",
+      "side": 1,
+      "message": "I think that\u0027s more a question of style.",
+      "parentUuid": "37fed334_df2a64e4",
+      "range": {
+        "startLine": 1001,
+        "startChar": 65,
+        "endLine": 1001,
+        "endChar": 39
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f0e0aff_3b6ab112",
