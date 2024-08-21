@@ -1,0 +1,426 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6db280_5fdc48c2",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "these are direct equivalent to c2_status. Should we add an automatic enforcement (e.g. a static_assert unit test somewhere?). Similarly for other enums below.",
+      "range": {
+        "startLine": 46,
+        "startChar": 13,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aee089b_5bc94bcb",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "is ownership implied if this is not nullptr? if so, does it need a delete method? if not, is there a risk of object lifecycle?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6bfb9b62_b5c3f288",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 134,
+                "endChar": 0
+              },
+              "replacement": " * The returned object is valid for the lifetime of the ApexCodecs module.\n *\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50dfdf35_13e5bd9a",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "should this return some sort of an error code, e.g. as to why creation may fail?",
+      "range": {
+        "startLine": 193,
+        "startChar": 21,
+        "endLine": 193,
+        "endChar": 47
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b9eace_8fd2672b",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "does this also \"release\" (free the object behind) the handle? If so, perhaps we can mention that the handle is assumed invalid after this call and the object is deleted.",
+      "range": {
+        "startLine": 197,
+        "startChar": 3,
+        "endLine": 197,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "773a6cdd_a80f9b43",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 197,
+                "startChar": 0,
+                "endLine": 198,
+                "endChar": 0
+              },
+              "replacement": " * Destroy the component by the handle. The handle is invalid after this call.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34708daf_3770bedb",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "I am noticing start/stop is missing. Is the created codec automatically started on create? Also, is this reset in effect meant for flush()?",
+      "range": {
+        "startLine": 208,
+        "startChar": 15,
+        "endLine": 208,
+        "endChar": 40
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "284e0b2e_3c8e9873",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "this seems the represent a C2 View. As such, do we want to clarify that there can be no assumptions that buffers are aligned to any value?",
+      "range": {
+        "startLine": 251,
+        "startChar": 15,
+        "endLine": 251,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0998f5f2_19ed8c5c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 250,
+                "startChar": 0,
+                "endLine": 250,
+                "endChar": 0
+              },
+              "replacement": " *\n * Note that the buffers are not necessarily aligned to any value.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "293817fc_3071cc31",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "what are the meaning of these fields?",
+      "range": {
+        "startLine": 269,
+        "startChar": 11,
+        "endLine": 269,
+        "endChar": 22
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd76705_6b03ce8e",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "we will likely need to add a size_t *produced as well. Also, part of the processing is generating \"configUpdates\". Should that also be added to this method?",
+      "range": {
+        "startLine": 296,
+        "startChar": 16,
+        "endLine": 296,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "40b2ad1c_c1fa0ec0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 281,
+                "startChar": 0,
+                "endLine": 284,
+                "endChar": 0
+              },
+              "replacement": " * \\param consumed  the number of consumed bytes from the input buffer,\n *                  set to 0 if no input buffer has been consumed, including\n *                  |input| is nullptr.\n *                  for graphic buffers, any non-zero value means that the\n *                  input buffer is consumed.\n * \\param produced  the number of produced bytes to the output buffer,\n *                  set to 0 if no output buffer has been produced, including\n *                  |output| is nullptr.\n *                  for graphic buffers, any non-zero value means that the\n *                  output buffer is produced.\n"
+            },
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 296,
+                "startChar": 0,
+                "endLine": 297,
+                "endChar": 0
+              },
+              "replacement": "        size_t *consumed,\n        size_t *produced) PLACEHOLDER_INTRO_IN_ANDROID_API_FUTURE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712dab0b_ba99f893",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "current C2 config API also returns a \"conflicts\" object, that framework today does not use. In order to implement a new configuration API, that conflicts object may become important. Is the expectation that at that point we will add a new config API? If so, what is the mechanism to figure out which version of the config API an APEX supports? On that note, outputting conflicts also requires \"preallocating\" conflicts, and having a mechanism to signal the scenario where the preallocation is too small, and an easy \"retry\" process.",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "deef4baa_1a71b592",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 307,
+                "startChar": 0,
+                "endLine": 307,
+                "endChar": 0
+              },
+              "replacement": " * \\param conflicts the output buffer for the conflicts\n * \\param conflictsSize the size of the conflicts buffer\n"
+            },
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 311,
+                "startChar": 0,
+                "endLine": 312,
+                "endChar": 0
+              },
+              "replacement": "        size_t configSize,\n        uint8_t *conflicts,\n        size_t *conflictsSize) PLACEHOLDER_INTRO_IN_ANDROID_API_FUTURE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d481951_29d1aec6",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "is this allocated by the APEX, or pre-allocated by the caller? (If preallocated, we need to define a process where this can return \"insufficient\" space, preferably without requerying the component.) If not preallocated, we need a convention on how to delete these outputs. I think we can save some significant thrashing if the client allocates these output buffers.",
+      "range": {
+        "startLine": 319,
+        "startChar": 10,
+        "endLine": 319,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e0777df2_49107a06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 319,
+                "startChar": 0,
+                "endLine": 321,
+                "endChar": 0
+              },
+              "replacement": " * \\param config the output buffer for the config blob, allocated by the caller\n * \\param configSize the size of the config buffer, set by the caller\n * \\return CODEC_STATUS_OK         if successful\n * \\return CODEC_STATUS_NO_MEMORY  if the config buffer is too small to hold the config\n *                                 the client should retry with a larger config buffer\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148c32d3_650f7d12",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "similar question on ownership and allocation of this output.",
+      "range": {
+        "startLine": 333,
+        "startChar": 29,
+        "endLine": 333,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a6fdb4e2_d4f02e2a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 335,
+                "endChar": 0
+              },
+              "replacement": " * \\param indices the output buffer for the supported indices,\n *                the client should allocate the buffer and set the size\n * \\param numIndices the size of the indices buffer\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1150f0d_3de29fd8",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-08-21T20:52:40Z",
+      "side": 1,
+      "message": "we may be able to avoid some of this variable-API (that may be more difficult to maintain than worth it) if we make freeze the ABI of this (e.g. LLNDK), and allow C2SupportedValues to be constructed from ApexCodec_SupportedValues.",
+      "range": {
+        "startLine": 383,
+        "startChar": 4,
+        "endLine": 383,
+        "endChar": 29
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
