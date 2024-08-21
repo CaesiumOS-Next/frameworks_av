@@ -22,6 +22,30 @@
       },
       "revId": "23a81448c1857cff0aa99b786bb0fb8395099df6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8205a9f9_f1ca12ee",
+        "filename": "media/module/libmediatranscoding/transcoder/VideoTrackTranscoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 3309800
+      },
+      "writtenOn": "2024-08-21T09:22:29Z",
+      "side": 1,
+      "message": "I believe we have the same workaround in media3.transformer - https://github.com/androidx/media/blob/b01c6ffcb3fca3d038476dab5d3bc9c9f2010781/libraries/transformer/src/main/java/androidx/media3/transformer/DefaultCodec.java#L257-L262\n\nPerhaps we can have a similar comment explaining this sleep.\n\nWill we need this workaround for future Android versions?\n\nCan the CTS test from https://b.corp.google.com/issues/264938310 be used to ensure this workaround is not needed in the future?",
+      "parentUuid": "6b1275ed_784bce28",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 67
+      },
+      "revId": "23a81448c1857cff0aa99b786bb0fb8395099df6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
