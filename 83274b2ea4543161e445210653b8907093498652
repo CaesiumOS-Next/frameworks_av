@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b0ee3f_8eba3cae",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-21T03:38:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3a02553d_36b934cf",
+      "range": {
+        "startLine": 51,
+        "startChar": 24,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb5347ac_5eaa05dc",
@@ -61,6 +85,30 @@
       "writtenOn": "2024-08-20T21:36:43Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Build Warnings: more \u0027%\u0027 conversions than data arguments [-Werror,-Wformat-insufficient-args]\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    more \u0027%\u0027 conversions than data arguments [-Werror,-Wformat-insufficient-args]\n      182 |             \"%s: the resulting voice volume %f is not the same as requested %f\",\n          |                                                                             ~^\n    frameworks/av/media/libaudiohal/impl/AidlUtils.h:46:66: note: expanded from macro \u0027AUGMENT_LOG_IF\u0027\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P79525707/targets/aosp_cf_x86_64_phone-trunk_staging-userdebug, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the aosp-main branch.",
+      "range": {
+        "startLine": 182,
+        "startChar": 77,
+        "endLine": 182,
+        "endChar": 77
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f449b961_4849bd1b",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-21T03:38:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb5347ac_5eaa05dc",
       "range": {
         "startLine": 182,
         "startChar": 77,
@@ -112,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a52b2f02_1948283e",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-21T03:38:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7e29857d_9b9176a8",
+      "range": {
+        "startLine": 905,
+        "startChar": 24,
+        "endLine": 905,
+        "endChar": 26
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63a187df_8e606973",
@@ -125,6 +197,30 @@
       "writtenOn": "2024-08-20T21:36:43Z",
       "side": 1,
       "message": "This \u0027module\u0027 parameter exists because it is used by the HIDL implementation. In this implementation we can just omit the name from the list of arguments to avoid this warning.",
+      "range": {
+        "startLine": 1001,
+        "startChar": 65,
+        "endLine": 1001,
+        "endChar": 39
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37fed334_df2a64e4",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-21T03:38:04Z",
+      "side": 1,
+      "message": "omitting may create confusion, how about using explicit attribute indicating it won\u0027t be used by using [[maybe_unused]]",
+      "parentUuid": "63a187df_8e606973",
       "range": {
         "startLine": 1001,
         "startChar": 65,
@@ -172,6 +268,30 @@
           ]
         }
       ],
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76fba58f_2ad713c0",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-21T03:38:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7f0e0aff_3b6ab112",
+      "range": {
+        "startLine": 475,
+        "startChar": 28,
+        "endLine": 475,
+        "endChar": 30
+      },
       "revId": "83274b2ea4543161e445210653b8907093498652",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -227,6 +347,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d710763_0386a72c",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-21T03:38:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2943f1f9_85575514",
+      "range": {
+        "startLine": 653,
+        "startChar": 38,
+        "endLine": 653,
+        "endChar": 40
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98b84c5a_d5c4df3e",
@@ -240,6 +384,30 @@
       "writtenOn": "2024-08-20T20:52:29Z",
       "side": 1,
       "message": "Extra space",
+      "range": {
+        "startLine": 928,
+        "startChar": 26,
+        "endLine": 928,
+        "endChar": 27
+      },
+      "revId": "83274b2ea4543161e445210653b8907093498652",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1542c46_d8ae1eec",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-08-21T03:38:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "98b84c5a_d5c4df3e",
       "range": {
         "startLine": 928,
         "startChar": 26,
