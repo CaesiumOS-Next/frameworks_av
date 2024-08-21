@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48ab5204_df369c73",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-21T21:55:45Z",
+      "side": 1,
+      "message": "is this change intended?",
+      "fixSuggestions": [
+        {
+          "fixId": "ee854183_2dfef375",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": "static const int64_t kBufferTimeOutUs \u003d 3000000LL;  // 3 sec\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4238ca_3580fde1",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-21T21:55:45Z",
+      "side": 1,
+      "message": "in this kind of construct we can inject `wp\u003cFrameDecoder\u003e` instead of the raw pointer.",
+      "fixSuggestions": [
+        {
+          "fixId": "1e97dd10_f0ed2984",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 240,
+                "startChar": 0,
+                "endLine": 241,
+                "endChar": 0
+              },
+              "replacement": "AsyncCodecHandler::AsyncCodecHandler(const wp\u003cFrameDecoder\u003e\u0026 frameDecoder) {\n"
+            },
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 260,
+                "startChar": 0,
+                "endLine": 261,
+                "endChar": 0
+              },
+              "replacement": "                    sp\u003cFrameDecoder\u003e frameDecoder \u003d mFrameDecoder.promote();\n                    if (frameDecoder !\u003d nullptr) {\n                        frameDecoder-\u003ehandleInputBufferAsync(index);\n                    }\n"
+            },
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 269,
+                "startChar": 0,
+                "endLine": 270,
+                "endChar": 0
+              },
+              "replacement": "                    sp\u003cFrameDecoder\u003e frameDecoder \u003d mFrameDecoder.promote();\n                    if (frameDecoder !\u003d nullptr) {\n                        frameDecoder-\u003ehandleOutputBufferAsync(index, timeUs);\n                    }\n"
+            },
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 279,
+                "startChar": 0,
+                "endLine": 280,
+                "endChar": 0
+              },
+              "replacement": "                    sp\u003cFrameDecoder\u003e frameDecoder \u003d mFrameDecoder.promote();\n                    if (frameDecoder !\u003d nullptr) {\n                        frameDecoder-\u003ehandleOutputFormatChangeAsync(format);\n                    }\n"
+            },
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 438,
+                "startChar": 0,
+                "endLine": 439,
+                "endChar": 0
+              },
+              "replacement": "        mHandler \u003d new AsyncCodecHandler(this-\u003egetWeakPtr());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4ca18e_08b26b89",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-21T21:55:45Z",
+      "side": 1,
+      "message": "nit: timeoutUs",
+      "range": {
+        "startLine": 316,
+        "startChar": 60,
+        "endLine": 316,
+        "endChar": 67
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "905f3ff2_3e1ca606",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 316,
+                "startChar": 0,
+                "endLine": 317,
+                "endChar": 0
+              },
+              "replacement": "bool InputBufferIndexQueue::dequeue(int32_t* index, int32_t timeoutUs) {\n"
+            },
+            {
+              "path": "media/libstagefright/FrameDecoder.cpp",
+              "range": {
+                "startLine": 318,
+                "startChar": 0,
+                "endLine": 319,
+                "endChar": 0
+              },
+              "replacement": "    bool hasAvailableIndex \u003d mCondition.wait_for(lock, std::chrono::microseconds(timeoutUs),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b9705b4_d4914cd8",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-21T21:55:45Z",
+      "side": 1,
+      "message": "mapping graphic buffer may only be necessary when mSurface \u003d\u003d nullptr",
+      "range": {
+        "startLine": 752,
+        "startChar": 0,
+        "endLine": 771,
+        "endChar": 5
+      },
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
