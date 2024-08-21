@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eab50cf9_6215e18f",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-21T20:33:37Z",
+      "side": 1,
+      "message": "I think this formatting makes log lines too verbose due to redundant info, for example:\n\n```\nHal2AidlMapper: [instance:default] : Hal2AidlMapper::releaseAudioPatch: patchId 159\nStreamHalAidl: [ioHandle:3934] : StreamInHalAidl::~StreamHalAidl\n```\n\nso I\u0027ve changed it to a more compact version:\n\n```\nHal2AidlMapper: [default] releaseAudioPatch: patchId 159\nStreamHalAidl: [in|ioHandle:3934] ~StreamHalAidl\n```",
+      "range": {
+        "startLine": 46,
+        "startChar": 28,
+        "endLine": 46,
+        "endChar": 43
+      },
+      "revId": "ca785e254841b3f93d11c5b5ae53d31bcc240b2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
