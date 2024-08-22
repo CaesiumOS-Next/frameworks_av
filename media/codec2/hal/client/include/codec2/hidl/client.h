@@ -23,6 +23,7 @@
 #include <C2Param.h>
 #include <C2.h>
 
+#include <apex/ApexCodecs.h>
 #include <gui/FrameTimestamps.h>
 #include <gui/IGraphicBufferProducer.h>
 #include <hidl/HidlSupport.h>
@@ -148,6 +149,7 @@ struct Codec2ConfigurableClient {
 
     explicit Codec2ConfigurableClient(const sp<HidlBase> &hidlBase);
     explicit Codec2ConfigurableClient(const std::shared_ptr<AidlBase> &aidlBase);
+    explicit Codec2ConfigurableClient(ApexCodec_Configurable *base);
 
     const C2String& getName() const;
 
@@ -282,6 +284,7 @@ struct Codec2Client : public Codec2ConfigurableClient {
             std::shared_ptr<AidlBase> const& base,
             std::shared_ptr<Codec2ConfigurableClient::AidlBase> const& configurable,
             size_t serviceIndex);
+    Codec2Client(size_t serviceIndex);
 
 protected:
     sp<HidlBase1_0> mHidlBase1_0;
@@ -518,6 +521,7 @@ protected:
     sp<HidlBase1_1> mHidlBase1_1;
     sp<HidlBase1_2> mHidlBase1_2;
     std::shared_ptr<AidlBase> mAidlBase;
+    ApexCodec_Component *mBase;
 
     struct HidlBufferPoolSender;
     struct AidlBufferPoolSender;
