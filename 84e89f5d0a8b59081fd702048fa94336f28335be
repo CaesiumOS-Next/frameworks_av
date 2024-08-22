@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dadbdbef_6f37b6eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-08-22T07:58:48Z",
+      "side": 1,
+      "message": "I thought you meant that the flag declaration in the output profile was DIRECT | DEEP. This would be unsupported. \nYou wrote \"Otherwise, APM can try profiles which has combination of (AUDIO_OUTPUT_FLAG_DEEP_BUFFER | AUDIO_OUTPUT_FLAG_DIRECT)\"\nWhat I don\u0027t understadn is why is DEEP_BUFFFER relevant here?\n\nwhen getProfileForOutput() is called with directOnly \u003d\u003d true, getRelevantFlags() will filter out the DEEP_BUFFER flag anyway.\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d1042?q\u003dgetRelevantFlags",
+      "parentUuid": "86cf1b32_c443760f",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 11,
+        "endChar": 87
+      },
+      "revId": "84e89f5d0a8b59081fd702048fa94336f28335be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "26052dc3_126b2aa0",
