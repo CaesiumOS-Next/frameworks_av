@@ -29,7 +29,6 @@ package {
 cc_defaults {
     name: "libmediaplayerserviceFuzzer_defaults",
     static_libs: [
-        "libmediaplayerservice",
         "liblog",
     ],
     shared_libs: [
@@ -38,6 +37,7 @@ cc_defaults {
         "libbinder_ndk",
         "libcutils",
         "libmedia",
+        "libmediaplayerservice",
         "libstagefright",
         "libutils",
         "libstagefright_foundation",
