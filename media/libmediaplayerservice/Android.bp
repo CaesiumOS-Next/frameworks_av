@@ -75,6 +75,7 @@ cc_defaults {
         "libstagefright_foundation",
         "libstagefright_httplive",
         "libutils",
+        "server_configurable_flags",
         "packagemanager_aidl-cpp",
     ],
 
@@ -91,6 +92,7 @@ cc_defaults {
         "libstagefright_rtsp",
         "libstagefright_timedtext",
         "framework-permission-aidl-cpp",
+        "com.android.media.flags.editing-aconfig-cc",
     ],
 
     cflags: [
