@@ -168,6 +168,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91945d2_3f441cc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-08-22T11:47:36Z",
+      "side": 1,
+      "message": "Agree, probably we need to consider here\n\nDEEP BUFFER FLAG forced by APM itself vs client requesting for DEEP BUFFER.\n\n\n1) For APM forcing deep buffer \n\n* Defer the flag setting\n* First try with directOutput,\n* If available attach to direct\n* If direct is not available then add deep buffer flags, the way this CL is doing.\n\n\n2) Client requested deep buffer\n\n-\u003e I would say if client is explicitly requesting for DEEP buffer, then APM should not provide direct outputs, this is where my other change will be helpful : \n\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3206293/3",
+      "parentUuid": "0784dcc0_452d8c46",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 11,
+        "endChar": 87
+      },
+      "revId": "84e89f5d0a8b59081fd702048fa94336f28335be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "26052dc3_126b2aa0",
