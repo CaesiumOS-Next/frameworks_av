@@ -334,6 +334,7 @@ cc_library {
         "framework-permission-aidl-cpp",
         "libmediandk_format",
         "libmedia_ndkformatpriv",
+        "android.media.stagefright.flags-aconfig-cc",
     ],
 
     header_libs: [
