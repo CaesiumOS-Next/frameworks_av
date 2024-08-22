@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e36c82b_ba7e3fc3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-08-22T09:51:24Z",
+      "side": 1,
+      "message": "We don\u0027t have any profile \"DEEP | DIRECT \" in xml.\n\nHere the problem is : \n* client calls with flags NONE,\n* APM first adds deep buffer flags, \n* opens a direct output.\n* At audioflinger, this opened output has flags DEEP | DIRECT, which is wrong.\n\n\nBased on your comment, I added few logs and found that APM modifies the flags when getProfileForOutput() is called (which is local to getProfileForOutput), so it will return a direct output (deep buffer will be rejected ), after that descriptor is opened for this direct output, but here original flags are used which DEEP buffer. \n\n```\n08-18 16:44:38.350  8958  8964 V APM_AudioPolicyManager: getOutputForAttrInt() attributes\u003d{ Content type: AUDIO_CONTENT_TYPE_MUSIC Usage: AUDIO_USAGE_MEDIA Source: AUDIO_SOURCE_DEFAULT Flags: 0x0 Tags:  } stream\u003dAUDIO_STREAM_MUSIC session 14377 selectedDeviceId 0\n08-18 16:44:38.351  8958  8964 V APM_AudioPolicyManager: getOutputForAttrInt() device {AUDIO_DEVICE_OUT_SPEAKER, @:}, sampling rate 384000, format 0x5, channel mask 0x3, flags 0 stream AUDIO_STREAM_MUSIC\n08-18 16:44:38.352  8958  8964 I APM_AudioPolicyManager: getOutputForDevices set deep buffer\n08-18 16:44:38.352  8958  8964 I APM_AudioPolicyManager: getProfileForOutput flags 8\n08-18 16:44:38.352  8958  8964 I APM_AudioPolicyManager: getProfileForOutput got flags 1\n08-18 16:44:38.352  8958  8964 I APM_AudioPolicyManager: openDirectOutput got profile direct_pcm_out \n08-18 16:44:38.352  8958  8964 I APM_AudioPolicyManager: openDirectOutput open the Io profile direct_pcm_out with flags 8\n08-18 16:44:38.353  8958  8964 I AudioFlinger: openOutput() this 0xb4000073a082a0d0, module 10 Device AUDIO_DEVICE_OUT_SPEAKER, @:, SamplingRate 384000, Format 0x000005, Channels 0x3, flags 0x9\n08-18 16:44:38.353  8958  8964 D DeviceHalAidl: 0xb400007480824cf0 DeviceHalAidl::openOutputStream\n08-18 16:44:38.353  8958  8964 D Hal2AidlMapper: 0xb400007480824e00 prepareToOpenStream: handle 85, dev\n\n\n```\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d1570?q\u003dopenDirectOutput\n\nthis flags is still deep buffer, not modified as per kRelevant flags (deep buffer is not discarded here)..\n```\n    status_t status \u003d\n            outputDesc-\u003eopen(config, nullptr /* mixerConfig */, devices, stream, flags, output,\n                             attributes);\n```\n\n\nSo, ideally, I think we need to update the flags in openDirectOutput if we are opening direct output\n\n@@ -1501,6 +1501,7 @@ status_t AudioPolicyManager::openDirectOutput(audio_stream_type_t stream,\n     sp\u003cIOProfile\u003e profile;\n     if (((flags \u0026 AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) \u003d\u003d 0) ||\n             !(mEffects.isNonOffloadableEffectEnabled() || mMasterMono)) {\n+        flags \u003d getRelevantFlags(flags, true);\n         profile \u003d getProfileForOutput(\n                 devices, config-\u003esample_rate, config-\u003eformat, config-\u003echannel_mask,\n                 flags, true /* directOnly */);\n\n\n\nSomething like : https://android-review.googlesource.com/c/platform/frameworks/av/+/3235723",
+      "parentUuid": "dadbdbef_6f37b6eb",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 11,
+        "endChar": 87
+      },
+      "revId": "84e89f5d0a8b59081fd702048fa94336f28335be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "26052dc3_126b2aa0",
