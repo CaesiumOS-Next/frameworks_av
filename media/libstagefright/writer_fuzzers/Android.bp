@@ -37,12 +37,12 @@ cc_defaults {
     static_libs: [
         "liblog",
         "libstagefright_foundation",
-        "libstagefright",
     ],
     shared_libs: [
         "libbinder",
         "libcutils",
         "libutils",
+        "libstagefright",
     ],
 }
 
