@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f474ca86_e1834ce9",
+        "filename": "services/audiopolicy/common/include/policy.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-22T22:39:52Z",
+      "side": 1,
+      "message": "Francois, I have moved this definition a bit to avoid a conflict downstream.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "43a6f73631353fe9053247f0fa3c4f098d19d68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
