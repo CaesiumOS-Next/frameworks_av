@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf785364_c128654a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-08-22T09:55:27Z",
+      "side": 1,
+      "message": "Or we need to refactor the API getProfileForOutput so if it modifies the flags, those can be propagated back, but it seems this is used at many places, What is your opinion.",
+      "parentUuid": "7e36c82b_ba7e3fc3",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 11,
+        "endChar": 87
+      },
+      "revId": "84e89f5d0a8b59081fd702048fa94336f28335be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "26052dc3_126b2aa0",
