@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14faa2f7_5647515e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-22T08:52:11Z",
+      "side": 1,
+      "message": "sorry for the delay, but VTS were failing due to misunderstanding of fastcmp logic...",
+      "parentUuid": "1ea9a782_498a9ad4",
+      "revId": "21997830453fac0318302999bec241589a14eb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2427864_18858f40",
