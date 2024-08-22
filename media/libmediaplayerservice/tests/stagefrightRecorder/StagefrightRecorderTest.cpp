@@ -30,6 +30,7 @@
 #include <media/NdkMediaExtractor.h>
 #include <media/stagefright/MediaCodec.h>
 #include <system/audio.h>
+#include <com_android_media_stagefright_flags.h>
 
 #include "StagefrightRecorder.h"
 
