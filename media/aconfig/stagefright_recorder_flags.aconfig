@@ -1,0 +1,9 @@
+package: "com.android.media.stagefright.flags"
+container: "system"
+
+flag {
+  name: "stagefrightrecorder_enable_b_frames"
+  namespace: "media_solutions"
+  description: "Enable B frames for Stagefright recorder."
+  bug: "341121900"
+}
