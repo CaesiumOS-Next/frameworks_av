@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78aa9665_c8b21fc8",
+        "filename": "media/aconfig/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1047003
+      },
+      "writtenOn": "2024-08-22T16:25:30Z",
+      "side": 1,
+      "message": "editing",
+      "range": {
+        "startLine": 56,
+        "startChar": 25,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34dadf66_f8695f56",
+        "filename": "media/aconfig/stagefright_recorder_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1047003
+      },
+      "writtenOn": "2024-08-22T16:25:30Z",
+      "side": 1,
+      "message": "rename to com.android.media.editing.flags",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 45
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
