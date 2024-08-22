@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "03662d84_4aaeb983",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-08-22T04:25:49Z",
+      "side": 1,
+      "message": "Yes, that why we are removing deep buffer flag during opening a direct output, and if there is no direct output then restoring it.\n\n\n\ncheck these logs mentioned on  https://partnerissuetracker.corp.google.com/u/5/issues/357522537, \n\n1) AAudio client requests with flag 0\n2) audio.deep_buffer.media is true, which add DEEP buffer flags\n3) first direct output is tried, because of step 2) it tries with DEEP_BUFFER | DIRECT, \n\n\n08-01 03:09:56.329 10086 26636 26648 D AudioStreamBuilder: build() MMAP not used because AAUDIO_PERFORMANCE_MODE_LOW_LATENCY not requested.\n08-01 03:09:56.329 10086 26636 26648 D ivemedia.aaudio: PlayerBase::PlayerBase()\n08-01 03:09:56.329 10086 26636 26648 D AudioStreamTrack: open(), request notificationFrames \u003d 0, frameCount \u003d 0\n08-01 03:09:56.330  1041  1959 25344 V APM_AudioPolicyManager: getOutputForAttrInt() attributes\u003d{ Content type: AUDIO_CONTENT_TYPE_MUSIC Usage: AUDIO_USAGE_MEDIA Source: AUDIO_SOURCE_DEFAULT Flags: 0x0 Tags:  } stream\u003dAUDIO_STREAM_MUSIC session 201 selectedDeviceId 0\n08-01 03:09:56.330  1041  1959 25344 V APM_AudioPolicyManager: getOutputForAttrInt() device {AUDIO_DEVICE_OUT_SPEAKER, @:}, sampling rate 384000, format 0x5, channel mask 0x3, flags 0 stream AUDIO_STREAM_MUSIC\n08-01 03:09:56.331  1041  1959 25344 I AudioFlinger: openOutput() this 0xb40000737a4130d0, module 10 Device AUDIO_DEVICE_OUT_SPEAKER, @:, SamplingRate 384000, Format 0x000005, Channels 0x3, flags 0x9",
+      "parentUuid": "3ae11319_622398c4",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 11,
+        "endChar": 87
+      },
+      "revId": "84e89f5d0a8b59081fd702048fa94336f28335be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "26052dc3_126b2aa0",
