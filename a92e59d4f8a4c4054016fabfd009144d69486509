@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c62995e4_a35201b1",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1927725
+      },
+      "writtenOn": "2024-08-22T22:33:58Z",
+      "side": 1,
+      "message": "based on my local test, 10ms might be too short for async codec. I can do more local test to suggest this value.\n\nWe can create a new constant for timeout limit specific for async mode.",
+      "parentUuid": "48ab5204_df369c73",
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe4238ca_3580fde1",
         "filename": "media/libstagefright/FrameDecoder.cpp",
         "patchSetId": 8
