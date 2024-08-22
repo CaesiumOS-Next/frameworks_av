@@ -1501,6 +1501,7 @@ status_t AudioPolicyManager::openDirectOutput(audio_stream_type_t stream,
     sp<IOProfile> profile;
     if (((flags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) == 0) ||
             !(mEffects.isNonOffloadableEffectEnabled() || mMasterMono)) {
+        flags = getRelevantFlags(flags, true);
         profile = getProfileForOutput(
                 devices, config->sample_rate, config->format, config->channel_mask,
                 flags, true /* directOnly */);
