@@ -35,14 +35,17 @@ cc_defaults {
         "include",
     ],
     static_libs: [
+        "com.android.media.flags.editing-aconfig-cc",
         "liblog",
-        "libstagefright_foundation",
         "libstagefright",
+        "libstagefright_foundation",
     ],
     shared_libs: [
+        "libaconfig_storage_read_api_cc",
         "libbinder",
         "libcutils",
         "libutils",
+        "server_configurable_flags",
     ],
 }
 
@@ -96,9 +99,9 @@ cc_fuzz {
 }
 
 cc_fuzz {
-    name : "mpeg4_writer_fuzzer",
-    defaults : ["writer-fuzzer-defaults"],
-    srcs : [
+    name: "mpeg4_writer_fuzzer",
+    defaults: ["writer-fuzzer-defaults"],
+    srcs: [
         "mpeg4_writer_fuzzer.cpp",
     ],
     static_libs: [
@@ -107,9 +110,9 @@ cc_fuzz {
 }
 
 cc_fuzz {
-    name : "ogg_writer_fuzzer",
-    defaults : ["writer-fuzzer-defaults"],
-    srcs : [
+    name: "ogg_writer_fuzzer",
+    defaults: ["writer-fuzzer-defaults"],
+    srcs: [
         "ogg_writer_fuzzer.cpp",
     ],
     static_libs: [
@@ -118,9 +121,9 @@ cc_fuzz {
 }
 
 cc_fuzz {
-    name : "webm_writer_fuzzer",
-    defaults : ["writer-fuzzer-defaults"],
-    srcs : [
+    name: "webm_writer_fuzzer",
+    defaults: ["writer-fuzzer-defaults"],
+    srcs: [
         "webm_writer_fuzzer.cpp",
     ],
     static_libs: [
