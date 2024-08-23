@@ -45,6 +45,30 @@
       },
       "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc33fa0f_9eac6315",
+        "filename": "media/aconfig/stagefright_recorder_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1237180
+      },
+      "writtenOn": "2024-08-23T13:46:01Z",
+      "side": 1,
+      "message": "There is already package named as \"com.android.media.editing.flags\" so getting build error for it.\ncs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/flags/editing.aconfig",
+      "parentUuid": "34dadf66_f8695f56",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 45
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
