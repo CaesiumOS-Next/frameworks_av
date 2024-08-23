@@ -22,6 +22,29 @@
       },
       "revId": "43a6f73631353fe9053247f0fa3c4f098d19d68b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376f50ab_d335e605",
+        "filename": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-23T00:13:15Z",
+      "side": 1,
+      "message": "This is why the build is failing.\n\n---\n\nPlease fix this ERROR reported by Build Warnings: format specifies type \u0027unsigned long\u0027 but the argument has type \u0027uint64_t\u0027 (aka \u0027unsigned long long\u0027) [-Werror,-Wformat]\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    format specifies type \u0027unsigned long\u0027 but the argument has type \u0027uint64_t\u0027 (aka \u0027unsigned long long\u0027) [-Werror,-Wformat]\n      415 |             ALOGV(\"%s: : adding %lu %d %s %s\", __func__, pfwCriterionValue, legacyDeviceType,\n          |                                 ~~~                      ^~~~~~~~~~~~~~~~~\n          |                                 %llu\n    system/logging/liblog/include/log/log_main.h:204:15: note: expanded from macro \u0027ALOGV\u0027\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P79684647/targets/aosp_cf_x86_64_phone-trunk_staging-userdebug, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the aosp-main branch.",
+      "range": {
+        "startLine": 415,
+        "startChar": 57,
+        "endLine": 415,
+        "endChar": 93
+      },
+      "revId": "43a6f73631353fe9053247f0fa3c4f098d19d68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
