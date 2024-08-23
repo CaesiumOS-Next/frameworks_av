@@ -16,6 +16,24 @@
       "message": "The test is more useful to catch catastrophe audio failure on actual device. In that case, will it be better to stay in the device specific build? Or does the device-tests be replaced by other tests?",
       "revId": "36eb285f9553b958d4e8e43f55437f2d64808e99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62167519_1183f856",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121894
+      },
+      "writtenOn": "2024-08-23T20:48:50Z",
+      "side": 1,
+      "message": "How or the current triggering of the tests remains unchanged.\n\nThe artifacts will be built on general-tests (test_suites side) instead which is cheaper and already available in those test configs to leverage.\n\nYou should see no differences whatsoever.",
+      "parentUuid": "ba0f870f_d9dcca34",
+      "revId": "36eb285f9553b958d4e8e43f55437f2d64808e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
