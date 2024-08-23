@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb904b7_197fd3b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2013250
+      },
+      "writtenOn": "2024-08-23T05:15:53Z",
+      "side": 1,
+      "message": "I don\u0027t have access to this bug. Could you please add mariusz@haleytek.corp-partner.google.com and\npawelso@haleytek.corp-partner.google.com to cc of this bug. I would like to know a reason for revert so I could work on it.",
+      "range": {
+        "startLine": 11,
+        "startChar": 19,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "39217a966cff24f5e90e966e340f7071778942dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
