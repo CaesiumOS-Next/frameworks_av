@@ -22,6 +22,30 @@
       },
       "revId": "39217a966cff24f5e90e966e340f7071778942dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c35985_c2b1d905",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-23T17:40:51Z",
+      "side": 1,
+      "message": "Hi Paweł, I have created b/361797420 in the component accessible to you and copied relevant info from the internal bug.",
+      "parentUuid": "deb904b7_197fd3b6",
+      "range": {
+        "startLine": 11,
+        "startChar": 19,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "39217a966cff24f5e90e966e340f7071778942dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
