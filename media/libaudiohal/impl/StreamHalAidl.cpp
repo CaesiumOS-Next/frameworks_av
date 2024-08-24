@@ -834,8 +834,9 @@ status_t StreamOutHalAidl::flush() {
     return StreamHalAidl::flush();
 }
 
-status_t StreamOutHalAidl::getPresentationPosition(uint64_t *frames, struct timespec *timestamp) {
-    if (frames == nullptr || timestamp == nullptr) {
+status_t StreamOutHalAidl::getPresentationPosition(
+        uint64_t *frames, struct timespec *timestamp, bool* sinceStandby) {
+    if (frames == nullptr || timestamp == nullptr || sinceStandby == nullptr) {
         return BAD_VALUE;
     }
     int64_t aidlFrames = 0, aidlTimestamp = 0;
@@ -843,7 +844,12 @@ status_t StreamOutHalAidl::getPresentationPosition(uint64_t *frames, struct time
     RETURN_STATUS_IF_ERROR(getObservablePosition(&aidlFrames, &aidlTimestamp, &statePositions));
     // See the table at the start of 'StreamHalInterface'.
     if (!mContext.isAsynchronous() && audio_has_proportional_frames(mConfig.format)) {
-        *frames = aidlFrames;
+        if (!*sinceStandby) {
+            *frames = aidlFrames;
+        } else {
+            *frames = aidlFrames <= statePositions.framesAtStandby ?
+                    0 : aidlFrames - statePositions.framesAtStandby;
+        }
     } else {
         const int64_t mostRecentResetPoint =
                 std::max(statePositions.framesAtStandby, statePositions.framesAtFlushOrDrain);

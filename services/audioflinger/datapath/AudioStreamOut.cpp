@@ -69,15 +69,20 @@ status_t AudioStreamOut::getPresentationPosition(uint64_t *frames, struct timesp
     }
 
     uint64_t halPosition = 0;
-    const status_t status = stream->getPresentationPosition(&halPosition, timestamp);
+    bool mustBeSinceStandbyAndScaled = mHalFormatHasProportionalFrames &&
+                        (flags & AUDIO_OUTPUT_FLAG_DIRECT) == AUDIO_OUTPUT_FLAG_DIRECT;
+    bool halPositionIsSinceStandby = mustBeSinceStandbyAndScaled;
+    const status_t status = stream->getPresentationPosition(
+            &halPosition, timestamp, &halPositionIsSinceStandby);
     if (status != NO_ERROR) {
         return status;
     }
 
-    if (mHalFormatHasProportionalFrames &&
-            (flags & AUDIO_OUTPUT_FLAG_DIRECT) == AUDIO_OUTPUT_FLAG_DIRECT) {
-        // For DirectTrack reset position to 0 on standby.
-        const uint64_t adjustedPosition = (halPosition <= mFramesWrittenAtStandby) ?
+    if (mustBeSinceStandbyAndScaled) {
+        // For DirectTrack reset position to 0 on standby. If 'halPositionIsSinceStandby == true'
+        // then it's already since the last standby, so only scaling is needed.
+        const uint64_t adjustedPosition = halPositionIsSinceStandby ? halPosition :
+                (halPosition <= mFramesWrittenAtStandby) ?
                 0 : (halPosition - mFramesWrittenAtStandby);
         // Scale from HAL sample rate to application rate.
         *frames = adjustedPosition / mRateMultiplier;

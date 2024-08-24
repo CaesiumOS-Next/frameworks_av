@@ -213,7 +213,13 @@ class StreamOutHalInterface : public virtual StreamHalInterface {
     // This excludes frames which have been written but are still in the pipeline. See the
     // table at the start of the 'StreamOutHalInterface' for the specification of the frame
     // count behavior w.r.t. 'flush', 'drain' and 'standby' operations.
-    virtual status_t getPresentationPosition(uint64_t *frames, struct timespec *timestamp) = 0;
+    //
+    // If 'sinceStandby' is set to 'true', then the returned position must be relative
+    // to the position at the last standby state. If the implementation of the StreamHalInterface
+    // can do that, it will leave 'sinceStandby' as 'true', otherwise it will reset it to 'false'
+    // indicating that position adjustment has to be done by the caller.
+    virtual status_t getPresentationPosition(uint64_t* frames, struct timespec* timestamp,
+                                             bool* sinceStandby) = 0;
 
     // Notifies the HAL layer that the framework considers the current playback as completed.
     virtual status_t presentationComplete() = 0;

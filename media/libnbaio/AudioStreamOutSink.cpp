@@ -92,7 +92,8 @@ status_t AudioStreamOutSink::getTimestamp(ExtendedTimestamp &timestamp)
 {
     uint64_t position64;
     struct timespec time;
-    if (mStream->getPresentationPosition(&position64, &time) != OK) {
+    bool sinceStandby = false;
+    if (mStream->getPresentationPosition(&position64, &time, &sinceStandby) != OK) {
         return INVALID_OPERATION;
     }
     timestamp.mPosition[ExtendedTimestamp::LOCATION_KERNEL] = position64;

@@ -169,7 +169,8 @@ class StreamOutHalHidl : public StreamOutHalInterface, public StreamHalHidl {
     // This excludes frames which have been written but are still in the pipeline. See the
     // table at the start of the 'StreamOutHalInterface' for the specification of the frame
     // count behavior w.r.t. 'flush', 'drain' and 'standby' operations.
-    virtual status_t getPresentationPosition(uint64_t *frames, struct timespec *timestamp);
+    virtual status_t getPresentationPosition(uint64_t* frames, struct timespec* timestamp,
+                                             bool* sinceStandby);
 
     // Notifies the HAL layer that the framework considers the current playback as completed.
     status_t presentationComplete() override;

@@ -693,9 +693,11 @@ status_t StreamOutHalHidl::standby() {
     return StreamHalHidl::standby();
 }
 
-status_t StreamOutHalHidl::getPresentationPosition(uint64_t *frames, struct timespec *timestamp) {
+status_t StreamOutHalHidl::getPresentationPosition(
+        uint64_t *frames, struct timespec *timestamp, bool* sinceStandby) {
     // TIME_CHECK();  // TODO(b/243839867) reenable only when optimized.
     if (mStream == 0) return NO_INIT;
+    *sinceStandby = false;  // For HIDL, position adjustment is not supported.
     if (mWriterClient == gettid() && mCommandMQ) {
         return callWriterThread(
                 WriteCommand::GET_PRESENTATION_POSITION, "getPresentationPosition", nullptr, 0,
