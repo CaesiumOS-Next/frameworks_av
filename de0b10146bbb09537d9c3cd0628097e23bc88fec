@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "029c233b_a20d6edb",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3783,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-08-26T04:29:34Z",
+      "side": 1,
+      "message": "not sure if we really need to notify for this.\nnotify() calls above are necessary from API requirements.\nall the errors below do not notify(). May be better to match with those?\nAlso can we use WARN_UNLESS() like below?",
+      "range": {
+        "startLine": 3782,
+        "startChar": 0,
+        "endLine": 3783,
+        "endChar": 92
+      },
+      "revId": "de0b10146bbb09537d9c3cd0628097e23bc88fec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
