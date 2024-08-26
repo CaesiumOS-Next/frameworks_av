@@ -61,6 +61,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c5d6230_52527d2f",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T18:32:40Z",
+      "side": 1,
+      "message": "`__FUNCTION__` here will always be `\"logIfErrorAndReturnStatus\"`. The intent of the original call was to capture the name of the function where the error has happened. To preserve this behavior, we need to pass the caller function name to this function.",
+      "range": {
+        "startLine": 84,
+        "startChar": 40,
+        "endLine": 84,
+        "endChar": 52
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dafa8402_2f5ed451",
         "filename": "media/libaudioclient/AudioRecord.cpp",
         "patchSetId": 1
@@ -141,6 +164,30 @@
       "writtenOn": "2024-08-26T17:36:10Z",
       "side": 1,
       "message": "reading this comment, I think we actually do error message twice now",
+      "range": {
+        "startLine": 387,
+        "startChar": 11,
+        "endLine": 387,
+        "endChar": 54
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28bcb49b_147f3203",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T18:32:40Z",
+      "side": 1,
+      "message": "One possible way to preserve the existing behavior is to add a parameter to `logIfErrorAndReturnStatus` in order to suppress the logic of the `error:` label and just update the value of `mStatus`.",
+      "parentUuid": "6f860f82_fc3d99cb",
       "range": {
         "startLine": 387,
         "startChar": 11,
