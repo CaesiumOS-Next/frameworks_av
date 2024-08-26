@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "613a120b_249a3fad",
+        "filename": "media/libstagefright/include/FrameDecoder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-26T17:14:45Z",
+      "side": 1,
+      "message": "nit: typo? mHandleOutputBufferAsyncDone",
+      "fixSuggestions": [
+        {
+          "fixId": "29ad8b37_df409503",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/include/FrameDecoder.h",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "    bool mHandleOutputBufferAsyncDone;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfc5b0580a815adb4ef003944801224fc45785c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
