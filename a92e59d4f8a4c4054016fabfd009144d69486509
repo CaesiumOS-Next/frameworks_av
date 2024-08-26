@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cce4c29_5aeb7201",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1927725
+      },
+      "writtenOn": "2024-08-26T07:06:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c62995e4_a35201b1",
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe4238ca_3580fde1",
@@ -129,6 +147,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9bffd4_e8671268",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1927725
+      },
+      "writtenOn": "2024-08-26T07:06:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe4238ca_3580fde1",
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b4ca18e_08b26b89",
@@ -180,6 +216,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5a3efc_2101d195",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1927725
+      },
+      "writtenOn": "2024-08-26T07:06:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b4ca18e_08b26b89",
+      "range": {
+        "startLine": 316,
+        "startChar": 60,
+        "endLine": 316,
+        "endChar": 67
+      },
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b9705b4_d4914cd8",
@@ -193,6 +253,30 @@
       "writtenOn": "2024-08-21T21:55:45Z",
       "side": 1,
       "message": "mapping graphic buffer may only be necessary when mSurface \u003d\u003d nullptr",
+      "range": {
+        "startLine": 752,
+        "startChar": 0,
+        "endLine": 771,
+        "endChar": 5
+      },
+      "revId": "a92e59d4f8a4c4054016fabfd009144d69486509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af427917_ae5e9f3f",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1927725
+      },
+      "writtenOn": "2024-08-26T07:06:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b9705b4_d4914cd8",
       "range": {
         "startLine": 752,
         "startChar": 0,
