@@ -16,6 +16,24 @@
       "message": "nit: NAN",
       "revId": "082df5b2768d094e331f23b564e592d7f9c6a2f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67725c35_62d6e2f4",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 46
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "NaN is the widely used abbreviation for \"Not a Number\".",
+      "parentUuid": "ca95d078_62b98ed4",
+      "revId": "082df5b2768d094e331f23b564e592d7f9c6a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

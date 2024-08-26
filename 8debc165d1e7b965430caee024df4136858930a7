@@ -66,6 +66,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38212416_c1967af2",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Done. Updated ParseSize() and ParseRational().",
+      "parentUuid": "accf6b41_465f496e",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64455ec3_d9201b96",
@@ -97,6 +115,24 @@
           ]
         }
       ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e93c8d_a4293d16",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64455ec3_d9201b96",
       "revId": "8debc165d1e7b965430caee024df4136858930a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -136,6 +172,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5fc87b2_7ebbeaab",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Replaced CheckPowerOfTwo with IsPowerOfTwo. Failing by printing errors and returning.",
+      "parentUuid": "af214e82_b010629f",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68fe9633_48f6bee4",
@@ -171,6 +225,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2b2154_97d3caec",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Replaced the CHECK() with returning null.",
+      "parentUuid": "68fe9633_48f6bee4",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "059a7ea9_9ccb103d",
@@ -188,6 +260,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3551fc81_0e0d4b34",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "059a7ea9_9ccb103d",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9039a6b_d03297e5",
@@ -201,6 +291,24 @@
       "writtenOn": "2024-08-20T20:04:28Z",
       "side": 1,
       "message": "regex may be helpful here",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78bcb523_86b58d79",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Updated using regex",
+      "parentUuid": "d9039a6b_d03297e5",
       "revId": "8debc165d1e7b965430caee024df4136858930a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -240,6 +348,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92dc3180_f83e2555",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "a2df3f16_5ad4f752",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "781cfcd9_1b44ea0a",
@@ -275,6 +401,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1155f09a_7a55eb8a",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Yes it is immutable. Marked all getters const.",
+      "parentUuid": "781cfcd9_1b44ea0a",
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4d2c65b_7d3332e1",
@@ -306,6 +450,24 @@
           ]
         }
       ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa81f148_f75cbd57",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4d2c65b_7d3332e1",
       "revId": "8debc165d1e7b965430caee024df4136858930a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -361,6 +523,24 @@
           ]
         }
       ],
+      "revId": "8debc165d1e7b965430caee024df4136858930a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "564a7022_3a68d1d0",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-26T22:14:43Z",
+      "side": 1,
+      "message": "Removing it as it is not used.",
+      "parentUuid": "96268f21_9f0df8e6",
       "revId": "8debc165d1e7b965430caee024df4136858930a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
