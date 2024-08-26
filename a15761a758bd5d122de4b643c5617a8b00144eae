@@ -34,6 +34,24 @@
       ],
       "revId": "a15761a758bd5d122de4b643c5617a8b00144eae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "542c06b4_dda3d83e",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6700,
+      "author": {
+        "id": 1765237
+      },
+      "writtenOn": "2024-08-26T02:26:06Z",
+      "side": 1,
+      "message": "yes. I agree with you. I am going to fix it.",
+      "parentUuid": "2fcd531b_74613dca",
+      "revId": "a15761a758bd5d122de4b643c5617a8b00144eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
