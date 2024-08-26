@@ -142,6 +142,30 @@
       },
       "revId": "d8010c8f741d34f3e5262985960b36dcc9e1e8b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0de5616_e1852dab",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-08-26T03:54:03Z",
+      "side": 1,
+      "message": "What do you suggest in this case, then? How should it be handled then?\n\nMore comment related to in https://android-review.googlesource.com/c/platform/frameworks/av/+/3206279",
+      "parentUuid": "d5053816_784ec4af",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1511,
+        "endChar": 52
+      },
+      "revId": "d8010c8f741d34f3e5262985960b36dcc9e1e8b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
