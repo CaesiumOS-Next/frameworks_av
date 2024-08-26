@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d744f9f3_c8e05556",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1106325
+      },
+      "writtenOn": "2024-08-26T17:57:19Z",
+      "side": 1,
+      "message": "@atneya@google.com I\u0027m checking for stale CLs, could you please update your vote?",
+      "revId": "8e19a63ee0a310cf511e7133437985ddc197ee0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
