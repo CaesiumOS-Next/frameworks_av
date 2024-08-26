@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84027052_b41649f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T20:42:56Z",
+      "side": 1,
+      "message": "Re-landing temporarily reverted ag/28945136, this time via AOSP to help dealing with external contributions.",
+      "revId": "3ec5556e57acb2998301e8ce3305b66082bca6ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
