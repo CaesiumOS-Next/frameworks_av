@@ -6697,7 +6697,7 @@ sp<Surface> MediaCodec::getOrCreateDetachedSurface() {
         uint64_t usage = 0;
         if (!mSurface || mSurface->getConsumerUsage(&usage) != OK) {
             // TODO: should we use a/the default consumer usage?
-            usage = 0;
+            usage = GRALLOC_USAGE_HW_TEXTURE;
         }
         mDetachedSurface.reset(new ReleaseSurface(usage));
     }
