@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "573357cb_c48d4b4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T18:22:22Z",
+      "side": 1,
+      "message": "Hi Tomislav, would you mind rebasing your changes and resolving conflicts?",
+      "revId": "1d5a196f0d36733f688ee0844afe06c1b7cb348f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
