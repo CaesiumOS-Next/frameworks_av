@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ac60d6_dae749e2",
+        "filename": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-26T14:56:52Z",
+      "side": 1,
+      "message": "seems to me that we should also be using builtin_mul_overflow()\nfor the L_var1 * L_var2 part of this expression.\n\nand also for line 465 below.",
+      "range": {
+        "startLine": 456,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 49
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6376d3d5_d5ff6c31",
+        "filename": "media/module/codecs/amrnb/common/src/l_abs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-26T14:56:52Z",
+      "side": 1,
+      "message": "looking at the function semantics, I think we can write cleaner, more obvious code.\n\nl_abs() {\nif (l_var1 \u003e\u003d 0) return l_var1;\nif (l_var1 !\u003d 0x80000000) return -l_var1;\n// min_int winds up with same value\nreturn 0x80000000;\n\nlet\u0027s stomp out any uses of xor in this style.",
+      "range": {
+        "startLine": 189,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 15
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ba4c05_210afb3f",
+        "filename": "media/module/codecs/amrnb/common/src/lsp_az.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-26T14:56:52Z",
+      "side": 1,
+      "message": "move the f-- to after the builtin_sub() so that we\ndon\u0027t have all these \"f+1\" things in there.",
+      "range": {
+        "startLine": 284,
+        "startChar": 12,
+        "endLine": 285,
+        "endChar": 93
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8db9e2f9_518a16c5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/codecs/amrnb/common/src/lsp_az.cpp",
+              "range": {
+                "startLine": 284,
+                "startChar": 0,
+                "endLine": 284,
+                "endChar": 0
+              },
+              "replacement": "            __builtin_sub_overflow(*(f), (t0 \u003c\u003c 2), f);   /*      *f -\u003d t0         */\n"
+            },
+            {
+              "path": "media/module/codecs/amrnb/common/src/lsp_az.cpp",
+              "range": {
+                "startLine": 285,
+                "startChar": 0,
+                "endLine": 286,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6cbf8d3_e7aaf29c",
+        "filename": "media/module/codecs/amrnb/common/src/norm_l.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-26T14:56:52Z",
+      "side": 1,
+      "message": "overly complicated l_abs().\nlet\u0027s just call l_abs() here.\n\nany of these xor ^ expressions left in the code is suspect.",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 30
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c86b17c_e7b94699",
+        "filename": "media/module/codecs/amrnb/common/src/residu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-26T14:56:52Z",
+      "side": 1,
+      "message": "shouldn\u0027t all of these multiplications\nbe done with builtin_mul_overflow()?",
+      "range": {
+        "startLine": 232,
+        "startChar": 39,
+        "endLine": 232,
+        "endChar": 75
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19386786_81d2050b",
+        "filename": "media/module/codecs/amrnb/enc/src/autocorr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-08-26T14:56:52Z",
+      "side": 1,
+      "message": "builtin_mul_overflow()?\n\nlots of instances of that.",
+      "range": {
+        "startLine": 346,
+        "startChar": 36,
+        "endLine": 346,
+        "endChar": 62
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
