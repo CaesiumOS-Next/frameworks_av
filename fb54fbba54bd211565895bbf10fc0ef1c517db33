@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5d8527_5a4c124f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T23:04:04Z",
+      "side": 1,
+      "message": "We can increase the scope of this CL to \"clean up and unification\", please see my comments.",
+      "revId": "fb54fbba54bd211565895bbf10fc0ef1c517db33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c880cd4_b9829da0",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T23:04:04Z",
+      "side": 1,
+      "message": "Since it\u0027s `ConversionHelperAidl` who provides `getInstanceName`, could we move these macros there? I was asking about that in the initial CL but this was not picked up.\n\nWe can also drop the mention of `getClassName` from this comment as we have ended up not using it.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 49
+      },
+      "revId": "fb54fbba54bd211565895bbf10fc0ef1c517db33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd2fa3a0_a6e0f93d",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T23:04:04Z",
+      "side": 1,
+      "message": "If we can now write `AUGMENT_LOG(D)` or `AUGMENT_LOG(V)` then we probably don\u0027t need these special versions at all.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "fb54fbba54bd211565895bbf10fc0ef1c517db33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
