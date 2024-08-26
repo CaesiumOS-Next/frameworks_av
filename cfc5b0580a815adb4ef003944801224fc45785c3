@@ -34,6 +34,24 @@
       ],
       "revId": "cfc5b0580a815adb4ef003944801224fc45785c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7296ceba_c12a005c",
+        "filename": "media/libstagefright/include/FrameDecoder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1927725
+      },
+      "writtenOn": "2024-08-26T23:55:26Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "613a120b_249a3fad",
+      "revId": "cfc5b0580a815adb4ef003944801224fc45785c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
