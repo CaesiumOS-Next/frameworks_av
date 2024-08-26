@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49bc9080_a642646a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T20:58:14Z",
+      "side": 1,
+      "message": "Thank you! The idea looks good, please address the comments.",
+      "revId": "3cb6fee9ad6b8e8ffe560bce7b3c77db80c17902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3276d65_84bfd9e2",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T20:58:14Z",
+      "side": 1,
+      "message": "Since we are not using `status` inside the `if` branch code block, we can omit introducing it, similar to the `if` statement below (lines 225–232). Note that we print the value of the status in `broadcastDeviceConnectionState`.",
+      "range": {
+        "startLine": 215,
+        "startChar": 25,
+        "endLine": 215,
+        "endChar": 31
+      },
+      "revId": "3cb6fee9ad6b8e8ffe560bce7b3c77db80c17902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d285b085_69dffcae",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T20:58:14Z",
+      "side": 1,
+      "message": "Same note about `status`.",
+      "range": {
+        "startLine": 408,
+        "startChar": 25,
+        "endLine": 408,
+        "endChar": 31
+      },
+      "revId": "3cb6fee9ad6b8e8ffe560bce7b3c77db80c17902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0ccef2_a336fbf8",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2753,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T20:58:14Z",
+      "side": 1,
+      "message": "I would prefer having that as a separate test, for example:\n\n```\nTEST_P(AudioPolicyManagerTestDeviceConnectionFailed, BroadcastDeviceFailure) { ...\n```",
+      "range": {
+        "startLine": 2740,
+        "startChar": 0,
+        "endLine": 2753,
+        "endChar": 5
+      },
+      "revId": "3cb6fee9ad6b8e8ffe560bce7b3c77db80c17902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
