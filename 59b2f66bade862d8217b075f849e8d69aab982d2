@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8fda4b4_456c487f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-26T21:01:28Z",
+      "side": 1,
+      "message": "Hi Neha, could you please review. I\u0027ve found out that Daniel is on a leave.",
+      "revId": "59b2f66bade862d8217b075f849e8d69aab982d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
