@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73cc756d_c08c29bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-27T00:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc5d8527_5a4c124f",
+      "revId": "fb54fbba54bd211565895bbf10fc0ef1c517db33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c880cd4_b9829da0",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a520c525_73b6a67a",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-27T00:11:57Z",
+      "side": 1,
+      "message": "sure",
+      "parentUuid": "8c880cd4_b9829da0",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 49
+      },
+      "revId": "fb54fbba54bd211565895bbf10fc0ef1c517db33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd2fa3a0_a6e0f93d",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-08-26T23:04:04Z",
       "side": 1,
       "message": "If we can now write `AUGMENT_LOG(D)` or `AUGMENT_LOG(V)` then we probably don\u0027t need these special versions at all.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "fb54fbba54bd211565895bbf10fc0ef1c517db33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1f69a0_76e1bbf4",
+        "filename": "media/libaudiohal/impl/AidlUtils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-08-27T00:11:57Z",
+      "side": 1,
+      "message": "I was thinking if it\u0027s better to have a `LOG_ENTRY` just to easily tell the case of anything goes into the HAL and never return, but we do not have a special log pattern for this so removed the LOG_ENTRY as you suggested - we can add some ENTRY logging with special strings in future if necessary",
+      "parentUuid": "dd2fa3a0_a6e0f93d",
       "range": {
         "startLine": 55,
         "startChar": 0,
