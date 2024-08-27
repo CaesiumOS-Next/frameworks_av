@@ -66,6 +66,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3ed7c59_92cded62",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "700ebbd4_786fca70",
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "452255d0_81e9bc02",
@@ -103,6 +121,30 @@
           ]
         }
       ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "296f31af_818068aa",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "452255d0_81e9bc02",
+      "range": {
+        "startLine": 132,
+        "startChar": 20,
+        "endLine": 138,
+        "endChar": 16
+      },
       "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -232,6 +274,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c1e3f2_d0308504",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99620550_716408b7",
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8805035_cb6bbdfc",
@@ -263,6 +323,24 @@
           ]
         }
       ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2004f461_ef1c647d",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 54
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8805035_cb6bbdfc",
       "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -302,6 +380,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "047bfb0b_c681af2d",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 54
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "248017a7_ce7f7887",
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1ff34cb_0c505861",
@@ -333,6 +429,24 @@
           ]
         }
       ],
+      "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74052d54_43d426be",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 54
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1ff34cb_0c505861",
       "revId": "70b4b1ac9ceae8dc5d36445545bfa2d9a7f5e53b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
