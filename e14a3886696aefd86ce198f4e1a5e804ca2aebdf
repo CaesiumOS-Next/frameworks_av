@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e5fc3e1_1a434d1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T23:36:38Z",
+      "side": 1,
+      "message": "Thanks Tomislav! Looks good to me, with some notes. I will let @atneya@google.com and @elaurent@google.com to check this change as well.",
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c5f2b1_3d6cc4d9",
+        "filename": "media/libaudioclient/TrackPlayerBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T23:36:38Z",
+      "side": 1,
+      "message": "We could put `audioTrack` inside the condition part of the `if`.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d6ebe2dd_50fd7ecd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/TrackPlayerBase.cpp",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "    if (sp\u003cAudioTrack\u003e audioTrack \u003d getAudioTrack(); audioTrack !\u003d 0) {\n"
+            },
+            {
+              "path": "media/libaudioclient/TrackPlayerBase.cpp",
+              "range": {
+                "startLine": 102,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "    if (sp\u003cAudioTrack\u003e audioTrack \u003d getAudioTrack(); audioTrack !\u003d 0) {\n"
+            },
+            {
+              "path": "media/libaudioclient/TrackPlayerBase.cpp",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 115,
+                "endChar": 0
+              },
+              "replacement": "    if (sp\u003cAudioTrack\u003e audioTrack \u003d getAudioTrack(); audioTrack !\u003d 0) {\n"
+            },
+            {
+              "path": "media/libaudioclient/TrackPlayerBase.cpp",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "    if (sp\u003cAudioTrack\u003e audioTrack \u003d getAudioTrack(); audioTrack !\u003d 0) {\n"
+            },
+            {
+              "path": "media/libaudioclient/TrackPlayerBase.cpp",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 152,
+                "endChar": 0
+              },
+              "replacement": "    if (sp\u003cAudioTrack\u003e audioTrack \u003d getAudioTrack(); audioTrack !\u003d 0) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7761ecc5_edaf7905",
+        "filename": "media/libaudioclient/tests/trackplayerbase_tests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T23:36:38Z",
+      "side": 1,
+      "message": "The recommended way to instantiate a refcounted object is like this:\n\n```\nauto track \u003d sp\u003cAudioTrack\u003e::make(...);\n```\n\nPlease refer to https://cs.android.com/android/_/android/platform/system/core/+/adcba868484c4b03343e599d37276654bffebf32:libutils/binder/include/utils/RefBase.h;l\u003d182",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 45
+      },
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1da1169_df1fd14a",
+        "filename": "media/libaudioclient/tests/trackplayerbase_tests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T23:36:38Z",
+      "side": 1,
+      "message": "Please add a call to `std::this_thread::yield()` to prevent this thread from starving another one in the case when both of them get scheduled on the same CPU. https://en.cppreference.com/w/cpp/thread/yield",
+      "range": {
+        "startLine": 186,
+        "startChar": 8,
+        "endLine": 186,
+        "endChar": 9
+      },
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "330ccf0c_8cda2a96",
+        "filename": "media/libaudioclient/tests/trackplayerbase_tests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T23:36:38Z",
+      "side": 1,
+      "message": "Same note about `yield`",
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16788d85_d2fc1e8c",
+        "filename": "media/libaudioclient/tests/trackplayerbase_tests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T23:36:38Z",
+      "side": 1,
+      "message": "That\u0027s a bit too long for the scale that we run tests in CI. Please reduce to 100–500 ms (the shorter the better).",
+      "range": {
+        "startLine": 200,
+        "startChar": 45,
+        "endLine": 200,
+        "endChar": 55
+      },
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
