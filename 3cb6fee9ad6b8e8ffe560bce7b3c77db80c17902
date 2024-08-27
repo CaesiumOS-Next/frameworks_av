@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "352bce42_f9a45074",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2024-08-27T08:50:41Z",
+      "side": 1,
+      "message": "updated",
+      "parentUuid": "f3276d65_84bfd9e2",
+      "range": {
+        "startLine": 215,
+        "startChar": 25,
+        "endLine": 215,
+        "endChar": 31
+      },
+      "revId": "3cb6fee9ad6b8e8ffe560bce7b3c77db80c17902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d285b085_69dffcae",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f368a8_4d0549eb",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2024-08-27T08:50:41Z",
+      "side": 1,
+      "message": "updated",
+      "parentUuid": "d285b085_69dffcae",
+      "range": {
+        "startLine": 408,
+        "startChar": 25,
+        "endLine": 408,
+        "endChar": 31
+      },
+      "revId": "3cb6fee9ad6b8e8ffe560bce7b3c77db80c17902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0ccef2_a336fbf8",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-08-26T20:58:14Z",
       "side": 1,
       "message": "I would prefer having that as a separate test, for example:\n\n```\nTEST_P(AudioPolicyManagerTestDeviceConnectionFailed, BroadcastDeviceFailure) { ...\n```",
+      "range": {
+        "startLine": 2740,
+        "startChar": 0,
+        "endLine": 2753,
+        "endChar": 5
+      },
+      "revId": "3cb6fee9ad6b8e8ffe560bce7b3c77db80c17902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b342c49_b11c0a5c",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2753,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2024-08-27T08:50:41Z",
+      "side": 1,
+      "message": "updated",
+      "parentUuid": "0e0ccef2_a336fbf8",
       "range": {
         "startLine": 2740,
         "startChar": 0,
