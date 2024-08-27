@@ -183,7 +183,7 @@ private:
     int32_t mTileWidth;
     int32_t mTileHeight;
     int32_t mTilesDecoded;
-    int32_t mTargetTiles;
+    int64_t mTargetTiles;
 };
 
 }  // namespace android

@@ -889,7 +889,7 @@ sp<AMessage> MediaImageDecoder::onGetFormatAndSeekOptions(
             overrideMeta = trackMeta();
         }
     }
-    mTargetTiles = mGridCols * mGridRows;
+    mTargetTiles = (int64_t)mGridCols * (int64_t)mGridRows;
 
     sp<AMessage> videoFormat;
     if (convertMetaDataToMessage(overrideMeta, &videoFormat) != OK) {
@@ -929,7 +929,7 @@ status_t MediaImageDecoder::onExtractRect(FrameRect *rect) {
         if (mTilesDecoded > 0) {
             return ERROR_UNSUPPORTED;
         }
-        mTargetTiles = mGridRows * mGridCols;
+        mTargetTiles = (int64_t)mGridRows * (int64_t)mGridCols;
         return OK;
     }
 
@@ -950,7 +950,7 @@ status_t MediaImageDecoder::onExtractRect(FrameRect *rect) {
     }
 
     // advance one row
-    mTargetTiles = mTilesDecoded + mGridCols;
+    mTargetTiles = (int64_t)mTilesDecoded + (int64_t)mGridCols;
     return OK;
 }
 
