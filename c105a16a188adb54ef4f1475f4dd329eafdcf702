@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ec2513_6aad8256",
+        "filename": "services/audiopolicy/engineconfigurable/config/Android.bp",
+        "patchSetId": 39
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T17:22:53Z",
+      "side": 1,
+      "message": "Francois, I have added this to resolve the build error on `aosp_cheetah-trunk_staging-userdebug`. Please re-download.\n\nFor resolving the build error on `seahawk` I\u0027m submitting a patch downstream.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 6
+      },
+      "revId": "c105a16a188adb54ef4f1475f4dd329eafdcf702",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
