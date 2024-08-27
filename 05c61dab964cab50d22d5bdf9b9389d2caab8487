@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d7f0af_1ec802c3",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75d59a7a_03de9e06",
+      "range": {
+        "startLine": 129,
+        "startChar": 3,
+        "endLine": 135,
+        "endChar": 37
+      },
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d336c76c_d635bff2",
@@ -55,6 +79,24 @@
       "writtenOn": "2024-08-20T20:28:45Z",
       "side": 1,
       "message": "remove opt post-fix, and use tmp or value for findInt32()",
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af30c5b3_3eb7246a",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:16:09Z",
+      "side": 1,
+      "message": "Does it look better now?",
+      "parentUuid": "d336c76c_d635bff2",
       "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -104,6 +146,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e688050c_e2282100",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f81ad1a_cce208c5",
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ace1429b_746c0ca1",
@@ -141,6 +201,30 @@
           ]
         }
       ],
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d75208eb_e6b2ff95",
+        "filename": "media/libmedia/include/media/EncoderCapabilities.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-08-27T23:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace1429b_746c0ca1",
+      "range": {
+        "startLine": 75,
+        "startChar": 32,
+        "endLine": 75,
+        "endChar": 40
+      },
       "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
