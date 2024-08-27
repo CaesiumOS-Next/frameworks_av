@@ -16,6 +16,69 @@
       "message": "Thank you Muga and Ping! Jiabin, could you please also review.",
       "revId": "572e61da59aa434ab0adc26063a6000a355e1980",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf3fff3_3a163a21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-08-27T16:59:39Z",
+      "side": 1,
+      "message": "Thanks for the CL! Some minor comments. Could you please take a look? Thnaks,",
+      "revId": "572e61da59aa434ab0adc26063a6000a355e1980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067c8bf2_53736ab8",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-08-27T16:59:39Z",
+      "side": 1,
+      "message": "As the broadcast can fail, does it make sense to log failure when disconnected fails? This may be helpful in the future debugging since failing disconnection may result in failing connection later.",
+      "range": {
+        "startLine": 252,
+        "startChar": 12,
+        "endLine": 252,
+        "endChar": 42
+      },
+      "revId": "572e61da59aa434ab0adc26063a6000a355e1980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9bc861e_9f5b4e9d",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2651,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-08-27T16:59:39Z",
+      "side": 1,
+      "message": "Please add documentation for this method as the value of `status` does affect lots of logic. Or have a method `setSimulateBroadcastDeviceStatus` to remove the preset value.",
+      "range": {
+        "startLine": 2651,
+        "startChar": 9,
+        "endLine": 2651,
+        "endChar": 41
+      },
+      "revId": "572e61da59aa434ab0adc26063a6000a355e1980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
