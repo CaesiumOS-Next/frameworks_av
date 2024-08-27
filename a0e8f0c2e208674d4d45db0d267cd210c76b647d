@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2658ed12_a6fd424a",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-27T15:42:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c33f573d_fdc22d75",
+      "range": {
+        "startLine": 82,
+        "startChar": 65,
+        "endLine": 82,
+        "endChar": 76
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c5d6230_52527d2f",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f9e34e_d916ff4e",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-27T15:42:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c5d6230_52527d2f",
+      "range": {
+        "startLine": 84,
+        "startChar": 40,
+        "endLine": 84,
+        "endChar": 52
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dafa8402_2f5ed451",
@@ -95,6 +143,30 @@
       "writtenOn": "2024-08-26T17:36:10Z",
       "side": 1,
       "message": "since this errorMessage will be reported to media metrics, I think we might need to be more informative. In this case, we should at least report the pid and sessionId to make cross checking possible.",
+      "range": {
+        "startLine": 263,
+        "startChar": 77,
+        "endLine": 263,
+        "endChar": 80
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9abc4022_c05a67b7",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-27T15:42:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dafa8402_2f5ed451",
       "range": {
         "startLine": 263,
         "startChar": 77,
@@ -165,6 +237,30 @@
       "writtenOn": "2024-08-26T17:36:10Z",
       "side": 1,
       "message": "I think it will be helpful to have pid and sessionId reported, same for below `logIfErrorAndReturnStatus`",
+      "range": {
+        "startLine": 329,
+        "startChar": 20,
+        "endLine": 329,
+        "endChar": 32
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5026c51_43f5a3e2",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-27T15:42:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f83ec11_60069934",
       "range": {
         "startLine": 329,
         "startChar": 20,
@@ -247,6 +343,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2737301c_c9ac61ce",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-27T15:42:48Z",
+      "side": 1,
+      "message": "In the case where (status \u003d\u003d NO_ERROR), do we need to update mStatus?",
+      "parentUuid": "0edcd37e_3a827d4e",
+      "range": {
+        "startLine": 404,
+        "startChar": 11,
+        "endLine": 404,
+        "endChar": 36
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c073ad4e_eb35c769",
         "filename": "media/libaudioclient/AudioTrack.cpp",
         "patchSetId": 1
@@ -258,6 +378,30 @@
       "writtenOn": "2024-08-26T17:36:10Z",
       "side": 1,
       "message": "same here, maybe report uid/pid and sessionId?",
+      "range": {
+        "startLine": 745,
+        "startChar": 81,
+        "endLine": 745,
+        "endChar": 84
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "618da720_e507bcff",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-27T15:42:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c073ad4e_eb35c769",
       "range": {
         "startLine": 745,
         "startChar": 81,
