@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac3b3ca1_d9caa752",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-27T00:44:06Z",
+      "side": 1,
+      "message": "Thank you Shunkai! I think now the code looks much better.",
+      "revId": "35665b1a383016418b05f728e465f73a30970661",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
