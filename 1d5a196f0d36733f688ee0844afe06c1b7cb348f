@@ -16,6 +16,24 @@
       "message": "Hi Tomislav, would you mind rebasing your changes and resolving conflicts?",
       "revId": "1d5a196f0d36733f688ee0844afe06c1b7cb348f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a1441a_1f93b096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005646
+      },
+      "writtenOn": "2024-08-27T21:31:02Z",
+      "side": 1,
+      "message": "@mnaganov@google.com: thanks for reviewing! I\u0027ve rebased and retested on main (it was just a trivial conflict in Android.bp; other CLs in the stack apply cleanly).",
+      "parentUuid": "573357cb_c48d4b4f",
+      "revId": "1d5a196f0d36733f688ee0844afe06c1b7cb348f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
