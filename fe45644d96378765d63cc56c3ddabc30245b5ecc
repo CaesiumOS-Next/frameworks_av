@@ -22,6 +22,30 @@
       },
       "revId": "fe45644d96378765d63cc56c3ddabc30245b5ecc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5063b068_c99567f1",
+        "filename": "services/audiopolicy/engineconfigurable/data/Android.bp",
+        "patchSetId": 24
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-28T11:20:18Z",
+      "side": 1,
+      "message": "I do have the same need also to support HIDL / AIDL until QualComm provides a full AIDL HAL. \nI managed this issue by using PRODUCT_COPY_FILES for vendor targets with conflicting name.\n\nIn order not to trig any change on your side, I will abandon this CL and provide a specific system config with specific names.",
+      "parentUuid": "909796d6_e2b3ce02",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "fe45644d96378765d63cc56c3ddabc30245b5ecc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
