@@ -82,6 +82,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e150db2_46326457",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-08-28T16:44:02Z",
+      "side": 1,
+      "message": "You are right. There is not need to add a new one here given there is a log at l131. Thanks,",
+      "parentUuid": "5fa7a10e_be849687",
+      "range": {
+        "startLine": 252,
+        "startChar": 12,
+        "endLine": 252,
+        "endChar": 42
+      },
+      "revId": "572e61da59aa434ab0adc26063a6000a355e1980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9bc861e_9f5b4e9d",
