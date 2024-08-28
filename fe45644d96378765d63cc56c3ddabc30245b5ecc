@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "909796d6_e2b3ce02",
+        "filename": "services/audiopolicy/engineconfigurable/data/Android.bp",
+        "patchSetId": 24
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-28T02:53:19Z",
+      "side": 1,
+      "message": "@francois.gaffie@ampere.cars Francois, I have realized there is a problem with this moving of files. There are car devices like `seahawk` that already have targets with same names for their vendor configuration. Now as `libaudiopolicyengineconfigurable` start depending on these prebuilts from system, both these new modules and the existing vendor modules end up in the device makefile, causing a name conflict. And we can\u0027t use `soong_namespace` to isolate them because we actually need both. That\u0027s because since the framework must support both HIDL and AIDL HAL, we have to always have these new config files in `/system/etc`, regardless of which HAL the device uses.\n\nI\u0027ve attempted to rename these `prebuilt_etc` targets to give them `Sys` prefix, but then I\u0027ve got a bit confused because there are many similar prebuilts across different directories here. Could you please help with this?",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "fe45644d96378765d63cc56c3ddabc30245b5ecc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
