@@ -46,6 +46,30 @@
       },
       "revId": "c105a16a188adb54ef4f1475f4dd329eafdcf702",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930254de_ba13e9eb",
+        "filename": "services/audiopolicy/engineconfigurable/config/Android.bp",
+        "patchSetId": 39
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-28T18:46:42Z",
+      "side": 1,
+      "message": "Unfortunately, there are still problems with building seahawk, and I could not find an AOSP target where they could be reproduced so I can only describe them here.\n\nThe issue is that seahawk uses an Android.bp which looks like a combo of https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/engineconfigurable/config/example/automotive/Android.bp and https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/engineconfigurable/parameter-framework/examples/Car/Android.bp. That means, they have some usage of the stuff from these Android.bp files that you are changing in this CL. Below is a relevant excerpt from their file:\n\n```\n//////////////////////////////////////////////////////////////\n//\n// Audio Policy Parameter Framework\n//\n//////////////////////////////////////////////////////////////\n//\n// Generate Audio Policy Parameter Framework Product Strategies Structure file from template\n//\ngenrule {\n    name: \"buildstrategiesstructure_gen\",\n    defaults: [\"buildstrategiesstructurerule\"],\n    srcs: [\n        \":audio_policy_engine_configuration_files\",\n    ],\n}\nprebuilt_etc {\n    name: \"ProductStrategies.xml\",\n    vendor: true,\n    src: \":buildstrategiesstructure_gen\",\n    sub_dir: \"parameter-framework/Structure/Policy\",\n    required: [\"libpolicy-subsystem\"],\n}\n//\n// Generate Audio Policy Parameter Framework Configurable Domains\n//\nfilegroup {\n    name: \"edd_files\",\n    srcs: [\n        // \"engine/parameter-framework/Settings/device_for_product_strategies.pfw\",\n        \"engine/parameter-framework/Settings/device_for_input_source.pfw\",\n        \"engine/parameter-framework/Settings/volumes.pfw\",\n    ],\n}\n// This is for Settings generation, must use socket port, so userdebug version is required\nfilegroup {\n    name: \"audio_policy_pfw_toplevel\",\n    srcs: [\":ParameterFrameworkConfigurationPolicy.userdebug.xml\"],\n}\nfilegroup {\n    name: \"audio_policy_pfw_structure_files\",\n    srcs: [\n        \":PolicyClass\",\n        \":PolicySubsystem\",\n        \":buildcommontypesstructure_gen\",\n        \":buildstrategiesstructure_gen\",\n    ],\n}\ngenrule {\n    name: \"domaingeneratorpolicyrule_gen\",\n    defaults: [\"domaingeneratorpolicyrule\"],\n    srcs: [\n        \":audio_policy_pfw_toplevel\",\n        \":audio_policy_pfw_structure_files\",\n        \":audio_policy_engine_criterion_types\",\n        \":edd_files\",\n    ],\n}\nprebuilt_etc {\n    name: \"parameter-framework.policy\",\n    filename_from_src: true,\n    vendor: true,\n    src: \":domaingeneratorpolicyrule_gen\",\n    sub_dir: \"parameter-framework/Settings/Policy\",\n    required: [\n        \"ProductStrategies.xml\",\n        \"PolicyClass.xml\",\n        \"PolicySubsystem.xml\",\n        \"PolicySubsystem-CommonTypes.xml\",\n    ],\n}\n```\n\nI think, that means we essentially need to leave what they use intact, so that the target continues to build and run. And for the system-side XMLs it\u0027s better to have a parallel set of modules and rules.",
+      "parentUuid": "d1d3f7e6_33a17f59",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 6
+      },
+      "revId": "c105a16a188adb54ef4f1475f4dd329eafdcf702",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
