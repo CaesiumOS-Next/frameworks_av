@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fa7a10e_be849687",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2024-08-28T10:13:50Z",
+      "side": 1,
+      "message": "Line 131 already has a log indicating an error occurred. Do we still need to add a new one?",
+      "parentUuid": "067c8bf2_53736ab8",
+      "range": {
+        "startLine": 252,
+        "startChar": 12,
+        "endLine": 252,
+        "endChar": 42
+      },
+      "revId": "572e61da59aa434ab0adc26063a6000a355e1980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9bc861e_9f5b4e9d",
         "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
         "patchSetId": 6
@@ -71,6 +95,30 @@
       "writtenOn": "2024-08-27T16:59:39Z",
       "side": 1,
       "message": "Please add documentation for this method as the value of `status` does affect lots of logic. Or have a method `setSimulateBroadcastDeviceStatus` to remove the preset value.",
+      "range": {
+        "startLine": 2651,
+        "startChar": 9,
+        "endLine": 2651,
+        "endChar": 41
+      },
+      "revId": "572e61da59aa434ab0adc26063a6000a355e1980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4a7289_387d42de",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2651,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2024-08-28T10:13:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f9bc861e_9f5b4e9d",
       "range": {
         "startLine": 2651,
         "startChar": 9,
