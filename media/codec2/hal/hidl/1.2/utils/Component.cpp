@@ -551,6 +551,28 @@ Return<Status> Component::reset() {
 }
 
 Return<Status> Component::release() {
+    std::list<std::shared_ptr<C2BufferQueueBlockPool>> bqPools;
+    if (!mClientDied) {
+        {
+            std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
+            for (auto it = mBlockPools.begin(); it != mBlockPools.end(); ++it) {
+                if (it->second->getAllocatorId() == C2PlatformAllocatorStore::BUFFERQUEUE) {
+                    std::shared_ptr<C2BufferQueueBlockPool> bqPool =
+                            std::static_pointer_cast<C2BufferQueueBlockPool>(it->second);
+                    bqPools.push_back(bqPool);
+                }
+            }
+        }
+        auto invalidate = [](std::list<std::shared_ptr<C2BufferQueueBlockPool>> pools) {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            for (auto it = pools.begin(); it != pools.end(); ++it) {
+                (*it)->invalidate();
+            }
+        };
+        std::thread invalidateThread(invalidate, bqPools);
+        invalidateThread.detach();
+    }
+
     Status status = static_cast<Status>(mComponent->release());
     {
         std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
