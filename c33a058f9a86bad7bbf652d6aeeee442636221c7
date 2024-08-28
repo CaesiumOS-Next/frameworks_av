@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "380e46ea_52c2daf6",
+        "filename": "media/codec2/hal/client/output.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-08-28T21:15:35Z",
+      "side": 1,
+      "message": "In what cases consumerAttachCount will be nullptr?\nUpon successful configure (when it returns true), I see that mConsumerAttachCount is created, but I don\u0027t see it being unset or reset.",
+      "range": {
+        "startLine": 542,
+        "startChar": 16,
+        "endLine": 542,
+        "endChar": 35
+      },
+      "revId": "c33a058f9a86bad7bbf652d6aeeee442636221c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
