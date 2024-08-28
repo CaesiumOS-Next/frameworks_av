@@ -46,6 +46,30 @@
       },
       "revId": "c33a058f9a86bad7bbf652d6aeeee442636221c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4379644c_a99b45fa",
+        "filename": "media/codec2/hal/client/output.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-08-28T22:51:26Z",
+      "side": 1,
+      "message": "if surface is not existing, it will be nullptr.",
+      "parentUuid": "073356a1_6d778dff",
+      "range": {
+        "startLine": 542,
+        "startChar": 16,
+        "endLine": 542,
+        "endChar": 35
+      },
+      "revId": "c33a058f9a86bad7bbf652d6aeeee442636221c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
