@@ -280,9 +280,11 @@ status_t DeviceHalHidl::openOutputStream(
     ::android::hardware::audio::common::COMMON_TYPES_CPP_VERSION::SourceMetadata hidlMetadata;
 #endif
 
-    RETURN_STATUS_IF_ERROR(CoreUtils::sourceMetadataFromHalV7(
-            sourceMetadata, true /*ignoreNonVendorTags*/, &hidlMetadata
-            ));
+    if (status_t status = CoreUtils::sourceMetadataFromHalV7(
+                sourceMetadata, true /*ignoreNonVendorTags*/, &hidlMetadata);
+            status != OK) {
+        return status;
+    }
 
 #if !(MAJOR_VERSION == 7 && MINOR_VERSION == 1)
     //TODO: b/193496180 use spatializer flag at audio HAL when available
