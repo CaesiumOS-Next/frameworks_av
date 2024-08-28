@@ -34,6 +34,7 @@
 #include <C2PlatformSupport.h>
 
 #include <chrono>
+#include <condition_variable>
 #include <thread>
 
 namespace android {
@@ -271,7 +272,34 @@ c2_status_t Component::status() const {
     return mInit;
 }
 
+namespace {
+    auto invalidateBqPools = [](std::list<std::shared_ptr<C2BufferQueueBlockPool>> pools,
+                                int delayInMs,
+                                std::shared_ptr<std::mutex> m,
+                                std::shared_ptr<std::condition_variable> cv,
+                                std::shared_ptr<std::atomic<bool>> skip) {
+        if (delayInMs > 0) {
+            if (!m) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(delayInMs));
+            } else {
+                std::unique_lock<std::mutex> l(*m);
+                if (skip->load()) {
+                    return;
+                }
+                cv->wait_for(l, std::chrono::milliseconds(delayInMs));
+                if (skip->load()) {
+                    return;
+                }
+            }
+        }
+        for (auto it = pools.begin(); it != pools.end(); ++it) {
+            (*it)->invalidate();
+        }
+    };
+} // anonymous
+
 void Component::onDeathReceived() {
+    std::list<std::shared_ptr<C2BufferQueueBlockPool>> bqPools;
     {
         std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
         mClientDied = true;
@@ -279,9 +307,12 @@ void Component::onDeathReceived() {
             if (it->second->getAllocatorId() == C2PlatformAllocatorStore::BUFFERQUEUE) {
                 std::shared_ptr<C2BufferQueueBlockPool> bqPool =
                         std::static_pointer_cast<C2BufferQueueBlockPool>(it->second);
-                bqPool->invalidate();
+                bqPools.push_back(bqPool);
             }
         }
+    }
+    if (bqPools.size() > 0) {
+        invalidateBqPools(bqPools, 0, nullptr, nullptr, nullptr);
     }
     release();
 }
@@ -551,7 +582,40 @@ Return<Status> Component::reset() {
 }
 
 Return<Status> Component::release() {
+    std::list<std::shared_ptr<C2BufferQueueBlockPool>> bqPools;
+    std::shared_ptr<std::mutex> bqPoolMutex =
+            std::make_shared<std::mutex>();
+    std::shared_ptr<std::condition_variable> bqPoolCv =
+            std::make_shared<std::condition_variable>();
+    std::shared_ptr<std::atomic<bool>> bqPoolSkip =
+            std::make_shared<std::atomic<bool>>(false);
+    {
+        std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
+        // handling rare cases of process death just after release() called.
+        if (!mClientDied) {
+            for (auto it = mBlockPools.begin(); it != mBlockPools.end(); ++it) {
+                if (it->second->getAllocatorId() == C2PlatformAllocatorStore::BUFFERQUEUE) {
+                    std::shared_ptr<C2BufferQueueBlockPool> bqPool =
+                            std::static_pointer_cast<C2BufferQueueBlockPool>(it->second);
+                    bqPools.push_back(bqPool);
+                }
+            }
+            if (bqPools.size() > 0) {
+                std::thread invalidateThread(invalidateBqPools, bqPools, 1000,
+                        bqPoolMutex, bqPoolCv, bqPoolSkip);
+                invalidateThread.detach();
+            }
+        }
+    }
     Status status = static_cast<Status>(mComponent->release());
+    if (bqPools.size() > 0) {
+        // In order for fast reclamation of resource of bqPools,
+        // terminates the invalidateThread in case of release()
+        // being completed timely.
+        std::unique_lock<std::mutex> bqLock(*bqPoolMutex);
+        bqPoolSkip->store(true);
+        bqPoolCv->notify_one();
+    }
     {
         std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
         mBlockPools.clear();
@@ -676,6 +740,24 @@ void Component::initListener(const sp<Component>& self) {
 }
 
 Component::~Component() {
+    std::list<std::shared_ptr<C2BufferQueueBlockPool>> bqPools;
+    {
+        std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
+        for (auto it = mBlockPools.begin(); it != mBlockPools.end(); ++it) {
+            if (it->second->getAllocatorId() == C2PlatformAllocatorStore::BUFFERQUEUE) {
+                std::shared_ptr<C2BufferQueueBlockPool> bqPool =
+                        std::static_pointer_cast<C2BufferQueueBlockPool>(it->second);
+                bqPools.push_back(bqPool);
+            }
+        }
+    }
+    if (bqPools.size() > 0) {
+        LOG(ERROR) << "blockpools are not cleared yet at dtor";
+        std::thread invalidateThread(invalidateBqPools, bqPools, 1000,
+                nullptr, nullptr, nullptr);
+        invalidateThread.detach();
+    }
+
     InputBufferManager::unregisterFrameData(mListener);
     mStore->reportComponentDeath(this);
 }
