@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f67a05f_5ef682b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-08-28T00:52:14Z",
+      "side": 1,
+      "message": "Thanks for following up",
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8c5f2b1_3d6cc4d9",
@@ -91,6 +108,41 @@
                 "endChar": 0
               },
               "replacement": "    if (sp\u003cAudioTrack\u003e audioTrack \u003d getAudioTrack(); audioTrack !\u003d 0) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3496bb8a_8fc8a8b5",
+        "filename": "media/libaudioclient/TrackPlayerBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-08-28T00:52:14Z",
+      "side": 1,
+      "message": "Want to flag here --\n\nCopying the sp\u003c\u003e this way guarantees the AudioTrack is live, but doesn\u0027t guarantee its non-stopped-ness (which full synchronization would correctly accomplish)\n\nSo we need to check if these methods are safe to call on stopped tracks.\n\nBut, certainly better than the current state.",
+      "fixSuggestions": [
+        {
+          "fixId": "0eb44610_da7ea71b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/TrackPlayerBase.cpp",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "        // TODO(b/181152111): This is not thread-safe.\n"
             }
           ]
         }
