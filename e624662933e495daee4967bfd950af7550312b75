@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f114b03_70bace45",
+        "filename": "services/audiopolicy/engineconfigurable/tools/Android.bp",
+        "patchSetId": 41
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-28T18:38:24Z",
+      "side": 0,
+      "message": "This rule is used by other genrules, see here: https://cs.android.com/search?q\u003dbuildstrategiesstructurerule\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain and attempts to call it in this form are failing:\n\n```\nusage: buildStrategiesStructureFile [-h] --audiopolicyengineconfigurationfile\n                                    (AUDIO_POLICY_ENGINE_CONFIGURATION_FILE)\n                                    --productstrategiesstructurefile\n                                    STRATEGIES_STRUCTURE_FILE --outputfile\n                                    STRATEGIES_STRUCTURE_OUTPUT_FILE\n                                    [--verbose]\nbuildStrategiesStructureFile: error: the following arguments are required: --productstrategiesstructurefile\n```",
+      "range": {
+        "startLine": 120,
+        "startChar": 11,
+        "endLine": 120,
+        "endChar": 39
+      },
+      "revId": "e624662933e495daee4967bfd950af7550312b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
