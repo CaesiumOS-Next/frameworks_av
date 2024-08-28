@@ -34,6 +34,24 @@
       "parentUuid": "e7a641f5_43833e66",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0afe413_4c395f26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-08-28T20:57:04Z",
+      "side": 1,
+      "message": "The problem (3s TIMED_OUT in AudioPolicyService::AudioCommandThread::threadLoop() - CREATE_AUDIO_PATCH) that I used to reproduce (radio playback by HwAudioSource) was caused mostly by the hang during playback track creation:\n\nAudioFlinger::createAudioPatch()\n    - \u003e AudioFlinger::PatchPanel::createAudioPatch()\n        - \u003e AudioFlinger::PatchPanel::Patch::createConnections()\n            - \u003e AudioFlinger::PlaybackThread::PatchTrack::PatchTrack()\n\nBut this hanging call occurs \"after\" 2x panel-\u003ecreateAudioPatch() ( while each of them calls mentioned: thread-\u003esendCreateAudioPatchConfigEvent() with 2s timeout ), so:\n\n// create patch from source device to record thread input\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/PatchPanel.cpp;l\u003d513\n\n// create patch from playback thread output to sink device\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/PatchPanel.cpp;l\u003d525\n\n// create a special playback track to render to playback thread.\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/PatchPanel.cpp;l\u003d640\n\nIn such case is the PatchPanel still right place for fix ?\n\nBTW, the link: https://android-review.googlesource.com/q/commit:3fddffeed45be9187dfca38e00ddc2d7a01f6f4c does not work for me, can you please check if it is valid ?",
+      "parentUuid": "2537eea3_98226fe8",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
