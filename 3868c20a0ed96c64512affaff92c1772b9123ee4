@@ -33,6 +33,24 @@
       "message": "Gentle ping (@atneya@google.com).\n\nThis turned out to be a bit more involved than I\u0027d hoped (refactoring across two repositories due to `mAudioTrack` previously being public) -- is there still interest in getting this fixed?\n\nThis was originally observed in Android 12 where the race with `applyVolumeShaper` (called from system server) resulted in an app crashing. Quick read of the code in `aosp/main` suggests this might still happen in more recent versions, though.",
       "revId": "3868c20a0ed96c64512affaff92c1772b9123ee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef6dc5bf_5abcd04d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005646
+      },
+      "writtenOn": "2024-08-28T23:50:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9da3805e_3bed504c",
+      "revId": "3868c20a0ed96c64512affaff92c1772b9123ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
