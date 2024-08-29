@@ -768,17 +768,27 @@ status_t Codec2InfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
 
                 if (com::android::media::codec::flags::provider_->large_audio_frame()
                         && android::media::codec::provider_->large_audio_frame_finish()) {
-                    // Adding feature-multiple-frames when C2LargeFrame param is present
+                    // Large audio frame feature depends on:
+                    // 1. the capability of the implementation to use the same input buffer
+                    // for different C2Work
+                    // 2. On supporting C2LargeFrame::output::PARAM_TYPE param.
                     if (trait.domain == C2Component::DOMAIN_AUDIO) {
-                        std::vector<std::shared_ptr<C2ParamDescriptor>> params;
-                        c2_status_t err = intf->querySupportedParams(&params);
-                        if (err == C2_OK) {
-                            for (const auto &paramDesc : params) {
-                                if (C2LargeFrame::output::PARAM_TYPE == paramDesc->index()) {
-                                    std::string featureMultipleFrames =
-                                            std::string(KEY_FEATURE_) + FEATURE_MultipleFrames;
-                                    caps->addDetail(featureMultipleFrames.c_str(), 0);
-                                    break;
+                        C2ApiFeaturesSetting features;
+                        std::vector<C2Param*> stackParams{&features};
+                        c2_status_t err = intf->query({stackParams}, {}, C2_MAY_BLOCK, nullptr);
+                        if ((err == C2_OK) &&
+                                (features.value & C2Config::api_feature_t::API_SAME_INPUT_BUFFER)) {
+                            const std::string featureMultipleFrames =
+                                    MediaCodecInfo::Capabilities::FEATURE_MULTIPLE_FRAMES;
+                            std::vector<std::shared_ptr<C2ParamDescriptor>> params;
+                            err = intf->querySupportedParams(&params);
+                            if (err == C2_OK) {
+                                for (const auto &paramDesc : params) {
+                                    if (C2LargeFrame::output::PARAM_TYPE ==
+                                            paramDesc->index()) {
+                                        caps->addDetail(featureMultipleFrames.c_str(), 0);
+                                        break;
+                                    }
                                 }
                             }
                         }
