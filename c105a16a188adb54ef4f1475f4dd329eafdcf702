@@ -70,6 +70,30 @@
       },
       "revId": "c105a16a188adb54ef4f1475f4dd329eafdcf702",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c283edd_65c174dc",
+        "filename": "services/audiopolicy/engineconfigurable/config/Android.bp",
+        "patchSetId": 39
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-29T06:57:04Z",
+      "side": 1,
+      "message": "Ok, got the error from the extract. I removed the out by default from domaingeneratorpolicyrule_gen since I got an error. Will fix and restore the out from the domaingeneratorpolicyrule_gen default target",
+      "parentUuid": "930254de_ba13e9eb",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 6
+      },
+      "revId": "c105a16a188adb54ef4f1475f4dd329eafdcf702",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
