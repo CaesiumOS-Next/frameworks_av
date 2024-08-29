@@ -318,6 +318,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "586079f9_be180799",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-29T20:18:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28bcb49b_147f3203",
+      "range": {
+        "startLine": 387,
+        "startChar": 11,
+        "endLine": 387,
+        "endChar": 54
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0edcd37e_3a827d4e",
@@ -355,6 +379,30 @@
       "side": 1,
       "message": "In the case where (status \u003d\u003d NO_ERROR), do we need to update mStatus?",
       "parentUuid": "0edcd37e_3a827d4e",
+      "range": {
+        "startLine": 404,
+        "startChar": 11,
+        "endLine": 404,
+        "endChar": 36
+      },
+      "revId": "a0e8f0c2e208674d4d45db0d267cd210c76b647d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "816d0345_65dabdc4",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-29T20:18:41Z",
+      "side": 1,
+      "message": "As discussed, with this change, the original behaviour is retained.",
+      "parentUuid": "2737301c_c9ac61ce",
       "range": {
         "startLine": 404,
         "startChar": 11,
