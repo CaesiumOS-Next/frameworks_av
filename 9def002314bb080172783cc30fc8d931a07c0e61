@@ -52,6 +52,24 @@
       "parentUuid": "2537eea3_98226fe8",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7db70bf_a9d499fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-08-29T14:00:18Z",
+      "side": 1,
+      "message": "Commit 3fddffeed45be9187dfca38e00ddc2d7a01f6f4c is not on AOSP yet, so it is normal the link does not work.\n\nIt is just using a 4 second timeout here when the command is create audio patch:\n\nhttps://cs.android.com/android/platform/superproject/+/android14-qpr3-release:frameworks/av/services/audioflinger/Threads.cpp;l\u003d728?q\u003dkConfigEventTimeoutNs",
+      "parentUuid": "f0afe413_4c395f26",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
