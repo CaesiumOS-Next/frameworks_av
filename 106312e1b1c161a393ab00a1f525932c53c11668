@@ -22,6 +22,30 @@
       },
       "revId": "106312e1b1c161a393ab00a1f525932c53c11668",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e2fd7b_2d17d224",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-29T21:20:17Z",
+      "side": 1,
+      "message": "No. From the phones experience, we don\u0027t want to ship both HIDL and AIDL HAL on the vendor partition. So if a device supports both versions, the HAL to use is chosen by a build flag.",
+      "parentUuid": "deda7634_e2df8426",
+      "range": {
+        "startLine": 82,
+        "startChar": 7,
+        "endLine": 82,
+        "endChar": 85
+      },
+      "revId": "106312e1b1c161a393ab00a1f525932c53c11668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
