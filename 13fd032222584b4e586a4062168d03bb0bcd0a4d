@@ -22,6 +22,30 @@
       },
       "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92ecfd8_28d5d07e",
+        "filename": "services/audiopolicy/engineconfigurable/tools/buildStrategiesStructureFile.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-29T22:25:12Z",
+      "side": 1,
+      "message": "@francois.gaffie@ampere.cars Please take a note.",
+      "parentUuid": "09b54537_a19edd89",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 62
+      },
+      "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
