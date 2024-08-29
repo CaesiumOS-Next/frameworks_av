@@ -523,6 +523,8 @@ void OutputBufferQueue::onBufferReleased(uint32_t generation) {
     sp<IGraphicBufferProducer> outputIgbp;
     uint32_t outputGeneration = 0;
     {
+        LOG(ERROR) << "onBufferReleased: mutex address "
+                   << std::addressof(mMutex);
         std::unique_lock<std::mutex> l(mMutex);
         if (mStopped) {
             return;

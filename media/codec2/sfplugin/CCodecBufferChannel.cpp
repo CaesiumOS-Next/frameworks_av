@@ -213,6 +213,7 @@ CCodecBufferChannel::CCodecBufferChannel(
 }
 
 CCodecBufferChannel::~CCodecBufferChannel() {
+    ALOGE("CCodecBufferChannel destructing");
     if (mCrypto != nullptr && mHeapSeqNum >= 0) {
         mCrypto->unsetHeap(mHeapSeqNum);
     }
@@ -1469,6 +1470,7 @@ void CCodecBufferChannel::onBufferReleasedFromOutputSurface(uint32_t generation)
     // during this interface being executed.
     std::shared_ptr<Codec2Client::Component> comp = mComponent;
     if (comp) {
+        ALOGE("onBufferReleasedFromOutputSurface: mComponent %lld", (long long)comp.use_count());
         comp->onBufferReleasedFromOutputSurface(generation);
     }
 }
