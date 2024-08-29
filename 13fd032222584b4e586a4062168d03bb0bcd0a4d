@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b54537_a19edd89",
+        "filename": "services/audiopolicy/engineconfigurable/tools/buildStrategiesStructureFile.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-08-29T22:24:44Z",
+      "side": 1,
+      "message": "These changes break the build of seahawk because it also used these scripts. My solution is to leave buildPolicyCriterionTypes.py and buildStrategiesStructureFile.py intact, and add your modifications as new scripts with `cap` prefix. Same for relevant genrules. I have also restored the `ProductStrategies.xml.in` file.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 62
+      },
+      "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
