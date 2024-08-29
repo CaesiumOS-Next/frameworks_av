@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "776d45dd_517ed2cf",
+        "filename": "media/codec2/sfplugin/Codec2InfoBuilder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-29T20:23:16Z",
+      "side": 1,
+      "message": "another approach may be that on the utils side detect the flag \u0026 not advertise the support for `C2LargeFrame`",
+      "fixSuggestions": [
+        {
+          "fixId": "f53c6b6a_96337fb5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/Codec2InfoBuilder.cpp",
+              "range": {
+                "startLine": 768,
+                "startChar": 0,
+                "endLine": 797,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "10c393afc5f077c93ecc0c34164d9babb4acee33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
