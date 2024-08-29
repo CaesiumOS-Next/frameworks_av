@@ -845,9 +845,13 @@ private:
     uint32_t mGeneration;
     std::weak_ptr<BufferChannelBase> mBufferChannel;
 
-    void notifyBufferReleased() {
+    void notifyBufferReleased(bool detach) {
         auto p = mBufferChannel.lock();
         if (p) {
+            if (detach) {
+                ALOGE("buffer release notify from detach bufferchannel:%lld",
+                      (long long)p.use_count());
+            }
             p->onBufferReleasedFromOutputSurface(mGeneration);
         }
     }
@@ -868,11 +872,11 @@ public:
     virtual ~OnBufferReleasedListener() = default;
 
     void onBufferReleased() override {
-        notifyBufferReleased();
+        notifyBufferReleased(false);
     }
 
     void onBufferDetached([[maybe_unused]] int slot) override {
-        notifyBufferReleased();
+        notifyBufferReleased(true);
     }
 
     bool needsReleaseNotify() override { return true; }

@@ -2055,6 +2055,7 @@ Codec2Client::Component::Component(const std::shared_ptr<AidlBase> &base)
 }
 
 Codec2Client::Component::~Component() {
+    LOG(ERROR) << "Component destructing";
     if (mAidlDeathSeq) {
         GetAidlDeathManager()->unlinkToDeath(*mAidlDeathSeq, mAidlBase);
     }
