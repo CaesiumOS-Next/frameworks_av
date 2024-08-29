@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16f09248_f920ed0d",
+        "filename": "services/audiopolicy/engineconfigurable/data/etc/Structure/CapSubsystem.xml",
+        "patchSetId": 41
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-29T07:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9a6faf6_9f77cd4c",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "273bee5fc4a84d6c90268b068a8c49bcc9d4b71d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08b610d1_6043cafa",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-28T18:38:24Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"occured\" -- should it be \"occurred\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"occured\" -- should it be \"occurred\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 51,
+        "startChar": 51,
+        "endLine": 51,
+        "endChar": 58
+      },
+      "revId": "273bee5fc4a84d6c90268b068a8c49bcc9d4b71d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b57a28_90bff272",
+        "filename": "services/audiopolicy/engineconfigurable/tools/buildPolicyAidlCriterionTypes.py",
+        "patchSetId": 41
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-29T07:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08b610d1_6043cafa",
       "range": {
         "startLine": 51,
         "startChar": 51,

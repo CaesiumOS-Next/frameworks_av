@@ -22,6 +22,54 @@
       },
       "revId": "e624662933e495daee4967bfd950af7550312b75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ce7e4d_ec64f03a",
+        "filename": "services/audiopolicy/engineconfigurable/tools/Android.bp",
+        "patchSetId": 41
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-29T07:38:29Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0f114b03_70bace45",
+      "range": {
+        "startLine": 120,
+        "startChar": 11,
+        "endLine": 120,
+        "endChar": 39
+      },
+      "revId": "e624662933e495daee4967bfd950af7550312b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5529ef_bf10f7bc",
+        "filename": "services/audiopolicy/engineconfigurable/tools/Android.bp",
+        "patchSetId": 41
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-29T07:38:29Z",
+      "side": 0,
+      "message": "my bad, I have forgotten to update this script from abandoned CL",
+      "parentUuid": "0f114b03_70bace45",
+      "range": {
+        "startLine": 120,
+        "startChar": 11,
+        "endLine": 120,
+        "endChar": 39
+      },
+      "revId": "e624662933e495daee4967bfd950af7550312b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
