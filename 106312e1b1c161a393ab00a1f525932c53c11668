@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deda7634_e2df8426",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-29T09:53:30Z",
+      "side": 1,
+      "message": "@mnaganov@google.com I do consider that if HIDL vendor file is there, we use hidl.\nOn my hybrid build, I used an android property to switch hidl/aidl at runtime if both are available. Not sure AOSP is interested in this feature however !",
+      "range": {
+        "startLine": 82,
+        "startChar": 7,
+        "endLine": 82,
+        "endChar": 85
+      },
+      "revId": "106312e1b1c161a393ab00a1f525932c53c11668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
