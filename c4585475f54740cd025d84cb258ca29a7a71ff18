@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f85d63_0618c4be",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-08-30T16:41:18Z",
+      "side": 1,
+      "message": "It seems like we should also add `mHandleOutputBufferAsyncDone(false)` here to assure the field can\u0027t be used uninitialized.",
+      "revId": "c4585475f54740cd025d84cb258ca29a7a71ff18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
