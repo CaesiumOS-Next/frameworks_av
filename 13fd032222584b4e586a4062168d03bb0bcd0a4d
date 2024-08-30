@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "86d6b153_a32ad67b",
+        "filename": "services/audiopolicy/engineconfigurable/tools/buildStrategiesStructureFile.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-30T11:03:21Z",
+      "side": 1,
+      "message": "I have the answer from Oscar ;-) . It does not, this is excatly the reason why",
+      "parentUuid": "17fc4b13_8f9d448e",
+      "range": {
+        "startLine": 76,
+        "startChar": 45,
+        "endLine": 76,
+        "endChar": 60
+      },
+      "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "09b54537_a19edd89",
         "filename": "services/audiopolicy/engineconfigurable/tools/buildStrategiesStructureFile.py",
         "patchSetId": 43
