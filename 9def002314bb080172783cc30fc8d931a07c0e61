@@ -88,6 +88,24 @@
       "parentUuid": "e7db70bf_a9d499fc",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eaf232f_076ee820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-08-30T20:24:26Z",
+      "side": 1,
+      "message": "I would say that if the command thread timeout of 3 seconds is too aggressive for some legit commands like audio patch creation, then we should extend it. But we must first investigate why we hit the time out in the audio flinger command thread because it could be a true cross deadlock and not just a long execution time in the audio HAL.",
+      "parentUuid": "99b61f7f_d82a11f2",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
