@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ff66eb_d149874f",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-30T06:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d324ec18_256e7146",
+      "range": {
+        "startLine": 363,
+        "startChar": 68,
+        "endLine": 363,
+        "endChar": 76
+      },
+      "revId": "b1fd9074969f427b95a84a04911b97d80fdfc6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad8a33d2_26b48d2e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-29T21:48:37Z",
       "side": 1,
       "message": "This will end up calling `reportError(status, AMEDIAMETRICS_PROP_EVENT_VALUE_CREATE, errorMessage.c_str());`. Should we just set `mStatus` and return?",
+      "range": {
+        "startLine": 682,
+        "startChar": 0,
+        "endLine": 682,
+        "endChar": 53
+      },
+      "revId": "b1fd9074969f427b95a84a04911b97d80fdfc6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58d8984_cad5be79",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1859273
+      },
+      "writtenOn": "2024-08-30T06:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad8a33d2_26b48d2e",
       "range": {
         "startLine": 682,
         "startChar": 0,
