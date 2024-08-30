@@ -46,6 +46,30 @@
       },
       "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e9c311_ea6578b5",
+        "filename": "services/audiopolicy/engineconfigurable/tools/buildStrategiesStructureFile.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-30T06:44:54Z",
+      "side": 1,
+      "message": "I wish I could see the log failure since I have here both legacy hidl / aidl. However, lets duplicate. I will remove a dub aidl and cap buildcriteriontype.py BTW",
+      "parentUuid": "f92ecfd8_28d5d07e",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 62
+      },
+      "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
