@@ -16,6 +16,23 @@
       "message": "hi  @essick@google.com   \nhelp review this patch thx.",
       "revId": "1ac5bb4607c1aaa6e890985384d8037e43303bd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12adc67_c545286d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-08-30T08:33:22Z",
+      "side": 1,
+      "message": "Is there a bug with more details about the issue that this change is fixing?",
+      "revId": "1ac5bb4607c1aaa6e890985384d8037e43303bd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
