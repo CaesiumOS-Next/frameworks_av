@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "17fc4b13_8f9d448e",
+        "filename": "services/audiopolicy/engineconfigurable/tools/buildStrategiesStructureFile.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-30T06:46:58Z",
+      "side": 1,
+      "message": "Identifier was expected to be mandatory. This is also the reason why I needed to have common py file.\n@mnaganov@google.com: does seahawk build/boots also?",
+      "range": {
+        "startLine": 76,
+        "startChar": 45,
+        "endLine": 76,
+        "endChar": 60
+      },
+      "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "09b54537_a19edd89",
