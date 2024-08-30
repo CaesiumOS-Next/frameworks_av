@@ -391,7 +391,12 @@ private:
     };
     Mutexed<BlockPools> mBlockPools;
 
-    Mutexed<std::shared_ptr<InputSurfaceWrapper>> mInputSurface;
+    std::atomic_bool mHasInputSurface;
+    struct InputSurface {
+        std::shared_ptr<InputSurfaceWrapper> surface;
+        int64_t queuedMinusGenerated;
+    };
+    Mutexed<InputSurface> mInputSurface;
 
     MetaMode mMetaMode;
 
