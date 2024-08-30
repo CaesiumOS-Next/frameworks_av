@@ -117,6 +117,30 @@
       },
       "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b579cf8_2c9efecd",
+        "filename": "services/audiopolicy/engineconfigurable/tools/buildStrategiesStructureFile.py",
+        "patchSetId": 43
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-08-30T11:07:44Z",
+      "side": 1,
+      "message": "@mnaganov@google.com Version 48 has reverted all changed on legacy version (I even aligned aidl criterion type name on legacy).\nJust updated the buildstrategy python script for legacy.\nThis script does not exist for AIDL, it does not need since the structure is not expected to change.",
+      "parentUuid": "29e9c311_ea6578b5",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 62
+      },
+      "revId": "13fd032222584b4e586a4062168d03bb0bcd0a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
