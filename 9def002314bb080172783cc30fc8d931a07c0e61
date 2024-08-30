@@ -70,6 +70,24 @@
       "parentUuid": "f0afe413_4c395f26",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b61f7f_d82a11f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-08-30T17:20:01Z",
+      "side": 1,
+      "message": "It looks whatever bad happens (status !\u003d NO_ERROR) in \u0027AudioFlinger::PatchPanel::Patch::createConnections()\u0027 it gets handled and clean up is involved by \u0027newPatch.clearConnections()\u0027, so even error status (including 2s TIMED_OUT from thread-\u003esendCreateAudioPatchConfigEvent() ( 2x panel-\u003ecreateAudioPatch() ) ) gets returned to \u0027AudioPolicyService::AudioCommandThread::threadLoop()\u0027 it would cause no resources leak.\n\nBut the case when \u0027new PlaybackThread::PatchTrack()\u0027 hangs (and possibly few other places) is something that does not trigger \u0027newPatch.clearConnections()\u0027 but triggers 3s TIMED_OUT in \u0027AudioPolicyService::AudioCommandThread::threadLoop()\u0027.\nSo what is OK from PatchPanel perspective (audio patch created, no errors, no \u0027newPatch.clearConnections()\u0027 cleanup involved) might be not OK (audio patch created to long \u003e 3s, TIMED_OUT) for \u0027AudioPolicyService::AudioCommandThread::threadLoop()\u0027.\n\nSo why to not let \u0027AudioPolicyService::AudioCommandThread::threadLoop()\u0027 for doing cleanup (by calling release audio patch) in case it\u0027s logic decided that patch is bad ( patch creation took too long (\u003e 3s) ) ?",
+      "parentUuid": "e7db70bf_a9d499fc",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
