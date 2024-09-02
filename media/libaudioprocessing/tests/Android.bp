@@ -92,6 +92,37 @@ cc_benchmark {
 }
 
 //
+// build mixerops volumeMulti benchmark
+//
+cc_benchmark {
+    name: "mixerops_volumeMulti",
+    host_supported: false,
+
+    include_dirs: [
+        "frameworks/av/media/libaudioprocessing",
+    ],
+    header_libs: [
+        "libaudioutils_headers",
+    ],
+    shared_libs: [
+        "liblog",
+    ],
+    srcs: [
+        "mixerops_volumeMulti.cpp",
+    ],
+    static_libs: [
+        "libaudioutils",
+        "libgoogle-benchmark",
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+    ],
+}
+
+//
 // mixerops unit test
 //
 cc_test {
