@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d588bfeb_70b7dd75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3459540
+      },
+      "writtenOn": "2024-09-02T14:09:48Z",
+      "side": 1,
+      "message": "Hi Andy Hung and Mikhail Naganov, can you help me to review? Thanks.",
+      "revId": "afa9dd4a8f217d668390a5450a802474d227e220",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
