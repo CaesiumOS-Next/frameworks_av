@@ -106,6 +106,24 @@
       "parentUuid": "99b61f7f_d82a11f2",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4072984e_9207db66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3235735
+      },
+      "writtenOn": "2024-09-02T14:42:37Z",
+      "side": 1,
+      "message": "It looks there are 2 problems:\n1) fix the reason(s) of 3s TIMED_OUT (many possibilities)\n2) fix the resources leak when 3s TIMED_OUT happens (this commit)\n\nIn my case the problem was very rare reproducible, had to run automated script that did Car Service kill in the loop (after the radio playback was started \u0026 playing by HwAudioSource).\nThe issue was reproducible 1/100 Car Service kills. It was possible to reproduce it 5x during the night run (12h).\n\nThe hang (during audio patch creation) used to happen during audioflinger call to system_server (more details and stack traces available in: https://partnerissuetracker.corp.google.com/issues/356095582) :\n...\n    #06 pc 000000000007ea64  /system/lib64/libbinder.so (android::BpPermissionController::getPackagesForUid\n    #07 pc 000000000007feb4  /system/lib64/libbinder.so (android::PermissionController::getPackagesForUid\n    #08 pc 00000000000f4c5c  /system/lib64/libaudioflinger.so (android::AudioFlinger::PlaybackThread::OpPlayAudioMonitor::createIfNeeded\n    #09 pc 00000000000f6398  /system/lib64/libaudioflinger.so (android::AudioFlinger::PlaybackThread::Track::Track\n    #10 pc 00000000000fea00  /system/lib64/libaudioflinger.so (android::AudioFlinger::PlaybackThread::PatchTrack::PatchTrack\n    #11 pc 000000000008fffc  /system/lib64/libaudioflinger.so (android::AudioFlinger::PatchPanel::Patch::createConnections\n    #12 pc 000000000008e648  /system/lib64/libaudioflinger.so (android::AudioFlinger::PatchPanel::createAudioPatch\n    #13 pc 000000000008d308  /system/lib64/libaudioflinger.so (android::AudioFlinger::createAudioPatch\n...\n\nwhile system_server seemed to be busy / stuck printing such log:\n...\n03-15 11:01:56.767  1000  1485  1498 E IPCThreadState: binder thread pool (31 threads) starved for 3058 ms\n...\n\nI assumed it is some performance issue, and as I checked initially it had something with dumping stacks after Car Service crash, because when disabled dumping stacks, the issue stopped reproducing (0x during 24h run):\nhttps://cs.android.com/android/platform/superproject/+/android12L-release:frameworks/opt/car/services/src/com/android/internal/car/CarServiceHelperService.java;l\u003d571\n\nwhile \u0027ro.car.recovery.restart_runtime.enabled\u0027 is false in our platform (in case it is true, recovery would happen by system_server restart):\nhttps://cs.android.com/android/platform/superproject/+/android12L-release:frameworks/opt/car/services/src/com/android/internal/car/CarServiceHelperService.java;l\u003d112\n\nI also observed few other hangs during my tests that I did not investigate (different than PermissionController hang) and also we have another product where sporadically TIMED_OUT 3s issue happens for radio playback (but there is no Car Service crash as trigger and reason was not confirmed so far) so wanted to prepare fix that would be generic solution that at least cleans up (releases) unused audio patch after TIMED_OUT 3s.\n\nI also did some experiment, disabled both audio policy command thread 3s timeout and 5s TimeCheck (this one that monitors overall binder AudioPolicyService transaction time and fires SIGABRT in case of 5s timeout what causes audioservice + audioserver processes restart what also recovers from the issue by the way), and observed the issue (problem with radio playback stop/start) was not reproducible (while I saw that PermissionController sometimes hangs up even max. 5s, so it does not look for an infinite deadlock).\n\nAccording to above I think this patch is good to have anyway as it gives possibility to recover (radio playback can be restarted) as it prevents from audio patch leakage in case of unexpected 3s TIMED_OUT, while fixing reason(s) of 3s TIMED_OUT is separate topic.",
+      "parentUuid": "1eaf232f_076ee820",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
