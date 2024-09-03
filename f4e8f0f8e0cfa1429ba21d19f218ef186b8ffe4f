@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8272b7e_09498f8e",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-03T23:56:47Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "65140979_b7b8def9",
+      "range": {
+        "startLine": 159,
+        "startChar": 52,
+        "endLine": 173,
+        "endChar": 5
+      },
+      "revId": "f4e8f0f8e0cfa1429ba21d19f218ef186b8ffe4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87428f59_659c1938",
@@ -109,6 +133,30 @@
           ]
         }
       ],
+      "revId": "f4e8f0f8e0cfa1429ba21d19f218ef186b8ffe4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2656ee2_e7bdf854",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-03T23:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87428f59_659c1938",
+      "range": {
+        "startLine": 175,
+        "startChar": 29,
+        "endLine": 191,
+        "endChar": 0
+      },
       "revId": "f4e8f0f8e0cfa1429ba21d19f218ef186b8ffe4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

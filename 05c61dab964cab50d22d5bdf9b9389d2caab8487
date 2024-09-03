@@ -119,6 +119,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72b5005c_ffcd567f",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-03T23:56:47Z",
+      "side": 1,
+      "message": "I see. Done",
+      "parentUuid": "21e21673_632a5952",
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f81ad1a_cce208c5",
