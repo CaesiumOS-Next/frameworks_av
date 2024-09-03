@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "555feef3_0aa4de9a",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 53
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-03T22:57:57Z",
+      "side": 1,
+      "message": "did you mean `value !\u003d 0 \u0026\u0026`\n\nPerhaps rename to `IsPowerOfTwoStrict` or rename the other function `IsPowerOfTwoOrZero`",
+      "revId": "e554ae0eaa2bece65d1bdc6633c2e7529d34cf72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560623b8_78fe0248",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 53
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-03T22:57:57Z",
+      "side": 1,
+      "message": "this is something that doesn\u0027t have to be regex",
+      "range": {
+        "startLine": 596,
+        "startChar": 0,
+        "endLine": 599,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b177ed2f_65eae899",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 598,
+                "startChar": 0,
+                "endLine": 600,
+                "endChar": 0
+              },
+              "replacement": "        if (key \u003d\u003d \"performance-point-none\" \u0026\u0026 ret.size() \u003d\u003d 0) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e554ae0eaa2bece65d1bdc6633c2e7529d34cf72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
