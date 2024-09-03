@@ -103,6 +103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21e21673_632a5952",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-03T23:06:13Z",
+      "side": 1,
+      "message": "I meant something like this:\n\n```\nint tmp;\nstd::optional\u003cint\u003e complexity \u003d std::nullopt;\nif (format-\u003efindInt32(KEY_COMPLEXITY, \u0026tmp)) {\n    complexity \u003d tmp;\n}\n```\n\nI feel Opt postfix does not improve readability here.",
+      "parentUuid": "af30c5b3_3eb7246a",
+      "revId": "05c61dab964cab50d22d5bdf9b9389d2caab8487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f81ad1a_cce208c5",
         "filename": "media/libmedia/include/media/CodecCapabilities.h",
         "patchSetId": 50
