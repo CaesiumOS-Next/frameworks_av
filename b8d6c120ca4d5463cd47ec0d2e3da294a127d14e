@@ -141,6 +141,30 @@
       },
       "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a379c353_bd159717",
+        "filename": "media/aconfig/stagefright_recorder_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-03T16:31:51Z",
+      "side": 1,
+      "message": "This CL together with aosp/3235726 are doing this similar to aosp/2745223.\n\nThe question I had was about the package name itself. \ncom.android.media.editing.flags is currently used by a *.aconfig file that is in frameworks/base/media/java folder and we need a flag in native code.\n\nIf com.android.media.stagefright.flags is fine for the current change, then we can continue with the review of the two CLs. If com.android.media.editing.flags is preferred to be used for the new flag, then should we move the current *.aconfig file from java folder to media/aconfig like other flags?",
+      "parentUuid": "d904f554_91b0df57",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 45
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
