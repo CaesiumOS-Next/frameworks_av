@@ -34,6 +34,24 @@
       "parentUuid": "04996637_72516c2c",
       "revId": "cc57edcf17da976cf2a114b91c5f6ff74da09bd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d78cc2_873250ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2051456
+      },
+      "writtenOn": "2024-09-03T13:44:53Z",
+      "side": 1,
+      "message": "Validated on a device with AIDL enabled.",
+      "parentUuid": "027a04e3_609a70b1",
+      "revId": "cc57edcf17da976cf2a114b91c5f6ff74da09bd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
