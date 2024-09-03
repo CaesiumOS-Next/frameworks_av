@@ -34,6 +34,24 @@
       "parentUuid": "c7f85d63_0618c4be",
       "revId": "c4585475f54740cd025d84cb258ca29a7a71ff18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fba7a2a1_182c1113",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-09-03T21:36:08Z",
+      "side": 1,
+      "message": "`mHandleOutputBufferAsyncDone` is also read in `handleOutputBufferAsync()`.  I\u0027m guessing the current logic makes sure we\u0027ve always called `extractInternalUsingBlockModel()` before `handleOutputBufferAsync()`.  But in the future some bug could break that assumption.  Tracking down that bug would be a lot easier if the behavior was always consistent, instead of randomly changing due to an uninitialized value sometimes acting differently.\n\nThe idea is to future-proof the code and not need to go through some big analysis to assure the variable is always initialized before use.",
+      "parentUuid": "f1e530b3_58cf6793",
+      "revId": "c4585475f54740cd025d84cb258ca29a7a71ff18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
