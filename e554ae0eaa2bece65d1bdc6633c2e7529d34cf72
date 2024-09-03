@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08800ebb_c620d7b1",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 53
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-03T23:56:39Z",
+      "side": 1,
+      "message": "Thanks for catching this. Done",
+      "parentUuid": "555feef3_0aa4de9a",
+      "revId": "e554ae0eaa2bece65d1bdc6633c2e7529d34cf72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "560623b8_78fe0248",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "e554ae0eaa2bece65d1bdc6633c2e7529d34cf72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b3b7f16_8c2bcb8b",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 53
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-03T23:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "560623b8_78fe0248",
+      "range": {
+        "startLine": 596,
+        "startChar": 0,
+        "endLine": 599,
+        "endChar": 44
+      },
       "revId": "e554ae0eaa2bece65d1bdc6633c2e7529d34cf72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
