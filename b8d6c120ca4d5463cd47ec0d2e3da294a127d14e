@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eabf1dd_b9245b2c",
+        "filename": "media/aconfig/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-03T14:11:21Z",
+      "side": 1,
+      "message": "being discussed in https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3235822/comment/34dadf66_f8695f56/",
+      "parentUuid": "78aa9665_c8b21fc8",
+      "range": {
+        "startLine": 56,
+        "startChar": 25,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34dadf66_f8695f56",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "There is already package named as \"com.android.media.editing.flags\" so getting build error for it.\ncs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/flags/editing.aconfig",
       "parentUuid": "34dadf66_f8695f56",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 45
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254c3871_ffe5bd29",
+        "filename": "media/aconfig/stagefright_recorder_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-03T14:11:21Z",
+      "side": 1,
+      "message": "Andrew,\nIs the package name ok \"com.android.media.stagefright.flags\" or should we explore moving https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/flags/editing.aconfig to media/aconfig folder and then add this flag in that file?",
+      "parentUuid": "bc33fa0f_9eac6315",
       "range": {
         "startLine": 1,
         "startChar": 10,
