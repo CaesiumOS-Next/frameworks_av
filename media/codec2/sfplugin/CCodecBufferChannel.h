@@ -381,6 +381,7 @@ private:
     };
     Mutexed<OutputSurface> mOutputSurface;
     int mRenderingDepth;
+    int mInputSmoothnessFactor;
 
     struct BlockPools {
         C2Allocator::id_t inputAllocatorId;

@@ -184,16 +184,21 @@ CCodecBufferChannel::CCodecBufferChannel(
       mIsSurfaceToDisplay(false),
       mHasPresentFenceTimes(false),
       mRenderingDepth(3u),
+      mInputSmoothnessFactor(kSmoothnessFactor),
       mMetaMode(MODE_NONE),
       mInputMetEos(false),
       mSendEncryptedInfoBuffer(false) {
+#ifndef __ANDROID_APEX__
+    mInputSmoothnessFactor = android::base::GetUintProperty(
+        "media.c2.input.smoothness.factor", kSmoothnessFactor);
+#endif
     {
         Mutexed<Input>::Locked input(mInput);
         input->buffers.reset(new DummyInputBuffers(""));
         input->extraBuffers.flush();
         input->inputDelay = 0u;
         input->pipelineDelay = 0u;
-        input->numSlots = kSmoothnessFactor;
+        input->numSlots = mInputSmoothnessFactor;
         input->numExtraSlots = 0u;
         input->lastFlushIndex = 0u;
     }
@@ -1578,7 +1583,7 @@ status_t CCodecBufferChannel::start(
     uint32_t pipelineDelayValue = pipelineDelay ? pipelineDelay.value : 0;
     uint32_t outputDelayValue = outputDelay ? outputDelay.value : 0;
 
-    size_t numInputSlots = inputDelayValue + pipelineDelayValue + kSmoothnessFactor;
+    size_t numInputSlots = inputDelayValue + pipelineDelayValue + mInputSmoothnessFactor;
     size_t numOutputSlots = outputDelayValue + kSmoothnessFactor;
 
     // TODO: get this from input format
@@ -2395,7 +2400,7 @@ bool CCodecBufferChannel::handleWork(
         size_t newNumSlots =
             newInputDelay.value_or(input->inputDelay) +
             newPipelineDelay.value_or(input->pipelineDelay) +
-            kSmoothnessFactor;
+            mInputSmoothnessFactor;
         input->inputDelay = newInputDelay.value_or(input->inputDelay);
         if (input->buffers->isArrayMode()) {
             if (input->numSlots >= newNumSlots) {
