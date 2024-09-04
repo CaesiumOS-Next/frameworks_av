@@ -1,0 +1,99 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "541a325a_40d793fd",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-04T19:57:17Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s right that all codecs share the same max supported instances",
+      "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbef6622_4773c55e",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-04T19:57:17Z",
+      "side": 1,
+      "message": "maybe we could inject parsing Capabilities into CodecCapabilities in the destructor of CapabilitiesWriter. (i.e. inject std::shared_ptr\u003cCodecCapabilities\u003e into CapabilitiesWriter \u0026 init() at destructor).",
+      "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b27febef_e4688d87",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-04T19:57:17Z",
+      "side": 1,
+      "message": "Build/CreateCodecCapabilities?",
+      "range": {
+        "startLine": 329,
+        "startChar": 57,
+        "endLine": 329,
+        "endChar": 77
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8eb3720c_47f2f140",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/MediaCodecInfo.cpp",
+              "range": {
+                "startLine": 214,
+                "startChar": 0,
+                "endLine": 215,
+                "endChar": 0
+              },
+              "replacement": "                    \u003d MediaCodecInfoWriter::CreateCodecCapabilities(\n"
+            },
+            {
+              "path": "media/libmedia/MediaCodecInfo.cpp",
+              "range": {
+                "startLine": 325,
+                "startChar": 0,
+                "endLine": 326,
+                "endChar": 0
+              },
+              "replacement": "                CreateCodecCapabilities(mediaType, caps, mInfo-\u003eisEncoder(), maxSupportedInstances));\n"
+            },
+            {
+              "path": "media/libmedia/MediaCodecInfo.cpp",
+              "range": {
+                "startLine": 329,
+                "startChar": 0,
+                "endLine": 330,
+                "endChar": 0
+              },
+              "replacement": "std::shared_ptr\u003cCodecCapabilities\u003e MediaCodecInfoWriter::CreateCodecCapabilities(AString mediaType,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
