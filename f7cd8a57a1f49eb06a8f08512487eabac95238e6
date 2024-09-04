@@ -40,6 +40,30 @@
       ],
       "revId": "f7cd8a57a1f49eb06a8f08512487eabac95238e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c716c471_555ddf59",
+        "filename": "media/codec2/sfplugin/Codec2Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-04T20:48:57Z",
+      "side": 1,
+      "message": "as chatted offline we might want to keep the conversion inside codec fwk at this time.",
+      "parentUuid": "9c794ed0_edefe4c1",
+      "range": {
+        "startLine": 1220,
+        "startChar": 29,
+        "endLine": 1220,
+        "endChar": 41
+      },
+      "revId": "f7cd8a57a1f49eb06a8f08512487eabac95238e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
