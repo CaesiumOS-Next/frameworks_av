@@ -189,6 +189,30 @@
       },
       "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f11c425_b6c19016",
+        "filename": "media/aconfig/stagefright_recorder_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-09-04T09:28:15Z",
+      "side": 1,
+      "message": "I agree it makes sense to put all the editing flags in one place, and choose a place that is usable by both Java and C++ code. So it sounds like that means moving the existing config to somewhere that is usable from C++?",
+      "parentUuid": "8e9c6342_9f72b15f",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 45
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
