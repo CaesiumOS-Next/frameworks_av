@@ -165,6 +165,30 @@
       },
       "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9c6342_9f72b15f",
+        "filename": "media/aconfig/stagefright_recorder_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-09-04T08:03:34Z",
+      "side": 1,
+      "message": "Does com.android.media.stagefright.flags existing already? I couldn\u0027t find a reference to it.\n\nI would probably increase the scope of com.android.media.editing.flags as I think you\u0027re suggesting (i.e., move the aconfig file to media/aconfig and use it for both Java and native), simply because it seems preferable to have one package covering all editing-related APIs. @ibaker@google.com Does this make sense? I wanted to get another opinion on whether it matters and how to approach it. Thanks.",
+      "parentUuid": "a379c353_bd159717",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 45
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
