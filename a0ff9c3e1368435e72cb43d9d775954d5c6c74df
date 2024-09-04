@@ -16,6 +16,24 @@
       "message": "file not required, structure is provided with already filled list of strategy in AIDL. I just changed legacy because Identifier was required, this is the reason why I am wondering if seahawk is builing but also running",
       "revId": "a0ff9c3e1368435e72cb43d9d775954d5c6c74df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4760bf67_7dd50434",
+        "filename": "services/audiopolicy/engineconfigurable/tools/capBuildStrategiesStructureFile.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-04T18:48:09Z",
+      "side": 1,
+      "message": "Thanks for clarifying!",
+      "parentUuid": "370cbce5_8717b2c1",
+      "revId": "a0ff9c3e1368435e72cb43d9d775954d5c6c74df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
