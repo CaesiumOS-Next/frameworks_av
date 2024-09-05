@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ceff6b0_c09268dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-09-05T22:31:24Z",
+      "side": 1,
+      "message": "Do we need a Flag field?",
+      "revId": "35dfca495d9a193c76155e4d5615daf8c6b1171d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
