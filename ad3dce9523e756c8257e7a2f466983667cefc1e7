@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d4b190_e73d419f",
+        "filename": "services/audiopolicy/engineconfigurable/data/Android.bp",
+        "patchSetId": 52
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-09-05T08:15:33Z",
+      "side": 1,
+      "message": "fixed issue reported by Oscar on user build",
+      "revId": "ad3dce9523e756c8257e7a2f466983667cefc1e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
