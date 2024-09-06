@@ -1218,4 +1218,49 @@ TEST_F(VideoRenderQualityTrackerTest, capturesMaximumContentDroppedAfterPause) {
     EXPECT_EQ(h.getMetrics().maxContentDroppedAfterPauseMs, 12 * 20);
 }
 
+TEST_F(VideoRenderQualityTrackerTest, capturesStagnantContentTime) {
+    Configuration c;
+    c.enabled = true;
+    VideoRenderQualityTracker tracker(c);
+    tracker.onFrameReleased(100);
+    tracker.onFrameRendered(100, 100);
+    tracker.onFrameReleased(100);
+    tracker.onFrameRendered(100, 120);
+    tracker.onFrameReleased(100);
+    tracker.onFrameRendered(100, 140);
+    tracker.onFrameReleased(100);
+    tracker.onFrameRendered(100, 160);
+    EXPECT_EQ(tracker.getMetrics().frameStagnantCount, 3);
+}
+
+TEST_F(VideoRenderQualityTrackerTest, capturesContentTimeJumpingBackwards) {
+    Configuration c;
+    c.enabled = true;
+    VideoRenderQualityTracker tracker(c);
+    tracker.onFrameReleased(100);
+    tracker.onFrameRendered(100, 100);
+    tracker.onFrameReleased(99);
+    tracker.onFrameRendered(99, 120);
+    tracker.onFrameReleased(88);
+    tracker.onFrameRendered(88, 140);
+    tracker.onFrameReleased(77);
+    tracker.onFrameRendered(77, 160);
+    EXPECT_EQ(tracker.getMetrics().frameJumpBackwardCount, 3);
+}
+
+TEST_F(VideoRenderQualityTrackerTest, capturesContentTimeJumpingBackwards) {
+    Configuration c;
+    c.enabled = true;
+    VideoRenderQualityTracker tracker(c);
+    tracker.onFrameReleased(100);
+    tracker.onFrameRendered(100, 100);
+    tracker.onFrameReleased(200);
+    tracker.onFrameRendered(200, 120);
+    tracker.onFrameReleased(300);
+    tracker.onFrameRendered(300, 140);
+    tracker.onFrameReleased(400);
+    tracker.onFrameRendered(400, 160);
+    EXPECT_EQ(tracker.getMetrics().frameJumpForwardCount, 3);
+}
+
 } // android
