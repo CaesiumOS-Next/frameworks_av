@@ -213,6 +213,30 @@
       },
       "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a6aa32_520fc921",
+        "filename": "media/aconfig/stagefright_recorder_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1237180
+      },
+      "writtenOn": "2024-09-06T12:51:49Z",
+      "side": 1,
+      "message": "I have moved this change to frameworks/base where mediaediting \"add_media_metrics_editing\" flag was added. \nhttps://android-review.googlesource.com/c/platform/frameworks/base/+/3256507\n\nWe don\u0027t need to change folders to use the flags from Java and C++ both but we need to define these flags as flag_name-cc and  flag_name-java. I have kept both flag in java folder currently because other flags are also doing the same like https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/AconfigFlags.bp;l\u003d344 which is defined \"frameworks/base/core/java/android/companion/virtual/flags/flags.aconfig\".\n\n@ibaker@google.com Let me if this is Ok otherwise I will create a new common folder in frameworks/base and move both flags there.",
+      "parentUuid": "9f11c425_b6c19016",
+      "range": {
+        "startLine": 1,
+        "startChar": 10,
+        "endLine": 1,
+        "endChar": 45
+      },
+      "revId": "b8d6c120ca4d5463cd47ec0d2e3da294a127d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
