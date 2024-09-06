@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dbaf485_dbe06bd0",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-06T14:06:15Z",
+      "side": 1,
+      "message": "this must have higher priority than the special echo reference device.\nYou also call getDeviceForInputSource() by doing that.",
+      "range": {
+        "startLine": 871,
+        "startChar": 0,
+        "endLine": 871,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f12844b7_bac59894",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 840,
+                "startChar": 0,
+                "endLine": 840,
+                "endChar": 0
+              },
+              "replacement": "\n    device \u003d policyMixes.getDeviceAndMixForInputSource(attr,\n                                                       availableInputDevices,\n                                                       uid,\n                                                       session,\n                                                       mix);\n    if (device !\u003d nullptr) {\n        return device;\n    }\n"
+            },
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 870,
+                "startChar": 0,
+                "endLine": 879,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "92a994646046d2f1bc580cc10fdddca2c492cf46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
