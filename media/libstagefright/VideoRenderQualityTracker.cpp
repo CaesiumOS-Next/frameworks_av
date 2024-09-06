@@ -433,8 +433,14 @@ bool VideoRenderQualityTracker::resetIfDiscontinuity(int64_t contentTimeUs,
         resetForDiscontinuity();
         return true;
     }
+    if (contentTimeUs == mLastContentTimeUs) {
+        ALOGI("Video playback content time did not advance forward (%d)",
+              int(contentTimeUs / 1000));
+        resetForDiscontinuity();
+        return true;
+    }
     if (contentTimeUs < mLastContentTimeUs) {
-        ALOGI("Video playback jumped %d ms backwards in content time (%d -> %d)",
+        ALOGI("Video playback content time jumped %d ms backwards (%d -> %d)",
               int((mLastContentTimeUs - contentTimeUs) / 1000), int(mLastContentTimeUs / 1000),
               int(contentTimeUs / 1000));
         resetForDiscontinuity();
