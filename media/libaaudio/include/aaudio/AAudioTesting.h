@@ -26,6 +26,8 @@
 extern "C" {
 #endif
 
+yeah
+
 /************************************************************************************
  * The definitions below are only for testing. Do not use them in an application.
  * They may change or be removed at any time.
