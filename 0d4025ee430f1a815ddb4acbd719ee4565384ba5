@@ -34,6 +34,52 @@
       "parentUuid": "79eaf898_066cb682",
       "revId": "0d4025ee430f1a815ddb4acbd719ee4565384ba5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b323d46d_57dbf17a",
+        "filename": "media/libmediaplayerservice/StagefrightRecorder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2128,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-09-07T06:26:13Z",
+      "side": 1,
+      "message": "This looks okay but why does the diffbase not already have `bLayers \u003d 0` (not behind a flag check)? Is this not on top of the previous change that turned off B frames?",
+      "range": {
+        "startLine": 2123,
+        "startChar": 0,
+        "endLine": 2128,
+        "endChar": 9
+      },
+      "revId": "0d4025ee430f1a815ddb4acbd719ee4565384ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38267e1_67c8abdb",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 4976,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-09-07T06:26:13Z",
+      "side": 1,
+      "message": "This is the modified behavior for using `mTimeScale` referred to in the commit message, right? Is there a tracking bug for why we are switching to `mTimeScale` that we could add to this CL?",
+      "range": {
+        "startLine": 4974,
+        "startChar": 0,
+        "endLine": 4976,
+        "endChar": 83
+      },
+      "revId": "0d4025ee430f1a815ddb4acbd719ee4565384ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
