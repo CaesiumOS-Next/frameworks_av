@@ -52,6 +52,23 @@
       "parentUuid": "f1e530b3_58cf6793",
       "revId": "c4585475f54740cd025d84cb258ca29a7a71ff18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3930e733_9cecec83",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1097570
+      },
+      "writtenOn": "2024-09-07T15:54:58Z",
+      "side": 1,
+      "message": "Missing NULL check, please check b/365086597 (Broadcom) and b/365002357 (Realtek and their proposed CL I2e8f351892457028ca6ae4e5035ff634cd560fe6)",
+      "revId": "c4585475f54740cd025d84cb258ca29a7a71ff18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
