@@ -175,8 +175,13 @@ void AudioStreamOut::presentationComplete() {
 
 ssize_t AudioStreamOut::write(const void *buffer, size_t numBytes)
 {
-    size_t bytesWritten;
-    const status_t result = stream->write(buffer, numBytes, &bytesWritten);
+    auto offloadRetryCount = kOffloadWriteFairRetryCount;
+    do {
+        size_t bytesWritten = 0;
+        status_t result = stream->write(buffer, numBytes, &bytesWritten);
+    } while (result != OK &&
+             (flags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) != 0 & (--offloadRetryCount));
+
     if (result == OK && bytesWritten > 0 && mHalFrameSize > 0) {
         mFramesWritten += bytesWritten / mHalFrameSize;
     }
