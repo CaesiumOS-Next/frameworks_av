@@ -97,6 +97,18 @@ protected:
     int mRateMultiplier = 1;
     bool mHalFormatHasProportionalFrames = false;
     size_t mHalFrameSize = 0;
+
+    /**
+     * As the offload playback deals with compress data,
+     * whenever there is a write failure, retry the write
+     * until the fair count expries because loosing the
+     * compress data may not be the best experience.
+     * This retry mechanism is restricted to compress and
+     * non-blocking playback.
+     */
+    constexpr static int kOffloadWriteFairRetryCount = 2;
+    constexpr static uint32_t kOffloadNonBlockingFlags =
+            (AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD | AUDIO_OUTPUT_FLAG_NON_BLOCKING);
 };
 
 } // namespace android
