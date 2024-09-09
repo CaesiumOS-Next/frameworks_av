@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "887fc034_9451d2df",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-09T22:08:21Z",
+      "side": 1,
+      "message": "It is a global setting of MediaCodecList. The CodecCapabilities class have a logic to calculate it\u0027s own maxSupportedInstances using this parameter passed from MediaCodecList.",
+      "parentUuid": "541a325a_40d793fd",
+      "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbef6622_4773c55e",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-04T19:57:17Z",
       "side": 1,
       "message": "maybe we could inject parsing Capabilities into CodecCapabilities in the destructor of CapabilitiesWriter. (i.e. inject std::shared_ptr\u003cCodecCapabilities\u003e into CapabilitiesWriter \u0026 init() at destructor).",
+      "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d08624_8c0c0446",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-09T22:08:21Z",
+      "side": 1,
+      "message": "Injected building CodecCapabilities into the destructor of CapabilitiesWriter.",
+      "parentUuid": "fbef6622_4773c55e",
       "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +128,30 @@
           ]
         }
       ],
+      "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a32368d_62d5be83",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-09-09T22:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27febef_e4688d87",
+      "range": {
+        "startLine": 329,
+        "startChar": 57,
+        "endLine": 329,
+        "endChar": 77
+      },
       "revId": "ebc7691ad932f490f35febe3feecbbeec1319edd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
