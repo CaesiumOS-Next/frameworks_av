@@ -33,24 +33,25 @@
 #include "SampleTable.h"
 #include "ItemTable.h"
 
-#include <media/esds/ESDS.h>
 #include <ID3.h>
-#include <media/stagefright/DataSourceBase.h>
 #include <media/ExtractorUtils.h>
+#include <media/esds/ESDS.h>
+#include <media/stagefright/DataSourceBase.h>
+#include <media/stagefright/MediaBufferGroup.h>
+#include <media/stagefright/MediaDefs.h>
+#include <media/stagefright/MetaDataBase.h>
+#include <media/stagefright/MetaDataUtils.h>
 #include <media/stagefright/foundation/ABitReader.h>
 #include <media/stagefright/foundation/ABuffer.h>
 #include <media/stagefright/foundation/ADebug.h>
 #include <media/stagefright/foundation/AMessage.h>
-#include <media/stagefright/foundation/AudioPresentationInfo.h>
 #include <media/stagefright/foundation/AUtils.h>
+#include <media/stagefright/foundation/AudioPresentationInfo.h>
 #include <media/stagefright/foundation/ByteUtils.h>
 #include <media/stagefright/foundation/ColorUtils.h>
+#include <media/stagefright/foundation/OpusHeader.h>
 #include <media/stagefright/foundation/avc_utils.h>
 #include <media/stagefright/foundation/hexdump.h>
-#include <media/stagefright/foundation/OpusHeader.h>
-#include <media/stagefright/MediaBufferGroup.h>
-#include <media/stagefright/MediaDefs.h>
-#include <media/stagefright/MetaDataBase.h>
 #include <utils/String8.h>
 
 #include <byteswap.h>
@@ -929,7 +930,6 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
     }
 
     PathAdder autoAdder(&mPath, chunk_type);
-
     // (data_offset - *offset) is either 8 or 16
     off64_t chunk_data_size = chunk_size - (data_offset - *offset);
     if (chunk_data_size < 0) {
@@ -1381,8 +1381,7 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
             break;
         }
 
-        case FOURCC("tenc"):
-        {
+        case FOURCC("tenc"): {
             *offset += chunk_size;
 
             if (chunk_size < 32) {
@@ -2597,9 +2596,30 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
             break;
         }
 
-        case FOURCC("vpcC"):
-        case FOURCC("av1C"):
-        {
+        case FOURCC("vpcC"): {
+            auto buffer = heapbuffer<uint8_t>(chunk_data_size);
+
+            if (buffer.get() == NULL) {
+                ALOGE("b/28471206");
+                return NO_MEMORY;
+            }
+
+            if (mDataSource->readAt(data_offset, buffer.get(), chunk_data_size) < chunk_data_size) {
+                return ERROR_IO;
+            }
+
+            if (mLastTrack == NULL) return ERROR_MALFORMED;
+
+            if (!MakeVP9CodecPrivateFromCsd(mLastTrack->meta, buffer.get())) {
+                ALOGE("Failed to create VP9 CodecPrivate from vpcC.");
+                return ERROR_MALFORMED;
+            }
+
+            *offset += chunk_size;
+            break;
+        }
+
+        case FOURCC("av1C"): {
             auto buffer = heapbuffer<uint8_t>(chunk_data_size);
 
             if (buffer.get() == NULL) {

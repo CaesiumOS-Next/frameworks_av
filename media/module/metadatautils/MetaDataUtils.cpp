@@ -252,6 +252,56 @@ bool MakeVP9CodecSpecificData(AMediaFormat* meta, const uint8_t* data, size_t si
     return true;
 }
 
+bool MakeVP9CodecPrivateFromCsd(AMediaFormat* meta, const uint8_t* csdData) {
+    if (!meta || !csdData) {  // Check for valid format and csd data
+        return false;
+    }
+
+    // Define the required VersionAndFlags value
+    int32_t versionAndFlag = 1 << 24;  // Equivalent to 0x01000000 in hexadecimal
+
+    // Extract the first 4 bytes (VersionAndFlags) and check if they match the required value
+    int32_t versionAndFlagsData =
+            (csdData[0] << 24) | (csdData[1] << 16) | (csdData[2] << 8) | csdData[3];
+    if (versionAndFlagsData != versionAndFlag) {
+        return false;  // Return false if VersionAndFlags do not match
+    }
+
+    // Create VP9 Codec Feature Metadata (CodecPrivate) that can be parsed
+    // https://www.webmproject.org/docs/container/#vp9-codec-feature-metadata-codecprivate
+    size_t csdSize = 12;  // Fixed size for profile, level, bit depth, etc.
+    sp<ABuffer> codecPrivate = sp<ABuffer>::make(csdSize);
+    uint8_t* codecPrivateData = codecPrivate->data();
+
+    const uint8_t* vpcCData = csdData + 4;  // Skip the first 4 bytes (VersionAndFlags)
+
+    // Construct CodecPrivate in WebM format (ID | Length | Data)
+    // Profile
+    *codecPrivateData++ = 0x01;         // ID for Profile
+    *codecPrivateData++ = 0x01;         // Length for Profile
+    *codecPrivateData++ = vpcCData[0];  // Profile value
+
+    // Level
+    *codecPrivateData++ = 0x02;         // ID for Level
+    *codecPrivateData++ = 0x01;         // Length for Level
+    *codecPrivateData++ = vpcCData[1];  // Level value
+
+    // Bit Depth
+    *codecPrivateData++ = 0x03;                       // ID for Bit Depth
+    *codecPrivateData++ = 0x01;                       // Length for Bit Depth
+    *codecPrivateData++ = (vpcCData[2] >> 4) & 0x0F;  // Bit Depth (4 bits)
+
+    // Chroma Subsampling
+    *codecPrivateData++ = 0x04;                       // ID for Chroma Subsampling
+    *codecPrivateData++ = 0x01;                       // Length for Chroma Subsampling
+    *codecPrivateData++ = (vpcCData[2] >> 1) & 0x07;  // Chroma Subsampling (3 bits)
+
+    // Set CSD in the meta format
+    AMediaFormat_setBuffer(meta, AMEDIAFORMAT_KEY_CSD_0, codecPrivate->data(), csdSize);
+
+    return true;
+}
+
 bool MakeAACCodecSpecificData(MetaDataBase &meta, const uint8_t *data, size_t size) {
     if (data == nullptr || size < 7) {
         return false;
