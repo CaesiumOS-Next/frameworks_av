@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ef401ed_72d8e69b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-09T23:54:26Z",
+      "side": 1,
+      "message": "Please add a `Bug:` reference, and something like `Test: m`",
+      "revId": "bbbb9bee3c72be182c61ff4a262e8e206d9ab276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9dd44e8_df574645",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-09T23:54:26Z",
+      "side": 1,
+      "message": "Maybe we should add a check for `AUDIO_OUTPUT_FLAG_NON_BLOCKING` because if a blocking write takes the full amount of time and then fails, then retrying it will introduce lagging, which will get worse and worse if these writes are failing often.",
+      "range": {
+        "startLine": 186,
+        "startChar": 22,
+        "endLine": 186,
+        "endChar": 56
+      },
+      "revId": "bbbb9bee3c72be182c61ff4a262e8e206d9ab276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a3587f_0a2e301a",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-09T23:54:26Z",
+      "side": 1,
+      "message": "Can be `constexpr`",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 9
+      },
+      "revId": "bbbb9bee3c72be182c61ff4a262e8e206d9ab276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
