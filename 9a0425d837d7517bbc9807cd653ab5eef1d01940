@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d05b7c5_a6d78f36",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-09-10T03:39:21Z",
+      "side": 1,
+      "message": "Mikhail, there are couple of points to adding a check specific to DEEP_BUFFER.\n\n1) It can fix deep buffer problem, but we may run into other other flag combination.\n\nThat\u0027s what exactly https://android-review.googlesource.com/c/platform/frameworks/av/+/3206293 is doing (super set of this change).\n\n2) Similarly, there could be 2 cases,\na)  client (AudioTrack) specifically requesting for DEEP_BUFFER.\n   -\u003e My thought here is, if the client is specifically requesting for deep_buffer, it should get deep buffer output, again https://android-review.googlesource.com/c/platform/frameworks/av/+/3206293 will be helpful.\n   \nb) APM based on audio.media.deep_buffer adding DEEP_BUFFER the flag, \n   I believe, if the client is calling with FLAGS_NONE, in that case, APM should provide DIRECT, if available, otherwise fallback to regular deep/primary output.\n   Just that audio.media_deep_buffer is set APM should not provide deep buffer.\n   \n   This is happening because, as soon as we enter getOutputForAttr, DEEP_BUFFER flag is added, then directOutput is tried to open, and lets say if we add either your change \n   \n   3260382 or my change to reject profiles 3206293.\n   \n   It means, even when client called with flags NONE, and there could have been a possibility of direct output, still we ended up with DEEP_BUFFER, which we don\u0027t want.\n   \n   that\u0027s why I want to have https://android-review.googlesource.com/c/platform/frameworks/av/+/3206279 .",
+      "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
