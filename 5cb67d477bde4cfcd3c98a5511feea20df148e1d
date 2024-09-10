@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a0d2b1_39992ba4",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-10T23:26:07Z",
+      "side": 1,
+      "message": "It\u0027s non-null as we don\u0027t have ways to unset input surface.",
+      "parentUuid": "c35930c8_33e1b8b1",
+      "range": {
+        "startLine": 229,
+        "startChar": 52,
+        "endLine": 229,
+        "endChar": 59
+      },
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f6caab7_2dbd2c1a",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-09-10T22:34:29Z",
       "side": 1,
       "message": "Do we need a verbose log here?",
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d64e8080_992580e4",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-10T23:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f6caab7_2dbd2c1a",
       "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "417eeb1f_9f349553",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-10T23:26:07Z",
+      "side": 1,
+      "message": "It does go below 0. Added comment to explain.",
+      "parentUuid": "e84bc0bb_5224b6c6",
+      "range": {
+        "startLine": 2653,
+        "startChar": 0,
+        "endLine": 2653,
+        "endChar": 53
+      },
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04335c69_8e062690",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-09-10T22:34:29Z",
       "side": 1,
       "message": "Could we pick clearer name? (or some comments.)",
+      "range": {
+        "startLine": 397,
+        "startChar": 16,
+        "endLine": 397,
+        "endChar": 36
+      },
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e9e0de_263b1849",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-10T23:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04335c69_8e062690",
       "range": {
         "startLine": 397,
         "startChar": 16,
