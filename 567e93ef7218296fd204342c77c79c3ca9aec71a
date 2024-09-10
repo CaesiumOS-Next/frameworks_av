@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4bb149f_f2c77742",
+        "filename": "media/codec2/hal/aidl/ComponentStore.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-09-10T23:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46282f60_d3af766d",
+      "range": {
+        "startLine": 156,
+        "startChar": 40,
+        "endLine": 156,
+        "endChar": 42
+      },
+      "revId": "567e93ef7218296fd204342c77c79c3ca9aec71a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40c60a3e_aa8bfbb2",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-09-10T23:13:34Z",
       "side": 1,
       "message": "does this need to be weak_ptr? since it shares the same lifecycle with mParamReflectors, I think we can just make it shared_ptr.",
+      "range": {
+        "startLine": 124,
+        "startChar": 9,
+        "endLine": 124,
+        "endChar": 17
+      },
+      "revId": "567e93ef7218296fd204342c77c79c3ca9aec71a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83f57e94_ed28c0c0",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/ComponentStore.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2024-09-10T23:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40c60a3e_aa8bfbb2",
       "range": {
         "startLine": 124,
         "startChar": 9,
