@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b18e0f4_9c21c55a",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1883619
+      },
+      "writtenOn": "2024-09-10T00:09:47Z",
+      "side": 1,
+      "message": "Agree, this issue comes when compress offload playback is synchronous/ blocking.\n\nso, shall I apply this for all asynchronous/non-blocking writes irrespective whether it is compress or not?",
+      "parentUuid": "f9dd44e8_df574645",
+      "range": {
+        "startLine": 186,
+        "startChar": 22,
+        "endLine": 186,
+        "endChar": 56
+      },
+      "revId": "bbbb9bee3c72be182c61ff4a262e8e206d9ab276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3a3587f_0a2e301a",
         "filename": "services/audioflinger/datapath/AudioStreamOut.h",
         "patchSetId": 7
