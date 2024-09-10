@@ -16,6 +16,24 @@
       "message": "Mikhail, there are couple of points to adding a check specific to DEEP_BUFFER.\n\n1) It can fix deep buffer problem, but we may run into other other flag combination.\n\nThat\u0027s what exactly https://android-review.googlesource.com/c/platform/frameworks/av/+/3206293 is doing (super set of this change).\n\n2) Similarly, there could be 2 cases,\na)  client (AudioTrack) specifically requesting for DEEP_BUFFER.\n   -\u003e My thought here is, if the client is specifically requesting for deep_buffer, it should get deep buffer output, again https://android-review.googlesource.com/c/platform/frameworks/av/+/3206293 will be helpful.\n   \nb) APM based on audio.media.deep_buffer adding DEEP_BUFFER the flag, \n   I believe, if the client is calling with FLAGS_NONE, in that case, APM should provide DIRECT, if available, otherwise fallback to regular deep/primary output.\n   Just that audio.media_deep_buffer is set APM should not provide deep buffer.\n   \n   This is happening because, as soon as we enter getOutputForAttr, DEEP_BUFFER flag is added, then directOutput is tried to open, and lets say if we add either your change \n   \n   3260382 or my change to reject profiles 3206293.\n   \n   It means, even when client called with flags NONE, and there could have been a possibility of direct output, still we ended up with DEEP_BUFFER, which we don\u0027t want.\n   \n   that\u0027s why I want to have https://android-review.googlesource.com/c/platform/frameworks/av/+/3206279 .",
       "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024f80d9_05e7df35",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-10T16:25:44Z",
+      "side": 1,
+      "message": "\u003e 1) It can fix deep buffer problem, but we may run into other other flag combination.\n\nThis fix is targeted for the deep buffer problem specifically. If we run into other problems we will update the logic and add new tests covering these scenarios.\n\n\u003e 2) Similarly, there could be 2 cases,\n\u003e a) client (AudioTrack) specifically requesting for DEEP_BUFFER.\n\u003e -\u003e My thought here is, if the client is specifically requesting for deep_buffer, \u003e it should get deep buffer output,\n\nIt will get it, please see lines `3457–3460` in `audiopolicymanager_tests.cpp` in this CL.\n\n\u003e b) APM based on audio.media.deep_buffer adding DEEP_BUFFER the flag,\n\u003e I believe, if the client is calling with FLAGS_NONE, in that case, APM should\n\u003e provide DIRECT, if available, otherwise fallback to regular deep/primary\n\u003e output.\n\nPlease consult the lines `3444–3450` in `audiopolicymanager_tests.cpp` in this CL. When the client uses a `NONE` flag, the outcomes are:\n\n - w/o `audio.deep_buffer.media` set, the client gets the primary output for SRs \u003c\u003d SAMPLE_RATE_HZ_MAX (192 kHz), this is an existing logic in `openDirectOutput`. If the SR is higher, and there is a direct output supporting this available, the client will be routed to it.\n \n - with `audio.deep_buffer.media` set, client always gets a deep buffer output. This property has a system-wide effect meaning that we want to save power on this system. It is important for AV scenarios because media players do not always specify that they want to use deep buffer.\n\n\u003e It means, even when client called with flags NONE, and there could have been a possibility of direct output, still we ended up with DEEP_BUFFER, which we don\u0027t want.\n\nWhat is your justification for the proposal that the system should prefer providing direct outputs to clients that did not specify flags, even when the `deep_buffer.media` property is set? I think, if you want to have this behavior in your platforms, you are of course free to do that in your modifications, especially considering that, as I understand it, the \"direct PCM\" is a QC-specific feature. The focus of this CL is to allow passing CTS tests on your platform with a GSI image.",
+      "parentUuid": "9d05b7c5_a6d78f36",
+      "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
