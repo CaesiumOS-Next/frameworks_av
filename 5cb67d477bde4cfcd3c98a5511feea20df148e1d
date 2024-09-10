@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35930c8_33e1b8b1",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-09-10T22:06:44Z",
+      "side": 1,
+      "message": "Can this surface be nullptr? if so mHasInputSurface may mislead",
+      "range": {
+        "startLine": 229,
+        "startChar": 52,
+        "endLine": 229,
+        "endChar": 59
+      },
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
