@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30666905_f27632d0",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-10T16:41:56Z",
+      "side": 1,
+      "message": "\u003e 2) Do we know if retrying will actually help to successfuly write, in next retries (DSP is already in bad state) ?\n\u003e 3) If due to some reason, DSP has not been able to consume the data then from HAL side onError callback should be sent.\n\nGood point, Jaideep! My point of view is that we should distinguish between \"recoverable\" and \"irrecoverable\" errors. At the HAL level, returning a non-OK status from a `burst` operation, while leaving the stream the current state means a \"recoverable\" error—the framework should retry. If the HAL stream goes into the `ERROR` state, which is terminal, it means that it has encountered an irrecoverable error, and the framework must re-open the stream. Same for the `onError` callback, because it also sends the HAL stream into the `ERROR` state.\n\nHowever, this logic has not yet been implemented in the framework.",
+      "parentUuid": "05298f4b_aaf742b7",
+      "range": {
+        "startLine": 186,
+        "startChar": 22,
+        "endLine": 186,
+        "endChar": 56
+      },
+      "revId": "bbbb9bee3c72be182c61ff4a262e8e206d9ab276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3a3587f_0a2e301a",
         "filename": "services/audioflinger/datapath/AudioStreamOut.h",
         "patchSetId": 7
