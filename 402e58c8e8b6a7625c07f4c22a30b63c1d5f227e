@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97fbee24_0f627a31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-09-10T23:27:51Z",
+      "side": 1,
+      "message": "Kuowei, thanks for creating the patch! Could you please explain why the change at MmapThread is needed? From the bug, it is said to resolve the timing issue when start and disconnect actions are executed simultaneously in audioflinger. However, AFAIK, the `Mmapthread::disconnect` is only used when destructor of MmapThreadHandle is called, which is from the aaudio service to close the stream. The close and start is operated from a command thread, which will not arrive at the same time.",
+      "revId": "402e58c8e8b6a7625c07f4c22a30b63c1d5f227e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ce399a_1b72d148",
+        "filename": "media/libaaudio/src/core/AudioStream.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-09-10T23:27:51Z",
+      "side": 1,
+      "message": "Maybe also call `setDisconnected` so that the stream state is correct.",
+      "range": {
+        "startLine": 476,
+        "startChar": 8,
+        "endLine": 476,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "baf77f4d_6959e922",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaaudio/src/core/AudioStream.cpp",
+              "range": {
+                "startLine": 476,
+                "startChar": 0,
+                "endLine": 476,
+                "endChar": 0
+              },
+              "replacement": "        setDisconnected();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "402e58c8e8b6a7625c07f4c22a30b63c1d5f227e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
