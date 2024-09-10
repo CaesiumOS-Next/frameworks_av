@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc948525_708efb6e",
+        "filename": "media/libmediaplayerservice/StagefrightRecorder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2128,
+      "author": {
+        "id": 1237180
+      },
+      "writtenOn": "2024-09-10T17:33:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b323d46d_57dbf17a",
+      "range": {
+        "startLine": 2123,
+        "startChar": 0,
+        "endLine": 2128,
+        "endChar": 9
+      },
+      "revId": "0d4025ee430f1a815ddb4acbd719ee4565384ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b38267e1_67c8abdb",
@@ -72,6 +96,30 @@
       "writtenOn": "2024-09-07T06:26:13Z",
       "side": 1,
       "message": "This is the modified behavior for using `mTimeScale` referred to in the commit message, right? Is there a tracking bug for why we are switching to `mTimeScale` that we could add to this CL?",
+      "range": {
+        "startLine": 4974,
+        "startChar": 0,
+        "endLine": 4976,
+        "endChar": 83
+      },
+      "revId": "0d4025ee430f1a815ddb4acbd719ee4565384ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94e4ca5_913195eb",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 4976,
+      "author": {
+        "id": 1237180
+      },
+      "writtenOn": "2024-09-10T17:33:22Z",
+      "side": 1,
+      "message": "This is the bug for fixing timescale issue b/288549440",
+      "parentUuid": "b38267e1_67c8abdb",
       "range": {
         "startLine": 4974,
         "startChar": 0,
