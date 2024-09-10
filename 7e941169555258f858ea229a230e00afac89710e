@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff10af22_381c7b40",
+        "filename": "media/libstagefright/writer_fuzzers/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-10T22:55:01Z",
+      "side": 1,
+      "message": "is this change necessary?",
+      "revId": "7e941169555258f858ea229a230e00afac89710e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
