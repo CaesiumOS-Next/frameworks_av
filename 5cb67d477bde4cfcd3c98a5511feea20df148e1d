@@ -22,6 +22,69 @@
       },
       "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f6caab7_2dbd2c1a",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-09-10T22:34:29Z",
+      "side": 1,
+      "message": "Do we need a verbose log here?",
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e84bc0bb_5224b6c6",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-09-10T22:34:29Z",
+      "side": 1,
+      "message": "I assume this does not go to minus.\nDo we need any logs for monitoring this?",
+      "range": {
+        "startLine": 2653,
+        "startChar": 0,
+        "endLine": 2653,
+        "endChar": 53
+      },
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04335c69_8e062690",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-09-10T22:34:29Z",
+      "side": 1,
+      "message": "Could we pick clearer name? (or some comments.)",
+      "range": {
+        "startLine": 397,
+        "startChar": 16,
+        "endLine": 397,
+        "endChar": 36
+      },
+      "revId": "5cb67d477bde4cfcd3c98a5511feea20df148e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
