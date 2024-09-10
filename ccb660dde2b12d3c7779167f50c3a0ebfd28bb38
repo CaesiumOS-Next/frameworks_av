@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c75436e7_c4ef7f5c",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2154,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-10T10:00:52Z",
+      "side": 1,
+      "message": "@Mikhail Naganov,\n\nDoes my explanation convince you ? Can you please confirm if we mark this comment as resolved ?",
+      "parentUuid": "3c83a25f_73a49623",
+      "range": {
+        "startLine": 2154,
+        "startChar": 24,
+        "endLine": 2154,
+        "endChar": 50
+      },
+      "revId": "ccb660dde2b12d3c7779167f50c3a0ebfd28bb38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d77b3f8_2199f6c3",
         "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
         "patchSetId": 5

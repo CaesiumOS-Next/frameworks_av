@@ -189,6 +189,30 @@
       },
       "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb5a6bd_33c4df23",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-10T10:00:52Z",
+      "side": 1,
+      "message": "@Mikhail Naganov,\n\nI mark this as unresolved because 2nd option is possible (please see previous comment): \"insert release command here directly to commands list on the first position\".\n\nLet\u0027s resolve this after conclusion what is better to do.\nWhat is your opinion ?",
+      "parentUuid": "6a85d0d0_9fd565a1",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 65
+      },
+      "revId": "cb537560f7e42ca127d7b7507b68151e6636f73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

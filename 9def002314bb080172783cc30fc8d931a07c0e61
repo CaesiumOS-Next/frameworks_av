@@ -124,6 +124,24 @@
       "parentUuid": "1eaf232f_076ee820",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d386df22_7dcfb146",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-10T10:00:52Z",
+      "side": 1,
+      "message": "@Eric Laurent, @Mikhail Naganov\n\nDo you have more doubts or questions ? Can we resolve this ?",
+      "parentUuid": "4072984e_9207db66",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
