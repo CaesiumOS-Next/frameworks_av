@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46282f60_d3af766d",
+        "filename": "media/codec2/hal/aidl/ComponentStore.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-10T23:13:34Z",
+      "side": 1,
+      "message": "nit: is",
+      "range": {
+        "startLine": 156,
+        "startChar": 40,
+        "endLine": 156,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2067feb5_2a146c79",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/ComponentStore.cpp",
+              "range": {
+                "startLine": 156,
+                "startChar": 0,
+                "endLine": 157,
+                "endChar": 0
+              },
+              "replacement": "    // MultiAccessUnit reflector helper is allocated once per store.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "567e93ef7218296fd204342c77c79c3ca9aec71a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c60a3e_aa8bfbb2",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/ComponentStore.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-10T23:13:34Z",
+      "side": 1,
+      "message": "does this need to be weak_ptr? since it shares the same lifecycle with mParamReflectors, I think we can just make it shared_ptr.",
+      "range": {
+        "startLine": 124,
+        "startChar": 9,
+        "endLine": 124,
+        "endChar": 17
+      },
+      "revId": "567e93ef7218296fd204342c77c79c3ca9aec71a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
