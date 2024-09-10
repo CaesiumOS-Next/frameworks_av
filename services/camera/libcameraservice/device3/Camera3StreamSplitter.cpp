@@ -463,6 +463,11 @@ status_t Camera3StreamSplitter::attachBufferToOutputs(ANativeWindowBuffer* anb,
         res = gbp->attachBuffer(&slot, gb);
         mMutex.lock();
         if (res != OK) {
+            if (gbp.get() == nullptr) {
+                //Output surface got likely removed by client.
+                res = OK;
+                continue;
+            }
             SP_LOGE("%s: Cannot attachBuffer from GraphicBufferProducer %p: %s (%d)",
                     __FUNCTION__, gbp.get(), strerror(-res), res);
             // TODO: might need to detach/cleanup the already attached buffers before return?
