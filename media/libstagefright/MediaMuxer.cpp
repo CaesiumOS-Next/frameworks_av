@@ -134,6 +134,14 @@ ssize_t MediaMuxer::addTrack(const sp<AMessage> &format) {
             ALOGW("addTrack() setCaptureRate failed :%d", result);
         }
     }
+    float screenRecordingMuxer = -1.0;
+    if (format->findAsFloat("ScreenRecordingMuxer", &screenRecordingMuxer)) {
+        ALOGV("addTrack() muxer called from screenRecordingMuxer: %f", screenRecordingMuxer);
+        result = mWriter->setPrevTimestampUs(true);
+        if (result != OK) {
+            ALOGW("addTrack() setPrevTimestampUs failed :%d", result);
+        }
+    }
 
     mFormatList.add(format);
     return mTrackList.add(newTrack);

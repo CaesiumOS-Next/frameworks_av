@@ -20,6 +20,7 @@
 #include <algorithm>
 
 #include <arpa/inet.h>
+#include <cmath>
 #include <fcntl.h>
 #include <inttypes.h>
 #include <pthread.h>
@@ -90,6 +91,8 @@ static const int kTimestampDebugCount = 10;
 static const int kItemIdBase = 10000;
 static const char kExifHeader[] = {'E', 'x', 'i', 'f', '\0', '\0'};
 static const uint8_t kExifApp1Marker[] = {'E', 'x', 'i', 'f', 0xff, 0xe1};
+static int64_t prevAudioTimestampUs;
+static int64_t prevVideoTimestampUs;
 
 static const uint8_t kMandatoryHevcNalUnitTypes[3] = {
     kHevcNalUnitTypeVps,
@@ -1996,6 +1999,11 @@ status_t MPEG4Writer::setCaptureRate(float captureFps) {
     return OK;
 }
 
+status_t MPEG4Writer::setPrevTimestampUs(bool isPrevTimestampUs) {
+    misPrevTimestampUs = isPrevTimestampUs;
+    return OK;
+}
+
 status_t MPEG4Writer::setTemporalLayerCount(uint32_t layerCount) {
     if (layerCount > 9) {
         return BAD_VALUE;
@@ -3523,6 +3531,8 @@ status_t MPEG4Writer::Track::threadEntry() {
     int64_t lastSampleDurationUs = -1;      // Duration calculated from EOS buffer and its timestamp
     int64_t lastSampleDurationTicks = -1;   // Timescale based ticks
     int64_t sampleFileOffset = -1;
+    bool isFirstAudioTimestampUs = true;
+    bool isFirstVideoTimestampUs = true;
 
     if (mIsAudio) {
         prctl(PR_SET_NAME, (unsigned long)"MP4WtrAudTrkThread", 0, 0, 0);
@@ -3760,6 +3770,14 @@ status_t MPEG4Writer::Track::threadEntry() {
         int32_t isSync = false;
         meta_data->findInt32(kKeyIsSyncFrame, &isSync);
         CHECK(meta_data->findInt64(kKeyTime, &timestampUs));
+        if (mIsAudio && isFirstAudioTimestampUs && !mOwner->misPrevTimestampUs) {
+            prevAudioTimestampUs = timestampUs;
+            isFirstAudioTimestampUs = false;
+        }
+        if (mIsVideo && isFirstVideoTimestampUs && !mOwner->misPrevTimestampUs) {
+            prevVideoTimestampUs = timestampUs;
+            isFirstVideoTimestampUs = false;
+        }
         timestampUs += mFirstSampleStartOffsetUs;
 
         // For video, skip the first several non-key frames until getting the first key frame.
@@ -3785,7 +3803,11 @@ status_t MPEG4Writer::Track::threadEntry() {
                     mFirstSampleStartOffsetUs = -timestampUs;
                     timestampUs = 0;
                 }
-                mOwner->setStartTimestampUs(timestampUs);
+                if (mOwner->misPrevTimestampUs) {
+                    mOwner->setStartTimestampUs(max(prevAudioTimestampUs, prevVideoTimestampUs));
+                } else {
+                    mOwner->setStartTimestampUs(timestampUs);
+                }
                 mStartTimestampUs = timestampUs;
                 previousPausedDurationUs = mStartTimestampUs;
             }
