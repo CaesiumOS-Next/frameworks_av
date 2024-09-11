@@ -77,6 +77,7 @@ public:
     virtual void setStartTimeOffsetMs(int ms) { mStartTimeOffsetMs = ms; }
     virtual int32_t getStartTimeOffsetMs() const { return mStartTimeOffsetMs; }
     virtual status_t setNextFd(int fd);
+    status_t setPrevTimestampUs(bool isPrevTimestampUs);
 
 protected:
     virtual ~MPEG4Writer();
@@ -129,6 +130,7 @@ private:
     bool mFallocateErr;
     bool mPreAllocationEnabled;
     status_t mResetStatus;
+    bool misPrevTimestampUs = false;
     // Queue to hold top long write durations
     std::priority_queue<std::chrono::microseconds, std::vector<std::chrono::microseconds>,
                         std::greater<std::chrono::microseconds>> mWriteDurationPQ;

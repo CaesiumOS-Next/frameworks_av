@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "MediaMuxer"
 
 #include "webm/WebmWriter.h"
@@ -132,6 +132,14 @@ ssize_t MediaMuxer::addTrack(const sp<AMessage> &format) {
         result = mWriter->setCaptureRate(captureFps);
         if (result != OK) {
             ALOGW("addTrack() setCaptureRate failed :%d", result);
+        }
+    }
+    float screenRecordingMuxer = -1.0;
+    if (format->findAsFloat("ScreenRecordingMuxer", &screenRecordingMuxer)) {
+        ALOGV("addTrack() muxer called from screenRecordingMuxer: %f", screenRecordingMuxer);
+        result = mWriter->setPrevTimestampUs(true);
+        if (result != OK) {
+            ALOGW("addTrack() setPrevTimestampUs failed :%d", result);
         }
     }
 
