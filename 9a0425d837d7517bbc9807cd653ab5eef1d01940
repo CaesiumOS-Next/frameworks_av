@@ -52,6 +52,24 @@
       "parentUuid": "024f80d9_05e7df35",
       "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7050d17_18122d10",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-09-11T12:15:54Z",
+      "side": 1,
+      "message": "I incorrectly mentioned \"stereo\" for multichannel, instead it has to anything \u003e2 channel clip.",
+      "parentUuid": "ae98d1a6_5785ddb1",
+      "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
