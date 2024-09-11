@@ -70,6 +70,24 @@
       "parentUuid": "ae98d1a6_5785ddb1",
       "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc1b78f0_3b965b8f",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-11T21:00:27Z",
+      "side": 1,
+      "message": "That\u0027s a very good point about policy mixes! However, there is an important detail in that logic that the preference for direct only takes place when the content has more channels than a power efficient output can provide. In that case we try direct output first in order to avoid downmixing. For the stereo content, the direct output is still not preferred.\n\nIf we wish to align the multichannel content output selection between policy mixes and the rest of scenarios, there is a technical difficulty. In the case of policy mixes, there is readily available information about the mix configuration, thus the code can compare the requested channel count with the channel count of the mix. In the case of `getOutputForDevices`, sometimes we have `prefMixerConfigInfo` but not always. Thus, in order to tell how many channels will a non-direct output have we essentially have try to select it first, before deciding whether we want to try a direct output. That\u0027s a big change in the APM logic, and we will have to put it under a flag, which will sufficiently delay its availability to you. We can consider this as a request for improvement in future.\n\nIf we ignore the multichannel scenario, then with my patch at least the stereo content behavior is consistent: when the `audio.deep_buffer.media` is set, we always select deep buffer. If we consider r/3206279 which postpones addition of the `DEEP_BUFFER` flag until after we have tried direct, then we will get an inconsistent behavior for stereo content when the property is set. That\u0027s because due to the existing check in `openDirectOutput` (https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d1525;drc\u003d8702b8469f1459883f97aa5b1c0269268e3538dd), stereo content with SR \u003c\u003d 192 kHz will still be not allowed for direct outputs, but content with higher SRs would.\n\n\u003e but AOSP supports DIRECT flags.\n\nIn AOSP the `DIRECT` flag is usually considered in combination with other flags which are used for the use cases when the AF mixer must be bypassed: encoded streams, HW_AV_SYNC, MMAP, etc. Use of `DIRECT` flag on its own is still for the \"Direct PCM\" feature only, which is not in AOSP.\n\nTo reiterate, if we want to pass AAudio CTS tests on QC platform, the change in this CL should be enough, and it is simple enough to consider it as a bugfix. Any more elaborate changes in the logic may cause breakages of other scenarios and thus should be delivered under a flag, and that\u0027s a lengthy process.",
+      "parentUuid": "c7050d17_18122d10",
+      "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
