@@ -34,6 +34,24 @@
       "parentUuid": "9d05b7c5_a6d78f36",
       "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae98d1a6_5785ddb1",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-09-11T03:28:22Z",
+      "side": 1,
+      "message": "I agree, that \"Direct PCM\" is QC specific feature, but AOSP supports DIRECT flags. I have seen in case of policymixes that direct paths should be preferred, if available (because the direct paths will avoid processing at FWK)\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d1267?q\u003d%22if%20a%20direct%20output%20can%20be%20opened%20to%20deliver%20the%20track%27s%20multi-channel%20content%20to%20the%22\n\nbased on these logics we are under impression that direct path should be tried first if not available then try for deep buffer (r/3206279) \n\n\nIf we try to play a multi channel clip with params 16bit, stereo, 192k and direct paths publish this support, but if we explicitly add deep_buffer check, (which APM added just before calling openDirectOutput), it won\u0027t allow a direct output.",
+      "parentUuid": "024f80d9_05e7df35",
+      "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
