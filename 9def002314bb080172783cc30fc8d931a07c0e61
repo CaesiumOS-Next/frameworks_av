@@ -142,6 +142,24 @@
       "parentUuid": "4072984e_9207db66",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba933720_1577c79b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-12T19:15:51Z",
+      "side": 1,
+      "message": "Hi Dariusz,\n\nApologies for a delay, we are stressed by various issues.\n\nRegarding the issue with the PermissionController, it\u0027s a known issue, and we have fixed it internally by reversing the direction of the communication between the audio server and the PermissionController. It\u0027s a complex change so I don\u0027t think it will be available in AOSP until the next AOSP push.\n\nMy concern with doing too many changes at once, that is, adding the patch cleanup logic and changing the way we update `mStatus` may have unpredictable consequences, and as a result this patch will have to be reverted, causing extra work to us. To reduce risks, I would like to proceed in small, narrowly scoped steps. Does adding patch cleanup actually depends on the status update change? If not, let\u0027s do it first because it seems to be more critical for you. If it does, let\u0027s first fix the race with the status update, submit the fix, ensure that it does not cause regressions, and then proceed with adding patch cleanup logic.",
+      "parentUuid": "d386df22_7dcfb146",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
