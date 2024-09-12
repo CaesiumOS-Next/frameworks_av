@@ -1,3 +1,5 @@
+<<<<<<< PATCH SET (077304 Add field to HapticGenerator scale params)
+=======
 /*
  * Copyright (C) 2020 The Android Open Source Project
  *
@@ -633,3 +635,4 @@ int32_t HapticGenerator_GetDescriptor(effect_handle_t self, effect_descriptor_t 
 }
 
 } // namespace android::audio_effect::haptic_generator
+>>>>>>> BASE      (5c5dd7 Merge changes from topic "am-f879e94043324c8cb3351aaf2c844d3)

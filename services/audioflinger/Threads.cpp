@@ -1,3 +1,5 @@
+<<<<<<< PATCH SET (077304 Add field to HapticGenerator scale params)
+=======
 /*
 **
 ** Copyright 2012, The Android Open Source Project
@@ -11471,3 +11473,4 @@ sp<IAfTrack> BitPerfectThread::getTrackToStreamBitPerfectly_l() {
 }
 
 } // namespace android
+>>>>>>> BASE      (5c5dd7 Merge changes from topic "am-f879e94043324c8cb3351aaf2c844d3)
