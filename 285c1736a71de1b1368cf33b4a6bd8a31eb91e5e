@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "389fc15d_15d2d7b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-12T17:32:33Z",
+      "side": 1,
+      "message": "Shunkai, could you please approve a CP of ag/29305948. There are more tests downstream and this is why I had to submit internal-first. Because of that, the internal CL has a bit more changes in the `audiopolicymanager_tests.cpp` file, as I was cleaning up sample rate constants use.",
+      "revId": "285c1736a71de1b1368cf33b4a6bd8a31eb91e5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
