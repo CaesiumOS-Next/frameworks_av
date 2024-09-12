@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c80982_81ff06f4",
+        "filename": "media/libeffects/hapticgenerator/aidl/HapticGeneratorContext.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-12T02:54:58Z",
+      "side": 1,
+      "message": "we shouldn\u0027t make this change, the audio framework was expecting same input and output samples for HapticGenerator case.\nI will submit the fix internal first and then upstream because there are some conflict needs to be solved.",
+      "range": {
+        "startLine": 191,
+        "startChar": 32,
+        "endLine": 191,
+        "endChar": 49
+      },
+      "revId": "70e81a886af22ddfccd724421ed935f585cccc78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
