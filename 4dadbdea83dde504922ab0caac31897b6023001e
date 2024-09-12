@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0223793d_fc44d3ea",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 63
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-12T17:45:42Z",
+      "side": 1,
+      "message": "please remove from the header as well",
+      "revId": "4dadbdea83dde504922ab0caac31897b6023001e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed678aa7_0810e362",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 63
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-12T17:45:42Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have `MediaCodecInfoWriter::setMaxSupportedInstances()` than having it as a param.",
+      "range": {
+        "startLine": 357,
+        "startChar": 35,
+        "endLine": 357,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "714b9161_8e121492",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 201,
+                "startChar": 0,
+                "endLine": 206,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 214,
+                "startChar": 0,
+                "endLine": 217,
+                "endChar": 0
+              },
+              "replacement": "         * @param isEncoder If the \u0027Capabilities\u0027 object is for an Encoder or not.\n"
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 220,
+                "endChar": 0
+              },
+              "replacement": "        CapabilitiesWriter(Capabilities* cap, std::shared_ptr\u003cCodecCapabilities\u003e codecCap, const char* mediaType, bool isEncoder);\n"
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 265,
+                "startChar": 0,
+                "endLine": 266,
+                "endChar": 0
+              },
+              "replacement": "    static sp\u003cMediaCodecInfo\u003e FromParcel(const Parcel \u0026parcel);\n"
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 310,
+                "startChar": 0,
+                "endLine": 311,
+                "endChar": 0
+              },
+              "replacement": "            sp\u003cMediaCodecInfo::Capabilities\u003e caps, bool isEncoder);\n"
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 314,
+                "startChar": 0,
+                "endLine": 315,
+                "endChar": 0
+              },
+              "replacement": "    void setCodecCapsMap();\n"
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 351,
+                "startChar": 0,
+                "endLine": 352,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 356,
+                "startChar": 0,
+                "endLine": 358,
+                "endChar": 0
+              },
+              "replacement": "    std::unique_ptr\u003cMediaCodecInfo::CapabilitiesWriter\u003e addMediaType(const char* mediaType);\n"
+            },
+            {
+              "path": "media/libmedia/include/media/MediaCodecInfo.h",
+              "range": {
+                "startLine": 372,
+                "startChar": 0,
+                "endLine": 372,
+                "endChar": 0
+              },
+              "replacement": "    /**\n     * Set the maxSupportedInstances setting from MediaCodecList.\n     *\n     * @param maxSupportedInstances The maxSupportedInstances setting from MediaCodecList.\n     */\n    void setMaxSupportedInstances(int maxSupportedInstances);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4dadbdea83dde504922ab0caac31897b6023001e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
