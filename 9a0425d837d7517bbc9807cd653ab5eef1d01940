@@ -88,6 +88,24 @@
       "parentUuid": "c7050d17_18122d10",
       "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7412039_43cd74c0",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2024-09-12T03:11:59Z",
+      "side": 1,
+      "message": "Sure, please mainline it. can we make it part next GSI releases as well, so it can be tested.",
+      "parentUuid": "fc1b78f0_3b965b8f",
+      "revId": "9a0425d837d7517bbc9807cd653ab5eef1d01940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
