@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20feb461_78ff8281",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-09-12T21:52:39Z",
+      "side": 1,
+      "message": "should this be factored out into a separate helper method? seems like a lot of logic to stuff inline, and could use some more detailed comments",
+      "range": {
+        "startLine": 481,
+        "startChar": 3,
+        "endLine": 481,
+        "endChar": 55
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f4957a2_1cc0b993",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-09-12T21:52:39Z",
+      "side": 1,
+      "message": "can this re-use a helper method, created as a result of my earlier comment?",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 0
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
