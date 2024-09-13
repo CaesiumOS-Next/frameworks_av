@@ -211,6 +211,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba74574_f9e61933",
+        "filename": "media/libaudioclient/TrackPlayerBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-09-13T14:50:23Z",
+      "side": 1,
+      "message": "I\u0027ll mark as resolved, and we can follow-up in the future.",
+      "parentUuid": "763ef0f6_47c21e4a",
+      "revId": "e14a3886696aefd86ce198f4e1a5e804ca2aebdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7761ecc5_edaf7905",
