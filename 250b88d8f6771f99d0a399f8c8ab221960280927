@@ -45,6 +45,53 @@
       },
       "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a16db0_ee3ba2a2",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-13T08:26:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "7f4957a2_1cc0b993",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 0
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82cf0c1_719694a8",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-13T08:26:34Z",
+      "side": 1,
+      "message": "redundant with line 848 if we use a block local variable for device in the : we exit at line 872 if device is changed while loop above.",
+      "range": {
+        "startLine": 880,
+        "startChar": 0,
+        "endLine": 880,
+        "endChar": 50
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
