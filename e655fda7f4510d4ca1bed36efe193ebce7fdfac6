@@ -33,6 +33,24 @@
       "message": "Thank you folks for reviewing!\n\nWhat would be the best way to get this merged? I\u0027m hesitant to use autosubmit due since these would ideally be submitted in the following order (due to cross-repo dependencies), but I don\u0027t have access to submit directly.\n\n1. aosp/2929062 - refactoring to add getters/setters\n2. aosp/2928911 - use those new methods in libwilhelm (needs another owner approval)\n3. aosp/2909337 - this fix",
       "revId": "e655fda7f4510d4ca1bed36efe193ebce7fdfac6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef38ec17_e72c532e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-13T17:37:04Z",
+      "side": 1,
+      "message": "These changes are in a topic so they will be submitted together (atomically) across all repos.\n\nThe `libwilhelm` change is missing owner\u0027s review, I\u0027ve pinged Eric to provide it. Once he grants it, we will submit the topic.",
+      "parentUuid": "a6d51846_da4812b9",
+      "revId": "e655fda7f4510d4ca1bed36efe193ebce7fdfac6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
