@@ -160,6 +160,24 @@
       "parentUuid": "d386df22_7dcfb146",
       "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e86d9c89_f3604a13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-13T14:15:41Z",
+      "side": 1,
+      "message": "\u003e\u003e\u003eApologies for a delay, we are stressed by various issues.\nHello Mikhail,\n\nNo problem, nice to hear from you again.\n\n\u003e\u003e\u003e Does adding patch cleanup actually depends on the status update change?\n\u003e\u003e\u003e If not, let\u0027s do it first because it seems to be more critical for you.\n\nI agree \u0027command-\u003emStatus\u0027 issue is separate problem and might be delivered in another commit while merging it can discover so far hidden issues.\n\nI have extracted \"audio patch leak\" fix, it might be looking less \"elegant\" now (see commit #8), but I believe shall not introduce degrades / different behaviour related to \u0027command-\u003emStatus\u0027.",
+      "parentUuid": "ba933720_1577c79b",
+      "revId": "9def002314bb080172783cc30fc8d931a07c0e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
