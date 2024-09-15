@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8b0a1f_e466f1fb",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1985,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-15T22:14:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9c20467_a30f8a82",
+      "range": {
+        "startLine": 1985,
+        "startChar": 0,
+        "endLine": 1985,
+        "endChar": 101
+      },
+      "revId": "16a6bb06241893c2c95d54c00a7cdb93fc6b6e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "234647ef_074f3730",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-09-13T17:17:38Z",
       "side": 1,
       "message": "Please rename to `createData`. Alternatively, since we don\u0027t do any checks, we can extract the handle directly and inline this variable:\n\n```\nconst auto patchHandle \u003d ((CreateAudioPatchData *)command-\u003emParam.get())-\u003emHandle;\n```",
+      "range": {
+        "startLine": 2162,
+        "startChar": 46,
+        "endLine": 2162,
+        "endChar": 50
+      },
+      "revId": "16a6bb06241893c2c95d54c00a7cdb93fc6b6e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37bce032_480fe522",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2162,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-15T22:14:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "234647ef_074f3730",
       "range": {
         "startLine": 2162,
         "startChar": 46,
@@ -101,6 +149,30 @@
           ]
         }
       ],
+      "revId": "16a6bb06241893c2c95d54c00a7cdb93fc6b6e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34e0266_5b0f4582",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2165,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-15T22:14:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e3db40a_e6244d50",
+      "range": {
+        "startLine": 2165,
+        "startChar": 41,
+        "endLine": 2165,
+        "endChar": 49
+      },
       "revId": "16a6bb06241893c2c95d54c00a7cdb93fc6b6e9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
