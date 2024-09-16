@@ -40,6 +40,30 @@
       ],
       "revId": "45413fb9477aaeb21a4dcd82b4e886fcf7e49403",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d4a3eb5_f2a35c9c",
+        "filename": "drm/libmediadrmrkp/src/DrmRkpAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1930132
+      },
+      "writtenOn": "2024-09-16T21:38:58Z",
+      "side": 1,
+      "message": "Sure, updated. Thanks",
+      "parentUuid": "280f452f_24a0dc53",
+      "range": {
+        "startLine": 94,
+        "startChar": 20,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "45413fb9477aaeb21a4dcd82b4e886fcf7e49403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
