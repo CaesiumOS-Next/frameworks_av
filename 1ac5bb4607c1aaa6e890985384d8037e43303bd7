@@ -51,6 +51,24 @@
       "parentUuid": "c12adc67_c545286d",
       "revId": "1ac5bb4607c1aaa6e890985384d8037e43303bd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fdef7b3_d9bdced9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-09-16T15:36:38Z",
+      "side": 1,
+      "message": "Please file a bug with more info about the crash. Things like:\n* Repro steps\n* Frequency\n* When it started happening",
+      "parentUuid": "188cace5_3daaee7c",
+      "revId": "1ac5bb4607c1aaa6e890985384d8037e43303bd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
