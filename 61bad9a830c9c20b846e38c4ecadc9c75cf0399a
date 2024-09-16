@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2341eeb9_10443cea",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-16T10:07:24Z",
+      "side": 1,
+      "message": "we should also check that command-\u003emStatus \u003d\u003d TIMED_OUT in case the implementation of sendCommand() changes in the future",
+      "range": {
+        "startLine": 2158,
+        "startChar": 0,
+        "endLine": 2158,
+        "endChar": 73
+      },
+      "revId": "61bad9a830c9c20b846e38c4ecadc9c75cf0399a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c54680_7844a9d9",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2173,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-16T10:07:24Z",
+      "side": 1,
+      "message": "we can probably call af-\u003ereleaseAudioPatch(createData-\u003emHandle) synchronously here",
+      "range": {
+        "startLine": 2163,
+        "startChar": 0,
+        "endLine": 2173,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3ff4b4c0_fdcab8d6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.cpp",
+              "range": {
+                "startLine": 2165,
+                "startChar": 0,
+                "endLine": 2165,
+                "endChar": 0
+              },
+              "replacement": "                        sp\u003cIAudioFlinger\u003e af \u003d AudioSystem::get_audio_flinger();\n                        if (af !\u003d 0) {\n                            af-\u003ereleaseAudioPatch(createData-\u003emHandle);\n                        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "61bad9a830c9c20b846e38c4ecadc9c75cf0399a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
