@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1b0b876_82a151da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-16T20:10:36Z",
+      "side": 1,
+      "message": "Requesting DrNo review for GSI (ref: b/363151269#comment19)",
+      "revId": "f1789da3a6c6ca8822233c0bb3064d6d50a0def8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
