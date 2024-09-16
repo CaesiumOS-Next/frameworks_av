@@ -63,6 +63,30 @@
       ],
       "revId": "61bad9a830c9c20b846e38c4ecadc9c75cf0399a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae9df5a_96851815",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2173,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-16T17:11:09Z",
+      "side": 1,
+      "message": "I think it was my suggestion to use a command to reuse the code of `RELEASE_AUDIO_PATCH` command handling. This is to ensure that any extra activities: checks, logging, etc. are consistent.",
+      "parentUuid": "c5c54680_7844a9d9",
+      "range": {
+        "startLine": 2163,
+        "startChar": 0,
+        "endLine": 2173,
+        "endChar": 59
+      },
+      "revId": "61bad9a830c9c20b846e38c4ecadc9c75cf0399a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
