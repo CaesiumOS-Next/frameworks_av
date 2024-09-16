@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc140ef_dfa4c131",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-09-16T10:33:11Z",
+      "side": 1,
+      "message": "For my understanding: is this fixing an actual bug in the old calculation by making the value used in the code match what\u0027s expected for the specification?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 39
+      },
+      "revId": "5fbf141d9f488c93ccb0850a70bc845321527957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b06bf8_25760f25",
+        "filename": "media/libmediaplayerservice/StagefrightRecorder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2126,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-09-16T10:33:11Z",
+      "side": 1,
+      "message": "Super-nit: remove extra space (hopefully the autoformatter removes it?).",
+      "range": {
+        "startLine": 2126,
+        "startChar": 19,
+        "endLine": 2126,
+        "endChar": 20
+      },
+      "revId": "5fbf141d9f488c93ccb0850a70bc845321527957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
