@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "339460df_cd734436",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1237180
+      },
+      "writtenOn": "2024-09-16T17:58:14Z",
+      "side": 1,
+      "message": "Yeah, When video start offset is zero mTimeScale is used to calculate mediaTime but for video start offset positive mvhdTimeScale is used to calculate mediaTime. This CL fix this issue and used mTimeScale in both cases.",
+      "parentUuid": "cdc140ef_dfa4c131",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 39
+      },
+      "revId": "5fbf141d9f488c93ccb0850a70bc845321527957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17b06bf8_25760f25",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-16T10:33:11Z",
       "side": 1,
       "message": "Super-nit: remove extra space (hopefully the autoformatter removes it?).",
+      "range": {
+        "startLine": 2126,
+        "startChar": 19,
+        "endLine": 2126,
+        "endChar": 20
+      },
+      "revId": "5fbf141d9f488c93ccb0850a70bc845321527957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "068d8cff_ddeef352",
+        "filename": "media/libmediaplayerservice/StagefrightRecorder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2126,
+      "author": {
+        "id": 1237180
+      },
+      "writtenOn": "2024-09-16T17:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17b06bf8_25760f25",
       "range": {
         "startLine": 2126,
         "startChar": 19,
