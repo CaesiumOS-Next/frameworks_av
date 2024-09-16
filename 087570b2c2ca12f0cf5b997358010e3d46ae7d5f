@@ -57,6 +57,30 @@
       ],
       "revId": "087570b2c2ca12f0cf5b997358010e3d46ae7d5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1da9c31a_a5b09d35",
+        "filename": "media/codec2/hal/hidl/1.2/utils/Component.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-09-16T22:49:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "34cf0b74_f25ac842",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 70
+      },
+      "revId": "087570b2c2ca12f0cf5b997358010e3d46ae7d5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
