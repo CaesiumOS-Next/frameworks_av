@@ -33,6 +33,23 @@
       "message": "Wonsik,\nThis seems to cause a regression (Refer: b/367371849).\nMay be better to wait till that is confirmed?",
       "revId": "08fe190349d9031dbec5e2eb33730151aab47d7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e675abb_7df8446a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-09-17T19:54:02Z",
+      "side": 1,
+      "message": "Based on Harish\u0027s comment.\nI will give +2 after confirming there is no regression.",
+      "revId": "08fe190349d9031dbec5e2eb33730151aab47d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
