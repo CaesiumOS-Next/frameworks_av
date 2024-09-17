@@ -33,6 +33,24 @@
       "message": "Hi Shunkai,\n\nI was going through this change and found it beneficial for stability of effects.\n\n1 question i have is about .\n\nmHalVersion \u003e\u003d kReopenSupportedVersion is known at startup of effects.\n\ncan we fix the flags used for efGroup-\u003ewake in constructor \nwhether to use kEventFlagDataMqNotEmpty vs kEventFlagNotEmpty.\n\nwhat do you think about it?",
       "revId": "688613e28573cac3c3f11b183d9579933dedf3d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd3443f2_4cf4b3bb",
+        "filename": "media/libaudiohal/impl/EffectHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-17T15:44:21Z",
+      "side": 1,
+      "message": "yes I think this is a good idea, will address it in followup CL, this CL is a cherry-pick so I\u0027m keeping it as is, thanks for the suggestion",
+      "parentUuid": "36d29284_5572ef92",
+      "revId": "688613e28573cac3c3f11b183d9579933dedf3d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
