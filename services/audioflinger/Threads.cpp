@@ -3220,9 +3220,9 @@ NO_THREAD_SAFETY_ANALYSIS
 
     // Calculate size of normal sink buffer relative to the HAL output buffer size
     double multiplier = 1.0;
-    // Note: mType == SPATIALIZER does not support FastMixer.
-    if (mType == MIXER && (kUseFastMixer == FastMixer_Static ||
-            kUseFastMixer == FastMixer_Dynamic)) {
+    // Note: mType == SPATIALIZER does not support FastMixer and DEEP is by definition not "fast"
+    if ((mType == MIXER && !(mOutput->flags & AUDIO_OUTPUT_FLAG_DEEP_BUFFER)) &&
+            (kUseFastMixer == FastMixer_Static || kUseFastMixer == FastMixer_Dynamic)) {
         size_t minNormalFrameCount = (kMinNormalSinkBufferSizeMs * mSampleRate) / 1000;
         size_t maxNormalFrameCount = (kMaxNormalSinkBufferSizeMs * mSampleRate) / 1000;
 
@@ -5123,7 +5123,8 @@ MixerThread::MixerThread(const sp<IAfThreadCallback>& afThreadCallback, AudioStr
 
     // initialize fast mixer depending on configuration
     bool initFastMixer;
-    if (mType == SPATIALIZER || mType == BIT_PERFECT) {
+    if (mType == SPATIALIZER || mType == BIT_PERFECT ||
+            (mType == MIXER && (output->flags & AUDIO_OUTPUT_FLAG_DEEP_BUFFER))) {
         initFastMixer = false;
     } else {
         switch (kUseFastMixer) {
