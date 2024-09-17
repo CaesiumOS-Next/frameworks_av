@@ -9,6 +9,22 @@ package {
 
 cc_library {
     name: "libaudiousecasevalidation",
+    defaults: ["libaudiousecasevalidation_defaults"],
+    shared_libs: [
+        "libaudioutils",
+    ],
+}
+
+cc_library {
+    name: "libaudiousecasevalidation_for_host",
+    defaults: ["libaudiousecasevalidation_defaults"],
+    shared_libs: [
+        "libaudioutils_for_host",
+    ],
+}
+
+cc_defaults {
+    name: "libaudiousecasevalidation_defaults",
     host_supported: true,
     srcs: [
         "UsecaseLookup.cpp",
@@ -19,7 +35,6 @@ cc_library {
     ],
     shared_libs: [
         "framework-permission-aidl-cpp",
-        "libaudioutils",
         "libbase",
         "liblog",
     ],
@@ -43,7 +58,7 @@ cc_test_host {
     ],
     shared_libs: [
         "framework-permission-aidl-cpp",
-        "libaudiousecasevalidation",
+        "libaudiousecasevalidation_for_host",
         "libutils",
     ],
 }
