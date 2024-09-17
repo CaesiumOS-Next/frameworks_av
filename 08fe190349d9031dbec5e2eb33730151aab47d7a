@@ -16,6 +16,23 @@
       "message": "Requesting DrNo review for GSI (ref: b/363151269#comment19)",
       "revId": "08fe190349d9031dbec5e2eb33730151aab47d7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5d5c0a5_45e9601e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-17T19:52:10Z",
+      "side": 1,
+      "message": "Wonsik,\nThis seems to cause a regression (Refer: b/367371849).\nMay be better to wait till that is confirmed?",
+      "revId": "08fe190349d9031dbec5e2eb33730151aab47d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
