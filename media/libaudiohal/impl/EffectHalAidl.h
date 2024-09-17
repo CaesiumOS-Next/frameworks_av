@@ -73,7 +73,10 @@ class EffectHalAidl : public EffectHalInterface {
     const int32_t mSessionId;
     const int32_t mIoId;
     const bool mIsProxyEffect;
-    const int mHalVersion;
+    const int32_t mHalVersion;
+    // for audio effect HAL V2 and above, expect kEventFlagDataMqNotEmpty to avoid bit conflict with
+    // FMQ_NOT_EMPTY
+    const uint32_t mEventFlagDataMqNotEmpty;
     bool mIsHapticGenerator = false;
     std::string mEffectName;
 
