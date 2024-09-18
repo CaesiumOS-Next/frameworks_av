@@ -88,6 +88,7 @@ class BundleContext final : public EffectContext {
 
     IEffect::Status processEffect(float* in, float* out, int sampleToProcess);
 
+    RetCode setCommon(const Parameter::Common& common);
   private:
     const lvm::BundleEffectType mType;
     bool mEnabled = false;
