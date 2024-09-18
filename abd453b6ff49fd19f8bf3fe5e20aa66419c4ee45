@@ -40,6 +40,30 @@
       ],
       "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8e102b_d790efb9",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5139,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-09-18T00:49:10Z",
+      "side": 1,
+      "message": "I understand that naming of deep buffer indicates a larger buffer... but the underlying intention is to create a lower power solution. Omitting the fast mixer is always a lower power solution than including it.  There is no need for a fast mixer to ever be attached to the deep buffer sink as fast tracks go to the primary or raw (except perhaps for reducing glitches, but there are other techniques such as priority to improve this).\n\nb/364329918#comment4\n\nPer the original bug we do not want the fast mixer for some dynamic profile situations at high sample rate (192K), and this CL does it.\n\nSo I think this is acceptable based on the deep buffer intention (though perhaps not the literal deep buffer name).  Does this seem acceptable?  Thanks!",
+      "parentUuid": "b4b40105_fee6d8ba",
+      "range": {
+        "startLine": 5139,
+        "startChar": 0,
+        "endLine": 5139,
+        "endChar": 60
+      },
+      "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
