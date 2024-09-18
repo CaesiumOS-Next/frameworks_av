@@ -16,6 +16,138 @@
       "message": "Please see http://b/338974476#comment17.",
       "revId": "8d12f6abb0b1f9053c3ed2c414fe9bd41081905b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a4cb1fd_630ecad9",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-09-18T22:27:34Z",
+      "side": 1,
+      "message": "nit: would prefer that you include the name of the queue that has the error, even though it may be obvious from the callstack.\n\n    template \u003ctypename MQTypeError\u003e\n    auto fmqErrorHandler(const std::string\u0026 name){\n        return [name](MQTypeError fmqError, std::string\u0026\u0026 errorMessage) {\n            if (fmqError !\u003d MQTypeError::NONE) {\n                mediautils::TimeCheck::signalAudioHals();\n                LOG_ALWAYS_FATAL(\"%s: %s\", name.c_str(), errorMessage.c_str());\n            }\n         };\n    }\n\n\nand below\n\n    setErrorHandler(fmqErrorHandler\u003cStreamContextAidl::CommandMQ::Error\u003e(\"CommandMQ\"));\n    ...",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1fb9f8db_11307ff6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "void fmqErrorHandler(const std::string\u0026 name, MQTypeError fmqError,\n                     std::string\u0026\u0026 errorMessage) {\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "        const std::string\u0026 name, StreamContextAidl::CommandMQ::Error fmqError,\n        std::string\u0026\u0026 errorMessage);\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 71,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "        const std::string\u0026 name, StreamContextAidl::DataMQ::Error fmqError,\n        std::string\u0026\u0026 errorMessage);\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 73,
+                "startChar": 0,
+                "endLine": 74,
+                "endChar": 0
+              },
+              "replacement": "        const std::string\u0026 name, StreamContextAidl::ReplyMQ::Error fmqError,\n        std::string\u0026\u0026 errorMessage);\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "                [name \u003d className](StreamContextAidl::CommandMQ::Error fmqError,\n                                   std::string\u0026\u0026 errorMessage) {\n                    fmqErrorHandler(name, fmqError, std::move(errorMessage));\n                });\n        mContext.getReplyMQ()-\u003esetErrorHandler(\n                [name \u003d className](StreamContextAidl::ReplyMQ::Error fmqError,\n                                   std::string\u0026\u0026 errorMessage) {\n                    fmqErrorHandler(name, fmqError, std::move(errorMessage));\n                });\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 126,
+                "startChar": 0,
+                "endLine": 127,
+                "endChar": 0
+              },
+              "replacement": "                    [name \u003d className](StreamContextAidl::DataMQ::Error fmqError,\n                                       std::string\u0026\u0026 errorMessage) {\n                        fmqErrorHandler(name, fmqError, std::move(errorMessage));\n                    });\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8d12f6abb0b1f9053c3ed2c414fe9bd41081905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d593939_0d00dd62",
+        "filename": "media/utils/TimeCheck.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-09-18T22:27:34Z",
+      "side": 1,
+      "message": "nit: unnecessary ctor, omit the std::string...  `(halPids + \", skipping tombstones\").c_str()` is sufficient.",
+      "range": {
+        "startLine": 327,
+        "startChar": 19,
+        "endLine": 327,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "92824581_385c7144",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/utils/TimeCheck.cpp",
+              "range": {
+                "startLine": 327,
+                "startChar": 0,
+                "endLine": 328,
+                "endChar": 0
+              },
+              "replacement": "        ALOGI(\"%s\", (halPids + \", skipping tombstones\").c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8d12f6abb0b1f9053c3ed2c414fe9bd41081905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
