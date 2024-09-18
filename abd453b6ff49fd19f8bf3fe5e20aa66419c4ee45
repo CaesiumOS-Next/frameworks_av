@@ -64,6 +64,30 @@
       },
       "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5483bc5_f2d29212",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5139,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-18T08:39:56Z",
+      "side": 1,
+      "message": "Ack but we need at least to log a warning when this happens: having a deep buffer implementation with buffers less than 24ms seems like a configuration error to me.",
+      "parentUuid": "1b8e102b_d790efb9",
+      "range": {
+        "startLine": 5139,
+        "startChar": 0,
+        "endLine": 5139,
+        "endChar": 60
+      },
+      "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
