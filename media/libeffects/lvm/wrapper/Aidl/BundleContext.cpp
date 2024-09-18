@@ -32,6 +32,7 @@ namespace aidl::android::hardware::audio::effect {
 using ::aidl::android::media::audio::common::AudioChannelLayout;
 using ::aidl::android::media::audio::common::AudioDeviceDescription;
 using ::aidl::android::media::audio::common::AudioDeviceType;
+using ::aidl::android::hardware::audio::common::getChannelCount;
 
 BundleContext::BundleContext(int statusDepth, const Parameter::Common& common,
               const lvm::BundleEffectType& type)
@@ -842,5 +843,41 @@ IEffect::Status BundleContext::process(float* in, float* out, int samples) {
     }
     return {STATUS_OK, samples, samples};
 }
+RetCode BundleContext::setCommon(const Parameter::Common& common) {
+    auto& input = common.input;
+    auto& output = common.output;
 
+    if (input.base.format.pcm != aidl::android::media::audio::common::PcmType::FLOAT_32_BIT ||
+        output.base.format.pcm != aidl::android::media::audio::common::PcmType::FLOAT_32_BIT) {
+        LOG(ERROR) << __func__ << " illegal IO, input "
+                   << ::android::internal::ToString(input.base.format) << ", output "
+                   << ::android::internal::ToString(output.base.format);
+        return RetCode::ERROR_ILLEGAL_PARAMETER;
+    }
+    if (mInputChannelCount != getChannelCount(input.base.channelMask) ||
+        mOutputChannelCount != getChannelCount(output.base.channelMask)) {
+        mInputChannelCount = getChannelCount(input.base.channelMask);
+        mOutputChannelCount = getChannelCount(output.base.channelMask);
+        LOG(VERBOSE) << __func__ << " " <<mType << " mInputChannelCount " << mInputChannelCount
+                    << ", mOutputChannelCount " << mOutputChannelCount;
+        if (mInputChannelCount == 0 || mOutputChannelCount == 0) {
+            LOG(ERROR) << __func__ << " illegal channel count input " << mInputChannelCount
+                        << ", output " << mOutputChannelCount;
+            return RetCode::ERROR_ILLEGAL_PARAMETER;
+        }
+        // Update Control Parameter
+        LVM_ControlParams_t params;
+        RETURN_VALUE_IF(LVM_SUCCESS != LVM_GetControlParameters(mInstance, &params),
+                        RetCode::ERROR_EFFECT_LIB_ERROR, " getControlParamFailed");
+        params.NrChannels = mOutputChannelCount;
+        RETURN_VALUE_IF(LVM_SUCCESS != LVM_SetControlParameters(mInstance, &params),
+                        RetCode::ERROR_EFFECT_LIB_ERROR, " setControlParamFailed");
+    }
+    if (auto ret = updateIOFrameSize(common); ret != RetCode::SUCCESS) {
+        return ret;
+    }
+
+    mCommon = common;
+    return RetCode::SUCCESS;
+}
 }  // namespace aidl::android::hardware::audio::effect
