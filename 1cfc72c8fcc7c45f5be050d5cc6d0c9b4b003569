@@ -1,0 +1,149 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "229de9c8_acd80e10",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-18T21:14:58Z",
+      "side": 1,
+      "message": "do you mean `mOutputChannelCount !\u003d getChannelCount(output.base.channelMask)`?",
+      "range": {
+        "startLine": 858,
+        "startChar": 73,
+        "endLine": 858,
+        "endChar": 134
+      },
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d8edf0_4455f4b8",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-18T21:14:58Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 858,
+        "startChar": 0,
+        "endLine": 858,
+        "endChar": 137
+      },
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c8844a_ed0445bb",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-18T21:14:58Z",
+      "side": 1,
+      "message": "```\n        LOG(VERBOSE) \u003c\u003c __func__ \u003c\u003c \" \" \u003c\u003cmType \u003c\u003c \" inputChannelCount \" \u003c\u003c mInputChannelCount\n                     \u003c\u003c \", outputChannelCount \" \u003c\u003c mOutputChannelCount;\n```",
+      "range": {
+        "startLine": 861,
+        "startChar": 0,
+        "endLine": 863,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "04f50b73_b88fbd29",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+              "range": {
+                "startLine": 862,
+                "startChar": 0,
+                "endLine": 863,
+                "endChar": 0
+              },
+              "replacement": "                    \u003c\u003c \", outputChannelCount \" \u003c\u003c mOutputChannelCount;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84efffc_9b7cd1fa",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-18T21:14:58Z",
+      "side": 1,
+      "message": "Looking at `BundleContext::initControlParameter`:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp;l\u003d610?q\u003dinitControlParameter\n\nNrChannels was assigned with output channel number. While it is true that input and output channel are usually same for now, we might not want to reply on this assumption. I suggest `params.NrChannels \u003d mOutputChannelCount`",
+      "range": {
+        "startLine": 872,
+        "startChar": 8,
+        "endLine": 872,
+        "endChar": 47
+      },
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef1d74f_d39dc2d3",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-18T21:14:58Z",
+      "side": 1,
+      "message": "override",
+      "fixSuggestions": [
+        {
+          "fixId": "dc7d359d_fd8c9836",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/lvm/wrapper/Aidl/BundleContext.h",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "    RetCode setCommon(const Parameter::Common\u0026 common) override;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
