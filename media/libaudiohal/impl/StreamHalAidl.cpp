@@ -59,6 +59,19 @@ template<HalCommand::Tag cmd> HalCommand makeHalCommand() {
 template<HalCommand::Tag cmd, typename T> HalCommand makeHalCommand(T data) {
     return HalCommand::make<cmd>(data);
 }
+
+template <typename MQTypeError>
+void fmqErrorHandler(MQTypeError fmqError, std::string&& errorMessage) {
+    mediautils::TimeCheck::signalAudioHals();
+    LOG_ALWAYS_FATAL_IF(fmqError != MQTypeError::NONE, "%s", errorMessage.c_str());
+}
+template void fmqErrorHandler<StreamContextAidl::CommandMQ::Error>(
+        StreamContextAidl::CommandMQ::Error fmqError, std::string&& errorMessage);
+template void fmqErrorHandler<StreamContextAidl::DataMQ::Error>(
+        StreamContextAidl::DataMQ::Error fmqError, std::string&& errorMessage);
+template void fmqErrorHandler<StreamContextAidl::ReplyMQ::Error>(
+        StreamContextAidl::ReplyMQ::Error fmqError, std::string&& errorMessage);
+
 }  // namespace
 
 // static
@@ -102,6 +115,16 @@ StreamHalAidl::StreamHalAidl(std::string_view className, bool isInput, const aud
             /* mStreamPowerLog.isUserDebugOrEngBuild() && */
             StreamHalAidl::getAudioProperties(&config) == NO_ERROR) {
         mStreamPowerLog.init(config.sample_rate, config.channel_mask, config.format);
+    }
+
+    if (mStream != nullptr) {
+        mContext.getCommandMQ()->setErrorHandler(
+                fmqErrorHandler<StreamContextAidl::CommandMQ::Error>);
+        mContext.getReplyMQ()->setErrorHandler(fmqErrorHandler<StreamContextAidl::ReplyMQ::Error>);
+        if (mContext.getDataMQ() != nullptr) {
+            mContext.getDataMQ()->setErrorHandler(
+                    fmqErrorHandler<StreamContextAidl::DataMQ::Error>);
+        }
     }
 }
 
@@ -388,11 +411,8 @@ status_t StreamHalAidl::transfer(void *buffer, size_t bytes, size_t *transferred
             return INVALID_OPERATION;
         }
     }
-    StreamContextAidl::DataMQ::Error fmqError = StreamContextAidl::DataMQ::Error::NONE;
-    std::string fmqErrorMsg;
     if (!mIsInput) {
-        bytes = std::min(bytes,
-                mContext.getDataMQ()->availableToWrite(&fmqError, &fmqErrorMsg));
+        bytes = std::min(bytes, mContext.getDataMQ()->availableToWrite());
     }
     StreamDescriptor::Command burst =
             StreamDescriptor::Command::make<StreamDescriptor::Command::Tag::burst>(bytes);
@@ -409,14 +429,12 @@ status_t StreamHalAidl::transfer(void *buffer, size_t bytes, size_t *transferred
         LOG_ALWAYS_FATAL_IF(*transferred > bytes,
                 "%s: HAL module read %zu bytes, which exceeds requested count %zu",
                 __func__, *transferred, bytes);
-        if (auto toRead = mContext.getDataMQ()->availableToRead(&fmqError, &fmqErrorMsg);
+        if (auto toRead = mContext.getDataMQ()->availableToRead();
                 toRead != 0 && !mContext.getDataMQ()->read(static_cast<int8_t*>(buffer), toRead)) {
             AUGMENT_LOG(E, "failed to read %zu bytes to data MQ", toRead);
             return NOT_ENOUGH_DATA;
         }
     }
-    LOG_ALWAYS_FATAL_IF(fmqError != StreamContextAidl::DataMQ::Error::NONE,
-            "%s", fmqErrorMsg.c_str());
     mStreamPowerLog.log(buffer, *transferred);
     return OK;
 }
