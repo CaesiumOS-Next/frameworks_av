@@ -69,6 +69,24 @@
       "parentUuid": "188cace5_3daaee7c",
       "revId": "1ac5bb4607c1aaa6e890985384d8037e43303bd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba60285e_c916b181",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010871
+      },
+      "writtenOn": "2024-09-19T10:33:13Z",
+      "side": 1,
+      "message": "Repro steps: UAT fully automated test.\n\nFrequency: Every time\n\nSummary：recorder_looper-/system/bin/mediaserver6411 (SIGSEGV),1 (SEGV_MAPERR),0x0000000000000000- /system/lib64/libstagefright.so (android::MediaCodecSource::feedEncoderInputBuffers()+136) (BuildId: 4bcacaf63ba7ac9b17d7e2276873cd77) /system/lib64/libstagefright.so (android::MediaCodecSource::onMessageReceived(android::sp\u003candroid::AMessage\u003e const\u0026)+3688) (BuildId: 4bcacaf63ba7ac9b17d7e2276873cd77)\n\ndet：Build fingerprint: \u0027Xiaomi/aurorapro/aurora:15/AQ3A.240627.003/OS2.0.240801.1.VNACNXM.PRE:user/release-keys\u0027\nRevision: \u00270\u0027\nABI: \u0027arm64\u0027\nProcess uptime: 137612s\nCmdline: /system/bin/mediaserver64\npid: 2911, tid: 27684, name: recorder_looper \u003e\u003e\u003e /system/bin/mediaserver64 \u003c\u003c\u003c\ntagged_addr_ctrl: 0000000000000001 (PR_TAGGED_ADDR_ENABLE)\npac_enabled_keys: 000000000000000f (PR_PAC_APIAKEY, PR_PAC_APIBKEY, PR_PAC_APDAKEY, PR_PAC_APDBKEY)\nsignal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0000000000000000\nCause: null pointer dereference",
+      "parentUuid": "9fdef7b3_d9bdced9",
+      "revId": "1ac5bb4607c1aaa6e890985384d8037e43303bd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
