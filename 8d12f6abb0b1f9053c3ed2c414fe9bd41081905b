@@ -109,6 +109,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43871169_7fe6dc7d",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-19T21:30:52Z",
+      "side": 1,
+      "message": "Yes, I was also thinking that stack should be enough for understanding which queue it was, but let\u0027s add a name for sure.",
+      "parentUuid": "4a4cb1fd_630ecad9",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "8d12f6abb0b1f9053c3ed2c414fe9bd41081905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d593939_0d00dd62",
@@ -146,6 +170,30 @@
           ]
         }
       ],
+      "revId": "8d12f6abb0b1f9053c3ed2c414fe9bd41081905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2c09e3_08123660",
+        "filename": "media/utils/TimeCheck.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-19T21:30:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d593939_0d00dd62",
+      "range": {
+        "startLine": 327,
+        "startChar": 19,
+        "endLine": 327,
+        "endChar": 31
+      },
       "revId": "8d12f6abb0b1f9053c3ed2c414fe9bd41081905b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
