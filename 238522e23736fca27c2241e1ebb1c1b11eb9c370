@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f423e0a_354d8da9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-19T23:13:40Z",
+      "side": 1,
+      "message": "Thanks Dariusz! One reason I was pushing for a separate CL to address the races issue is that leaving access unprotected in some cases still makes the resulting behavior prone to races, so I would assume that more complete overhaul is needed.",
+      "revId": "238522e23736fca27c2241e1ebb1c1b11eb9c370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf80651b_482d8069",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1924,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-19T23:13:40Z",
+      "side": 1,
+      "message": "IMO, if we want to serialize access to the fields of `AudioCommand` properly, we should add thread safety annotations:\n\n```\n        class AudioCommand: public RefBase {\n...\n            mutable audio_utils::mutex mMutex{audio_utils::MutexOrder::kAudioCommand_Mutex};\n            mutable audio_utils::condition_variable mCond; // condition for status return\n            status_t mStatus GUARDED_BY(mMutex); // command status\n            bool mWaitStatus GUARDED_BY(mMutex); // true if caller is waiting for status\n...\n        };\n\n```\n\nalso, make immutable fields `const`, and then address all compiler complaints about non thread-safe access. Otherwise, it\u0027s just a half-measure which creates an illusion of thread safety, while still remaining prone to races.",
+      "range": {
+        "startLine": 1924,
+        "startChar": 25,
+        "endLine": 1924,
+        "endChar": 50
+      },
+      "revId": "238522e23736fca27c2241e1ebb1c1b11eb9c370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
