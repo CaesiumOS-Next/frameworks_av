@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec7ee99_6ce0f7f4",
+        "filename": "media/codec2/hal/hidl/1.0/utils/Component.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-19T19:50:03Z",
+      "side": 1,
+      "message": "looks like this should be a class and early skip should be a method. e.g.:\n\n```cpp\nclass BqPoolInvalidator {\npublic:\n  BqPoolInvalidator(std::list\u003cstd::shared_ptr\u003cC2BufferQueueBlockPool\u003e\u003e \u0026\u0026pools, int delayMs);\n  void skipWaiting();\n  \nprivate:\n  std::mutex m;\n  std::condition_variable cv;\n  std::atomic_bool skip;\n}\n```",
+      "revId": "9ce26ba47c55f2a8fff30a0f0455cbd0d9be8d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
