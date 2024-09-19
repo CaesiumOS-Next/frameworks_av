@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71e2d5f6_a0548e6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-09-19T04:47:07Z",
+      "side": 1,
+      "message": "Thanks for the explanation! That makes things more clear. From your description, the `mDirectOpenCount` increasment indicates that it is a shared stream. If the `mDirectOpenCount` remains 1 indicates that `stopOutput` is not called correctly. \n\nBack to the code, from my understanding, this CL wants to set `mPortId` as `NONE` from method `disconnect` and then call `stopOutput` when calling `start` and `mPortId` is `NONE`. AFAIK, the `disconnect` method will only be called when the MmapThreadHandle is destroyed. See [code](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/Threads.h;l\u003d2236;bpv\u003d1;bpt\u003d1). In that case, if `MmapThread::start` is called after `MmapThread::disconnect` is called, it is a severe problem as we are calling to something that is already destroyed or is destroying.\n\nThat sounds like a race condition that the mmap interface is freed when `start` method is not yet finished. Given the report is on a U code base, I will double check if this is already fix on latest build or not.\n\nBut the change of sending an error callback if the callback thread cannot be created is still needed.",
+      "parentUuid": "7d6910c2_c0b1c159",
+      "revId": "402e58c8e8b6a7625c07f4c22a30b63c1d5f227e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ce399a_1b72d148",
         "filename": "media/libaaudio/src/core/AudioStream.cpp",
         "patchSetId": 3
