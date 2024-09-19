@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d6910c2_c0b1c159",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1478901
+      },
+      "writtenOn": "2024-09-19T03:14:27Z",
+      "side": 1,
+      "message": "As diagram in report, there are `open` and `requestStart` from client which will `getOutputForAttr` with same configuration and lead the `mDirectOpenCount` of mmap output in AudioPolicyManager be increased into 2. If we do error handle in `wrapUserThread`, the mmap output will keep `mDirectOpenCount` as 1 and not to close the output. Maybe there should be a guideline for client to handle this situation instead of doing error handle inside server side?",
+      "parentUuid": "063b2e11_c7202f0d",
+      "revId": "402e58c8e8b6a7625c07f4c22a30b63c1d5f227e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ce399a_1b72d148",
         "filename": "media/libaaudio/src/core/AudioStream.cpp",
         "patchSetId": 3
