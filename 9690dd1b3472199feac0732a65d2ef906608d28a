@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ca797e_7276672d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-19T16:44:27Z",
+      "side": 1,
+      "message": "Hi @hunga@google.com, could you pls help provide another review? thanks!",
+      "revId": "9690dd1b3472199feac0732a65d2ef906608d28a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f67094_c2431421",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-19T16:44:27Z",
+      "side": 1,
+      "message": "nit: add a space here",
+      "fixSuggestions": [
+        {
+          "fixId": "1dcd381d_d377afb2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+              "range": {
+                "startLine": 861,
+                "startChar": 0,
+                "endLine": 862,
+                "endChar": 0
+              },
+              "replacement": "        LOG(VERBOSE) \u003c\u003c __func__ \u003c\u003c \" \" \u003c\u003c mType \u003c\u003c \" mInputChannelCount \" \u003c\u003c mInputChannelCount\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9690dd1b3472199feac0732a65d2ef906608d28a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4eed7fc_88211101",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-19T16:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "229de9c8_acd80e10",
+      "range": {
+        "startLine": 858,
+        "startChar": 73,
+        "endLine": 858,
+        "endChar": 134
+      },
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7eabbdc_df90bd1b",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-19T16:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84d8edf0_4455f4b8",
+      "range": {
+        "startLine": 858,
+        "startChar": 0,
+        "endLine": 858,
+        "endChar": 137
+      },
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5c8844a_ed0445bb",
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92dbc3ec_c9c0ff01",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-19T16:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5c8844a_ed0445bb",
+      "range": {
+        "startLine": 861,
+        "startChar": 0,
+        "endLine": 863,
+        "endChar": 0
+      },
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f84efffc_9b7cd1fa",
@@ -101,6 +173,30 @@
       "writtenOn": "2024-09-18T21:14:58Z",
       "side": 1,
       "message": "Looking at `BundleContext::initControlParameter`:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp;l\u003d610?q\u003dinitControlParameter\n\nNrChannels was assigned with output channel number. While it is true that input and output channel are usually same for now, we might not want to reply on this assumption. I suggest `params.NrChannels \u003d mOutputChannelCount`",
+      "range": {
+        "startLine": 872,
+        "startChar": 8,
+        "endLine": 872,
+        "endChar": 47
+      },
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0535fa85_33a5e8d3",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-19T16:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f84efffc_9b7cd1fa",
       "range": {
         "startLine": 872,
         "startChar": 8,
@@ -142,6 +238,24 @@
           ]
         }
       ],
+      "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d9aaa2_3833c967",
+        "filename": "media/libeffects/lvm/wrapper/Aidl/BundleContext.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-19T16:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cef1d74f_d39dc2d3",
       "revId": "1cfc72c8fcc7c45f5be050d5cc6d0c9b4b003569",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
