@@ -1069,7 +1069,9 @@ status_t MediaCodecsXmlParser::Impl::Parser::updateMediaCodec(
         codec.rank = rank;
     }
 
-    codec.variantSet = variants;
+    for (const std::string &variant : variants) {
+        codec.variantSet.emplace(variant);
+    }
 
     // we allow sets of domains...
     for (const std::string &domain : domains) {
