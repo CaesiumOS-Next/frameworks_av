@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "033286fe_55ae3fce",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-09-19T21:34:25Z",
+      "side": 1,
+      "message": "it works here, but could be fragile because lifetime is not guaranteed...",
+      "range": {
+        "startLine": 64,
+        "startChar": 21,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0be5a9c1_5e1cc7a4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "    return [mqName \u003d std::string(mqName)](MQTypeError fmqError,\n            std::string\u0026\u0026 errorMessage) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b59cfcfcf7f33e7e5a6e00c3ea25c5e4bbf05171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
