@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "558b7a0d_03812cc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-09-19T21:42:27Z",
+      "side": 1,
+      "message": "Separate review related to command status issue discussed in this review: https://android-review.googlesource.com/c/platform/frameworks/av/+/3271703\n\n@mnaganov@google.com, @elaurent@google.com, FYI",
+      "revId": "6311fad7ead2813b6322d31aec4a34e240eb93c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
