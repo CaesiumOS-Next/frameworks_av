@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f537b087_5e74af47",
+        "filename": "media/module/codecs/amrnb/dec/test/DynamicConfig.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-20T18:16:55Z",
+      "side": 1,
+      "message": "need to wait till aosp/3254536 is merged and the zip is uploaded.",
+      "revId": "f5e48d413459616251865c00855814846b61dd40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
