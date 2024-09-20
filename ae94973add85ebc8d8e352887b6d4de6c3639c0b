@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4016ffd_5cd88c79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-20T17:58:35Z",
+      "side": 1,
+      "message": "This is a CP of aosp/3260382 for updating the GSI image used in CTS-on-GSI tests.",
+      "revId": "ae94973add85ebc8d8e352887b6d4de6c3639c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
