@@ -488,7 +488,9 @@ public:
                     ::android::base::GetIntProperty(
                             "debug.codec2.bqpool_dealloc_after_stop", 0) != 0;
         }
+        ALOGD("C2BlockPoolCache APEX");
 #endif
+        ALOGD("C2BlockPoolCache COMMON");
     }
 
 private:
