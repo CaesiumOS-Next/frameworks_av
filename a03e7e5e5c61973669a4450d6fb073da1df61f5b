@@ -34,6 +34,24 @@
       ],
       "revId": "a03e7e5e5c61973669a4450d6fb073da1df61f5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a850bb9b_2b60acbc",
+        "filename": "media/libstagefright/xmlparser/MediaCodecsXmlParser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-21T04:43:32Z",
+      "side": 1,
+      "message": "Wonsik,\nI couldn\u0027t call merge because variants has a const qualifier.\nSo I used insert() instead.\nHope this is fine.",
+      "parentUuid": "a86bd928_2c97cb9a",
+      "revId": "a03e7e5e5c61973669a4450d6fb073da1df61f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
