@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44253f3f_871de070",
+        "filename": "media/mediaserver/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 3647897
+      },
+      "writtenOn": "2024-09-22T20:25:46Z",
+      "side": 0,
+      "message": "suggestion        \"libbinder\"",
+      "revId": "2d27d437c848b5f7cd2072289f40b7593b34f5cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
