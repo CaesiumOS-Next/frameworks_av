@@ -17,7 +17,7 @@
 
 #define LOG_TAG "mediaserver"
 //#define LOG_NDEBUG 0
-
+#include <android/binder_process.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
 #include <binder/IServiceManager.h>
@@ -41,7 +41,11 @@ int main(int argc __unused, char **argv __unused)
     ResourceManagerService::instantiate();
     registerExtensions();
     ::android::hardware::configureRpcThreadpool(16, false);
+    ABinderProcess_setThreadPoolMaxThreadCount(16);
+    ABinderProcess_startThreadPool();
     ProcessState::self()->startThreadPool();
+
     IPCThreadState::self()->joinThreadPool();
+    ABinderProcess_joinThreadPool();
     ::android::hardware::joinRpcThreadpool();
 }
