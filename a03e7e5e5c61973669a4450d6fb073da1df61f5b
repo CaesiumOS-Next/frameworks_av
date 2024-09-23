@@ -52,6 +52,24 @@
       "parentUuid": "a86bd928_2c97cb9a",
       "revId": "a03e7e5e5c61973669a4450d6fb073da1df61f5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2faf47e0_c93d02a5",
+        "filename": "media/libstagefright/xmlparser/MediaCodecsXmlParser.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-23T20:59:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a850bb9b_2b60acbc",
+      "revId": "a03e7e5e5c61973669a4450d6fb073da1df61f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
