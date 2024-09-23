@@ -227,8 +227,11 @@ class AudioPolicyManagerTest : public testing::Test {
     sp<AudioPolicyConfig> mConfig;
     std::unique_ptr<AudioPolicyManagerTestClient> mClient;
     std::unique_ptr<AudioPolicyTestManager> mManager;
+<<<<<<< HEAD   (2d27d4 Merge "Release audio patch just after it was created in case)
 
     static const std::string sTestEngineConfig;
+=======
+>>>>>>> BRANCH (ae9497 APM: Reject attempts to use DEEP_BUFFER in openDirectOutput)
 };
 
 const std::string AudioPolicyManagerTest::sTestEngineConfig =

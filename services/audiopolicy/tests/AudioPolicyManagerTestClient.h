@@ -42,8 +42,12 @@ public:
                         audio_config_base_t *mixerConfig,
                         const sp<DeviceDescriptorBase>& /*device*/,
                         uint32_t * /*latencyMs*/,
+<<<<<<< HEAD   (2d27d4 Merge "Release audio patch just after it was created in case)
                         audio_output_flags_t flags,
                         audio_attributes_t /*attributes*/) override {
+=======
+                        audio_output_flags_t flags) override {
+>>>>>>> BRANCH (ae9497 APM: Reject attempts to use DEEP_BUFFER in openDirectOutput)
         if (module >= mNextModuleHandle) {
             ALOGE("%s: Module handle %d has not been allocated yet (next is %d)",
                   __func__, module, mNextModuleHandle);
