@@ -22,6 +22,30 @@
       },
       "revId": "7a96c1f60463bf46dddd6801a8d4468c4374e18d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69ecda9_d7eee316",
+        "filename": "media/libaudiohal/impl/EffectHalAidl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-09-23T23:40:04Z",
+      "side": 1,
+      "message": "done, thanks for the review and suggestion",
+      "parentUuid": "7095f1b4_5bc5bd21",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 20
+      },
+      "revId": "7a96c1f60463bf46dddd6801a8d4468c4374e18d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
