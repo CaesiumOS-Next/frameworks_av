@@ -2228,6 +2228,12 @@ void CCodecBufferChannel::flush(const std::list<std::unique_ptr<C2Work>> &flushe
 void CCodecBufferChannel::onWorkDone(
         std::unique_ptr<C2Work> work, const sp<AMessage> &outputFormat,
         const C2StreamInitDataInfo::output *initData) {
+    if (mHasInputSurface && android::media::codec::provider_->input_surface_throttle()) {
+        Mutexed<InputSurface>::Locked inputSurface(mInputSurface);
+        --inputSurface->numProcessingBuffersBalance;
+        ALOGV("[%s] onWorkDone: numProcessingBuffersBalance = %lld",
+                mName, static_cast<long long>(inputSurface->numProcessingBuffersBalance));
+    }
     if (handleWork(std::move(work), outputFormat, initData)) {
         feedInputBufferIfAvailable();
     }
@@ -2655,12 +2661,6 @@ void CCodecBufferChannel::sendOutputBuffers() {
                         new WrapperObject<std::vector<AccessUnitInfo>>{accessUnitInfos}};
                     outBuffer->meta()->setObject("accessUnitInfo", obj);
                 }
-            }
-            if (mHasInputSurface && android::media::codec::provider_->input_surface_throttle()) {
-                Mutexed<InputSurface>::Locked inputSurface(mInputSurface);
-                --inputSurface->numProcessingBuffersBalance;
-                ALOGV("[%s] onOutputBufferAvailable: numProcessingBuffersBalance = %lld",
-                      mName, static_cast<long long>(inputSurface->numProcessingBuffersBalance));
             }
             mCallback->onOutputBufferAvailable(index, outBuffer);
             break;
