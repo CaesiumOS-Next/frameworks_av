@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c79c9e_0887878f",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-09-24T20:12:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20feb461_78ff8281",
+      "range": {
+        "startLine": 481,
+        "startChar": 3,
+        "endLine": 481,
+        "endChar": 55
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f4957a2_1cc0b993",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5cb73c6_d79569e7",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-09-24T20:12:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a16db0_ee3ba2a2",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 0
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c82cf0c1_719694a8",
@@ -84,6 +132,30 @@
       "writtenOn": "2024-09-13T08:26:34Z",
       "side": 1,
       "message": "redundant with line 848 if we use a block local variable for device in the : we exit at line 872 if device is changed while loop above.",
+      "range": {
+        "startLine": 880,
+        "startChar": 0,
+        "endLine": 880,
+        "endChar": 50
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a87ab5b4_f5e029f4",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-09-24T20:12:58Z",
+      "side": 1,
+      "message": "The device may be changed to null at line 869, and it doesn\u0027t exit. So we need to get it again here. Added a null check.",
+      "parentUuid": "c82cf0c1_719694a8",
       "range": {
         "startLine": 880,
         "startChar": 0,
