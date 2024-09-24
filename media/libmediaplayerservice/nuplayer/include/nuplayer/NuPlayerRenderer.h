@@ -178,6 +178,7 @@ private:
     AVSyncSettings mSyncSettings;
     float mVideoFpsHint;
 
+    int64_t mLastAudioAnchorNowUs;
     int64_t mAudioFirstAnchorTimeMediaUs;
     // previous audio anchor timestamp, in media time base.
     int64_t mAudioAnchorTimeMediaUs;
@@ -284,6 +285,8 @@ private:
 
     void onDrainVideoQueue();
     void postDrainVideoQueue();
+
+    void forceAudioUpdateAnchorTime();
 
     void prepareForMediaRenderingStart_l();
     void notifyIfMediaRenderingStarted_l();
