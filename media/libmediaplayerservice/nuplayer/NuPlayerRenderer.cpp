@@ -131,6 +131,7 @@ NuPlayer::Renderer::Renderer(
       mAudioEOSGeneration(0),
       mMediaClock(mediaClock),
       mPlaybackSettings(AUDIO_PLAYBACK_RATE_DEFAULT),
+      mLastAudioAnchorNowUs(-1),
       mAudioFirstAnchorTimeMediaUs(-1),
       mAudioAnchorTimeMediaUs(-1),
       mAnchorTimeMediaUs(-1),
@@ -658,6 +659,8 @@ void NuPlayer::Renderer::onMessageReceived(const sp<AMessage> &msg) {
                 break;
             }
 
+            forceAudioUpdateAnchorTime();
+
             mDrainVideoQueuePending = false;
 
             onDrainVideoQueue();
@@ -1007,6 +1010,7 @@ size_t NuPlayer::Renderer::fillAudioBuffer(void *buffer, size_t size) {
             mAudioFirstAnchorTimeMediaUs + mAudioSink->getPlayedOutDurationUs(nowUs);
         // we don't know how much data we are queueing for offloaded tracks.
         mMediaClock->updateAnchor(nowMediaUs, nowUs, INT64_MAX);
+        mLastAudioAnchorNowUs = nowUs;
     }
 
     // for non-offloaded audio, we need to compute the frames written because
@@ -1403,6 +1407,34 @@ void NuPlayer::Renderer::postDrainVideoQueue() {
     }
 
     mDrainVideoQueuePending = true;
+}
+
+void NuPlayer::Renderer::forceAudioUpdateAnchorTime() {
+    if (!(mHasAudio && offloadingAudio())) {
+        return;
+    }
+    {
+        Mutex::Autolock autoLock(mLock);
+        if (mLastAudioAnchorNowUs < 0) {
+            return;
+        }
+
+        const static auto kAudioAnchorTimeExpiryMs =
+                property_get_int32("media.stagefright.audio.anchor_time.expiry_ms", 5000);
+        const static int64_t kAudioAnchorTimeExpiryUs = kAudioAnchorTimeExpiryMs * 1000;
+
+        int64_t nowUs = ALooper::GetNowUs();
+
+        if (kAudioAnchorTimeExpiryUs > (nowUs - mLastAudioAnchorNowUs)) {
+            return;
+        }
+
+        int64_t nowMediaUs =
+                mAudioFirstAnchorTimeMediaUs + mAudioSink->getPlayedOutDurationUs(nowUs);
+        mMediaClock->updateAnchor(nowMediaUs, nowUs, INT64_MAX);
+        mLastAudioAnchorNowUs = nowUs;
+        ALOGV("%s: applied", __func__);
+    }
 }
 
 void NuPlayer::Renderer::onDrainVideoQueue() {
