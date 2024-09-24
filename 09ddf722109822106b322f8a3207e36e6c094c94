@@ -33,6 +33,24 @@
       "message": "Abhishek, thanks for proposing the change!\n\nThe value of `mFramesPerBurst` is initialized as 48 and updated by receiving data information from server, which is the device frames per burst. If it is 0, it indicates a potential problem from the server side. In that case, Abhishek, could you share at what case you noticed the value of `mFramesPerBurst` is 0? That can help us identify the problem from the aaudio service side.\n\nAlso adding Phil to review.",
       "revId": "09ddf722109822106b322f8a3207e36e6c094c94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a33341a7_a5078d82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-09-24T22:14:37Z",
+      "side": 1,
+      "message": "I agree with Jiabin. A framesPerBurst\u003d\u003d0 is a bug. I do not want to hide the bug. A /0 crash would be helpful here. If needed, we could add upstream checks for a framesPerBurst\u003d\u003d0 when the stream is opened.\n\nWas this issue found by a Linter or was there an actual crash?",
+      "parentUuid": "a373cf18_7ce06893",
+      "revId": "09ddf722109822106b322f8a3207e36e6c094c94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
