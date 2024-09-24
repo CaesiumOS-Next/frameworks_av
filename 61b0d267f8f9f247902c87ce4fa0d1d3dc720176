@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59c3fb5a_f4bca1ba",
+        "filename": "media/module/codecs/amrnb/common/include/basic_op_c_equivalent.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-09-24T06:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ac60d6_dae749e2",
+      "range": {
+        "startLine": 456,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 49
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6376d3d5_d5ff6c31",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-26T14:56:52Z",
       "side": 1,
       "message": "looking at the function semantics, I think we can write cleaner, more obvious code.\n\nl_abs() {\nif (l_var1 \u003e\u003d 0) return l_var1;\nif (l_var1 !\u003d 0x80000000) return -l_var1;\n// min_int winds up with same value\nreturn 0x80000000;\n\nlet\u0027s stomp out any uses of xor in this style.",
+      "range": {
+        "startLine": 189,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 15
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0bbd331_4f1a9eb8",
+        "filename": "media/module/codecs/amrnb/common/src/l_abs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-09-24T06:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6376d3d5_d5ff6c31",
       "range": {
         "startLine": 189,
         "startChar": 4,
@@ -98,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08bfff10_87b4d830",
+        "filename": "media/module/codecs/amrnb/common/src/lsp_az.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-09-24T06:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74ba4c05_210afb3f",
+      "range": {
+        "startLine": 284,
+        "startChar": 12,
+        "endLine": 285,
+        "endChar": 93
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6cbf8d3_e7aaf29c",
@@ -111,6 +183,30 @@
       "writtenOn": "2024-08-26T14:56:52Z",
       "side": 1,
       "message": "overly complicated l_abs().\nlet\u0027s just call l_abs() here.\n\nany of these xor ^ expressions left in the code is suspect.",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 30
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e967b4_835d6c95",
+        "filename": "media/module/codecs/amrnb/common/src/norm_l.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-09-24T06:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6cbf8d3_e7aaf29c",
       "range": {
         "startLine": 214,
         "startChar": 8,
@@ -144,6 +240,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c224f7a_9ce76cc5",
+        "filename": "media/module/codecs/amrnb/common/src/residu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-09-24T06:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c86b17c_e7b94699",
+      "range": {
+        "startLine": 232,
+        "startChar": 39,
+        "endLine": 232,
+        "endChar": 75
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19386786_81d2050b",
@@ -157,6 +277,30 @@
       "writtenOn": "2024-08-26T14:56:52Z",
       "side": 1,
       "message": "builtin_mul_overflow()?\n\nlots of instances of that.",
+      "range": {
+        "startLine": 346,
+        "startChar": 36,
+        "endLine": 346,
+        "endChar": 62
+      },
+      "revId": "61b0d267f8f9f247902c87ce4fa0d1d3dc720176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f08aca18_c86b04c0",
+        "filename": "media/module/codecs/amrnb/enc/src/autocorr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-09-24T06:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19386786_81d2050b",
       "range": {
         "startLine": 346,
         "startChar": 36,
