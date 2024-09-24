@@ -264,8 +264,9 @@ int64_t IsochronousClockModel::convertPositionToTime(int64_t framePosition) cons
     if (mState == STATE_STOPPED) {
         return mMarkerNanoTime;
     }
-    int64_t nextBurstIndex = (framePosition + mFramesPerBurst - 1) / mFramesPerBurst;
-    int64_t nextBurstPosition = mFramesPerBurst * nextBurstIndex;
+    int64_t framesPerBurst = (mFramesPerBurst == 0) ? 1 : mFramesPerBurst;
+    int64_t nextBurstIndex = (framePosition + framesPerBurst - 1) / framesPerBurst;
+    int64_t nextBurstPosition = framesPerBurst * nextBurstIndex;
     int64_t framesDelta = nextBurstPosition - mMarkerFramePosition;
     int64_t nanosDelta = convertDeltaPositionToTime(framesDelta);
     int64_t time = mMarkerNanoTime + nanosDelta;
@@ -279,11 +280,12 @@ int64_t IsochronousClockModel::convertTimeToPosition(int64_t nanoTime) const {
     if (mState == STATE_STOPPED) {
         return mMarkerFramePosition;
     }
+    int64_t framesPerBurst = (mFramesPerBurst == 0) ? 1 : mFramesPerBurst;
     int64_t nanosDelta = nanoTime - mMarkerNanoTime;
     int64_t framesDelta = convertDeltaTimeToPosition(nanosDelta);
     int64_t nextBurstPosition = mMarkerFramePosition + framesDelta;
-    int64_t nextBurstIndex = nextBurstPosition / mFramesPerBurst;
-    int64_t position = nextBurstIndex * mFramesPerBurst;
+    int64_t nextBurstIndex = nextBurstPosition / framesPerBurst;
+    int64_t position = nextBurstIndex * framesPerBurst
 //    ALOGD("convertTimeToPosition: time = %llu --> pos = %llu",
 //         (unsigned long long)nanoTime,
 //         (unsigned long long)position);
