@@ -3,7 +3,7 @@
     "presubmit-large": [
         // runs whenever we change something in this tree
         {
-            "name": "CtsMediaCodecTestCases",
+            "name": "MctsMediaCodecTestCases",
             "options": [
                 {
                     "include-filter": "android.media.codec.cts.EncodeDecodeTest"
@@ -11,10 +11,18 @@
             ]
         },
         {
-            "name": "CtsMediaCodecTestCases",
+            "name": "MctsMediaCodecTestCases",
             "options": [
                 {
                     "include-filter": "android.media.codec.cts.DecodeEditEncodeTest"
+                }
+            ]
+        },
+        {
+            "name": "MctsMediaCodecTestCases",
+            "options": [
+                {
+                    "include-filter": "android.media.codec.cts.ExtractDecodeEditEncodeMuxTest"
                 }
             ]
         }
