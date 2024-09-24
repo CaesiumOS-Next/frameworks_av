@@ -60,7 +60,6 @@
           "exclude-annotation": "android.platform.test.annotations.RequiresDevice"
         }
       ]
-    },
     {
       "name": "CtsMediaPlayerTestCases",
       "options": [
@@ -85,13 +84,37 @@
     // writerTest fails about 5 out of 66
     // { "name": "writerTest" },
     {
-       "name": "BatteryChecker_test"
+        "name": "BatteryChecker_test"
     },
     {
         "name": "ExtractorFactoryTest"
     },
     {
         "name": "HEVCUtilsUnitTest"
+    },
+    {
+      "name": "MctsMediaDecoderTestCases",
+      "options": [
+        {
+          "include-annotation": "android.platform.test.annotations.Presubmit"
+        }
+      ]
+    },
+    {
+      "name": "MctsMediaEncoderTestCases",
+      "options": [
+        {
+          "include-annotation": "android.platform.test.annotations.Presubmit"
+        }
+      ]
+    },
+    {
+      "name": "MctsMediaCodecTestCases",
+      "options": [
+        {
+          "include-annotation": "android.platform.test.annotations.Presubmit"
+        }
+      ]
     }
   ]
 }
