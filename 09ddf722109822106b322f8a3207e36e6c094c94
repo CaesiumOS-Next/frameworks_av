@@ -16,6 +16,23 @@
       "message": "Upstream from Meta! Thanks in advance for reviewing 😊",
       "revId": "09ddf722109822106b322f8a3207e36e6c094c94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a373cf18_7ce06893",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-09-24T16:42:40Z",
+      "side": 1,
+      "message": "Abhishek, thanks for proposing the change!\n\nThe value of `mFramesPerBurst` is initialized as 48 and updated by receiving data information from server, which is the device frames per burst. If it is 0, it indicates a potential problem from the server side. In that case, Abhishek, could you share at what case you noticed the value of `mFramesPerBurst` is 0? That can help us identify the problem from the aaudio service side.\n\nAlso adding Phil to review.",
+      "revId": "09ddf722109822106b322f8a3207e36e6c094c94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
