@@ -59,7 +59,7 @@ static bool isP010Allowed() {
     // The Vendor API level which is min(ro.product.first_api_level, ro.board.[first_]api_level).
     // This is the api level to which VSR requirement the device conform.
     static const int32_t kVendorApiLevel =
-        base::GetIntProperty<int32_t>("ro.vendor.api_level", 0);
+        base::GetIntProperty<int32_t>("ro.board.first_api_level", 0);
 
     return kVendorApiLevel >= __ANDROID_API_T__;
 }
