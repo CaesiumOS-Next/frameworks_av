@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5600e8bb_2e45d7bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-09-24T14:44:34Z",
+      "side": 1,
+      "message": "let\u0027s verify whether we need some of the casts -- as I observed in one of the last\nfiles in this CL.  I think we don\u0027t, but it\u0027s worth having a second opinion.",
+      "revId": "b1b6d19f8760d5d3158491644d023cc4ea5a9d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a2f150_e41f3dbb",
+        "filename": "media/module/codecs/amrnb/enc/src/pitch_ol.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-09-24T14:44:34Z",
+      "side": 1,
+      "message": "not sure that we need the cast here.\nI think the __builtin semantics are such that it looks at all 3 types (operands+result) to get the right precisions, etc.\n\n[there are number of places where we\u0027ve done this probably-unneeded cast].\n\nlooking at *p_signal as being word16, multiplying 2 of those always fits\ninto a word32. I think builtin knows this and probably optimizes it.\nI think the original expression before we did anything required a cast to make\nsure the intermediate values weren\u0027t clipped to word16.",
+      "range": {
+        "startLine": 1006,
+        "startChar": 32,
+        "endLine": 1006,
+        "endChar": 41
+      },
+      "revId": "b1b6d19f8760d5d3158491644d023cc4ea5a9d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
