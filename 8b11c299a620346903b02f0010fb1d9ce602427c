@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbe5164_4dbded05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-09-24T03:33:12Z",
+      "side": 1,
+      "message": "Should this be resourcemanager_service_fuzzer ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "8b11c299a620346903b02f0010fb1d9ce602427c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
