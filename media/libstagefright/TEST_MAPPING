@@ -29,7 +29,7 @@
       ]
     },
     {
-      "name": "CtsMediaDecoderTestCases",
+      "name": "MctsMediaDecoderTestCases",
       "options": [
         {
           "include-annotation": "android.platform.test.annotations.Presubmit"
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "name": "CtsMediaEncoderTestCases",
+      "name": "MctsMediaEncoderTestCases",
       "options": [
         {
           "include-annotation": "android.platform.test.annotations.Presubmit"
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "name": "CtsMediaCodecTestCases",
+      "name": "MctsMediaCodecTestCases",
       "options": [
         {
           "include-annotation": "android.platform.test.annotations.Presubmit"
@@ -85,7 +85,7 @@
     // writerTest fails about 5 out of 66
     // { "name": "writerTest" },
     {
-       "name": "BatteryChecker_test"
+        "name": "BatteryChecker_test"
     },
     {
         "name": "ExtractorFactoryTest"
