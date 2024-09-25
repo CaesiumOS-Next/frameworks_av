@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f0a65a_e6d2e1de",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-25T08:41:21Z",
+      "side": 1,
+      "message": "no need to recall EngineBase as if we make getInputDeviceForEchoRef protected",
+      "range": {
+        "startLine": 482,
+        "startChar": 17,
+        "endLine": 482,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "534028fb_aa496f83",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+              "range": {
+                "startLine": 482,
+                "startChar": 0,
+                "endLine": 483,
+                "endChar": 0
+              },
+              "replacement": "        device \u003d getInputDeviceForEchoRef(attr, availableInputDevices);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9f5096f934b33d73e4ddd1a1757e439784aef82c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89104e4_94e2e53c",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-25T08:41:21Z",
+      "side": 1,
+      "message": "sp\u003cDeviceDescriptor\u003e device2 \u003d getInputDeviceForEchoRef(attr, availableInputDevices);\nif (device2 !\u003d nullptr) {\n            return device2;\n            }\n            \n            and remove lines 857 to 860",
+      "range": {
+        "startLine": 851,
+        "startChar": 0,
+        "endLine": 851,
+        "endChar": 83
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "21f6cd91_94cb0683",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 851,
+                "startChar": 0,
+                "endLine": 854,
+                "endChar": 0
+              },
+              "replacement": "        sp\u003cDeviceDescriptor\u003e device2 \u003d\n                EngineBase::getInputDeviceForEchoRef(attr, availableInputDevices);\n        if (device2 !\u003d nullptr) {\n            return device2;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9f5096f934b33d73e4ddd1a1757e439784aef82c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
