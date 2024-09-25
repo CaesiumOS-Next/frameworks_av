@@ -79,11 +79,7 @@
     },
     {
       "name": "CtsMediaTranscodingTestCases"
-    }
-  ],
-  "postsubmit": [
-    // writerTest fails about 5 out of 66
-    // { "name": "writerTest" },
+    },
     {
         "name": "BatteryChecker_test"
     },
@@ -118,4 +114,8 @@
       ]
     }
   ]
+  // "postsubmit": [
+  //   writerTest fails about 5 out of 66
+  //   { "name": "writerTest" },
+  // ]
 }
