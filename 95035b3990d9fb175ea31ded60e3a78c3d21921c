@@ -1,0 +1,109 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c835bdb_8454fb00",
+        "filename": "services/audioflinger/datapath/AudioHwDevice.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-25T23:37:46Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 101
+      },
+      "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ef1ee4_1ab7f1f3",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-25T23:37:46Z",
+      "side": 1,
+      "message": "Please use initializer at the field definition site.",
+      "range": {
+        "startLine": 35,
+        "startChar": 10,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "738052bb_8399467d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/datapath/AudioStreamOut.cpp",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1456e987_1e67164b",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-25T23:37:46Z",
+      "side": 1,
+      "message": "Please add `explicit`",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 4
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5243c085_cd1eab65",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/datapath/AudioStreamOut.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "    explicit AudioStreamOut(AudioHwDevice *dev);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
