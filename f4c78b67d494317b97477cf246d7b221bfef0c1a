@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3853ef00_67fed6c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-09-25T22:14:24Z",
+      "side": 1,
+      "message": "Echoing Eric\u0027s comment.",
+      "revId": "f4c78b67d494317b97477cf246d7b221bfef0c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d48c17f_e9678bc1",
