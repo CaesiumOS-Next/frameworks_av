@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc869d99_5ced57bd",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-09-25T04:35:25Z",
+      "side": 1,
+      "message": "I need to do this on first ref.",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 44
+      },
+      "revId": "f0542bb5ebfb1d3658b3b98574209a8d2ea83be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
