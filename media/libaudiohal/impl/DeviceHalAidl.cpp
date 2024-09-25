@@ -22,6 +22,7 @@
 #include <aidl/android/hardware/audio/core/BnStreamCallback.h>
 #include <aidl/android/hardware/audio/core/BnStreamOutEventCallback.h>
 #include <aidl/android/hardware/audio/core/StreamDescriptor.h>
+#include <android/binder_ibinder_platform.h>
 #include <error/expected_utils.h>
 #include <media/AidlConversionCppNdk.h>
 #include <media/AidlConversionNdk.h>
@@ -29,6 +30,8 @@
 #include <media/AidlConversionUtil.h>
 #include <mediautils/TimeCheck.h>
 #include <system/audio.h>
+#include <system/thread_defs.h>
+
 #include <Utils.h>
 #include <utils/Log.h>
 
@@ -415,7 +418,11 @@ class OutputStreamCallbackAidl : public StreamCallbackBase,
     explicit OutputStreamCallbackAidl(const sp<CallbackBroker>& broker)
             : StreamCallbackBase(broker),
               StreamCallbackBaseHelper<StreamOutHalInterfaceCallback>(
-                      *static_cast<StreamCallbackBase*>(this)) {}
+                      *static_cast<StreamCallbackBase*>(this)) {
+        ndk::SpAIBinder binder = asBinder();
+        AIBinder_setMinSchedulerPolicy(binder.get(), SCHED_NORMAL, ANDROID_PRIORITY_AUDIO);
+        AIBinder_setInheritRt(binder.get(), true);
+    }
     ndk::ScopedAStatus onTransferReady() override {
         return runCb([](CbRef cb) { cb->onWriteReady(); });
     }
@@ -438,7 +445,11 @@ class OutputStreamEventCallbackAidl :
               StreamCallbackBaseHelper<StreamOutHalInterfaceEventCallback>(
                       *static_cast<StreamCallbackBase*>(this)),
               StreamCallbackBaseHelper<StreamOutHalInterfaceLatencyModeCallback>(
-                      *static_cast<StreamCallbackBase*>(this)) {}
+                      *static_cast<StreamCallbackBase*>(this)) {
+        ndk::SpAIBinder binder = asBinder();
+        AIBinder_setMinSchedulerPolicy(binder.get(), SCHED_NORMAL, ANDROID_PRIORITY_AUDIO);
+        AIBinder_setInheritRt(binder.get(), true);
+    }
     ndk::ScopedAStatus onCodecFormatChanged(const std::vector<uint8_t>& halMetadata) override {
         return StreamCallbackBaseHelper<StreamOutHalInterfaceEventCallback>::runCb(
                 [&halMetadata](auto cb) { cb->onCodecFormatChanged(halMetadata); });
