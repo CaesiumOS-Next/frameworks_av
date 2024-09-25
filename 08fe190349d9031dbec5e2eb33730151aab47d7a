@@ -50,6 +50,24 @@
       "message": "Based on Harish\u0027s comment.\nI will give +2 after confirming there is no regression.",
       "revId": "08fe190349d9031dbec5e2eb33730151aab47d7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8ba9017_2a29a0f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-09-25T20:25:47Z",
+      "side": 1,
+      "message": "the fix for the regression included in the chain",
+      "parentUuid": "b5d5c0a5_45e9601e",
+      "revId": "08fe190349d9031dbec5e2eb33730151aab47d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
