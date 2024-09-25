@@ -23,6 +23,7 @@
 #include <binder/Parcel.h>
 #include <media/IMediaHTTPService.h>
 #include <media/IMediaMetadataRetriever.h>
+#include <utils/Mutex.h>
 #include <utils/String8.h>
 #include <utils/KeyedVector.h>
 
@@ -122,10 +123,13 @@ public:
         data.writeInt32(option);
         data.writeInt32(colorFormat);
         data.writeInt32(metaOnly);
-        remote()->transact(GET_FRAME_AT_TIME, data, &reply);
-        status_t ret = reply.readInt32();
-        if (ret != NO_ERROR) {
-            return NULL;
+        {
+            Mutex::Autolock glock(sLock);
+            remote()->transact(GET_FRAME_AT_TIME, data, &reply);
+            status_t ret = reply.readInt32();
+            if (ret != NO_ERROR) {
+                return NULL;
+            }
         }
         return interface_cast<IMemory>(reply.readStrongBinder());
     }
@@ -140,10 +144,13 @@ public:
         data.writeInt32(colorFormat);
         data.writeInt32(metaOnly);
         data.writeInt32(thumbnail);
-        remote()->transact(GET_IMAGE_AT_INDEX, data, &reply);
-        status_t ret = reply.readInt32();
-        if (ret != NO_ERROR) {
-            return NULL;
+        {
+            Mutex::Autolock glock(sLock);
+            remote()->transact(GET_IMAGE_AT_INDEX, data, &reply);
+            status_t ret = reply.readInt32();
+            if (ret != NO_ERROR) {
+                return NULL;
+            }
         }
         return interface_cast<IMemory>(reply.readStrongBinder());
     }
@@ -161,10 +168,13 @@ public:
         data.writeInt32(top);
         data.writeInt32(right);
         data.writeInt32(bottom);
-        remote()->transact(GET_IMAGE_RECT_AT_INDEX, data, &reply);
-        status_t ret = reply.readInt32();
-        if (ret != NO_ERROR) {
-            return NULL;
+        {
+            Mutex::Autolock glock(sLock);
+            remote()->transact(GET_IMAGE_RECT_AT_INDEX, data, &reply);
+            status_t ret = reply.readInt32();
+            if (ret != NO_ERROR) {
+                return NULL;
+            }
         }
         return interface_cast<IMemory>(reply.readStrongBinder());
     }
@@ -179,10 +189,13 @@ public:
         data.writeInt32(index);
         data.writeInt32(colorFormat);
         data.writeInt32(metaOnly);
-        remote()->transact(GET_FRAME_AT_INDEX, data, &reply);
-        status_t ret = reply.readInt32();
-        if (ret != NO_ERROR) {
-            return NULL;
+        {
+            Mutex::Autolock glock(sLock);
+            remote()->transact(GET_FRAME_AT_INDEX, data, &reply);
+            status_t ret = reply.readInt32();
+            if (ret != NO_ERROR) {
+                return NULL;
+            }
         }
         return interface_cast<IMemory>(reply.readStrongBinder());
     }
@@ -225,7 +238,12 @@ public:
 
 private:
     KeyedVector<int, String8> mMetadata;
+    // Static lock was moved from the service to the client(here).
+    // For the reason why the lock is necessary, see also b/21277440.
+    static Mutex sLock;
 };
+
+Mutex BpMediaMetadataRetriever::sLock;
 
 IMPLEMENT_META_INTERFACE(MediaMetadataRetriever, "android.media.IMediaMetadataRetriever");
 

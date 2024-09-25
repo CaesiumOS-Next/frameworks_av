@@ -191,15 +191,12 @@ status_t MetadataRetrieverClient::setDataSource(
     return ret;
 }
 
-Mutex MetadataRetrieverClient::sLock;
-
 sp<IMemory> MetadataRetrieverClient::getFrameAtTime(
         int64_t timeUs, int option, int colorFormat, bool metaOnly)
 {
     ALOGV("getFrameAtTime: time(%lld us) option(%d) colorFormat(%d), metaOnly(%d)",
             (long long)timeUs, option, colorFormat, metaOnly);
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -217,7 +214,6 @@ sp<IMemory> MetadataRetrieverClient::getImageAtIndex(
     ALOGV("getImageAtIndex: index(%d) colorFormat(%d), metaOnly(%d) thumbnail(%d)",
             index, colorFormat, metaOnly, thumbnail);
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -235,7 +231,6 @@ sp<IMemory> MetadataRetrieverClient::getImageRectAtIndex(
     ALOGV("getImageRectAtIndex: index(%d) colorFormat(%d), rect {%d, %d, %d, %d}",
             index, colorFormat, left, top, right, bottom);
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
@@ -253,7 +248,6 @@ sp<IMemory> MetadataRetrieverClient::getFrameAtIndex(
     ALOGV("getFrameAtIndex: index(%d), colorFormat(%d), metaOnly(%d)",
             index, colorFormat, metaOnly);
     Mutex::Autolock lock(mLock);
-    Mutex::Autolock glock(sLock);
     if (mRetriever == NULL) {
         ALOGE("retriever is not initialized");
         return NULL;
