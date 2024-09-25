@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d7840b2_c2322d82",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-25T12:04:16Z",
+      "side": 1,
+      "message": "did repo upload complain if these weren\u0027t reordered?\nif not, then better to keep the old order and only make required changes.",
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb930b7_b9dec2c8",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-25T12:04:16Z",
+      "side": 1,
+      "message": "revert unrelated change",
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6326f235_7ffd8a34",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-25T12:04:16Z",
+      "side": 1,
+      "message": "should this be renamed to MakeVP9CodecPrivateFromFirstFrame",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 29
+      },
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d9007a_7270a3f4",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-25T12:04:16Z",
+      "side": 1,
+      "message": "create a function that takes profile, level, bitdepth and chroma subsampling as arguments and use that here and in the function above.\n\nadd level only if it is \u003e\u003d 0 and in the function above, call with level set to 0.",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 88
+      },
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
