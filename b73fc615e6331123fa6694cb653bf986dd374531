@@ -16,6 +16,24 @@
       "message": "It seems `frameworks/av/media/libmedia/mediametadataretriever.cpp` is the only significant user of this API; can we put the serialization there?",
       "revId": "b73fc615e6331123fa6694cb653bf986dd374531",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c22d5590_d939af95",
+        "filename": "media/libmedia/IMediaMetadataRetriever.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-09-25T23:30:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee7bd3b9_d6190456",
+      "revId": "b73fc615e6331123fa6694cb653bf986dd374531",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
