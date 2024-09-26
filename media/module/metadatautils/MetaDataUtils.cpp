@@ -137,7 +137,7 @@ static bool getVp9BitdepthChromaSubSampling(ABitReader &bits,
 // The param data contains the first frame data, starting with the uncompressed frame
 // header. This uncompressed header (refer section 6.2 of the VP9 bitstream spec) is
 // used to parse profile, bitdepth and subsampling.
-bool MakeVP9CodecSpecificData(AMediaFormat* meta, const uint8_t* data, size_t size) {
+bool MakeVP9CodecSpecificDataFromFirstFrame(AMediaFormat* meta, const uint8_t* data, size_t size) {
     if (meta == nullptr || data == nullptr || size == 0) {
         return false;
     }
