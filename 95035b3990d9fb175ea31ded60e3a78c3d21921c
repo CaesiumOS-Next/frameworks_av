@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a9cae5_cb739caf",
+        "filename": "services/audioflinger/datapath/AudioHwDevice.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2024-09-26T18:46:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c835bdb_8454fb00",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 101
+      },
+      "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51ef1ee4_1ab7f1f3",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8b2b4a7_53b55814",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2024-09-26T18:46:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51ef1ee4_1ab7f1f3",
+      "range": {
+        "startLine": 35,
+        "startChar": 10,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1456e987_1e67164b",
@@ -119,6 +167,30 @@
           ]
         }
       ],
+      "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172103eb_2783c36c",
+        "filename": "services/audioflinger/datapath/AudioStreamOut.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2024-09-26T18:46:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1456e987_1e67164b",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 4
+      },
       "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
