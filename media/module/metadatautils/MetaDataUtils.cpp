@@ -134,10 +134,49 @@ static bool getVp9BitdepthChromaSubSampling(ABitReader &bits,
     }
     return true;
 }
+
+// Build VP9 Codec Feature Metadata (CodecPrivate) to set CSD for VP9 codec.
+// For reference:
+// https://www.webmproject.org/docs/container/#vp9-codec-feature-metadata-codecprivate.
+static bool MakeVP9CodecPrivate(AMediaFormat* meta, int32_t csdSize, int32_t profile, int32_t level,
+                                int32_t bitDepth, int32_t chromaSubsampling) {
+    if (!meta) {
+        return false;
+    }
+    sp<ABuffer> codecPrivate = sp<ABuffer>::make(csdSize);
+    uint8_t* codecPrivateData = codecPrivate->data();
+
+    // Construct CodecPrivate in WebM format (ID | Length | Data).
+    // Profile
+    *codecPrivateData++ = 0x01;  // ID for Profile
+    *codecPrivateData++ = 0x01;  // Length for Profile
+    *codecPrivateData++ = static_cast<uint8_t>(profile);
+
+    // Level
+    if (level >= 0) {
+        *codecPrivateData++ = 0x02;  // ID for Level.
+        *codecPrivateData++ = 0x01;  // Length for Level.
+        *codecPrivateData++ = static_cast<uint8_t>(level);
+    }
+
+    // Bit Depth
+    *codecPrivateData++ = 0x03;  // ID for Bit Depth.
+    *codecPrivateData++ = 0x01;  // Length for Bit Depth.
+    *codecPrivateData++ = static_cast<uint8_t>(bitDepth);
+
+    // Chroma Subsampling
+    *codecPrivateData++ = 0x04;  // ID for Chroma Subsampling.
+    *codecPrivateData++ = 0x01;  // Length for Chroma Subsampling.
+    *codecPrivateData++ = static_cast<uint8_t>(chromaSubsampling);
+    // Set CSD in the meta format.
+    AMediaFormat_setBuffer(meta, AMEDIAFORMAT_KEY_CSD_0, codecPrivate->data(), csdSize);
+    return true;
+}
+
 // The param data contains the first frame data, starting with the uncompressed frame
 // header. This uncompressed header (refer section 6.2 of the VP9 bitstream spec) is
 // used to parse profile, bitdepth and subsampling.
-bool MakeVP9CodecSpecificData(AMediaFormat* meta, const uint8_t* data, size_t size) {
+bool MakeVP9CodecSpecificDataFromFirstFrame(AMediaFormat* meta, const uint8_t* data, size_t size) {
     if (meta == nullptr || data == nullptr || size == 0) {
         return false;
     }
@@ -227,29 +266,36 @@ bool MakeVP9CodecSpecificData(AMediaFormat* meta, const uint8_t* data, size_t si
     if (chromaSubsampling != -1) {
         csdSize += 3;
     }
+    // As level is not present in first frame build CodecPrivate without it.
+    return MakeVP9CodecPrivate(meta, csdSize, profile, -1, bitDepth, chromaSubsampling);
+}
 
-    // Create VP9 Codec Feature Metadata (CodecPrivate) that can be parsed
-    // https://www.webmproject.org/docs/container/#vp9-codec-feature-metadata-codecprivate
-    sp<ABuffer> csd = sp<ABuffer>::make(csdSize);
-    uint8_t* csdData = csd->data();
-
-    *csdData++ = 0x01 /* FEATURE PROFILE */;
-    *csdData++ = 0x01 /* length */;
-    *csdData++ = profile;
-
-    *csdData++ = 0x03 /* FEATURE BITDEPTH */;
-    *csdData++ = 0x01 /* length */;
-    *csdData++ = bitDepth;
-
-    // csdSize more than 6 means chroma subsampling data was found.
-    if (csdSize > 6) {
-        *csdData++ = 0x04 /* FEATURE SUBSAMPLING */;
-        *csdData++ = 0x01 /* length */;
-        *csdData++ = chromaSubsampling;
+bool MakeVP9CodecPrivateFromVpcC(AMediaFormat* meta, const uint8_t* csdData) {
+    if (!meta || !csdData) {  // Check for valid format and csd data
+        return false;
     }
 
-    AMediaFormat_setBuffer(meta, AMEDIAFORMAT_KEY_CSD_0, csd->data(), csd->size());
-    return true;
+    // Define the required VersionAndFlags value
+    int32_t versionAndFlag = 1 << 24;  // Equivalent to 0x01000000 in hexadecimal
+
+    // Extract the first 4 bytes (VersionAndFlags) and check if they match the required value.
+    int32_t versionAndFlagsData =
+            (csdData[0] << 24) | (csdData[1] << 16) | (csdData[2] << 8) | csdData[3];
+    if (versionAndFlagsData != versionAndFlag) {
+        return false;  // Return false if VersionAndFlags do not match.
+    }
+
+    // Create VP9 Codec Feature Metadata (CodecPrivate) that can be parsed.
+    // https://www.webmproject.org/docs/container/#vp9-codec-feature-metadata-codecprivate
+    size_t csdSize = 12;  // Fixed size for profile, level, bit depth, etc.
+
+    const uint8_t* vpcCData = csdData + 4;  // Skip the first 4 bytes (VersionAndFlags)
+
+    int32_t profile = vpcCData[0];
+    int32_t level = vpcCData[1];
+    int32_t bitDepth = (vpcCData[2] >> 4) & 0x0F;           // Bit Depth ( 4 bits).
+    int32_t chromaSubsampling = (vpcCData[2] >> 1) & 0x07;  // Chroma Subsampling (3 bits).
+    return MakeVP9CodecPrivate(meta, csdSize, profile, level, bitDepth, chromaSubsampling);
 }
 
 bool MakeAACCodecSpecificData(MetaDataBase &meta, const uint8_t *data, size_t size) {
