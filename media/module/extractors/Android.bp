@@ -28,6 +28,10 @@ cc_defaults {
         "liblog",
     ],
 
+    static_libs: [
+        "libstagefright_metadatautils",
+    ],
+
     // extractors are expected to run on Q(29)
     min_sdk_version: "29",
     apex_available: [
@@ -38,8 +42,8 @@ cc_defaults {
     relative_install_path: "extractors",
 
     cflags: [
-        "-Werror",
         "-Wall",
+        "-Werror",
         "-fvisibility=hidden",
     ],
 
@@ -53,9 +57,10 @@ cc_defaults {
         },
         host: {
             static_libs: [
-                "libutils",
-                "libmediandk_format",
                 "libmedia_ndkformatpriv",
+                "libmediandk_format",
+                "libstagefright_metadatautils",
+                "libutils",
             ],
         },
     },
@@ -63,8 +68,8 @@ cc_defaults {
     sanitize: {
         cfi: true,
         misc_undefined: [
-            "unsigned-integer-overflow",
             "signed-integer-overflow",
+            "unsigned-integer-overflow",
         ],
     },
 }
