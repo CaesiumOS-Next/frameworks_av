@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58667231_ad133678",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2024-09-26T22:57:53Z",
+      "side": 1,
+      "message": "Thanks Mikhail, this should be resolved in PS12.",
+      "parentUuid": "fca7b322_54c22a81",
+      "revId": "95035b3990d9fb175ea31ded60e3a78c3d21921c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c835bdb_8454fb00",
