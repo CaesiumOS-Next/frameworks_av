@@ -519,7 +519,13 @@ public:
         }
         return fromAidlStatus(mSource->configure(
                 (*node), static_cast<::aidl::android::hardware::graphics::common::Dataspace>(
+<<<<<<< HEAD   (35918f Merge "update aconfig lib setup for host test" into main)
                         dataspace)));
+||||||| BASE
+                        mDataSpace)));
+=======
+                        mDataSpace)));
+>>>>>>> BRANCH (4aa3f7 CCodecBufferChannel: decrease balance for discarded work as )
     }
 
     void disconnect() override {
