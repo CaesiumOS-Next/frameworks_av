@@ -188,6 +188,30 @@
       },
       "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb236b4a_68b10678",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1101748
+      },
+      "writtenOn": "2024-09-26T18:13:58Z",
+      "side": 1,
+      "message": "Got it. Changed to a local variable device2. Thanks!",
+      "parentUuid": "c9c9b66a_1142aab6",
+      "range": {
+        "startLine": 880,
+        "startChar": 0,
+        "endLine": 880,
+        "endChar": 50
+      },
+      "revId": "250b88d8f6771f99d0a399f8c8ab221960280927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
