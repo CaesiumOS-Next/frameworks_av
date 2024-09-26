@@ -40,7 +40,7 @@ void parseVorbisComment(
 
 bool MakeVP9CodecPrivate(AMediaFormat* meta, int32_t csdSize, int32_t profile, int32_t level,
                          int32_t bitDepth, int32_t chromaSubsampling);
-bool MakeVP9CodecSpecificData(AMediaFormat* meta, const uint8_t* data, size_t size);
+bool MakeVP9CodecSpecificDataFromFirstFrame(AMediaFormat* meta, const uint8_t* data, size_t size);
 bool MakeVP9CodecPrivateFromCsd(AMediaFormat* meta, const uint8_t* data);
 
 }  // namespace android
