@@ -51,6 +51,24 @@
       "parentUuid": "a373cf18_7ce06893",
       "revId": "09ddf722109822106b322f8a3207e36e6c094c94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6742566_f72a5eca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2024-09-26T18:06:38Z",
+      "side": 1,
+      "message": "Thanks for the feedback and agree that it will hide the bug. We will investigate this further on our side. Abandoning the patch.",
+      "parentUuid": "a33341a7_a5078d82",
+      "revId": "09ddf722109822106b322f8a3207e36e6c094c94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
