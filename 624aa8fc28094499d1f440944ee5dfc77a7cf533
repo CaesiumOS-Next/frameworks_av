@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a10ffdd7_da4f1e7c",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-09-26T09:17:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d7840b2_c2322d82",
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeb930b7_b9dec2c8",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-25T12:04:16Z",
       "side": 1,
       "message": "revert unrelated change",
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baffb30b_fec47636",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-09-26T09:17:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb930b7_b9dec2c8",
       "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f616c5e6_af8d8944",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-09-26T09:17:32Z",
+      "side": 1,
+      "message": "created new [CL](https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3283104/2) to have clean commit.",
+      "parentUuid": "6326f235_7ffd8a34",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 29
+      },
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3d9007a_7270a3f4",
@@ -71,6 +131,30 @@
       "writtenOn": "2024-09-25T12:04:16Z",
       "side": 1,
       "message": "create a function that takes profile, level, bitdepth and chroma subsampling as arguments and use that here and in the function above.\n\nadd level only if it is \u003e\u003d 0 and in the function above, call with level set to 0.",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 88
+      },
+      "revId": "624aa8fc28094499d1f440944ee5dfc77a7cf533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "686832cf_705f476b",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-09-26T09:17:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3d9007a_7270a3f4",
       "range": {
         "startLine": 278,
         "startChar": 0,
