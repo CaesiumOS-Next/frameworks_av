@@ -128,6 +128,7 @@ status_t Hal2AidlMapper::createOrUpdatePatch(
         int32_t* patchId, Cleanups* cleanups) {
     auto existingPatchIt = *patchId != 0 ? mPatches.find(*patchId): mPatches.end();
     AudioPatch patch;
+    AudioPatch updatedPatch;
     if (existingPatchIt != mPatches.end()) {
         patch = existingPatchIt->second;
         patch.sourcePortConfigIds.clear();
@@ -202,9 +203,13 @@ status_t Hal2AidlMapper::createOrUpdatePatch(
     RETURN_STATUS_IF_ERROR(fillPortConfigs(
                     mixPortConfigs, devicePortIds, mixPortConfigIds, nullptr));
     if (existingPatchIt != mPatches.end()) {
-        RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(
-                        mModule->setAudioPatch(patch, &patch)));
-        existingPatchIt->second = patch;
+        status_t status = statusTFromBinderStatus(mModule->setAudioPatch(patch, &updatedPatch));
+        existingPatchIt->second = updatedPatch;
+        ALOGI("%s: updated patch: %s, status:%d",
+                        __func__, updatedPatch.toString().c_str(), status);
+
+        if (status != OK)
+            return status;
     } else {
         bool created = false;
         // When the framework does not specify a patch ID, only the mix port config
