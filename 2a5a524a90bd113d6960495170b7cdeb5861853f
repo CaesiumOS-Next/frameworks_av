@@ -51,6 +51,24 @@
       ],
       "revId": "2a5a524a90bd113d6960495170b7cdeb5861853f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd62c8a_993c32b0",
+        "filename": "media/libaudiohal/impl/DeviceHalHidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-27T23:30:30Z",
+      "side": 1,
+      "message": "Usually it\u0027s implemented either via `setParams` which never fails: https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/audio/core/all-versions/default/Device.cpp;l\u003d549;drc\u003d43966208b7ef50c51a58e82c6d7c10ee9e115860, or as a stub which always returns `NOT_SUPPORTED`: https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/audio/core/all-versions/default/Device.cpp;l\u003d549;drc\u003d43966208b7ef50c51a58e82c6d7c10ee9e115860.\n\nSo I don\u0027t think that logging any of these cases would be helpful. Logging any other error is helpful, and this is what we do below.",
+      "parentUuid": "132d89d1_09c28577",
+      "revId": "2a5a524a90bd113d6960495170b7cdeb5861853f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
