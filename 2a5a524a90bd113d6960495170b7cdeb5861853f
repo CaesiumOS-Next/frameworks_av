@@ -16,6 +16,41 @@
       "message": "This is same as aosp/3223062 + changes in DeviceHalHidl to allow E2E tests to pass on HIDL implementations that do not implement \u0027setDeviceConnected\u0027.",
       "revId": "2a5a524a90bd113d6960495170b7cdeb5861853f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132d89d1_09c28577",
+        "filename": "media/libaudiohal/impl/DeviceHalHidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-09-27T23:22:17Z",
+      "side": 1,
+      "message": "nit, will it be good to add a debug log if the HAL returns NOT_SUPPORTED?",
+      "fixSuggestions": [
+        {
+          "fixId": "ca91f848_6248e7dc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/DeviceHalHidl.cpp",
+              "range": {
+                "startLine": 627,
+                "startChar": 0,
+                "endLine": 627,
+                "endChar": 0
+              },
+              "replacement": "        ALOGD(\"setConnectedState is not supported by the HAL\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2a5a524a90bd113d6960495170b7cdeb5861853f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
