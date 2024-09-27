@@ -112,6 +112,30 @@
       },
       "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e4bf41_54691bc3",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5139,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-09-27T06:05:24Z",
+      "side": 1,
+      "message": "@elaurent@google.com\nWe are in discussion with our platform vendor regarding the buffer length.\nThey have proposed a solution that will set the buffer size to 40ms regardless of samplerate and I have verified that the values are correct and works fine as in no fastmixer is applied. We still think this would be a nice touch to get a log warning together with not getting the fastmixer.\nI agree that fixing this without fixing the rootcause (short buffers for higher samplerates) is not good.",
+      "parentUuid": "3c19855c_c95fb54c",
+      "range": {
+        "startLine": 5139,
+        "startChar": 0,
+        "endLine": 5139,
+        "endChar": 60
+      },
+      "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
