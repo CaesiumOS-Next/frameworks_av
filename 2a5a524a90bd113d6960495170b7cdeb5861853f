@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7a3e24b_7f0f0f47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-27T00:17:27Z",
+      "side": 1,
+      "message": "This is same as aosp/3223062 + changes in DeviceHalHidl to allow E2E tests to pass on HIDL implementations that do not implement \u0027setDeviceConnected\u0027.",
+      "revId": "2a5a524a90bd113d6960495170b7cdeb5861853f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
