@@ -324,14 +324,82 @@ media_status_t MidiExtractor::getMetaData(AMediaFormat *meta)
 }
 
 // Sniffer
+class SniffBuffer {
+public:
+    static const int CACHE_SIZE = 1024;
+
+    SniffBuffer(CDataSource *source) : mSource(source), mCacheOffset(-1), mCacheSize(0) {
+        mCache = new char[CACHE_SIZE];
+    }
+
+    ~SniffBuffer() {
+        delete[] mCache;
+    }
+
+    int readAt(void *buf, int offset, int size) {
+        int bytesRead = 0;
+        char *charBuf = static_cast<char*>(buf);
+
+        while (bytesRead < size) {
+            if (offset >= mCacheOffset && offset < mCacheOffset + mCacheSize) {
+                // Data is in cache
+                int cachePos = offset - mCacheOffset;
+                int bytesToCopy = std::min(mCacheSize - cachePos, size - bytesRead);
+                std::memcpy(charBuf + bytesRead, mCache + cachePos, bytesToCopy);
+                bytesRead += bytesToCopy;
+                offset += bytesToCopy;
+            } else {
+                // Data is not in cache, need to read from source
+                mCacheOffset = offset;
+                mCacheSize = mSource->readAt(mSource->handle, mCacheOffset, mCache, CACHE_SIZE);
+                if (mCacheSize <= 0) {
+                    break; // Error or end of file
+                }
+                // Now that we've filled the cache, continue the loop to copy from cache
+            }
+        }
+
+        return bytesRead;
+    }
+
+    int getSize() const {
+        off64_t size;
+        mSource->getSize(mSource->handle, &size);
+        return static_cast<int>(size);
+    }
+
+private:
+    CDataSource *mSource;
+    char *mCache;
+    int mCacheOffset;
+    int mCacheSize;
+};
+
+static int sniffReadAt(void *handle, void *buf, int offset, int size) {
+    return ((SniffBuffer *)handle)->readAt(buf, offset, size);
+}
+
+static int sniffSize(void *handle) {
+    return ((SniffBuffer *)handle)->getSize();
+}
 
 bool SniffMidi(CDataSource *source, float *confidence)
 {
-    MidiEngine p(source, NULL, NULL);
-    if (p.initCheck() == OK) {
-        *confidence = 0.8;
-        ALOGV("SniffMidi: yes");
-        return true;
+    SniffBuffer sniffBuffer(source);
+    EAS_DATA_HANDLE easDataHandle;
+    EAS_HANDLE easHandle;
+    EAS_FILE file;
+    file.handle = (void*) &sniffBuffer;
+    file.readAt = sniffReadAt;
+    file.size = sniffSize;
+
+    EAS_RESULT result = EAS_Init(&easDataHandle);
+    if (result == EAS_SUCCESS) {
+        if (EAS_OpenFile(easDataHandle, &file, &easHandle) == EAS_SUCCESS) {
+            *confidence = 0.8;
+            ALOGV("SniffMidi: yes");
+            return true;
+        }
     }
     ALOGV("SniffMidi: no");
     return false;
