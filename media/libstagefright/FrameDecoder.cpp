@@ -51,7 +51,7 @@
 namespace android {
 
 static const int64_t kBufferTimeOutUs = 10000LL; // 10 msec
-static const int64_t kAsyncBufferTimeOutUs = 2000000LL; // 2000 msec
+static const int64_t kAsyncBufferTimeOutUs = 8000000LL; // 8000 msec for support 4K decode
 static const size_t kRetryCount = 100; // must be >0
 static const int64_t kDefaultSampleDurationUs = 33333LL; // 33ms
 // For codec, 0 is the highest importance; higher the number lesser important.
