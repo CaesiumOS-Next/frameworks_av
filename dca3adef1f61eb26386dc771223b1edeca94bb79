@@ -156,6 +156,29 @@
       "parentUuid": "8e5a3c98_7f1889ae",
       "revId": "dca3adef1f61eb26386dc771223b1edeca94bb79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8a0c76_3fe0a368",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4051,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-30T12:49:10Z",
+      "side": 1,
+      "message": "I would prefer not to unlock effect chains or relock the thread lock in this section. We need to find another way to fix this problem",
+      "range": {
+        "startLine": 4049,
+        "startChar": 0,
+        "endLine": 4051,
+        "endChar": 49
+      },
+      "revId": "dca3adef1f61eb26386dc771223b1edeca94bb79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
