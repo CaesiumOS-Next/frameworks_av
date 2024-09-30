@@ -16,6 +16,80 @@
       "message": "looks like this should be a class and early skip should be a method. e.g.:\n\n```cpp\nclass BqPoolInvalidator {\npublic:\n  BqPoolInvalidator(std::list\u003cstd::shared_ptr\u003cC2BufferQueueBlockPool\u003e\u003e \u0026\u0026pools, int delayMs);\n  void skipWaiting();\n  \nprivate:\n  std::mutex m;\n  std::condition_variable cv;\n  std::atomic_bool skip;\n}\n```",
       "revId": "9ce26ba47c55f2a8fff30a0f0455cbd0d9be8d1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "011deab7_d26a90f2",
+        "filename": "media/codec2/hal/hidl/1.0/utils/Component.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-09-30T17:56:12Z",
+      "side": 1,
+      "message": "skip could be nullptr too (so is cv). Do we need to validate them before using (or is it implicit that if m isn\u0027t nullptr, then other shared_ptrs aren\u0027t too?",
+      "range": {
+        "startLine": 284,
+        "startChar": 20,
+        "endLine": 284,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a3b02f98_d12a7f6c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/hidl/1.0/utils/Component.cpp",
+              "range": {
+                "startLine": 284,
+                "startChar": 0,
+                "endLine": 285,
+                "endChar": 0
+              },
+              "replacement": "                if (skip \u0026\u0026 skip-\u003eload()) {\n"
+            },
+            {
+              "path": "media/codec2/hal/hidl/1.0/utils/Component.cpp",
+              "range": {
+                "startLine": 287,
+                "startChar": 0,
+                "endLine": 289,
+                "endChar": 0
+              },
+              "replacement": "                if (cv) {\n                    cv-\u003ewait_for(l, std::chrono::milliseconds(delayInMs));\n                }\n                if (skip \u0026\u0026 skip-\u003eload()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9ce26ba47c55f2a8fff30a0f0455cbd0d9be8d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45f6f69_f14f79d4",
+        "filename": "media/codec2/hal/hidl/1.0/utils/Component.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-09-30T17:56:12Z",
+      "side": 1,
+      "message": "Can we inline this block (for loop to get std::list\u003cstd::shared_ptr\u003cC2BufferQueueBlockPool\u003e\u003e) ?\nLooks like its been used in 3 different places",
+      "range": {
+        "startLine": 594,
+        "startChar": 12,
+        "endLine": 600,
+        "endChar": 13
+      },
+      "revId": "9ce26ba47c55f2a8fff30a0f0455cbd0d9be8d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
