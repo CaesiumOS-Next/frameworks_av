@@ -136,6 +136,30 @@
       },
       "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77c1b813_2650bc0a",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5139,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-09-30T13:37:01Z",
+      "side": 1,
+      "message": "Ok, so please add a warning when we correct the fastmixer decision for a deep bufer otput and we can take the CL.",
+      "parentUuid": "48e4bf41_54691bc3",
+      "range": {
+        "startLine": 5139,
+        "startChar": 0,
+        "endLine": 5139,
+        "endChar": 60
+      },
+      "revId": "abd453b6ff49fd19f8bf3fe5e20aa66419c4ee45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
