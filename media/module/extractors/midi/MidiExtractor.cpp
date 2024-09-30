@@ -323,16 +323,123 @@ media_status_t MidiExtractor::getMetaData(AMediaFormat *meta)
     return AMediaFormat_copy(meta, mFileMetadata);
 }
 
-// Sniffer
+static bool startsWithPattern(const uint8_t *buf, size_t size, const char *pattern,
+                              size_t patternSize) {
+    if (size < patternSize) {
+        return false;
+    }
+    return (memcmp(buf, pattern, patternSize) == 0);
+}
 
+static bool isValidMThd(const uint8_t *buf, size_t size) {
+    return startsWithPattern(buf, size, "MThd", 4);
+}
+
+static bool isValidXmf(const uint8_t *buf, size_t size) {
+    return startsWithPattern(buf, size, "XMF_", 4);
+}
+
+static bool isValidImelody(const uint8_t *buf, size_t size) {
+    return startsWithPattern(buf, size, "BEGIN:IMELODY", 13);
+}
+
+static bool isValidRtttl(const uint8_t *buf, size_t size) {
+    #define RTTTL_MAX_TITLE_LEN 32
+    // rtttl starts with the following:
+    // <title>:<type>=<value>
+    //
+    // Where:
+    // - <title>: Up to 32 characters
+    // - <type>: Single character indicating:
+    //     'd' for duration
+    //     'o' for octave
+    //     'b' for beats per minute
+    // - <value>: Corresponding value for the type
+    if (size < 4) {
+        return false;
+    }
+    for (size_t i = 0; i < RTTTL_MAX_TITLE_LEN && i < size; i++) {
+        if (buf[i] == ':') {
+            if (i < (size - 3) && buf[i + 2] == '=') {
+                return true;
+            }
+            break;
+        }
+    }
+    return false;
+}
+
+static bool isValidOta(const uint8_t *buf, size_t size) {
+    #define OTA_RINGTONE 0x25
+    #define OTA_SOUND 0x1d
+    #define OTA_UNICODE 0x22
+
+    // ota starts with the following:
+    // <cmdLen><cmd1><cmd2>..<cmdN>
+    //
+    // Where:
+    // - <cmdLen>: Single character command length
+    // - <cmd1>: Single character (0x25 << 1)
+    // - <cmd2>: Single character (0x1d << 1) or (0x22 << 1)
+    //           and so on with last cmd being (0x1d << 1)
+
+    if (size < 3) {
+        return false;
+    }
+
+    uint8_t cmdLen = buf[0];
+    if (cmdLen < 2) {
+        return false;
+    }
+
+    if ((buf[1] >> 1) != OTA_RINGTONE) {
+        return false;
+    }
+
+    for (size_t i = 2; i <= cmdLen && i < size; i++) {
+        if ((buf[i] >> 1) == OTA_SOUND) {
+            return true;
+        }
+        if ((buf[i] >> 1) != OTA_UNICODE) {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+// Sniffer
 bool SniffMidi(CDataSource *source, float *confidence)
 {
-    MidiEngine p(source, NULL, NULL);
-    if (p.initCheck() == OK) {
-        *confidence = 0.8;
-        ALOGV("SniffMidi: yes");
+    uint8_t header[128];
+    int filled = source->readAt(source->handle, 0, header, sizeof(header));
+
+    if (isValidMThd(header, filled)) {
+        *confidence = 0.80;
+        ALOGV("SniffMidi: yes, MThd");
         return true;
     }
+    if (isValidXmf(header, filled)) {
+        *confidence = 0.80;
+        ALOGV("SniffMidi: yes, XMF_");
+        return true;
+    }
+    if (isValidImelody(header, filled)) {
+        *confidence = 0.80;
+        ALOGV("SniffMidi: yes, imelody");
+        return true;
+    }
+    if (isValidRtttl(header, filled)) {
+        *confidence = 0.80;
+        ALOGV("SniffMidi: yes, rtttl");
+        return true;
+    }
+    if (isValidOta(header, filled)) {
+        *confidence = 0.80;
+        ALOGV("SniffMidi: yes, ota");
+        return true;
+    }
+
     ALOGV("SniffMidi: no");
     return false;
 
