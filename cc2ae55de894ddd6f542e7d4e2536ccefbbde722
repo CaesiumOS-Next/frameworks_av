@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbaa9f3_8a7cfa2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-09-30T07:12:29Z",
+      "side": 1,
+      "message": "better squash with the previous CL itself?",
+      "revId": "cc2ae55de894ddd6f542e7d4e2536ccefbbde722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
