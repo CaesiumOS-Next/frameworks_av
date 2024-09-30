@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "776d497f_e3b214f3",
+        "filename": "media/libaudiohal/impl/Hal2AidlMapper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-09-30T21:48:24Z",
+      "side": 1,
+      "message": "Please note that when a remote call fails with an error, no `out` parameters, like `updatedPatch` in this case, get updated. So essentially, if `status` is not `OK`, then `updatedPatch` will just carry its initial default initialized value, that means it has ID value of `0` etc. So I\u0027m not sure what are you intending to achieve here.",
+      "range": {
+        "startLine": 206,
+        "startChar": 50,
+        "endLine": 206,
+        "endChar": 94
+      },
+      "revId": "9800457169f3c700136aa3cc147d93ee6eaa88f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
