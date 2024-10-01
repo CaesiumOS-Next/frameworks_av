@@ -108,6 +108,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "764b3511_7a2c1eda",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-01T13:39:40Z",
+      "side": 1,
+      "message": "i don\u0027t think this is correct.\n\nnot checking that title field is non-empty (and  alphanumeric]\nnot checking that the (optional) parameter list ends with a \":\"\n\nI think the regex (in butchered syntax) is:\n\n[alphanum]+ \u0027:\u0027 ( [dob] \u0027\u003d\u0027 [digits]+ ) * \u0027:\u0027\n\nand we don\u0027t care so much what comes after the second colon.",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 368,
+        "endChar": 5
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40bcfa8a_a63491b4",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-01T13:39:40Z",
+      "side": 1,
+      "message": "doesn\u0027t seem to be correct.\n[based on how our sonivox library behaves. we have no guarantee that the library\nis correct]\n\nI don\u0027t see anything that says OTA_UNICODE must be the final command.\n\n0x1d seems to be \"title is encoded in unicode\".\nlibrary, if it sees 0x22\u003c\u003c1 (OTA_SOUND), it breaks out and declares that\nthe rest is sound, never reading the unicode bit.",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 58
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7b916f_a170ef4b",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-01T13:39:40Z",
+      "side": 1,
+      "message": "through here, i\u0027m in agreement.",
+      "range": {
+        "startLine": 397,
+        "startChar": 1,
+        "endLine": 397,
+        "endChar": 5
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb7c490b_596e348f",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-01T13:39:40Z",
+      "side": 1,
+      "message": "this feels wonky and awkward to understand to me.\n\nat this point, we\u0027ve already eaten 1 command (the OTA_RINGTONE).\n\ncmdLen--;  // we ate the OTA_RINGTONE\nwhile (cmdLen\u003e0 \u0026\u0026 i \u003c size) {\n. switch (buf[i]\u003e\u003e1) {\n.. case OTA_UNICODE:\n... break;\n.. case OTA_SOUND:\n... return true; // even if more cmds in buffer\n.. default:\n... return false;\n. }\n. cmdLen--; i++;\n}\n// success if we consumed all of the commands\nreturn (cmdLen \u003d\u003d 0);\n\n\nreadability:\navoids the \u003d\u003d vs !\u003d on lines 400/403\navoids the trickiness of \"\u003c\u003dcmdlen\" vs \"\u003csize\"",
+      "range": {
+        "startLine": 399,
+        "startChar": 4,
+        "endLine": 407,
+        "endChar": 0
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d11805cd_bc103b98",
         "filename": "media/module/extractors/midi/MidiExtractor.cpp",
         "patchSetId": 4
@@ -124,6 +216,29 @@
         "startChar": 0,
         "endLine": 415,
         "endChar": 75
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6334238c_900f71a3",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-01T13:39:40Z",
+      "side": 1,
+      "message": "I do like the extra \"what sub-genre\" bit of the log message.",
+      "range": {
+        "startLine": 429,
+        "startChar": 31,
+        "endLine": 429,
+        "endChar": 39
       },
       "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
