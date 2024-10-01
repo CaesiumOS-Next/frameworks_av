@@ -68,6 +68,7 @@ cc_library {
         "C2PlatformStorePluginLoader.cpp",
         "C2Store.cpp",
         "platform/C2BqBuffer.cpp",
+        "platform/C2BqPoolInvalidator.cpp",
         "platform/C2SurfaceSyncObj.cpp",
         "platform/C2IgbaBuffer.cpp",
         "types.cpp",
