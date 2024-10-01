@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12cc426a_2def8c95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-01T21:41:22Z",
+      "side": 1,
+      "message": "Same as aosp/2923410, re-approving",
+      "revId": "dfb67b8a87fcad99b8183ae4b5c812c80b977e03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
