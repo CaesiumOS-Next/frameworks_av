@@ -18,6 +18,7 @@
 #define LOG_TAG "Codec2-Component@1.2"
 #include <android-base/logging.h>
 
+#include <codec2/common/BqPoolInvalidateHelper.h>
 #include <codec2/hidl/1.2/Component.h>
 #include <codec2/hidl/1.2/ComponentStore.h>
 #include <codec2/hidl/1.2/InputBufferManager.h>
@@ -30,10 +31,12 @@
 #include <utils/Timers.h>
 
 #include <C2BqBufferPriv.h>
+#include <C2BqPoolInvalidator.h>
 #include <C2Debug.h>
 #include <C2PlatformSupport.h>
 
 #include <chrono>
+#include <ranges>
 #include <thread>
 
 namespace android {
@@ -272,16 +275,17 @@ c2_status_t Component::status() const {
 }
 
 void Component::onDeathReceived() {
+    std::list<std::shared_ptr<C2BufferQueueBlockPool>> bqPools;
     {
         std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
         mClientDied = true;
-        for (auto it = mBlockPools.begin(); it != mBlockPools.end(); ++it) {
-            if (it->second->getAllocatorId() == C2PlatformAllocatorStore::BUFFERQUEUE) {
-                std::shared_ptr<C2BufferQueueBlockPool> bqPool =
-                        std::static_pointer_cast<C2BufferQueueBlockPool>(it->second);
-                bqPool->invalidate();
-            }
-        }
+        std::ranges::copy(mBlockPools | std::views::filter(BqPoolFilterFn) |
+                std::views::transform(BqPoolConvertFn), std::back_inserter(bqPools));
+    }
+    if (!bqPools.empty()) {
+        std::shared_ptr<C2BqPoolInvalidateItem> bqInvalidateItem =
+                std::make_shared<C2BqPoolInvalidateItem>(std::move(bqPools));
+        bqInvalidateItem->invalidate();
     }
     release();
 }
@@ -551,7 +555,26 @@ Return<Status> Component::reset() {
 }
 
 Return<Status> Component::release() {
+    std::list<std::shared_ptr<C2BufferQueueBlockPool>> bqPools;
+    {
+        std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
+        if (!mClientDied) {
+            std::ranges::copy(mBlockPools | std::views::filter(BqPoolFilterFn) |
+                    std::views::transform(BqPoolConvertFn), std::back_inserter(bqPools));
+        }
+    }
+    std::shared_ptr<C2BqPoolInvalidateItem> bqInvalidateItem;
+    if (!bqPools.empty()) {
+        // handling rare cases of process death just after release() called.
+        bqInvalidateItem = std::make_shared<C2BqPoolInvalidateItem>(std::move(bqPools));
+        C2BqPoolInvalidator::getInstance().queue(bqInvalidateItem);
+    }
     Status status = static_cast<Status>(mComponent->release());
+    if (bqInvalidateItem) {
+        // If release is not blocked,
+        // skip invalidation and finish ASAP.
+        bqInvalidateItem->skip();
+    }
     {
         std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
         mBlockPools.clear();
@@ -676,6 +699,18 @@ void Component::initListener(const sp<Component>& self) {
 }
 
 Component::~Component() {
+    std::list<std::shared_ptr<C2BufferQueueBlockPool>> bqPools;
+    {
+        std::lock_guard<std::mutex> lock(mBlockPoolsMutex);
+        std::ranges::copy(mBlockPools | std::views::filter(BqPoolFilterFn) |
+                std::views::transform(BqPoolConvertFn), std::back_inserter(bqPools));
+    }
+    if (!bqPools.empty()) {
+        LOG(ERROR) << "blockpools are not cleared yet at dtor";
+        std::shared_ptr<C2BqPoolInvalidateItem> bqInvalidateItem =
+                std::make_shared<C2BqPoolInvalidateItem>(std::move(bqPools));
+        C2BqPoolInvalidator::getInstance().queue(bqInvalidateItem);
+    }
     InputBufferManager::unregisterFrameData(mListener);
     mStore->reportComponentDeath(this);
 }
