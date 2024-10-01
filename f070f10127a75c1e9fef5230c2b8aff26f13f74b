@@ -237,6 +237,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6f78d34_f176d5fa",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-01T14:50:26Z",
+      "side": 1,
+      "message": "i can not tell you why i had the values reversed between those two.\nBut that\u0027s what i did.\n\nlet\u0027s use OTA_RINGTONE, etc in the comment and not the literal values.\n\nprobably also in the comments, our assumption / interpretation of rules:\n(1) shortest legal is 2 cmds: RINGTONE, SOUND\n(2) there can only be a single OTA_SOUND in the cmd list\n\nit feels like the longest allowed is 3:  RINGTONE, UNICODE, SOUND\nwell, maybe longest *supported* which is slightly different than *allowed*.",
+      "parentUuid": "ccb88bc5_7fb3ee81",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 58
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b7b916f_a170ef4b",
         "filename": "media/module/extractors/midi/MidiExtractor.cpp",
         "patchSetId": 4
@@ -342,6 +366,30 @@
       "side": 1,
       "message": "Ian,\nFrom what I understand, each readAt() is a binder call and is expensive.\n\nMay I know the reason for why we would need repeated calls instead of a single readAt()?",
       "parentUuid": "d11805cd_bc103b98",
+      "range": {
+        "startLine": 415,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 75
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ae7a31_58fece5c",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-01T14:50:26Z",
+      "side": 1,
+      "message": "readAt() will get what it can, up to EOF or requested size or some error.\nWe should not need to implement any \"please look for more data\" logic here.",
+      "parentUuid": "f57f41f8_42dc7e21",
       "range": {
         "startLine": 415,
         "startChar": 0,
