@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3af88740_592f60d9",
+        "filename": "media/codec2/hal/common/include/codec2/common/BqPoolInvalidateHelper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-01T21:40:47Z",
+      "side": 1,
+      "message": "I will use std::ranges suggestion directly. (The complexity of using the template seems pretty same with the complexity of using std::ranges directly.)",
+      "parentUuid": "84b6281a_e68a3365",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3c49500_7fcf60bf",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-10-01T19:43:48Z",
       "side": 1,
       "message": "maybe static functions instead of lambdas?",
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78baa38_be6efec9",
+        "filename": "media/codec2/hal/common/include/codec2/common/BqPoolInvalidateHelper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-01T21:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3c49500_7fcf60bf",
       "revId": "06de898064f02855024871337f091678af206be0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +117,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b9896f_6ed991d1",
+        "filename": "media/codec2/vndk/platform/C2BqPoolInvalidator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-01T21:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc92b321_eec0b087",
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b228177d_da9b8b23",
@@ -92,6 +152,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e918acfc_70613ff4",
+        "filename": "media/codec2/vndk/platform/C2BqPoolInvalidator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-01T21:40:47Z",
+      "side": 1,
+      "message": "No, invalidate() from the thread will no-op after this.\nPurpose of skip() is skipping future invalidate() and also removing BlockPool reference in order to fast resource reclamation.",
+      "parentUuid": "b228177d_da9b8b23",
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a4740e4_8dfe11df",
@@ -105,6 +183,30 @@
       "writtenOn": "2024-10-01T19:43:48Z",
       "side": 1,
       "message": "```suggestion\nC2BqPoolInvalidator\u0026 C2BqPoolInvalidator::getInstance() {\n    android::base::NoDestructor\u003cC2BqPoolInvalidator\u003e sInvalidator;\n    return sInvalidator;\n}\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 1,
+        "endLine": 56,
+        "endChar": 1
+      },
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5683a9a_d2ed0374",
+        "filename": "media/codec2/vndk/platform/C2BqPoolInvalidator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-01T21:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a4740e4_8dfe11df",
       "range": {
         "startLine": 50,
         "startChar": 1,
