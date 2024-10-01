@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b6281a_e68a3365",
+        "filename": "media/codec2/hal/common/include/codec2/common/BqPoolInvalidateHelper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-01T19:43:48Z",
+      "side": 1,
+      "message": "```suggestion\ntemplate \u003cclass Container, class OutputIt class Pred, class Fct\u003e\nvoid transform_if(Container c, OutputIt dest, Pred pred, Fct transform) {\n    std::ranges::copy(c | std::views::filter(pred) | std::views::transform(transform), dest);\n}\n```",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3c49500_7fcf60bf",
+        "filename": "media/codec2/hal/common/include/codec2/common/BqPoolInvalidateHelper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-01T19:43:48Z",
+      "side": 1,
+      "message": "maybe static functions instead of lambdas?",
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6e4be0_a7b0c86f",
+        "filename": "media/codec2/vndk/include/C2BqPoolInvalidator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-01T19:43:48Z",
+      "side": 1,
+      "message": "optional: maybe we can use a map so that the items are sorted by time, but then it may not matter for now since we use a fixed wait time.",
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc92b321_eec0b087",
+        "filename": "media/codec2/vndk/platform/C2BqPoolInvalidator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-01T19:43:48Z",
+      "side": 1,
+      "message": "nit: pools \u003d std::move(mPools); may be sufficient",
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b228177d_da9b8b23",
+        "filename": "media/codec2/vndk/platform/C2BqPoolInvalidator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-01T19:43:48Z",
+      "side": 1,
+      "message": "does this notify the invalidator thread?",
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a4740e4_8dfe11df",
+        "filename": "media/codec2/vndk/platform/C2BqPoolInvalidator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-01T19:43:48Z",
+      "side": 1,
+      "message": "```suggestion\nC2BqPoolInvalidator\u0026 C2BqPoolInvalidator::getInstance() {\n    android::base::NoDestructor\u003cC2BqPoolInvalidator\u003e sInvalidator;\n    return sInvalidator;\n}\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 1,
+        "endLine": 56,
+        "endChar": 1
+      },
+      "revId": "06de898064f02855024871337f091678af206be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
