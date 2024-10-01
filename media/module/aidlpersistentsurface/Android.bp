@@ -13,7 +13,7 @@ aidl_interface {
         "HardwareBuffer_aidl",
     ],
     imports: [
-        "android.hardware.graphics.common-V5",
+        "android.hardware.graphics.common-V6",
     ],
     include_dirs: [
         "frameworks/native/aidl/gui",
@@ -56,7 +56,7 @@ cc_library_shared {
         "media_plugin_headers",
     ],
     shared_libs: [
-        "android.hardware.graphics.common-V5-ndk",
+        "android.hardware.graphics.common-V6-ndk",
         "graphicbuffersource-aidl-ndk",
         "libbinder_ndk",
         "libcutils",

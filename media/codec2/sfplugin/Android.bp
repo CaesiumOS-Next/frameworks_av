@@ -56,7 +56,7 @@ cc_library_shared {
         "android.hardware.drm@1.0",
         "android.hardware.media.c2@1.0",
         "android.hardware.media.omx@1.0",
-        "android.hardware.graphics.common-V5-ndk",
+        "android.hardware.graphics.common-V6-ndk",
         "graphicbuffersource-aidl-ndk",
         "libbase",
         "libbinder",
