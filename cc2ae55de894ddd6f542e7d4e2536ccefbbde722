@@ -16,6 +16,23 @@
       "message": "better squash with the previous CL itself?",
       "revId": "cc2ae55de894ddd6f542e7d4e2536ccefbbde722",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3312e10_c55c6970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T13:29:10Z",
+      "side": 1,
+      "message": "please abandon this CL.",
+      "revId": "cc2ae55de894ddd6f542e7d4e2536ccefbbde722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
