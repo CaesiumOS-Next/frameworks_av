@@ -16,6 +16,117 @@
       "message": "+philburk as someone that\u0027s done a lot with midi (although not necessarily in this file).",
       "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c24217c9_5086e930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-01T09:17:23Z",
+      "side": 1,
+      "message": "I think this change needs to be flag protected",
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8567cdfd_1fcece0e",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-01T09:17:23Z",
+      "side": 1,
+      "message": "optional nit: we can probably remove `Pattern` here? (fine to keep it in the param names)",
+      "range": {
+        "startLine": 326,
+        "startChar": 22,
+        "endLine": 326,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5f6e7375_5afdae3e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/midi/MidiExtractor.cpp",
+              "range": {
+                "startLine": 326,
+                "startChar": 0,
+                "endLine": 327,
+                "endChar": 0
+              },
+              "replacement": "static bool startsWith(const uint8_t *buf, size_t size, const char *pattern,\n"
+            },
+            {
+              "path": "media/module/extractors/midi/MidiExtractor.cpp",
+              "range": {
+                "startLine": 335,
+                "startChar": 0,
+                "endLine": 336,
+                "endChar": 0
+              },
+              "replacement": "    return startsWith(buf, size, \"MThd\", 4);\n"
+            },
+            {
+              "path": "media/module/extractors/midi/MidiExtractor.cpp",
+              "range": {
+                "startLine": 339,
+                "startChar": 0,
+                "endLine": 340,
+                "endChar": 0
+              },
+              "replacement": "    return startsWith(buf, size, \"XMF_\", 4);\n"
+            },
+            {
+              "path": "media/module/extractors/midi/MidiExtractor.cpp",
+              "range": {
+                "startLine": 343,
+                "startChar": 0,
+                "endLine": 344,
+                "endChar": 0
+              },
+              "replacement": "    return startsWith(buf, size, \"BEGIN:IMELODY\", 13);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11805cd_bc103b98",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-01T09:17:23Z",
+      "side": 1,
+      "message": "Is `readAt` allowed to e.g. read a single byte? In that case I think we\u0027d need to issue repeated reads until we either hit the end of the source, or we\u0027ve read 128 bytes?",
+      "range": {
+        "startLine": 415,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 75
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
