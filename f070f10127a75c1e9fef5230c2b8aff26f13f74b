@@ -35,6 +35,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99fafba7_3e099d8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T14:22:51Z",
+      "side": 1,
+      "message": "I have responded to a couple of review comments that need clarifications.\nI will make the other suggested changes and upload a patchset.",
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673f1cc4_e790bfce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T14:22:51Z",
+      "side": 1,
+      "message": "Last when I had checked, it was not possible to use flags in mainline modules.\nI will check this again and see if it is supported now.",
+      "parentUuid": "c24217c9_5086e930",
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8567cdfd_1fcece0e",
@@ -131,6 +166,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40db05a8_f2bb9fca",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T14:22:51Z",
+      "side": 1,
+      "message": "I have tried to match the library in terms of what is required.\n\n\u003e not checking that title field is non-empty (and alphanumeric]\n\nAs per\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/sonivox/arm-wt-22k/lib_src/eas_rtttl.c;l\u003d1049;drc\u003d48dd86efcb221f80bb4558e5f6be400f5e49dcb5\n\n- There is no need for the bytes in the title to be alphanumeric.\n- The first byte can be \u0027:\u0027 and it is still valid.\n\n\u003e not checking that the (optional) parameter list ends with a \":\"\n\nI have stopped at parsing \u0027\u003d\u0027. Each command has a different syntax and adding all that parsing logic would make this lot more complicated.\n\nThis is consistent with how \"XMF_\" files are identified (the library actually parses a lot more to determine an XMF_ file correctly).\n\nPlease let me know whether further parsing is necessary, both here and for XMF_ too.\n\nPlease note: As per what is discussed in the bug, the approach here is to identify a file quickly at the risk of a few files wrongly getting identified as midi files.\n\nThe other approach that I had in mind was to reduce the number of readAt() calls by caching the data. Something like aosp/3284284.\nBut that wasn\u0027t a preferred approach as per the discussion in the bug.",
+      "parentUuid": "764b3511_7a2c1eda",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 368,
+        "endChar": 5
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40bcfa8a_a63491b4",
         "filename": "media/module/extractors/midi/MidiExtractor.cpp",
         "patchSetId": 4
@@ -154,6 +213,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ccb88bc5_7fb3ee81",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T14:22:51Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/main/+/main:external/sonivox/arm-wt-22k/lib_src/eas_ota.c;l\u003d47?q\u003dOTA_SOUND\n\nOTA_SOUND is 0x1d and OTA_UNICODE is 0x22.\n\nComment says last cmd needs to be 0x1d for it to be a valid file.\nThis is as per\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/sonivox/arm-wt-22k/lib_src/eas_ota.c;l\u003d222;drc\u003d2fa59c8c6851b453271f33f254c7549fa79d07fb\n\nplease note,  OTA_CheckFileType  returns SUCCESS even when the last command is not OTA_SOUND, but the ppHandle is initialized only when it ends with OTA_SOUND and this is what is used to decide if the file is recognized correctly.",
+      "parentUuid": "40bcfa8a_a63491b4",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 58
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b7b916f_a170ef4b",
         "filename": "media/module/extractors/midi/MidiExtractor.cpp",
         "patchSetId": 4
@@ -165,6 +248,30 @@
       "writtenOn": "2024-10-01T13:39:40Z",
       "side": 1,
       "message": "through here, i\u0027m in agreement.",
+      "range": {
+        "startLine": 397,
+        "startChar": 1,
+        "endLine": 397,
+        "endChar": 5
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00b1e7f5_21f0726e",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T14:22:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1b7b916f_a170ef4b",
       "range": {
         "startLine": 397,
         "startChar": 1,
@@ -223,6 +330,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f57f41f8_42dc7e21",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T14:22:51Z",
+      "side": 1,
+      "message": "Ian,\nFrom what I understand, each readAt() is a binder call and is expensive.\n\nMay I know the reason for why we would need repeated calls instead of a single readAt()?",
+      "parentUuid": "d11805cd_bc103b98",
+      "range": {
+        "startLine": 415,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 75
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6334238c_900f71a3",
         "filename": "media/module/extractors/midi/MidiExtractor.cpp",
         "patchSetId": 4
@@ -234,6 +365,30 @@
       "writtenOn": "2024-10-01T13:39:40Z",
       "side": 1,
       "message": "I do like the extra \"what sub-genre\" bit of the log message.",
+      "range": {
+        "startLine": 429,
+        "startChar": 31,
+        "endLine": 429,
+        "endChar": 39
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3dbbb94_176aeb8b",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-01T14:22:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6334238c_900f71a3",
       "range": {
         "startLine": 429,
         "startChar": 31,
