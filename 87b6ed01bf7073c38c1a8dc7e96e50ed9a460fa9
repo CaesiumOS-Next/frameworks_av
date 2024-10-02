@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e87b239_cc417f49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-02T20:38:50Z",
+      "side": 1,
+      "message": "This changes behavior regardless of the underlying CodecBase impl.",
+      "parentUuid": "d520054c_202b0fab",
+      "revId": "87b6ed01bf7073c38c1a8dc7e96e50ed9a460fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61740645_09df55f3",
