@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3c8cbe_07a72814",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-02T13:58:11Z",
+      "side": 1,
+      "message": "Thanks for bringing this up.\nMoved the changes under a flag as suggested.",
+      "parentUuid": "673f1cc4_e790bfce",
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8567cdfd_1fcece0e",
@@ -137,6 +155,30 @@
           ]
         }
       ],
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54ab60e9_54ead97d",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-02T13:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8567cdfd_1fcece0e",
+      "range": {
+        "startLine": 326,
+        "startChar": 22,
+        "endLine": 326,
+        "endChar": 29
+      },
       "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -343,6 +385,30 @@
       "writtenOn": "2024-10-01T13:39:40Z",
       "side": 1,
       "message": "this feels wonky and awkward to understand to me.\n\nat this point, we\u0027ve already eaten 1 command (the OTA_RINGTONE).\n\ncmdLen--;  // we ate the OTA_RINGTONE\nwhile (cmdLen\u003e0 \u0026\u0026 i \u003c size) {\n. switch (buf[i]\u003e\u003e1) {\n.. case OTA_UNICODE:\n... break;\n.. case OTA_SOUND:\n... return true; // even if more cmds in buffer\n.. default:\n... return false;\n. }\n. cmdLen--; i++;\n}\n// success if we consumed all of the commands\nreturn (cmdLen \u003d\u003d 0);\n\n\nreadability:\navoids the \u003d\u003d vs !\u003d on lines 400/403\navoids the trickiness of \"\u003c\u003dcmdlen\" vs \"\u003csize\"",
+      "range": {
+        "startLine": 399,
+        "startChar": 4,
+        "endLine": 407,
+        "endChar": 0
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b73f5ef_f5edd2e3",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-02T13:58:11Z",
+      "side": 1,
+      "message": "Thank you for the suggestion.\nMade the changes.",
+      "parentUuid": "cb7c490b_596e348f",
       "range": {
         "startLine": 399,
         "startChar": 4,
