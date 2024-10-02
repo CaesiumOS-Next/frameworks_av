@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e73e9a_006989e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-02T18:25:17Z",
+      "side": 1,
+      "message": "If we write up a doc for this, adding somewhere in the form of `.md` might be a good thing to do.",
+      "revId": "4aa99a8438dae5a58cabef6e4510d08d45c1b089",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
