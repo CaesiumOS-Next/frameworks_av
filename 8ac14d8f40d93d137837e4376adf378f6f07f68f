@@ -1,0 +1,115 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44992e28_3e602651",
+        "filename": "media/libmedia/mediametadataretriever.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-02T19:20:11Z",
+      "side": 1,
+      "message": "should this be outside of the mLock? having it inside will also block any other calls while waiting for the sLock, such as extractMetadata.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4cb2b9d8_fcad9c5e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 149,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 153,
+                "startChar": 0,
+                "endLine": 153,
+                "endChar": 0
+              },
+              "replacement": "    Mutex::Autolock _gLock(sLock);\n"
+            },
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 161,
+                "startChar": 0,
+                "endLine": 162,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 166,
+                "startChar": 0,
+                "endLine": 166,
+                "endChar": 0
+              },
+              "replacement": "    Mutex::Autolock _gLock(sLock);\n"
+            },
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 174,
+                "startChar": 0,
+                "endLine": 175,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 179,
+                "startChar": 0,
+                "endLine": 179,
+                "endChar": 0
+              },
+              "replacement": "    Mutex::Autolock _gLock(sLock);\n"
+            },
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 188,
+                "startChar": 0,
+                "endLine": 189,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/mediametadataretriever.cpp",
+              "range": {
+                "startLine": 193,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": "    Mutex::Autolock _gLock(sLock);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ac14d8f40d93d137837e4376adf378f6f07f68f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
