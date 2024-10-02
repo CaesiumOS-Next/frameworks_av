@@ -1,0 +1,288 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b67be4d_e13e6294",
+        "filename": "media/module/extractors/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "consider reducing the diff of this change by reverting this and L72, and keeping the ordering of L61 the same as it was before and just adding a single line.\n\nThis helps keep the blame layer as clean as possible, which helps us quickly find more details on when and why a particular line was added or changed.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 18
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "753a3d5e_227d89de",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "please document which of these parameters are \u0027optional\u0027 and which are required, and how a missing parameter is indicated (e.g. by passing `-1`).\n\nAt the moment it seems that passing a negative number for `profile` implies \u0027unset\u0027, but this isn\u0027t documented, and the same doesn\u0027t seem to apply to any of the other parameters (and possibly should apply to `chromeSubsampling`, see my other comment).",
+      "range": {
+        "startLine": 141,
+        "startChar": 32,
+        "endLine": 142,
+        "endChar": 75
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2799f653_2462a7f4",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "it seems strange to me that the size is set from outside this function, but we write into the buffer inside this function, and the number of bytes we write is conditional based on which parameters were set.\n\nShouldn\u0027t we be able to derive the length inside this function, just based on which parameters were set?",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 58
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df35e4e1_36e3d380",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "does this function need to know how long `csdData` is?",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 78
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "069fa6c8_f7bd842a",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "nit: please use consistent syntax with similar check above on L180: `if (meta \u003d\u003d nullptr || data \u003d\u003d nullptr)`",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 274,
+        "endChar": 26
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa26ac6_c25a84bb",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "nit: please use consistent syntax with similar check above on L180: `if (meta \u003d\u003d nullptr || data \u003d\u003d nullptr)`",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 274,
+        "endChar": 26
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af8ee07_666e3465",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "either `0x01000000` is a useful way of reading this value for a human, in which case we can probably just use it in the code instead of `1 \u003c\u003c 24` and remove the comment, or `1 \u003c\u003c 24` is more readable in which case we can just remove the comment.\n\nI suggest removing the comment, because counting the zeroes in `0x01000000` is IMO quite tricky for a human.",
+      "range": {
+        "startLine": 279,
+        "startChar": 40,
+        "endLine": 279,
+        "endChar": 81
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f90052_1b9afeff",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "no need for this comment, the code here is self-explanatory",
+      "range": {
+        "startLine": 285,
+        "startChar": 23,
+        "endLine": 285,
+        "endChar": 71
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "401868d2_51a5e818",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/metadatautils/MetaDataUtils.cpp",
+              "range": {
+                "startLine": 285,
+                "startChar": 0,
+                "endLine": 286,
+                "endChar": 0
+              },
+              "replacement": "        return false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f06488_ef07bd34",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "optional nit (and related to comment above about hex literal vs bit shifting): I wonder if this would be clearer just to check each byte at a time:\n\n```cpp\nif (csdData[0] !\u003d 0x01 \n    || csdData[1] !\u003d 0x00 \n    || csdData[2] !\u003d 0x00 \n    || csdData[3] !\u003d 0x00) {\n  return false;\n}\n```",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "305d9803_877ebf06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/metadatautils/MetaDataUtils.cpp",
+              "range": {
+                "startLine": 279,
+                "startChar": 0,
+                "endLine": 285,
+                "endChar": 0
+              },
+              "replacement": "    if (csdData[0] !\u003d 0x01 || csdData[1] !\u003d 0x00 || csdData[2] !\u003d 0x00 || csdData[3] !\u003d 0x00) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6921a74c_54d8efb6",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:16:47Z",
+      "side": 1,
+      "message": "ubernit: remove space",
+      "range": {
+        "startLine": 296,
+        "startChar": 74,
+        "endLine": 296,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "43cd7c69_0292ca36",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/metadatautils/MetaDataUtils.cpp",
+              "range": {
+                "startLine": 296,
+                "startChar": 0,
+                "endLine": 297,
+                "endChar": 0
+              },
+              "replacement": "    int32_t bitDepth \u003d (vpcCData[2] \u003e\u003e 4) \u0026 0x0F;           // Bit Depth (4 bits).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
