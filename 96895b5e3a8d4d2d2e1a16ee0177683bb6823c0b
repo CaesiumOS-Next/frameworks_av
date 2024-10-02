@@ -139,6 +139,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6ad148_1dbbcce5",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-02T08:27:23Z",
+      "side": 1,
+      "message": "Resolving duplicate comment, sorry",
+      "parentUuid": "069fa6c8_f7bd842a",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 274,
+        "endChar": 26
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6af8ee07_666e3465",
