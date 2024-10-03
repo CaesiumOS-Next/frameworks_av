@@ -114,7 +114,108 @@ static uint32_t convertFlags(uint32_t flags, bool toC2) {
             });
 }
 
+class SurfaceCallbackHandler {
+public:
+    enum SURFACE_CALLBACK {
+        ON_BUFFER_RELEASED = 0,
+        ON_BUFFER_ATTACHED
+    };
+
+    void post(SURFACE_CALLBACK callback,
+            std::shared_ptr<Codec2Client::Component> component,
+            uint32_t generation) {
+        if (!component) {
+            ALOGW("surface callback psoted for invalid component");
+        }
+        std::shared_ptr<SurfaceCallbackItem> item =
+                std::make_shared<SurfaceCallbackItem>(callback, component, generation);
+        std::unique_lock<std::mutex> lock(mMutex);
+        mItems.emplace_back(std::move(item));
+        mCv.notify_one();
+    }
+
+    ~SurfaceCallbackHandler() {
+        {
+            std::unique_lock<std::mutex> lock(mMutex);
+            mDone = true;
+            mCv.notify_all();
+        }
+        if (mThread.joinable()) {
+            mThread.join();
+        }
+    }
+
+private:
+    struct SurfaceCallbackItem {
+        SURFACE_CALLBACK mCallback;
+        std::shared_ptr<Codec2Client::Component> mComp;
+        uint32_t mGeneration;
+
+        SurfaceCallbackItem(
+                SURFACE_CALLBACK callback,
+                std::shared_ptr<Codec2Client::Component> comp,
+                uint32_t generation)
+                : mCallback(callback), mComp(comp), mGeneration(generation) {}
+    };
+
+    SurfaceCallbackHandler() { mThread = std::thread(&SurfaceCallbackHandler::run, this); }
+
+    void run() {
+        std::unique_lock<std::mutex> lock(mMutex);
+        while (!mDone) {
+            while (!mItems.empty()) {
+                std::deque<std::shared_ptr<SurfaceCallbackItem>> items = std::move(mItems);
+                mItems.clear();
+                lock.unlock();
+                handle(items);
+                lock.lock();
+            }
+            mCv.wait(lock);
+        }
+    }
+
+    void handle(std::deque<std::shared_ptr<SurfaceCallbackItem>> &items) {
+        while (!items.empty()) {
+            std::shared_ptr<SurfaceCallbackItem> item = items.front();
+            items.pop_front();
+            switch (item->mCallback) {
+                case ON_BUFFER_RELEASED: {
+                    std::shared_ptr<Codec2Client::Component> comp = item->mComp;
+                    if (comp) {
+                        comp->onBufferReleasedFromOutputSurface(item->mGeneration);
+                    }
+                    break;
+                }
+                case ON_BUFFER_ATTACHED: {
+                    std::shared_ptr<Codec2Client::Component> comp = item->mComp;
+                    if (comp) {
+                        comp->onBufferAttachedToOutputSurface(item->mGeneration);
+                    }
+                    break;
+                }
+                default:
+                    ALOGE("Non defined surface callback message");
+                    break;
+            }
+        }
+    }
+
+    std::thread mThread;
+    bool mDone = false;
+    std::deque<std::shared_ptr<SurfaceCallbackItem>> mItems;
+    std::mutex mMutex;
+    std::condition_variable mCv;
+
+
+    friend std::unique_ptr<SurfaceCallbackHandler> std::make_unique<SurfaceCallbackHandler>();
+
+    DISALLOW_EVIL_CONSTRUCTORS(SurfaceCallbackHandler);
+};
+
 }  // namespace
+   //
+static std::unique_ptr<SurfaceCallbackHandler> sSurfaceCallbackHandler =
+        std::make_unique<SurfaceCallbackHandler>();
 
 CCodecBufferChannel::QueueGuard::QueueGuard(
         CCodecBufferChannel::QueueSync &sync) : mSync(sync) {
@@ -1492,7 +1593,8 @@ void CCodecBufferChannel::onBufferReleasedFromOutputSurface(uint32_t generation)
     // during this interface being executed.
     std::shared_ptr<Codec2Client::Component> comp = mComponent;
     if (comp) {
-        comp->onBufferReleasedFromOutputSurface(generation);
+        sSurfaceCallbackHandler->post(
+                SurfaceCallbackHandler::ON_BUFFER_RELEASED, comp, generation);
     }
 }
 
@@ -1503,7 +1605,8 @@ void CCodecBufferChannel::onBufferAttachedToOutputSurface(uint32_t generation) {
     // during this interface being executed.
     std::shared_ptr<Codec2Client::Component> comp = mComponent;
     if (comp) {
-        comp->onBufferAttachedToOutputSurface(generation);
+        sSurfaceCallbackHandler->post(
+                SurfaceCallbackHandler::ON_BUFFER_ATTACHED, comp, generation);
     }
 }
 
