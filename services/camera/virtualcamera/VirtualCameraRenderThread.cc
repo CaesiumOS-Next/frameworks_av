@@ -217,7 +217,7 @@ std::shared_ptr<EglFrameBuffer> allocateTemporaryFramebuffer(
       .height = static_cast<uint32_t>(height),
       .layers = 1,
       .format = AHARDWAREBUFFER_FORMAT_Y8Cb8Cr8_420,
-      .usage = AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER |
+      .usage = AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE |
                AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN,
       .rfu0 = 0,
       .rfu1 = 0};
