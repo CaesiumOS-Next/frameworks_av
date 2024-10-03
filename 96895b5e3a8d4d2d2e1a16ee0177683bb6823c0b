@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "069fe343_e24e6ac0",
+        "filename": "media/module/extractors/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b67be4d_e13e6294",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 18
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "753a3d5e_227d89de",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-02T08:16:47Z",
       "side": 1,
       "message": "please document which of these parameters are \u0027optional\u0027 and which are required, and how a missing parameter is indicated (e.g. by passing `-1`).\n\nAt the moment it seems that passing a negative number for `profile` implies \u0027unset\u0027, but this isn\u0027t documented, and the same doesn\u0027t seem to apply to any of the other parameters (and possibly should apply to `chromeSubsampling`, see my other comment).",
+      "range": {
+        "startLine": 141,
+        "startChar": 32,
+        "endLine": 142,
+        "endChar": 75
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "862c40e7_75ccf991",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "In case chromeSubsampling is -1 then we are not creating csd it can be through [android::getVp9BitdepthChromaSubSampling](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/module/metadatautils/MetaDataUtils.cpp?q\u003dsymbol%3A%5Cbandroid%3A%3AgetVp9BitdepthChromaSubSampling%5Cb%20case%3Ayes) method. This method returns false when chromeSubsampling is -1 and because of this we do not create CodecPrivate and set it as CSD.",
+      "parentUuid": "753a3d5e_227d89de",
       "range": {
         "startLine": 141,
         "startChar": 32,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b16a24c3_21516faf",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2799f653_2462a7f4",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 58
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df35e4e1_36e3d380",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-10-02T08:16:47Z",
       "side": 1,
       "message": "does this function need to know how long `csdData` is?",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 78
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21d8dcad_0a2de833",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "No as csdData (is VpcC box extracted by extractor) will always be size of 12.",
+      "parentUuid": "df35e4e1_36e3d380",
       "range": {
         "startLine": 273,
         "startChar": 0,
@@ -163,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa15e179_e161c67d",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa26ac6_c25a84bb",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 274,
+        "endChar": 26
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6af8ee07_666e3465",
@@ -176,6 +296,30 @@
       "writtenOn": "2024-10-02T08:16:47Z",
       "side": 1,
       "message": "either `0x01000000` is a useful way of reading this value for a human, in which case we can probably just use it in the code instead of `1 \u003c\u003c 24` and remove the comment, or `1 \u003c\u003c 24` is more readable in which case we can just remove the comment.\n\nI suggest removing the comment, because counting the zeroes in `0x01000000` is IMO quite tricky for a human.",
+      "range": {
+        "startLine": 279,
+        "startChar": 40,
+        "endLine": 279,
+        "endChar": 81
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "712b4f99_4d8ae6e6",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6af8ee07_666e3465",
       "range": {
         "startLine": 279,
         "startChar": 40,
@@ -227,6 +371,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "009d43bc_71063e71",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89f90052_1b9afeff",
+      "range": {
+        "startLine": 285,
+        "startChar": 23,
+        "endLine": 285,
+        "endChar": 71
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74f06488_ef07bd34",
@@ -268,6 +436,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6ffea0e_f4dc5e3b",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74f06488_ef07bd34",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 5
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6921a74c_54d8efb6",
@@ -305,6 +497,30 @@
           ]
         }
       ],
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa32a5e3_387dafee",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-03T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6921a74c_54d8efb6",
+      "range": {
+        "startLine": 296,
+        "startChar": 74,
+        "endLine": 296,
+        "endChar": 75
+      },
       "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
