@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f0709e_961d96b1",
+        "filename": "services/camera/virtualcamera/VirtualCameraSession.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1143408
+      },
+      "writtenOn": "2024-10-03T14:10:49Z",
+      "side": 1,
+      "message": "This is not only used in test. This is production code which renders camera data in YUV\n\nI think the correct way would be to use the usage from the provided `stream`. Similar to : \n\nhttps://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/camera/device/default/ExternalCameraDeviceSession.cpp;l\u003d435-437?q\u003dExternalCameraDeviceSession.cpp\u0026ss\u003dandroid",
+      "range": {
+        "startLine": 194,
+        "startChar": 28,
+        "endLine": 194,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d348466b_90b5a2c6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/camera/virtualcamera/VirtualCameraSession.cc",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": "  halStream.producerUsage \u003d stream.usage;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "97d11732ff195719ef0b0794983a6a39181310ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
