@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b4ab51_1519d958",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-03T14:00:29Z",
+      "side": 1,
+      "message": "since we are no longer passing csdSize, can we simplify this by using an std::vector?\n\nI don\u0027t think we really need an ABuffer() for this",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 53
+      },
+      "revId": "aa9accbf77a2d181206df80c25cf41b042725024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcb4b85b_fb7c4965",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-03T14:00:29Z",
+      "side": 1,
+      "message": "in the old code, this was conditional.\nlooks like it can be -1 in which case we shouldn\u0027t write this.\n\nupdate the documentation as well.",
+      "range": {
+        "startLine": 184,
+        "startChar": 47,
+        "endLine": 184,
+        "endChar": 64
+      },
+      "revId": "aa9accbf77a2d181206df80c25cf41b042725024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
