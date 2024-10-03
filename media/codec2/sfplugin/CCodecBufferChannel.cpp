@@ -2157,7 +2157,7 @@ void CCodecBufferChannel::reset() {
 
 void CCodecBufferChannel::release() {
     mInfoBuffers.clear();
-    mComponent.reset();
+    // mComponent.reset();
     mInputAllocator.reset();
     mOutputSurface.lock()->surface.clear();
     {
