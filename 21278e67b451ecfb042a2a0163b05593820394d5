@@ -22,6 +22,30 @@
       },
       "revId": "21278e67b451ecfb042a2a0163b05593820394d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa8d783_2da108b6",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-03T17:09:06Z",
+      "side": 1,
+      "message": "Ray,\nThank you for bringing this up.\nThis is the first CL where we are adding flags to a mainline module (as it wasn\u0027t possible to add flags in mainline modules in Android V).\n\nNot sure if there is any documentation on how flags are supposed to work in a mainline module when installed on an older version. It would be good to get this clarified before proceeding with these CLs.",
+      "parentUuid": "85982cbc_019dae23",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 420,
+        "endChar": 84
+      },
+      "revId": "21278e67b451ecfb042a2a0163b05593820394d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
