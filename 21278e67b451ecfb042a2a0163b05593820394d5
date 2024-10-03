@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85982cbc_019dae23",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-03T03:52:12Z",
+      "side": 1,
+      "message": "i\u0027m curious to see how this works when the module is installed on an older release where the flag is not present.  Say on a T device.\n\ngiven that the flag is in frameworks/base, which is not module code. I don\u0027t know if building the module snapshots the flag value and carries it with the module; basically -- how does the mechanism work in such cases.\n\ni have no reason to believe that as-typed is incorrect, I just want to understand the mechanisms better.",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 420,
+        "endChar": 84
+      },
+      "revId": "21278e67b451ecfb042a2a0163b05593820394d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
