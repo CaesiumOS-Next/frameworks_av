@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0f66720_c0cd0419",
+        "filename": "media/module/codecs/amrnb/common/src/l_abs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-10-04T08:36:00Z",
+      "side": 1,
+      "message": "After running the amrnb_enc_fuzzer for over 3 days, we encountered an issue with the file timeout-0c54690cbc0dfd0b7168f490741a62872df46c22. The cause of the issue is that 0x80000000 (2147483648) exceeds the positive range of a WORD32. To resolve the problem, we should return 0x7FFFFFFF (2147483647) instead.",
+      "range": {
+        "startLine": 192,
+        "startChar": 11,
+        "endLine": 192,
+        "endChar": 21
+      },
+      "revId": "f8e4ef73f56b3e23ebd5c9e1c571a6f43b2c9986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -39,6 +39,30 @@
       },
       "revId": "b1b6d19f8760d5d3158491644d023cc4ea5a9d34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2347dac5_748b34bd",
+        "filename": "media/module/codecs/amrnb/enc/src/pitch_ol.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-10-04T08:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5a2f150_e41f3dbb",
+      "range": {
+        "startLine": 1006,
+        "startChar": 32,
+        "endLine": 1006,
+        "endChar": 41
+      },
+      "revId": "b1b6d19f8760d5d3158491644d023cc4ea5a9d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
