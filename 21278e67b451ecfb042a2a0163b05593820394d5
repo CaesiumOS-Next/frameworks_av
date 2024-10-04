@@ -46,6 +46,30 @@
       },
       "revId": "21278e67b451ecfb042a2a0163b05593820394d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58b1a71f_93c6a599",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-04T09:01:36Z",
+      "side": 1,
+      "message": "@essick@google.com: Not completely sure if this answers your question, but: Reading go/android-flag-containers and go/mainline-trunk-stable-g3doc#mainline-flag-container, I think the flag being added in aosp/3290721 is in the wrong \u0027container\u0027.\n\nIt\u0027s currently in `container: \"system\",` (from the `android.media.playback.flags-aconfig` declaration)\n\nBut go/mainline-trunk-stable-g3doc#mainline-flag-container says:\n\n\u003e Each flag has a container. The values for a container can be system, vendor, \u003capex\u003e (e.g. com.android.\u003cmodule\u003e), among other possible values.\n\u003e\n\u003e A flag is a Mainline flag if its container is an apex. \n\nSo I guess the flag needs to be defined in the `com.android.media` container instead?",
+      "parentUuid": "0aa8d783_2da108b6",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 420,
+        "endChar": 84
+      },
+      "revId": "21278e67b451ecfb042a2a0163b05593820394d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
