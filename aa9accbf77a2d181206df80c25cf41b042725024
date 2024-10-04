@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38db664_d8a1685b",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-04T11:22:48Z",
+      "side": 1,
+      "message": "In creating CSD for AAC, ABuffer was used so to have consistency with existing code we have used the above method. For reference [link](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/module/metadatautils/MetaDataUtils.cpp;l\u003d68?q\u003dmedia%2Fmodule%2Fmetadatautils%2FMetaDataUtils.cpp).",
+      "parentUuid": "84b4ab51_1519d958",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 53
+      },
+      "revId": "aa9accbf77a2d181206df80c25cf41b042725024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcb4b85b_fb7c4965",

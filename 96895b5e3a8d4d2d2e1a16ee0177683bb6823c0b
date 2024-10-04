@@ -213,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4721cf_44336961",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-04T11:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47fb8834_ae69941f",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 78
+      },
+      "revId": "96895b5e3a8d4d2d2e1a16ee0177683bb6823c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "069fa6c8_f7bd842a",
