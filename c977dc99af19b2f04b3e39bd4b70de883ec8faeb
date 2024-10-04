@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c34fde96_db9b310b",
+        "filename": "services/camera/virtualcamera/VirtualCameraRenderThread.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1071172
+      },
+      "writtenOn": "2024-10-04T13:07:23Z",
+      "side": 1,
+      "message": "If the hardware doesn\u0027t support yuv rendering, GPU_FRAMEBUFFER usage is rejected in driver. Change to GPU_SAMPLED_IMAGE can pass CtsVirtualDevicesCameraCtsTestCases. \n\n\nHowever, I noticed it seems to use yuv42 to draw thumbnail in https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/camera/virtualcamera/VirtualCameraRenderThread.cc;l\u003d847;drc\u003d1b1eb1b13c701c39b380dcb8dc3205f6f99410a5?q\u003dVirtualCameraRenderThread::createThumbnail\n\nI don\u0027t know how to check the thumbnail use case and raise the concern here. If you could, please share the steps that I can verify further. If yuv420 rendering is intended here, could Google help to provide more generic solution to avoid use yuv rendering if hardware doesn\u0027t support? Thanks",
+      "revId": "c977dc99af19b2f04b3e39bd4b70de883ec8faeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

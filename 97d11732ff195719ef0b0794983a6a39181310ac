@@ -40,6 +40,30 @@
       ],
       "revId": "97d11732ff195719ef0b0794983a6a39181310ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09330b50_68b809f9",
+        "filename": "services/camera/virtualcamera/VirtualCameraSession.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1071172
+      },
+      "writtenOn": "2024-10-04T13:07:23Z",
+      "side": 1,
+      "message": "Thanks. The producerUsage is modified with to respect to the stream.usage.",
+      "parentUuid": "03f0709e_961d96b1",
+      "range": {
+        "startLine": 194,
+        "startChar": 28,
+        "endLine": 194,
+        "endChar": 53
+      },
+      "revId": "97d11732ff195719ef0b0794983a6a39181310ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
