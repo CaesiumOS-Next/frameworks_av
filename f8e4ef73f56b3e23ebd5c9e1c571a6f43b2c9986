@@ -22,6 +22,30 @@
       },
       "revId": "f8e4ef73f56b3e23ebd5c9e1c571a6f43b2c9986",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c5a3c2_f93c3b30",
+        "filename": "media/module/codecs/amrnb/common/src/l_abs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-04T11:28:53Z",
+      "side": 1,
+      "message": "There is an expectation that L_abs() will return a value \u003e\u003d 0\nso returning 0x80000000 is not appropriate.\nThat\u0027s my fault for suggesting that value.\n\nas you point out, L_abs(0x80000000) is not representable in 32 bits.\n\nI think I\u0027m ok with returning 0x7fffffff; it\u0027s close enough and we\u0027re trying\nto avoid some of the discontinuities we were seeing where values went between\nvery-negative and very-positive.\n\nWhat I do want is to clean up the comment on line 191.  This is clearly no\nlonger correct -- it directly contradicts what we\u0027re doing here.\nRewrite it so that it says something like:\n\n// abs(0x80000000) can not be represented in Word32.\n// we choose to return the closest value we can -- 0x7fffffff\n// This is acceptable because ...\n\n[and we need to fill in the ... ]\n\nI do see other places in the amr code that make this same decision:\namrwb/enc/inc/basic_op.h:#define L_abs(x) (((x) !\u003d MIN_32) ? (((x) \u003e\u003d 0) ? (x) : (-(x))) : MAX_32)\namrnb/enc/src/l_negate.cpp:    L_var_out \u003d (L_var1 \u003d\u003d MIN_32) ? MAX_32 : -L_var1;\namrnb/enc/src/l_negate.cpp:    L_var1 \u003d (L_var1 \u003d\u003d MIN_32) ? MAX_32 : -L_var1;",
+      "parentUuid": "b0f66720_c0cd0419",
+      "range": {
+        "startLine": 192,
+        "startChar": 11,
+        "endLine": 192,
+        "endChar": 21
+      },
+      "revId": "f8e4ef73f56b3e23ebd5c9e1c571a6f43b2c9986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
