@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad252a5d_e5a597dd",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-04T17:06:33Z",
+      "side": 1,
+      "message": "looking at VPCodecConfigurationRecord() in https://www.webmproject.org/vp9/mp4/, vpCC box min size is 8 bytes and 4 bytes of version.\n\nSo 12 is the minimum, but vpCC box can contain codecInitializationData too.\n\nSo should the check be size \u003e\u003d 12?",
+      "range": {
+        "startLine": 289,
+        "startChar": 16,
+        "endLine": 289,
+        "endChar": 18
+      },
+      "revId": "416cde2774535e13848a17d96af86e8236a6cee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
