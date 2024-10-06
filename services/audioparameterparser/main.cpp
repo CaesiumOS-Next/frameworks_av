@@ -18,24 +18,73 @@
 #include <android-base/logging.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
+#include <android-base/properties.h>
+#include <cstdlib>
+#include <dlfcn.h>
+#include <filesystem>
 
 #include "ParameterParser.h"
 
 using vendor::audio::parserservice::ParameterParser;
 
+void tryRegisteringVendorImpl() {
+    /* Libpath property needs to be defined by vendor to get the path of
+     * vendorimplemenatation code lib.
+     * If path and lib exists,load it else simply ignore and return as success
+     * as vendor implementation is not mandatory and depends on vendors.
+     */
+    const std::string kLibPropName =
+        ::android::base::GetProperty("ro.audio.ihaladaptervendorextension_libname","");
+    if (kLibPropName == "") {
+        LOG(DEBUG) << kLibPropName << "property is not found";
+        return;
+    }
+    // If libpath property is defined but file doesn't exists return
+    std::string fullLibPath = "system_ext/lib/" + kLibPropName;
+    if(!(std::filesystem::exists(fullLibPath))) {
+        LOG(ERROR) << "File doesn't exist at " << fullLibPath;
+        return;
+    }
+    void* libHandle = dlopen(fullLibPath.c_str(), RTLD_NOW | RTLD_NODELETE);
+    if (libHandle == nullptr) {
+        LOG(ERROR) << "Failed to load library:" << kLibPropName << dlerror();
+        return ;
+    }
+    /* Vendor needs to pass registration functor pointer in vendor lib as property
+     * to invoke the registration function of vendor implementations .so
+     */
+    const std::string kPropSymbol =
+        ::android::base::GetProperty("ro.audio.ihaladaptervendorextension_symbol","");
+    if(kPropSymbol== "") {
+        LOG(ERROR) << "Failed to get property 'ro.audio.ihaladaptervendorextension_symbol'";
+        return;
+    }
+    auto registerInterface = reinterpret_cast<int(*)()>(dlsym(libHandle,kPropSymbol.c_str()));
+    if (registerInterface == nullptr) {
+        LOG(ERROR) << "Failed to find symbol \"" << kPropSymbol << "\"";
+        return ;
+    }
+    registerInterface();
+}
+
 int main() {
     // This is a debug implementation, always enable debug logging.
     android::base::SetMinimumLogSeverity(::android::base::DEBUG);
-
+    //First check if vendor implementation service can be registered
+    tryRegisteringVendorImpl();
     auto parser = ndk::SharedRefBase::make<ParameterParser>();
     const std::string parserFqn =
-            std::string().append(ParameterParser::descriptor).append("/default");
-    binder_status_t status =
+    std::string().append(ParameterParser::descriptor).append("/default");
+    // If vendor implemented interface registration fails, register with default
+    if (AServiceManager_checkService(parserFqn.c_str()) != nullptr) {
+        LOG(INFO) << "Successfully registered Ihalvendorextension service ";
+    } else {
+        binder_status_t status =
             AServiceManager_addService(parser->asBinder().get(), parserFqn.c_str());
-    if (status != STATUS_OK) {
-        LOG(ERROR) << "failed to register service for \"" << parserFqn << "\"";
+        if (status != STATUS_OK) {
+            LOG(ERROR) << "failed to register service for \"" << parserFqn << "\"";
+        }
     }
-
     ABinderProcess_joinThreadPool();
     return EXIT_FAILURE;  // should not reach
 }
