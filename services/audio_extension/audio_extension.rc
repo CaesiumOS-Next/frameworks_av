@@ -1,0 +1,12 @@
+service audio_extension /system_ext/bin/audio_extension
+    class core
+    # process user is same as audioserver
+    user audioserver
+    # process group is same as audioserver
+    group audio
+    # process capabilities and profile  same as audioserver
+    capabilities BLOCK_SUSPEND
+    task_profiles ProcessCapacityHigh HighPerformance
+
+on init
+    # do initialaztion upon process start
