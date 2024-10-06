@@ -1,0 +1,14 @@
+service audio_extension /system_ext/bin/audio_extension
+    class core
+    # process user is same as audioserver
+    user audioserver
+    # process group is same as audioserver
+    group audio
+    capabilities BLOCK_SUSPEND
+    # match rtprio cur / max with sensor service as we handle AR/VR HID sensor data.
+    rlimit rtprio 10 10
+    ioprio rt 4
+    task_profiles ProcessCapacityHigh HighPerformance
+
+on init
+    # do initialaztion upon process start

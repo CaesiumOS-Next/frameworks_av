@@ -1,0 +1,24 @@
+cc_binary {
+    name: "audio_extension",
+    owner: "qcom",
+    system_ext_specific: true,
+
+    srcs: [
+        "main_audio_extension.cpp",
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wthread-safety",
+        "-DBACKEND_NDK",
+    ],
+
+    shared_libs: [
+        "libbinder_ndk",
+        "libbase",
+    ],
+
+    init_rc: ["audio_extension.rc"],
+}
