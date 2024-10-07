@@ -1,0 +1,103 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e62342c_9167f7e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-07T09:29:03Z",
+      "side": 1,
+      "message": "Should there be tests (either CTS or unit) to accompany this change?",
+      "revId": "9438c4e66cf2aa65adb6bcab3fb2ee9bc8a83e35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a95c91_0a247a29",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-07T09:29:03Z",
+      "side": 1,
+      "message": "this can be removed",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e979ddb4_1a8b5d59",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/metadatautils/MetaDataUtils.cpp",
+              "range": {
+                "startLine": 144,
+                "startChar": 0,
+                "endLine": 145,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "9438c4e66cf2aa65adb6bcab3fb2ee9bc8a83e35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5746c666_1adf24b9",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-07T09:29:03Z",
+      "side": 1,
+      "message": "nit: put the comment on its own line to avoid breaking the if condition across two lines - or just remove the comment, since the code is pretty clear on its own.",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 76
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e96ca7b8_50472566",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/metadatautils/MetaDataUtils.cpp",
+              "range": {
+                "startLine": 281,
+                "startChar": 0,
+                "endLine": 282,
+                "endChar": 0
+              },
+              "replacement": "        size \u003c 12) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9438c4e66cf2aa65adb6bcab3fb2ee9bc8a83e35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
