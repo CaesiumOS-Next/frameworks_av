@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19380039_f4116fa6",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6db280_5fdc48c2",
+      "range": {
+        "startLine": 46,
+        "startChar": 13,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5aee089b_5bc94bcb",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "574ff3c4_36de57a5",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Added doc around ownership",
+      "parentUuid": "5aee089b_5bc94bcb",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 25
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50dfdf35_13e5bd9a",
@@ -78,6 +126,30 @@
       "writtenOn": "2024-08-21T20:52:40Z",
       "side": 1,
       "message": "should this return some sort of an error code, e.g. as to why creation may fail?",
+      "range": {
+        "startLine": 193,
+        "startChar": 21,
+        "endLine": 193,
+        "endChar": 47
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b33f6b_6152490a",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50dfdf35_13e5bd9a",
       "range": {
         "startLine": 193,
         "startChar": 21,
@@ -129,6 +201,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "952b36fc_d9925129",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6b9eace_8fd2672b",
+      "range": {
+        "startLine": 197,
+        "startChar": 3,
+        "endLine": 197,
+        "endChar": 24
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34708daf_3770bedb",
@@ -142,6 +238,30 @@
       "writtenOn": "2024-08-21T20:52:40Z",
       "side": 1,
       "message": "I am noticing start/stop is missing. Is the created codec automatically started on create? Also, is this reset in effect meant for flush()?",
+      "range": {
+        "startLine": 208,
+        "startChar": 15,
+        "endLine": 208,
+        "endChar": 40
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d1aead_e8a15ae0",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Yes once the codec is created it is assumed that it is ready to process frames.\n\nAdded flush and more documentations.",
+      "parentUuid": "34708daf_3770bedb",
       "range": {
         "startLine": 208,
         "startChar": 15,
@@ -193,6 +313,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf45a967_1e628415",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "284e0b2e_3c8e9873",
+      "range": {
+        "startLine": 251,
+        "startChar": 15,
+        "endLine": 251,
+        "endChar": 37
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "293817fc_3071cc31",
@@ -206,6 +350,30 @@
       "writtenOn": "2024-08-21T20:52:40Z",
       "side": 1,
       "message": "what are the meaning of these fields?",
+      "range": {
+        "startLine": 269,
+        "startChar": 11,
+        "endLine": 269,
+        "endChar": 22
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec1e862f_521a07c8",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Updated documentation",
+      "parentUuid": "293817fc_3071cc31",
       "range": {
         "startLine": 269,
         "startChar": 11,
@@ -269,6 +437,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e0183da_a657fd37",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "The produced buffer size and the config updates should be at |output|.",
+      "parentUuid": "9fd76705_6b03ce8e",
+      "range": {
+        "startLine": 296,
+        "startChar": 16,
+        "endLine": 296,
+        "endChar": 24
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "712dab0b_ba99f893",
         "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
         "patchSetId": 10
@@ -320,6 +512,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8e25e14_d03ef128",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "712dab0b_ba99f893",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 14
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d481951_29d1aec6",
         "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
         "patchSetId": 10
@@ -355,6 +571,30 @@
           ]
         }
       ],
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d002d815_ab167d75",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "5d481951_29d1aec6",
+      "range": {
+        "startLine": 319,
+        "startChar": 10,
+        "endLine": 319,
+        "endChar": 54
+      },
       "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -400,6 +640,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69594a5_f4f669e1",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "148c32d3_650f7d12",
+      "range": {
+        "startLine": 333,
+        "startChar": 29,
+        "endLine": 333,
+        "endChar": 35
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1150f0d_3de29fd8",
@@ -413,6 +677,30 @@
       "writtenOn": "2024-08-21T20:52:40Z",
       "side": 1,
       "message": "we may be able to avoid some of this variable-API (that may be more difficult to maintain than worth it) if we make freeze the ABI of this (e.g. LLNDK), and allow C2SupportedValues to be constructed from ApexCodec_SupportedValues.",
+      "range": {
+        "startLine": 383,
+        "startChar": 4,
+        "endLine": 383,
+        "endChar": 29
+      },
+      "revId": "eb80a41d48d667bf57f350ef64217949b3a61c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b56cc7c_dd9fddb3",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-07T22:05:02Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "d1150f0d_3de29fd8",
       "range": {
         "startLine": 383,
         "startChar": 4,
