@@ -16,6 +16,75 @@
       "message": "The code lgtm, but I\u0027m not sure about the currently open discussions on the specifics of the MIDI spec, so I think they should be resolved one way or the other before submitting.",
       "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28641186_64a9cb04",
+        "filename": "media/module/extractors/extractor.aconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-07T13:57:30Z",
+      "side": 1,
+      "message": "maybe media_extractor instead of media_solutions.\nmake it more about the functional area, not who owns it.",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a520f4c6_971b7b61",
+        "filename": "media/module/extractors/fuzzers/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-07T13:57:30Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Android Ownership Lint: Ownership attribution is recommended for existing test targets. The following targets in media/module/extractors/fuzzers/Android.bp are missing an owner: mp4_extractor_fuzzer, wav_extractor_fuzzer, amr_extractor_fuzzer, mkv_extractor_fuzzer...\n\nAnalyzer Description: Validates test targets attribution.\nOwner: crumpet-eng@google.com\n\nOwnership attribution is recommended for existing test targets. The following targets in media/module/extractors/fuzzers/Android.bp are missing an owner: mp4_extractor_fuzzer, wav_extractor_fuzzer, amr_extractor_fuzzer, mkv_extractor_fuzzer, ogg_extractor_fuzzer, mpeg2ps_extractor_fuzzer, mpeg2ts_extractor_fuzzer, mp3_extractor_fuzzer, aac_extractor_fuzzer, flac_extractor_fuzzer, midi_extractor_fuzzer. Please refer to the ownership guidelines doc go/new-android-ownership-model for more information.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a653e0_177ccdbf",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-07T13:57:30Z",
+      "side": 1,
+      "message": "i\u0027m on a drive for what I consider simplifying logic.\nhow about:\n\nif (mthd) return true\nif (xmf) return true\n... the rtl and ota and imelody checks ...\nif (OURNEWFLAG) { MidiEngine p(); if (p.initCheck() \u003d\u003d ok) return true; }\n\nreturn false\n\nand the sense of OURNEWFLAG becomes more \"are we keeping the old way as a fallback\".\nthan an either/or decision.",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 421,
+        "endChar": 21
+      },
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
