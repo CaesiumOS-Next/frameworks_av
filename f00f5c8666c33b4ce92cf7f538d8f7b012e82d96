@@ -85,6 +85,30 @@
       },
       "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2bed502_51e7b644",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-07T14:37:58Z",
+      "side": 1,
+      "message": "I don\u0027t think this would be a particularly safe use of flagging though - if the flag is disabled then the logic should be equivalent to before this change - and I think the current structure achieves that unambiguously.\n\nArguably there could be another level of method nesting added, making `SniffMidi()` just:\n\n```\nreturn flag ? SniffMidiEfficiently() : SniffMidiLegacy();\n```\n\nThen when the flag is removed `SniffMidiEfficiently()` can be in-lined into `SniffMidi()` and `SniffMidiLegacy()` can be removed.",
+      "parentUuid": "27a653e0_177ccdbf",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 421,
+        "endChar": 21
+      },
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
