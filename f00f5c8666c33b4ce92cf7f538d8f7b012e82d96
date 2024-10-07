@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf12ef2a_ff6c31f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-07T09:52:31Z",
+      "side": 1,
+      "message": "The code lgtm, but I\u0027m not sure about the currently open discussions on the specifics of the MIDI spec, so I think they should be resolved one way or the other before submitting.",
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
