@@ -109,6 +109,30 @@
       },
       "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72674b0a_316605ac",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-07T18:44:33Z",
+      "side": 1,
+      "message": "Ray,\nFrom what I understand, the flags are to be used to retain the old behavior till the flags are turned on.\n\nThe above approach changes the behavior compared to old one even when the flag is turned off. And there is no way to get the old behavior back by just keeping the flag off (till we are sure that this is working as intended).\n\nCan you please confirm if this is indeed what is needed here?",
+      "parentUuid": "27a653e0_177ccdbf",
+      "range": {
+        "startLine": 420,
+        "startChar": 4,
+        "endLine": 421,
+        "endChar": 21
+      },
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
