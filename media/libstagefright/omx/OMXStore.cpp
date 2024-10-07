@@ -66,7 +66,6 @@ void OMXStore::addVendorPlugin() {
 }
 
 void OMXStore::addPlatformPlugin() {
-    addPlugin("libstagefright_softomx_plugin.so");
 }
 
 void OMXStore::addPlugin(const char *libname) {
