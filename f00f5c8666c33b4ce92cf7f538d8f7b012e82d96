@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3d4ccde_24f468c6",
+        "filename": "media/module/extractors/extractor.aconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-07T21:31:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28641186_64a9cb04",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a520f4c6_971b7b61",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-10-07T13:57:30Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Android Ownership Lint: Ownership attribution is recommended for existing test targets. The following targets in media/module/extractors/fuzzers/Android.bp are missing an owner: mp4_extractor_fuzzer, wav_extractor_fuzzer, amr_extractor_fuzzer, mkv_extractor_fuzzer...\n\nAnalyzer Description: Validates test targets attribution.\nOwner: crumpet-eng@google.com\n\nOwnership attribution is recommended for existing test targets. The following targets in media/module/extractors/fuzzers/Android.bp are missing an owner: mp4_extractor_fuzzer, wav_extractor_fuzzer, amr_extractor_fuzzer, mkv_extractor_fuzzer, ogg_extractor_fuzzer, mpeg2ps_extractor_fuzzer, mpeg2ts_extractor_fuzzer, mp3_extractor_fuzzer, aac_extractor_fuzzer, flac_extractor_fuzzer, midi_extractor_fuzzer. Please refer to the ownership guidelines doc go/new-android-ownership-model for more information.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c78e6ac2_cb5c34eb",
+        "filename": "media/module/extractors/fuzzers/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-07T21:31:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a520f4c6_971b7b61",
       "range": {
         "startLine": 0,
         "startChar": 0,
