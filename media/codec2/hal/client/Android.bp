@@ -41,6 +41,7 @@ cc_library {
     cpp_std: "gnu++20",
 
     header_libs: [
+        "libapexcodecs-headers",
         "libcodec2_internal", // private
     ],
 
@@ -77,6 +78,10 @@ cc_library {
 
     export_include_dirs: [
         "include",
+    ],
+
+    export_header_lib_headers: [
+        "libapexcodecs-headers",
     ],
 
     export_shared_lib_headers: [
