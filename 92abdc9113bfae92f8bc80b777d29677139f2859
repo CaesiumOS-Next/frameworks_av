@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95fd4af0_c03f8716",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-08T17:58:20Z",
+      "side": 1,
+      "message": "I think we need to check explicitly for `STATUS_INVALID_OPERATION` as this is what indicates the situation when the HAL stream could not handle the command because it was in another state: https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/audio/aidl/default/Stream.cpp;l\u003d179;drc\u003da33bb5eaf5a76d0cab352dcd2f77fcdd3c17fbd6",
+      "range": {
+        "startLine": 451,
+        "startChar": 12,
+        "endLine": 451,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9f51bb7f_ca9c948b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 451,
+                "startChar": 0,
+                "endLine": 452,
+                "endChar": 0
+              },
+              "replacement": "        if (status \u003d\u003d STATUS_INVALID_OPERATION \u0026\u0026\n                !isInPlayOrRecordState(innerReply-\u003estate)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "92abdc9113bfae92f8bc80b777d29677139f2859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
