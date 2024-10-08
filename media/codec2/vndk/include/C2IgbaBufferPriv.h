@@ -65,6 +65,13 @@ public:
         std::shared_ptr<C2GraphicBlock> *block /* nonnull */,
         C2Fence *fence /* nonnull */) override;
 
+    virtual c2_status_t fetchGraphicBlock(
+        uint32_t width,
+        uint32_t height,
+        uint32_t format,
+        C2MemoryUsage usage,
+        std::shared_ptr<C2GraphicBlock> *block /* nonnull */,
+        C2Fence *fence /* nonnull */, bool requestHwFence) override;
     // Do we need this?
     void invalidate();
 
@@ -77,7 +84,7 @@ private:
         c2_nsecs_t timeoutNs,
         uint64_t *origId /* nonnull */,
         std::shared_ptr<C2GraphicBlock> *block /* nonnull */,
-        C2Fence *fence /* nonnull */);
+        C2Fence *fence /* nonnull */, bool requestHwFence);
 
     const std::shared_ptr<C2Allocator> mAllocator;
     const std::shared_ptr<::aidl::android::hardware::media::c2::IGraphicBufferAllocator> mIgba;

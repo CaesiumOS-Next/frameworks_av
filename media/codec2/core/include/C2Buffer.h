@@ -1096,6 +1096,16 @@ public:
             C2MemoryUsage usage,
             std::shared_ptr<C2GraphicBlock> *block /* nonnull */,
             C2Fence *fence /* nonnull */);
+
+    virtual c2_status_t fetchGraphicBlock(
+            uint32_t width __unused, uint32_t height __unused, uint32_t format __unused,
+            C2MemoryUsage usage __unused,
+            std::shared_ptr<C2GraphicBlock> *block /* nonnull */,
+            C2Fence *fence /* nonnull */ __unused, bool requestHwFence __unused) {
+        *block = nullptr;
+        return C2_OMITTED;
+    }
+
 protected:
     C2BlockPool() = default;
 };
