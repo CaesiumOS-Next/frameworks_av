@@ -647,11 +647,9 @@ ParamsBlobType<Params> *GetBlob(Params *params) {
     return params;
 }
 
-// Params -> std::vector<C2Param*>
-template <typename Params>
-bool parseParamsBlob(std::vector<C2Param*> *params, const Params &paramsBlob) {
+template <typename Vector>
+bool parseParamsVector(std::vector<C2Param*> *params, const Vector &blob) {
     // assuming blob is const here
-    const ParamsBlobType<Params> &blob = GetBlob(paramsBlob);
     size_t size = blob.size();
     size_t ix = 0;
     size_t old_ix = 0;
@@ -679,18 +677,14 @@ bool parseParamsBlob(std::vector<C2Param*> *params, const Params &paramsBlob) {
     return true;
 }
 
-/**
- * Concatenates a list of C2Params into a params blob. T is a container type
- * whose member type is compatible with C2Param*.
- *
- * \param[out] blob target blob
- * \param[in] params parameters to concatenate
- * \retval C2_OK if the blob was successfully created
- * \retval C2_BAD_VALUE if the blob was not successful created (this only
- *         happens if the parameters were not const)
- */
-template <typename Params, typename T>
-bool _createParamsBlob(Params *paramsBlob, const T &params) {
+// Params -> std::vector<C2Param*>
+template <typename Params>
+bool parseParamsBlob(std::vector<C2Param*> *params, const Params &paramsBlob) {
+    return parseParamsVector(params, GetBlob(paramsBlob));
+}
+
+template <typename Vector, typename T>
+bool createParamsVector(Vector *blob, const T &params) {
     // assuming the parameter values are const
     size_t size = 0;
     for (const auto &p : params) {
@@ -700,7 +694,6 @@ bool _createParamsBlob(Params *paramsBlob, const T &params) {
         size += p->size();
         size = align(size, PARAMS_ALIGNMENT);
     }
-    ParamsBlobType<Params> *blob = GetBlob(paramsBlob);
     blob->resize(size);
     size_t ix = 0;
     for (const auto &p : params) {
@@ -722,6 +715,21 @@ bool _createParamsBlob(Params *paramsBlob, const T &params) {
         return false;
     }
     return true;
+}
+
+/**
+ * Concatenates a list of C2Params into a params blob. T is a container type
+ * whose member type is compatible with C2Param*.
+ *
+ * \param[out] blob target blob
+ * \param[in] params parameters to concatenate
+ * \retval C2_OK if the blob was successfully created
+ * \retval C2_BAD_VALUE if the blob was not successful created (this only
+ *         happens if the parameters were not const)
+ */
+template <typename Params, typename T>
+bool _createParamsBlob(Params *paramsBlob, const T &params) {
+    return createParamsVector(GetBlob(paramsBlob), params);
 }
 
 /**
