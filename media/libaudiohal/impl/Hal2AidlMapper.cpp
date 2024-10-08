@@ -398,7 +398,7 @@ status_t Hal2AidlMapper::findOrCreateMixPortConfig(
                         matchFlags.toString().c_str());
         }
         // These output flags get removed one by one in this order when retrying port finding.
-        std::vector<AudioOutputFlags> optionalOutputFlags { };
+        std::vector<AudioOutputFlags> optionalOutputFlags { AudioOutputFlags::DEEP_BUFFER };
         // For remote submix output, retry with these output flags removed one by one:
         // 1. DIRECT: remote submix outputs are expected not to manipulate the contents of the
         //            audio stream.
