@@ -733,7 +733,7 @@ static_vo Word32 L_shl (Word32 L_var1, Word16 var2)
                     break;
                 }
             }
-            L_var1 *= 2;
+            L_var1 <<= 1;
             L_var_out = L_var1;
         }
     }
