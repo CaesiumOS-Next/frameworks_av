@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da9b919e_0f955224",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 63
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-09T22:00:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0223793d_fc44d3ea",
+      "revId": "4dadbdea83dde504922ab0caac31897b6023001e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed678aa7_0810e362",
@@ -135,6 +153,30 @@
           ]
         }
       ],
+      "revId": "4dadbdea83dde504922ab0caac31897b6023001e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5169d1ce_5ab8f663",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 63
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-09T22:00:23Z",
+      "side": 1,
+      "message": "Done. Using a static variable in MediaCodecInfo",
+      "parentUuid": "ed678aa7_0810e362",
+      "range": {
+        "startLine": 357,
+        "startChar": 35,
+        "endLine": 357,
+        "endChar": 65
+      },
       "revId": "4dadbdea83dde504922ab0caac31897b6023001e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
