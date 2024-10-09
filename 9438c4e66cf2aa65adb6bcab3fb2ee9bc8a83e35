@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4183737_8579be9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-09T21:37:58Z",
+      "side": 1,
+      "message": "As discussed in the call today, a CTS test can\u0027t be added as mp4 in vp9 is not a CDD requirement.\n\nAll the current extractor CTS tests expect that all the files used in the test work as expected and do not allow an extractor to say a certain mimetype is not supported.\n\nAs per the unit tests, current extractor unit tests have a quite a lot of known failures, so any additional tests to that can\u0027t really be run in continuous runs to enforce this behavior at the moment.\n\nFor these reasons, it was aligned in the call to ignore adding a test for now and hence marking this as resolved.",
+      "parentUuid": "acf5d9e5_5b544eaa",
+      "revId": "9438c4e66cf2aa65adb6bcab3fb2ee9bc8a83e35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25a95c91_0a247a29",
