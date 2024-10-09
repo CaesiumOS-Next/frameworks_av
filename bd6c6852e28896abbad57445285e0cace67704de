@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fda088a_2f142230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-09T18:57:32Z",
+      "side": 1,
+      "message": "Hi Jindong, please see https://r.android.com/3260382 for the approved solution for this problem. Our support team should soon update your bug with more details.",
+      "revId": "bd6c6852e28896abbad57445285e0cace67704de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
