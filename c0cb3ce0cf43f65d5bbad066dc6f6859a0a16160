@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcc20adf_86f2976b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-09T09:20:30Z",
+      "side": 1,
+      "message": "I\u0027d like to understand the root cause of this crash in more detail, in order to understand the best way to mitigate it - I\u0027ve replied on the bug - let\u0027s discuss there for now.",
+      "revId": "c0cb3ce0cf43f65d5bbad066dc6f6859a0a16160",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
