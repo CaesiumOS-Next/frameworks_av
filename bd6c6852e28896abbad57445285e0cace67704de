@@ -16,6 +16,24 @@
       "message": "Hi Jindong, please see https://r.android.com/3260382 for the approved solution for this problem. Our support team should soon update your bug with more details.",
       "revId": "bd6c6852e28896abbad57445285e0cace67704de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e480ba_d95519a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2024-10-10T02:49:26Z",
+      "side": 1,
+      "message": "Hi Mikhail, thanks for your comments. \nThe patch you mentioned doesn\u0027t seem to solve my problem. \nWhat I want is to use direct output for those sample rates \u003e 192khz or channels \u003e 2, but the patch rejects them. \n\nLet me explain my use cases. \nSometimes I want to route the audio directly to the card without mixing in frameworks, this means if the audio file is 96khz or 192khz, I want the pcm device opened with 96khz or 192khz, not the primary port setting (usually 48khz). \nCurrently in AudioPolicyManager::openDirectOutput, it rejects those sample rates \u003c\u003d SAMPLE_RATE_HZ_MAX. So I need to change SAMPLE_RATE_HZ_MAX from 192000 to 48000 to allow 96khz/192khz files to pass through direct output.\nIs there any other way to achieve this?\nThank you very much.",
+      "parentUuid": "1fda088a_2f142230",
+      "revId": "bd6c6852e28896abbad57445285e0cace67704de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
