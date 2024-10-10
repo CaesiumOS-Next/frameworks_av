@@ -34,6 +34,24 @@
       "parentUuid": "1fda088a_2f142230",
       "revId": "bd6c6852e28896abbad57445285e0cace67704de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bffda636_5eb620f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-10T17:59:30Z",
+      "side": 1,
+      "message": "If it\u0027s for USB devices, then the official solution is described here: https://source.android.com/docs/core/audio/preferred-mixer-attr.\n\nIf it\u0027s for the SoC ADSP, then you should talk to the SoC vendor. I know that Qualcomm has some extensions to `DIRECT` on their platforms which may facilitate your scenario.",
+      "parentUuid": "a6e480ba_d95519a6",
+      "revId": "bd6c6852e28896abbad57445285e0cace67704de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
