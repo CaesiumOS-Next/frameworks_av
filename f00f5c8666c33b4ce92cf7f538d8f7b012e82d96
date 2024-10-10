@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d51735a_99fbd0a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-10T14:34:49Z",
+      "side": 1,
+      "message": "Marking this as resovled as CL has code-review +1 by Ray.",
+      "parentUuid": "bf12ef2a_ff6c31f2",
+      "revId": "f00f5c8666c33b4ce92cf7f538d8f7b012e82d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28641186_64a9cb04",

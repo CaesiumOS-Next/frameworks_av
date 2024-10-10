@@ -230,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b630bb3_a345cc6d",
+        "filename": "media/module/extractors/midi/MidiExtractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-10T14:34:49Z",
+      "side": 1,
+      "message": "Marking this as resolved as the CL now has Ray\u0027s Code-Review +1.",
+      "parentUuid": "40db05a8_f2bb9fca",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 368,
+        "endChar": 5
+      },
+      "revId": "f070f10127a75c1e9fef5230c2b8aff26f13f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40bcfa8a_a63491b4",
