@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad680f9_8c402f3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1055713
+      },
+      "writtenOn": "2024-10-11T20:58:34Z",
+      "side": 1,
+      "message": "Patchset 2 is just for discussion. Let me know if you want to set this value at all.",
+      "revId": "430c564e9b26dc7355f855ce178daa7ee3575999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5fda374_83a2c2b4",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1055713
+      },
+      "writtenOn": "2024-10-11T20:58:34Z",
+      "side": 1,
+      "message": "Since there are other modes that are used I only set the low value for CBR. If you want keep everything as is I can just set this to 450 for VBR and leave the rest.",
+      "revId": "430c564e9b26dc7355f855ce178daa7ee3575999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
