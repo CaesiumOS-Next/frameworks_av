@@ -124,6 +124,24 @@
       "parentUuid": "b382dae3_5dfd635c",
       "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35fc63ad_67744d91",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-11T20:11:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5983ac96_ae36e2d5",
+      "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
