@@ -34,6 +34,24 @@
       ],
       "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b382dae3_5dfd635c",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1055713
+      },
+      "writtenOn": "2024-10-11T19:45:53Z",
+      "side": 1,
+      "message": "\u003e We need to assess how this harm output video quality for the I-frames. IT is totally OK for CBR use cases when we don\u0027t want I-frames to overshoot bitstream budget too much, but for VBR it can harm I-frame quality.\n\nMarco, any thoughts? WebRTC uses this, but it\u0027s true they do mostly focus on CBR.",
+      "parentUuid": "044dbe16_b1d06a98",
+      "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
