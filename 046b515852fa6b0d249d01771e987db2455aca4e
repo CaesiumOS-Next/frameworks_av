@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044dbe16_b1d06a98",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-11T18:30:32Z",
+      "side": 1,
+      "message": "We need to assess how this harm output video quality for the I-frames. IT is totally OK for CBR use cases when we don\u0027t want I-frames to overshoot bitstream budget too much, but for VBR it can harm I-frame quality.",
+      "fixSuggestions": [
+        {
+          "fixId": "29653a07_c6b032da",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+              "range": {
+                "startLine": 495,
+                "startChar": 0,
+                "endLine": 496,
+                "endChar": 0
+              },
+              "replacement": "    codec_return \u003d aom_codec_control(mCodecContext, AOME_SET_MAX_INTRA_BITRATE_PCT, 100);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
