@@ -52,6 +52,24 @@
       "parentUuid": "044dbe16_b1d06a98",
       "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4edfe66_344cd0b0",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 2030750
+      },
+      "writtenOn": "2024-10-11T19:56:04Z",
+      "side": 1,
+      "message": "Yes 300 is what we typically use for WebRTC which is CBR mode. For VBR it would make sense to increase it, to say 600 or 800, see if that helps the test and acceptable quality-wise.",
+      "parentUuid": "b382dae3_5dfd635c",
+      "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
