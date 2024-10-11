@@ -492,6 +492,11 @@ aom_codec_err_t C2SoftAomEnc::setupCodecParameters() {
     codec_return = aom_codec_control(mCodecContext, AV1E_SET_AQ_MODE, 3);
     if (codec_return != AOM_CODEC_OK) goto BailOut;
 
+    int maxIntraBitratePct = mBitrateControlMode == AOM_CBR ? 300 : 450;
+    codec_return = aom_codec_control(mCodecContext, AOME_SET_MAX_INTRA_BITRATE_PCT,
+                                     maxIntraBitratePct);
+    if (codec_return != AOM_CODEC_OK) goto BailOut;
+
     codec_return = aom_codec_control(mCodecContext, AV1E_SET_COEFF_COST_UPD_FREQ, 3);
     if (codec_return != AOM_CODEC_OK) goto BailOut;
 
