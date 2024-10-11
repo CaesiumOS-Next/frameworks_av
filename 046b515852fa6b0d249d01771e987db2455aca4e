@@ -88,6 +88,24 @@
       "parentUuid": "a4edfe66_344cd0b0",
       "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b715d59_0d1b386a",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 2030750
+      },
+      "writtenOn": "2024-10-11T19:58:52Z",
+      "side": 1,
+      "message": "probably yeah, but we didn\u0027t do that for WebRTC.",
+      "parentUuid": "9a020007_5e1bbf18",
+      "revId": "046b515852fa6b0d249d01771e987db2455aca4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
