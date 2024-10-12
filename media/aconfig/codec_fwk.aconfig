@@ -6,6 +6,14 @@ package: "android.media.codec"
 container: "system"
 
 flag {
+  name: "apv_support"
+  is_exported: true
+  namespace: "codec_fwk"
+  description: "Feature flag for Android support for APV Content"
+  bug: "363333555"
+}
+
+flag {
   name: "aidl_hal_input_surface"
   namespace: "codec_fwk"
   description: "Feature flags for enabling AIDL HAL InputSurface handling"
