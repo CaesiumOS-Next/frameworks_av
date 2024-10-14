@@ -436,6 +436,41 @@ ALookup<C2Config::hdr_format_t, int32_t> sAv1HdrFormats = {
     { C2Config::hdr_format_t::HDR10_PLUS, AV1ProfileMain10HDR10Plus },
 };
 
+// APV
+ALookup<C2Config::profile_t, int32_t> sApvProfiles = {
+    { C2Config::PROFILE_APV_422_10, APV422Profile10 },
+    { C2Config::PROFILE_APV_422_12, APV422Profile12 },
+    { C2Config::PROFILE_APV_444_10, APV444Profile10 },
+    { C2Config::PROFILE_APV_444_12, APV444Profile12 },
+    { C2Config::PROFILE_APV_4444_10, APV4444Profile10 },
+    { C2Config::PROFILE_APV_4444_12, APV4444Profile12 },
+    { C2Config::PROFILE_APV_400_10, APV400Profile10 },
+};
+
+ALookup<C2Config::level_t, int32_t> sApvLevels = {
+    { C2Config::LEVEL_APV_1, APVLevel1 },
+    { C2Config::LEVEL_APV_1_1, APVLevel11 },
+    { C2Config::LEVEL_APV_2, APVLevel2 },
+    { C2Config::LEVEL_APV_2_1, APVLevel21 },
+    { C2Config::LEVEL_APV_3, APVLevel3 },
+    { C2Config::LEVEL_APV_3_1, APVLevel31 },
+    { C2Config::LEVEL_APV_4, APVLevel4 },
+    { C2Config::LEVEL_APV_4_1, APVLevel41 },
+    { C2Config::LEVEL_APV_5, APVLevel5 },
+    { C2Config::LEVEL_APV_5_1, APVLevel51 },
+    { C2Config::LEVEL_APV_6, APVLevel6 },
+    { C2Config::LEVEL_APV_6_1, APVLevel61 },
+    { C2Config::LEVEL_APV_7, APVLevel7 },
+    { C2Config::LEVEL_APV_7_1, APVLevel71 },
+};
+
+ALookup<C2Config::hdr_format_t, int32_t> sApvHdrFormats = {
+    { C2Config::hdr_format_t::SDR, APV422Profile10 },
+    { C2Config::hdr_format_t::HLG, APV422Profile10 },
+    { C2Config::hdr_format_t::HDR10, APV422Profile10 },
+    { C2Config::hdr_format_t::HDR10_PLUS, APV422Profile10 },
+};
+
 // HAL_PIXEL_FORMAT_* -> COLOR_Format*
 ALookup<uint32_t, int32_t> sPixelFormats = {
     { HAL_PIXEL_FORMAT_IMPLEMENTATION_DEFINED, COLOR_FormatSurface },
@@ -720,6 +755,32 @@ private:
     int32_t mBitDepth;
 };
 
+// APV
+struct ApvProfileLevelMapper : ProfileLevelMapperHelper {
+    ApvProfileLevelMapper(int32_t bitDepth = 10) :
+        ProfileLevelMapperHelper(),
+        mBitDepth(bitDepth) {}
+
+    virtual bool simpleMap(C2Config::level_t from, int32_t *to) {
+        return sApvLevels.map(from, to);
+    }
+    virtual bool simpleMap(int32_t from, C2Config::level_t *to) {
+        return sApvLevels.map(from, to);
+    }
+    virtual bool simpleMap(C2Config::profile_t from, int32_t *to) {
+        return sApvProfiles.map(from, to);
+    }
+    virtual bool simpleMap(int32_t from, C2Config::profile_t *to) {
+        return sApvProfiles.map(from, to);
+    }
+    virtual bool mapHdrFormat(int32_t from, C2Config::hdr_format_t *to) override {
+        return (mBitDepth == 10) ? sApvHdrFormats.map(from, to) : sApvHdrFormats.map(from, to);
+    }
+
+private:
+    int32_t mBitDepth;
+};
+
 } // namespace
 
 // the default mapper is used for media types that do not support HDR
@@ -753,6 +814,8 @@ C2Mapper::GetProfileLevelMapper(std::string mediaType) {
         return std::make_shared<Vp9ProfileLevelMapper>();
     } else if (mediaType == MIMETYPE_VIDEO_AV1) {
         return std::make_shared<Av1ProfileLevelMapper>();
+    } else if (mediaType == MIMETYPE_VIDEO_APV) {
+        return std::make_shared<ApvProfileLevelMapper>();
     }
     return nullptr;
 }
