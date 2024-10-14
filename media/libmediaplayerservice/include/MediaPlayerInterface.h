@@ -141,6 +141,7 @@ public:
         virtual void        flush() = 0;
         virtual void        pause() = 0;
         virtual void        close() = 0;
+        virtual void        clear() = 0;
 
         virtual status_t    setPlaybackRate(const AudioPlaybackRate& rate) = 0;
         virtual status_t    getPlaybackRate(AudioPlaybackRate* rate /* nonnull */) = 0;
