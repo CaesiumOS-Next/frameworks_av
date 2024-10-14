@@ -140,4 +140,5 @@ const char *MEDIA_MIMETYPE_TEXT_CEA_608 = "text/cea-608";
 const char *MEDIA_MIMETYPE_TEXT_CEA_708 = "text/cea-708";
 const char *MEDIA_MIMETYPE_DATA_TIMED_ID3 = "application/x-id3v4";
 
+const char *MEDIA_MIMETYPE_VIDEO_APV = "video/apv";
 }  // namespace android

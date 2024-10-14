@@ -430,6 +430,7 @@ enum : uint32_t {
     _C2_PL_AV1_BASE  = 0x9000,
     _C2_PL_VP8_BASE  = 0xA000,
     _C2_PL_MPEGH_BASE = 0xB000,     // MPEG-H 3D Audio
+    _C2_PL_APV_BASE = 0xC000,     // APV
 
     C2_PROFILE_LEVEL_VENDOR_START = 0x70000000,
 };
@@ -597,6 +598,15 @@ enum C2Config::profile_t : uint32_t {
     PROFILE_MPEGH_HIGH,                         ///< MPEG-H High
     PROFILE_MPEGH_LC,                           ///< MPEG-H Low-complexity
     PROFILE_MPEGH_BASELINE,                     ///< MPEG-H Baseline
+
+    // Advanced Professional VideoCodec (APV)
+    PROFILE_APV_422_10 = _C2_PL_APV_BASE,       ///< APV 422-10 Profile
+    PROFILE_APV_422_12,                         ///< APV 422-12 Profile
+    PROFILE_APV_444_10,                         ///< APV 444-10 Profile
+    PROFILE_APV_444_12,                         ///< APV 444-12 Profile
+    PROFILE_APV_4444_10,                        ///< APV 4444-10 Profile
+    PROFILE_APV_4444_12,                        ///< APV 4444-12 Profile
+    PROFILE_APV_400_10,                         ///< APV 400-10 Profile
 };
 
 enum C2Config::level_t : uint32_t {
@@ -752,6 +762,22 @@ enum C2Config::level_t : uint32_t {
     LEVEL_MPEGH_3,                              ///< MPEG-H L3
     LEVEL_MPEGH_4,                              ///< MPEG-H L4
     LEVEL_MPEGH_5,                              ///< MPEG-H L5
+
+    // Advanced Professional VideoCodec(APV) levels
+    LEVEL_APV_1 = _C2_PL_APV_BASE,              ///< APV L 1
+    LEVEL_APV_1_1,                              ///< APV L 1.1
+    LEVEL_APV_2,                                ///< APV L 2
+    LEVEL_APV_2_1,                              ///< APV L 2.1
+    LEVEL_APV_3,                                ///< APV L 3
+    LEVEL_APV_3_1,                              ///< APV L 3.1
+    LEVEL_APV_4,                                ///< APV L 4
+    LEVEL_APV_4_1,                              ///< APV L 4.1
+    LEVEL_APV_5,                                ///< APV L 5
+    LEVEL_APV_5_1,                              ///< APV L 5.1
+    LEVEL_APV_6,                                ///< APV L 6
+    LEVEL_APV_6_1,                              ///< APV L 6.1
+    LEVEL_APV_7,                                ///< APV L 7
+    LEVEL_APV_7_1,                              ///< APV L 7.1
 };
 
 struct C2ProfileLevelStruct {

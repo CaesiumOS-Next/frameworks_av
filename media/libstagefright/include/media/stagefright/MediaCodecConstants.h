@@ -586,6 +586,63 @@ inline static const char *asString_Dts_UHDProfile(int32_t i, const char *def = "
     }
 }
 
+// APV ProfileLevel
+inline constexpr int32_t APV422Profile10  = 0x01;
+inline constexpr int32_t APV422Profile12  = 0x02;
+inline constexpr int32_t APV444Profile10  = 0x04;
+inline constexpr int32_t APV444Profile12  = 0x08;
+inline constexpr int32_t APV4444Profile10 = 0x10;
+inline constexpr int32_t APV4444Profile12 = 0x20;
+inline constexpr int32_t APV400Profile10  = 0x40;
+
+inline static const char *asString_APVProfile(int32_t i, const char *def = "??") {
+    switch (i) {
+        case APV422Profile10:  return "APV422Profile10";
+        case APV422Profile12:  return "APV422Profile12";
+        case APV444Profile10:  return "APV444Profile10";
+        case APV444Profile12:  return "APV444Profile12";
+        case APV4444Profile10: return "APV4444Profile10";
+        case APV4444Profile12: return "APV4444Profile12";
+        case APV400Profile10:  return "APV400Profile10";
+        default:               return def;
+    }
+}
+
+inline constexpr int32_t APVLevel1   = 0x1;
+inline constexpr int32_t APVLevel11  = 0x2;
+inline constexpr int32_t APVLevel2   = 0x4;
+inline constexpr int32_t APVLevel21  = 0x8;
+inline constexpr int32_t APVLevel3   = 0x10;
+inline constexpr int32_t APVLevel31  = 0x20;
+inline constexpr int32_t APVLevel4   = 0x40;
+inline constexpr int32_t APVLevel41  = 0x80;
+inline constexpr int32_t APVLevel5   = 0x100;
+inline constexpr int32_t APVLevel51  = 0x200;
+inline constexpr int32_t APVLevel6   = 0x400;
+inline constexpr int32_t APVLevel61  = 0x800;
+inline constexpr int32_t APVLevel7   = 0x1000;
+inline constexpr int32_t APVLevel71  = 0x2000;
+
+inline static const char *asString_APVTierLevel(int32_t i, const char *def = "??") {
+    switch (i) {
+        case APVLevel1:     return "Level 1";
+        case APVLevel11:    return "Level 1.1";
+        case APVLevel2:     return "Level 2";
+        case APVLevel21:    return "Level 2.1";
+        case APVLevel3:     return "Level 3";
+        case APVLevel31:    return "Level 3.1";
+        case APVLevel4:     return "Level 4";
+        case APVLevel41:    return "Level 4.1";
+        case APVLevel5:     return "Level 5";
+        case APVLevel51:    return "Level 5.1";
+        case APVLevel6:     return "Level 6";
+        case APVLevel61:    return "Level 6.1";
+        case APVLevel7:     return "Level 7";
+        case APVLevel71:    return "Level 7.1";
+        default:            return def;
+    }
+}
+
 inline constexpr int32_t BITRATE_MODE_CBR = 2;
 inline constexpr int32_t BITRATE_MODE_CBR_FD = 3;
 inline constexpr int32_t BITRATE_MODE_CQ = 0;
@@ -654,6 +711,7 @@ inline constexpr int32_t COLOR_FormatYUV422SemiPlanar        = 24;
 inline constexpr int32_t COLOR_FormatYUV444Flexible          = 0x7F444888;
 inline constexpr int32_t COLOR_FormatYUV444Interleaved       = 29;
 inline constexpr int32_t COLOR_FormatYUVP010                 = 54;
+inline constexpr int32_t COLOR_FormatYUVP210                 = 60;
 inline constexpr int32_t COLOR_QCOM_FormatYUV420SemiPlanar   = 0x7fa30c00;
 inline constexpr int32_t COLOR_TI_FormatYUV420PackedSemiPlanar = 0x7f000100;
 
@@ -712,6 +770,7 @@ inline static const char *asString_ColorFormat(int32_t i, const char *def = "??"
         case COLOR_FormatYUV444Flexible:            return "YUV444Flexible";
         case COLOR_FormatYUV444Interleaved:         return "YUV444Interleaved";
         case COLOR_FormatYUVP010:                   return "YUVP010";
+        case COLOR_FormatYUVP210:                   return "YUVP210";
         case COLOR_QCOM_FormatYUV420SemiPlanar:     return "QCOM_YUV420SemiPlanar";
         case COLOR_TI_FormatYUV420PackedSemiPlanar: return "TI_YUV420PackedSemiPlanar";
         default:                                    return def;
@@ -739,6 +798,7 @@ inline constexpr char MIMETYPE_VIDEO_MPEG2[] = "video/mpeg2";
 inline constexpr char MIMETYPE_VIDEO_RAW[] = "video/raw";
 inline constexpr char MIMETYPE_VIDEO_DOLBY_VISION[] = "video/dolby-vision";
 inline constexpr char MIMETYPE_VIDEO_SCRAMBLED[] = "video/scrambled";
+inline constexpr char MIMETYPE_VIDEO_APV[] = "video/apv";
 
 inline constexpr char MIMETYPE_AUDIO_AMR_NB[] = "audio/3gpp";
 inline constexpr char MIMETYPE_AUDIO_AMR_WB[] = "audio/amr-wb";

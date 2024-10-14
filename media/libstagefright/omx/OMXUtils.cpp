@@ -29,6 +29,7 @@
 #include <system/graphics-base.h>
 
 namespace android {
+const char *MEDIA_MIMETYPE_VIDEO_APV = "video/apv";
 
 status_t StatusFromOMXError(OMX_ERRORTYPE err) {
     switch (err) {
@@ -140,6 +141,8 @@ const char *GetComponentRole(bool isEncoder, const char *mime) {
             "audio_decoder.g711alaw", "audio_encoder.g711alaw" },
         { MEDIA_MIMETYPE_VIDEO_AVC,
             "video_decoder.avc", "video_encoder.avc" },
+        { MEDIA_MIMETYPE_VIDEO_APV,
+            "video_decoder.apv", "video_encoder.apv" },
         { MEDIA_MIMETYPE_VIDEO_HEVC,
             "video_decoder.hevc", "video_encoder.hevc" },
         { MEDIA_MIMETYPE_VIDEO_MPEG4,
