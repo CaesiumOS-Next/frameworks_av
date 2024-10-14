@@ -166,6 +166,7 @@ NuPlayer::Renderer::Renderer(
 
 NuPlayer::Renderer::~Renderer() {
     if (offloadingAudio()) {
+        mAudioSink->clear();
         mAudioSink->stop();
         mAudioSink->flush();
         mAudioSink->close();
