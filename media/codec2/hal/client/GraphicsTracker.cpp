@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "GraphicsTracker"
 #include <fcntl.h>
 #include <unistd.h>
@@ -215,10 +215,12 @@ bool GraphicsTracker::adjustDequeueConfLocked(bool *updateDequeue) {
             mMaxDequeue = mMaxDequeueRequested.value();
             mDequeueable -= (delta - 1);
             drained = delta - 1;
+            ALOGV("adjustDequeueConfLocked: mDequeueable %d", mDequeueable);
         } else {
             mMaxDequeue -= adjustable;
             drained = mDequeueable;
             mDequeueable = 0;
+            ALOGV("adjustDequeueConfLocked: clear mDequeueable %d", mDequeueable);
         }
         if (drained > 0) {
             drainDequeueableLocked(drained);
@@ -357,6 +359,7 @@ c2_status_t GraphicsTracker::configureMaxDequeueCount(int maxDequeueCount) {
             int delta = std::min(mMaxDequeue - maxDequeueCount, mDequeueable);
             maxDequeueToCommit = mMaxDequeue - delta;
             mDequeueable -= delta;
+            ALOGV("configureMaxDequeueCount: dec mDequeueable %d", mDequeueable);
             if (delta > 0) {
                 drainDequeueableLocked(delta);
             }
@@ -395,6 +398,7 @@ c2_status_t GraphicsTracker::configureMaxDequeueCount(int maxDequeueCount) {
             int delta = mMaxDequeueCommitted - oldMaxDequeue;
             if (delta > 0) {
                 mDequeueable += delta;
+                ALOGV("configureMaxDequeueCount, inc mDequeueable %d", mDequeueable);
                 writeIncDequeueableLocked(delta);
             }
         }
@@ -568,6 +572,7 @@ c2_status_t GraphicsTracker::requestAllocate(std::shared_ptr<BufferCache> *cache
         }
         mNumDequeueing++;
         mDequeueable--;
+        ALOGD("requestAllocate dec by 1 mDequeueable %d", mDequeueable);
         *cache = mBufferCache;
         return C2_OK;
     }
@@ -608,6 +613,7 @@ void GraphicsTracker::commitAllocate(c2_status_t res, const std::shared_ptr<Buff
             return;
         }
         mDequeueable++;
+        ALOGV("allocate error inc by 1 mDequeueable %d", mDequeueable);
         writeIncDequeueableLocked(1);
     }
 }
@@ -796,6 +802,7 @@ c2_status_t GraphicsTracker::requestDeallocate(uint64_t bid, const sp<Fence> &fe
             return C2_OK;
         }
         mDequeueable++;
+        ALOGV("requestDeallocate : not in cur IGBP inc by 1 mDequeueable %d", mDequeueable);
         writeIncDequeueableLocked(1);
     }
     return C2_OK;
@@ -814,6 +821,7 @@ void GraphicsTracker::commitDeallocate(
         return;
     }
     mDequeueable++;
+    ALOGV("commitDeallocate inc by 1 mDequeueable %d", mDequeueable);
     writeIncDequeueableLocked(1);
 }
 
@@ -874,6 +882,7 @@ c2_status_t GraphicsTracker::requestRender(uint64_t bid, std::shared_ptr<BufferC
             return C2_BAD_STATE;
         }
         mDequeueable++;
+        ALOGV("requestRender buffer not found: inc by one mDequeueable %d", mDequeueable);
         writeIncDequeueableLocked(1);
         return C2_BAD_STATE;
     }
@@ -919,6 +928,7 @@ void GraphicsTracker::commitRender(const std::shared_ptr<BufferCache> &cache,
             return;
         }
         mDequeueable++;
+        ALOGV("commitRender: inc by one mDequeueable %d", mDequeueable);
         writeIncDequeueableLocked(1);
         return;
     }
@@ -1015,6 +1025,7 @@ void GraphicsTracker::onReleased(uint32_t generation) {
             }
             if (!adjustDequeueConfLocked(&updateDequeue)) {
                 mDequeueable++;
+                ALOGV("onReleased: inc by one mDequeueable %d", mDequeueable);
                 writeIncDequeueableLocked(1);
             }
         }

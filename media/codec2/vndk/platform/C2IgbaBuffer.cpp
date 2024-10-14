@@ -196,6 +196,7 @@ c2_status_t C2IgbaBlockPool::fetchGraphicBlock(
         // SyncFence waiting timeout.
         // Usually HAL treats C2_TIMED_OUT as an irrecoverable error.
         // We want HAL to re-try.
+        ALOGW("fetchGraphicBlock returned C2_TIMED_OUT, translated to C2_BLOCKING");
         return C2_BLOCKING;
     }
     return res;
@@ -208,6 +209,7 @@ c2_status_t C2IgbaBlockPool::fetchGraphicBlock(
     c2_status_t res = _fetchGraphicBlock(width, height, format, usage, 0LL, &origId, block, fence);
     if (res == C2_TIMED_OUT) {
         *fence = C2Fence();
+        ALOGW("fetchGraphicBlock returned C2_TIMED_OUT, translated to C2_BLOCKING - returning signalled C2Fence");
         return C2_BLOCKING;
     }
     return res;
@@ -230,6 +232,7 @@ c2_status_t C2IgbaBlockPool::_fetchGraphicBlock(
                 return C2_BLOCKING;
             }
             case C2_TIMED_OUT: {
+                ALOGW("mWaitFence returned C2_TIMED_OUT");
                 *fence = mWaitFence;
                 return C2_BLOCKING;
             }
