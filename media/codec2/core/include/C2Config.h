@@ -430,6 +430,7 @@ enum : uint32_t {
     _C2_PL_AV1_BASE  = 0x9000,
     _C2_PL_VP8_BASE  = 0xA000,
     _C2_PL_MPEGH_BASE = 0xB000,     // MPEG-H 3D Audio
+    _C2_PL_APV_BASE = 0xC000,     // APV
 
     C2_PROFILE_LEVEL_VENDOR_START = 0x70000000,
 };
@@ -597,6 +598,15 @@ enum C2Config::profile_t : uint32_t {
     PROFILE_MPEGH_HIGH,                         ///< MPEG-H High
     PROFILE_MPEGH_LC,                           ///< MPEG-H Low-complexity
     PROFILE_MPEGH_BASELINE,                     ///< MPEG-H Baseline
+
+    // Advanced Professional VideoCodec (APV)
+    PROFILE_APV_422_10 = _C2_PL_APV_BASE,       ///< APV 422-10 Profile
+    PROFILE_APV_422_12,                         ///< APV 422-12 Profile
+    PROFILE_APV_444_10,                         ///< APV 444-10 Profile
+    PROFILE_APV_444_12,                         ///< APV 444-12 Profile
+    PROFILE_APV_4444_10,                        ///< APV 4444-10 Profile
+    PROFILE_APV_4444_12,                        ///< APV 4444-12 Profile
+    PROFILE_APV_400_10,                         ///< APV 400-10 Profile
 };
 
 enum C2Config::level_t : uint32_t {
@@ -752,6 +762,64 @@ enum C2Config::level_t : uint32_t {
     LEVEL_MPEGH_3,                              ///< MPEG-H L3
     LEVEL_MPEGH_4,                              ///< MPEG-H L4
     LEVEL_MPEGH_5,                              ///< MPEG-H L5
+
+    // Advanced Professional VideoCodec(APV) levels/bands
+    LEVEL_APV_1_0 = _C2_PL_APV_BASE,            ///< APV L 1 B 0
+    LEVEL_APV_1_1,                              ///< APV L 1 B 1
+    LEVEL_APV_1_2,                              ///< APV L 1 B 2
+    LEVEL_APV_1_3,                              ///< APV L 1 B 3
+    LEVEL_APV_1_1_0,                            ///< APV L 1.1 B 0
+    LEVEL_APV_1_1_1,                            ///< APV L 1.1 B 1
+    LEVEL_APV_1_1_2,                            ///< APV L 1.1 B 2
+    LEVEL_APV_1_1_3,                            ///< APV L 1.1 B 3
+    LEVEL_APV_2_0,                              ///< APV L 2 B 0
+    LEVEL_APV_2_1,                              ///< APV L 2 B 1
+    LEVEL_APV_2_2,                              ///< APV L 2 B 2
+    LEVEL_APV_2_3,                              ///< APV L 2 B 3
+    LEVEL_APV_2_1_0,                            ///< APV L 2.1 B 0
+    LEVEL_APV_2_1_1,                            ///< APV L 2.1 B 1
+    LEVEL_APV_2_1_2,                            ///< APV L 2.1 B 2
+    LEVEL_APV_2_1_3,                            ///< APV L 2.1 B 3
+    LEVEL_APV_3_0,                              ///< APV L 3 B 0
+    LEVEL_APV_3_1,                              ///< APV L 3 B 1
+    LEVEL_APV_3_2,                              ///< APV L 3 B 2
+    LEVEL_APV_3_3,                              ///< APV L 3 B 3
+    LEVEL_APV_3_1_0,                            ///< APV L 3.1 B 0
+    LEVEL_APV_3_1_1,                            ///< APV L 3.1 B 1
+    LEVEL_APV_3_1_2,                            ///< APV L 3.1 B 2
+    LEVEL_APV_3_1_3,                            ///< APV L 3.1 B 3
+    LEVEL_APV_4_0,                              ///< APV L 4 B 0
+    LEVEL_APV_4_1,                              ///< APV L 4 B 1
+    LEVEL_APV_4_2,                              ///< APV L 4 B 2
+    LEVEL_APV_4_3,                              ///< APV L 4 B 3
+    LEVEL_APV_4_1_0,                            ///< APV L 4.1 B 0
+    LEVEL_APV_4_1_1,                            ///< APV L 4.1 B 1
+    LEVEL_APV_4_1_2,                            ///< APV L 4.1 B 2
+    LEVEL_APV_4_1_3,                            ///< APV L 4.1 B 3
+    LEVEL_APV_5_0,                              ///< APV L 5 B 0
+    LEVEL_APV_5_1,                              ///< APV L 5 B 1
+    LEVEL_APV_5_2,                              ///< APV L 5 B 2
+    LEVEL_APV_5_3,                              ///< APV L 5 B 3
+    LEVEL_APV_5_1_0,                            ///< APV L 5.1 B 0
+    LEVEL_APV_5_1_1,                            ///< APV L 5.1 B 1
+    LEVEL_APV_5_1_2,                            ///< APV L 5.1 B 2
+    LEVEL_APV_5_1_3,                            ///< APV L 5.1 B 3
+    LEVEL_APV_6_0,                              ///< APV L 6 B 0
+    LEVEL_APV_6_1,                              ///< APV L 6 B 1
+    LEVEL_APV_6_2,                              ///< APV L 6 B 2
+    LEVEL_APV_6_3,                              ///< APV L 6 B 3
+    LEVEL_APV_6_1_0,                            ///< APV L 6.1 B 0
+    LEVEL_APV_6_1_1,                            ///< APV L 6.1 B 1
+    LEVEL_APV_6_1_2,                            ///< APV L 6.1 B 2
+    LEVEL_APV_6_1_3,                            ///< APV L 6.1 B 3
+    LEVEL_APV_7_0,                              ///< APV L 7 B 0
+    LEVEL_APV_7_1,                              ///< APV L 7 B 1
+    LEVEL_APV_7_2,                              ///< APV L 7 B 2
+    LEVEL_APV_7_3,                              ///< APV L 7 B 3
+    LEVEL_APV_7_1_0,                            ///< APV L 7.1 B 0
+    LEVEL_APV_7_1_1,                            ///< APV L 7.1 B 1
+    LEVEL_APV_7_1_2,                            ///< APV L 7.1 B 2
+    LEVEL_APV_7_1_3,                            ///< APV L 7.1 B 3
 };
 
 struct C2ProfileLevelStruct {
