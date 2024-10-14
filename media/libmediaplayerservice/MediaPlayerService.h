@@ -198,7 +198,11 @@ class MediaPlayerService : public BnMediaPlayerService
                 mSwitching = false;
             }
             sp<AudioOutput> getOutput() const { return mData.load().promote(); }
-            void            setOutput(const wp<AudioOutput>& newcookie) { mData.store(newcookie); }
+            void            setOutput(const wp<AudioOutput>& newcookie) {
+                mLock.lock();
+                mData.store(newcookie);
+                mLock.unlock();
+            }
             // lock/unlock are used by the callback before accessing the payload of this object
             void            lock() const { mLock.lock(); }
             void            unlock() const { mLock.unlock(); }

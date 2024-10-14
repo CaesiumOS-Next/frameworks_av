@@ -2483,6 +2483,19 @@ void MediaPlayerService::AudioOutput::pause()
     if (mTrack != 0) mTrack->pauseAndWait(TIMEOUT_MS);
 }
 
+void MediaPlayerService::AudioOutput::clear()
+{
+    ALOGV("clear");
+    {
+        Mutex::Autolock lock(mLock);
+        if((mFlags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) != 0) {
+            if (mCallbackData != NULL) {
+                mCallbackData->setOutput(NULL);
+            }
+        }
+    }
+}
+
 void MediaPlayerService::AudioOutput::close()
 {
     ALOGV("close");
