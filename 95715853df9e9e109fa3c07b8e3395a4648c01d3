@@ -33,6 +33,24 @@
       "message": "mSequence is incremented within this method.",
       "revId": "95715853df9e9e109fa3c07b8e3395a4648c01d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38013742_fbf95fba",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-10-15T12:20:11Z",
+      "side": 1,
+      "message": "I observe below restore behaviour when proxy-\u003eobtainBuffer() returns DEAD_OBJECT all the time.\nWithout fix proxy-\u003eobtainBuffer() is called for the same mSequence id twice.\nLooks that protection that prevents from unnecessary track recreation (\"// re-create track, unless someone else has already done so\") does not allow to recreate track after proxy-\u003eobtainBuffer() returned DEAD_OBJECT error while mSequence id was not changed meanwhile (noone else called restoreTrack_l()).\n\nWithout fix:\nmSequence\u003d2: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d3\nmSequence\u003d3: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nmSequence\u003d3: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d4\nmSequence\u003d4: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nmSequence\u003d4: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d5\nmSequence\u003d5: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nbreak\n\nWith fix:\nmSequence\u003d2: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d3\nmSequence\u003d3: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d4\nmSequence\u003d4: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d5\nmSequence\u003d5: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d6\nmSequence\u003d6: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nrestoreTrack_l() -\u003e mSequence\u003d7\nmSequence\u003d7: proxy-\u003eobtainBuffer() -\u003e DEAD_OBJECT\nbreak",
+      "parentUuid": "2fbab336_3cba6ea2",
+      "revId": "95715853df9e9e109fa3c07b8e3395a4648c01d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
