@@ -2514,6 +2514,12 @@ void MediaPlayerService::AudioOutput::close()
     {
         Mutex::Autolock lock(mLock);
         track = mTrack;
+    }
+
+    if (track) track->stopAndJoinCallbacks();
+
+    {
+        Mutex::Autolock lock(mLock);
         close_l(); // clears mTrack
     }
     // destruction of the track occurs outside of mutex.
