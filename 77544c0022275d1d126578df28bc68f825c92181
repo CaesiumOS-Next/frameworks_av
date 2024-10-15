@@ -16,6 +16,24 @@
       "message": "instead of global static init we can do lazy init, e.g.\n\n```cpp\npublic:\n  static SurfaceCallbackHandler\u0026 GetInstance() {\n    static base::NoDestructor\u003cSurfaceCallbackHandler\u003e sSurfaceCallbackHandler{};\n    return *sSurfaceCallbackHandler;\n  }\n```",
       "revId": "77544c0022275d1d126578df28bc68f825c92181",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30080d2b_0ad3e91b",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-15T21:48:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c73f153_3cd05404",
+      "revId": "77544c0022275d1d126578df28bc68f825c92181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
