@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f59e8e1_7dabbdb7",
+        "filename": "media/module/codecs/amrwb/enc/inc/basic_op.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-15T13:28:01Z",
+      "side": 1,
+      "message": "the CL where this was changed to use \"*\u003d2\" instead of \"\u003c\u003c\u003d1\"\nis entitled \"fix undefined behavior\".\n\nIt doesn\u0027t seem appropriate to go back to undefined behavior.",
+      "range": {
+        "startLine": 736,
+        "startChar": 11,
+        "endLine": 736,
+        "endChar": 25
+      },
+      "revId": "364f21d52fddfa07fc54a87b616f76f1491ebb07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
