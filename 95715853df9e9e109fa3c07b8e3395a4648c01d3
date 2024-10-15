@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bf95188_6d5bd18f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2024-10-15T12:23:46Z",
+      "side": 1,
+      "message": "In case this is question in general, please see 2nd comment answer for more details. Please let me know in case I need to elaborate more this commit message.",
+      "parentUuid": "eeec1c9c_ad1b6363",
+      "revId": "95715853df9e9e109fa3c07b8e3395a4648c01d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fbab336_3cba6ea2",
