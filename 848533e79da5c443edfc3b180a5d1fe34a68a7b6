@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f56ab2d0_71c81b9c",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-15T16:25:31Z",
+      "side": 1,
+      "message": "V or flag being enabled?",
+      "range": {
+        "startLine": 215,
+        "startChar": 12,
+        "endLine": 215,
+        "endChar": 96
+      },
+      "revId": "848533e79da5c443edfc3b180a5d1fe34a68a7b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55dfdc9d_fd70646b",
@@ -20,6 +43,47 @@
         "endLine": 219,
         "endChar": 101
       },
+      "revId": "848533e79da5c443edfc3b180a5d1fe34a68a7b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9b4678b_20e293ec",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-15T16:25:31Z",
+      "side": 1,
+      "message": "nit: please address longer than 100 characters warning.",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 101
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "33c12c82_26e92e13",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+              "range": {
+                "startLine": 219,
+                "startChar": 0,
+                "endLine": 220,
+                "endChar": 0
+              },
+              "replacement": "        std::string value \u003d GetServerConfigurableFlag(\n                \"media_native\", \"ccodec_rendering_depth\", \"3\");\n"
+            }
+          ]
+        }
+      ],
       "revId": "848533e79da5c443edfc3b180a5d1fe34a68a7b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
