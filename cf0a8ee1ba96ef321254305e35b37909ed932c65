@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b44a0e1_973fc07a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-15T08:21:10Z",
+      "side": 1,
+      "message": "Preventing auto-submit while I look into b/373467039",
+      "revId": "cf0a8ee1ba96ef321254305e35b37909ed932c65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
