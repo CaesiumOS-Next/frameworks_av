@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "115cfe4b_829a737b",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-16T15:52:55Z",
+      "side": 1,
+      "message": "same concern for this.",
+      "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b31cf759_cb4bc5ed",
         "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
         "patchSetId": 2
