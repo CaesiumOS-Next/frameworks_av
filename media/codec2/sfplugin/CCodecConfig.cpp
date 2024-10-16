@@ -976,6 +976,11 @@ void CCodecConfig::initializeStandardParams() {
             }
         }));
 
+    add(ConfigMapper(KEY_ENCODER_DELAY, C2_PARAMKEY_AUDIO_ENCODER_DELAY, "value")
+        .limitTo(D::AUDIO & D::ENCODER & D::OUTPUT & D::READ));
+    add(ConfigMapper(KEY_ENCODER_PADDING, C2_PARAMKEY_AUDIO_ENCODER_PADDING, "value")
+        .limitTo(D::AUDIO & D::ENCODER & D::OUTPUT & D::READ));
+
     add(ConfigMapper("android._encoding-quality-level", C2_PARAMKEY_ENCODING_QUALITY_LEVEL, "value")
         .limitTo(D::ENCODER & (D::CONFIG | D::PARAM)));
     add(ConfigMapper(KEY_QUALITY, C2_PARAMKEY_QUALITY, "value")
