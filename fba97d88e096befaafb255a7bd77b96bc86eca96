@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c81ffb6_4786b34a",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-16T17:16:48Z",
+      "side": 1,
+      "message": "The priority of the callback is lower than of the I/O thread, for a reason, but still it is in the \"audio\" class, this is set here: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudiohal/impl/DeviceHalAidl.cpp;l\u003d511;drc\u003dab659d669806509b1587501f28d32bec49b12d97.\n\nThen, we need to consider a bigger picture. Async mode is designed to complete the blocking part of I/O operations as soon as possible to decrease the AP CPU time, thus the I/O thread should not be spending all of its time interacting with the HAL. Usually it performs an operation and then sleeps waiting for an event. In particular, the playback thread waits for an async callback to arrive: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/Threads.cpp;l\u003d4135;drc\u003d072fda78e9e5d599c93333263f67fafdb47c5ace.\n\nThus, the cycle that should happen is as follows: the I/O thread sends a \u0027burst\u0027 or \u0027drain\u0027 command to the HAL (the `mCommandReplyLock` is taken), since it\u0027s async write or drain, the HAL is not waiting for too long. If the HAL emits an async notification at this moment and the Binder thread receives it, the handler waits for the I/O thread to complete the command. Audio flinger should not be trying to send another I/O command until it receives an async completion. Thus, once the I/O thread has finished with the command, it should hang on a CV to wait for async completion. So now we are in the same situation that we would be in if the HAL has not send the notification that fast.\n\nAlso, if you think about it, there was already a competition between I/O threads and these callbacks for the `mLock` which guards the `mLastReply`, and things were working. The only difference of the `mCommandReplyLock` is that it is held by I/O threads a bit longer.\n\nSo in theory, it all should work, but since the practice can always be different I was asking you to try to check this CL under the conditions that helped to find the original issue.",
+      "parentUuid": "c61f8cda_2963ce72",
+      "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "115cfe4b_829a737b",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3f22bf7_a8bcf4d3",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-16T17:16:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "115cfe4b_829a737b",
+      "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b31cf759_cb4bc5ed",
@@ -66,6 +102,24 @@
       "writtenOn": "2024-10-16T15:51:47Z",
       "side": 1,
       "message": "But this operation seems to be important.",
+      "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e8b4189_87a9d9a6",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-16T17:16:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b31cf759_cb4bc5ed",
       "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
