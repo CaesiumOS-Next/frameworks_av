@@ -33,6 +33,24 @@
       "message": "Since there are other modes that are used I only set the low value for CBR. If you want keep everything as is I can just set this to 450 for VBR and leave the rest.",
       "revId": "430c564e9b26dc7355f855ce178daa7ee3575999",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79f369ea_bc6e1879",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-16T15:41:49Z",
+      "side": 1,
+      "message": "James, did c08b9808c3c91d21c9c06320db832ecf0f5a7b4c from Marco fix the issue? Or adjusting maxIntraBitrate is still needed?",
+      "parentUuid": "d5fda374_83a2c2b4",
+      "revId": "430c564e9b26dc7355f855ce178daa7ee3575999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
