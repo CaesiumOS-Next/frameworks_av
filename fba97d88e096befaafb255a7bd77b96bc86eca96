@@ -16,6 +16,41 @@
       "message": "QQ: Does this callback thread, which is binder, has same priority that of writer\u0027s thread in the framework? I assuming the writer\u0027s thread is URGENT_AUDIO.\n\nEven if it is has same priority, this  ```mCommandReplyLock``` access is not guaranteed here or rather i can say it is not serialized. Thus, it end up waiting for sometime. In our stability testing, this happened to Audio HAL.",
       "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c61f8cda_2963ce72",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-16T15:51:47Z",
+      "side": 1,
+      "message": "Although, I don\u0027t see important operation pending here.",
+      "parentUuid": "557515ce_e55b40c4",
+      "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31cf759_cb4bc5ed",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-16T15:51:47Z",
+      "side": 1,
+      "message": "But this operation seems to be important.",
+      "revId": "fba97d88e096befaafb255a7bd77b96bc86eca96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
