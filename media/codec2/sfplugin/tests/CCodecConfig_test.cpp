@@ -242,6 +242,20 @@ public:
                     .withSetter(Setter<C2ResourcesExcludedTuning>)
                     .build());
 
+                addParameter(
+                        DefineParam(mAudioEncoderDelay, C2_PARAMKEY_AUDIO_ENCODER_DELAY)
+                        .withDefault(new C2StreamAudioEncoderDelayInfo::output(0u, 0))
+                        .withFields({C2F(mAudioEncoderDelay, value).inRange(0, 2112)})
+                        .withSetter(Setter<C2StreamAudioEncoderDelayInfo::output>)
+                        .build());
+
+                addParameter(
+                        DefineParam(mAudioEncoderPadding, C2_PARAMKEY_AUDIO_ENCODER_PADDING)
+                        .withDefault(new C2StreamAudioEncoderPaddingInfo::output(0u, 0))
+                        .withFields({C2F(mAudioEncoderPadding, value).inRange(0, 1024)})
+                        .withSetter(Setter<C2StreamAudioEncoderPaddingInfo::output>)
+                        .build());
+
                 if (isEncoder) {
                     addParameter(
                             DefineParam(mInputBitrate, C2_PARAMKEY_BITRATE)
@@ -300,6 +314,8 @@ public:
             std::shared_ptr<C2StreamVendorInt64Info::output> mInt64Output;
             std::shared_ptr<C2PortVendorStringInfo::input> mStringInput;
             std::shared_ptr<C2StreamPixelAspectRatioInfo::output> mPixelAspectRatio;
+            std::shared_ptr<C2StreamAudioEncoderDelayInfo::output> mAudioEncoderDelay;
+            std::shared_ptr<C2StreamAudioEncoderPaddingInfo::output> mAudioEncoderPadding;
             std::shared_ptr<C2StreamBitrateInfo::input> mInputBitrate;
             std::shared_ptr<C2StreamBitrateInfo::output> mOutputBitrate;
             std::shared_ptr<C2StreamProfileLevelInfo::input> mInputProfileLevel;
@@ -591,6 +607,46 @@ TEST_F(CCodecConfigTest, PixelAspectRatioUpdate) {
             << "mOutputFormat = " << mConfig.mOutputFormat->debugString().c_str();
     ASSERT_EQ(11, parHeight);
     ASSERT_FALSE(mConfig.mInputFormat->findInt32(KEY_PIXEL_ASPECT_RATIO_HEIGHT, &parHeight))
+            << "mInputFormat = " << mConfig.mInputFormat->debugString().c_str();
+}
+
+TEST_F(CCodecConfigTest, AudioEncoderDelayUpdate) {
+    init(C2Component::DOMAIN_AUDIO, C2Component::KIND_ENCODER, MIMETYPE_AUDIO_AAC);
+
+    ASSERT_EQ(OK, mConfig.initialize(mReflector, mConfigurable));
+
+    std::vector<std::unique_ptr<C2Param>> configUpdate;
+    C2StreamAudioEncoderDelayInfo::output audioEncoderDelay(0u, 2048);
+    configUpdate.push_back(C2Param::Copy(audioEncoderDelay));
+
+    ASSERT_TRUE(mConfig.updateConfiguration(configUpdate, D::ALL));
+
+    int32_t audioEncoderDelayValue{0};
+    ASSERT_TRUE(mConfig.mOutputFormat->findInt32(KEY_ENCODER_DELAY, &audioEncoderDelayValue))
+            << "mOutputFormat = " << mConfig.mOutputFormat->debugString().c_str();
+    ASSERT_EQ(2048, audioEncoderDelayValue);
+    ASSERT_FALSE(mConfig.mInputFormat->findInt32(KEY_ENCODER_DELAY, &audioEncoderDelayValue))
+            << "mInputFormat = " << mConfig.mInputFormat->debugString().c_str();
+}
+
+TEST_F(CCodecConfigTest, AudioEncoderPaddingUpdate) {
+    init(C2Component::DOMAIN_AUDIO, C2Component::KIND_ENCODER, MIMETYPE_AUDIO_AAC);
+
+    ASSERT_EQ(OK, mConfig.initialize(mReflector, mConfigurable));
+
+    std::vector<std::unique_ptr<C2Param>> configUpdate;
+    C2StreamAudioEncoderPaddingInfo::output audioEncoderPadding(0u, 960);
+    configUpdate.push_back(C2Param::Copy(audioEncoderPadding));
+
+    ASSERT_TRUE(mConfig.updateConfiguration(configUpdate, D::ALL));
+
+    int32_t audioEncoderPaddingValue{0};
+    ASSERT_TRUE(
+            mConfig.mOutputFormat->findInt32(KEY_ENCODER_PADDING, &audioEncoderPaddingValue))
+            << "mOutputFormat = " << mConfig.mOutputFormat->debugString().c_str();
+    ASSERT_EQ(960, audioEncoderPaddingValue);
+    ASSERT_FALSE(
+            mConfig.mInputFormat->findInt32(KEY_ENCODER_PADDING, &audioEncoderPaddingValue))
             << "mInputFormat = " << mConfig.mInputFormat->debugString().c_str();
 }
 
