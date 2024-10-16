@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c3f419e_7ddbd1c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-10-16T16:43:23Z",
+      "side": 1,
+      "message": "Francois,\n\nCan you confirm that there is no side effect for the configurable engine?",
+      "revId": "c86a3e1001e16d38aa175e8d4303535311b48c0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
