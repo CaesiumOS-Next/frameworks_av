@@ -248,7 +248,9 @@ enum C2ParamIndexKind : C2Param::type_index_t {
     kParamIndexDrcEffectType, // drc, enum
     kParamIndexDrcOutputLoudness, // drc, float (dBFS)
     kParamIndexDrcAlbumMode, // drc, enum
-    kParamIndexAudioFrameSize, // int
+    kParamIndexAudioFrameSize, // uint32
+    kParamIndexAudioEncoderDelay, // uint32
+    kParamIndexAudioEncoderPadding, // uint32
 
     /* ============================== platform-defined parameters ============================== */
 
@@ -2406,6 +2408,26 @@ constexpr char C2_PARAMKEY_DRC_OUTPUT_LOUDNESS[] = "output.drc.output-loudness";
 typedef C2StreamParam<C2Info, C2Uint32Value, kParamIndexAudioFrameSize>
         C2StreamAudioFrameSizeInfo;
 constexpr char C2_PARAMKEY_AUDIO_FRAME_SIZE[] = "raw.audio-frame-size";
+
+/**
+ * Audio encoder delay in PCM frames.
+ *
+ * A param describing the number of frames to trim from the start of the decoded audio stream.
+ * The associated value is an integer.
+ */
+typedef C2StreamParam<C2Info, C2Uint32Value, kParamIndexAudioEncoderDelay>
+        C2StreamAudioEncoderDelayInfo;
+constexpr char C2_PARAMKEY_AUDIO_ENCODER_DELAY[] = "coding.audio-encoder-delay";
+
+/**
+ * Audio encoder padding in PCM frames.
+ *
+ * A param describing the number of frames to trim from the end of the decoded audio stream.
+ * The associated value is an integer.
+ */
+typedef C2StreamParam<C2Info, C2Uint32Value, kParamIndexAudioEncoderPadding>
+        C2StreamAudioEncoderPaddingInfo;
+constexpr char C2_PARAMKEY_AUDIO_ENCODER_PADDING[] = "coding.audio-encoder-padding";
 
 /**
  * Information for an access unit in a large frame (containing multiple access units)
