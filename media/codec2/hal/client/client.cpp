@@ -797,6 +797,266 @@ c2_status_t Codec2ConfigurableClient::AidlImpl::querySupportedValues(
     return status;
 }
 
+// Codec2ConfigurableClient::ApexImpl
+
+struct Codec2ConfigurableClient::ApexImpl : public Codec2ConfigurableClient::ImplBase {
+    // base cannot be null.
+    explicit ApexImpl(ApexCodec_Configurable *base);
+
+    const C2String& getName() const override {
+        return mName;
+    }
+
+    c2_status_t query(
+            const std::vector<C2Param*>& stackParams,
+            const std::vector<C2Param::Index> &heapParamIndices,
+            c2_blocking_t mayBlock,
+            std::vector<std::unique_ptr<C2Param>>* const heapParams) const override;
+
+    c2_status_t config(
+            const std::vector<C2Param*> &params,
+            c2_blocking_t mayBlock,
+            std::vector<std::unique_ptr<C2SettingResult>>* const failures) override;
+
+    c2_status_t querySupportedParams(
+            std::vector<std::shared_ptr<C2ParamDescriptor>>* const params
+            ) const override;
+
+    c2_status_t querySupportedValues(
+            std::vector<C2FieldSupportedValuesQuery>& fields,
+            c2_blocking_t mayBlock) const override;
+
+private:
+    ApexCodec_Configurable* mBase;
+    const C2String mName;
+};
+
+Codec2ConfigurableClient::ApexImpl::ApexImpl(ApexCodec_Configurable *base, const C2String &name)
+      : mBase{base},
+        mName{name} {
+}
+
+c2_status_t Codec2ConfigurableClient::ApexImpl::query(
+        const std::vector<C2Param*> &stackParams,
+        const std::vector<C2Param::Index> &heapParamIndices,
+        c2_blocking_t mayBlock,
+        std::vector<std::unique_ptr<C2Param>>* const heapParams) const {
+    std::vector<uint32_t> indices(
+            stackParams.size() + heapParamIndices.size());
+    size_t numIndices = 0;
+    for (C2Param* const& stackParam : stackParams) {
+        if (!stackParam) {
+            LOG(WARNING) << "query -- null stack param encountered.";
+            continue;
+        }
+        indices[numIndices++] = int(stackParam->index());
+    }
+    size_t numStackIndices = numIndices;
+    for (const C2Param::Index& index : heapParamIndices) {
+        indices[numIndices++] = int(static_cast<uint32_t>(index));
+    }
+    indices.resize(numIndices);
+    if (heapParams) {
+        heapParams->reserve(heapParams->size() + numIndices);
+    }
+    if (numIndices == 0) {
+        return C2_OK;
+    }
+    thread_local std::vector<uint8_t> configBuffer(1024);
+    if (configBuffer.capacity() < numIndices * 16u) {
+        configBuffer.resize(numIndices * 16u);
+    }
+    size_t configSize = configBuffer.capacity();
+    codec_status_t status = ApexCodec_Configurable_query(
+            mBase, indices.data(), indices.size(), configBuffer.data(), &configSize);
+    if (status == CODEC_STATUS_NO_MEMORY) {
+        configBuffer.resize(align(configSize, 1024));
+        configSize = configBuffer.size();
+        status = ApexCodec_Configurable_query(
+                mBase, indices.data(), indices.size(), configBuffer.data(), &configSize);
+    }
+    if (status != CODEC_STATUS_OK && status != CODEC_STATUS_BAD_INDEX) {
+        configSize = 0;
+    }
+    configBuffer.resize(configSize);
+    std::vector<C2Param*> paramPointers;
+    if (!::android::parseParamsBlob(&paramPointers, configBuffer)) {
+        LOG(ERROR) << "query -- error while parsing params.";
+        return C2_CORRUPTED;
+    }
+    size_t i = 0;
+    size_t numQueried = 0;
+    for (auto it = paramPointers.begin(); it != paramPointers.end(); ) {
+        C2Param* paramPointer = *it;
+        if (numStackIndices > 0) {
+            --numStackIndices;
+            if (!paramPointer) {
+                LOG(DEBUG) << "query -- null stack param.";
+                ++it;
+                continue;
+            }
+            for (; i < stackParams.size() && !stackParams[i]; ) {
+                ++i;
+            }
+            if (i >= stackParams.size()) {
+                LOG(ERROR) << "query -- unexpected error.";
+                status = C2_CORRUPTED;
+                break;
+            }
+            if (stackParams[i]->index() != paramPointer->index()) {
+                LOG(DEBUG) << "query -- param skipped: "
+                              "index = "
+                           << stackParams[i]->index() << ".";
+                stackParams[i++]->invalidate();
+                // this means that the param could not be queried.
+                // signalling C2_BAD_INDEX to the client.
+                status = C2_BAD_INDEX;
+                continue;
+            }
+            if (stackParams[i++]->updateFrom(*paramPointer)) {
+                ++numQueried;
+            } else {
+                LOG(WARNING) << "query -- param update failed: "
+                                "index = "
+                             << paramPointer->index() << ".";
+            }
+        } else {
+            if (!paramPointer) {
+                LOG(DEBUG) << "query -- null heap param.";
+                ++it;
+                continue;
+            }
+            if (!heapParams) {
+                LOG(WARNING) << "query -- "
+                                "unexpected extra stack param.";
+            } else {
+                heapParams->emplace_back(C2Param::Copy(*paramPointer));
+                ++numQueried;
+            }
+        }
+        ++it;
+    }
+    if (status == CODEC_STATUS_OK && indices.size() != numQueried) {
+        status = CODEC_STATUS_BAD_INDEX;
+    }
+    return (c2_status_t)status;
+}
+
+namespace {
+struct ParamOrField : public C2ParamField {
+    explicit ParamOrField(const ApexCodec_ParamFieldValues& field)
+            : C2ParamField(field.index, field.offset, field.size) {}
+};
+}  // anonymous namespace
+
+c2_status_t Codec2ConfigurableClient::ApexImpl::config(
+        const std::vector<C2Param*> &params,
+        c2_blocking_t mayBlock,
+        std::vector<std::unique_ptr<C2SettingResult>>* const failures) {
+    (void)mayBlock;
+    std::vector<uint8_t> configBuffer;
+    if (!::android::_createParamsBlob(&configBuffer, params)) {
+        LOG(ERROR) << "config -- bad input.";
+        return C2_TRANSACTION_FAILED;
+    }
+    ApexCodec_SettingResult* result = nullptr;
+    codec_status_t status = ApexCodec_Configurable_config(
+            mBase, configBuffer.data(), configBuffer.size(), &result);
+    ScopeGuard guard([result] {
+        if (result) {
+            ApexCodec_SettingResult_release(result);
+        });
+    size_t index = 0;
+    ApexCodec_SettingResultFailure failure;
+    ApexCodec_ParamFieldValues field;
+    size_t numConflicts = 0;
+    ApexCodec_ParamFieldValues* conflicts = nullptr;
+    codec_status_t getResultStatus = ApexCodec_SettingResult_getResultAtIndex(
+        result, 0, &failure, &field, &numConflicts, &conflicts);
+    while (getResultStatus == CODEC_STATUS_OK) {
+        std::unique_ptr<C2SettingResult> settingResult = std::make_unique<C2SettingResult>();
+        stetingResult->failure = C2SettingResult::Failure(failure);
+        settingResult->field.paramOrField = ParamOrField(field);
+        // TODO: settingResult->field.values = ?
+        settingResult->conflicts.clear();
+        for (size_t i = 0; i < numConflicts; ++i) {
+            settingResult->conflicts.push_back();
+            C2ParamFieldValues& conflict = settingResult->conflicts.back();
+            conflict.paramOrField = ParamOrField(conflicts[i]);
+            // TODO: conflict.values = ?
+        }
+        failures->push_back(std::move(settingResult));
+        getResultStatus = ApexCodec_SettingResult_getResultAtIndex(
+                result, ++index, &failure, &field, &numConflicts, &conflicts);
+    }
+    if (!::android::updateParamsFromBlob(params, configBuffer)) {
+        LOG(ERROR) << "config -- "
+                   << "failed to parse returned params.";
+        status = C2_CORRUPTED;
+    }
+    return status;
+}
+
+c2_status_t Codec2ConfigurableClient::ApexImpl::querySupportedParams(
+        std::vector<std::shared_ptr<C2ParamDescriptor>>* const params) const {
+    // TODO: Cache and query properly!
+    ApexCodec_Configurable_querySupportedParams(mBase, &result);
+    std::vector<c2_aidl::ParamDescriptor> result;
+    ndk::ScopedAStatus transStatus = mBase->querySupportedParams(
+            std::numeric_limits<uint32_t>::min(),
+            std::numeric_limits<uint32_t>::max(),
+            &result);
+    c2_status_t status = GetC2Status(transStatus, "querySupportedParams");
+    if (status != C2_OK) {
+        return status;
+    }
+    size_t i = params->size();
+    params->resize(i + result.size());
+    for (const c2_aidl::ParamDescriptor& sp : result) {
+        if (!c2_aidl::utils::FromAidl(&(*params)[i++], sp)) {
+            LOG(ERROR) << "querySupportedParams -- invalid returned ParamDescriptor.";
+            return C2_CORRUPTED;
+        }
+    }
+    return status;
+}
+
+c2_status_t Codec2ConfigurableClient::AidlImpl::querySupportedValues(
+        std::vector<C2FieldSupportedValuesQuery>& fields,
+        c2_blocking_t mayBlock) const {
+    std::vector<c2_aidl::FieldSupportedValuesQuery> inFields(fields.size());
+    for (size_t i = 0; i < fields.size(); ++i) {
+        if (!c2_aidl::utils::ToAidl(&inFields[i], fields[i])) {
+            LOG(ERROR) << "querySupportedValues -- bad input";
+            return C2_TRANSACTION_FAILED;
+        }
+    }
+
+    c2_aidl::IConfigurable::QuerySupportedValuesResult result;
+
+    ndk::ScopedAStatus transStatus = mBase->querySupportedValues(
+            inFields, (mayBlock == C2_MAY_BLOCK), &result);
+    c2_status_t status = GetC2Status(transStatus, "querySupportedValues");
+    if (status != C2_OK) {
+        return status;
+    }
+    status = static_cast<c2_status_t>(result.status.status);
+    if (result.values.size() != fields.size()) {
+        LOG(ERROR) << "querySupportedValues -- "
+                      "input and output lists "
+                      "have different sizes.";
+        return C2_CORRUPTED;
+    }
+    for (size_t i = 0; i < fields.size(); ++i) {
+        if (!c2_aidl::utils::FromAidl(&fields[i], inFields[i], result.values[i])) {
+            LOG(ERROR) << "querySupportedValues -- "
+                          "invalid returned value.";
+            return C2_CORRUPTED;
+        }
+    }
+    return status;
+}
+
 // Codec2ConfigurableClient
 
 Codec2ConfigurableClient::Codec2ConfigurableClient(const sp<HidlBase> &hidlBase)
