@@ -16,6 +16,23 @@
       "message": "Clean cherry-pick from internal ag/29485188",
       "revId": "efea6c5b8be9cfcaaf97d313cca542e0b7fa84a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1dd2dd_b1900a16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-16T01:30:14Z",
+      "side": 1,
+      "message": "This also resolves b/372364924.",
+      "revId": "efea6c5b8be9cfcaaf97d313cca542e0b7fa84a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
