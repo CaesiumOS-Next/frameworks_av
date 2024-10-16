@@ -16,6 +16,23 @@
       "message": "Hi, @taklee@google.com. I found you added a patch which fix metadata retriever consumes mediaserver all the binder thread pools and lead to starvation.\nThe patch sLock is in APP process, there is still a risk if using mutil apps. I try to implement a new getFrame\u0026Image serialize calls. Could you please help the review? Thanks.",
       "revId": "2a48dae36d0befd199051069de2d7cd54a2843bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7c7d53c_ac390a78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-16T17:27:37Z",
+      "side": 1,
+      "message": "We are still discussing the issue. This seems to add much complexity to the original codes.\nWe cannot approve the patch as of now.\n\nWe will get back after some time.",
+      "revId": "2a48dae36d0befd199051069de2d7cd54a2843bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
