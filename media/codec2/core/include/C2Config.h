@@ -249,6 +249,8 @@ enum C2ParamIndexKind : C2Param::type_index_t {
     kParamIndexDrcOutputLoudness, // drc, float (dBFS)
     kParamIndexDrcAlbumMode, // drc, enum
     kParamIndexAudioFrameSize, // int
+    kParamIndexAudioEncoderDelay, // int
+    kParamIndexAudioEncoderPadding, // int
 
     /* ============================== platform-defined parameters ============================== */
 
@@ -2406,6 +2408,28 @@ constexpr char C2_PARAMKEY_DRC_OUTPUT_LOUDNESS[] = "output.drc.output-loudness";
 typedef C2StreamParam<C2Info, C2Uint32Value, kParamIndexAudioFrameSize>
         C2StreamAudioFrameSizeInfo;
 constexpr char C2_PARAMKEY_AUDIO_FRAME_SIZE[] = "raw.audio-frame-size";
+
+/**
+ * Audio encoder delay in frames.
+ *
+ * The initial priming refers to the silence frames added by the audio encoder before the first
+ * actual audio frame. This ensures accurate decoding in audio codecs, where transforms over
+ * overlapping blocks of audio frames are required.
+ */
+typedef C2StreamParam<C2Info, C2Uint32Value, kParamIndexAudioEncoderDelay>
+        C2StreamAudioEncoderDelayInfo;
+constexpr char C2_PARAMKEY_AUDIO_ENCODER_DELAY[] = "coding.audio-encoder-delay";
+
+/**
+ * Audio encoder padding in frames.
+ *
+ * The audio encoder padding is additional silence or extra frames added at the end of an audio
+ * stream by the encoder. It ensures that the final audio block is fully processed and avoids any
+ * truncation during playback.
+ */
+typedef C2StreamParam<C2Info, C2Uint32Value, kParamIndexAudioEncoderPadding>
+        C2StreamAudioEncoderPaddingInfo;
+constexpr char C2_PARAMKEY_AUDIO_ENCODER_PADDING[] = "coding.audio-encoder-padding";
 
 /**
  * Information for an access unit in a large frame (containing multiple access units)
