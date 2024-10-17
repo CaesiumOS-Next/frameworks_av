@@ -114,6 +114,13 @@ public:
                             C2Config::AAC_SBR_AUTO })})
                 .withSetter(Setter<decltype(*mSBRMode)>::NonStrictValueWithNoDeps)
                 .build());
+
+       addParameter(
+               DefineParam(mEncoderDelay, C2_PARAMKEY_AUDIO_ENCODER_DELAY)
+               .withDefault(new C2StreamAudioEncoderDelayInfo::output(0u, 0))
+               .withFields({C2F(mEncoderDelay, value).inRange(0, 32767)})
+               .withSetter(Setter<decltype(*mEncoderDelay)>::StrictValueWithNoDeps)
+               .build());
     }
 
     uint32_t getSampleRate() const { return mSampleRate->value; }
@@ -143,6 +150,7 @@ private:
     std::shared_ptr<C2StreamMaxBufferSizeInfo::input> mInputMaxBufSize;
     std::shared_ptr<C2StreamProfileLevelInfo::output> mProfileLevel;
     std::shared_ptr<C2StreamAacSbrModeTuning::input> mSBRMode;
+    std::shared_ptr<C2StreamAudioEncoderDelayInfo::output> mEncoderDelay;
 };
 
 C2SoftAacEnc::C2SoftAacEnc(
@@ -364,6 +372,22 @@ void C2SoftAacEnc::process(
             mSignalledError = true;
             work->result = C2_CORRUPTED;
             return;
+        }
+
+        if (encInfo.nDelayCore) {
+            C2StreamAudioEncoderDelayInfo::output encoderDelay(0u, encInfo.nDelayCore);
+            std::vector<std::unique_ptr<C2SettingResult>> failures;
+            c2_status_t err = mIntf->config({&encoderDelay}, C2_MAY_BLOCK, &failures);
+            if (err == C2_OK) {
+                work->worklets.front()->output.configUpdate.push_back(
+                        C2Param::Copy(encoderDelay));
+            } else {
+                ALOGE("Config update encoderDelay failed");
+                mSignalledError = true;
+                work->workletsProcessed = 1u;
+                work->result = C2_CORRUPTED;
+                return;
+            }
         }
 
         std::unique_ptr<C2StreamInitDataInfo::output> csd =
