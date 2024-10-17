@@ -16,6 +16,24 @@
       "message": "Preventing auto-submit while I look into b/373467039",
       "revId": "cf0a8ee1ba96ef321254305e35b37909ed932c65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d29325_ba510b2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-17T17:52:15Z",
+      "side": 1,
+      "message": "Ian,\nGiven that read-only\u003dtrue is necessary for mainline flags, would it be better to just land this?\n\nIf this not being read_only is causing the issue in b/373467039 then it could solve the issue.",
+      "parentUuid": "6b44a0e1_973fc07a",
+      "revId": "cf0a8ee1ba96ef321254305e35b37909ed932c65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
