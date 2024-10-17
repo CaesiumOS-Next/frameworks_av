@@ -87,6 +87,24 @@
       "parentUuid": "2fbab336_3cba6ea2",
       "revId": "95715853df9e9e109fa3c07b8e3395a4648c01d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "301bd63a_b2e5bc7e",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-17T18:36:51Z",
+      "side": 1,
+      "message": "Thanks for the explanation, the code dates from some time back and was intended to prevent releasing buffers from stale cblk/shared memory (post restore), adding Phil for review as well.\n\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/1251872",
+      "parentUuid": "38013742_fbf95fba",
+      "revId": "95715853df9e9e109fa3c07b8e3395a4648c01d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
