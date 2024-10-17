@@ -51,6 +51,24 @@
       ],
       "revId": "2e3d26b13c78c0f2b6c9a498b555c087ff43be35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c81aa43_bc425864",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-17T23:11:45Z",
+      "side": 1,
+      "message": "Done.  I need to fix the build on internal main.",
+      "parentUuid": "837ff708_90a06d9f",
+      "revId": "2e3d26b13c78c0f2b6c9a498b555c087ff43be35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
