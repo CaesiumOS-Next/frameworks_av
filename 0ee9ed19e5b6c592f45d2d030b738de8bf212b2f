@@ -1,0 +1,76 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699bdb5d_9c05ec97",
+        "filename": "cmds/stagefright/AudioPlayer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-10-17T23:55:43Z",
+      "side": 1,
+      "message": "Why can\u0027t we just pass a wp\u003c\u003e to this here (instead of this wrapper)? What does this double-indirection give you?",
+      "fixSuggestions": [
+        {
+          "fixId": "b0ea7b57_549512e8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/stagefright/AudioPlayer.cpp",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "cmds/stagefright/AudioPlayer.cpp",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 211,
+                "endChar": 0
+              },
+              "replacement": "                wp\u003cRefBase\u003e::fromExisting(this),\n"
+            },
+            {
+              "path": "cmds/stagefright/AudioPlayer.cpp",
+              "range": {
+                "startLine": 440,
+                "startChar": 0,
+                "endLine": 441,
+                "endChar": 0
+              },
+              "replacement": "    const auto me \u003d AudioPlayer::makeMe(cookie);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0ee9ed19e5b6c592f45d2d030b738de8bf212b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc13f719_7760d759",
+        "filename": "cmds/stagefright/AudioPlayer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-10-17T23:55:43Z",
+      "side": 1,
+      "message": "If this is just a wp\u003c\u003e what would be different?",
+      "revId": "0ee9ed19e5b6c592f45d2d030b738de8bf212b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
