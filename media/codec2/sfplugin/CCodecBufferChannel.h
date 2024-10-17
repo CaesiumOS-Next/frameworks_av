@@ -30,6 +30,7 @@
 #include <codec2/hidl/client.h>
 #include <media/stagefright/foundation/Mutexed.h>
 #include <media/stagefright/CodecBase.h>
+#include <media/stagefright/AtomicSharedPtr.h>
 
 #include "CCodecBuffers.h"
 #include "FrameReassembler.h"
@@ -329,7 +330,7 @@ private:
     int32_t mHeapSeqNum;
     std::map<wp<hardware::HidlMemory>, int32_t> mHeapSeqNumMap;
 
-    std::shared_ptr<Codec2Client::Component> mComponent;
+    AtomicSharedPtr<Codec2Client::Component> mComponent;
     std::string mComponentName; ///< component name for debugging
     const char *mName; ///< C-string version of component name
     std::shared_ptr<CCodecCallback> mCCodecCallback;
