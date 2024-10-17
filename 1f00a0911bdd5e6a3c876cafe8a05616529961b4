@@ -16,6 +16,23 @@
       "message": "Phil, can you please review?",
       "revId": "1f00a0911bdd5e6a3c876cafe8a05616529961b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8bd9b43_f70e553a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-10-17T22:53:01Z",
+      "side": 1,
+      "message": "I would like to inject failures into obtainBuffer() to verify the expected behavior",
+      "revId": "1f00a0911bdd5e6a3c876cafe8a05616529961b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

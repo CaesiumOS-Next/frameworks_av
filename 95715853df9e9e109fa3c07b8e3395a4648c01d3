@@ -105,6 +105,24 @@
       "parentUuid": "38013742_fbf95fba",
       "revId": "95715853df9e9e109fa3c07b8e3395a4648c01d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9499ce8f_f05f2964",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-10-17T22:53:01Z",
+      "side": 1,
+      "message": "This area is very fragile. We need to make sure that the regular code paths do not break.\n\nI think this fix works. And I think it may also fix a temporary resource leak.\n\nAll sequences start with mSequence \u003d 1\n\n1) ObtainBuffer() does not fail \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nWithout Fix SAME AS With Fix:\noldSequence \u003d 0\noldSequence \u003d mSequence \u003d 1\nobtainBuffer works\n\nreleaseBuffer(): (audioBuffer-\u003esequence !\u003d mSequence) FALSE so buffer released\n\n2) ObtainBuffer() fails ONCE \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nWithout Fix:\noldSequence \u003d 0\noldSequence \u003d 1\nobtainBuffer fails -\u003e status \u003d DEAD_OBJECT\n(oldSequence \u003d\u003d mSequence) TRUE so restoreTrack_l: mSequence \u003d 2\noldSequence \u003d 1\nobtainBuffer works\n\nreleaseBuffer(): (audioBuffer-\u003esequence !\u003d mSequence) TRUE!\nSo buffer is not released. Resource Leak?\n\nWith Fix:\noldSequence \u003d 0\noldSequence \u003d 1\nobtainBuffer fails -\u003e status \u003d DEAD_OBJECT\n(oldSequence \u003d\u003d mSequence) TRUE so restoreTrack_l: mSequence \u003d 2\noldSequence \u003d 2\nobtainBuffer works\n\nreleaseBuffer(): (audioBuffer-\u003esequence !\u003d mSequence) FALSE so buffer released\n\n\n2) ObtainBuffer() fails TWICE \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nWithout Fix:\noldSequence \u003d 0\noldSequence \u003d 1\nobtainBuffer fails -\u003e status \u003d DEAD_OBJECT\n(oldSequence \u003d\u003d mSequence) TRUE so restoreTrack_l: mSequence \u003d 2\noldSequence \u003d 1\nobtainBuffer fails -\u003e status \u003d DEAD_OBJECT\n(oldSequence\u003d1 \u003d\u003d mSequence{2}) FALSE so restoreTrack_l not called!\noldSequence \u003d 1\nobtainBuffer fails -\u003e status \u003d DEAD_OBJECT; DOOMED to fail forever\n\nreleaseBuffer(): (audioBuffer-\u003esequence !\u003d mSequence) TRUE!\nSo buffer is not released. Resource Leak?\n\nWith Fix:\noldSequence \u003d 0\noldSequence \u003d 1\nobtainBuffer fails -\u003e status \u003d DEAD_OBJECT\n(oldSequence \u003d\u003d mSequence) TRUE so restoreTrack_l: mSequence \u003d 2\noldSequence \u003d 2\nobtainBuffer fails -\u003e status \u003d DEAD_OBJECT\n(oldSequence \u003d\u003d mSequence) TRUE so restoreTrack_l: mSequence \u003d 3\noldSequence \u003d 3\n\nreleaseBuffer(): (audioBuffer-\u003esequence !\u003d mSequence) FALSE so buffer released",
+      "parentUuid": "301bd63a_b2e5bc7e",
+      "revId": "95715853df9e9e109fa3c07b8e3395a4648c01d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
