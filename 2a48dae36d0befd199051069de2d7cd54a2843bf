@@ -33,6 +33,24 @@
       "message": "We are still discussing the issue. This seems to add much complexity to the original codes.\nWe cannot approve the patch as of now.\n\nWe will get back after some time.",
       "revId": "2a48dae36d0befd199051069de2d7cd54a2843bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba83bc20_65de3d1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2024-10-17T02:17:33Z",
+      "side": 1,
+      "message": "Ok, Thanks for your reply. \nI did add much modifications to the original code. But the solution of the pach is clear and not complexity, which is similar to add a condition variable.\nIt keeps APIs\u0027 and  serialized calls\u0027 behavior not change. And it also provides the ability to allow the limited concurrency in the future if we need.\nLooking forward to good news.",
+      "parentUuid": "a7c7d53c_ac390a78",
+      "revId": "2a48dae36d0befd199051069de2d7cd54a2843bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
