@@ -67,6 +67,7 @@ private:
     // We support max 6 channels
     uint8_t mRemainder[kRemainderBufSize];
     size_t mRemainderLen;
+    bool mSetEncoderDelayKey;
 
     status_t initEncoder();
 

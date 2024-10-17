@@ -21,3 +21,11 @@ flag {
   description: "Enable keep_threads_active in mpeg2 decoder"
   bug: "343793479"
 }
+
+flag {
+  name: "audio_sync_settings"
+  is_exported: true
+  namespace: "codec_fwk"
+  description: "Flag to enable configuration of encoder-delay and encoder-padding keys to allow for gapless playback and better audio-video synchronization"
+  bug: "375055097"
+}

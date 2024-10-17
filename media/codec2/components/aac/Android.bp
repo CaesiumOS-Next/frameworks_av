@@ -45,5 +45,6 @@ cc_library {
 
     static_libs: [
         "libFraunhoferAAC",
+        "android.media.swcodec.flags-aconfig-cc",
     ],
 }
