@@ -89,8 +89,8 @@ public:
 
         // Callback returns the number of bytes actually written to the buffer.
         typedef size_t (*AudioCallback)(
-                AudioSink *audioSink, void *buffer, size_t size, void *cookie,
-                        cb_event_t event);
+                const sp<AudioSink>& audioSink, void *buffer, size_t size,
+                const wp<RefBase>& cookie, cb_event_t event);
 
         virtual             ~AudioSink() {}
         virtual bool        ready() const = 0; // audio output is open and ready
@@ -117,7 +117,7 @@ public:
                 audio_format_t format=AUDIO_FORMAT_PCM_16_BIT,
                 int bufferCount=DEFAULT_AUDIOSINK_BUFFERCOUNT,
                 AudioCallback cb = NULL,
-                void *cookie = NULL,
+                const wp<RefBase>& cookie = {},
                 audio_output_flags_t flags = AUDIO_OUTPUT_FLAG_NONE,
                 const audio_offload_info_t *offloadInfo = NULL,
                 bool doNotReconnect = false,
