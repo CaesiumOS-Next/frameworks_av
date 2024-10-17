@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49970999_3b5df629",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-10-17T19:31:31Z",
+      "side": 1,
+      "message": "lg other than build issue",
+      "revId": "2e3d26b13c78c0f2b6c9a498b555c087ff43be35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837ff708_90a06d9f",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-10-17T19:31:31Z",
+      "side": 1,
+      "message": "If we are holding onto ref, we could just cast the ptr, instead of making a new sp\u003c\u003e",
+      "fixSuggestions": [
+        {
+          "fixId": "02f28a39_1d78b596",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+              "range": {
+                "startLine": 915,
+                "startChar": 0,
+                "endLine": 917,
+                "endChar": 0
+              },
+              "replacement": "     const auto me \u003d static_cast\u003cNuPlayer::Renderer*\u003e(ref.get());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e3d26b13c78c0f2b6c9a498b555c087ff43be35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
