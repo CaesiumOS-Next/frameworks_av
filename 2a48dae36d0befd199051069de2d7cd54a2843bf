@@ -68,6 +68,24 @@
       "message": "Lajos, could you review this?",
       "revId": "2a48dae36d0befd199051069de2d7cd54a2843bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c9ad18_42e79e39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2024-10-18T06:57:41Z",
+      "side": 1,
+      "message": "Thanks @taklee@google.com.\n\nHi, @lajos@google.com, could you please help review the patch? Thanks.\n1. The patch solves the issue we known, even if consturing a specific scenario(like mutil processes).\n2. It\u0027s indeed much modifications to the original code. But the solution of the pach is clear and not complexity, which is similar to add a condition variable.\n3. It keeps the behavior of APIs and serialized calls not changed.\n4. It also provides the ability(a little modified) to allow MMR the limited concurrency in the future if we need.\n5. And there is a flag to soak this new implementation.",
+      "parentUuid": "ce259bac_95863a0c",
+      "revId": "2a48dae36d0befd199051069de2d7cd54a2843bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
