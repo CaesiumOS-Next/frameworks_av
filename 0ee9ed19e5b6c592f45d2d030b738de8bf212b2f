@@ -56,6 +56,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c65d8d_f7a3a13d",
+        "filename": "cmds/stagefright/AudioPlayer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-18T00:31:43Z",
+      "side": 1,
+      "message": "We have to wrap the AudioPlayer in a class which derives (non-virtually) from RefBase.",
+      "parentUuid": "699bdb5d_9c05ec97",
+      "revId": "0ee9ed19e5b6c592f45d2d030b738de8bf212b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc13f719_7760d759",
@@ -69,6 +87,24 @@
       "writtenOn": "2024-10-17T23:55:43Z",
       "side": 1,
       "message": "If this is just a wp\u003c\u003e what would be different?",
+      "revId": "0ee9ed19e5b6c592f45d2d030b738de8bf212b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2743c17_9c771dd8",
+        "filename": "cmds/stagefright/AudioPlayer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-18T00:31:43Z",
+      "side": 1,
+      "message": "AudioPlayer derives from RefBase as a virtual base class.  We can\u0027t downcast from a virtual base class to a derived class.",
+      "parentUuid": "dc13f719_7760d759",
       "revId": "0ee9ed19e5b6c592f45d2d030b738de8bf212b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
