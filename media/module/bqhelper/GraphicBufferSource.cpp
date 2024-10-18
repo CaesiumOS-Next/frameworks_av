@@ -942,6 +942,7 @@ void GraphicBufferSource::submitEndOfInputStream_l() {
         ssize_t cbix = mSubmittedCodecBuffers.add(codecBufferId, nullptr);
         ALOGV("submitEndOfInputStream_l: buffer submitted, bufferId=%u@%zd", codecBufferId, cbix);
         mEndOfStreamSent = true;
+        mNumAvailableUnacquiredBuffers = 0;
 
         // no need to hold onto any buffers for frame repeating
         ++mRepeatLastFrameGeneration;
