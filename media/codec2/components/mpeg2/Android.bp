@@ -15,7 +15,7 @@ cc_library {
     ],
 
     cflags: [
-        "-DKEEP_THREADS_ACTIVE=0",
+        "-DKEEP_THREADS_ACTIVE=1",
     ],
 
     srcs: ["C2SoftMpeg2Dec.cpp"],
