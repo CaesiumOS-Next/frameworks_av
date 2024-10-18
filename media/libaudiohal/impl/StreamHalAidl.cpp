@@ -567,17 +567,20 @@ void StreamHalAidl::onAsyncDrainReady() {
         // Use 'mCommandReplyLock' to ensure that 'sendCommand' has finished updating the state
         // after the reply from the 'drain' command.
         std::lock_guard l(mCommandReplyLock);
-        state = getState();
     }
+    // Retrieve the current state together with position counters unconditionally
+    // to ensure that the state on our side gets updated.
+    sendCommand(makeHalCommand<HalCommand::Tag::getStatus>(), nullptr,
+                true /*safeFromNonWorkerThread */);
+    state = getState();
     if (state == StreamDescriptor::State::DRAINING) {
-        // Retrieve the current state together with position counters unconditionally
-        // to ensure that the state on our side gets updated.
-        sendCommand(makeHalCommand<HalCommand::Tag::getStatus>(), nullptr,
-                    true /*safeFromNonWorkerThread */);
+        AUGMENT_LOG(D, "callback for DRAIN_EARLY_NOTIFY %s", toString(state).c_str());
+    } else if (state == StreamDescriptor::State::IDLE) {
         // For compatibility with HIDL behavior, apply a "soft" position reset
         // after receiving the "drain ready" callback.
         std::lock_guard l(mLock);
         mStatePositions.framesAtFlushOrDrain = mLastReply.observable.frames;
+        AUGMENT_LOG(D, "drain callback for DRAIN_ALL %s", toString(state).c_str());
     } else {
         AUGMENT_LOG(W, "unexpected onDrainReady in the state %s", toString(state).c_str());
     }
@@ -679,8 +682,7 @@ status_t StreamHalAidl::sendCommand(
                     mStatePositions.framesAtFlushOrDrain = reply->observable.frames;
                 } else if (!mContext.isAsynchronous() &&
                         command.getTag() == StreamDescriptor::Command::drain &&
-                        (reply->state == StreamDescriptor::State::IDLE ||
-                                reply->state == StreamDescriptor::State::DRAINING)) {
+                        reply->state == StreamDescriptor::State::IDLE) {
                     mStatePositions.framesAtFlushOrDrain = reply->observable.frames;
                 } // for asynchronous drain, the frame count is saved in 'onAsyncDrainReady'
             }
