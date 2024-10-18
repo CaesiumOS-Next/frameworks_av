@@ -34,6 +34,24 @@
       "parentUuid": "6b44a0e1_973fc07a",
       "revId": "cf0a8ee1ba96ef321254305e35b37909ed932c65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03dbbf11_684e35a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-18T08:38:02Z",
+      "side": 1,
+      "message": "Yeah probably - i just wanted to wait to see if http://r.android.com/3286814 was going to be immediately rolled back (in which case this being on top would complicate things), but it doesn\u0027t seem like it is going to be.",
+      "parentUuid": "56d29325_ba510b2b",
+      "revId": "cf0a8ee1ba96ef321254305e35b37909ed932c65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
