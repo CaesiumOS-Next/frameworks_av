@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "914a2317_b1f9c6df",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-18T13:35:41Z",
+      "side": 1,
+      "message": "For synchronous drain command also, the state from the reply will be DRAINING. But the HAL move to IDLE without informing the client(empty buffer). Thus, client doesn\u0027t know the instance at which the drain happened.\n\nThis is still an open question.\n\nThinking undo this patch.",
+      "revId": "44e839aaa36d4b7e55d7378720b54b35ca716c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
