@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ffb594a_3c1b576e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-18T02:28:43Z",
+      "side": 1,
+      "message": "Jaideep, I will need QCOM\u0027s review to land this.\nToni or Tianyi, can you please give code owner\u0027s approval?  Thanks!",
+      "revId": "49cf9d2ed502b85e1c741e407f78ffc877b8330c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
