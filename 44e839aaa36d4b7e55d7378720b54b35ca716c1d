@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19a7f03e_7da698c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-18T17:37:36Z",
+      "side": 1,
+      "message": "Add:\n\n`Bug: 363958142`\n`Bug: 373872271`",
+      "revId": "44e839aaa36d4b7e55d7378720b54b35ca716c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7e9fc8_39c86551",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-18T17:37:36Z",
+      "side": 1,
+      "message": "This assumption is fragile. What we plan to change is adding these edges to the state graph:\n\n```\n+    DRAINING -\u003e DRAINING [label\u003d\"←IStreamCallback.onDrainReady\"];  // allowed for `DRAIN_EARLY_NOTIFY` \n+    DRAINING -\u003e IDLE [label\u003d\"\u003cempty buffer\u003e\"];  // allowed for `DRAIN_EARLY_NOTIFY`\n```\n\nIt\u0027s not required. We need to store which drain command we have sent and base our decisions on that.",
+      "range": {
+        "startLine": 576,
+        "startChar": 0,
+        "endLine": 577,
+        "endChar": 86
+      },
+      "revId": "44e839aaa36d4b7e55d7378720b54b35ca716c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "914a2317_b1f9c6df",
         "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
         "patchSetId": 5
@@ -14,6 +54,24 @@
       "writtenOn": "2024-10-18T13:35:41Z",
       "side": 1,
       "message": "For synchronous drain command also, the state from the reply will be DRAINING. But the HAL move to IDLE without informing the client(empty buffer). Thus, client doesn\u0027t know the instance at which the drain happened.\n\nThis is still an open question.\n\nThinking undo this patch.",
+      "revId": "44e839aaa36d4b7e55d7378720b54b35ca716c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62cfd9b9_be704679",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-18T17:37:36Z",
+      "side": 1,
+      "message": "I think, if we see here that the HAL state is `draining`, then we need to make a note that on the next HAL state change we need to set `framesAtFlushOrDrain` to the current frames—that\u0027s our best effort in knowing when draining has finished.",
+      "parentUuid": "914a2317_b1f9c6df",
       "revId": "44e839aaa36d4b7e55d7378720b54b35ca716c1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
