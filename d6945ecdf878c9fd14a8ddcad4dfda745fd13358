@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43e9d8e8_a6860631",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-10-18T12:13:33Z",
+      "side": 1,
+      "message": "Nit: AFAIK the bug numbers have to be on separate lines in the commit message to be parsed properly.",
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09a027cc_2ef50f4d",
         "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
         "patchSetId": 5
