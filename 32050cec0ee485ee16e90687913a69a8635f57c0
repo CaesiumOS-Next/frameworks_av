@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a810e250_639f3e12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-18T16:19:22Z",
+      "side": 1,
+      "message": "Please file an issue and add bug-id to the description like below.\n\n```\nSet mNumAvailableUnacquiredBuffers to 0 when EOS received\n\nBug: \u003cbug-id\u003e\nChange-Id: I452f4b1def0e800a876083fcb5a13dc7cfd80462\nSigned-off-by: Jia Jia \u003cjia.jia@zte.com.cn\u003e\n```",
+      "revId": "32050cec0ee485ee16e90687913a69a8635f57c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
