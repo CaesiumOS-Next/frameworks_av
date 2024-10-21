@@ -35,6 +35,63 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f1cd452_6c4c8c0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-21T16:24:43Z",
+      "side": 1,
+      "message": "just a note on the C2 convention.",
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363feac5_cd83b97c",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-21T16:24:43Z",
+      "side": 1,
+      "message": "Note that this will need to be a separate CL from the rest. (anything under codec2/core)",
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9fd827_5d7ee414",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-21T16:24:43Z",
+      "side": 1,
+      "message": "please separate the BASES by 0x100 like in HEVC, and keep levels contiguous. And name them LEVEL_APV_1_BASE_0, and LEVEL_APV_1_1_BASE_2",
+      "range": {
+        "startLine": 767,
+        "startChar": 4,
+        "endLine": 767,
+        "endChar": 17
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09a027cc_2ef50f4d",
