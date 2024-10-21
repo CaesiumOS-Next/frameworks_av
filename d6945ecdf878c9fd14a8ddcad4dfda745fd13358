@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e3f0c04_2622b4c7",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-21T03:31:47Z",
+      "side": 1,
+      "message": "hansang4321.kim@samsung.com could you comment on this?",
+      "parentUuid": "09a027cc_2ef50f4d",
+      "range": {
+        "startLine": 819,
+        "startChar": 0,
+        "endLine": 819,
+        "endChar": 95
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c23da0d_ba3cfe02",
         "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
         "patchSetId": 5
@@ -71,6 +95,30 @@
       "writtenOn": "2024-10-18T12:11:35Z",
       "side": 1,
       "message": "Is this used somewhere? (Sorry if I just missed something.)",
+      "range": {
+        "startLine": 823,
+        "startChar": 0,
+        "endLine": 823,
+        "endChar": 22
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bac36a2_95583199",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-21T03:31:47Z",
+      "side": 1,
+      "message": "hansang4321.kim@samsung.com Could you comment on this?",
+      "parentUuid": "3c23da0d_ba3cfe02",
       "range": {
         "startLine": 823,
         "startChar": 0,
@@ -106,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef178a15_c69e10da",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-21T03:31:47Z",
+      "side": 1,
+      "message": "It is in the same topic with public API change, isn\u0027t it?",
+      "parentUuid": "80fafe37_c6014f0c",
+      "range": {
+        "startLine": 873,
+        "startChar": 0,
+        "endLine": 873,
+        "endChar": 24
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e0639cc_b9758135",
         "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
         "patchSetId": 5
@@ -117,6 +189,30 @@
       "writtenOn": "2024-10-18T12:11:35Z",
       "side": 1,
       "message": "Super-nit: Might be better not to split up VP9 and AV1 given this codec is mostly unrelated to those and it\u0027s not in alphabetical order -- maybe put before DV below?",
+      "range": {
+        "startLine": 876,
+        "startChar": 0,
+        "endLine": 876,
+        "endChar": 57
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c3ad3c_f0ac5a3f",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-21T03:31:47Z",
+      "side": 1,
+      "message": "Hmm.. I was looking for a place and decided to go in alphabetical order",
+      "parentUuid": "0e0639cc_b9758135",
       "range": {
         "startLine": 876,
         "startChar": 0,
