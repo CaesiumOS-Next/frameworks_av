@@ -69,6 +69,24 @@
       "parentUuid": "79f369ea_bc6e1879",
       "revId": "430c564e9b26dc7355f855ce178daa7ee3575999",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c70247c1_3c66bc6b",
+        "filename": "media/codec2/components/aom/C2SoftAomEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-21T03:24:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c97ebfc7_b4b1b366",
+      "revId": "430c564e9b26dc7355f855ce178daa7ee3575999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
