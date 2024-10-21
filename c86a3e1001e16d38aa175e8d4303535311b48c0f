@@ -16,6 +16,24 @@
       "message": "Francois,\n\nCan you confirm that there is no side effect for the configurable engine?",
       "revId": "c86a3e1001e16d38aa175e8d4303535311b48c0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ee57bd_0d32453f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-10-21T08:07:56Z",
+      "side": 1,
+      "message": "Eric, from code review, I do not see any potential side effect. Will cherry-pick and make basic test with CAP engine.",
+      "parentUuid": "0c3f419e_7ddbd1c5",
+      "revId": "c86a3e1001e16d38aa175e8d4303535311b48c0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
