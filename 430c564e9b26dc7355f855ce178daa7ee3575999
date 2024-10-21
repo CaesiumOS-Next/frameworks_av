@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ef17de1_bdce3b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-21T15:33:24Z",
+      "side": 1,
+      "message": "Ah..\nJames, do you mind to fix the build warnings and move the local variable to the top of the function?",
+      "revId": "430c564e9b26dc7355f855ce178daa7ee3575999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5fda374_83a2c2b4",
