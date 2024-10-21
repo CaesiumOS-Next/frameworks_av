@@ -34,6 +34,24 @@
       "parentUuid": "c34fde96_db9b310b",
       "revId": "c977dc99af19b2f04b3e39bd4b70de883ec8faeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af910e18_5db6e03e",
+        "filename": "services/camera/virtualcamera/VirtualCameraRenderThread.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1071172
+      },
+      "writtenOn": "2024-10-21T14:16:09Z",
+      "side": 1,
+      "message": "Thanks for checking further.\n \nIMG texture hardware flow:\nMemory -\u003e TPU(texture process unit) -\u003e USC(shader compiler) -\u003e PBE(pixel buffer engine) -\u003e Memory\nSome old cores, it has TPU, but lacks PBE functions.\n\n- TPU reads from memory, and then fetching, decoding and filtering texture data based on shader instructsions\n  It applies to usage as : USAGE_GPU_SAMPLED_IMAGE/GPU_TEXTURE\n- PBE writes to memory, it does format conversions, swizzle, packing and output to memory.\n  It applies to usage as : AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER/AHARDWAREBUFFER_USAGE_GPU_COLOR_OUTPUT/GPU_RENDER_TARGET\n\nThus, USAGE_GPU_SAMPLED_IMAGE is readible, it doesn\u0027t mean gpu can write to memory.\n\nI\u0027m not expert in JPEG. Some ideas for your reference:\n\nmethod A) \nUse non-yuv format instead. In VirtualCameraRenderThread::renderIntoEglFramebuffer(), it seems there has alternative method of using RGB to render.\n    const bool renderSuccess \u003d\n        isYuvFormat(static_cast\u003cPixelFormat\u003e(textureBuffer-\u003egetPixelFormat()))\n            ? mEglTextureYuvProgram-\u003edraw(...)\n            : mEglTextureRgbProgram-\u003edraw(...)\n\nmethod B)\n - Call gralloc API isSupported() before allocation, it may return failure to indicate it can\u0027t be allocated.\n - If YUV not supported, fallback to use other formats",
+      "parentUuid": "fe1cf189_a289d2dd",
+      "revId": "c977dc99af19b2f04b3e39bd4b70de883ec8faeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
