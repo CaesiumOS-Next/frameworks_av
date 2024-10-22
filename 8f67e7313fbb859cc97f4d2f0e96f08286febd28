@@ -46,6 +46,30 @@
       },
       "revId": "8f67e7313fbb859cc97f4d2f0e96f08286febd28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc610b1b_9280b75f",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-10-22T21:07:24Z",
+      "side": 1,
+      "message": "Got it, thank you 😊",
+      "parentUuid": "33a6032e_7ee4284b",
+      "range": {
+        "startLine": 2057,
+        "startChar": 0,
+        "endLine": 2057,
+        "endChar": 29
+      },
+      "revId": "8f67e7313fbb859cc97f4d2f0e96f08286febd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
