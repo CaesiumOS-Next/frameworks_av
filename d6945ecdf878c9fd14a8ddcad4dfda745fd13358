@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe2f3be_4d079322",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-22T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43e9d8e8_a6860631",
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "363feac5_cd83b97c",
@@ -69,6 +87,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8311785_875a7a2e",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-22T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "363feac5_cd83b97c",
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d9fd827_5d7ee414",
@@ -82,6 +118,30 @@
       "writtenOn": "2024-10-21T16:24:43Z",
       "side": 1,
       "message": "please separate the BASES by 0x100 like in HEVC, and keep levels contiguous. And name them LEVEL_APV_1_BASE_0, and LEVEL_APV_1_1_BASE_2",
+      "range": {
+        "startLine": 767,
+        "startChar": 4,
+        "endLine": 767,
+        "endChar": 17
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f732c7d9_54ac625c",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-22T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d9fd827_5d7ee414",
       "range": {
         "startLine": 767,
         "startChar": 4,
@@ -233,6 +293,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d675cc0e_9b093b19",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-22T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef178a15_c69e10da",
+      "range": {
+        "startLine": 873,
+        "startChar": 0,
+        "endLine": 873,
+        "endChar": 24
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0639cc_b9758135",
@@ -270,6 +354,30 @@
       "side": 1,
       "message": "Hmm.. I was looking for a place and decided to go in alphabetical order",
       "parentUuid": "0e0639cc_b9758135",
+      "range": {
+        "startLine": 876,
+        "startChar": 0,
+        "endLine": 876,
+        "endChar": 57
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a95f1c_79c65399",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-22T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06c3ad3c_f0ac5a3f",
       "range": {
         "startLine": 876,
         "startChar": 0,
