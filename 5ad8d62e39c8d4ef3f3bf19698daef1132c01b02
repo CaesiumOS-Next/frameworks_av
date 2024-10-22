@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c0bb0fe_155295e5",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1931225
+      },
+      "writtenOn": "2024-10-22T13:51:49Z",
+      "side": 1,
+      "message": "Question: How about return reply-\u003estatus?",
+      "range": {
+        "startLine": 530,
+        "startChar": 11,
+        "endLine": 530,
+        "endChar": 19
+      },
+      "revId": "5ad8d62e39c8d4ef3f3bf19698daef1132c01b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faf08ebc_5fb1e682",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4397,
+      "author": {
+        "id": 1931225
+      },
+      "writtenOn": "2024-10-22T13:51:49Z",
+      "side": 1,
+      "message": "Question: How about change \"\u003e\u003d\" to \"\u003e\" ?",
+      "range": {
+        "startLine": 4397,
+        "startChar": 12,
+        "endLine": 4397,
+        "endChar": 71
+      },
+      "revId": "5ad8d62e39c8d4ef3f3bf19698daef1132c01b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
