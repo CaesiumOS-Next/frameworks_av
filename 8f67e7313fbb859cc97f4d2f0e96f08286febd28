@@ -22,6 +22,30 @@
       },
       "revId": "8f67e7313fbb859cc97f4d2f0e96f08286febd28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33a6032e_7ee4284b",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-22T21:06:07Z",
+      "side": 1,
+      "message": "no, the `guard` object should not be freed until the method returns (it works similarly to mutex locks). optional construct was done to selectively hold the reference depending on the flag value",
+      "parentUuid": "a184b416_189b414d",
+      "range": {
+        "startLine": 2057,
+        "startChar": 0,
+        "endLine": 2057,
+        "endChar": 29
+      },
+      "revId": "8f67e7313fbb859cc97f4d2f0e96f08286febd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
