@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ac8e67_3aad770a",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-10-22T20:36:48Z",
+      "side": 1,
+      "message": "nit: CallbackType or callback_type_t?",
+      "range": {
+        "startLine": 120,
+        "startChar": 9,
+        "endLine": 120,
+        "endChar": 25
+      },
+      "revId": "c975ddfd6195ca49c0e00c53347863187ac69fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
