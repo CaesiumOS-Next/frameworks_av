@@ -264,15 +264,16 @@ status_t StreamHalAidl::getLatency(uint32_t *latency) {
     return OK;
 }
 
-status_t StreamHalAidl::getObservablePosition(int64_t *frames, int64_t *timestamp) {
+// change to latest code
+status_t StreamHalAidl::getObservablePosition(int64_t* frames, int64_t* timestamp,
+        StatePositions* statePositions) {
     ALOGV("%p %s::%s", this, getClassName().c_str(), __func__);
     if (!mStream) return NO_INIT;
     StreamDescriptor::Reply reply;
-    if (status_t status = updateCountersIfNeeded(&reply); status != OK) {
-        return status;
-    }
-    *frames = reply.observable.frames;
-    *timestamp = reply.observable.timeNs;
+    RETURN_STATUS_IF_ERROR(updateCountersIfNeeded(&reply, statePositions));
+    // change -1 to 0
+    *frames = std::max<int64_t>(0, reply.observable.frames);
+    *timestamp = std::max<int64_t>(0, reply.observable.timeNs);
     return OK;
 }
 
@@ -506,18 +507,27 @@ status_t StreamHalAidl::sendCommand(
     }
 }
 
+// change to latest code
 status_t StreamHalAidl::updateCountersIfNeeded(
-        ::aidl::android::hardware::audio::core::StreamDescriptor::Reply* reply) {
-    if (mWorkerTid.load(std::memory_order_acquire) == gettid()) {
-        if (const auto state = getState(); state != StreamDescriptor::State::ACTIVE &&
-                state != StreamDescriptor::State::DRAINING &&
-                state != StreamDescriptor::State::TRANSFERRING) {
-            return sendCommand(makeHalCommand<HalCommand::Tag::getStatus>(), reply);
-        }
+        ::aidl::android::hardware::audio::core::StreamDescriptor::Reply* reply,
+        StatePositions* statePositions) {
+    bool doUpdate = false;
+    {
+        std::lock_guard l(mLock);
+        doUpdate = uptimeNanos() > mLastReplyExpirationNs;
     }
-    if (reply != nullptr) {
+    if (doUpdate) {
+        // Since updates are paced, it is OK to perform them from any thread, they should
+        // not interfere with I/O operations of the worker.
+        return sendCommand(makeHalCommand<HalCommand::Tag::getStatus>(),
+                reply, true /*safeFromNonWorkerThread */, statePositions);
+    } else if (reply != nullptr) {  // provide cached reply
         std::lock_guard l(mLock);
         *reply = mLastReply;
+        if (statePositions != nullptr) {
+            *statePositions = mStatePositions;
+        }
+        // Question: How about return reply->status?
     }
     return OK;
 }

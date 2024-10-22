@@ -109,6 +109,7 @@ struct alignas(8) /* bug 29096183, bug 29108507 */ ExtendedTimestamp {
         // We omit LOCATION_CLIENT as we prefer at least LOCATION_SERVER based accuracy
         // when getting the best timestamp.
         for (int i = LOCATION_KERNEL; i >= LOCATION_SERVER; --i) {
+            // need > 0?
             if (mTimeNs[i] > 0) {
                 *position = mPosition[i];
                 *time = mTimeNs[i] + mTimebaseOffset[timebase];

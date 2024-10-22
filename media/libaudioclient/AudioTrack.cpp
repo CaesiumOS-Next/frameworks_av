@@ -3171,7 +3171,7 @@ status_t AudioTrack::getTimestamp_l(AudioTimestamp& timestamp)
                     // are valid (if they predate the current track, the positions may
                     // be zero or negative).
                     const int64_t frames =
-                            (ets.mTimeNs[ExtendedTimestamp::LOCATION_SERVER_LASTKERNELOK] < 0 ||
+                            (ets.mTimeNs[ExtendedTimestamp::LOCATION_SERVER_LASTKERNELOK] < 0 || // '< 0' mean '>= 0' is valid ?
                             ets.mTimeNs[ExtendedTimestamp::LOCATION_KERNEL_LASTKERNELOK] < 0 ||
                             ets.mPosition[ExtendedTimestamp::LOCATION_SERVER_LASTKERNELOK] <= 0 ||
                             ets.mPosition[ExtendedTimestamp::LOCATION_KERNEL_LASTKERNELOK] <= 0)

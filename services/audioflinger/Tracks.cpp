@@ -1856,6 +1856,7 @@ void AudioFlinger::PlaybackThread::Track::updateTrackFrameInfo(
     for (int i = ExtendedTimestamp::LOCATION_MAX - 1;
             i >= ExtendedTimestamp::LOCATION_SERVER; --i) {
         // Lookup the track frame corresponding to the sink frame position.
+        // need > 0?
         if (local.mTimeNs[i] > 0) {
             local.mPosition[i] = mFrameMap.findX(local.mPosition[i]);
             // check drain state from the latest stage in the pipeline.

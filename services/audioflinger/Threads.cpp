@@ -4392,9 +4392,11 @@ void AudioFlinger::PlaybackThread::collectTimestamps_l()
         // We keep track of the last valid kernel position in case we are in underrun
         // and the normal mixer period is the same as the fast mixer period, or there
         // is some error from the HAL.
+        // Question: How about change ">=" to ">" ?
+        // need >= 0?
         if (mTimestamp.mTimeNs[ExtendedTimestamp::LOCATION_KERNEL] >= 0) {
             mTimestamp.mPosition[ExtendedTimestamp::LOCATION_KERNEL_LASTKERNELOK] =
-                    mTimestamp.mPosition[ExtendedTimestamp::LOCATION_KERNEL];
+                    mTimestamp.mPosition[ExtendedTimestamp::LOCATION_KERNEL]; // include suspended frames
             mTimestamp.mTimeNs[ExtendedTimestamp::LOCATION_KERNEL_LASTKERNELOK] =
                     mTimestamp.mTimeNs[ExtendedTimestamp::LOCATION_KERNEL];
 
@@ -4411,6 +4413,7 @@ void AudioFlinger::PlaybackThread::collectTimestamps_l()
         }
 
         // copy over kernel info
+        // mSuspendedFrames added
         mTimestamp.mPosition[ExtendedTimestamp::LOCATION_KERNEL] =
                 timestamp.mPosition[ExtendedTimestamp::LOCATION_KERNEL]
                 + mSuspendedFrames; // add frames discarded when suspended
