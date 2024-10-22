@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03c747ef_ff37aab5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-22T15:48:18Z",
+      "side": 1,
+      "message": "Please specify the bug number.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 4
+      },
+      "revId": "97885424c41612250f4d45bd94ba5c6d39658c2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2332d9bb_83834e5e",
+        "filename": "media/libeffects/dynamicsproc/aidl/DynamicsProcessingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-22T15:48:18Z",
+      "side": 1,
+      "message": "Please add spaces around `\u003d`.",
+      "range": {
+        "startLine": 55,
+        "startChar": 17,
+        "endLine": 55,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "caec69ad_95fe114c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/dynamicsproc/aidl/DynamicsProcessingContext.cpp",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "    mEngineInited \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "97885424c41612250f4d45bd94ba5c6d39658c2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
