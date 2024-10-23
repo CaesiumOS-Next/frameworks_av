@@ -21,6 +21,7 @@
 #include <android-base/unique_fd.h>
 #include <cutils/native_handle.h>
 #include <utils/Log.h>
+#include <utils/SystemClock.h>
 #include <ui/Fence.h>
 
 #include <C2FenceFactory.h>
@@ -631,50 +632,70 @@ C2Fence _C2FenceFactory::CreateMultiSyncFence(
  */
 class _C2FenceFactory::PipeFenceImpl: public C2Fence::Impl {
 private:
-    bool waitEvent(c2_nsecs_t timeoutNs, bool *hangUp, bool *event) const {
+    // Wait for an event using ::ppoll().
+    // if ::ppoll returns EINTR due to an interruption by a signal,
+    // this will retry another ::ppoll() when timeoutNs has not been elapsed.
+    // (if timeoutNs has been elapsed, this will return false.)
+    //
+    // Note: signal blocking is not used here.
+    // Since linux threading NPTL library utilizes 2 realtime signals,
+    // those signals are non blockable with libc. (If we try to block
+    // all signals, still those 2 realtime signals could interrupt.)
+    bool waitEvent(c2_nsecs_t timeoutNs, bool *hangUp) const {
         if (!mValid) {
             *hangUp = true;
-            return true;
+            return false;
         }
 
-        struct pollfd pfd;
-        pfd.fd = mPipeFd.get();
-        pfd.events = POLLIN;
-        pfd.revents = 0;
-        struct timespec ts;
+        int64_t waitTimeNs = kPipeFenceWaitLimitSecs * 1000000000LL;
         if (timeoutNs >= 0) {
-            ts.tv_sec = int(timeoutNs / 1000000000);
-            ts.tv_nsec = timeoutNs % 1000000000;
+            waitTimeNs = timeoutNs;
         } else {
             ALOGD("polling for indefinite duration requested, but changed to wait for %d sec",
                   kPipeFenceWaitLimitSecs);
-            ts.tv_sec = kPipeFenceWaitLimitSecs;
-            ts.tv_nsec = 0;
         }
-        int ret = ::ppoll(&pfd, 1, &ts, nullptr);
-        if (ret >= 0) {
-            if (pfd.revents) {
-                if (pfd.revents & ~POLLIN) {
-                    // Mostly this means the writing end fd was closed.
-                    *hangUp = true;
-                    mValid = false;
-                    ALOGD("PipeFenceImpl: pipe fd hangup or err event returned");
+
+        int64_t startTsNs = android::elapsedRealtimeNano();
+        int64_t elapsedTsNs = 0;
+        int tryNum = 0;
+        int noEvent = 0;
+        do {
+            struct pollfd pfd;
+            pfd.fd = mPipeFd.get();
+            pfd.events = POLLIN;
+            pfd.revents = 0;
+            struct timespec ts;
+
+            ts.tv_sec = int((waitTimeNs - elapsedTsNs) / 1000000000);
+            ts.tv_nsec = (waitTimeNs - elapsedTsNs) % 1000000000;
+            ++tryNum;
+            int ret = ::ppoll(&pfd, 1, &ts, nullptr);
+            if (ret >= 0) {
+                if (pfd.revents) {
+                    if (pfd.revents & ~POLLIN) {
+                        // Mostly this means the writing end fd was closed.
+                        *hangUp = true;
+                        mValid = false;
+                        ALOGD("PipeFenceImpl: pipe fd hangup or err event returned");
+                        return false;
+                    }
+                    return true;
                 }
-                *event = true;
-                return true;
+                ++noEvent;
+                // retry if the deadline does not meet yet.
+            } else if (errno != EINTR) {
+                ALOGE("PipeFenceImpl: poll() error %d", errno);
+                *hangUp = true;
+                mValid = false;
+                return false;
             }
-            // event not ready yet.
-            return true;
-        }
-        if (errno == EINTR) {
-            // poll() was cancelled by signal or inner kernel status.
-            return false;
-        }
-        // Since poll error happened here, treat the error is irrecoverable.
-        ALOGE("PipeFenceImpl: poll() error %d", errno);
-        *hangUp = true;
-        mValid = false;
-        return true;
+            elapsedTsNs = android::elapsedRealtimeNano() - startTsNs;
+        } while (elapsedTsNs < waitTimeNs);
+        // EINTR till the end.
+        // treat this as event not ready yet.
+        ALOGV("PipeFenceImpl: tried %d times NoEvent %d times, spent %lld nanosecs",
+              tryNum, noEvent, (long long)elapsedTsNs);
+        return false;
     }
 
 public:
@@ -683,18 +704,14 @@ public:
             return C2_BAD_STATE;
         }
         bool hangUp = false;
-        bool event = false;
-        if (waitEvent(timeoutNs, &hangUp, &event)) {
-            if (hangUp) {
-                return C2_BAD_STATE;
-            }
-            if (event) {
-                return C2_OK;
-            }
-            return C2_TIMED_OUT;
-        } else {
-            return C2_CANCELED;
+        bool event = waitEvent(timeoutNs, &hangUp);
+        if (hangUp) {
+            return C2_BAD_STATE;
         }
+        if (event) {
+            return C2_OK;
+        }
+        return C2_TIMED_OUT;
     }
 
     virtual bool valid() const {
@@ -702,13 +719,8 @@ public:
             return false;
         }
         bool hangUp = false;
-        bool event = false;
-        if (waitEvent(0, &hangUp, &event)) {
-            if (hangUp) {
-                return false;
-            }
-        }
-        return true;
+        (void)waitEvent(0, &hangUp);
+        return !hangUp;
     }
 
     virtual bool ready() const {
@@ -716,13 +728,8 @@ public:
             return false;
         }
         bool hangUp = false;
-        bool event = false;
-        if (waitEvent(0, &hangUp, &event)) {
-            if (event) {
-                return true;
-            }
-        }
-        return false;
+        bool event = waitEvent(0, &hangUp);
+        return event;
     }
 
     virtual int fd() const {
