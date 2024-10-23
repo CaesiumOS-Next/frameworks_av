@@ -16,6 +16,24 @@
       "message": "Haripriya,\nPlease fix the bpfmt warnings seen on a couple of the Android.bp files (even though those errors existed from before)",
       "revId": "aaaf8e0d14f5476ce99346f298476ad6b14e6ae3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6836c834_32da1989",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-10-23T05:46:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5638c9eb_e4a07f7e",
+      "revId": "aaaf8e0d14f5476ce99346f298476ad6b14e6ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
