@@ -63,6 +63,30 @@
       ],
       "revId": "97885424c41612250f4d45bd94ba5c6d39658c2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8775edf_295c8024",
+        "filename": "media/libeffects/dynamicsproc/aidl/DynamicsProcessingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2051456
+      },
+      "writtenOn": "2024-10-23T12:00:02Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "2332d9bb_83834e5e",
+      "range": {
+        "startLine": 55,
+        "startChar": 17,
+        "endLine": 55,
+        "endChar": 18
+      },
+      "revId": "97885424c41612250f4d45bd94ba5c6d39658c2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
