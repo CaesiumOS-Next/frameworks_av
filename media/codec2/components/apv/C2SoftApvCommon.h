@@ -1,0 +1,24 @@
+#ifndef ANDROID_C2_SOFT_APV_COMMON_H__
+#define ANDROID_C2_SOFT_APV_COMMON_H__
+
+typedef enum
+{
+    PIX_CHROMA_NA = 0xFFFFFFFF,
+    PIX_YUV_420P = 0x1,
+    PIX_YUV_422P = 0x2,
+    PIX_420_UV_INTL = 0x3,
+    PIX_YUV_422IBE = 0x4,
+    PIX_YUV_422ILE = 0x5,
+    PIX_YUV_444P = 0x6,
+    PIX_YUV_411P = 0x7,
+    PIX_GRAY = 0x8,
+    PIX_RGB_565 = 0x9,
+    PIX_RGB_24 = 0xa,
+    PIX_YUV_420SP_UV = 0xb,
+    PIX_YUV_420SP_VU = 0xc,
+    PIX_YUV_422SP_UV = 0xd,
+    PIX_YUV_422SP_VU = 0xe
+} PIX_COLOR_FORMAT_T;
+
+
+#endif // ANDROID_C2_SOFT_APV_COMMON_H__
