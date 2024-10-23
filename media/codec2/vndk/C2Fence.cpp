@@ -21,6 +21,7 @@
 #include <android-base/unique_fd.h>
 #include <cutils/native_handle.h>
 #include <utils/Log.h>
+#include <utils/SystemClock.h>
 #include <ui/Fence.h>
 
 #include <C2FenceFactory.h>
@@ -637,43 +638,50 @@ private:
             return true;
         }
 
-        struct pollfd pfd;
-        pfd.fd = mPipeFd.get();
-        pfd.events = POLLIN;
-        pfd.revents = 0;
-        struct timespec ts;
+        int64_t waitTimeNs = kPipeFenceWaitLimitSecs * 1000000000LL;
         if (timeoutNs >= 0) {
-            ts.tv_sec = int(timeoutNs / 1000000000);
-            ts.tv_nsec = timeoutNs % 1000000000;
+            waitTimeNs = timeoutNs;
         } else {
             ALOGD("polling for indefinite duration requested, but changed to wait for %d sec",
                   kPipeFenceWaitLimitSecs);
-            ts.tv_sec = kPipeFenceWaitLimitSecs;
-            ts.tv_nsec = 0;
         }
-        int ret = ::ppoll(&pfd, 1, &ts, nullptr);
-        if (ret >= 0) {
-            if (pfd.revents) {
-                if (pfd.revents & ~POLLIN) {
-                    // Mostly this means the writing end fd was closed.
-                    *hangUp = true;
-                    mValid = false;
-                    ALOGD("PipeFenceImpl: pipe fd hangup or err event returned");
+
+        int64_t startTsNs = android::elapsedRealtimeNano();
+        int64_t elapsedTsNs = 0;
+        do {
+            struct pollfd pfd;
+            pfd.fd = mPipeFd.get();
+            pfd.events = POLLIN;
+            pfd.revents = 0;
+            struct timespec ts;
+
+            ts.tv_sec = int((waitTimeNs - elapsedTsNs) / 1000000000);
+            ts.tv_nsec = (waitTimeNs - elapsedTsNs) % 1000000000;
+            int ret = ::ppoll(&pfd, 1, &ts, nullptr);
+            if (ret >= 0) {
+                if (pfd.revents) {
+                    if (pfd.revents & ~POLLIN) {
+                        // Mostly this means the writing end fd was closed.
+                        *hangUp = true;
+                        mValid = false;
+                        ALOGD("PipeFenceImpl: pipe fd hangup or err event returned");
+                    }
+                    *event = true;
+                    return true;
                 }
-                *event = true;
+                // event not ready yet.
                 return true;
             }
-            // event not ready yet.
-            return true;
-        }
-        if (errno == EINTR) {
-            // poll() was cancelled by signal or inner kernel status.
-            return false;
-        }
-        // Since poll error happened here, treat the error is irrecoverable.
-        ALOGE("PipeFenceImpl: poll() error %d", errno);
-        *hangUp = true;
-        mValid = false;
+            if (errno != EINTR) {
+                ALOGE("PipeFenceImpl: poll() error %d", errno);
+                *hangUp = true;
+                mValid = false;
+                return true;
+            }
+            elapsedTsNs = android::elapsedRealtimeNano() - startTsNs;
+        } while (waitTimeNs < elapsedTsNs);
+        // EINTR till the end.
+        // treat this as event not ready yet.
         return true;
     }
 
