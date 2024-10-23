@@ -199,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e5a2de_43c1f99b",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-23T04:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e3f0c04_2622b4c7",
+      "range": {
+        "startLine": 819,
+        "startChar": 0,
+        "endLine": 819,
+        "endChar": 95
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c23da0d_ba3cfe02",
@@ -236,6 +260,30 @@
       "side": 1,
       "message": "hansang4321.kim@samsung.com Could you comment on this?",
       "parentUuid": "3c23da0d_ba3cfe02",
+      "range": {
+        "startLine": 823,
+        "startChar": 0,
+        "endLine": 823,
+        "endChar": 22
+      },
+      "revId": "d6945ecdf878c9fd14a8ddcad4dfda745fd13358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3686d13b_9f9c7782",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-23T04:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bac36a2_95583199",
       "range": {
         "startLine": 823,
         "startChar": 0,
