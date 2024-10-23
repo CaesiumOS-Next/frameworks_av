@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ea91489_35a99ec8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-23T00:21:25Z",
+      "side": 1,
+      "message": "nit: could add\n\nBug: 374920078",
+      "revId": "d1f31b84d0dcd44cffed13a4c8427cc684e90073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
