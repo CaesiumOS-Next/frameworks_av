@@ -128,6 +128,26 @@ private:
 
     static const int kTx3gGrowth = 16 * 1024;
 
+    struct ApvFrameHeader {
+        uint8_t profile_idc;
+        uint8_t level_idc;
+        uint8_t band_idc;
+        uint32_t frame_width_minus1;
+        uint32_t frame_height_minus1;
+        uint8_t chroma_format_idc;
+        uint8_t bit_depth_minus8;
+        uint8_t capture_time_distance;
+        bool color_description_present_flag;
+        uint8_t color_primaries;
+        uint8_t transfer_characteristics;
+        uint8_t matrix_coefficients;
+        bool use_q_matrix;
+        uint8_t size_of_q_matrix_info;
+        uint8_t* quantization_matrix;
+        uint16_t size_of_tile_info;  // bytes
+        uint8_t* tile_info;
+    };
+
     Vector<SidxEntry> mSidxEntries;
     off64_t mMoofOffset;
     bool mMoofFound;
@@ -187,6 +207,8 @@ private:
     status_t parseAC4SpecificBox(off64_t offset);
     status_t parseALACSampleEntry(off64_t *offset);
     void adjustRawDefaultFrameSize();
+    void updateFrameHeader(const ApvFrameHeader& header);
+    void parseAPVDecoderConfiguration(const void* data, size_t size);
 
     MPEG4Extractor(const MPEG4Extractor &);
     MPEG4Extractor &operator=(const MPEG4Extractor &);

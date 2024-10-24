@@ -83,6 +83,14 @@ enum {
     kMaxAtomSize = 64 * 1024 * 1024,
 };
 
+enum {
+    apvPrimaryFrame = 1,
+    apvNonPrimaryFrame = 2,
+    apvPreviewFrame = 25,
+    apvDepthFrame = 26,
+    apvAlphaFrame = 27,
+};
+
 class MPEG4Source : public MediaTrackHelper {
 static const size_t  kMaxPcmFrameSize = 8192;
 public:
@@ -147,6 +155,7 @@ private:
 
     bool mIsAVC;
     bool mIsHEVC;
+    bool mIsAPV;
     bool mIsDolbyVision;
     bool mIsAC4;
     bool mIsMpegH = false;
@@ -188,6 +197,8 @@ private:
     int32_t parseHEVCLayerId(const uint8_t *data, size_t size);
     size_t getNALLengthSizeFromAvcCsd(const uint8_t *data, const size_t size) const;
     size_t getNALLengthSizeFromHevcCsd(const uint8_t *data, const size_t size) const;
+    void addFrameHeaderToAccessUnit(const void* frameHeader, size_t frameHeaderSize,
+                                    size_t* bufferSize);
 
     struct TrackFragmentHeaderInfo {
         enum Flags {
@@ -365,6 +376,9 @@ static const char *FourCC2MIME(uint32_t fourcc) {
         case FOURCC("hvc1"):
         case FOURCC("hev1"):
             return MEDIA_MIMETYPE_VIDEO_HEVC;
+
+        case FOURCC("apv1"):
+            return MEDIA_MIMETYPE_VIDEO_APV;
 
         case FOURCC("dvav"):
         case FOURCC("dva1"):
@@ -2106,6 +2120,7 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
         case FOURCC("dav1"):
         case FOURCC("av01"):
         case FOURCC("vp09"):
+        case FOURCC("apv1"):
         {
             uint8_t buffer[78];
             if (chunk_data_size < (ssize_t)sizeof(buffer)) {
@@ -2597,6 +2612,38 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
             *offset += chunk_size;
             break;
         }
+
+        case FOURCC("apvC"):
+        {
+            if (!chunk_data_size) {
+                ALOGV("chunk_data_size=0x%" PRIx64 " ", chunk_data_size);
+                return ERROR_MALFORMED;
+            }
+
+            auto buffer = heapbuffer<uint8_t>(chunk_data_size);
+
+            if (buffer.get() == NULL) {
+                ALOGE("b/28471206");
+                return NO_MEMORY;
+            }
+
+            if (mDataSource->readAt(data_offset, buffer.get(), chunk_data_size) < chunk_data_size) {
+                return ERROR_IO;
+            }
+
+            if (mLastTrack == NULL) {
+                return ERROR_MALFORMED;
+            }
+
+            parseAPVDecoderConfiguration(buffer.get(), chunk_data_size);
+
+            AMediaFormat_setBuffer(mLastTrack->meta, AMEDIAFORMAT_KEY_CSD_0, buffer.get(),
+                                   chunk_data_size);
+
+            *offset += chunk_size;
+            break;
+        }
+
         case FOURCC("vpcC"):
         {
             if (mLastTrack == NULL) {
@@ -5111,6 +5158,174 @@ void MPEG4Extractor::adjustRawDefaultFrameSize() {
     }
 }
 
+static inline void rightShiftMemoryByOne(uint8_t* memory, size_t size) {
+    uint8_t carry = 0;
+    for (size_t i = 0; i < size; ++i) {
+        uint8_t newCarry = (memory[i] & 0x01) << 7;
+        memory[i] = (memory[i] >> 1) | carry;
+        carry = newCarry;
+    }
+}
+
+static inline void setBitValueAt(uint8_t* buffer, unsigned int offset, bool value) {
+    uint8_t mask = 1u << (7 - offset);
+
+    if (value) {
+        *buffer |= mask;
+    } else {
+        *buffer &= ~mask;
+    }
+}
+
+void MPEG4Extractor::updateFrameHeader(const ApvFrameHeader& header) {
+    ALOGV("updateFrameHeader");
+
+    // frame_info(14), reserved_zero_8bits(1)
+    uint16_t headerSize = header.color_description_present_flag ? 18 : 15;
+    if (header.use_q_matrix) {
+        headerSize += header.size_of_q_matrix_info;
+    }
+
+    headerSize += header.size_of_tile_info;
+    headerSize++;  // reserved_zero_8bits
+
+    sp<ABuffer> frameHeader = new ABuffer(headerSize);
+    if (frameHeader->capacity() < headerSize) {
+        ALOGW("failed to alloc frameHeader");
+        return;
+    }
+
+    memset(frameHeader->data(), 0, frameHeader->size());
+
+    memcpy(frameHeader->data(), &header.profile_idc, 1);
+    memcpy(frameHeader->data() + 1, &header.level_idc, 1);
+    uint8_t band_idc = header.band_idc << 5;
+    memcpy(frameHeader->data() + 2, &band_idc, 1);
+    // reserved_zero_5bits;
+    uint32_t frame_width_minus1 = htonl(header.frame_width_minus1);
+    memcpy(frameHeader->data() + 3, &frame_width_minus1, 4);
+    uint32_t frame_height_minus1 = htonl(header.frame_height_minus1);
+    memcpy(frameHeader->data() + 7, &frame_height_minus1, 4);
+    uint8_t byte = header.chroma_format_idc << 4 | header.bit_depth_minus8;
+    memcpy(frameHeader->data() + 11, &byte, 1);
+    memcpy(frameHeader->data() + 12, &header.capture_time_distance, 1);
+    // reserved_zero_8bits
+
+    uint8_t offset = 15;  // offset for color_description_present_flag
+    // copy data first and then set the flag values(use_q_matrix_info,
+    // color_description_present_flag)
+    if (header.color_description_present_flag) {
+        memcpy(frameHeader->data() + offset, &header.color_primaries, 1);
+        memcpy(frameHeader->data() + offset + 1, &header.transfer_characteristics, 1);
+        memcpy(frameHeader->data() + offset + 2, &header.matrix_coefficients, 1);
+        offset += 3;
+    }
+
+    if (header.use_q_matrix) {
+        memcpy(frameHeader->data() + offset, header.quantization_matrix,
+               header.size_of_q_matrix_info);
+        offset += header.size_of_q_matrix_info;
+    }
+
+    memcpy(frameHeader->data() + offset, header.tile_info, header.size_of_tile_info);
+
+    // write use_q_matrix
+    offset = header.color_description_present_flag ? 18 : 15;
+    rightShiftMemoryByOne(frameHeader->data() + offset, frameHeader->size() - offset);
+    setBitValueAt((frameHeader->data() + offset), 0, (bool)header.use_q_matrix);
+
+    // write color_description_present_flag
+    offset = 15;
+    rightShiftMemoryByOne(frameHeader->data() + offset, frameHeader->size() - offset);
+    setBitValueAt((frameHeader->data() + offset), 0, (bool)header.color_description_present_flag);
+
+    AMediaFormat_setBuffer(mLastTrack->meta, "static-frame-header", frameHeader->data(),
+                           frameHeader->size());
+}
+
+void MPEG4Extractor::parseAPVDecoderConfiguration(const void* data, size_t size) {
+    ALOGV("parseAPVDecoderConfiguration size(%zu)", size);
+    if (size < 26) {
+        return;
+    }
+
+    uint8_t* apvcData = (uint8_t*)data + 4;  // skip version, flag (full box)
+    ABitReader br(apvcData, size);
+    br.skipBits(8);  // configurationVersion
+
+    uint8_t numConfigEntry = br.getBits(8);
+    if (numConfigEntry != 1) {
+        // currently only entry count 1 is supported
+        return;
+    }
+
+    uint8_t pbuType = br.getBits(8);
+    if (pbuType != apvPrimaryFrame && pbuType != apvNonPrimaryFrame && pbuType != apvPreviewFrame &&
+        pbuType != apvDepthFrame && pbuType != apvAlphaFrame) {
+        return;
+    }
+
+    uint8_t numFrameInfo = br.getBits(8);
+    if (numFrameInfo != 1) {
+        // frame header configuration is only necessary for static cases
+        return;
+    }
+
+    br.skipBits(8);  // reserved_zero_7bits, capture_time_distance_ignored
+    ApvFrameHeader header = {0, 0, 0, 0, 0, 0, 0, 0, false, 0, 0, 0, false, 0, nullptr, 0, nullptr};
+    header.profile_idc = br.getBits(8);
+    header.level_idc = br.getBits(8);
+    header.band_idc = br.getBits(8);
+    header.frame_width_minus1 = br.getBits(32);
+    header.frame_height_minus1 = br.getBits(32);
+    header.chroma_format_idc = br.getBits(4);
+    header.bit_depth_minus8 = br.getBits(4);
+    header.capture_time_distance = br.getBits(8);
+    br.skipBits(7);  // reserved
+
+    if (br.getBits(1)) {
+        ALOGV("frame_header_repeated");
+        return;
+    }
+
+    br.skipBits(6);  // reserved
+    header.color_description_present_flag = br.getBits(1);
+    header.use_q_matrix = br.getBits(1);
+
+    uint32_t offset = 20;  // configurationVersion ~ use_q_matrix_info
+    if (header.color_description_present_flag) {
+        header.color_primaries = br.getBits(8);
+        header.transfer_characteristics = br.getBits(8);
+        header.matrix_coefficients = br.getBits(8);
+        offset += 3;
+    }
+
+    if (header.use_q_matrix) {
+        header.size_of_q_matrix_info = br.getBits(8);
+        CHECK(header.size_of_q_matrix_info);
+        offset++;
+        header.quantization_matrix = apvcData + offset;
+        offset += header.size_of_q_matrix_info;
+    }
+
+    header.size_of_tile_info = br.getBits(16);
+    offset += 2;
+
+    CHECK(header.size_of_tile_info % 8);  // it's not byte aligned
+    header.size_of_tile_info = (header.size_of_tile_info / 8) + 1;
+    header.tile_info = apvcData + offset;
+
+    if (offset + 4 + header.size_of_tile_info > size) {
+        ALOGD("invalid frame header info. size(%zu), color_description_present_flag(%u), "
+              "size_of_q_matrix_info(%u), size_of_tile_info(%u)",
+              size, header.color_description_present_flag, header.size_of_q_matrix_info,
+              header.size_of_tile_info);
+        return;
+    }
+
+    updateFrameHeader(header);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 MPEG4Source::MPEG4Source(
@@ -5145,6 +5360,7 @@ MPEG4Source::MPEG4Source(
       mCurrentSampleInfoOffsets(NULL),
       mIsAVC(false),
       mIsHEVC(false),
+      mIsAPV(false),
       mIsDolbyVision(false),
       mIsAC4(false),
       mIsPcm(false),
@@ -5187,6 +5403,7 @@ MPEG4Source::MPEG4Source(
     mIsAVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
     mIsHEVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
               !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC);
+    mIsAPV = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
     mIsAC4 = !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_AC4);
     mIsDolbyVision = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_DOLBY_VISION);
     mIsHeif = !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC) && mItemTable != NULL;
@@ -6179,6 +6396,46 @@ size_t MPEG4Source::getNALLengthSizeFromHevcCsd(const uint8_t *data, const size_
     return 1 + (data[14 + 7] & 3);
 }
 
+void MPEG4Source::addFrameHeaderToAccessUnit(const void* frameHeader, size_t frameHeaderSize,
+                                             size_t* bufferSize) {
+    ALOGV("addFrameHeaderToAccessUnit, frameHeaderSize(%zu), bufferSize(%zu)", frameHeaderSize,
+          *bufferSize);
+
+    size_t frameOffset = 0;
+    size_t pbuSize = 0;
+    size_t currReadSize = 4;  // skip au_size
+    while (mBuffer->size() > currReadSize) {
+        pbuSize = U32_AT((uint8_t*)mBuffer->data() + currReadSize);
+        currReadSize += 4;
+        uint8_t pbuType = *((uint8_t*)mBuffer->data() + currReadSize);
+        if (pbuType == apvPrimaryFrame || pbuType == apvNonPrimaryFrame ||
+            pbuType == apvPreviewFrame || pbuType == apvDepthFrame || pbuType == apvAlphaFrame) {
+            frameOffset = currReadSize + 4;
+            break;
+        }
+        currReadSize += pbuSize;
+    }
+
+    if (frameOffset < 8) {
+        ALOGW("invalid frame start offset(%zu", frameOffset);
+        return;
+    }
+
+    memmove((uint8_t*)mBuffer->data() + frameOffset + frameHeaderSize,
+            (uint8_t*)mBuffer->data() + frameOffset, *bufferSize - frameOffset);
+    memcpy((uint8_t*)mBuffer->data() + frameOffset, frameHeader, frameHeaderSize);
+
+    size_t auSize = U32_AT((uint8_t*)mBuffer->data());
+    auSize += frameHeaderSize;
+    auSize = htonl(auSize);
+    memcpy(mBuffer->data(), &auSize, 4);
+
+    pbuSize += frameHeaderSize;
+    pbuSize = htonl(pbuSize);
+    memcpy((uint8_t*)mBuffer->data() + frameOffset - 8, &pbuSize, 4);
+    *bufferSize += frameHeaderSize;
+}
+
 media_status_t MPEG4Source::read(
         MediaBufferHelper **out, const ReadOptions *options) {
     Mutex::Autolock autoLock(mLock);
@@ -6456,6 +6713,26 @@ media_status_t MPEG4Source::read(
                     mBuffer = NULL;
 
                     return AMEDIA_ERROR_IO;
+                }
+
+                if (mIsAPV) {
+                    void* frameHeader;
+                    size_t frameHeaderSize = 0;
+                    if (AMediaFormat_getBuffer(mFormat, "static-frame-header", &frameHeader,
+                                               &frameHeaderSize) &&
+                        frameHeaderSize > 0) {
+                        if (mBuffer->size() < frameHeaderSize ||
+                            mBuffer->size() - frameHeaderSize < size) {
+                            ALOGW("buffer size small handle frame header. \n"
+                                  "buffer size(%zu), AU size(%zu), frameHeaderSize(%zu)",
+                                  mBuffer->size(), size, frameHeaderSize);
+                            mBuffer->release();
+                            mBuffer = NULL;
+                            return AMEDIA_ERROR_IO;
+                        }
+
+                        addFrameHeaderToAccessUnit(frameHeader, frameHeaderSize, &size);
+                    }
                 }
 
                 CHECK(mBuffer != NULL);
