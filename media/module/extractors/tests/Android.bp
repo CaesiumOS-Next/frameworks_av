@@ -31,6 +31,8 @@ cc_test {
     srcs: ["ExtractorUnitTest.cpp"],
 
     static_libs: [
+        "android.media.extractor.flags-aconfig-cc",
+        "libaconfig_storage_read_api_cc",
         "libaacextractor",
         "libamrextractor",
         "libmp3extractor",
@@ -77,6 +79,7 @@ cc_test {
         "libhidlmemory",
         "libhidlbase",
         "libbase",
+        "server_configurable_flags",
     ],
 
     compile_multilib: "first",
