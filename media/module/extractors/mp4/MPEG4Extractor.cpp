@@ -147,6 +147,7 @@ private:
 
     bool mIsAVC;
     bool mIsHEVC;
+    bool mIsAPV;
     bool mIsDolbyVision;
     bool mIsAC4;
     bool mIsMpegH = false;
@@ -188,6 +189,8 @@ private:
     int32_t parseHEVCLayerId(const uint8_t *data, size_t size);
     size_t getNALLengthSizeFromAvcCsd(const uint8_t *data, const size_t size) const;
     size_t getNALLengthSizeFromHevcCsd(const uint8_t *data, const size_t size) const;
+    void addFrameHeaderToAccessUnit(const void* frameHeader, size_t frameHeaderSize,
+                                    size_t* bufferSize);
 
     struct TrackFragmentHeaderInfo {
         enum Flags {
@@ -365,6 +368,9 @@ static const char *FourCC2MIME(uint32_t fourcc) {
         case FOURCC("hvc1"):
         case FOURCC("hev1"):
             return MEDIA_MIMETYPE_VIDEO_HEVC;
+
+        case FOURCC("apv1"):
+            return MEDIA_MIMETYPE_VIDEO_APV;
 
         case FOURCC("dvav"):
         case FOURCC("dva1"):
@@ -2106,6 +2112,7 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
         case FOURCC("dav1"):
         case FOURCC("av01"):
         case FOURCC("vp09"):
+        case FOURCC("apv1"):
         {
             uint8_t buffer[78];
             if (chunk_data_size < (ssize_t)sizeof(buffer)) {
@@ -2597,6 +2604,36 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
             *offset += chunk_size;
             break;
         }
+
+        case FOURCC("apvC"):
+        {
+            if (!chunk_data_size) {
+                ALOGV("chunk_data_size=0x%" PRIx64 " ", chunk_data_size);
+                return ERROR_MALFORMED;
+            }
+
+            auto buffer = heapbuffer<uint8_t>(chunk_data_size);
+
+            if (buffer.get() == NULL) {
+                ALOGE("b/28471206");
+                return NO_MEMORY;
+            }
+
+            if (mDataSource->readAt(data_offset, buffer.get(), chunk_data_size) < chunk_data_size) {
+                return ERROR_IO;
+            }
+
+            if (mLastTrack == NULL) {
+                return ERROR_MALFORMED;
+            }
+
+            AMediaFormat_setBuffer(mLastTrack->meta, AMEDIAFORMAT_KEY_CSD_0, buffer.get(),
+                                   chunk_data_size);
+
+            *offset += chunk_size;
+            break;
+        }
+
         case FOURCC("vpcC"):
         {
             if (mLastTrack == NULL) {
@@ -5145,6 +5182,7 @@ MPEG4Source::MPEG4Source(
       mCurrentSampleInfoOffsets(NULL),
       mIsAVC(false),
       mIsHEVC(false),
+      mIsAPV(false),
       mIsDolbyVision(false),
       mIsAC4(false),
       mIsPcm(false),
@@ -5187,6 +5225,7 @@ MPEG4Source::MPEG4Source(
     mIsAVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
     mIsHEVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
               !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC);
+    mIsAPV = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
     mIsAC4 = !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_AC4);
     mIsDolbyVision = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_DOLBY_VISION);
     mIsHeif = !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC) && mItemTable != NULL;
