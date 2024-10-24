@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23faf121_1ba31a1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-24T21:13:44Z",
+      "side": 1,
+      "message": "nit: use topic for CLs, e.g.\nCodecCapabilities: use int32_t for bitrate\n\nThis prevents potential mul overflow issues.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "3fc6f738e8aa5dfce5d70d8dcaab55a261e1d647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
