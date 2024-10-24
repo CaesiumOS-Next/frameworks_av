@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dcbbe04_60316118",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-10-24T15:38:47Z",
+      "side": 1,
+      "message": "(sorry, i didn\u0027t realize until it was too late that drmserver and libdrmframework weren\u0027t separate git projects, so there are two changes making the \"same\" change!)",
+      "revId": "ff90a5a0446ede943ae0c00165e135987f519bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
