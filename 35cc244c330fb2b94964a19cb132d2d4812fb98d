@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceeb65f2_c18ec315",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-24T21:11:42Z",
+      "side": 1,
+      "message": "nit: add topic and make it a \"command\" tense:\n\nCodecCapabilities: Use optional [instead of 0] to represent missing values in supports()",
+      "revId": "35cc244c330fb2b94964a19cb132d2d4812fb98d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82c3e166_c91515db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-24T21:11:42Z",
+      "side": 1,
+      "message": "nit: this is not needed to understand this CL. One could in theory follow the bug link below as well.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "35cc244c330fb2b94964a19cb132d2d4812fb98d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
