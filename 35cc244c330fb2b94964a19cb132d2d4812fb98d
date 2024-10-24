@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b14b6fec_6c315cd1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-24T22:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceeb65f2_c18ec315",
+      "revId": "35cc244c330fb2b94964a19cb132d2d4812fb98d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82c3e166_c91515db",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-10-24T21:11:42Z",
       "side": 1,
       "message": "nit: this is not needed to understand this CL. One could in theory follow the bug link below as well.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "35cc244c330fb2b94964a19cb132d2d4812fb98d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d03f1a_ea32e1e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-24T22:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82c3e166_c91515db",
       "range": {
         "startLine": 9,
         "startChar": 0,
