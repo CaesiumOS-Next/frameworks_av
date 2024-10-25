@@ -26,7 +26,7 @@
 #include <Codec2Mapper.h>
 #include <SimpleC2Interface.h>
 #include "C2SoftApvDec.h"
-#include "oapv_app_util.h"
+//#include "oapv_app_util.h"
 
 #include <cutils/properties.h>
 

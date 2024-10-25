@@ -33,7 +33,7 @@
 #include <util/C2InterfaceHelper.h>
 
 #include "C2SoftApvEnc.h"
-#include "oapv_app_util.h"
+//#include "oapv_app_util.h"
 
 namespace android {
 
@@ -525,7 +525,9 @@ c2_status_t C2SoftApvEnc::reset() {
 
 c2_status_t C2SoftApvEnc::releaseEncoder() {
     for (int32_t i = 0; i < MAX_NUM_FRMS; i++) {
-        imgb_release(InputFrames.frm[i].imgb);
+        if (InputFrames.frm[i].imgb != nullptr) {
+            imgb_release(InputFrames.frm[i].imgb);
+        }
     }
 
     if (mBitstreamBuf) {

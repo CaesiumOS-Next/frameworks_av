@@ -23,8 +23,8 @@
 #include <map>
 #include <media/stagefright/foundation/ColorUtils.h>
 #include <utils/Vector.h>
-#include <C2SoftApvCommon.h>
 #include "oapv.h"
+#include <C2SoftApvCommon.h>
 
 namespace android {
 
