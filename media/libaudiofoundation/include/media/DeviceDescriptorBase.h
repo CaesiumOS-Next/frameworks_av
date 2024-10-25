@@ -85,6 +85,8 @@ public:
 protected:
     AudioDeviceTypeAddr mDeviceTypeAddr;
     FormatVector        mEncodedFormats;
+    // TODO DO NOT SUBMIT How do we get this from the HAL?
+    uint32_t mSpeakerLayout = 0;
     uint32_t mEncapsulationModes = 0;
     uint32_t mEncapsulationMetadataTypes = 0;
 private:
@@ -98,6 +100,7 @@ private:
         port->ext.device.encapsulation_modes = mEncapsulationModes;
         port->ext.device.encapsulation_metadata_types = mEncapsulationMetadataTypes;
         (void)audio_utils_strlcpy_zerofill(port->ext.device.address, mDeviceTypeAddr.getAddress());
+        port->ext.device.speaker_layout_channel_mask = mSpeakerLayout;
     }
 };
 
