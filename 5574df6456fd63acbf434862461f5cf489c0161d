@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d6d541_6ae87c4c",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-25T00:42:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27505a4f_90a32cfb",
+      "revId": "5574df6456fd63acbf434862461f5cf489c0161d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efb58497_7f100f2e",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-24T21:10:43Z",
       "side": 1,
       "message": "```suggestion\n        err \u003d std::atomic_load(\u0026mComponent)-\u003equeue(\u0026items);\n```",
+      "revId": "5574df6456fd63acbf434862461f5cf489c0161d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "752fc827_374f33d8",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-25T00:42:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efb58497_7f100f2e",
       "revId": "5574df6456fd63acbf434862461f5cf489c0161d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
