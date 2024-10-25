@@ -86,6 +86,23 @@
       "parentUuid": "3fcb4360_23998398",
       "revId": "32050cec0ee485ee16e90687913a69a8635f57c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "176461bc_502c80e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-10-25T01:46:00Z",
+      "side": 1,
+      "message": "Though EOS is submitted, there are still un-acquired buffers.\nThose buffers should be acquired and sent to the codec, as I understand.\n\nSo I believe this CL is not properly fixing the issue.\n\nIf you have more to say, please comment in the issue.",
+      "revId": "32050cec0ee485ee16e90687913a69a8635f57c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
