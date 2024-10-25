@@ -349,6 +349,7 @@ constexpr inline audio_channel_mask_t canonicalChannelMaskFromCount(size_t chann
         [8] = AUDIO_CHANNEL_OUT_7POINT1,
         [10] = AUDIO_CHANNEL_OUT_5POINT1POINT4,
         [12] = AUDIO_CHANNEL_OUT_7POINT1POINT4,
+        [13] = AUDIO_CHANNEL_OUT_13POINT0,
         [14] = AUDIO_CHANNEL_OUT_9POINT1POINT4,
         [16] = AUDIO_CHANNEL_OUT_9POINT1POINT6,
         [24] = AUDIO_CHANNEL_OUT_22POINT2,
