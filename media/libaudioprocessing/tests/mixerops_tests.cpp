@@ -162,6 +162,11 @@ TEST(mixerops, stereovolume_12) {
         MixerOpsBasicTest<MIXTYPE_MULTI_STEREOVOL, 12>::testStereoVolume();
     }
 }
+TEST(mixerops, stereovolume_13) {
+    if constexpr (FCC_LIMIT >= 13) {
+        MixerOpsBasicTest<MIXTYPE_MULTI_STEREOVOL, 13>::testStereoVolume();
+    }
+}
 TEST(mixerops, stereovolume_24) {
     if constexpr (FCC_LIMIT >= 24) {
         MixerOpsBasicTest<MIXTYPE_MULTI_STEREOVOL, 24>::testStereoVolume();
@@ -169,7 +174,7 @@ TEST(mixerops, stereovolume_24) {
 }
 TEST(mixerops, channel_equivalence) {
     // we must match the constexpr function with the system determined channel mask from count.
-    for (size_t i = 0; i < FCC_LIMIT; ++i) {
+    for (size_t i = 0; i <= FCC_LIMIT; ++i) {
         const audio_channel_mask_t actual = canonicalChannelMaskFromCount(i);
         const audio_channel_mask_t system = audio_channel_out_mask_from_count(i);
         if (system == AUDIO_CHANNEL_INVALID) continue;
