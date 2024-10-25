@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a30e8851_5a205d57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-10-25T17:49:47Z",
+      "side": 1,
+      "message": "lgtm other than Andy\u0027s comment",
+      "revId": "b2e35cdbdaccfd988a9c6c355cafad8d460e2c56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a914d7a2_e3b4b9bb",
