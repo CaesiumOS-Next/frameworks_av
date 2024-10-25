@@ -3136,6 +3136,13 @@ void RecordTrack::copyMetadataTo(MetadataInserter& backInserter) const
     *backInserter++ = metadata;
 }
 
+void RecordTrack::setSilenced(bool silenced) {
+    if (!isPatchTrack()) {
+        ALOGD_IF(mSilenced != silenced, "%s: track with port id: %d, (%s)", __func__, mPortId,
+                 (mSilenced = silenced) ? "silenced" : "unsilenced");
+    }
+}
+
 // ----------------------------------------------------------------------------
 #undef LOG_TAG
 #define LOG_TAG "AF::PatchRecord"
