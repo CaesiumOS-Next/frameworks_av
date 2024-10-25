@@ -396,7 +396,7 @@ bool OutputBuffers::convert(
     }
     int32_t configEncoding = kAudioEncodingPcm16bit;
     int32_t codecEncoding = kAudioEncodingPcm16bit;
-    if (mFormat->findInt32("android._codec-pcm-encoding", &codecEncoding)
+    if (mFormat && mFormat->findInt32("android._codec-pcm-encoding", &codecEncoding)
             && mFormat->findInt32("android._config-pcm-encoding", &configEncoding)) {
         if (mSrcEncoding != codecEncoding || mDstEncoding != configEncoding) {
             if (codecEncoding != configEncoding) {
