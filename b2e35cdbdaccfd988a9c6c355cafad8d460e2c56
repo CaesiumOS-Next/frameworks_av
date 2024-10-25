@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a914d7a2_e3b4b9bb",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3141,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-25T17:45:37Z",
+      "side": 1,
+      "message": "can you please only log on a state change?  thanks!",
+      "range": {
+        "startLine": 3141,
+        "startChar": 0,
+        "endLine": 3141,
+        "endChar": 29
+      },
+      "revId": "b2e35cdbdaccfd988a9c6c355cafad8d460e2c56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
