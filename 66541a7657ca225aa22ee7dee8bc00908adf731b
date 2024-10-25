@@ -16,6 +16,92 @@
       "message": "PTAL.",
       "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41ec635_2f1f831e",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5243,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-25T14:48:02Z",
+      "side": 1,
+      "message": "looks like this is the only place which requires this function to be a member of MPEG4Extractor class.\n\nIt is weird to have a function which is specific to APV in MPEG4Extractor class.\n\nCan you please move this out of this function and make updateFrameHeader() a static?\n\nThat way ApvFrameHeader declaration can also move to this file from MPEG4Extractor.h.",
+      "range": {
+        "startLine": 5242,
+        "startChar": 0,
+        "endLine": 5243,
+        "endChar": 48
+      },
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e36355c_05589204",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6722,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-25T14:48:02Z",
+      "side": 1,
+      "message": "Since we send the entire apvC box as CSD, I am not sure if this part is really necessary.\n\nFor now, can you please remove this code, addFrameHeaderToAccessUnit, updateFrameHeader and the ApvFrameHeader out of this CL to a separate CL?\n\nPreference would be get the extractor to send apvC box as CSD and decoder assembles this as required without expecting extractor to do this.",
+      "range": {
+        "startLine": 6721,
+        "startChar": 0,
+        "endLine": 6722,
+        "endChar": 67
+      },
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9337fbbb_d1a9bc5c",
+        "filename": "media/module/extractors/mp4/include/MPEG4Extractor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-25T14:48:02Z",
+      "side": 1,
+      "message": "need to see if this can be moved to MPEG4Extractor.cpp.\n\nmore comments in the other file.",
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b605548_30a691e8",
+        "filename": "media/module/extractors/mp4/include/MPEG4Extractor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-25T14:48:02Z",
+      "side": 1,
+      "message": "need to see if this can be moved to MPEG4Extractor.cpp.\n\nmore comments in the other file.",
+      "range": {
+        "startLine": 210,
+        "startChar": 9,
+        "endLine": 210,
+        "endChar": 26
+      },
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
