@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "093a310c_8c80785d",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3141,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-25T21:18:43Z",
+      "side": 1,
+      "message": "nit: a bit fragile.  If this were a function then the order of evaluation of the arguments is not guaranteed.   Why not just replace line 3141 with\n\n    if (!isPatchTrack() \u0026\u0026 mSilenced !\u003d silenced) { ...",
+      "range": {
+        "startLine": 3141,
+        "startChar": 0,
+        "endLine": 3141,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4b23aa61_4ced6bc5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Tracks.cpp",
+              "range": {
+                "startLine": 3140,
+                "startChar": 0,
+                "endLine": 3142,
+                "endChar": 0
+              },
+              "replacement": "     if (!isPatchTrack()) {\n         ALOGD_IF(mSilenced !\u003d silenced, \"%s: track with port id: %d, (%s)\", __func__, mPortId,\n"
+            },
+            {
+              "path": "services/audioflinger/Tracks.cpp",
+              "range": {
+                "startLine": 3143,
+                "startChar": 0,
+                "endLine": 3144,
+                "endChar": 0
+              },
+              "replacement": "     }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6a2196a32dbc9aef6f1328547e68bf87c1e82562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d793beaa_5da20047",
         "filename": "services/audioflinger/Tracks.cpp",
         "patchSetId": 3
