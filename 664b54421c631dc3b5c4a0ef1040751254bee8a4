@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21dd1dae_8a64a911",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-26T00:28:18Z",
+      "side": 1,
+      "message": "So the EARLY DRAIN is not enabled for HIDL?\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:hardware/interfaces/audio/7.0/IStreamOut.hal;drc\u003d0144b4ff47eb09535e59b4c9154f310c79426a51;l\u003d246",
+      "range": {
+        "startLine": 78,
+        "startChar": 69,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a146063c_eed1e1ac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.cpp",
+              "range": {
+                "startLine": 73,
+                "startChar": 0,
+                "endLine": 84,
+                "endChar": 0
+              },
+              "replacement": " * asynchronous), the framework uses the \"drain early notify\" call for\n * stopping playback of the current clip before switching to the next one.\n * The \"early notify\" instruction means that the HAL invokes the callback\n * slightly before the playback of the clip actually ends. And this is the\n * moment when \u0027onAsyncDrainReady\u0027 records the current stream position. Thus,\n * the adaptation layer returns to the framework a reset position slightly\n * earlier, while HIDL HAL implementations used to reset the frame position\n * exactly when the playback of the clip has ended. This discrepancy has to be\n * solved. The problem is that the adaptation layer does not have a way to know\n * when the clip has finished playing at the HAL side, so this moment may only\n * be induced based on other events.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "664b54421c631dc3b5c4a0ef1040751254bee8a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
