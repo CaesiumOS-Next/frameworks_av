@@ -49,6 +49,40 @@ using ::aidl::android::hardware::audio::core::StreamDescriptor;
 using ::aidl::android::media::audio::common::MicrophoneDynamicInfo;
 using ::aidl::android::media::audio::IHalAdapterVendorExtension;
 
+/**
+ * Notes on the position handling implementation. First, please consult
+ * "On position reporting" comment in StreamHalInterface.h for the context.
+ *
+ * The adaptation layer for AIDL HALs needs to emulate the HIDL HAL behavior
+ * (that's until some future release when the framework stops supporting HIDL
+ * HALs and it will be possible to remove the code in the framework which
+ * translates resetting positions into continuous) by resetting the reported
+ * position after certain events, depending on the kind of the audio data
+ * stream. Unlike the AIDL interface, the interface between the HAL adaptation
+ * layer and the framework uses separate method calls for controlling the stream
+ * state and retrieving the position. Because of that, the code which implements
+ * position reporting (methods 'getRenderPosition' and 'getObservablePosition')
+ * needs to use stored stream positions which it had at certain state changing
+ * events, like flush or drain. These are stored in the field called
+ * 'mStatePositions'. This field is updated in the code which changes the stream
+ * state. There are two places for that: the 'sendCommand' method, which is used
+ * for all streams, and handlers of asynchronous stream events called
+ * 'onAsync...'.
+ *
+ * Known issue (b/373872271). For offload bitstream playback (which is
+ * asynchronous), the framework uses the "drain early notify" call for stopping
+ * playback of the current clip before switching to the next one. The "early
+ * notify" instruction means that the HAL invokes the callback slightly before
+ * the playback of the clip actually ends. And this is the moment when
+ * 'onAsyncDrainReady' records the current stream position. Thus, the adaptation
+ * layer returns to the framework a reset position slightly earlier, while HIDL
+ * HAL implementations used to reset the frame position exactly when the
+ * playback of the clip has ended. This discrepancy has to be solved. The
+ * problem is that the adaptation layer does not have a way to know when the
+ * clip has finished playing at the HAL side, so this moment may only be induced
+ * based on other events.
+ */
+
 namespace android {
 
 using HalCommand = StreamDescriptor::Command;
