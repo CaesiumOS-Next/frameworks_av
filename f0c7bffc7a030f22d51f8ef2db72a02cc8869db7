@@ -22,6 +22,30 @@
       },
       "revId": "f0c7bffc7a030f22d51f8ef2db72a02cc8869db7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "411917c8_d9c94f40",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-27T17:02:28Z",
+      "side": 1,
+      "message": "Yes, I sync-ed with Lajos about this and the convention is that on C2 level we define all Profiles/Levels that are in the spec and on public API we define only those that we use and can test. HEVC constants above is a good example",
+      "parentUuid": "1c3ac481_e03b3b1d",
+      "range": {
+        "startLine": 604,
+        "startChar": 71,
+        "endLine": 609,
+        "endChar": 71
+      },
+      "revId": "f0c7bffc7a030f22d51f8ef2db72a02cc8869db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
