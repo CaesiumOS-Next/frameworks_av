@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30dcaee5_62298dda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-28T14:39:36Z",
+      "side": 1,
+      "message": "i think this is last round of changes.",
+      "revId": "142c636a056e8fdd86dbcd9b607bc5d9c22664c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89c9965e_3ab200ca",
+        "filename": "media/module/codecs/amrnb/dec/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-28T14:39:36Z",
+      "side": 1,
+      "message": "Let\u0027s do this.  it\u0027s flagged for a couple directories, so let\u0027s get them all.\n\n\nPlease fix this WARNING reported by Android Ownership Lint: Ownership attribution is recommended for existing test targets. The following targets in media/module/codecs/amrnb/dec/Android.bp are missing an owner: libstagefright_amrnbdec_test. Please refer to the ownership guidelines doc go/new-androi...\n\nAnalyzer Description: Validates test targets attribution.\nOwner: crumpet-eng@google.com\n\nOwnership attribution is recommended for existing test targets. The following targets in media/module/codecs/amrnb/dec/Android.bp are missing an owner: libstagefright_amrnbdec_test. Please refer to the ownership guidelines doc go/new-android-ownership-model for more information.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "142c636a056e8fdd86dbcd9b607bc5d9c22664c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

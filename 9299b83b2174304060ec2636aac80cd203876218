@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f8cc672_1f35151f",
+        "filename": "media/module/codecs/amrnb/common/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-28T14:39:36Z",
+      "side": 0,
+      "message": "Should include \nBug: 25409744\nin commit message, since we\u0027re messing with the resolution to that bug.",
+      "range": {
+        "startLine": 107,
+        "startChar": 13,
+        "endLine": 107,
+        "endChar": 27
+      },
+      "revId": "9299b83b2174304060ec2636aac80cd203876218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52bea25e_61a57e84",
+        "filename": "media/module/codecs/amrnb/enc/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-28T14:39:36Z",
+      "side": 0,
+      "message": "flagged in a different file.  just another instance of something we\nshould reflect in our \"Bug:\" lines",
+      "range": {
+        "startLine": 110,
+        "startChar": 16,
+        "endLine": 110,
+        "endChar": 27
+      },
+      "revId": "9299b83b2174304060ec2636aac80cd203876218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
