@@ -64,6 +64,30 @@
       },
       "revId": "664b54421c631dc3b5c4a0ef1040751254bee8a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b4e87b_0749d126",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-28T21:38:07Z",
+      "side": 1,
+      "message": "Correct. In HIDL, early drain is enabled. The HAL sends \u0027onDrainReady\u0027 slightly earlier than the playback of the current clip actually ends. It resets the frame count once the playback of the previous clip has ended, and the new one has started. Thus, there are two separate \"events\" that the framework can observe: the arrival of the \u0027onDrainReady\u0027 callback, and the reset of the frame count back to 0 for the presentation position.\n\nIn AIDL, we require the HAL to provide a non-retrograde frame position. In order to emulate the HIDL behavior from the framework\u0027s POV, the adaptation layer has to reset the frame count on its side. However, since it does not actually know when the HAL has transferred from the previous clip to the next one, currently it resets the frame count when it receives \u0027onDrainReady\u0027. But for the \"early notify\" mode this reset thus happens a bit early—while the previous clip is still playing. In effect, these two \"events\" coalesce into one. We should fix that, that\u0027s what b/373872271 is about.",
+      "parentUuid": "ba65203e_cddae364",
+      "range": {
+        "startLine": 78,
+        "startChar": 69,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "revId": "664b54421c631dc3b5c4a0ef1040751254bee8a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
