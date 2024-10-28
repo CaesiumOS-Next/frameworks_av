@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9acef4_5f9c495d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-10-28T14:05:02Z",
+      "side": 1,
+      "message": "Lajos, can you provide more details on what spec is being violated?",
+      "revId": "e1f44db859f4854a936aadbb318585df32ba392f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
