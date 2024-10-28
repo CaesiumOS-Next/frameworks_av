@@ -114,10 +114,19 @@ private:
     MediaCodecList(const MediaCodecList&) = delete;
     MediaCodecList& operator=(const MediaCodecList&) = delete;
 
+    static void findMatchingCodecs(
+            const char *mime,
+            bool createEncoder,
+            uint32_t flags,
+            const sp<AMessage> &format,
+            Vector<AString> *matchingCodecs,
+            bool checkAlignment);
+
     static bool codecHandlesFormat(
             const char *mime,
             const sp<MediaCodecInfo> &info,
-            const sp<AMessage> &format);
+            const sp<AMessage> &format,
+            bool checkAlignment);
 };
 
 }  // namespace android

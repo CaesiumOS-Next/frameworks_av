@@ -357,6 +357,16 @@ void MediaCodecList::findMatchingCodecs(
 void MediaCodecList::findMatchingCodecs(
         const char *mime, bool encoder, uint32_t flags, const sp<AMessage> &format,
         Vector<AString> *matches) {
+    findMatchingCodecs(mime, encoder, flags, format, matches, /* checkAlignment= */ true);
+    if (matches->empty()) {
+        ALOGV("no matching codec found, retrying without alignment check");
+        findMatchingCodecs(mime, encoder, flags, format, matches, /* checkAlignment= */ false);
+    }
+}
+//static
+void MediaCodecList::findMatchingCodecs(
+        const char *mime, bool encoder, uint32_t flags, const sp<AMessage> &format,
+        Vector<AString> *matches, bool checkAlignment) {
     matches->clear();
 
     const sp<IMediaCodecList> list = getInstance();
@@ -380,7 +390,7 @@ void MediaCodecList::findMatchingCodecs(
 
         AString componentName = info->getCodecName();
 
-        if (!codecHandlesFormat(mime, info, format)) {
+        if (!codecHandlesFormat(mime, info, format, checkAlignment)) {
             ALOGV("skipping codec '%s' which doesn't satisfy format %s",
                   componentName.c_str(), format->debugString(2).c_str());
             continue;
@@ -415,7 +425,8 @@ void MediaCodecList::findMatchingCodecs(
 
 // static
 bool MediaCodecList::codecHandlesFormat(
-        const char *mime, const sp<MediaCodecInfo> &info, const sp<AMessage> &format) {
+        const char *mime, const sp<MediaCodecInfo> &info, const sp<AMessage> &format,
+        bool checkAlignment) {
 
     if (format == nullptr) {
         ALOGD("codecHandlesFormat: no format, so no extra checks");
@@ -505,7 +516,7 @@ bool MediaCodecList::codecHandlesFormat(
             // @ 'alignment' [e.g. "2x2" which tells us that both dimensions must be even]
             // no alignment == we're ok with anything
             AString alignment, alignWidth, alignHeight;
-            if (details->findString("alignment", &alignment)) {
+            if (checkAlignment && details->findString("alignment", &alignment)) {
                 if (splitString(alignment, "x", &alignWidth, &alignHeight) ||
                     splitString(alignment, "*", &alignWidth, &alignHeight)) {
                     int wAlign = strtol(alignWidth.c_str(), NULL, 10);
