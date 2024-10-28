@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6deed782_9195c2a4",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 7734,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-28T23:25:49Z",
+      "side": 1,
+      "message": "maybe not here, but ScopedTrace is safer\n\nhttps://cs.android.com/search?q\u003dScopedTrace\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:frameworks%2Fav%2F",
+      "range": {
+        "startLine": 7734,
+        "startChar": 0,
+        "endLine": 7734,
+        "endChar": 26
+      },
+      "revId": "4d0c9e8687118f0f0011236d419f8a6e98e6110d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
