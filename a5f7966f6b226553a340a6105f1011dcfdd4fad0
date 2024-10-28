@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19179bcf_1bbcb3ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-28T22:06:12Z",
+      "side": 1,
+      "message": "This matches the AudioTrack side, so it is reasonable request.  Would prefer to go through the IAudioRecord binder interface, but that\u0027s a larger change.",
+      "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68cc9c35_074eeb61",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-28T22:06:12Z",
+      "side": 1,
+      "message": "currently AudioTrack only permits setParameters for DIRECT, and calls through the track binder interface.  Should we do the same for record?\n\nhttps://cs.android.com/android/platform/superproject/+/android14-qpr3-release:frameworks/av/media/libaudioclient/AudioTrack.cpp;drc\u003df4ea87c6ddaf911cd018aa9193f8d282b095d102;l\u003d3043\n\nhttps://cs.android.com/android/platform/superproject/+/android14-qpr3-release:frameworks/av/services/audioflinger/Tracks.cpp;drc\u003db882d4870c8b82f68dfc228c8ee27afd1d7a3c0d;l\u003d1500\n\nHave a preference for access directly through the IAudioRecord binder interface rather than generically through AudioSystem as it is directly associated with the RecordTrack.  What do you think?",
+      "range": {
+        "startLine": 1228,
+        "startChar": 0,
+        "endLine": 1228,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "722b7dee_a201842b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AudioRecord.cpp",
+              "range": {
+                "startLine": 1227,
+                "startChar": 0,
+                "endLine": 1230,
+                "endChar": 0
+              },
+              "replacement": "    if (mInput \u003d\u003d AUDIO_IO_HANDLE_NONE) {\n        return NO_INIT;\n    }\n    if (mAudioRecord \u003d\u003d nullptr) {\n        return NO_INIT;\n    }\n    return statusTFromBinderStatus(mAudioRecord-\u003esetParameters(keyValuePairs));\n"
+            },
+            {
+              "path": "media/libaudioclient/AudioRecord.cpp",
+              "range": {
+                "startLine": 1234,
+                "startChar": 0,
+                "endLine": 1237,
+                "endChar": 0
+              },
+              "replacement": "    if (mInput \u003d\u003d AUDIO_IO_HANDLE_NONE) {\n        return String8::empty();\n    }\n    if (mAudioRecord \u003d\u003d nullptr) {\n        return String8::empty();\n    }\n    String8 result;\n    status_t status \u003d statusTFromBinderStatus(mAudioRecord-\u003egetParameters(keys, \u0026result));\n    if (status !\u003d NO_ERROR) {\n        return String8::empty();\n    }\n    return result;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
