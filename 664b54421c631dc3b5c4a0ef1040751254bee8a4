@@ -40,6 +40,30 @@
       ],
       "revId": "664b54421c631dc3b5c4a0ef1040751254bee8a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba65203e_cddae364",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1763691
+      },
+      "writtenOn": "2024-10-28T13:12:36Z",
+      "side": 1,
+      "message": "Since in the HIDL audio HAL, the lower layer controls when to reset the frame position, even if the HIDL audio HAL also calls back earlier, the position is not reset at this moment on the adaptation layer.",
+      "parentUuid": "21dd1dae_8a64a911",
+      "range": {
+        "startLine": 78,
+        "startChar": 69,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "revId": "664b54421c631dc3b5c4a0ef1040751254bee8a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
