@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88fc6698_7c05cc07",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2631,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T11:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efdd5df7_178c88e8",
+      "range": {
+        "startLine": 2631,
+        "startChar": 30,
+        "endLine": 2631,
+        "endChar": 89
+      },
+      "revId": "09a34aaf9ef650b9efa473e353b168eb408cfd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89d3dc16_d35d6cd0",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "936a9847_9b095b1a",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T11:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89d3dc16_d35d6cd0",
+      "range": {
+        "startLine": 543,
+        "startChar": 5,
+        "endLine": 543,
+        "endChar": 22
+      },
+      "revId": "09a34aaf9ef650b9efa473e353b168eb408cfd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc999c15_60f5d097",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-10-29T09:57:30Z",
       "side": 1,
       "message": "If we change all the `return header` calls to `return updateApvFrameHeader(\u0026header)`, then we can remove the call to `AMediaFormat_setBuffer` from `updateApvFrameHeader`. It won\u0027t need a reference to `fileMeta`. The call to `AMediaFormat_setBuffer` can then be in MPEG4Extractor.",
+      "range": {
+        "startLine": 615,
+        "startChar": 8,
+        "endLine": 615,
+        "endChar": 22
+      },
+      "revId": "09a34aaf9ef650b9efa473e353b168eb408cfd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86c030c_296c2023",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T11:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc999c15_60f5d097",
       "range": {
         "startLine": 615,
         "startChar": 8,
