@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b42fba_806f21f3",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T14:34:10Z",
+      "side": 1,
+      "message": "require MIME_TYPE constant from [CL](https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3308676/11)",
+      "range": {
+        "startLine": 373,
+        "startChar": 19,
+        "endLine": 373,
+        "endChar": 43
+      },
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
