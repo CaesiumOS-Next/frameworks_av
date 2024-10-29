@@ -67,6 +67,30 @@
       ],
       "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e755fd87_4ba3ff91",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-29T09:40:50Z",
+      "side": 1,
+      "message": "1) Either setParameters or getParameters API, although now currently used DIRECT records. I don\u0027t see the reason to restrict it to a particular IO flag, let AudioRecord\u0027s client worry about it. But you may have reason.\n\n2) I did about thought using binder interface API for (set|get)Parameters but i dont see them for IAudioRecord.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:out/soong/.intermediates/frameworks/av/media/libaudioclient/audioflinger-aidl-cpp-source/gen/include/android/media/IAudioRecord.h;drc\u003dd25ede77935b89745234efd62f7b50ef5ef1fa70;l\u003d28\n\nAre you suggesting to add them IAudioRecord.aidl ?\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudioclient/aidl/android/media/IAudioRecord.aidl;l\u003d1;drc\u003dd25ede77935b89745234efd62f7b50ef5ef1fa70?q\u003dIAudioRecord.aidl\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "parentUuid": "68cc9c35_074eeb61",
+      "range": {
+        "startLine": 1228,
+        "startChar": 0,
+        "endLine": 1228,
+        "endChar": 66
+      },
+      "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
