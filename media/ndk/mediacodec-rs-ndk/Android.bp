@@ -1,0 +1,30 @@
+rust_library {
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
+    name: "libmediacodec-ndk-rs",
+    crate_name: "mediacodec",
+    srcs: [
+        "lib.rs",
+    ],
+    rustlibs: [
+        "liblibc",
+    ],
+    shared_libs: [
+        "libbinder_ndk",
+        "libmediandk",
+    ],
+    compile_multilib: "64",
+}
+
+rust_test {
+    name: "mediacodec-ndk-rs-test",
+    srcs: ["test.rs"],
+    rustlibs: [
+        "liblibc",
+        "libmediacodec-ndk-rs",
+    ],
+    // cfgs: ["verbose"],
+    compile_multilib: "64",
+}
