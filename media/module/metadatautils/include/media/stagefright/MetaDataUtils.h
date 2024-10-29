@@ -24,7 +24,16 @@ struct AMediaFormat;
 
 namespace android {
 
+enum {
+    apvPrimaryFrame = 1,
+    apvNonPrimaryFrame = 2,
+    apvPreviewFrame = 25,
+    apvDepthFrame = 26,
+    apvAlphaFrame = 27,
+};
+
 struct ABuffer;
+
 bool MakeAVCCodecSpecificData(MetaDataBase &meta, const uint8_t *data, size_t size);
 bool MakeAVCCodecSpecificData(AMediaFormat *meta, const uint8_t *data, size_t size);
 
@@ -37,6 +46,8 @@ bool MakeAACCodecSpecificData(AMediaFormat *meta, unsigned profile, unsigned sam
 
 void parseVorbisComment(
         AMediaFormat *fileMeta, const char *comment, size_t commentLength);
+
+sp<ABuffer> parseAPVDecoderConfiguration(const void* data, size_t size);
 
 bool MakeVP9CodecSpecificData(AMediaFormat* meta, int32_t csdSize, int32_t profile, int32_t level,
                               int32_t bitDepth, int32_t chromaSubsampling);
