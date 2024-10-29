@@ -57,6 +57,41 @@
       ],
       "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da38457_7744ce75",
+        "filename": "media/libaudioclient/include/media/AudioRecord.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-10-29T21:55:56Z",
+      "side": 1,
+      "message": "If we are documenting must be used with direct, I would prefer arg checking as such.",
+      "fixSuggestions": [
+        {
+          "fixId": "80af3e95_49ba3bbc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/include/media/AudioRecord.h",
+              "range": {
+                "startLine": 592,
+                "startChar": 0,
+                "endLine": 593,
+                "endChar": 0
+              },
+              "replacement": "    /* Set parameters */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
