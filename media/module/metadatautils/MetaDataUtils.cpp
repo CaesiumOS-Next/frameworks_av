@@ -22,6 +22,7 @@
 #include <media/stagefright/foundation/base64.h>
 #include <media/stagefright/foundation/ABitReader.h>
 #include <media/stagefright/foundation/ABuffer.h>
+#include <media/stagefright/foundation/ADebug.h>
 #include <media/stagefright/foundation/ByteUtils.h>
 #include <media/stagefright/MediaDefs.h>
 #include <media/stagefright/MetaDataUtils.h>
@@ -518,6 +519,174 @@ static void extractAlbumArt(
             &flac[8 + typeLen + 4 + descLen + 20], dataLen);
 
     delete[] flac;
+}
+
+static inline void rightShiftMemoryByOne(uint8_t* memory, size_t size) {
+    uint8_t carry = 0;
+    for (size_t i = 0; i < size; ++i) {
+        uint8_t newCarry = (memory[i] & 0x01) << 7;
+        memory[i] = (memory[i] >> 1) | carry;
+        carry = newCarry;
+    }
+}
+
+static inline void setBitValueAt(uint8_t* buffer, unsigned int offset, bool value) {
+    uint8_t mask = 1u << (7 - offset);
+
+    if (value) {
+        *buffer |= mask;
+    } else {
+        *buffer &= ~mask;
+    }
+}
+
+static sp<ABuffer> updateApvFrameHeader(const ApvFrameHeader& header) {
+    ALOGV("updateApvFrameHeader");
+
+    // frame_info(14), reserved_zero_8bits(1)
+    uint16_t headerSize = header.color_description_present_flag ? 18 : 15;
+    if (header.use_q_matrix) {
+        headerSize += header.size_of_q_matrix_info;
+    }
+
+    headerSize += header.size_of_tile_info;
+    headerSize++;  // reserved_zero_8bits
+
+    sp<ABuffer> frameHeader = new ABuffer(headerSize);
+    if (frameHeader->capacity() < headerSize) {
+        ALOGW("failed to alloc frameHeader");
+        return new ABuffer(0);
+    }
+
+    memset(frameHeader->data(), 0, frameHeader->size());
+
+    memcpy(frameHeader->data(), &header.profile_idc, 1);
+    memcpy(frameHeader->data() + 1, &header.level_idc, 1);
+    uint8_t band_idc = header.band_idc << 5;
+    memcpy(frameHeader->data() + 2, &band_idc, 1);
+    // reserved_zero_5bits;
+    uint32_t frame_width_minus1 = htonl(header.frame_width_minus1);
+    memcpy(frameHeader->data() + 3, &frame_width_minus1, 4);
+    uint32_t frame_height_minus1 = htonl(header.frame_height_minus1);
+    memcpy(frameHeader->data() + 7, &frame_height_minus1, 4);
+    uint8_t byte = header.chroma_format_idc << 4 | header.bit_depth_minus8;
+    memcpy(frameHeader->data() + 11, &byte, 1);
+    memcpy(frameHeader->data() + 12, &header.capture_time_distance, 1);
+    // reserved_zero_8bits
+
+    uint8_t offset = 15;  // offset for color_description_present_flag
+    // copy data first and then set the flag values(use_q_matrix_info,
+    // color_description_present_flag)
+    if (header.color_description_present_flag) {
+        memcpy(frameHeader->data() + offset, &header.color_primaries, 1);
+        memcpy(frameHeader->data() + offset + 1, &header.transfer_characteristics, 1);
+        memcpy(frameHeader->data() + offset + 2, &header.matrix_coefficients, 1);
+        offset += 3;
+    }
+
+    if (header.use_q_matrix) {
+        memcpy(frameHeader->data() + offset, header.quantization_matrix,
+               header.size_of_q_matrix_info);
+        offset += header.size_of_q_matrix_info;
+    }
+
+    memcpy(frameHeader->data() + offset, header.tile_info, header.size_of_tile_info);
+
+    // write use_q_matrix
+    offset = header.color_description_present_flag ? 18 : 15;
+    rightShiftMemoryByOne(frameHeader->data() + offset, frameHeader->size() - offset);
+    setBitValueAt((frameHeader->data() + offset), 0, (bool)header.use_q_matrix);
+
+    // write color_description_present_flag
+    offset = 15;
+    rightShiftMemoryByOne(frameHeader->data() + offset, frameHeader->size() - offset);
+    setBitValueAt((frameHeader->data() + offset), 0, (bool)header.color_description_present_flag);
+
+    return frameHeader;
+}
+
+sp<ABuffer> parseAPVDecoderConfiguration(const void* data, size_t size) {
+    ALOGV("parseAPVDecoderConfiguration size(%zu)", size);
+
+    ApvFrameHeader header = {0, 0, 0, 0, 0, 0, 0, 0, false, 0, 0, 0, false, 0, nullptr, 0, nullptr};
+
+    if (size < 26) {
+        return updateApvFrameHeader(header);
+    }
+
+    uint8_t* apvcData = (uint8_t*)data + 4;  // skip version, flag (full box)
+    ABitReader br(apvcData, size);
+    br.skipBits(8);  // configurationVersion
+
+    uint8_t numConfigEntry = br.getBits(8);
+    if (numConfigEntry != 1) {
+        // currently only entry count 1 is supported
+        return updateApvFrameHeader(header);
+    }
+
+    uint8_t pbuType = br.getBits(8);
+    if (pbuType != apvPrimaryFrame && pbuType != apvNonPrimaryFrame && pbuType != apvPreviewFrame &&
+        pbuType != apvDepthFrame && pbuType != apvAlphaFrame) {
+        return updateApvFrameHeader(header);
+    }
+
+    uint8_t numFrameInfo = br.getBits(8);
+    if (numFrameInfo != 1) {
+        // frame header configuration is only necessary for static cases
+        return updateApvFrameHeader(header);
+    }
+
+    br.skipBits(8);  // reserved_zero_7bits, capture_time_distance_ignored
+    header.profile_idc = br.getBits(8);
+    header.level_idc = br.getBits(8);
+    header.band_idc = br.getBits(8);
+    header.frame_width_minus1 = br.getBits(32);
+    header.frame_height_minus1 = br.getBits(32);
+    header.chroma_format_idc = br.getBits(4);
+    header.bit_depth_minus8 = br.getBits(4);
+    header.capture_time_distance = br.getBits(8);
+    br.skipBits(7);  // reserved
+
+    if (br.getBits(1)) {
+        ALOGV("frame_header_repeated");
+        return updateApvFrameHeader(header);
+    }
+
+    br.skipBits(6);  // reserved
+    header.color_description_present_flag = br.getBits(1);
+    header.use_q_matrix = br.getBits(1);
+
+    uint32_t offset = 20;  // configurationVersion ~ use_q_matrix_info
+    if (header.color_description_present_flag) {
+        header.color_primaries = br.getBits(8);
+        header.transfer_characteristics = br.getBits(8);
+        header.matrix_coefficients = br.getBits(8);
+        offset += 3;
+    }
+
+    if (header.use_q_matrix) {
+        header.size_of_q_matrix_info = br.getBits(8);
+        CHECK(header.size_of_q_matrix_info);
+        offset++;
+        header.quantization_matrix = apvcData + offset;
+        offset += header.size_of_q_matrix_info;
+    }
+
+    header.size_of_tile_info = br.getBits(16);
+    offset += 2;
+
+    CHECK(header.size_of_tile_info % 8);  // it's not byte aligned
+    header.size_of_tile_info = (header.size_of_tile_info / 8) + 1;
+    header.tile_info = apvcData + offset;
+
+    if (offset + 4 + header.size_of_tile_info > size) {
+        ALOGD("invalid frame header info. size(%zu), color_description_present_flag(%u), "
+              "size_of_q_matrix_info(%u), size_of_tile_info(%u)",
+              size, header.color_description_present_flag, header.size_of_q_matrix_info,
+              header.size_of_tile_info);
+        return updateApvFrameHeader(header);
+    }
+    return updateApvFrameHeader(header);
 }
 
 void parseVorbisComment(
