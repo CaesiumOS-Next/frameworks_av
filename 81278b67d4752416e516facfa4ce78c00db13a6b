@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf4feab6_30f56d83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-10-29T21:26:48Z",
+      "side": 1,
+      "message": "This looks generally correct (modulo the proposal to use `audio_port_config_device_ext` instead of `audio_port_device_ext`). You need to use the same \"Topic\" for patches from different repos so that they get built together.",
+      "revId": "81278b67d4752416e516facfa4ce78c00db13a6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
