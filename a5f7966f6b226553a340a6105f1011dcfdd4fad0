@@ -139,6 +139,30 @@
       },
       "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "822eee93_e1ad0f72",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-29T19:26:23Z",
+      "side": 1,
+      "message": "If you can add both the setParameters and the getParameters through the IAudioRecord.aidl, that would be great, thanks!  Eventually we will move IAudioTrack to match.",
+      "parentUuid": "935c8f3c_5286db2d",
+      "range": {
+        "startLine": 1228,
+        "startChar": 0,
+        "endLine": 1228,
+        "endChar": 66
+      },
+      "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
