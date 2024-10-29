@@ -85,6 +85,11 @@ struct MediaCodecList : public BnMediaCodecList {
 
     static bool isSoftwareCodec(const AString &componentName);
 
+    static bool codecHandlesFormat(
+            const char *mime,
+            const sp<MediaCodecInfo> &info,
+            const sp<AMessage> &format);
+
 private:
     class BinderDeathObserver : public IBinder::DeathRecipient {
         void binderDied(const wp<IBinder> &the_late_who __unused);
@@ -113,11 +118,6 @@ private:
 
     MediaCodecList(const MediaCodecList&) = delete;
     MediaCodecList& operator=(const MediaCodecList&) = delete;
-
-    static bool codecHandlesFormat(
-            const char *mime,
-            const sp<MediaCodecInfo> &info,
-            const sp<AMessage> &format);
 };
 
 }  // namespace android
