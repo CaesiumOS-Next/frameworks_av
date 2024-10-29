@@ -2627,6 +2627,9 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
                 return ERROR_MALFORMED;
             }
 
+            updateFrameHeader(mLastTrack->meta,
+                              parseAPVDecoderConfiguration(buffer.get(), chunk_data_size));
+
             AMediaFormat_setBuffer(mLastTrack->meta, AMEDIAFORMAT_KEY_CSD_0, buffer.get(),
                                    chunk_data_size);
 
@@ -6218,6 +6221,46 @@ size_t MPEG4Source::getNALLengthSizeFromHevcCsd(const uint8_t *data, const size_
     return 1 + (data[14 + 7] & 3);
 }
 
+void MPEG4Source::addFrameHeaderToAccessUnit(const void* frameHeader, size_t frameHeaderSize,
+                                             size_t* bufferSize) {
+    ALOGV("addFrameHeaderToAccessUnit, frameHeaderSize(%zu), bufferSize(%zu)", frameHeaderSize,
+          *bufferSize);
+
+    size_t frameOffset = 0;
+    size_t pbuSize = 0;
+    size_t currReadSize = 4;  // skip au_size
+    while (mBuffer->size() > currReadSize) {
+        pbuSize = U32_AT((uint8_t*)mBuffer->data() + currReadSize);
+        currReadSize += 4;
+        uint8_t pbuType = *((uint8_t*)mBuffer->data() + currReadSize);
+        if (pbuType == apvPrimaryFrame || pbuType == apvNonPrimaryFrame ||
+            pbuType == apvPreviewFrame || pbuType == apvDepthFrame || pbuType == apvAlphaFrame) {
+            frameOffset = currReadSize + 4;
+            break;
+        }
+        currReadSize += pbuSize;
+    }
+
+    if (frameOffset < 8) {
+        ALOGW("invalid frame start offset(%zu", frameOffset);
+        return;
+    }
+
+    memmove((uint8_t*)mBuffer->data() + frameOffset + frameHeaderSize,
+            (uint8_t*)mBuffer->data() + frameOffset, *bufferSize - frameOffset);
+    memcpy((uint8_t*)mBuffer->data() + frameOffset, frameHeader, frameHeaderSize);
+
+    size_t auSize = U32_AT((uint8_t*)mBuffer->data());
+    auSize += frameHeaderSize;
+    auSize = htonl(auSize);
+    memcpy(mBuffer->data(), &auSize, 4);
+
+    pbuSize += frameHeaderSize;
+    pbuSize = htonl(pbuSize);
+    memcpy((uint8_t*)mBuffer->data() + frameOffset - 8, &pbuSize, 4);
+    *bufferSize += frameHeaderSize;
+}
+
 media_status_t MPEG4Source::read(
         MediaBufferHelper **out, const ReadOptions *options) {
     Mutex::Autolock autoLock(mLock);
@@ -6495,6 +6538,26 @@ media_status_t MPEG4Source::read(
                     mBuffer = NULL;
 
                     return AMEDIA_ERROR_IO;
+                }
+
+                if (mIsAPV) {
+                    void* frameHeader;
+                    size_t frameHeaderSize = 0;
+                    if (AMediaFormat_getBuffer(mFormat, "static-frame-header", &frameHeader,
+                                               &frameHeaderSize) &&
+                        frameHeaderSize > 0) {
+                        if (mBuffer->size() < frameHeaderSize ||
+                            mBuffer->size() - frameHeaderSize < size) {
+                            ALOGW("buffer size small handle frame header. \n"
+                                  "buffer size(%zu), AU size(%zu), frameHeaderSize(%zu)",
+                                  mBuffer->size(), size, frameHeaderSize);
+                            mBuffer->release();
+                            mBuffer = NULL;
+                            return AMEDIA_ERROR_IO;
+                        }
+
+                        addFrameHeaderToAccessUnit(frameHeader, frameHeaderSize, &size);
+                    }
                 }
 
                 CHECK(mBuffer != NULL);

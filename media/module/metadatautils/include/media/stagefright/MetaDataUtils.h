@@ -24,7 +24,35 @@ struct AMediaFormat;
 
 namespace android {
 
+enum {
+    apvPrimaryFrame = 1,
+    apvNonPrimaryFrame = 2,
+    apvPreviewFrame = 25,
+    apvDepthFrame = 26,
+    apvAlphaFrame = 27,
+};
+
 struct ABuffer;
+struct ApvFrameHeader {
+    uint8_t profile_idc;
+    uint8_t level_idc;
+    uint8_t band_idc;
+    uint32_t frame_width_minus1;
+    uint32_t frame_height_minus1;
+    uint8_t chroma_format_idc;
+    uint8_t bit_depth_minus8;
+    uint8_t capture_time_distance;
+    bool color_description_present_flag;
+    uint8_t color_primaries;
+    uint8_t transfer_characteristics;
+    uint8_t matrix_coefficients;
+    bool use_q_matrix;
+    uint8_t size_of_q_matrix_info;
+    uint8_t* quantization_matrix;
+    uint16_t size_of_tile_info;  // bytes
+    uint8_t* tile_info;
+};
+
 bool MakeAVCCodecSpecificData(MetaDataBase &meta, const uint8_t *data, size_t size);
 bool MakeAVCCodecSpecificData(AMediaFormat *meta, const uint8_t *data, size_t size);
 
@@ -37,6 +65,9 @@ bool MakeAACCodecSpecificData(AMediaFormat *meta, unsigned profile, unsigned sam
 
 void parseVorbisComment(
         AMediaFormat *fileMeta, const char *comment, size_t commentLength);
+
+ApvFrameHeader parseAPVDecoderConfiguration(const void* data, size_t size);
+void updateFrameHeader(AMediaFormat* fileMeta, const ApvFrameHeader& header);
 
 bool MakeVP9CodecSpecificData(AMediaFormat* meta, int32_t csdSize, int32_t profile, int32_t level,
                               int32_t bitDepth, int32_t chromaSubsampling);

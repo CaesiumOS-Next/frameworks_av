@@ -23,6 +23,7 @@
 #include <media/MediaExtractorPluginApi.h>
 #include <media/MediaExtractorPluginHelper.h>
 #include <media/NdkMediaFormat.h>
+#include <media/stagefright/MetaDataUtils.h>
 #include <media/stagefright/foundation/AString.h>
 #include <utils/KeyedVector.h>
 #include <utils/List.h>
