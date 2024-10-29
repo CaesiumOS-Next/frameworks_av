@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f16b9217_6c1b6733",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-29T21:28:03Z",
+      "side": 1,
+      "message": "nit:  ||",
+      "range": {
+        "startLine": 1227,
+        "startChar": 38,
+        "endLine": 1230,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f5cb85f1_15f64296",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AudioRecord.cpp",
+              "range": {
+                "startLine": 1227,
+                "startChar": 0,
+                "endLine": 1231,
+                "endChar": 0
+              },
+              "replacement": "    if (mInput \u003d\u003d AUDIO_IO_HANDLE_NONE || mAudioRecord \u003d\u003d nullptr) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
