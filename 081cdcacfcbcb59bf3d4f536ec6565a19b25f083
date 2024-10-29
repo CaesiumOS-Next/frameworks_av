@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "639b5bb0_5c93de45",
+        "filename": "media/module/metadatautils/include/media/stagefright/MetaDataUtils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-29T14:14:13Z",
+      "side": 1,
+      "message": "Can these changes be moved to MetaDataUtils.cpp?",
+      "revId": "081cdcacfcbcb59bf3d4f536ec6565a19b25f083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
