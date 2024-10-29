@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efdd5df7_178c88e8",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2631,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-10-29T09:57:30Z",
+      "side": 1,
+      "message": "Create an `ApvFrameHeader` object and store the parse return value in it. If you do the changes as suggested in MetaDataUtils, then the returned header can be used to set the buffer here after the parse call.",
+      "range": {
+        "startLine": 2631,
+        "startChar": 30,
+        "endLine": 2631,
+        "endChar": 89
+      },
+      "revId": "09a34aaf9ef650b9efa473e353b168eb408cfd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d3dc16_d35d6cd0",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-10-29T09:57:30Z",
+      "side": 1,
+      "message": "We could maybe change it to updateApvFrameHeader",
+      "range": {
+        "startLine": 543,
+        "startChar": 5,
+        "endLine": 543,
+        "endChar": 22
+      },
+      "revId": "09a34aaf9ef650b9efa473e353b168eb408cfd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc999c15_60f5d097",
+        "filename": "media/module/metadatautils/MetaDataUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2024-10-29T09:57:30Z",
+      "side": 1,
+      "message": "If we change all the `return header` calls to `return updateApvFrameHeader(\u0026header)`, then we can remove the call to `AMediaFormat_setBuffer` from `updateApvFrameHeader`. It won\u0027t need a reference to `fileMeta`. The call to `AMediaFormat_setBuffer` can then be in MPEG4Extractor.",
+      "range": {
+        "startLine": 615,
+        "startChar": 8,
+        "endLine": 615,
+        "endChar": 22
+      },
+      "revId": "09a34aaf9ef650b9efa473e353b168eb408cfd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
