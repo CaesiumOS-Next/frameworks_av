@@ -46,6 +46,30 @@
       },
       "revId": "cef0eda7b64651fa98b114097dc79a9e07783c2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e38e20b1_29bbc0d3",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7890,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-10-29T18:32:13Z",
+      "side": 1,
+      "message": "I just noticed from an old report b/312949498 that the `waitTimeMs` could be pretty large. In that case, `waitTimeMs*mNormalFrameCount` may overflow. \n\nActually, if it doesn\u0027t change `waitTimeMs` if `strong-\u003eframeCount() / mNormalFrameCount` ends up as 1. The issue only happens when the downstream thread\u0027s frame count is couple times of the duplicating thread one.",
+      "parentUuid": "2c73403b_9d850c7c",
+      "range": {
+        "startLine": 7890,
+        "startChar": 30,
+        "endLine": 7890,
+        "endChar": 73
+      },
+      "revId": "cef0eda7b64651fa98b114097dc79a9e07783c2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
