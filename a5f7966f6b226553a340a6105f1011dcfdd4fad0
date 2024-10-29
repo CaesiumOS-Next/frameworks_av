@@ -91,6 +91,30 @@
       },
       "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53a8e811_9fe61df2",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-29T09:44:43Z",
+      "side": 1,
+      "message": "If you need that way, I can try adding them like IAudioTrack.aidl",
+      "parentUuid": "e755fd87_4ba3ff91",
+      "range": {
+        "startLine": 1228,
+        "startChar": 0,
+        "endLine": 1228,
+        "endChar": 66
+      },
+      "revId": "a5f7966f6b226553a340a6105f1011dcfdd4fad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
