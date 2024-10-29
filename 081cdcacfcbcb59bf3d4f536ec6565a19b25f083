@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f97f0b_7e5a5546",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T14:30:10Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "081cdcacfcbcb59bf3d4f536ec6565a19b25f083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "639b5bb0_5c93de45",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-10-29T14:14:13Z",
       "side": 1,
       "message": "Can these changes be moved to MetaDataUtils.cpp?",
+      "revId": "081cdcacfcbcb59bf3d4f536ec6565a19b25f083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1198f6_501853da",
+        "filename": "media/module/metadatautils/include/media/stagefright/MetaDataUtils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T14:30:10Z",
+      "side": 1,
+      "message": "MPEG4Source::addFrameHeaderToAccessUnit is using this enum through MetaDatautils.h file so I thought not to move.",
+      "parentUuid": "639b5bb0_5c93de45",
       "revId": "081cdcacfcbcb59bf3d4f536ec6565a19b25f083",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
