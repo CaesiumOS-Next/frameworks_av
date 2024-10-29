@@ -2482,6 +2482,8 @@ aidl2legacy_AudioPortDeviceExt_audio_port_device_ext(const AudioPortDeviceExt& a
     legacy.encapsulation_metadata_types = VALUE_OR_RETURN(
             aidl2legacy_AudioEncapsulationMetadataType_mask(
                     aidl.encapsulationMetadataTypes));
+    legacy.speaker_layout_channel_mask = VALUE_OR_RETURN(
+            aidl2legacy_AudioSpeakerLayout_mask(aidl.speakerLayout));
     return legacy;
 }
 
@@ -2494,6 +2496,8 @@ ConversionResult<AudioPortDeviceExt> legacy2aidl_audio_port_device_ext_AudioPort
             legacy2aidl_AudioEncapsulationMode_mask(legacy.encapsulation_modes));
     aidl.encapsulationMetadataTypes = VALUE_OR_RETURN(
             legacy2aidl_AudioEncapsulationMetadataType_mask(legacy.encapsulation_metadata_types));
+    aidl.speakerLayout = VALUE_OR_RETURN(
+            legacy2aidl_AudioSpeakerLayout_mask(legacy.speaker_layout_channel_mask));
     return aidl;
 }
 
