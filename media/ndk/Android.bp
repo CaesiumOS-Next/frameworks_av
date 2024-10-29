@@ -93,6 +93,8 @@ cc_library_shared {
     srcs: [
         "NdkJavaVMHelper.cpp",
         "NdkMediaCodec.cpp",
+        "NdkMediaCodecInfo.cpp",
+        "NdkMediaCodecStore.cpp",
         "NdkMediaCrypto.cpp",
         "NdkMediaDataSource.cpp",
         "NdkMediaExtractor.cpp",
