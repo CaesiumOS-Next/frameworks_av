@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37c5d6d_752ddc1b",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7890,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-10-29T14:26:43Z",
+      "side": 1,
+      "message": "This will lose precision and may not change the waitTimeMs. Consider:\n\n    waitTimeMs \u003d (waitTimeMs * mNormalFrameCount) / strong-\u003eframeCount();",
+      "range": {
+        "startLine": 7890,
+        "startChar": 30,
+        "endLine": 7890,
+        "endChar": 73
+      },
+      "revId": "cef0eda7b64651fa98b114097dc79a9e07783c2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
