@@ -7886,6 +7886,9 @@ void DuplicatingThread::updateWaitTime_l()
         const auto strong = mOutputTracks[i]->thread().promote();
         if (strong != 0) {
             uint32_t waitTimeMs = (strong->frameCount() * 2 * 1000) / strong->sampleRate();
+            if (strong->frameCount() > mNormalFrameCount) {
+                waitTimeMs /= (strong->frameCount() / mNormalFrameCount);
+            }
             if (waitTimeMs < mWaitTimeMs) {
                 mWaitTimeMs = waitTimeMs;
             }
