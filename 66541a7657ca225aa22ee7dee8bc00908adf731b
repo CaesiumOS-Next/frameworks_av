@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82f3e973_a32e211a",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5243,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T12:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c41ec635_2f1f831e",
+      "range": {
+        "startLine": 5242,
+        "startChar": 0,
+        "endLine": 5243,
+        "endChar": 48
+      },
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e36355c_05589204",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-10-25T14:48:02Z",
       "side": 1,
       "message": "Since we send the entire apvC box as CSD, I am not sure if this part is really necessary.\n\nFor now, can you please remove this code, addFrameHeaderToAccessUnit, updateFrameHeader and the ApvFrameHeader out of this CL to a separate CL?\n\nPreference would be get the extractor to send apvC box as CSD and decoder assembles this as required without expecting extractor to do this.",
+      "range": {
+        "startLine": 6721,
+        "startChar": 0,
+        "endLine": 6722,
+        "endChar": 67
+      },
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe398df_b28e831a",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6722,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T12:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e36355c_05589204",
       "range": {
         "startLine": 6721,
         "startChar": 0,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f2e30d3_bdfc5cf8",
+        "filename": "media/module/extractors/mp4/include/MPEG4Extractor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T12:21:44Z",
+      "side": 1,
+      "message": "PTAL in next [CL](https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3322397/3)",
+      "parentUuid": "9337fbbb_d1a9bc5c",
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b605548_30a691e8",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-10-25T14:48:02Z",
       "side": 1,
       "message": "need to see if this can be moved to MPEG4Extractor.cpp.\n\nmore comments in the other file.",
+      "range": {
+        "startLine": 210,
+        "startChar": 9,
+        "endLine": 210,
+        "endChar": 26
+      },
+      "revId": "66541a7657ca225aa22ee7dee8bc00908adf731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e1fd701_8b2827f6",
+        "filename": "media/module/extractors/mp4/include/MPEG4Extractor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-29T12:21:44Z",
+      "side": 1,
+      "message": "PTAL in next [CL](https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3322397/3)",
+      "parentUuid": "7b605548_30a691e8",
       "range": {
         "startLine": 210,
         "startChar": 9,
