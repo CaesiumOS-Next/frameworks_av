@@ -118,6 +118,30 @@
       },
       "revId": "cef0eda7b64651fa98b114097dc79a9e07783c2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "469f93fd_e2d15225",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7890,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-10-30T16:16:12Z",
+      "side": 1,
+      "message": "Maybe what we should have is to have `mWaitTimeMs` initialized `mNormalFrameCount * 1000 / mSampleRate` and then keep the logic as is here. Also adding Andy for discussion.",
+      "parentUuid": "e0efc538_1f37dcc3",
+      "range": {
+        "startLine": 7890,
+        "startChar": 30,
+        "endLine": 7890,
+        "endChar": 73
+      },
+      "revId": "cef0eda7b64651fa98b114097dc79a9e07783c2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
