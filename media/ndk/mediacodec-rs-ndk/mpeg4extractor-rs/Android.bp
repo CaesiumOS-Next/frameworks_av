@@ -1,0 +1,75 @@
+cc_library_static {
+    name: "libmpeg4extractor",
+    srcs: [
+        "ESDS.cpp",
+        "MPEG4Extractor.cpp",
+        "Utils.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+    ],
+    export_include_dirs: [
+        "include",
+    ],
+    compile_multilib: "64",
+}
+
+rust_library {
+    name: "libmpeg4extractor-rs",
+    crate_name: "mpeg4extractor",
+    srcs: [
+        "mpeg4extractor.rs",
+    ],
+    rustlibs: [
+        "libcxx",
+        "liblibc",
+    ],
+    shared_libs: [
+        "libbase",
+    ],
+    static_libs: [
+        "libcxx_mpeg4extractor_cpp",
+        "libmpeg4extractor",
+    ],
+    compile_multilib: "64",
+}
+
+cc_library_static {
+    name: "libcxx_mpeg4extractor_cpp",
+    srcs: [
+        "libcxx_mpeg4extractor.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+    ],
+    static_libs: [
+        "libmpeg4extractor",
+    ],
+    header_libs: [
+        "libmediadrm_headers",
+    ],
+    generated_headers: [
+        "cxx-bridge-header",
+        "libcxx_mpeg4extractor_bridge_header",
+    ],
+    generated_sources: [
+        "libcxx_mpeg4extractor_bridge_code",
+    ],
+    compile_multilib: "64",
+}
+
+genrule {
+    name: "libcxx_mpeg4extractor_bridge_code",
+    tools: ["cxxbridge"],
+    cmd: "$(location cxxbridge) $(in) > $(out)",
+    srcs: ["mpeg4extractor.rs"],
+    out: ["libcxx_mpeg4extractor_cxx_generated.cc"],
+}
+
+genrule {
+    name: "libcxx_mpeg4extractor_bridge_header",
+    tools: ["cxxbridge"],
+    cmd: "$(location cxxbridge) $(in) --header > $(out)",
+    srcs: ["mpeg4extractor.rs"],
+    out: ["mpeg4extractor.rs.h"],
+}
