@@ -24,6 +24,7 @@ rust_test {
     rustlibs: [
         "liblibc",
         "libmediacodec-ndk-rs",
+        "libmpeg4extractor-rs",
     ],
     // cfgs: ["verbose"],
     compile_multilib: "64",
