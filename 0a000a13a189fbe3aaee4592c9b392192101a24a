@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f8cc05_38c18f2c",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-30T06:48:17Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "f16b9217_6c1b6733",
+      "range": {
+        "startLine": 1227,
+        "startChar": 38,
+        "endLine": 1230,
+        "endChar": 8
+      },
+      "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3da38457_7744ce75",
@@ -90,6 +114,24 @@
           ]
         }
       ],
+      "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fddb0387_72266325",
+        "filename": "media/libaudioclient/include/media/AudioRecord.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-10-30T06:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3da38457_7744ce75",
       "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
