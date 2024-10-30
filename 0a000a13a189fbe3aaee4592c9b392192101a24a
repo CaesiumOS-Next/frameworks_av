@@ -134,6 +134,24 @@
       "parentUuid": "3da38457_7744ce75",
       "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200820ae_231ae7fb",
+        "filename": "media/libaudioclient/include/media/AudioRecord.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-10-30T21:20:02Z",
+      "side": 1,
+      "message": "Do we want to keep it for direct only?  It would be checked in the base CL (in AudioFlinger).",
+      "parentUuid": "fddb0387_72266325",
+      "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
