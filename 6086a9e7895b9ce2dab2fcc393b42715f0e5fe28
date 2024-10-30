@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf87c9c_1841cdf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3309800
+      },
+      "writtenOn": "2024-10-30T08:54:34Z",
+      "side": 1,
+      "message": "The existence of the APV codec is not confidential, right?",
+      "revId": "6086a9e7895b9ce2dab2fcc393b42715f0e5fe28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d5fa183_066ee01a",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 3309800
+      },
+      "writtenOn": "2024-10-30T08:54:34Z",
+      "side": 1,
+      "message": "formatting: extra space `}  else`",
+      "range": {
+        "startLine": 2717,
+        "startChar": 3,
+        "endLine": 2717,
+        "endChar": 10
+      },
+      "revId": "6086a9e7895b9ce2dab2fcc393b42715f0e5fe28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb88d689_339f0d40",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4526,
+      "author": {
+        "id": 3309800
+      },
+      "writtenOn": "2024-10-30T08:54:34Z",
+      "side": 1,
+      "message": "formatting: space before `} else`",
+      "range": {
+        "startLine": 4526,
+        "startChar": 4,
+        "endLine": 4526,
+        "endChar": 6
+      },
+      "revId": "6086a9e7895b9ce2dab2fcc393b42715f0e5fe28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
