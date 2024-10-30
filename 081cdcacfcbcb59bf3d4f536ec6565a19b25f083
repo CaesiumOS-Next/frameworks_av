@@ -69,6 +69,24 @@
       "parentUuid": "8e1198f6_501853da",
       "revId": "081cdcacfcbcb59bf3d4f536ec6565a19b25f083",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc07ba1_72f70c16",
+        "filename": "media/module/metadatautils/include/media/stagefright/MetaDataUtils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-30T04:16:19Z",
+      "side": 1,
+      "message": "Moved.",
+      "parentUuid": "83ba4297_929964ea",
+      "revId": "081cdcacfcbcb59bf3d4f536ec6565a19b25f083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
