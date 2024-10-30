@@ -18,6 +18,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3470b748_7652a56e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-30T09:21:37Z",
+      "side": 1,
+      "message": "No, it is not confidential. Draft specification is available here - [link](https://datatracker.ietf.org/doc/draft-lim-apv).",
+      "parentUuid": "abf87c9c_1841cdf0",
+      "revId": "6086a9e7895b9ce2dab2fcc393b42715f0e5fe28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e42dfdc_5efee3db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-30T09:21:37Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "6086a9e7895b9ce2dab2fcc393b42715f0e5fe28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d5fa183_066ee01a",
@@ -41,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d644fda0_0ed2470e",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-30T09:21:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d5fa183_066ee01a",
+      "range": {
+        "startLine": 2717,
+        "startChar": 3,
+        "endLine": 2717,
+        "endChar": 10
+      },
+      "revId": "6086a9e7895b9ce2dab2fcc393b42715f0e5fe28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb88d689_339f0d40",
@@ -54,6 +113,30 @@
       "writtenOn": "2024-10-30T08:54:34Z",
       "side": 1,
       "message": "formatting: space before `} else`",
+      "range": {
+        "startLine": 4526,
+        "startChar": 4,
+        "endLine": 4526,
+        "endChar": 6
+      },
+      "revId": "6086a9e7895b9ce2dab2fcc393b42715f0e5fe28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd6fd7a5_4d327840",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4526,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-10-30T09:21:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb88d689_339f0d40",
       "range": {
         "startLine": 4526,
         "startChar": 4,
