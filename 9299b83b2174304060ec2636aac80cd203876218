@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18725099_9863bc3c",
+        "filename": "media/module/codecs/amrnb/common/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-10-30T10:41:02Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "6f8cc672_1f35151f",
+      "range": {
+        "startLine": 107,
+        "startChar": 13,
+        "endLine": 107,
+        "endChar": 27
+      },
+      "revId": "9299b83b2174304060ec2636aac80cd203876218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52bea25e_61a57e84",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-28T14:39:36Z",
       "side": 0,
       "message": "flagged in a different file.  just another instance of something we\nshould reflect in our \"Bug:\" lines",
+      "range": {
+        "startLine": 110,
+        "startChar": 16,
+        "endLine": 110,
+        "endChar": 27
+      },
+      "revId": "9299b83b2174304060ec2636aac80cd203876218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "532bf839_515156de",
+        "filename": "media/module/codecs/amrnb/enc/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-10-30T10:41:02Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "52bea25e_61a57e84",
       "range": {
         "startLine": 110,
         "startChar": 16,
