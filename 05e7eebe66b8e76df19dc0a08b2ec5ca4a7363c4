@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1631eb90_bc3ca13a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-30T01:17:14Z",
+      "side": 1,
+      "message": "Ian, Fyodor,\n\nFollowing are still pending for this:\n- Adding an aconfig flag and moving the code under this flag.\n- Limiting the support to newer versions of Android.\n\nThis is uploaded so that the initial testing of APV support can start and also reviews can start in parallel.",
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7b42fba_806f21f3",
         "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
         "patchSetId": 4
