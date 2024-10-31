@@ -37,6 +37,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dce8239_6405485c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-31T09:15:11Z",
+      "side": 1,
+      "message": "Please reference a bug from the commit description\n\nWhat is the testing plan for this?",
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f834a0_81dec5d2",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-31T09:15:11Z",
+      "side": 1,
+      "message": "i think this belongs in aosp/3322397 rather than this change? (it doesn\u0027t seem to be used here)",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 56
+      },
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7b42fba_806f21f3",
         "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
         "patchSetId": 4
@@ -54,6 +94,47 @@
         "endLine": 373,
         "endChar": 43
       },
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eec43f8_611f0361",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-10-31T09:15:11Z",
+      "side": 1,
+      "message": "what happens if you add `case FOURCC(\"apvC\"):` here? The code looks pretty much the same",
+      "range": {
+        "startLine": 2663,
+        "startChar": 0,
+        "endLine": 2663,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e7d4ff4b_10b4ab97",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 2602,
+                "startChar": 0,
+                "endLine": 2603,
+                "endChar": 0
+              },
+              "replacement": "                   AMEDIAFORMAT_KEY_CSD_0, buffer.get(), chunk_data_size);\n"
+            }
+          ]
+        }
+      ],
       "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
