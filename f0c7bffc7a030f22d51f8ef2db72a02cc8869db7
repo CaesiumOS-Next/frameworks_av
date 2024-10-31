@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6516432_a34e4212",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T06:14:47Z",
+      "side": 1,
+      "message": "nit: one more place here to line up the \u003ds (MPEGH jutted out, and perhaps should have forced a re-align.)",
+      "range": {
+        "startLine": 433,
+        "startChar": 19,
+        "endLine": 433,
+        "endChar": 20
+      },
+      "revId": "f0c7bffc7a030f22d51f8ef2db72a02cc8869db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c3ac481_e03b3b1d",
         "filename": "media/codec2/core/include/C2Config.h",
         "patchSetId": 3
@@ -38,6 +61,30 @@
       "side": 1,
       "message": "Yes, I sync-ed with Lajos about this and the convention is that on C2 level we define all Profiles/Levels that are in the spec and on public API we define only those that we use and can test. HEVC constants above is a good example",
       "parentUuid": "1c3ac481_e03b3b1d",
+      "range": {
+        "startLine": 604,
+        "startChar": 71,
+        "endLine": 609,
+        "endChar": 71
+      },
+      "revId": "f0c7bffc7a030f22d51f8ef2db72a02cc8869db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c8641d_290f3365",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T06:14:47Z",
+      "side": 1,
+      "message": "Correct. We like to have a const for all spec profiles and levels.",
+      "parentUuid": "411917c8_d9c94f40",
       "range": {
         "startLine": 604,
         "startChar": 71,
