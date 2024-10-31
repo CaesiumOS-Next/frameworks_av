@@ -1,0 +1,236 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51a56c1e_170b1042",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T07:01:12Z",
+      "side": 1,
+      "message": "I had a chance to get through this finally. Looks nice. I just have a few questions.",
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3a3dc5_27128f18",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T07:01:12Z",
+      "side": 1,
+      "message": "is this a safe thing to do? will all users of this buffer know the domain, kind and direction? alternately, will that require all code that wants to understand this struct to needing to get struct[domain, kind and direction]? perhaps we could add an enum memorytype to make this part of this struct so it is understandable by itself and hopefully also simplify the code.",
+      "range": {
+        "startLine": 285,
+        "startChar": 41,
+        "endLine": 286,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab68d489_3f841df0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 285,
+                "startChar": 0,
+                "endLine": 287,
+                "endChar": 0
+              },
+              "replacement": "     * The actual memory for the buffer. The domain, kind and direction (in/out) of the component\n     * determines which is used between linear and graphic.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff6c49ca_b34d0cf1",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T07:01:12Z",
+      "side": 1,
+      "message": "these two fields are kind of make a LinearBuffer. Should we use LinearBuffer for configBlob?",
+      "range": {
+        "startLine": 297,
+        "startChar": 13,
+        "endLine": 297,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "55d3c6a2_69a8c9ef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 297,
+                "startChar": 0,
+                "endLine": 302,
+                "endChar": 0
+              },
+              "replacement": "    ApexCodec_LinearBuffer configUpdates;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7abfb036_af2e8f7e",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T07:01:12Z",
+      "side": 1,
+      "message": "nit: perhaps RESERVED",
+      "range": {
+        "startLine": 341,
+        "startChar": 7,
+        "endLine": 341,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "87fddbe8_d613a2c3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 341,
+                "startChar": 0,
+                "endLine": 342,
+                "endChar": 0
+              },
+              "replacement": "    // RESERVED                            \u003d 3,\n"
+            },
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 344,
+                "startChar": 0,
+                "endLine": 345,
+                "endChar": 0
+              },
+              "replacement": "    // RESERVED                            \u003d 6,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d60934_48d7d585",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T07:01:12Z",
+      "side": 1,
+      "message": "is this also used if the output buffer is too large? E.g. resolution change to a smaller resolution than originally expected.",
+      "range": {
+        "startLine": 480,
+        "startChar": 48,
+        "endLine": 480,
+        "endChar": 93
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bc05ff56_4182f086",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 480,
+                "startChar": 0,
+                "endLine": 484,
+                "endChar": 0
+              },
+              "replacement": " * \\return CODEC_STATUS_NO_MEMORY  if the output buffer is too small to hold the output frame,\n *                                 or too large to hold the output frame (e.g. resolution change);\n *                                 the client should retry with a larger/smaller output buffer;\n *                                 configUpdates should have the information to update the buffer\n *                                 size.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5bef395_eb12f60b",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T07:01:12Z",
+      "side": 1,
+      "message": "it seems the new version of the API now allocates queries[i].values, so this is perhaps not needed/would never happen.",
+      "range": {
+        "startLine": 656,
+        "startChar": 36,
+        "endLine": 656,
+        "endChar": 90
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2cfe9fa3_c929166b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 655,
+                "startChar": 0,
+                "endLine": 658,
+                "endChar": 0
+              },
+              "replacement": " * \\return CODEC_STATUS_OK         if successful\n"
+            }
+          ]
+        }
+      ],
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
