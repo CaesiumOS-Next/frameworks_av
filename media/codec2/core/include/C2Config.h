@@ -167,6 +167,11 @@ enum C2ParamIndexKind : C2Param::type_index_t {
     /* Region of Interest Encoding parameters */
     kParamIndexQpOffsetMapBuffer, // info-buffer, used to signal qp-offset map for a frame
 
+    /* resource capacity, resources available, and resources excluded */
+    kParamIndexResourceCapacity,
+    kParamIndexResourcesAvailable,
+    kParamIndexResourcesExcluded,
+
     // deprecated
     kParamIndexDelayRequest = kParamIndexDelay | C2Param::CoreIndex::IS_REQUEST_FLAG,
 
@@ -1255,6 +1260,28 @@ constexpr char C2_PARAMKEY_OUTPUT_COUNTER[] = "output.buffers.counter";
 constexpr char C2_PARAMKEY_CONFIG_COUNTER[] = "algo.config.counter";
 
 /* ----------------------------------------- resources ----------------------------------------- */
+
+/**
+ * Total resources available for all the components.
+ *
+ * Resources are tracked as a vector of positive numbers. Available resources are defined by
+ * the vendor.
+ *
+ * This should provide the total available resources of each type,
+ * (and the currently used quantity for each such resource - for example,
+ * if the resource is shared with other subsystems, such as display/graphics).
+ *
+ * TODO: define some of the resources.
+ */
+typedef C2GlobalParam<C2Tuning, C2Uint64Array, kParamIndexResourceCapacity>
+        C2ResourceCapacityTuning;
+typedef C2GlobalParam<C2Tuning, C2Uint64Array, kParamIndexResourcesAvailable>
+        C2ResourcesAvailableTuning;
+typedef C2GlobalParam<C2Tuning, C2Uint64Array, kParamIndexResourcesExcluded>
+        C2ResourcesExcludedTuning;
+constexpr char C2_PARAMKEY_RESOURCE_CAPACITY[] = "resources.available";
+constexpr char C2_PARAMKEY_RESOURCES_AVAILABLE[] = "resource.capacity";
+constexpr char C2_PARAMKEY_RESOURCES_EXCLUDED[] = "resources.excluded";
 
 /**
  * Resources needed and resources reserved for current configuration.
