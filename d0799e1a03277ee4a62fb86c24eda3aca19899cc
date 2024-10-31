@@ -16,6 +16,24 @@
       "message": "once this revert lands.\n-- prep a CL that addresses the \"bpfmt\" comments in here; things that the original CL fixed\n-- adds the trendy_team attributions\n-- leaves the sanitization status alone (e.g. off).\n\nthen we can later make the sanitization a standalone change that isn\u0027 tied to\nthose other fixes.",
       "revId": "d0799e1a03277ee4a62fb86c24eda3aca19899cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba4679f1_2be05cb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-10-31T14:15:10Z",
+      "side": 1,
+      "message": "Thanks. Will do.",
+      "parentUuid": "5aedf558_cda7138f",
+      "revId": "d0799e1a03277ee4a62fb86c24eda3aca19899cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
