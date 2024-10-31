@@ -1185,6 +1185,21 @@ constexpr char C2_PARAMKEY_CONFIG_COUNTER[] = "algo.config.counter";
 /* ----------------------------------------- resources ----------------------------------------- */
 
 /**
+ * Total resources available for all the components.
+ *
+ * Resources are tracked as a vector of positive numbers. Available resources are defined by
+ * the vendor.
+ *
+ * This should provide the total available resources of each type,
+ * (and the currently used quantity for each such resource - for example,
+ * if the resource is shared with other subsystems, such as display/graphics).
+ *
+ * TODO: define some of the resources.
+ */
+typedef C2GlobalParam<C2Tuning, C2Uint64Array, kParamIndexResourcesNeeded> C2ResourcesAvailableTuning;
+constexpr char C2_PARAMKEY_RESOURCES_AVAILABLE[] = "resources.available";
+
+/**
  * Resources needed and resources reserved for current configuration.
  *
  * Resources are tracked as a vector of positive numbers. Available resources are defined by
