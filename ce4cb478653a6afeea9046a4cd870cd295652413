@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d843e58_9fde4a60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-31T13:41:40Z",
+      "side": 1,
+      "message": "add:\nBug: 25409744\nwhich was in the original CL that we\u0027re reverting.",
+      "revId": "ce4cb478653a6afeea9046a4cd870cd295652413",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c00157b1_45c4af9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-31T13:41:40Z",
+      "side": 1,
+      "message": "i want us to make sure that the amr stream that caused this problem is copied from the MediaPlayerTestCases into the AMR test cases.",
+      "revId": "ce4cb478653a6afeea9046a4cd870cd295652413",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
