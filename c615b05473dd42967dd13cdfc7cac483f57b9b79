@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7b56531_ac913960",
+        "filename": "media/libstagefright/omx/OMXUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T06:19:48Z",
+      "side": 1,
+      "message": "we don\u0027t want this. This is for OMX only and we don\u0027t support APV in OMX.",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ce4ee844_80a2b059",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/omx/OMXUtils.cpp",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 145,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c615b05473dd42967dd13cdfc7cac483f57b9b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
