@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e95d63e_cc1fb795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1414712
+      },
+      "writtenOn": "2024-10-31T08:41:44Z",
+      "side": 1,
+      "message": "Hi Wonsik,\nThanks for your patch. \nThis can help fix several failures of MctsMediaEncoderTestCases android.media.encoder.cts.VideoEncoderTest#testEncode.\nI noticed that this patch was only merged in the main branch but not in the android 15 tag (android-15.0.0_r1/android-15.0.0_r2/android-15.0.0_r3).\nDo we need to cherry-pick this patch into android15-release branch or somewhere so that it can be included in future android 15 tags or android15-gsi branch?",
+      "revId": "c4039b0332dce1c4b06f31d247a84f8549413100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
