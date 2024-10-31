@@ -1,0 +1,109 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5df515c_f4716461",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T21:15:03Z",
+      "side": 1,
+      "message": "I think these need to be upper case, e.g. FLAG_DECODER",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b17f46d1_d8ecbe5b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "        FLAG_DECODER \u003d 1 \u003c\u003c 0,\n        FLAG_ENCODER \u003d 1 \u003c\u003c 1,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3ea8f2dc257eb999271eb4cabbfdb77163a1d988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bed2a4f_f13d9951",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T21:15:03Z",
+      "side": 1,
+      "message": "please document the expected return status values as well.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 14
+      },
+      "revId": "3ea8f2dc257eb999271eb4cabbfdb77163a1d988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c1bbdc6_77122fac",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-10-31T21:15:03Z",
+      "side": 1,
+      "message": "nit; ByName may be unnecessary.",
+      "range": {
+        "startLine": 84,
+        "startChar": 44,
+        "endLine": 84,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ec104c11_5411aacf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 84,
+                "startChar": 0,
+                "endLine": 85,
+                "endChar": 0
+              },
+              "replacement": "media_status_t AMediaCodecStore_getCodecInfo(\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3ea8f2dc257eb999271eb4cabbfdb77163a1d988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
