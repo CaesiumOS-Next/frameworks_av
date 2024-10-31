@@ -70,6 +70,7 @@ struct C2Config {
     enum platform_level_t : uint32_t;       ///< platform level
     enum prepend_header_mode_t : uint32_t;  ///< prepend header operational modes
     enum profile_t : uint32_t;              ///< coding profile
+    enum resource_kind_t : uint32_t;        ///< resource kinds
     enum scaling_method_t : uint32_t;       ///< scaling methods
     enum scan_order_t : uint32_t;           ///< scan orders
     enum secure_mode_t : uint32_t;          ///< secure/protected modes
@@ -101,6 +102,7 @@ enum C2ParamIndexKind : C2Param::type_index_t {
     kParamIndexMasteringDisplayColorVolume,
     kParamIndexChromaOffset,
     kParamIndexGopLayer,
+    kParamIndexSystemResource,
 
     /* =================================== parameter indices =================================== */
 
@@ -166,6 +168,11 @@ enum C2ParamIndexKind : C2Param::type_index_t {
 
     /* Region of Interest Encoding parameters */
     kParamIndexQpOffsetMapBuffer, // info-buffer, used to signal qp-offset map for a frame
+
+    /* resource capacity, resources available, and resources excluded */
+    kParamIndexResourcesCapacity,
+    kParamIndexResourcesAvailable,
+    kParamIndexResourcesExcluded,
 
     // deprecated
     kParamIndexDelayRequest = kParamIndexDelay | C2Param::CoreIndex::IS_REQUEST_FLAG,
@@ -1257,6 +1264,77 @@ constexpr char C2_PARAMKEY_CONFIG_COUNTER[] = "algo.config.counter";
 /* ----------------------------------------- resources ----------------------------------------- */
 
 /**
+ * Resource kind.
+ */
+C2ENUM(C2Config::resource_kind_t, uint32_t,
+    CONST,
+    PER_FRAME,
+    PER_INPUT_BLOCK,
+    PER_OUTPUT_BLOCK
+)
+
+/**
+ * Definition of hal system resources.
+ *
+ * The vendors will have to shadow this with their own identical vendor-struct
+ * and their vendor-enum, so that the parameterDescriptor will pick the named values.
+ *
+ * The names of the resources will come from the parameterDescriptor for that field.
+ *
+ * Resources are defined by:
+ *   - a uint32_t based enum, where the platform will define some values,
+ *     and reserve a range for vendor values.
+ *   - a resource kind, which can be one of the type (can be extended later)
+ *     defined above.
+ *   - amount of resources
+ *
+ * All these resource specific definitions are "[PROPOSED]" to mark that
+ * this is still under discussion and subjected to change.
+ *
+ */
+
+struct C2SystemResourceStruct {
+    C2SystemResourceStruct(uint32_t id,
+                           C2Config::resource_kind_t kind,
+                           uint64_t amount)
+        : id_(id), kind_(kind), amount_(amount) { }
+    // this is a uint32_t based enum, where the platform will define some values, and reserve a range for vendor values
+    uint32_t id_;
+    C2Config::resource_kind_t kind_;
+    uint64_t amount_;
+
+    DEFINE_AND_DESCRIBE_C2STRUCT(SystemResource)
+    C2FIELD(id_, "id")
+    C2FIELD(kind_, "kind")
+    C2FIELD(amount_, "amount")
+};
+
+/**
+ * Total resources available for all the components.
+ *
+ * Resources are tracked as a vector of positive numbers.
+ * Each resource has a maximum capacity, followed by currently available
+ * at any given time and excluded (reduced) resources.
+ *
+ * This should provide the total available resources of each type,
+ * (and the currently used quantity for each such resource - for example,
+ * if the resource is shared with other subsystems, such as display/graphics).
+ *
+ */
+typedef C2GlobalParam<C2Tuning,
+                      C2SimpleArrayStruct<C2SystemResourceStruct>,
+                      kParamIndexResourcesCapacity> C2ResourcesCapacityTuning;
+typedef C2GlobalParam<C2Tuning,
+                      C2SimpleArrayStruct<C2SystemResourceStruct>,
+                      kParamIndexResourcesAvailable> C2ResourcesAvailableTuning;
+typedef C2GlobalParam<C2Tuning,
+                      C2SimpleArrayStruct<C2SystemResourceStruct>,
+                      kParamIndexResourcesExcluded> C2ResourcesExcludedTuning;
+constexpr char C2_PARAMKEY_RESOURCES_CAPACITY[] = "resources.capacity";
+constexpr char C2_PARAMKEY_RESOURCES_AVAILABLE[] = "resources.available";
+constexpr char C2_PARAMKEY_RESOURCES_EXCLUDED[] = "resources.excluded";
+
+/**
  * Resources needed and resources reserved for current configuration.
  *
  * Resources are tracked as a vector of positive numbers. Available resources are defined by
@@ -1268,9 +1346,12 @@ constexpr char C2_PARAMKEY_CONFIG_COUNTER[] = "algo.config.counter";
  *
  * TODO: define some of the resources.
  */
-typedef C2GlobalParam<C2Tuning, C2Uint64Array, kParamIndexResourcesNeeded> C2ResourcesNeededTuning;
-typedef C2GlobalParam<C2Tuning, C2Uint64Array, kParamIndexResourcesReserved>
-        C2ResourcesReservedTuning;
+typedef C2GlobalParam<C2Tuning,
+                      C2SimpleArrayStruct<C2SystemResourceStruct>,
+                      kParamIndexResourcesNeeded> C2ResourcesNeededTuning;
+typedef C2GlobalParam<C2Tuning,
+                      C2SimpleArrayStruct<C2SystemResourceStruct>,
+                      kParamIndexResourcesReserved> C2ResourcesReservedTuning;
 constexpr char C2_PARAMKEY_RESOURCES_NEEDED[] = "resources.needed";
 constexpr char C2_PARAMKEY_RESOURCES_RESERVED[] = "resources.reserved";
 
