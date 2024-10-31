@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab431ede_ef833b3d",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-31T23:55:56Z",
+      "side": 1,
+      "message": "@lajos@google.com What do you think?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b2e1840d_456c8379",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": " * If called with a different format while \\param outCodecInfo is NOT NULL, it will still return\n * the supported codecs for previous format. The API can only be reset when user call with null\n * \\param outCodecInfo.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 94,
+                "endChar": 0
+              },
+              "replacement": " * If called with a different format while \\param outCodecInfo is NOT NULL, it will still return\n * the supported codecs for previous format. The API can only be reset when user call with null\n * \\param outCodecInfo.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e54c7a72f9232bd9a2f545ccde7935d6b1626b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

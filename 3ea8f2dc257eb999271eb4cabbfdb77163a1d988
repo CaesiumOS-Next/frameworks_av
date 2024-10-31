@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4c552c_6994f78e",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-31T23:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5df515c_f4716461",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 20
+      },
+      "revId": "3ea8f2dc257eb999271eb4cabbfdb77163a1d988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bed2a4f_f13d9951",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-10-31T21:15:03Z",
       "side": 1,
       "message": "please document the expected return status values as well.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 14
+      },
+      "revId": "3ea8f2dc257eb999271eb4cabbfdb77163a1d988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61b7eb94_bfb45c58",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-31T23:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bed2a4f_f13d9951",
       "range": {
         "startLine": 55,
         "startChar": 0,
@@ -102,6 +150,30 @@
           ]
         }
       ],
+      "revId": "3ea8f2dc257eb999271eb4cabbfdb77163a1d988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca759fa4_a7766588",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-10-31T23:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c1bbdc6_77122fac",
+      "range": {
+        "startLine": 84,
+        "startChar": 44,
+        "endLine": 84,
+        "endChar": 50
+      },
       "revId": "3ea8f2dc257eb999271eb4cabbfdb77163a1d988",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
