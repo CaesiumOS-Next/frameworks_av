@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b0708dd_3aa7b3d1",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-10-31T22:14:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a6516432_a34e4212",
+      "range": {
+        "startLine": 433,
+        "startChar": 19,
+        "endLine": 433,
+        "endChar": 20
+      },
+      "revId": "f0c7bffc7a030f22d51f8ef2db72a02cc8869db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c3ac481_e03b3b1d",
