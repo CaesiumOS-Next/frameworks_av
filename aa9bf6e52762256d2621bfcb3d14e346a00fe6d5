@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae23a04_576a4840",
+        "filename": "media/audioaidlconversion/AidlConversionCppNdk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-01T20:40:10Z",
+      "side": 1,
+      "message": "That\u0027s a good point, I\u0027ve added a comment to the VTS test to validate this assumption on the configuration received from the HAL.",
+      "range": {
+        "startLine": 2318,
+        "startChar": 36,
+        "endLine": 2318,
+        "endChar": 87
+      },
+      "revId": "aa9bf6e52762256d2621bfcb3d14e346a00fe6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
