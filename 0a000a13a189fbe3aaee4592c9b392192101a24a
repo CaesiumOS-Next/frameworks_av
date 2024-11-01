@@ -152,6 +152,24 @@
       "parentUuid": "fddb0387_72266325",
       "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7acf582_b05fe14d",
+        "filename": "media/libaudioclient/include/media/AudioRecord.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-01T20:24:53Z",
+      "side": 1,
+      "message": "I don\u0027t have reason to restrict to direct AudioRecord.\nMay be lets keep open for all types of AudioRecord. Lets user worry about it.",
+      "parentUuid": "200820ae_231ae7fb",
+      "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
