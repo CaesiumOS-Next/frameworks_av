@@ -188,6 +188,24 @@
       "parentUuid": "d7acf582_b05fe14d",
       "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9413365_35ce8fdf",
+        "filename": "media/libaudioclient/include/media/AudioRecord.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-01T21:02:18Z",
+      "side": 1,
+      "message": "I put a comment on the base CL.  Opening to all types may require additional permissions and parameter filtering.",
+      "parentUuid": "540266ad_269385a0",
+      "revId": "0a000a13a189fbe3aaee4592c9b392192101a24a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
