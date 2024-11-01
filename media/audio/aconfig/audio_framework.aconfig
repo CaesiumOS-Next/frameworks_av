@@ -139,3 +139,10 @@ flag {
     bug: "296232417"
     is_fixed_read_only: true
 }
+
+flag {
+    name: "speaker_layout_api"
+    namespace: "media_audio"
+    description: "Surface new API method for returning speaker layout channel mask for devices"
+    bug: "337522902"
+}
