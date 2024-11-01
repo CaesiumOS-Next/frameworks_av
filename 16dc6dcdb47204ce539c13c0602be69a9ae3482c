@@ -22,6 +22,30 @@
       },
       "revId": "16dc6dcdb47204ce539c13c0602be69a9ae3482c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d2ef588_5fa1c934",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3131,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-01T20:25:30Z",
+      "side": 1,
+      "message": "May be keep it open for all AudioRecord\u0027s",
+      "parentUuid": "0eb2b4e9_c96aee47",
+      "range": {
+        "startLine": 3131,
+        "startChar": 10,
+        "endLine": 3131,
+        "endChar": 12
+      },
+      "revId": "16dc6dcdb47204ce539c13c0602be69a9ae3482c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
