@@ -46,6 +46,30 @@
       },
       "revId": "16dc6dcdb47204ce539c13c0602be69a9ae3482c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21c3c5c_992ce933",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3131,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-01T21:00:53Z",
+      "side": 1,
+      "message": "I prefer not to open it up without additional checks as AudioRecord may share the RecordThread in concurrent record, but DIRECT implies exclusive access (and is more rare).  The AudioFlinger::setParameters has a more elaborate parameter checking scheme which does validate permissions.\n\nI am adding Eric to see if we should restrict this to DIRECT or if this needs settings permission to make available in the general case.\n\nhttps://cs.android.com/android/platform/superproject/+/android14-qpr3-release:frameworks/av/services/audioflinger/AudioFlinger.cpp;drc\u003d4e98b5bf046bc4351319541e01b9003c23baef99;l\u003d1787",
+      "parentUuid": "8d2ef588_5fa1c934",
+      "range": {
+        "startLine": 3131,
+        "startChar": 10,
+        "endLine": 3131,
+        "endChar": 12
+      },
+      "revId": "16dc6dcdb47204ce539c13c0602be69a9ae3482c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
