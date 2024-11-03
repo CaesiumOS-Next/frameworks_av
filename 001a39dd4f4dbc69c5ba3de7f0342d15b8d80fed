@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a81434_fca27d5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-03T22:25:26Z",
+      "side": 1,
+      "message": "32-bit failures need a fix in upstream openAPV lib. I am working on it, but I don\u0027t expect a code change will be needed in C2 code for this.",
+      "revId": "001a39dd4f4dbc69c5ba3de7f0342d15b8d80fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
