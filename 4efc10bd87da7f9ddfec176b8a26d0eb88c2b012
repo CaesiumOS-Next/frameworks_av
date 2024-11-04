@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82616050_8c0662c1",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-11-04T12:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36fc6649_b5726d96",
+      "revId": "4efc10bd87da7f9ddfec176b8a26d0eb88c2b012",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45f56d40_832ed3ef",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b69f925_5eff396f",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-11-04T12:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45f56d40_832ed3ef",
+      "revId": "4efc10bd87da7f9ddfec176b8a26d0eb88c2b012",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "755fc757_60158eca",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-11-04T11:09:10Z",
       "side": 1,
       "message": "should this be guarded with `muxer_mp4_enable_apv` flag?",
+      "revId": "4efc10bd87da7f9ddfec176b8a26d0eb88c2b012",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98fd879c_d2a9b19c",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 4353,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-11-04T12:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "755fc757_60158eca",
       "revId": "4efc10bd87da7f9ddfec176b8a26d0eb88c2b012",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
