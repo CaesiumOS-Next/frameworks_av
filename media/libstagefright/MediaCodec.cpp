@@ -1189,6 +1189,18 @@ sp<PersistentSurface> MediaCodec::CreatePersistentInputSurface() {
     return new PersistentSurface(bufferProducer, bufferSource);
 }
 
+//static
+status_t MediaCodec::getAvailableDeviceResources(std::vector<ResourceInfo>& resources) {
+    // Make sure codec availability feature is on.
+    if (!android::media::codec::codec_availability()) {
+        return INVALID_OPERATION;
+    }
+    // TODO: Implement this function
+    resources.clear();
+    // Call component store to query the the available resources.
+    return OK;
+}
+
 // GenerateCodecId generates a 64bit Random ID for each codec that is created.
 // The Codec ID is generated as:
 //   - A process-unique random high 32bits
@@ -2524,6 +2536,23 @@ status_t MediaCodec::configure(
     }
 
     return err;
+}
+
+status_t MediaCodec::getRequiredDeviceResources(std::vector<ResourceInfo>& resources) {
+    // Make sure codec availability feature is on.
+    if (!android::media::codec::codec_availability()) {
+        return INVALID_OPERATION;
+    }
+    // TODO: Implement this function
+    resources.clear();
+    // Make sure that the codec is in configured state.
+    if (mState != CONFIGURED) {
+        ALOGE("Codec isn't in configured state!");
+        return INVALID_OPERATION;
+    }
+    // Call mCodec->getRequiredDeviceResources to query the
+    // component interface to get the required resources.
+    return OK;
 }
 
 // Media Format Shaping support

@@ -142,6 +142,25 @@ struct MediaCodec : public AHandler {
 
     static sp<PersistentSurface> CreatePersistentInputSurface();
 
+    /**
+     * Abstraction for Codec resources.
+     */
+    struct ResourceInfo {
+        /**
+         * Identifier for the Resource type.
+         */
+        int mId;
+        /**
+         * Available count of this Resource type.
+         */
+        int mCount;
+    };
+
+    /**
+     * Get a list of available device codec resources.
+     */
+    static status_t getAvailableDeviceResources(std::vector<ResourceInfo>& resources);
+
     status_t configure(
             const sp<AMessage> &format,
             const sp<Surface> &nativeWindow,
@@ -154,6 +173,15 @@ struct MediaCodec : public AHandler {
             const sp<ICrypto> &crypto,
             const sp<IDescrambler> &descrambler,
             uint32_t flags);
+
+    /**
+     * Get a list of required device codec resources.
+     *
+     * This may only be called after configure and before start.
+     * Calling this while the codec isn't in the configured state will result in
+     * returning INVALID_OPERATION error code.
+     */
+    status_t getRequiredDeviceResources(std::vector<ResourceInfo>& resources);
 
     status_t releaseCrypto();
 
