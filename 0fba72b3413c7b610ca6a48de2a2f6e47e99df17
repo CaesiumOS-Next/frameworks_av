@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "0fba72b3413c7b610ca6a48de2a2f6e47e99df17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7a623f_0b3d98d2",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2615,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-11-04T10:07:21Z",
+      "side": 1,
+      "message": "i think if the flag is disabled we should behave as if this `case` statement wasn\u0027t present - i.e. the contents of the `default:` statement - which looks like it modifies `offset` and then returns `OK`.",
+      "revId": "0fba72b3413c7b610ca6a48de2a2f6e47e99df17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

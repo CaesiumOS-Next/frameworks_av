@@ -227,6 +227,30 @@
       },
       "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca42e3d0_ec7f8eb0",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-11-04T10:07:21Z",
+      "side": 1,
+      "message": "Ah right - there are more extractor changes neeeded to suppoort APV after this? Should these changes be merged together in that case? It would be easier to review to see the whole picture.\n\nThe description of this change is:\n\n\u003e Add APV codec support to Platform extractor\n\nThat sounds quite complete, like no further extractor changes are needed for APV playback to work - but I guess that\u0027s not correct?\n\nIf you are going to keep the changes separate then please reword the description of this one to more precisely reflect what it is actually implementing, and to sound less \u0027complete\u0027 (if it is indeed incomplete).",
+      "parentUuid": "a631e39a_7f666f6c",
+      "range": {
+        "startLine": 2663,
+        "startChar": 0,
+        "endLine": 2663,
+        "endChar": 28
+      },
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
