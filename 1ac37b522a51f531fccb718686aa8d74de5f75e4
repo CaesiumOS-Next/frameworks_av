@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41da282d_e1df8f97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-11-04T14:21:09Z",
+      "side": 1,
+      "message": "as per the current discussions, this is no longer expected from the extractor.\nmark this WIP and ignore this for now.",
+      "revId": "1ac37b522a51f531fccb718686aa8d74de5f75e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
