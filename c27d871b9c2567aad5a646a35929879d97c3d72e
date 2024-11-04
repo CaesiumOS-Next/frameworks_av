@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b21f984_5263f1ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-04T19:07:14Z",
+      "side": 1,
+      "message": "Please explain the intent of this service, currently it\u0027s too generic for anyone to explain what it does. Also, \u0027system_ext\u0027 is the partition for vendors, they should be able to add this service anyway. I\u0027m not sure what problem does this contribution is intended to solve.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673f3d7a_c4fa87a8",
+        "filename": "media/audio_extension/audio_extension.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-04T19:07:14Z",
+      "side": 1,
+      "message": "What this service actually does?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 84
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97657b31_439e3d8d",
         "filename": "media/audio_extension/main_audio_extension.cpp",
         "patchSetId": 2
@@ -19,6 +65,52 @@
         "startChar": 4,
         "endLine": 3,
         "endChar": 41
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3502005c_50192c7b",
+        "filename": "media/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-04T19:07:14Z",
+      "side": 1,
+      "message": "In order to be able to register anything with the ServiceManager, this service must have associated SELinux policy rules. Otherwise this service is incomplete, and this will be confusing.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69359118_800f9321",
+        "filename": "media/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-04T19:07:14Z",
+      "side": 1,
+      "message": "Since it\u0027s a service, it should really go under `frameworks/av/services`.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 51
       },
       "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
