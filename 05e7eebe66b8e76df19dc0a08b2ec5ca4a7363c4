@@ -275,6 +275,30 @@
       },
       "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd16b69c_cf838c8b",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-11-04T14:20:25Z",
+      "side": 1,
+      "message": "Ian,\nFyodor is in discussion with APV team about the static frame header.\nAs of now it has been aligned that it is not a good idea to expect the extractors and muxers to deal with the frame headers. So the second CL is not required as of now.\n\nSham,\nPlease mark the second CL as WIP and ignore it for now.\nMake any changes required in this assuming this is the only CL for extractor.",
+      "parentUuid": "20c06e24_439cbe9a",
+      "range": {
+        "startLine": 2663,
+        "startChar": 0,
+        "endLine": 2663,
+        "endChar": 28
+      },
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
