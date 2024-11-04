@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d1a60e_00c2e700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-11-04T09:57:28Z",
+      "side": 1,
+      "message": "Done and already added test with APV encoded clip in CTS. [link](https://android-review.git.corp.google.com/c/platform/cts/+/3320194/2)",
+      "parentUuid": "1dce8239_6405485c",
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19f834a0_81dec5d2",
@@ -65,6 +83,30 @@
       "writtenOn": "2024-10-31T09:15:11Z",
       "side": 1,
       "message": "i think this belongs in aosp/3322397 rather than this change? (it doesn\u0027t seem to be used here)",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 56
+      },
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "665f5267_d0e4ca46",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-11-04T09:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19f834a0_81dec5d2",
       "range": {
         "startLine": 192,
         "startChar": 4,
@@ -159,6 +201,30 @@
           ]
         }
       ],
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a631e39a_7f666f6c",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2024-11-04T09:57:28Z",
+      "side": 1,
+      "message": "In [aosp/3322397](https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3322397/4) we are setting `static-frame-header` in `case FOURCC(\"apvC\")` and checking APV flag is enabled so it needs to be separated. We can have a conditional set also if we want to add it in `case FOURCC(\"av1C\"):`",
+      "parentUuid": "7eec43f8_611f0361",
+      "range": {
+        "startLine": 2663,
+        "startChar": 0,
+        "endLine": 2663,
+        "endChar": 28
+      },
       "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
