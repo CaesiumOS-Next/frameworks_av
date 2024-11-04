@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fe27dfe_e0a54632",
+        "filename": "media/aconfig/swcodec_flags.aconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-04T21:51:34Z",
+      "side": 1,
+      "message": "\"feature flag\" is redundant... c2 doesn\u0027t add anything here.\nperhaps just \"Enable APV Software Codec\"",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "5f9b27927c28b6c99de68f32a7ac621840703378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
