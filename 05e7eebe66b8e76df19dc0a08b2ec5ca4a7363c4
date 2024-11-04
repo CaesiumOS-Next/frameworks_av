@@ -299,6 +299,30 @@
       },
       "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3e0f13c_2d6b55b7",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-11-04T14:55:36Z",
+      "side": 1,
+      "message": "OK cool, if the second CL might not be required then I think we can remove the duplication here and re-use this `case` block for the `FOURCC(\"apvC\")` case too. If we decide to go ahead with the follow-up then we can split into two separate `case` blocks or add the conditional as Sham suggests.",
+      "parentUuid": "bd16b69c_cf838c8b",
+      "range": {
+        "startLine": 2663,
+        "startChar": 0,
+        "endLine": 2663,
+        "endChar": 28
+      },
+      "revId": "05e7eebe66b8e76df19dc0a08b2ec5ca4a7363c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
