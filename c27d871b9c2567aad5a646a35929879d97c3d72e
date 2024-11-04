@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97657b31_439e3d8d",
+        "filename": "media/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1605569
+      },
+      "writtenOn": "2024-11-04T18:37:43Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Open-source Licensing: Third-party license (BSD) disallowed in repository platform/frameworks/av:\n\nAnalyzer Description: Identifies changes requiring human review for potential licensing issues.\nOwner: opensource-licensing@google.com\n\nThird-party license (BSD) disallowed in repository platform/frameworks/av:\nSPDX-License-Identifier: BSD-3-Clause",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 41
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
