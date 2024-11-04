@@ -123,6 +123,7 @@ struct MediaCodec : public AHandler {
         CB_RESOURCE_RECLAIMED = 5,
         CB_CRYPTO_ERROR = 6,
         CB_LARGE_FRAME_OUTPUT_AVAILABLE = 7,
+        CB_REQUIRED_RESOURCES_CHANGED = 8,
     };
 
     static const pid_t kNoPid = -1;
@@ -142,6 +143,53 @@ struct MediaCodec : public AHandler {
 
     static sp<PersistentSurface> CreatePersistentInputSurface();
 
+    /**
+     * Abstraction for the Global Codec resources.
+     * This encapsulates all the available codec resources on the device.
+     */
+    struct GlobalResourceInfo {
+        /**
+         * Identifier for the Resource type.
+         */
+        int mId;
+        /**
+         * Total count/capacity of resources of this type.
+         */
+        int mCapacity;
+        /**
+         * Available count of this resource type.
+         */
+        int mAvailable;
+    };
+
+    /**
+     * Abstraction for the resources associated with a codec instance.
+     * This encapsulates the required codec resources for a configured codec instance.
+     */
+    struct InstanceResourceInfo {
+        /**
+         * Identifier for the Resource type.
+         */
+        int mId;
+        /**
+         * Required resource count of this type.
+         */
+        int mStaticCount;
+        /**
+         * Per frame resource requirement of this resource type.
+         */
+        int mPerFrameCount;
+    };
+
+    /**
+     * Get a list of Globally available device codec resources.
+     *
+     * It will return INVALID_OPERATION if:
+     *  - HAL does not implement codec availability API
+     *  - codec_availability feature flag isn't defined.
+     */
+    static status_t getGloballyAvailableResources(std::vector<GlobalResourceInfo>& resources);
+
     status_t configure(
             const sp<AMessage> &format,
             const sp<Surface> &nativeWindow,
@@ -154,6 +202,19 @@ struct MediaCodec : public AHandler {
             const sp<ICrypto> &crypto,
             const sp<IDescrambler> &descrambler,
             uint32_t flags);
+
+    /**
+     * Get a list of required codec resources.
+     *
+     * This may only be called after configuring the codec.
+     *
+     * Calling this while the codec wasn't configured, will result in
+     * returning INVALID_OPERATION error code.
+     * It will also return INVALID_OPERATION if:
+     *  - HAL does not implement codec availability API
+     *  - codec_availability feature flag isn't defined.
+     */
+    status_t getRequiredResources(std::vector<InstanceResourceInfo>& resources);
 
     status_t releaseCrypto();
 
@@ -671,6 +732,7 @@ private:
     void onCryptoError(const sp<AMessage> &msg);
     void onError(status_t err, int32_t actionCode, const char *detail = NULL);
     void onOutputFormatChanged();
+    void onRequiredResourcesChanged(const std::vector<InstanceResourceInfo>& resourceInfo);
 
     status_t onSetParameters(const sp<AMessage> &params);
 
@@ -770,6 +832,8 @@ private:
     friend class MediaTestHelper;
 
     CodecErrorLog mErrorLog;
+    // Required resource info for this codec.
+    std::vector<InstanceResourceInfo> mRequiredResourceInfo;
 
     DISALLOW_EVIL_CONSTRUCTORS(MediaCodec);
 };
