@@ -16,6 +16,24 @@
       "message": "Will cherry pick and test today.\nWill it be part of 2024Q4 fs release? or it is already closed?",
       "revId": "f7b48d22b8cb08d6580ca432e71c8da055398a5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "389f52ce_df96b031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-04T17:56:15Z",
+      "side": 1,
+      "message": "HAL interfaces are released once a year, the next release will be in the first half of 2025.",
+      "parentUuid": "d7939f4e_83ee1e10",
+      "revId": "f7b48d22b8cb08d6580ca432e71c8da055398a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
