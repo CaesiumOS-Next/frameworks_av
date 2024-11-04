@@ -22,6 +22,30 @@
       },
       "revId": "5f9b27927c28b6c99de68f32a7ac621840703378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49b74a6_171c621e",
+        "filename": "media/aconfig/swcodec_flags.aconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-04T22:17:15Z",
+      "side": 1,
+      "message": "Just following the pattern in codec_fwk.aconfig. Like here: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/aconfig/codec_fwk.aconfig;drc\u003d1f204268afd66cc7e03bda719bbfc569b5e9c653;l\u003d47\n\nI think \"feature flag\" is there to separate feature flags from \"bugfix flags\"",
+      "parentUuid": "5fe27dfe_e0a54632",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "5f9b27927c28b6c99de68f32a7ac621840703378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
