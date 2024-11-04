@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5b73a8_90d20a6b",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-11-04T17:19:01Z",
+      "side": 1,
+      "message": "why the asymetry between set and get Parameters implementation?",
+      "range": {
+        "startLine": 1236,
+        "startChar": 0,
+        "endLine": 1236,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7735a39f_d09a2a9e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AudioRecord.cpp",
+              "range": {
+                "startLine": 1235,
+                "startChar": 0,
+                "endLine": 1238,
+                "endChar": 0
+              },
+              "replacement": "    if (mInput \u003d\u003d AUDIO_IO_HANDLE_NONE || mAudioRecord \u003d\u003d nullptr) {\n        return String8::empty();\n    }\n    return statusTFromBinderStatus(mAudioRecord-\u003egetParameters(keys));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2a434a10483482972239f0d67cda4711b3ca498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
