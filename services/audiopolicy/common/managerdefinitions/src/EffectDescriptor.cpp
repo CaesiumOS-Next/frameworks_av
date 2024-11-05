@@ -157,14 +157,18 @@ status_t EffectDescriptorCollection::setEffectEnabled(const sp<EffectDescriptor>
     return NO_ERROR;
 }
 
-bool EffectDescriptorCollection::isNonOffloadableEffectEnabled() const
+bool EffectDescriptorCollection::isNonOffloadableEffectEnabled(
+        std::optional<const effect_uuid_t> uuid) const
 {
     for (size_t i = 0; i < size(); i++) {
         sp<EffectDescriptor> effectDesc = valueAt(i);
-        if (effectDesc->mEnabled && (effectDesc->isMusicEffect()) &&
-                ((effectDesc->mDesc.flags & EFFECT_FLAG_OFFLOAD_SUPPORTED) == 0)) {
-            ALOGV("isNonOffloadableEffectEnabled() non offloadable effect %s enabled on session %d",
-                  effectDesc->mDesc.name, effectDesc->mSession);
+        if ((effectDesc->mEnabled && (effectDesc->isMusicEffect()) &&
+                ((effectDesc->mDesc.flags & EFFECT_FLAG_OFFLOAD_SUPPORTED) == 0)) &&
+                (uuid == std::nullopt ||
+                memcmp(&effectDesc->mDesc.uuid, &uuid, sizeof(effect_uuid_t)) == 0)) {
+            ALOGV("isNonOffloadableEffectEnabled() non offloadable effect %s, uuid %p,"
+                    " enabled on session %d",
+                    effectDesc->mDesc.name, effectDesc->mDesc.uuid, effectDesc->mSession);
             return true;
         }
     }
