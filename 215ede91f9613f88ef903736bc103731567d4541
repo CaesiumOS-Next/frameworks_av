@@ -16,6 +16,64 @@
       "message": "PTAL.",
       "revId": "215ede91f9613f88ef903736bc103731567d4541",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9fa99d_a3b0549a",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 2641,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-11-05T09:48:08Z",
+      "side": 1,
+      "message": "should we increment `offset` here too? To match L3262 in the `default` case that would be executed before this CL.",
+      "range": {
+        "startLine": 2641,
+        "startChar": 0,
+        "endLine": 2641,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "071e2f30_1108e54e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 2642,
+                "startChar": 0,
+                "endLine": 2642,
+                "endChar": 0
+              },
+              "replacement": "                *offset +\u003d chunk_size;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "215ede91f9613f88ef903736bc103731567d4541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818c8f3c_a4255808",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 2642,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-11-05T09:48:08Z",
+      "side": 1,
+      "message": "optional nit: you can use `break` here to re-use the `return OK` line on L3267 - this seems more consistent with all the other code here.",
+      "revId": "215ede91f9613f88ef903736bc103731567d4541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
