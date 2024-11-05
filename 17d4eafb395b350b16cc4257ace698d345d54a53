@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c2d7aa_9492ce19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-05T21:42:23Z",
+      "side": 1,
+      "message": "We are going to. As part of this CL: https://android-review.git.corp.google.com/c/platform/cts/+/3312344",
+      "parentUuid": "ff36d371_b33ad9c5",
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee303366_827c465f",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cc287f6_0b7e3e5b",
+        "filename": "media/codec2/components/apv/C2SoftApvCommon.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-05T21:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee303366_827c465f",
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70b0d246_b8479d40",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-11-05T19:09:15Z",
       "side": 1,
       "message": "2024?",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b24bed_0608bd7c",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-05T21:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70b0d246_b8479d40",
       "range": {
         "startLine": 2,
         "startChar": 17,
@@ -179,6 +239,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "096c23bc_2d694170",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-05T21:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2047fb9e_76278663",
+      "range": {
+        "startLine": 657,
+        "startChar": 53,
+        "endLine": 657,
+        "endChar": 64
+      },
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca0a0d22_a5bfc153",
@@ -210,6 +294,24 @@
       "side": 1,
       "message": "It is to be protected with the flag: https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3326462 I am just figuring out if RO flag is the proper way to do it. Please feel free to comment on that CL as well. I\u0027ll add flagging by a separate CL.",
       "parentUuid": "ca0a0d22_a5bfc153",
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f538847_7d865936",
+        "filename": "media/codec2/vndk/C2Store.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-05T21:42:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1f43852f_df86b0d7",
       "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
