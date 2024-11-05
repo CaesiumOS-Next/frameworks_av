@@ -157,7 +157,7 @@ status_t EffectDescriptorCollection::setEffectEnabled(const sp<EffectDescriptor>
     return NO_ERROR;
 }
 
-bool EffectDescriptorCollection::isNonOffloadableEffectEnabled() const
+bool EffectDescriptorCollection::isNonOffloadableEffectEnabled(const effect_uuid_t* uuid) const
 {
     for (size_t i = 0; i < size(); i++) {
         sp<EffectDescriptor> effectDesc = valueAt(i);
@@ -165,7 +165,10 @@ bool EffectDescriptorCollection::isNonOffloadableEffectEnabled() const
                 ((effectDesc->mDesc.flags & EFFECT_FLAG_OFFLOAD_SUPPORTED) == 0)) {
             ALOGV("isNonOffloadableEffectEnabled() non offloadable effect %s enabled on session %d",
                   effectDesc->mDesc.name, effectDesc->mSession);
-            return true;
+            if (uuid == nullptr ||
+                  memcmp(&effectDesc->mDesc.uuid, uuid, sizeof(effect_uuid_t)) == 0) {
+                return true;
+            }
         }
     }
     return false;
