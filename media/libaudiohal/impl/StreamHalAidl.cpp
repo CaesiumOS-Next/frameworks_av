@@ -232,9 +232,11 @@ status_t StreamHalAidl::standby() {
             RETURN_STATUS_IF_ERROR(pause(&reply));
             if (reply.state != StreamDescriptor::State::PAUSED &&
                     reply.state != StreamDescriptor::State::DRAIN_PAUSED &&
-                    reply.state != StreamDescriptor::State::TRANSFER_PAUSED) {
-                AUGMENT_LOG(E, "unexpected stream state: %s (expected PAUSED)",
-                            toString(reply.state).c_str());
+                    reply.state != StreamDescriptor::State::TRANSFER_PAUSED &&
+                    (state != StreamDescriptor::State::DRAINING ||
+                        reply.state != StreamDescriptor::State::IDLE)) {
+                ALOGE("%s: unexpected stream state: %s (expected PAUSED)",
+                        __func__, toString(reply.state).c_str());
                 return INVALID_OPERATION;
             }
             FALLTHROUGH_INTENDED;
