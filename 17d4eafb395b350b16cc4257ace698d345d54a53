@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff36d371_b33ad9c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-05T19:09:15Z",
+      "side": 1,
+      "message": "we\u0027re probably not running the new codecs here..",
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee303366_827c465f",
+        "filename": "media/codec2/components/apv/C2SoftApvCommon.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-05T19:09:15Z",
+      "side": 1,
+      "message": "nit: license",
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b0d246_b8479d40",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-05T19:09:15Z",
+      "side": 1,
+      "message": "2024?",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2047fb9e_76278663",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-05T19:09:15Z",
+      "side": 1,
+      "message": "nit: inputFrames?",
+      "range": {
+        "startLine": 657,
+        "startChar": 53,
+        "endLine": 657,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1cd9e7d9_90b30987",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 657,
+                "startChar": 0,
+                "endLine": 658,
+                "endChar": 0
+              },
+              "replacement": "c2_status_t C2SoftApvEnc::setEncodeArgs(oapv_frms_t* inputFrames, const C2GraphicView* const input,\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 683,
+                "startChar": 0,
+                "endLine": 686,
+                "endChar": 0
+              },
+              "replacement": "    inputFrames-\u003enum_frms \u003d MAX_NUM_FRMS;\n    inputFrames-\u003efrm[mReceivedFrames].group_id \u003d 1;\n    inputFrames-\u003efrm[mReceivedFrames].pbu_type \u003d OAPV_PBU_TYPE_PRIMARY_FRAME;\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 698,
+                "startChar": 0,
+                "endLine": 699,
+                "endChar": 0
+              },
+              "replacement": "                    ColorConvertP010ToYUV422P10le(input, inputFrames-\u003efrm[0].imgb);\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 700,
+                "startChar": 0,
+                "endLine": 701,
+                "endChar": 0
+              },
+              "replacement": "                    ColorConvertP010ToP210(input, inputFrames-\u003efrm[0].imgb);\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 706,
+                "startChar": 0,
+                "endLine": 707,
+                "endChar": 0
+              },
+              "replacement": "                ColorConvertNv12ToP210(input, inputFrames-\u003efrm[0].imgb);\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 708,
+                "startChar": 0,
+                "endLine": 709,
+                "endChar": 0
+              },
+              "replacement": "                ColorConvertNv12ToP210(input, inputFrames-\u003efrm[0].imgb);\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 1200,
+                "startChar": 0,
+                "endLine": 1201,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d setEncodeArgs(\u0026inputFrames, view.get(), workIndex);\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 1219,
+                "startChar": 0,
+                "endLine": 1220,
+                "endChar": 0
+              },
+              "replacement": "    if (inputFrames.frm[0].imgb) {\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 1221,
+                "startChar": 0,
+                "endLine": 1222,
+                "endChar": 0
+              },
+              "replacement": "                oapve_encode(mEncoderId, \u0026inputFrames, mMetaId, bits.get(), \u0026stat, \u0026ReconFrames);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca0a0d22_a5bfc153",
+        "filename": "media/codec2/vndk/C2Store.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-05T19:09:15Z",
+      "side": 1,
+      "message": "maybe we should protect these with a flag? although the catch is that we don\u0027t have mechanism to enable part of the xml by a flag.",
+      "revId": "17d4eafb395b350b16cc4257ace698d345d54a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
