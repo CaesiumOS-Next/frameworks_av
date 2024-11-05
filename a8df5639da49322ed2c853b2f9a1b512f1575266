@@ -45,6 +45,30 @@
       },
       "revId": "a8df5639da49322ed2c853b2f9a1b512f1575266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0892dfa0_92458fa0",
+        "filename": "media/aconfig/swcodec_flags.aconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-05T21:10:57Z",
+      "side": 1,
+      "message": "Ray, sorry, but I disagree.\nAll other codec-related features are in codec_fwk namespace. \nThere is no \"media\" namespace for flags (as far as I can tell) and I\u0027d refrain from creating a new namespace unless it is absolutely necessary. On the other hand:\n1. APV API is guarded by the flag in codec_fwk https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/aconfig/codec_fwk.aconfig;drc\u003d1f204268afd66cc7e03bda719bbfc569b5e9c653;l\u003d18 and\n2. This new codec will only be available via MediaCodec Framework\nSo codec_fwk namespace seems appropriate to me.",
+      "parentUuid": "63f04b2c_38dd9071",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "a8df5639da49322ed2c853b2f9a1b512f1575266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
