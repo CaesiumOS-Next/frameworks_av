@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30b67f3d_49b4aa97",
+        "filename": "media/module/extractors/tests/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-11-05T00:39:47Z",
+      "side": 1,
+      "message": "default_team: \"trendy_team_android_media_solutions_playback\",",
+      "revId": "8a376eacfeb88c0b0bd232fb81680a39cc0a512a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
