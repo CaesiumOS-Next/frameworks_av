@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eac4560_8a9b367c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-06T02:47:41Z",
+      "side": 1,
+      "message": "From the implementation in [Codec2InfoBuilder.cpp](https://source.corp.google.com/h/android/platform/superproject/main/+/main:frameworks/av/media/codec2/sfplugin/Codec2InfoBuilder.cpp;drc\u003dd55f06f97dd48bf36099d5b8edb2bcf5d884f183;l\u003d643), there is no \"hybrid\" codec. Replacing the \"hybrid\" field with \"unkown\". @lajos@google.com",
+      "fixSuggestions": [
+        {
+          "fixId": "aed3a734_20fae5cc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "     * Unknown if it is a software or hardware codec. This is the default value.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c4608e2aad8510ce01ac51ebb66d295fcb8efd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
