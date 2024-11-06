@@ -2037,6 +2037,12 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
         } else {
             ALOGV("Mime \"%s\" mapped to audio_format 0x%x",
                     mime.c_str(), audioFormat);
+            int32_t offloadpcmEncoding;
+            
+            if (format->findInt32(KEY_PCM_ENCODING, &offloadpcmEncoding)) {
+               audioFormat= audioFormatFromEncoding(offloadpcmEncoding);
+               ALOGV("audioFormat use KEY_PCM_ENCODING vaule 0x%x first",audioFormat);
+            }
 
             int avgBitRate = 0;
             format->findInt32("bitrate", &avgBitRate);
