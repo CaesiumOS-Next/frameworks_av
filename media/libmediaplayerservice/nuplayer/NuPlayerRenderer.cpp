@@ -98,20 +98,6 @@ const NuPlayer::Renderer::PcmInfo NuPlayer::Renderer::AUDIO_PCMINFO_INITIALIZER 
 // static
 const int64_t NuPlayer::Renderer::kMinPositionUpdateDelayUs = 100000ll;
 
-static audio_format_t constexpr audioFormatFromEncoding(int32_t pcmEncoding) {
-    switch (pcmEncoding) {
-    case kAudioEncodingPcmFloat:
-        return AUDIO_FORMAT_PCM_FLOAT;
-    case kAudioEncodingPcm16bit:
-        return AUDIO_FORMAT_PCM_16_BIT;
-    case kAudioEncodingPcm8bit:
-        return AUDIO_FORMAT_PCM_8_BIT; // TODO: do we want to support this?
-    default:
-        ALOGE("%s: Invalid encoding: %d", __func__, pcmEncoding);
-        return AUDIO_FORMAT_INVALID;
-    }
-}
-
 NuPlayer::Renderer::Renderer(
         const sp<MediaPlayerBase::AudioSink> &sink,
         const sp<MediaClock> &mediaClock,
@@ -2037,6 +2023,12 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
         } else {
             ALOGV("Mime \"%s\" mapped to audio_format 0x%x",
                     mime.c_str(), audioFormat);
+            int32_t offloadpcmEncoding;
+
+            if (format->findInt32(KEY_PCM_ENCODING, &offloadpcmEncoding)) {
+               audioFormat = audioFormatFromEncoding(offloadpcmEncoding);
+               ALOGV("audioFormat use KEY_PCM_ENCODING value 0x%x first",audioFormat);
+            }
 
             int avgBitRate = 0;
             format->findInt32("bitrate", &avgBitRate);
