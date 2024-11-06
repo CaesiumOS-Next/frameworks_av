@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e0a374_e45d6cb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2024-11-06T17:20:18Z",
+      "side": 1,
+      "message": "We need a bug number.",
+      "revId": "64fbe0913fc68f64d1708588b36078021899d954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "678ae494_ea4374e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2024-11-06T17:20:18Z",
+      "side": 1,
+      "message": "Is this part of the Test step? If so can you indent and use lower case for first letter.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "64fbe0913fc68f64d1708588b36078021899d954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
