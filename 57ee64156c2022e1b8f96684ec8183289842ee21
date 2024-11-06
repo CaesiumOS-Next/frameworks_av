@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11797463_a15972f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2024-11-06T17:25:16Z",
+      "side": 1,
+      "message": "Bug number?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 3
+      },
+      "revId": "57ee64156c2022e1b8f96684ec8183289842ee21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bfe575d_6e87e223",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2024-11-06T17:25:16Z",
+      "side": 1,
+      "message": "Is this the case when there are multiple speakers and an address is needed to identify them?\n\nWill this break the current selection rules for speaker without address?",
+      "fixSuggestions": [
+        {
+          "fixId": "2ffdcc5c_b9bb7e41",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+              "range": {
+                "startLine": 408,
+                "startChar": 0,
+                "endLine": 411,
+                "endChar": 0
+              },
+              "replacement": "    } else if (device_distinguishes_on_address(*deviceTypes.begin())) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "57ee64156c2022e1b8f96684ec8183289842ee21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
