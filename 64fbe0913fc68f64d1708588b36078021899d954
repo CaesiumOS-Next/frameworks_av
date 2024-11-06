@@ -39,6 +39,47 @@
       },
       "revId": "64fbe0913fc68f64d1708588b36078021899d954",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578fd853_641e1e56",
+        "filename": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-06T20:56:42Z",
+      "side": 1,
+      "message": "I think you can also use a suffix: `1ULL`",
+      "range": {
+        "startLine": 371,
+        "startChar": 41,
+        "endLine": 371,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "749fea7b_363dfa01",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+              "range": {
+                "startLine": 371,
+                "startChar": 0,
+                "endLine": 372,
+                "endChar": 0
+              },
+              "replacement": "            uint64_t pfwCriterionValue \u003d 1ULL \u003c\u003c (shift++);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "64fbe0913fc68f64d1708588b36078021899d954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
