@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf5f79c9_a89f386e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-06T23:42:50Z",
+      "side": 1,
+      "message": "There\u0027s no change to libmediandk.map.txt, so something\u0027s not right about how these are being declared.  We do also need ` __INTRODUCED_IN(36);` added to all the declarations, I believe.",
+      "revId": "b24ff9e615b03ce1247abc639e0efba270c46af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f0e4765_975952d5",
