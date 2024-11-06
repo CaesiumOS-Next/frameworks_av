@@ -98,20 +98,6 @@ const NuPlayer::Renderer::PcmInfo NuPlayer::Renderer::AUDIO_PCMINFO_INITIALIZER 
 // static
 const int64_t NuPlayer::Renderer::kMinPositionUpdateDelayUs = 100000ll;
 
-static audio_format_t constexpr audioFormatFromEncoding(int32_t pcmEncoding) {
-    switch (pcmEncoding) {
-    case kAudioEncodingPcmFloat:
-        return AUDIO_FORMAT_PCM_FLOAT;
-    case kAudioEncodingPcm16bit:
-        return AUDIO_FORMAT_PCM_16_BIT;
-    case kAudioEncodingPcm8bit:
-        return AUDIO_FORMAT_PCM_8_BIT; // TODO: do we want to support this?
-    default:
-        ALOGE("%s: Invalid encoding: %d", __func__, pcmEncoding);
-        return AUDIO_FORMAT_INVALID;
-    }
-}
-
 NuPlayer::Renderer::Renderer(
         const sp<MediaPlayerBase::AudioSink> &sink,
         const sp<MediaClock> &mediaClock,
@@ -2028,7 +2014,12 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
     if (offloadingAudio()) {
         AString mime;
         CHECK(format->findString("mime", &mime));
-        status_t err = mapMimeToAudioFormat(audioFormat, mime.c_str());
+        status_t err = OK;
+        if (audioFormat == AUDIO_FORMAT_PCM_16_BIT) {
+            // If there is probably no pcm-encoding in the format message, try to get the format by
+            // its mimetype.
+            err = mapMimeToAudioFormat(audioFormat, mime.c_str());
+        }
 
         if (err != OK) {
             ALOGE("Couldn't map mime \"%s\" to a valid "
