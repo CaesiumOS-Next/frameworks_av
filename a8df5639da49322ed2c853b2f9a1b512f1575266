@@ -93,6 +93,30 @@
       },
       "revId": "a8df5639da49322ed2c853b2f9a1b512f1575266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8d704a_38196e94",
+        "filename": "media/aconfig/swcodec_flags.aconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-06T21:00:34Z",
+      "side": 1,
+      "message": "Also according to this: go/android-flags-howto-onboarding we should not create a namespace just for the sake of logical subdivision of functionality",
+      "parentUuid": "0892dfa0_92458fa0",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "a8df5639da49322ed2c853b2f9a1b512f1575266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
