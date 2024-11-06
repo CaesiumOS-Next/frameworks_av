@@ -1,0 +1,80 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66a6ddbe_9f2903a8",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-06T19:25:07Z",
+      "side": 1,
+      "message": "maybe LEVEL_UNUSED",
+      "range": {
+        "startLine": 332,
+        "startChar": 24,
+        "endLine": 332,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8c48e3f6_7e0edf60",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 332,
+                "startChar": 0,
+                "endLine": 333,
+                "endChar": 0
+              },
+              "replacement": "        int32_t level \u003d LEVEL_UNUSED;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8dfabe1dbd88dff014a57483759822580039d38b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1f2354_a836f981",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-06T19:25:07Z",
+      "side": 1,
+      "message": "nit: maybe a comment explaining why we multiply the level by 3 (because band?)",
+      "fixSuggestions": [
+        {
+          "fixId": "6f308d5a_3450a10e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 381,
+                "startChar": 0,
+                "endLine": 381,
+                "endChar": 0
+              },
+              "replacement": "        // APV level is defined as 3x of the level in the spec.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8dfabe1dbd88dff014a57483759822580039d38b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
