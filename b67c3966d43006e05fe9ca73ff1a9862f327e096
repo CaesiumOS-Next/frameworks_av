@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a003e7dd_912f846f",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-06T22:23:44Z",
+      "side": 1,
+      "message": "could these functions be in some utils class so that they don\u0027t pollute the ::android namespace with lots of media specific methods (and maybe even classes)?\n\nOptionally they could be static methods inside Rational and Range",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 18
+      },
+      "revId": "b67c3966d43006e05fe9ca73ff1a9862f327e096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

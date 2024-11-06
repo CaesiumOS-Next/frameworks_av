@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6544bc6_24ecdaee",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 60
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-06T22:23:44Z",
+      "side": 1,
+      "message": "this may overflow... perhaps use strtol?",
+      "range": {
+        "startLine": 60,
+        "startChar": 21,
+        "endLine": 60,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5536902b_33ab5731",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "        int w \u003d std::stoi(match[1].str().c_str());\n        int h \u003d std::stoi(match[3].str().c_str());\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": "        int numerator \u003d std::stoi(match[1].str().c_str());\n        int denominator \u003d std::stoi(match[3].str().c_str());\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 152,
+                "startChar": 0,
+                "endLine": 156,
+                "endChar": 0
+              },
+              "replacement": "        lower \u003d std::stoi(match[1].str().c_str());\n        upper \u003d std::stoi(match[2].str().c_str());\n    } else if (std::stoi(str.c_str()) !\u003d 0) {\n        lower \u003d upper \u003d std::stoi(str.c_str());\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 172,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": "        lower \u003d std::stol(match[1].str().c_str());\n        upper \u003d std::stol(match[2].str().c_str());\n    } else if (std::stol(str.c_str()) !\u003d 0) {\n        lower \u003d upper \u003d std::stoi(str.c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "78e705fd78a8bb1591e6ab17da6ef50eca3d75f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d42cda10_1de1202d",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 60
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-06T22:23:44Z",
+      "side": 1,
+      "message": "should these be also sized?, e.g. int32_t",
+      "range": {
+        "startLine": 110,
+        "startChar": 36,
+        "endLine": 110,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6d02779c_9686bf23",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 110,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": "Rational ScaleRatio(Rational ratio, int scale) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 115,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "            (int)(ratio.getNumerator() * (double)scale),     // saturate to int\n            (int)(ratio.getDenominator() * (double)scale));  // saturate to int\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 119,
+                "startChar": 0,
+                "endLine": 121,
+                "endChar": 0
+              },
+              "replacement": "Range\u003cRational\u003e ScaleRange(Range\u003cRational\u003e range, int scale) {\n    if (scale \u003d\u003d 1) {\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilitiesUtils.cpp",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "            ScaleRatio(range.lower(), scale),\n            ScaleRatio(range.upper(), scale));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "78e705fd78a8bb1591e6ab17da6ef50eca3d75f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
