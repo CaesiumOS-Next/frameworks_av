@@ -33,6 +33,24 @@
       "message": "Do we need the deleters? or we can just let users to call delete by themselves. @etalvala@google.com",
       "revId": "b24ff9e615b03ce1247abc639e0efba270c46af8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc57bbfb_1b456243",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-06T23:51:20Z",
+      "side": 1,
+      "message": "Yes if the API allocates any instances for the client. No if they\u0027re all allocated by the client and passed into API methods (in which case the client must deallocate after the API is done using the objects)",
+      "parentUuid": "8f0e4765_975952d5",
+      "revId": "b24ff9e615b03ce1247abc639e0efba270c46af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
