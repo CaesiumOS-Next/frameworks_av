@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "451bd8d6_2fd14bb1",
+        "filename": "media/aconfig/swcodec_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-06T01:40:44Z",
+      "side": 1,
+      "message": "com.google.android.media.swcodec is the c2 swcodec package name.",
+      "range": {
+        "startLine": 5,
+        "startChar": 12,
+        "endLine": 5,
+        "endChar": 37
+      },
+      "revId": "06c3a2eaf026d9d27645978e2bb2aa0dfb6c52cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
