@@ -1,0 +1,132 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b77a67_5259f91a",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-11-06T13:32:17Z",
+      "side": 1,
+      "message": "why would this give a different result for audioformat than the call at line 2024?",
+      "range": {
+        "startLine": 2043,
+        "startChar": 15,
+        "endLine": 2043,
+        "endChar": 71
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2d24f6f6_1e333f23",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+              "range": {
+                "startLine": 2043,
+                "startChar": 0,
+                "endLine": 2045,
+                "endChar": 0
+              },
+              "replacement": "               audioFormat \u003d audioFormatFromEncoding(offloadpcmEncoding);\n               ALOGV(\"audioFormat use KEY_PCM_ENCODING vaule 0x%x first\", audioFormat);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a037cbd_5bf27c14",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-11-06T13:32:17Z",
+      "side": 1,
+      "message": "missing space",
+      "range": {
+        "startLine": 2043,
+        "startChar": 26,
+        "endLine": 2043,
+        "endChar": 27
+      },
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d597de5e_51dede59",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2044,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-11-06T13:32:17Z",
+      "side": 1,
+      "message": "value",
+      "range": {
+        "startLine": 2044,
+        "startChar": 55,
+        "endLine": 2044,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6591cd05_fee9e4ab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+              "range": {
+                "startLine": 2044,
+                "startChar": 0,
+                "endLine": 2045,
+                "endChar": 0
+              },
+              "replacement": "               ALOGV(\"audioFormat use KEY_PCM_ENCODING value 0x%x first\",audioFormat);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e01e4650_aa143212",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2409,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-11-06T13:32:17Z",
+      "side": 1,
+      "message": "this is already defined in NuPlayerRenderer class at line 101. please use the same function everywhere (use the new utils function in NuPlayerRenderer)",
+      "range": {
+        "startLine": 2409,
+        "startChar": 0,
+        "endLine": 2409,
+        "endChar": 78
+      },
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
