@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0e4765_975952d5",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-06T23:37:58Z",
+      "side": 1,
+      "message": "Do we need the deleters? or we can just let users to call delete by themselves. @etalvala@google.com",
+      "revId": "b24ff9e615b03ce1247abc639e0efba270c46af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
