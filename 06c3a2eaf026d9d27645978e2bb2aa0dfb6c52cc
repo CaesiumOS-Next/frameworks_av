@@ -22,6 +22,30 @@
       },
       "revId": "06c3a2eaf026d9d27645978e2bb2aa0dfb6c52cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "260c9a8f_ba58c4c5",
+        "filename": "media/aconfig/swcodec_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-06T03:32:19Z",
+      "side": 1,
+      "message": "Yes, according this this: go/mainline-trunk-stable-g3doc#what-container-should-i-use-for-my-flags I shall use APEX name as \"container\" for mainline flags.",
+      "parentUuid": "451bd8d6_2fd14bb1",
+      "range": {
+        "startLine": 5,
+        "startChar": 12,
+        "endLine": 5,
+        "endChar": 37
+      },
+      "revId": "06c3a2eaf026d9d27645978e2bb2aa0dfb6c52cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
