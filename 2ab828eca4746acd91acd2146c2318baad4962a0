@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b9f7ac_119ed3d2",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-06T20:30:30Z",
+      "side": 1,
+      "message": "If allowing IDLE is is specific to draining, can we do a more strict check here:\n\n```\n            if (reply.state !\u003d StreamDescriptor::State::PAUSED \u0026\u0026\n                    reply.state !\u003d StreamDescriptor::State::DRAIN_PAUSED \u0026\u0026\n                    reply.state !\u003d StreamDescriptor::State::TRANSFER_PAUSED \u0026\u0026\n                    (state !\u003d StreamDescriptor::State::DRAINING ||\n                        reply.state !\u003d StreamDescriptor::State::IDLE)) {\n```  \n\nThis way, we only allow `reply.state` to be `IDLE` if the pause from a `DRAINING` state.",
+      "range": {
+        "startLine": 236,
+        "startChar": 20,
+        "endLine": 236,
+        "endChar": 64
+      },
+      "revId": "2ab828eca4746acd91acd2146c2318baad4962a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
