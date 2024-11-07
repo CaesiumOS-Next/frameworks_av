@@ -16,6 +16,23 @@
       "message": "Shunkai, could you please approve.",
       "revId": "0fc3d44f3299ffb9317142272982f21ed879407a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e3734c_d7ed1ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-07T20:57:00Z",
+      "side": 1,
+      "message": "Jaideep, could you please help in getting Qualcomm-Review.",
+      "revId": "0fc3d44f3299ffb9317142272982f21ed879407a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
