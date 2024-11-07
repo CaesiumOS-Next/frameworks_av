@@ -16,6 +16,80 @@
       "message": "Ok, double-checked with the NDK API council folks (I am one, but it\u0027s been a bit since I\u0027ve engaged deeply with NDK).\n\n- You have to add public.txt entries manually\n- Per https://g3doc.corp.google.com/company/teams/android-api-council/guidelines/ndk.md?cl\u003dhead#compatibilty-cts , you have to have a CTS test that verifies these actually work, because otherwise there\u0027s no way to guarantee you exposed the methods correctly.  That\u0027s supposed to be included in the initial set of CLs.",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a956ae_3e411103",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T22:37:26Z",
+      "side": 1,
+      "message": "Can we use clear structs in this API? Such structs are not extendible (not sure if we would ever want to extend these). The alternate is to add AMediaCodecSuppertedMediaType_getMode() and _getMediaType() methods, and keep these opaque.\n\nhow do we ensure that these will be non-modifiable for the user?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e917ac25_aa50216e",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T22:37:26Z",
+      "side": 1,
+      "message": "maybe without Info? that mimics the current Java API (findDecoderForFormat)",
+      "range": {
+        "startLine": 78,
+        "startChar": 47,
+        "endLine": 78,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "36f95a63_3623f903",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "media_status_t AMediaCodecStore_findNextDecoderForFormat(\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 97,
+                "startChar": 0,
+                "endLine": 98,
+                "endChar": 0
+              },
+              "replacement": "media_status_t AMediaCodecStore_findNextEncoderForFormat(\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
