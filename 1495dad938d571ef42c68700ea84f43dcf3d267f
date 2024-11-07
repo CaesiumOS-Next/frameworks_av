@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281d2ae3_e2b1c28b",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "what is the distinction between codec_buffer_type_t/codec_status_t and ApexCodec_Kind with regards to the naming? Is one supposed to be more universally used - e.g. in other NDKs?",
+      "range": {
+        "startLine": 258,
+        "startChar": 13,
+        "endLine": 258,
+        "endChar": 32
+      },
+      "revId": "1495dad938d571ef42c68700ea84f43dcf3d267f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47e5ef20_c3294590",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f3a3dc5_27128f18",
+      "range": {
+        "startLine": 285,
+        "startChar": 41,
+        "endLine": 286,
+        "endChar": 42
+      },
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff6c49ca_b34d0cf1",
@@ -96,6 +120,30 @@
           ]
         }
       ],
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75860b2b_a7d8d718",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff6c49ca_b34d0cf1",
+      "range": {
+        "startLine": 297,
+        "startChar": 13,
+        "endLine": 297,
+        "endChar": 26
+      },
       "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -151,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68698477_cd8320a4",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7abfb036_af2e8f7e",
+      "range": {
+        "startLine": 341,
+        "startChar": 7,
+        "endLine": 341,
+        "endChar": 13
+      },
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79e68902_1a8ebd03",
@@ -174,6 +246,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "830f132a_7553aeb6",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79e68902_1a8ebd03",
+      "range": {
+        "startLine": 390,
+        "startChar": 8,
+        "endLine": 391,
+        "endChar": 32
+      },
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8849b659_0ee29969",
@@ -187,6 +283,30 @@
       "writtenOn": "2024-10-31T18:29:49Z",
       "side": 1,
       "message": "same here on the ordering.",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 47
+      },
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b28c8662_c639d44d",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8849b659_0ee29969",
       "range": {
         "startLine": 455,
         "startChar": 8,
@@ -238,6 +358,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c02b0b4_265f4ea7",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01d60934_48d7d585",
+      "range": {
+        "startLine": 480,
+        "startChar": 48,
+        "endLine": 480,
+        "endChar": 93
+      },
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5bef395_eb12f60b",
@@ -275,6 +419,30 @@
           ]
         }
       ],
+      "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3217271e_a36b1919",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T17:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5bef395_eb12f60b",
+      "range": {
+        "startLine": 656,
+        "startChar": 36,
+        "endLine": 656,
+        "endChar": 90
+      },
       "revId": "12fe559a3451cfd2d201c8690502b470deffa16c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
