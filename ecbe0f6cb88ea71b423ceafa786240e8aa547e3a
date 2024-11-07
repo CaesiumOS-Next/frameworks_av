@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a593f90_777c28ee",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2463,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-07T23:47:49Z",
+      "side": 1,
+      "message": "Could we have some comments why this configure() could be allowed here?",
+      "range": {
+        "startLine": 2463,
+        "startChar": 8,
+        "endLine": 2463,
+        "endChar": 66
+      },
+      "revId": "ecbe0f6cb88ea71b423ceafa786240e8aa547e3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
