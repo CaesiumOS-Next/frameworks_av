@@ -20,6 +20,51 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc3a8e5b_ca6ac444",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T22:38:56Z",
+      "side": 1,
+      "message": "See go/android-ndk-api-guidelines#compatibilty-methods for adding __INTRODUCED_IN(36) annotations to each new method",
+      "fixSuggestions": [
+        {
+          "fixId": "512e21d2_18f82778",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "__INTRODUCED_IN(36)\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 63,
+                "endChar": 0
+              },
+              "replacement": "__INTRODUCED_IN(36)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a956ae_3e411103",
         "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
         "patchSetId": 10
