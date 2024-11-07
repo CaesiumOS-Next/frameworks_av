@@ -46,6 +46,30 @@
       },
       "revId": "2ab828eca4746acd91acd2146c2318baad4962a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de584966_6bc59fdc",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-07T19:12:42Z",
+      "side": 1,
+      "message": "Well, we can always send commands to the HAL w/o checking its state first, but I felt that we want to exercise more control on the framework side. At least, on the framework side we can ensure that errors are reported consistently, whereas every SoC vendor can provide their own error messages, or even not provide them, making issue investigations harder.",
+      "parentUuid": "790c5e62_97ea4777",
+      "range": {
+        "startLine": 236,
+        "startChar": 20,
+        "endLine": 236,
+        "endChar": 64
+      },
+      "revId": "2ab828eca4746acd91acd2146c2318baad4962a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
