@@ -65,6 +65,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78555353_b65a272f",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2024-11-07T02:36:09Z",
+      "side": 1,
+      "message": "Will be modified",
+      "parentUuid": "9a037cbd_5bf27c14",
+      "range": {
+        "startLine": 2043,
+        "startChar": 26,
+        "endLine": 2043,
+        "endChar": 27
+      },
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d69d75a_f2c1d2b7",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2024-11-07T02:36:09Z",
+      "side": 1,
+      "message": "The result here is the same as the result in line 2024, but the mapMimeToAudioFormat method in line 2031 remaps MEDIA_MIMETYPE_AUDIO_RAW to  AUDIO_FORMAT_PCM_16_BIT, resulting audioFormat error",
+      "parentUuid": "84b77a67_5259f91a",
+      "range": {
+        "startLine": 2043,
+        "startChar": 15,
+        "endLine": 2043,
+        "endChar": 71
+      },
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d597de5e_51dede59",
@@ -106,6 +154,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5fa864_8a6e5479",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2044,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2024-11-07T02:36:09Z",
+      "side": 1,
+      "message": "Will be modified",
+      "parentUuid": "d597de5e_51dede59",
+      "range": {
+        "startLine": 2044,
+        "startChar": 55,
+        "endLine": 2044,
+        "endChar": 60
+      },
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e01e4650_aa143212",
@@ -119,6 +191,30 @@
       "writtenOn": "2024-11-06T13:32:17Z",
       "side": 1,
       "message": "this is already defined in NuPlayerRenderer class at line 101. please use the same function everywhere (use the new utils function in NuPlayerRenderer)",
+      "range": {
+        "startLine": 2409,
+        "startChar": 0,
+        "endLine": 2409,
+        "endChar": 78
+      },
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f25c677_8a6a4e58",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2409,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2024-11-07T02:36:09Z",
+      "side": 1,
+      "message": "Will be modified",
+      "parentUuid": "e01e4650_aa143212",
       "range": {
         "startLine": 2409,
         "startChar": 0,
