@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2417b09_c1c89a92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T22:15:37Z",
+      "side": 1,
+      "message": "Ok, double-checked with the NDK API council folks (I am one, but it\u0027s been a bit since I\u0027ve engaged deeply with NDK).\n\n- You have to add public.txt entries manually\n- Per https://g3doc.corp.google.com/company/teams/android-api-council/guidelines/ndk.md?cl\u003dhead#compatibilty-cts , you have to have a CTS test that verifies these actually work, because otherwise there\u0027s no way to guarantee you exposed the methods correctly.  That\u0027s supposed to be included in the initial set of CLs.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
