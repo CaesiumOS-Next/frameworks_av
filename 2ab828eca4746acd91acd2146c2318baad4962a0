@@ -22,6 +22,30 @@
       },
       "revId": "2ab828eca4746acd91acd2146c2318baad4962a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "790c5e62_97ea4777",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2024-11-07T02:10:44Z",
+      "side": 1,
+      "message": "done.\n\nMikhail, I feel this code needs a revisit in terms of which transistions are allowed.\nA fallthrough in state is making code complex in terms of state expectations \nand for this \"standby\" like APIs, state checks may not serve the actual purpose of \"standy\" and return before that.\n\nDo you think we should atleast send \"standby\" even few intermittent states are mismatching?",
+      "parentUuid": "b6b9f7ac_119ed3d2",
+      "range": {
+        "startLine": 236,
+        "startChar": 20,
+        "endLine": 236,
+        "endChar": 64
+      },
+      "revId": "2ab828eca4746acd91acd2146c2318baad4962a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
