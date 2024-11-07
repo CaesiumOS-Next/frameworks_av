@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c85b56_0218f001",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T22:48:33Z",
+      "side": 1,
+      "message": "it seems that at the NDK we would always exclude such special codecs.",
+      "range": {
+        "startLine": 58,
+        "startChar": 37,
+        "endLine": 58,
+        "endChar": 44
+      },
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6218405b_20330616",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T22:48:33Z",
+      "side": 1,
+      "message": "seems that we are double checking for getValidFeature, as we only use \"checkFeature\" for features returns by getValidFeature.\n\nThat said, this would become mFlagsSupported.\"contains\"(KEY_FEATURE_ + name)",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8a61b887_1ae31ab9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "    return mFlagsSupported.contains(KEY_FEATURE_ + name);\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 107,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": "    return mFlagsRequired.contains(KEY_FEATURE_ + name);\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 128,
+                "startChar": 0,
+                "endLine": 137,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e201aca_bd7e4818",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T22:48:33Z",
+      "side": 1,
+      "message": "here we could do\n\nif (yesNo \u003e 0) { \n  mFlagsRequired.add(key)\n}\nmFlagsSupported.add(key)",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6395cab6_9490d61a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "    return checkFeature(name, mFlagsSupported.get());\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 107,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": "    return checkFeature(name, mFlagsRequired.get());\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 424,
+                "startChar": 0,
+                "endLine": 427,
+                "endChar": 0
+              },
+              "replacement": "    mFlagsRequired.clear();\n    mFlagsSupported.clear();\n    mFlagsVerified.clear(); // TODO: remove as it is unused\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 435,
+                "startChar": 0,
+                "endLine": 436,
+                "endChar": 0
+              },
+              "replacement": "            mFlagsRequired.add(feat.mName);\n"
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 437,
+                "startChar": 0,
+                "endLine": 438,
+                "endChar": 0
+              },
+              "replacement": "        mFlagsSupported.add(feat.mName);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "742ca90a_22e3faa4",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 69
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T22:48:33Z",
+      "side": 1,
+      "message": "note: we don\u0027t yet verify flags, so that could be ommitted.\n\nCould we use std::set\u003cfeature-string, or Feature\u003e for mSupportedFlags and mRequiredFlags? This will make this part of the code simpler.  Using a string\nwould allow supporting both \"feature-xyz\" strings and \"attribute-xyz\" strings.",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 267,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6071658f_51dff3eb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilities.h",
+              "range": {
+                "startLine": 265,
+                "startChar": 0,
+                "endLine": 268,
+                "endChar": 0
+              },
+              "replacement": "    std::set\u003cFeature\u003e mSupportedFeatures;\n    std::set\u003cFeature\u003e mRequiredFeatures;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
