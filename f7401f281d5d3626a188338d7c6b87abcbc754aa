@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd55a784_100d8213",
+        "filename": "media/libmedia/EncoderCapabilities.cpp",
+        "patchSetId": 64
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-07T22:18:39Z",
+      "side": 1,
+      "message": "this may be simpler in C++ as\n\nif (complexity) {\n  ok \u0026\u0026\u003d mComplexityRange.contains(complexity.value())\n}",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e67da79b_1dd772a8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/EncoderCapabilities.cpp",
+              "range": {
+                "startLine": 121,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": "    if (complexity) {\n        ok \u0026\u0026\u003d mComplexityRange.contains(complexity.value());\n"
+            },
+            {
+              "path": "media/libmedia/EncoderCapabilities.cpp",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "    if (quality) {\n        ok \u0026\u0026\u003d mQualityRange.contains(quality.value());\n"
+            },
+            {
+              "path": "media/libmedia/EncoderCapabilities.cpp",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "    if (profile) {\n        ok \u0026\u0026\u003d std::any_of(mProfileLevels.begin(), mProfileLevels.end(),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f7401f281d5d3626a188338d7c6b87abcbc754aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
