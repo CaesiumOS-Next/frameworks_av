@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "742ff777_461abc72",
+        "filename": "media/libaudioprocessing/AudioMixerOps.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-07T19:47:49Z",
+      "side": 1,
+      "message": "i prefer we do not consider this a canonical mask as it is dramatically different than the others.",
+      "range": {
+        "startLine": 352,
+        "startChar": 15,
+        "endLine": 352,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b6422621_050b4b59",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioprocessing/AudioMixerOps.h",
+              "range": {
+                "startLine": 352,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4be56463b2d2091c3306384d6672fc3e05420e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
