@@ -18,6 +18,162 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "023f5693_af64592a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "A lot of minor nits about documentation, a few questions on structure",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01504d0d_f50a933c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "\"A utility structure...\"",
+      "range": {
+        "startLine": 34,
+        "startChar": 3,
+        "endLine": 34,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a8e7d231_a58db6d2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": " * A utility structure describing the range of two integer values.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": " * A utility structure describing the range of two double values.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55b4404_af9f9f74",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "it\u0027s generally preferred to typedef structs, go/android-ndk-api-guidelines#naming",
+      "fixSuggestions": [
+        {
+          "fixId": "7295be34_a962b57f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "typedef struct AIntRange {\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "} AIntRange;\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "typedef struct ADoubleRange {\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "} ADoubleRange;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1b6b65_693ab2e3",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "\"A utility structure...\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 19
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc3a8e5b_ca6ac444",
@@ -65,6 +221,1001 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c60ed929_8edb1da5",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "free/delete functions often accept nulls (and do a no-op), it\u0027s generally a good default unless there\u0027s an actual reason to do otherwise.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae04090_c578e4fe",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "For any return value that\u0027s a pointer, you need to document the lifetime, and/or indicate how the receiver has to free the returned value.\n\nI assume this is either \u0027the returned string is valid for the lifetime of AMediaCodecInfo \u0027 or \u0027valid until the process ends\u0027 ?",
+      "fixSuggestions": [
+        {
+          "fixId": "d26771ea_3e066de9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 71,
+                "endChar": 0
+              },
+              "replacement": " * Return NULL if \\param info is invalid. The returned string is valid for the lifetime of the\n * AMediaCodecInfo.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ee3c0e_549b75eb",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "This is a pretty weird statement, are you saying \"There\u0027s no way to verify this is actually a HW codec?\u0027  We certainly run compliance tests against hardware codecs, so we need to be more specific here. \n\nAnd not sure we really need to say \u0027don\u0027t trust this value\u0027?  Maybe something like: \n\n\u0027Hardware codecs generally have higher performance or lower power consumption than software codecs, but since they are specific to each device, the actual performance details can vary.\u0027?",
+      "range": {
+        "startLine": 99,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 53
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ed67ec_b7da76e4",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "we should probably add 0 to the enum then, so that the returned value is always a valid enum.",
+      "range": {
+        "startLine": 113,
+        "startChar": 3,
+        "endLine": 113,
+        "endChar": 38
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7675ced9_af657aca",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "Document lifetime of returned string.  We could also implement this as\n\n```\nconst char* mediaType AMediaCodecInfo_getMediaType(const AMediaCodecInfo *info);\n```\n\nif INVALID_PARAMETER is the only error case we need to worry about (and return nullptr in that case), which would be slightly simpler to use.  But if we expect to use multiple media_status_t values that\u0027s not a good idea.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "471d5a10_91c42ab9",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "what is returned if info is invalid?",
+      "fixSuggestions": [
+        {
+          "fixId": "d1b7101f_ea1aff26",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 132,
+                "endChar": 0
+              },
+              "replacement": " *\n * Return 0 if \\param info is invalid.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76dd43c7_0238765a",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "right now, this can\u0027t distinguish between \u0027known feature not supported\u0027, \u0027unknown feature\u0027, and \u0027null info/featureName\u0027.  \n\nShould we have a distinction between \"bad inputs\" and \"good inputs but not a supported feature\", at least?  That\u0027d require returning an enum of some kind, or something like \"0 \u003d unsupported, \u003e 0 supported, \u003c 0 error code\".",
+      "fixSuggestions": [
+        {
+          "fixId": "9b42287e_ce72f602",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 142,
+                "startChar": 0,
+                "endLine": 143,
+                "endChar": 0
+              },
+              "replacement": "bool AMediaCodecInfo_isFeatureSupported(const AMediaCodecInfo *info, const char *featureName,\n        bool *outIsVendor);\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "bool AMediaCodecInfo_isFeatureRequired(const AMediaCodecInfo *info, const char *featureName,\n        bool *outIsVendor);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "605a5824_95f460e8",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "same as line 142",
+      "fixSuggestions": [
+        {
+          "fixId": "54620435_c09fe4dd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 142,
+                "startChar": 0,
+                "endLine": 143,
+                "endChar": 0
+              },
+              "replacement": "bool AMediaCodecInfo_isFeatureSupported(const AMediaCodecInfo *info, const char *feature);\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "bool AMediaCodecInfo_isFeatureRequired(const AMediaCodecInfo *info, const char *feature);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0675489d_04a71c8a",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "same as line 142",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a2506f_32142f2b",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "lifetime of outAudioCaps.\n\nIf there\u0027s a global policy, as I think we discussed we\u0027d have one here, we could just document it in one place, but not sure what that place would be for the NDK.  Not sure we can do file-level docs or not, please see if the existing NDK reference docs have some examples of that.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f01b35_f5ca4a7c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "lifetime of outVideoCaps",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2d39b6_059ff99d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "lifetime of outEncoderCaps",
+      "fixSuggestions": [
+        {
+          "fixId": "18401421_0cc704ec",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 183,
+                "endChar": 0
+              },
+              "replacement": " *\n * The caller is responsible for deleting the ACodecEncoderCapabilities object.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b945cb9_e388cc5a",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "I think I\u0027ll stop flagging lifetime notes from here down for standard out params, but please make sure they\u0027re all documented.\n\nThat said, for simple small structs like Range, should we just have clients provide an instance and copy into it? Or return the range directly (but that\u0027s of course messy for media_status_t when we need it)?",
+      "fixSuggestions": [
+        {
+          "fixId": "92c6bf91_b38de760",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 197,
+                "endChar": 0
+              },
+              "replacement": "        const AIntRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 206,
+                "startChar": 0,
+                "endLine": 207,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecAudioCapabilities *audioCaps, const int **outArrayPtr);  // outArrayPtr is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 216,
+                "startChar": 0,
+                "endLine": 217,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecAudioCapabilities *audioCaps, const AIntRange **outArrayPtr);  // outArrayPtr is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecAudioCapabilities *audioCaps, const AIntRange **outArrayPtr);  // outArrayPtr is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 304,
+                "startChar": 0,
+                "endLine": 305,
+                "endChar": 0
+              },
+              "replacement": "        const AIntRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 313,
+                "startChar": 0,
+                "endLine": 314,
+                "endChar": 0
+              },
+              "replacement": "        const AIntRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 322,
+                "startChar": 0,
+                "endLine": 323,
+                "endChar": 0
+              },
+              "replacement": "        const AIntRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 355,
+                "startChar": 0,
+                "endLine": 356,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecVideoCapabilities *videoCaps, const AIntRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 368,
+                "startChar": 0,
+                "endLine": 369,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecVideoCapabilities *videoCaps, int32_t height, AIntRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 381,
+                "startChar": 0,
+                "endLine": 382,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecVideoCapabilities *videoCaps, int32_t width, AIntRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 400,
+                "endChar": 0
+              },
+              "replacement": "        ADoubleRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 413,
+                "startChar": 0,
+                "endLine": 414,
+                "endChar": 0
+              },
+              "replacement": "        ADoubleRange **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 423,
+                "startChar": 0,
+                "endLine": 424,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecPerformancePoint **outPerformancePointArray);  // outPerformancePointArray is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 449,
+                "startChar": 0,
+                "endLine": 450,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecEncoderCapabilities *encoderCaps, const AIntRange  **outRange);  // outRange is owned by the caller.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 462,
+                "startChar": 0,
+                "endLine": 463,
+                "endChar": 0
+              },
+              "replacement": "        const ACodecEncoderCapabilities *encoderCaps, const AIntRange **outRange);  // outRange is owned by the caller.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe628a1_7e1215a5",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "by distinct, does that mean that the ranges are fully discontinuous, so that for entry N,  `max_{N-1} \u003c min_{N} \u003c max_{N} \u003c min{N+1}` or just that there are no exact duplicate ranges where `max_N \u003d\u003d max_M \u0026\u0026 min_N \u003d\u003d min_M` for any two entries N and M?  If the latter, what\u0027s the sorting criteria for ascending?",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c59ea3_ac569422",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "What\u0027s returned if audioCaps is bad?  Not sure if 0 could be a valid max input channel count or not here.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8ffc2ea_fdd9206f",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "What\u0027s returned if audioCaps is bad?",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "555ac0f6_1ac13e95",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "Sort order, are they disjoint, as with getSupportedSampleRateRanges",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6764915_25154db4",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "less chance of problems compared to the string feature query, but is this returning \u0027false\u0027 for bad audioCaps?",
+      "fixSuggestions": [
+        {
+          "fixId": "cf143a09_6c8c13e7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 242,
+                "startChar": 0,
+                "endLine": 242,
+                "endChar": 0
+              },
+              "replacement": " *\n * Return false if \\param audioCaps is invalid.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6527a4_bfda3010",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "if we do\n```\nACodecPerformancePoint *AcodecPerformancePoint_create(...) \n```\ninstead, then we don\u0027t have this error case to worry about. Are there other error values to return? If not, should we do the above?",
+      "fixSuggestions": [
+        {
+          "fixId": "b1bac64e_1f27753d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 257,
+                "endChar": 0
+              },
+              "replacement": " * Return a performance point if it is successfully created.\n * Return NULL if it fails to create a performance point.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 258,
+                "startChar": 0,
+                "endLine": 260,
+                "endChar": 0
+              },
+              "replacement": "ACodecPerformancePoint *ACodecPerformancePoint_create(int32_t width, int32_t height,\n        int32_t frameRate);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e973e5f0_408b23b9",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "is there a definition of \u0027covers\u0027 we should include here? It\u0027s not actually clear what it means specifically and why I\u0027d want to know it.  Is it just that `another.width * height \u003c one.width * height \u0026\u0026 another.fps \u003c one.fps` ? So if the codec can handle `one` it can always also handle `another`?",
+      "range": {
+        "startLine": 280,
+        "startChar": 68,
+        "endLine": 280,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4db32c66_fd9502b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 289,
+                "startChar": 0,
+                "endLine": 289,
+                "endChar": 0
+              },
+              "replacement": "/**\n * Checks whether a performance point covers a media format.\n *\n * \\param format Stream format considered.\n * \\return true if \\param one covers \\param another.\n */\nbool ACodecPerformancePoint_covers(const ACodecPerformancePoint *one,\n        const ACodecPerformancePoint *another);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6adfdf3_72ec857d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "performance",
+      "range": {
+        "startLine": 290,
+        "startChar": 22,
+        "endLine": 290,
+        "endChar": 32
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137d92b9_19c849cb",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "as above, should we have a client-provided range object, or even return a range directly? Same for the next few range query methods.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bded94cb_e2092ecd",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "return value if videoCaps is bad? Same for next few methods",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df3e716_caa5321c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "A bit more docs here would be good.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b58986_eade4038",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "this is different from the methods above (at least in docs, no idea if the impl is the same), so please make sure we\u0027re consistent in the end. Or at least clearly documented in all cases.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d875601_505f011f",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "height query? Presumably height is a thing all video codecs do.",
+      "range": {
+        "startLine": 364,
+        "startChar": 43,
+        "endLine": 364,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b2af81fc_e8c4272f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 364,
+                "startChar": 0,
+                "endLine": 365,
+                "endChar": 0
+              },
+              "replacement": " * \\return AMEDIA_ERROR_UNSUPPORTED if the height query is not supported.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 377,
+                "startChar": 0,
+                "endLine": 378,
+                "endChar": 0
+              },
+              "replacement": " * \\return AMEDIA_ERROR_UNSUPPORTED if the width query is not supported.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d23249b3_d01b8c47",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "width query",
+      "range": {
+        "startLine": 377,
+        "startChar": 43,
+        "endLine": 377,
+        "endChar": 48
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d70099_9c8c78f5",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "frame rate query",
+      "range": {
+        "startLine": 394,
+        "startChar": 43,
+        "endLine": 394,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4085a23d_28b9334c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 394,
+                "startChar": 0,
+                "endLine": 395,
+                "endChar": 0
+              },
+              "replacement": " * \\return AMEDIA_ERROR_UNSUPPORTED if the frame rate query is not supported.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad07c4e_c4179d0b",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "Maybe add \"This is based on manufacturer\u0027s performance measurements for this device and codec. The measurements may not be available for all codecs or devices.\"",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d75147f_f9d701e9",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "given",
+      "range": {
+        "startLine": 426,
+        "startChar": 21,
+        "endLine": 426,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "551d5efe_640f0971",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 426,
+                "startChar": 0,
+                "endLine": 427,
+                "endChar": 0
+              },
+              "replacement": " * \\return whether a given video size and frameRate combination is supported.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4792247a_c2a38909",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "are these defined somewhere?",
+      "range": {
+        "startLine": 468,
+        "startChar": 7,
+        "endLine": 468,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3bbef45a_ee6a755e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 466,
+                "startChar": 0,
+                "endLine": 466,
+                "endChar": 0
+              },
+              "replacement": " *\n * \\param mode the bitrate mode to query.\n * \\return true if the bitrate mode is supported.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a956ae_3e411103",
         "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
         "patchSetId": 10
@@ -76,6 +1227,30 @@
       "writtenOn": "2024-11-07T22:37:26Z",
       "side": 1,
       "message": "Can we use clear structs in this API? Such structs are not extendible (not sure if we would ever want to extend these). The alternate is to add AMediaCodecSuppertedMediaType_getMode() and _getMediaType() methods, and keep these opaque.\n\nhow do we ensure that these will be non-modifiable for the user?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bca33aed_218526af",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:22:37Z",
+      "side": 1,
+      "message": "We can use a clear struct if we want, but yeah, we won\u0027t be able to change it outside of creating a SupportedMediaTypeV2.\n\nIn terms of modifiability, we could choose to just not care; if they mess with the data, they presumably only hurt themselves?",
+      "parentUuid": "57a956ae_3e411103",
       "range": {
         "startLine": 32,
         "startChar": 0,
