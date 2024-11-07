@@ -60,8 +60,10 @@ static bool isP010Allowed() {
     // This is the api level to which VSR requirement the device conform.
     static const int32_t kVendorApiLevel =
         base::GetIntProperty<int32_t>("ro.vendor.api_level", 0);
+        bool hasHDRDisplay =
+             base::GetBoolProperty("ro.surface_flinger.has_HDR_display", false);
 
-    return kVendorApiLevel >= __ANDROID_API_T__;
+        return ((kVendorApiLevel >= __ANDROID_API_T__) && hasHDRDisplay);
 }
 
 bool isHalPixelFormatSupported(AHardwareBuffer_Format format) {
