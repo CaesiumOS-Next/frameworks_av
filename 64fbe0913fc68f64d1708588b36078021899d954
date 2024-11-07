@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d70fcad0_db47adc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-11-07T11:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65e0a374_e45d6cb4",
+      "revId": "64fbe0913fc68f64d1708588b36078021899d954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "678ae494_ea4374e4",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-11-06T17:20:18Z",
       "side": 1,
       "message": "Is this part of the Test step? If so can you indent and use lower case for first letter.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "64fbe0913fc68f64d1708588b36078021899d954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00cc0ea2_93b1152c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-11-07T11:53:22Z",
+      "side": 1,
+      "message": "yes it is",
+      "parentUuid": "678ae494_ea4374e4",
       "range": {
         "startLine": 11,
         "startChar": 0,
@@ -78,6 +120,30 @@
           ]
         }
       ],
+      "revId": "64fbe0913fc68f64d1708588b36078021899d954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5872b864_14d0ad02",
+        "filename": "services/audiopolicy/engineconfigurable/config/src/CapEngineConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-11-07T11:53:22Z",
+      "side": 1,
+      "message": "definitely...  will change it while adding bug to the commit msg",
+      "parentUuid": "578fd853_641e1e56",
+      "range": {
+        "startLine": 371,
+        "startChar": 41,
+        "endLine": 371,
+        "endChar": 65
+      },
       "revId": "64fbe0913fc68f64d1708588b36078021899d954",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
