@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb60647_d6b0a52a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-07T17:19:01Z",
+      "side": 1,
+      "message": "Addressed the comments and required build changes for same https://android-review.googlesource.com/c/platform/build/+/3335797",
+      "revId": "5a1bb51e0cf60c67d047a8fcf6b65aa969efb5d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

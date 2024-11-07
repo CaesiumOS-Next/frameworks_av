@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43a4265c_09a265ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-07T17:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b21f984_5263f1ae",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "673f3d7a_c4fa87a8",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2971b71d_d5d18657",
+        "filename": "media/audio_extension/audio_extension.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-07T17:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "673f3d7a_c4fa87a8",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 84
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97657b31_439e3d8d",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-11-04T18:37:43Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Open-source Licensing: Third-party license (BSD) disallowed in repository platform/frameworks/av:\n\nAnalyzer Description: Identifies changes requiring human review for potential licensing issues.\nOwner: opensource-licensing@google.com\n\nThird-party license (BSD) disallowed in repository platform/frameworks/av:\nSPDX-License-Identifier: BSD-3-Clause",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 41
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb159961_7cd5989b",
+        "filename": "media/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-07T17:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97657b31_439e3d8d",
       "range": {
         "startLine": 3,
         "startChar": 4,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5f1b761_51b9eb1d",
+        "filename": "media/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-07T17:19:01Z",
+      "side": 1,
+      "message": "Buganizer for reference where we shared sepolicy chnages patch for review \nhttps://partnerissuetracker.corp.google.com/issues/372181051",
+      "parentUuid": "3502005c_50192c7b",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69359118_800f9321",
         "filename": "media/audio_extension/main_audio_extension.cpp",
         "patchSetId": 2
@@ -106,6 +202,30 @@
       "writtenOn": "2024-11-04T19:07:14Z",
       "side": 1,
       "message": "Since it\u0027s a service, it should really go under `frameworks/av/services`.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 51
+      },
+      "revId": "c27d871b9c2567aad5a646a35929879d97c3d72e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ea705b_30943120",
+        "filename": "media/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-07T17:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69359118_800f9321",
       "range": {
         "startLine": 35,
         "startChar": 0,
