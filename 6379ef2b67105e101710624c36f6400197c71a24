@@ -34,6 +34,24 @@
       "parentUuid": "668160cc_cd4e5936",
       "revId": "6379ef2b67105e101710624c36f6400197c71a24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46dc4e8c_15de939c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-07T23:54:34Z",
+      "side": 1,
+      "message": "Yes, not in MediaCodecList",
+      "parentUuid": "6256027c_71f388dc",
+      "revId": "6379ef2b67105e101710624c36f6400197c71a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
