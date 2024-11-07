@@ -16,6 +16,24 @@
       "message": "did we also verify that the codec does not show up in the MediaCodecList?",
       "revId": "6379ef2b67105e101710624c36f6400197c71a24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6256027c_71f388dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-07T21:41:47Z",
+      "side": 1,
+      "message": "I think it should fail here: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/codec2/sfplugin/Codec2InfoBuilder.cpp;drc\u003d33c0f49e05bcd08d262c453e35493fb54df8add3;l\u003d530 with this CL and will not make it into MediaCodecList. But let me check",
+      "parentUuid": "668160cc_cd4e5936",
+      "revId": "6379ef2b67105e101710624c36f6400197c71a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
