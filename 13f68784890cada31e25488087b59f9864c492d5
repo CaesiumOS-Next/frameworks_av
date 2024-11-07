@@ -1263,6 +1263,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac6f4bb7_4d792319",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:37:25Z",
+      "side": 1,
+      "message": "but they do have to get rid of the outMediaTypes array themselves, right? That is:\n\n```C++\n   size_t n \u003d AMediaCodecStore_countSupportedMediaTypes();\n   auto *supportedTypes \u003d new AMediaCodecSupportedMediaType[n];\n   media_status_t err;\n   err \u003d AMediaCodecStore_getSupportedMediaTypes(\u0026supportedTypes, n);\n   ...\n   \u003cuse supportedTypes\u003e\n   ...\n   // not OK\n   delete(supportedTypes[0]);\n   \n   // Probably also bad?\n   delete[](supportedTypes);\n   \n   // Necessary\n   delete(supportedTypes);\n```\n\nThat\u0027s a bit foot-gunny to me, but I assume there\u0027s a reason we can\u0027t just provide them the array too?",
+      "range": {
+        "startLine": 59,
+        "startChar": 3,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0d1132_5dae159d",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:37:25Z",
+      "side": 1,
+      "message": "Document what happens if `max` \u003c `countSupportedMediaTypes()`.",
+      "range": {
+        "startLine": 62,
+        "startChar": 60,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5c09c4_38548918",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:37:25Z",
+      "side": 1,
+      "message": "Is this keeping state inside the method somewhere? Is it thread-safe? (ie, like `strtok` / `strtok_r`)",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e917ac25_aa50216e",
         "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
         "patchSetId": 10
@@ -1308,6 +1371,46 @@
           ]
         }
       ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b169ef_5b3decfd",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:37:25Z",
+      "side": 1,
+      "message": "Stylistically, the APEX Codec API Wonsik is adding has a different way to iterate, requiring an incrementing index to be passed in until you get a null result.\n\nCould we use a consistent pattern for this kind of \u0027interate over all entries\u0027 method, or are there reasons each API needs to stick with what they have?\n\nNot that an index is all that pretty, but it at least seems to avoid storing any state in the method.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813b86bb_d13a18ca",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-07T23:37:25Z",
+      "side": 1,
+      "message": "where does the set of names available come from?",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 25
+      },
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
