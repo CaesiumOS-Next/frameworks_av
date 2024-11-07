@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72ca339e_cfc16ccf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2024-11-07T08:22:46Z",
+      "side": 1,
+      "message": "This modification is not enough, the getAudioOffloadInfo method also needs to use the correct audioformat to determine whether it supports offload",
+      "parentUuid": "06af2941_f647c75d",
+      "revId": "a4f1cbc78a268c36d6c76a0074c0ee236f06fc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84b77a67_5259f91a",
         "filename": "media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp",
         "patchSetId": 2
