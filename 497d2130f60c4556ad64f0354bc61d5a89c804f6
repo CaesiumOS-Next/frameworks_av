@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69bf4ac_ed99867e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T17:14:08Z",
+      "side": 1,
+      "message": "Note that I am breaking this CL up into individual pieces.",
+      "revId": "497d2130f60c4556ad64f0354bc61d5a89c804f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6da34fdb_5e216f3d",
@@ -37,6 +54,30 @@
       "writtenOn": "2024-11-08T14:35:53Z",
       "side": 1,
       "message": "Wouldn\u0027t this be change in behavior for some metrics like mBytesEncoded, which would count for all bytes encoded for the life time of the codec (between create and release), but now we reset it for each sub-session.",
+      "range": {
+        "startLine": 6031,
+        "startChar": 4,
+        "endLine": 6031,
+        "endChar": 32
+      },
+      "revId": "497d2130f60c4556ad64f0354bc61d5a89c804f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a8996e4_7a14fa88",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6031,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T17:14:08Z",
+      "side": 1,
+      "message": "that is the intention of subsession metrics. We need to divide the previous codec session into the various subsessions that we missed before. (Note: technically, bytes encoded was not counted prior to this CL as there are no subsessions yet for encoders, and bytes encoded was restricted to video encoders)",
+      "parentUuid": "6f0565c8_837a9b37",
       "range": {
         "startLine": 6031,
         "startChar": 4,
