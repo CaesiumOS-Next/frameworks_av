@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "130b8de3_73090f85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-08T04:31:03Z",
+      "side": 1,
+      "message": "As I understand it, NuPlayerRenderer upon failing to connect in Offload mode with PCM_FLOAT should fall back to non-Offload mode.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp;drc\u003d064697a2f965a135e7b1cd68c7d54a0e1939eb84;l\u003d2117\n\nso you should be on the primary output sink, with sound.",
+      "parentUuid": "6b3b13ab_265f8d89",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "6ee65a778e412c1a531a361cd0f15d89741dcdbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "98fde886_af9c839e",
