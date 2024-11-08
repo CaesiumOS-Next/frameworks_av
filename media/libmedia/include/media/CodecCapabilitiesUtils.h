@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <cmath>
 #include <optional>
+#include <regex>
 #include <string>
 #include <vector>
 
@@ -113,6 +114,41 @@ struct Range {
         return Range(std::max(lower_, lower), std::min(upper_, upper));
     }
 
+    // parse a string into a range
+    static std::optional<Range<T>> Parse(const std::string &str) {
+        if (str.empty()) {
+            ALOGW("could not parse empty integer range");
+            return std::nullopt;
+        }
+        long long lower, upper;
+        std::regex regex("([0-9]+)-([0-9]+)$");
+        std::smatch match;
+        if (std::regex_match(str, match, regex)) {
+            char *endLo, *endUp;
+            lower = strtoll(match[1].str().c_str(), &endLo, 10);
+            upper = strtoll(match[2].str().c_str(), &endUp, 10);
+            if (*endLo != '\0' || *endUp != '\0') {
+                ALOGW("could not parse integer range: %s", str.c_str());
+                return std::nullopt;
+            }
+        } else {
+            char *end;
+            lower = upper = strtoll(str.c_str(), &end, 10);
+            if (*end != '\0') {
+                ALOGW("could not parse integer range: %s", str.c_str());
+                return std::nullopt;
+            }
+        }
+
+        if (lower < std::numeric_limits<T>::min() || std::numeric_limits<T>::max() < upper
+                || upper < lower) {
+            ALOGW("could not parse integer range: %s", str.c_str());
+            return std::nullopt;
+        }
+
+        return std::make_optional<Range<T>>((T)lower, (T)upper);
+    }
+
 private:
     T lower_;
     T upper_;
@@ -175,9 +211,6 @@ std::vector<Range<T>> intersectSortedDistinctRanges(
     }
     return result;
 }
-
-// parse string into int range
-std::optional<Range<int>> ParseIntRange(const std::string &str);
 
 }  // namespace android
 
