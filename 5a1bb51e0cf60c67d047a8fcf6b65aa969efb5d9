@@ -16,6 +16,47 @@
       "message": "Addressed the comments and required build changes for same https://android-review.googlesource.com/c/platform/build/+/3335797",
       "revId": "5a1bb51e0cf60c67d047a8fcf6b65aa969efb5d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304d7ab9_dccc11c7",
+        "filename": "services/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-08T00:39:36Z",
+      "side": 1,
+      "message": "If that means `android.media.audio.IHalAdapterVendorExtension`, it already gets registered here: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioparameterparser/main.cpp;l\u003d32;drc\u003de5011000602dc369e9fdd0698d3ed391ba11110e. Having two services attempting to register the same thing is confusing.\n\nIf you need to make the example implementation, please convert the existing `frameworks/av/services/audioparameterparser` to this model. You can use your code for loading the service implementation from an .so, and actually provide the .so which contains the code from https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioparameterparser/ParameterParser.cpp",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "031bc437_433b113a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audio_extension/main_audio_extension.cpp",
+              "range": {
+                "startLine": 56,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "    LOG(INFO) \u003c\u003c \"Successfully registered IHaladaptervendorextension\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5a1bb51e0cf60c67d047a8fcf6b65aa969efb5d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
