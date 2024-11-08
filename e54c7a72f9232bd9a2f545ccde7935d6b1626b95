@@ -50,6 +50,30 @@
       ],
       "revId": "e54c7a72f9232bd9a2f545ccde7935d6b1626b95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00911185_76642ccf",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T22:30:27Z",
+      "side": 1,
+      "message": "See above. We don\u0027t really want to keep state in this call outside of the parameters themselves.",
+      "parentUuid": "ab431ede_ef833b3d",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 74
+      },
+      "revId": "e54c7a72f9232bd9a2f545ccde7935d6b1626b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

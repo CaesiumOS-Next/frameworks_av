@@ -1261,6 +1261,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f59f9bb5_cb426037",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T22:30:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bca33aed_218526af",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac6f4bb7_4d792319",
@@ -1274,6 +1298,30 @@
       "writtenOn": "2024-11-07T23:37:25Z",
       "side": 1,
       "message": "but they do have to get rid of the outMediaTypes array themselves, right? That is:\n\n```C++\n   size_t n \u003d AMediaCodecStore_countSupportedMediaTypes();\n   auto *supportedTypes \u003d new AMediaCodecSupportedMediaType[n];\n   media_status_t err;\n   err \u003d AMediaCodecStore_getSupportedMediaTypes(\u0026supportedTypes, n);\n   ...\n   \u003cuse supportedTypes\u003e\n   ...\n   // not OK\n   delete(supportedTypes[0]);\n   \n   // Probably also bad?\n   delete[](supportedTypes);\n   \n   // Necessary\n   delete(supportedTypes);\n```\n\nThat\u0027s a bit foot-gunny to me, but I assume there\u0027s a reason we can\u0027t just provide them the array too?",
+      "range": {
+        "startLine": 59,
+        "startChar": 3,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e666f863_715a01fe",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T22:30:27Z",
+      "side": 1,
+      "message": "Thanks for catching this. Could we (the platform) also own the out array, and make max a size_t *outCount out parameter? That way there is nothing to do for the caller to clean up, or manage the count.",
+      "parentUuid": "ac6f4bb7_4d792319",
       "range": {
         "startLine": 59,
         "startChar": 3,
@@ -1320,6 +1368,24 @@
       "writtenOn": "2024-11-07T23:37:25Z",
       "side": 1,
       "message": "Is this keeping state inside the method somewhere? Is it thread-safe? (ie, like `strtok` / `strtok_r`)",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d195f0f3_38c4b219",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T22:30:27Z",
+      "side": 1,
+      "message": "I agree that we don\u0027t want to do that. Instead, we should make this required. E.g. If called with a different format while .... the behavior is undefined.\n\nIn all fairness, we will just loop from the outCodecInfo in the implementation through our linear array of codec infos and use the current format.",
+      "parentUuid": "6f5c09c4_38548918",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1412,6 +1478,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1997d364_fac6a5f2",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T22:30:27Z",
+      "side": 1,
+      "message": "The issue is that using an index will create an extra call (getInfoAtIndex) and restricts our implementation to actually using a vector-like construct with an index. Here we could use a linked list.\n\nAPEX Codec API is used to iterate throw all codecs, and not just for codecs that support a specific media type. What we found that nearly 99% of apps just want to find a codec for a format, and they make mistakes because they try to implement that themselves (usually incorrectly), hence this proposed API.",
+      "parentUuid": "9286b50c_d9395bb6",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "813b86bb_d13a18ca",
         "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
         "patchSetId": 10
@@ -1423,6 +1507,30 @@
       "writtenOn": "2024-11-07T23:37:25Z",
       "side": 1,
       "message": "where does the set of names available come from?",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd91a35_1d9531e7",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T22:30:27Z",
+      "side": 1,
+      "message": "This is for cases when you already know the codec name, e.g. in MediaCodec itself although for now we are not implementing this on top of the NDK. Many times application code gets the codec name (from the findDecoder/Encoder methods above), and keeps only the codec name, which is guaranteed to uniquely identify the codec and its info.\n\nPerhaps we need to say that?",
+      "parentUuid": "813b86bb_d13a18ca",
       "range": {
         "startLine": 108,
         "startChar": 8,
