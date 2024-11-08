@@ -241,6 +241,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75732e61_0a0b724d",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T00:23:35Z",
+      "side": 1,
+      "message": "Ok, makes sense. I know this is basically our code on both sides, but good to keep things simple if we can. Sounds like two objects is better here.",
+      "parentUuid": "5e67cae4_2f37926f",
+      "revId": "26c212db4a997ece7d006874098d1e09b01999cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5146e58_b1f94e9b",
@@ -1270,6 +1288,30 @@
       "side": 1,
       "message": "These can come from the param layout defined in C2Config.h",
       "parentUuid": "a24931c5_e4c388f1",
+      "range": {
+        "startLine": 655,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 18
+      },
+      "revId": "26c212db4a997ece7d006874098d1e09b01999cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd8bb22_13c5fa2e",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T00:23:35Z",
+      "side": 1,
+      "message": "can I only query once I\u0027ve configured, so that there\u0027s a config blob to reference? Or are the index/offset actually just globally defined values in C2Config, so always valid?",
+      "parentUuid": "77faefc2_840cd008",
       "range": {
         "startLine": 655,
         "startChar": 0,

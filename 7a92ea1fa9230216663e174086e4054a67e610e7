@@ -16,6 +16,75 @@
       "message": "Thank you for the feedback! PTAL",
       "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e572e1b_2c5815f5",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T00:23:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to parse `step, num, den` - is it:\n\n```\n  range_min \u003d min\n  range_max \u003d max\n  valid values \u003d min + (num/den) * n, where n \u003d 0...(step-1)?\n  and max is also included?\n```\n\nor something else?",
+      "range": {
+        "startLine": 356,
+        "startChar": 70,
+        "endLine": 356,
+        "endChar": 98
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e313e5c5_012ab65a",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T00:23:35Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 536,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 102
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6dbe8b_deab79ac",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T00:23:35Z",
+      "side": 1,
+      "message": "is this discussed in c2 docs / headers in more detail? If the configuration gets applied successfully but there are still failure results, what does that mean? Some values were clamped to supported ranges or some values were picked by the codec for conflicts so that a valid config can be set up?",
+      "range": {
+        "startLine": 562,
+        "startChar": 25,
+        "endLine": 563,
+        "endChar": 85
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
