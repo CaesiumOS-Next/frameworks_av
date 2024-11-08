@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d03faf8_44fd1ea4",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodec.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T18:09:32Z",
+      "side": 1,
+      "message": "Sure, I will take this out",
+      "parentUuid": "e9ac6cef_2e35a63f",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 37
+      },
+      "revId": "2811d1611cc4d36943d698b1c2e8dc9c3aae3d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff9af876_e849c0f0",
@@ -132,6 +156,30 @@
           ]
         }
       ],
+      "revId": "2811d1611cc4d36943d698b1c2e8dc9c3aae3d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f17aa4_b07e91b5",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodec.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T18:09:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff9af876_e849c0f0",
+      "range": {
+        "startLine": 154,
+        "startChar": 12,
+        "endLine": 154,
+        "endChar": 15
+      },
       "revId": "2811d1611cc4d36943d698b1c2e8dc9c3aae3d11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
