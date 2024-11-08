@@ -98,6 +98,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "86bcf934_4dbbd0a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-08T07:27:42Z",
+      "side": 1,
+      "message": "Okay, so at this point, the change just optimizes the logic.",
+      "parentUuid": "aa0a60d8_e2a4e113",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "6ee65a778e412c1a531a361cd0f15d89741dcdbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "98fde886_af9c839e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
