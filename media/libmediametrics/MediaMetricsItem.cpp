@@ -307,7 +307,7 @@ std::string mediametrics::Item::toString() const {
 // for the lazy, we offer methods that finds the service and
 // calls the appropriate daemon
 bool mediametrics::Item::selfrecord() {
-    ALOGD_IF(DEBUG_API, "%s: delivering %s", __func__, this->toString().c_str());
+    ALOGD_IF(1, "%s: delivering %s", __func__, this->toString().c_str());
 
     char *str;
     size_t size;
