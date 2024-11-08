@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "535bdf71_64b288f3",
+        "filename": "media/aconfig/codec_fwk.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T17:52:35Z",
+      "side": 1,
+      "message": "is this flag limited to the HAL APIs? If so we could say that \"for codec availability HAL API support\".",
+      "range": {
+        "startLine": 26,
+        "startChar": 33,
+        "endLine": 26,
+        "endChar": 51
+      },
+      "revId": "3c44cc1a261732c5f1bf9c60418d4babb781f0ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
