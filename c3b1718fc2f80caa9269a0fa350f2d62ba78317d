@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76f72d8f_22664d58",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T22:05:19Z",
+      "side": 1,
+      "message": "Does it means in NDK we need to check isRegular() for each codec and remove the irregular codecs?",
+      "parentUuid": "81c85b56_0218f001",
+      "range": {
+        "startLine": 58,
+        "startChar": 37,
+        "endLine": 58,
+        "endChar": 44
+      },
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6218405b_20330616",
         "filename": "media/libmedia/CodecCapabilities.cpp",
         "patchSetId": 69
@@ -81,6 +105,30 @@
           ]
         }
       ],
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf51dbf7_2f7c6ef4",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T22:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6218405b_20330616",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 1
+      },
       "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -166,6 +214,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e67b64_01676208",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T22:05:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e201aca_bd7e4818",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 39
+      },
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "742ca90a_22e3faa4",
@@ -203,6 +275,30 @@
           ]
         }
       ],
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c6c018_1b715c32",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 69
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T22:05:19Z",
+      "side": 1,
+      "message": "Updated with std::set\u003cfeature-string\u003e",
+      "parentUuid": "742ca90a_22e3faa4",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 267,
+        "endChar": 23
+      },
       "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
