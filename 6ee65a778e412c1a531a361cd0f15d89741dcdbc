@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3b13ab_265f8d89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2024-11-08T03:41:29Z",
+      "side": 1,
+      "message": "Perhaps whether to support offload should be decided by HAL here，\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libstagefright/Utils.cpp;drc\u003d216a97bdad3c0f492094250b33d82abf27098932;l\u003d2499\n\nBut the value of info -\u003eformat provided here is PCM_16_BIT,The judgment that causes HAL errors supports offload\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libstagefright/Utils.cpp;drc\u003d33c0f49e05bcd08d262c453e35493fb54df8add3;l\u003d2421\n\nI found in actual testing that due to HAL not actually supporting PCM-FLOAT, the audiopolicymanager chose the primary output, and it seems that one Nuplayer is in offload mode, but HAL is the primary output, causing have no sound",
+      "parentUuid": "356aaede_25c4f60b",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "6ee65a778e412c1a531a361cd0f15d89741dcdbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "98fde886_af9c839e",
