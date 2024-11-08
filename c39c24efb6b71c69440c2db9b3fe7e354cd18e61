@@ -1,0 +1,114 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed363ad1_be4d22fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T02:54:14Z",
+      "side": 1,
+      "message": "please add component:\n\ne.g.\n\ncodec2: refine available/required-resources configs",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67fb483c_d1aa74da",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T02:54:14Z",
+      "side": 1,
+      "message": "this breaks the ABI. All indices need to go at the end of a section.\n\nI would call the ResourceCapacity and ResourcesExcluded",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 154,
+        "endChar": 33
+      },
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0858899_ebf8eb1c",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T02:54:14Z",
+      "side": 1,
+      "message": "oops: this should have gone under image/video components. We will keep it here.\n\n\nThen add new indices after it.",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 32
+      },
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c08a02_5e14ca3d",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-08T02:54:14Z",
+      "side": 1,
+      "message": "we will need to update this. this is technically a breaking change, but this config was never officially defined.\n\nBased on the latest discussions, we will need a couple of new definitions. We have not prototyped vendor-defined enums, so this may be tricky. Maybe\n\nstruct C2SystemResource {\n  uint32_t id;  // this is a uint32_t based enum, where the platform will define some values, and reserve a range for vendor values\n  resource_kind_t kind;\n  uint64_t amount;\n}\n\n(vendors will need to shadow this with their own identical vendor-struct and their vendor-enum, so that the parameterDescriptor will pick of the named values.)\n\nThe names of the resources will come from the parameterDescriptor for that field.\n\nresource_kind_t can be:\n{ CONST, PER_FRAME, PER_INPUT_BLOCK, PER_OUTPUT_BLOCK } with more to be defined later.\n\nThen the codec-required, system available resources would use C2SystemResource array instead uint64_t[].\n\nAlso we need to mark all of these as \"[PROPOSED]\" to mark that this is still under discussion.\n\nFor global resources, it would make sense to define \"CAPACITY\" and \"EXCLUDED\" (vs. available.)  Excluded means that total capacity is reduced.",
+      "range": {
+        "startLine": 1288,
+        "startChar": 32,
+        "endLine": 1288,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "75ba3da4_bea8fb91",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/core/include/C2Config.h",
+              "range": {
+                "startLine": 1287,
+                "startChar": 0,
+                "endLine": 1287,
+                "endChar": 0
+              },
+              "replacement": " *\n * TODO: this is a breaking change.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
