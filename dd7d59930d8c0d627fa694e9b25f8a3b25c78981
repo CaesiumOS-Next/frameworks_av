@@ -1,5 +1,40 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84410053_5f1bb580",
+        "filename": "media/libstagefright/data/media_codecs_sw.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-11-08T03:55:01Z",
+      "side": 1,
+      "message": "enabled\u003d\"false\" minsdk\u003d\"36\" like av1.encoder is limited in line 401?",
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f8b501_60b091aa",
+        "filename": "media/libstagefright/data/media_codecs_sw.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-11-08T03:55:01Z",
+      "side": 1,
+      "message": "enabled\u003d\"false\" minsdk\u003d\"36\" like av1.encoder is limited in line 401?",
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
