@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72786e75_a63ffe83",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b750dd0_0f49615e",
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bdc9173_f8cbc888",
@@ -77,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12cbdc1b_b7a76f6a",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bdc9173_f8cbc888",
+      "range": {
+        "startLine": 136,
+        "startChar": 11,
+        "endLine": 136,
+        "endChar": 21
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "108c73d6_7aeff2fa",
@@ -94,6 +136,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d64b1c41_7917a070",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "This function is also used in AudioCapabilities. Sent another cl aosp/3341542 to update it.",
+      "parentUuid": "108c73d6_7aeff2fa",
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05184215_a9741e8d",
@@ -107,6 +167,30 @@
       "writtenOn": "2024-11-06T22:23:44Z",
       "side": 1,
       "message": "these were meant to be part of the public API (e.g. VideoCapabilities.h). Here they look to be inline to this file.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83de37b6_1439e36a",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Deleted.",
+      "parentUuid": "05184215_a9741e8d",
       "range": {
         "startLine": 38,
         "startChar": 0,
@@ -140,6 +224,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e4f8dd_2545eaf7",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4910e03_945eecdd",
+      "range": {
+        "startLine": 294,
+        "startChar": 15,
+        "endLine": 294,
+        "endChar": 25
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95c84d63_8b482ddc",
@@ -153,6 +261,30 @@
       "writtenOn": "2024-11-06T22:23:44Z",
       "side": 1,
       "message": "in C++ we can use shorthand evaluator to achieve the same as the original Java code:\n\ne.g. if (width !\u003d 0) {\n  ok \u0026\u0026\u003d mWidthRange.contains(width);\n}\n  \nhowever, we should use std::optional here.",
+      "range": {
+        "startLine": 479,
+        "startChar": 10,
+        "endLine": 481,
+        "endChar": 46
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a65a5e55_a8c98f86",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Updated with shorthand evaluator. However, I don\u0027t quite get how to use optional here.",
+      "parentUuid": "95c84d63_8b482ddc",
       "range": {
         "startLine": 479,
         "startChar": 10,
@@ -204,6 +336,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee109490_a031428e",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17ebbc41_fdb000ee",
+      "range": {
+        "startLine": 142,
+        "startChar": 12,
+        "endLine": 142,
+        "endChar": 25
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8b785dd_c79e086d",
@@ -247,6 +403,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d0ac128_2d28aef2",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "This is used in VideoCapabilities.cpp. Could you clarify \"sort by area\"?",
+      "parentUuid": "e8b785dd_c79e086d",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 26
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "331c2483_da8c2bab",
         "filename": "media/libmedia/include/media/VideoCapabilities.h",
         "patchSetId": 61
@@ -282,6 +462,30 @@
           ]
         }
       ],
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c45ad4f_113a4abf",
+        "filename": "media/libmedia/include/media/VideoCapabilities.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Moved to AUtils.h",
+      "parentUuid": "331c2483_da8c2bab",
+      "range": {
+        "startLine": 173,
+        "startChar": 8,
+        "endLine": 173,
+        "endChar": 48
+      },
       "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

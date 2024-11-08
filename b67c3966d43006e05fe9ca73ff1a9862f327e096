@@ -22,6 +22,30 @@
       },
       "revId": "b67c3966d43006e05fe9ca73ff1a9862f327e096",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d84f1ad_1bc1a24b",
+        "filename": "media/libmedia/CodecCapabilitiesUtils.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T11:15:06Z",
+      "side": 1,
+      "message": "Moved all utils into corresponding classes.",
+      "parentUuid": "a003e7dd_912f846f",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 18
+      },
+      "revId": "b67c3966d43006e05fe9ca73ff1a9862f327e096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
