@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0a60d8_e2a4e113",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2024-11-08T06:53:55Z",
+      "side": 1,
+      "message": "yes, if an error is returned, it will fall back to non Offload mode. Then it will play normally,\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp;drc\u003d064697a2f965a135e7b1cd68c7d54a0e1939eb84;l\u003d2088\n\nHowever, because our HAL does not support it, there is no declaration in audio_policy_configuration.xml that supports PCM-FLOAT offload. Therefore, audiopolicy will not use PCM-FLOAT to open the offload output stream, but will choose the primary output and return OK\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d1564;drc\u003d33c0f49e05bcd08d262c453e35493fb54df8add3\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;drc\u003d33c0f49e05bcd08d262c453e35493fb54df8add3;l\u003d1808",
+      "parentUuid": "130b8de3_73090f85",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "6ee65a778e412c1a531a361cd0f15d89741dcdbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "98fde886_af9c839e",
