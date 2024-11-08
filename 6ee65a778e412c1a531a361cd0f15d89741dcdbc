@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "356aaede_25c4f60b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-08T03:00:43Z",
+      "side": 1,
+      "message": "seems we aren\u0027t rejecting it here if PCM_FLOAT is not supported.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libstagefright/Utils.cpp;l\u003d2491\n\nbut the HAL is free to reject it here if PCM_FLOAT is not supported.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libmediaplayerservice/nuplayer/NuPlayerRenderer.cpp;drc\u003d064697a2f965a135e7b1cd68c7d54a0e1939eb84;l\u003d2068",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "6ee65a778e412c1a531a361cd0f15d89741dcdbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98fde886_af9c839e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-08T03:00:43Z",
+      "side": 1,
+      "message": "LGTM.  It seems that NuPlayer should still work, but suboptimally (it issues a superfluous sink open request).",
+      "revId": "6ee65a778e412c1a531a361cd0f15d89741dcdbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
