@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45cf9d51_2e34b955",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T19:33:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b3383ffc_8fea5da8",
+      "range": {
+        "startLine": 356,
+        "startChar": 70,
+        "endLine": 356,
+        "endChar": 98
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e313e5c5_012ab65a",
@@ -159,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe9d085_fafc3992",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T19:33:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "43130b1b_6302aa29",
+      "range": {
+        "startLine": 562,
+        "startChar": 25,
+        "endLine": 563,
+        "endChar": 85
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b16ad06_123119a0",
@@ -208,6 +256,24 @@
       "side": 1,
       "message": "The general plan is to inject existing sw codecs into the ComponentStore and test the APIs. The actual tests will follow in subsequent CLs.",
       "parentUuid": "3b16ad06_123119a0",
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a13790a_fb5424d7",
+        "filename": "media/module/libapexcodecs/tests/ApexCodecsTest.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-08T19:33:28Z",
+      "side": 1,
+      "message": "Ok. NDK API policy is that I\u0027m not supposed to grant NDK+1 unless there are tests included.  I\u0027m OK being flexible here since we\u0027re the only consumer of these (as I understand it) since it\u0027s an APEX-to-fwk API only. As long as we do get some tests to ensure all the methods are correctly usable so that we can be safe using the whole surface in future mainline updates and such.",
+      "parentUuid": "b98cf11e_8747cf96",
       "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
