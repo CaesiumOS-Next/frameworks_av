@@ -40,6 +40,30 @@
       ],
       "revId": "4be56463b2d2091c3306384d6672fc3e05420e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f211a9_53adb91a",
+        "filename": "media/libaudioprocessing/AudioMixerOps.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-11-08T07:39:09Z",
+      "side": 1,
+      "message": "I am reading an old case and am I right the issue is that we want the same channel-mask convention?\nhttps://partnerissuetracker.corp.google.com/u/0/issues/238402306\n\nOne suggestion was CHANNEL_OUT_5POINT0POINT5POINT3",
+      "parentUuid": "742ff777_461abc72",
+      "range": {
+        "startLine": 352,
+        "startChar": 15,
+        "endLine": 352,
+        "endChar": 47
+      },
+      "revId": "4be56463b2d2091c3306384d6672fc3e05420e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
