@@ -1394,6 +1394,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9286b50c_d9395bb6",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-08T22:13:10Z",
+      "side": 1,
+      "message": "@lajos@google.com How do you think about it?",
+      "parentUuid": "f4b169ef_5b3decfd",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "813b86bb_d13a18ca",
         "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
         "patchSetId": 10
