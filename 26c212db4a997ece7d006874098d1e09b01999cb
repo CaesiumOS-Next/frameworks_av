@@ -1320,6 +1320,30 @@
       },
       "revId": "26c212db4a997ece7d006874098d1e09b01999cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c34f19b5_02cba456",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-08T07:54:22Z",
+      "side": 1,
+      "message": "The index and offset is fixed values at C2Config. The API could return BAD_VALUE if the index and/or offset are invalid (i.e. goes out of range or offset does not point to the start of the field.)",
+      "parentUuid": "ebd8bb22_13c5fa2e",
+      "range": {
+        "startLine": 655,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 18
+      },
+      "revId": "26c212db4a997ece7d006874098d1e09b01999cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

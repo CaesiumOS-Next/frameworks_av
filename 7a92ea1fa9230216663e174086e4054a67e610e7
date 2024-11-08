@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3383ffc_8fea5da8",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-08T07:54:22Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "4e572e1b_2c5815f5",
+      "range": {
+        "startLine": 356,
+        "startChar": 70,
+        "endLine": 356,
+        "endChar": 98
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e313e5c5_012ab65a",
         "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
         "patchSetId": 28
@@ -54,6 +78,30 @@
       "writtenOn": "2024-11-08T00:23:35Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 536,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 102
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb01849a_bd6c1ecb",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-08T07:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e313e5c5_012ab65a",
       "range": {
         "startLine": 536,
         "startChar": 0,
@@ -77,6 +125,30 @@
       "writtenOn": "2024-11-08T00:23:35Z",
       "side": 1,
       "message": "is this discussed in c2 docs / headers in more detail? If the configuration gets applied successfully but there are still failure results, what does that mean? Some values were clamped to supported ranges or some values were picked by the codec for conflicts so that a valid config can be set up?",
+      "range": {
+        "startLine": 562,
+        "startChar": 25,
+        "endLine": 563,
+        "endChar": 85
+      },
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43130b1b_6302aa29",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-08T07:54:22Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "8d6dbe8b_deab79ac",
       "range": {
         "startLine": 562,
         "startChar": 25,
@@ -118,6 +190,24 @@
           ]
         }
       ],
+      "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b98cf11e_8747cf96",
+        "filename": "media/module/libapexcodecs/tests/ApexCodecsTest.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-08T07:54:22Z",
+      "side": 1,
+      "message": "The general plan is to inject existing sw codecs into the ComponentStore and test the APIs. The actual tests will follow in subsequent CLs.",
+      "parentUuid": "3b16ad06_123119a0",
       "revId": "7a92ea1fa9230216663e174086e4054a67e610e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
