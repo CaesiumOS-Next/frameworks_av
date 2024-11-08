@@ -482,6 +482,9 @@ Return<void> ComponentStore::createComponent_1_2(
 
 std::shared_ptr<C2StructDescriptor> ComponentStore::describe(const C2Param::CoreIndex &index) {
     for (const std::shared_ptr<C2ParamReflector> &reflector : mParamReflectors) {
+        if (!reflector) {
+            continue;
+        }
         std::shared_ptr<C2StructDescriptor> desc = reflector->describe(index);
         if (desc) {
             return desc;
