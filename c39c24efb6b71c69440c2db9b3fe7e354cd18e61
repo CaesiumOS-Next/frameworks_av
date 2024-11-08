@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a5fd94_25782dd1",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T18:09:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "67fb483c_d1aa74da",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 154,
+        "endChar": 33
+      },
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0858899_ebf8eb1c",
@@ -60,6 +84,30 @@
       "writtenOn": "2024-11-08T02:54:14Z",
       "side": 1,
       "message": "oops: this should have gone under image/video components. We will keep it here.\n\n\nThen add new indices after it.",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 32
+      },
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a04dc5_e5d93d6e",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T18:09:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f0858899_ebf8eb1c",
       "range": {
         "startLine": 169,
         "startChar": 4,
@@ -107,6 +155,30 @@
           ]
         }
       ],
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ee3f72_3da59a5e",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T18:09:10Z",
+      "side": 1,
+      "message": "I will discuss this with you.",
+      "parentUuid": "63c08a02_5e14ca3d",
+      "range": {
+        "startLine": 1288,
+        "startChar": 32,
+        "endLine": 1288,
+        "endChar": 45
+      },
       "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
