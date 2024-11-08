@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f945acc6_0b935150",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T17:55:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2e10c0_b81efbbf",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 9
+      },
+      "revId": "3c44cc1a261732c5f1bf9c60418d4babb781f0ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "535bdf71_64b288f3",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-08T17:52:35Z",
       "side": 1,
       "message": "is this flag limited to the HAL APIs? If so we could say that \"for codec availability HAL API support\".",
+      "range": {
+        "startLine": 26,
+        "startChar": 33,
+        "endLine": 26,
+        "endChar": 51
+      },
+      "revId": "3c44cc1a261732c5f1bf9c60418d4babb781f0ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1eff7f7_b4d187f3",
+        "filename": "media/aconfig/codec_fwk.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T17:55:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "535bdf71_64b288f3",
       "range": {
         "startLine": 26,
         "startChar": 33,
