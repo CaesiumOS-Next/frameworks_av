@@ -1,6 +1,114 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3068ddd4_246b9440",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-11-08T18:35:09Z",
+      "side": 1,
+      "message": "Naive post-submit drive-by.  I hope this isn\u0027t too much noise or distraction.\n\nMy biggest concern is not initializing 3 fields in one of the constructors (just because bugs involving uninitialized memory are so hard to track down).  While I was in here I noted a couple other things.\n\nThanks!",
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771b33ca_4988bf30",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-11-08T18:35:09Z",
+      "side": 1,
+      "message": "It\u0027s best to keep our field initializations in the same order as the fields are declared in the class.  The compiler will initialize based on field declaration order, not the order of the initializations given here.  It\u0027s not a specific issue here, but to give an absurd example, if we had:\n\n```\nmHeaderDecoded(mHeight !\u003d 240),\n```\n\nthat code would use an uninitialized value for `mHeight`, even though looking at this code it would seem like `mHeight` got set before this.\n\nSo this field should move up to be right after `mOutputDelay`.",
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d608ef4f_d4e7d363",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-11-08T18:35:09Z",
+      "side": 1,
+      "message": "It seems like we should also initialize the fields `mHalPixelFormat`, `mSignalledError`, and `mSignalledOutputEos` to assure they\u0027re never used uninitialized.",
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8329eb53_ea4fba06",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-11-08T18:35:09Z",
+      "side": 1,
+      "message": "I don\u0027t know if we ever expect to inherit from `C2SoftApvDec`, but if something does, and overrides the virtual function `onRelease()`, then we won\u0027t end up using the dynamic binding.  We could declare this struct or the `onRelease()` method `final` in the header to guard against that.",
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163db56a_521945fb",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-11-08T18:35:09Z",
+      "side": 1,
+      "message": "Same comment as the other destructor, where we won\u0027t use the dynamic binding of `onRelease()` here.",
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c273e0d3_5445bc8b",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-11-08T18:35:09Z",
+      "side": 1,
+      "message": "This is more of a style comment, but while I\u0027m in here (these lines stood out from having `uint8_t*` on one and then `auto*` on the other).\n\nWhy are we casting the results here before the assignment?  Is it to remove the `const`?  It seems like we\u0027d want to keep that `const`, and could/should just declare `src` as a `const` pointer as well below, and then I think everything should work.\n\nIt would also catch (at compile time) any future bugs that accidentally tried to modify these values.",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 913,
+        "endChar": 47
+      },
+      "revId": "dd7d59930d8c0d627fa694e9b25f8a3b25c78981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84410053_5f1bb580",
