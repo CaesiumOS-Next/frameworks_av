@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e00b839c_c4258817",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-08T06:29:32Z",
+      "side": 1,
+      "message": "If my memory serves me right, the current codes is an effort to solve some device issue in the past. I guess wenchang@ might know the history. asking his review for the CL.",
+      "revId": "8a007370c558fb45ebfa5f31a5c636901b0ae548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
