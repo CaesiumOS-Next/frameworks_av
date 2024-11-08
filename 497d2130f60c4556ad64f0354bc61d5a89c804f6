@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6da34fdb_5e216f3d",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6027,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T14:35:53Z",
+      "side": 1,
+      "message": "I think this needs to be done with mMetricsLock",
+      "range": {
+        "startLine": 6014,
+        "startChar": 4,
+        "endLine": 6027,
+        "endChar": 28
+      },
+      "revId": "497d2130f60c4556ad64f0354bc61d5a89c804f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f0565c8_837a9b37",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6031,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-08T14:35:53Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this be change in behavior for some metrics like mBytesEncoded, which would count for all bytes encoded for the life time of the codec (between create and release), but now we reset it for each sub-session.",
+      "range": {
+        "startLine": 6031,
+        "startChar": 4,
+        "endLine": 6031,
+        "endChar": 32
+      },
+      "revId": "497d2130f60c4556ad64f0354bc61d5a89c804f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
