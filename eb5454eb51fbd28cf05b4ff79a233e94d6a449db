@@ -22,6 +22,30 @@
       },
       "revId": "eb5454eb51fbd28cf05b4ff79a233e94d6a449db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e87fc034_f3d9fa9b",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 7885,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2024-11-09T02:52:56Z",
+      "side": 1,
+      "message": "I think no. Our maximum data will only be `mNormalFrameCount`. In that case, there seems no need to wai for longer than that.\n\nPer b/361029363#comment48, not quite sure what is difference between this one and the patchset 1. One possibility could be the wait time is different on old build.",
+      "parentUuid": "2638f679_92abd08b",
+      "range": {
+        "startLine": 7885,
+        "startChar": 18,
+        "endLine": 7885,
+        "endChar": 35
+      },
+      "revId": "eb5454eb51fbd28cf05b4ff79a233e94d6a449db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
