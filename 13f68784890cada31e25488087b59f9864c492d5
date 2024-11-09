@@ -1392,6 +1392,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31254797_96d47e6a",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-09T00:27:07Z",
+      "side": 1,
+      "message": "Not sure I follow - make which part required?  Just want to avoid having a situation where two threads querying codec info will clobber each other.",
+      "parentUuid": "d195f0f3_38c4b219",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e917ac25_aa50216e",
         "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
         "patchSetId": 10
@@ -1494,6 +1512,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2480aaa_74885e8a",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-09T00:27:07Z",
+      "side": 1,
+      "message": "Technically we could count nodes in a linked list, but agree that would be inefficient to start at root each time instead of a fixed offset / follow the next pointer.\n\nSo soudns reasonable to me to have this be different.",
+      "parentUuid": "1997d364_fac6a5f2",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "813b86bb_d13a18ca",
@@ -1531,6 +1567,30 @@
       "side": 1,
       "message": "This is for cases when you already know the codec name, e.g. in MediaCodec itself although for now we are not implementing this on top of the NDK. Many times application code gets the codec name (from the findDecoder/Encoder methods above), and keeps only the codec name, which is guaranteed to uniquely identify the codec and its info.\n\nPerhaps we need to say that?",
       "parentUuid": "813b86bb_d13a18ca",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31de7489_8328d5dc",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-09T00:27:07Z",
+      "side": 1,
+      "message": "It\u0027d be good to mention the options, at least as breadcrumbs for developers to know where to look for names.",
+      "parentUuid": "5fd91a35_1d9531e7",
       "range": {
         "startLine": 108,
         "startChar": 8,
