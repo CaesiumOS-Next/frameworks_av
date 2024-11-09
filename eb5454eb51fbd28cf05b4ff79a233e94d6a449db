@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2638f679_92abd08b",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 7885,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2024-11-09T02:30:54Z",
+      "side": 1,
+      "message": "Does this need a *2 like on line 7889?",
+      "range": {
+        "startLine": 7885,
+        "startChar": 18,
+        "endLine": 7885,
+        "endChar": 35
+      },
+      "revId": "eb5454eb51fbd28cf05b4ff79a233e94d6a449db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
