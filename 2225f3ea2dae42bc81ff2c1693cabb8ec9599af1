@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1147d8_aae29027",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "please use codec2: as the component name.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "735686e8_108d50b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "Add more ... ?\n\nThere are already some",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866e736a_7ce53504",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "input surface is platform specific, so this needs to go to the platform specific portion, e.g. where the other new params are added.",
+      "range": {
+        "startLine": 171,
+        "startChar": 4,
+        "endLine": 171,
+        "endChar": 32
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29685fa5_764e39b7",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "this seem to be int64_t",
+      "range": {
+        "startLine": 269,
+        "startChar": 45,
+        "endLine": 269,
+        "endChar": 51
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8795bfd3_6096ae61",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "are all of these used? E.g. kParamIndexMinFrameRate may have been meant to be max framerate",
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc1711b_1ee0d801",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "please add the types in the comments",
+      "range": {
+        "startLine": 301,
+        "startChar": 4,
+        "endLine": 301,
+        "endChar": 33
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42a8b0a_479b0439",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1268,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "how is this parameter used? From this definition this looks to be a parameter that each component needs to support for each stream. Is that intended?",
+      "range": {
+        "startLine": 1268,
+        "startChar": 8,
+        "endLine": 1268,
+        "endChar": 27
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6c22a8_157d96dc",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2635,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "this meant to reuse the gap adjustment struct\u0027s CORE_INDEX, which should already be kParamIndexTimestampGapAdjustment. What is the error you are getting?",
+      "range": {
+        "startLine": 2635,
+        "startChar": 62,
+        "endLine": 2635,
+        "endChar": 95
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9576b21_0c4af6c2",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2662,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T22:47:59Z",
+      "side": 1,
+      "message": "I think more needs to be said. E.g. this is something that components pass back to the platform based on the last buffer timestamp.",
+      "range": {
+        "startLine": 2662,
+        "startChar": 23,
+        "endLine": 2662,
+        "endChar": 25
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
