@@ -263,7 +263,7 @@ enum C2ParamIndexKind : C2Param::type_index_t {
     kParamIndexSuspendAt, // input-surface, struct
     kParamIndexResumeAt, // input-surface, struct
     kParamIndexStopAt, // input-surface, struct
-    kParamIndexTimeOffset, // input-surface, struct
+    kParamIndexTimeOffset, // input-surface, int64_t
     kParamIndexMinFrameRate, // input-surface, float
     kParamIndexTimestampGapAdjustment, // input-surface, struct
 
@@ -293,6 +293,11 @@ enum C2ParamIndexKind : C2Param::type_index_t {
 
     // allow tunnel peek behavior to be unspecified for app compatibility
     kParamIndexTunnelPeekMode, // tunnel mode, enum
+
+    // input surface
+    kParamIndexTimelapseFrameRate, // input-surface, struct
+    kParamIndexSurfaceSetup, // input-surface, struct
+    kParamIndexStopTimeOffset, // input-surface, int64_t
 };
 
 }
@@ -2552,6 +2557,14 @@ typedef C2PortParam<C2Tuning, C2FloatValue, kParamIndexMinFrameRate> C2PortMinFr
 constexpr char C2_PARAMKEY_INPUT_SURFACE_MIN_FRAME_RATE[] = "input-surface.min-frame-rate";
 
 /**
+ * Maximum fps for input surface.
+ *
+ * Drop frame to meet this.
+ */
+typedef C2PortParam<C2Tuning, C2FloatValue, kParamIndexMaxFrameRate> C2PortMaxFrameRateTuning;
+constexpr char C2_PARAMKEY_INPUT_SURFACE_MAX_FRAME_RATE[] = "input-surface.max-frame-rate";
+
+/**
  * Timestamp adjustment (override) for input surface buffers. These control the input timestamp
  * fed to the codec, but do not impact the output timestamp.
  */
@@ -2581,8 +2594,78 @@ C2ENUM(C2TimestampGapAdjustmentStruct::mode_t, uint32_t,
 inline C2TimestampGapAdjustmentStruct::C2TimestampGapAdjustmentStruct()
     : mode(C2TimestampGapAdjustmentStruct::NONE), value(0) { }
 
-typedef C2PortParam<C2Tuning, C2TimestampGapAdjustmentStruct> C2PortTimestampGapTuning;
+typedef C2PortParam<C2Tuning, C2TimestampGapAdjustmentStruct, kParamIndexTimestampGapAdjustment>
+        C2PortTimestampGapTuning;
 constexpr char C2_PARAMKEY_INPUT_SURFACE_TIMESTAMP_ADJUSTMENT[] = "input-surface.timestamp-adjustment";
+
+/**
+ * Timelapse fps control for input surface.
+ */
+struct C2TimelapseFrameRateStruct {
+    float captureFps;
+    float codedFps;
+
+    C2TimelapseFrameRateStruct()
+        : captureFps(0.0), codedFps(0.0) {}
+    C2TimelapseFrameRateStruct(float capture_, float coded_)
+        : captureFps(capture_), codedFps(coded_) {}
+
+    DEFINE_AND_DESCRIBE_C2STRUCT(TimelapseFrameRate)
+    C2FIELD(captureFps, "capture-fps")
+    C2FIELD(codedFps, "coded-fps")
+};
+
+typedef C2PortParam<C2Tuning, C2TimelapseFrameRateStruct, kParamIndexTimelapseFrameRate>
+        C2PortTimelapseFpsTuning;
+constexpr char C2_PARAMKEY_INPUT_SURFACE_TIMELAPSE_FPS[] = "input-surface.timelapse-frame-rate";
+
+/**
+ * Input surface setup struct
+ *
+ * This structure describes the parameters for creation of input surface.
+ * This parameter is determined for each input surface w.r.t. the actual
+ * component
+ */
+struct C2SurfaceSetupStruct {
+    int32_t width;
+    int32_t height;
+    int32_t bufferCount;
+    int32_t dataspace;
+    uint64_t consumerUsage;
+
+    C2SurfaceSetupStruct()
+        : width(0), height(0), bufferCount(16), dataspace(0), consumerUsage(0) {}
+
+    C2SurfaceSetupStruct(
+            int32_t width_, int32_t height_,
+            int32_t bufferCount_, int32_t dataspace_, uint64_t consumerUsage_)
+        : width(width_), height(height_), bufferCount(bufferCount_),
+        dataspace(dataspace_), consumerUsage(consumerUsage_) {}
+
+    DEFINE_AND_DESCRIBE_C2STRUCT(SurfaceSetup)
+    C2FIELD(width, "width")
+    C2FIELD(height, "height")
+    C2FIELD(bufferCount, "buffer-count")
+    C2FIELD(dataspace, "dataspace")
+    C2FIELD(consumerUsage, "consumer-usage")
+};
+
+/**
+ * This tuning is for the input surface creation parameters w.r.t the actual
+ * encoder component.
+ */
+typedef C2PortParam<C2Tuning, C2SurfaceSetupStruct, kParamIndexSurfaceSetup>
+        C2PortSurfaceSetup;
+constexpr char C2_PARAMKEY_INPUT_SURFACE_SURFACE_SETUP[] = "input-surface.surface-setup";
+
+/**
+ * Stop time offset for input surface. Stop time offset is the elapsed time
+ * offset to the last frame time from the stop time. This could be returned from
+ * IInputSurface when it is queried, and it could be accessed by the application
+ * via input format('android._stop-time-offset-us').
+ */
+typedef C2PortParam<C2Tuning, C2Int64Value, kParamIndexStopTimeOffset> C2PortStopTimeOffset;
+constexpr char C2_PARAMKEY_INPUT_SURFACE_STOP_TIME_OFFSET[] = "input-surface.stop-time-offset";
 
 /* ===================================== TUNNELED CODEC ==================================== */
 
