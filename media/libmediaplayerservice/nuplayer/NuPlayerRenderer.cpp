@@ -102,6 +102,10 @@ static audio_format_t constexpr audioFormatFromEncoding(int32_t pcmEncoding) {
     switch (pcmEncoding) {
     case kAudioEncodingPcmFloat:
         return AUDIO_FORMAT_PCM_FLOAT;
+    case kAudioEncodingPcm32bit:
+        return AUDIO_FORMAT_PCM_32_BIT;
+    case kAudioEncodingPcm24bitPacked:
+        return AUDIO_FORMAT_PCM_24_BIT_PACKED;
     case kAudioEncodingPcm16bit:
         return AUDIO_FORMAT_PCM_16_BIT;
     case kAudioEncodingPcm8bit:
@@ -904,12 +908,15 @@ void NuPlayer::Renderer::notifyIfMediaRenderingStarted_l() {
 
 // static
 size_t NuPlayer::Renderer::AudioSinkCallback(
-        MediaPlayerBase::AudioSink * /* audioSink */,
+        const sp<MediaPlayerBase::AudioSink>& /* audioSink */,
         void *buffer,
         size_t size,
-        void *cookie,
+        const wp<RefBase>& cookie,
         MediaPlayerBase::AudioSink::cb_event_t event) {
-    NuPlayer::Renderer *me = (NuPlayer::Renderer *)cookie;
+    if (cookie == nullptr) return 0;
+    const auto ref = cookie.promote();
+    if (!ref) return 0;
+    const auto me = static_cast<NuPlayer::Renderer*>(ref.get()); // we already hold a sp.
 
     switch (event) {
         case MediaPlayerBase::AudioSink::CB_EVENT_FILL_BUFFER:
@@ -2025,7 +2032,12 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
     if (offloadingAudio()) {
         AString mime;
         CHECK(format->findString("mime", &mime));
-        status_t err = mapMimeToAudioFormat(audioFormat, mime.c_str());
+        status_t err = OK;
+        if (audioFormat == AUDIO_FORMAT_PCM_16_BIT) {
+            // If there is probably no pcm-encoding in the format message, try to get the format by
+            // its mimetype.
+            err = mapMimeToAudioFormat(audioFormat, mime.c_str());
+        }
 
         if (err != OK) {
             ALOGE("Couldn't map mime \"%s\" to a valid "
