@@ -16,6 +16,23 @@
       "message": "There is exist MediaCodec API to support audio presentation selection: https://developer.android.com/reference/android/media/MediaCodec#setAudioPresentation(android.media.AudioPresentation)\n\nIt can work for OMX component but NOT for Codec2 component. This contribution with another one will add audio presentation selection support in codec2.\n\nThe example usage is:\n\nMediaFormat trackFormat \u003d mediaExtractor.getTrackFormat(AUDIO_TRACK_AC4_INDEX);\nString mime \u003d trackFormat.getString(MediaFormat.KEY_MIME);\nmediaExtractor.selectTrack(AUDIO_TRACK_AC4_INDEX);\ntry {\nMediaCodecList list \u003d new MediaCodecList(MediaCodecList.ALL_CODECS);\nString name \u003d list.findDecoderForFormat(trackFormat);\ndecoder \u003d MediaCodec.createByCodecName(name);\n} catch (IOException e) {\nthrow new RuntimeException(e);\n}\n\ndecoder.configure(trackFormat, null, null, 0);\ndecoder.start();\n\nmAudioPresentations \u003d mediaExtractor.getAudioPresentations(AUDIO_TRACK_AC4_INDEX);\nmSelectedAudioPresentation \u003d mAudioPresentations.get(PREFERRED_PRESENTATION_INDEX);\ndecoder.setAudioPresentation(mSelectedAudioPresentation);",
       "revId": "30cfd9b5be6d661720aa93450293ba6cf77e378b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c76d3b_28a430b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1604644
+      },
+      "writtenOn": "2024-11-11T01:09:51Z",
+      "side": 1,
+      "message": "Hi, Googlers, could you help to review this code contribution?",
+      "revId": "30cfd9b5be6d661720aa93450293ba6cf77e378b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
