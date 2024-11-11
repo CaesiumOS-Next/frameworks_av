@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fda403_330550f1",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 6014,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-11T22:08:54Z",
+      "side": 1,
+      "message": "nit: not mutexed, or no lock needed?",
+      "fixSuggestions": [
+        {
+          "fixId": "c9e3236a_bc6d31ac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 6014,
+                "startChar": 0,
+                "endLine": 6015,
+                "endChar": 0
+              },
+              "replacement": "// always called from the looper thread (and therefore not mutexed)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "933ac00891ce1564ebe5ed6895e6e1594936254c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
