@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23ec12d_c0af54db",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T23:24:45Z",
+      "side": 1,
+      "message": "these are mixed.\n\nI thought the platform will track the \"available\" resources to reduce the burden from the HAL implementation.",
+      "range": {
+        "startLine": 1282,
+        "startChar": 15,
+        "endLine": 1283,
+        "endChar": 69
+      },
+      "revId": "185a5450a3ca114f6bf46450df3bc9a6376a6505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c6aed2_567aea1f",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T23:24:45Z",
+      "side": 1,
+      "message": "for this one specifically, we may want to call this \"resources.capacity\" even if the name (which must follow English language) uses singular resource.",
+      "range": {
+        "startLine": 1283,
+        "startChar": 52,
+        "endLine": 1283,
+        "endChar": 60
+      },
+      "revId": "185a5450a3ca114f6bf46450df3bc9a6376a6505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
