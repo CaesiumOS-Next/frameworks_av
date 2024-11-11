@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e5574bf_fb095c2d",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6027,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T19:27:04Z",
+      "side": 1,
+      "message": "this is only accessed from the looper (and desctructor)",
+      "parentUuid": "6da34fdb_5e216f3d",
+      "range": {
+        "startLine": 6014,
+        "startChar": 4,
+        "endLine": 6027,
+        "endChar": 28
+      },
+      "revId": "497d2130f60c4556ad64f0354bc61d5a89c804f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f0565c8_837a9b37",
         "filename": "media/libstagefright/MediaCodec.cpp",
         "patchSetId": 2
