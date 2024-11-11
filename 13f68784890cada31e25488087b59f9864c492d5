@@ -1410,6 +1410,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f062e7d_1dcb6f3b",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T23:53:02Z",
+      "side": 1,
+      "message": "We don\u0027t want to keep thread-local state in these APIs. It\u0027s required to use the same format for successive iterations, otherwise the behavior is undefined.",
+      "parentUuid": "31254797_96d47e6a",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e917ac25_aa50216e",
         "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
         "patchSetId": 10
@@ -1591,6 +1609,30 @@
       "side": 1,
       "message": "It\u0027d be good to mention the options, at least as breadcrumbs for developers to know where to look for names.",
       "parentUuid": "5fd91a35_1d9531e7",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b35bf274_64f3d885",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-11T23:53:02Z",
+      "side": 1,
+      "message": "I agree",
+      "parentUuid": "31de7489_8328d5dc",
       "range": {
         "startLine": 108,
         "startChar": 8,
