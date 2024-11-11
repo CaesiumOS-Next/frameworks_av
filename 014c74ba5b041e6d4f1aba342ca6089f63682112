@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b3694a_1e661869",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1881060
+      },
+      "writtenOn": "2024-11-11T23:47:23Z",
+      "side": 1,
+      "message": "I don\u0027t think you want that.\n\nDoing this would give access to internal flag to the bluetooth component.\nBluetooth is a module that is not supposed to call or depend on hidden API but this CL will give it possibility.\n\nConsider only exposing the exported version of the flag library:\n\n```\njava_aconfig_library {\n    name: \"android.media.audio-aconfig-java-exported\",\n    aconfig_declarations: \"android.media.audio-aconfig\",\n    min_sdk_version: \"Tiramisu\",\n    mode: \"exported\",\n    visibility: [\n...\n        \"//packages/modules/Bluetooth:__subpackages__\",\n    ],\n    apex_available: [\n        \"//apex_available:platform\",\n        \"com.android.btservices\",\n    ],\n}\n```\n\n\nFor the same reason, I don\u0027t think it\u0027s a good practice to depend on the internal flag in your cts library, cts test are supposed to be based on the API.\nleaking the internal flag to cts is an indication that the cts is not a correct \"API oriented\" test but instead depend on detail of implementation.",
+      "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
