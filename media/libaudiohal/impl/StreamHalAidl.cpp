@@ -232,7 +232,9 @@ status_t StreamHalAidl::standby() {
             RETURN_STATUS_IF_ERROR(pause(&reply));
             if (reply.state != StreamDescriptor::State::PAUSED &&
                     reply.state != StreamDescriptor::State::DRAIN_PAUSED &&
-                    reply.state != StreamDescriptor::State::TRANSFER_PAUSED) {
+                    reply.state != StreamDescriptor::State::TRANSFER_PAUSED &&
+                    (state != StreamDescriptor::State::DRAINING ||
+                        reply.state != StreamDescriptor::State::IDLE)) {
                 AUGMENT_LOG(E, "unexpected stream state: %s (expected PAUSED)",
                             toString(reply.state).c_str());
                 return INVALID_OPERATION;
@@ -367,8 +369,12 @@ status_t StreamHalAidl::getObservablePosition(int64_t* frames, int64_t* timestam
     if (!mStream) return NO_INIT;
     StreamDescriptor::Reply reply;
     RETURN_STATUS_IF_ERROR(updateCountersIfNeeded(&reply, statePositions));
-    *frames = std::max<int64_t>(0, reply.observable.frames);
-    *timestamp = std::max<int64_t>(0, reply.observable.timeNs);
+    if (reply.observable.frames == StreamDescriptor::Position::UNKNOWN ||
+        reply.observable.timeNs == StreamDescriptor::Position::UNKNOWN) {
+        return INVALID_OPERATION;
+    }
+    *frames = reply.observable.frames;
+    *timestamp = reply.observable.timeNs;
     return OK;
 }
 
@@ -377,8 +383,12 @@ status_t StreamHalAidl::getHardwarePosition(int64_t *frames, int64_t *timestamp)
     if (!mStream) return NO_INIT;
     StreamDescriptor::Reply reply;
     RETURN_STATUS_IF_ERROR(updateCountersIfNeeded(&reply));
-    *frames = std::max<int64_t>(0, reply.hardware.frames);
-    *timestamp = std::max<int64_t>(0, reply.hardware.timeNs);
+    if (reply.hardware.frames == StreamDescriptor::Position::UNKNOWN ||
+        reply.hardware.timeNs == StreamDescriptor::Position::UNKNOWN) {
+        return INVALID_OPERATION;
+    }
+    *frames = reply.hardware.frames;
+    *timestamp = reply.hardware.timeNs;
     return OK;
 }
 
@@ -387,7 +397,10 @@ status_t StreamHalAidl::getXruns(int32_t *frames) {
     if (!mStream) return NO_INIT;
     StreamDescriptor::Reply reply;
     RETURN_STATUS_IF_ERROR(updateCountersIfNeeded(&reply));
-    *frames = std::max<int32_t>(0, reply.xrunFrames);
+    if (reply.xrunFrames == StreamDescriptor::Position::UNKNOWN) {
+        return INVALID_OPERATION;
+    }
+    *frames = reply.xrunFrames;
     return OK;
 }
 
@@ -544,7 +557,14 @@ status_t StreamHalAidl::exit() {
 }
 
 void StreamHalAidl::onAsyncTransferReady() {
-    if (auto state = getState(); state == StreamDescriptor::State::TRANSFERRING) {
+    StreamDescriptor::State state;
+    {
+        // Use 'mCommandReplyLock' to ensure that 'sendCommand' has finished updating the state
+        // after the reply from the 'burst' command.
+        std::lock_guard l(mCommandReplyLock);
+        state = getState();
+    }
+    if (state == StreamDescriptor::State::TRANSFERRING) {
         // Retrieve the current state together with position counters unconditionally
         // to ensure that the state on our side gets updated.
         sendCommand(makeHalCommand<HalCommand::Tag::getStatus>(),
@@ -555,7 +575,14 @@ void StreamHalAidl::onAsyncTransferReady() {
 }
 
 void StreamHalAidl::onAsyncDrainReady() {
-    if (auto state = getState(); state == StreamDescriptor::State::DRAINING) {
+    StreamDescriptor::State state;
+    {
+        // Use 'mCommandReplyLock' to ensure that 'sendCommand' has finished updating the state
+        // after the reply from the 'drain' command.
+        std::lock_guard l(mCommandReplyLock);
+        state = getState();
+    }
+    if (state == StreamDescriptor::State::DRAINING) {
         // Retrieve the current state together with position counters unconditionally
         // to ensure that the state on our side gets updated.
         sendCommand(makeHalCommand<HalCommand::Tag::getStatus>(), nullptr,
@@ -563,7 +590,9 @@ void StreamHalAidl::onAsyncDrainReady() {
         // For compatibility with HIDL behavior, apply a "soft" position reset
         // after receiving the "drain ready" callback.
         std::lock_guard l(mLock);
-        mStatePositions.framesAtFlushOrDrain = mLastReply.observable.frames;
+        if (mLastReply.observable.frames != StreamDescriptor::Position::UNKNOWN) {
+            mStatePositions.framesAtFlushOrDrain = mLastReply.observable.frames;
+        }
     } else {
         AUGMENT_LOG(W, "unexpected onDrainReady in the state %s", toString(state).c_str());
     }
@@ -656,7 +685,8 @@ status_t StreamHalAidl::sendCommand(
             }
             mLastReply = *reply;
             mLastReplyExpirationNs = uptimeNanos() + mLastReplyLifeTimeNs;
-            if (!mIsInput && reply->status == STATUS_OK) {
+            if (!mIsInput && reply->status == STATUS_OK &&
+                    reply->observable.frames != StreamDescriptor::Position::UNKNOWN) {
                 if (command.getTag() == StreamDescriptor::Command::standby &&
                         reply->state == StreamDescriptor::State::STANDBY) {
                     mStatePositions.framesAtStandby = reply->observable.frames;
