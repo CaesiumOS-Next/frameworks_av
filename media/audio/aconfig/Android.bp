@@ -23,6 +23,7 @@ aconfig_declarations {
     name: "com.android.media.audio-aconfig",
     package: "com.android.media.audio",
     container: "system",
+    exportable: true,
     srcs: ["audio.aconfig"],
 }
 
@@ -99,6 +100,16 @@ cc_aconfig_library {
 java_aconfig_library {
     name: "com.android.media.audio-aconfig-java",
     aconfig_declarations: "com.android.media.audio-aconfig",
+    defaults: ["framework-minus-apex-aconfig-java-defaults"],
+    min_sdk_version: "Tiramisu",
+    mode: "exported",
+    visibility: [
+        "//packages/modules/Bluetooth:__subpackages__",
+    ],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.btservices",
+    ],
 }
 
 // For CTS usage
