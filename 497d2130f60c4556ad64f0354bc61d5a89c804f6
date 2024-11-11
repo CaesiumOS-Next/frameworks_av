@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f32adab6_34f2ff4d",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6027,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-11T20:20:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9e5574bf_fb095c2d",
+      "range": {
+        "startLine": 6014,
+        "startChar": 4,
+        "endLine": 6027,
+        "endChar": 28
+      },
+      "revId": "497d2130f60c4556ad64f0354bc61d5a89c804f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f0565c8_837a9b37",
