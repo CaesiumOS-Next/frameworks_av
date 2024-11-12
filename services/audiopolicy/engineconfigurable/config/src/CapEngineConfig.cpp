@@ -122,24 +122,18 @@ ConversionResult<std::string> aidl2legacy_AudioHalCapCriterionV2TypeDevice_CapCr
 }
 
 ConversionResult<std::string> aidl2legacy_AudioHalCapCriterionV2Type_CapCriterionValue(
-        const AudioHalCapCriterionV2& aidl) {
+        const AudioHalCapCriterionV2::Type& aidl) {
     switch (aidl.getTag()) {
-        case AudioHalCapCriterionV2::availableInputDevices:
+        case AudioHalCapCriterionV2::Type::availableDevicesType:
             return aidl2legacy_AudioHalCapCriterionV2TypeDevice_CapCriterionValue(
-                    aidl.get<AudioHalCapCriterionV2::availableInputDevices>().values[0]);
-        case AudioHalCapCriterionV2::availableOutputDevices:
-            return aidl2legacy_AudioHalCapCriterionV2TypeDevice_CapCriterionValue(
-                    aidl.get<AudioHalCapCriterionV2::availableOutputDevices>().values[0]);
-        case AudioHalCapCriterionV2::availableInputDevicesAddresses:
-            return aidl.get<AudioHalCapCriterionV2::availableInputDevicesAddresses>().values[0].
-                    template get<AudioDeviceAddress::id>();
-        case AudioHalCapCriterionV2::availableOutputDevicesAddresses:
-            return aidl.get<AudioHalCapCriterionV2::availableOutputDevicesAddresses>().values[0].
-                    template get<AudioDeviceAddress::id>();
-        case AudioHalCapCriterionV2::telephonyMode:
-            return toString(aidl.get<AudioHalCapCriterionV2::telephonyMode>().values[0]);
-        case AudioHalCapCriterionV2::forceConfigForUse:
-            return toString(aidl.get<AudioHalCapCriterionV2::forceConfigForUse>().values[0]);
+                    aidl.get<AudioHalCapCriterionV2::Type::availableDevicesType>());
+        case AudioHalCapCriterionV2::Type::availableDevicesAddressesType:
+            return aidl.get<AudioHalCapCriterionV2::Type::availableDevicesAddressesType>().template
+                    get<AudioDeviceAddress::id>();
+        case AudioHalCapCriterionV2::Type::telephonyModeType:
+            return toString(aidl.get<AudioHalCapCriterionV2::Type::telephonyModeType>());
+        case AudioHalCapCriterionV2::Type::forcedConfigType:
+            return toString(aidl.get<AudioHalCapCriterionV2::Type::forcedConfigType>());
         default:
             return unexpected(BAD_VALUE);
     }
@@ -174,11 +168,11 @@ ConversionResult<std::string> aidl2legacy_AudioHalCapRule_CapRule(
         }
         isFirstCriterionRule = false;
         std::string selectionCriterion = VALUE_OR_RETURN(
-                aidl2legacy_AudioHalCapCriterionV2_CapName(criterionRule.criterionAndValue));
+                aidl2legacy_AudioHalCapCriterionV2_CapName(criterionRule.criterion));
         std::string matchesWhen;
         std::string value = VALUE_OR_RETURN(
                 aidl2legacy_AudioHalCapCriterionV2Type_CapCriterionValue(
-                        criterionRule.criterionAndValue));
+                        criterionRule.criterionTypeValue));
 
         switch (criterionRule.matchingRule) {
             case AudioHalCapRule::MatchingRule::IS:
