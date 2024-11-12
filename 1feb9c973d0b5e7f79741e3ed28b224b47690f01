@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f219d56a_c09ce75f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-11-12T02:58:58Z",
+      "side": 1,
+      "message": "Suyog,\nAs discussed in a call with Wonsik and Ray, this needs to be enabled based on an aconfig flag.\n\nSince we can\u0027t use flags in Android.bp,\nyou can do the following.\n- Define the macro \"KEEP_THREADS_ACTIVE\" to 1 in Android.bp (like you have done currently).\n- Define a flag in https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/aconfig/swcodec_flags.aconfig;l\u003d7 \n- When that flag is not enabled, reset s_init_ip.u4_keep_threads_active and   s_fill_mem_ip.u4_keep_threads_active to 0 in C2SoftMpeg2Dec.cpp.",
+      "revId": "1feb9c973d0b5e7f79741e3ed28b224b47690f01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
