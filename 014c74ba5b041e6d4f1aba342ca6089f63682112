@@ -52,6 +52,24 @@
       "parentUuid": "3b299d8d_077e050a",
       "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c76f8b_b704d7d2",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2024-11-12T01:04:45Z",
+      "side": 1,
+      "message": "Agree to disagree.\n\nAgain, these are not internal audio flags. These are flags that are meant to be released in the framework.jar at some point.\n\nCan you give me an example of an API that BT will be able to call after this and should not be able? The flags that should not be accessed by BT are not exported in the first place in their aconfig declaration.",
+      "parentUuid": "faddd31f_3bd869c2",
+      "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
