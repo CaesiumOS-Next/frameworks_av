@@ -86,6 +86,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc5d688_e6ee9730",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01504d0d_f50a933c",
+      "range": {
+        "startLine": 34,
+        "startChar": 3,
+        "endLine": 34,
+        "endChar": 18
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a55b4404_af9f9f74",
@@ -151,6 +175,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec1c10d_e5d11632",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a55b4404_af9f9f74",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb1b6b65_693ab2e3",
@@ -164,6 +206,30 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "\"A utility structure...\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 19
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c70c4401_8024cf3f",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb1b6b65_693ab2e3",
       "range": {
         "startLine": 42,
         "startChar": 3,
@@ -219,6 +285,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "683605ba_9dc9d878",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc3a8e5b_ca6ac444",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c60ed929_8edb1da5",
@@ -232,6 +316,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "free/delete functions often accept nulls (and do a no-op), it\u0027s generally a good default unless there\u0027s an actual reason to do otherwise.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d201a8c4_2fd09466",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Got it. Updated the API returning void.",
+      "parentUuid": "c60ed929_8edb1da5",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -271,6 +373,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "935ec0bf_25f4680d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Got it. Documented.",
+      "parentUuid": "5ae04090_c578e4fe",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ee3c0e_549b75eb",
@@ -284,6 +404,30 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "This is a pretty weird statement, are you saying \"There\u0027s no way to verify this is actually a HW codec?\u0027  We certainly run compliance tests against hardware codecs, so we need to be more specific here. \n\nAnd not sure we really need to say \u0027don\u0027t trust this value\u0027?  Maybe something like: \n\n\u0027Hardware codecs generally have higher performance or lower power consumption than software codecs, but since they are specific to each device, the actual performance details can vary.\u0027?",
+      "range": {
+        "startLine": 99,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 53
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1429cbbd_0983faa9",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Sure. Done",
+      "parentUuid": "d1ee3c0e_549b75eb",
       "range": {
         "startLine": 99,
         "startChar": 7,
@@ -317,6 +461,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28a5d42e_379ddfd7",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Sure. Added 0 to the enum",
+      "parentUuid": "b4ed67ec_b7da76e4",
+      "range": {
+        "startLine": 113,
+        "startChar": 3,
+        "endLine": 113,
+        "endChar": 38
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7675ced9_af657aca",
@@ -330,6 +498,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "Document lifetime of returned string.  We could also implement this as\n\n```\nconst char* mediaType AMediaCodecInfo_getMediaType(const AMediaCodecInfo *info);\n```\n\nif INVALID_PARAMETER is the only error case we need to worry about (and return nullptr in that case), which would be slightly simpler to use.  But if we expect to use multiple media_status_t values that\u0027s not a good idea.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b43989c_684ce1e9",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Thanks for catching it. Updated returning the char pointer and documented lifecycle.",
+      "parentUuid": "7675ced9_af657aca",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -365,6 +551,24 @@
           ]
         }
       ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "310bb47c_365b2c92",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Returning 0 for invalid info. Documented.",
+      "parentUuid": "471d5a10_91c42ab9",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -414,6 +618,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd9cd819_8f44d22d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Sure. Updated by returning int. \u003d0: unsupported, \u003e0: supported, \u003c0: error",
+      "parentUuid": "76dd43c7_0238765a",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "605a5824_95f460e8",
@@ -459,6 +681,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "391d8fe2_b8d14866",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "605a5824_95f460e8",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0675489d_04a71c8a",
@@ -472,6 +712,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "same as line 142",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d4f747_7993c448",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0675489d_04a71c8a",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -493,6 +751,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "634d4c29_d4e56bf6",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Documented. I\u0027ll document the lifetime of them one by one as they may vary",
+      "parentUuid": "e6a2506f_32142f2b",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8f01b35_f5ca4a7c",
@@ -506,6 +782,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "lifetime of outVideoCaps",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "195f966b_e55c98c1",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8f01b35_f5ca4a7c",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -541,6 +835,24 @@
           ]
         }
       ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6717178b_1bfd603d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d2d39b6_059ff99d",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -737,6 +1049,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a3a202_76f28f5a",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "the ranges are fully discontinuous. Updated the doc.",
+      "parentUuid": "2fe628a1_7e1215a5",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28c59ea3_ac569422",
@@ -750,6 +1080,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "What\u0027s returned if audioCaps is bad?  Not sure if 0 could be a valid max input channel count or not here.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00e8c64e_628a58e3",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Returning -1 if audioCaps is bad. The max input channel count is always \u003e0. Documented",
+      "parentUuid": "28c59ea3_ac569422",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -771,6 +1119,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ebd4f13_fb6adb54",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Documented",
+      "parentUuid": "a8ffc2ea_fdd9206f",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "555ac0f6_1ac13e95",
@@ -784,6 +1150,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "Sort order, are they disjoint, as with getSupportedSampleRateRanges",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6489eeda_2750fc55",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Yes they are fully discontinuous. Updated the doc",
+      "parentUuid": "555ac0f6_1ac13e95",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -819,6 +1203,24 @@
           ]
         }
       ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "964cca7f_1c8f2c29",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Replacing return type from bool to int. return -1 for bad audioCaps",
+      "parentUuid": "f6764915_25154db4",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -864,6 +1266,24 @@
           ]
         }
       ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7981e5a1_f10f21fe",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Sure. Updated to return ACodecPerformancePoint *.",
+      "parentUuid": "6a6527a4_bfda3010",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -932,6 +1352,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "760db6ab_f39a9b87",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6adfdf3_72ec857d",
+      "range": {
+        "startLine": 290,
+        "startChar": 22,
+        "endLine": 290,
+        "endChar": 32
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "137d92b9_19c849cb",
@@ -962,6 +1406,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "return value if videoCaps is bad? Same for next few methods",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35d7c900_f8dbb7c1",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bded94cb_e2092ecd",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1051,6 +1513,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b8f8a4_cb698ff4",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d875601_505f011f",
+      "range": {
+        "startLine": 364,
+        "startChar": 43,
+        "endLine": 364,
+        "endChar": 49
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d23249b3_d01b8c47",
@@ -1064,6 +1550,30 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "width query",
+      "range": {
+        "startLine": 377,
+        "startChar": 43,
+        "endLine": 377,
+        "endChar": 48
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b3af16_c93b10d5",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d23249b3_d01b8c47",
       "range": {
         "startLine": 377,
         "startChar": 43,
@@ -1115,6 +1625,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fbfb0a6_72f56a4d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95d70099_9c8c78f5",
+      "range": {
+        "startLine": 394,
+        "startChar": 43,
+        "endLine": 394,
+        "endChar": 47
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ad07c4e_c4179d0b",
@@ -1128,6 +1662,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "Maybe add \"This is based on manufacturer\u0027s performance measurements for this device and codec. The measurements may not be available for all codecs or devices.\"",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f6b923d_69bdc837",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ad07c4e_c4179d0b",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1173,6 +1725,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6fedfd_f72d5f38",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d75147f_f9d701e9",
+      "range": {
+        "startLine": 426,
+        "startChar": 21,
+        "endLine": 426,
+        "endChar": 27
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4792247a_c2a38909",
@@ -1210,6 +1786,30 @@
           ]
         }
       ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f20efc43_60a57203",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Thanks for catching this. Updated with an Enum defined.",
+      "parentUuid": "4792247a_c2a38909",
+      "range": {
+        "startLine": 468,
+        "startChar": 7,
+        "endLine": 468,
+        "endChar": 21
+      },
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1332,6 +1932,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d4a83f6_2f8c81f5",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Made the framework own the out array.",
+      "parentUuid": "e666f863_715a01fe",
+      "range": {
+        "startLine": 59,
+        "startChar": 3,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c0d1132_5dae159d",
@@ -1345,6 +1969,30 @@
       "writtenOn": "2024-11-07T23:37:25Z",
       "side": 1,
       "message": "Document what happens if `max` \u003c `countSupportedMediaTypes()`.",
+      "range": {
+        "startLine": 62,
+        "startChar": 60,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8a9813_6f0825c2",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c0d1132_5dae159d",
       "range": {
         "startLine": 62,
         "startChar": 60,
@@ -1473,6 +2121,30 @@
           ]
         }
       ],
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e37882c5_d82e94a4",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e917ac25_aa50216e",
+      "range": {
+        "startLine": 78,
+        "startChar": 47,
+        "endLine": 78,
+        "endChar": 51
+      },
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1633,6 +2305,30 @@
       "side": 1,
       "message": "I agree",
       "parentUuid": "31de7489_8328d5dc",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1d59d5_50d1cbcc",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b35bf274_64f3d885",
       "range": {
         "startLine": 108,
         "startChar": 8,

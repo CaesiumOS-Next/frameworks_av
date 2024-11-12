@@ -52,6 +52,24 @@
       "parentUuid": "0eac4560_8a9b367c",
       "revId": "3c4608e2aad8510ce01ac51ebb66d295fcb8efd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1648679c_49db206d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T05:11:58Z",
+      "side": 1,
+      "message": "Updated with SOFTWARE_WITH_DEVICE_ACCESS",
+      "parentUuid": "e9bc2de4_f5e73067",
+      "revId": "3c4608e2aad8510ce01ac51ebb66d295fcb8efd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
