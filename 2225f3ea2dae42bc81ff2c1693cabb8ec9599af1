@@ -406,6 +406,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84a51dc4_8b6af5f6",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2635,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-12T01:29:29Z",
+      "side": 1,
+      "message": "The original definition below supposed to be used here, since it mentions `input-surface` and never used.\n```\nkParamIndexTimestampGapAdjustment, // input-surface, struct\n```",
+      "parentUuid": "5fd587f9_f8d6cc6f",
+      "range": {
+        "startLine": 2635,
+        "startChar": 62,
+        "endLine": 2635,
+        "endChar": 95
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9576b21_0c4af6c2",
