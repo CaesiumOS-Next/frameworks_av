@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d726a63f_92ba775c",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2577,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-12T18:33:42Z",
+      "side": 1,
+      "message": "maybe we could just fail at stopping",
+      "range": {
+        "startLine": 2577,
+        "startChar": 51,
+        "endLine": 2577,
+        "endChar": 69
+      },
+      "revId": "bde95acdad768baae250d8cfeb440aaf772d3dce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d0e0a3b_ab9c99fe",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodec.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-12T18:33:42Z",
+      "side": 1,
+      "message": "do we need these in sp\u003c\u003e? the struct is a string \u0026 couple of ints, so it may be ok to just use `std::vector\u003cGlobalResourceInfo\u003e`.",
+      "range": {
+        "startLine": 222,
+        "startChar": 65,
+        "endLine": 222,
+        "endChar": 83
+      },
+      "revId": "bde95acdad768baae250d8cfeb440aaf772d3dce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
