@@ -88,6 +88,24 @@
       "parentUuid": "f4c76f8b_b704d7d2",
       "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce35ea0d_acd81961",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2024-11-12T01:49:49Z",
+      "side": 1,
+      "message": "There is a mix an match algorithm AFAIK when you include an exported library. You will not be able to access the flags that are not exported.\n\nHowever, one problem that I see is that you can declare another library which could access the non-exported flags. Even though I am not sure it will compile based on the duplication of symbols with the BCP.\n\nAn easy fix would be to pull the library declaration into the av path and not allow anyone else besides BT use it. This way we would drop the necessary visibility statements and the BT code will only access the exported library version.",
+      "parentUuid": "5c65797b_f4415173",
+      "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
