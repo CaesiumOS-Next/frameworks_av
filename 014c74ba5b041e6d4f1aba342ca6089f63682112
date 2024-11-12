@@ -70,6 +70,24 @@
       "parentUuid": "faddd31f_3bd869c2",
       "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c65797b_f4415173",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1881060
+      },
+      "writtenOn": "2024-11-12T01:15:38Z",
+      "side": 1,
+      "message": "`android.media.audio.autoPublicVolumeApiHardening()` \n`android.media.audio.automaticBtDeviceType()`\n`android.media.audio.concurrentAudioRecordBypassPermission()`\n\nThese are the first 3 flags in  `audio_framework.aconfig` that are not exported, but that this CL will allow Bluetooth to check and call.\n\nThere are other flags defined there that are not exported, I just listed the first few.\n\n\u003e The flags that should not be accessed by BT are not exported in the first place in their aconfig declaration.\n\nThis is why I would like Bluetooth to only depend on the exported library. Today we are aware of this and now we must no call non-exported flag. But if the library are linked and expose to Bluetooth, there is no control possible and the mistake will happens.\nI would like the build modules to be done in such a way that make this impossible to happen in the future.",
+      "parentUuid": "f4c76f8b_b704d7d2",
+      "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
