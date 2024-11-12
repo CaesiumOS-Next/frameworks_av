@@ -81,6 +81,30 @@
       },
       "revId": "5a1bb51e0cf60c67d047a8fcf6b65aa969efb5d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38cb3fa1_59701bd5",
+        "filename": "services/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-12T19:18:20Z",
+      "side": 1,
+      "message": "To clarify, `IHalAdapterVendorExtension` is not a \"Cuttlefish\" service. The idea is that each SoC provides their own implementation of this interface. The SELinux policy line you are referring to is for the Cuttlefish **implementation** of the service. In fact, only the first element of this definition is fixed, that\u0027s the name of the interface and of its instance:\n\n```\nandroid.media.audio.IHalAdapterVendorExtension/default\n```\n\nThe name in the second part: `audio_vendor_parameter_parser_service` can be any. It just needs to be used consistently across other SELinux policy files used for this service.\n\nIf you are seeing SELinux errors when using your implementation of the service, that means you are missing rules for it. Yes, these rules can be similar to what you see for Cuttlefish, but they may be different if for example, the implementation of this service is merged with the audioserver. That\u0027s the SoC vendor\u0027s task to figure out what is the best way for them to declare these rules.\n\nAnd when you say \"becoz ideally below seems to be google specific and will this service starts by default\"—note that this particular implementation of the IHalAdapterVendorExtension is only added to Cuttlefish, here in its `device.mk` file:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:device/google/cuttlefish/shared/device.mk;l\u003d303;drc\u003d13dab8199491f6993833bd3cd6e36639064cab1e",
+      "parentUuid": "99274db0_74fb83ec",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "5a1bb51e0cf60c67d047a8fcf6b65aa969efb5d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
