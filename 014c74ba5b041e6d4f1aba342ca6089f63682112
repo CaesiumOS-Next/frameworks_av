@@ -34,6 +34,24 @@
       "parentUuid": "b2b3694a_1e661869",
       "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faddd31f_3bd869c2",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1881060
+      },
+      "writtenOn": "2024-11-12T00:20:18Z",
+      "side": 1,
+      "message": "I am sorry but I strongly disagree.\n\nBluetooth should not check internal audio flag.\n\nAt the time of this comment, aosp/3340860 is in the same topic and it created the exported library in place of this CL. But the bluetooth code should not create a library that is exported by audio.\n\n\u003e Also in case there is a restriction on the hidden APIs we will check the caller permissions. \n\nThere is a misunderstanding as Bluetooth has the permission to call the real API. The issues is with the flag library, Bluetooth must not call it, doing it will generate failure in future release but also on already released device, since theoretically, Bluetooth can be backported on older version. (but it will crash because audio will not offer their flag method on older version).",
+      "parentUuid": "3b299d8d_077e050a",
+      "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
