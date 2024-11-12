@@ -757,11 +757,15 @@ public:
                 syncVar->setSyncStatusLocked(C2SyncVariables::STATUS_ACTIVE);
                 syncVar->unlock();
             }
+
+            clearDeferredBlocks_l();
+
             if (mProducer && bqInformation) { // migrate buffers
                 for (int i = 0; i < NUM_BUFFER_SLOTS; ++i) {
                     std::shared_ptr<C2BufferQueueBlockPoolData> data =
                             mPoolDatas[i].lock();
                     if (data) {
+                        auto oldGraphicBuffer = mBuffers[i];
                         int slot = data->migrate(
                                 mProducer, generation, usage,
                                 producerId, mBuffers[i], oldGeneration, mSyncMem);
@@ -769,6 +773,14 @@ public:
                             buffers[slot] = mBuffers[i];
                             poolDatas[slot] = data;
                             ++migrated;
+
+                            // This is to prevent graphic buffers that
+                            // may be in use by a codec component from being destroyed
+                            if (mDeferDeallocationAfterStop &&
+                                (mBuffers[i] != oldGraphicBuffer)) {
+                                mHavingDeallocationDeferred = true;
+                                mBuffersWithDeallocationDeferred[slot] = oldGraphicBuffer;
+                            }
                         }
                     }
                 }
@@ -785,9 +797,7 @@ public:
                     }
                 }
             }
-            if (!toNullSurface) {
-                clearDeferredBlocks_l();
-            }
+
             if (mInvalidated) {
                 mIgbpValidityToken = std::make_shared<int>(0);
             }
