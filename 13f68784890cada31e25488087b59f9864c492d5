@@ -1032,6 +1032,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb49f64a_76c02b13",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T22:42:18Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. I think it is a good idea to let clients to provide small structs. It will simplify the implementation. Updated the API. Now all the output arrays are owned by the framework while all output AIntRange and ADoubleRange are owned by clients.\nAlso, documented lifecycle for all apis",
+      "parentUuid": "3b945cb9_e388cc5a",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fe628a1_7e1215a5",
@@ -1329,6 +1347,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "733f5550_49d4e04b",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T22:42:18Z",
+      "side": 1,
+      "message": "Yes, covers means one\u0027s pixels, pixel rate and frame rate are all greater than that of another.\nIf the codec can handle one than it can handle other performance points covered by it.\nAdded more doc",
+      "parentUuid": "e973e5f0_408b23b9",
+      "range": {
+        "startLine": 280,
+        "startChar": 68,
+        "endLine": 280,
+        "endChar": 74
+      },
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6adfdf3_72ec857d",
@@ -1393,6 +1435,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c8d2e9_956eef65",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T22:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "137d92b9_19c849cb",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bded94cb_e2092ecd",
@@ -1445,6 +1505,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33292284_310a2e97",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T22:42:18Z",
+      "side": 1,
+      "message": "Sorry this API should be hided. Removed",
+      "parentUuid": "2df3e716_caa5321c",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52b58986_eade4038",
@@ -1458,6 +1536,24 @@
       "writtenOn": "2024-11-07T23:22:37Z",
       "side": 1,
       "message": "this is different from the methods above (at least in docs, no idea if the impl is the same), so please make sure we\u0027re consistent in the end. Or at least clearly documented in all cases.",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90afeedb_3fad4946",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-12T22:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52b58986_eade4038",
       "revId": "13f68784890cada31e25488087b59f9864c492d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
