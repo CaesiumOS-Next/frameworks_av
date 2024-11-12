@@ -23,6 +23,7 @@
 #include <C2Param.h>
 #include <C2.h>
 
+#include <apex/ApexCodecs.h>
 #include <gui/FrameTimestamps.h>
 #include <gui/IGraphicBufferProducer.h>
 #include <hidl/HidlSupport.h>
@@ -148,6 +149,7 @@ struct Codec2ConfigurableClient {
 
     explicit Codec2ConfigurableClient(const sp<HidlBase> &hidlBase);
     explicit Codec2ConfigurableClient(const std::shared_ptr<AidlBase> &aidlBase);
+    Codec2ConfigurableClient(ApexCodec_Configurable *base, const C2String &name);
 
     const C2String& getName() const;
 
@@ -172,6 +174,7 @@ struct Codec2ConfigurableClient {
 private:
     struct HidlImpl;
     struct AidlImpl;
+    struct ApexImpl;
 
     const std::unique_ptr<ImplBase> mImpl;
 };
@@ -282,12 +285,16 @@ struct Codec2Client : public Codec2ConfigurableClient {
             std::shared_ptr<AidlBase> const& base,
             std::shared_ptr<Codec2ConfigurableClient::AidlBase> const& configurable,
             size_t serviceIndex);
+    Codec2Client(
+            ApexCodec_ComponentStore* base,
+            size_t serviceIndex);
 
 protected:
     sp<HidlBase1_0> mHidlBase1_0;
     sp<HidlBase1_1> mHidlBase1_1;
     sp<HidlBase1_2> mHidlBase1_2;
     std::shared_ptr<AidlBase> mAidlBase;
+    ApexCodec_ComponentStore* mApexBase;
 
     // Finds the first store where the predicate returns C2_OK and returns the
     // last predicate result. The predicate will be tried on all stores. The
@@ -325,6 +332,20 @@ protected:
     std::vector<C2Component::Traits> _listComponents(bool* success) const;
 
     class Cache;
+
+private:
+    c2_status_t createComponent_aidl(
+            C2String const& name,
+            std::shared_ptr<Listener> const& listener,
+            std::shared_ptr<Component>* const component);
+    c2_status_t createComponent_hidl(
+            C2String const& name,
+            std::shared_ptr<Listener> const& listener,
+            std::shared_ptr<Component>* const component);
+    c2_status_t createComponent_apex(
+            C2String const& name,
+            std::shared_ptr<Listener> const& listener,
+            std::shared_ptr<Component>* const component);
 };
 
 struct Codec2Client::Interface : public Codec2Client::Configurable {
@@ -508,11 +529,16 @@ struct Codec2Client::Component : public Codec2Client::Configurable {
 
     c2_status_t disconnectFromInputSurface();
 
+    c2_status_t initApexHandler(
+            const std::shared_ptr<Listener> &listener,
+            const std::shared_ptr<Component> &comp);
+
     // base cannot be null.
     Component(const sp<HidlBase>& base);
     Component(const sp<HidlBase1_1>& base);
     Component(const sp<HidlBase1_2>& base);
     Component(const std::shared_ptr<AidlBase>& base);
+    Component(ApexCodec_Component* base, const C2String& name);
 
     ~Component();
 
@@ -521,11 +547,15 @@ protected:
     sp<HidlBase1_1> mHidlBase1_1;
     sp<HidlBase1_2> mHidlBase1_2;
     std::shared_ptr<AidlBase> mAidlBase;
+    ApexCodec_Component *mApexBase;
 
     struct HidlBufferPoolSender;
     struct AidlBufferPoolSender;
     std::unique_ptr<HidlBufferPoolSender> mHidlBufferPoolSender;
     std::unique_ptr<AidlBufferPoolSender> mAidlBufferPoolSender;
+
+    class ApexHandler;
+    std::unique_ptr<ApexHandler> mApexHandler;
 
     struct OutputBufferQueue;
     std::unique_ptr<OutputBufferQueue> mOutputBufferQueue;
@@ -546,6 +576,8 @@ protected:
             const std::shared_ptr<Component>& component,
             const std::shared_ptr<Listener>& listener);
     sp<::android::hardware::hidl_death_recipient> mDeathRecipient;
+
+    std::map<C2BlockPool::local_id_t, std::shared_ptr<C2BlockPool>> mBlockPools;
 
     friend struct Codec2Client;
 
