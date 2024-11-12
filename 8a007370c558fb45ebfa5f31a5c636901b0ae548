@@ -33,6 +33,24 @@
       "message": "This codes originally resolved some pixel device issues, as far as I remember.\nSo I am concerned that this change will re-introduce some issues again for pixels.\n\nIf you really want this change to be in, could you guard this change with some system property which is specific to SLSI?",
       "revId": "8a007370c558fb45ebfa5f31a5c636901b0ae548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f19b6eeb_7a14c60d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765237
+      },
+      "writtenOn": "2024-11-12T09:29:01Z",
+      "side": 1,
+      "message": "I think it is OK not to apply this patch if that is not a bug.\nin my opinion, this patch helps reduce complexity to avoid cloning GraphicBuffer when a new surface can use existing GraphicBuffer.",
+      "parentUuid": "4e03d702_e42cce54",
+      "revId": "8a007370c558fb45ebfa5f31a5c636901b0ae548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
