@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cd651c1_e5f9fd60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-11-12T19:33:03Z",
+      "side": 1,
+      "message": "I\u0027m going to un-+2 as I wait to hear back from the flagging team on whether this is actually safe for going back to VIC.\n\nIt is possible that we may need a new fwk target, since we added this before exporting was possible. Alternatively, they may have a solutions",
+      "revId": "f6e23aa28f1a421b5aaab4b7ec03f6149959d5eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
