@@ -57,6 +57,30 @@
       ],
       "revId": "5a1bb51e0cf60c67d047a8fcf6b65aa969efb5d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99274db0_74fb83ec",
+        "filename": "services/audio_extension/main_audio_extension.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3497905
+      },
+      "writtenOn": "2024-11-12T17:18:15Z",
+      "side": 1,
+      "message": "@Mikhail, Can you pls suggest adding this service https://cs.android.com/android/platform/superproject/main/+/main:device/google/cuttlefish/shared/sepolicy/system_ext/private/service_contexts in our QC sepolicy is needed as well becoz ideally below seems to be google specific and will this service starts by default? as its resulting in sepolicy errors as below.\n\nError : 01-01 00:00:47.119   982   982 W ServiceManagerCppClient: Failed to registerForNotifications in waitForService for android.media.audio.IHalAdapterVendorExtension/default: Status(-1, EX_SECURITY): \u0027SELinux denied for service.\u0027",
+      "parentUuid": "304d7ab9_dccc11c7",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "5a1bb51e0cf60c67d047a8fcf6b65aa969efb5d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

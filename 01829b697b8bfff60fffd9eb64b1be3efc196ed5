@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5efee8fb_a43ba2eb",
+        "filename": "media/audio_extension/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3497905
+      },
+      "writtenOn": "2024-11-12T17:18:15Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Bpfmt: This file is not formatted.\n\nAnalyzer Description: Formats Android.bp files.\n\nThis file is not formatted.\n\nRun `prebuilts/build-tools/linux-x86/bin/bpfmt -w {filename}` to format the file, or apply the suggested fix. You may also want to add `bpfmt \u003d true` to `PREUPLOAD.cfg`",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "01829b697b8bfff60fffd9eb64b1be3efc196ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
