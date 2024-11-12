@@ -106,6 +106,24 @@
       "parentUuid": "5c65797b_f4415173",
       "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b895b9_4a752cdc",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2024-11-12T01:59:48Z",
+      "side": 1,
+      "message": "With the newest patchset the BT container does not have access to the aconfig flag declaration of audio flags in framework.jar and will only be able to use the exported flags from the exported library.",
+      "parentUuid": "ce35ea0d_acd81961",
+      "revId": "014c74ba5b041e6d4f1aba342ca6089f63682112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
