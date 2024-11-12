@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1943c9d0_dd544ca6",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1881060
+      },
+      "writtenOn": "2024-11-12T02:11:12Z",
+      "side": 1,
+      "message": "Bluetooth doesn\u0027t need this visibility",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 55
+      },
+      "revId": "282f97da9fd46724bf1f4a042c3f1938de062e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5915a1f5_7a465d5e",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1881060
+      },
+      "writtenOn": "2024-11-12T02:11:12Z",
+      "side": 1,
+      "message": "the bluetooth apex doesn\u0027t need this library to be available for it.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 33
+      },
+      "revId": "282f97da9fd46724bf1f4a042c3f1938de062e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
