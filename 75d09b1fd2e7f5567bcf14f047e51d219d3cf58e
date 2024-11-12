@@ -33,6 +33,24 @@
       "message": "For correctness, this defaults should be removed",
       "revId": "75d09b1fd2e7f5567bcf14f047e51d219d3cf58e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "478a857a_5a52743c",
+        "filename": "media/audio/aconfig/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-11-12T03:59:35Z",
+      "side": 1,
+      "message": "Resolving, from offline discussion, I think this is correct for exported flags.",
+      "parentUuid": "e9e89a9c_a350a738",
+      "revId": "75d09b1fd2e7f5567bcf14f047e51d219d3cf58e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
