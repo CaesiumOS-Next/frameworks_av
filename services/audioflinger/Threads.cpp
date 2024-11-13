@@ -9214,6 +9214,13 @@ bool RecordThread::stop(IAfRecordTrack* recordTrack) {
     if (mActiveTracks.indexOf(recordTrack) < 0 || recordTrack->state() == IAfTrackBase::PAUSING) {
         return false;
     }
+    // A case where destroy is handled first followed by stop before track is
+    // removed from active tracks. While destroy removes record track from
+    // mTracks, threadloop removes it from mActiveTracks.
+    if (recordTrack->isTerminated()) {
+        ALOGW("unsychronized stop. Destroy track executed prior to stop");
+        return false;
+    }
     // note that threadLoop may still be processing the track at this point [without lock]
     recordTrack->setState(IAfTrackBase::PAUSING);
 
