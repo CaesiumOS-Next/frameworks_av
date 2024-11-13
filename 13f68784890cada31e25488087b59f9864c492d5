@@ -2170,6 +2170,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7488c9ec_0f8b165e",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-13T00:51:45Z",
+      "side": 1,
+      "message": "Thanks for all your inputs. Reimplemented with a linked list. No internal states now. PTAL.",
+      "parentUuid": "9f062e7d_1dcb6f3b",
+      "revId": "13f68784890cada31e25488087b59f9864c492d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e917ac25_aa50216e",

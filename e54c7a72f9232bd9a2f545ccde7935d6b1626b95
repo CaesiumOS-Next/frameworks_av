@@ -74,6 +74,30 @@
       },
       "revId": "e54c7a72f9232bd9a2f545ccde7935d6b1626b95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dabd8d5_465dcab2",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-13T00:51:45Z",
+      "side": 1,
+      "message": "Got it. Implemented with a linked list. PTAL",
+      "parentUuid": "00911185_76642ccf",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 74
+      },
+      "revId": "e54c7a72f9232bd9a2f545ccde7935d6b1626b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
