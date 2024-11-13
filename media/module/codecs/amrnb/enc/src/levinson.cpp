@@ -749,7 +749,7 @@ Word16 Levinson(
 
         if (i < 5)
         {
-            *(rc + i - 1) = (Word16)((t2 + 0x00008000L) >> 16);
+            *(rc + i - 1) = (Word16)((t2 + (int64_t)0x00008000L) >> 16);
         }
         /* Test for unstable filter. If unstable keep old A(z) */
         if ((abs_s(Kh)) > 32750)

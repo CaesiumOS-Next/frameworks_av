@@ -269,8 +269,8 @@ void subframePostProc(
         __builtin_add_overflow(L_temp2, mul << 1, &L_temp2);
         L_temp   <<=  tempShift;
         L_temp2  <<=  tempShift;
-        *(p_exc++) = (Word16)((L_temp  + 0x08000L) >> 16);
-        *(p_exc++) = (Word16)((L_temp2 + 0x08000L) >> 16);
+        *(p_exc++) = (Word16)((L_temp  + (int64_t)0x08000L) >> 16);
+        *(p_exc++) = (Word16)((L_temp2 + (int64_t)0x08000L) >> 16);
 
     }
 
