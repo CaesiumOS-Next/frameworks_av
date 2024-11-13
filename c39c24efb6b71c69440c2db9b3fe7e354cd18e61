@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead6dfda_13746c5a",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-13T07:25:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4019a7c6_59072c74",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 23
+      },
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67fb483c_d1aa74da",
@@ -220,6 +244,30 @@
       "side": 1,
       "message": "Technically it must be called C2SystemResourceStruct",
       "parentUuid": "63c08a02_5e14ca3d",
+      "range": {
+        "startLine": 1288,
+        "startChar": 32,
+        "endLine": 1288,
+        "endChar": 45
+      },
+      "revId": "c39c24efb6b71c69440c2db9b3fe7e354cd18e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e49c11b_ac2554a4",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-13T07:25:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb8cf6a5_93548a1f",
       "range": {
         "startLine": 1288,
         "startChar": 32,
