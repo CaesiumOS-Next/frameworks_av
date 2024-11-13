@@ -191,7 +191,9 @@ HalStream getHalStream(const Stream& stream) {
   }
   halStream.overrideDataSpace = stream.dataSpace;
 
-  halStream.producerUsage = BufferUsage::GPU_RENDER_TARGET;
+  halStream.producerUsage = static_cast<BufferUsage>(
+      static_cast<int64_t>(BufferUsage::GPU_RENDER_TARGET) |
+      static_cast<int64_t>(BufferUsage::CAMERA_OUTPUT));
   halStream.supportOffline = false;
   return halStream;
 }
