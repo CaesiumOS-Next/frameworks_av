@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b3abf07_f3b9d97c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-13T23:57:41Z",
+      "side": 1,
+      "message": "Yes. Done",
+      "parentUuid": "aacaecfe_f873e71c",
+      "range": {
+        "startLine": 110,
+        "startChar": 64,
+        "endLine": 110,
+        "endChar": 70
+      },
+      "revId": "8dad663afd347e0373257af88a0f89740b5a88d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a14ff2d_e7da4046",
@@ -160,6 +184,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe79398_09889224",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-13T23:57:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a14ff2d_e7da4046",
+      "range": {
+        "startLine": 180,
+        "startChar": 79,
+        "endLine": 180,
+        "endChar": 88
+      },
+      "revId": "8dad663afd347e0373257af88a0f89740b5a88d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbaa9d40_25b138fe",
@@ -197,6 +245,30 @@
           ]
         }
       ],
+      "revId": "8dad663afd347e0373257af88a0f89740b5a88d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d29c15_6877b316",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-13T23:57:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbaa9d40_25b138fe",
+      "range": {
+        "startLine": 220,
+        "startChar": 48,
+        "endLine": 220,
+        "endChar": 56
+      },
       "revId": "8dad663afd347e0373257af88a0f89740b5a88d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
