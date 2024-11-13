@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8d88e2_b9141782",
+        "filename": "drm/libmediadrm/DrmHalHidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1557693
+      },
+      "writtenOn": "2024-11-13T21:58:52Z",
+      "side": 1,
+      "message": "Probably the best we can do for now. The last HIDL 1.4 version was in android 12, so we need to maintain it till android 16(B). Can you open a b/ to remove HIDL references in Android 17 (26Q2). Maybe assign to bugjuggler to wait for 9 months before assigning back to you?\n\nI don\u0027t know where AI got the b# from 😊",
+      "range": {
+        "startLine": 342,
+        "startChar": 22,
+        "endLine": 342,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "070636fc_16b06a28",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drm/libmediadrm/DrmHalHidl.cpp",
+              "range": {
+                "startLine": 342,
+                "startChar": 0,
+                "endLine": 342,
+                "endChar": 0
+              },
+              "replacement": "            // TODO(b/221491111): Remove HIDL references in Android 17 (26Q2).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "06bfbcb3e7c57a7b1070a27cd06beb8a6909b994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
