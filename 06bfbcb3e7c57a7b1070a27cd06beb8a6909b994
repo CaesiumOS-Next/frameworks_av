@@ -64,6 +64,30 @@
       },
       "revId": "06bfbcb3e7c57a7b1070a27cd06beb8a6909b994",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "099578bf_f47cd0c7",
+        "filename": "drm/libmediadrm/DrmHalHidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1902075
+      },
+      "writtenOn": "2024-11-13T23:13:21Z",
+      "side": 1,
+      "message": "Created b/378954619",
+      "parentUuid": "8a12273a_0bab4878",
+      "range": {
+        "startLine": 342,
+        "startChar": 22,
+        "endLine": 342,
+        "endChar": 28
+      },
+      "revId": "06bfbcb3e7c57a7b1070a27cd06beb8a6909b994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
