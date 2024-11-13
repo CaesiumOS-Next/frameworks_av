@@ -22,4 +22,5 @@ package android.media;
 enum AudioMixRouteFlag {
     RENDER = 0,
     LOOP_BACK = 1,
+    DISALLOWS = 3,
 }

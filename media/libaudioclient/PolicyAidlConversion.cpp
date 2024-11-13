@@ -92,6 +92,8 @@ aidl2legacy_AudioMixRouteFlag_uint32_t(media::AudioMixRouteFlag aidl) {
             return MIX_ROUTE_FLAG_RENDER;
         case media::AudioMixRouteFlag::LOOP_BACK:
             return MIX_ROUTE_FLAG_LOOP_BACK;
+        case media::AudioMixRouteFlag::DISALLOWS:
+            return MIX_ROUTE_FLAG_DISALLOWS_PREFERRED_DEVICE;
     }
     return unexpected(BAD_VALUE);
 }
@@ -103,6 +105,8 @@ legacy2aidl_uint32_t_AudioMixRouteFlag(uint32_t legacy) {
             return media::AudioMixRouteFlag::RENDER;
         case MIX_ROUTE_FLAG_LOOP_BACK:
             return media::AudioMixRouteFlag::LOOP_BACK;
+        case MIX_ROUTE_FLAG_DISALLOWS_PREFERRED_DEVICE:
+            return media::AudioMixRouteFlag::DISALLOWS;
     }
     return unexpected(BAD_VALUE);
 }
