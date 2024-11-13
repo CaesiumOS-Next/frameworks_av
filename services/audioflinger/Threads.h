@@ -2143,6 +2143,7 @@ private:
             // mActiveTracks has dual roles:  it indicates the current active track(s), and
             // is used together with mStartStopCV to indicate start()/stop() progress
             ActiveTracks<IAfRecordTrack>           mActiveTracks;
+            bool                                   mBoolIsActiveTracksCleared = false;
 
             audio_utils::condition_variable mStartStopCV;
 

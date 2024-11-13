@@ -8255,6 +8255,7 @@ void RecordThread::preExit()
 {
     ALOGV("  preExit()");
     audio_utils::lock_guard _l(mutex());
+    mBoolIsActiveTracksCleared = true;
     for (size_t i = 0; i < mTracks.size(); i++) {
         sp<IAfRecordTrack> track = mTracks[i];
         track->invalidate();
@@ -8834,6 +8835,7 @@ unlock:
 
     {
         audio_utils::lock_guard _l(mutex());
+        mBoolIsActiveTracksCleared = true;
         for (size_t i = 0; i < mTracks.size(); i++) {
             sp<IAfRecordTrack> track = mTracks[i];
             track->invalidate();
@@ -9210,6 +9212,10 @@ void RecordThread::syncStartEventCallback(const wp<SyncEvent>& event)
 bool RecordThread::stop(IAfRecordTrack* recordTrack) {
     ALOGV("RecordThread::stop");
     audio_utils::unique_lock _l(mutex());
+    // if the ActiveTracks were already cleared, we shouldn't be stopping, otherwise we crash
+    if (mBoolIsActiveTracksCleared) {
+        return false;
+    }
     // if we're invalid, we can't be on the ActiveTracks.
     if (mActiveTracks.indexOf(recordTrack) < 0 || recordTrack->state() == IAfTrackBase::PAUSING) {
         return false;
