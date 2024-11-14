@@ -25,6 +25,7 @@
 #include <cutils/atomic.h>
 #include <utils/Log.h>
 #include <android_media_Utils.h>
+#include <android-base/logging.h>
 #include <ui/PublicFormat.h>
 #include <private/android/AHardwareBufferHelpers.h>
 #include <grallocusage/GrallocUsageConversion.h>
@@ -394,11 +395,12 @@ void AImageReader::close() {
         delete *it;
     }
 
-    if (mBufferItemConsumer != nullptr) {
-        mBufferItemConsumer->abandon();
-        mBufferItemConsumer->setFrameAvailableListener(nullptr);
+    if (!mInitWithOldInstance) {
+        if (mBufferItemConsumer != nullptr) {
+            mBufferItemConsumer->abandon();
+            mBufferItemConsumer->setFrameAvailableListener(nullptr);
+        }
     }
-
     if (mWindowHandle != nullptr) {
         int size = mWindowHandle->data[0];
         hidl_vec<uint8_t> halToken;
@@ -717,6 +719,107 @@ static native_handle_t *convertHalTokenToNativeHandle(
     return nh;
 }
 
+AImageReader::AImageReader(int32_t width,
+                           int32_t height,
+                           int32_t format,
+                           uint64_t usage,
+                           int32_t maxImages,
+                           uint32_t hardwareBufferFormat,
+                           android_dataspace dataSpace,
+                           AImageReader *old)
+    : mWidth(width),
+      mHeight(height),
+      mFormat(format),
+      mUsage(usage),
+      mMaxImages(maxImages),
+      mNumPlanes(getNumPlanesForFormat(format)),
+      mHalFormat(hardwareBufferFormat),
+      mHalDataSpace(dataSpace),
+      mFrameListener(new FrameListener(this)),
+      mBufferRemovedListener(new BufferRemovedListener(this)),
+      mInitWithOldInstance(true) {
+
+    Mutex::Autolock _oldLock(old->mLock);
+    mProducer = old->mProducer;
+    mSurface = old->mSurface;
+    mBufferItemConsumer = old->mBufferItemConsumer;
+}
+
+// In order to call IGBC::setConsumerIsProtected() from BufferItemConsumer
+// TODO: remove this
+namespace {
+    struct BufferItemConsumerWrapper: public BufferItemConsumer {
+        sp<IGraphicBufferConsumer> getConsumer() {
+            return mConsumer;
+        }
+    };
+} // anonymous
+
+media_status_t
+AImageReader::initWithOld() {
+    CHECK(mInitWithOldInstance);
+    CHECK(mProducer != nullptr && mSurface != nullptr && mBufferItemConsumer != nullptr);
+
+    mHalUsage = AHardwareBuffer_convertToGrallocUsageBits(mUsage);
+
+    String8 consumerName = String8::format("ImageReader-%dx%df%xu%" PRIu64 "m%d-%d-%d",
+            mWidth, mHeight, mFormat, mUsage, mMaxImages, getpid(),
+            createProcessUniqueId());
+
+    mBufferItemConsumer->setName(consumerName);
+    mBufferItemConsumer->setFrameAvailableListener(mFrameListener);
+    mBufferItemConsumer->setBufferFreedListener(mBufferRemovedListener);
+
+    status_t res;
+    res = mBufferItemConsumer->setDefaultBufferSize(mWidth, mHeight);
+    if (res != OK) {
+        ALOGE("Failed to set BufferItemConsumer buffer size");
+        return AMEDIA_ERROR_UNKNOWN;
+    }
+    res = mBufferItemConsumer->setDefaultBufferFormat(mHalFormat);
+    if (res != OK) {
+        ALOGE("Failed to set BufferItemConsumer buffer format");
+        return AMEDIA_ERROR_UNKNOWN;
+    }
+    res = mBufferItemConsumer->setDefaultBufferDataSpace(mHalDataSpace);
+    if (res != OK) {
+        ALOGE("Failed to set BufferItemConsumer buffer dataSpace");
+        return AMEDIA_ERROR_UNKNOWN;
+    }
+
+    // In order to call IGBC::setConsumerIsProtected() from BufferItemConsumer
+    // TODO: remove this
+    BufferItemConsumer *pItemConsumer = mBufferItemConsumer.get();
+    sp<IGraphicBufferConsumer> consumer =
+            (static_cast<BufferItemConsumerWrapper *>(pItemConsumer))->getConsumer();
+    if (mUsage & AHARDWAREBUFFER_USAGE_PROTECTED_CONTENT) {
+        consumer->setConsumerIsProtected(true);
+    }
+
+    mWindow = static_cast<ANativeWindow*>(mSurface.get());
+
+    for (int i = 0; i < mMaxImages; i++) {
+        BufferItem* buffer = new BufferItem;
+        mBuffers.push_back(buffer);
+    }
+
+    mCbLooper = new ALooper;
+    mCbLooper->setName(consumerName.c_str());
+    res = mCbLooper->start(
+            /*runOnCallingThread*/false,
+            /*canCallJava*/       true,
+            PRIORITY_DEFAULT);
+    if (res != OK) {
+        ALOGE("Failed to start the looper");
+        return AMEDIA_ERROR_UNKNOWN;
+    }
+    mHandler = new CallbackHandler(this);
+    mCbLooper->registerHandler(mHandler);
+    mIsOpen = true;
+    return AMEDIA_OK;
+}
+
+
 EXPORT
 media_status_t AImageReader_new(
         int32_t width, int32_t height, int32_t format, int32_t maxImages,
@@ -910,5 +1013,44 @@ media_status_t AImageReader_setBufferRemovedListener(
     }
 
     reader->setBufferRemovedListener(listener);
+    return AMEDIA_OK;
+}
+
+EXPORT
+media_status_t AImageReader_newWithExistingImageReader(
+    int32_t width, int32_t height, uint64_t usage,
+    int32_t maxImages, uint32_t hardwareBufferFormat, int32_t dataSpace,
+    AImageReader *old,
+    /*out*/ AImageReader** reader) {
+    ALOGV("%s", __FUNCTION__);
+    if (old == nullptr) {
+        ALOGE("%s: invalid argument! old %p", __FUNCTION__, old);
+        return AMEDIA_ERROR_INVALID_PARAMETER;
+    }
+
+    android_dataspace halDataSpace = static_cast<android_dataspace>(dataSpace);
+    int32_t format = static_cast<int32_t>(
+          mapHalFormatDataspaceToPublicFormat(hardwareBufferFormat, halDataSpace));
+
+    validateParameters(width, height, format, usage, maxImages, reader);
+
+    PublicFormat publicFormat = static_cast<PublicFormat>(format);
+    uint32_t halFormat = mapPublicFormatToHalFormat(publicFormat);
+
+    AImageReader* tmpReader = new AImageReader(
+        width, height, format, usage, maxImages, halFormat, halDataSpace, old);
+    if (tmpReader == nullptr) {
+        ALOGE("%s: AImageReader allocation failed", __FUNCTION__);
+        return AMEDIA_ERROR_UNKNOWN;
+    }
+    media_status_t ret = tmpReader->initWithOld();
+    if (ret != AMEDIA_OK) {
+        ALOGE("%s: AImageReader initialization failed!", __FUNCTION__);
+        delete tmpReader;
+        return ret;
+    }
+    *reader = tmpReader;
+    (*reader)->incStrong((void*) AImageReader_new);
+    old->decStrong((void*) AImageReader_delete);
     return AMEDIA_OK;
 }

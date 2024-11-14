@@ -425,6 +425,17 @@ media_status_t AImageReader_newWithDataSpace(int32_t width, int32_t height, uint
         /*out*/ AImageReader** reader) __INTRODUCED_IN(34);
 
 /**
+ * Similar to AImageReader_newWithDataspace, but takes an existing
+ * AImageReader so that the new AImageReader owns the same ANativeWindow.
+ * |old| is deleted after calling this method.
+ */
+media_status_t AImageReader_newWithExistingImageReader(
+        int32_t width, int32_t height, uint64_t usage,
+        int32_t maxImages, uint32_t hardwareBufferFormat, int32_t dataSpace,
+        AImageReader *old,
+        /*out*/ AImageReader** reader) __INTRODUCED_IN(36);
+
+/**
  * Acquire the next {@link AImage} from the image reader's queue asynchronously.
  *
  * <p>AImageReader acquire method similar to {@link AImageReader_acquireNextImage} that takes an

@@ -59,11 +59,20 @@ struct AImageReader : public RefBase {
                  int32_t maxImages,
                  uint32_t hardwareBufferFormat,
                  android_dataspace dataSpace);
+    AImageReader(int32_t width,
+                 int32_t height,
+                 int32_t format,
+                 uint64_t usage,
+                 int32_t maxImages,
+                 uint32_t hardwareBufferFormat,
+                 android_dataspace dataSpace,
+                 AImageReader *old);
     ~AImageReader();
 
     // Initialize AImageReader, uninitialized or failed to initialize AImageReader
     // should never be passed to application
     media_status_t init();
+    media_status_t initWithOld();
 
     media_status_t setImageListener(AImageReader_ImageListener* listener);
     media_status_t setBufferRemovedListener(AImageReader_BufferRemovedListener* listener);
@@ -169,6 +178,7 @@ struct AImageReader : public RefBase {
 
     List<AImage*>              mAcquiredImages;
     bool                       mIsOpen = false;
+    bool                       mInitWithOldInstance = false;
 
     Mutex                      mLock;
 };
