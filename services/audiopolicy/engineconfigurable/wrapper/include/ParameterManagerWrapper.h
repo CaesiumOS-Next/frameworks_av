@@ -234,9 +234,13 @@ private:
 
     DeviceToCriterionTypeAdapter mOutputDeviceToCriterionTypeMap;
     DeviceToCriterionTypeAdapter mInputDeviceToCriterionTypeMap;
+#ifdef ENABLE_CAP_AIDL_HYBRID_MODE
+    static const char *const mVendorPolicyPfwConfFileName; /**< CapEngine PFW top file name.*/
+#endif
+#ifndef DISABLE_CAP_AIDL
+    static const char *const mPolicyPfwConfFileName; /**< CapEngine PFW top file name.*/
+#endif
 
-    static const char *const mPolicyPfwDefaultConfFileName; /**< Default Policy PFW top file name.*/
-    static const char *const mPolicyPfwVendorConfFileName; /**< Vendor Policy PFW top file name.*/
 };
 
 } // namespace audio_policy

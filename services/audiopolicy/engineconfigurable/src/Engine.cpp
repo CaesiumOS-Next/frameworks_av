@@ -72,7 +72,17 @@ Engine::Engine() : mPolicyParameterMgr(new ParameterManagerWrapper())
 
 status_t Engine::loadFromHalConfigWithFallback(
         const media::audio::common::AudioHalEngineConfig& aidlConfig) {
-
+#ifdef DISABLE_CAP_AIDL
+    (void) aidlConfig;
+    ALOGE("%s CapEngine Config disabled, falling back on vendor XML for engine", __func__);
+    return loadFromXmlConfigWithFallback(engineConfig::DEFAULT_PATH);
+#else
+#ifdef ENABLE_CAP_AIDL_HYBRID_MODE
+    if (!aidlConfig.capSpecificConfig.value().domains.has_value()) {
+        ALOGE("%s CapEngine Config missing, falling back on vendor XML for engine", __func__);
+        return loadFromXmlConfigWithFallback(engineConfig::DEFAULT_PATH);
+    }
+#endif
     auto capResult = capEngineConfig::convert(aidlConfig);
     if (capResult.parsedConfig == nullptr) {
         ALOGE("%s CapEngine Config invalid", __func__);
@@ -97,6 +107,7 @@ status_t Engine::loadFromHalConfigWithFallback(
         return NO_INIT;
     }
     return mPolicyParameterMgr->setConfiguration(capResult);
+#endif
 }
 
 status_t Engine::loadFromXmlConfigWithFallback(const std::string& xmlFilePath)
