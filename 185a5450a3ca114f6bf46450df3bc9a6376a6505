@@ -117,6 +117,30 @@
       },
       "revId": "185a5450a3ca114f6bf46450df3bc9a6376a6505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1693a7a7_407767b5",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-14T19:58:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9bac5fa_8d641a9e",
+      "range": {
+        "startLine": 1282,
+        "startChar": 15,
+        "endLine": 1283,
+        "endChar": 69
+      },
+      "revId": "185a5450a3ca114f6bf46450df3bc9a6376a6505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
