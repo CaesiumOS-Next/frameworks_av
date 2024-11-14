@@ -14,6 +14,7 @@ LIBMEDIANDK {
     AImageReader_new; # introduced=24
     AImageReader_newWithUsage; # introduced=26
     AImageReader_newWithDataSpace; # introduced=UpsideDownCake
+    AImageReader_newWithExistingImageReader; #introduced=36
     AImageReader_setBufferRemovedListener; # introduced=26
     AImageReader_setImageListener; # introduced=24
     AImage_delete; # introduced=24
