@@ -75,8 +75,8 @@ status_t Engine::loadFromHalConfigWithFallback(
 
     auto capResult = capEngineConfig::convert(aidlConfig);
     if (capResult.parsedConfig == nullptr) {
-        ALOGE("%s CapEngine Config invalid", __func__);
-        return BAD_VALUE;
+        ALOGW("%s CapEngine Config invalid, falling back on XML for engine", __func__);
+        return loadFromXmlConfigWithFallback("/vendor/etc/audio_policy_engine_configuration.xml");
     }
     status_t ret = loadWithFallback(aidlConfig);
     if (ret != NO_ERROR) {
