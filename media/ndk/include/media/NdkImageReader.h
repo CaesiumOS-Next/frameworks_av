@@ -425,6 +425,46 @@ media_status_t AImageReader_newWithDataSpace(int32_t width, int32_t height, uint
         /*out*/ AImageReader** reader) __INTRODUCED_IN(34);
 
 /**
+ * Similar to AImageReader_newWithDataspace, but takes an existing AImageReader so that
+ * the new AImageReader owns the same ANativeWindow.
+ * On succssful creation, the newly created AImageReader is written to |reader| and |old|
+ * is deleted after calling this methid.
+ *
+ * Available since API level 36.
+ *
+ * @param width The default width in pixels of the Images that this reader will produce.
+ * @param height The default height in pixels of the Images that this reader will produce.
+ * @param usage specifies how the consumer will access the AImage.
+ *              See {@link AImageReader_newWithUsage} parameter description for more details.
+ * @param maxImages The maximum number of images the user will want to access simultaneously.
+ *                  See {@link AImageReader_newWithUsage} parameter description for more details.
+ * @param hardwareBufferFormat The hardware buffer format passed by the producer.
+ *                             This must be one of the AHARDWAREBUFFER_FORMAT_* enum values defined
+ *                             in {@link hardware_buffer.h}.
+ * @param dataSpace The dataspace of the Image passed by the producer.
+ *                  This must be one of the ADATASPACE_* enum values defined in
+ *                  {@link ADataSpace}.
+ * @param old The existing AImageReader for the new AImageReader.
+ *            Surface/BufferItemConsumer/IGraphicBufferProducer from |old| is
+ *            reused for the new AImageReader. All of them must be valid.
+ * @param reader The created image reader will be filled here if the method call succeeds.
+ *
+ * @return <ul>
+ *         <li>{@link AMEDIA_OK} if the method call succeeds.</li>
+ *         <li>{@link AMEDIA_ERROR_INVALID_PARAMETER} if reader is NULL, or one or more of width,
+ *                 height, maxImages, hardwareBufferFormat or dataSpace arguments
+ *                 is not supported.</li>
+ *         <li>{@link AMEDIA_ERROR_UNKNOWN} if the method fails for some other reasons.</li></ul>
+ *
+ * @see AImageReader_newWithDataspace
+ */
+media_status_t AImageReader_newWithExistingImageReader(
+        int32_t width, int32_t height, uint64_t usage,
+        int32_t maxImages, uint32_t hardwareBufferFormat, int32_t dataSpace,
+        AImageReader *old,
+        /*out*/ AImageReader** reader) __INTRODUCED_IN(36);
+
+/**
  * Acquire the next {@link AImage} from the image reader's queue asynchronously.
  *
  * <p>AImageReader acquire method similar to {@link AImageReader_acquireNextImage} that takes an
