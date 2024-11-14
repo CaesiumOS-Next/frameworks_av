@@ -16,6 +16,41 @@
       "message": "missed a argument!!\nfixed a compilation error,",
       "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e1e4d8_862e6dd4",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-11-14T20:26:32Z",
+      "side": 1,
+      "message": "I didn\u0027t see this in the prior review, but should be,",
+      "fixSuggestions": [
+        {
+          "fixId": "adc474d1_72ba9f5f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AudioRecord.cpp",
+              "range": {
+                "startLine": 1230,
+                "startChar": 0,
+                "endLine": 1233,
+                "endChar": 0
+              },
+              "replacement": "    return statusTFromBinderStatus(\n        mAudioRecord-\u003esetParameters(keyValuePairs.c_str()));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
