@@ -22,6 +22,30 @@
       },
       "revId": "adde7689244edba32b36f7f5f1a2649e1e053cde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5ff007_47322776",
+        "filename": "media/libstagefright/data/media_codecs_sw.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-14T20:44:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5b300b29_9374a4ce",
+      "range": {
+        "startLine": 258,
+        "startChar": 66,
+        "endLine": 258,
+        "endChar": 115
+      },
+      "revId": "adde7689244edba32b36f7f5f1a2649e1e053cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
