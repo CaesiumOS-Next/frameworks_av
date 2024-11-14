@@ -356,7 +356,7 @@ static status_t parseAttributes(const _xmlNode *cur, audio_attributes_t &attribu
 
             ALOGV("%s Bundle %s %s",  __FUNCTION__, bundleKey.c_str(), bundleValue.c_str());
 
-            std::string tags(bundleKey + "=" + bundleValue);
+            std::string tags(bundleKey + "_" + bundleValue);
             std::strncpy(attributes.tags, tags.c_str(), AUDIO_ATTRIBUTES_TAGS_MAX_SIZE - 1);
         }
     }
