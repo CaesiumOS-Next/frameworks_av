@@ -33,6 +33,24 @@
       "message": "Thank you for the fix. \n\nCan you please elaborate on how to test this change ?",
       "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a45063b_94c2f0f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143408
+      },
+      "writtenOn": "2024-11-14T21:03:28Z",
+      "side": 1,
+      "message": "unresolved",
+      "parentUuid": "13d7cf82_da77a5c4",
+      "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
