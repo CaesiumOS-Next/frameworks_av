@@ -16,6 +16,23 @@
       "message": "Andy, Eric\ncan you please review again?",
       "revId": "969c3457df5e3386de12d2017affd60d648fc740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ff1315_4e82ea85",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioRecord.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-11-14T20:22:55Z",
+      "side": 1,
+      "message": "Looking at the following CL, this should not be returning `int`\n\nThis should be void.\n\nPlease use `binderStatusTfrom...` on the service side. The conversion will pull it back into a status_t if necessary.",
+      "revId": "969c3457df5e3386de12d2017affd60d648fc740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
