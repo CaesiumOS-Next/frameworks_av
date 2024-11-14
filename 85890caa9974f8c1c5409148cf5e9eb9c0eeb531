@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "445fd49b_0c0a52ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-11-14T17:01:16Z",
+      "side": 1,
+      "message": "Hey Mikhail, raw first drop of hybrid mode!",
+      "revId": "85890caa9974f8c1c5409148cf5e9eb9c0eeb531",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
