@@ -63,10 +63,14 @@ using utilities::convertTo;
 
 namespace audio_policy {
 
-const char *const ParameterManagerWrapper::mPolicyPfwDefaultConfFileName =
-    "/etc/parameter-framework/ParameterFrameworkConfigurationCap.xml";
-const char *const ParameterManagerWrapper::mPolicyPfwVendorConfFileName =
+#ifdef ENABLE_CAP_AIDL_HYBRID_MODE
+// Legacy or AIDL with Hybrid enabled read XML from vendor partition
+const char *const ParameterManagerWrapper::mPolicyPfwConfFileName =
     "/vendor/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml";
+#else
+const char *const ParameterManagerWrapper::mPolicyPfwConfFileName =
+    "/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml";
+#endif
 
 template <>
 struct ParameterManagerWrapper::parameterManagerElementSupported<ISelectionCriterionInterface> {};
@@ -78,10 +82,8 @@ ParameterManagerWrapper::ParameterManagerWrapper(bool enableSchemaVerification,
     : mPfwConnectorLogger(new ParameterMgrPlatformConnectorLogger)
 {
     // Connector
-    if (access(mPolicyPfwVendorConfFileName, R_OK) == 0) {
-        mPfwConnector = new CParameterMgrFullConnector(mPolicyPfwVendorConfFileName);
-    } else {
-        mPfwConnector = new CParameterMgrFullConnector(mPolicyPfwDefaultConfFileName);
+    if (access(mPolicyPfwConfFileName, R_OK) == 0) {
+        mPfwConnector = new CParameterMgrFullConnector(mPolicyPfwConfFileName);
     }
 
     // Logger
