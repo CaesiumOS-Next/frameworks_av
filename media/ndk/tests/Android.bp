@@ -25,11 +25,13 @@ cc_test {
     test_suites: ["device-tests"],
 
     cflags: [
-        "-Werror",
         "-Wall",
+        "-Werror",
     ],
 
     shared_libs: [
+        "libbase",
+        "libbinder_ndk",
         "liblog",
         "libmediandk",
         "libutils",
@@ -37,5 +39,6 @@ cc_test {
 
     srcs: [
         "NdkMediaFormat_test.cpp",
+        "sample_video.cpp",
     ],
 }
