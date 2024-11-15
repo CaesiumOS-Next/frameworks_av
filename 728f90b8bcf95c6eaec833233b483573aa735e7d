@@ -69,6 +69,24 @@
       "parentUuid": "c9e1e4d8_862e6dd4",
       "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c051360_b12cb74d",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-11-15T22:46:46Z",
+      "side": 1,
+      "message": "You need to also modify the method signature in the .aidl file to not take a second param.",
+      "parentUuid": "693459a3_1d0afc99",
+      "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
