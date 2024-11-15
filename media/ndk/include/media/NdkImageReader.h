@@ -529,6 +529,26 @@ typedef struct AImageReader_BufferRemovedListener {
 media_status_t AImageReader_setBufferRemovedListener(
         AImageReader* reader, AImageReader_BufferRemovedListener* listener) __INTRODUCED_IN(26);
 
+/**
+ * Set the usage of this image reader.
+ *
+ * <p>Note that calling this method will replace the previously set usage.</p>
+ *
+ * Available since API level 36.
+ *
+ * @param reader The image reader of interest.
+ * @param usage specifies how the consumer will access the AImage.
+ *              See {@link AImageReader_newWithUsage} parameter description for more details.
+ * @return <ul>
+ *         <li>{@link AMEDIA_OK} if the method call succeeds.</li>
+ *         <li>{@link AMEDIA_ERROR_INVALID_PARAMETER} if reader is NULL.</li>
+ *         <li>{@link AMEDIA_ERROR_UNKNOWN} if the method fails for some other reasons.</li></ul>
+ *
+ * @see AImage_getHardwareBuffer
+ */
+media_status_t AImageReader_setUsage(
+        AImageReader* reader, uint64_t usage) __INTRODUCED_IN(36);
+
 #ifdef __ANDROID_VNDK__
 /*
  * Get the native_handle_t corresponding to the ANativeWindow owned by the
