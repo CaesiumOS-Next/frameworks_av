@@ -100,6 +100,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "409bf126_23a06f21",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1883619
+      },
+      "writtenOn": "2024-11-15T06:26:13Z",
+      "side": 1,
+      "message": "const std::filesystem::path kLibPath \u003d \"/system_ext/lib64/\" + \u003clibName\u003e;",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02fe410f_c7716ea7",
         "filename": "services/audioparameterparser/main.cpp",
         "patchSetId": 7
@@ -174,6 +197,23 @@
         "endLine": 52,
         "endChar": 76
       },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9225b2b5_1e9e7cb7",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1883619
+      },
+      "writtenOn": "2024-11-15T06:26:13Z",
+      "side": 1,
+      "message": "ro.audio.ihaladaptervendorextension_symbol",
       "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
