@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0eb7387_b0f84a96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-15T22:37:46Z",
+      "side": 1,
+      "message": "Based on discussion earlier, I don\u0027t think we can do this very easily (that is, a lot of endpoints won\u0027t do anything with an updated usage post initial config).\nWill it do something with decoders right now?\n\nWe should keep talking about how to wire this up for various producers, since at the least we\u0027d need some kind of signal to tell producers to reread the consumer\u0027s defaults and set things up again.  With the current camera HAL design, camera would have to flush and restart the pipeline, so there\u0027d be a few hundred ms glitch in output.",
+      "revId": "13b54c8c2263ef02e65be5def479cfe41df2ec40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
