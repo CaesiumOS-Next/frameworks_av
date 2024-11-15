@@ -38,6 +38,8 @@
 #include "android/binder_interface_utils.h"
 #include "android/binder_libbinder.h"
 #include "android/binder_status.h"
+#include "binder/IPCThreadState.h"
+#include "binder/IResultReceiver.h"
 #include "binder/Status.h"
 #include "fmt/format.h"
 #include "util/EglDisplayContext.h"
@@ -241,7 +243,9 @@ ndk::ScopedAStatus VirtualCameraService::registerCamera(
     const std::string& cameraId, const int32_t deviceId, bool* _aidl_return) {
   if (!mPermissionProxy.checkCallingPermission(kCreateVirtualDevicePermission)) {
     ALOGE("%s: caller (pid %d, uid %d) doesn't hold %s permission", __func__,
-          getpid(), getuid(), kCreateVirtualDevicePermission);
+          IPCThreadState::self()->getCallingPid(),
+          IPCThreadState::self()->getCallingUid(),
+          kCreateVirtualDevicePermission);
     return ndk::ScopedAStatus::fromExceptionCode(EX_SECURITY);
   }
 
@@ -294,7 +298,9 @@ ndk::ScopedAStatus VirtualCameraService::unregisterCamera(
     const ::ndk::SpAIBinder& token) {
   if (!mPermissionProxy.checkCallingPermission(kCreateVirtualDevicePermission)) {
     ALOGE("%s: caller (pid %d, uid %d) doesn't hold %s permission", __func__,
-          getpid(), getuid(), kCreateVirtualDevicePermission);
+          IPCThreadState::self()->getCallingPid(),
+          IPCThreadState::self()->getCallingUid(),
+          kCreateVirtualDevicePermission);
     return ndk::ScopedAStatus::fromExceptionCode(EX_SECURITY);
   }
 
@@ -319,7 +325,9 @@ ndk::ScopedAStatus VirtualCameraService::getCameraId(
     const ::ndk::SpAIBinder& token, std::string* _aidl_return) {
   if (!mPermissionProxy.checkCallingPermission(kCreateVirtualDevicePermission)) {
     ALOGE("%s: caller (pid %d, uid %d) doesn't hold %s permission", __func__,
-          getpid(), getuid(), kCreateVirtualDevicePermission);
+          IPCThreadState::self()->getCallingPid(),
+          IPCThreadState::self()->getCallingUid(),
+          kCreateVirtualDevicePermission);  
     return ndk::ScopedAStatus::fromExceptionCode(EX_SECURITY);
   }
 
