@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d7e3218_cb185cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-15T22:52:03Z",
+      "side": 1,
+      "message": "Updated documentation and the description of the CL accordingly.",
+      "parentUuid": "da008733_eb2a514a",
+      "revId": "13b54c8c2263ef02e65be5def479cfe41df2ec40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bcc3ce3_48662eb4",
