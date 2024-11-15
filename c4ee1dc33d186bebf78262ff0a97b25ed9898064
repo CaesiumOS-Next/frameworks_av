@@ -1,0 +1,244 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4538e881_7a00b561",
+        "filename": "services/audioparameterparser/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "use libbase for properties!",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9743a4dc_bd43ba97",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "\u003c\u003e headers on top with alphabetical order.",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c68ee5_32f7652c",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "tryRegisteringVendorImpl",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 39
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9acd54_aaeac6c7",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "use ::android::base::GetProperty in libbase.\nhttps://cs.android.com/android/platform/superproject/main/+/main:system/libbase/include/android-base/properties.h;l\u003d34",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59adad8b_63dedf8a",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "const std::string kLibPropName \u003d \"ro.audio.ihaladaptervendorextension_libname\";",
+      "range": {
+        "startLine": 37,
+        "startChar": 21,
+        "endLine": 37,
+        "endChar": 64
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02fe410f_c7716ea7",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "test for negation first, to reduce indentation length.",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09337ad0_9bb10769",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "/*\n * Expected signature for symbol\n * int (*)(void);\n * returns 0 on success\n */",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 15
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3500fd7_eb1512f7",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "test for negation first, to reduce indentation length.",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b951cd48_ed6dbda8",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "const std::string kPropSymbol \u003d \"ro.audio.ihaladaptervendorextension_symbol\";",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 76
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749247dc_ca38c3db",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "seems trivial",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 7
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60981fc2_1ddd8296",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "Why change the log level ?",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cfe063_37f6c386",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 1,
+      "message": "skip this if vendor service already registered.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 5
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

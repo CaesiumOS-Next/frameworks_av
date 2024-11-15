@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b574d581_93aaf29b",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:23:37Z",
+      "side": 0,
+      "message": "Leave a newline for local headers",
+      "revId": "78e3c8adddaf3b00bbbc41dcb0653755d1c0852c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
