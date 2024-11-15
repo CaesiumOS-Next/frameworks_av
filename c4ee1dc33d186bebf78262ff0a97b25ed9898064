@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "723de402_2b118af2",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9743a4dc_bd43ba97",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25c68ee5_32f7652c",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-11-15T06:23:37Z",
       "side": 1,
       "message": "tryRegisteringVendorImpl",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 39
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c9ec42_68bb8f0a",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25c68ee5_32f7652c",
       "range": {
         "startLine": 29,
         "startChar": 5,
@@ -98,6 +140,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f9ee1e_308bf8c0",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c9acd54_aaeac6c7",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "919dbf46_d87518ef",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59adad8b_63dedf8a",
+      "range": {
+        "startLine": 37,
+        "startChar": 21,
+        "endLine": 37,
+        "endChar": 64
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "409bf126_23a06f21",
@@ -111,6 +195,30 @@
       "writtenOn": "2024-11-15T06:26:13Z",
       "side": 1,
       "message": "const std::filesystem::path kLibPath \u003d \"/system_ext/lib64/\" + \u003clibName\u003e;",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0bb2f6_990ee5b8",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "409bf126_23a06f21",
       "range": {
         "startLine": 38,
         "startChar": 8,
@@ -138,6 +246,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37444db1_49d5138e",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02fe410f_c7716ea7",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09337ad0_9bb10769",
@@ -151,6 +277,30 @@
       "writtenOn": "2024-11-15T06:23:37Z",
       "side": 1,
       "message": "/*\n * Expected signature for symbol\n * int (*)(void);\n * returns 0 on success\n */",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 15
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52bc521d_813a409c",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09337ad0_9bb10769",
       "range": {
         "startLine": 49,
         "startChar": 12,
@@ -218,6 +368,66 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd696896_0542fbe5",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3500fd7_eb1512f7",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33fb603_97121476",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9225b2b5_1e9e7cb7",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baef6002_3c3887f0",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b951cd48_ed6dbda8",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 76
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "749247dc_ca38c3db",
@@ -231,6 +441,30 @@
       "writtenOn": "2024-11-15T06:23:37Z",
       "side": 1,
       "message": "seems trivial",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 7
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4a83764_900d3d77",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "749247dc_ca38c3db",
       "range": {
         "startLine": 69,
         "startChar": 4,
@@ -258,6 +492,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48d27e1_777d8620",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60981fc2_1ddd8296",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04cfe063_37f6c386",
@@ -271,6 +523,30 @@
       "writtenOn": "2024-11-15T06:23:37Z",
       "side": 1,
       "message": "skip this if vendor service already registered.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 5
+      },
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112177e1_166bd440",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04cfe063_37f6c386",
       "range": {
         "startLine": 79,
         "startChar": 4,

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97bdcdc7_42a7f924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-15T16:45:06Z",
+      "side": 1,
+      "message": "Addressed the comments to use existing example service",
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
