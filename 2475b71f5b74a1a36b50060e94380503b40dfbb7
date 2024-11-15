@@ -51,6 +51,23 @@
       "parentUuid": "13d7cf82_da77a5c4",
       "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "268372b9_d79bdea2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-11-15T13:20:15Z",
+      "side": 1,
+      "message": "Removing myself since I no longer work in this space",
+      "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
