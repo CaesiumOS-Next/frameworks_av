@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "116efd10_02b3af26",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 79
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-15T22:39:59Z",
+      "side": 1,
+      "message": "Removed. Now Codec2InfoBuilder/OmxInfoBuilder call the createCodecCaps() to create CodecCapbilities",
+      "parentUuid": "d1333b8d_759541cc",
+      "range": {
+        "startLine": 176,
+        "startChar": 11,
+        "endLine": 176,
+        "endChar": 79
+      },
+      "revId": "118e70f5d8d82b51eb7dee9d2f9019bb8a44c49c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc423e63_d72ea2dc",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-15T19:43:56Z",
       "side": 1,
       "message": "Could we separate the creation of the CodecCapabilities from the Capabilities? Capabilities is an internal representation for parsed capabilities from an XML file (as well as codec interface), where CodecCapabilities is the user-friendly expression of Capabilities.\n\nI can see in the future we would only have one class (maybe Capabilties would be the base class of CodecCapabilities.)",
+      "range": {
+        "startLine": 211,
+        "startChar": 8,
+        "endLine": 211,
+        "endChar": 44
+      },
+      "revId": "118e70f5d8d82b51eb7dee9d2f9019bb8a44c49c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "534569ea_1b5c4443",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 79
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-15T22:39:59Z",
+      "side": 1,
+      "message": "Separated it to createCodecCaps() function",
+      "parentUuid": "fc423e63_d72ea2dc",
       "range": {
         "startLine": 211,
         "startChar": 8,
