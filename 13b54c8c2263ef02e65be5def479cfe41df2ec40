@@ -34,6 +34,58 @@
       "parentUuid": "e0eb7387_b0f84a96",
       "revId": "13b54c8c2263ef02e65be5def479cfe41df2ec40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c6f49b6_f17c2999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-15T22:44:12Z",
+      "side": 1,
+      "message": "We need to make it clear this is just for the next connection, not a dynamic switch for the current one.",
+      "revId": "13b54c8c2263ef02e65be5def479cfe41df2ec40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bcc3ce3_48662eb4",
+        "filename": "media/ndk/include/media/NdkImageReader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-15T22:44:12Z",
+      "side": 1,
+      "message": "Let\u0027s add \"If the AImageReader is already connected to an output, the new usage will not be used with this output. It will only become valid for the next connected output.\" or similar",
+      "fixSuggestions": [
+        {
+          "fixId": "18478f7b_7c3b5a1e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkImageReader.h",
+              "range": {
+                "startLine": 535,
+                "startChar": 0,
+                "endLine": 536,
+                "endChar": 0
+              },
+              "replacement": " * \u003cp\u003eNote that calling this method will replace the previously set usage. If the AImageReader is\n * already connected to an output, the new usage will not be used with this output. It will only\n * become valid for the next connected output.\u003c/p\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13b54c8c2263ef02e65be5def479cfe41df2ec40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
