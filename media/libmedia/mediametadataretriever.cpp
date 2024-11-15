@@ -35,7 +35,8 @@ Mutex MediaMetadataRetriever::sServiceLock;
 sp<IMediaPlayerService> MediaMetadataRetriever::sService;
 sp<MediaMetadataRetriever::DeathNotifier> MediaMetadataRetriever::sDeathNotifier;
 
-Mutex MediaMetadataRetriever::sLock;
+//Mutex MediaMetadataRetriever::sLock;
+CSemaphore MediaMetadataRetriever::cSem(3);
 
 const sp<IMediaPlayerService> MediaMetadataRetriever::getService()
 {
@@ -145,12 +146,19 @@ sp<IMemory> MediaMetadataRetriever::getFrameAtTime(
     ALOGV("getFrameAtTime: time(%" PRId64 " us) option(%d) colorFormat(%d) metaOnly(%d)",
             timeUs, option, colorFormat, metaOnly);
     Mutex::Autolock _l(mLock);
-    Mutex::Autolock _gLock(sLock);
+    //Mutex::Autolock _gLock(sLock);
     if (mRetriever == 0) {
         ALOGE("retriever is not initialized");
         return NULL;
     }
-    return mRetriever->getFrameAtTime(timeUs, option, colorFormat, metaOnly);
+    cSem.wait();
+    sp<IMemory> frame = mRetriever->getFrameAtTime(timeUs, option, colorFormat, metaOnly);
+    cSem.notify();
+
+    if (frame == NULL) {
+        ALOGE("failed to capture a video frame");
+    }
+    return frame;
 }
 
 sp<IMemory> MediaMetadataRetriever::getImageAtIndex(
@@ -158,12 +166,19 @@ sp<IMemory> MediaMetadataRetriever::getImageAtIndex(
     ALOGV("getImageAtIndex: index(%d) colorFormat(%d) metaOnly(%d) thumbnail(%d)",
             index, colorFormat, metaOnly, thumbnail);
     Mutex::Autolock _l(mLock);
-    Mutex::Autolock _gLock(sLock);
+    //Mutex::Autolock _gLock(sLock);
     if (mRetriever == 0) {
         ALOGE("retriever is not initialized");
         return NULL;
     }
-    return mRetriever->getImageAtIndex(index, colorFormat, metaOnly, thumbnail);
+    cSem.wait();
+    sp<IMemory> frame = mRetriever->getImageAtIndex(index, colorFormat, metaOnly, thumbnail);
+    cSem.notify();
+
+    if (frame == NULL) {
+        ALOGE("failed to extract image");
+    }
+    return frame;
 }
 
 sp<IMemory> MediaMetadataRetriever::getImageRectAtIndex(
@@ -176,8 +191,15 @@ sp<IMemory> MediaMetadataRetriever::getImageRectAtIndex(
         ALOGE("retriever is not initialized");
         return NULL;
     }
-    return mRetriever->getImageRectAtIndex(
+    cSem.wait();
+    sp<IMemory> frame = mRetriever->getImageRectAtIndex(
             index, colorFormat, left, top, right, bottom);
+    cSem.notify();
+
+    if (frame == NULL) {
+        ALOGE("failed to extract image at index %d", index);
+    }
+    return frame;
 }
 
 sp<IMemory>  MediaMetadataRetriever::getFrameAtIndex(
@@ -190,7 +212,14 @@ sp<IMemory>  MediaMetadataRetriever::getFrameAtIndex(
         ALOGE("retriever is not initialized");
         return NULL;
     }
-    return mRetriever->getFrameAtIndex(index, colorFormat, metaOnly);
+    cSem.wait();
+    sp<IMemory> frame = mRetriever->getFrameAtIndex(index, colorFormat, metaOnly);
+    cSem.notify();
+
+    if (frame == NULL) {
+        ALOGE("failed to extract frame at index %d", index);
+    }
+    return frame;
 }
 
 const char* MediaMetadataRetriever::extractMetadata(int keyCode)

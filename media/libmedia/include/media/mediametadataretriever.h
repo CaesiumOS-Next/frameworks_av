@@ -22,7 +22,7 @@
 #include <utils/threads.h>
 #include <binder/IMemory.h>
 #include <media/IMediaMetadataRetriever.h>
-
+#include <condition_variable>
 namespace android {
 
 class IDataSource;
@@ -80,6 +80,28 @@ enum {
     // Add more here...
 };
 
+class CSemaphore {
+public:
+    CSemaphore(int count = 0) : count(count) {}
+
+    void notify() {
+        std::unique_lock<std::mutex> lock(mtx);
+        ++count;
+        cv.notify_one();
+    }
+
+    void wait() {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, [this]{ return count > 0; });
+        --count;
+    }
+
+private:
+    std::mutex mtx;
+    std::condition_variable cv;
+    int count;
+};
+
 class MediaMetadataRetriever: public RefBase
 {
 public:
@@ -125,7 +147,8 @@ private:
     // Static lock was added to the client in order to consume at most
     // one service thread from image extraction requests of the same
     // client process(See also b/21277449).
-    static Mutex                              sLock;
+    //static Mutex                              sLock;
+    static  CSemaphore                         cSem;
     sp<IMediaMetadataRetriever>               mRetriever;
 
 };
