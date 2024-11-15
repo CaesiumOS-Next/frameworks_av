@@ -51,6 +51,24 @@
       ],
       "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "693459a3_1d0afc99",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-15T06:57:41Z",
+      "side": 1,
+      "message": "It gave me compilation error,\n\n```\nandroid_x86_64_silvermont_static_cfi/obj/frameworks/av/media/libaudioclient/AudioRecord.o frameworks/av/media/libaudioclient/AudioRecord.cpp\nframeworks/av/media/libaudioclient/AudioRecord.cpp:1230:77: error: too few arguments to function call, expected 2, have 1\n 1230 |     return statusTFromBinderStatus(mAudioRecord-\u003esetParameters(keyValuePairs));\n      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~              ^\nout/soong/.intermediates/frameworks/av/media/libaudioclient/audioflinger-aidl-cpp-source/gen/include/android/media/IAudioRecord.h:38:37: note: \u0027setParameters\u0027 declared here\n   38 |   virtual ::android::binder::Status setParameters(const ::std::string\u0026 keyValuePairs, int32_t* _aidl_return) \u003d 0;\n```",
+      "parentUuid": "c9e1e4d8_862e6dd4",
+      "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
