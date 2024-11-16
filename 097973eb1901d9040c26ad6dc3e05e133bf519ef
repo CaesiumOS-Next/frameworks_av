@@ -1,0 +1,150 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb812b02_a42c0b23",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:16:07Z",
+      "side": 1,
+      "message": "this may not work for int64_t on 32-bit systems, it is long long.",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ec6fd564_8d9ed295",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "        int64_t lower, upper;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8c1a88_2c38aa75",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:16:07Z",
+      "side": 1,
+      "message": "does this need a $ to ensure the string ends with the integer?",
+      "range": {
+        "startLine": 124,
+        "startChar": 43,
+        "endLine": 124,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ebaa396e_973fe718",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 125,
+                "endChar": 0
+              },
+              "replacement": "        std::regex regex(\"([0-9]+)-([0-9]+)$\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c4aa8b_228edaa0",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:16:07Z",
+      "side": 1,
+      "message": "this would become strtoll, and we need to check *endl to see if the number overflowed potentially. That actually means that we also need to check for overflow for the parsed value:\n\nif (lower \u003e\u003d std::numeric_limits\u003cT\u003e::min() \u0026\u0026 lower \u003c\u003d std::numeric_limits\u003cT\u003e::max()).\n\nwe could make these constants (MIN_T_VALUE, MAX_T_VALUE) to keep the code cleaner.",
+      "range": {
+        "startLine": 127,
+        "startChar": 20,
+        "endLine": 127,
+        "endChar": 26
+      },
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b520ff_662150d6",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:16:07Z",
+      "side": 1,
+      "message": "here we need to check that *endl \u003d\u003d \u0027\\0\u0027 to ensure the full expression was parsed as a number.",
+      "range": {
+        "startLine": 130,
+        "startChar": 28,
+        "endLine": 130,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4fa5c90c_835958d1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 130,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "            char *end;\n            lower \u003d upper \u003d strtol(str.c_str(), \u0026end, 10);\n            if (*end !\u003d \u0027\\0\u0027) {\n                ALOGW(\"could not parse integer range: %s\", str.c_str());\n                return std::nullopt;\n            }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
