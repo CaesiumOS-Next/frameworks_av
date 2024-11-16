@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f5b4bef_2695d2a8",
+        "filename": "media/ndk/NdkImageReader.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-16T01:46:14Z",
+      "side": 1,
+      "message": "I don\u0027t want to change the structure at this point.",
+      "parentUuid": "f8ba1a3b_6973726f",
+      "range": {
+        "startLine": 665,
+        "startChar": 4,
+        "endLine": 665,
+        "endChar": 10
+      },
+      "revId": "884c0db03175711bcad8b5c0b486977c82197f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60c92dc6_220d5230",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-11-16T01:33:45Z",
       "side": 1,
       "message": "Should we be moving this to line# 672 (after verifying setConsumerUsageBits was successful)?",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 666,
+        "endChar": 66
+      },
+      "revId": "884c0db03175711bcad8b5c0b486977c82197f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a61dc9f6_b35015aa",
+        "filename": "media/ndk/NdkImageReader.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-16T01:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60c92dc6_220d5230",
       "range": {
         "startLine": 666,
         "startChar": 0,
