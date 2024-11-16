@@ -16,6 +16,52 @@
       "message": "Looks fine to me, but I want to make sure John\u0027s OK with this since we went over a lot of different aspects in today\u0027s meeting.",
       "revId": "884c0db03175711bcad8b5c0b486977c82197f3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ba1a3b_6973726f",
+        "filename": "media/ndk/NdkImageReader.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-16T01:33:45Z",
+      "side": 1,
+      "message": "Question: why do we preserve usage? (I don\u0027t see it being used anywhere else)",
+      "range": {
+        "startLine": 665,
+        "startChar": 4,
+        "endLine": 665,
+        "endChar": 10
+      },
+      "revId": "884c0db03175711bcad8b5c0b486977c82197f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c92dc6_220d5230",
+        "filename": "media/ndk/NdkImageReader.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-16T01:33:45Z",
+      "side": 1,
+      "message": "Should we be moving this to line# 672 (after verifying setConsumerUsageBits was successful)?",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 666,
+        "endChar": 66
+      },
+      "revId": "884c0db03175711bcad8b5c0b486977c82197f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
