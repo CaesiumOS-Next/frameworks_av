@@ -1,0 +1,466 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b35a5b1_70849dec",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "This may not work for 64-bit which may end up as being \"long long\". and using strtoll?",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "69650346_aee9a70e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "        int64_t lower, upper;\n"
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 154,
+                "startChar": 0,
+                "endLine": 156,
+                "endChar": 0
+              },
+              "replacement": "            lower \u003d strtoll(match[1].str().c_str(), NULL, 10);\n            upper \u003d strtoll(match[2].str().c_str(), NULL, 10);\n"
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 157,
+                "startChar": 0,
+                "endLine": 158,
+                "endChar": 0
+              },
+              "replacement": "            lower \u003d upper \u003d strtoll(str.c_str(), NULL, 10);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f042f37_2cfe9b57",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "do we need to add $ to ensure no straggling characters?",
+      "range": {
+        "startLine": 151,
+        "startChar": 43,
+        "endLine": 151,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d69650d7_bcbb8be2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 151,
+                "startChar": 0,
+                "endLine": 152,
+                "endChar": 0
+              },
+              "replacement": "        std::regex regex(\"([0-9]+)-([0-9]+)$\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f630d49b_1936420b",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "we will need to check that \u0026end points to \u0027-\u0027 and \u0027\\0\u0027 respectively, which ensures that the number did not overflow.",
+      "range": {
+        "startLine": 154,
+        "startChar": 51,
+        "endLine": 154,
+        "endChar": 55
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34138c01_ae7b37d3",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "here we need to ensure that there are no straggling characters.\n\n(use \u0026end and check that it is \u0027\\0\u0027)",
+      "range": {
+        "startLine": 157,
+        "startChar": 28,
+        "endLine": 157,
+        "endChar": 34
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a46da7b_5f6fac9a",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "0-0 is a valid range. This needs to be based on the character at \u0026end (needto check \u0026end for both strtoll-s)",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d3947ec7_4832c66a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 161,
+                "endChar": 0
+              },
+              "replacement": "        if (match.end() \u003d\u003d str.end()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b99c102_1e87faa2",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "this looks as if it could be a simple instance (non-static) method on Range\u003cT\u003e called \"factor\"",
+      "range": {
+        "startLine": 168,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 58
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7101901_fb99ea78",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "it is unclear what this does. Perhaps, GetAllowedDimensionRange?",
+      "range": {
+        "startLine": 314,
+        "startChar": 26,
+        "endLine": 314,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "07ea9c25_5a492eae",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 314,
+                "startChar": 0,
+                "endLine": 315,
+                "endChar": 0
+              },
+              "replacement": "    static Range\u003cint32_t\u003e GetAllowedDimensionRange();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533ab609_65b04baf",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "nit: in our code base we name these asDouble, etc...",
+      "range": {
+        "startLine": 498,
+        "startChar": 11,
+        "endLine": 498,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d6af67a2_5ccf4c2d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 498,
+                "startChar": 0,
+                "endLine": 499,
+                "endChar": 0
+              },
+              "replacement": "    double asDouble() const {\n"
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 514,
+                "startChar": 0,
+                "endLine": 515,
+                "endChar": 0
+              },
+              "replacement": "    float asFloat() const {\n"
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 530,
+                "startChar": 0,
+                "endLine": 531,
+                "endChar": 0
+              },
+              "replacement": "    int32_t asInt32() const {\n"
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 553,
+                "startChar": 0,
+                "endLine": 554,
+                "endChar": 0
+              },
+              "replacement": "    int64_t asInt64() const {\n"
+            },
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 576,
+                "startChar": 0,
+                "endLine": 578,
+                "endChar": 0
+              },
+              "replacement": "    int16_t asInt16() const {\n        return (int16_t) asInt32();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9d4f21_3c84d8fd",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "ParseRange? (Rational is already given)",
+      "range": {
+        "startLine": 649,
+        "startChar": 42,
+        "endLine": 649,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ff37e76b_7d84fc55",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 649,
+                "startChar": 0,
+                "endLine": 650,
+                "endChar": 0
+              },
+              "replacement": "    static std::optional\u003cRange\u003cRational\u003e\u003e ParseRange(const std::string str);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2e2bb5_50fe685e",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "this may be the only static method that\u0027s required.",
+      "range": {
+        "startLine": 651,
+        "startChar": 27,
+        "endLine": 651,
+        "endChar": 37
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b64579_e8c0442b",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "Parse?",
+      "range": {
+        "startLine": 691,
+        "startChar": 35,
+        "endLine": 691,
+        "endChar": 48
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84ae2c4_1cd3ec68",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "Rational scale(int32_t num, int32_t den)?",
+      "range": {
+        "startLine": 693,
+        "startChar": 20,
+        "endLine": 693,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "46fab365_1e80c3f2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 693,
+                "startChar": 0,
+                "endLine": 694,
+                "endChar": 0
+              },
+              "replacement": "    Rational scale(int32_t num, int32_t den);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

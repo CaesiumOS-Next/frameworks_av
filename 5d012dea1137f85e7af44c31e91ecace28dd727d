@@ -201,6 +201,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f21eaee3_0e918bfc",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "That said, I am not sure we need them for the C++ internal version. They were meant for apps.",
+      "parentUuid": "83de37b6_1439e36a",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4910e03_945eecdd",
@@ -285,6 +309,30 @@
       "side": 1,
       "message": "Updated with shorthand evaluator. However, I don\u0027t quite get how to use optional here.",
       "parentUuid": "95c84d63_8b482ddc",
+      "range": {
+        "startLine": 479,
+        "startChar": 10,
+        "endLine": 481,
+        "endChar": 46
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6abb6db_72f94d2f",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "Sorry about this. LLM told me there is a \u0026\u0026\u003d in C++ but there isn\u0027t. Hence, this needs to be ok \u003d ok \u0026\u0026 ...\n\nstd::optional is similar to what you did for audio capabilities. this Java code used width \u003d 0 to mean width is not specified, but in audio capabilities you used std::optional, so you may want to do the same here.",
+      "parentUuid": "a65a5e55_a8c98f86",
       "range": {
         "startLine": 479,
         "startChar": 10,
@@ -415,6 +463,30 @@
       "side": 1,
       "message": "This is used in VideoCapabilities.cpp. Could you clarify \"sort by area\"?",
       "parentUuid": "e8b785dd_c79e086d",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 26
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c67c13e_e26471da",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:01:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d0ac128_2d28aef2",
       "range": {
         "startLine": 287,
         "startChar": 4,
