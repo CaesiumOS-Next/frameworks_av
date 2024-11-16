@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcff5467_3b2d83a3",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb812b02_a42c0b23",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 16
+      },
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d8c1a88_2c38aa75",
@@ -83,6 +107,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c20d33b4_f0eb39ec",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d8c1a88_2c38aa75",
+      "range": {
+        "startLine": 124,
+        "startChar": 43,
+        "endLine": 124,
+        "endChar": 44
+      },
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8c4aa8b_228edaa0",
@@ -96,6 +144,30 @@
       "writtenOn": "2024-11-16T06:16:07Z",
       "side": 1,
       "message": "this would become strtoll, and we need to check *endl to see if the number overflowed potentially. That actually means that we also need to check for overflow for the parsed value:\n\nif (lower \u003e\u003d std::numeric_limits\u003cT\u003e::min() \u0026\u0026 lower \u003c\u003d std::numeric_limits\u003cT\u003e::max()).\n\nwe could make these constants (MIN_T_VALUE, MAX_T_VALUE) to keep the code cleaner.",
+      "range": {
+        "startLine": 127,
+        "startChar": 20,
+        "endLine": 127,
+        "endChar": 26
+      },
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0f8c82_06f0f18d",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8c4aa8b_228edaa0",
       "range": {
         "startLine": 127,
         "startChar": 20,
@@ -143,6 +215,30 @@
           ]
         }
       ],
+      "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff9a7228_09e78e2f",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52b520ff_662150d6",
+      "range": {
+        "startLine": 130,
+        "startChar": 28,
+        "endLine": 130,
+        "endChar": 34
+      },
       "revId": "097973eb1901d9040c26ad6dc3e05e133bf519ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
