@@ -87,6 +87,24 @@
       "parentUuid": "693459a3_1d0afc99",
       "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7b44f6_65fee70e",
+        "filename": "media/libaudioclient/AudioRecord.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T13:51:31Z",
+      "side": 1,
+      "message": "Agree, we can, but, we agreed to do it like in ```IAudioTrack.aidl```\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudioclient/aidl/android/media/IAudioTrack.aidl;l\u003d69?q\u003dIAudioTrack.aidl\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "parentUuid": "8c051360_b12cb74d",
+      "revId": "728f90b8bcf95c6eaec833233b483573aa735e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
