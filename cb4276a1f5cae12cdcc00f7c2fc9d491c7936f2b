@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f235b037_54494b78",
+        "filename": "media/codec2/sfplugin/Codec2InfoBuilder.cpp",
+        "patchSetId": 84
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T06:54:36Z",
+      "side": 1,
+      "message": "It is to propagate the global setting of MaxSupportedInstances from MediaCodecList to MediaCodecInfo. It is an optional setting. Each MediaCodecInfo can calculate it\u0027s own MaxSupportedInstances based on this global setting or the default value defined in MediaCodecInfo.cpp.",
+      "parentUuid": "9a019ab9_ddd0186c",
+      "range": {
+        "startLine": 641,
+        "startChar": 22,
+        "endLine": 641,
+        "endChar": 24
+      },
+      "revId": "cb4276a1f5cae12cdcc00f7c2fc9d491c7936f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05cb7ee8_7f2ba27e",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-11-16T06:29:54Z",
       "side": 1,
       "message": "where is this used? it seems that we are not \"parceling\" the static value upon receipt, which highlights the strangeness of using a static value here. We may need to resolve the actual max instance value and parcel that (it is in details, so it may just need to be pre-initialized with the static value.)",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 194,
+        "endChar": 33
+      },
+      "revId": "cb4276a1f5cae12cdcc00f7c2fc9d491c7936f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be54f79_d285f199",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 84
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T06:54:36Z",
+      "side": 1,
+      "message": "Sorry this should set the global value. This is just the global setting from MediaCodecList. So I think it make sense to use a static value as it is shared by all the MediaCodecInfo.The real MaxSupportedInstances will be calculated inside CodecCapabilities.",
+      "parentUuid": "05cb7ee8_7f2ba27e",
       "range": {
         "startLine": 194,
         "startChar": 12,
