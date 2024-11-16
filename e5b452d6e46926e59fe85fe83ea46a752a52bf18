@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1dd00a2_b3b1715c",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 77
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e821dce_487b708b",
+      "range": {
+        "startLine": 113,
+        "startChar": 24,
+        "endLine": 113,
+        "endChar": 27
+      },
+      "revId": "e5b452d6e46926e59fe85fe83ea46a752a52bf18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba8d7c10_d636eb43",
@@ -65,6 +89,30 @@
       "writtenOn": "2024-11-16T06:08:16Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 104
+      },
+      "revId": "e5b452d6e46926e59fe85fe83ea46a752a52bf18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dc6fe80_5067344d",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 77
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba8d7c10_d636eb43",
       "range": {
         "startLine": 51,
         "startChar": 0,

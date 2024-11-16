@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2c38dc_c0642bc8",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:14:44Z",
+      "side": 1,
+      "message": "As there is no regular codecs concept in NDK, we need to exclude these special codecs in NDK",
+      "parentUuid": "76f72d8f_22664d58",
+      "range": {
+        "startLine": 58,
+        "startChar": 37,
+        "endLine": 58,
+        "endChar": 44
+      },
+      "revId": "c3b1718fc2f80caa9269a0fa350f2d62ba78317d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6218405b_20330616",
