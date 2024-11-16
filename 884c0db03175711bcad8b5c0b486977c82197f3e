@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "581ba75d_12805285",
+        "filename": "media/ndk/NdkImageReader.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-16T01:46:33Z",
+      "side": 1,
+      "message": "Sorry, my bad. I missed on removing const on NdkImageReaderPriv::mUsage (and read it as adding a new member variable)",
+      "parentUuid": "f8ba1a3b_6973726f",
+      "range": {
+        "startLine": 665,
+        "startChar": 4,
+        "endLine": 665,
+        "endChar": 10
+      },
+      "revId": "884c0db03175711bcad8b5c0b486977c82197f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60c92dc6_220d5230",
