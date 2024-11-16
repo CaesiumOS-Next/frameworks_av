@@ -343,6 +343,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "470975a2_1366a329",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6abb6db_72f94d2f",
+      "range": {
+        "startLine": 479,
+        "startChar": 10,
+        "endLine": 481,
+        "endChar": 46
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17ebbc41_fdb000ee",
@@ -486,6 +510,30 @@
       "writtenOn": "2024-11-16T06:01:07Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "3d0ac128_2d28aef2",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 26
+      },
+      "revId": "5d012dea1137f85e7af44c31e91ecace28dd727d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04817cc6_8b3e816c",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Added a comment. It is just used in the map",
       "parentUuid": "3d0ac128_2d28aef2",
       "range": {
         "startLine": 287,

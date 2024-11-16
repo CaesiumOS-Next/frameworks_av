@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c080768_6ed2098e",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b35a5b1_70849dec",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 12
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f042f37_2cfe9b57",
@@ -103,6 +127,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3c51b9_944533ca",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f042f37_2cfe9b57",
+      "range": {
+        "startLine": 151,
+        "startChar": 43,
+        "endLine": 151,
+        "endChar": 44
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f630d49b_1936420b",
@@ -126,6 +174,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7737d652_b2928dfb",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f630d49b_1936420b",
+      "range": {
+        "startLine": 154,
+        "startChar": 51,
+        "endLine": 154,
+        "endChar": 55
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34138c01_ae7b37d3",
@@ -139,6 +211,30 @@
       "writtenOn": "2024-11-16T06:01:07Z",
       "side": 1,
       "message": "here we need to ensure that there are no straggling characters.\n\n(use \u0026end and check that it is \u0027\\0\u0027)",
+      "range": {
+        "startLine": 157,
+        "startChar": 28,
+        "endLine": 157,
+        "endChar": 34
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9cbb19e_9550be04",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34138c01_ae7b37d3",
       "range": {
         "startLine": 157,
         "startChar": 28,
@@ -190,6 +286,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9069a86d_276bc150",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a46da7b_5f6fac9a",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 37
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b99c102_1e87faa2",
@@ -203,6 +323,30 @@
       "writtenOn": "2024-11-16T06:01:07Z",
       "side": 1,
       "message": "this looks as if it could be a simple instance (non-static) method on Range\u003cT\u003e called \"factor\"",
+      "range": {
+        "startLine": 168,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 58
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2535dcb6_3ed8e4df",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b99c102_1e87faa2",
       "range": {
         "startLine": 168,
         "startChar": 4,
@@ -250,6 +394,30 @@
           ]
         }
       ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab568c32_71c2c612",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7101901_fb99ea78",
+      "range": {
+        "startLine": 314,
+        "startChar": 26,
+        "endLine": 314,
+        "endChar": 38
+      },
       "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -335,6 +503,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d59fccd_1c527a6b",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "533ab609_65b04baf",
+      "range": {
+        "startLine": 498,
+        "startChar": 11,
+        "endLine": 498,
+        "endChar": 22
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e9d4f21_3c84d8fd",
@@ -372,6 +564,30 @@
           ]
         }
       ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90cb5c01_4913e678",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e9d4f21_3c84d8fd",
+      "range": {
+        "startLine": 649,
+        "startChar": 42,
+        "endLine": 649,
+        "endChar": 60
+      },
       "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -422,6 +638,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d3a50c_5d22e3f0",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5b64579_e8c0442b",
+      "range": {
+        "startLine": 691,
+        "startChar": 35,
+        "endLine": 691,
+        "endChar": 48
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f84ae2c4_1cd3ec68",
@@ -459,6 +699,30 @@
           ]
         }
       ],
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5b84ce_54bba882",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-16T11:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f84ae2c4_1cd3ec68",
+      "range": {
+        "startLine": 693,
+        "startChar": 20,
+        "endLine": 693,
+        "endChar": 30
+      },
       "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
