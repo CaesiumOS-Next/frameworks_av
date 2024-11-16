@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e821dce_487b708b",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 77
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:08:16Z",
+      "side": 1,
+      "message": "features?\n\nYou can also simply say:\n\nfor (const Feature \u0026feat : getValidFeatures()) {\n  if (!feat.mInternal) {\n    res.push_back(feat.mName);\n  }\n}\n\nthat may be easier to understand.",
+      "range": {
+        "startLine": 113,
+        "startChar": 24,
+        "endLine": 113,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cea391c8_b1c3a017",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/CodecCapabilities.cpp",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": "    for (const Feature \u0026feat : getValidFeatures()) {\n        if (!feat.mInternal) {\n            res.push_back(feat.mName);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e5b452d6e46926e59fe85fe83ea46a752a52bf18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8d7c10_d636eb43",
+        "filename": "media/libmedia/include/media/CodecCapabilities.h",
+        "patchSetId": 77
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:08:16Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 104
+      },
+      "revId": "e5b452d6e46926e59fe85fe83ea46a752a52bf18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
