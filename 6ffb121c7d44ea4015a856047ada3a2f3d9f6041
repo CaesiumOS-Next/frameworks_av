@@ -16,6 +16,298 @@
       "message": "Addressed the comments to use existing example service",
       "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a544da7_37376458",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "void tryRegisteringVendorImpl()",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 26
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276711ef_3e2b8ceb",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "avoid this?",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75281b4b_6dcfa212",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "keep the default to \"\"",
+      "range": {
+        "startLine": 37,
+        "startChar": 96,
+        "endLine": 37,
+        "endChar": 105
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655cd217_193670e4",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "use full namespace ::android::base::GetProperty",
+      "range": {
+        "startLine": 37,
+        "startChar": 37,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79089ab6_558a9c52",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "Limit the line width to 100!!",
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f704871_75322c14",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "it is not an ERROR, if there is no prop setting.\nKeep it as DEBUG.",
+      "range": {
+        "startLine": 39,
+        "startChar": 12,
+        "endLine": 39,
+        "endChar": 17
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0caccee_2d5b7e9f",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "kLibPropName + \" property is not found\";",
+      "range": {
+        "startLine": 39,
+        "startChar": 22,
+        "endLine": 40,
+        "endChar": 81
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c248a408_ec8c0f38",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "else is not needed, if there is a return?",
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a9f8a1b_dabf2a90",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "I checked dlopen behavior, just the library name would work for both 32 bit and 64 bit systems.\navoid the file path.",
+      "range": {
+        "startLine": 43,
+        "startChar": 35,
+        "endLine": 43,
+        "endChar": 50
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85a05076_f2b2e514",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "else is not needed, if there is a return?",
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58cb1a77_57a7c2f3",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "else is not needed, if there is a return?",
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f007722_9926f6b5",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "else is not needed, if there is a return?",
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c24df7_4969bd21",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "Expected function signature\nint (*)()",
+      "range": {
+        "startLine": 63,
+        "startChar": 58,
+        "endLine": 63,
+        "endChar": 68
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b320914_a1716cc4",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-16T16:13:45Z",
+      "side": 1,
+      "message": "use this to check whether service already got registered?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/ndk/service_manager.cpp;l\u003d75?q\u003dAServiceManager_checkService\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 32
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
