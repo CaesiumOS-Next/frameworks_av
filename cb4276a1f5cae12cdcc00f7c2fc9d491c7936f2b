@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a019ab9_ddd0186c",
+        "filename": "media/codec2/sfplugin/Codec2InfoBuilder.cpp",
+        "patchSetId": 84
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:29:54Z",
+      "side": 1,
+      "message": "lowercase set?\n\nI think I understand what you are trying to do here, but each codec may have its own max-supported-instance setting, and we only use the \"default\" global setting if none is specified. As such, it is confusing to set this static value here, and not in MediaCodecInfo::SetMaxSupportedInstances in line 510.",
+      "range": {
+        "startLine": 641,
+        "startChar": 22,
+        "endLine": 641,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "59601984_f66039a2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/Codec2InfoBuilder.cpp",
+              "range": {
+                "startLine": 641,
+                "startChar": 0,
+                "endLine": 642,
+                "endChar": 0
+              },
+              "replacement": "            codecInfo-\u003esetMaxSupportedInstances(maxSupportedInstances);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cb4276a1f5cae12cdcc00f7c2fc9d491c7936f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cb7ee8_7f2ba27e",
+        "filename": "media/libmedia/MediaCodecInfo.cpp",
+        "patchSetId": 84
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:29:54Z",
+      "side": 1,
+      "message": "where is this used? it seems that we are not \"parceling\" the static value upon receipt, which highlights the strangeness of using a static value here. We may need to resolve the actual max instance value and parcel that (it is in details, so it may just need to be pre-initialized with the static value.)",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 194,
+        "endChar": 33
+      },
+      "revId": "cb4276a1f5cae12cdcc00f7c2fc9d491c7936f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a745d41f_19eceaa0",
+        "filename": "media/libmedia/include/media/MediaCodecInfo.h",
+        "patchSetId": 84
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-16T06:29:54Z",
+      "side": 1,
+      "message": "this further clarifies that CodecCapabilities should be \"a part of\" Capabilities (likely the other way around.) in the future.",
+      "range": {
+        "startLine": 195,
+        "startChar": 10,
+        "endLine": 195,
+        "endChar": 43
+      },
+      "revId": "cb4276a1f5cae12cdcc00f7c2fc9d491c7936f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
