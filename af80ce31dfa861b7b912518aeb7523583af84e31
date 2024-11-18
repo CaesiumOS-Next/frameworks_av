@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b706217_cab3e0de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-11-18T16:02:38Z",
+      "side": 1,
+      "message": "Requires CTS test coverage in topic",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 15
+      },
+      "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bfe1400_b29a07f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-11-18T16:02:38Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sold on this. What does the current usage look like, can you reference the internal API usages that this is currently hitting?\n\nBut otherwise an API that might take effect somewhere between \"immediately\" and \"never\" seems sketchy. A consumer is required to support the previous/initial usage bits indefinitely after creation after all. So why do the usage bits need to change at all?",
+      "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
