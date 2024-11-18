@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0262a3c0_8e4c7fff",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-11-18T13:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ef7e53_f514470e",
+      "range": {
+        "startLine": 192,
+        "startChar": 63,
+        "endLine": 192,
+        "endChar": 72
+      },
+      "revId": "a49809e1a9d87a010a0bb222bb66bdae6bb318f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d772201_a5093063",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-15T20:16:14Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 344,
+        "endChar": 103
+      },
+      "revId": "a49809e1a9d87a010a0bb222bb66bdae6bb318f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acfe5c25_816cf40a",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-11-18T13:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d772201_a5093063",
       "range": {
         "startLine": 344,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec0358b_87f0b3ff",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-11-18T13:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dc8c5da_69ad1a35",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 131
+      },
+      "revId": "a49809e1a9d87a010a0bb222bb66bdae6bb318f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e922dae4_e3b198da",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81c97cb9_0f9b1710",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-11-18T13:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e922dae4_e3b198da",
+      "range": {
+        "startLine": 421,
+        "startChar": 0,
+        "endLine": 421,
+        "endChar": 113
+      },
+      "revId": "a49809e1a9d87a010a0bb222bb66bdae6bb318f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecdedc7b_ad21dda4",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-11-15T20:16:14Z",
       "side": 1,
       "message": "How about kAudioEncodingPcm24bitPacked and kAudioEncodingPcm32bit ?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 5
+      },
+      "revId": "a49809e1a9d87a010a0bb222bb66bdae6bb318f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b26c2b0_23a34b4f",
+        "filename": "media/libstagefright/SkipCutBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-11-18T13:05:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecdedc7b_ad21dda4",
       "range": {
         "startLine": 34,
         "startChar": 0,
