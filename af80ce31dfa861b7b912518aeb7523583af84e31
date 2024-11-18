@@ -57,6 +57,24 @@
       "parentUuid": "6bfe1400_b29a07f4",
       "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee8cee7e_f1668bc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-11-18T18:48:55Z",
+      "side": 1,
+      "message": "if this:\n\n```\n * \u003cp\u003eNote: If the AImageReader is already connected to an output,\n * the new usage will not be used with this output. It will only\n * become valid for the next connected output.\u003c/p\u003e\n```\n\nIs all we\u0027re committing to in the API, then I don\u0027t think we should do this. However, looking at the current implementation it looks like the new usages should get picked up the next time the producer dequeues a buffer here: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/gui/BufferQueueProducer.cpp;drc\u003d045a30e06207744f45d7defa109764a5565bf30e;l\u003d448\n\nSo this only being delayed by the currently in-flight buffers I think is then a reasonable API. We should note that this will trigger re-allocation, could cause producer failures mid-stream if the new usage combination isn\u0027t supported, and thus should be avoided as much as possible regardless.",
+      "parentUuid": "16a3d299_da71db47",
+      "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
