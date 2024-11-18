@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaf3360d_a8191195",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "remove this as it is unused",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a66145_a838225f",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "dlopen(\u003conly_library.so\u003e) is sufficient, remove this.",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 5
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3547232_5be93f17",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "when failed to symbol,\ndlclose(libHandle);",
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa7f9ade_4e27b5d4",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "trivial comment",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 68
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "805257af_e6dc2bf8",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "move this object to else part at line 82.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 62
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d80f87_b8034814",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "::aidl::android::hardware::audio::core::IHalAdapterVendorExtension::descriptor",
+      "range": {
+        "startLine": 77,
+        "startChar": 25,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f864766_f4c57f07",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "trivial comment",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 80
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fef0673f_9f9768f0",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:42:46Z",
+      "side": 1,
+      "message": "IHalAdapterVendorExtension registered with vendor\u0027s implementation.",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 74
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
