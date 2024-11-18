@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23a8a52b_1930e39e",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:59:08Z",
+      "side": 1,
+      "message": "/*\n     * The property \"ro.audio.ihaladaptervendorextension_libname\" allows vendors or OEMs to dynamically\n     * load a specific library into this process space using dlopen.\n     *\n     * The property \"ro.audio.ihaladaptervendorextension_symbol\" identifies the symbol within the\n     * dynamically loaded library using dlsym. This symbol can then be used to register the\n     * \"::aidl::android::hardware::audio::core::IHalAdapterVendorExtension/default\" with the\n     * ServiceManager.\n     */",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 7
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54a66145_a838225f",
         "filename": "services/audioparameterparser/main.cpp",
         "patchSetId": 11
@@ -42,6 +65,29 @@
         "startChar": 4,
         "endLine": 47,
         "endChar": 5
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec5aadac_304087f4",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-11-18T16:59:08Z",
+      "side": 1,
+      "message": "please remove",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 7
       },
       "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
