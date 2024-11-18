@@ -93,6 +93,24 @@
       "parentUuid": "ee8cee7e_f1668bc4",
       "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a5dbbd_5af20ccb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-11-18T19:10:11Z",
+      "side": 1,
+      "message": "marking this #llndk instead sounds safer, yeah.\n\nBut as for:\n\n\u003e If it\u0027s actually being used for new buffer allocation, it may well crash things; camera service/HAL assume usage won\u0027t change dynamically, so if the buffer layout changes as a result of usage flag changes, there\u0027s definitely a chance things will break when a new buffer is handed off to the HAL to be filled out.\n\nHopefully camera isn\u0027t currently assuming the set of buffers never changes? Reallocs are already quite possible via public APIs (eg, when passing an Image from an ImageReader to an ImageWriter, since that detaches the buffer from the first queue)\n\nIt\u0027d be unexpected for this to change the format since that\u0027s still set by the producer, so the producer shouldn\u0027t notice this happened other than 1) generic realloc causing cache miss/update, 2) possibly the new usages are incompatible and dequeueBuffer fails entirely which is unusual to happen \u003cN\u003e frames into the stream",
+      "parentUuid": "b1b7e769_69472ffc",
+      "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
