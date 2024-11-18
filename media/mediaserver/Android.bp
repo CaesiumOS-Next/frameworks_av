@@ -15,6 +15,26 @@ license {
     ],
 }
 
+soong_config_module_type {
+    name: "mediaserver_cc_defaults",
+    module_type: "cc_defaults",
+    config_namespace: "mediaserver",
+    value_variables: ["registermsext_lib"],
+    properties: ["static_libs"],
+}
+
+mediaserver_cc_defaults {
+    name: "mediaserver_defaults",
+    soong_config_variables: {
+        registermsext_lib: {
+            static_libs: ["%s"],
+            conditions_default: {
+                static_libs: ["libregistermsext"],
+            },
+        },
+    },
+}
+
 cc_library_static {
     name: "libregistermsext",
     srcs: ["register.cpp"],
@@ -59,7 +79,10 @@ vintf_fragment {
 mediaserver_cc_binary {
     name: "mediaserver",
 
-    defaults: ["libcodec2_hal_selection"],
+    defaults: [
+        "libcodec2_hal_selection",
+        "mediaserver_defaults",
+    ],
 
     srcs: ["main_mediaserver.cpp"],
 
@@ -74,10 +97,6 @@ mediaserver_cc_binary {
         "libmediaplayerservice",
         "libresourcemanagerservice",
         "libutils",
-    ],
-
-    static_libs: [
-        "libregistermsext",
     ],
 
     // By default mediaserver runs in 32-bit to save memory, except
