@@ -75,6 +75,24 @@
       "parentUuid": "16a3d299_da71db47",
       "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b7e769_69472ffc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-18T19:04:18Z",
+      "side": 1,
+      "message": "This is why I was suggesting making this a system API (apparently, an LL NDK API to be available to codecs), so we don\u0027t commit to somewhat odd stuff in public API. \n\nBut we should document the behavior accurately, of course.  If it\u0027s actually being used for new buffer allocation, it may well crash things; camera service/HAL assume usage won\u0027t change dynamically, so if the buffer layout changes as a result of usage flag changes, there\u0027s definitely a chance things will break when a new buffer is handed off to the HAL to be filled out. But not something we\u0027ve tested at all.",
+      "parentUuid": "ee8cee7e_f1668bc4",
+      "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
