@@ -111,6 +111,24 @@
       "parentUuid": "b1b7e769_69472ffc",
       "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7d822b5_041d2d63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-18T19:51:04Z",
+      "side": 1,
+      "message": "Reallocs should be fine (if very inefficient), though we\u0027ve had some bugs in some camera HALs where bad assumptions have been made (assuming a fixed # of total buffers in terms of mapping buffers to the GPU on a Pixel a few years back, needed for image stabilization warping).\n\nThe main concern would be with IMPLEMENTATION_DEFINED where the actual format might change if the usage flags change.  Most efficient layout for the encoder is often not the same as for the GPU, for example.",
+      "parentUuid": "b6a5dbbd_5af20ccb",
+      "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
