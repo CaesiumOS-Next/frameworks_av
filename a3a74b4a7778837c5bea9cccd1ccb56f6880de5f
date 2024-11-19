@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "717fa0ea_8ffe63a9",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1110304
+      },
+      "writtenOn": "2024-11-19T22:46:28Z",
+      "side": 1,
+      "message": "Should this be `c_int` instead? Same for parameters to `AMediaFormat_getRect`.",
+      "range": {
+        "startLine": 119,
+        "startChar": 20,
+        "endLine": 119,
+        "endChar": 23
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb9664f_196c244b",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1110304
+      },
+      "writtenOn": "2024-11-19T22:46:28Z",
+      "side": 1,
+      "message": "nit: This could be `Self::new()`, which would make the `AMediaFormat_delete` in line 338 unnecessary.",
+      "range": {
+        "startLine": 328,
+        "startChar": 8,
+        "endLine": 331,
+        "endChar": 42
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
