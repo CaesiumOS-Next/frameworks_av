@@ -33,6 +33,23 @@
       "message": "Adding people from the frameworks team to review, including taklee@ who recently edited this file.",
       "revId": "2cabcc7c0aa740dbdffa9c0e92224eb409163dc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4550833b_7c1aedd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2024-11-19T10:40:02Z",
+      "side": 1,
+      "message": "For anyone else wondering, the `Android.mk` -\u003e `Android.bp` change was in Feb 2019: aosp/892253",
+      "revId": "2cabcc7c0aa740dbdffa9c0e92224eb409163dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
