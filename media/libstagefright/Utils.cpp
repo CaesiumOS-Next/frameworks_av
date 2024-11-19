@@ -1438,11 +1438,20 @@ status_t convertMetaDataToMessage(
             return NO_MEMORY;
         }
         memcpy(buffer->data(), data, size);
-
         buffer->meta()->setInt32("csd", true);
         buffer->meta()->setInt64("timeUs", 0);
         msg->setBuffer("csd-0", buffer);
         parseAV1ProfileLevelFromCsd(buffer, msg);
+    } else if (meta->findData(kKeyAPVC, &type, &data, &size)) {
+        sp<ABuffer> buffer = new (std::nothrow) ABuffer(size);
+        if (buffer.get() == NULL || buffer->base() == NULL) {
+            return NO_MEMORY;
+        }
+        memcpy(buffer->data(), data, size);
+
+        buffer->meta()->setInt32("csd", true);
+        buffer->meta()->setInt64("timeUs", 0);
+        msg->setBuffer("csd-0", buffer);
     } else if (meta->findData(kKeyESDS, &type, &data, &size)) {
         ESDS esds((const char *)data, size);
         if (esds.InitCheck() != (status_t)OK) {
@@ -2091,6 +2100,8 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
         } else if (mime == MEDIA_MIMETYPE_VIDEO_AV1 ||
                    mime == MEDIA_MIMETYPE_IMAGE_AVIF) {
             meta->setData(kKeyAV1C, 0, csd0->data(), csd0->size());
+        } else if (mime == MEDIA_MIMETYPE_VIDEO_APV) {
+            meta->setData(kKeyAPVC, 0, csd0->data(), csd0->size());
         } else if (mime == MEDIA_MIMETYPE_VIDEO_DOLBY_VISION) {
             int32_t profile = -1;
             uint8_t blCompatibilityId = -1;
