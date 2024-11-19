@@ -99,6 +99,7 @@ cc_library_static {
 
     static_libs: [
         "libstagefright_esds",
+        "com.android.media.flags.editing-aconfig-cc-host",
     ],
 
     export_include_dirs: [
