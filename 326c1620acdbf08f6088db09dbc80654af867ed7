@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba41f20e_0a42ba8d",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-19T21:59:30Z",
+      "side": 1,
+      "message": "nit: format",
+      "fixSuggestions": [
+        {
+          "fixId": "cc1d3169_8ea8fb4a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 989,
+                "startChar": 0,
+                "endLine": 990,
+                "endChar": 0
+              },
+              "replacement": "    pbu_type \u003d reader.getBits(8); // pbu_type\n"
+            }
+          ]
+        }
+      ],
+      "revId": "326c1620acdbf08f6088db09dbc80654af867ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "728fa3bb_63bca30c",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-19T21:59:30Z",
+      "side": 1,
+      "message": "why are these overriden to a hardcoded value?",
+      "revId": "326c1620acdbf08f6088db09dbc80654af867ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
