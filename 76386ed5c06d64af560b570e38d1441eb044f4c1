@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb686914_0e9e7984",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaf3360d_a8191195",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23a8a52b_1930e39e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-18T16:59:08Z",
       "side": 1,
       "message": "/*\n     * The property \"ro.audio.ihaladaptervendorextension_libname\" allows vendors or OEMs to dynamically\n     * load a specific library into this process space using dlopen.\n     *\n     * The property \"ro.audio.ihaladaptervendorextension_symbol\" identifies the symbol within the\n     * dynamically loaded library using dlsym. This symbol can then be used to register the\n     * \"::aidl::android::hardware::audio::core::IHalAdapterVendorExtension/default\" with the\n     * ServiceManager.\n     */",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 7
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6316fa74_2fc62505",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23a8a52b_1930e39e",
       "range": {
         "startLine": 31,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b16a9f_6cc95022",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54a66145_a838225f",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 5
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec5aadac_304087f4",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-11-18T16:59:08Z",
       "side": 1,
       "message": "please remove",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 7
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aae2d9b_11969f09",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec5aadac_304087f4",
       "range": {
         "startLine": 53,
         "startChar": 4,
@@ -110,6 +206,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36def9cd_c0a57807",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3547232_5be93f17",
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa7f9ade_4e27b5d4",
@@ -123,6 +237,30 @@
       "writtenOn": "2024-11-18T16:42:46Z",
       "side": 1,
       "message": "trivial comment",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 68
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93196abd_72111580",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa7f9ade_4e27b5d4",
       "range": {
         "startLine": 73,
         "startChar": 4,
@@ -156,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e3d987_2c2f39c7",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "805257af_e6dc2bf8",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 62
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8d80f87_b8034814",
@@ -169,6 +331,30 @@
       "writtenOn": "2024-11-18T16:42:46Z",
       "side": 1,
       "message": "::aidl::android::hardware::audio::core::IHalAdapterVendorExtension::descriptor",
+      "range": {
+        "startLine": 77,
+        "startChar": 25,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c305a1b_e03e7093",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8d80f87_b8034814",
       "range": {
         "startLine": 77,
         "startChar": 25,
@@ -202,6 +388,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdbb98e2_6ad9f852",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f864766_f4c57f07",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 80
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fef0673f_9f9768f0",
@@ -215,6 +425,30 @@
       "writtenOn": "2024-11-18T16:42:46Z",
       "side": 1,
       "message": "IHalAdapterVendorExtension registered with vendor\u0027s implementation.",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 74
+      },
+      "revId": "76386ed5c06d64af560b570e38d1441eb044f4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f555ca06_8fee0874",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef0673f_9f9768f0",
       "range": {
         "startLine": 80,
         "startChar": 22,

@@ -393,6 +393,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8692565_d940a3f6",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-19T17:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a9f8a1b_dabf2a90",
+      "range": {
+        "startLine": 43,
+        "startChar": 35,
+        "endLine": 43,
+        "endChar": 50
+      },
+      "revId": "6ffb121c7d44ea4015a856047ada3a2f3d9f6041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85a05076_f2b2e514",
