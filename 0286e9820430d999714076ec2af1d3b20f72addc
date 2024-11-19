@@ -198,6 +198,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ece7cb3_d8e45b98",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-19T01:09:05Z",
+      "side": 1,
+      "message": "Protected the function with checking if errno \u003d\u003d ERANGE.\nThe endPtr will still be set to the end of string even if the number is out of the range of type long long. Checking if the errno \u003d\u003d ERANGE can ensure the number is not overflowed for the string to long long conversion.\nAlso, added logic to check if the number is within the range of type T.",
+      "parentUuid": "7737d652_b2928dfb",
+      "range": {
+        "startLine": 154,
+        "startChar": 51,
+        "endLine": 154,
+        "endChar": 55
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34138c01_ae7b37d3",
@@ -235,6 +259,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "34138c01_ae7b37d3",
+      "range": {
+        "startLine": 157,
+        "startChar": 28,
+        "endLine": 157,
+        "endChar": 34
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d34af6f1_ea0eaec9",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-19T01:09:05Z",
+      "side": 1,
+      "message": "Added check of endPtr.\nThe differences between this and above is that the above case is guarded by the regex. It is guaranteed that the above matches only contain continuous number characters. So we only need to check if reached the end for this case.",
+      "parentUuid": "f9cbb19e_9550be04",
       "range": {
         "startLine": 157,
         "startChar": 28,
@@ -300,6 +348,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "8a46da7b_5f6fac9a",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 37
+      },
+      "revId": "0286e9820430d999714076ec2af1d3b20f72addc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30345c88_e8ba8036",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-19T01:09:05Z",
+      "side": 1,
+      "message": "Updated to check errno and if the converted number is within the range of type T.",
+      "parentUuid": "9069a86d_276bc150",
       "range": {
         "startLine": 160,
         "startChar": 12,
