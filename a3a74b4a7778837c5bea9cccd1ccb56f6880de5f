@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28bbc16e_ef4d9b42",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:03:19Z",
+      "side": 1,
+      "message": "Rather than directly using `c_void`, it\u0027s possible to create distinct types to represent these structures. That allows the Rust type checker to distinguish between these types. With `type` aliases like this it would otherwise treat them interchangeably.\n\nSee\n- https://doc.rust-lang.org/nomicon/ffi.html#representing-opaque-structs\n- https://doc.rust-lang.org/std/ffi/enum.c_void.html",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "717fa0ea_8ffe63a9",
         "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
         "patchSetId": 4
@@ -26,6 +49,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d6ae7a1_d5eb3e6c",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:03:19Z",
+      "side": 1,
+      "message": "FYI a panic here would cause the process to abort, since `panic` by default won\u0027t cross the FFI boundary.\n\nhttps://doc.rust-lang.org/nomicon/ffi.html#ffi-and-unwinding",
+      "range": {
+        "startLine": 170,
+        "startChar": 32,
+        "endLine": 170,
+        "endChar": 41
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c834f345_9c008ac4",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:03:19Z",
+      "side": 1,
+      "message": "Using a `const` to store `-libc::ENOMEM` will avoid the `n if n \u003d\u003d ...` construction.\n\nSee https://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003df0c7f074b7bde223b3c916295d4987b7",
+      "range": {
+        "startLine": 253,
+        "startChar": 12,
+        "endLine": 253,
+        "endChar": 35
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb9664f_196c244b",
         "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
         "patchSetId": 4
@@ -42,6 +111,98 @@
         "startChar": 8,
         "endLine": 331,
         "endChar": 42
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d7abcc_9bc249a0",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:03:19Z",
+      "side": 1,
+      "message": "The [documentation](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/ndk/include/media/NdkMediaFormat.h;l\u003d65;drc\u003d5af7fb15ce95b8dd9ea87a982290242a05406002) of `AMediaFormat_toString` writes\n\n\u003e The returned string is owned by the format, and remains valid until the next call to toString, or until the format is deleted.\n\nBecause `MediaFormat` is marked as `Sync`, it would technically be possible for two threads to have an execution with the following ordering:\n\nA: str_1 \u003d AMediaFormat_toString(format)\nB: str_2 \u003d AMediaFormat_toString(format)\nA: c_str \u003d CStr::from_ptr(str_1)\n\nThis is a race because `str_1` is no longer valid after the second call to `AMediaFormat_toString`.",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 10
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6084c1b1_d6c8dbe5",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:03:19Z",
+      "side": 1,
+      "message": "A safer type to use would be `Box\u003cPin\u003cSender\u003cAsyncMessage\u003e\u003e\u003e`. `Pin` is the Rust way to describe \"an instance that must stay in the same location in memory.\"\n\nSee\n\n- https://doc.rust-lang.org/std/pin/struct.Pin.html#pinning-a-value-inside-a-box\n- https://doc.rust-lang.org/std/pin/",
+      "range": {
+        "startLine": 447,
+        "startChar": 4,
+        "endLine": 450,
+        "endChar": 42
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe74489_9bc32b47",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:03:19Z",
+      "side": 1,
+      "message": "nit: \"portable across thread boundaries\" is the meaning of `Send`, while `Sync` means \"multiple threads can call the `\u0026self` methods concurrently.\"",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 26
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03116c60_4d4ae542",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:03:19Z",
+      "side": 1,
+      "message": "Here and in `get_output_buffer`, this needs to guarantee not only that the memory is valid at the time that this function is called, but also that it is valid for the lifetime of the type that is returned.\n\nWithout explicitly setting a lifetime here, `\u0026mut [u8]` will default to having the same lifetime as `\u0026self`, which may extend beyond the real lifetime of that memory (based on some interaction with `queue_input_buffer` and `release_output_buffer`?)\n\nRepresenting the real lifetime probably involves creating a new type to wrap the buffer that can have its own lifetime and be consumed by `queue_input_buffer` or `release_output_buffer`.\n\nA faster way to get out of this problem at the expense of performance is to create a copy, returning a `Vec\u003cu8\u003e` instead of a `\u0026mut [u8]`.",
+      "range": {
+        "startLine": 575,
+        "startChar": 8,
+        "endLine": 576,
+        "endChar": 38
       },
       "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
