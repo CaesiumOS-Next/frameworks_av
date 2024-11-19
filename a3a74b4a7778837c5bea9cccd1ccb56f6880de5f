@@ -206,6 +206,30 @@
       },
       "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b176e010_4879d28e",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-11-19T23:07:24Z",
+      "side": 1,
+      "message": "Actually realized a copy may work for `get_output_buffer` but probably not for this function, since it\u0027s returning a mutable reference probably intending the caller to write data to it.\n\nA more appropriate strategy for `get_input_buffer` specifically could be to accept data from the caller and copy it into the memory returned by `AMediaCodec_getInputBuffer`.\n\nIn both cases the \"simple\" way is to avoid the `AMediaCodec_getInputBuffer` / `AMediaCodec_getOutputBuffer` pointer \"escaping\" by providing a higher level interaction, while the more complex way is to create a new type that represents the true lifetime of the underlying pointer type.",
+      "parentUuid": "03116c60_4d4ae542",
+      "range": {
+        "startLine": 575,
+        "startChar": 8,
+        "endLine": 576,
+        "endChar": 38
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
