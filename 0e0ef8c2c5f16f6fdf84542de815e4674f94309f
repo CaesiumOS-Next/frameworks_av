@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ec532c7_18dd57cf",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-20T23:58:13Z",
+      "side": 1,
+      "message": "We would need to evaluate the resources defined in the AIDL, as those were meant for conflicts that may not reflect actual resources (e.g. secure codec coexistence, which cannot always be represented by this proposed resource model.)",
+      "parentUuid": "ac7f3b09_d6203810",
+      "range": {
+        "startLine": 1300,
+        "startChar": 4,
+        "endLine": 1300,
+        "endChar": 12
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "545e2922_8ee0bf34",
         "filename": "media/codec2/core/include/C2Config.h",
         "patchSetId": 15
