@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5eecf5c_844e2ea7",
+        "filename": "media/codec2/components/mpeg2/C2SoftMpeg2Dec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-20T12:57:06Z",
+      "side": 1,
+      "message": "needs a mKeepThreadsActive(false) initialization.\n\nI would prefer it initialized in the header file;  \nand that we move all of these initializations that aren\u0027t driven from the \nparameters to the constructor be moved to the header file.\n\ni\u0027d even argue that the ones we set from parameters (mIntf) should be set\nto a default [null for mIntf] in the header and then overridden here.",
+      "range": {
+        "startLine": 327,
+        "startChar": 7,
+        "endLine": 330,
+        "endChar": 38
+      },
+      "revId": "a85223e98abc6a34160a0eade0bcc5954d4536c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fcedb1_886d2f70",
+        "filename": "media/codec2/components/mpeg2/C2SoftMpeg2Dec.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-20T12:57:06Z",
+      "side": 1,
+      "message": "bool mKeepThreadsActive \u003d false;\nsimilarly to how mTimeStart and mTimeEnd are initialized at line 182/183.\n\nI think that we should initialize then all here rather than how they are currently done in the constructor\u0027s default list.  It\u0027s clear that having them in separate\nplaces has let them become inconsistent (not everything is initialized).",
+      "range": {
+        "startLine": 161,
+        "startChar": 3,
+        "endLine": 161,
+        "endChar": 28
+      },
+      "revId": "a85223e98abc6a34160a0eade0bcc5954d4536c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
