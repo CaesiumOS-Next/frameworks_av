@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "601f8535_05b74384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1107261
+      },
+      "writtenOn": "2024-11-20T07:30:54Z",
+      "side": 1,
+      "message": "Hi Andy, Could you please review this change to see if it\u0027s acceptable?\n\nI\u0027ve found that some apps\u0027 ANR logs show they are blocking in obtainBuffer, but the AudioFlinger dump indicates that the client track has already been disabled.",
+      "revId": "efe4afe70b838115fdc303fa2dccecd94ffb6637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
