@@ -409,6 +409,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3270dfc_eed9bd1a",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2602,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-20T15:53:41Z",
+      "side": 1,
+      "message": "My question was whether MinFrameRate is used for GBS? I don\u0027t see any API where that is set, so likely that was just a type and was meant to be MaxFrameRate.",
+      "parentUuid": "8f41a691_2f3ca6e5",
+      "range": {
+        "startLine": 2602,
+        "startChar": 44,
+        "endLine": 2602,
+        "endChar": 67
+      },
+      "revId": "2225f3ea2dae42bc81ff2c1693cabb8ec9599af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c6c22a8_157d96dc",
         "filename": "media/codec2/core/include/C2Config.h",
         "patchSetId": 1

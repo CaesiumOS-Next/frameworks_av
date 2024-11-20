@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4173fd5_27ac4544",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-20T15:53:41Z",
+      "side": 1,
+      "message": "do we need a setting for this?",
+      "range": {
+        "startLine": 299,
+        "startChar": 4,
+        "endLine": 299,
+        "endChar": 27
+      },
+      "revId": "f64d88ae2c2327b62e08bd94d5f5a85f76ecfe47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b22ef7_aed84eba",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2602,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-20T15:53:41Z",
+      "side": 1,
+      "message": "Can we use individual params?\n\nWe have kParamIndexFrameRate for the coded frame rate.\n\nWe also have kParamIndexTimeStretch to specify a modified frame rate, but I think that is meant to impact input/output work ratio, which is not strictly the case here. We could add a capture fps.",
+      "range": {
+        "startLine": 2602,
+        "startChar": 3,
+        "endLine": 2602,
+        "endChar": 43
+      },
+      "revId": "f64d88ae2c2327b62e08bd94d5f5a85f76ecfe47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb17189_c9297824",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-20T15:53:41Z",
+      "side": 1,
+      "message": "can we use the individual settings for this? We have width/height, we have kParamIndexDataspace, kParamIndexUsage (we would need to designate that as consumer usage for the input surface interface.). We also have kParamIndexSuggestedBufferCount.",
+      "range": {
+        "startLine": 2629,
+        "startChar": 0,
+        "endLine": 2634,
+        "endChar": 27
+      },
+      "revId": "f64d88ae2c2327b62e08bd94d5f5a85f76ecfe47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
