@@ -22,6 +22,30 @@
       },
       "revId": "8cb47251bf0e5248f631f36dd679fcdb24d5ad9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab9ea78_207365a7",
+        "filename": "media/codec2/sfplugin/Codec2InfoBuilder.cpp",
+        "patchSetId": 89
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:47:04Z",
+      "side": 1,
+      "message": "Yes it should be there. Done. Updated OMXInfoBuilder as well",
+      "parentUuid": "2a521c0c_659ac943",
+      "range": {
+        "startLine": 641,
+        "startChar": 12,
+        "endLine": 641,
+        "endChar": 71
+      },
+      "revId": "8cb47251bf0e5248f631f36dd679fcdb24d5ad9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
