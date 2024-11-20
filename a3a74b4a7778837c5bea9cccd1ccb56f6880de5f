@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39160439_6bb27461",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1110304
+      },
+      "writtenOn": "2024-11-20T18:30:38Z",
+      "side": 1,
+      "message": "I thought the original api was `int`, if it\u0027s `int32_t` then `i32` is the correct equivalent.",
+      "parentUuid": "fb1cbcc4_ba62c165",
+      "range": {
+        "startLine": 119,
+        "startChar": 20,
+        "endLine": 119,
+        "endChar": 23
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d6ae7a1_d5eb3e6c",
