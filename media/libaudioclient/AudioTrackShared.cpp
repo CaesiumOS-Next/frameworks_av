@@ -310,8 +310,12 @@ status_t ClientProxy::obtainBuffer(Buffer* buffer, const struct timespec *reques
             ts = NULL;
             break;
         }
+        // here, low probability that twice underrun happends and then AudioFlinger disable this track
         int32_t old = android_atomic_and(~CBLK_FUTEX_WAKE, &cblk->mFutex);
-        if (!(old & CBLK_FUTEX_WAKE)) {
+        int32_t current_flags = android_atomic_acquire_load(&cblk->mFlags);
+        bool inactive = current_flags & (CBLK_INVALID | CBLK_DISABLED);
+
+        if (!(old & CBLK_FUTEX_WAKE) && !inactive) {
             if (measure && !beforeIsValid) {
                 clock_gettime(CLOCK_MONOTONIC, &before);
                 beforeIsValid = true;
