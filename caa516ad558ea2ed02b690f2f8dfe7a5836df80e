@@ -33,6 +33,24 @@
       "message": "This one isn\u0027t actually part of the NDK, is it?",
       "revId": "caa516ad558ea2ed02b690f2f8dfe7a5836df80e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e77ab07_3287cfab",
+        "filename": "media/ndk/NdkMediaCodecInfoPriv.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "it isn\u0027t. I added it as other ndkPriv.h file has it. It should not be there actually. Removed",
+      "parentUuid": "37c8cbb9_4be9c2f5",
+      "revId": "caa516ad558ea2ed02b690f2f8dfe7a5836df80e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

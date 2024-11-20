@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "407bb261_0dd9be50",
+        "filename": "media/ndk/NdkMediaCodecInfoPriv.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Added mName for ndkName",
+      "parentUuid": "15566b8e_98a90797",
+      "range": {
+        "startLine": 104,
+        "startChar": 23,
+        "endLine": 104,
+        "endChar": 28
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7be19284_48b8a8a8",
@@ -109,6 +133,30 @@
           ]
         }
       ],
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feb77354_38a8eefb",
+        "filename": "media/ndk/NdkMediaCodecInfoPriv.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7be19284_48b8a8a8",
+      "range": {
+        "startLine": 116,
+        "startChar": 12,
+        "endLine": 116,
+        "endChar": 22
+      },
       "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -194,6 +242,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "922e69e5_6012ccbd",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Removed as the implementation is changed",
+      "parentUuid": "622710f5_62a08c21",
+      "range": {
+        "startLine": 37,
+        "startChar": 41,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c89f643_1ad23570",
@@ -245,6 +317,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8791a31b_b3436ebd",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c89f643_1ad23570",
+      "range": {
+        "startLine": 48,
+        "startChar": 12,
+        "endLine": 48,
+        "endChar": 17
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f50a1b9a_d476abc7",
@@ -268,6 +364,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "058abd97_3f617c03",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Excluded the special codecs by checking if codec requires special codec feature",
+      "parentUuid": "f50a1b9a_d476abc7",
+      "range": {
+        "startLine": 57,
+        "startChar": 21,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b608832_e549752b",
@@ -281,6 +401,30 @@
       "writtenOn": "2024-11-19T18:02:27Z",
       "side": 1,
       "message": "could we edit mode in-place to avoid churn?\n\n```c++\nauto it \u003d typesInfoMap.find(mediaType);\nif (it \u003d\u003d typesInfoMap.end()) {\n  it \u003d typesInfoMap.emplace(mediaType, AMediaCodecSupportedMediaType(mediaType.c_str(), 0)).first;\n}\nuint32_t \u0026mode \u003d it-\u003esecond.mMode;\nmode |\u003d flag;\n```",
+      "range": {
+        "startLine": 59,
+        "startChar": 12,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b220109_56c7c5d1",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion",
+      "parentUuid": "1b608832_e549752b",
       "range": {
         "startLine": 59,
         "startChar": 12,
@@ -332,6 +476,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8880d0f8_617369b0",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Added support of multiple media types in initCodecInfoMap().",
+      "parentUuid": "c185b31b_9258f2b1",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 8
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1db9b454_199a4370",
@@ -345,6 +513,30 @@
       "writtenOn": "2024-11-19T18:02:27Z",
       "side": 1,
       "message": "It would be nice if we guaranteed an order here to signal preference of decreasing codec efficiency. Today we do not have that data, but could order by types appearing in sCodecList - so at least the order is consistent on the device between reboots. By convention, sCodecList puts video codecs first, which is not balanced, but that\u0027s probably okay.",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 5
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71a32d9_c74ac002",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Added a vector mediaTypes to keep the order. Done",
+      "parentUuid": "1db9b454_199a4370",
       "range": {
         "startLine": 66,
         "startChar": 4,
@@ -378,6 +570,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15d6ea8_2303cb2c",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Thanks for the detailed explanation! Updated with your implementation.",
+      "parentUuid": "28d874f2_0ff32152",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebf685ba_a12514d2",
@@ -391,6 +607,30 @@
       "writtenOn": "2024-11-19T18:02:27Z",
       "side": 1,
       "message": "this needs to be like:\n\nkeep a found flag:\n\n```\nbool found \u003d *outCodecInfo \u003d\u003d null;\n\n// iterate through typeToInfoList for (format-\u003e\"getMediaType\"(), DECODER).\nfor (info : list) {\n  if (found \u0026\u0026 info-\u003esupportsFormat(format)) {\n    // return info\n    *outCodecInfo \u003d info;\n    return OK;\n  }\n  if (info \u003d\u003d *outCodecInfo) { // start after a previous result\n    found \u003d true;\n  }\n}\nerror case: no more such codecs.\n*outCodecInfo \u003d null;\nreturn NOT_FOUND;\n\n\n  \n\n```",
+      "range": {
+        "startLine": 102,
+        "startChar": 22,
+        "endLine": 102,
+        "endChar": 44
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16496c70_ad704993",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Updated. PTAL. Thanks",
+      "parentUuid": "ebf685ba_a12514d2",
       "range": {
         "startLine": 102,
         "startChar": 22,
@@ -424,6 +664,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a68e6a2_10a54ded",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "There are two cases:\n1. The given height is out of the range of the supported heights of the VideoCapabilities.\n2. The given height is not divisible by the height alignment of the VideoCapabilities.",
+      "parentUuid": "cea88a25_772dadf2",
+      "range": {
+        "startLine": 469,
+        "startChar": 10,
+        "endLine": 469,
+        "endChar": 34
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96a6dc6b_d901db2a",
@@ -447,6 +711,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7294e121_af608424",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Yes it should not be in the C header. Deleted. Initializing the structure by braces instead",
+      "parentUuid": "96a6dc6b_d901db2a",
+      "range": {
+        "startLine": 63,
+        "startChar": 49,
+        "endLine": 63,
+        "endChar": 51
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d468c677_452a35a9",
@@ -460,6 +748,30 @@
       "writtenOn": "2024-11-19T18:19:13Z",
       "side": 1,
       "message": "Keep? e.g.\n\nKeep the last codecInfo you got from a previous call to get the next one.",
+      "range": {
+        "startLine": 84,
+        "startChar": 24,
+        "endLine": 84,
+        "endChar": 27
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14bf78c8_b0cf2ef0",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d468c677_452a35a9",
       "range": {
         "startLine": 84,
         "startChar": 24,
@@ -521,6 +833,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2e1298_63c55819",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2383007b_93813338",
+      "range": {
+        "startLine": 85,
+        "startChar": 38,
+        "endLine": 85,
+        "endChar": 43
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8c995e2_a5961cc6",
@@ -534,6 +870,30 @@
       "writtenOn": "2024-11-19T18:19:13Z",
       "side": 1,
       "message": "my implementation does not support this. We will need to keep an all decoder list to support this, so that the ordering is properly controlled by the OEM.",
+      "range": {
+        "startLine": 88,
+        "startChar": 24,
+        "endLine": 88,
+        "endChar": 93
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a12b0d8c_8d6c709a",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Deleted",
+      "parentUuid": "f8c995e2_a5961cc6",
       "range": {
         "startLine": 88,
         "startChar": 24,
@@ -567,6 +927,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1091305_08e52ad3",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4491341_febfad2c",
+      "range": {
+        "startLine": 97,
+        "startChar": 3,
+        "endLine": 97,
+        "endChar": 73
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3410a15_d66b4160",
@@ -580,6 +964,30 @@
       "writtenOn": "2024-11-19T18:19:13Z",
       "side": 1,
       "message": "can\n\nIn general though, this is a codec name. We will need to say something like this:\n\nUsers can get valid codec names from the AMediaCodecInfo object returned from findNextDecoder|EncoderForFormat methods. Note that this name may not correspond to the name the same codec used by the SDK API, but will always do for codec names starting with \"c2.\".",
+      "range": {
+        "startLine": 130,
+        "startChar": 30,
+        "endLine": 130,
+        "endChar": 35
+      },
+      "revId": "d507eb112c74344f9a2238145fdf2942a2d6e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2136443c_337d289d",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-11-20T10:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3410a15_d66b4160",
       "range": {
         "startLine": 130,
         "startChar": 30,
