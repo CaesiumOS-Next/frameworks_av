@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fac90e4_d6f7555a",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-20T00:53:32Z",
+      "side": 1,
+      "message": "I would like to reuse utility code that we have in the framework. Please use functions from https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/utils/include/mediautils/Library.h to load the library and find the symbol in it.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e13135a_26f5c941",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-20T00:53:32Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 103
+      },
+      "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e14b42b4_3dd15042",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-20T00:53:32Z",
+      "side": 1,
+      "message": "For consistency with other code, please call the registration function `createIHalAdapterVendorExtension` and make it return `binder_status_t` to indicate success in registration, please see a similar function for a reference:\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:hardware/interfaces/bluetooth/audio/aidl/default/service.cpp\n\nBy following this convention we can drop `ro.audio.ihaladaptervendorextension_symbol` property.\n\nAnd by having a result returned, there will be no need to check the service status with the service manager.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 94
+      },
+      "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
