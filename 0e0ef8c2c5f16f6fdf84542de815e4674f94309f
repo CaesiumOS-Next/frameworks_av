@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "600241b0_4b88db38",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-20T18:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef4ac975_265b2a2f",
+      "range": {
+        "startLine": 1276,
+        "startChar": 17,
+        "endLine": 1276,
+        "endChar": 20
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75b3cf5d_15519589",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-20T15:38:18Z",
       "side": 1,
       "message": "this is implementation guidance, and does not belong in the top description. I recommend this:\n\n[PROPOSED]\n\nSystem resources are defined by the default component store. They represent any physical or abstract entities of limited availability that is required for a component instance to execute and process work.\n\nEach defined resource has an id. The use of a resource is specified by the amount\nand the kind (e.g. whether the amount of resources is required for each frame processed, or whether they are required regardless of the processing rate (const amount)).\n\nNote: implementations can shadow this structure with their own custom resource structure where a uint32_t based enum is used for id. This can be used to provide\na name for each resource, via parameter descriptors.",
+      "range": {
+        "startLine": 1278,
+        "startChar": 2,
+        "endLine": 1279,
+        "endChar": 85
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3d9c5de_2b4ec2a7",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-20T18:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75b3cf5d_15519589",
       "range": {
         "startLine": 1278,
         "startChar": 2,
@@ -93,6 +141,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a4af8c_273a81dd",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-20T18:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0ec8a8c_7dddc8e0",
+      "range": {
+        "startLine": 1300,
+        "startChar": 13,
+        "endLine": 1300,
+        "endChar": 16
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7f3b09_d6203810",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-20T18:49:27Z",
+      "side": 1,
+      "message": "We have resource types defined in frameworks/av/services/mediaresourcemanager/aidl/android/media/MediaResourceType.aidl and this can be extended to add more resource.",
+      "parentUuid": "02547aea_6db2cba4",
+      "range": {
+        "startLine": 1300,
+        "startChar": 4,
+        "endLine": 1300,
+        "endChar": 12
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "545e2922_8ee0bf34",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-11-20T15:38:18Z",
       "side": 1,
       "message": "each struct will need its own javadoc.",
+      "range": {
+        "startLine": 1310,
+        "startChar": 0,
+        "endLine": 1310,
+        "endChar": 3
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b29f112_3c76ec82",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1310,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-20T18:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "545e2922_8ee0bf34",
       "range": {
         "startLine": 1310,
         "startChar": 0,
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa8a6a90_4be2e52f",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-20T18:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e61e29c_85cb990c",
+      "range": {
+        "startLine": 1313,
+        "startChar": 2,
+        "endLine": 1320,
+        "endChar": 54
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ea37ff8_63709fc4",
@@ -152,6 +296,30 @@
       "writtenOn": "2024-11-20T15:38:18Z",
       "side": 1,
       "message": "please separate for each setting. E.g.\n\nSystem resources needed for the current configuration.\n\n[PROPOSED]\n\nResources are tracked as a list of individual resource use specifications. Kind can be CONST, PER_FRAME, PER_INPUT_BLODCK or PER_OUTPUT_BLOCK.\n\nThen\n\nSystem resources reserved for this component\n\n[FUTURE]\n\nThis allows the platform to set aside system resources for the component. Since this is a static resource reservation, kind must be CONST for each element. This resource reservation only considers CONST and PER_FRAME use.\n\nBy default, no resources are reserved for a component. If resource reservation is successful, the component shall be able to use those resources exclusively. If however, the component is not using all of the reserved resources, those may be shared with other components.",
+      "range": {
+        "startLine": 1333,
+        "startChar": 3,
+        "endLine": 1333,
+        "endChar": 12
+      },
+      "revId": "0e0ef8c2c5f16f6fdf84542de815e4674f94309f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2de4b366_72684406",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-20T18:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ea37ff8_63709fc4",
       "range": {
         "startLine": 1333,
         "startChar": 3,
