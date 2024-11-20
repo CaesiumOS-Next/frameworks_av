@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a5dfc46_c496fcef",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-20T05:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba41f20e_0a42ba8d",
+      "revId": "326c1620acdbf08f6088db09dbc80654af867ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "728fa3bb_63bca30c",
@@ -49,6 +67,24 @@
       "writtenOn": "2024-11-19T21:59:30Z",
       "side": 1,
       "message": "why are these overriden to a hardcoded value?",
+      "revId": "326c1620acdbf08f6088db09dbc80654af867ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ea569cc_2b3aea2d",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-20T05:30:40Z",
+      "side": 1,
+      "message": "Confirmed to be test code remains.",
+      "parentUuid": "728fa3bb_63bca30c",
       "revId": "326c1620acdbf08f6088db09dbc80654af867ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
