@@ -16,6 +16,23 @@
       "message": "A CP of ag/30465623. I had to upload manually due to merge conflicts that cherry-picker could not resolve correctly.",
       "revId": "fc404ea274814c52e242e2de5b51bdddd7a74990",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6d663dd_8e2b56c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-20T00:38:55Z",
+      "side": 1,
+      "message": "Looks like I will have to patch `aosp-main-with-phones` first.",
+      "revId": "fc404ea274814c52e242e2de5b51bdddd7a74990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
