@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7a5d43b_edc76e89",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "TIL again, done.",
+      "parentUuid": "28bbc16e_ef4d9b42",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "717fa0ea_8ffe63a9",
         "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-19T22:46:28Z",
       "side": 1,
       "message": "Should this be `c_int` instead? Same for parameters to `AMediaFormat_getRect`.",
+      "range": {
+        "startLine": 119,
+        "startChar": 20,
+        "endLine": 119,
+        "endChar": 23
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1cbcc4_ba62c165",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure, I thought c_int was reserved for APIs declared \"int\" in C/C++, i.e. platform specific size, these APIs are declared as int32_t. I did, however, change code to make sure media_status_t is a c_int rather than an int32_t.",
+      "parentUuid": "717fa0ea_8ffe63a9",
       "range": {
         "startLine": 119,
         "startChar": 20,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e908e173_60ca6e98",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "Good to know, in this case I\u0027d argue that if the send fails, it is because the receiver is no longer alive which is an error in using these APIs. Not sure how better to handle this, I cannot communicate this failure since it only happened because who I want to communicate to is no longer there.",
+      "parentUuid": "4d6ae7a1_d5eb3e6c",
+      "range": {
+        "startLine": 170,
+        "startChar": 32,
+        "endLine": 170,
+        "endChar": 41
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c834f345_9c008ac4",
         "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
         "patchSetId": 4
@@ -83,6 +155,30 @@
       "writtenOn": "2024-11-19T23:03:19Z",
       "side": 1,
       "message": "Using a `const` to store `-libc::ENOMEM` will avoid the `n if n \u003d\u003d ...` construction.\n\nSee https://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003df0c7f074b7bde223b3c916295d4987b7",
+      "range": {
+        "startLine": 253,
+        "startChar": 12,
+        "endLine": 253,
+        "endChar": 35
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8ebead_3944d77f",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "TIL, thanks.",
+      "parentUuid": "c834f345_9c008ac4",
       "range": {
         "startLine": 253,
         "startChar": 12,
@@ -106,6 +202,30 @@
       "writtenOn": "2024-11-19T22:46:28Z",
       "side": 1,
       "message": "nit: This could be `Self::new()`, which would make the `AMediaFormat_delete` in line 338 unnecessary.",
+      "range": {
+        "startLine": 328,
+        "startChar": 8,
+        "endLine": 331,
+        "endChar": 42
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7af131f_b73ad77a",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "\u003e nit: This could be `Self::new()`, which would make the `AMediaFormat_delete` in line 338 unnecessary.\n\ngood point, changed.",
+      "parentUuid": "fbb9664f_196c244b",
       "range": {
         "startLine": 328,
         "startChar": 8,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dec96e4d_fbb70486",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "Good point, I\u0027m adding code to protect the sequence calling AMediaFormat_toString and making a copy into a CString (rather than CStr) with a mutex. It\u0027s still not perfectly safe since I cannot guarantee that there are no other callers of this API in the process, but it\u0027s a debug API, so I\u0027m not too worried about it. Terrible NDK API design though.",
+      "parentUuid": "f4d7abcc_9bc249a0",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 10
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6084c1b1_d6c8dbe5",
         "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
         "patchSetId": 4
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fe596c1_948c6998",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "I briefly used this in a previous iteration but for some reason I came to the conclusion that this was a no-op in non-async code. I\u0027ll change it back. Also you mean Pinx\u003cBox\u003cSender\u003cAsyncMessage\u003e\u003e\u003e, right?",
+      "parentUuid": "6084c1b1_d6c8dbe5",
+      "range": {
+        "startLine": 447,
+        "startChar": 4,
+        "endLine": 450,
+        "endChar": 42
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfe74489_9bc32b47",
         "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
         "patchSetId": 4
@@ -175,6 +343,30 @@
       "writtenOn": "2024-11-19T23:03:19Z",
       "side": 1,
       "message": "nit: \"portable across thread boundaries\" is the meaning of `Send`, while `Sync` means \"multiple threads can call the `\u0026self` methods concurrently.\"",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 26
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2e4658_c21087ca",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cfe74489_9bc32b47",
       "range": {
         "startLine": 459,
         "startChar": 0,
@@ -222,6 +414,30 @@
       "side": 1,
       "message": "Actually realized a copy may work for `get_output_buffer` but probably not for this function, since it\u0027s returning a mutable reference probably intending the caller to write data to it.\n\nA more appropriate strategy for `get_input_buffer` specifically could be to accept data from the caller and copy it into the memory returned by `AMediaCodec_getInputBuffer`.\n\nIn both cases the \"simple\" way is to avoid the `AMediaCodec_getInputBuffer` / `AMediaCodec_getOutputBuffer` pointer \"escaping\" by providing a higher level interaction, while the more complex way is to create a new type that represents the true lifetime of the underlying pointer type.",
       "parentUuid": "03116c60_4d4ae542",
+      "range": {
+        "startLine": 575,
+        "startChar": 8,
+        "endLine": 576,
+        "endChar": 38
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac51d63f_dc762e92",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-11-20T14:13:21Z",
+      "side": 1,
+      "message": "Not sure I understand, the codec owns input and output buffers, so tying the lifetime of the returned \u0026[u8] pointers to \u0026self is exactly what I want. \"release_output_buffer\"\u0027s full name should be \"release_output_buffer_back_to_codec_after_you_are_done_with_it_so_that_it_can_be_filled_with_another_frame\", it\u0027s not implying that the underlying memory is freed.",
+      "parentUuid": "b176e010_4879d28e",
       "range": {
         "startLine": 575,
         "startChar": 8,
