@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf56f95_4f2cc0af",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-21T07:55:28Z",
+      "side": 1,
+      "message": "We don\u0027t need this. removed.",
+      "parentUuid": "f4173fd5_27ac4544",
+      "range": {
+        "startLine": 299,
+        "startChar": 4,
+        "endLine": 299,
+        "endChar": 27
+      },
+      "revId": "f64d88ae2c2327b62e08bd94d5f5a85f76ecfe47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02b22ef7_aed84eba",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca564f0e_43b517e0",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2602,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-21T07:55:28Z",
+      "side": 1,
+      "message": "Sorry for basic questions.\nI checked the codes and found as below.\nI just thought that C2Info is always incorporating with a buffer, not a normal config.\n\nIs C2Info can be used for config during a whole encoding session?\n\nAlso I am seeing kParamIndexFrameRate key for multiple definitions.\n(C2StreamFrameRateInfo and C2PortFrameRateInfo)\nIs this legit? (because one is streamparam and the other is portparam?)\n\nAdded capturefps indiviually. And will use the existing one for the coded frame rate.\n\n```\ntypedef C2StreamParam\u003cC2Info, C2FloatValue, kParamIndexFrameRate\u003e C2StreamFrameRateInfo;\nconstexpr char C2_PARAMKEY_FRAME_RATE[] \u003d \"coded.frame-rate\";\n\ntypedef C2PortParam\u003cC2Info, C2FloatValue, kParamIndexFrameRate\u003e C2PortFrameRateInfo;\nconstexpr char C2_PARAMKEY_INPUT_FRAME_RATE[] \u003d \"input.frame-rate\";\nconstexpr char C2_PARAMKEY_OUTPUT_FRAME_RATE[] \u003d \"output.frame-rate\";\n```",
+      "parentUuid": "02b22ef7_aed84eba",
+      "range": {
+        "startLine": 2602,
+        "startChar": 3,
+        "endLine": 2602,
+        "endChar": 43
+      },
+      "revId": "f64d88ae2c2327b62e08bd94d5f5a85f76ecfe47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feb17189_c9297824",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-11-20T15:53:41Z",
       "side": 1,
       "message": "can we use the individual settings for this? We have width/height, we have kParamIndexDataspace, kParamIndexUsage (we would need to designate that as consumer usage for the input surface interface.). We also have kParamIndexSuggestedBufferCount.",
+      "range": {
+        "startLine": 2629,
+        "startChar": 0,
+        "endLine": 2634,
+        "endChar": 27
+      },
+      "revId": "f64d88ae2c2327b62e08bd94d5f5a85f76ecfe47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1054fc7_f44761fe",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-21T07:55:28Z",
+      "side": 1,
+      "message": "Removed and will use those params.",
+      "parentUuid": "feb17189_c9297824",
       "range": {
         "startLine": 2629,
         "startChar": 0,
