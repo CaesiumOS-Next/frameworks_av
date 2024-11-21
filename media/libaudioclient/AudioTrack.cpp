@@ -3574,6 +3574,10 @@ uint32_t AudioTrack::getUnderrunFrames() const
     return mProxy->getUnderrunFrames();
 }
 
+uint32_t AudioTrack::getUnderrunFrames_l() const {
+    return mProxy->getUnderrunFrames();
+}
+
 void AudioTrack::setLogSessionId(const char *logSessionId)
 {
      AutoMutex lock(mLock);
