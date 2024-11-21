@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfccc635_2f18b80e",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-21T16:35:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fac90e4_d6f7555a",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e13135a_26f5c941",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ce36e10_91ba9535",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-21T16:35:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e13135a_26f5c941",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 103
+      },
+      "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e14b42b4_3dd15042",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-11-20T00:53:32Z",
       "side": 1,
       "message": "For consistency with other code, please call the registration function `createIHalAdapterVendorExtension` and make it return `binder_status_t` to indicate success in registration, please see a similar function for a reference:\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:hardware/interfaces/bluetooth/audio/aidl/default/service.cpp\n\nBy following this convention we can drop `ro.audio.ihaladaptervendorextension_symbol` property.\n\nAnd by having a result returned, there will be no need to check the service status with the service manager.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 94
+      },
+      "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78ee70fb_a5735d95",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-21T16:35:10Z",
+      "side": 1,
+      "message": "We have used properties approach to provide feasibility to vendor\u0027s as all vendors may not use same notations and may use different lib/symbol names.\n\nThis properties can be defined and provided by vendor so that this fwk code remains intact and only those valuse can vary from vendor-vendor and some may not require/use this properties.",
+      "parentUuid": "e14b42b4_3dd15042",
       "range": {
         "startLine": 56,
         "startChar": 0,
