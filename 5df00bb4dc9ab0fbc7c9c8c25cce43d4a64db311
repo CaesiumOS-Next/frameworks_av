@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68039a52_4a3e64cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3611431
+      },
+      "writtenOn": "2024-11-21T05:26:15Z",
+      "side": 1,
+      "message": "thanks for this quick patch! I verified by testing on our platform (Android 14 system while Widevine related vendor lib stays at version 12-ish) - now the \"old\" HIDL Widevine can be fetched as expected by MediaDrm.getSupportedCryptoSchemes()",
+      "revId": "5df00bb4dc9ab0fbc7c9c8c25cce43d4a64db311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
