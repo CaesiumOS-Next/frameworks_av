@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c908843_d426e7fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 74
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-11-21T21:38:41Z",
+      "side": 1,
+      "message": "This CL has an undefined behavior as reported in device boot test. https://android-build.corp.google.com/test_investigate/invocation/I83300010338002932/test/TR04429524132203515/?itab\u003dartifacts\u0026blocking\u003dblocking\u0026status\u003dnone\n\nb/380314394",
+      "revId": "4ed0abda8208235c95a839f6c253b7950df11f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
