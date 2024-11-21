@@ -16,6 +16,29 @@
       "message": "thanks for this quick patch! I verified by testing on our platform (Android 14 system while Widevine related vendor lib stays at version 12-ish) - now the \"old\" HIDL Widevine can be fetched as expected by MediaDrm.getSupportedCryptoSchemes()",
       "revId": "5df00bb4dc9ab0fbc7c9c8c25cce43d4a64db311",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a976236_15591bff",
+        "filename": "drm/libmediadrm/DrmHal.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1557693
+      },
+      "writtenOn": "2024-11-21T18:07:53Z",
+      "side": 1,
+      "message": "It seems a valid implementation for this method to clear before inserting. It currently does not, so this is ok. Either we want to \n* concatenate the schemes\n* or ignore, since we will remove HIDL support in the next release.\nLeaving it upto you to you to decide which way to proceed.",
+      "range": {
+        "startLine": 292,
+        "startChar": 52,
+        "endLine": 292,
+        "endChar": 71
+      },
+      "revId": "5df00bb4dc9ab0fbc7c9c8c25cce43d4a64db311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
