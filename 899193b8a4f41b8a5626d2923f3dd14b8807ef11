@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a29088f6_907abca4",
+        "filename": "media/libaudioprocessing/BufferProviders.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 3388692
+      },
+      "writtenOn": "2024-11-21T08:15:25Z",
+      "side": 1,
+      "message": "Or is it possible to get the support config information directly from the underlying HAL without using the effect instance?",
+      "parentUuid": "0263f020_8b148f2c",
+      "range": {
+        "startLine": 159,
+        "startChar": 5,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49bed10e_23b6cd77",
         "filename": "media/libaudioprocessing/BufferProviders.cpp",
         "patchSetId": 2
@@ -77,6 +101,30 @@
       "writtenOn": "2024-11-21T03:55:07Z",
       "side": 1,
       "message": "about here seems to be the right place to decide whether we suppor this particular effect configuration -- after we\u0027ve built the mDownMixConfig.\nand I think we can\u0027t decide here, we have to ask the underlying HAL mEffectsFactory\nwhether we\u0027ve got a legal configuration.",
+      "range": {
+        "startLine": 194,
+        "startChar": 5,
+        "endLine": 194,
+        "endChar": 7
+      },
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d21dba2c_615455a9",
+        "filename": "media/libaudioprocessing/BufferProviders.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 3388692
+      },
+      "writtenOn": "2024-11-21T08:15:25Z",
+      "side": 1,
+      "message": "These parameters are passed in and haven\u0027t changed in the process. In EFFECT_CMD_SET_CONFIG these parameters are also passed to ask the underlying HAL mEffectsFactory whether we\u0027ve got a legal configuration. So can the underlying HAL effect provide static methods or something similar to get a supported configuration at the start of the DownmixerBufferProvider construction? when did not create EffectsFactoryHalInterface and mDownmixInterface can get to support the config information, rather than created to set the configuration information (But failed to set and then clean up the obtained interface).\n         mOutBuffer.clear();\n         mInBuffer.clear();\n         mDownmixInterface.clear();\n         mEffectsFactory.clear();\n         return;",
+      "parentUuid": "49bed10e_23b6cd77",
       "range": {
         "startLine": 194,
         "startChar": 5,
