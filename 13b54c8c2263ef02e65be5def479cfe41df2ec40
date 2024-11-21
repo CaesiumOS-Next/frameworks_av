@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e693880f_f91974ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-11-21T04:19:06Z",
+      "side": 1,
+      "message": "You may want to add this symbol to LLNDK but not NDK if this is only for vendor partition.\nIf so, just add \"llndk\" annotatation. (ex: `# introduced\u003d36 llndk`)",
+      "parentUuid": "47983274_acb9f662",
+      "revId": "13b54c8c2263ef02e65be5def479cfe41df2ec40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bcc3ce3_48662eb4",
         "filename": "media/ndk/include/media/NdkImageReader.h",
         "patchSetId": 1
