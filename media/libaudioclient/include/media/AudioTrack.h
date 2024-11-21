@@ -1226,6 +1226,11 @@ public:
 
             uint32_t    getUnderrunCount_l() const;
 
+            /*
+             * Lock free version of getUnderrunFrames to avoid deadlock.
+             */
+            uint32_t    getUnderrunFrames_l() const;
+
             bool     isOffloaded() const;
             bool     isDirect() const;
             bool     isOffloadedOrDirect() const;
