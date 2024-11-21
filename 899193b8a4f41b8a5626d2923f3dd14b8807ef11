@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466da063_3232a3c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-21T03:55:07Z",
+      "side": 1,
+      "message": "but isn\u0027t that exactly the place that knows whether a particular configuration is supported on that device?  It seems to me that\nwe must ask the effectsfactoryhal to tell us whether it\u0027s supported.",
+      "range": {
+        "startLine": 16,
+        "startChar": 78,
+        "endLine": 16,
+        "endChar": 147
+      },
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7504e4ba_c027205a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-21T03:55:07Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem the appropriate abstraction level for that decision.",
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0263f020_8b148f2c",
+        "filename": "media/libaudioprocessing/BufferProviders.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-21T03:55:07Z",
+      "side": 1,
+      "message": "this seems to deal with artifacts of the current implementation.\nI don\u0027t see anywhere that we only allow effects for stereo, pcm-float format.\n\nI can believe that it might be the only effect format currently supported, \nbut that is not the same as saying that we will never support anything else.",
+      "range": {
+        "startLine": 159,
+        "startChar": 5,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49bed10e_23b6cd77",
+        "filename": "media/libaudioprocessing/BufferProviders.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-21T03:55:07Z",
+      "side": 1,
+      "message": "about here seems to be the right place to decide whether we suppor this particular effect configuration -- after we\u0027ve built the mDownMixConfig.\nand I think we can\u0027t decide here, we have to ask the underlying HAL mEffectsFactory\nwhether we\u0027ve got a legal configuration.",
+      "range": {
+        "startLine": 194,
+        "startChar": 5,
+        "endLine": 194,
+        "endChar": 7
+      },
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
