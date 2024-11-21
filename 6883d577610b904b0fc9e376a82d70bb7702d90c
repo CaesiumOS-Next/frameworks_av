@@ -1,0 +1,150 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2746f9b8_c79d6d87",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-21T22:52:22Z",
+      "side": 1,
+      "message": "Please move to the end of the previous line",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3cc793d3_2787d5cc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioparameterparser/main.cpp",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "    if (tryRegisteringVendorImpl() !\u003d STATUS_OK) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6883d577610b904b0fc9e376a82d70bb7702d90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c2a3ed_cfcdd775",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-21T22:52:22Z",
+      "side": 1,
+      "message": "Please indent this block properly.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bfe53c9d_2832d2ac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioparameterparser/main.cpp",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "        const std::string parserFqn \u003d\n        std::string().append(::aidl::android::media::audio\n            ::IHalAdapterVendorExtension::descriptor).append(\"/default\");\n        auto parser \u003d ndk::SharedRefBase::make\u003cParameterParser\u003e();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6883d577610b904b0fc9e376a82d70bb7702d90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2066aef9_ca9662e1",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-21T22:52:22Z",
+      "side": 1,
+      "message": "Missing space.",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ae4ff7e5_64101ab1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioparameterparser/main.cpp",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "    } else\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6883d577610b904b0fc9e376a82d70bb7702d90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d0a546_460a6e40",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-21T22:52:22Z",
+      "side": 1,
+      "message": "The `else` branch needs to be bracketed, too.",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 90
+      },
+      "revId": "6883d577610b904b0fc9e376a82d70bb7702d90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

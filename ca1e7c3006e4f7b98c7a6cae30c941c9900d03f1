@@ -140,6 +140,30 @@
       },
       "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee6ab2af_e4858512",
+        "filename": "services/audioparameterparser/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-11-21T22:52:22Z",
+      "side": 1,
+      "message": "Each property adds maintenance burden and a possibility for creating a failure if it\u0027s not set properly, so it\u0027s better to avoid introducing them without a clear need. In this case, I don\u0027t see why the symbol name has to be allowed to vary from vendor to vendor. Do you have a strong case for that?",
+      "parentUuid": "78ee70fb_a5735d95",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 94
+      },
+      "revId": "ca1e7c3006e4f7b98c7a6cae30c941c9900d03f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
