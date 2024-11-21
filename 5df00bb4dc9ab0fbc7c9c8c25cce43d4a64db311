@@ -39,6 +39,30 @@
       },
       "revId": "5df00bb4dc9ab0fbc7c9c8c25cce43d4a64db311",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0edfe623_0ac05668",
+        "filename": "drm/libmediadrm/DrmHal.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1902075
+      },
+      "writtenOn": "2024-11-21T18:51:31Z",
+      "side": 1,
+      "message": "We can submit this fix, since the hidl support is needed until Android 16, which could affect 2 major android releases.",
+      "parentUuid": "3a976236_15591bff",
+      "range": {
+        "startLine": 292,
+        "startChar": 52,
+        "endLine": 292,
+        "endChar": 71
+      },
+      "revId": "5df00bb4dc9ab0fbc7c9c8c25cce43d4a64db311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
