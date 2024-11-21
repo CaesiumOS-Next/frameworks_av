@@ -41,6 +41,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "280dae74_f652e22f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-21T13:38:50Z",
+      "side": 1,
+      "message": "I think that the current CL is not correct.\nThe comments in the CL since then have touched on a few possible approaches to solving the observed problem -- the current HAL interface/implementation cost more than we want on certain low-powered devices.\n\nAt this point, I think the discussion should continue in a buganizer bug/feature request rather than as comments in this CL. If you want to continue, please file such a bug.",
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0263f020_8b148f2c",
@@ -90,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d38db371_313eb65f",
+        "filename": "media/libaudioprocessing/BufferProviders.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-21T13:38:50Z",
+      "side": 1,
+      "message": "as long as we\u0027re asking \n\"HAL, do you support this configuration\"\ninstead of \n\"HAL, tell me all the things you support and I\u0027ll figure out if my current config matches one of those\".",
+      "parentUuid": "a29088f6_907abca4",
+      "range": {
+        "startLine": 159,
+        "startChar": 5,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49bed10e_23b6cd77",
         "filename": "media/libaudioprocessing/BufferProviders.cpp",
         "patchSetId": 2
@@ -125,6 +166,30 @@
       "side": 1,
       "message": "These parameters are passed in and haven\u0027t changed in the process. In EFFECT_CMD_SET_CONFIG these parameters are also passed to ask the underlying HAL mEffectsFactory whether we\u0027ve got a legal configuration. So can the underlying HAL effect provide static methods or something similar to get a supported configuration at the start of the DownmixerBufferProvider construction? when did not create EffectsFactoryHalInterface and mDownmixInterface can get to support the config information, rather than created to set the configuration information (But failed to set and then clean up the obtained interface).\n         mOutBuffer.clear();\n         mInBuffer.clear();\n         mDownmixInterface.clear();\n         mEffectsFactory.clear();\n         return;",
       "parentUuid": "49bed10e_23b6cd77",
+      "range": {
+        "startLine": 194,
+        "startChar": 5,
+        "endLine": 194,
+        "endChar": 7
+      },
+      "revId": "899193b8a4f41b8a5626d2923f3dd14b8807ef11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c00c20e_c92224c6",
+        "filename": "media/libaudioprocessing/BufferProviders.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-11-21T13:38:50Z",
+      "side": 1,
+      "message": "That\u0027s one path towards \n-- a lighter (less computation) path to learn if the effect is supported\n-- keeps that determination within the HAL, which is the entity that knows what is supported.",
+      "parentUuid": "d21dba2c_615455a9",
       "range": {
         "startLine": 194,
         "startChar": 5,
