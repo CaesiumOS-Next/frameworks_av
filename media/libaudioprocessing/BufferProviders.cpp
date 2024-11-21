@@ -156,6 +156,11 @@ DownmixerBufferProvider::DownmixerBufferProvider(
         ALOGE("DownmixerBufferProvider() error: not multichannel capable");
         return;
     }
+    // Check configuration compatibility with EffectDownmix
+    if (outputChannelMask != AUDIO_CHANNEL_OUT_STEREO || format != AUDIO_FORMAT_PCM_FLOAT) {
+        ALOGE("DownmixerBufferProvider() error: config does not meet EffectDownmix Configure");
+        return;
+    }
     mEffectsFactory = EffectsFactoryHalInterface::create();
     if (mEffectsFactory == 0) {
         ALOGE("DownmixerBufferProvider() error: could not obtain the effects factory");
