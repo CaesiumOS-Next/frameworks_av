@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eb46338_1a4b775f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-22T23:07:31Z",
+      "side": 1,
+      "message": "For llndk CTS is not mandatory, but will add VTS shortly.",
+      "parentUuid": "3b706217_cab3e0de",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 15
+      },
+      "revId": "af80ce31dfa861b7b912518aeb7523583af84e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bfe1400_b29a07f4",
