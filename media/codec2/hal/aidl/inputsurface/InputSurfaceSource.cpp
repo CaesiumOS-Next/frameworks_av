@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,28 @@
 
 #include <inttypes.h>
 
-#define LOG_TAG "GraphicBufferSource"
+#define LOG_TAG "InputSurfaceSource"
 //#define LOG_NDEBUG 0
 #include <utils/Log.h>
 
 #define STRINGIFY_ENUMS // for asString in HardwareAPI.h/VideoAPI.h
 
-#include <media/stagefright/bqhelper/GraphicBufferSource.h>
-#include <media/stagefright/bqhelper/FrameDropper.h>
+#include <codec2/aidl/inputsurface/FrameDropper.h>
+#include <codec2/aidl/inputsurface/InputSurfaceSource.h>
 #include <media/stagefright/foundation/ADebug.h>
 #include <media/stagefright/foundation/AMessage.h>
 #include <media/stagefright/foundation/ColorUtils.h>
 #include <media/stagefright/foundation/FileDescriptor.h>
 
 #include <android-base/properties.h>
-#include <media/hardware/MetadataBufferType.h>
-#include <ui/GraphicBuffer.h>
-#include <gui/BufferItem.h>
-#include <gui/BufferQueue.h>
-#include <gui/bufferqueue/1.0/WGraphicBufferProducer.h>
-#include <gui/bufferqueue/2.0/B2HGraphicBufferProducer.h>
-#include <gui/IGraphicBufferProducer.h>
-#include <gui/IGraphicBufferConsumer.h>
-#include <media/hardware/HardwareAPI.h>
+// #include <ui/GraphicBuffer.h>
+// #include <gui/BufferItem.h>
+// #include <gui/BufferQueue.h>
+// #include <gui/bufferqueue/1.0/WGraphicBufferProducer.h>
+// #include <gui/bufferqueue/2.0/B2HGraphicBufferProducer.h>
+// #include <gui/IGraphicBufferProducer.h>
+// #include <gui/IGraphicBufferConsumer.h>
+// #include <media/hardware/HardwareAPI.h>
 
 #include <inttypes.h>
 
@@ -46,12 +45,12 @@
 #include <memory>
 #include <cmath>
 
-namespace android {
+namespace aidl::android::hardware::media::c2::implementation {
 
 namespace {
 // kTimestampFluctuation is an upper bound of timestamp fluctuation from the
-// source that GraphicBufferSource allows. The unit of kTimestampFluctuation is
-// frames. More specifically, GraphicBufferSource will drop a frame if
+// source that InputSurfaceSource allows. The unit of kTimestampFluctuation is
+// frames. More specifically, InputSurfaceSource will drop a frame if
 //
 // expectedNewFrametimestamp - actualNewFrameTimestamp <
 //     (0.5 - kTimestampFluctuation) * expectedtimePeriodBetweenFrames
@@ -63,7 +62,7 @@ namespace {
 // - expectedTimePeriodBetweenFrames is the ideal difference of the timestamps
 //   of two adjacent frames
 //
-// See GraphicBufferSource::calculateCodecTimestamp_l() for more detail about
+// See InputSurfaceSource::calculateCodecTimestamp_l() for more detail about
 // how kTimestampFluctuation is used.
 //
 // kTimestampFluctuation should be non-negative. A higher value causes a smaller
@@ -71,7 +70,7 @@ namespace {
 // difference between the source timestamp and the interpreted (snapped)
 // timestamp.
 //
-// The value of 0.05 means that GraphicBufferSource expects the input timestamps
+// The value of 0.05 means that InputSurfaceSource expects the input timestamps
 // to fluctuate no more than 5% from the regular time period.
 //
 // TODO: Justify the choice of this value, or make it configurable.
@@ -85,7 +84,7 @@ constexpr double kTimestampFluctuation = 0.05;
  * references to it (by buffers acquired from the slot) mainly so that we can keep a debug
  * count of how many buffers we need to still release back to the producer.
  */
-struct GraphicBufferSource::CachedBuffer {
+struct InputSurfaceSource::CachedBuffer {
     /**
      * Token that is used to track acquire counts (as opposed to all references to this object).
      */
@@ -94,11 +93,14 @@ struct GraphicBufferSource::CachedBuffer {
     /**
      * Create using a buffer cached in a slot.
      */
-    CachedBuffer(slot_id slot, const sp<GraphicBuffer> &graphicBuffer)
+    CachedBuffer(slot_id slot, const AHardwareBuffer *ahwBuffer)
         : mIsCached(true),
           mSlot(slot),
-          mGraphicBuffer(graphicBuffer),
+          mHardwareBuffer(ahwBuffer),
           mAcquirable(std::make_shared<Acquirable>()) {
+        if (ahwBuffer) {
+            AHardwareBuffer_acquire(ahwBuffer);
+        }
     }
 
     /**
@@ -112,10 +114,10 @@ struct GraphicBufferSource::CachedBuffer {
     }
 
     /**
-     * Returns the cached buffer.
+     * Retruns the cached buffer.
      */
-    sp<GraphicBuffer> getGraphicBuffer() const {
-        return mGraphicBuffer;
+    AHardwareBuffer *getHardwareBuffer() const {
+        return mHardwareBuffer;
     }
 
     /**
@@ -140,7 +142,7 @@ struct GraphicBufferSource::CachedBuffer {
     }
 
 private:
-    friend void GraphicBufferSource::discardBufferAtSlotIndex_l(ssize_t);
+    friend void InputSurfaceSource::discardBufferAtSlotIndex_l(ssize_t);
 
     /**
      * This method to be called when the buffer is no longer in the buffer cache.
@@ -166,7 +168,7 @@ private:
  * assumed that the encoder has waited for the acquire fence (or returned it as the release
  * fence).
  */
-struct GraphicBufferSource::AcquiredBuffer {
+struct InputSurfaceSource::AcquiredBuffer {
     AcquiredBuffer(
             const std::shared_ptr<CachedBuffer> &buffer,
             std::function<void(AcquiredBuffer *)> onReleased,
@@ -260,8 +262,8 @@ struct GraphicBufferSource::AcquiredBuffer {
     }
 
 private:
-    std::shared_ptr<GraphicBufferSource::CachedBuffer> mBuffer;
-    std::shared_ptr<GraphicBufferSource::CachedBuffer::Acquirable> mAcquirable;
+    std::shared_ptr<InputSurfaceSource::CachedBuffer> mBuffer;
+    std::shared_ptr<InputSurfaceSource::CachedBuffer::Acquirable> mAcquirable;
     sp<Fence> mAcquireFence;
     Vector<int> mReleaseFenceFds;
     bool mGotReleaseFences;
@@ -287,40 +289,40 @@ private:
     }
 };
 
-struct GraphicBufferSource::ConsumerProxy : public BufferQueue::ConsumerListener {
-    ConsumerProxy(const wp<GraphicBufferSource> &gbs) : mGbs(gbs) {}
+struct InputSurfaceSource::ConsumerProxy : public BufferQueue::ConsumerListener {
+    ConsumerProxy(const wp<InputSurfaceSource> &gbs) : mGbs(gbs) {}
 
     ~ConsumerProxy() = default;
 
     void onFrameAvailable(const BufferItem& item) override {
-        sp<GraphicBufferSource> gbs = mGbs.promote();
+        sp<InputSurfaceSource> gbs = mGbs.promote();
         if (gbs != nullptr) {
             gbs->onFrameAvailable(item);
         }
     }
 
     void onBuffersReleased() override {
-        sp<GraphicBufferSource> gbs = mGbs.promote();
+        sp<InputSurfaceSource> gbs = mGbs.promote();
         if (gbs != nullptr) {
             gbs->onBuffersReleased();
         }
     }
 
     void onSidebandStreamChanged() override {
-        sp<GraphicBufferSource> gbs = mGbs.promote();
+        sp<InputSurfaceSource> gbs = mGbs.promote();
         if (gbs != nullptr) {
             gbs->onSidebandStreamChanged();
         }
     }
 
 private:
-    // Note that GraphicBufferSource is holding an sp to us, we can't hold
-    // an sp back to GraphicBufferSource as the circular dependency will
+    // Note that InputSurfaceSource is holding an sp to us, we can't hold
+    // an sp back to InputSurfaceSource as the circular dependency will
     // make both immortal.
-    wp<GraphicBufferSource> mGbs;
+    wp<InputSurfaceSource> mGbs;
 };
 
-GraphicBufferSource::GraphicBufferSource() :
+InputSurfaceSource::InputSurfaceSource() :
     mInitCheck(UNKNOWN_ERROR),
     mNumAvailableUnacquiredBuffers(0),
     mNumOutstandingAcquires(0),
@@ -345,15 +347,15 @@ GraphicBufferSource::GraphicBufferSource() :
     mPrevCaptureUs(-1LL),
     mPrevFrameUs(-1LL),
     mInputBufferTimeOffsetUs(0LL) {
-    ALOGV("GraphicBufferSource");
+    ALOGV("InputSurfaceSource");
 
-    String8 name("GraphicBufferSource");
+    String8 name("InputSurfaceSource");
 
     BufferQueue::createBufferQueue(&mProducer, &mConsumer);
     mConsumer->setConsumerName(name);
 
     // create the consumer listener interface, and hold sp so that this
-    // interface lives as long as the GraphicBufferSource.
+    // interface lives as long as the InputSurfaceSource.
     mConsumerProxy = new ConsumerProxy(this);
 
     sp<IConsumerListener> proxy =
@@ -371,8 +373,8 @@ GraphicBufferSource::GraphicBufferSource() :
     CHECK(mInitCheck == NO_ERROR);
 }
 
-GraphicBufferSource::~GraphicBufferSource() {
-    ALOGV("~GraphicBufferSource");
+InputSurfaceSource::~InputSurfaceSource() {
+    ALOGV("~InputSurfaceSource");
     {
         // all acquired buffers must be freed with the mutex locked otherwise our debug assertion
         // may trigger
@@ -394,12 +396,12 @@ GraphicBufferSource::~GraphicBufferSource() {
     }
 }
 
-sp<IGraphicBufferProducer> GraphicBufferSource::getIGraphicBufferProducer() const {
+sp<IGraphicBufferProducer> InputSurfaceSource::getIGraphicBufferProducer() const {
     return mProducer;
 }
 
 sp<::android::hardware::graphics::bufferqueue::V1_0::IGraphicBufferProducer>
-GraphicBufferSource::getHGraphicBufferProducer_V1_0() const {
+InputSurfaceSource::getHGraphicBufferProducer_V1_0() const {
     using TWGraphicBufferProducer = ::android::TWGraphicBufferProducer<
         ::android::hardware::graphics::bufferqueue::V1_0::IGraphicBufferProducer>;
 
@@ -407,12 +409,12 @@ GraphicBufferSource::getHGraphicBufferProducer_V1_0() const {
 }
 
 sp<::android::hardware::graphics::bufferqueue::V2_0::IGraphicBufferProducer>
-GraphicBufferSource::getHGraphicBufferProducer() const {
+InputSurfaceSource::getHGraphicBufferProducer() const {
     return new ::android::hardware::graphics::bufferqueue::V2_0::utils::
                     B2HGraphicBufferProducer(getIGraphicBufferProducer());
 }
 
-status_t GraphicBufferSource::start() {
+status_t InputSurfaceSource::start() {
     Mutex::Autolock autoLock(mMutex);
     ALOGV("--> start; available=%zu, submittable=%zd",
             mAvailableBuffers.size(), mFreeCodecBuffers.size());
@@ -448,7 +450,7 @@ status_t GraphicBufferSource::start() {
     }
 
     if (mFrameRepeatIntervalUs > 0LL && mLooper == NULL) {
-        mReflector = new AHandlerReflector<GraphicBufferSource>(this);
+        mReflector = new AHandlerReflector<InputSurfaceSource>(this);
 
         mLooper = new ALooper;
         mLooper->registerHandler(mReflector);
@@ -462,7 +464,7 @@ status_t GraphicBufferSource::start() {
     return OK;
 }
 
-status_t GraphicBufferSource::stop() {
+status_t InputSurfaceSource::stop() {
     ALOGV("stop");
 
     Mutex::Autolock autoLock(mMutex);
@@ -475,7 +477,7 @@ status_t GraphicBufferSource::stop() {
     return OK;
 }
 
-status_t GraphicBufferSource::release(){
+status_t InputSurfaceSource::release(){
     sp<ALooper> looper;
     {
         Mutex::Autolock autoLock(mMutex);
@@ -504,7 +506,7 @@ status_t GraphicBufferSource::release(){
     return OK;
 }
 
-status_t GraphicBufferSource::onInputBufferAdded(codec_buffer_id bufferId) {
+status_t InputSurfaceSource::onInputBufferAdded(codec_buffer_id bufferId) {
     Mutex::Autolock autoLock(mMutex);
 
     if (mExecuting) {
@@ -520,7 +522,7 @@ status_t GraphicBufferSource::onInputBufferAdded(codec_buffer_id bufferId) {
     return OK;
 }
 
-status_t GraphicBufferSource::onInputBufferEmptied(codec_buffer_id bufferId, int fenceFd) {
+status_t InputSurfaceSource::onInputBufferEmptied(codec_buffer_id bufferId, int fenceFd) {
     Mutex::Autolock autoLock(mMutex);
     FileDescriptor::Autoclose fence(fenceFd);
 
@@ -587,7 +589,7 @@ status_t GraphicBufferSource::onInputBufferEmptied(codec_buffer_id bufferId, int
     return OK;
 }
 
-void GraphicBufferSource::onDataspaceChanged_l(
+void InputSurfaceSource::onDataspaceChanged_l(
         android_dataspace dataspace, android_pixel_format pixelFormat) {
     ALOGD("got buffer with new dataSpace %#x", dataspace);
     mLastDataspace = dataspace;
@@ -598,7 +600,7 @@ void GraphicBufferSource::onDataspaceChanged_l(
     }
 }
 
-bool GraphicBufferSource::fillCodecBuffer_l() {
+bool InputSurfaceSource::fillCodecBuffer_l() {
     CHECK(mExecuting && haveAvailableBuffers_l());
 
     if (mFreeCodecBuffers.empty()) {
@@ -743,7 +745,7 @@ bool GraphicBufferSource::fillCodecBuffer_l() {
     return true;
 }
 
-bool GraphicBufferSource::repeatLatestBuffer_l() {
+bool InputSurfaceSource::repeatLatestBuffer_l() {
     CHECK(mExecuting && !haveAvailableBuffers_l());
 
     if (mLatestBuffer.mBuffer == nullptr || mSuspended) {
@@ -779,7 +781,7 @@ bool GraphicBufferSource::repeatLatestBuffer_l() {
     return true;
 }
 
-void GraphicBufferSource::setLatestBuffer_l(const VideoBuffer &item) {
+void InputSurfaceSource::setLatestBuffer_l(const VideoBuffer &item) {
     mLatestBuffer = item;
 
     ALOGV("setLatestBuffer_l: [slot=%d, useCount=%ld]",
@@ -791,7 +793,7 @@ void GraphicBufferSource::setLatestBuffer_l(const VideoBuffer &item) {
     queueFrameRepeat_l();
 }
 
-void GraphicBufferSource::queueFrameRepeat_l() {
+void InputSurfaceSource::queueFrameRepeat_l() {
     mFrameRepeatBlockedOnCodecBuffer = false;
 
     if (mReflector != NULL) {
@@ -804,7 +806,7 @@ void GraphicBufferSource::queueFrameRepeat_l() {
 #ifdef __clang__
 __attribute__((no_sanitize("integer")))
 #endif
-bool GraphicBufferSource::calculateCodecTimestamp_l(
+bool InputSurfaceSource::calculateCodecTimestamp_l(
         nsecs_t bufferTimeNs, int64_t *codecTimeUs) {
     int64_t timeUs = bufferTimeNs / 1000;
     timeUs += mInputBufferTimeOffsetUs;
@@ -880,7 +882,7 @@ bool GraphicBufferSource::calculateCodecTimestamp_l(
     return true;
 }
 
-status_t GraphicBufferSource::submitBuffer_l(const VideoBuffer &item) {
+status_t InputSurfaceSource::submitBuffer_l(const VideoBuffer &item) {
     CHECK(!mFreeCodecBuffers.empty());
     uint32_t codecBufferId = *mFreeCodecBuffers.begin();
 
@@ -920,7 +922,7 @@ status_t GraphicBufferSource::submitBuffer_l(const VideoBuffer &item) {
     return OK;
 }
 
-void GraphicBufferSource::submitEndOfInputStream_l() {
+void InputSurfaceSource::submitEndOfInputStream_l() {
     CHECK(mEndOfStream);
     if (mEndOfStreamSent) {
         ALOGV("EOS already sent");
@@ -949,7 +951,7 @@ void GraphicBufferSource::submitEndOfInputStream_l() {
     }
 }
 
-status_t GraphicBufferSource::acquireBuffer_l(VideoBuffer *ab) {
+status_t InputSurfaceSource::acquireBuffer_l(VideoBuffer *ab) {
     BufferItem bi;
     status_t err = mConsumer->acquireBuffer(&bi, 0);
     if (err == BufferQueue::NO_BUFFER_AVAILABLE) {
@@ -1009,7 +1011,7 @@ status_t GraphicBufferSource::acquireBuffer_l(VideoBuffer *ab) {
 }
 
 // BufferQueue::ConsumerListener callback
-void GraphicBufferSource::onFrameAvailable(const BufferItem& item __unused) {
+void InputSurfaceSource::onFrameAvailable(const BufferItem& item __unused) {
     Mutex::Autolock autoLock(mMutex);
 
     ALOGV("onFrameAvailable: executing=%d available=%zu+%d",
@@ -1038,7 +1040,7 @@ void GraphicBufferSource::onFrameAvailable(const BufferItem& item __unused) {
     }
 }
 
-bool GraphicBufferSource::areWeDiscardingAvailableBuffers_l() {
+bool InputSurfaceSource::areWeDiscardingAvailableBuffers_l() {
     return mEndOfStreamSent // already sent EOS to codec
             || mComponent == nullptr // there is no codec connected
             || (mSuspended && mActionQueue.empty()) // we are suspended and not waiting for
@@ -1046,7 +1048,7 @@ bool GraphicBufferSource::areWeDiscardingAvailableBuffers_l() {
             || !mExecuting;
 }
 
-void GraphicBufferSource::onBufferAcquired_l(const VideoBuffer &buffer) {
+void InputSurfaceSource::onBufferAcquired_l(const VideoBuffer &buffer) {
     if (mEndOfStreamSent) {
         // This should only be possible if a new buffer was queued after
         // EOS was signaled, i.e. the app is misbehaving.
@@ -1065,7 +1067,7 @@ void GraphicBufferSource::onBufferAcquired_l(const VideoBuffer &buffer) {
 }
 
 // BufferQueue::ConsumerListener callback
-void GraphicBufferSource::onBuffersReleased() {
+void InputSurfaceSource::onBuffersReleased() {
     Mutex::Autolock lock(mMutex);
 
     uint64_t slotMask;
@@ -1095,7 +1097,7 @@ void GraphicBufferSource::onBuffersReleased() {
     }
 }
 
-bool GraphicBufferSource::discardBufferInSlot_l(GraphicBufferSource::slot_id i) {
+bool InputSurfaceSource::discardBufferInSlot_l(InputSurfaceSource::slot_id i) {
     ssize_t bsi = mBufferSlots.indexOfKey(i);
     if (bsi < 0) {
         return false;
@@ -1106,7 +1108,7 @@ bool GraphicBufferSource::discardBufferInSlot_l(GraphicBufferSource::slot_id i) 
     }
 }
 
-void GraphicBufferSource::discardBufferAtSlotIndex_l(ssize_t bsi) {
+void InputSurfaceSource::discardBufferAtSlotIndex_l(ssize_t bsi) {
     const std::shared_ptr<CachedBuffer>& buffer = mBufferSlots.valueAt(bsi);
     // use -2 if there is no latest buffer, and -1 if it is no longer cached
     slot_id latestBufferSlot =
@@ -1128,7 +1130,7 @@ void GraphicBufferSource::discardBufferAtSlotIndex_l(ssize_t bsi) {
     CHECK_DBG(buffer == nullptr);
 }
 
-void GraphicBufferSource::releaseAllAvailableBuffers_l() {
+void InputSurfaceSource::releaseAllAvailableBuffers_l() {
     mAvailableBuffers.clear();
     while (mNumAvailableUnacquiredBuffers > 0) {
         VideoBuffer item;
@@ -1140,11 +1142,11 @@ void GraphicBufferSource::releaseAllAvailableBuffers_l() {
 }
 
 // BufferQueue::ConsumerListener callback
-void GraphicBufferSource::onSidebandStreamChanged() {
-    ALOG_ASSERT(false, "GraphicBufferSource can't consume sideband streams");
+void InputSurfaceSource::onSidebandStreamChanged() {
+    ALOG_ASSERT(false, "InputSurfaceSource can't consume sideband streams");
 }
 
-status_t GraphicBufferSource::configure(
+status_t InputSurfaceSource::configure(
         const sp<ComponentWrapper>& component,
         int32_t dataSpace,
         int32_t bufferCount,
@@ -1156,7 +1158,7 @@ status_t GraphicBufferSource::configure(
                      frameWidth, frameHeight, consumerUsage64);
 }
 
-status_t GraphicBufferSource::configure(
+status_t InputSurfaceSource::configure(
         const sp<ComponentWrapper>& component,
         int32_t dataSpace,
         int32_t bufferCount,
@@ -1232,7 +1234,7 @@ status_t GraphicBufferSource::configure(
     return OK;
 }
 
-status_t GraphicBufferSource::setSuspend(bool suspend, int64_t suspendStartTimeUs) {
+status_t InputSurfaceSource::setSuspend(bool suspend, int64_t suspendStartTimeUs) {
     ALOGV("setSuspend=%d at time %lld us", suspend, (long long)suspendStartTimeUs);
 
     Mutex::Autolock autoLock(mMutex);
@@ -1283,7 +1285,7 @@ status_t GraphicBufferSource::setSuspend(bool suspend, int64_t suspendStartTimeU
     return OK;
 }
 
-status_t GraphicBufferSource::setRepeatPreviousFrameDelayUs(int64_t repeatAfterUs) {
+status_t InputSurfaceSource::setRepeatPreviousFrameDelayUs(int64_t repeatAfterUs) {
     ALOGV("setRepeatPreviousFrameDelayUs: delayUs=%lld", (long long)repeatAfterUs);
 
     Mutex::Autolock autoLock(mMutex);
@@ -1296,7 +1298,7 @@ status_t GraphicBufferSource::setRepeatPreviousFrameDelayUs(int64_t repeatAfterU
     return OK;
 }
 
-status_t GraphicBufferSource::setTimeOffsetUs(int64_t timeOffsetUs) {
+status_t InputSurfaceSource::setTimeOffsetUs(int64_t timeOffsetUs) {
     Mutex::Autolock autoLock(mMutex);
 
     // timeOffsetUs must be negative for adjustment.
@@ -1308,7 +1310,7 @@ status_t GraphicBufferSource::setTimeOffsetUs(int64_t timeOffsetUs) {
     return OK;
 }
 
-status_t GraphicBufferSource::setMaxFps(float maxFps) {
+status_t InputSurfaceSource::setMaxFps(float maxFps) {
     ALOGV("setMaxFps: maxFps=%lld", (long long)maxFps);
 
     Mutex::Autolock autoLock(mMutex);
@@ -1327,7 +1329,7 @@ status_t GraphicBufferSource::setMaxFps(float maxFps) {
     return OK;
 }
 
-status_t GraphicBufferSource::setStartTimeUs(int64_t skipFramesBeforeUs) {
+status_t InputSurfaceSource::setStartTimeUs(int64_t skipFramesBeforeUs) {
     ALOGV("setStartTimeUs: skipFramesBeforeUs=%lld", (long long)skipFramesBeforeUs);
 
     Mutex::Autolock autoLock(mMutex);
@@ -1339,7 +1341,7 @@ status_t GraphicBufferSource::setStartTimeUs(int64_t skipFramesBeforeUs) {
     return OK;
 }
 
-status_t GraphicBufferSource::setStopTimeUs(int64_t stopTimeUs) {
+status_t InputSurfaceSource::setStopTimeUs(int64_t stopTimeUs) {
     ALOGV("setStopTimeUs: %lld us", (long long)stopTimeUs);
     Mutex::Autolock autoLock(mMutex);
 
@@ -1369,7 +1371,7 @@ status_t GraphicBufferSource::setStopTimeUs(int64_t stopTimeUs) {
     return OK;
 }
 
-status_t GraphicBufferSource::getStopTimeOffsetUs(int64_t *stopTimeOffsetUs) {
+status_t InputSurfaceSource::getStopTimeOffsetUs(int64_t *stopTimeOffsetUs) {
     ALOGV("getStopTimeOffsetUs");
     Mutex::Autolock autoLock(mMutex);
     if (mStopTimeUs == -1) {
@@ -1381,7 +1383,7 @@ status_t GraphicBufferSource::getStopTimeOffsetUs(int64_t *stopTimeOffsetUs) {
     return OK;
 }
 
-status_t GraphicBufferSource::setTimeLapseConfig(double fps, double captureFps) {
+status_t InputSurfaceSource::setTimeLapseConfig(double fps, double captureFps) {
     ALOGV("setTimeLapseConfig: fps=%lg, captureFps=%lg",
             fps, captureFps);
     Mutex::Autolock autoLock(mMutex);
@@ -1402,7 +1404,7 @@ status_t GraphicBufferSource::setTimeLapseConfig(double fps, double captureFps) 
     return OK;
 }
 
-status_t GraphicBufferSource::setColorAspects(int32_t aspectsPacked) {
+status_t InputSurfaceSource::setColorAspects(int32_t aspectsPacked) {
     Mutex::Autolock autoLock(mMutex);
     mDefaultColorAspectsPacked = aspectsPacked;
     ColorAspects colorAspects = ColorUtils::unpackToColorAspects(aspectsPacked);
@@ -1415,7 +1417,7 @@ status_t GraphicBufferSource::setColorAspects(int32_t aspectsPacked) {
     return OK;
 }
 
-status_t GraphicBufferSource::signalEndOfInputStream() {
+status_t InputSurfaceSource::signalEndOfInputStream() {
     Mutex::Autolock autoLock(mMutex);
     ALOGV("signalEndOfInputStream: executing=%d available=%zu+%d eos=%d",
             mExecuting, mAvailableBuffers.size(), mNumAvailableUnacquiredBuffers, mEndOfStream);
@@ -1442,7 +1444,7 @@ status_t GraphicBufferSource::signalEndOfInputStream() {
     return OK;
 }
 
-void GraphicBufferSource::onMessageReceived(const sp<AMessage> &msg) {
+void InputSurfaceSource::onMessageReceived(const sp<AMessage> &msg) {
     switch (msg->what()) {
         case kWhatRepeatLastFrame:
         {
@@ -1475,4 +1477,4 @@ void GraphicBufferSource::onMessageReceived(const sp<AMessage> &msg) {
     }
 }
 
-}  // namespace android
+}  // namespace aidl::android::hardware::media::c2::implementation
