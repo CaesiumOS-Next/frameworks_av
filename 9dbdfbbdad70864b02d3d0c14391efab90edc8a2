@@ -34,6 +34,24 @@
       ],
       "revId": "9dbdfbbdad70864b02d3d0c14391efab90edc8a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0452456d_97fafad4",
+        "filename": "media/ndk/include/media/VndkImageReader.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-22T21:41:05Z",
+      "side": 1,
+      "message": "Create a separate path `media-vndk\u0027.",
+      "parentUuid": "4afae648_d671f256",
+      "revId": "9dbdfbbdad70864b02d3d0c14391efab90edc8a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
