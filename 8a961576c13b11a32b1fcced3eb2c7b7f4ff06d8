@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f781a3_b68338a7",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T23:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ebd174a_46149bc2",
+      "range": {
+        "startLine": 843,
+        "startChar": 0,
+        "endLine": 845,
+        "endChar": 68
+      },
+      "revId": "8a961576c13b11a32b1fcced3eb2c7b7f4ff06d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ade1b65b_6a4b9920",
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "8a961576c13b11a32b1fcced3eb2c7b7f4ff06d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26dc6bdd_e37586df",
+        "filename": "media/codec2/hal/client/include/codec2/hidl/client.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T23:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ade1b65b_6a4b9920",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 80
+      },
       "revId": "8a961576c13b11a32b1fcced3eb2c7b7f4ff06d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
