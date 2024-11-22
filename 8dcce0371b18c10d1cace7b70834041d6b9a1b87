@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eed08dd_937c2c59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-11-22T09:39:41Z",
+      "side": 1,
+      "message": "Manually testing before and after this commit shows that toggling a non offloadable global effect will allow the thread to return to COMPRESS.",
+      "revId": "8dcce0371b18c10d1cace7b70834041d6b9a1b87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
