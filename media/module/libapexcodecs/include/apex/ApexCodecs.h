@@ -617,9 +617,10 @@ ApexCodec_Status ApexCodec_Configurable_config(
  * \param [in] indices      the array of indices to query
  * \param [in] numIndices   the size of the indices array
  * \param [inout] config    the output buffer for the config blob, allocated by the client.
- *                          if the |config->size| was insufficient, it is set to the required size
- *                          and |config->data| remains unchanged.
- * \param [out] written     the number of bytes written to |config|.
+ * \param [out] writtenOrRequested      the number of bytes written to |config|.
+ *                                      if the |config->size| was insufficient, it is set to the
+ *                                      required size.
+ *
  * \return APEXCODEC_STATUS_OK          if successful
  * \return APEXCODEC_STATUS_NO_MEMORY   if |config.size| is too small; |config.size| is updated to the
  *                                      requested buffer size.
@@ -631,7 +632,7 @@ ApexCodec_Status ApexCodec_Configurable_query(
         uint32_t indices[],
         size_t numIndices,
         ApexCodec_LinearBuffer *config,
-        size_t *written) __INTRODUCED_IN(36);
+        size_t *writtenOrRequested) __INTRODUCED_IN(36);
 
 /**
  * Struct that represents a parameter descriptor.
