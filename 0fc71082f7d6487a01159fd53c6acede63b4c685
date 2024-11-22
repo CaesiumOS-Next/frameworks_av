@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6df88d_3db7da97",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4e84f7e_6ad0bfde",
+      "range": {
+        "startLine": 803,
+        "startChar": 12,
+        "endLine": 803,
+        "endChar": 26
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d2629a8_e587cc6e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-31T18:27:04Z",
       "side": 1,
       "message": "is there a reason for these if indices is a vector\u003cuint32_t\u003e?",
+      "range": {
+        "startLine": 856,
+        "startChar": 32,
+        "endLine": 856,
+        "endChar": 35
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d172862a_131e1b86",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2629a8_e587cc6e",
       "range": {
         "startLine": 856,
         "startChar": 32,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d2bdfea_f64cf1df",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "we\u0027d be allocating the buffer every time we call query, versus thread_local behaves like static for the same thread.",
+      "parentUuid": "90c4d087_e9b3ae12",
+      "range": {
+        "startLine": 865,
+        "startChar": 4,
+        "endLine": 865,
+        "endChar": 16
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18544c84_45ec763e",
         "filename": "media/codec2/hal/client/client.cpp",
         "patchSetId": 13
@@ -83,6 +155,30 @@
       "writtenOn": "2024-10-31T18:27:04Z",
       "side": 1,
       "message": "I now understand what you meant by communicating the requiured size.\n\nI am afraid that this creates an issue where briefly configSize will be larger than the allocated buffer, so breaking the semantics of the meaning of configSize. Do we have examples for other standard methods that do this?\n\nWe could have a separate out parameter for this purpose. While it\u0027s one extra parameter, perhaps it makes the usage cleaner and less error prone. E.g if someone forgets to check the return value.\n\nAlso, in the vast majority of cases (for now it is even 100%), the queried config output size is \u003c\u003d the number of heap indices queried (which is local + heap here). The reason for the discrepancy was to allow querying multiple stream parameters in one call in the future, but we don\u0027t support multiple streams at the moment. As such, we could initialize configBuffer to be the same size as indices.",
+      "range": {
+        "startLine": 873,
+        "startChar": 8,
+        "endLine": 873,
+        "endChar": 53
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1dad6ea_ea3f0041",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "I am changing the semantics to have |written| to be set with the requested size. PTAL",
+      "parentUuid": "18544c84_45ec763e",
       "range": {
         "startLine": 873,
         "startChar": 8,
@@ -134,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb39d4c_b8821b81",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d39b8975_cfdad076",
+      "range": {
+        "startLine": 1093,
+        "startChar": 8,
+        "endLine": 1093,
+        "endChar": 22
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a97f216_c6d3b981",
@@ -147,6 +267,30 @@
       "writtenOn": "2024-10-31T18:27:04Z",
       "side": 1,
       "message": "seems that here this is really just a cleanup that could be added right after FromApex...",
+      "range": {
+        "startLine": 1126,
+        "startChar": 4,
+        "endLine": 1133,
+        "endChar": 7
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c83422e0_d66a062e",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a97f216_c6d3b981",
       "range": {
         "startLine": 1126,
         "startChar": 4,
@@ -182,6 +326,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07e99531_f6e78c05",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "We\u0027ll have a new process() APEX API and the __builtin_available() would be used to figure out if the API exist.",
+      "parentUuid": "56fab9f9_9d4c3185",
+      "range": {
+        "startLine": 1445,
+        "startChar": 12,
+        "endLine": 1445,
+        "endChar": 46
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2823bf5_7638e21b",
         "filename": "media/codec2/hal/client/client.cpp",
         "patchSetId": 13
@@ -193,6 +361,30 @@
       "writtenOn": "2024-10-31T18:27:04Z",
       "side": 1,
       "message": "this must be a WIP CL as this takes parameters.",
+      "range": {
+        "startLine": 1468,
+        "startChar": 8,
+        "endLine": 1468,
+        "endChar": 35
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c06b1b_42e46efa",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2823bf5_7638e21b",
       "range": {
         "startLine": 1468,
         "startChar": 8,
@@ -216,6 +408,30 @@
       "writtenOn": "2024-10-31T18:27:04Z",
       "side": 1,
       "message": "do we have an assumption here for linear or graphic input? (and not using domain/kind/input/output to detect if input is 1D as described in the ApexCodec API?) in other words, how will component know if this is 1D or 2D without adding that into apexBuffer.memory?",
+      "range": {
+        "startLine": 1477,
+        "startChar": 12,
+        "endLine": 1477,
+        "endChar": 60
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "656855d0_fa4df140",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "Added type in |memory|",
+      "parentUuid": "2c357202_c85b611f",
       "range": {
         "startLine": 1477,
         "startChar": 12,
@@ -283,6 +499,30 @@
           ]
         }
       ],
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "715beaa6_06f2ff47",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-22T21:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99e8bf19_8c7030aa",
+      "range": {
+        "startLine": 1682,
+        "startChar": 4,
+        "endLine": 1686,
+        "endChar": 6
+      },
       "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
