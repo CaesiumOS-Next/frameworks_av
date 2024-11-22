@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eaf70b2_743c25c2",
+        "filename": "media/codec2/components/mpeg2/C2SoftMpeg2Dec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-11-22T05:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5eecf5c_844e2ea7",
+      "range": {
+        "startLine": 327,
+        "startChar": 7,
+        "endLine": 330,
+        "endChar": 38
+      },
+      "revId": "a85223e98abc6a34160a0eade0bcc5954d4536c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6fcedb1_886d2f70",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-20T12:57:06Z",
       "side": 1,
       "message": "bool mKeepThreadsActive \u003d false;\nsimilarly to how mTimeStart and mTimeEnd are initialized at line 182/183.\n\nI think that we should initialize then all here rather than how they are currently done in the constructor\u0027s default list.  It\u0027s clear that having them in separate\nplaces has let them become inconsistent (not everything is initialized).",
+      "range": {
+        "startLine": 161,
+        "startChar": 3,
+        "endLine": 161,
+        "endChar": 28
+      },
+      "revId": "a85223e98abc6a34160a0eade0bcc5954d4536c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd7b71f3_5c1d5724",
+        "filename": "media/codec2/components/mpeg2/C2SoftMpeg2Dec.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1959195
+      },
+      "writtenOn": "2024-11-22T05:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6fcedb1_886d2f70",
       "range": {
         "startLine": 161,
         "startChar": 3,
