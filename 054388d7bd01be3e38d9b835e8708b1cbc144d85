@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22cd61d2_2ad3f76d",
+        "filename": "media/ndk/include/media/NdkImageReader.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-11-22T19:07:26Z",
+      "side": 1,
+      "message": "this is an NDK header so an LLNDK method shouldn\u0027t be here.\n\nmake a different include path that\u0027s LLDNK-specific, like we do for native window here: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/libs/nativewindow/include/vndk/",
+      "fixSuggestions": [
+        {
+          "fixId": "c0213e45_155dfdc4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkImageReader.h",
+              "range": {
+                "startLine": 553,
+                "startChar": 0,
+                "endLine": 555,
+                "endChar": 0
+              },
+              "replacement": "media_status_t AImageReader_setUsage(AImageReader* reader, uint64_t usage) __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "054388d7bd01be3e38d9b835e8708b1cbc144d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
