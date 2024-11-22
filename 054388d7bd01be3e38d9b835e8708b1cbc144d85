@@ -34,6 +34,24 @@
       ],
       "revId": "054388d7bd01be3e38d9b835e8708b1cbc144d85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d37b7ea4_a9cad174",
+        "filename": "media/ndk/include/media/NdkImageReader.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-22T20:00:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22cd61d2_2ad3f76d",
+      "revId": "054388d7bd01be3e38d9b835e8708b1cbc144d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
