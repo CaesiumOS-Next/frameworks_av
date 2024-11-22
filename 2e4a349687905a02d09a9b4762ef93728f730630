@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83772028_af14822c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-22T23:06:37Z",
+      "side": 1,
+      "message": "`llndk\u003d202504` seems to cause a build error for the most recent tree, so removed version.",
+      "revId": "2e4a349687905a02d09a9b4762ef93728f730630",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
