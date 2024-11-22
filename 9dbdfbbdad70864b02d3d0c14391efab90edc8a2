@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4afae648_d671f256",
+        "filename": "media/ndk/include/media/VndkImageReader.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-11-22T21:22:47Z",
+      "side": 1,
+      "message": "you\u0027re still shipping this header to the NDK since this entire folder is shipped to the NDK: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/av/media/ndk/Android.bp;drc\u003dc1f577a83ac330b53723d888293350b41d5e3c43;l\u003d61\n\nSo you need a different folder path, too. I\u0027m not sure if the ndk/include_platform/ folder is appropriate? It looks like it might be but I\u0027m not sure what the scope of the existing things in there is exactly",
+      "fixSuggestions": [
+        {
+          "fixId": "14da6445_d9212fa0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/VndkImageReader.h",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "media_status_t AImageReader_setUsage(AImageReader* reader, uint64_t usage)\n        __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9dbdfbbdad70864b02d3d0c14391efab90edc8a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
