@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,38 @@
  * limitations under the License.
  */
 
-#ifndef FRAME_DROPPER_H_
-
-#define FRAME_DROPPER_H_
+#pragma once
 
 #include <utils/Errors.h>
-#include <utils/RefBase.h>
 
 #include <media/stagefright/foundation/ABase.h>
 
-namespace android {
+#include <C2.h>
 
-struct FrameDropper : public RefBase {
-    // No frames will be dropped until a valid max frame rate is set.
+namespace aidl::android::hardware::media::c2::implementation {
+
+/**
+ * The class decides whether to drop a frame or not for InputSurface and
+ * InputSurfaceConnection.
+ */
+struct FrameDropper {
     FrameDropper();
 
-    // maxFrameRate required to be positive.
-    // maxFrameRate negative causes shouldDrop() to always return false
-    // maxFrameRate == 0 is illegal
-    status_t setMaxFrameRate(float maxFrameRate);
+    /**
+     * Sets max frame rate, which is based on for deciding frame drop.
+     *
+     * @param[in] maxFrameRate  negative value means there is no drop
+     *                          zero value is not accepted
+     *
+     * @return  C2_OK
+     *          C2_BAD_VALUE    when zero is given as maxFrameRate.
+     */
+    c2_status_t setMaxFrameRate(float maxFrameRate);
 
-    // Returns false if max frame rate has not been set via setMaxFrameRate.
+    /** Returns false if max frame rate has not been set via setMaxFrameRate. */
     bool shouldDrop(int64_t timeUs);
 
-    // Returns true if all frame drop logic should be disabled.
+    /** Returns true if all frame drop logic should be disabled. */
     bool disabled() { return (mMinIntervalUs == -1ll); }
 
 protected:
@@ -51,5 +59,3 @@ private:
 };
 
 }  // namespace android
-
-#endif  // FRAME_DROPPER_H_

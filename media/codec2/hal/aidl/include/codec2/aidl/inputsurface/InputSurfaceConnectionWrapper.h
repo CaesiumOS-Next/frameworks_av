@@ -1,5 +1,5 @@
 /*
- * Copyright 2018, The Android Open Source Project
+ * Copyright 2024, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-#ifndef COMPONENT_WRAPPER_H_
-#define COMPONENT_WRAPPER_H_
+#pragma once
 
-#include <utils/RefBase.h>
-#include <utils/StrongPointer.h>
-#include <ui/GraphicBuffer.h>
+#include <android/hardware_buffer.h>
 
 #include <stdint.h>
 
-namespace android {
+namespace aidl::android::hardware::media::c2::implementation {
 
-struct ComponentWrapper : public RefBase {
+struct InputSurfaceConnectionWrapper {
     virtual status_t submitBuffer(
-            int32_t bufferId, const sp<GraphicBuffer> &buffer = nullptr,
+            int32_t bufferId, const AHardwareBuffer *buffer = nullptr,
             int64_t timestamp = 0, int fenceFd = -1) = 0;
     virtual status_t submitEos(int32_t bufferId) = 0;
     virtual void dispatchDataSpaceChanged(
             int32_t dataSpace, int32_t aspects, int32_t pixelFormat) = 0;
 };
 
-}  // namespace android
-
-#endif  // COMPONENT_WRAPPER_H_
+}  // namespace aidl::android::hardware::media::c2::implementation

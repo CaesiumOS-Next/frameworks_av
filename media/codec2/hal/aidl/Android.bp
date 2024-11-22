@@ -78,6 +78,8 @@ cc_library {
         "Configurable.cpp",
         "InputBufferManager.cpp",
         "ParamTypes.cpp",
+        "inputsurface/FrameDropper.cpp",
+        "inputsurface/InputSurface.cpp",
     ],
 
     header_libs: [

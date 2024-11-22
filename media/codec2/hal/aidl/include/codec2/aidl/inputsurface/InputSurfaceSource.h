@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,26 @@
  * limitations under the License.
  */
 
-#ifndef GRAPHIC_BUFFER_SOURCE_H_
-
-#define GRAPHIC_BUFFER_SOURCE_H_
+#pragma once
 
 #include <binder/Status.h>
 #include <utils/RefBase.h>
 
+#include <media/NdkImageReader.h>
 #include <media/hardware/VideoAPI.h>
 #include <media/stagefright/foundation/ABase.h>
 #include <media/stagefright/foundation/AHandlerReflector.h>
 #include <media/stagefright/foundation/ALooper.h>
-#include <media/stagefright/bqhelper/ComponentWrapper.h>
-#include <android/hardware/graphics/bufferqueue/1.0/IGraphicBufferProducer.h>
-#include <android/hardware/graphics/bufferqueue/2.0/IGraphicBufferProducer.h>
 
-namespace android {
+#include <codec2/aidl/inputsurface/InputSurfaceConnectionWrapper.h>
+
+namespace aidl::android::hardware::media::c2::implementation {
 
 struct FrameDropper;
-class BufferItem;
-class IGraphicBufferProducer;
-class IGraphicBufferConsumer;
-/*
- * This class is used to feed codecs from a Surface via BufferQueue or
- * HW producer.
+/**
+ * This class is used to feed codecs from ANativeWindow via AImageReader
+ * for InputSurface and InputSurfaceConnection. InputSurfaceConnection is
+ * wrapped around InputSurfaceWrapper to communicate with.
  *
  * Instances of the class don't run on a dedicated thread.  Instead,
  * various events trigger data movement:
@@ -52,7 +48,7 @@ class IGraphicBufferConsumer;
  * before the codec is in the "executing" state, so we need to queue
  * things up until we're ready to go.
  *
- * The GraphicBufferSource can be configure dynamically to discard frames
+ * The InputSurfaceSource can be configure dynamically to discard frames
  * from the source:
  *
  * - if their timestamp is less than a start time
@@ -68,11 +64,11 @@ class IGraphicBufferConsumer;
  * (even if it was dropped) to reencode it after an interval if no further
  * frames are sent by the producer.
  */
-class GraphicBufferSource : public RefBase {
+class InputSurfaceSource : public RefBase {
 public:
-    GraphicBufferSource();
+    InputSurfaceSource();
 
-    virtual ~GraphicBufferSource();
+    virtual ~InputSurfaceSource();
 
     // We can't throw an exception if the constructor fails, so we just set
     // this and require that the caller test the value.
@@ -80,62 +76,41 @@ public:
         return mInitCheck;
     }
 
-    // Returns the handle to the producer side of the BufferQueue.  Buffers
-    // queued on this will be received by GraphicBufferSource.
-    sp<IGraphicBufferProducer> getIGraphicBufferProducer() const;
-
-    // Returns the handle to the bufferqueue HAL (V1_0) producer side of the BufferQueue.
-    // Buffers queued on this will be received by GraphicBufferSource.
-    sp<::android::hardware::graphics::bufferqueue::V1_0::IGraphicBufferProducer>
-        getHGraphicBufferProducer_V1_0() const;
-
-    // Returns the handle to the bufferqueue HAL producer side of the BufferQueue.
-    // Buffers queued on this will be received by GraphicBufferSource.
-    sp<::android::hardware::graphics::bufferqueue::V2_0::IGraphicBufferProducer>
-        getHGraphicBufferProducer() const;
+    /**
+     * Returns the handle of ANativeWindow as the output parameter.
+     *
+     * @return C2_OK
+     *         C2_CORRUPTED if ANativeWindow cannot be returned
+     */
+    c2_status_t getANativeWindow(ANativeWindow **window);
 
     // This is called when component transitions to running state, which means
     // we can start handing it buffers.  If we already have buffers of data
     // sitting in the BufferQueue, this will send them to the codec.
-    status_t start();
+    c2_status_t start();
 
     // This is called when component transitions to stopped, indicating that
     // the codec is meant to return all buffers back to the client for them
     // to be freed. Do NOT submit any more buffers to the component.
-    status_t stop();
+    c2_status_t stop();
 
     // This is called when component transitions to released, indicating that
     // we are shutting down.
-    status_t release();
+    c2_status_t release();
 
     // A "codec buffer", i.e. a buffer that can be used to pass data into
     // the encoder, has been allocated.  (This call does not call back into
     // component.)
-    status_t onInputBufferAdded(int32_t bufferId);
+    c2_status_t onInputBufferAdded(int32_t bufferId);
 
     // Called when encoder is no longer using the buffer.  If we have a BQ
     // buffer available, fill it with a new frame of data; otherwise, just mark
     // it as available.
-    status_t onInputBufferEmptied(int32_t bufferId, int fenceFd);
-
-    // IGraphicBufferSource interface
-    // ------------------------------
-
-    // Configure the buffer source to be used with a component with the default
-    // data space. (32-bit consumerUsage flag, for vendor partition
-    // compatibility)
-    [[deprecated("use configure() with a 64-bit consumerUsage flag instead")]]
-    status_t configure(
-        const sp<ComponentWrapper> &component,
-        int32_t dataSpace,
-        int32_t bufferCount,
-        uint32_t frameWidth,
-        uint32_t frameHeight,
-        uint32_t consumerUsage);
+    c2_status_t onInputBufferEmptied(int32_t bufferId, int fenceFd);
 
     // Configure the buffer source to be used with a component with the default
     // data space. (64-bit consumerUsage flag)
-    status_t configure(
+    c2_status_t configure(
         const sp<ComponentWrapper> &component,
         int32_t dataSpace,
         int32_t bufferCount,
@@ -147,14 +122,14 @@ public:
     // timestamp is greater or equal than stopTimeUs. We need to submit an empty
     // buffer with the EOS flag set.  If we don't have a codec buffer ready,
     // we just set the mEndOfStream flag.
-    status_t signalEndOfInputStream();
+    c2_status_t signalEndOfInputStream();
 
     // If suspend is true, all incoming buffers (including those currently
     // in the BufferQueue) with timestamp larger than timeUs will be discarded
     // until the suspension is lifted. If suspend is false, all incoming buffers
     // including those currently in the BufferQueue) with timestamp larger than
     // timeUs will be processed. timeUs uses SYSTEM_TIME_MONOTONIC time base.
-    status_t setSuspend(bool suspend, int64_t timeUs);
+    c2_status_t setSuspend(bool suspend, int64_t timeUs);
 
     // Specifies the interval after which we requeue the buffer previously
     // queued to the encoder. This is useful in the case of surface flinger
@@ -163,11 +138,11 @@ public:
     // the decoder on the remote end would be unable to decode the latest frame.
     // This API must be called before transitioning the encoder to "executing"
     // state and once this behaviour is specified it cannot be reset.
-    status_t setRepeatPreviousFrameDelayUs(int64_t repeatAfterUs);
+    c2_status_t setRepeatPreviousFrameDelayUs(int64_t repeatAfterUs);
 
     // Sets the input buffer timestamp offset.
     // When set, the sample's timestamp will be adjusted with the timeOffsetUs.
-    status_t setTimeOffsetUs(int64_t timeOffsetUs);
+    c2_status_t setTimeOffsetUs(int64_t timeOffsetUs);
 
     /*
      * Set the maximum frame rate on the source.
@@ -184,56 +159,52 @@ public:
      *
      * When maxFps is 0, this call will fail with BAD_VALUE.
      */
-    status_t setMaxFps(float maxFps);
+    c2_status_t setMaxFps(float maxFps);
 
     // Sets the time lapse (or slow motion) parameters.
     // When set, the sample's timestamp will be modified to playback framerate,
     // and capture timestamp will be modified to capture rate.
-    status_t setTimeLapseConfig(double fps, double captureFps);
+    c2_status_t setTimeLapseConfig(double fps, double captureFps);
 
     // Sets the start time us (in system time), samples before which should
     // be dropped and not submitted to encoder
-    status_t setStartTimeUs(int64_t startTimeUs);
+    c2_status_t setStartTimeUs(int64_t startTimeUs);
 
     // Sets the stop time us (in system time), samples after which should be dropped
     // and not submitted to encoder. timeUs uses SYSTEM_TIME_MONOTONIC time base.
-    status_t setStopTimeUs(int64_t stopTimeUs);
+    c2_status_t setStopTimeUs(int64_t stopTimeUs);
 
     // Gets the stop time offset in us. This is the time offset between latest buffer
     // time and the stopTimeUs. If stop time is not set, INVALID_OPERATION will be returned.
     // If return is OK, *stopTimeOffsetUs will contain the valid offset. Otherwise,
     // *stopTimeOffsetUs will not be modified. Positive stopTimeOffsetUs means buffer time
     // larger than stopTimeUs.
-    status_t getStopTimeOffsetUs(int64_t *stopTimeOffsetUs);
+    c2_status_t getStopTimeOffsetUs(int64_t *stopTimeOffsetUs);
 
     // Sets the desired color aspects, e.g. to be used when producer does not specify a dataspace.
-    status_t setColorAspects(int32_t aspectsPacked);
+    c2_status_t setColorAspects(int32_t aspectsPacked);
 
 protected:
 
-    // BufferQueue::ConsumerListener interface, called when a new frame of
-    // data is available.  If we're executing and a codec buffer is
-    // available, we acquire the buffer, copy the GraphicBuffer reference
-    // into the codec buffer, and call Empty[This]Buffer.  If we're not yet
-    // executing or there's no codec buffer available, we just increment
-    // mNumFramesAvailable and return.
-    void onFrameAvailable(const BufferItem& item) ;
+    // Called from AImageReader_ImageListener::onImageAvailable when a new frame
+    // of  data is available. If we're executing and a codec buffer is
+    // available, we acquire the buffer, copy the AHardwareBuffer into the codec
+    // buffer, and call Empty[This]Buffer.  If we're not yet executing or
+    // there's no codec buffer available, we just increment mNumFramesAvailable
+    // and return.
+    void onFrameAvailable() ;
 
-    // BufferQueue::ConsumerListener interface, called when the client has
-    // released one or more GraphicBuffers.  We clear out the appropriate
-    // set of mBufferSlot entries.
-    void onBuffersReleased() ;
-
-    // BufferQueue::ConsumerListener interface, called when the client has
-    // changed the sideband stream. GraphicBufferSource doesn't handle sideband
-    // streams so this is a no-op (and should never be called).
-    void onSidebandStreamChanged() ;
+    // Called from AImageReader_BufferRemovedListener::onBufferRemoved when a
+    // buffer is removed. We clear an appropriate cached buffer.
+    void onBuffersReleased(uint64_t bid) ;
 
 private:
-    // BQ::ConsumerListener interface
-    // ------------------------------
-    struct ConsumerProxy;
-    sp<ConsumerProxy> mConsumerProxy;
+
+    // AImageReader listener interface
+    struct BufferAvailableListener;
+    struct BufferRemovedListener;
+    std::shared_ptr<BufferAvailableListener> mBufferAvailableListener;
+    std::shared_ptr<BufferRemovedListener> mBufferRemovedListener;
 
     // Lock, covers all member variables.
     mutable Mutex mMutex;
@@ -244,8 +215,8 @@ private:
     // Graphic buffer reference objects
     // --------------------------------
 
-    // These are used to keep a shared reference to GraphicBuffers and gralloc handles owned by the
-    // GraphicBufferSource as well as to manage the cache slots. Separate references are owned by
+    // These are used to keep a reference to AHardwareBuffer and gralloc handles owned by the
+    // InputSurfaceSource as well as to manage the cache slots. Separate references are owned by
     // the buffer cache (controlled by the buffer queue/buffer producer) and the codec.
 
     // When we get a buffer from the producer (BQ) it designates them to be cached into specific
@@ -267,7 +238,7 @@ private:
         android_dataspace_t mDataspace;
     };
 
-    // Cached and aquired buffers
+    // Cached and acquired buffers
     // --------------------------------
 
     typedef int slot_id;
@@ -283,12 +254,12 @@ private:
     int32_t mNumAvailableUnacquiredBuffers;
 
     // Number of frames acquired from consumer (debug only)
-    // (as in aquireBuffer called, and release needs to be called)
+    // (as in acquireBuffer called, and release needs to be called)
     int32_t mNumOutstandingAcquires;
 
     // Acquire a buffer from the BQ and store it in |item| if successful
     // \return OK on success, or error on failure.
-    status_t acquireBuffer_l(VideoBuffer *item);
+    c2_status_t acquireBuffer_l(VideoBuffer *item);
 
     // Called when a buffer was acquired from the producer
     void onBufferAcquired_l(const VideoBuffer &buffer);
@@ -343,7 +314,7 @@ private:
     // while also keeping a reference for it in mSubmittedCodecBuffers.
     // Returns UNKNOWN_ERROR if the buffer was not submitted due to buffer timestamp. Otherwise,
     // it returns any submit success or error value returned by the codec.
-    status_t submitBuffer_l(const VideoBuffer &item);
+    c2_status_t submitBuffer_l(const VideoBuffer &item);
 
     // Submits an empty buffer, with the EOS flag set if there is an available codec buffer and
     // sets mEndOfStreamSent flag. Does nothing if there is no codec buffer available.
@@ -366,7 +337,7 @@ private:
     void onDataspaceChanged_l(android_dataspace dataspace, android_pixel_format pixelFormat);
 
     // Pointer back to the component that created us.  We send buffers here.
-    sp<ComponentWrapper> mComponent;
+    std::shared_ptr<InputSurfaerConnectionWrapper> mComponent;
 
     // Set by start() / stop().
     bool mExecuting;
@@ -379,11 +350,10 @@ private:
 
     int64_t mLastFrameTimestampUs;
 
-    // Our BufferQueue interfaces. mProducer is passed to the producer through
-    // getIGraphicBufferProducer, and mConsumer is used internally to retrieve
-    // the buffers queued by the producer.
-    sp<IGraphicBufferProducer> mProducer;
-    sp<IGraphicBufferConsumer> mConsumer;
+    // AImageReader creates ANativeWindow. The created ANativeWindow is passed
+    // to the producer, and mImageReader is used internally to retrieve the
+    // buffers queued by the producer.
+    AImageReader *mImageReader;
 
     // The time to stop sending buffers.
     int64_t mStopTimeUs;
@@ -402,13 +372,13 @@ private:
     // monotonically increasing.
     int64_t mLastActionTimeUs;
 
-    // An action queue that queue up all the actions sent to GraphicBufferSource.
+    // An action queue that queue up all the actions sent to InputSurfaceSource.
     // STOP action should only show up at the end of the list as all the actions
     // after a STOP action will be discarded. mActionQueue is protected by mMutex.
     List<ActionItem> mActionQueue;
 
     ////
-    friend struct AHandlerReflector<GraphicBufferSource>;
+    friend struct AHandlerReflector<InputSurfaceSource>;
 
     enum {
         kWhatRepeatLastFrame,   ///< queue last frame for reencoding
@@ -419,10 +389,10 @@ private:
 
     int64_t mSkipFramesBeforeNs;
 
-    sp<FrameDropper> mFrameDropper;
+    std::shared_ptr<FrameDropper> mFrameDropper;
 
     sp<ALooper> mLooper;
-    sp<AHandlerReflector<GraphicBufferSource> > mReflector;
+    sp<AHandlerReflector<InputSurfaceSource> > mReflector;
 
     // Repeat last frame feature
     // -------------------------
@@ -528,9 +498,7 @@ private:
 
     void onMessageReceived(const sp<AMessage> &msg);
 
-    DISALLOW_EVIL_CONSTRUCTORS(GraphicBufferSource);
+    DISALLOW_EVIL_CONSTRUCTORS(InputSurfaceSource);
 };
 
-}  // namespace android
-
-#endif  // GRAPHIC_BUFFER_SOURCE_H_
+}  // namespace aidl::android::hardware::media::c2::implementation
