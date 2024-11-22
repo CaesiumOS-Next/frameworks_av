@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d94a2784_0646f3f9",
+        "filename": "services/audioparameterparser/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3447051
+      },
+      "writtenOn": "2024-11-22T16:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4538e881_7a00b561",
+      "revId": "c4ee1dc33d186bebf78262ff0a97b25ed9898064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9743a4dc_bd43ba97",
