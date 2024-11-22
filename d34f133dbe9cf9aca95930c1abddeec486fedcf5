@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3005cce3_95e30632",
+        "filename": "media/codec2/components/mpeg2/C2SoftMpeg2Dec.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-11-22T05:12:21Z",
+      "side": 1,
+      "message": "just to keep the code consistent, please initialize these values too.\nmStride \u003d 0, two booleans false here.\n\nmNumCores \u003d 1;\nand mNumMemRecords \u003d 0;",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 25
+      },
+      "revId": "d34f133dbe9cf9aca95930c1abddeec486fedcf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
