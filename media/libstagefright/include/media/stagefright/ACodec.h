@@ -296,6 +296,7 @@ private:
     bool mIsLegacyVP9Decoder;
     bool mIsStreamCorruptFree;
     bool mIsLowLatency;
+    bool mSubmitOutputMetaFailedNoInit;
 
     // If "mKeepComponentAllocated" we only transition back to Loaded state
     // and do not release the component instance.
@@ -358,7 +359,7 @@ private:
     status_t allocateOutputBuffersFromNativeWindow();
     status_t cancelBufferToNativeWindow(BufferInfo *info);
     status_t freeOutputBuffersNotOwnedByComponent();
-    BufferInfo *dequeueBufferFromNativeWindow();
+    BufferInfo *dequeueBufferFromNativeWindow(status_t *errOut = NULL);
 
     void initializeFrameTracking();
     void trackReleasedFrame(int64_t frameId, int64_t mediaTimeUs, int64_t desiredRenderTimeNs);
@@ -618,6 +619,8 @@ private:
 
     // Force EXEC->IDLE->LOADED shutdown sequence if not stale.
     void forceStateTransition(int generation);
+
+    void signalReleaseCodecInstance();
 
     DISALLOW_EVIL_CONSTRUCTORS(ACodec);
 };

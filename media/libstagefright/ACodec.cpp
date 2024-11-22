@@ -589,6 +589,7 @@ ACodec::ACodec()
       mIsLegacyVP9Decoder(false),
       mIsStreamCorruptFree(false),
       mIsLowLatency(false),
+      mSubmitOutputMetaFailedNoInit(false),
       mEncoderDelay(0),
       mEncoderPadding(0),
       mRotationDegrees(0),
@@ -1388,11 +1389,14 @@ status_t ACodec::submitOutputMetadataBuffer() {
     if (mMetadataBuffersToSubmit == 0)
         return OK;
 
-    BufferInfo *info = dequeueBufferFromNativeWindow();
+    status_t err = OK;
+    BufferInfo *info = dequeueBufferFromNativeWindow(&err);
     if (info == NULL) {
+        mSubmitOutputMetaFailedNoInit = (err == NO_INIT);
         return ERROR_IO;
     }
 
+    mSubmitOutputMetaFailedNoInit = false;
     ALOGV("[%s] submitting output meta buffer ID %u for graphic buffer %p",
           mComponentName.c_str(), info->mBufferID, info->mGraphicBuffer->handle);
 
@@ -1460,7 +1464,7 @@ void ACodec::onFirstTunnelFrameReady() {
     mCallback->onFirstTunnelFrameReady();
 }
 
-ACodec::BufferInfo *ACodec::dequeueBufferFromNativeWindow() {
+ACodec::BufferInfo *ACodec::dequeueBufferFromNativeWindow(status_t *errOut) {
     ANativeWindowBuffer *buf;
     CHECK(mNativeWindow.get() != NULL);
 
@@ -1480,6 +1484,9 @@ ACodec::BufferInfo *ACodec::dequeueBufferFromNativeWindow() {
         status_t err = mNativeWindow->dequeueBuffer(mNativeWindow.get(), &buf, &fenceFd);
         if (err != 0) {
             ALOGE("dequeueBuffer failed: %s(%d).", asString(err), err);
+            if (errOut != NULL) {
+                *errOut = err;
+            }
             return NULL;
         }
 
@@ -6028,7 +6035,7 @@ bool ACodec::BaseState::onMessageReceived(const sp<AMessage> &msg) {
             ALOGI("[%s] forcing the release of codec",
                     mCodec->mComponentName.c_str());
             status_t err = mCodec->mOMXNode->freeNode();
-            ALOGE_IF("[%s] failed to release codec instance: err=%d",
+            ALOGE_IF(err != OK, "[%s] failed to release codec instance: err=%d",
                        mCodec->mComponentName.c_str(), err);
             mCodec->mCallback->onReleaseCompleted();
 
@@ -7773,6 +7780,7 @@ void ACodec::ExecutingState::resume() {
 
 void ACodec::ExecutingState::stateEntered() {
     ALOGV("[%s] Now Executing", mCodec->mComponentName.c_str());
+    mCodec->mSubmitOutputMetaFailedNoInit = false;
     mCodec->processDeferredMessages();
 }
 
@@ -7818,6 +7826,19 @@ bool ACodec::ExecutingState::onMessageReceived(const sp<AMessage> &msg) {
                     mCodec->mBuffers[kPortIndexOutput].size());
 
             mActive = false;
+
+            if (mCodec->mSubmitOutputMetaFailedNoInit) {
+                // If the BufferQueue has been abandoned by the client before releasing the
+                // codec, causing the dequeue operation in submitOutputMetadataBuffer to fail,
+                // we run the risk of hitting the following timeout in libOmxDec when sending
+                // OMX_CommandFlush: https://fburl.com/diffusion/1eermdcc. Detect this error
+                // case and signal it immediately to avoid delays (see T68088623).
+                mCodec->signalError(OMX_ErrorUndefined, NO_INIT);
+                mCodec->signalReleaseCodecInstance();
+
+                handled = true;
+                break;
+            }
 
             status_t err = mCodec->mOMXNode->sendCommand(OMX_CommandFlush, OMX_ALL);
             if (err != OK) {
@@ -8586,6 +8607,10 @@ void ACodec::forceStateTransition(int generation) {
     }
 }
 
+void ACodec::signalReleaseCodecInstance() {
+    (new AMessage(kWhatReleaseCodecInstance, this))->post();
+}
+
 bool ACodec::ExecutingState::onOMXFrameRendered(int64_t mediaTimeUs, nsecs_t systemNano) {
     mCodec->mCallback->onOutputFramesRendered({RenderedFrameInfo(mediaTimeUs, systemNano)});
     return true;
@@ -8802,6 +8827,13 @@ bool ACodec::OutputPortSettingsChangedState::onOMXEvent(
                 if (err != OK) {
                     mCodec->signalError(OMX_ErrorUndefined, makeNoSideEffectStatus(err));
                     ALOGE("Error occurred while disabling the output port");
+                    if (err == NO_INIT) {
+                        // Allocating buffers on the output port failed because the BufferQueue
+                        // has been abandoned. This causes the state machine to get stuck, so
+                        // abort immediately to unblock the caller (otherwise we'd hit the 3
+                        // second timeout; see T68088623).
+                        mCodec->signalReleaseCodecInstance();
+                    }
                 }
 
                 return true;
