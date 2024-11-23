@@ -51,6 +51,24 @@
       ],
       "revId": "2e4a349687905a02d09a9b4762ef93728f730630",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09203004_79043d61",
+        "filename": "media/ndk/include/media-vndk/VndkImageReader.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-23T00:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe9497c4_dc58c19d",
+      "revId": "2e4a349687905a02d09a9b4762ef93728f730630",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
