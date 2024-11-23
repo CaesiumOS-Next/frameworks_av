@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0684ddec_6d41aa18",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-23T01:07:38Z",
+      "side": 1,
+      "message": "Just curiosity, it seemed that nothing changed though this interface is changed from member interface to static.\n\nIs there any reason to change this to static?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 89
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "33dbdd9a_38ea5c8f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+              "range": {
+                "startLine": 313,
+                "startChar": 0,
+                "endLine": 315,
+                "endChar": 0
+              },
+              "replacement": "    static C2Config::level_t decisionApvLevel(int32_t width, int32_t height,\n                                              int32_t fps, uint64_t bitrate,\n                                              int32_t band) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f351fe9f9252b2784254124a73e0219477b5df31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
