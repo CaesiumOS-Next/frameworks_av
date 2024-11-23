@@ -16,6 +16,41 @@
       "message": "`llndk\u003d202504` seems to cause a build error for the most recent tree, so removed version.",
       "revId": "2e4a349687905a02d09a9b4762ef93728f730630",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9497c4_dc58c19d",
+        "filename": "media/ndk/include/media-vndk/VndkImageReader.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-11-23T00:09:53Z",
+      "side": 1,
+      "message": "should have a _NonNull annotation for reader",
+      "fixSuggestions": [
+        {
+          "fixId": "c535d39a_476bb9b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media-vndk/VndkImageReader.h",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "        AImageReader* _Nonnull reader, uint64_t usage) __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e4a349687905a02d09a9b4762ef93728f730630",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
