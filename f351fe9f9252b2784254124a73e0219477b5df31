@@ -40,6 +40,30 @@
       ],
       "revId": "f351fe9f9252b2784254124a73e0219477b5df31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65a58d34_e3a28b26",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-11-23T05:04:54Z",
+      "side": 1,
+      "message": "I think making it just a static function makes sense - it doesn\u0027t access any other member of the class - basically just converting input parameters into the level value",
+      "parentUuid": "0684ddec_6d41aa18",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 89
+      },
+      "revId": "f351fe9f9252b2784254124a73e0219477b5df31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
