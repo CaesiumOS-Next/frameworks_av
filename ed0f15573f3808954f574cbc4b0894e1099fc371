@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12e47afb_c279e79e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-23T02:29:45Z",
+      "side": 1,
+      "message": "since this CL is for review and just copied, bypassing the lint.",
+      "revId": "ed0f15573f3808954f574cbc4b0894e1099fc371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
