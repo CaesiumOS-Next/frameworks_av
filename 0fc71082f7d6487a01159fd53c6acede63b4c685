@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b3954d3_03f69d9c",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-24T06:50:45Z",
+      "side": 1,
+      "message": "resolving",
+      "parentUuid": "3d2bdfea_f64cf1df",
+      "range": {
+        "startLine": 865,
+        "startChar": 4,
+        "endLine": 865,
+        "endChar": 16
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18544c84_45ec763e",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "I am changing the semantics to have |written| to be set with the requested size. PTAL",
       "parentUuid": "18544c84_45ec763e",
+      "range": {
+        "startLine": 873,
+        "startChar": 8,
+        "endLine": 873,
+        "endChar": 53
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ad214c_f027162c",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-24T06:50:45Z",
+      "side": 1,
+      "message": "resolving",
+      "parentUuid": "a1dad6ea_ea3f0041",
       "range": {
         "startLine": 873,
         "startChar": 8,
@@ -338,6 +386,30 @@
       "side": 1,
       "message": "We\u0027ll have a new process() APEX API and the __builtin_available() would be used to figure out if the API exist.",
       "parentUuid": "56fab9f9_9d4c3185",
+      "range": {
+        "startLine": 1445,
+        "startChar": 12,
+        "endLine": 1445,
+        "endChar": 46
+      },
+      "revId": "0fc71082f7d6487a01159fd53c6acede63b4c685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c187a215_64e7422f",
+        "filename": "media/codec2/hal/client/client.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-11-24T06:50:45Z",
+      "side": 1,
+      "message": "resolving",
+      "parentUuid": "07e99531_f6e78c05",
       "range": {
         "startLine": 1445,
         "startChar": 12,
