@@ -1112,6 +1112,50 @@ void CCodec::initiateConfigureComponent(const sp<AMessage> &format) {
     msg->post();
 }
 
+/**
+ * A utility function that converts C2ResourcesNeededTuning into
+ * a vector of InstanceResourceInfo.
+ *
+ * Right now, this function is at its simplest form looking into
+ * maping constant and per frame resource kinds,
+ * but we need to extend this to address:
+ *  - Construct the name for each resources
+ *    (using the resource id and component store)
+ *  - Devise a unified way of presenting per frame, per input/output block
+ *    resource requirements.
+ */
+static status_t getSystemResource(const C2ResourcesNeededTuning* systemResourcesInfo,
+                                  std::vector<InstanceResourceInfo>& resources) {
+    if (systemResourcesInfo && *systemResourcesInfo) {
+        for (size_t i = 0; i < systemResourcesInfo->flexCount(); ++i) {
+            const C2SystemResourceStruct& resource =
+                systemResourcesInfo->m.values[i];
+            uint64_t staticCount = 0;
+            uint64_t perFrameCount = 0;
+            // TODO: Constuct the name based on the id and the (hal) implementation.
+            std::string name = std::to_string(resource.id);
+
+            switch (resource.kind) {
+            case CONST:
+                staticCount = resource.amount;
+                break;
+            case PER_FRAME:
+                perFrameCount = resource.amount;
+                break;
+            case PER_INPUT_BLOCK:
+            case PER_OUTPUT_BLOCK:
+                // TODO: Find a way to pass this info through InstanceResourceInfo
+                break;
+            }
+            resources.push_back({name, staticCount, perFrameCount});
+        }
+
+        return OK;
+    }
+
+    return UNKNOWN_ERROR;
+}
+
 void CCodec::configure(const sp<AMessage> &msg) {
     std::shared_ptr<Codec2Client::Component> comp;
     auto checkAllocated = [this, &comp] {
@@ -1860,6 +1904,25 @@ void CCodec::configure(const sp<AMessage> &msg) {
 
     mMetrics = new AMessage;
     mChannel->resetBuffersPixelFormat((config->mDomain & Config::IS_ENCODER) ? true : false);
+
+    // Query required/needed system resources for the current configuration.
+    if (android::media::codec::codec_availability_support()) {
+        std::vector<std::unique_ptr<C2Param>> heapParams;
+        c2_status_t c2err = mClient->query(
+                {},
+                {C2ResourcesNeededTuning::PARAM_TYPE},
+                C2_MAY_BLOCK,
+                &heapParams);
+        // TODO: Should we fail the configuration if this query fails?
+        if (c2err != C2_OK || heapParams.size() != 1u) {
+            ALOGE("Failed to query component interface for required system resources: %d", c2err);
+        } else {
+            // Construct Required System Resources.
+            Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mResources);
+            std::vector<InstanceResourceInfo>& resources = *resourcesLocked;
+            getSystemResource(C2ResourcesNeededTuning::From(heapParams[0].get()), resources);
+        }
+    }
 
     mCallback->onComponentConfigured(config->mInputFormat, config->mOutputFormat);
 }
@@ -2771,6 +2834,15 @@ status_t CCodec::unsubscribeFromParameters(const std::vector<std::string> &names
     Mutexed<std::unique_ptr<Config>>::Locked configLocked(mConfig);
     const std::unique_ptr<Config> &config = *configLocked;
     return config->unsubscribeFromVendorConfigUpdate(comp, names);
+}
+
+std::vector<InstanceResourceInfo> CCodec::getRequiredSystemResources() {
+    if (android::media::codec::codec_availability_support()) {
+        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mResources);
+        return *resourcesLocked;
+    }
+
+    std::vector<InstanceResourceInfo>{};
 }
 
 void CCodec::onWorkDone(std::list<std::unique_ptr<C2Work>> &workItems) {

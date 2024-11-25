@@ -2579,15 +2579,15 @@ status_t MediaCodec::getRequiredResources(std::vector<InstanceResourceInfo>& res
         return INVALID_OPERATION;
     }
 
-    if (!mRequiredResourceInfo.empty()) {
-        resources = mRequiredResourceInfo;
-        return OK;
+    if (android::media::codec::codec_availability_support()) {
+        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mRequiredResourceInfo);
+        std::vector<InstanceResourceInfo>& requiredResourceInfo = *resourcesLocked;
+        if (!requiredResourceInfo.empty()) {
+            resources = requiredResourceInfo;
+            return OK;
+        }
     }
 
-    // TODO: For now this is just an empty function.
-    // The actual implementation should use component interface
-    // (for example, through mCodec->getRequiredDeviceResources) to query the
-    // the required resources for this configuration, and fill in resources with the same.
     return ERROR_UNSUPPORTED;
 }
 
@@ -4329,6 +4329,14 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                             && usingSwRenderer) {
                         mFlags |= kFlagUsesSoftwareRenderer;
                     }
+
+                    if (android::media::codec::codec_availability_support()) {
+                        // Get the required system resources now.
+                        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(
+                                mRequiredResourceInfo);
+                        *resourcesLocked = mCodec->getRequiredSystemResources();
+                    }
+
                     setState(CONFIGURED);
                     postPendingRepliesAndDeferredMessages("kWhatComponentConfigured");
 
@@ -7081,7 +7089,10 @@ void MediaCodec::onOutputFormatChanged() {
 
 void MediaCodec::onRequiredResourcesChanged(
         const std::vector<InstanceResourceInfo>& resourceInfo) {
-    mRequiredResourceInfo = resourceInfo;
+    if (android::media::codec::codec_availability_support()) {
+        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mRequiredResourceInfo);
+        *resourcesLocked = resourceInfo;
+    }
     // Make sure codec availability feature is on.
     if (mCallback != nullptr && android::media::codec::codec_availability()) {
         // Post the callback
