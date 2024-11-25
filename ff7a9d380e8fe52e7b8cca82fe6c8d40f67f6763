@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a513b3_31fbd472",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-11-25T20:25:04Z",
+      "side": 1,
+      "message": "just copy, overriding lint. (lint error will be updated in subsequent CLs.)",
+      "revId": "ff7a9d380e8fe52e7b8cca82fe6c8d40f67f6763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
