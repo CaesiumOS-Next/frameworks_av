@@ -1112,6 +1112,59 @@ void CCodec::initiateConfigureComponent(const sp<AMessage> &format) {
     msg->post();
 }
 
+// Construct the name based on the component store name
+// and the id of the resource.
+// resource name = "componentStoreName-id"
+static inline std::string getResourceName(const std::string& componentStoreName, uint32_t id) {
+    return componentStoreName + "-" + std::to_string(id);
+}
+
+/**
+ * A utility function that converts C2ResourcesNeededTuning into
+ * a vector of InstanceResourceInfo.
+ *
+ * Right now, this function is at its simplest form looking into
+ * mapping constant and per frame resource kinds,
+ * but we need to extend this to address:
+ *  - Construct the name for each resources
+ *    (using the resource id and component store)
+ *  - Devise a unified way of presenting per frame, per input/output block
+ *    resource requirements.
+ */
+static status_t getSystemResource(const C2ResourcesNeededTuning* systemResourcesInfo,
+                                  const std::string& storeName,
+                                  std::vector<InstanceResourceInfo>& resources) {
+    if (systemResourcesInfo && *systemResourcesInfo) {
+        for (size_t i = 0; i < systemResourcesInfo->flexCount(); ++i) {
+            const C2SystemResourceStruct& resource =
+                systemResourcesInfo->m.values[i];
+            uint64_t staticCount = 0;
+            uint64_t perFrameCount = 0;
+            std::string name = getResourceName(storeName, resource.id);
+
+            switch (resource.kind) {
+            case CONST:
+                staticCount = resource.amount;
+                break;
+            case PER_FRAME:
+                perFrameCount = resource.amount;
+                break;
+            case PER_INPUT_BLOCK:
+            case PER_OUTPUT_BLOCK:
+                // TODO: Find a way to pass this info through InstanceResourceInfo
+                // For now, we are using this as per frame count.
+                perFrameCount = resource.amount;
+                break;
+            }
+            resources.push_back({name, staticCount, perFrameCount});
+        }
+
+        return OK;
+    }
+
+    return UNKNOWN_ERROR;
+}
+
 void CCodec::configure(const sp<AMessage> &msg) {
     std::shared_ptr<Codec2Client::Component> comp;
     auto checkAllocated = [this, &comp] {
@@ -1860,6 +1913,28 @@ void CCodec::configure(const sp<AMessage> &msg) {
 
     mMetrics = new AMessage;
     mChannel->resetBuffersPixelFormat((config->mDomain & Config::IS_ENCODER) ? true : false);
+
+    // Query required/needed system resources for the current configuration.
+    if (android::media::codec::codec_availability_support()) {
+        std::vector<std::unique_ptr<C2Param>> heapParams;
+        c2_status_t c2err = comp->query(
+                {},
+                {C2ResourcesNeededTuning::PARAM_TYPE},
+                C2_MAY_BLOCK,
+                &heapParams);
+        // TODO: Should we fail the configuration if this query fails?
+        if (c2err != C2_OK || heapParams.size() != 1u) {
+            ALOGE("Failed to query component interface for required system resources: %d", c2err);
+        } else {
+            // Construct Required System Resources.
+            std::string storeName = mClient->getServiceName();
+            Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mResources);
+            std::vector<InstanceResourceInfo>& resources = *resourcesLocked;
+            getSystemResource(C2ResourcesNeededTuning::From(heapParams[0].get()),
+                              storeName,
+                              resources);
+        }
+    }
 
     mCallback->onComponentConfigured(config->mInputFormat, config->mOutputFormat);
 }
@@ -2773,6 +2848,15 @@ status_t CCodec::unsubscribeFromParameters(const std::vector<std::string> &names
     return config->unsubscribeFromVendorConfigUpdate(comp, names);
 }
 
+std::vector<InstanceResourceInfo> CCodec::getRequiredSystemResources() {
+    if (android::media::codec::codec_availability_support()) {
+        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mResources);
+        return *resourcesLocked;
+    }
+
+    return std::vector<InstanceResourceInfo>{};
+}
+
 void CCodec::onWorkDone(std::list<std::unique_ptr<C2Work>> &workItems) {
     if (!workItems.empty()) {
         Mutexed<std::list<std::unique_ptr<C2Work>>>::Locked queue(mWorkDoneQueue);
@@ -3517,6 +3601,87 @@ std::shared_ptr<C2GraphicBlock> CCodec::FetchGraphicBlock(
         break;
     }
     return block;
+}
+
+static
+c2_status_t queryGlobalResources(const std::shared_ptr<Codec2Client>& client,
+                                 std::vector<GlobalResourceInfo>& systemAvailableResources) {
+    std::vector<std::unique_ptr<C2Param>> heapParams;
+    c2_status_t c2err = client->query(
+            {},
+            {C2ResourcesCapacityTuning::PARAM_TYPE, C2ResourcesExcludedTuning::PARAM_TYPE},
+            C2_MAY_BLOCK,
+            &heapParams);
+
+    if (c2err == C2_OK || heapParams.size() == 2u) {
+        // Construct Globally available resources now.
+        // Get the total capacity first.
+        std::string storeName = client->getServiceName();
+        const C2ResourcesCapacityTuning* systemCapacity =
+                C2ResourcesCapacityTuning::From(heapParams[0].get());
+        if (systemCapacity && *systemCapacity) {
+            for (size_t i = 0; i < systemCapacity->flexCount(); ++i) {
+                const C2SystemResourceStruct& resource =
+                    systemCapacity->m.values[i];
+                std::string name = getResourceName(storeName, resource.id);
+                uint64_t capacity = (resource.kind == CONST) ? resource.amount : 0;
+                systemAvailableResources.push_back({name, capacity, capacity});
+            }
+        } else {
+            ALOGW("Failed to get C2ResourcesCapacityTuning");
+        }
+
+        // Get the excluded resource info.
+        // The available resource should exclude this, if there are any.
+        const C2ResourcesExcludedTuning* systemExcluded =
+                C2ResourcesExcludedTuning::From( heapParams[1].get());
+        if (systemExcluded && *systemExcluded) {
+            for (size_t i = 0; i < systemExcluded->flexCount(); ++i) {
+                const C2SystemResourceStruct& resource =
+                    systemExcluded->m.values[i];
+                std::string name = getResourceName(storeName, resource.id);
+                uint64_t excluded = (resource.kind == CONST) ? resource.amount : 0;
+                auto found = std::find_if(systemAvailableResources.begin(),
+                                          systemAvailableResources.end(),
+                                          [name](const GlobalResourceInfo& item) {
+                                              return item.mName == name; });
+
+                if (found != systemAvailableResources.end()) {
+                    // Take off excluded resources from available resources.
+                    found->mAvailable -= excluded;
+                } else {
+                    ALOGW("Failed to find the resource [%s]", name.c_str());
+                }
+            }
+        } else {
+            ALOGW("Failed to get C2ResourcesExcludedTuning");
+        }
+
+    } else {
+        ALOGW("Failed to query component store for system resources: %d", c2err);
+    }
+
+    return c2err;
+}
+
+//static
+std::vector<GlobalResourceInfo> CCodec::GetGloballyAvailableResources() {
+    if (android::media::codec::codec_availability_support()) {
+        // Try creating client from "default" service:
+        std::shared_ptr<Codec2Client> client = Codec2Client::CreateFromService("default");
+        if (client) {
+            // Query the system resource capacity from the component store.
+            std::vector<GlobalResourceInfo> systemAvailableResources;
+            c2_status_t status = queryGlobalResources(client, systemAvailableResources);
+            if (status == C2_OK) {
+                return systemAvailableResources;
+            }
+        } else {
+            ALOGW("Failed to create client from default component store!");
+        }
+    }
+
+    return std::vector<GlobalResourceInfo>{};
 }
 
 }  // namespace android
