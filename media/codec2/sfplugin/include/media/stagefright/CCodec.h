@@ -71,6 +71,8 @@ public:
     virtual status_t subscribeToParameters(const std::vector<std::string> &names) override;
     virtual status_t unsubscribeFromParameters(const std::vector<std::string> &names) override;
 
+    virtual std::vector<InstanceResourceInfo> getRequiredSystemResources() override;
+
     void initiateReleaseIfStuck();
     void onWorkDone(std::list<std::unique_ptr<C2Work>> &workItems);
     void onInputBufferDone(uint64_t frameIndex, size_t arrayIndex);
@@ -206,6 +208,7 @@ private:
     Mutexed<std::list<std::unique_ptr<C2Work>>> mWorkDoneQueue;
 
     sp<AMessage> mMetrics;
+    Mutexed<std::vector<InstanceResourceInfo>> mResources;
 
     friend class CCodecCallbackImpl;
 
