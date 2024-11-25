@@ -78,6 +78,8 @@ struct ACodec : public AHierarchicalStateMachine, public CodecBase {
     virtual status_t subscribeToParameters(const std::vector<std::string> &names) override;
     virtual status_t unsubscribeFromParameters(const std::vector<std::string> &names) override;
 
+    virtual std::vector<InstanceResourceInfo> getRequiredSystemResources() override;
+
     status_t queryCapabilities(
             const char* owner, const char* name,
             const char* mime, bool isEncoder,

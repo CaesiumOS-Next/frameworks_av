@@ -1193,12 +1193,14 @@ sp<PersistentSurface> MediaCodec::CreatePersistentInputSurface() {
 status_t MediaCodec::getGloballyAvailableResources(std::vector<GlobalResourceInfo>& resources) {
     resources.clear();
     // Make sure codec availability feature is on.
-    if (!android::media::codec::codec_availability()) {
+    if (!android::media::codec::codec_availability() ||
+        !android::media::codec::codec_availability_support()) {
         return ERROR_UNSUPPORTED;
     }
-    // TODO: For now this is just an empty function.
-    // The actual implementation should use component store to query the
-    // available resources from hal, and fill in resources with the same.
+    resources = CCodec::GetGloballyAvailableResources();
+    if (!resources.empty()) {
+        return OK;
+    }
     return ERROR_UNSUPPORTED;
 }
 
@@ -2569,7 +2571,8 @@ status_t MediaCodec::configure(
 status_t MediaCodec::getRequiredResources(std::vector<InstanceResourceInfo>& resources) {
     resources.clear();
     // Make sure codec availability feature is on.
-    if (!android::media::codec::codec_availability()) {
+    if (!android::media::codec::codec_availability() ||
+        !android::media::codec::codec_availability_support()) {
         return ERROR_UNSUPPORTED;
     }
     // Make sure that the codec was configured already.
@@ -2579,15 +2582,13 @@ status_t MediaCodec::getRequiredResources(std::vector<InstanceResourceInfo>& res
         return INVALID_OPERATION;
     }
 
-    if (!mRequiredResourceInfo.empty()) {
-        resources = mRequiredResourceInfo;
+    Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mRequiredResourceInfo);
+    std::vector<InstanceResourceInfo>& requiredResourceInfo = *resourcesLocked;
+    if (!requiredResourceInfo.empty()) {
+        resources = requiredResourceInfo;
         return OK;
     }
 
-    // TODO: For now this is just an empty function.
-    // The actual implementation should use component interface
-    // (for example, through mCodec->getRequiredDeviceResources) to query the
-    // the required resources for this configuration, and fill in resources with the same.
     return ERROR_UNSUPPORTED;
 }
 
@@ -4329,6 +4330,15 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                             && usingSwRenderer) {
                         mFlags |= kFlagUsesSoftwareRenderer;
                     }
+
+                    if (android::media::codec::codec_availability() &&
+                        android::media::codec::codec_availability_support()) {
+                        // Get the required system resources now.
+                        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(
+                                mRequiredResourceInfo);
+                        *resourcesLocked = mCodec->getRequiredSystemResources();
+                    }
+
                     setState(CONFIGURED);
                     postPendingRepliesAndDeferredMessages("kWhatComponentConfigured");
 
@@ -7081,9 +7091,15 @@ void MediaCodec::onOutputFormatChanged() {
 
 void MediaCodec::onRequiredResourcesChanged(
         const std::vector<InstanceResourceInfo>& resourceInfo) {
-    mRequiredResourceInfo = resourceInfo;
+    bool canIssueCallback = false;
+    if (android::media::codec::codec_availability() &&
+        android::media::codec::codec_availability_support()) {
+        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mRequiredResourceInfo);
+        *resourcesLocked = resourceInfo;
+        canIssueCallback = true;
+    }
     // Make sure codec availability feature is on.
-    if (mCallback != nullptr && android::media::codec::codec_availability()) {
+    if (mCallback != nullptr && canIssueCallback) {
         // Post the callback
         sp<AMessage> msg = mCallback->dup();
         msg->setInt32("callbackID", CB_REQUIRED_RESOURCES_CHANGED);
