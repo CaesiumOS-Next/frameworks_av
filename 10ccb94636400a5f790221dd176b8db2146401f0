@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d269d85b_413a2fe2",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-11-25T22:22:32Z",
+      "side": 1,
+      "message": "Thanks for the contribution!\n\nHow about `std::optional\u003ceffect_uuid_t\u003e \u003d std::nullopt` for type safe and semantic clarity?",
+      "range": {
+        "startLine": 160,
+        "startChar": 63,
+        "endLine": 160,
+        "endChar": 88
+      },
+      "revId": "10ccb94636400a5f790221dd176b8db2146401f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b40aab_bf10318b",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-11-25T22:22:32Z",
+      "side": 1,
+      "message": "With this change the log above could be misleading, I think we should combine this check with line#164.\nI think it will be helpful to log the uuid now.\nAnd maybe we should avoid `memcmp`, what do you think?",
+      "range": {
+        "startLine": 168,
+        "startChar": 20,
+        "endLine": 169,
+        "endChar": 83
+      },
+      "revId": "10ccb94636400a5f790221dd176b8db2146401f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
