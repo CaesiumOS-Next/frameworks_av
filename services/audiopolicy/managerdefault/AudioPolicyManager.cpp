@@ -2161,14 +2161,15 @@ audio_io_handle_t AudioPolicyManager::selectOutput(const SortedVector<audio_io_h
     // 2: the output with the highest number of requested functional flags
     //    with tiebreak preferring the minimum number of extra functional flags
     //    (see b/200293124, the incorrect selection of AUDIO_OUTPUT_FLAG_VOIP_RX).
-    // 3: the output supporting the exact channel mask
-    // 4: the output with a higher channel count than requested
-    // 5: the output with the highest sampling rate if the requested sample rate is
+    // 3: the output with the exact channel mask
+    // 4: the output supporting the exact channel mask
+    // 5: the output with a higher channel count than requested
+    // 6: the output with the highest sampling rate if the requested sample rate is
     //    greater than default sampling rate
-    // 6: the output with the highest number of requested performance flags
-    // 7: the output with the bit depth the closest to the requested one
-    // 8: the primary output
-    // 9: the first output in the list
+    // 7: the output with the highest number of requested performance flags
+    // 8: the output with the bit depth the closest to the requested one
+    // 9: the primary output
+    // 10: the first output in the list
 
     // matching criteria values in priority order for best matching output so far
     std::vector<uint32_t> bestMatchCriteria(8, 0);
@@ -2223,12 +2224,16 @@ audio_io_handle_t AudioPolicyManager::selectOutput(const SortedVector<audio_io_h
                 outputDesc->getChannelMask());
         if (channelMask != AUDIO_CHANNEL_NONE && channelCount > 2 &&
             channelCount <= outputChannelCount) {
-            if ((audio_channel_mask_get_representation(channelMask) ==
-                    audio_channel_mask_get_representation(outputDesc->getChannelMask())) &&
-                    ((channelMask & outputDesc->getChannelMask()) == channelMask)) {
-                currentMatchCriteria[2] = outputChannelCount;
+            if (audio_channel_mask_get_representation(channelMask) ==
+                    audio_channel_mask_get_representation(outputDesc->getChannelMask())) {
+                if (channelMask == outputDesc->getChannelMask()) {
+                    currentMatchCriteria[2] = outputChannelCount;
+                }
+                if ((channelMask & outputDesc->getChannelMask()) == channelMask) {
+                    currentMatchCriteria[3] = outputChannelCount;
+                }
             }
-            currentMatchCriteria[3] = outputChannelCount;
+            currentMatchCriteria[4] = outputChannelCount;
         }
 
         // sampling rate match
@@ -2240,21 +2245,21 @@ audio_io_handle_t AudioPolicyManager::selectOutput(const SortedVector<audio_io_h
             // if none exists, prefer the closest output sampling rate less than target.
             //
             // criteria is offset to make non-negative.
-            currentMatchCriteria[4] = diff >= 0 ? -diff + 200'000'000 : diff + 100'000'000;
+            currentMatchCriteria[5] = diff >= 0 ? -diff + 200'000'000 : diff + 100'000'000;
         }
 
         // performance flags match
-        currentMatchCriteria[5] = popcount(outputDesc->mFlags & performanceFlags);
+        currentMatchCriteria[6] = popcount(outputDesc->mFlags & performanceFlags);
 
         // format match
         if (format != AUDIO_FORMAT_INVALID) {
-            currentMatchCriteria[6] =
+            currentMatchCriteria[7] =
                 PolicyAudioPort::kFormatDistanceMax -
                 PolicyAudioPort::formatDistance(format, outputDesc->getFormat());
         }
 
         // primary output match
-        currentMatchCriteria[7] = outputDesc->mFlags & AUDIO_OUTPUT_FLAG_PRIMARY;
+        currentMatchCriteria[8] = outputDesc->mFlags & AUDIO_OUTPUT_FLAG_PRIMARY;
 
         // compare match criteria by priority then value
         if (std::lexicographical_compare(bestMatchCriteria.begin(), bestMatchCriteria.end(),
