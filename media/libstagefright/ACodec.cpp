@@ -9446,4 +9446,8 @@ status_t ACodec::unsubscribeFromParameters([[maybe_unused]] const std::vector<st
     return OK;
 }
 
+std::vector<InstanceResourceInfo> ACodec::getRequiredSystemResources() {
+    return std::vector<InstanceResourceInfo>{};
+}
+
 }  // namespace android
