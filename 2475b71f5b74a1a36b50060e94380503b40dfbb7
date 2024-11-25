@@ -68,6 +68,24 @@
       "message": "Removing myself since I no longer work in this space",
       "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea0f31d_4535af53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3645304
+      },
+      "writtenOn": "2024-11-25T21:15:19Z",
+      "side": 1,
+      "message": "Hi Vadim! #hellofromtheotherside :) \n\nThis change should fix virtual camera CTS on qcomm Snapdragon XR2 hardware.\nIt seems that without this flag the gralloc implementation on qcomm allocates buffer format which is not compatible with EXT_YUV_target and the shader execution fails.\n\nThe sufficient test should be \"run atest CtsVirtualCameraTestCases\" on device with Snapdragon XR2 (or other platform sharing same gralloc implementation).\n\nHowever, this change should be generally safe (the flag is also set in external camera HAL implentation here [0]).\n\n[0] https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/camera/device/default/ExternalCameraDeviceSession.cpp;drc\u003d8c428d7ad225937c3d716dce88c9129e844b203b;l\u003d438",
+      "parentUuid": "7a45063b_94c2f0f3",
+      "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
