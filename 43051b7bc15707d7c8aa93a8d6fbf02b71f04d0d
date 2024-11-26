@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d619c571_9830fa86",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 3603,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-26T23:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de0e594d_ef4fa273",
+      "range": {
+        "startLine": 3603,
+        "startChar": 12,
+        "endLine": 3603,
+        "endChar": 32
+      },
+      "revId": "43051b7bc15707d7c8aa93a8d6fbf02b71f04d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bd22dc6_5d71ccbf",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-26T19:10:55Z",
       "side": 1,
       "message": "As of now, this isn\u0027t considering the used resources (by the codec components).\nBut that can be addressed in a separate change",
+      "range": {
+        "startLine": 1200,
+        "startChar": 0,
+        "endLine": 1200,
+        "endChar": 60
+      },
+      "revId": "43051b7bc15707d7c8aa93a8d6fbf02b71f04d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be77dd2b_33e34420",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-11-26T23:56:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0bd22dc6_5d71ccbf",
       "range": {
         "startLine": 1200,
         "startChar": 0,
