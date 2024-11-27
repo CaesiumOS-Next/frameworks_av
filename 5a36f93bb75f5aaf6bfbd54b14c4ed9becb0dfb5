@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ccdd7b_339bf734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-11-27T08:45:49Z",
+      "side": 1,
+      "message": "I think the race condition still exists but this is better than before.",
+      "revId": "5a36f93bb75f5aaf6bfbd54b14c4ed9becb0dfb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
