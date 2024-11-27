@@ -86,6 +86,24 @@
       "parentUuid": "7a45063b_94c2f0f3",
       "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbef8f7_8cf9317a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143408
+      },
+      "writtenOn": "2024-11-27T16:36:24Z",
+      "side": 1,
+      "message": "Hello !! Nice to see you here ! \n\nI had a similar request from another OEM (https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3290543) \n\nI think the correct implementation is this one: https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3380568\n\nBut I talked with the camera team who basically told me that producerUsage are meant to be written and consumed by vendor component. \n\nVirtualCamera is a special case here since we don\u0027t know the Allocator implementation so we can\u0027t make assumption on the usage needed. \n\nLet\u0027s try with the new CL and see how it goes.",
+      "parentUuid": "3ea0f31d_4535af53",
+      "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
