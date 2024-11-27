@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e549a7c0_1eb41a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-27T21:12:01Z",
+      "side": 1,
+      "message": "I thought more about the codec renaming. This would need to be done in the internal MediaCodecList, so that MediaCodec::CreateByName works with the NDK name.",
+      "revId": "953c0d7ad9cb409d0ac923949a500a0fe03b9147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08bff1d_9e257820",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-11-27T21:12:01Z",
+      "side": 1,
+      "message": "Do we want to keep supporting null format?",
+      "range": {
+        "startLine": 85,
+        "startChar": 27,
+        "endLine": 85,
+        "endChar": 31
+      },
+      "revId": "953c0d7ad9cb409d0ac923949a500a0fe03b9147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
