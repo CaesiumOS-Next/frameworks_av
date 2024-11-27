@@ -16,6 +16,70 @@
       "message": "Hi Andy, Could you please review this change to see if it\u0027s acceptable?\n\nI\u0027ve found that some apps\u0027 ANR logs show they are blocking in obtainBuffer, but the AudioFlinger dump indicates that the client track has already been disabled.",
       "revId": "efe4afe70b838115fdc303fa2dccecd94ffb6637",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5940a51_929e2ab2",
+        "filename": "media/libaudioclient/AudioTrackShared.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-27T00:45:20Z",
+      "side": 1,
+      "message": "can you please fix this?  I would suggest adding:\n\n    // Check inactive to prevent waiting if the track has been disabled due to underrun\n    // (or invalidated).  The subsequent call to obtainBufer will return NOT_ENOUGH_DATA\n    // (or DEAD_OBJECT) and restart (or restore) the track.\n    const int32_t current_flags \u003d android_atomic_acquire_load(\u0026cblk-\u003emFlags);\n    const bool inactive \u003d current_flags \u0026 (CBLK_INVALID | CBLK_DISABLED);",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 102
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "29697928_fa14d478",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AudioTrackShared.cpp",
+              "range": {
+                "startLine": 313,
+                "startChar": 0,
+                "endLine": 314,
+                "endChar": 0
+              },
+              "replacement": "        // Check inactive to prevent waiting if the track has been disabled\n        // due to underrun (or invalidated).  The subsequent call to obtainBuffer\n        // will return WOULD_BLOCK.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "efe4afe70b838115fdc303fa2dccecd94ffb6637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4142d2f0_7f7ec6f3",
+        "filename": "media/libaudioclient/AudioTrackShared.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-11-27T00:45:20Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 102
+      },
+      "revId": "efe4afe70b838115fdc303fa2dccecd94ffb6637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
