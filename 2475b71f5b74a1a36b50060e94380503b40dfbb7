@@ -122,6 +122,23 @@
       "parentUuid": "3bbef8f7_8cf9317a",
       "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56dd1bc0_f9b6ddb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-11-28T11:09:52Z",
+      "side": 1,
+      "message": "Thank you Vadim for the new fix. I\u0027ll abandon this CL for now to see how the new CL goes and we can revisit if needed.",
+      "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
