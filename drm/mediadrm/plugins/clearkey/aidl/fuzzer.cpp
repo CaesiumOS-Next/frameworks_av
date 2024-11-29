@@ -28,6 +28,8 @@ using android::fuzzService;
 using ndk::SharedRefBase;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
+    // TODO(b/183141167): need to rewrite 'dump' to avoid SIGPIPE.
+    signal(SIGPIPE, SIG_IGN);
     std::shared_ptr<DrmFactory> drmFactory = createDrmFactory();
     fuzzService(drmFactory->asBinder().get(),  FuzzedDataProvider(data, size));
 
