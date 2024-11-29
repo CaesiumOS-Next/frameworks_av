@@ -139,6 +139,24 @@
       "message": "Thank you Vadim for the new fix. I\u0027ll abandon this CL for now to see how the new CL goes and we can revisit if needed.",
       "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094671ef_3b741654",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3645304
+      },
+      "writtenOn": "2024-11-29T07:55:56Z",
+      "side": 1,
+      "message": "Thanks a lot! \n\nWe had another patch on top of this fixing also extending vs. overriding consumer flags prepared for upstreaming, but you cl already fixes that as well!",
+      "parentUuid": "dab9e825_04868985",
+      "revId": "2475b71f5b74a1a36b50060e94380503b40dfbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
