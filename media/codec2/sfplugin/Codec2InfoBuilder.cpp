@@ -16,9 +16,6 @@
 
 //#define LOG_NDEBUG 0
 #define LOG_TAG "Codec2InfoBuilder"
-
-#include <cstdlib>
-
 #include <log/log.h>
 
 #include <strings.h>
@@ -511,10 +508,6 @@ status_t Codec2InfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
                 && !hasPrefix(v.first, "domain-")
                 && !hasPrefix(v.first, "variant-")) {
             writer->addGlobalSetting(v.first.c_str(), v.second.c_str());
-            if (v.first == "max-concurrent-instances") {
-                MediaCodecInfoWriter::SetMaxSupportedInstances(
-                        (int32_t)strtol(v.second.c_str(), NULL, 10));
-            }
         }
     }
 
@@ -803,7 +796,6 @@ status_t Codec2InfoBuilder::buildMediaCodecList(MediaCodecListWriter* writer) {
                     }
                 }
             }
-            codecInfo->createCodecCaps();
         }
     }
     return OK;
