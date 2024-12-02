@@ -486,7 +486,7 @@ public:
         if (!stopHalBeforeSurface) {
             mBqPoolDeferDeallocAfterStop =
                     ::android::base::GetIntProperty(
-                            "debug.codec2.bqpool_dealloc_after_stop", 0) != 0;
+                            "debug.codec2.bqpool_dealloc_after_stop", 1) != 0;
         }
 #endif
     }
