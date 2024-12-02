@@ -3826,6 +3826,10 @@ void CameraService::doUserSwitch(const std::vector<int32_t>& newUserIds) {
         if (mAllowedUsers.find(clientUserId) != mAllowedUsers.end()) {
             continue;
         }
+        // Don't evict clients that have a system UID
+        if (callerHasSystemUid(clientUid)) {
+            continue;
+        }
 
         evicted.push_back(clientSp);
 

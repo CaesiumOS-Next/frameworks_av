@@ -162,8 +162,14 @@ public:
 
     // The word 'System' here does not refer to callers only on the system
     // partition. They just need to have an android system uid.
+    bool hasSystemUid(int callingUid) {
+        return (callingUid < AID_APP_START);
+    }
+
+    // The word 'System' here does not refer to callers only on the system
+    // partition. They just need to have an android system uid.
     bool callerHasSystemUid() const {
-        return (getCallingUid() < AID_APP_START);
+        return hasSystemUid(getCallingUid());
     }
 
     bool hasPermissionsForCamera(int callingPid, int callingUid, int32_t deviceId) const {
