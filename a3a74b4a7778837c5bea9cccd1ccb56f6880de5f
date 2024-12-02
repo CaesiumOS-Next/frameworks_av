@@ -378,6 +378,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09907968_e52293a6",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-12-02T12:20:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d108a17_51d20963",
+      "range": {
+        "startLine": 447,
+        "startChar": 4,
+        "endLine": 450,
+        "endChar": 42
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfe74489_9bc32b47",
@@ -510,6 +534,30 @@
       "side": 1,
       "message": "Sorry my first comments did not make that much sense.\n\nThe goal is to avoid a sequence of safe Rust calls that could possibly cause invalid memory accesses.\n\nThe problem comes with `AMediaCodec_getInputBuffer` and `AMediaCodec_getOutputBuffer` specifying \"The specified buffer index must have been previously obtained from dequeue______Buffer, and not yet queued.\"\n\nIIUC the way to use the input API correctly is:\n\n```rust\nlet index \u003d ???;\nlet buffer \u003d media_codec.get_input_buffer(index);\nbuffer[...] \u003d ...;\nmedia_codec.queue_input_buffer(index, ..., buffer.len(), ..., ...);\n```\n\nThe Rust API needs to be safe against misuses of the API which could trigger the code to do invalid `unsafe` behavior, such as:\n\n- Getting indexes wrong\n```\nlet index \u003d ???;\nlet buffer \u003d media_codec.get_input_buffer(index);\nbuffer[...] \u003d ...;\nmedia_codec.queue_input_buffer(index + 1, ..., buffer.len(), ..., ...);\n```\n- Getting sizes wrong\n```\nlet index \u003d ???;\nlet buffer \u003d media_codec.get_input_buffer(index);\nbuffer[...] \u003d ...;\nmedia_codec.queue_input_buffer(index, ..., buffer.len() + 1, ..., ...);\n```\n- Accessing memory at the wrong time\n```\nlet index \u003d ???;\nlet buffer \u003d media_codec.get_input_buffer(index);\nbuffer[...] \u003d ...;\nmedia_codec.queue_input_buffer(index, ..., buffer.len(), ..., ...);\nbuffer[...] \u003d ...;\n```\n- Otherwise using resources after they\u0027re \"done\":\n```\nlet index \u003d ???;\nlet buffer \u003d media_codec.get_input_buffer(index);\nbuffer[...] \u003d ...;\nmedia_codec.queue_input_buffer(index, ..., buffer.len(), ..., ...);\nmedia_codec.queue_input_buffer(index, ..., buffer.len(), ..., ...);\n```\n\n(This is assuming that the `size` from `getInputBuffer` needs to be given back exactly.)\n\nThe way to solve all of these problems at once is to introduce a new type like `InputBuffer` and design the Rust API around this type:\n```\nstruct InputBuffer\u003c\u0027a\u003e {\n  index: usize,\n  data: \u0026\u0027a mut [u8]\n}\nimpl InputBuffer {\n  fn data_mut(\u0026mut self) -\u003e \u0026mut [u8] {}\n}\n...\nimpl MediaCodec {\n  fn get_input_buffer(\u0026\u0027a mut self) -\u003e InputBuffer\u003c\u0027a\u003e { /* dequeueInputBuffer and getInputBuffer */ }\n  fn queue_input_buffer(\u0026\u0027a mut self, buffer: InputBuffer\u003c\u0027a\u003e, offset: usize, time: u64, flags: u32) { /* use data in buffer, maybe check that `offset` is within range */ }\n}\n```\n\n`InputBuffer` is templated with the lifetime of `MediaCodec`, so it cannot outlive `MediaCodec`. `queue_input_buffer` explicitly consumes the `InputBuffer`, so it cannot be used again. `index` is contained within the `InputBuffer`, so the user cannot mishandle indexes between the two calls. `InputBuffer` also keeps track of the size internally.",
       "parentUuid": "ac51d63f_dc762e92",
+      "range": {
+        "startLine": 575,
+        "startChar": 8,
+        "endLine": 576,
+        "endChar": 38
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cb83b34_9cab7be5",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-12-02T12:20:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "66e3e729_1efe17fe",
       "range": {
         "startLine": 575,
         "startChar": 8,

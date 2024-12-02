@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b4a1c32_b26cb280",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-12-02T12:20:19Z",
+      "side": 1,
+      "message": "FYI: I have come up with a nicer (and safer) API re cody\u0027s comments, updated the tests, everything works there, however, I am still fighting the compiler over lifetimes integrating that API into the final target (crosvm)...",
+      "revId": "980e934f52b189d313dc16096e64893ceb1f4785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
