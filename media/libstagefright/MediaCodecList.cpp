@@ -20,6 +20,11 @@
 
 #include <binder/IServiceManager.h>
 
+#include <android_media_codec.h>
+
+#include <android-base/properties.h>
+#include <android-base/no_destructor.h>
+
 #include <media/IMediaCodecList.h>
 #include <media/IMediaPlayerService.h>
 #include <media/MediaCodecInfo.h>
@@ -49,10 +54,6 @@
 namespace android {
 
 namespace {
-
-Mutex sInitMutex;
-
-Mutex sRemoteInitMutex;
 
 constexpr const char* kProfilingResults =
         MediaCodecsXmlParser::defaultProfilingResultsXmlPath;
@@ -113,9 +114,6 @@ std::vector<MediaCodecListBuilderBase *> GetBuilders() {
 }  // unnamed namespace
 
 // static
-sp<IMediaCodecList> MediaCodecList::sCodecList;
-
-// static
 void *MediaCodecList::profilerThreadWrapper(void * /*arg*/) {
     ALOGV("Enter profilerThreadWrapper.");
     remove(kProfilingResults);  // remove previous result so that it won't be loaded to
@@ -143,10 +141,20 @@ void *MediaCodecList::profilerThreadWrapper(void * /*arg*/) {
     return nullptr;
 }
 
+static bool MediaCodecList::sBootCompleted = false;
+
 // static
 sp<IMediaCodecList> MediaCodecList::getLocalInstance() {
     Mutex::Autolock autoLock(sInitMutex);
 
+    if (android::media::codec::provider_()->in_process_sw_audio_codec_support()
+            && !sBootCompleted) {
+        sBootCompleted = base::GetBoolProperty("sys.boot_completed", false);
+        if (sBootCompleted) {
+            ALOGI("Boot completed, will reset local instance.");
+            sCodecList = nullptr;
+        }
+    }
     if (sCodecList == nullptr) {
         MediaCodecList *codecList = new MediaCodecList(GetBuilders());
         if (codecList->initCheck() == OK) {
@@ -167,8 +175,6 @@ sp<IMediaCodecList> MediaCodecList::getLocalInstance() {
 
     return sCodecList;
 }
-
-sp<IMediaCodecList> MediaCodecList::sRemoteList;
 
 sp<MediaCodecList::BinderDeathObserver> MediaCodecList::sBinderDeathObserver;
 sp<IBinder> MediaCodecList::sMediaPlayer;  // kept since linked to death
