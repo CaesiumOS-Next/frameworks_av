@@ -90,6 +90,7 @@ private:
         void binderDied(const wp<IBinder> &the_late_who __unused);
     };
 
+    static bool sBootCompleted;
     static sp<BinderDeathObserver> sBinderDeathObserver;
     static sp<IBinder> sMediaPlayer;
 

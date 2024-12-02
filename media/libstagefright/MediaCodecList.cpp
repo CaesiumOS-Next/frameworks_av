@@ -20,6 +20,11 @@
 
 #include <binder/IServiceManager.h>
 
+#include <android_media_codec.h>
+
+#include <android-base/properties.h>
+#include <android-base/no_destructor.h>
+
 #include <media/IMediaCodecList.h>
 #include <media/IMediaPlayerService.h>
 #include <media/MediaCodecInfo.h>
@@ -143,10 +148,20 @@ void *MediaCodecList::profilerThreadWrapper(void * /*arg*/) {
     return nullptr;
 }
 
+/* static */ bool MediaCodecList::sBootCompleted = false;
+
 // static
 sp<IMediaCodecList> MediaCodecList::getLocalInstance() {
     Mutex::Autolock autoLock(sInitMutex);
 
+    if (android::media::codec::provider_->in_process_sw_audio_codec_support()
+            && !sBootCompleted) {
+        sBootCompleted = base::GetBoolProperty("sys.boot_completed", false);
+        if (sBootCompleted) {
+            ALOGI("Boot completed, will reset local instance.");
+            sCodecList = nullptr;
+        }
+    }
     if (sCodecList == nullptr) {
         MediaCodecList *codecList = new MediaCodecList(GetBuilders());
         if (codecList->initCheck() == OK) {
