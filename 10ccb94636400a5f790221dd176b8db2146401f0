@@ -93,6 +93,30 @@
       },
       "revId": "10ccb94636400a5f790221dd176b8db2146401f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd293d96_8a8ca050",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-12-02T19:09:15Z",
+      "side": 1,
+      "message": "I uploaded another CL https://android-review.googlesource.com/c/platform/system/media/+/3387719 to add `ToString` and `\u003d\u003d` utils for `audio_uuid_t`, this CL has been updated accordingly.",
+      "parentUuid": "f23b6b17_4bfd492b",
+      "range": {
+        "startLine": 168,
+        "startChar": 20,
+        "endLine": 169,
+        "endChar": 83
+      },
+      "revId": "10ccb94636400a5f790221dd176b8db2146401f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
