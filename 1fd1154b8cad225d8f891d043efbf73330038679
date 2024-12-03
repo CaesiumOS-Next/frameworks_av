@@ -1,0 +1,189 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "956c0cc4_876f027c",
+        "filename": "media/ndk/NdkMediaCodecInfoPriv.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-03T21:28:51Z",
+      "side": 1,
+      "message": "No `using namespace` in header files please.",
+      "fixSuggestions": [
+        {
+          "fixId": "c3c0d890_089d90d4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "    std::shared_ptr\u003candroid::AudioCapabilities\u003e mAudioCaps;\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "        const std::vector\u003candroid::Range\u003cint\u003e\u003e\u0026 sampleRateRanges\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 45,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "        const std::vector\u003candroid::Range\u003cint\u003e\u003e\u0026 inputChannels\n                \u003d mAudioCaps-\u003egetInputChannelCountRanges();\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "    ACodecAudioCapabilities(std::shared_ptr\u003candroid::AudioCapabilities\u003e audioCaps)\n            : mAudioCaps(audioCaps) {\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    std::shared_ptr\u003cconst android::VideoCapabilities::PerformancePoint\u003e mPerformancePoint;\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "    ACodecPerformancePoint(std::shared_ptr\u003cconst android::VideoCapabilities::PerformancePoint\u003e\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": "    std::shared_ptr\u003candroid::VideoCapabilities\u003e mVideoCaps;\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 71,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "        const std::vector\u003candroid::VideoCapabilities::PerformancePoint\u003e\u0026 performancePoints\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "                    std::shared_ptr\u003cconst android::VideoCapabilities::PerformancePoint\u003e(\u0026(*it)));\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 79,
+                "startChar": 0,
+                "endLine": 80,
+                "endChar": 0
+              },
+              "replacement": "    ACodecVideoCapabilities(std::shared_ptr\u003candroid::VideoCapabilities\u003e videoCaps)\n            : mVideoCaps(videoCaps) {\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "    std::shared_ptr\u003candroid::EncoderCapabilities\u003e mEncoderCaps;\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": "    ACodecEncoderCapabilities(std::shared_ptr\u003candroid::EncoderCapabilities\u003e encoderCaps)\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 94,
+                "endChar": 0
+              },
+              "replacement": "    sp\u003candroid::MediaCodecInfo\u003e mInfo;\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "    std::shared_ptr\u003candroid::CodecCapabilities\u003e mCodecCaps;\n"
+            },
+            {
+              "path": "media/ndk/NdkMediaCodecInfoPriv.h",
+              "range": {
+                "startLine": 101,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "    AMediaCodecInfo(std::string name, sp\u003candroid::MediaCodecInfo\u003e info, std::string mediaType)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1fd1154b8cad225d8f891d043efbf73330038679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
