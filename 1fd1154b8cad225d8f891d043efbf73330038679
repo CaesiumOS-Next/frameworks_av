@@ -219,6 +219,24 @@
       "parentUuid": "956c0cc4_876f027c",
       "revId": "1fd1154b8cad225d8f891d043efbf73330038679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe73dbfd_3b4d8076",
+        "filename": "media/ndk/NdkMediaCodecInfoPriv.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-12-03T23:30:13Z",
+      "side": 1,
+      "message": "Deleted",
+      "parentUuid": "a6230d8b_d9e52ccd",
+      "revId": "1fd1154b8cad225d8f891d043efbf73330038679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
