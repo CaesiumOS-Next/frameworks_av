@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03945308_0ae9150b",
+        "filename": "media/codec2/vndk/platform/C2BqBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-03T21:25:39Z",
+      "side": 1,
+      "message": "This should be set only when mDeferDeallocationAfterStop is set.\n\nHolding reference should be activated only when mDeferDeallocationAfterStop is set.",
+      "range": {
+        "startLine": 777,
+        "startChar": 32,
+        "endLine": 777,
+        "endChar": 59
+      },
+      "revId": "5f72cdcd6c984436af4e938ba5bd9487ac55ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
