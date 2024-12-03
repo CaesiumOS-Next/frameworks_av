@@ -23,6 +23,7 @@
 #include <string>
 #include <vector>
 #include <media/MediaResource.h>
+#include <media/stagefright/ResourceInfo.h>
 #include <aidl/android/media/ClientInfoParcel.h>
 #include <aidl/android/media/IResourceManagerClient.h>
 #include <aidl/android/media/MediaResourceParcel.h>
@@ -211,6 +212,9 @@ public:
         return mMap;
     }
 
+    // For each MediaResourceType, get amount of resource being used at the moment.
+    void getMediaResourceUsageReport(std::vector<MediaResourceParcel>* resources) const;
+
 private:
     // Get ResourceInfos associated with the given process.
     // If none exists, this method will create and associate an empty object and return it.
@@ -249,6 +253,7 @@ private:
     std::map<pid_t, ProcessInfoOverride> mProcessInfoOverrideMap;
     // Interface that gets process specific information.
     sp<ProcessInfoInterface> mProcessInfo;
+    std::vector<GlobalResourceInfo> mGlobalResourceInfo;
 };
 
 } // namespace android
