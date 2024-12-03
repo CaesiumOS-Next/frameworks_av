@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c02114_e7a3f145",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2711,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-03T22:36:16Z",
+      "side": 1,
+      "message": "nit: this does not belong in this file as it only describes the C2 API.",
+      "range": {
+        "startLine": 2710,
+        "startChar": 35,
+        "endLine": 2711,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ebcaec12_f90d34c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/core/include/C2Config.h",
+              "range": {
+                "startLine": 2710,
+                "startChar": 0,
+                "endLine": 2712,
+                "endChar": 0
+              },
+              "replacement": " * IInputSurface when it is queried.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b8a77ff34f628664e2679a662c8187e1f35eac64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
