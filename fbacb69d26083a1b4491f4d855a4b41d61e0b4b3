@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02038d8a_fa2270df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1328424
+      },
+      "writtenOn": "2024-12-03T11:53:06Z",
+      "side": 1,
+      "message": "Hi @jiajia.tian@amlogic.com Can you address the comments unresolved?",
+      "revId": "fbacb69d26083a1b4491f4d855a4b41d61e0b4b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
