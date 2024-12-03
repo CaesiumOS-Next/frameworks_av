@@ -19,6 +19,7 @@
 
 #include <media/stagefright/foundation/ADebug.h>
 
+#include <C2Buffer.h>
 #include <codec2/aidl/GraphicBufferAllocator.h>
 #include <codec2/aidl/GraphicsTracker.h>
 
@@ -122,11 +123,14 @@ c2_status_t GraphicBufferAllocator::displayBuffer(
 GraphicBufferAllocator::~GraphicBufferAllocator() {}
 
 std::shared_ptr<GraphicBufferAllocator> GraphicBufferAllocator::CreateGraphicBufferAllocator(
+        std::shared_ptr<C2Allocator> allocator,
         int maxDequeueCount) {
-    return ::ndk::SharedRefBase::make<GraphicBufferAllocator>(maxDequeueCount);
+    return ::ndk::SharedRefBase::make<GraphicBufferAllocator>(allocator, maxDequeueCount);
 }
 
-GraphicBufferAllocator::GraphicBufferAllocator(int maxDequeueCount)
-        : mGraphicsTracker(GraphicsTracker::CreateGraphicsTracker(maxDequeueCount)) {}
+GraphicBufferAllocator::GraphicBufferAllocator(
+        std::shared_ptr<C2Allocator> allocator, int maxDequeueCount)
+    : mAllocator(allocator),
+      mGraphicsTracker(GraphicsTracker::CreateGraphicsTracker(allocator, maxDequeueCount)) {}
 
 } // namespace aidl::android::hardware::media::c2::implementation

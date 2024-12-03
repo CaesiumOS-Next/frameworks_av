@@ -172,7 +172,7 @@ void GraphicsTracker::BufferCache::unblockSlot(int slot) {
     p->cv.notify_one();
 }
 
-GraphicsTracker::GraphicsTracker(int maxDequeueCount)
+GraphicsTracker::GraphicsTracker(std::shared_ptr<C2Allocator> allocator, int maxDequeueCount)
     : mBufferCache(new BufferCache()), mNumDequeueing{0}, mMaxDequeue{maxDequeueCount},
     mMaxDequeueCommitted{maxDequeueCount},
     mDequeueable{maxDequeueCount},
@@ -187,6 +187,7 @@ GraphicsTracker::GraphicsTracker(int maxDequeueCount)
         mMaxDequeueCommitted = kMaxDequeueMax;
         mDequeueable = kMaxDequeueMax;
     }
+    mAllocator = allocator;
     int pipefd[2] = { -1, -1};
     int ret = ::pipe2(pipefd, O_CLOEXEC | O_NONBLOCK);
 

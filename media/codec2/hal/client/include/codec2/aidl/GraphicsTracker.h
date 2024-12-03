@@ -57,8 +57,10 @@ using ::android::sp;
  */
 class GraphicsTracker {
 public:
-    static std::shared_ptr<GraphicsTracker> CreateGraphicsTracker(int maxDequeueCount) {
-        GraphicsTracker *p = new GraphicsTracker(maxDequeueCount);
+    static std::shared_ptr<GraphicsTracker> CreateGraphicsTracker(
+            std::shared_ptr<C2Allocator> allocator,
+            int maxDequeueCount) {
+        GraphicsTracker *p = new GraphicsTracker(allocator, maxDequeueCount);
         std::shared_ptr<GraphicsTracker> sp(p);
         return sp;
     }
@@ -290,8 +292,11 @@ private:
 
     std::atomic<bool> mStopped;
 
+    // Allocator for direct allocation (when there is no IGBP.)
+    std::shared_ptr<C2Allocator> mAllocator;
+
 private:
-    explicit GraphicsTracker(int maxDequeueCount);
+    explicit GraphicsTracker(std::shared_ptr<C2Allocator> allocator, int maxDequeueCount);
 
     // return {@code true} only when dequeue config adjust happened.
     // {@code updateDequeueConf} is an output parameter, and returns

@@ -1857,6 +1857,7 @@ struct Codec2Client::Component::GraphicBufferAllocators {
 private:
     std::optional<C2BlockPool::local_id_t> mCurrentId;
     std::shared_ptr<AidlGraphicBufferAllocator> mCurrent;
+    std::shared_ptr<C2Allocator> mAllocator;
 
     // A new BlockPool is created before the old BlockPool is destroyed.
     // This holds the reference of the old BlockPool when a new BlockPool is
@@ -1865,6 +1866,11 @@ private:
     std::mutex mMutex;
 
 public:
+    GraphicBufferAllocators() {
+        (void)GetCodec2PlatformAllocatorStore()->fetchAllocator(
+                C2PlatformAllocatorStore::GRALLOC, &mAllocator);
+        CHECK(mAllocator);
+    }
     // Creates a GraphicBufferAllocator which will be passed to HAL
     // for creating C2BlockPool. And the created GraphicBufferAllocator
     // will be used afterwards by current().
@@ -1880,8 +1886,8 @@ public:
             mCurrent.reset();
         }
         // TODO: integrate initial value with CCodec/CCodecBufferChannel
-        mCurrent =
-                AidlGraphicBufferAllocator::CreateGraphicBufferAllocator(3 /* maxDequeueCount */);
+        mCurrent = AidlGraphicBufferAllocator::CreateGraphicBufferAllocator(
+                mAllocator, 3 /* maxDequeueCount */);
         ALOGD("GraphicBufferAllocator created");
         return mCurrent;
     }

@@ -25,6 +25,8 @@
 
 #include <C2Buffer.h>
 
+class C2Allocator;
+
 namespace aidl::android::hardware::media::c2::implementation {
 
 // forward declarations
@@ -134,13 +136,16 @@ public:
      * The interface will be cretaed in the beginning of Codec createion. And
      * lives until the instance destroyed.
      *
+     * @param   allocator         allocator for direct allocation.
      * @param   maxDequeueCount   Initial max allocatable count
      */
     static std::shared_ptr<GraphicBufferAllocator> CreateGraphicBufferAllocator(
+            std::shared_ptr<C2Allocator> allocator,
             int maxDequeueCount);
 private:
-    GraphicBufferAllocator(int maxDequeueCount);
+    GraphicBufferAllocator(std::shared_ptr<C2Allocator> allocator, int maxDequeueCount);
 
+    std::shared_ptr<C2Allocator> mAllocator;
     std::shared_ptr<GraphicsTracker> mGraphicsTracker;
 
     friend class ::ndk::SharedRefBase;
