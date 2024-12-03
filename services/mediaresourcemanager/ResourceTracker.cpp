@@ -20,6 +20,7 @@
 #include <utils/Log.h>
 
 #include <binder/IPCThreadState.h>
+#include <media/stagefright/CCodec.h>
 #include <mediautils/ProcessInfo.h>
 #include "ResourceTracker.h"
 #include "ResourceManagerServiceNew.h"
@@ -70,6 +71,8 @@ ResourceTracker::ResourceTracker(const std::shared_ptr<ResourceManagerServiceNew
                                  const sp<ProcessInfoInterface>& processInfo) :
         mService(service),
         mProcessInfo(processInfo) {
+    // Get the globally available resources.
+    mGlobalResourceInfo = CCodec::GetGloballyAvailableResources();
 }
 
 ResourceTracker::~ResourceTracker() {
@@ -769,6 +772,22 @@ bool ResourceTracker::isCallingPriorityHigher(int callingPid, int pid) {
     }
 
     return (callingPidPriority < priority);
+}
+
+void ResourceTracker::getMediaResourceUsageReport(
+        std::vector<MediaResourceParcel>* resources) const {
+    ResourceList resourceUsageList;
+
+    // Add up all the resource usage by every process into resourceUsageList
+    for (const auto& [pid, /* ResourceInfos */ infos] : mMap) {
+        for (const auto& [infoKey, /* ResourceInfo */ info] : infos) {
+            for (const MediaResourceParcel& res : info.resources.getResources()) {
+                resourceUsageList.add(res);
+            }
+        }
+    }
+
+    *resources = resourceUsageList.getResources();
 }
 
 } // namespace android
