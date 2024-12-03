@@ -175,6 +175,14 @@ public:
      */
     void stop();
 
+    /**
+     * stop()/release() request to HAL is in process from the client.
+     * The class will never be active again after the request.
+     * Still, allocation requests from HAL should be served until stop()
+     * is being called.
+     */
+    void onRequestStop();
+
 private:
     struct BufferCache;
 
@@ -290,6 +298,10 @@ private:
 
     std::atomic<bool> mStopped;
 
+    bool mStopRequested;
+    int mAllocAfterStopRequested;
+
+
 private:
     explicit GraphicsTracker(int maxDequeueCount);
 
@@ -333,6 +345,10 @@ private:
             uint32_t width, uint32_t height, PixelFormat format, uint64_t usage,
             bool *cached, int *rSlotId, sp<Fence> *rFence,
             std::shared_ptr<BufferItem> *buffer);
+
+    bool _allocateDirect(
+            uint32_t width, uint32_t height, PixelFormat format, uint64_t usage,
+            AHardwareBuffer **buf, sp<Fence> *fence, c2_status_t *ret);
 
     void writeIncDequeueableLocked(int inc);
     void drainDequeueableLocked(int dec);

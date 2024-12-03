@@ -32,6 +32,8 @@ namespace {
 static constexpr int kMaxDequeueMin = 1;
 static constexpr int kMaxDequeueMax = ::android::BufferQueueDefs::NUM_BUFFER_SLOTS - 2;
 
+static constexpr int kAllocateDirectUs = 16666; // frame seconds of 60 fps
+
 c2_status_t retrieveAHardwareBufferId(const C2ConstGraphicBlock &blk, uint64_t *bid) {
     std::shared_ptr<const _C2BlockPoolData> bpData = _C2BlockFactory::GetGraphicBlockPoolData(blk);
     if (!bpData || bpData->getType() != _C2BlockPoolData::TYPE_AHWBUFFER) {
@@ -177,7 +179,7 @@ GraphicsTracker::GraphicsTracker(int maxDequeueCount)
     mMaxDequeueCommitted{maxDequeueCount},
     mDequeueable{maxDequeueCount},
     mTotalDequeued{0}, mTotalCancelled{0}, mTotalDropped{0}, mTotalReleased{0},
-    mInConfig{false}, mStopped{false} {
+    mInConfig{false}, mStopped{false}, mStopRequested{false}, mAllocAfterStopRequested{0} {
     if (maxDequeueCount < kMaxDequeueMin) {
         mMaxDequeue = kMaxDequeueMin;
         mMaxDequeueCommitted = kMaxDequeueMin;
@@ -490,6 +492,18 @@ void GraphicsTracker::stop() {
     }
 }
 
+void GraphicsTracker::onRequestStop() {
+    std::unique_lock<std::mutex> l(mLock);
+    if (mStopped) {
+        return;
+    }
+    if (mStopRequested) {
+        return;
+    }
+    mStopRequested = true;
+    writeIncDequeueableLocked(kMaxDequeueMax - 1);
+}
+
 void GraphicsTracker::writeIncDequeueableLocked(int inc) {
     CHECK(inc > 0 && inc < kMaxDequeueMax);
     thread_local char buf[kMaxDequeueMax];
@@ -728,12 +742,52 @@ c2_status_t GraphicsTracker::_allocate(const std::shared_ptr<BufferCache> &cache
     return C2_OK;
 }
 
+bool GraphicsTracker::_allocateDirect(
+        uint32_t width, uint32_t height, PixelFormat format, uint64_t usage,
+        AHardwareBuffer **buf, sp<Fence> *rFence, c2_status_t *ret) {
+    std::unique_lock<std::mutex> l(mLock);
+    if (!mStopRequested) {
+        return false;
+    }
+
+    AHardwareBuffer_Desc desc;
+    desc.width = width;
+    desc.height = height;
+    desc.layers = 1u;
+    desc.format = ::android::AHardwareBuffer_convertFromPixelFormat(format);
+    desc.usage = ::android::AHardwareBuffer_convertFromGrallocUsageBits(usage);
+    desc.rfu0 = 0;
+    desc.rfu1 = 0;
+
+    int res = AHardwareBuffer_allocate(&desc, buf);
+    if (res != ::android::OK) {
+        ALOGE("_allocateDirect() failed(%d)", res);
+        if (res == ::android::NO_MEMORY) {
+            *ret = C2_NO_MEMORY;
+        } else {
+            *ret = C2_CORRUPTED;
+        }
+    } else {
+        mAllocAfterStopRequested++;
+        *ret = C2_OK;
+        *rFence = Fence::NO_FENCE;
+        ALOGD("_allocateDirect() allocated %d buffer", mAllocAfterStopRequested);
+    }
+    return true;
+}
+
 c2_status_t GraphicsTracker::allocate(
         uint32_t width, uint32_t height, PixelFormat format, uint64_t usage,
         AHardwareBuffer **buf, sp<Fence> *rFence) {
     if (mStopped.load() == true) {
         ALOGE("cannot allocate due to being stopped");
         return C2_BAD_STATE;
+    }
+    c2_status_t directRes = C2_OK;
+    if (_allocateDirect(width, height, format, usage, buf, rFence, &directRes)) {
+        // Delay a little bit for HAL to receive stop()/release() request.
+        ::usleep(kAllocateDirectUs);
+        return directRes;
     }
     std::shared_ptr<BufferCache> cache;
     c2_status_t res = requestAllocate(&cache);
