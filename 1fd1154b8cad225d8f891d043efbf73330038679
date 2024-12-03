@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e0be1c_dab57198",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 39
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-03T21:41:46Z",
+      "side": 1,
+      "message": "This looks good to me. Please remove the using namespace from the headers and add the .map.txt changes as requested by Eddy.",
+      "revId": "1fd1154b8cad225d8f891d043efbf73330038679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "956c0cc4_876f027c",
@@ -182,6 +199,24 @@
           ]
         }
       ],
+      "revId": "1fd1154b8cad225d8f891d043efbf73330038679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6230d8b_d9e52ccd",
+        "filename": "media/ndk/NdkMediaCodecInfoPriv.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-03T21:41:46Z",
+      "side": 1,
+      "message": "Great catch! There should be a lint about that.",
+      "parentUuid": "956c0cc4_876f027c",
       "revId": "1fd1154b8cad225d8f891d043efbf73330038679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
