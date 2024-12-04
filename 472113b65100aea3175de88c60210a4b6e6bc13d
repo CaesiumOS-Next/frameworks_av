@@ -16,6 +16,157 @@
       "message": "Francois, I have noticed that after aosp/3020124 when parsing engine config files that do not have the `id` field for the strategy, like this one: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/enginedefault/config/example/phone/audio_policy_engine_product_strategies.xml, the built-in strategies will receive vendor IDs. I think this is unintended, so I\u0027m fixing this.",
       "revId": "472113b65100aea3175de88c60210a4b6e6bc13d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "948b1ab4_acfcd467",
+        "filename": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-12-04T10:05:37Z",
+      "side": 1,
+      "message": "Can we check that we only allow this for the configurable engine? The default engine will not work with a strategy without ID",
+      "range": {
+        "startLine": 554,
+        "startChar": 11,
+        "endLine": 554,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3dde4d70_7919a3d0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "ConversionResult\u003cstd::string\u003e aidl2legacy_AudioHalProductStrategy_ProductStrategyType(\n        int id, bool isVendorStrategy) {\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "    if (isVendorStrategy) {\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "        const media::audio::common::AudioHalProductStrategy\u0026 aidl, bool isVendorStrategy) {\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "                    aidl2legacy_AudioHalProductStrategy_ProductStrategyType(aidl.id, isVendorStrategy)));\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 187,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": "    static android::status_t deserialize(_xmlDoc *doc, const _xmlNode *root, Collection \u0026ps,\n                                         bool isVendorStrategy);\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 537,
+                "startChar": 0,
+                "endLine": 538,
+                "endChar": 0
+              },
+              "replacement": "                                            Collection \u0026strategies, bool isVendorStrategy)\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 550,
+                "startChar": 0,
+                "endLine": 551,
+                "endChar": 0
+              },
+              "replacement": "    } else if (isVendorStrategy) {\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 554,
+                "startChar": 0,
+                "endLine": 555,
+                "endChar": 0
+              },
+              "replacement": "        } else {\n            ALOGE(\"%s: Invalid strategy name %s\", __FUNCTION__, name.c_str());\n            return BAD_VALUE;\n        }\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 811,
+                "startChar": 0,
+                "endLine": 811,
+                "endChar": 0
+              },
+              "replacement": "    bool isVendorStrategy \u003d false;\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 812,
+                "startChar": 0,
+                "endLine": 813,
+                "endChar": 0
+              },
+              "replacement": "                doc.get(), cur, config-\u003eproductStrategies, nbSkippedElements, isVendorStrategy);\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 853,
+                "startChar": 0,
+                "endLine": 854,
+                "endChar": 0
+              },
+              "replacement": "ParsingResult convert(const ::android::media::audio::common::AudioHalEngineConfig\u0026 aidlConfig,\n                      bool isVendorStrategy) {\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 858,
+                "startChar": 0,
+                "endLine": 859,
+                "endChar": 0
+              },
+              "replacement": "                    aidl2legacy_AudioHalProductStrategy_ProductStrategy, isVendorStrategy); conv.ok()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "472113b65100aea3175de88c60210a4b6e6bc13d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
