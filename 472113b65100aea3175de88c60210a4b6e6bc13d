@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f248c55_8d3ab5e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-04T01:00:50Z",
+      "side": 1,
+      "message": "Francois, I have noticed that after aosp/3020124 when parsing engine config files that do not have the `id` field for the strategy, like this one: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/enginedefault/config/example/phone/audio_policy_engine_product_strategies.xml, the built-in strategies will receive vendor IDs. I think this is unintended, so I\u0027m fixing this.",
+      "revId": "472113b65100aea3175de88c60210a4b6e6bc13d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
