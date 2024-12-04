@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19f8c8b_7204ec26",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2024-12-04T12:26:04Z",
+      "side": 1,
+      "message": "We could instead use static size_t getAudioSampleSize(AudioEncoding e)\nif we move getAudioSampleSize and getAudioFormat to libstagefright/include/DataConverter.h for instance.\n\nThen we do not need have the switch statement.",
+      "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
