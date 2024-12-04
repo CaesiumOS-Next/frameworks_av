@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d6e27c_9c81a75e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 44
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-12-04T20:09:56Z",
+      "side": 1,
+      "message": "The previous presumit failures look to be https://b.corp.google.com/issues/382235536 which should now be fixed, so hopefully this run will do better",
+      "revId": "d88caa41af777ab38763008ab76097b8047d123d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
