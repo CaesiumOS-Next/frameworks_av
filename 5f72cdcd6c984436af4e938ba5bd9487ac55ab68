@@ -22,6 +22,30 @@
       },
       "revId": "5f72cdcd6c984436af4e938ba5bd9487ac55ab68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cefbc81c_db21e960",
+        "filename": "media/codec2/vndk/platform/C2BqBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1765237
+      },
+      "writtenOn": "2024-12-04T08:22:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "03945308_0ae9150b",
+      "range": {
+        "startLine": 777,
+        "startChar": 32,
+        "endLine": 777,
+        "endChar": 59
+      },
+      "revId": "5f72cdcd6c984436af4e938ba5bd9487ac55ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
