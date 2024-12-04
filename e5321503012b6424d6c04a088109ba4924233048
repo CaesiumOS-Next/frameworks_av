@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31adf2c_3d0c27f3",
+        "filename": "media/codec2/hal/client/GraphicsTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-04T19:07:24Z",
+      "side": 1,
+      "message": "There is a stop()/release() request to HAL in progress.\n\nSo the allocated frame may not delivered to client, this is just some meaningful delay for HAL to receive the request. So the actual delay value does not matter.\n\nI added explanation to the comment.",
+      "parentUuid": "b8bb5ecf_ac737dbb",
+      "range": {
+        "startLine": 35,
+        "startChar": 68,
+        "endLine": 35,
+        "endChar": 74
+      },
+      "revId": "e5321503012b6424d6c04a088109ba4924233048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10d86ccb_cd9cfa16",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-04T18:42:53Z",
       "side": 1,
       "message": "bit?",
+      "range": {
+        "startLine": 786,
+        "startChar": 30,
+        "endLine": 786,
+        "endChar": 33
+      },
+      "revId": "e5321503012b6424d6c04a088109ba4924233048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "098d786a_ac13cf40",
+        "filename": "media/codec2/hal/client/GraphicsTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-04T19:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10d86ccb_cd9cfa16",
       "range": {
         "startLine": 786,
         "startChar": 30,
