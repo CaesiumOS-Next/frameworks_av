@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27abddac_6e30c020",
+        "filename": "media/ndk/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-12-04T18:29:19Z",
+      "side": 1,
+      "message": "I think this should include `sdk_version: \"current\",` to ensure the build is actually using the NDK stubs",
+      "revId": "eb8ece9932d50019a7fb9f2b1ed32ef7dd63b7fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
