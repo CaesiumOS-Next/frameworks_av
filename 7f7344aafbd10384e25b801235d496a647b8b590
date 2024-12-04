@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b3a27f5_57244c85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-04T01:06:32Z",
+      "side": 1,
+      "message": "Upstreaming ag/29211704 with conflicts resolved.",
+      "revId": "7f7344aafbd10384e25b801235d496a647b8b590",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
