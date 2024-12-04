@@ -547,9 +547,13 @@ status_t ProductStrategyTraits::deserialize(_xmlDoc *doc, const _xmlNode *child,
         if (!convertTo(idLiteral, id)) {
             return BAD_VALUE;
         }
-        ALOGV("%s: %s, %s = %d", __FUNCTION__, name.c_str(), Attributes::id, id);
+    } else {
+        legacy_strategy legacyId;
+        if (legacy_strategy_from_string(name.c_str(), &legacyId)) {
+            id = legacyId;
+        }  // Otherwise it can be a vendor-provided strategy name.
     }
-    ALOGV("%s: %s = %s", __FUNCTION__, Attributes::name, name.c_str());
+    ALOGV("%s: %s, %s = %d", __FUNCTION__, name.c_str(), Attributes::id, id);
 
     size_t skipped = 0;
     AttributesGroups attrGroups;
