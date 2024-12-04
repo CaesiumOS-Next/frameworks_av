@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84557c2f_c5ed108d",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-12-04T16:34:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7a5d43b_edc76e89",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "717fa0ea_8ffe63a9",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Good to know, in this case I\u0027d argue that if the send fails, it is because the receiver is no longer alive which is an error in using these APIs. Not sure how better to handle this, I cannot communicate this failure since it only happened because who I want to communicate to is no longer there.",
       "parentUuid": "4d6ae7a1_d5eb3e6c",
+      "range": {
+        "startLine": 170,
+        "startChar": 32,
+        "endLine": 170,
+        "endChar": 41
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1735ce11_a5f31b79",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-12-04T16:34:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e908e173_60ca6e98",
       "range": {
         "startLine": 170,
         "startChar": 32,
@@ -297,6 +345,30 @@
       "side": 1,
       "message": "Good point, I\u0027m adding code to protect the sequence calling AMediaFormat_toString and making a copy into a CString (rather than CStr) with a mutex. It\u0027s still not perfectly safe since I cannot guarantee that there are no other callers of this API in the process, but it\u0027s a debug API, so I\u0027m not too worried about it. Terrible NDK API design though.",
       "parentUuid": "f4d7abcc_9bc249a0",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 10
+      },
+      "revId": "a3a74b4a7778837c5bea9cccd1ccb56f6880de5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "896c06d2_0bac4e5c",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2024-12-04T16:34:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dec96e4d_fbb70486",
       "range": {
         "startLine": 426,
         "startChar": 0,
