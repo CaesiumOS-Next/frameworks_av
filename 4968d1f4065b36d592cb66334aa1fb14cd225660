@@ -33,6 +33,47 @@
       "message": "(restarting presubmit since the error seems unrelated to your CL)",
       "revId": "4968d1f4065b36d592cb66334aa1fb14cd225660",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef2250e0_9b7d5185",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-04T19:38:21Z",
+      "side": 1,
+      "message": "outcount will need to be described here as well.",
+      "range": {
+        "startLine": 536,
+        "startChar": 1,
+        "endLine": 536,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ca26678_aa8dd5de",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 536,
+                "startChar": 0,
+                "endLine": 536,
+                "endChar": 0
+              },
+              "replacement": " * @param outCount      The size of the output array.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4968d1f4065b36d592cb66334aa1fb14cd225660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
