@@ -39,3 +39,23 @@ cc_test {
         "NdkMediaFormat_test.cpp",
     ],
 }
+
+cc_test {
+    name: "NdkAMediaCodecStoreTest",
+    test_suites: ["device-tests"],
+    sdk_version: "current",
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libmediandk",
+    ],
+
+    srcs: [
+        "NdkAMediaCodecStoreTest.cpp",
+    ],
+}
