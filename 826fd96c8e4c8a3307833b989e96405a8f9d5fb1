@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1f1c552_8b96277f",
+        "filename": "media/codec2/vndk/platform/C2BqBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-04T23:25:49Z",
+      "side": 1,
+      "message": "we\u0027d better move this to between L646 to L647.\nThe cached blocks will be removed on next allocation attempt.\n\nAnd memory impact could be minimized.",
+      "range": {
+        "startLine": 648,
+        "startChar": 0,
+        "endLine": 648,
+        "endChar": 36
+      },
+      "revId": "826fd96c8e4c8a3307833b989e96405a8f9d5fb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e87bc9af_4b6ec3e5",
+        "filename": "media/codec2/vndk/platform/C2BqBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-04T23:25:49Z",
+      "side": 1,
+      "message": "This will keep cached buffers until the next surface change,\nAnd it\u0027s gonna be indefinite duration.\nSo this has significant impact on memory.\n\nI agree to remove the delayed block of \nclearDeferredBlocks_l() though.\n\nAlso refer to my comment above.",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 36
+      },
+      "revId": "826fd96c8e4c8a3307833b989e96405a8f9d5fb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
