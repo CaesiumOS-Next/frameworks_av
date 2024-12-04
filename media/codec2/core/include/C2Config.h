@@ -1292,9 +1292,9 @@ C2ENUM(C2Config::resource_kind_t, uint32_t,
  */
 
 struct C2SystemResourceStruct {
-    C2SystemResourceStruct(uint32_t id_,
-                           C2Config::resource_kind_t kind_,
-                           uint64_t amount_)
+    C2SystemResourceStruct(uint32_t id_ = 0,
+                           C2Config::resource_kind_t kind_ = CONST,
+                           uint64_t amount_ = 0)
         : id(id_), kind(kind_), amount(amount_) { }
     uint32_t id;
     C2Config::resource_kind_t kind;
