@@ -16,6 +16,24 @@
       "message": "I think this should include `sdk_version: \"current\",` to ensure the build is actually using the NDK stubs",
       "revId": "eb8ece9932d50019a7fb9f2b1ed32ef7dd63b7fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f388cfd_a565b8db",
+        "filename": "media/ndk/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2024-12-04T19:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27abddac_6e30c020",
+      "revId": "eb8ece9932d50019a7fb9f2b1ed32ef7dd63b7fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
