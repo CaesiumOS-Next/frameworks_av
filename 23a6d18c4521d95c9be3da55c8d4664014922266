@@ -50,6 +50,30 @@
       ],
       "revId": "23a6d18c4521d95c9be3da55c8d4664014922266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e377a5_2174c938",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1297,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-05T17:21:12Z",
+      "side": 1,
+      "message": "- There is a static assertion for C2 structure must have default constructor\n- id 0 (at resource manager) is unspecified and also when the amount is 0, we ignore it anyway.\n- I will add default constructor as you have suggested",
+      "parentUuid": "a78bd77f_7a883ca4",
+      "range": {
+        "startLine": 1295,
+        "startChar": 27,
+        "endLine": 1297,
+        "endChar": 48
+      },
+      "revId": "23a6d18c4521d95c9be3da55c8d4664014922266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
