@@ -30,6 +30,8 @@ cc_test {
     ],
 
     shared_libs: [
+        "libbase",
+        "libbinder_ndk",
         "liblog",
         "libmediandk",
         "libutils",
