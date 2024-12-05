@@ -34,6 +34,24 @@
       "parentUuid": "b174c91f_51882d8b",
       "revId": "27115d1890328d876c33ed48abac5abd800a70f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647cd98f_e9763fb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1837035
+      },
+      "writtenOn": "2024-12-05T08:50:33Z",
+      "side": 1,
+      "message": "Hi Brian,\nSo, do you agree with us that we should let APK decide push_blank or not for secure case? If so, could you check if this modification can support this requirement and also keep the original flow work?\n\nThanks",
+      "parentUuid": "b52cbdfb_565a5a3f",
+      "revId": "27115d1890328d876c33ed48abac5abd800a70f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
