@@ -70,6 +70,24 @@
       "parentUuid": "f366e72b_abae1ddd",
       "revId": "60cbc2b506fdbc98550abdcce55c20e9124c3a60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe65e28_76692ea0",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-12-05T14:46:10Z",
+      "side": 0,
+      "message": "Let me discuss with the Codecs team.",
+      "parentUuid": "ba312a9d_d1fbe8ec",
+      "revId": "60cbc2b506fdbc98550abdcce55c20e9124c3a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
