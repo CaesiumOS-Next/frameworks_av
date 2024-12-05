@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "352397fc_c9805c7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-12-05T16:39:44Z",
+      "side": 1,
+      "message": "This needs to be the change ID of http://ag/28806896. I gave bad advice in the other CL!\n\n`Merged-In: I54b1ebbb1e9e3467ecb401555c4de42dfcaf8ca6`",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "873d7e67a1862292c091c2f4f10e1e07404856d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
