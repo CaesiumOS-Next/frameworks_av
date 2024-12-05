@@ -1,5 +1,46 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d90d8a_6a00a514",
+        "filename": "media/ndk/NdkMediaCodecInfoPriv.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-12-05T13:29:28Z",
+      "side": 1,
+      "message": "We should probably take the `name` and `mediaType` arguments by const reference, instead of by copy.\n\nIt\u0027s possible that as a function declared in the header file, the compiler is optimizing this to remove the additional string copies.  But assuming it isn\u0027t a major pain API review-wise, it\u0027s likely worth explicitly using things like `const std::string \u0026name` just to be sure.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 89
+      },
+      "revId": "ef3ee0579bd10264559279b561db60b6ad464662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf0408a_0aa87c97",
+        "filename": "media/ndk/NdkMediaCodecStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-12-05T13:29:28Z",
+      "side": 1,
+      "message": "We probably want to take `codecInfo` by const reference, instead of creating a copy.  We have the `const` here, but don\u0027t have the `\u0026`.  I\u0027d recommend using `const AMediaCodecInfo \u0026codecInfo`.",
+      "revId": "ef3ee0579bd10264559279b561db60b6ad464662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
