@@ -33,6 +33,23 @@
       "message": "Eric, ping for a review.",
       "revId": "188c3aa4dad9d173260af2a945c63d927d9c905d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cd0a0e2_6e2c8ac6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-05T21:06:39Z",
+      "side": 1,
+      "message": "Ajender and Harika, please also bring these CLs to the attention of Qualcomm-Reviewers.",
+      "revId": "188c3aa4dad9d173260af2a945c63d927d9c905d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
