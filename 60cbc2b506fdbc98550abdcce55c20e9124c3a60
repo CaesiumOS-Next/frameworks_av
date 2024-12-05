@@ -52,6 +52,24 @@
       "parentUuid": "9252b33e_a5577f60",
       "revId": "60cbc2b506fdbc98550abdcce55c20e9124c3a60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba312a9d_d1fbe8ec",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-12-05T14:44:32Z",
+      "side": 0,
+      "message": "Sorry, I withdraw my comment.It looks like the app\u0027s preference for KEY_PUSH_BLANK_BUFFERS_ON_STOP is ignored for secure/protected components. I misread.",
+      "parentUuid": "f366e72b_abae1ddd",
+      "revId": "60cbc2b506fdbc98550abdcce55c20e9124c3a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
