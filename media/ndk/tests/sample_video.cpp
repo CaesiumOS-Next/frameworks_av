@@ -6,6 +6,7 @@
 #include <vector>
 #include <queue>
 #include <condition_variable>
+#include <android/binder_process.h>
 
 #include <media/NdkMediaCodec.h>
 #include <media/NdkMediaExtractor.h>
@@ -414,6 +415,7 @@ AMediaExtractor* GetAndroidMediaExtractor(const std::string& file_path) {
 
 // Run decoder on the video track of the given media file.
 int RunMediaDecoder(const std::string& filename, bool async) {
+  ABinderProcess_startThreadPool();
   ALOGI("Running decoder %s.", async ? "asynchronously" : "synchronously");
   AMediaExtractor* extractor = GetAndroidMediaExtractor(filename);
   if (extractor == nullptr) {
@@ -491,22 +493,27 @@ int RunMediaDecoder(const std::string& filename, bool async) {
     // Codec is configured to work synchronously.
     // So, start feeding the input and process the output.
     for (;;) {
+      BufferState input_buffer_state = BufferState::kSuccess;
+      BufferState output_buffer_state = BufferState::kSuccess;
       // Keep processing input buffers until we run out of data or available
       // buffers.
       for (;;) {
-        BufferState input_buffer_state = ProcessNextSample(extractor, codec);
+        input_buffer_state = ProcessNextSample(extractor, codec);
         if (input_buffer_state != BufferState::kSuccess) {
           break;
         }
       }
       // Keep processing output buffers until we run out of available buffers.
       for (;;) {
-        BufferState output_buffer_state = ProcessNextOutputBuffer(codec);
+        output_buffer_state = ProcessNextOutputBuffer(codec);
         if (output_buffer_state != BufferState::kSuccess) {
           break;
         }
       }
-      std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      if (input_buffer_state == BufferState::kError || output_buffer_state == BufferState::kError) {
+        break;
+      }
+      std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
   }
 
