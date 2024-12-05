@@ -52,6 +52,24 @@
       "parentUuid": "b52cbdfb_565a5a3f",
       "revId": "27115d1890328d876c33ed48abac5abd800a70f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d65986c_e8947f77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1580654
+      },
+      "writtenOn": "2024-12-05T14:45:56Z",
+      "side": 1,
+      "message": "I withdraw this comment. I misread the original code.",
+      "parentUuid": "647cd98f_e9763fb7",
+      "revId": "27115d1890328d876c33ed48abac5abd800a70f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
