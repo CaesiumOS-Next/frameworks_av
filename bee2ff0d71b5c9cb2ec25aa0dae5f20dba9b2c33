@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4559c2e8_5887e3ac",
+        "filename": "services/audiopolicy/common/include/policy.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-12-05T07:53:52Z",
+      "side": 1,
+      "message": "_",
+      "range": {
+        "startLine": 37,
+        "startChar": 41,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c2fe841c_86887039",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/common/include/policy.h",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "#define AUDIO_DEFINE_MAP_ENTRY_V(symbol, _) { AUDIO_ENUM_STRINGIFY(symbol), symbol },\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bee2ff0d71b5c9cb2ec25aa0dae5f20dba9b2c33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
