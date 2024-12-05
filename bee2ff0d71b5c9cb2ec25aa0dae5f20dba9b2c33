@@ -40,6 +40,30 @@
       ],
       "revId": "bee2ff0d71b5c9cb2ec25aa0dae5f20dba9b2c33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5535bdb9_9cdea0b5",
+        "filename": "services/audiopolicy/common/include/policy.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-05T18:55:27Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "4559c2e8_5887e3ac",
+      "range": {
+        "startLine": 37,
+        "startChar": 41,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "bee2ff0d71b5c9cb2ec25aa0dae5f20dba9b2c33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
