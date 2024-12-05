@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a78bd77f_7a883ca4",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1297,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-05T17:02:22Z",
+      "side": 1,
+      "message": "What is the purpose of adding default parameter? (and is there any meaning for id being zero?)\n\nWould it better to have like\n\n```\nC2SystemResrouceStruct() : C2SystemResrouceStruct(0, CONST, 0) {}\n```",
+      "range": {
+        "startLine": 1295,
+        "startChar": 27,
+        "endLine": 1297,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1409d490_bbff4538",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/core/include/C2Config.h",
+              "range": {
+                "startLine": 1295,
+                "startChar": 0,
+                "endLine": 1298,
+                "endChar": 0
+              },
+              "replacement": "    C2SystemResourceStruct(uint32_t id_,\n                           C2Config::resource_kind_t kind_,\n                           uint64_t amount_)\n"
+            },
+            {
+              "path": "media/codec2/core/include/C2Config.h",
+              "range": {
+                "startLine": 1299,
+                "startChar": 0,
+                "endLine": 1299,
+                "endChar": 0
+              },
+              "replacement": "\n    C2SystemResourceStruct() : C2SystemResourceStruct(0, CONST, 0) {}\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "23a6d18c4521d95c9be3da55c8d4664014922266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
