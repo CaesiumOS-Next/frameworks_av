@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35713886_0e5aab5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-12-05T01:11:56Z",
+      "side": 1,
+      "message": "Re-approving previously landed CL, with small additional build fix",
+      "revId": "66bf6e24287c6a25bcd1ab7706335de8e29ecaac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
