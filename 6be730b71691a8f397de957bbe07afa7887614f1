@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e580f63d_1574ad83",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-12-06T14:58:42Z",
+      "side": 1,
+      "message": "I this loop is probably better structured as a do{}while() instead of the current while-do. I think that will simplify some flow.\n\ni could possibly see  if (cond1) { do {... } while (cond2) }\nif the entry conditions are non-empty.\nBut I do think that the entry conditions are different than \"do another iteration\"\nconditions. and that the current while/do struggles with expressing that.",
+      "range": {
+        "startLine": 502,
+        "startChar": 4,
+        "endLine": 502,
+        "endChar": 85
+      },
+      "revId": "6be730b71691a8f397de957bbe07afa7887614f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
