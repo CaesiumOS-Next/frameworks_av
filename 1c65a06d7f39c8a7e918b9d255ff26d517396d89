@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8d87e1e6_d6fd05dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-12-06T10:08:53Z",
+      "side": 1,
+      "message": "Done. Needs re-approval for the CL as the votes were reset on commit message update. btw, is there a way to prevent the vote resets or not? Thanks.",
+      "parentUuid": "f0fb2350_0e74737e",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "1c65a06d7f39c8a7e918b9d255ff26d517396d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bd7da823_c63549c7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
