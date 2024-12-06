@@ -1212,7 +1212,7 @@ status_t MediaCodec::getGloballyAvailableResources(std::vector<GlobalResourceInf
     resources.clear();
     // Make sure codec availability feature is on.
     if (!android::media::codec::codec_availability() ||
-        !android::media::codec::codec_availability_support()) {
+        !android::media::codec::codec_availability_integration()) {
         return ERROR_UNSUPPORTED;
     }
 
@@ -2624,7 +2624,7 @@ status_t MediaCodec::getRequiredResources(std::vector<InstanceResourceInfo>& res
     resources.clear();
     // Make sure codec availability feature is on.
     if (!android::media::codec::codec_availability() ||
-        !android::media::codec::codec_availability_support()) {
+        !android::media::codec::codec_availability_integration()) {
         return ERROR_UNSUPPORTED;
     }
     // Make sure that the codec was configured already.
@@ -4394,7 +4394,7 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                     }
 
                     if (android::media::codec::codec_availability() &&
-                        android::media::codec::codec_availability_support()) {
+                        android::media::codec::codec_availability_integration()) {
                         // Get the required system resources now.
                         Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(
                                 mRequiredResourceInfo);
@@ -4546,7 +4546,7 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                                 MediaResource::GraphicMemoryResource(getGraphicBufferSize()));
                     }
                     if (android::media::codec::codec_availability() &&
-                        android::media::codec::codec_availability_support()) {
+                        android::media::codec::codec_availability_integration()) {
                         Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(
                                 mRequiredResourceInfo);
                         std::vector<InstanceResourceInfo>& requiredResourceInfo = *resourcesLocked;
@@ -7169,7 +7169,7 @@ void MediaCodec::onRequiredResourcesChanged(
         const std::vector<InstanceResourceInfo>& resourceInfo) {
     bool canIssueCallback = false;
     if (android::media::codec::codec_availability() &&
-        android::media::codec::codec_availability_support()) {
+        android::media::codec::codec_availability_integration()) {
         Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mRequiredResourceInfo);
         *resourcesLocked = resourceInfo;
         canIssueCallback = true;
