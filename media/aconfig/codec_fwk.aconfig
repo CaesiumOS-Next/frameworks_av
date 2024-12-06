@@ -32,7 +32,10 @@ flag {
   name: "codec_availability_support"
   namespace: "codec_fwk"
   description: "Feature flag for codec availability HAL API implementation"
-  bug: "363282971"
+  bug: "382739177"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }
 
 flag {
