@@ -29,6 +29,18 @@ flag {
 }
 
 flag {
+  name: "codec_availability_integration"
+  namespace: "codec_fwk"
+  description: "Bugfix flag for codec availability HAL integration"
+  bug: "382739177"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+ }
+
+# Since the codec availability hal integration with frameworks is covered
+# under codec_availability_integration flag, this flag will be abandoned.
+flag {
   name: "codec_availability_support"
   namespace: "codec_fwk"
   description: "Feature flag for codec availability HAL API implementation"

@@ -783,7 +783,7 @@ c2_status_t queryGlobalResources(std::shared_ptr<Codec2Client::Configurable>& co
         if (systemCapacity && *systemCapacity) {
             for (size_t i = 0; i < systemCapacity->flexCount(); ++i) {
                 resources.push_back(systemCapacity->m.values[i]);
-                ALOGI("System Resource[%zu]{%u %d %ld}", i,
+                ALOGI("System Resource[%zu]{%u %d %jd}", i,
                       systemCapacity->m.values[i].id,
                       systemCapacity->m.values[i].kind,
                       systemCapacity->m.values[i].amount);
@@ -800,7 +800,7 @@ c2_status_t queryGlobalResources(std::shared_ptr<Codec2Client::Configurable>& co
             for (size_t i = 0; i < systemExcluded->flexCount(); ++i) {
                 const C2SystemResourceStruct& resource =
                     systemExcluded->m.values[i];
-                ALOGI("Excluded Resource[%zu]{%u %d %ld}", i,
+                ALOGI("Excluded Resource[%zu]{%u %d %jd}", i,
                       resource.id, resource.kind, resource.amount);
                 uint64_t excluded = (resource.kind == CONST) ? resource.amount : 0;
                 auto found = std::find_if(resources.begin(),
@@ -830,7 +830,7 @@ c2_status_t queryGlobalResources(std::shared_ptr<Codec2Client::Configurable>& co
 
     size_t index = 0;
     for (const auto& resource : resources) {
-        ALOGI("Globally Available System Resource[%zu]{%u %d %ld}", index++,
+        ALOGI("Globally Available System Resource[%zu]{%u %d %jd}", index++,
               resource.id, resource.kind, resource.amount);
     }
     return c2err;
