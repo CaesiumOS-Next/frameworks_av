@@ -16,6 +16,24 @@
       "message": "This looks like the safer way of handling potential errors from getOutput/InputFormat, thanks! Could you check if the linked bug makes sense though (Bug: 378042729)? It doesn\u0027t seem related to this issue.",
       "revId": "578df58247b102a329e123ed7650b14220e69554",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "255ec196_ceba8718",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2024-12-06T01:41:48Z",
+      "side": 1,
+      "message": "Modified(Bug: 379989075)",
+      "parentUuid": "4f7652c8_a69143af",
+      "revId": "578df58247b102a329e123ed7650b14220e69554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
