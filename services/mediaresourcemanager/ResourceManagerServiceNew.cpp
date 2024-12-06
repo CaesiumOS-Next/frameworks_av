@@ -233,7 +233,7 @@ Status ResourceManagerServiceNew::getMediaResourceUsageReport(
 
     resources->clear();
     if (!android::media::codec::codec_availability() ||
-        !android::media::codec::codec_availability_support()) {
+        !android::media::codec::codec_availability_integration()) {
         return Status::fromStatus(INVALID_OPERATION);
     }
 

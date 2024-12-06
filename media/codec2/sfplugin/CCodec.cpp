@@ -1096,7 +1096,7 @@ void CCodec::allocate(const sp<MediaCodecInfo> &codecInfo) {
     }
     config->queryConfiguration(comp);
 
-    if (android::media::codec::codec_availability_support()) {
+    if (android::media::codec::codec_availability_integration()) {
         std::string storeName = mClient->getServiceName();
         mCodecResources = std::make_unique<CCodecResources>(storeName);
     }
@@ -3539,7 +3539,7 @@ std::shared_ptr<C2GraphicBlock> CCodec::FetchGraphicBlock(
 
 //static
 std::vector<GlobalResourceInfo> CCodec::GetGloballyAvailableResources() {
-    if (android::media::codec::codec_availability_support()) {
+    if (android::media::codec::codec_availability_integration()) {
         return CCodecResources::GetGloballyAvailableResources();
     }
 
