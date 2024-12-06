@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8fec32_40f0186c",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-12-06T03:36:17Z",
+      "side": 1,
+      "message": "nit: demorgan\u0027s law, this should be ||",
+      "range": {
+        "startLine": 462,
+        "startChar": 55,
+        "endLine": 462,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a5a680c2_638b594f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp",
+              "range": {
+                "startLine": 462,
+                "startChar": 0,
+                "endLine": 463,
+                "endChar": 0
+              },
+              "replacement": "                if (!audio_is_linear_pcm(config.format) ||\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2d1005ba8f67582bb376a319bbd14d977dbe9f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
