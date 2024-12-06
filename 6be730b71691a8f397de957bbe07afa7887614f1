@@ -22,6 +22,30 @@
       },
       "revId": "6be730b71691a8f397de957bbe07afa7887614f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667a88f8_ea6ae058",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2024-12-06T17:50:19Z",
+      "side": 1,
+      "message": "Ray, inargs.numInSamples \u003e\u003d channelCount needs to be checked continuously as numInSamples gets updated in each iteration making do...while() less suitable here.",
+      "parentUuid": "e580f63d_1574ad83",
+      "range": {
+        "startLine": 502,
+        "startChar": 4,
+        "endLine": 502,
+        "endChar": 85
+      },
+      "revId": "6be730b71691a8f397de957bbe07afa7887614f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
