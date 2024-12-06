@@ -299,6 +299,9 @@ enum C2ParamIndexKind : C2Param::type_index_t {
 
     // allow tunnel peek behavior to be unspecified for app compatibility
     kParamIndexTunnelPeekMode, // tunnel mode, enum
+
+    // allow BlockPool to return HW fence
+    kParamIndexBlockPoolReturnHwFence, // bool
 };
 
 }
@@ -2803,6 +2806,18 @@ typedef C2StreamParam<C2Tuning,
         kParamIndexTunnelPeekMode> C2StreamTunnelPeekModeTuning;
 constexpr char C2_PARAMKEY_TUNNEL_PEEK_MODE[] =
         "output.tunnel-peek-mode";
+
+/**
+ * BlockPool can return HW fence along with a block(buffer).
+ *
+ * If set to true, BlockPool can return C2Fence along with a block when fetch is
+ * successful. In the case, the returned block should not be accessed until the
+ * C2Fence is signalled.(The returned C2Fence is H/W fence in this case.)
+ */
+typedef C2PortParam<C2Tuning, C2BoolValue, kParamIndexBlockPoolReturnHwFence>
+        C2PortBlockPoolReturnHwFenceTuning;
+constexpr char C2_PARAMKEY_BLOCK_POOL_RETURN_HW_FENCE[] =
+        "output.block-pool-return-hw-fence";
 
 /**
  * Encoding quality level signaling.
