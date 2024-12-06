@@ -303,6 +303,9 @@ enum C2ParamIndexKind : C2Param::type_index_t {
     // input surface
     kParamIndexCaptureFrameRate, // input-surface, float
     kParamIndexStopTimeOffset, // input-surface, int64_t
+
+    // allow a block fence to be passed along with a block
+    kParamIndexAllowBlockFence, // bool
 };
 
 }
@@ -340,7 +343,6 @@ C2ENUM(C2Config::api_feature_t, uint64_t,
 
     API_SAME_INPUT_BUFFER = (1U << 16),   ///< supporting multiple input buffers
                                           ///< backed by the same allocation
-
     API_STREAMS          = (1ULL << 32),  ///< supporting variable number of streams
 
     API_TUNNELING        = (1ULL << 48)   ///< tunneling API
@@ -2832,6 +2834,21 @@ typedef C2StreamParam<C2Tuning,
         kParamIndexTunnelPeekMode> C2StreamTunnelPeekModeTuning;
 constexpr char C2_PARAMKEY_TUNNEL_PEEK_MODE[] =
         "output.tunnel-peek-mode";
+
+/**
+ * A Block fence handling ability signaling.
+ *
+ * If a component set this true, the component must be capable of handling
+ * block fences. A block fence can be accomodated regadless of how a block
+ * being received. (Whether a block is received from a work, or fetched from
+ * any block pool.)
+ */
+typedef C2PortParam<C2Tuning, C2BoolValue, kParamIndexAllowBlockFence>
+        C2PortAllowBlockFenceTuning;
+constexpr char C2_PARAMKEY_INPUT_ALLOW_BLOCK_FENCE[] =
+        "input.allow-block-fence";
+constexpr char C2_PARAMKEY_OUTPUT_ALLOW_BLOCK_FENCE[] =
+        "output.allow-block-fence";
 
 /**
  * Encoding quality level signaling.
