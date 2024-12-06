@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "528e1f40_39642fbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1141048
+      },
+      "writtenOn": "2024-12-06T18:19:57Z",
+      "side": 1,
+      "message": "+ Avi, could you take a look? It looks like an interesting corner case.",
+      "revId": "a752a7eb941204229070ebf7463633f557fb9182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
