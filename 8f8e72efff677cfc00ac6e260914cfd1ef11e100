@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2984c5_d421ff19",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-12-07T00:36:52Z",
+      "side": 1,
+      "message": "can these two methods be const if mLock is mutable?",
+      "range": {
+        "startLine": 239,
+        "startChar": 9,
+        "endLine": 239,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f2c65cd7_2a4e7d10",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/DeviceHalAidl.h",
+              "range": {
+                "startLine": 239,
+                "startChar": 0,
+                "endLine": 241,
+                "endChar": 0
+              },
+              "replacement": "    bool isModuleInitialized() const NO_THREAD_SAFETY_ANALYSIS { return mModule !\u003d nullptr; }\n    bool isTelephonyInitialize() const NO_THREAD_SAFETY_ANALYSIS { return mTelephony !\u003d nullptr; }\n"
+            },
+            {
+              "path": "media/libaudiohal/impl/DeviceHalAidl.h",
+              "range": {
+                "startLine": 242,
+                "startChar": 0,
+                "endLine": 243,
+                "endChar": 0
+              },
+              "replacement": "    mutable std::mutex mLock;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8f8e72efff677cfc00ac6e260914cfd1ef11e100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ba5421_687f2719",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-12-07T00:36:52Z",
+      "side": 1,
+      "message": "nit: isTelephonyInitialized().",
+      "range": {
+        "startLine": 240,
+        "startChar": 9,
+        "endLine": 240,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1670647f_99eb3b34",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/DeviceHalAidl.h",
+              "range": {
+                "startLine": 240,
+                "startChar": 0,
+                "endLine": 241,
+                "endChar": 0
+              },
+              "replacement": "    bool isTelephonyInitialized() NO_THREAD_SAFETY_ANALYSIS { return mTelephony !\u003d nullptr; }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8f8e72efff677cfc00ac6e260914cfd1ef11e100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
