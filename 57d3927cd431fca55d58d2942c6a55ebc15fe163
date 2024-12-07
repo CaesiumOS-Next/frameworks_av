@@ -46,6 +46,30 @@
       },
       "revId": "57d3927cd431fca55d58d2942c6a55ebc15fe163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ccff5f_62a1481b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-07T07:35:01Z",
+      "side": 1,
+      "message": "I initially used `api_feature_t API_BLOCK_FENCES \u003d (1U \u003c\u003c 17)`.\nBut realized that block fences for input/output is quite different for vendor HALs. \n\nSo I thought that we\u0027d better separate input/output using tuning as of now.\nLater on we can move it to `api_feature_t`(not W maybe X?).",
+      "parentUuid": "76d32781_f523122a",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "57d3927cd431fca55d58d2942c6a55ebc15fe163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
