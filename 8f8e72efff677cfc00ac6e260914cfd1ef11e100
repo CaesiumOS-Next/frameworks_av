@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "448f7a27_4dc79b5d",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-07T00:42:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d2984c5_d421ff19",
+      "range": {
+        "startLine": 239,
+        "startChar": 9,
+        "endLine": 239,
+        "endChar": 30
+      },
+      "revId": "8f8e72efff677cfc00ac6e260914cfd1ef11e100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68ba5421_687f2719",
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "8f8e72efff677cfc00ac6e260914cfd1ef11e100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57df8645_aabb7211",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-07T00:42:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68ba5421_687f2719",
+      "range": {
+        "startLine": 240,
+        "startChar": 9,
+        "endLine": 240,
+        "endChar": 30
+      },
       "revId": "8f8e72efff677cfc00ac6e260914cfd1ef11e100",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
