@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f38dc6_a942c103",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-07T00:33:39Z",
+      "side": 1,
+      "message": "this part is not very descriptive and also said twice. Some questions: can this be expanded to support all fences? (e.g. in work - for input buffers as well as any buffers fetched from any blockpool.) Also, does it have to be limited to HW fences, or any parcelable fence? (it\u0027s true that today we only parcel HW fences, but those are two different concepts.)\n\nE.g.\n\nC2Config: allow component to signal support for buffer fences\n\nThis is for component to signal that they can handle fences for all blocks (whether received from a work, or fetched from any block pool.)\n\nThis is needed as prior implementation never returned a fence for these calls.\n\nIf we define this generically, this really belongs to an API feature flag, such as api_feature_t API_BLOCK_FENCES \u003d (1U \u003c\u003c 17). (since this is pretty generic part of the API, this can be in the generic portion, and not platform_feature_t.",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "57d3927cd431fca55d58d2942c6a55ebc15fe163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
