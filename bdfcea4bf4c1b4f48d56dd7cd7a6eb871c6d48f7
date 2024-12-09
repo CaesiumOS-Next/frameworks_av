@@ -16,6 +16,24 @@
       "message": "not sure if you can modify the metadata after the flag is merged and synced with gantry..",
       "revId": "bdfcea4bf4c1b4f48d56dd7cd7a6eb871c6d48f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dba022b_22c947c7",
+        "filename": "media/aconfig/codec_fwk.aconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-09T22:51:10Z",
+      "side": 1,
+      "message": "Yeah, this doesn\u0027t work.\nEither I will have to get an exception to get this shipped for 25Q2 using the current flag or see if this can go in as bug (a new flag).",
+      "parentUuid": "5a36a92b_b4e66ae1",
+      "revId": "bdfcea4bf4c1b4f48d56dd7cd7a6eb871c6d48f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
