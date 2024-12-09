@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d9a465_ab0f67ff",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioRecord.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-12-09T13:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ff1315_4e82ea85",
+      "revId": "969c3457df5e3386de12d2017affd60d648fc740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eddf963_7b190ae2",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-11-14T20:25:18Z",
       "side": 1,
       "message": "Like the previous method, return via binderStatusFromStatusT, remove _aidl_return:\n\n```\nreturn binderStatusFromStatusT(mRecordTrack-\u003esetParameters(\n```",
+      "revId": "969c3457df5e3386de12d2017affd60d648fc740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c62cb58_81e9eff6",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2726,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2024-12-09T13:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eddf963_7b190ae2",
       "revId": "969c3457df5e3386de12d2017affd60d648fc740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
