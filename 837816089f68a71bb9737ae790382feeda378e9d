@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc6c65e_9fcd64ff",
+        "filename": "services/mediaresourcemanager/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-09T19:25:02Z",
+      "side": 1,
+      "message": "Please separate out the necessary part and not link against the ccodec directly.",
+      "revId": "837816089f68a71bb9737ae790382feeda378e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17507ffe_20cf4baa",
+        "filename": "services/mediaresourcemanager/ResourceTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-09T19:25:02Z",
+      "side": 1,
+      "message": "this probably need to move out of CCodec.",
+      "range": {
+        "startLine": 75,
+        "startChar": 34,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "837816089f68a71bb9737ae790382feeda378e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
