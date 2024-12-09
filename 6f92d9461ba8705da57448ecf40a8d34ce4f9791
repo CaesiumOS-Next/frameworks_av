@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b17ba6a_d87dde42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-09T21:17:57Z",
+      "side": 1,
+      "message": "Thanks Sungtak - Let me discuss with you about this.",
+      "parentUuid": "c601e1dc_8449f35d",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a67ca_5b5c9880",
         "filename": "media/libstagefright/ACodec.cpp",
         "patchSetId": 14
@@ -31,6 +49,24 @@
       "writtenOn": "2024-12-09T19:21:24Z",
       "side": 1,
       "message": "nit: maybe we don\u0027t need it",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecd68873_ab132cf7",
+        "filename": "media/libstagefright/ACodec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 9449,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-09T21:17:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "186a67ca_5b5c9880",
       "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95afa9f3_de103f65",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-09T21:17:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d09a4cf1_94de75c8",
+      "range": {
+        "startLine": 1203,
+        "startChar": 46,
+        "endLine": 1203,
+        "endChar": 56
+      },
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dae9e18b_4d56340b",
@@ -71,6 +131,24 @@
       "writtenOn": "2024-12-09T19:21:24Z",
       "side": 1,
       "message": "does this work if the system has OMX codecs?",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759020be_e15b4326",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-09T21:17:57Z",
+      "side": 1,
+      "message": "Since Codec availability is implemented only through C2 hal, we aren\u0027t tracking any resources for omx based codecs. \nBut:\n- if c2 component store is implemented, then we can query for the system resource\n- if no such hal, it will be empty\n\nDoes that answer your question?",
+      "parentUuid": "dae9e18b_4d56340b",
       "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
