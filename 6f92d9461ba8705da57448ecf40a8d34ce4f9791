@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dad2e246_b0b20784",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-09T22:48:11Z",
+      "side": 1,
+      "message": "I have implemented codec resources in a separate class now. Please let me know if this looks better.",
+      "parentUuid": "0b17ba6a_d87dde42",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a67ca_5b5c9880",
         "filename": "media/libstagefright/ACodec.cpp",
         "patchSetId": 14
