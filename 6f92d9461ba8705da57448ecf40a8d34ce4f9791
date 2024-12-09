@@ -16,6 +16,63 @@
       "message": "Static interface regarding resource in CCodec could be in a separate class(or interface) other than ccodec?",
       "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "186a67ca_5b5c9880",
+        "filename": "media/libstagefright/ACodec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 9449,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-09T19:21:24Z",
+      "side": 1,
+      "message": "nit: maybe we don\u0027t need it",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d09a4cf1_94de75c8",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-09T19:21:24Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please don\u0027t use std::stoi* functions. Exceptions are disabled by default on Android and your code will abort. Consider atoi() if -1 is suitable for reporting errors, \u003candroid-base/parseint.h\u003e for C++, or the strtol()/scanf() family otherwi...\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease don\u0027t use std::stoi* functions. Exceptions are disabled by default on Android and your code will abort. Consider atoi() if -1 is suitable for reporting errors, \u003candroid-base/parseint.h\u003e for C++, or the strtol()/scanf() family otherwise.",
+      "range": {
+        "startLine": 1203,
+        "startChar": 46,
+        "endLine": 1203,
+        "endChar": 56
+      },
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae9e18b_4d56340b",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-09T19:21:24Z",
+      "side": 1,
+      "message": "does this work if the system has OMX codecs?",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
