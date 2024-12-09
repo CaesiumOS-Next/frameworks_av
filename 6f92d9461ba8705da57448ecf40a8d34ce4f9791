@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c601e1dc_8449f35d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-09T18:33:02Z",
+      "side": 1,
+      "message": "Static interface regarding resource in CCodec could be in a separate class(or interface) other than ccodec?",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
