@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f566e106_d9d97624",
+        "filename": "media/codec2/sfplugin/CCodecResources.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-10T22:02:41Z",
+      "side": 1,
+      "message": "nit: you don\u0027t want to get below 0 here. (that will also crash due to the underflow sanitizer)",
+      "range": {
+        "startLine": 74,
+        "startChar": 20,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "bf75aafbe8cbf854d044367ca4fec2fe92b074a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
