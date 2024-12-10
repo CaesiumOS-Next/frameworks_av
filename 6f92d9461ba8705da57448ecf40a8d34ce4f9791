@@ -187,6 +187,24 @@
       "parentUuid": "dae9e18b_4d56340b",
       "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0035a023_3b6ccaa3",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-10T21:56:15Z",
+      "side": 1,
+      "message": "yes. please add a comment in the code. thank you!",
+      "parentUuid": "759020be_e15b4326",
+      "revId": "6f92d9461ba8705da57448ecf40a8d34ce4f9791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
