@@ -22,6 +22,30 @@
       },
       "revId": "bf75aafbe8cbf854d044367ca4fec2fe92b074a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7107d7c8_d7633777",
+        "filename": "media/codec2/sfplugin/CCodecResources.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-10T22:28:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f566e106_d9d97624",
+      "range": {
+        "startLine": 74,
+        "startChar": 20,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "bf75aafbe8cbf854d044367ca4fec2fe92b074a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
