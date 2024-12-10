@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85655c59_c896470f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-10T21:29:46Z",
+      "side": 1,
+      "message": "Thank you Francois! Just one minor comment.",
+      "revId": "05f498bfbf8a0f6eb67245916c498e4f52707cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "470de892_35640d26",
+        "filename": "services/audiopolicy/common/managerdefinitions/include/AudioPolicyConfig.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-10T21:29:46Z",
+      "side": 1,
+      "message": "Maybe, name it `AIDL HAL Hybrid CAP` to make it clear that \"hybrid\" only relates to the engine and that \"hybrid\" is not an acronym 😊",
+      "range": {
+        "startLine": 49,
+        "startChar": 66,
+        "endLine": 49,
+        "endChar": 72
+      },
+      "revId": "05f498bfbf8a0f6eb67245916c498e4f52707cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
