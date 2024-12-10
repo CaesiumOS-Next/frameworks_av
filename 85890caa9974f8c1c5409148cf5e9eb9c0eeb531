@@ -33,6 +33,24 @@
       "message": "Thank you Francois! We should put this mode use under a build flag which I have added here: https://r.android.com/3341296. The fallback (hybrid mode) should be enabled only when this flag is set to `false`. For that, we need to add a declaration into the Android.bp file to enable a preprocessor define when this flag is `false`:\n\n```\n    cflags: [\n    ...\n    ] + select(release_flag(\"RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL\"), {\n        true: [],\n        default: [\"-DENABLE_CAP_AIDL_HYBRID_MODE\"],\n    }),\n```\n\nI also have a question: can the same XML CAP config files used in both scenarios? If not, then we need to use the flag for picking up appropriate files during build time.",
       "revId": "85890caa9974f8c1c5409148cf5e9eb9c0eeb531",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dd37601_a6e1782a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-12-10T16:34:25Z",
+      "side": 1,
+      "message": "At first attempt to upstream CAP config, it was the case. But during the review, the constraint made the XML incompatible between \"HIDL\" / AIDL.\n\nI wanted to reuse also engine config in AIDL but Cap in XML but the name of strategies is not there in stable, so it would lead to use VX_xxx name instead of user friendly name. So, I adandonned this idea and fallback on the whole \"legacy XML based engine\"",
+      "parentUuid": "899e2d8e_ec30ffb2",
+      "revId": "85890caa9974f8c1c5409148cf5e9eb9c0eeb531",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
