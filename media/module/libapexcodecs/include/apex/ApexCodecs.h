@@ -187,14 +187,14 @@ typedef struct ApexCodec_Component ApexCodec_Component;
  *
  * \param store the component store
  * \param name the name of the component
- * \param component out-param to be filled with the component; must not be null
+ * \param outComponent out-param to be filled with the component; must not be null
  * \return  APEXCODEC_STATUS_OK         if successful
  *          APEXCODEC_STATUS_NOT_FOUND  if the name is not found
  */
 ApexCodec_Status ApexCodec_Component_create(
         ApexCodec_ComponentStore *_Nonnull store,
         const char *_Nonnull name,
-        ApexCodec_Component *_Nullable *_Nonnull comp) __INTRODUCED_IN(36);
+        ApexCodec_Component *_Nullable *_Nonnull outComponent) __INTRODUCED_IN(36);
 
 /**
  * Destroy the component by the handle. It is invalid to call component methods on the handle
@@ -412,27 +412,27 @@ typedef struct ApexCodec_SupportedValues ApexCodec_SupportedValues;
 /**
  * Extract information from ApexCodec_SupportedValues object.
  *
- * \param [in] supportedValues the supported values object
- * \param [out] type        pointer to be filled with the type of the supported values
- * \param [out] numberType  pointer to be filled with the numeric type of the supported values
- * \param [out] values      pointer to be filled with the array of the actual supported values.
+ * \param supportedValues   the supported values object
+ * \param outType           pointer to be filled with the type of the supported values
+ * \param outNumberType     pointer to be filled with the numeric type of the supported values
+ * \param outValues         pointer to be filled with the array of the actual supported values.
  *                          if type == APEXCODEC_SUPPORTED_VALUES_EMPTY: nullptr
  *                          if type == APEXCODEC_SUPPORTED_VALUES_RANGE: {min, max, step, num, den}
  *                          if type == APEXCODEC_SUPPORTED_VALUES_VALUES/_FLAGS:
  *                              the array of supported values/flags
  *                          the array is owned by the |supportedValues| object and the client
  *                          should not free it.
- * \param [out] numValues   pointer to be filled with the number of values.
+ * \param outNumValues      pointer to be filled with the number of values.
  *                          if type == APEXCODEC_SUPPORTED_VALUES_EMPTY: 0
  *                          if type == APEXCODEC_SUPPORTED_VALUES_RANGE: 5
  *                          if type == APEXCODEC_SUPPORTED_VALUES_VALUES/_FLAGS: varies
  */
 ApexCodec_Status ApexCodec_SupportedValues_getTypeAndValues(
         ApexCodec_SupportedValues *_Nonnull supportedValues,
-        ApexCodec_SupportedValuesType *_Nonnull type,
-        ApexCodec_SupportedValuesNumberType *_Nonnull numberType,
-        ApexCodec_Value *_Nullable *_Nonnull values,
-        uint32_t *_Nonnull numValues) __INTRODUCED_IN(36);
+        ApexCodec_SupportedValuesType *_Nonnull outType,
+        ApexCodec_SupportedValuesNumberType *_Nonnull outNumberType,
+        ApexCodec_Value *_Nullable *_Nonnull outValues,
+        uint32_t *_Nonnull outNumValues) __INTRODUCED_IN(36);
 
 /**
  * Release the supported values object. No-op if |values| is nullptr.
@@ -513,17 +513,17 @@ typedef struct ApexCodec_ParamFieldValues {
  * The client can iterate through the results with index starting from 0 until this function returns
  * APEXCODEC_STATUS_NOT_FOUND.
  *
- * \param [in]  result  the result object
- * \param [in]  index   the index of the result to extract, starts from 0.
- * \param [out] failure pointer to be filled with the failure code
- * \param [out] field   pointer to be filled with the field that failed.
+ * \param result        the result object
+ * \param index         the index of the result to extract, starts from 0.
+ * \param outFailure    pointer to be filled with the failure code
+ * \param outField      pointer to be filled with the field that failed.
  *                      |field->value| is owned by the |result| object and the client should not
  *                      free it.
- * \param [out] conflicts   pointer to be filled with the array of conflicts.
+ * \param outConflicts      pointer to be filled with the array of conflicts.
  *                          nullptr if |numConflicts| is 0.
  *                          the array and its content is owned by the |result| object and the client
  *                          should not free it.
- * \param [out] numConflicts pointer to be filled with the number of conflicts
+ * \param outNumConflicts   pointer to be filled with the number of conflicts
  *                          may be 0 if there are no conflicts
  * \return APEXCODEC_STATUS_OK         if successful
  * \return APEXCODEC_STATUS_NOT_FOUND  if index is out of range
@@ -531,10 +531,10 @@ typedef struct ApexCodec_ParamFieldValues {
 ApexCodec_Status ApexCodec_SettingResults_getResultAtIndex(
         ApexCodec_SettingResults *_Nonnull results,
         size_t index,
-        ApexCodec_SettingResultFailure *_Nonnull failure,
-        ApexCodec_ParamFieldValues *_Nonnull field,
-        ApexCodec_ParamFieldValues *_Nullable *_Nonnull conflicts,
-        size_t *_Nonnull numConflicts) __INTRODUCED_IN(36);
+        ApexCodec_SettingResultFailure *_Nonnull outFailure,
+        ApexCodec_ParamFieldValues *_Nonnull outField,
+        ApexCodec_ParamFieldValues *_Nullable *_Nonnull outConflicts,
+        size_t *_Nonnull outNumConflicts) __INTRODUCED_IN(36);
 
 /**
  * Release the setting result object. No-op if |results| is nullptr.
@@ -551,15 +551,15 @@ void ApexCodec_SettingResults_release(
  * buffer; |output->configUpdates| contains config updates as a result of processing the frame.
  *
  * \param comp      the component to process the buffers
- * \param input     the input buffer; when nullptr, the component should fill |output| if there are
- *                  any pending output buffers.
- * \param output    the output buffer, should not be nullptr.
- * \param consumed  the number of consumed bytes from the input buffer
- *                  set to 0 if no input buffer has been consumed, including |input| is nullptr.
- *                  for graphic buffers, any non-zero value means that the input buffer is consumed.
- * \param produced  the number of bytes produced on the output buffer
- *                  set to 0 if no output buffer has been produced.
- *                  for graphic buffers, any non-zero value means that the output buffer is filled.
+ * \param input         the input buffer; when nullptr, the component should fill |output|
+ *                      if there are any pending output buffers.
+ * \param output        the output buffer, should not be nullptr.
+ * \param outConsumed   the number of consumed bytes from the input buffer
+ *                      set to 0 if no input buffer has been consumed, including |input| is nullptr.
+ *                      for graphic buffers, any non-zero value means that the input buffer is consumed.
+ * \param outProduced   the number of bytes produced on the output buffer
+ *                      set to 0 if no output buffer has been produced.
+ *                      for graphic buffers, any non-zero value means that the output buffer is filled.
  * \return APEXCODEC_STATUS_OK         if successful
  * \return APEXCODEC_STATUS_NO_MEMORY  if the output buffer is not suitable to hold the output frame
  *                                     the client should retry with a new output buffer;
@@ -574,8 +574,8 @@ ApexCodec_Status ApexCodec_Component_process(
         ApexCodec_Component *_Nonnull comp,
         const ApexCodec_Buffer *_Nullable input,
         ApexCodec_Buffer *_Nonnull output,
-        size_t *_Nonnull consumed,
-        size_t *_Nonnull produced) __INTRODUCED_IN(36);
+        size_t *_Nonnull outConsumed,
+        size_t *_Nonnull outProduced) __INTRODUCED_IN(36);
 
 /**
  * Configure the component with the given config.
