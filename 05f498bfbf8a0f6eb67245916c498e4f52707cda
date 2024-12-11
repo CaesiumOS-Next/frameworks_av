@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25e3cff_54782e44",
+        "filename": "services/audiopolicy/common/managerdefinitions/include/AudioPolicyConfig.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-12-11T11:52:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "470de892_35640d26",
+      "range": {
+        "startLine": 49,
+        "startChar": 66,
+        "endLine": 49,
+        "endChar": 72
+      },
+      "revId": "05f498bfbf8a0f6eb67245916c498e4f52707cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "597b5bb3_d95082d1",
