@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc107970_7415d68a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3768729
+      },
+      "writtenOn": "2024-12-11T06:49:13Z",
+      "side": 1,
+      "message": "It takes a long time in the sequence below, and the time is being spent in the process of updating the volume for each audio output.\n\nAudioManager(AudioService).registerAudioPolicy() -\u003e new AudioPolicyProxy() -\u003e connectMixes() -\u003e mAudioSystem.registerPolicyMixes(mMixes, true) -\u003e AudioPolicyManager.registerPolicyMixes() -\u003e updateCallAndOutputRouting()\n\nIf you change updateCallAndOutputRouting() in AudioPolicyManager.registerPolicyMixes() as follows, it is will improvement.\nupdateCallAndOutputRouting(false /* forceVolumeReeval /, 0 / delayMs /, true / skipDelays */);\n\nThe above volume update process includes setOutputDevices - applyStreamVolumes processes in the AudioPolicyManager init process and the actual startOutput process, so I want to skip it in the registerPolicyMixes() process.\nIn setUserIdDeviceAffinities, forceVolumeReeval \u003d false, skipDelays \u003d true is also used.\n(In the case of Automotive, volume control is done through hwDevice AudioPortConfig, so volume control is not required here.)\nPlease give me your opinion on what the intention was behind this behavior and what problems would arise if it were omitted.",
+      "revId": "45a6e92981356d370364d60c57dbc3b19b60a9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
