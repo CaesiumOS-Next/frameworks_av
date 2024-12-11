@@ -39,6 +39,47 @@
       },
       "revId": "05f498bfbf8a0f6eb67245916c498e4f52707cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597b5bb3_d95082d1",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2024-12-11T08:52:11Z",
+      "side": 1,
+      "message": "not new in this version but we are not protected against a failure to access the file. In this case mPfwConnector remains null and all other access are not protected. should we abort or have a default behavior?",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3f107003_1324d027",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 87,
+                "endChar": 0
+              },
+              "replacement": "    } else {\n        ALOGE(\"%s: Failed to access %s\", __func__, mPolicyPfwConfFileName);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "05f498bfbf8a0f6eb67245916c498e4f52707cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
