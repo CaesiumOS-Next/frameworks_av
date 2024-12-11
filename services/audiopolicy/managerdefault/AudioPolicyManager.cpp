@@ -4023,7 +4023,7 @@ status_t AudioPolicyManager::registerPolicyMixes(const Vector<AudioMix>& mixes)
         }
     } else if (checkOutputs) {
         checkForDeviceAndOutputChanges();
-        updateCallAndOutputRouting();
+        updateCallAndOutputRouting(false, 0, true);
     }
     return res;
 }
