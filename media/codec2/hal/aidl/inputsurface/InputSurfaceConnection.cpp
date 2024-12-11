@@ -22,10 +22,16 @@
 
 namespace aidl::android::hardware::media::c2::utils {
 
-InputSurfaceConnection::InputSurfaceConnection() {
+InputSurfaceConnection::InputSurfaceConnection(
+        const std::shared_ptr<IInputSink>& sink) : mSink{sink} {
 }
 
 InputSurfaceConnection::~InputSurfaceConnection() {
+}
+
+c2_status_t InputSurfaceConnection::status() const {
+    // TODO;
+    return C2_OK;
 }
 
 ::ndk::ScopedAStatus InputSurfaceConnection::disconnect() {
