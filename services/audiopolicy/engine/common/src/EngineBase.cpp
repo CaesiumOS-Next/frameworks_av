@@ -125,6 +125,14 @@ std::string EngineBase::getProductStrategyName(product_strategy_t id) const {
     return "";
 }
 
+void EngineBase::setDefaultConfiguration() {
+    mProductStrategies.clear();
+    mVolumeGroups.clear();
+    engineConfig::ParsingResult result =
+            {std::make_unique<engineConfig::Config>(gDefaultEngineConfig), 1};
+    (void) processParsingResult(std::move(result));
+}
+
 engineConfig::ParsingResult EngineBase::loadAudioPolicyEngineConfig(
         const media::audio::common::AudioHalEngineConfig& aidlConfig, bool)
 {
