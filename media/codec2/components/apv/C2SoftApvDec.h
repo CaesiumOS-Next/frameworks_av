@@ -26,44 +26,6 @@
 #include "oapv.h"
 #include <C2SoftApvCommon.h>
 
-typedef unsigned int UWORD32;
-
-typedef enum {
-    IV_CHROMA_NA = 0xFFFFFFFF,
-    IV_YUV_420P = 0x1,
-    IV_YUV_422P = 0x2,
-    IV_420_UV_INTL = 0x3,
-    IV_YUV_422IBE = 0x4,
-    IV_YUV_422ILE = 0x5,
-    IV_YUV_444P = 0x6,
-    IV_YUV_411P = 0x7,
-    IV_GRAY = 0x8,
-    IV_RGB_565 = 0x9,
-    IV_RGB_24 = 0xa,
-    IV_YUV_420SP_UV = 0xb,
-    IV_YUV_420SP_VU = 0xc,
-    IV_YUV_422SP_UV = 0xd,
-    IV_YUV_422SP_VU = 0xe
-
-} IV_COLOR_FORMAT_T;
-
-typedef struct {
-    /**
-     * u4_size of the structure
-     */
-    UWORD32 u4_size;
-
-    /**
-     * Pointer to the API function pointer table of the codec
-     */
-    void* pv_fxns;
-
-    /**
-     * Pointer to the handle of the codec
-     */
-    void* pv_codec_handle;
-} iv_obj_t;
-
 namespace android {
 
 struct C2SoftApvDec final : public SimpleC2Component {
@@ -102,9 +64,7 @@ struct C2SoftApvDec final : public SimpleC2Component {
                           const std::unique_ptr<C2Work>& work);
 
     std::shared_ptr<IntfImpl> mIntf;
-    iv_obj_t* mDecHandle;
-    uint8_t* mOutBufferFlush;
-    IV_COLOR_FORMAT_T mIvColorformat;
+    uint8_t *mOutBufferFlush;
     uint32_t mOutputDelay;
     bool mHeaderDecoded;
     std::atomic_uint64_t mOutIndex;
@@ -118,6 +78,10 @@ struct C2SoftApvDec final : public SimpleC2Component {
     uint32_t mHeight;
     bool mSignalledOutputEos;
     bool mSignalledError;
+
+    C2StreamHdrStaticMetadataInfo::output mHdrStaticMetadataInfo;
+    std::unique_ptr<C2StreamHdr10PlusInfo::output> mHdr10PlusInfo = nullptr;
+
     // Color aspects. These are ISO values and are meant to detect changes in aspects to avoid
     // converting them to C2 values for each frame
     struct VuiColorAspects {
@@ -138,15 +102,17 @@ struct C2SoftApvDec final : public SimpleC2Component {
                 && fullRange == o.fullRange;
         }
     } mBitstreamColorAspects;
+    struct VuiColorAspects vuiColorAspects;
 
-    oapvd_t oapvdHandle;
-    oapvm_t oapvmHandle;
-    oapvd_cdesc_t cdesc;
-    oapv_frms_t ofrms;
+    oapvd_t mDecHandle;
+    oapvm_t mMetadataHandle;
+    oapv_frms_t mOutFrames;
 
-    int outputCsp;
+    int mOutCsp;
 
-    void getVuiParams(VuiColorAspects* buffer);
+    void getVuiParams();
+    void getHDRStaticParams(const oapv_imgb_t *buffer, const std::unique_ptr<C2Work>& work);
+    void getHDR10PlusInfoData(const oapv_imgb_t *buffer, const std::unique_ptr<C2Work>& work);
 
     C2_DO_NOT_COPY(C2SoftApvDec);
 };
