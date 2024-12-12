@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b0be526_13b0a723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-12T21:23:22Z",
+      "side": 1,
+      "message": "Eric, are you OK submitting this change on its own? I will review and check the second change soon.",
+      "revId": "066b01a96b5d0e4e290ac2f1ab5b8a1651ffe0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
