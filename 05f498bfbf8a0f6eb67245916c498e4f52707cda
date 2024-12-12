@@ -152,6 +152,30 @@
       },
       "revId": "05f498bfbf8a0f6eb67245916c498e4f52707cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e4f1a4_80cdda2a",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-12-12T07:59:47Z",
+      "side": 1,
+      "message": "In fact, the CL is ready but not pushed, let me push it for review. I have tested and dumpsys showed the default configuration and it booted.",
+      "parentUuid": "d2b2e5c4_d4fef3b9",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "05f498bfbf8a0f6eb67245916c498e4f52707cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
