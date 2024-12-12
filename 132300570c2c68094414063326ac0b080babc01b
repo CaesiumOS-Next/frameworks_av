@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77caea55_627b82ec",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-12T20:40:10Z",
+      "side": 1,
+      "message": "nit: Required?",
+      "range": {
+        "startLine": 622,
+        "startChar": 29,
+        "endLine": 622,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a7db6713_c77fa276",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 622,
+                "startChar": 0,
+                "endLine": 623,
+                "endChar": 0
+              },
+              "replacement": " * \\param [out] writtenOrRequired      the number of bytes written to |config|.\n"
+            },
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 637,
+                "startChar": 0,
+                "endLine": 638,
+                "endChar": 0
+              },
+              "replacement": "        size_t *_Nonnull writtenOrRequired) __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "132300570c2c68094414063326ac0b080babc01b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
