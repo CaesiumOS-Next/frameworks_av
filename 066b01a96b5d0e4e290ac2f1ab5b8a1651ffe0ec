@@ -16,6 +16,29 @@
       "message": "Eric, are you OK submitting this change on its own? I will review and check the second change soon.",
       "revId": "066b01a96b5d0e4e290ac2f1ab5b8a1651ffe0ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dea007cc_61adc3ae",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-12T21:37:59Z",
+      "side": 1,
+      "message": "Sorry, missed this: if the connector is nullptr then this error message will be wrong.",
+      "range": {
+        "startLine": 167,
+        "startChar": 14,
+        "endLine": 167,
+        "endChar": 75
+      },
+      "revId": "066b01a96b5d0e4e290ac2f1ab5b8a1651ffe0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
