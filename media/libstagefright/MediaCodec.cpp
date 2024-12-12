@@ -6452,8 +6452,10 @@ status_t MediaCodec::onReturnInputBuffer(const sp<AMessage> &msg) {
     {
         // synchronization boundary for getBufferAndFormat
         Mutex::Autolock al(mBufferLock);
+        sp<MediaCodecBuffer> buffer = info->mData;
         info->mOwnedByClient = false;
         info->mData.clear();
+        mBufferChannel->discardBuffer(buffer);
     }
     return OK;
 }
