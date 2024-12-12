@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf120b45_8603c06f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643016
+      },
+      "writtenOn": "2024-12-12T09:37:54Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure this branch is a good chery-pick branch (compared to android13-dev for example?), I\u0027ll leave that to you though or the Dr.No reviewer.",
+      "revId": "c751f51b8811b040c8a86e9dbfaa8c9c21cf637c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
