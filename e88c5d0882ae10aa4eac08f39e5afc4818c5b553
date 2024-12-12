@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "927e7cfc_ab3caae6",
+        "filename": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-12T21:39:46Z",
+      "side": 1,
+      "message": "Just inline this into the call to `processParsingResult`?",
+      "range": {
+        "startLine": 132,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 77
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "faa8a4af_d691db7d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 134,
+                "endChar": 0
+              },
+              "replacement": "    (void) processParsingResult(\n            {std::make_unique\u003cengineConfig::Config\u003e(gDefaultEngineConfig), 1});\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e88c5d0882ae10aa4eac08f39e5afc4818c5b553",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
