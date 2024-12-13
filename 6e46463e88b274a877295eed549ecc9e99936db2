@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19045d5d_2f27e4fb",
+        "filename": "media/codec2/sfplugin/tests/CCodecConfig_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-13T21:26:49Z",
+      "side": 1,
+      "message": "c2err may be C2_OK when heapParams.size() !\u003d 2. Is this intended?",
+      "revId": "6e46463e88b274a877295eed549ecc9e99936db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d32f19fe_737c0393",
+        "filename": "media/codec2/sfplugin/tests/CCodecConfig_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-13T21:26:49Z",
+      "side": 1,
+      "message": "in essence this function just checks whether query succeeds or not. Are we going to add more checks in the future?",
+      "revId": "6e46463e88b274a877295eed549ecc9e99936db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
