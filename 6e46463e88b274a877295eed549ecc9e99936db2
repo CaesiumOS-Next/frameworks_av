@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0c65c3c_735eb116",
+        "filename": "media/codec2/sfplugin/tests/CCodecConfig_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-13T22:38:12Z",
+      "side": 1,
+      "message": "Taken care of this in the next patch",
+      "parentUuid": "19045d5d_2f27e4fb",
+      "revId": "6e46463e88b274a877295eed549ecc9e99936db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d32f19fe_737c0393",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-12-13T21:26:49Z",
       "side": 1,
       "message": "in essence this function just checks whether query succeeds or not. Are we going to add more checks in the future?",
+      "revId": "6e46463e88b274a877295eed549ecc9e99936db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc19c8c0_f636b3e6",
+        "filename": "media/codec2/sfplugin/tests/CCodecConfig_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-13T22:38:12Z",
+      "side": 1,
+      "message": "Updated the test to validate the query output with what is expected of.\nThe primary responsibility of this test case is to validate the new c2config indicies on the component store (capacity and excluded resources).\n\nI am working on adding some tests at the interface level (for required resources per component)",
+      "parentUuid": "d32f19fe_737c0393",
       "revId": "6e46463e88b274a877295eed549ecc9e99936db2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
