@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d7b935_4a5a52e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2024-12-13T17:15:24Z",
+      "side": 1,
+      "message": "Abhijit, Eric,\n\nThis is the same as previously approved aosp/3313691. Added another SELinux rule in a new CL to avoid generating SELinux denials.",
+      "revId": "f52fe94b4f3389c714f25fc81bba09a9d0dab937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
