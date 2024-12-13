@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "931dca08_3d5bd1f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2024-12-13T00:26:39Z",
+      "side": 1,
+      "message": "Ajender, you will need someone from QCOM to help review, thanks!",
+      "revId": "8ee003d8364e13c594adbf712e6cbbe45df83fd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
