@@ -164,7 +164,8 @@ status_t ParameterManagerWrapper::start(std::string &error)
     ALOGD("%s: in", __FUNCTION__);
     /// Start PFW
     if (mPfwConnector == nullptr || !mPfwConnector->start(error)) {
-        ALOGE("%s: Policy PFW start error: %s", __FUNCTION__, error.c_str());
+        ALOGE("%s: Policy PFW start error: %s", __FUNCTION__,
+              mPfwConnector == nullptr ? "invalid connector" : error.c_str());
         return NO_INIT;
     }
     ALOGD("%s: Policy PFW successfully started!", __FUNCTION__);
