@@ -33,6 +33,24 @@
       "message": "Thank you for uploading the patch. However, could you add a logic for checking \"Automotive\" feature to make this fix only applicable to automotive devices?",
       "revId": "45a6e92981356d370364d60c57dbc3b19b60a9d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2cbdd23_bfb557a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1624675
+      },
+      "writtenOn": "2024-12-13T12:16:59Z",
+      "side": 1,
+      "message": "Please refer to https://cs.android.com/android/platform/superproject/+/android14-qpr3-release:frameworks/native/services/sensorservice/SensorService.cpp;l\u003d153?q\u003dandroid.hardware.type.automotive%20file:cpp for automotive feature checking in .cpp file.",
+      "parentUuid": "ee4f61db_103f0ce3",
+      "revId": "45a6e92981356d370364d60c57dbc3b19b60a9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
