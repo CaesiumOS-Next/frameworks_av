@@ -51,6 +51,23 @@
       "parentUuid": "ee4f61db_103f0ce3",
       "revId": "45a6e92981356d370364d60c57dbc3b19b60a9d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec5b2732_acdc89c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3768729
+      },
+      "writtenOn": "2024-12-13T12:26:05Z",
+      "side": 1,
+      "message": "This problem is not limited to automotive.\nIn setUserIdDeviceAffinities, forceVolumeReeval \u003d false, skipDelays \u003d true is also used.\n(This is the part that is called when the User changes in Automotive.)\nThere is no logic to check Automotive in setUserIdDeviceAffinities.",
+      "revId": "45a6e92981356d370364d60c57dbc3b19b60a9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
