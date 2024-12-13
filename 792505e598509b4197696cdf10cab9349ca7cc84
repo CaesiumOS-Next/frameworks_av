@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a38ff94b_bbf295bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1141048
+      },
+      "writtenOn": "2024-12-13T17:09:48Z",
+      "side": 1,
+      "message": "+ camera framework eng. team for visibility",
+      "revId": "792505e598509b4197696cdf10cab9349ca7cc84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
