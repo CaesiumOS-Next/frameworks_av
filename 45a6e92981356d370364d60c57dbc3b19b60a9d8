@@ -68,6 +68,24 @@
       "message": "This problem is not limited to automotive.\nIn setUserIdDeviceAffinities, forceVolumeReeval \u003d false, skipDelays \u003d true is also used.\n(This is the part that is called when the User changes in Automotive.)\nThere is no logic to check Automotive in setUserIdDeviceAffinities.",
       "revId": "45a6e92981356d370364d60c57dbc3b19b60a9d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747b759f_ef3598ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1624675
+      },
+      "writtenOn": "2024-12-13T13:09:54Z",
+      "side": 1,
+      "message": "I hope we can stay conservative when making this level of change.\nI believe you can follow the way of Automotive feature checking https://cs.android.com/android/platform/superproject/+/android14-qpr3-release:frameworks/native/services/sensorservice/SensorService.cpp;l\u003d153?q\u003dandroid.hardware.type.automotive%20file:cpp if you include #include \u003candroid/content/pm/IPackageManagerNative.h\u003e",
+      "parentUuid": "ec5b2732_acdc89c7",
+      "revId": "45a6e92981356d370364d60c57dbc3b19b60a9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
