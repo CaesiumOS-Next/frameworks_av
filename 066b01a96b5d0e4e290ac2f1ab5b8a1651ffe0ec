@@ -39,6 +39,30 @@
       },
       "revId": "066b01a96b5d0e4e290ac2f1ab5b8a1651ffe0ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e965eb70_d1a755b3",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2024-12-13T11:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dea007cc_61adc3ae",
+      "range": {
+        "startLine": 167,
+        "startChar": 14,
+        "endLine": 167,
+        "endChar": 75
+      },
+      "revId": "066b01a96b5d0e4e290ac2f1ab5b8a1651ffe0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
