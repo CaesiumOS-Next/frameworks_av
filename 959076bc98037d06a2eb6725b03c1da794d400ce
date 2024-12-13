@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8060e3ce_2ff64710",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010396
+      },
+      "writtenOn": "2024-12-13T09:36:24Z",
+      "side": 1,
+      "message": "Hey Folks,\nKindly ask for your review of the CL.\n\nCheers\nDaniel",
+      "revId": "959076bc98037d06a2eb6725b03c1da794d400ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
