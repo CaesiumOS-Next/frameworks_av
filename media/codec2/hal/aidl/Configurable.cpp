@@ -68,6 +68,7 @@ ScopedAStatus CachedConfigurable::query(
             (Index*)indices.data(),
             (Index*)indices.data() + indices.size());
     std::vector<std::unique_ptr<C2Param>> c2heapParams;
+    LOG(INFO) << "GIRISH: CachedConfigurable::" <<  __func__;
     c2_status_t c2res = mIntf->query(
             c2heapParamIndices,
             mayBlock ? C2_MAY_BLOCK : C2_DONT_BLOCK,

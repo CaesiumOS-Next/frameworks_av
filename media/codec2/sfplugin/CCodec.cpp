@@ -779,6 +779,8 @@ public:
             const std::vector<C2Param *> &stackParams,
             const std::vector<C2Param::Index> &heapParamIndices,
             std::vector<std::unique_ptr<C2Param>> *const heapParams) const {
+        ALOGI("GIRISH: Codec2ClientInterfaceWrapper::%s:%d:: Calling query on client",
+              __func__, __LINE__);
         return mClient->query(stackParams, heapParamIndices, C2_MAY_BLOCK, heapParams);
     }
 

@@ -88,6 +88,7 @@ struct StoreIntf : public ConfigurableC2Intf {
         if (mayBlock == C2_DONT_BLOCK && indices.size() != 0) {
             return C2_BLOCKING;
         }
+        ALOGI("GIRISH: StoreIntf::%s", __func__);
         return mStore->query_sm({}, indices, params);
     }
 
@@ -263,6 +264,7 @@ ScopedAStatus ComponentStore::createComponent(
         const std::shared_ptr<IClientManager>& pool,
         std::shared_ptr<IComponent> *component) {
 
+    ALOGI("GIRISH: ComponentStore::%s: name(%s)", __func__, name.c_str());
     if (!listener) {
         ALOGE("createComponent(): listener is null");
         return ScopedAStatus::fromServiceSpecificError(Status::BAD_VALUE);
@@ -308,6 +310,8 @@ ScopedAStatus ComponentStore::createComponent(
 ScopedAStatus ComponentStore::createInterface(
         const std::string& name,
         std::shared_ptr<IComponentInterface> *intf) {
+
+    ALOGI("GIRISH: ComponentStore::%s: name(%s)", __func__, name.c_str());
     std::shared_ptr<C2ComponentInterface> c2interface;
     c2_status_t res = mStore->createInterface(name, &c2interface);
     if (res == C2_OK) {

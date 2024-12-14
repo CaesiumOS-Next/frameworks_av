@@ -176,6 +176,7 @@ public:
             std::vector<C2Param*> const& stackParams,
             std::vector<C2Param::Index> const& heapParamIndices,
             std::vector<std::unique_ptr<C2Param>>* const heapParams) const {
+        ALOGI("GIRISH: Client2Store::query: %d", __LINE__);
         return mClient->query(stackParams, heapParamIndices, C2_MAY_BLOCK, heapParams);
     }
 
@@ -623,6 +624,7 @@ c2_status_t Codec2ConfigurableClient::AidlImpl::query(
         const std::vector<C2Param::Index> &heapParamIndices,
         c2_blocking_t mayBlock,
         std::vector<std::unique_ptr<C2Param>>* const heapParams) const {
+    ALOGI("GIRISH: Codec2ConfigurableClient::AidlImpl::query: %d", __LINE__);
     std::vector<int> indices(
             stackParams.size() + heapParamIndices.size());
     size_t numIndices = 0;
@@ -1208,6 +1210,7 @@ c2_status_t Codec2ConfigurableClient::query(
         const std::vector<C2Param::Index> &heapParamIndices,
         c2_blocking_t mayBlock,
         std::vector<std::unique_ptr<C2Param>>* const heapParams) const {
+    ALOGI("GIRISH: Codec2ConfigurableClient::query: %d", __LINE__);
     return mImpl->query(stackParams, heapParamIndices, mayBlock, heapParams);
 }
 
