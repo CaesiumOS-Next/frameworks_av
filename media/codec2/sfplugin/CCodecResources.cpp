@@ -141,7 +141,9 @@ static status_t getSystemResource(const C2ResourcesNeededTuning* systemResources
 //static
 std::vector<GlobalResourceInfo> CCodecResources::GetGloballyAvailableResources() {
     // Try creating client from "default" service:
-    std::shared_ptr<Codec2Client> client = Codec2Client::CreateFromService("default");
+    //std::shared_ptr<Codec2Client> client = Codec2Client::CreateFromService("default");
+    // GIRISH: TEST-ONLY: Forcing to use software store.
+    std::shared_ptr<Codec2Client> client = Codec2Client::CreateFromService("software");
     if (client) {
         // Query the system resource capacity from the component store.
         std::vector<GlobalResourceInfo> systemAvailableResources;

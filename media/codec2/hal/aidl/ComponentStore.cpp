@@ -308,6 +308,7 @@ ScopedAStatus ComponentStore::createComponent(
 ScopedAStatus ComponentStore::createInterface(
         const std::string& name,
         std::shared_ptr<IComponentInterface> *intf) {
+
     std::shared_ptr<C2ComponentInterface> c2interface;
     c2_status_t res = mStore->createInterface(name, &c2interface);
     if (res == C2_OK) {

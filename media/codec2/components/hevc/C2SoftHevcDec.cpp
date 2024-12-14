@@ -38,6 +38,11 @@ constexpr char COMPONENT_NAME[] = "c2.android.hevc.decoder";
 constexpr uint32_t kDefaultOutputDelay = 8;
 constexpr uint32_t kMaxOutputDelay = 16;
 constexpr size_t kMinInputBufferSize = 2 * 1024 * 1024;
+
+// Only for testing.
+const uint32_t kMaxInstanceCountId = 0x1000;
+const uint32_t kMaxPixelstId = 0x1001;
+
 }  // namespace
 
 class C2SoftHevcDec::IntfImpl : public SimpleInterface<void>::BaseParams {
@@ -195,6 +200,31 @@ public:
                 .withConstValue(new C2StreamPixelFormatInfo::output(
                                      0u, HAL_PIXEL_FORMAT_YCBCR_420_888))
                 .build());
+
+        // Add needed resources
+        addNeededResources();
+    }
+
+    // Only for testing:
+    // Add Required/needed resources for this component.
+    void addNeededResources(uint32_t width = 320, uint32_t height = 240) {
+        std::vector<C2SystemResourceStruct> resourcesNeeded;
+        // Add one instance.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxInstanceCountId, CONST, 1));
+        // Add the pixel count.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxPixelstId, CONST, width * height));
+
+        addParameter(
+                DefineParam(mResourcesNeeded, C2_PARAMKEY_RESOURCES_NEEDED)
+                .withDefault(C2ResourcesNeededTuning::AllocShared(
+                        resourcesNeeded.size(), resourcesNeeded))
+                .withFields({
+                        C2F(mResourcesNeeded, m.values[0].id).any(),
+                        C2F(mResourcesNeeded, m.values[0].kind).any(),
+                        C2F(mResourcesNeeded, m.values[0].amount).any(),
+                })
+                .withSetter(ResourcesNeededSetter, mSize)
+                .build());
     }
 
     static C2R SizeSetter(bool mayBlock, const C2P<C2StreamPictureSizeInfo::output> &oldMe,
@@ -286,6 +316,22 @@ public:
         return C2R::Ok();
     }
 
+    static C2R ResourcesNeededSetter(bool mayBlock,
+                                     C2P<C2ResourcesNeededTuning>& me,
+                                     // dependencies
+                                     const C2P<C2StreamPictureSizeInfo::output>& size) {
+        (void)mayBlock;
+        for (size_t i = 0; i < me.v.flexCount(); ++i) {
+            const C2SystemResourceStruct& resource = me.v.m.values[i];
+            // Update the pixel count
+            if (resource.id == kMaxPixelstId) {
+                me.set().m.values[i].amount = size.v.width * size.v.height;
+            }
+        }
+
+        return C2R::Ok();
+    };
+
     std::shared_ptr<C2StreamColorAspectsInfo::output> getColorAspects_l() {
         return mColorAspects;
     }
@@ -300,6 +346,7 @@ private:
     std::shared_ptr<C2StreamColorAspectsTuning::output> mDefaultColorAspects;
     std::shared_ptr<C2StreamColorAspectsInfo::output> mColorAspects;
     std::shared_ptr<C2StreamPixelFormatInfo::output> mPixelFormat;
+    std::shared_ptr<C2ResourcesNeededTuning> mResourcesNeeded;
 };
 
 static size_t getCpuCoreCount() {
@@ -946,6 +993,7 @@ void C2SoftHevcDec::process(
                     work->result = C2_CORRUPTED;
                     return;
                 }
+
                 continue;
             }
         }

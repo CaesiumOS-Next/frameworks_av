@@ -14,6 +14,7 @@ cc_test {
     srcs: [
         "CCodecBuffers_test.cpp",
         "CCodecConfig_test.cpp",
+        "CodecResources_test.cpp",
         "FrameReassembler_test.cpp",
         "ReflectedParamUpdater_test.cpp",
     ],
@@ -25,6 +26,7 @@ cc_test {
 
     header_libs: [
         "libsfplugin_ccodec_internal_headers",
+        "media_ndk_headers",
     ],
 
     shared_libs: [
