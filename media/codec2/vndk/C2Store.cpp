@@ -935,6 +935,8 @@ private:
     struct Interface : public C2InterfaceHelper {
         std::shared_ptr<C2StoreIonUsageInfo> mIonUsageInfo;
         std::shared_ptr<C2StoreDmaBufUsageInfo> mDmaBufUsageInfo;
+        std::shared_ptr<C2ResourcesCapacityTuning> mResourcesCapacity;
+        std::shared_ptr<C2ResourcesExcludedTuning> mResourcesExcluded;
 
         Interface(std::shared_ptr<C2ReflectorHelper> reflector)
             : C2InterfaceHelper(reflector) {
@@ -983,6 +985,22 @@ private:
                     me.set().m.allocFlags = 0;
                     return C2R::Ok();
                 };
+
+                static C2R setResourcesCapacity(bool mayBlock,
+                                                C2P<C2ResourcesCapacityTuning>& me) {
+                    (void)mayBlock;
+                    (void)me;
+                    ALOGI("GIRISH: Setter::%s:%d", __func__, __LINE__);
+                    return C2R::Ok();
+                };
+
+                static C2R setExcludedResources(bool mayBlock,
+                                                C2P<C2ResourcesExcludedTuning>& me) {
+                    (void)mayBlock;
+                    (void)me;
+                    ALOGI("GIRISH: Setter::%s:%d", __func__, __LINE__);
+                    return C2R::Ok();
+                };
             };
 
             addParameter(
@@ -1009,6 +1027,70 @@ private:
                 })
                 .withSetter(Setter::setDmaBufUsage)
                 .build());
+
+            // Only for testing
+            std::vector<C2SystemResourceStruct> systemResourcesCapacity;
+            std::vector<C2SystemResourceStruct> excludedSystemResources;
+            initializeSystemResources(systemResourcesCapacity, excludedSystemResources);
+            if (!systemResourcesCapacity.empty() && !excludedSystemResources.empty()) {
+                // Add System Resource Capacity
+                addParameter(
+                    DefineParam(mResourcesCapacity, C2_PARAMKEY_RESOURCES_CAPACITY)
+                    .withDefault(C2ResourcesCapacityTuning::AllocShared(
+                            systemResourcesCapacity.size(), systemResourcesCapacity))
+                    .withFields({
+                            C2F(mResourcesCapacity, m.values[0].id).any(),
+                            C2F(mResourcesCapacity, m.values[0].kind).any(),
+                            C2F(mResourcesCapacity, m.values[0].amount).any(),
+                    })
+                    .withSetter(Setter::setResourcesCapacity)
+                    .build());
+
+                // Add Excluded System Resources
+                addParameter(
+                    DefineParam(mResourcesExcluded, C2_PARAMKEY_RESOURCES_EXCLUDED)
+                    .withDefault(C2ResourcesExcludedTuning::AllocShared(
+                            excludedSystemResources.size(), excludedSystemResources))
+                    .withFields({
+                            C2F(mResourcesExcluded, m.values[0].id).any(),
+                            C2F(mResourcesExcluded, m.values[0].kind).any(),
+                            C2F(mResourcesExcluded, m.values[0].amount).any(),
+                    })
+                    .withSetter(Setter::setExcludedResources)
+                    .build());
+            }
+        }
+
+        /*
+         * Only for testing:
+         * This simulates the "software" store with two system resources for video
+         * codecs.
+         *  - max instance limit, which is capped at 64
+         *  - max pixel count: up to 4 instances of 4K ==> 4 * 3840 * 2400
+         *
+         *  These 2 resource types are given 2 different (sw resource) ids.
+         */
+        void initializeSystemResources(
+                std::vector<C2SystemResourceStruct>& systemResourcesCapacity,
+                std::vector<C2SystemResourceStruct>& excludedSystemResources) {
+            // max instance limit 64
+            const uint32_t kMaxInstanceCountId = 0x1000;
+            const uint64_t kMaxInstanceCountAmount = 64;
+            // max pixel count: up to 4 instances of 4K
+            const uint32_t kMaxPixelstId = 0x1001;
+            const uint64_t kMaxPixelsAmount = 4 * 3840 * 2400;
+            systemResourcesCapacity.push_back(C2SystemResourceStruct(kMaxInstanceCountId,
+                                                                     CONST,
+                                                                     kMaxInstanceCountAmount));
+            systemResourcesCapacity.push_back(C2SystemResourceStruct(kMaxPixelstId,
+                                                                     CONST,
+                                                                     kMaxPixelsAmount));
+
+            // Nothing is excluded, but lets just add them with amount as 0.
+            excludedSystemResources.push_back(C2SystemResourceStruct(kMaxInstanceCountId,
+                                                                     CONST, 0));
+            excludedSystemResources.push_back(C2SystemResourceStruct(kMaxPixelstId,
+                                                                     CONST, 0));
         }
     };
 
@@ -1050,6 +1132,7 @@ private:
     std::vector<std::tuple<C2String,
                           C2ComponentFactory::CreateCodec2FactoryFunc,
                           C2ComponentFactory::DestroyCodec2FactoryFunc>> mCodec2FactoryFuncs;
+
 };
 
 c2_status_t C2PlatformComponentStore::ComponentModule::init(
@@ -1236,6 +1319,7 @@ c2_status_t C2PlatformComponentStore::query_sm(
         const std::vector<C2Param*> &stackParams,
         const std::vector<C2Param::Index> &heapParamIndices,
         std::vector<std::unique_ptr<C2Param>> *const heapParams) const {
+    ALOGI("GIRISH: C2PlatformComponentStore::%s", __func__);
     return mInterface.query(stackParams, heapParamIndices, C2_MAY_BLOCK, heapParams);
 }
 

@@ -600,6 +600,8 @@ c2_status_t C2InterfaceHelper::config(
     bool paramTimedOut = false;
     bool paramCorrupted = false;
 
+    C2_LOG(INFO) << "GIRISH: C2InterfaceHelper::" << __func__ << ": " << __LINE__
+                 << ": count: " << params.size();
     // dependencies
     // down dependencies are marked dirty, but params set are not immediately
     // marked dirty (unless they become down dependency) so that we can
@@ -772,6 +774,8 @@ c2_status_t C2InterfaceHelper::query(
     bool paramDidNotFit = false;
     bool paramNoMemory = false;
 
+    C2_LOG(INFO) << "GIRISH: C2InterfaceHelper::" << __func__ << ": " << __LINE__
+                 << ": count: " << heapParamIndices.size();
     for (C2Param* const p : stackParams) {
         if (!*p) {
             paramWasInvalid = true;

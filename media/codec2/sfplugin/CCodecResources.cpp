@@ -30,6 +30,7 @@ static
 c2_status_t queryGlobalResources(const std::shared_ptr<Codec2Client>& client,
                                  std::vector<GlobalResourceInfo>& systemAvailableResources) {
     std::vector<std::unique_ptr<C2Param>> heapParams;
+    ALOGI("GIRISH: queryGlobalResources[%d]: Calling query on client", __LINE__);
     c2_status_t c2err = client->query(
             {},
             {C2ResourcesCapacityTuning::PARAM_TYPE, C2ResourcesExcludedTuning::PARAM_TYPE},
@@ -141,8 +142,11 @@ static status_t getSystemResource(const C2ResourcesNeededTuning* systemResources
 //static
 std::vector<GlobalResourceInfo> CCodecResources::GetGloballyAvailableResources() {
     // Try creating client from "default" service:
-    std::shared_ptr<Codec2Client> client = Codec2Client::CreateFromService("default");
+    //std::shared_ptr<Codec2Client> client = Codec2Client::CreateFromService("default");
+    // GIRISH: Forcing to use software store.
+    std::shared_ptr<Codec2Client> client = Codec2Client::CreateFromService("software");
     if (client) {
+        ALOGI("GIRISH: Store name is: %s", client->getServiceName().c_str());
         // Query the system resource capacity from the component store.
         std::vector<GlobalResourceInfo> systemAvailableResources;
         c2_status_t status = queryGlobalResources(client, systemAvailableResources);
@@ -162,6 +166,7 @@ status_t CCodecResources::queryRequiredResources(
         const std::shared_ptr<Codec2Client::Component>& comp) {
     // Query required/needed system resources for the current configuration.
     std::vector<std::unique_ptr<C2Param>> heapParams;
+    ALOGI("GIRISH: CCodecResources::queryRequiredResources[%d]: Calling query on comp", __LINE__);
     c2_status_t c2err = comp->query(
             {},
             {C2ResourcesNeededTuning::PARAM_TYPE},

@@ -1142,6 +1142,8 @@ status_t CCodecConfig::initialize(
         mParamUpdater->addStandardParam<C2StreamInitDataInfo::output>(C2_PARAMKEY_INIT_DATA);
     }
     if (domain.value == C2Component::DOMAIN_IMAGE || domain.value == C2Component::DOMAIN_VIDEO) {
+        // TODO: GIRISH: Do we have to add RESOURCES_NEEDED here?
+        // addLocalParam<C2ResourcesNeededTuning>(C2_PARAMKEY_RESOURCES_NEEDED);
         if (kind.value != C2Component::KIND_ENCODER) {
             addLocalParam<C2StreamPictureSizeInfo::output>(C2_PARAMKEY_PICTURE_SIZE);
             addLocalParam<C2StreamCropRectInfo::output>(C2_PARAMKEY_CROP_RECT);
@@ -2097,10 +2099,12 @@ status_t CCodecConfig::setParameters(
     std::vector<C2Param *> paramVector;
     for (const std::unique_ptr<C2Param> &param : configUpdate) {
         if (mSupportedIndices.count(param->index())) {
+            ALOGI("component parameter");
             // component parameter
             paramVector.push_back(param.get());
             indices.push_back(param->index());
         } else if (mLocalParams.count(param->index())) {
+            ALOGI("local parameter");
             // handle local parameter here
             LocalParamValidator validator = mLocalParams.find(param->index())->second;
             c2_status_t err = C2_OK;
