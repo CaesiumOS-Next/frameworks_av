@@ -1576,6 +1576,10 @@ bool EffectModule::isSpatializer() const {
     return IAfEffectModule::isSpatializer(&mDescriptor.type);
 }
 
+bool EffectModule::isEffect(const effect_uuid_t *uuid) const {
+    return memcmp(&mDescriptor.uuid, uuid, sizeof(effect_uuid_t)) == 0;
+}
+
 status_t EffectModule::setHapticScale_l(int id, os::HapticScale hapticScale) {
     if (mStatus != NO_ERROR) {
         return mStatus;
