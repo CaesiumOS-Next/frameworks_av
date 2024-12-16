@@ -90,7 +90,11 @@ private:
         void binderDied(const wp<IBinder> &the_late_who __unused);
     };
 
-    class InstanceCache;
+    static sp<BinderDeathObserver> sBinderDeathObserver;
+    static sp<IBinder> sMediaPlayer;
+
+    static sp<IMediaCodecList> sCodecList;
+    static sp<IMediaCodecList> sRemoteList;
 
     status_t mInitCheck{NO_INIT};
 
