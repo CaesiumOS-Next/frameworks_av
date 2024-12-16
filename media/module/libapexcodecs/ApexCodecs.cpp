@@ -106,7 +106,7 @@ ApexCodec_Status ApexCodec_Configurable_query(
         uint32_t indices[],
         size_t numIndices,
         ApexCodec_LinearBuffer *config,
-        size_t *writtenOrRequired) {
+        size_t *written) {
     return APEXCODEC_STATUS_OMITTED;
 }
 
