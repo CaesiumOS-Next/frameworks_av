@@ -39,6 +39,7 @@
 #include <mediautils/MethodStatistics.h>
 #include <mediautils/ServiceUtilities.h>
 #include <mediautils/TimeCheck.h>
+#include <system/audio_effects/audio_effects_utils.h>
 #include <system/audio_effects/effect_aec.h>
 #include <system/audio_effects/effect_downmix.h>
 #include <system/audio_effects/effect_dynamicsprocessing.h>
@@ -1574,6 +1575,11 @@ bool IAfEffectModule::isSpatializer(const effect_uuid_t *type) {
 
 bool EffectModule::isSpatializer() const {
     return IAfEffectModule::isSpatializer(&mDescriptor.type);
+}
+
+bool EffectModule::isEffect(const effect_uuid_t *uuid) const {
+    using android::effect::utils::operator==;
+    return mDescriptor.uuid == *uuid;
 }
 
 status_t EffectModule::setHapticScale_l(int id, os::HapticScale hapticScale) {
