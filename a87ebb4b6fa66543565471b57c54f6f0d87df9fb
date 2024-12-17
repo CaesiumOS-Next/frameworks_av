@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2c98bc8_aa0266b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-17T18:10:30Z",
+      "side": 1,
+      "message": "For stability pixels have no issues. there is  some not so big delay for memory reclamation in the end(when codecs are released).",
+      "parentUuid": "a2a9c747_8baa47e4",
+      "revId": "a87ebb4b6fa66543565471b57c54f6f0d87df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "87d01496_44b1eb5d",
