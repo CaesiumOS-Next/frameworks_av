@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f40245_b51a8424",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-17T17:47:11Z",
+      "side": 1,
+      "message": "For stability wise, this does not make the current status worse.\n(There might be some not so big delay for memory reclamation, but I don\u0027t think they are significant.)\nOther than that, current device experiencing crashes will have benefit whithout changing the property.\nAnd pixel already migrated to C2AIDL from V, effects on pixel should be minima also.",
+      "parentUuid": "f4e2cd57_802efa04",
+      "revId": "a87ebb4b6fa66543565471b57c54f6f0d87df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "87d01496_44b1eb5d",
