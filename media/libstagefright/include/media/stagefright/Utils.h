@@ -60,6 +60,9 @@ status_t getAudioOffloadInfo(const sp<MetaData>& meta, bool hasVideo,
 // Check whether the stream defined by meta can be offloaded to hardware
 bool canOffloadStream(const sp<MetaData>& meta, bool hasVideo,
                       bool isStreaming, audio_stream_type_t streamType);
+// check whether pcm stream can be used over compress offload path
+bool canPcmOffloadStream(const sp<AMessage> &format, bool hasVideo,
+                      bool isStreaming, audio_stream_type_t streamType);
 
 struct HLSTime {
     int32_t mSeq;

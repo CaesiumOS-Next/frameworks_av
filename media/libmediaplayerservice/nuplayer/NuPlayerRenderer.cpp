@@ -2017,7 +2017,9 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
             format->findInt32(KEY_PCM_ENCODING, &pcmEncoding) ?
                     audioFormatFromEncoding(pcmEncoding) : AUDIO_FORMAT_PCM_16_BIT;
 
-    if (offloadingAudio()) {
+    bool isPcmOffloadPossible =  canPcmOffloadStream(format, hasVideo, isStreaming, AUDIO_STREAM_MUSIC);
+    ALOGI("%s offloadingAudio %d isPcmOffloadPossible %d ", __func__, offloadingAudio(), isPcmOffloadPossible);
+    if (offloadingAudio() || isPcmOffloadPossible) {
         AString mime;
         CHECK(format->findString("mime", &mime));
         status_t err = OK;
@@ -2117,7 +2119,7 @@ status_t NuPlayer::Renderer::onOpenAudioSink(
             }
         }
     }
-    if (!offloadOnly && !offloadingAudio()) {
+    if (!offloadOnly && !offloadingAudio() && !isPcmOffloadPossible) {
         ALOGV("openAudioSink: open AudioSink in NON-offload mode");
         uint32_t pcmFlags = flags;
         pcmFlags &= ~AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD;

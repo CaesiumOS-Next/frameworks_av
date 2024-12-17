@@ -2540,6 +2540,21 @@ bool canOffloadStream(const sp<MetaData>& meta, bool hasVideo,
 #endif
 }
 
+bool canPcmOffloadStream(const sp<AMessage> &format, bool hasVideo,
+                      bool isStreaming, audio_stream_type_t streamType)
+{
+    int32_t pcmEncoding;
+    audio_format_t audioFormat =
+            format->findInt32(KEY_PCM_ENCODING, &pcmEncoding) ?
+                    audioFormatFromEncoding(pcmEncoding) : AUDIO_FORMAT_PCM_16_BIT;
+
+    if (!audio_is_linear_pcm(audioFormat)) return false;
+
+    sp<MetaData> metadata = new MetaData();
+    convertMessageToMetaData(format, metadata);
+    return canOffloadStream(metadata, hasVideo, isStreaming, streamType);
+}
+
 HLSTime::HLSTime(const sp<AMessage>& meta) :
     mSeq(-1),
     mTimeUs(-1LL),
