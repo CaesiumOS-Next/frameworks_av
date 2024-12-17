@@ -17,8 +17,11 @@ cc_library {
     ],
 
     static_libs: [
-        "android.media.swcodec.flags-aconfig-cc",
         "libopenapv",
+    ],
+
+    shared_libs: [
+        "android.media.swcodec.flags-aconfig-cc",
     ],
 
     srcs: [
@@ -45,8 +48,11 @@ cc_library {
     ],
 
     static_libs: [
-        "android.media.swcodec.flags-aconfig-cc",
         "libopenapv",
+    ],
+
+    shared_libs: [
+        "android.media.swcodec.flags-aconfig-cc",
     ],
 
     srcs: [

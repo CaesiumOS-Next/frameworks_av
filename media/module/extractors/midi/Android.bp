@@ -32,7 +32,6 @@ cc_library {
     ],
 
     static_libs: [
-        "android.media.extractor.flags-aconfig-cc",
         "libaconfig_storage_read_api_cc",
         "libmedia_midiiowrapper",
         "libsonivoxwithoutjet",
@@ -41,6 +40,7 @@ cc_library {
     ],
 
     shared_libs: [
+        "android.media.extractor.flags-aconfig-cc",
         "libbase",
         "server_configurable_flags",
     ],
