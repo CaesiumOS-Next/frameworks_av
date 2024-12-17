@@ -1,0 +1,126 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb393611_deccfe00",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-17T20:28:30Z",
+      "side": 1,
+      "message": "This seems to be a very common name,\nhow about making this as static const or constexpr with more specific name?\n\nconstexpr int32_t kDefaultSoftApvDecNumThreads \u003d 1;",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e7964e3a_c747a527",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvDec.cpp",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 41,
+                "endChar": 0
+              },
+              "replacement": "#define DEFAULT_NUM_THREADS  (1)\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvDec.cpp",
+              "range": {
+                "startLine": 591,
+                "startChar": 0,
+                "endLine": 592,
+                "endChar": 0
+              },
+              "replacement": "    cdesc.threads \u003d DEFAULT_NUM_THREADS;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96360a32a0eb5eb8194f7e6a9b22b79d4764000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67f0de6a_de8f1fa9",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-17T20:28:30Z",
+      "side": 1,
+      "message": "Could we have some comments on this?\nJust stating the specification might seems to be enough.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ed29fbca_215f9a70",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvDec.h",
+              "range": {
+                "startLine": 107,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "    // HDR info structure as defined in the APV spec\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvDec.h",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "        // HDR MDCV structure as defined in the APV spec\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvDec.h",
+              "range": {
+                "startLine": 126,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "        // HDR CLL structure as defined in the APV spec\n"
+            },
+            {
+              "path": "media/codec2/components/apv/C2SoftApvDec.h",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "        // ITUT T35 structure as defined in the APV spec\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96360a32a0eb5eb8194f7e6a9b22b79d4764000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
