@@ -19,7 +19,23 @@ on property:vts.native_server.on=1
 on property:vts.native_server.on=0
     start audioserver
 
-on property:init.svc.audioserver=stopped
+on property:vts.native_server.off=1
+    stop audioserver
+    stop vendor.audio-hal
+    stop vendor.audio-hal-aidl
+    stop vendor.audio-effect-hal-aidl
+    stop vendor.audio-hal-4-0-msd
+    stop audio_proxy_service
+
+on property:vts.native_server.off=0
+    start vendor.audio-hal
+    start vendor.audio-hal-aidl
+    start vendor.audio-effect-hal-aidl
+    start vendor.audio-hal-4-0-msd
+    start audio_proxy_service
+    start audioserver
+
+on property:init.svc.audioserver=stopped && vts.native_server.on=1
     stop vendor.audio-hal
     stop vendor.audio-hal-aidl
     stop vendor.audio-effect-hal-aidl
