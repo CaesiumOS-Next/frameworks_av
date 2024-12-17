@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b757e65e_922ef6c7",
+        "filename": "media/codec2/components/hevc/C2SoftHevcDec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-17T23:03:27Z",
+      "side": 1,
+      "message": "this is the signature of a strict setter. Since this is a calculated setting, it cannot be strict.\n\nUse the following signature:\n\n```\nbool mayBlock,\nC2P\u003cC2ResourcesNeededTuning\u003e\u0026 me,\n// dependencies\nconst C2P\u003cC2StreamPictureSizeInfo::output\u003e \u0026size // ...\n) {\n  // then calculate the resources needed\n  // one complexity is that you need to create a flex parameter here which does not exist today.\n  \n  std::shared_ptr\u003cC2ResourcesNeededTuning\u003e resources(\n     C2ResourcesNeededTuning::AllocShared(1));\n  resources.m.values[0].amount \u003d size.width * size.height;\n  resources.m.values[0].kind \u003d CONST;\n  \n  // need a new C2P method to be able to set the whole value\n  me.set(resources);\n}\n```",
+      "range": {
+        "startLine": 323,
+        "startChar": 37,
+        "endLine": 324,
+        "endChar": 73
+      },
+      "revId": "a039224cc3c915362c06ba0e33463d294be8410c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
