@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3343929_ffbf82f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-12-17T21:00:07Z",
+      "side": 1,
+      "message": "adding a property for devices in the field is not an option.\nthat would require an OTA update of the device; which is not something that is distributed through playstore.",
+      "parentUuid": "0249bec9_79193a76",
+      "revId": "a87ebb4b6fa66543565471b57c54f6f0d87df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "87d01496_44b1eb5d",
