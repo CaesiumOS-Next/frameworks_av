@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0249bec9_79193a76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-17T18:13:06Z",
+      "side": 1,
+      "message": "Also there is an option to add system property for retaining the existing behavior.(I don\u0027t know whether this is feasible though.)",
+      "parentUuid": "a2c98bc8_aa0266b5",
+      "revId": "a87ebb4b6fa66543565471b57c54f6f0d87df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "87d01496_44b1eb5d",
