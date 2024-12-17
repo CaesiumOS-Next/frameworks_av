@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a9c747_8baa47e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-12-17T17:50:18Z",
+      "side": 1,
+      "message": "\u003d\u003d And pixel already migrated to C2AIDL from V, effects on pixel should be minima also\n\nthis statement worries me because it seems to discount the pixels that are still running R/S/T/U.\nWe also have to keep those stable/correct.",
+      "parentUuid": "45f40245_b51a8424",
+      "revId": "a87ebb4b6fa66543565471b57c54f6f0d87df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "87d01496_44b1eb5d",
