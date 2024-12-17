@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdcb0ede_89c5dab7",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-12-17T20:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb393611_deccfe00",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "revId": "96360a32a0eb5eb8194f7e6a9b22b79d4764000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67f0de6a_de8f1fa9",
@@ -119,6 +143,30 @@
           ]
         }
       ],
+      "revId": "96360a32a0eb5eb8194f7e6a9b22b79d4764000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e4c2e9e_b210b591",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2024-12-17T20:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67f0de6a_de8f1fa9",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 6
+      },
       "revId": "96360a32a0eb5eb8194f7e6a9b22b79d4764000a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
