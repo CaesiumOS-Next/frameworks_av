@@ -42,7 +42,6 @@ cc_library {
     ],
 
     static_libs: [
-        "android.media.extractor.flags-aconfig-cc",
         "libaconfig_storage_read_api_cc",
         "libstagefright_esds",
         "libstagefright_foundation",
@@ -51,6 +50,7 @@ cc_library {
     ],
 
     shared_libs: [
+        "android.media.extractor.flags-aconfig-cc",
         "server_configurable_flags",
     ],
 

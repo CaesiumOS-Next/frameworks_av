@@ -44,6 +44,8 @@ cc_library {
 
     shared_libs: [
         "libbase",
+        "android.media.extractor.flags-aconfig-cc",
+        "server_configurable_flags",
     ],
 
     header_libs: [
@@ -72,7 +74,6 @@ cc_library {
         "libstagefright_mpeg2support_nocrypto",
         "libutils",
     ],
-
     apex_available: [
         "com.android.media",
         "test_com.android.media",

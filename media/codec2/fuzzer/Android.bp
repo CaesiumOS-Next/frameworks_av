@@ -95,6 +95,10 @@ cc_fuzz {
         "libmpeg2dec",
         "libcodec2_soft_mpeg2dec",
     ],
+
+    shared_libs: [
+        "android.media.swcodec.flags-aconfig-cc",
+    ],
 }
 
 cc_fuzz {
