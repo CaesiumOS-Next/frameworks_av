@@ -71,6 +71,8 @@ struct EncoderCapabilities {
     /** @hide */
     bool supportsFormat(const sp<AMessage> &format);
 
+    size_t getMemoryCost() const;
+
 private:
     inline static const Feature sBitrateModes[] = {
         Feature("VBR", BITRATE_MODE_VBR, true),

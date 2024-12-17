@@ -439,4 +439,29 @@ int32_t CodecCapabilities::getErrors() const {
     return 0;
 }
 
+size_t CodecCapabilities::getMemoryCost() const {
+    size_t memory = 0;
+    memory += sizeof(std::string);  // size of mMediaType
+    memory += mProfileLevels.capacity();
+    memory += mColorFormats.capacity();
+
+    memory += sizeof(AMessage::ItemData) * mDefaultFormat->countEntries();
+    memory += sizeof(AMessage::ItemData) * mCapabilitiesInfo->countEntries();
+
+    memory += mFeaturesSupported.size() * sizeof(std::string);
+    memory += mFeaturesRequired.size() * sizeof(std::string);
+
+    if (mAudioCaps != nullptr) {
+        memory += mAudioCaps->getMemoryCost();
+    }
+    if (mVideoCaps != nullptr) {
+        memory += mVideoCaps->getMemoryCost();
+    }
+    if (mEncoderCaps != nullptr) {
+        memory += mEncoderCaps->getMemoryCost();
+    }
+
+    return memory;
+}
+
 }  // namespace android

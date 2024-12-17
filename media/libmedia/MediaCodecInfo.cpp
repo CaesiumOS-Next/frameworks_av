@@ -276,6 +276,16 @@ MediaCodecInfo::MediaCodecInfo()
       mRank(0x100) {
 }
 
+size_t MediaCodecInfo::getCodecCapsMemoryCost() const {
+    size_t memory = 0;
+
+    for (int i = 0; i < mCodecCaps.size(); i++) {
+        memory += mCodecCaps.valueAt(i)->getMemoryCost() + sizeof(AString);
+    }
+
+    return memory;
+}
+
 void MediaCodecInfoWriter::setName(const char* name) {
     mInfo->mName = name;
 }

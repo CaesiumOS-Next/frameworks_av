@@ -389,6 +389,8 @@ struct VideoCapabilities {
      */
     Range<Rational> getAspectRatioRange(bool blocks) const;
 
+    size_t getMemoryCost() const;
+
 private:
     std::string mMediaType;
     std::vector<ProfileLevel> mProfileLevels;

@@ -102,6 +102,8 @@ struct AudioCapabilities {
     /* For internal use only. Not exposed as a public API */
     bool supportsFormat(const sp<AMessage> &format);
 
+    size_t getMemoryCost() const;
+
 private:
     static constexpr int32_t MAX_INPUT_CHANNEL_COUNT = 30;
     static constexpr uint32_t MAX_NUM_CHANNELS = FCC_LIMIT;

@@ -229,6 +229,8 @@ struct MediaCodecInfo : public RefBase {
     static sp<MediaCodecInfo> FromParcel(const Parcel &parcel);
     status_t writeToParcel(Parcel *parcel) const;
 
+    size_t getCodecCapsMemoryCost() const;
+
 private:
     /**
      * Max supported instances setting from MediaCodecList global setting.

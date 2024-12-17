@@ -118,6 +118,8 @@ private:
             const char *mime,
             const sp<MediaCodecInfo> &info,
             const sp<AMessage> &format);
+
+    size_t getCodecCapsMemoryCost() const;
 };
 
 }  // namespace android

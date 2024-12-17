@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "MediaCodecList"
 #include <utils/Log.h>
 
@@ -220,6 +220,7 @@ MediaCodecList::MediaCodecList(std::vector<MediaCodecListBuilderBase*> builders)
     }
     writer.writeGlobalSettings(mGlobalSettings);
     writer.writeCodecInfos(&mCodecInfos);
+    ALOGD("Memory cost of native CodecCapabilities is: %zu", getCodecCapsMemoryCost());
     std::stable_sort(
             mCodecInfos.begin(),
             mCodecInfos.end(),
@@ -543,6 +544,14 @@ bool MediaCodecList::codecHandlesFormat(
 
     // haven't found a reason to discard this one
     return true;
+}
+
+size_t MediaCodecList::getCodecCapsMemoryCost() const {
+    size_t memory = 0;
+    for (const sp<MediaCodecInfo> info : mCodecInfos) {
+        memory += info->getCodecCapsMemoryCost();
+    }
+    return memory;
 }
 
 }  // namespace android

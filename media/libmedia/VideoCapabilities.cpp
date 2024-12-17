@@ -1699,4 +1699,15 @@ void VideoCapabilities::applyLevelLimits() {
     mError |= errors;
 }
 
+size_t VideoCapabilities::getMemoryCost() const {
+    size_t memory = 0;
+
+    memory += sizeof(std::string);  // mMediaType
+    memory += mProfileLevels.capacity();
+    memory += mMeasuredFrameRates.size() * (sizeof(VideoSize) + sizeof(Range<int64_t>));
+    memory += mPerformancePoints.capacity();
+
+    return memory;
+}
+
 }  // namespace android

@@ -396,4 +396,16 @@ bool AudioCapabilities::supportsFormat(const sp<AMessage> &format) {
     return true;
 }
 
+size_t AudioCapabilities::getMemoryCost() const {
+    size_t memory = 0;
+
+    memory += sizeof(std::string);  // mMediaType
+    memory += mProfileLevels.capacity();
+    memory += mSampleRates.capacity();
+    memory += mSampleRateRanges.capacity();
+    memory += mInputChannelRanges.capacity();
+
+    return memory;
+}
+
 }  // namespace android

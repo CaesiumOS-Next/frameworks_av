@@ -252,6 +252,8 @@ struct CodecCapabilities {
      */
     bool isEncoder() const;
 
+    size_t getMemoryCost() const;
+
 private:
     std::string mMediaType;
     std::vector<ProfileLevel> mProfileLevels;

@@ -202,4 +202,13 @@ bool EncoderCapabilities::supportsFormat(const sp<AMessage> &format) {
     return supports(complexity, quality, profile);
 }
 
+size_t EncoderCapabilities::getMemoryCost() const {
+    size_t memory = 0;
+
+    memory += sizeof(std::string) * 2;  // mMediaType and mQualityScale
+    memory += mProfileLevels.capacity();
+
+    return memory;
+}
+
 }  // namespace android
