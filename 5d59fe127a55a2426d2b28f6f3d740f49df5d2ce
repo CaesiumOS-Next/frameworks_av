@@ -1,5 +1,47 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96db9fe2_e78d11e0",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-18T21:50:04Z",
+      "side": 1,
+      "message": "we should still end up with 0 here",
+      "range": {
+        "startLine": 1252,
+        "startChar": 0,
+        "endLine": 1252,
+        "endChar": 95
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f1724250_c28588e5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1254,
+                "startChar": 0,
+                "endLine": 1255,
+                "endChar": 0
+              },
+              "replacement": "                    res.mAvailable \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d59fe127a55a2426d2b28f6f3d740f49df5d2ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
