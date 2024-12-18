@@ -16,6 +16,69 @@
       "message": "ptal",
       "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d184a77_aede5545",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-12-18T00:36:35Z",
+      "side": 1,
+      "message": "Sorry about the wait.",
+      "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b699404_dcbd1a4b",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-12-18T00:36:35Z",
+      "side": 1,
+      "message": "There are a few calls here to `as_c_str().as_ptr()`, but it\u0027s possible to call `as_ptr()` directly on a `CString` ([playground](https://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003dadbe9fd1875d32d8a2c0bda181710199)).\n\nThe long explanation is that `CString` [implements `Deref\u003cTarget\u003dCStr\u003e`](https://doc.rust-lang.org/std/ffi/struct.CString.html#deref-methods-CStr), which means that `CStr` methods can be called directly via [Deref coercion](https://doc.rust-lang.org/std/ops/trait.Deref.html#deref-coercion).",
+      "range": {
+        "startLine": 378,
+        "startChar": 21,
+        "endLine": 378,
+        "endChar": 40
+      },
+      "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c111697_49086fdf",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2024-12-18T00:36:35Z",
+      "side": 1,
+      "message": "Relative to patchset #6, it looks like the InputBuffer and OutputBuffer layer is introduced over MediaCodec. If I understand correctly, there are 3 layers of the API described here now:\n\n1. The C API, referenced with `extern \"C\" { AMediaCodec_* }` functions.\n2. The MediaCodec API, which is `pub(crate)` to limit visibility. This presents the Rust type equivalents of some C types like turning pointers into slices.\n3. InputBuffer, Session, and OutputBuffer comprise the safe public API.\n\nAs written here the C API is `unsafe` by default through being `extern`, the MediaCodec type is implemented as safe rust functions with `unsafe` blocks internally, and InputBuffer, Session, and OutputBuffer are implemented using operations from MediaCodec.\n\nHowever, the MediaCodec functions still have sharp edges. InputBuffer, Session, and OutputBuffer are involved in maintaining the requirements of MediaCodec such as being unable to queue input buffers multiple times. By the [meanings of `unsafe`](https://doc.rust-lang.org/std/keyword.unsafe.html#the-different-meanings-of-unsafe) the members of MediaCodec still meet the definition of `unsafe fn`:\n\n\u003e `unsafe fn`: calling this function means abiding by a contract the compiler cannot enforce.\n\nWhether the compiler can enforce the contracts still matters to Rust semantics whether or not the functions are private or part of the public API.\n\nThis leaves two options:\n\n1. Move the `unsafe` / safe boundary to be between layers 2 and 3, i.e. make the members of MediaCodec into `unsafe` functions, document their API contracts, and document how InputBuffer, Session, and OutputBuffer honor those contracts with \"SAFETY\" comments over internal `unsafe` blocks. In this case, I think the MediaCodec functions can in turn drop the internal `unsafe` blocks and \"SAFETY\" comments. \n\n2. Shore up the MediaCodec functions such that they can be called safely, effectively combining MediaCodec into InputBuffer, OutputBuffer, and Session.\n\nI\u0027m not an expert on any Android specific policies or preferences here, so I\u0027ll defer to @cramertj@google.com as the designated reviewer from android-rust-unsafe-reviewers@ on this.",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 499,
+        "endChar": 26
+      },
+      "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
