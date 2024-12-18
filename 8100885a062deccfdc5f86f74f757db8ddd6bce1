@@ -1,5 +1,47 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a7f480_17e9989e",
+        "filename": "media/codec2/sfplugin/CCodecResources.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2024-12-18T21:49:23Z",
+      "side": 1,
+      "message": "we should probably still end up with 0 here.",
+      "range": {
+        "startLine": 77,
+        "startChar": 23,
+        "endLine": 77,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "21e35fae_f42b4698",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodecResources.cpp",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "                        found-\u003emAvailable \u003d 0;\n                        ALOGW(\"Excluded resources(%jd) can\u0027t be more than Available resources(%jd)\",\n                              excluded, found-\u003emAvailable);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8100885a062deccfdc5f86f74f757db8ddd6bce1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
