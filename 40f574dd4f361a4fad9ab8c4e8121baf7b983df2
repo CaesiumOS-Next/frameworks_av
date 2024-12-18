@@ -22,6 +22,30 @@
       },
       "revId": "40f574dd4f361a4fad9ab8c4e8121baf7b983df2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7960b3_e3e810c8",
+        "filename": "media/codec2/sfplugin/tests/CCodecConfig_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-18T19:11:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6bbd213_109237cf",
+      "range": {
+        "startLine": 819,
+        "startChar": 48,
+        "endLine": 819,
+        "endChar": 50
+      },
+      "revId": "40f574dd4f361a4fad9ab8c4e8121baf7b983df2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
