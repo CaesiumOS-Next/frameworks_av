@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff7f177_159b36ee",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-18T17:45:57Z",
+      "side": 1,
+      "message": "any() in withFields generates compile erros.\nsymbol missing.",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e3d7b75a_1d352727",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+              "range": {
+                "startLine": 214,
+                "startChar": 0,
+                "endLine": 220,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "8ce18e0b6bdfd6c40d809d717d963ed8be4c0918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
