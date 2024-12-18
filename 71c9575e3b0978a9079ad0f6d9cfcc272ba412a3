@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d61cd9c_27f7ed5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2024-12-18T02:13:30Z",
+      "side": 1,
+      "message": "Looks like this is causing regeression for volume gain index initialization, see b/384664610.\n\nI also raised this bug for a crash issue b/38412154.",
+      "revId": "71c9575e3b0978a9079ad0f6d9cfcc272ba412a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
