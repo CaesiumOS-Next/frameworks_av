@@ -46,6 +46,30 @@
       },
       "revId": "a039224cc3c915362c06ba0e33463d294be8410c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c3bf3c_7071c42f",
+        "filename": "media/codec2/components/hevc/C2SoftHevcDec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2024-12-18T01:51:06Z",
+      "side": 1,
+      "message": "Let me take it back as setting it as below causes __ubsan_handle_sub_overflow_minimal_abort when I run the test multiple times\n\n```\n                me.set().m.values[i].amount \u003d size.v.width * size.v.height;\n```",
+      "parentUuid": "4ce80226_5463df18",
+      "range": {
+        "startLine": 323,
+        "startChar": 37,
+        "endLine": 324,
+        "endChar": 73
+      },
+      "revId": "a039224cc3c915362c06ba0e33463d294be8410c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
