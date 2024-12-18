@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6bbd213_109237cf",
+        "filename": "media/codec2/sfplugin/tests/CCodecConfig_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-18T18:53:39Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "range": {
+        "startLine": 819,
+        "startChar": 48,
+        "endLine": 819,
+        "endChar": 50
+      },
+      "revId": "40f574dd4f361a4fad9ab8c4e8121baf7b983df2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
