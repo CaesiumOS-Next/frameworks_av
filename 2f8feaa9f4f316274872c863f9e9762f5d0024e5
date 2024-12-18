@@ -1,5 +1,69 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a29cf9_271dc762",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-12-18T16:10:48Z",
+      "side": 1,
+      "message": "The biggest concern (and smallest comment 😊) is about no longer initializing a field we used to.  The other stuff isn\u0027t buggy, but it would be best practice to adjust it to help assure no future bugs.",
+      "revId": "2f8feaa9f4f316274872c863f9e9762f5d0024e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aaffa9f_1a992376",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-12-18T16:10:48Z",
+      "side": 1,
+      "message": "With `mDecHandle` having its field position in the class moved, these fields are now out of order with when they\u0027re actually initialization.  (See other comment for details).\n\nThis doesn\u0027t break anything now, but it would be good practice to have this in order.",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 500,
+        "endChar": 31
+      },
+      "revId": "2f8feaa9f4f316274872c863f9e9762f5d0024e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60743c36_a9f4d3ef",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-12-18T16:10:48Z",
+      "side": 1,
+      "message": "While it doesn\u0027t make a difference in this case, it\u0027s good practice to keep the field initializations in the same order as the fields are in the struct.\n\nThe generated code will initialize them in the order the fields are in the struct, and if we were to change this in the future to where fields are initialized based on another field, then we\u0027ll be using an uninitialized value without really realizing it.\n\nFor example, if this was:\n\n```\nhas_hdr_cll(false),\nhas_itut_t35(!has_hdr_cll) {}\n```\n\nthen `has_itut_t35` would use an uninitialized value of `has_hdr_cll` for its initialization.\n\nAgain, we likely wouldn\u0027t switch the code to something like this in the future, but it\u0027s still good practice to keep these initializers in the order that they\u0027re being executed.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 35
+      },
+      "revId": "2f8feaa9f4f316274872c863f9e9762f5d0024e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {

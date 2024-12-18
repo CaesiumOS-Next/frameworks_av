@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687c8e54_d1dd0c66",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-12-18T16:10:48Z",
+      "side": 0,
+      "message": "We still have this field; why did we remove its initialization?  It (naively) seems like now we risk using it uninitialized.",
+      "revId": "fc1a1493adbe7c5066adbb44848824feb6d42cf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
