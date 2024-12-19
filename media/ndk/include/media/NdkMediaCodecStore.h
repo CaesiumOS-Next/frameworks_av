@@ -54,8 +54,8 @@ typedef struct AMediaCodecSupportedMediaType {
         FLAG_ENCODER = 1 << 1,
     };
 
-    // The media type.
-    const char *mMediaType;
+    // The media type encoded in UTF-8.
+    const char* _Nonnull mMediaType;
     // bitfields for modes.
     uint32_t mMode;
 } AMediaCodecSupportedMediaType;
@@ -68,11 +68,12 @@ typedef struct AMediaCodecSupportedMediaType {
  *
  * @param outCount size of the out array.
  *
- * Return AMEDIA_OK if successfully made the copy.
- * Return AMEDIA_ERROR_INVALID_PARAMETER if the @param outMediaTypes is invalid.
+ * @return AMEDIA_OK if successfully made the copy.
+ * @return AMEDIA_ERROR_INVALID_PARAMETER if the @param outMediaTypes is invalid.
  */
 media_status_t AMediaCodecStore_getSupportedMediaTypes(
-        const AMediaCodecSupportedMediaType **outMediaTypes, size_t *outCount) __INTRODUCED_IN(36);
+        const AMediaCodecSupportedMediaType* _Nullable * _Nonnull outMediaTypes,
+        size_t* _Nonnull outCount) __INTRODUCED_IN(36);
 
 /**
  * Get the next decoder info that supports the format.
@@ -85,15 +86,16 @@ media_status_t AMediaCodecStore_getSupportedMediaTypes(
  * @param format        If set as NULL, this API will iterate through all available decoders.
  *                      If NOT NULL, it MUST contain key "mime" implying the media type.
  *
- * Return AMEDIA_OK if successfully got the info.
- * Return AMEDIA_ERROR_INVALID_PARAMETER if @param outCodecInfo or @param format is invalid.
- * Return AMEDIA_ERROR_UNSUPPORTED if no more decoder supporting the format.
+ * @return AMEDIA_OK if successfully got the info.
+ * @return AMEDIA_ERROR_INVALID_PARAMETER if @param outCodecInfo or @param format is invalid.
+ * @return AMEDIA_ERROR_UNSUPPORTED if no more decoder supporting the format.
  *
  * It is undefined behavior to call this API with a NON NULL @param outCodecInfo
  * and a different @param format during an iteration.
  */
 media_status_t AMediaCodecStore_findNextDecoderForFormat(
-        const AMediaFormat *format, const AMediaCodecInfo **outCodecInfo) __INTRODUCED_IN(36);
+        const AMediaFormat* _Nonnull format,
+        const AMediaCodecInfo* _Nullable * _Nonnull outCodecInfo) __INTRODUCED_IN(36);
 
 /**
  * Get the next encoder info that supports the format.
@@ -106,9 +108,9 @@ media_status_t AMediaCodecStore_findNextDecoderForFormat(
  * @param format        If set as NULL, this API will iterate through all available encoders.
  *                      If NOT NULL, it MUST contain key "mime" implying the media type.
  *
- * Return AMEDIA_OK if successfully got the info.
- * Return AMEDIA_ERROR_INVALID_PARAMETER if @param outCodecInfo is invalid.
- * Return AMEDIA_ERROR_UNSUPPORTED if no more encoder supporting the format.
+ * @return AMEDIA_OK if successfully got the info.
+ * @return AMEDIA_ERROR_INVALID_PARAMETER if @param outCodecInfo is invalid.
+ * @return AMEDIA_ERROR_UNSUPPORTED if no more encoder supporting the format.
  *
  * It is undefined behavior to call this API with a NON NULL @param outCodecInfo
  * and a different @param format during an iteration.
@@ -116,7 +118,8 @@ media_status_t AMediaCodecStore_findNextDecoderForFormat(
  * No secure encoder will show in the output.
  */
 media_status_t AMediaCodecStore_findNextEncoderForFormat(
-        const AMediaFormat* format, const AMediaCodecInfo **outCodecInfo) __INTRODUCED_IN(36);
+        const AMediaFormat* _Nonnull format,
+        const AMediaCodecInfo* _Nullable * _Nonnull outCodecInfo) __INTRODUCED_IN(36);
 
 /**
  * Get the codecInfo corresponding to a given codec name.
@@ -130,12 +133,13 @@ media_status_t AMediaCodecStore_findNextEncoderForFormat(
  * @param outCodecInfo  Output parameter for the corresponding AMeidaCodecInfo structure.
  *                      It is owned by the framework and has an infinite lifetime.
  *
- * Return AMEDIA_OK if got the codecInfo successfully.
- * Return AMEDIA_ERROR_UNSUPPORTED if no corresponding codec found.
- * Return AMEDIA_ERROR_INVALID_PARAMETER if @param outCodecInfo or @param name is invalid.
+ * @return AMEDIA_OK if got the codecInfo successfully.
+ * @return AMEDIA_ERROR_UNSUPPORTED if no corresponding codec found.
+ * @return AMEDIA_ERROR_INVALID_PARAMETER if @param outCodecInfo or @param name is invalid.
  */
 media_status_t AMediaCodecStore_getCodecInfo(
-        const char *name, const AMediaCodecInfo **outCodecInfo) __INTRODUCED_IN(36);
+        const char*  _Nonnull name,
+        const AMediaCodecInfo* _Nullable * _Nonnull outCodecInfo) __INTRODUCED_IN(36);
 
 __END_DECLS
 

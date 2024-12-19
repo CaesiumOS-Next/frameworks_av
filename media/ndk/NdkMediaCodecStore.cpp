@@ -152,7 +152,7 @@ static void initCodecInfoMap() {
     }
 }
 
-static bool codecHandlesFormat(const AMediaCodecInfo codecInfo,
+static bool codecHandlesFormat(const AMediaCodecInfo &codecInfo,
         sp<AMessage> format, bool isEncoder) {
     return codecInfo.mCodecCaps->isEncoder() == isEncoder
             && codecInfo.mCodecCaps->isFormatSupported(format);
