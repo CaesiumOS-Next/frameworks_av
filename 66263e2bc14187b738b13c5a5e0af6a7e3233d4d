@@ -1,0 +1,439 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdad955f_4814ca54",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "no `using` in a header file.",
+      "fixSuggestions": [
+        {
+          "fixId": "af1cbcb0_3d89e796",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+              "range": {
+                "startLine": 125,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "        const std::shared_ptr\u003caidl::android::hardware::media::c2::utils::InputSurfaceConnection\u003e \u0026component,\n"
+            },
+            {
+              "path": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+              "range": {
+                "startLine": 351,
+                "startChar": 0,
+                "endLine": 352,
+                "endChar": 0
+              },
+              "replacement": "    std::shared_ptr\u003caidl::android::hardware::media::c2::utils::InputSurfaceConnection\u003e mComponent;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f35b38_17fe9adb",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "does this need to be RefBase?",
+      "range": {
+        "startLine": 67,
+        "startChar": 27,
+        "endLine": 67,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "818ed676_6fba3bcd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "class InputSurfaceSource {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33f4d076_55b27824",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "please consider using std::mutex",
+      "fixSuggestions": [
+        {
+          "fixId": "f62c41ee_10556e05",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "#include \u003cmutex\u003e\n"
+            },
+            {
+              "path": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+              "range": {
+                "startLine": 220,
+                "startChar": 0,
+                "endLine": 221,
+                "endChar": 0
+              },
+              "replacement": "    mutable std::mutex mMutex;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae73695_a4cb5192",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "please consider using std::list",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b5f3d64_e292a265",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "bsi seems to stand for buffer slot index --- maybe just bufferId?",
+      "range": {
+        "startLine": 284,
+        "startChar": 42,
+        "endLine": 284,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fa60b163_5c700a2c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+              "range": {
+                "startLine": 284,
+                "startChar": 0,
+                "endLine": 285,
+                "endChar": 0
+              },
+              "replacement": "    void discardBufferAtIdIndex_l(ssize_t bufferId);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "535bfe73_e9401208",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "we may no longer need libui references",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f863b150_c5e281a0",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 333,
+        "startChar": 9,
+        "endLine": 333,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "21fa0b8a_e2ce32b1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 334,
+                "endChar": 0
+              },
+              "replacement": "    void remove(void *context) {\n"
+            },
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+              "range": {
+                "startLine": 455,
+                "startChar": 0,
+                "endLine": 455,
+                "endChar": 0
+              },
+              "replacement": "\n    ImageReaderListener::GetInstance().remove(mImageListener);\n    ImageReaderListener::GetInstance().remove(mBufferRemovedListener);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54a63e3_5b6b3e6e",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "no_init?",
+      "range": {
+        "startLine": 365,
+        "startChar": 15,
+        "endLine": 365,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab600c0c_ee02dd13",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+              "range": {
+                "startLine": 365,
+                "startChar": 0,
+                "endLine": 366,
+                "endChar": 0
+              },
+              "replacement": "    mInitCheck(C2_NO_INIT),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa1e66e_0b88983a",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "is this safe to call from constructor?",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc3ada6_60b2381b",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "are these guaranteed to work or we want to fail gracefully?",
+      "fixSuggestions": [
+        {
+          "fixId": "4a472034_f338dde6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+              "range": {
+                "startLine": 430,
+                "startChar": 0,
+                "endLine": 432,
+                "endChar": 0
+              },
+              "replacement": "    media_status_t err \u003d AImageReader_getWindow(mImageReader, \u0026mImageWindow);\n    if (err !\u003d AMEDIA_OK) {\n        ALOGE(\"Error getting window from AImageReader: %d\", err);\n        return;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c300021d_6098fc4c",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "maybe:\n\n```suggestion\n    } else {\n        LOG_ALWAYS_FATAL(\"AHardwareBuffer_getId must be available for this implementation to work\");\n    }\n```",
+      "range": {
+        "startLine": 1030,
+        "startChar": 2,
+        "endLine": 1031,
+        "endChar": 20
+      },
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d64052d3_ced0cc66",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfbb38b_f70fcc24",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-12-19T19:19:29Z",
+      "side": 1,
+      "message": "maybe mention that ImageReader will handle the resolution change without explicit reconfig.",
+      "fixSuggestions": [
+        {
+          "fixId": "98792e01_88037f90",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+              "range": {
+                "startLine": 1219,
+                "startChar": 0,
+                "endLine": 1220,
+                "endChar": 0
+              },
+              "replacement": "            ALOGD(\"frameWidth %d -\u003e %d: frameHeight %d -\u003e %d. ImageReader will handle the resolution \"\n                    \"change without explicit configuration.\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
