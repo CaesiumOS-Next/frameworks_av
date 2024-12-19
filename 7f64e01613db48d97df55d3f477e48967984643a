@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a65bfb_7ec94af6",
+        "filename": "media/codec2/sfplugin/Codec2InfoBuilder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1765237
+      },
+      "writtenOn": "2024-12-19T04:44:02Z",
+      "side": 1,
+      "message": "could you explain why you use AHARDWAREBUFFER_FORMAT_YCbCr_P210 in hardware_buffer.h instead of hal format definition in graphis-base-~~.h?",
+      "range": {
+        "startLine": 743,
+        "startChar": 35,
+        "endLine": 743,
+        "endChar": 68
+      },
+      "revId": "7f64e01613db48d97df55d3f477e48967984643a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
