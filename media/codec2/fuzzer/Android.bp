@@ -28,7 +28,7 @@ package {
 cc_defaults {
     name: "C2Fuzzer-defaults",
 
-    defaults: [ "libcodec2-static-defaults" ],
+    defaults: ["libcodec2-static-defaults"],
 
     srcs: [
         "C2Fuzzer.cpp",
@@ -338,4 +338,7 @@ cc_fuzz {
         "libxaacdec",
         "libcodec2_soft_xaacdec",
     ],
+    fuzz_config: {
+        fuzzed_code_usage: "experimental",
+    },
 }
