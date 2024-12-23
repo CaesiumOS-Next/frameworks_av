@@ -16,6 +16,24 @@
       "message": "Looks fine but I\u0027m not sure how to decide whether the value should be constrained in the writer or in the fuzzer code instead (as in, updating the range in `fdp.ConsumeIntegralInRange\u003cint64_t\u003e(5 * 1024 * 1024, INT64_MAX)`)?",
       "revId": "7fb342b331eb2acf390b09ee1b1a67d596818493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a27cd01_2d017170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2024-12-23T15:05:58Z",
+      "side": 1,
+      "message": "constraining in the fuzzer would mask the underlying issue and if someone were to invoke the writer with a value larger than this, the writer would still show this issue.",
+      "parentUuid": "0878aa54_d5d57b61",
+      "revId": "7fb342b331eb2acf390b09ee1b1a67d596818493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
