@@ -338,4 +338,7 @@ cc_fuzz {
         "libxaacdec",
         "libcodec2_soft_xaacdec",
     ],
+    fuzz_config: {
+        fuzzed_code_usage: "experimental",
+    },
 }
