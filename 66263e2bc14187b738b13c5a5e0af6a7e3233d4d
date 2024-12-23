@@ -56,6 +56,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81b62953_ac2cadd7",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdad955f_4814ca54",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7f35b38_17fe9adb",
@@ -93,6 +111,30 @@
           ]
         }
       ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1efa6d5f_e2d7735c",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Since AHanderReflector has dependency for RefBase, I left RefBase as of now.\nI will add TODO for removing this dependency.",
+      "parentUuid": "d7f35b38_17fe9adb",
+      "range": {
+        "startLine": 67,
+        "startChar": 27,
+        "endLine": 67,
+        "endChar": 54
+      },
       "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -142,6 +184,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6258dc78_e4f6fd41",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33f4d076_55b27824",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fae73695_a4cb5192",
@@ -155,6 +215,24 @@
       "writtenOn": "2024-12-19T19:19:29Z",
       "side": 1,
       "message": "please consider using std::list",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17eb1e5_25f48bfc",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fae73695_a4cb5192",
       "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -200,6 +278,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "580f7c26_74b5f34d",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b5f3d64_e292a265",
+      "range": {
+        "startLine": 284,
+        "startChar": 42,
+        "endLine": 284,
+        "endChar": 45
+      },
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "535bfe73_e9401208",
@@ -213,6 +315,24 @@
       "writtenOn": "2024-12-19T19:19:29Z",
       "side": 1,
       "message": "we may no longer need libui references",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9261b2_57a3327b",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "535bfe73_e9401208",
       "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -268,6 +388,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1160b91_76a90557",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f863b150_c5e281a0",
+      "range": {
+        "startLine": 333,
+        "startChar": 9,
+        "endLine": 333,
+        "endChar": 12
+      },
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a54a63e3_5b6b3e6e",
@@ -309,6 +453,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b571c942_8903c952",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a54a63e3_5b6b3e6e",
+      "range": {
+        "startLine": 365,
+        "startChar": 15,
+        "endLine": 365,
+        "endChar": 27
+      },
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfa1e66e_0b88983a",
@@ -322,6 +490,24 @@
       "writtenOn": "2024-12-19T19:19:29Z",
       "side": 1,
       "message": "is this safe to call from constructor?",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "471d40e9_112084a0",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "moved to private functions which has GetInstance()/NoDestruct.",
+      "parentUuid": "dfa1e66e_0b88983a",
       "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -361,6 +547,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c97e74_945147ea",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "removed CHECK() here and logged.\n\nremoving CHECK() int his file is added as a TODO.",
+      "parentUuid": "0bc3ada6_60b2381b",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c300021d_6098fc4c",
@@ -384,6 +588,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55871955_e7d5cfbe",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c300021d_6098fc4c",
+      "range": {
+        "startLine": 1030,
+        "startChar": 2,
+        "endLine": 1031,
+        "endChar": 20
+      },
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d64052d3_ced0cc66",
@@ -397,6 +625,24 @@
       "writtenOn": "2024-12-19T19:19:29Z",
       "side": 1,
       "message": "same here",
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1b172bb_747f7656",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d64052d3_ced0cc66",
       "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -432,6 +678,24 @@
           ]
         }
       ],
+      "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "005b39b8_106fc5af",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-12-23T00:16:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cfbb38b_f70fcc24",
       "revId": "66263e2bc14187b738b13c5a5e0af6a7e3233d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
