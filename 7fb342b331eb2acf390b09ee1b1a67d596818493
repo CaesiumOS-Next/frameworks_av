@@ -34,6 +34,24 @@
       "parentUuid": "0878aa54_d5d57b61",
       "revId": "7fb342b331eb2acf390b09ee1b1a67d596818493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d54d7c2_a4b2a1ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2024-12-24T09:38:31Z",
+      "side": 1,
+      "message": "I was thinking that but then saw in the fuzzer \"This range is set to avoid CHECK failure in WEBMWriter::reset() -\u003e EbmlVoid::EBmlVoid().\" so was wondering why we don\u0027t CHECK for this case. I suppose either approach would work (it\u0027s probably unrealistic that an app passes extremely large file sizes anyway).",
+      "parentUuid": "1a27cd01_2d017170",
+      "revId": "7fb342b331eb2acf390b09ee1b1a67d596818493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
