@@ -7484,14 +7484,28 @@ void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t &attr
             bool invalidate = false;
             for (auto client : desc->clientsList(false /*activeOnly*/)) {
                 if (desc->isDuplicated() || !desc->mProfile->isDirectOutput()) {
-                    // a client on a non direct outputs has necessarily a linear PCM format
-                    // so we can call selectOutput() safely
-                    const audio_io_handle_t newOutput = selectOutput(dstOutputs,
-                                                                     client->flags(),
-                                                                     client->config().format,
-                                                                     client->config().channel_mask,
-                                                                     client->config().sample_rate,
-                                                                     client->session());
+                    audio_io_handle_t newOutput = AUDIO_IO_HANDLE_NONE;
+                    audio_attributes_t clientAttr = client->attributes();
+                    audio_config_base_t clientConfig = client->config();
+                    audio_config_t config = audio_config_initializer(&clientConfig);
+                    if (mSpatializerOutput != nullptr
+                            && newDevices == oldDevices
+                            && canBeSpatializedInt(&clientAttr,
+                                                   &config,
+                                                   newDevices.toTypeAddrVector())
+                            && checkHapticCompatibilityOnSpatializerOutput(&config,
+                                                                           client->session())) {
+                        newOutput = mSpatializerOutput->mIoHandle;
+                    } else {
+                        // a client on a non direct outputs has necessarily a linear PCM format
+                        // so we can call selectOutput() safely
+                        newOutput = selectOutput(dstOutputs,
+                                                 client->flags(),
+                                                 client->config().format,
+                                                 client->config().channel_mask,
+                                                 client->config().sample_rate,
+                                                 client->session());
+                    }
                     if (newOutput != srcOut) {
                         invalidate = true;
                         break;
