@@ -7881,8 +7881,7 @@ void DuplicatingThread::removeOutputTrack(IAfPlaybackThread* thread)
 // caller must hold mutex()
 void DuplicatingThread::updateWaitTime_l()
 {
-    // Initialize mWaitTimeMs according to the mixer buffer size.
-    mWaitTimeMs = mNormalFrameCount * 2 * 1000 / mSampleRate;
+    mWaitTimeMs = UINT_MAX;
     for (size_t i = 0; i < mOutputTracks.size(); i++) {
         const auto strong = mOutputTracks[i]->thread().promote();
         if (strong != 0) {
