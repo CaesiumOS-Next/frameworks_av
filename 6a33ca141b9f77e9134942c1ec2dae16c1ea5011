@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f4c1bf_f5387add",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-12-27T23:02:50Z",
+      "side": 1,
+      "message": "Thanks for the patch.\n\nIMHO commit message can be updated from:\n```\nAudio: Add isEffect\n```\nto \n```\nEffectModule: Add isEffect to check effect by uuid\n```",
+      "revId": "6a33ca141b9f77e9134942c1ec2dae16c1ea5011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82182336_29dfae10",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-12-27T23:02:50Z",
+      "side": 1,
+      "message": "With `android::effect::utils::operator\u003d\u003d`:\nhttps://cs.android.com/android/platform/superproject/main/+/main:system/media/audio/include/system/audio_effects/audio_effects_utils.h;l\u003d267;drc\u003db4d6320e2ae398b36f0aaafb2ecd83609d2d99af;bpv\u003d1;bpt\u003d1\n\nI think we can just do something like this:\n```\nbool EffectModule::isEffect(const effect_uuid_t \u0026uuid) const {\n    using android::effect::utils::operator\u003d\u003d;\n    return mDescriptor.uuid \u003d\u003d uuid;\n}\n```\n\nReference to a previous patch:\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3367552/6/services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp#169",
+      "range": {
+        "startLine": 1580,
+        "startChar": 11,
+        "endLine": 1580,
+        "endChar": 70
+      },
+      "revId": "6a33ca141b9f77e9134942c1ec2dae16c1ea5011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
