@@ -18,7 +18,6 @@
 
 #include <android-base/no_destructor.h>
 #include <apex/ApexCodecs.h>
-#include <apex/ApexCodecsParam.h>
 
 // TODO: remove when we have real implementations
 #pragma clang diagnostic push
