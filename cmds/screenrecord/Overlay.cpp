@@ -34,6 +34,8 @@
 #include "Overlay.h"
 #include "TextRenderer.h"
 
+#include <media/stagefright/foundation/AMessage.h>
+
 using namespace android;
 
 // System properties to look up and display on the info screen.
@@ -57,6 +59,11 @@ const char* Overlay::kPropertyNames[] = {
 status_t Overlay::start(const sp<IGraphicBufferProducer>& outputSurface,
         sp<IGraphicBufferProducer>* pBufferProducer) {
     ALOGV("Overlay::start");
+    if (mHandler) {
+        ALOGW("Overlay::start looper already started");
+        return INVALID_OPERATION;
+    }
+
     mOutputSurface = outputSurface;
 
     // Grab the current monotonic time and the current wall-clock time so we
@@ -67,70 +74,48 @@ status_t Overlay::start(const sp<IGraphicBufferProducer>& outputSurface,
     mStartMonotonicNsecs = systemTime(CLOCK_MONOTONIC);
     mStartRealtimeNsecs = systemTime(CLOCK_REALTIME);
 
-    Mutex::Autolock _l(mMutex);
+    mHandler = new OverlayHandler(this);
+    mHandler->init();
 
-    // Start the thread.  Traffic begins immediately.
-    run("overlay");
+    sp<AMessage> msg = new AMessage(kWhatStart, mHandler);
 
-    mState = INIT;
-    while (mState == INIT) {
-        mStartCond.wait(mMutex);
+    sp<AMessage> response;
+    status_t err = msg->postAndAwaitResponse(&response);
+    if (err != OK) {
+        ALOGE("kWhatStart postAndAwaitResponse err: (%d)", err);
+        return err;
+    }
+    if (response->findInt32("err", &err)) {
+        ALOGE("kWhatStart find err: (%d)", err);
+        return err;
     }
 
-    if (mThreadResult != NO_ERROR) {
-        ALOGE("Failed to start overlay thread: err=%d", mThreadResult);
-        return mThreadResult;
-    }
-    assert(mState == RUNNING);
-
-    ALOGV("Overlay::start successful");
     *pBufferProducer = mProducer;
     return NO_ERROR;
 }
 
 status_t Overlay::stop() {
     ALOGV("Overlay::stop");
-    {
-        Mutex::Autolock _l(mMutex);
-        mState = STOPPING;
-        mEventCond.signal();
+    if (!mHandler) {
+        ALOGE("Overlay::stop looper not started");
+        return INVALID_OPERATION;
     }
-    join();
+    sp<AMessage> msg = new AMessage(kWhatStop, mHandler);
+
+    sp<AMessage> response;
+    status_t err = msg->postAndAwaitResponse(&response);
+    if (err != OK) {
+        ALOGE("kWhatStop postAndAwaitResponse err: (%d)", err);
+        mHandler.clear();
+        return err;
+    }
+    if (response->findInt32("err", &err)) {
+        ALOGE("kWhatStop find err: (%d)", err);
+        mHandler.clear();
+        return err;
+    }
+    mHandler.clear();
     return NO_ERROR;
-}
-
-bool Overlay::threadLoop() {
-    Mutex::Autolock _l(mMutex);
-
-    mThreadResult = setup_l();
-
-    if (mThreadResult != NO_ERROR) {
-        ALOGW("Aborting overlay thread");
-        mState = STOPPED;
-        release_l();
-        mStartCond.broadcast();
-        return false;
-    }
-
-    ALOGV("Overlay thread running");
-    mState = RUNNING;
-    mStartCond.broadcast();
-
-    while (mState == RUNNING) {
-        mEventCond.wait(mMutex);
-        if (mFrameAvailable) {
-            ALOGV("Awake, frame available");
-            processFrame_l();
-            mFrameAvailable = false;
-        } else {
-            ALOGV("Awake, frame not available");
-        }
-    }
-
-    ALOGV("Overlay thread stopping");
-    release_l();
-    mState = STOPPED;
-    return false;       // stop
 }
 
 status_t Overlay::setup_l() {
@@ -288,9 +273,7 @@ void Overlay::getTimeString_l(nsecs_t monotonicNsec, char* buf, size_t bufLen) {
 // Callback; executes on arbitrary thread.
 void Overlay::onFrameAvailable(const BufferItem& /* item */) {
     ALOGV("Overlay::onFrameAvailable");
-    Mutex::Autolock _l(mMutex);
-    mFrameAvailable = true;
-    mEventCond.signal();
+    (new AMessage(kWhatFrameAvailable, mHandler))->post();
 }
 
 
@@ -412,4 +395,76 @@ void Overlay::onFrameAvailable(const BufferItem& /* item */) {
     // player to hold the frame on screen.
     window.presentationTime(systemTime(CLOCK_MONOTONIC) - holdTime);
     window.swapBuffers();
+}
+
+Overlay::OverlayHandler::OverlayHandler(Overlay* overlay) : mOverlay(overlay), mLooper(new ALooper) {
+    ALOGV("Overlay::OverlayHandler::OverlayHandler");
+}
+
+Overlay::OverlayHandler::~OverlayHandler() {
+    ALOGV("Overlay::OverlayHandler::~OverlayHandler");
+    if (mLooper) {
+        mLooper->unregisterHandler(id());
+        mLooper->stop();
+        mLooper.clear();
+    }
+}
+
+void Overlay::OverlayHandler::init() {
+    if (mLooper) {
+        ALOGV("Overlay::OverlayHandler::init");
+        mLooper->setName("OverlayHandler");
+        mLooper->start(false, false, ANDROID_PRIORITY_VIDEO);
+        mLooper->registerHandler(this);
+    }
+}
+
+void Overlay::OverlayHandler::onMessageReceived(const sp<AMessage> &msg) {
+    switch (msg->what()) {
+        case kWhatStart:
+        {
+            ALOGV("Overlay::onMessageReceived kWhatStart");
+            status_t  status = mOverlay->setup_l();
+            if (status != NO_ERROR) {
+                ALOGW("Aborting overlay thread");
+                mOverlay->release_l();
+            }
+
+            sp<AMessage> response = new AMessage;
+            if (status != NO_ERROR) {
+                response->setInt32("err", status);
+            }
+            sp<AReplyToken> replyID;
+            if (!msg->senderAwaitsResponse(&replyID)) {
+                ALOGE("kWhatStart no reply ID");
+                break;
+            }
+            response->postReply(replyID);
+            break;
+        }
+        case kWhatStop:
+        {
+            ALOGV("Overlay::onMessageReceived kWhatStop");
+            mOverlay->release_l();
+            sp<AMessage> response = new AMessage;
+            sp<AReplyToken> replyID;
+            if (!msg->senderAwaitsResponse(&replyID)) {
+                ALOGE("kWhatStop no reply ID");
+                break;
+            }
+            response->postReply(replyID);
+            break;
+        }
+        case kWhatFrameAvailable:
+        {
+            if (mOverlay->mGlConsumer.get()) {
+              ALOGV("Overlay::onMessageReceived kWhatFrameAvailable");
+              mOverlay->processFrame_l();
+            }
+            break;
+        }
+        default:
+            ALOGE("Unknown message: %d", msg->what());
+            break;
+    }
 }
