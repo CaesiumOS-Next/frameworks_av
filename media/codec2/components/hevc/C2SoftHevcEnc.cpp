@@ -73,6 +73,18 @@ void ParseGop(
         *iInterval = iInt;
     }
 }
+
+// Only for testing.
+// An ID for resources associated with instance count.
+const uint32_t kMaxInstanceCountId = 0x1000;
+// An ID for resources associated with maximum pixels supported at any given time.
+const uint32_t kMaxPixelstId = 0x1001;
+// An ID for resources associated with per frame.
+const uint32_t kMaxPerFrameResourceId = 0x1002;
+// Add the per frame based resource count. This assumes that the
+// implementation needs 10 of these resources per frame.
+const uint32_t kPerFrameResources = 10;
+
 } // namepsace
 
 class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
@@ -257,6 +269,36 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
                              C2F(mPictureQuantization, m.values[0].min).any(),
                              C2F(mPictureQuantization, m.values[0].max).any()})
                 .withSetter(PictureQuantizationSetter)
+                .build());
+
+        // Add needed resources
+        addNeededResources();
+    }
+
+    // Only for testing:
+    // Add Required/needed resources for this component.
+    void addNeededResources(uint32_t width = 64, uint32_t height = 64) {
+        std::vector<C2SystemResourceStruct> resourcesNeeded;
+        // Add one instance.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxInstanceCountId, CONST, 1));
+        // Add the pixel count.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxPixelstId, CONST, width * height));
+        // Add the per frame based resource count. This assumes that the
+        // implementation needs 10 of these resources per frame.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxPerFrameResourceId,
+                                                         PER_FRAME,
+                                                         kPerFrameResources));
+
+        addParameter(
+                DefineParam(mResourcesNeeded, C2_PARAMKEY_RESOURCES_NEEDED)
+                .withDefault(C2ResourcesNeededTuning::AllocShared(
+                        resourcesNeeded.size(), resourcesNeeded))
+                .withFields({
+                        C2F(mResourcesNeeded, m.values[0].id).any(),
+                        C2F(mResourcesNeeded, m.values[0].kind).any(),
+                        C2F(mResourcesNeeded, m.values[0].amount).any(),
+                })
+                .withSetter(ResourcesNeededSetter, mSize)
                 .build());
     }
 
@@ -537,6 +579,24 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
 
         return C2R::Ok();
     }
+
+    static C2R ResourcesNeededSetter(bool mayBlock,
+                                     C2P<C2ResourcesNeededTuning>& me,
+                                     // dependencies
+                                     const C2P<C2StreamPictureSizeInfo::input>& size) {
+        (void)mayBlock;
+        for (size_t i = 0; i < me.v.flexCount(); ++i) {
+            const C2SystemResourceStruct& resource = me.v.m.values[i];
+            // Update the pixel count
+            if (resource.id == kMaxPixelstId) {
+                uint64_t amount = size.v.width * size.v.height;
+                me.set().m.values[i].amount = amount;
+            }
+        }
+
+        return C2R::Ok();
+    };
+
     std::shared_ptr<C2StreamColorAspectsInfo::output> getCodedColorAspects_l() {
         return mCodedColorAspects;
     }
@@ -559,6 +619,7 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
     std::shared_ptr<C2StreamColorAspectsInfo::input> mColorAspects;
     std::shared_ptr<C2StreamColorAspectsInfo::output> mCodedColorAspects;
     std::shared_ptr<C2StreamPictureQuantizationTuning::output> mPictureQuantization;
+    std::shared_ptr<C2ResourcesNeededTuning> mResourcesNeeded;
 };
 
 static size_t GetCPUCoreCount() {
