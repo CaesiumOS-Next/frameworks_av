@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1699b48d_0d6a2e1c",
+        "filename": "services/audioflinger/IAfEffect.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-12-30T16:39:11Z",
+      "side": 1,
+      "message": "nit: can we pass `const effect_uuid_t\u0026` instead?",
+      "range": {
+        "startLine": 184,
+        "startChar": 26,
+        "endLine": 184,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "febe9413_51780d8a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/IAfEffect.h",
+              "range": {
+                "startLine": 184,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": "    virtual bool isEffect(const effect_uuid_t\u0026 uuid) const \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2bc5012ebade5f0594d87f47ddafbeafeca2d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
