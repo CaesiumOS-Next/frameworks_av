@@ -643,65 +643,89 @@ status_t FrameDecoder::extractInternal() {
 }
 
 status_t FrameDecoder::extractInternalUsingBlockModel() {
-    status_t err = OK;
-    MediaBufferBase* mediaBuffer = NULL;
-    int64_t ptsUs = 0LL;
-    uint32_t flags = 0;
-    int32_t index;
-    mHandleOutputBufferAsyncDone = false;
+    while (mHaveMoreInputs) {
+        status_t err = OK;
+        MediaBufferBase* mediaBuffer = NULL;
+        int64_t ptsUs = 0LL;
+        uint32_t flags = 0;
+        int32_t index;
+        mHandleOutputBufferAsyncDone = false;
 
-    err = mSource->read(&mediaBuffer, &mReadOptions);
-    mReadOptions.clearSeekTo();
-    if (err != OK) {
-        ALOGW("Input Error: err=%d", err);
-        if (mediaBuffer) {
-            mediaBuffer->release();
+        err = mSource->read(&mediaBuffer, &mReadOptions);
+        mReadOptions.clearSeekTo();
+        if (err != OK) {
+            ALOGW("Input Error: err=%d", err);
+            if (mediaBuffer) {
+                mediaBuffer->release();
+            }
+            if (!mFirstSample) {
+                break;
+            } else {
+                return err;
+            }
         }
-        return err;
-    }
 
-    size_t inputSize = mediaBuffer->range_length();
-    std::shared_ptr<C2LinearBlock> block =
-            MediaCodec::FetchLinearBlock(inputSize, {std::string{mComponentName.c_str()}});
-    C2WriteView view{block->map().get()};
-    if (view.error() != C2_OK) {
-        ALOGE("Fatal error: failed to allocate and map a block");
+        size_t inputSize = mediaBuffer->range_length();
+        std::shared_ptr<C2LinearBlock> block =
+                MediaCodec::FetchLinearBlock(inputSize, {std::string{mComponentName.c_str()}});
+        C2WriteView view{block->map().get()};
+        if (view.error() != C2_OK) {
+            ALOGE("Fatal error: failed to allocate and map a block");
+            mediaBuffer->release();
+            if (!mFirstSample) {
+                break;
+            } else {
+                return NO_MEMORY;
+            }
+        }
+        if (inputSize > view.capacity()) {
+            ALOGE("Fatal error: allocated block is too small "
+                "(input size %zu; block cap %u)",
+                inputSize, view.capacity());
+            mediaBuffer->release();
+            if (!mFirstSample) {
+                break;
+            } else {
+                return BAD_VALUE;
+            }
+        }
+        CHECK(mediaBuffer->meta_data().findInt64(kKeyTime, &ptsUs));
+        memcpy(view.base(), (const uint8_t*)mediaBuffer->data() + mediaBuffer->range_offset(),
+            inputSize);
+        std::shared_ptr<C2Buffer> c2Buffer =
+                C2Buffer::CreateLinearBuffer(block->share(0, inputSize, C2Fence{}));
+        onInputReceived(view.base(), inputSize, mediaBuffer->meta_data(), true /* firstSample */,
+                        &flags);
+        //flags |= MediaCodec::BUFFER_FLAG_EOS;
         mediaBuffer->release();
-        return NO_MEMORY;
-    }
-    if (inputSize > view.capacity()) {
-        ALOGE("Fatal error: allocated block is too small "
-              "(input size %zu; block cap %u)",
-              inputSize, view.capacity());
-        mediaBuffer->release();
-        return BAD_VALUE;
-    }
-    CHECK(mediaBuffer->meta_data().findInt64(kKeyTime, &ptsUs));
-    memcpy(view.base(), (const uint8_t*)mediaBuffer->data() + mediaBuffer->range_offset(),
-           inputSize);
-    std::shared_ptr<C2Buffer> c2Buffer =
-            C2Buffer::CreateLinearBuffer(block->share(0, inputSize, C2Fence{}));
-    onInputReceived(view.base(), inputSize, mediaBuffer->meta_data(), true /* firstSample */,
-                    &flags);
-    flags |= MediaCodec::BUFFER_FLAG_EOS;
-    mediaBuffer->release();
 
-    std::vector<AccessUnitInfo> infoVec;
-    infoVec.emplace_back(flags, inputSize, ptsUs);
-    sp<BufferInfosWrapper> infos = new BufferInfosWrapper{std::move(infoVec)};
-
-    if (!mInputBufferIndexQueue.dequeue(&index, kAsyncBufferTimeOutUs)) {
-        ALOGE("No available input buffer index for async mode.");
-        return TIMED_OUT;
-    }
-
-    AString errorDetailMsg;
-    ALOGD("QueueLinearBlock: index=%d size=%zu ts=%" PRId64 " us flags=%x",
-            index, inputSize, ptsUs,flags);
-    err = mDecoder->queueBuffer(index, c2Buffer, infos, nullptr, &errorDetailMsg);
-    if (err != OK) {
-        ALOGE("failed to queueBuffer (err %d): %s", err, errorDetailMsg.c_str());
-        return err;
+        std::vector<AccessUnitInfo> infoVec;
+        infoVec.emplace_back(flags, inputSize, ptsUs);
+        sp<BufferInfosWrapper> infos = new BufferInfosWrapper{std::move(infoVec)};
+        if (!mInputBufferIndexQueue.dequeue(&index, kAsyncBufferTimeOutUs)) {
+            ALOGE("No available input buffer index for async mode.");
+            if (!mFirstSample) {
+                break;
+            } else {
+                return TIMED_OUT;
+            }
+        }
+        AString errorDetailMsg;
+        ALOGD("QueueLinearBlock: index=%d size=%zu ts=%" PRId64 " us flags=%x",
+                index, inputSize, ptsUs,flags);
+        err = mDecoder->queueBuffer(index, c2Buffer, infos, nullptr, &errorDetailMsg);
+        if (err != OK) {
+            ALOGE("failed to queueBuffer (err %d): %s", err, errorDetailMsg.c_str());
+            if (!mFirstSample) {
+                break;
+            } else {
+                return err;
+            }
+        }
+        if (flags & MediaCodec::BUFFER_FLAG_EOS) {
+            mHaveMoreInputs = false;
+        }
+        mFirstSample = false;
     }
 
     // wait for handleOutputBufferAsync() to finish
@@ -724,6 +748,7 @@ VideoFrameDecoder::VideoFrameDecoder(
       mSeekMode(MediaSource::ReadOptions::SEEK_PREVIOUS_SYNC),
       mTargetTimeUs(-1LL),
       mDefaultSampleDurationUs(0) {
+      mHaveAvcOrHevcIDR = false;
 }
 
 status_t FrameDecoder::handleOutputFormatChangeAsync(sp<AMessage> format) {
@@ -892,9 +917,15 @@ status_t VideoFrameDecoder::onInputReceived(uint8_t* data, size_t size, MetaData
         ALOGV("Seeking closest: targetTimeUs=%lld", (long long)mTargetTimeUs);
     }
 
-    if (!isSeekingClosest && ((mIsAvc && IsIDR(data, size)) || (mIsHevc && IsIDR(data, size)))) {
-        // Only need to decode one IDR frame, unless we're seeking with CLOSEST
-        // option, in which case we need to actually decode to targetTimeUs.
+    if (!isSeekingClosest) {
+      if (!mHaveAvcOrHevcIDR && ((mIsAvc && IsIDR(data, size)) || (mIsHevc && IsIDR(data, size)))) {
+        mHaveAvcOrHevcIDR = true;
+      } else if (mHaveAvcOrHevcIDR) {
+        // sometimes codec need two input frame to decode one correct output.
+        *flags |= MediaCodec::BUFFER_FLAG_EOS;
+      }
+    }
+    if (mUseBlockModel && !mHaveAvcOrHevcIDR) {
         *flags |= MediaCodec::BUFFER_FLAG_EOS;
     }
     int64_t durationUs;

@@ -182,6 +182,7 @@ private:
 
     sp<Surface> initSurface();
     status_t captureSurface();
+    bool mHaveAvcOrHevcIDR;
 };
 
 struct MediaImageDecoder : public FrameDecoder {
