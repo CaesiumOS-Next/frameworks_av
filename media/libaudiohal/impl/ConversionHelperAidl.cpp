@@ -32,16 +32,16 @@ namespace android {
 status_t parseAndGetVendorParameters(
         std::shared_ptr<IHalAdapterVendorExtension> vendorExt,
         const VendorParametersRecipient& recipient,
-        const AudioParameter& parameterKeys,
+        const AudioParameter& parameterKeyAndValues,
         String8* values) {
     using ParameterScope = IHalAdapterVendorExtension::ParameterScope;
-    if (parameterKeys.size() == 0) return OK;
-    const String8 rawKeys = parameterKeys.keysToString();
+    if (parameterKeyAndValues.size() == 0) return OK;
+    const String8 rawKeysAndValues = parameterKeyAndValues.toString();
 
     std::vector<std::string> parameterIds;
     RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(vendorExt->parseVendorParameterIds(
                             ParameterScope(recipient.index()),
-                            std::string(rawKeys.c_str()), &parameterIds)));
+                            std::string(rawKeysAndValues.c_str()), &parameterIds)));
     if (parameterIds.empty()) return OK;
 
     std::vector<VendorParameter> parameters;
