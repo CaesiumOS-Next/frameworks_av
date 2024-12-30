@@ -73,6 +73,22 @@ void ParseGop(
         *iInterval = iInt;
     }
 }
+
+// Only for testing.
+// An ID for resources associated with instance count.
+const uint32_t kMaxInstanceCountId = 0x1000;
+// An ID for resources associated with maximum pixels supported at any given time.
+const uint32_t kMaxPixelstId = 0x1001;
+// An ID for resources associated with Macroblocks.
+// This implementation arbitrarily assumes that the per frame macroblock
+// requirement is 10.
+const uint32_t kMaxMacroblocksId = 0x1002;
+const uint32_t kPerFrameMacroblocks = 10;
+// An ID for resources associated with Processing Rate.
+// This implementation arbitrarily assumes that the implementation can
+// concurrently support an operating rate at 32 instances of 30 frames per second.
+const uint32_t kMaxProcessingRate = 0x1003;
+
 } // namepsace
 
 class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
@@ -257,6 +273,39 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
                              C2F(mPictureQuantization, m.values[0].min).any(),
                              C2F(mPictureQuantization, m.values[0].max).any()})
                 .withSetter(PictureQuantizationSetter)
+                .build());
+
+        // Add needed resources
+        addNeededResources();
+    }
+
+    // Only for testing:
+    // Add Required/needed resources for this component.
+    void addNeededResources(uint32_t width = 64, uint32_t height = 64) {
+        std::vector<C2SystemResourceStruct> resourcesNeeded;
+        // Add one instance.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxInstanceCountId, CONST, 1));
+        // Add the pixel count.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxPixelstId, CONST, width * height));
+        // Add the per frame based resource count.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxMacroblocksId,
+                                                         PER_FRAME,
+                                                         kPerFrameMacroblocks));
+        // Add processing rate as frame rate.
+        resourcesNeeded.push_back(C2SystemResourceStruct(kMaxProcessingRate,
+                                                         CONST,
+                                                         mFrameRate->value));
+
+        addParameter(
+                DefineParam(mResourcesNeeded, C2_PARAMKEY_RESOURCES_NEEDED)
+                .withDefault(C2ResourcesNeededTuning::AllocShared(
+                        resourcesNeeded.size(), resourcesNeeded))
+                .withFields({
+                        C2F(mResourcesNeeded, m.values[0].id).any(),
+                        C2F(mResourcesNeeded, m.values[0].kind).any(),
+                        C2F(mResourcesNeeded, m.values[0].amount).any(),
+                })
+                .withSetter(ResourcesNeededSetter, mSize, mFrameRate)
                 .build());
     }
 
@@ -537,11 +586,37 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
 
         return C2R::Ok();
     }
+
+    static C2R ResourcesNeededSetter(bool mayBlock,
+                                     C2P<C2ResourcesNeededTuning>& me,
+                                     // dependencies
+                                     const C2P<C2StreamPictureSizeInfo::input>& size,
+                                     const C2P<C2StreamFrameRateInfo::output>& frameRate) {
+        (void)mayBlock;
+        for (size_t i = 0; i < me.v.flexCount(); ++i) {
+            const C2SystemResourceStruct& resource = me.v.m.values[i];
+            if (resource.id == kMaxPixelstId) {
+                // Update the pixel count.
+                uint64_t amount = size.v.width * size.v.height;
+                me.set().m.values[i].amount = amount;
+            } else if (resource.id == kMaxProcessingRate) {
+                // Update the processing rate.
+                me.set().m.values[i].amount = frameRate.v.value;
+            }
+        }
+
+        return C2R::Ok();
+    };
+
     std::shared_ptr<C2StreamColorAspectsInfo::output> getCodedColorAspects_l() {
         return mCodedColorAspects;
     }
     std::shared_ptr<C2StreamPictureQuantizationTuning::output> getPictureQuantization_l() const {
         return mPictureQuantization;
+    }
+
+    std::shared_ptr<C2ResourcesNeededTuning> getResourcesNeeded_l() const {
+        return mResourcesNeeded;
     }
 
    private:
@@ -559,6 +634,7 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
     std::shared_ptr<C2StreamColorAspectsInfo::input> mColorAspects;
     std::shared_ptr<C2StreamColorAspectsInfo::output> mCodedColorAspects;
     std::shared_ptr<C2StreamPictureQuantizationTuning::output> mPictureQuantization;
+    std::shared_ptr<C2ResourcesNeededTuning> mResourcesNeeded;
 };
 
 static size_t GetCPUCoreCount() {
@@ -1109,6 +1185,30 @@ void C2SoftHevcEnc::process(const std::unique_ptr<C2Work>& work,
             work->result = status;
             work->workletsProcessed = 1u;
             return;
+        }
+
+        if (mStarted) {
+            // See if we can do a configUpdate on a resource here.
+            std::shared_ptr<C2ResourcesNeededTuning> resources = mIntf->getResourcesNeeded_l();
+
+            for (size_t i = 0; i < resources->flexCount(); ++i) {
+                C2SystemResourceStruct& resource = resources->m.values[i];
+                // The Processing rate change already happens through the
+                // addParameter setter (ResourcesNeededSetter) already, but to force
+                // a demonstration of configUpdate to reflect change in resource
+                // requirement, this example forces Processing Rate change here.
+                if (resource.id == kMaxProcessingRate) {
+                    long oldValue = resource.amount;
+                    resource.amount = resource.amount + 1;
+                }
+            }
+
+            std::vector<std::unique_ptr<C2SettingResult>> failures;
+            c2_status_t err = mIntf->config({resources.get()}, C2_MAY_BLOCK, &failures);
+            if (err == C2_OK) {
+                work->worklets.front()->output.configUpdate.push_back(
+                        C2Param::Copy(*resources));
+            }
         }
     }
 

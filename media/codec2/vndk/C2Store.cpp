@@ -937,6 +937,8 @@ private:
     struct Interface : public C2InterfaceHelper {
         std::shared_ptr<C2StoreIonUsageInfo> mIonUsageInfo;
         std::shared_ptr<C2StoreDmaBufUsageInfo> mDmaBufUsageInfo;
+        std::shared_ptr<C2ResourcesCapacityTuning> mResourcesCapacity;
+        std::shared_ptr<C2ResourcesExcludedTuning> mResourcesExcluded;
 
         Interface(std::shared_ptr<C2ReflectorHelper> reflector)
             : C2InterfaceHelper(reflector) {
@@ -985,6 +987,20 @@ private:
                     me.set().m.allocFlags = 0;
                     return C2R::Ok();
                 };
+
+                static C2R setResourcesCapacity(bool mayBlock,
+                                                C2P<C2ResourcesCapacityTuning>& me) {
+                    (void)mayBlock;
+                    (void)me;
+                    return C2R::Ok();
+                };
+
+                static C2R setExcludedResources(bool mayBlock,
+                                                C2P<C2ResourcesExcludedTuning>& me) {
+                    (void)mayBlock;
+                    (void)me;
+                    return C2R::Ok();
+                };
             };
 
             addParameter(
@@ -1011,6 +1027,101 @@ private:
                 })
                 .withSetter(Setter::setDmaBufUsage)
                 .build());
+
+            // Only for testing
+            std::vector<C2SystemResourceStruct> systemResourcesCapacity;
+            std::vector<C2SystemResourceStruct> excludedSystemResources;
+            initializeSystemResources(systemResourcesCapacity, excludedSystemResources);
+
+            if (!systemResourcesCapacity.empty() && !excludedSystemResources.empty()) {
+                // Add System Resource Capacity
+                addParameter(
+                    DefineParam(mResourcesCapacity, C2_PARAMKEY_RESOURCES_CAPACITY)
+                    .withDefault(C2ResourcesCapacityTuning::AllocShared(
+                            systemResourcesCapacity.size(), systemResourcesCapacity))
+                    .withFields({
+                            C2F(mResourcesCapacity, m.values[0].id).any(),
+                            C2F(mResourcesCapacity, m.values[0].kind).any(),
+                            C2F(mResourcesCapacity, m.values[0].amount).any(),
+                    })
+                    .withSetter(Setter::setResourcesCapacity)
+                    .build());
+
+                // Add Excluded System Resources
+                addParameter(
+                    DefineParam(mResourcesExcluded, C2_PARAMKEY_RESOURCES_EXCLUDED)
+                    .withDefault(C2ResourcesExcludedTuning::AllocShared(
+                            excludedSystemResources.size(), excludedSystemResources))
+                    .withFields({
+                            C2F(mResourcesExcluded, m.values[0].id).any(),
+                            C2F(mResourcesExcluded, m.values[0].kind).any(),
+                            C2F(mResourcesExcluded, m.values[0].amount).any(),
+                    })
+                    .withSetter(Setter::setExcludedResources)
+                    .build());
+
+            }
+        }
+
+        /*
+         * Only for testing:
+         * This simulates the "software" store with three system resources for video
+         * codecs.
+         *  - max instance limit, which is capped at 64
+         *  - max pixel count: up to 64 instances of 4K ==> 64 * 3840 * 2400
+         *  - resources associated with the video frames:
+         *    - This implementation assumes (for simplicity) that it can support
+         *      up to 32 instances of codecs at 30 frames per sec.
+         *      And the resource usage is ~10 such resources per frame.
+         *      So, roughly 32 * 30 * 10 resources are available.
+         *
+         *  These 3 resource types are given 3 different (sw resource) ids.
+         */
+        void initializeSystemResources(
+                std::vector<C2SystemResourceStruct>& systemResourcesCapacity,
+                std::vector<C2SystemResourceStruct>& excludedSystemResources) {
+            // max instance limit 64
+            const uint32_t kMaxInstanceCountId = 0x1000;
+            const uint64_t kMaxInstanceCountAmount = 64;
+            // max pixel count: up to 64 instances of 4K
+            // Since it's a software store, memory is the only limit unlike
+            // hardware store where codec resources are limited.
+            const uint32_t kMaxPixelstId = 0x1001;
+            const uint64_t kMaxPixelsAmount = 64 * 3840 * 2400;
+            // An ID for resources associated with Macroblocks.
+            // This implementation arbitrarily assumes that there are enough macroblocks
+            // for 32 instances of concurrent codecs at 30 framerate and 10
+            // macroblocks per frame.
+            const uint32_t kMaxMacroblocksId = 0x1002;
+            const uint32_t kMaxFrameResources = 32 * 30 * 10;
+            // An ID for resources associated with Processing Rate.
+            // This implementation arbitrarily assumes that the implementation can
+            // concurrently support maximum processing of 32 instances @ 30 frames per second.
+            const uint32_t kMaxProcessingRate = 0x1003;
+            const uint32_t kMaxProcessingRateCount = 32 * 30;
+
+            systemResourcesCapacity.push_back(C2SystemResourceStruct(kMaxInstanceCountId,
+                                                                     CONST,
+                                                                     kMaxInstanceCountAmount));
+            systemResourcesCapacity.push_back(C2SystemResourceStruct(kMaxPixelstId,
+                                                                     CONST,
+                                                                     kMaxPixelsAmount));
+            systemResourcesCapacity.push_back(C2SystemResourceStruct(kMaxMacroblocksId,
+                                                                     CONST,
+                                                                     kMaxFrameResources));
+            systemResourcesCapacity.push_back(C2SystemResourceStruct(kMaxProcessingRate,
+                                                                     CONST,
+                                                                     kMaxProcessingRateCount));
+
+            // Nothing is excluded, but lets just add them with amount as 0.
+            excludedSystemResources.push_back(C2SystemResourceStruct(kMaxInstanceCountId,
+                                                                     CONST, 0));
+            excludedSystemResources.push_back(C2SystemResourceStruct(kMaxPixelstId,
+                                                                     CONST, 0));
+            excludedSystemResources.push_back(C2SystemResourceStruct(kMaxMacroblocksId,
+                                                                     CONST, 0));
+            excludedSystemResources.push_back(C2SystemResourceStruct(kMaxProcessingRate,
+                                                                     CONST, 0));
         }
     };
 
