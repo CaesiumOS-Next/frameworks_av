@@ -27,6 +27,7 @@
 #include <C2Debug.h>
 #include <Codec2Mapper.h>
 #include <C2PlatformSupport.h>
+#include <C2SystemResources.h>
 #include <Codec2BufferUtils.h>
 #include <SimpleC2Interface.h>
 #include <util/C2InterfaceHelper.h>
@@ -257,6 +258,39 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
                              C2F(mPictureQuantization, m.values[0].min).any(),
                              C2F(mPictureQuantization, m.values[0].max).any()})
                 .withSetter(PictureQuantizationSetter)
+                .build());
+
+        // Add needed resources
+        addNeededResources();
+    }
+
+    // NOTE: Reference implementation:
+    // Add Required/needed resources for this component.
+    void addNeededResources(uint32_t width = 64, uint32_t height = 64) {
+        std::vector<C2SystemResourceStruct> resourcesNeeded;
+        // Add one instance.
+        resourcesNeeded.push_back(C2SystemResourceStruct(SESSION, CONST, 1));
+        // Add internal memory needed as pixel count.
+        resourcesNeeded.push_back(C2SystemResourceStruct(INTERNAL_MEMORY, CONST, width * height));
+        // Add required Macroblocks for each frame.
+        resourcesNeeded.push_back(C2SystemResourceStruct(MACROBLOCK_RATE,
+                                                         PER_FRAME,
+                                                         (width * height) / kMacroBlockSize));
+        // Add processing rate as frame rate.
+        resourcesNeeded.push_back(C2SystemResourceStruct(PROCESSING_RATE,
+                                                         CONST,
+                                                         mFrameRate->value));
+
+        addParameter(
+                DefineParam(mResourcesNeeded, C2_PARAMKEY_RESOURCES_NEEDED)
+                .withDefault(C2ResourcesNeededTuning::AllocShared(
+                        resourcesNeeded.size(), resourcesNeeded))
+                .withFields({
+                        C2F(mResourcesNeeded, m.values[0].id).any(),
+                        C2F(mResourcesNeeded, m.values[0].kind).any(),
+                        C2F(mResourcesNeeded, m.values[0].amount).any(),
+                })
+                .withSetter(ResourcesNeededSetter, mSize, mFrameRate)
                 .build());
     }
 
@@ -537,11 +571,40 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
 
         return C2R::Ok();
     }
+
+    static C2R ResourcesNeededSetter(bool mayBlock,
+                                     C2P<C2ResourcesNeededTuning>& me,
+                                     // dependencies
+                                     const C2P<C2StreamPictureSizeInfo::input>& size,
+                                     const C2P<C2StreamFrameRateInfo::output>& frameRate) {
+        (void)mayBlock;
+        for (size_t i = 0; i < me.v.flexCount(); ++i) {
+            const C2SystemResourceStruct& resource = me.v.m.values[i];
+            if (resource.id == INTERNAL_MEMORY) {
+                // Update the memory requirement.
+                uint64_t amount = size.v.width * size.v.height;
+                me.set().m.values[i].amount = amount;
+            } else if (resource.id == PROCESSING_RATE) {
+                // Update the processing rate.
+                me.set().m.values[i].amount = frameRate.v.value;
+            } else if (resource.id == MACROBLOCK_RATE) {
+                // Update the macroblock rate.
+                me.set().m.values[i].amount = (size.v.width * size.v.height) / kMacroBlockSize;
+            }
+        }
+
+        return C2R::Ok();
+    };
+
     std::shared_ptr<C2StreamColorAspectsInfo::output> getCodedColorAspects_l() {
         return mCodedColorAspects;
     }
     std::shared_ptr<C2StreamPictureQuantizationTuning::output> getPictureQuantization_l() const {
         return mPictureQuantization;
+    }
+
+    std::shared_ptr<C2ResourcesNeededTuning> getResourcesNeeded_l() const {
+        return mResourcesNeeded;
     }
 
    private:
@@ -559,6 +622,7 @@ class C2SoftHevcEnc::IntfImpl : public SimpleInterface<void>::BaseParams {
     std::shared_ptr<C2StreamColorAspectsInfo::input> mColorAspects;
     std::shared_ptr<C2StreamColorAspectsInfo::output> mCodedColorAspects;
     std::shared_ptr<C2StreamPictureQuantizationTuning::output> mPictureQuantization;
+    std::shared_ptr<C2ResourcesNeededTuning> mResourcesNeeded;
 };
 
 static size_t GetCPUCoreCount() {
@@ -1109,6 +1173,30 @@ void C2SoftHevcEnc::process(const std::unique_ptr<C2Work>& work,
             work->result = status;
             work->workletsProcessed = 1u;
             return;
+        }
+
+        if (mStarted) {
+            // See if we can do a configUpdate on a resource here.
+            // NOTE: It's just a reference implementation that forces a configUpdate
+            std::shared_ptr<C2ResourcesNeededTuning> resources = mIntf->getResourcesNeeded_l();
+            for (size_t i = 0; i < resources->flexCount(); ++i) {
+                C2SystemResourceStruct& resource = resources->m.values[i];
+                // The Processing rate change already happens through the
+                // addParameter setter (ResourcesNeededSetter) already, but to force
+                // a demonstration of configUpdate to reflect change in resource
+                // requirement, this example forces Processing Rate change here.
+                if (resource.id == PROCESSING_RATE) {
+                    resource.amount += 1;
+                    break;
+                }
+            }
+
+            std::vector<std::unique_ptr<C2SettingResult>> failures;
+            c2_status_t err = mIntf->config({resources.get()}, C2_MAY_BLOCK, &failures);
+            if (err == C2_OK) {
+                work->worklets.front()->output.configUpdate.push_back(
+                        C2Param::Copy(*resources));
+            }
         }
     }
 
