@@ -736,6 +736,19 @@ static void parseAV1ProfileLevelFromCsd(const sp<ABuffer> &csd, sp<AMessage> &fo
     }
 }
 
+static void parseAPVProfileLevelFromCsd(const sp<ABuffer>& csd, sp<AMessage>& format) {
+    // Parse CSD structure to extract profile level information
+    // https://github.com/openapv/openapv/blob/main/readme/apv_isobmff.md#syntax-1
+    const uint8_t* data = csd->data();
+    size_t csdSize = csd->size();
+    if (csdSize < 10 || data[5] != 0x01) {  // configurationVersion == 1
+        return;
+    }
+    uint8_t profile = data[9];
+    uint8_t level = data[10];
+    format->setInt32("profile", profile);
+    format->setInt32("level", level);
+}
 
 static std::vector<std::pair<const char *, uint32_t>> stringMappings {
     {
@@ -1456,6 +1469,7 @@ status_t convertMetaDataToMessage(
         buffer->meta()->setInt32("csd", true);
         buffer->meta()->setInt64("timeUs", 0);
         msg->setBuffer("csd-0", buffer);
+        parseAPVProfileLevelFromCsd(buffer, msg);
     } else if (meta->findData(kKeyESDS, &type, &data, &size)) {
         ESDS esds((const char *)data, size);
         if (esds.InitCheck() != (status_t)OK) {
