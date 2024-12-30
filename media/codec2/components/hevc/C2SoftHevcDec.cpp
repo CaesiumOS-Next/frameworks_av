@@ -25,6 +25,7 @@
 
 #include <C2Debug.h>
 #include <C2PlatformSupport.h>
+#include <C2SystemResources.h>
 #include <Codec2Mapper.h>
 #include <SimpleC2Interface.h>
 
@@ -195,6 +196,31 @@ public:
                 .withConstValue(new C2StreamPixelFormatInfo::output(
                                      0u, HAL_PIXEL_FORMAT_YCBCR_420_888))
                 .build());
+
+        // Add needed resources
+        addNeededResources();
+    }
+
+    // NOTE: Reference implementation:
+    // Add Required/needed resources for this component.
+    void addNeededResources(uint32_t width = 320, uint32_t height = 240) {
+        std::vector<C2SystemResourceStruct> resourcesNeeded;
+        // Add one instance.
+        resourcesNeeded.push_back(C2SystemResourceStruct(SESSION, CONST, 1));
+        // Add internal memory needed as pixel count.
+        resourcesNeeded.push_back(C2SystemResourceStruct(INTERNAL_MEMORY, CONST, width * height));
+
+        addParameter(
+                DefineParam(mResourcesNeeded, C2_PARAMKEY_RESOURCES_NEEDED)
+                .withDefault(C2ResourcesNeededTuning::AllocShared(
+                        resourcesNeeded.size(), resourcesNeeded))
+                .withFields({
+                        C2F(mResourcesNeeded, m.values[0].id).any(),
+                        C2F(mResourcesNeeded, m.values[0].kind).any(),
+                        C2F(mResourcesNeeded, m.values[0].amount).any(),
+                })
+                .withSetter(ResourcesNeededSetter, mSize)
+                .build());
     }
 
     static C2R SizeSetter(bool mayBlock, const C2P<C2StreamPictureSizeInfo::output> &oldMe,
@@ -286,6 +312,22 @@ public:
         return C2R::Ok();
     }
 
+    static C2R ResourcesNeededSetter(bool mayBlock,
+                                     C2P<C2ResourcesNeededTuning>& me,
+                                     // dependencies
+                                     const C2P<C2StreamPictureSizeInfo::output>& size) {
+        (void)mayBlock;
+        for (size_t i = 0; i < me.v.flexCount(); ++i) {
+            const C2SystemResourceStruct& resource = me.v.m.values[i];
+            // Update the momory requirement.
+            if (resource.id == INTERNAL_MEMORY) {
+                me.set().m.values[i].amount = size.v.width * size.v.height;
+            }
+        }
+
+        return C2R::Ok();
+    };
+
     std::shared_ptr<C2StreamColorAspectsInfo::output> getColorAspects_l() {
         return mColorAspects;
     }
@@ -300,6 +342,7 @@ private:
     std::shared_ptr<C2StreamColorAspectsTuning::output> mDefaultColorAspects;
     std::shared_ptr<C2StreamColorAspectsInfo::output> mColorAspects;
     std::shared_ptr<C2StreamPixelFormatInfo::output> mPixelFormat;
+    std::shared_ptr<C2ResourcesNeededTuning> mResourcesNeeded;
 };
 
 static size_t getCpuCoreCount() {
