@@ -22,6 +22,30 @@
       },
       "revId": "994b4c9f45a19d6cdcff8eb86f66064e72d1ffd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1622a0d8_18fa2d41",
+        "filename": "media/codec2/fuzzer/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046576
+      },
+      "writtenOn": "2024-12-31T05:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6214afd1_b2e9e3f9",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "994b4c9f45a19d6cdcff8eb86f66064e72d1ffd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
