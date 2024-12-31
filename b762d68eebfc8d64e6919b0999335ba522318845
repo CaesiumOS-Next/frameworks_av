@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778db3ef_23f9ba35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2024-12-31T13:02:37Z",
+      "side": 1,
+      "message": "VtsHalMediaC2V1_0TargetVideoEncTest- AdaptiveBitrateTest fails -\nmOutputSize is greater than prevOutputSize\nmOutputSize \u003d 1334045\nprevOutputSize \u003d 1309370",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 4
+      },
+      "revId": "b762d68eebfc8d64e6919b0999335ba522318845",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
