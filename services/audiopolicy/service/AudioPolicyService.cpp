@@ -1206,9 +1206,6 @@ void AudioPolicyService::setAppState_l(sp<AudioRecordClient> client, app_state_t
 {
     AutoCallerClear acc;
 
-    if (mAudioPolicyManager) {
-        mAudioPolicyManager->setAppState(client->portId, state);
-    }
     sp<IAudioFlinger> af = AudioSystem::get_audio_flinger();
     if (af) {
         bool silenced = state == APP_STATE_IDLE;
@@ -1231,6 +1228,11 @@ void AudioPolicyService::setAppState_l(sp<AudioRecordClient> client, app_state_t
             client->silenced = silenced;
         }
     }
+
+    if (mAudioPolicyManager) {
+        mAudioPolicyManager->setAppState(client->portId, state);
+    }
+
 }
 
 status_t AudioPolicyService::dump(int fd, const Vector<String16>& args __unused)
