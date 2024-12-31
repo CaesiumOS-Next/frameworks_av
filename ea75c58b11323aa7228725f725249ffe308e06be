@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1760cc5_2245c486",
+        "filename": "media/libaudiohal/impl/ConversionHelperAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2024-12-31T02:41:28Z",
+      "side": 1,
+      "message": "this is changing the behavior of the function, I\u0027m not sure if there are other cases where we use key string only. Maybe adding another method like `parseAndGetVendorParametersWithKeyValue` is better?\nI will leave this for @mnaganov@google.com to comment.",
+      "range": {
+        "startLine": 39,
+        "startChar": 37,
+        "endLine": 39,
+        "endChar": 67
+      },
+      "revId": "ea75c58b11323aa7228725f725249ffe308e06be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
