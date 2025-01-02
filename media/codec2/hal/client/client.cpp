@@ -1434,7 +1434,7 @@ public:
             mListener(listener),
             mComponent(comp),
             mStopped(false),
-            mOutputBufferType(APEXCODEC_BUFFER_TYPE_INVALID) {
+            mOutputBufferType(APEXCODEC_BUFFER_TYPE_EMPTY) {
     }
 
     void start() {
@@ -1455,7 +1455,7 @@ public:
             LOG(ERROR) << "ApexHandler::start -- unrecognized component kind " << kind.value;
             return;
         }
-        ApexCodec_BufferType outputBufferType = APEXCODEC_BUFFER_TYPE_INVALID;
+        ApexCodec_BufferType outputBufferType = APEXCODEC_BUFFER_TYPE_EMPTY;
         if (domain.value == C2Component::DOMAIN_AUDIO) {
             // For both encoders and decoders the output buffer type is linear.
             outputBufferType = APEXCODEC_BUFFER_TYPE_LINEAR;
@@ -1528,10 +1528,11 @@ private:
                 LOG(DEBUG) << "handleWork -- listener died.";
                 return;
             }
-            ApexCodec_Buffer input;
-            input.flags = (ApexCodec_BufferFlags)workItem->input.flags;
-            input.frameIndex = workItem->input.ordinal.frameIndex.peekll();
-            input.timestampUs = workItem->input.ordinal.timestamp.peekll();
+            thread_local ApexCodec_Buffer *input = ApexCodec_Buffer_create();
+            ApexCodec_Buffer_clear(input);
+            ApexCodec_BufferFlags flags = (ApexCodec_BufferFlags)workItem->input.flags;
+            uint64_t frameIndex = workItem->input.ordinal.frameIndex.peekll();
+            uint64_t timestampUs = workItem->input.ordinal.timestamp.peekll();
 
             if (workItem->input.buffers.size() > 1) {
                 LOG(ERROR) << "handleWork -- input buffer size is "
@@ -1543,7 +1544,7 @@ private:
             if (!workItem->input.buffers.empty()) {
                 buffer = workItem->input.buffers[0];
             }
-            if (!FillMemory(buffer, &input, &linearView)) {
+            if (!FillMemory(buffer, input, &linearView)) {
                 LOG(ERROR) << "handleWork -- failed to map input";
                 return;
             }
@@ -1553,23 +1554,26 @@ private:
                 listener->onError(mComponent, C2_CORRUPTED);
                 return;
             }
-            input.configUpdates.data = configUpdatesVector.data();
-            input.configUpdates.size = configUpdatesVector.size();
+            ApexCodec_LinearBuffer configUpdates;
+            configUpdates.data = configUpdatesVector.data();
+            configUpdates.size = configUpdatesVector.size();
+            ApexCodec_Buffer_setConfigUpdates(input, &configUpdates);
             mWorkMap.insert_or_assign(
                     workItem->input.ordinal.frameIndex.peekll(), std::move(workItem));
 
             std::list<std::unique_ptr<C2Work>> workItems;
             bool inputDrained = false;
             while (!inputDrained) {
-                ApexCodec_Buffer output;
+                thread_local ApexCodec_Buffer *output = ApexCodec_Buffer_create();
+                output->clear();
                 std::shared_ptr<C2LinearBlock> linearBlock;
                 std::optional<C2WriteView> linearView;
                 std::shared_ptr<C2GraphicBlock> graphicBlock;
-                allocOutputBuffer(&output, &linearBlock, &linearView, &graphicBlock);
+                allocOutputBuffer(output, &linearBlock, &linearView, &graphicBlock);
                 size_t consumed = 0;
                 size_t produced = 0;
                 ApexCodec_Status status = ApexCodec_Component_process(
-                        mApexComponent, &input, &output, &consumed, &produced);
+                        mApexComponent, input, output, &consumed, &produced);
                 if (status == APEXCODEC_STATUS_NO_MEMORY) {
                     continue;
                 }
