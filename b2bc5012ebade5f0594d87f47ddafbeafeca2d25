@@ -40,6 +40,30 @@
       ],
       "revId": "b2bc5012ebade5f0594d87f47ddafbeafeca2d25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "729fde3c_93b6e69d",
+        "filename": "services/audioflinger/IAfEffect.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-01-02T08:17:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1699b48d_0d6a2e1c",
+      "range": {
+        "startLine": 184,
+        "startChar": 26,
+        "endLine": 184,
+        "endChar": 46
+      },
+      "revId": "b2bc5012ebade5f0594d87f47ddafbeafeca2d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
