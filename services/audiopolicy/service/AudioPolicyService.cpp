@@ -596,13 +596,17 @@ void AudioPolicyService::doOnCheckSpatializer()
                     getActiveTracksMasks_l(newOutput);
             mMutex.unlock();
             // It is OK to call detachOutput() is none is already attached.
-            mSpatializer->detachOutput();
             if (status == NO_ERROR && newOutput != AUDIO_IO_HANDLE_NONE) {
+                mSpatializer->detachOutput();
                 status = mSpatializer->attachOutput(newOutput, activeTracksMasks);
             }
             mMutex.lock();
             if (status != NO_ERROR) {
-                mAudioPolicyManager->releaseSpatializerOutput(newOutput);
+                if (mAudioPolicyManager->releaseSpatializerOutput(newOutput) == NO_ERROR) {
+                    mMutex.unlock();
+                    mSpatializer->detachOutput();
+                    mMutex.lock();
+                }
             }
         } else if (mSpatializer->getLevel() == Spatialization::Level::NONE &&
                    mSpatializer->getOutput() != AUDIO_IO_HANDLE_NONE) {
