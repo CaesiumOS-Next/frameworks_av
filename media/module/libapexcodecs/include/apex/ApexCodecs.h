@@ -278,7 +278,7 @@ typedef enum ApexCodec_BufferFlags : uint32_t {
  * Introduced in API 36.
  */
 typedef enum ApexCodec_BufferType : uint32_t {
-    APEXCODEC_BUFFER_TYPE_INVALID,
+    APEXCODEC_BUFFER_TYPE_EMPTY,
     APEXCODEC_BUFFER_TYPE_LINEAR,
     APEXCODEC_BUFFER_TYPE_LINEAR_CHUNKS,
     APEXCODEC_BUFFER_TYPE_GRAPHIC,
@@ -305,44 +305,147 @@ typedef struct ApexCodec_LinearBuffer {
 } ApexCodec_LinearBuffer;
 
 /**
- * Struct that represents a buffer for ApexCodec_Component.
+ * Opaque struct that represents a buffer for ApexCodec_Component.
  *
  * Introduced in API 36.
  */
-typedef struct ApexCodec_Buffer {
-    /**
-     * Flags associated with the buffer.
-     */
-    ApexCodec_BufferFlags flags;
-    /**
-     * For input buffers client assign a unique sequential index for each buffer. For output buffers
-     * it is the same as the associated input buffer's frame index.
-     */
-    uint64_t frameIndex;
-    /**
-     * A timestamp associated with the buffer in microseconds.
-     */
-    uint64_t timestampUs;
-    /**
-     * The type of the buffer. The component may reject request to process a buffer with the wrong
-     * type. For example, a video decoder will reject an input buffer with type BUFFER_TYPE_GRAPHIC,
-     * or an output buffer with type BUFFER_TYPE_LINEAR.
-     */
-    ApexCodec_BufferType type;
-    /**
-     * The actual memory for the buffer.
-     */
-    union {
-        ApexCodec_LinearBuffer linear;
-        AHardwareBuffer *_Nullable graphic;
-    } memory;
-    /**
-     * Config updates associated with the buffer. For input buffers these are sent to the component
-     * at the specific input frame. For output buffers these are config updates as a result of
-     * processing the buffer.
-     */
-    ApexCodec_LinearBuffer configUpdates;
-} ApexCodec_Buffer;
+typedef struct ApexCodec_Buffer ApexCodec_Buffer;
+
+/**
+ * Create an empty buffer object.
+ *
+ * \return the buffer object handle
+ */
+ApexCodec_Buffer *_Nonnull ApexCodec_Buffer_create() __INTRODUCED_IN(36);
+
+/**
+ * Destroy the buffer object. No-op if |buffer| is nullptr. Note that ApexCodec_Buffer does not own
+ * any objects, so the client is responsible for freeing them if needed.
+ *
+ * \param buffer the buffer object
+ */
+void ApexCodec_Buffer_destroy(ApexCodec_Buffer *_Nullable buffer) __INTRODUCED_IN(36);
+
+/**
+ * Clear the buffer object to be the empty state.
+ *
+ * \param buffer the buffer object
+ */
+void ApexCodec_Buffer_clear(ApexCodec_Buffer *_Nonnull buffer) __INTRODUCED_IN(36);
+
+
+/**
+ * Get the type of the buffer object.
+ *
+ * \param buffer the buffer object
+ * \return the type of the buffer object
+ */
+ApexCodec_BufferType ApexCodec_Buffer_getType(
+        ApexCodec_Buffer *_Nonnull buffer) __INTRODUCED_IN(36);
+
+/**
+ * Set the linear buffer for the empty buffer object.
+ *
+ * \param buffer the buffer object
+ * \param flags the flags associated with the buffer
+ * \param frameIndex    the frame index for the buffer
+ *                      for input buffers client assign a unique sequential index for each buffer.
+ * \param timestampUs   the timestamp for the buffer in microseconds
+ * \param linearBuffer  the linear buffer to be set
+ * \return  APEXCODEC_STATUS_OK         if successful
+ * \return  APEXCODEC_STATUS_BAD_STATE  if |buffer| is not empty
+ */
+ApexCodec_Status ApexCodec_Buffer_setLinearBuffer(
+        ApexCodec_Buffer *_Nonnull buffer,
+        ApexCodec_BufferFlags flags,
+        uint64_t frameIndex,
+        uint64_t timestampUs,
+        const ApexCodec_LinearBuffer *_Nonnull linearBuffer) __INTRODUCED_IN(36);
+
+/**
+ * Set the graphic buffer for the empty buffer object.
+ *
+ * \param buffer        the buffer object
+ * \param flags         the flags associated with the buffer
+ * \param frameIndex    the frame index for the buffer
+ *                      for input buffers client assign a unique sequential index for each buffer.
+ * \param timestampUs   the timestamp for the buffer in microseconds
+ * \param graphicBuffer the graphic buffer to be set
+ * \return  APEXCODEC_STATUS_OK         if successful
+ * \return  APEXCODEC_STATUS_BAD_STATE  if |buffer| is not empty
+ */
+ApexCodec_Status ApexCodec_Buffer_setGraphicBuffer(
+        ApexCodec_Buffer *_Nonnull buffer,
+        ApexCodec_BufferFlags flags,
+        uint64_t frameIndex,
+        uint64_t timestampUs,
+        AHardwareBuffer *_Nonnull graphicBuffer) __INTRODUCED_IN(36);
+
+/**
+ * Set the config updates for the empty buffer object.
+ * For input buffers these are sent to the component at the specific input frame.
+ *
+ * \param buffer            the buffer object
+ * \param configUpdates     the config updates to be set
+ * \return  APEXCODEC_STATUS_OK         if successful
+ * \return  APEXCODEC_STATUS_BAD_STATE  if |buffer| is not empty
+ */
+ApexCodec_Status ApexCodec_Buffer_setConfigUpdates(
+        ApexCodec_Buffer *_Nonnull buffer,
+        const ApexCodec_LinearBuffer *_Nonnull configUpdates) __INTRODUCED_IN(36);
+
+/**
+ * Extract the linear buffer from the buffer object.
+ *
+ * \param buffer            the buffer object
+ * \param outFlags          the flags associated with the buffer
+ * \param outFrameIndex     the frame index for the buffer
+ *                          for output buffers it is the same as the associated
+ *                          input buffer's frame index.
+ * \param outTimestampUs    the timestamp for the buffer in microseconds
+ * \param outLinearBuffer   the linear buffer to be set
+ * \return  APEXCODEC_STATUS_OK         if successful
+ * \return  APEXCODEC_STATUS_BAD_STATE  if |buffer| does not contain a linear buffer
+ */
+ApexCodec_Status ApexCodec_Buffer_getLinearBuffer(
+        ApexCodec_Buffer *_Nonnull buffer,
+        ApexCodec_BufferFlags *_Nonnull outFlags,
+        uint64_t *_Nonnull outFrameIndex,
+        uint64_t *_Nonnull outTimestampUs,
+        ApexCodec_LinearBuffer *_Nonnull outLinearBuffer) __INTRODUCED_IN(36);
+
+/**
+ * Extract the graphic buffer from the buffer object.
+ *
+ * \param buffer            the buffer object
+ * \param outFlags          the flags associated with the buffer
+ * \param outFrameIndex     the frame index for the buffer
+ *                          for output buffers it is the same as the associated
+ *                          input buffer's frame index.
+ * \param outTimestampUs    the timestamp for the buffer in microseconds
+ * \param outGraphicBuffer  the graphic buffer to be set
+ * \return  APEXCODEC_STATUS_OK         if successful
+ * \return  APEXCODEC_STATUS_BAD_STATE  if |buffer| does not contain a graphic buffer
+ */
+ApexCodec_Status ApexCodec_Buffer_getGraphicBuffer(
+        ApexCodec_Buffer *_Nonnull buffer,
+        ApexCodec_BufferFlags *_Nonnull outFlags,
+        uint64_t *_Nonnull outFrameIndex,
+        uint64_t *_Nonnull outTimestampUs,
+        AHardwareBuffer *_Nullable *_Nonnull outGraphicBuffer) __INTRODUCED_IN(36);
+
+/**
+ * Extract the config updates from the buffer object.
+ * For output buffers these are config updates as a result of processing the buffer.
+ *
+ * \param buffer            the buffer object
+ * \param outConfigUpdates  the config updates to be set
+ * \return  APEXCODEC_STATUS_OK         if successful
+ * \return  APEXCODEC_STATUS_BAD_STATE  if |buffer| is empty
+ */
+ApexCodec_Status ApexCodec_Buffer_getConfigUpdates(
+        ApexCodec_Buffer *_Nonnull buffer,
+        ApexCodec_LinearBuffer *_Nonnull outConfigUpdates) __INTRODUCED_IN(36);
 
 /**
  * An opaque struct that represents the supported values of a parameter.
