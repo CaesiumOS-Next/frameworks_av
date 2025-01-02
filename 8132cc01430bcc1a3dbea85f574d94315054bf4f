@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a0d232_b8622b42",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2025-01-02T19:51:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3b699404_dcbd1a4b",
+      "range": {
+        "startLine": 378,
+        "startChar": 21,
+        "endLine": 378,
+        "endChar": 40
+      },
+      "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c111697_49086fdf",
