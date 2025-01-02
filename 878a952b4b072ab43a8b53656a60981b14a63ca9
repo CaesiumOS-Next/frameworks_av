@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f62eaf_7e520940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1141048
+      },
+      "writtenOn": "2025-01-02T20:49:45Z",
+      "side": 1,
+      "message": "Avi, could you approve the AOSP cherry-pick of the camera splitter fix",
+      "revId": "878a952b4b072ab43a8b53656a60981b14a63ca9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
