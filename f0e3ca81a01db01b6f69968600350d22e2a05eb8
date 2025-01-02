@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04187288_d225c944",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-01-02T11:58:03Z",
+      "side": 1,
+      "message": "it looks like you check `data` has size \u003e\u003d 10 above, but then access the element with index 10 (for which size must be \u003e\u003d 11).",
+      "range": {
+        "startLine": 748,
+        "startChar": 0,
+        "endLine": 748,
+        "endChar": 29
+      },
+      "revId": "f0e3ca81a01db01b6f69968600350d22e2a05eb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0830eb0e_a3d7d50a",
         "filename": "media/libstagefright/Utils.cpp",
         "patchSetId": 1
