@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b395c1_1d386908",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-03T23:16:18Z",
+      "side": 0,
+      "message": "this was always a limitation of the existing API. While internally we only support encoders and decoders, this should be more like a mode, such as AMediaCodecKind AMediaCodecInfo_getKind(const AMediaCodecInfo* _NonNull info) - we use Kind in C2 terminology for this.\n\nThen we could have it return\n\nAMediaCodecKind_ENCODER\nor _DECODER\nor _INVALID for the case where info is invalid.\n\nWill we validate the info parameter? E.g. whether it was returned from a call, or do we require it to be a returned value? We could check against NULL, but this return value suggests that we are doing some sort of verification beyond null-ness, which will add to the cost. In most other cases we assume that these pointers are returned from our call and are therefore valid.\n\nSince this parameter is marked non-null, it is also considered bad practice to check for nullness, which further reduces the need for an invalid value.",
+      "range": {
+        "startLine": 86,
+        "startChar": 5,
+        "endLine": 86,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dd9ff2bf_5bd2e6af",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": " * The type of codecs.\n */\ntypedef enum AMediaCodecKind : int32_t {\n    /**\n     * Not a codec type. Used for indicating an invalid operation occurred.\n     */\n    AMediaCodecKind_INVALID_CODEC_INFO \u003d 0,\n\n    /**\n     * Encoder.\n     */\n    AMediaCodecKind_ENCODER \u003d 1,\n\n    /**\n     * Decoder.\n     */\n    AMediaCodecKind_DECODER \u003d 2,\n} AMediaCodecKind;\n\n/**\n * Query the type of the codec.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": " * @return INVALID_CODEC_INFO if @param info is invalid.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "AMediaCodecKind AMediaCodecInfo_getMediaCodecKind(const AMediaCodecInfo* _Nonnull info)\n        __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc74e23551cb60398942a4897d26aba02b1b83ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

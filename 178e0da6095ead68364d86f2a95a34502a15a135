@@ -1,0 +1,127 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "473cebb4_db196a1d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-03T23:16:18Z",
+      "side": 1,
+      "message": "it is actually ASCII",
+      "range": {
+        "startLine": 77,
+        "startChar": 22,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "670a1b6c_c7e9baca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": " *              It is ASCII encoded and owned by the framework.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "178e0da6095ead68364d86f2a95a34502a15a135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e3795a0_898b24d9",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-03T23:16:18Z",
+      "side": 1,
+      "message": "ASCII. I think it is used as \"this string is ASCII\", but we can phrase it as \"encoded as ASCII\" (not in)",
+      "range": {
+        "startLine": 57,
+        "startChar": 33,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "95f96d42_a432c9e9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "    // The media type encoded as ASCII.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "178e0da6095ead68364d86f2a95a34502a15a135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f091bc_2c8d0485",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-03T23:16:18Z",
+      "side": 1,
+      "message": "encoded as ASCII.",
+      "range": {
+        "startLine": 127,
+        "startChar": 36,
+        "endLine": 127,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "df5584e6_bd136833",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": " * @param name          Media codec name encoded as ASCII.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "178e0da6095ead68364d86f2a95a34502a15a135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
