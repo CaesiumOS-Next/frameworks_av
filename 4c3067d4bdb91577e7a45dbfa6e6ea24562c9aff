@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe215fe_692d5804",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-01-03T09:33:29Z",
+      "side": 1,
+      "message": "Typo",
+      "range": {
+        "startLine": 632,
+        "startChar": 13,
+        "endLine": 632,
+        "endChar": 27
+      },
+      "revId": "4c3067d4bdb91577e7a45dbfa6e6ea24562c9aff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
