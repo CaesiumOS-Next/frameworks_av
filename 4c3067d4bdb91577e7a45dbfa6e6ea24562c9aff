@@ -22,6 +22,30 @@
       },
       "revId": "4c3067d4bdb91577e7a45dbfa6e6ea24562c9aff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fc00e63_2acc6e04",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-03T18:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afe215fe_692d5804",
+      "range": {
+        "startLine": 632,
+        "startChar": 13,
+        "endLine": 632,
+        "endChar": 27
+      },
+      "revId": "4c3067d4bdb91577e7a45dbfa6e6ea24562c9aff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
