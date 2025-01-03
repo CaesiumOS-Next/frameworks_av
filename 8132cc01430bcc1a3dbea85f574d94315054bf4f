@@ -103,6 +103,30 @@
       },
       "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb8623e1_43c77cf5",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2025-01-03T17:54:58Z",
+      "side": 1,
+      "message": "\u003e Shore up the MediaCodec functions such that they can be called safely, effectively combining MediaCodec into InputBuffer, OutputBuffer, and Session.\n\nIf it\u0027s possible to do this while retaining the flexibility you want, that sounds great! Otherwise\n\n\u003e Move the unsafe / safe boundary to be between layers 2 and 3, i.e. make the members of MediaCodec into unsafe functions, document their API contracts, and document how InputBuffer, Session, and OutputBuffer honor those contracts with \"SAFETY\" comments over internal unsafe blocks. In this case, I think the MediaCodec functions can in turn drop the internal unsafe blocks and \"SAFETY\" comments.\n\nEven if these APIs are marked `unsafe`, their own usages of unsafe still require SAFETY comments. This is to ensure that each layer is documenting exactly what preconditions it has in order to be used without triggering undefined behavior.",
+      "parentUuid": "2c111697_49086fdf",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 499,
+        "endChar": 26
+      },
+      "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

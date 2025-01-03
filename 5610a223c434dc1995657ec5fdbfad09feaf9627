@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7681954f_fd7c45f0",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2025-01-03T17:54:58Z",
+      "side": 1,
+      "message": "How long is this reference guaranteed to be valid for?\n\nIf there are multiple successive calls to `get_input_buffer_data`, can they alias? If so, this method should take `\u0026mut self`.",
+      "range": {
+        "startLine": 810,
+        "startChar": 71,
+        "endLine": 810,
+        "endChar": 81
+      },
+      "revId": "5610a223c434dc1995657ec5fdbfad09feaf9627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824e235c_a32f5ba4",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2025-01-03T17:54:58Z",
+      "side": 1,
+      "message": "How long is this reference guaranteed to be valid for? Will it remain valid in the face of other method calls, or are there other `\u0026self` calls that can invalidate this buffer?",
+      "range": {
+        "startLine": 824,
+        "startChar": 72,
+        "endLine": 824,
+        "endChar": 78
+      },
+      "revId": "5610a223c434dc1995657ec5fdbfad09feaf9627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
