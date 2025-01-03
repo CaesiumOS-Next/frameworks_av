@@ -33,6 +33,24 @@
       "message": "@xuweilin@google.com \nAre there any other reviews of this code?",
       "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a46ad1_18672456",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1624675
+      },
+      "writtenOn": "2025-01-03T05:09:59Z",
+      "side": 1,
+      "message": "I believe Osca may review this to give +2 points.",
+      "parentUuid": "3af20d9f_8c6449ab",
+      "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
