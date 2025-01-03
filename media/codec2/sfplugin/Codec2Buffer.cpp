@@ -113,6 +113,27 @@ bool LocalLinearBuffer::copy(const std::shared_ptr<C2Buffer> &buffer) {
     return copyLinear(buffer);
 }
 
+// EncryptedLinearBuffer
+
+void EncryptedLinearBuffer::clearC2BufferRefs() {
+    mBufferRef.reset();
+}
+
+bool EncryptedLinearBuffer::canCopy(const std::shared_ptr<C2Buffer> &buffer) const {
+    return canCopyLinear(buffer);
+}
+
+bool EncryptedLinearBuffer::copy(const std::shared_ptr<C2Buffer> &buffer) {
+    native_handle_t *handle = NULL;
+    handle = (native_handle_t *)(buffer->data().linearBlocks()[0].handle());
+    meta()->setPointer("handle", handle);
+    meta()->setInt32("rangeOffset", 0);
+    meta()->setInt32("rangeLength", buffer->data().linearBlocks()[0].size());
+    setRange(0, buffer->data().linearBlocks()[0].size());
+    mBufferRef = buffer;
+    return true;
+}
+
 // DummyContainerBuffer
 
 static uint8_t sDummyByte[1] = { 0 };

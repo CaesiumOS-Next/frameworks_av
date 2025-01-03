@@ -86,6 +86,24 @@ public:
 };
 
 /**
+* MediaCodecBuffer implementation to use for secure encoder, it can cross process boundary,
+* and let buffer handle passthrough to next stage which can handle this protect memory,
+* C2Buffer reference need be hold until MediaCodecBuffer returned.
+*/
+class EncryptedLinearBuffer : public Codec2Buffer {
+public:
+    using Codec2Buffer::Codec2Buffer;
+
+    std::shared_ptr<C2Buffer> asC2Buffer() override { return nullptr; }
+    void clearC2BufferRefs() override;
+    bool canCopy(const std::shared_ptr<C2Buffer> &buffer) const override;
+    bool copy(const std::shared_ptr<C2Buffer> &buffer) override;
+
+private:
+    std::shared_ptr<C2Buffer> mBufferRef;
+};
+
+/**
  * MediaCodecBuffer implementation to be used only as a dummy wrapper around a
  * C2Buffer object.
  */

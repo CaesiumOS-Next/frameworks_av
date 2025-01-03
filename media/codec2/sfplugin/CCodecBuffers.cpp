@@ -1408,9 +1408,16 @@ void OutputBuffersArray::realloc(const std::shared_ptr<C2Buffer> &c2buffer) {
             } else {
                 size = kMaxLinearBufferSize;
             }
-            mAlloc = [format = mFormat, size] {
-                return new LocalLinearBuffer(format, new ABuffer(size));
-            };
+            bool secure = mChannelName.find(".secure") != std::string::npos;
+            if (secure) {
+                mAlloc = [format = mFormat, size] {
+                    return new EncryptedLinearBuffer(format, new ABuffer(size));
+                };
+            } else {
+                mAlloc = [format = mFormat, size] {
+                    return new LocalLinearBuffer(format, new ABuffer(size));
+                };
+            }
             ALOGD("[%s] reallocating with linear buffer of size %u", mName, size);
             break;
         }
@@ -1577,10 +1584,18 @@ sp<Codec2Buffer> LinearOutputBuffers::wrap(const std::shared_ptr<C2Buffer> &buff
 }
 
 std::function<sp<Codec2Buffer>()> LinearOutputBuffers::getAlloc() {
-    return [format = mFormat]{
-        // TODO: proper max output size
-        return new LocalLinearBuffer(format, new ABuffer(kLinearBufferSize));
-    };
+    bool secure = mChannelName.find(".secure") != std::string::npos;
+    if (secure) {
+        return [format = mFormat]{
+            // TODO: proper max output size
+            return new EncryptedLinearBuffer(format, new ABuffer(kLinearBufferSize));
+        };
+    } else {
+        return [format = mFormat]{
+            // TODO: proper max output size
+            return new LocalLinearBuffer(format, new ABuffer(kLinearBufferSize));
+        };
+    }
 }
 
 // GraphicOutputBuffers
