@@ -16,6 +16,23 @@
       "message": "Looks reasonable to me, so +2ing in interest of time. But if Lajos needs to take a look, please wait on him",
       "revId": "8d4e0a060293d03cb5d32ea25c2d5adace704880",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef2410f_d40d6409",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T20:22:06Z",
+      "side": 1,
+      "message": "Thanks for the clarifications!",
+      "revId": "8d4e0a060293d03cb5d32ea25c2d5adace704880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
