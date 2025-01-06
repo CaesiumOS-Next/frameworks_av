@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7390e8ef_2d407e99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T21:46:46Z",
+      "side": 1,
+      "message": "Fine from the NDK perspective, not +2ing since Lajos has outstanding comments.",
+      "revId": "ce2fdf96425941b80c0c761d3dc311925a0f105e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15367343_a306e23e",
