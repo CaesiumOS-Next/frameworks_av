@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77abc475_2121b754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T23:20:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "01563d9b_485a0a93",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e9cc6b5_d62cfed0",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "PTAL --- I added a overview here and the specifics to the individual methods",
       "parentUuid": "7e9cc6b5_d62cfed0",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "102773af_c2981c35",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T23:20:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "232ed546_86fc53bb",
       "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -241,6 +277,24 @@
       "side": 1,
       "message": "Added setBufferInfo and removed those params in setLinearBuffer and setGraphicBuffer.",
       "parentUuid": "c04e52af_961e01ce",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aab9016_88b6ec77",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T23:20:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "809dcd81_f6e2b602",
       "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -497,6 +551,30 @@
       "side": 1,
       "message": "PTAL",
       "parentUuid": "2f29b66f_0c4541d4",
+      "range": {
+        "startLine": 447,
+        "startChar": 75,
+        "endLine": 448,
+        "endChar": 55
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5bb567a_df974d6b",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T23:20:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2c0ac841_dae0384f",
       "range": {
         "startLine": 447,
         "startChar": 75,
