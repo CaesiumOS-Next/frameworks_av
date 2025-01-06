@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228e9938_c9040852",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-06T14:24:07Z",
+      "side": 1,
+      "message": "Please refer to the buganizer issue addressed by this CL or create one if none exists: what is the actual problme fixed by this change?",
+      "revId": "e1802f8ef03a103ed1e056e01381e2714abc2ddf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
