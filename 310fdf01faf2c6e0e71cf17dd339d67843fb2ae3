@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8928e303_6ae99733",
+        "filename": "media/codec2/hal/client/ApexCodecsLazy.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:34:55Z",
+      "side": 1,
+      "message": "nit: a bit verbose here, but up to you! Maybe add underscores or use CamelCase more to make it a bit more readable? (or just shorten it back since it\u0027s not part of any public API definition)",
+      "range": {
+        "startLine": 88,
+        "startChar": 21,
+        "endLine": 88,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ae752bcf_4c2de6dd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/client/ApexCodecsLazy.cpp",
+              "range": {
+                "startLine": 88,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": "    static void* LoadApexCodecs(int dlopen_flags) {\n"
+            },
+            {
+              "path": "media/codec2/hal/client/ApexCodecsLazy.cpp",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "        void* handle \u003d LoadApexCodecs(RTLD_NOW);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "310fdf01faf2c6e0e71cf17dd339d67843fb2ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
