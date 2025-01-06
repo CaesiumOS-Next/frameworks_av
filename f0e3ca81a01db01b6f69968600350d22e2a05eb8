@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4bbaa1d_fe90455f",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-01-06T16:45:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04187288_d225c944",
+      "range": {
+        "startLine": 748,
+        "startChar": 0,
+        "endLine": 748,
+        "endChar": 29
+      },
+      "revId": "f0e3ca81a01db01b6f69968600350d22e2a05eb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0830eb0e_a3d7d50a",
@@ -54,6 +78,24 @@
       "writtenOn": "2025-01-02T00:31:50Z",
       "side": 1,
       "message": "we also need to look at hdr info to update the profile accordingly.\n\nRefer: line 695 to 705 above.",
+      "revId": "f0e3ca81a01db01b6f69968600350d22e2a05eb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3b71396_1f80db69",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-01-06T16:45:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0830eb0e_a3d7d50a",
       "revId": "f0e3ca81a01db01b6f69968600350d22e2a05eb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
