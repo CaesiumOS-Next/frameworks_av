@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "232ed546_86fc53bb",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "PTAL --- I added a overview here and the specifics to the individual methods",
+      "parentUuid": "7e9cc6b5_d62cfed0",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d64b9cd6_b758ae76",
         "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2025-01-06T17:59:58Z",
       "side": 1,
       "message": "What are the defaults? Which I assume _clear also restores, so definitely good to document.",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41dc639c_b548e201",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d64b9cd6_b758ae76",
       "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -65,6 +101,30 @@
       "writtenOn": "2025-01-06T17:59:58Z",
       "side": 1,
       "message": "maybe expand on this a little? Do you mean things like ApexCodec_LinearBuffer?\n Might be best to document that also with methods like setLinearBuffer \"ApexCodec_Buffer does not take ownership of the linearBuffer passed in. It must be freed by the caller only once the ApexCodec_Buffer is no longer in use.\" or similar.",
+      "range": {
+        "startLine": 323,
+        "startChar": 20,
+        "endLine": 323,
+        "endChar": 39
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "defd4bab_ba56c340",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e46e4f1_d7edf226",
       "range": {
         "startLine": 323,
         "startChar": 20,
@@ -126,6 +186,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8657d17a_a7b67843",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "644d63f3_b115fca9",
+      "range": {
+        "startLine": 347,
+        "startChar": 52,
+        "endLine": 347,
+        "endChar": 53
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c04e52af_961e01ce",
@@ -139,6 +223,24 @@
       "writtenOn": "2025-01-06T17:59:58Z",
       "side": 1,
       "message": "what should be set for output buffers? Do we recommend \u00270\u0027? Same for timestamp.  If these aren\u0027t generally set for output buffers, should we have a separate setter for the `frameIndex` and `timeStampUs` parameters (and then not have to repeat them for both `setLinearBuffer` and `setGraphicBuffer`)?",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809dcd81_f6e2b602",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "Added setBufferInfo and removed those params in setLinearBuffer and setGraphicBuffer.",
+      "parentUuid": "c04e52af_961e01ce",
       "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -204,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a17ec3b_c5c23e82",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed17f58d_2d586ebc",
+      "range": {
+        "startLine": 354,
+        "startChar": 53,
+        "endLine": 354,
+        "endChar": 80
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d998e40_7d43f747",
@@ -241,6 +367,30 @@
           ]
         }
       ],
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c5cfed_fc7ac052",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "Removed the condition",
+      "parentUuid": "7d998e40_7d43f747",
+      "range": {
+        "startLine": 393,
+        "startChar": 39,
+        "endLine": 393,
+        "endChar": 60
+      },
       "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -288,6 +438,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59d0f63d_beed5a75",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "4c4c1106_7a7e0686",
+      "range": {
+        "startLine": 395,
+        "startChar": 17,
+        "endLine": 395,
+        "endChar": 50
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f29b66f_0c4541d4",
         "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
         "patchSetId": 5
@@ -299,6 +473,30 @@
       "writtenOn": "2025-01-06T17:59:58Z",
       "side": 1,
       "message": "this seems contradictory with the next parameter.  Unless you mean something more like \"If the config updates were set by the client via setConfigUpdates, this will be the exact same pointer and outOwnedByClient will be `true`\" and don\u0027t intend to say that every instance of outConfigUpdates must be freed by the client.",
+      "range": {
+        "startLine": 447,
+        "startChar": 75,
+        "endLine": 448,
+        "endChar": 55
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0ac841_dae0384f",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-06T23:11:24Z",
+      "side": 1,
+      "message": "PTAL",
+      "parentUuid": "2f29b66f_0c4541d4",
       "range": {
         "startLine": 447,
         "startChar": 75,
