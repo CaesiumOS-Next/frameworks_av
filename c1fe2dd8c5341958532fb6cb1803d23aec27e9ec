@@ -1,0 +1,312 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01563d9b_485a0a93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "Just a lot of doc clarification/expansion requests - with the explicit buffer structure gone, I think we need to explain more in docs about how the generic buffer works.",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e9cc6b5_d62cfed0",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "You\u0027ve lost some of the member-specific docs of ApexCodec_Buffer now, especially the ones implied by the structure (either/or of linear and graphic buffers, for example) they should migrate somewhere, either here or to the setters and getters.\n\nBut at the least, you should discuss the lifecycle and usage of a buffer here a little bit.",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d64b9cd6_b758ae76",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "What are the defaults? Which I assume _clear also restores, so definitely good to document.",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e46e4f1_d7edf226",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "maybe expand on this a little? Do you mean things like ApexCodec_LinearBuffer?\n Might be best to document that also with methods like setLinearBuffer \"ApexCodec_Buffer does not take ownership of the linearBuffer passed in. It must be freed by the caller only once the ApexCodec_Buffer is no longer in use.\" or similar.",
+      "range": {
+        "startLine": 323,
+        "startChar": 20,
+        "endLine": 323,
+        "endChar": 39
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644d63f3_b115fca9",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "Might want to be clearer that you can\u0027t call `setLinearBuffer` after `setGraphicBuffer` (presumably) or vice versa.  Though since you can do it by calling `clear` in the middle, it\u0027s not obvious to me why we want to enforce that requirement (is to to ensure the config updates are cleared too?)\n\nAlso, should document that this changes the type of the buffer to LINEAR (presumably)",
+      "range": {
+        "startLine": 347,
+        "startChar": 52,
+        "endLine": 347,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "72e0fe1c_2a637045",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 349,
+                "startChar": 0,
+                "endLine": 349,
+                "endChar": 0
+              },
+              "replacement": " * Note that you can\u0027t call this method after calling ApexCodec_Buffer_setGraphicBuffer,\n * and vice versa.\n *\n"
+            },
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 368,
+                "startChar": 0,
+                "endLine": 368,
+                "endChar": 0
+              },
+              "replacement": " * Note that you can\u0027t call this method after calling ApexCodec_Buffer_setLinearBuffer,\n * and vice versa.\n *\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c04e52af_961e01ce",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "what should be set for output buffers? Do we recommend \u00270\u0027? Same for timestamp.  If these aren\u0027t generally set for output buffers, should we have a separate setter for the `frameIndex` and `timeStampUs` parameters (and then not have to repeat them for both `setLinearBuffer` and `setGraphicBuffer`)?",
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed17f58d_2d586ebc",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "why would we support setting a `null` buffer here or in setLinearBuffer? What will the type be?  Will that mean the ApexCodec_Buffer is empty? \n\nAlso, the documentation gets a bit confusing here with `buffer` on this line meaning ApexCodec_LinearBuffer and two lines below ApexCodec_Buffer.  Might be better to write out exactly which buffer is being talked about in each case.",
+      "range": {
+        "startLine": 354,
+        "startChar": 53,
+        "endLine": 354,
+        "endChar": 80
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "98ac4fff_4df4822b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 354,
+                "startChar": 0,
+                "endLine": 355,
+                "endChar": 0
+              },
+              "replacement": " * \\param linearBuffer  the linear buffer to be set; must not be null\n"
+            },
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 363,
+                "startChar": 0,
+                "endLine": 364,
+                "endChar": 0
+              },
+              "replacement": "        const ApexCodec_LinearBuffer *_Nonnull linearBuffer) __INTRODUCED_IN(36);\n"
+            },
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 373,
+                "startChar": 0,
+                "endLine": 374,
+                "endChar": 0
+              },
+              "replacement": " * \\param graphicBuffer the graphic buffer to be set; must not be null\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d998e40_7d43f747",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "this suggests we have to call `setLinearBuffer` or `setGraphicBuffer` before we call `setConfigUpdates`.  Is there a strong reason for that, because it seems a bit rough on the client?",
+      "range": {
+        "startLine": 393,
+        "startChar": 39,
+        "endLine": 393,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3a4c4029_7e54a124",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 393,
+                "startChar": 0,
+                "endLine": 394,
+                "endChar": 0
+              },
+              "replacement": " * \\return  APEXCODEC_STATUS_BAD_STATE  if config updates are already set\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4c1106_7a7e0686",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "since this is nonnull , is the expected way to clear these via `clear`? That\u0027s fine, but probably good to point out.",
+      "range": {
+        "startLine": 395,
+        "startChar": 17,
+        "endLine": 395,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "56c0ef9a_d668daeb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+              "range": {
+                "startLine": 390,
+                "startChar": 0,
+                "endLine": 390,
+                "endChar": 0
+              },
+              "replacement": " * To clear the config updates, call ApexCodec_Buffer_clear() on the buffer object.\n *\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f29b66f_0c4541d4",
+        "filename": "media/module/libapexcodecs/include/apex/ApexCodecs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T17:59:58Z",
+      "side": 1,
+      "message": "this seems contradictory with the next parameter.  Unless you mean something more like \"If the config updates were set by the client via setConfigUpdates, this will be the exact same pointer and outOwnedByClient will be `true`\" and don\u0027t intend to say that every instance of outConfigUpdates must be freed by the client.",
+      "range": {
+        "startLine": 447,
+        "startChar": 75,
+        "endLine": 448,
+        "endChar": 55
+      },
+      "revId": "c1fe2dd8c5341958532fb6cb1803d23aec27e9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
