@@ -51,6 +51,123 @@
       "parentUuid": "3af20d9f_8c6449ab",
       "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82a9bbc_1509a663",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4026,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-06T18:49:28Z",
+      "side": 1,
+      "message": "Since this are all constant we should add a paremeter comment:\n```\nupdateCallAndOutputRouting(false /* forceVolumeReeval */, 0 /* delayMs */,\n                                   true /* skipDelays */);\n```\n\nI think Weilin made a comment on this but it was to remove the spaces in the comment, but lets follow the convention mentioned in line 4478 below.",
+      "range": {
+        "startLine": 4026,
+        "startChar": 35,
+        "endLine": 4026,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2a4afa05_9b0ce854",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4026,
+                "startChar": 0,
+                "endLine": 4027,
+                "endChar": 0
+              },
+              "replacement": "        updateCallAndOutputRouting(false /* forceVolumeReeval */, 0 /* delayMs */,\n                                   true /* skipDelays*/);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1a553af_40cc55d1",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4026,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-06T18:49:28Z",
+      "side": 1,
+      "message": "We should also apply the same logic to the method `unregisterPolicyMixes`.",
+      "range": {
+        "startLine": 4026,
+        "startChar": 8,
+        "endLine": 4026,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bb846f0f_7899ab9d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4091,
+                "startChar": 0,
+                "endLine": 4092,
+                "endChar": 0
+              },
+              "replacement": "        updateCallAndOutputRouting(false, 0, true);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c95d1fb_4b9d4d8a",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4478,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-06T18:49:28Z",
+      "side": 1,
+      "message": "Should be able to follow this convention here above.",
+      "fixSuggestions": [
+        {
+          "fixId": "b021a3b7_c760b840",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4026,
+                "startChar": 0,
+                "endLine": 4027,
+                "endChar": 0
+              },
+              "replacement": "        updateCallAndOutputRouting(false /* forceVolumeReeval */, 0 /* delayMs */,\n                                   true /* skipDelays */);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
