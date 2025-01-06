@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3de26d4d_92987999",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2025-01-06T16:57:54Z",
+      "side": 1,
+      "message": "Input/output buffer data is valid from the point the client is notified that the buffer is available to the point at which the client re-submits the buffer back to the codec (or the session is terminated). Originally, MediaCodec would simply deliver buffer indices to the client and safe treatment of these indices was up to the client to maintain. After Cody\u0027s earlier comments I introduced the InputBuffer/OutputBuffer/Session abstractions to shift the responsibility back to my implementation. Input/Output buffer indices are wrapped inside an InputBuffer/OutputBuffer object that also carries a Session reference. Buffer indices are only returned to the codec when InputBuffer/OutputBuffer objects are dropped. The session only ends when the Session object is dropped. All of this made the public API safe as far as I\u0027m concerned. I left the original index-based implementation intact as much as possible but marked it pub(crate) to make it in essence a private implementation detail. Now what I\u0027m hear is that that\u0027s not safe enough (presumably because somebody could accidentally modify the crate implementation to violate the invariants in the future). I\u0027ll mark the relevant methods in MediaCodec \"unsafe\" and call them from within \"unsafe\" blocks in the InputBuffer/OutputBuffer/Session objects\u0027 implementation.",
+      "parentUuid": "7681954f_fd7c45f0",
+      "range": {
+        "startLine": 810,
+        "startChar": 71,
+        "endLine": 810,
+        "endChar": 81
+      },
+      "revId": "5610a223c434dc1995657ec5fdbfad09feaf9627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "824e235c_a32f5ba4",
         "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-03T17:54:58Z",
       "side": 1,
       "message": "How long is this reference guaranteed to be valid for? Will it remain valid in the face of other method calls, or are there other `\u0026self` calls that can invalidate this buffer?",
+      "range": {
+        "startLine": 824,
+        "startChar": 72,
+        "endLine": 824,
+        "endChar": 78
+      },
+      "revId": "5610a223c434dc1995657ec5fdbfad09feaf9627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9907040e_69cb1f82",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2025-01-06T16:57:54Z",
+      "side": 1,
+      "message": "see my comment on \"get_input_buffer_data\" above.",
+      "parentUuid": "824e235c_a32f5ba4",
       "range": {
         "startLine": 824,
         "startChar": 72,

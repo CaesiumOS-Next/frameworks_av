@@ -127,6 +127,30 @@
       },
       "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c3dfd46_b6722bcc",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2025-01-06T16:57:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cb8623e1_43c77cf5",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 499,
+        "endChar": 26
+      },
+      "revId": "8132cc01430bcc1a3dbea85f574d94315054bf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
