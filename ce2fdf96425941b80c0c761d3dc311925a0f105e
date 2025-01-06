@@ -1,0 +1,240 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15367343_a306e23e",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T21:44:15Z",
+      "side": 1,
+      "message": "nit: AMediaCodecInfo_FEATURE, also below",
+      "range": {
+        "startLine": 175,
+        "startChar": 36,
+        "endLine": 175,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e45d8129_07d4856a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 175,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": " *                      with prefix AMediaCodecInfo_FEATURE_.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 191,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": " *                      with prefix AMediaCodecInfo_FEATURE_.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ce2fdf96425941b80c0c761d3dc311925a0f105e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "183e33df_096c351a",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-06T21:44:15Z",
+      "side": 1,
+      "message": "Since this doesn\u0027t show up in the docs, each of the feature constants doc should probably include something like \"A feature constant for use with AMediaCodecInfo_isFeature* methods\"",
+      "fixSuggestions": [
+        {
+          "fixId": "7c0778a4_b1d0f955",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 663,
+                "startChar": 0,
+                "endLine": 663,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 668,
+                "startChar": 0,
+                "endLine": 668,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 673,
+                "startChar": 0,
+                "endLine": 673,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 678,
+                "startChar": 0,
+                "endLine": 678,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 685,
+                "startChar": 0,
+                "endLine": 685,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 691,
+                "startChar": 0,
+                "endLine": 691,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 698,
+                "startChar": 0,
+                "endLine": 698,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 703,
+                "startChar": 0,
+                "endLine": 703,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 708,
+                "startChar": 0,
+                "endLine": 708,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 716,
+                "startChar": 0,
+                "endLine": 716,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 723,
+                "startChar": 0,
+                "endLine": 723,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 734,
+                "startChar": 0,
+                "endLine": 734,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 751,
+                "startChar": 0,
+                "endLine": 751,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 770,
+                "startChar": 0,
+                "endLine": 770,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 793,
+                "startChar": 0,
+                "endLine": 793,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 827,
+                "startChar": 0,
+                "endLine": 827,
+                "endChar": 0
+              },
+              "replacement": " * A feature constant for use with AMediaCodecInfo_isFeature* methods.\n *\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ce2fdf96425941b80c0c761d3dc311925a0f105e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
