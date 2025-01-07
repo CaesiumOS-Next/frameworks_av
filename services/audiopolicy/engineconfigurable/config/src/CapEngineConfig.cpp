@@ -534,7 +534,7 @@ ConversionResult<CapCriterion> aidl2legacy_AudioHalCapCriterionV2_Criterion(
             }
             std::string deviceLiteral = VALUE_OR_RETURN_STATUS(truncatePrefix(legacyTypeLiteral,
                     isOut ? gLegacyOutputDevicePrefix : gLegacyInputDevicePrefix));
-            uint64_t pfwCriterionValue = 1 << shift++;
+            uint64_t pfwCriterionValue = (uint64_t)1 << shift++;
             criterionType.valuePairs.push_back(
                     {pfwCriterionValue, static_cast<int32_t>(legacyDeviceType), deviceLiteral});
             ALOGV("%s: adding %" PRIu64 " %d %s %s", __func__, pfwCriterionValue, legacyDeviceType,
@@ -551,7 +551,7 @@ ConversionResult<CapCriterion> aidl2legacy_AudioHalCapCriterionV2_Criterion(
         criterion.typeName = criterionType.name;
         int shift = 0;
         for (auto &value : aidlCriterion.values) {
-            uint64_t pfwCriterionValue = 1 << shift++;
+            uint64_t pfwCriterionValue = (uint64_t)1 << shift++;
             if (value.getTag() != AudioDeviceAddress::id) {
                 return BAD_VALUE;
             }
