@@ -22,6 +22,30 @@
       },
       "revId": "70bbadf1361d5e21d137e5865702c7ddb786cec9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b77411bb_9e5f1673",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-07T18:31:46Z",
+      "side": 1,
+      "message": "I think so, let me test it first and I\u0027ll provide feedback.",
+      "parentUuid": "0bdfafb0_9143cb4a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "70bbadf1361d5e21d137e5865702c7ddb786cec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
