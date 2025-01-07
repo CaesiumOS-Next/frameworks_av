@@ -1,5 +1,57 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31cc90d_aceca5a9",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-01-07T23:45:10Z",
+      "side": 1,
+      "message": "the nullptr check on line 940 should occur before this code.  see b/388333862.",
+      "range": {
+        "startLine": 933,
+        "startChar": 0,
+        "endLine": 933,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6b63bddb_1bcd1948",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 933,
+                "startChar": 0,
+                "endLine": 933,
+                "endChar": 0
+              },
+              "replacement": "    if (device \u003d\u003d nullptr) {\n        return device;\n    }\n\n"
+            },
+            {
+              "path": "services/audiopolicy/enginedefault/src/Engine.cpp",
+              "range": {
+                "startLine": 940,
+                "startChar": 0,
+                "endLine": 942,
+                "endChar": 0
+              },
+              "replacement": "    if (!audio_is_remote_submix_device(device-\u003etype())) {\n        // Return immediately if the device is not a remote submix device.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aa8ec60ed36f55a99fbfc20d78f7d94a2138b632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
