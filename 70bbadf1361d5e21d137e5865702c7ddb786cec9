@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bdfafb0_9143cb4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-07T15:00:10Z",
+      "side": 1,
+      "message": "@Oscar, @Mikhail, can I call it abusively Revert^2 when the patch is lightly changed",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "70bbadf1361d5e21d137e5865702c7ddb786cec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
