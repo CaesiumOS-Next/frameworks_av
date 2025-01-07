@@ -16,6 +16,23 @@
       "message": "Francois, are you OK with this change? The vendor has verified that it helps them to use Android 16 system image with a vendor image from a previous version of Android.",
       "revId": "4a2c5fe8ff4bf5d612a0726c992570eafadeea81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed3967d_5de726a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-07T09:15:09Z",
+      "side": 1,
+      "message": "I am ok on the principle, let me test on CapAIDL to ensure no reg",
+      "revId": "4a2c5fe8ff4bf5d612a0726c992570eafadeea81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
