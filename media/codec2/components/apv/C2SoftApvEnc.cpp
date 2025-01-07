@@ -1033,6 +1033,7 @@ c2_status_t C2SoftApvEnc::setEncodeArgs(oapv_frms_t* inputFrames, const C2Graphi
         }
         case C2PlanarLayout::TYPE_YUV: {
             if (IsP010(*input)) {
+                ALOGV("Convert from P010 to P210");
                 if (mColorFormat == OAPV_CF_YCBCR422) {
                     ColorConvertP010ToYUV422P10le(input, inputFrames->frm[0].imgb);
                 } else if (mColorFormat == OAPV_CF_PLANAR2) {
@@ -1041,22 +1042,26 @@ c2_status_t C2SoftApvEnc::setEncodeArgs(oapv_frms_t* inputFrames, const C2Graphi
                     uint16_t *dstY  = (uint16_t*)inputFrames->frm[0].imgb->a[0];
                     uint16_t *dstUV = (uint16_t*)inputFrames->frm[0].imgb->a[1];
                     convertP010ToP210(dstY, dstUV, srcY, srcUV,
-                                      input->width(), input->width(), input->width(),
+                                      layout.planes[layout.PLANE_U].rowInc,
+                                      input->width(), input->width(),
                                       input->height());
                 } else {
                     ALOGE("Not supported color format. %d", mColorFormat);
                     return C2_BAD_VALUE;
                 }
             } else if (IsNV12(*input)) {
+                ALOGV("Convert from NV12 to P210");
                 uint8_t  *srcY  = (uint8_t*)input->data()[0];
                 uint8_t  *srcUV = (uint8_t*)input->data()[1];
                 uint16_t *dstY  = (uint16_t*)inputFrames->frm[0].imgb->a[0];
                 uint16_t *dstUV = (uint16_t*)inputFrames->frm[0].imgb->a[1];
                 convertSemiPlanar8ToP210(dstY, dstUV, srcY, srcUV,
-                                         input->width(), input->width(), input->width(),
+                                         layout.planes[layout.PLANE_Y].rowInc,
+                                         layout.planes[layout.PLANE_U].rowInc, input->width(),
                                          input->width(), input->width(), input->height(),
                                          CONV_FORMAT_I420);
             } else if (IsI420(*input)) {
+                ALOGV("Convert from I420 to P210");
                 uint8_t  *srcY  = (uint8_t*)input->data()[0];
                 uint8_t  *srcU  = (uint8_t*)input->data()[1];
                 uint8_t  *srcV  = (uint8_t*)input->data()[2];

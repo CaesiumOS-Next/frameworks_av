@@ -887,8 +887,8 @@ static void copyBufferFromP210ToYV12(uint8_t* dstY, uint8_t* dstU, uint8_t* dstV
 
     for (size_t i = 0; i < height / 2; ++i) {
         for (size_t j = 0; j < width / 2; ++j) {
-            dstV[i * dstVStride + j] = (srcUV[i * srcUVStride * 2 + j * 2] >> 8) & 0xFF;
-            dstU[i * dstUStride + j] = (srcUV[i * srcUVStride * 2 + j * 2 + 1] >> 8) & 0xFF;
+            dstU[i * dstVStride + j] = (srcUV[i * srcUVStride * 2 + j * 2] >> 8) & 0xFF;
+            dstV[i * dstUStride + j] = (srcUV[i * srcUVStride * 2 + j * 2 + 1] >> 8) & 0xFF;
         }
     }
 }
@@ -1370,63 +1370,79 @@ status_t C2SoftApvDec::outputBuffer(const std::shared_ptr<C2BlockPool>& pool,
                                      : (format == HAL_PIXEL_FORMAT_YV12 ? "YV12" : "UNKNOWN")));
         }
     } else {  // HAL_PIXEL_FORMAT_YV12
-        if (OAPV_CS_GET_BIT_DEPTH(imgbOutput->cs) == 10) {
-            const uint16_t* srcY = (const uint16_t*)imgbOutput->a[0];
-            const uint16_t* srcV = (const uint16_t*)imgbOutput->a[1];
-            const uint16_t* srcU = (const uint16_t*)imgbOutput->a[2];
-            size_t srcYStride = imgbOutput->s[0] / 2;
-            size_t srcVStride = imgbOutput->s[1] / 2;
-            size_t srcUStride = imgbOutput->s[2] / 2;
-            if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR420) {
-                ALOGV("OAPV_CS_YUV420 10bit to YV12");
-                copyBufferFromYUV42010bitToYV12(dstY, dstU, dstV, srcY, srcU, srcV, srcYStride,
-                                                srcUStride, srcVStride, dstYStride, dstUStride,
-                                                dstVStride, mWidth, mHeight);
-            } else if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR422) {
-                ALOGV("OAPV_CS_YUV422 10bit to YV12");
-                copyBufferFromYUV42210bitToYV12(dstY, dstU, dstV, srcY, srcU, srcV, srcYStride,
-                                                srcUStride, srcVStride, dstYStride, dstUStride,
-                                                dstVStride, mWidth, mHeight);
-            } else if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_PLANAR2) {
-                ALOGV("OAPV_CS_P210 to YV12");
-                copyBufferFromP210ToYV12(dstY, dstU, dstV, srcY, srcV, srcYStride, srcVStride,
-                                         dstYStride, dstUStride, dstVStride, mWidth, mHeight);
-            } else {
-                ALOGE("Not supported convert format : %d", OAPV_CS_GET_FORMAT(imgbOutput->cs));
-            }
-        } else if (OAPV_CS_GET_BIT_DEPTH(imgbOutput->cs) == 8) {
-            const uint8_t* srcY = (const uint8_t*)imgbOutput->a[0];
-            const uint8_t* srcV = (const uint8_t*)imgbOutput->a[1];
-            const uint8_t* srcU = (const uint8_t*)imgbOutput->a[2];
-            size_t srcYStride = imgbOutput->s[0];
-            size_t srcVStride = imgbOutput->s[1];
-            size_t srcUStride = imgbOutput->s[2];
-            if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR420) {
-                ALOGV("OAPV_CS_YUV420 to YV12");
-                copyBufferFromYUV420ToYV12(dstY, dstU, dstV, srcY, srcU, srcV, srcYStride,
-                                           srcUStride, srcVStride, dstYStride, dstUStride,
-                                           dstVStride, mWidth, mHeight);
-            } else if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR422) {
-                ALOGV("OAPV_CS_YUV422 to YV12");
-                copyBufferFromYUV422ToYV12(dstY, dstU, dstV, srcY, srcU, srcV, srcYStride,
-                                           srcUStride, srcVStride, dstYStride, dstUStride,
-                                           dstVStride, mWidth, mHeight);
-            } else {
-                ALOGE("Not supported convert format : %d", OAPV_CS_GET_FORMAT(imgbOutput->cs));
-            }
+        if (!IsI420(wView)) {
+            ALOGE("Only P210 to I420 conversion is supported.");
         } else {
-            ALOGE("Not supported convert from bd:%d, format: %d(%s), to format: %d(%s)",
-                  OAPV_CS_GET_BIT_DEPTH(imgbOutput->cs), OAPV_CS_GET_FORMAT(imgbOutput->cs),
-                  OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR420
-                          ? "YUV420"
-                          : (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR422 ? "YUV422"
-                                                                                    : "UNKNOWN"),
-                  format,
-                  format == HAL_PIXEL_FORMAT_YCBCR_P010
-                          ? "P010"
-                          : (format == HAL_PIXEL_FORMAT_YCBCR_420_888
-                                     ? "YUV420"
-                                     : (format == HAL_PIXEL_FORMAT_YV12 ? "YV12" : "UNKNOWN")));
+            if (OAPV_CS_GET_BIT_DEPTH(imgbOutput->cs) == 10) {
+                const uint16_t* srcY = (const uint16_t*)imgbOutput->a[0];
+                const uint16_t* srcV = (const uint16_t*)imgbOutput->a[1];
+                const uint16_t* srcU = (const uint16_t*)imgbOutput->a[2];
+                size_t srcYStride = imgbOutput->s[0] / 2;
+                size_t srcVStride = imgbOutput->s[1] / 2;
+                size_t srcUStride = imgbOutput->s[2] / 2;
+                if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR420) {
+                    ALOGV("OAPV_CS_YUV420 10bit to YV12");
+                    copyBufferFromYUV42010bitToYV12(
+                        dstY, dstU, dstV, srcY, srcU, srcV, srcYStride, srcUStride,
+                        srcVStride, dstYStride, dstUStride, dstVStride, mWidth,
+                        mHeight);
+                } else if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR422) {
+                    ALOGV("OAPV_CS_YUV422 10bit to YV12");
+                    copyBufferFromYUV42210bitToYV12(
+                        dstY, dstU, dstV, srcY, srcU, srcV, srcYStride, srcUStride,
+                        srcVStride, dstYStride, dstUStride, dstVStride, mWidth,
+                        mHeight);
+                } else if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_PLANAR2) {
+                    ALOGV("OAPV_CS_P210 to YV12");
+                    copyBufferFromP210ToYV12(dstY, dstU, dstV, srcY, srcV, srcYStride,
+                                       srcVStride, dstYStride, dstUStride,
+                                       dstVStride, mWidth, mHeight);
+                } else {
+                    ALOGE("Not supported convert format : %d",
+                            OAPV_CS_GET_FORMAT(imgbOutput->cs));
+                }
+            } else if (OAPV_CS_GET_BIT_DEPTH(imgbOutput->cs) == 8) {
+                const uint8_t* srcY = (const uint8_t*)imgbOutput->a[0];
+                const uint8_t* srcV = (const uint8_t*)imgbOutput->a[1];
+                const uint8_t* srcU = (const uint8_t*)imgbOutput->a[2];
+                size_t srcYStride = imgbOutput->s[0];
+                size_t srcVStride = imgbOutput->s[1];
+                size_t srcUStride = imgbOutput->s[2];
+                if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR420) {
+                    ALOGV("OAPV_CS_YUV420 to YV12");
+                    copyBufferFromYUV420ToYV12(dstY, dstU, dstV, srcY, srcU, srcV,
+                                         srcYStride, srcUStride, srcVStride,
+                                         dstYStride, dstUStride, dstVStride,
+                                         mWidth, mHeight);
+                } else if (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR422) {
+                    ALOGV("OAPV_CS_YUV422 to YV12");
+                    copyBufferFromYUV422ToYV12(dstY, dstU, dstV, srcY, srcU, srcV,
+                                         srcYStride, srcUStride, srcVStride,
+                                         dstYStride, dstUStride, dstVStride,
+                                         mWidth, mHeight);
+                } else {
+                    ALOGE("Not supported convert format : %d",
+                        OAPV_CS_GET_FORMAT(imgbOutput->cs));
+                }
+            } else {
+                ALOGE(
+                "Not supported convert from bd:%d, format: %d(%s), to format: "
+                    "%d(%s)",
+                    OAPV_CS_GET_BIT_DEPTH(imgbOutput->cs),
+                    OAPV_CS_GET_FORMAT(imgbOutput->cs),
+                    OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR420
+                        ? "YUV420"
+                        : (OAPV_CS_GET_FORMAT(imgbOutput->cs) == OAPV_CF_YCBCR422
+                           ? "YUV422"
+                           : "UNKNOWN"),
+                    format,
+                    format == HAL_PIXEL_FORMAT_YCBCR_P010
+                        ? "P010"
+                        : (format == HAL_PIXEL_FORMAT_YCBCR_420_888
+                           ? "YUV420"
+                           : (format == HAL_PIXEL_FORMAT_YV12 ? "YV12"
+                                                              : "UNKNOWN")));
+            }
         }
     }
 
