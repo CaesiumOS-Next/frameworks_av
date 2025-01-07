@@ -33,6 +33,23 @@
       "message": "I am ok on the principle, let me test on CapAIDL to ensure no reg",
       "revId": "4a2c5fe8ff4bf5d612a0726c992570eafadeea81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be034a0c_70dd803a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-07T13:29:52Z",
+      "side": 1,
+      "message": "Validated with both AIDL and HYBRID AIDL (even if currently reverted)",
+      "revId": "4a2c5fe8ff4bf5d612a0726c992570eafadeea81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
