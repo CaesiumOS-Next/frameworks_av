@@ -71,6 +71,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe646e1c_708bc4a3",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2025-01-07T17:28:52Z",
+      "side": 1,
+      "message": "all destroy() functions must allow nulls and be a no-op for it",
+      "range": {
+        "startLine": 374,
+        "startChar": 32,
+        "endLine": 374,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "34a19e70_296cf092",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 374,
+                "startChar": 0,
+                "endLine": 375,
+                "endChar": 0
+              },
+              "replacement": "        ACodecPerformancePoint* _Nullable performancePoint) __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ce2fdf96425941b80c0c761d3dc311925a0f105e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "183e33df_096c351a",
         "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
         "patchSetId": 6
