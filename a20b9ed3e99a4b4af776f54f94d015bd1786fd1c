@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fd95ea_1bf41e16",
+        "filename": "media/codec2/fuzzer/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-01-07T22:00:07Z",
+      "side": 1,
+      "message": "this single line appears to be the only field that keeps us from staying with the existing structure.\n\nRather than replicate all of this --  can we continue to use C2Fuzzer-defaults and then add just a clause:\n  cc_fuzz {\n     name: c2fuzzerxaacdec\n     defaults: [\"c2fuzzer-defaults\"]\n    fuzz_config: { fuzzed_code_usage: \"experimental\",} ,\n    }\n    \nwhich maximizes our reuse.",
+      "range": {
+        "startLine": 358,
+        "startChar": 7,
+        "endLine": 358,
+        "endChar": 42
+      },
+      "revId": "a20b9ed3e99a4b4af776f54f94d015bd1786fd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
