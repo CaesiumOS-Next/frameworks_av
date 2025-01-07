@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, The Android Open Source Project
+ * Copyright 2025, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@
 
 #include <atomic>
 
-#include <android/IOMXBufferSource.h>
 #include <aidl/android/media/IAidlBufferSource.h>
 #include <aidl/android/media/IAidlNode.h>
 #include <codec2/hidl/client.h>
@@ -33,39 +32,27 @@ namespace android {
  * As a result, one cannot expect this IOmxNode to work in any other usage than
  * IGraphicBufferSource(if aidl hal is used, IAidlGraphicBufferSource).
  */
-struct C2NodeImpl {
-    explicit C2NodeImpl(const std::shared_ptr<Codec2Client::Component> &comp, bool aidl);
-    ~C2NodeImpl();
+struct InputSurfaceConnectionImpl {
+    explicit InputSurfaceConnectionImpl(
+            const std::shared_ptr<IInputSink> &sink,
+            ::android::sp<InputSurfaceSource> const &source);
+    ~InputSurfaceConnectionImpl();
 
-    // IOMXNode and/or IAidlNode
-    status_t freeNode();
+    void release();
 
-    void onFirstInputFrame();
+    // removed
+    // freeNode(), I don't see anywhere it can be called.
+    // onFirstInputFrame(), we will not reuse this for multiple times.
+    // getInputBufferParams(), component configuration should be retrieved from
+    // client.
     void getConsumerUsageBits(uint64_t *usage /* nonnull */);
-    void getInputBufferParams(
-            ::aidl::android::media::IAidlNode::InputBufferParams *params /* nonnull */);
     void setConsumerUsageBits(uint64_t usage);
     void setAdjustTimestampGapUs(int32_t gapUs);
-
-    status_t setInputSurface(
-            const sp<IOMXBufferSource> &bufferSource);
-    status_t setAidlInputSurface(
-            const std::shared_ptr<::aidl::android::media::IAidlBufferSource> &aidlBufferSource);
 
     status_t submitBuffer(
             uint32_t buffer, const sp<GraphicBuffer> &graphicBuffer,
             uint32_t flags, int64_t timestamp, int fenceFd);
     status_t onDataspaceChanged(uint32_t dataSpace, uint32_t pixelFormat);
-
-    /**
-     * Returns underlying IOMXBufferSource object.
-     */
-    sp<IOMXBufferSource> getSource();
-
-    /**
-     * Returns underlying IAidlBufferSource object.
-     */
-    std::shared_ptr<::aidl::android::media::IAidlBufferSource> getAidlSource();
 
     /**
      * Configure the frame size.
@@ -95,16 +82,11 @@ struct C2NodeImpl {
      */
     uint32_t getPixelFormat();
 
-    /**
-     * Sets priority of the queue thread.
-     */
-    void setPriority(int priority);
-
 private:
-    std::weak_ptr<Codec2Client::Component> mComp;
-
-    sp<IOMXBufferSource> mBufferSource;
-    std::shared_ptr<::aidl::android::media::IAidlBufferSource> mAidlBufferSource;
+    std::weak_ptr<IInputSink> mSink;
+    ::android::wp<InputSurfaceSource> mSource;
+    c2_status_t mInit;
+    std::atomic<bool> mReleased;
 
     std::shared_ptr<C2Allocator> mAllocator;
     std::atomic_uint64_t mFrameIndex;
@@ -138,9 +120,6 @@ private:
     class QueueThread;
     sp<QueueThread> mQueueThread;
 
-    bool mAidlHal;
-
-    bool hasBufferSource();
     void notifyInputBufferEmptied(int32_t bufferId);
 };
 

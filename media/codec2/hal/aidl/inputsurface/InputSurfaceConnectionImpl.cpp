@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, The Android Open Source Project
+ * Copyright 2025, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 //#define LOG_NDEBUG 0
-#define LOG_TAG "C2NodeImpl"
+#define LOG_TAG "InputSurfaceConnectionImpl"
 #include <log/log.h>
 
 #include <C2AllocatorGralloc.h>
@@ -34,13 +34,10 @@
 #include <utils/Thread.h>
 
 #include "utils/Codec2Mapper.h"
-#include "C2NodeImpl.h"
+#include "InputSurfaceConnectionImpl.h"
 #include "Codec2Buffer.h"
 
 namespace android {
-
-using ::aidl::android::media::IAidlBufferSource;
-using ::aidl::android::media::IAidlNode;
 
 using ::android::media::BUFFERFLAG_EOS;
 
@@ -53,18 +50,18 @@ public:
 
 }  // namespace
 
-class C2NodeImpl::QueueThread : public Thread {
+class InputSurfaceConnectionImpl::QueueThread : public Thread {
 public:
     QueueThread() : Thread(false) {}
     ~QueueThread() override = default;
     void queue(
-            const std::shared_ptr<Codec2Client::Component> &comp,
+            const std::shared_ptr<IInputSink> &sink,
             int fenceFd,
             std::unique_ptr<C2Work> &&work,
             android::base::unique_fd &&fd0,
             android::base::unique_fd &&fd1) {
         Mutexed<Jobs>::Locked jobs(mJobs);
-        auto it = jobs->queues.try_emplace(comp, comp).first;
+        auto it = jobs->queues.try_emplace(sink, sink).first;
         it->second.workList.emplace_back(
                 std::move(work), fenceFd, std::move(fd0), std::move(fd1));
         jobs->cond.broadcast();
@@ -107,8 +104,8 @@ protected:
                     ++it;
                     continue;
                 }
-                std::shared_ptr<Codec2Client::Component> comp = queue.component.lock();
-                if (!comp) {
+                std::shared_ptr<IInputSink> sink = queue.inputSink.lock();
+                if (!sink) {
                     it = jobs->queues.erase(it);
                     continue;
                 }
@@ -132,7 +129,7 @@ protected:
                     fence->waitForever(LOG_TAG);
                 }
                 queue.lastQueuedTimestampNs = nowNs;
-                comp->queue(&items);
+                sink->queue(&items);
                 for (android::base::unique_fd &ufd : uniqueFds) {
                     (void)ufd.release();
                 }
@@ -172,119 +169,74 @@ private:
         android::base::unique_fd fd1;
     };
     struct Queue {
-        Queue(const std::shared_ptr<Codec2Client::Component> &comp)
-            : component(comp), lastQueuedTimestampNs(0) {}
+        Queue(const std::shared_ptr<IInputSink> &sink)
+            : inputSink(sink), lastQueuedTimestampNs(0) {}
         Queue(const Queue &) = delete;
         Queue &operator =(const Queue &) = delete;
 
-        std::weak_ptr<Codec2Client::Component> component;
+        std::weak_ptr<IInputSink> inputSink;
         std::list<WorkFence> workList;
         nsecs_t lastQueuedTimestampNs;
     };
     struct Jobs {
-        std::map<std::weak_ptr<Codec2Client::Component>,
+        std::map<std::weak_ptr<IInputSink>,
                  Queue,
-                 std::owner_less<std::weak_ptr<Codec2Client::Component>>> queues;
+                 std::owner_less<std::weak_ptr<IInputSink>>> queues;
         std::vector<std::unique_ptr<C2Param>> configUpdate;
         Condition cond;
     };
     Mutexed<Jobs> mJobs;
 };
 
-C2NodeImpl::C2NodeImpl(const std::shared_ptr<Codec2Client::Component> &comp, bool aidl)
-    : mComp(comp), mFrameIndex(0), mWidth(0), mHeight(0), mUsage(0),
+InputSurfaceConnectionImpl::InputSurfaceConnectionImpl(
+        const std::shared_ptr<IInputSink> &sink,
+        ::android::sp<InputSurfaceSource> const &source)
+    : mSink(sink), mSource(source), mReleased(false),
+      mFrameIndex(0), mWidth(0), mHeight(0), mUsage(0),
       mAdjustTimestampGapUs(0), mFirstInputFrame(true),
-      mQueueThread(new QueueThread), mAidlHal(aidl) {
+      mQueueThread(new QueueThread) {
     android_fdsan_set_error_level(ANDROID_FDSAN_ERROR_LEVEL_WARN_ALWAYS);
-    mQueueThread->run("C2NodeImpl", PRIORITY_AUDIO);
+    mQueueThread->run("InputSurfaceConnectionImpl", PRIORITY_AUDIO);
 
     android_dataspace ds = HAL_DATASPACE_UNKNOWN;
     mDataspace.lock().set(ds);
     uint32_t pf = PIXEL_FORMAT_UNKNOWN;
     mPixelFormat.lock().set(pf);
+    c2_status_t err = GetCodec2PlatformAllocatorStore()->fetchAllocator(
+            C2PlatformAllocatorStore::GRALLOC, &mAllocator);
+    mInit = err;
 }
 
-C2NodeImpl::~C2NodeImpl() {
+InputSurfaceConnectionImpl::~InputSurfaceConnectionImpl() {
+    release();
 }
 
-status_t C2NodeImpl::freeNode() {
-    mComp.reset();
-    android_fdsan_set_error_level(ANDROID_FDSAN_ERROR_LEVEL_WARN_ONCE);
-    return mQueueThread->requestExitAndWait();
+void InputSurfaceConnectionImpl::release() {
+    bool released = false;
+    if (mReleased.compare_exchange_strong(released, true)) {
+        android_fdsan_set_error_level(ANDROID_FDSAN_ERROR_LEVEL_WARN_ONCE);
+        (void) mQueueThread->requestExitAndWait();
+        // TODO more for release?
+    }
 }
 
-void C2NodeImpl::onFirstInputFrame() {
-    mFirstInputFrame = true;
-}
-
-void C2NodeImpl::getConsumerUsageBits(uint64_t *usage) {
+void InputSurfaceConnectionImpl::getConsumerUsageBits(uint64_t *usage) {
     *usage = mUsage;
 }
 
-void C2NodeImpl::getInputBufferParams(IAidlNode::InputBufferParams *params) {
-    params->bufferCountActual = 16;
-
-    // WORKAROUND: having more slots improve performance while consuming
-    // more memory. This is a temporary workaround to reduce memory for
-    // larger-than-4K scenario.
-    if (mWidth * mHeight > 4096 * 2340) {
-        std::shared_ptr<Codec2Client::Component> comp = mComp.lock();
-        C2PortActualDelayTuning::input inputDelay(0);
-        C2ActualPipelineDelayTuning pipelineDelay(0);
-        c2_status_t c2err = C2_NOT_FOUND;
-        if (comp) {
-            c2err = comp->query(
-                    {&inputDelay, &pipelineDelay}, {}, C2_DONT_BLOCK, nullptr);
-        }
-        if (c2err == C2_OK || c2err == C2_BAD_INDEX) {
-            params->bufferCountActual = 4;
-            params->bufferCountActual += (inputDelay ? inputDelay.value : 0u);
-            params->bufferCountActual += (pipelineDelay ? pipelineDelay.value : 0u);
-        }
-    }
-
-    params->frameWidth = mWidth;
-    params->frameHeight = mHeight;
-}
-
-void C2NodeImpl::setConsumerUsageBits(uint64_t usage) {
+void InputSurfaceConnectionImpl::setConsumerUsageBits(uint64_t usage) {
     mUsage = usage;
 }
 
-void C2NodeImpl::setAdjustTimestampGapUs(int32_t gapUs) {
+void InputSurfaceConnectionImpl::setAdjustTimestampGapUs(int32_t gapUs) {
     mAdjustTimestampGapUs = gapUs;
 }
 
-status_t C2NodeImpl::setInputSurface(const sp<IOMXBufferSource> &bufferSource) {
-    c2_status_t err = GetCodec2PlatformAllocatorStore()->fetchAllocator(
-            C2PlatformAllocatorStore::GRALLOC,
-            &mAllocator);
-    if (err != OK) {
-        return UNKNOWN_ERROR;
-    }
-    CHECK(!mAidlHal);
-    mBufferSource = bufferSource;
-    return OK;
-}
-
-status_t C2NodeImpl::setAidlInputSurface(
-        const std::shared_ptr<IAidlBufferSource> &aidlBufferSource) {
-    c2_status_t err = GetCodec2PlatformAllocatorStore()->fetchAllocator(
-            C2PlatformAllocatorStore::GRALLOC,
-            &mAllocator);
-    if (err != OK) {
-        return UNKNOWN_ERROR;
-    }
-    CHECK(mAidlHal);
-    mAidlBufferSource = aidlBufferSource;
-    return OK;
-}
-
-status_t C2NodeImpl::submitBuffer(
+status_t InputSurfaceConnectionImpl::submitBuffer(
         uint32_t buffer, const sp<GraphicBuffer> &graphicBuffer,
         uint32_t flags, int64_t timestamp, int fenceFd) {
-    std::shared_ptr<Codec2Client::Component> comp = mComp.lock();
-    if (!comp) {
+    std::shared_ptr<IInputSink> sink = mSink.lock();
+    if (!sink) {
         return NO_INIT;
     }
 
@@ -378,12 +330,12 @@ status_t C2NodeImpl::submitBuffer(
         Mutexed<BuffersTracker>::Locked buffers(mBuffersTracker);
         buffers->mIdsInUse.emplace(work->input.ordinal.frameIndex.peeku(), buffer);
     }
-    mQueueThread->queue(comp, fenceFd, std::move(work), std::move(fd0), std::move(fd1));
+    mQueueThread->queue(sink, fenceFd, std::move(work), std::move(fd0), std::move(fd1));
 
     return OK;
 }
 
-status_t C2NodeImpl::onDataspaceChanged(uint32_t dataSpace, uint32_t pixelFormat) {
+status_t InputSurfaceConnectionImpl::onDataspaceChanged(uint32_t dataSpace, uint32_t pixelFormat) {
     ALOGD("dataspace changed to %#x pixel format: %#x", dataSpace, pixelFormat);
     android_dataspace d = (android_dataspace)dataSpace;
     mQueueThread->setDataspace(d);
@@ -393,22 +345,12 @@ status_t C2NodeImpl::onDataspaceChanged(uint32_t dataSpace, uint32_t pixelFormat
     return OK;
 }
 
-sp<IOMXBufferSource> C2NodeImpl::getSource() {
-    CHECK(!mAidlHal);
-    return mBufferSource;
-}
-
-std::shared_ptr<IAidlBufferSource> C2NodeImpl::getAidlSource() {
-    CHECK(mAidlHal);
-    return mAidlBufferSource;
-}
-
-void C2NodeImpl::setFrameSize(uint32_t width, uint32_t height) {
+void InputSurfaceConnectionImpl::setFrameSize(uint32_t width, uint32_t height) {
     mWidth = width;
     mHeight = height;
 }
 
-void C2NodeImpl::onInputBufferDone(c2_cntr64_t index) {
+void InputSurfaceConnectionImpl::onInputBufferDone(c2_cntr64_t index) {
     if (android::media::codec::provider_->input_surface_throttle()) {
         Mutexed<BuffersTracker>::Locked buffers(mBuffersTracker);
         auto it = buffers->mIdsInUse.find(index.peeku());
@@ -438,7 +380,7 @@ void C2NodeImpl::onInputBufferDone(c2_cntr64_t index) {
     }
 }
 
-void C2NodeImpl::onInputBufferEmptied() {
+void InputSurfaceConnectionImpl::onInputBufferEmptied() {
     if (!android::media::codec::provider_->input_surface_throttle()) {
         ALOGE("onInputBufferEmptied should not be called "
               "when input_surface_throttle is false");
@@ -461,39 +403,22 @@ void C2NodeImpl::onInputBufferEmptied() {
     notifyInputBufferEmptied(bufferId);
 }
 
-bool C2NodeImpl::hasBufferSource() {
-    if (mAidlHal) {
-        if (!mAidlBufferSource) {
-            ALOGD("Buffer source not set");
-            return false;
-        }
-    } else {
-        if (!mBufferSource) {
-            ALOGD("Buffer source not set");
-            return false;
-        }
-    }
-    return true;
-}
-
-void C2NodeImpl::notifyInputBufferEmptied(int32_t bufferId) {
-    if (mAidlHal) {
-        ::ndk::ScopedFileDescriptor nullFence;
-        (void)mAidlBufferSource->onInputBufferEmptied(bufferId, nullFence);
-    } else {
-        (void)mBufferSource->onInputBufferEmptied(bufferId, -1);
+void InputSurfaceConnectionImpl::notifyInputBufferEmptied(int32_t bufferId) {
+    auto sp = mSource.promote();
+    if (sp) {
+        sp->onInputBufferEmptied(bufferId, -1);
     }
 }
 
-android_dataspace C2NodeImpl::getDataspace() {
+android_dataspace InputSurfaceConnectionImpl::getDataspace() {
     return *mDataspace.lock();
 }
 
-uint32_t C2NodeImpl::getPixelFormat() {
+uint32_t InputSurfaceConnectionImpl::getPixelFormat() {
     return *mPixelFormat.lock();
 }
 
-void C2NodeImpl::setPriority(int priority) {
+void InputSurfaceConnectionImpl::setPriority(int priority) {
     mQueueThread->setPriority(priority);
 }
 
