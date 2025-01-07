@@ -16,6 +16,23 @@
       "message": "Waiting for Wonsik or Lajos to +2 as well to ensure these methods are indeed meant to throw exceptions.",
       "revId": "f7573c77415c5079a86cf68546ba41f72c0f0ab1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce6167b5_f79c64e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-07T09:17:15Z",
+      "side": 1,
+      "message": "Dear @wonsik@google.com, @lajos@google.com, Could you review this change if you have time?",
+      "revId": "f7573c77415c5079a86cf68546ba41f72c0f0ab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
