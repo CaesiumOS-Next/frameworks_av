@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1558a01_b2518197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2025-01-07T19:22:12Z",
+      "side": 1,
+      "message": "Please update BUG ID",
+      "revId": "f0ad425adc2749d3c859ae61e14e5d3b8e359cf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
