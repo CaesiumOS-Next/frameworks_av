@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be27a897_7023e41c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-07T23:58:08Z",
+      "side": 1,
+      "message": "please add `Bug:` and `Test:` lines",
+      "revId": "9be8beaa5e3a6a220bd3fd00ad5fffdbe3128f92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
