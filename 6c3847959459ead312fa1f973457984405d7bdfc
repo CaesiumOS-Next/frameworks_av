@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12b82f5_156477cb",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-07T19:08:34Z",
+      "side": 1,
+      "message": "IIRC it was unsafe to wrap an object to sp\u003c\u003e in the constructor. Could you please check if this is okay?",
+      "revId": "6c3847959459ead312fa1f973457984405d7bdfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
