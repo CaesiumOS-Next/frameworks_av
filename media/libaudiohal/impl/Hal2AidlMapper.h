@@ -151,6 +151,7 @@ class Hal2AidlMapper : public ConversionHelperAidl {
             const ::aidl::android::media::audio::common::AudioPortConfig& requestedPortConfig,
             ::aidl::android::media::audio::common::AudioPortConfig* result, bool *created);
     void eraseConnectedPort(int32_t portId);
+    void fillTemplateDevicePorts();
     status_t findOrCreatePatch(
             const std::set<int32_t>& sourcePortConfigIds,
             const std::set<int32_t>& sinkPortConfigIds,
@@ -233,6 +234,11 @@ class Hal2AidlMapper : public ConversionHelperAidl {
     std::pair<int32_t, ::aidl::android::media::audio::common::AudioPort>
             mDisconnectedPortReplacement;
     std::set<int32_t> mDynamicMixPortIds;
+    /**
+     * Template device ports represents the Audio ports of external devices.
+     * Such device ports have dynamic profiles.
+     **/
+    std::set<int32_t> mTemplateDevicePortIds;
 };
 
 }  // namespace android
