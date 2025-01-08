@@ -5515,7 +5515,8 @@ void MPEG4Writer::writeIpcoBox() {
                 // Patch avcc's lengthSize field to match the number
                 // of bytes we use to indicate the size of a nal unit.
                 uint8_t *ptr = (uint8_t *)hvcc->data();
-                ptr[21] = (ptr[21] & 0xfc) | (useNalLengthFour() ? 3 : 1);
+                if (hvcc->size() >= 22)
+                    ptr[21] = (ptr[21] & 0xfc) | (useNalLengthFour() ? 3 : 1);
                 write(hvcc->data(), hvcc->size());
                 endBox();
                 break;
