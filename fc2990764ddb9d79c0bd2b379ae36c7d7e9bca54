@@ -70,6 +70,30 @@
       },
       "revId": "fc2990764ddb9d79c0bd2b379ae36c7d7e9bca54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de8c7df_21878e53",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-08T23:51:22Z",
+      "side": 1,
+      "message": "Uopated aosp/3397000 to use the new methods",
+      "parentUuid": "0a254d97_dcc85a05",
+      "range": {
+        "startLine": 583,
+        "startChar": 15,
+        "endLine": 583,
+        "endChar": 68
+      },
+      "revId": "fc2990764ddb9d79c0bd2b379ae36c7d7e9bca54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
