@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23bc1c9a_9d543b1e",
+        "filename": "services/audiopolicy/engine/common/src/ProductStrategy.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-08T03:42:22Z",
+      "side": 1,
+      "message": "I had to remove this since it does not exist, did you meant to add it and use it elsewhere?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78b7204d_4d9f364b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engine/common/src/ProductStrategy.cpp",
+              "range": {
+                "startLine": 313,
+                "startChar": 0,
+                "endLine": 314,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e3e7e2be8ad33d912ebbca596b0369a8328b673b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
