@@ -311,6 +311,23 @@ void Hal2AidlMapper::fillTemplateDevicePorts() {
     }
 }
 
+Hal2AidlMapper::Ports::iterator Hal2AidlMapper::findMatchingTemplateDevicePort(
+        const ::aidl::android::media::audio::common::AudioDevice& device) {
+    Hal2AidlMapper::Ports::iterator portIt = mPorts.end();
+    for (const auto templateId : mTemplateDevicePortIds) {
+        auto it = mPorts.find(templateId);
+        if (it == mPorts.end()) {
+            // shouldn't happen
+            AUGMENT_LOG(E, "unable to find template port: %d", templateId);
+            continue;
+        }
+        if (audioDeviceMatches(device, it->second)) {
+            portIt = it;
+        }
+    }
+    return portIt;
+}
+
 status_t Hal2AidlMapper::findOrCreatePatch(
         const AudioPatch& requestedPatch, PatchMatch match, AudioPatch* patch, bool* created) {
     std::set<int32_t> sourcePortConfigIds(requestedPatch.sourcePortConfigIds.begin(),
@@ -1057,7 +1074,7 @@ status_t Hal2AidlMapper::setDevicePortConnectedState(const AudioPort& devicePort
             matchDevice.address = AudioDeviceAddress::make<AudioDeviceAddress::id>();
         }
         if (!templatePort.has_value()) {
-            auto portsIt = findPort(matchDevice);
+            auto portsIt = findMatchingTemplateDevicePort(matchDevice);
             if (portsIt == mPorts.end()) {
                 // Since 'setConnectedState' is called for all modules, it is normal when the device
                 // port not found in every one of them.
