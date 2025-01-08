@@ -16,6 +16,24 @@
       "message": "please add `Bug:` and `Test:` lines",
       "revId": "9be8beaa5e3a6a220bd3fd00ad5fffdbe3128f92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1e3761c_55b0aee9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3605130
+      },
+      "writtenOn": "2025-01-08T19:07:40Z",
+      "side": 1,
+      "message": "Ah, yes. Sorry about that.  Done.",
+      "parentUuid": "be27a897_7023e41c",
+      "revId": "9be8beaa5e3a6a220bd3fd00ad5fffdbe3128f92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
