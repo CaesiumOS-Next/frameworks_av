@@ -46,6 +46,30 @@
       },
       "revId": "fc2990764ddb9d79c0bd2b379ae36c7d7e9bca54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a254d97_dcc85a05",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-08T17:20:47Z",
+      "side": 1,
+      "message": "Please update your CTS CL to use all the new methods as soon as possible, to ensure we don\u0027t miss any other problems like this.",
+      "parentUuid": "82800e87_ed2da8e3",
+      "range": {
+        "startLine": 583,
+        "startChar": 15,
+        "endLine": 583,
+        "endChar": 68
+      },
+      "revId": "fc2990764ddb9d79c0bd2b379ae36c7d7e9bca54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

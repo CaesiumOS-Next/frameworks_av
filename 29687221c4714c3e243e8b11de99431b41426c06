@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d700284c_24a095a2",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-08T17:20:47Z",
+      "side": 1,
+      "message": "might be better to have this description in the body of the method, since it\u0027s central to using it correctly.",
+      "range": {
+        "startLine": 575,
+        "startChar": 32,
+        "endLine": 578,
+        "endChar": 89
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "85d7ef2b_fc5f318a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 574,
+                "startChar": 0,
+                "endLine": 579,
+                "endChar": 0
+              },
+              "replacement": " * @param outPerformancePoint   The pointer to the output performance point.\n *                              It is owned by the framework and has an infinite lifetime.\n *                              Should be set as NULL to start the iteration.\n *                              Keep the last performancePoint you got from a previous call to get the\n *                              next one. *outPerformancePoint will be set to NULL if reached the end.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "29687221c4714c3e243e8b11de99431b41426c06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e17a7ea9_f5678a3c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-08T17:20:47Z",
+      "side": 1,
+      "message": "Does this mean when the end of the list is reached, we get `nullptr` and we also get this error code? It\u0027d be good to explain that in one place.",
+      "range": {
+        "startLine": 583,
+        "startChar": 35,
+        "endLine": 583,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "efcce81a_893ada26",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 577,
+                "startChar": 0,
+                "endLine": 578,
+                "endChar": 0
+              },
+              "replacement": " *                              *outPerformancePoint will be set to NULL if reached the end of the\n *                              list.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 583,
+                "startChar": 0,
+                "endLine": 584,
+                "endChar": 0
+              },
+              "replacement": " * @return AMEDIA_ERROR_UNSUPPORTED if no more supported performance point. This error code is also\n *                                        returned when the end of the list is reached.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "29687221c4714c3e243e8b11de99431b41426c06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
