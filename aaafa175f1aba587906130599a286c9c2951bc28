@@ -118,6 +118,30 @@
       },
       "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040c9329_607ab048",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-08T21:56:13Z",
+      "side": 0,
+      "message": "I have realized that we need a description for the possible scenarios that we can encounter with CAP. I\u0027m working on a short doc describing them, will share it soon. This is to ensure that we are all on the same page.",
+      "parentUuid": "489b6978_c6984ee4",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
