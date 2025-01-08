@@ -182,6 +182,8 @@ class Hal2AidlMapper : public ConversionHelperAidl {
         ::aidl::android::media::audio::common::AudioPortConfig* portConfig, bool* created);
     Patches::iterator findPatch(const std::set<int32_t>& sourcePortConfigIds,
             const std::set<int32_t>& sinkPortConfigIds, PatchMatch match);
+    Ports::iterator findMatchingTemplateDevicePort(
+            const ::aidl::android::media::audio::common::AudioDevice& device);
     Ports::iterator findPort(const ::aidl::android::media::audio::common::AudioDevice& device);
     Ports::iterator findPort(
             const ::aidl::android::media::audio::common::AudioConfig& config,
