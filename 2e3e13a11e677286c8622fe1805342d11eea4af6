@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98befb7c_e2179d88",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-08T20:02:25Z",
+      "side": 1,
+      "message": "nit: framework",
+      "range": {
+        "startLine": 581,
+        "startChar": 82,
+        "endLine": 581,
+        "endChar": 91
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5d3d667b_c390fd96",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 581,
+                "startChar": 0,
+                "endLine": 582,
+                "endChar": 0
+              },
+              "replacement": " *                              The ACodecPerformancePoint object is owned by the framework\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e3e13a11e677286c8622fe1805342d11eea4af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e57d36_1e3cf6be",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-01-08T20:02:25Z",
+      "side": 1,
+      "message": "nit: framework",
+      "range": {
+        "startLine": 87,
+        "startChar": 83,
+        "endLine": 87,
+        "endChar": 92
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a0d2a85b_84f59d97",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": " *                      It is owned by the framework and has an infinite lifetime.\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": " *                      will be stored. The AMediaCodecInfo object is owned by the framework\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecStore.h",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 115,
+                "endChar": 0
+              },
+              "replacement": " *                      will be stored. The AMediaCodecInfo object is owned by the framework\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e3e13a11e677286c8622fe1805342d11eea4af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
