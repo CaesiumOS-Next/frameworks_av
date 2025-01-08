@@ -1,0 +1,109 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6662d3b4_e020017a",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-08T19:20:16Z",
+      "side": 1,
+      "message": "I recommend the following verbiage:\n\nThis API returns the supported performance points in a sequence and stores them\nin a pointer at outPerformancePoint. Initially, set the pointer pointed to by outPerformancePoint to NULL. On successive calls, keep the last pointer value.\nWhen the sequence is over AMEDIA_ERROR_UNSUPPORTED will be returned and the\npointer will be set to NULL.",
+      "range": {
+        "startLine": 574,
+        "startChar": 3,
+        "endLine": 574,
+        "endChar": 7
+      },
+      "revId": "849e15f64e0eb28e58fee5c365edc46267107b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ea68f3_7f32d191",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-08T19:20:16Z",
+      "side": 1,
+      "message": "this should be descriptive to what this parameter is, vs. how it is used.\n\na pointer to (the ACodecPerformancePoint pointer) where the next performance point will be stored. The ACodecPerformancePoint object is owned by the frmaework and\nhas an infinite lifecycle.",
+      "range": {
+        "startLine": 576,
+        "startChar": 32,
+        "endLine": 576,
+        "endChar": 76
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2f360801_a5f7b415",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 576,
+                "startChar": 0,
+                "endLine": 577,
+                "endChar": 0
+              },
+              "replacement": " * @param outPerformancePoint   a pointer to (the ACodecPerformancePoint pointer) where the next\n *                              performance point will be stored. The ACodecPerformancePoint\n"
+            }
+          ]
+        }
+      ],
+      "revId": "849e15f64e0eb28e58fee5c365edc46267107b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70d045b7_5ad6d020",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-08T19:20:16Z",
+      "side": 1,
+      "message": "I liked the original @return annotation for this:\n\n@return AMEDIA_ERROR_UNSUPPORTED if there are no more supported performance points. *outPerformancePoint will also be set to NULL in this case.",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 583,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "957ddb13_218cb8e6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkMediaCodecInfo.h",
+              "range": {
+                "startLine": 582,
+                "startChar": 0,
+                "endLine": 584,
+                "endChar": 0
+              },
+              "replacement": " * @return AMEDIA_ERROR_UNSUPPORTED if there are no more supported\n * performance points. *outPerformancePoint will also be set to NULL in this\n * case.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "849e15f64e0eb28e58fee5c365edc46267107b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
