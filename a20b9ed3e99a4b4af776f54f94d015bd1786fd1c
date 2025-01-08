@@ -46,6 +46,30 @@
       },
       "revId": "a20b9ed3e99a4b4af776f54f94d015bd1786fd1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a232018_876f0364",
+        "filename": "media/codec2/fuzzer/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-01-08T21:05:36Z",
+      "side": 1,
+      "message": "then let\u0027s make a c2fuzzer-defaults-shipped and c2fuzzer-defaults-experimental\nthey could inherit from c2fuzzer-defaults -- and we\u0027d move the fuzz_config\nclause from -defaults to -defaults-shipped and -defaults-experimental\n\nand then use those two new default\u0027s accordingly throughout this file.",
+      "parentUuid": "409cdfe0_59b16f87",
+      "range": {
+        "startLine": 358,
+        "startChar": 7,
+        "endLine": 358,
+        "endChar": 42
+      },
+      "revId": "a20b9ed3e99a4b4af776f54f94d015bd1786fd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
