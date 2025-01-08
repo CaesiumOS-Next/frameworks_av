@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7158e6cc_543f3783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2025-01-08T12:14:26Z",
+      "side": 1,
+      "message": "Can you verify if the method [makeHvcc](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libstagefright/MPEG4Writer.cpp;drc\u003db4d6320e2ae398b36f0aaafb2ecd83609d2d99af;l\u003d3438) returns an error? If it doesn\u0027t, shouldn\u0027t the size be atleast 23? And if it has returned an error, maybe we shouldn\u0027t come to this box.",
+      "revId": "890a6b53bbe8afdd5f0fc0d72bb37fd2926292ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
