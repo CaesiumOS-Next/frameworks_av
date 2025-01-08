@@ -70,6 +70,30 @@
       ],
       "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c5f72b7_8224ce4b",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-08T08:24:18Z",
+      "side": 0,
+      "message": "Legacy products were supposed to use \n/vendor/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml\n\nAllowing \n/system/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml\nwas a mistake.\nBut if there are previous project using system file, need to restore the fallback mecanism (when release flag is not set or set to false)\n\nParameterFrameworkConfigurationCap is the new name for AIDL based, conditioned by release build flag.\nIt is not intented to use vendor legacy file if the release flag is set to true (or not set for previous)\nIt is also not intented to fallback on system ParameterFrameworkConfigurationCap is the flag is not set of set to false.",
+      "parentUuid": "b28b3456_6be54bad",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
