@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "002cecce_47f218da",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-08T20:08:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98befb7c_e2179d88",
+      "range": {
+        "startLine": 581,
+        "startChar": 82,
+        "endLine": 581,
+        "endChar": 91
+      },
+      "revId": "2e3e13a11e677286c8622fe1805342d11eea4af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0e57d36_1e3cf6be",
@@ -99,6 +123,30 @@
           ]
         }
       ],
+      "revId": "2e3e13a11e677286c8622fe1805342d11eea4af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "967a0838_e297ad14",
+        "filename": "media/ndk/include/media/NdkMediaCodecStore.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-08T20:08:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0e57d36_1e3cf6be",
+      "range": {
+        "startLine": 87,
+        "startChar": 83,
+        "endLine": 87,
+        "endChar": 92
+      },
       "revId": "2e3e13a11e677286c8622fe1805342d11eea4af6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
