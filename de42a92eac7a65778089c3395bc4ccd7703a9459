@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8aa1d78_3711f891",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2025-01-08T23:02:55Z",
+      "side": 1,
+      "message": "I\u0027m able to build these two C++ files, with a new Clang and with the pragma removed, so maybe the underlying enum conversion problem was fixed in the meantime?",
+      "revId": "de42a92eac7a65778089c3395bc4ccd7703a9459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
