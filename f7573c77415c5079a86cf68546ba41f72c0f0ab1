@@ -33,6 +33,23 @@
       "message": "Dear @wonsik@google.com, @lajos@google.com, Could you review this change if you have time?",
       "revId": "f7573c77415c5079a86cf68546ba41f72c0f0ab1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f728ae52_5c71755e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-08T01:44:33Z",
+      "side": 1,
+      "message": "Dear @tonihei@google.com，Could you give Presubmit-Ready +1, thanks.",
+      "revId": "f7573c77415c5079a86cf68546ba41f72c0f0ab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
