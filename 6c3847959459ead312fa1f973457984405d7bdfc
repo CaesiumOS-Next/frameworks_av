@@ -16,6 +16,24 @@
       "message": "IIRC it was unsafe to wrap an object to sp\u003c\u003e in the constructor. Could you please check if this is okay?",
       "revId": "6c3847959459ead312fa1f973457984405d7bdfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "656f0d56_853c4667",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-08T21:04:46Z",
+      "side": 1,
+      "message": "Changed to initialize separately.",
+      "parentUuid": "b12b82f5_156477cb",
+      "revId": "6c3847959459ead312fa1f973457984405d7bdfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
