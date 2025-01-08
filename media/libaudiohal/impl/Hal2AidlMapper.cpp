@@ -297,6 +297,20 @@ void Hal2AidlMapper::eraseConnectedPort(int32_t portId) {
     updateDynamicMixPorts();
 }
 
+void Hal2AidlMapper::fillTemplateDevicePorts() {
+    mTemplateDevicePortIds.clear();
+    for (const auto& [_, port] : mPorts) {
+        if (port.ext.getTag() != AudioPortExt::Tag::device || !port.profiles.empty()) {
+            continue;
+        }
+        const auto& device = port.ext.get<AudioPortExt::Tag::device>().device;
+        if (device.type.connection.empty()) {
+            continue;
+        }
+        mTemplateDevicePortIds.insert(port.id);
+    }
+}
+
 status_t Hal2AidlMapper::findOrCreatePatch(
         const AudioPatch& requestedPatch, PatchMatch match, AudioPatch* patch, bool* created) {
     std::set<int32_t> sourcePortConfigIds(requestedPatch.sourcePortConfigIds.begin(),
@@ -758,6 +772,7 @@ status_t Hal2AidlMapper::initialize() {
                 mDefaultOutputPortId);
     std::transform(ports.begin(), ports.end(), std::inserter(mPorts, mPorts.end()),
             [](const auto& p) { return std::make_pair(p.id, p); });
+    fillTemplateDevicePorts();
     RETURN_STATUS_IF_ERROR(updateRoutes());
     std::vector<AudioPortConfig> portConfigs;
     RETURN_STATUS_IF_ERROR(
