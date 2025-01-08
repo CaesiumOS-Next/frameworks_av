@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b28b3456_6be54bad",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-08T03:37:43Z",
+      "side": 0,
+      "message": "What happens if priviously device was setup to use `/vendor/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml` and there is no `etc/parameter-framework/ParameterFrameworkConfigurationCap.xml` would this break the device?\n\nWhat about if the definitions in `/vendor/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml` is different from `etc/parameter-framework/ParameterFrameworkConfigurationCap.xml`?",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "45e043cc_4db8bad0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "                                                 const std::string \u0026schemaUri,\n                                                 const std::string \u0026policyPfwConfFileName)\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "    if (access(policyPfwConfFileName.c_str(), R_OK) !\u003d 0) {\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "    mPfwConnector \u003d new CParameterMgrFullConnector(policyPfwConfFileName);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
