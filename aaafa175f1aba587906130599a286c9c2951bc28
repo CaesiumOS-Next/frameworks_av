@@ -94,6 +94,30 @@
       },
       "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "489b6978_c6984ee4",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-08T21:36:36Z",
+      "side": 0,
+      "message": "Can you clarify this, `It is not intented to use vendor legacy file if the release flag is set to true (or not set for previous)`, the \"not intended\" part is confusing me.\n\nThat to me says that if flag is enabled then:\n```\n#ifdef ENABLE_CAP_AIDL_HYBRID_MODE\n```\nWill be pass (ENABLE_CAP_AIDL_HYBRID_MODE is defined), but it is infact using line 69:\n```\n\"/vendor/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml\";\n```\n\nAlso for legacy mode `/vendor/etc/parameter-framework/ParameterFrameworkConfigurationPolicy.xml` should be used. Does this means that `RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL` will be true for legacy devices in AOSP (Android 15)?",
+      "parentUuid": "1c5f72b7_8224ce4b",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
