@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e769d4_fb430b9c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-01-08T08:49:38Z",
+      "side": 1,
+      "message": "This function returns an array of performance points. Besides the first point, others are not accessible because ACodecPerformancePoint is opaque. we cannot increment the base address to reach the next address?",
+      "range": {
+        "startLine": 583,
+        "startChar": 15,
+        "endLine": 583,
+        "endChar": 68
+      },
+      "revId": "fc2990764ddb9d79c0bd2b379ae36c7d7e9bca54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
