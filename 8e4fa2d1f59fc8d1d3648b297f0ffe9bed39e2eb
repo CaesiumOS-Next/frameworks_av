@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2126fad_eddb08ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1932715
+      },
+      "writtenOn": "2025-01-08T10:32:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70a197cc_eab92803",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "8e4fa2d1f59fc8d1d3648b297f0ffe9bed39e2eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a49b3de0_9bdc00d7",
@@ -73,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f9410fd_2bcf5790",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1932715
+      },
+      "writtenOn": "2025-01-08T10:32:37Z",
+      "side": 1,
+      "message": "We logged this duration, converting need about 4 ~ 6s.\nDecoding is fast, but convert is a absolute CPU processing, this is limited by hardware.\n\nIt\u0027s OK on 2K, need about 1~2s, so I think on 4K, need 2 * 4 \u003d 8s.\nThis is just a reference value.",
+      "parentUuid": "ebef7a4e_a549b37d",
+      "range": {
+        "startLine": 54,
+        "startChar": 58,
+        "endLine": 54,
+        "endChar": 90
+      },
+      "revId": "8e4fa2d1f59fc8d1d3648b297f0ffe9bed39e2eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a628d48_b0b69e40",
         "filename": "media/libstagefright/FrameDecoder.cpp",
         "patchSetId": 3
@@ -84,6 +132,30 @@
       "writtenOn": "2024-10-01T14:24:45Z",
       "side": 1,
       "message": "it looks like we use the timeout for 2 purposes.\nthis looks like a simple \"get a buffer\"\n\nwhere the one at line 709 appears to be more in the spirit of \"wait for processing to have finished\".\n\ni can see extending the timeout at line 709;\nbut i\u0027m not sure I see the value in extending the timeout here;\nit feels like there should be 2 different timeouts.",
+      "range": {
+        "startLine": 693,
+        "startChar": 46,
+        "endLine": 693,
+        "endChar": 70
+      },
+      "revId": "8e4fa2d1f59fc8d1d3648b297f0ffe9bed39e2eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e034b6ba_6c42a27a",
+        "filename": "media/libstagefright/FrameDecoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1932715
+      },
+      "writtenOn": "2025-01-08T10:32:37Z",
+      "side": 1,
+      "message": "YES, it\u0027s used to ensure complete from dequeuedBuffer from Decoder and ensure frame decoding complete from FrameDecode.\n\nThis just is an reference solution for indicating this issue point, it\u0027s major is the format converting costs long time (\u003e 2s) in 4K frame.\n\nSo we maybe also don\u0027t need focus on this resolution CL, if having other better solution.",
+      "parentUuid": "9a628d48_b0b69e40",
       "range": {
         "startLine": 693,
         "startChar": 46,
