@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "448359ac_4e03c676",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-08T19:54:40Z",
+      "side": 1,
+      "message": "Done. Updated findNextDecoder|EncoderForFormat\u0027s doc as well. Thanks for the suggestion.",
+      "parentUuid": "6662d3b4_e020017a",
+      "range": {
+        "startLine": 574,
+        "startChar": 3,
+        "endLine": 574,
+        "endChar": 7
+      },
+      "revId": "849e15f64e0eb28e58fee5c365edc46267107b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1ea68f3_7f32d191",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e5f300_a16ad09c",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-08T19:54:40Z",
+      "side": 1,
+      "message": "Done. Updated findNextDecoder|EncoderForFormat\u0027s doc as well",
+      "parentUuid": "c1ea68f3_7f32d191",
+      "range": {
+        "startLine": 576,
+        "startChar": 32,
+        "endLine": 576,
+        "endChar": 76
+      },
+      "revId": "849e15f64e0eb28e58fee5c365edc46267107b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70d045b7_5ad6d020",
@@ -102,6 +150,30 @@
           ]
         }
       ],
+      "revId": "849e15f64e0eb28e58fee5c365edc46267107b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "461938d3_bfc11d8d",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-08T19:54:40Z",
+      "side": 1,
+      "message": "Done. Updated findNextDecoder|EncoderForFormat\u0027s doc as well",
+      "parentUuid": "70d045b7_5ad6d020",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 583,
+        "endChar": 39
+      },
       "revId": "849e15f64e0eb28e58fee5c365edc46267107b5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
