@@ -22,6 +22,30 @@
       },
       "revId": "a20b9ed3e99a4b4af776f54f94d015bd1786fd1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409cdfe0_59b16f87",
+        "filename": "media/codec2/fuzzer/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 2046576
+      },
+      "writtenOn": "2025-01-08T05:53:19Z",
+      "side": 1,
+      "message": "Hi Ray,\nIf we update only \u0027*fuzzed_code_usage*\u0027 field in cc_fuzz of \u0027C2FuzzerXaacDec\u0027, we observed [this build error](https://android-build.corp.google.com/build_explorer/artifact_viewer/P87473561/aosp_cf_arm64_only_phone-trunk_staging-userdebug/logs/build_error.log?attemptId\u003dlatest) due to redefinition of \u0027*fuzzed_code_usage*\u0027 since it was already defined in \u0027c2fuzzer-defaults\u0027.\nTo resolve this issue, we can either remove \u0027*fuzzed_code_usage*\u0027 from defaults and rewrite it for individual targets or remove  \u0027c2fuzzer-defaults\u0027 for \u0027C2FuzzerXaacDec\u0027 and define \u0027*fuzzed_code_usage*\u0027 for it as done in latest patch. Please let us know which approach is preferred.",
+      "parentUuid": "a5fd95ea_1bf41e16",
+      "range": {
+        "startLine": 358,
+        "startChar": 7,
+        "endLine": 358,
+        "endChar": 42
+      },
+      "revId": "a20b9ed3e99a4b4af776f54f94d015bd1786fd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
