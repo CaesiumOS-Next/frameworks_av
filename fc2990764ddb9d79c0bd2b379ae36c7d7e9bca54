@@ -22,6 +22,30 @@
       },
       "revId": "fc2990764ddb9d79c0bd2b379ae36c7d7e9bca54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82800e87_ed2da8e3",
+        "filename": "media/ndk/include/media/NdkMediaCodecInfo.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-08T12:42:02Z",
+      "side": 1,
+      "message": "Thanks for catching this. Updated the API to getNextSupportedPerformancePoint.",
+      "parentUuid": "20e769d4_fb430b9c",
+      "range": {
+        "startLine": 583,
+        "startChar": 15,
+        "endLine": 583,
+        "endChar": 68
+      },
+      "revId": "fc2990764ddb9d79c0bd2b379ae36c7d7e9bca54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
