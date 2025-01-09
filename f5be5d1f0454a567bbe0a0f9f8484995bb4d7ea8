@@ -51,6 +51,24 @@
       "parentUuid": "798358bf_fcf1ab75",
       "revId": "f5be5d1f0454a567bbe0a0f9f8484995bb4d7ea8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "962c9fd7_0061dba7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643016
+      },
+      "writtenOn": "2025-01-09T14:17:09Z",
+      "side": 1,
+      "message": "Indeed, thanks for the link. Surprising that this never came up before, but your fix looks correct to me.",
+      "parentUuid": "343636bd_1e085518",
+      "revId": "f5be5d1f0454a567bbe0a0f9f8484995bb4d7ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
