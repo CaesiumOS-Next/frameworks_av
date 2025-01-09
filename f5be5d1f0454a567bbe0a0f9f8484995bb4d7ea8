@@ -33,6 +33,24 @@
       "message": "Could you expand the commit description to explain why this is needed?",
       "revId": "f5be5d1f0454a567bbe0a0f9f8484995bb4d7ea8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "343636bd_1e085518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-09T14:11:07Z",
+      "side": 1,
+      "message": "format at here not guaranteed to include width, height, and crop info,\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libmediaplayerservice/nuplayer/NuPlayerDecoder.cpp;l\u003d851?q\u003dNuPlayer::Decoder::handleOutputFormatChange\nso we should not check it in NuPlayer::updateVideoSize.",
+      "parentUuid": "798358bf_fcf1ab75",
+      "revId": "f5be5d1f0454a567bbe0a0f9f8484995bb4d7ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
