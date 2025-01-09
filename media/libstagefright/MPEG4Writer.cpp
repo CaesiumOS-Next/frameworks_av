@@ -2535,6 +2535,9 @@ void MPEG4Writer::Track::addItemOffsetAndSize(off64_t offset, size_t size, bool 
     bool hasGrid = (mTileWidth > 0);
 
     if (mProperties.empty()) {
+        if (!mIsAvif && mCodecSpecificDataSize < 23) {
+            return; // ISO 14496-15: HEVC file format 23 bytes in the header
+        }
         mProperties.push_back(mOwner->addProperty_l({
             .type = static_cast<uint32_t>(mIsAvif ?
                   FOURCC('a', 'v', '1', 'C') :
