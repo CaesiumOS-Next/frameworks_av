@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3394b7a_4dac66fb",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-09T16:12:22Z",
+      "side": 1,
+      "message": "this must be called with the lock held",
+      "range": {
+        "startLine": 604,
+        "startChar": 0,
+        "endLine": 604,
+        "endChar": 91
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f970151e_545ad223",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.cpp",
+              "range": {
+                "startLine": 604,
+                "startChar": 0,
+                "endLine": 604,
+                "endChar": 0
+              },
+              "replacement": "                audio_utils::lock_guard _l(mMutex);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c8cb57da003dc8d3f0c4f247df356fa153f709c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
