@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7973701_c7ed043a",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/FrameDropper.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bfee78d_fa481751",
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eccc59a_7e552def",
@@ -83,6 +101,30 @@
           ]
         }
       ],
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5492b552_c136fde7",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/FrameDropper.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9eccc59a_7e552def",
+      "range": {
+        "startLine": 60,
+        "startChar": 16,
+        "endLine": 60,
+        "endChar": 23
+      },
       "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -148,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d398a3_43a95f48",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e66629a_3ccabf1e",
+      "range": {
+        "startLine": 255,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 26
+      },
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ab426ef_f111deb8",
@@ -161,6 +227,30 @@
       "writtenOn": "2025-01-08T22:01:37Z",
       "side": 1,
       "message": "nit: std::list",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 302,
+        "endChar": 16
+      },
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0742fea_aa0e176e",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ab426ef_f111deb8",
       "range": {
         "startLine": 302,
         "startChar": 8,
@@ -212,6 +302,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb4362d8_59e89f7a",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a70816f9_2a919a72",
+      "range": {
+        "startLine": 306,
+        "startChar": 11,
+        "endLine": 306,
+        "endChar": 22
+      },
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1ce669c_15ffb3a6",
@@ -225,6 +339,30 @@
       "writtenOn": "2025-01-08T22:01:37Z",
       "side": 1,
       "message": "nit: std::list",
+      "range": {
+        "startLine": 397,
+        "startChar": 9,
+        "endLine": 397,
+        "endChar": 18
+      },
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f61e4e_6707ab98",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/InputSurfaceSource.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1ce669c_15ffb3a6",
       "range": {
         "startLine": 397,
         "startChar": 9,
@@ -270,6 +408,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e0164c_4f81ec7f",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "removed pBuf",
+      "parentUuid": "737cf541_93c9ffae",
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b65eb97c_56db928d",
@@ -283,6 +439,30 @@
       "writtenOn": "2025-01-08T22:01:37Z",
       "side": 1,
       "message": "not sure if we need to keep this logic --- in GraphicBufferSource this handles a buffer replacement from a certain BufferQueue slot, but with ImageReader we don\u0027t have a concept of slot.",
+      "range": {
+        "startLine": 1073,
+        "startChar": 0,
+        "endLine": 1085,
+        "endChar": 0
+      },
+      "revId": "dd30f5b49d5b6d1c1985e5b2aae1055b750ccfa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0fca4a_0ae46bb2",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-09T21:50:02Z",
+      "side": 1,
+      "message": "I agree. I will modify CachedBuffer for debugging/statistics only.\nAlso removing onBufferRemoved callback might improve the performanve.\n(TODO)",
+      "parentUuid": "b65eb97c_56db928d",
       "range": {
         "startLine": 1073,
         "startChar": 0,
