@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fd36367_afaa0a39",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2025-01-09T13:10:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3de26d4d_92987999",
+      "range": {
+        "startLine": 810,
+        "startChar": 71,
+        "endLine": 810,
+        "endChar": 81
+      },
+      "revId": "5610a223c434dc1995657ec5fdbfad09feaf9627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "824e235c_a32f5ba4",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "see my comment on \"get_input_buffer_data\" above.",
       "parentUuid": "824e235c_a32f5ba4",
+      "range": {
+        "startLine": 824,
+        "startChar": 72,
+        "endLine": 824,
+        "endChar": 78
+      },
+      "revId": "5610a223c434dc1995657ec5fdbfad09feaf9627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a83cded_ecabd932",
+        "filename": "media/ndk/mediacodec-rs-ndk/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2025-01-09T13:10:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9907040e_69cb1f82",
       "range": {
         "startLine": 824,
         "startChar": 72,
