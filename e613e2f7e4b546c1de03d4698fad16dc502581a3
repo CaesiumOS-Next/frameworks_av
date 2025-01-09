@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f281a540_3aa04360",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 4027,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-09T09:21:51Z",
+      "side": 1,
+      "message": "if skipDelays is true, we must call changeOutputDevicesMuteState(devices) before and after calling updateCallAndOutputRouting().\nThe \"devices\" is the list of all devices in the registered rendered mixes that can be updated at line 4011",
+      "range": {
+        "startLine": 4027,
+        "startChar": 0,
+        "endLine": 4027,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bb98f23d_4e301334",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4026,
+                "startChar": 0,
+                "endLine": 4026,
+                "endChar": 0
+              },
+              "replacement": "        changeOutputDevicesMuteState(registeredMixes.toTypeAddrVector());\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4028,
+                "startChar": 0,
+                "endLine": 4028,
+                "endChar": 0
+              },
+              "replacement": "        changeOutputDevicesMuteState(registeredMixes.toTypeAddrVector());\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4092,
+                "startChar": 0,
+                "endLine": 4092,
+                "endChar": 0
+              },
+              "replacement": "        changeOutputDevicesMuteState(mixes.toTypeAddrVector());\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4094,
+                "startChar": 0,
+                "endLine": 4094,
+                "endChar": 0
+              },
+              "replacement": "        changeOutputDevicesMuteState(mixes.toTypeAddrVector());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e613e2f7e4b546c1de03d4698fad16dc502581a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
