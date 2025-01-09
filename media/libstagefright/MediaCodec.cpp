@@ -871,7 +871,10 @@ MediaCodec::~MediaCodec() {
     CHECK_EQ(mState, UNINITIALIZED);
     mResourceManagerProxy->removeClient();
 
-    flushMediametrics();
+    if (mMetricsHandle != 0) {
+        mediametrics_delete(mMetricsHandle);
+        mMetricsHandle = 0;
+    }
 }
 
 void MediaCodec::initMediametrics() {
