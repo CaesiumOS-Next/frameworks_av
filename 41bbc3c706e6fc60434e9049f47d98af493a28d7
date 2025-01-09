@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32ee25bf_06faaceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-09T14:10:16Z",
+      "side": 1,
+      "message": "Dear @tonihei@google.com, I file a Bug: 388723642 to explain this issue.",
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
