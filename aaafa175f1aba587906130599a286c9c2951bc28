@@ -142,6 +142,30 @@
       },
       "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3cf06cb_54961d4d",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-09T21:55:09Z",
+      "side": 0,
+      "message": "\u003e Does this means that RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL will be true for legacy devices in AOSP (Android 15)?\n\nThe \"hybrid mode\" is intended for the case when the vendor wants to use the AIDL HAL, but they don\u0027t convert their CAP config files to accomodate the changes introduced in the AIDL version, in other words, they reuse their HIDL config for CAP. The entire set of CAP configuration must be loaded from the vendor partition.\n\nSince this fallback behavior is guarded in the framework code with the preprocessor define, it is possible in principle to backport it to previous system versions. It\u0027s not something we are doing now, but we can leave that possiblity.",
+      "parentUuid": "040c9329_607ab048",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
