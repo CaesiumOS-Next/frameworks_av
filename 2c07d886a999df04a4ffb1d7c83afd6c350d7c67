@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f236639_814230a1",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-10T18:53:32Z",
+      "side": 1,
+      "message": "how does this \"maintain consistency between mSpatializer-\u003egetOutput() and the spatializer output state\"?\nIf mAudioPolicyManager-\u003egetSpatializerOutput() does not return an error and the returned output is AUDIO_IO_HANDLE_NONE, then the current output shold be detached from the spatializer controller to be consistent with the state in APM?\nWhich problem are you trying to solve exactly?",
+      "range": {
+        "startLine": 599,
+        "startChar": 0,
+        "endLine": 599,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "88aba260_a564a41a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.cpp",
+              "range": {
+                "startLine": 598,
+                "startChar": 0,
+                "endLine": 599,
+                "endChar": 0
+              },
+              "replacement": "            // It is OK to call detachOutput() if none is already attached.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2c07d886a999df04a4ffb1d7c83afd6c350d7c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
