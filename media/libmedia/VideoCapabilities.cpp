@@ -371,7 +371,7 @@ bool VideoCapabilities::isSizeSupported(int32_t width, int32_t height) const {
 }
 
 bool VideoCapabilities::supports(std::optional<int32_t> width, std::optional<int32_t> height,
-        std::optional<double> rate) const {
+        std::optional<float> rate) const {
     bool ok = true;
 
     if (width) {
@@ -396,7 +396,7 @@ bool VideoCapabilities::supports(std::optional<int32_t> width, std::optional<int
                         Rational(widthInBlocks, heightInBlocks))
                 && mAspectRatioRange.contains(Rational(width.value(), height.value()));
         if (rate) {
-            double blocksPerSec = blockCount * rate.value();
+            double blocksPerSec = blockCount * (double)rate.value();
             ok &= mBlocksPerSecondRange.contains(
                     Range<int64_t>::RangeFor(blocksPerSec));
         }
@@ -410,9 +410,18 @@ bool VideoCapabilities::supportsFormat(const sp<AMessage> &format) const {
             ? std::make_optional<int32_t>(widthVal) : std::nullopt;
     std::optional<int32_t> height = format->findInt32(KEY_HEIGHT, &heightVal)
             ? std::make_optional<int32_t>(heightVal) : std::nullopt;
-    double rateVal;
-    std::optional<double> rate = format->findDouble(KEY_FRAME_RATE, &rateVal)
-            ? std::make_optional<double>(rateVal) : std::nullopt;
+
+    // Frame rate can be int32 or float. MediaCodec accept both float and int32 values.
+    std::optional<float> rate;
+    int32_t i32RateVal;
+    float fltRateVal;
+    if (format->findInt32(KEY_FRAME_RATE, &i32RateVal)) {
+        rate = std::make_optional<float>((float)i32RateVal);
+    } else if (format->findFloat(KEY_FRAME_RATE, &fltRateVal)) {
+        rate = std::make_optional<float>(fltRateVal);
+    } else {
+        rate = std::nullopt;
+    }
 
     if (!supports(width, height, rate)) {
         return false;
