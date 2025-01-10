@@ -190,6 +190,30 @@
       },
       "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0c99b5_b80638df",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-10T19:05:45Z",
+      "side": 0,
+      "message": "I think I has clarified my vision on the relation of the build flag to the code. Please see the section `Notes on the build flag` which I have added to the end of the document.",
+      "parentUuid": "57acccf0_f459de7d",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
