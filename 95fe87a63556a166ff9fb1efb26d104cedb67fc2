@@ -16,6 +16,24 @@
       "message": "I cannot simply call it revert^2 since patch updated (maybe allowed internally to",
       "revId": "95fe87a63556a166ff9fb1efb26d104cedb67fc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a44a0c1e_a04618f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-10T07:53:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcc40e95_393f2cf9",
+      "revId": "95fe87a63556a166ff9fb1efb26d104cedb67fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

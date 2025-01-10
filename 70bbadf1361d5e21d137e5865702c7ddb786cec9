@@ -69,6 +69,30 @@
       },
       "revId": "70bbadf1361d5e21d137e5865702c7ddb786cec9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f33fd1_c4d2b4ae",
+        "filename": "services/audiopolicy/engineconfigurable/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-10T07:53:27Z",
+      "side": 1,
+      "message": "Yes, we need this minimum set of system file in case AIDL CAP. I could not get rid of these one. They are generic. Strategies are provisionned from 1000 to 1039.",
+      "parentUuid": "f3d4a4f2_00b8faeb",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 53
+      },
+      "revId": "70bbadf1361d5e21d137e5865702c7ddb786cec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

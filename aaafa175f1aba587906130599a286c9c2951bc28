@@ -166,6 +166,30 @@
       },
       "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57acccf0_f459de7d",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-10T07:53:27Z",
+      "side": 0,
+      "message": "RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL  must be set (to true) only if we want to switch to Audio AIDL for Cap. It wont be possible before A16.\n\nHybrid mode: it was to handle the lack of full AudioAIDL Cap config support.\nOEM disable RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL on A15, but cannot use full AIDP (since AIDL version frozen for A15 does not provide such support), so it fallback on vendor conf.\n\nOem wants to continue using vendor conf on A15 (and next desserts if still allowed to access vendor partition from AudioPolicy): RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL  is set to false.\n\nLet s switch to the document, excellent initiative",
+      "parentUuid": "e3cf06cb_54961d4d",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "aaafa175f1aba587906130599a286c9c2951bc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
