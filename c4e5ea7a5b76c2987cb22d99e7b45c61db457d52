@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af3e8f4_9fce334f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-01-10T13:59:35Z",
+      "side": 1,
+      "message": "wonsik: can i get OWNERS from you?\n\n(let me know if you\u0027d prefer i split this change into the \"add the missing `const`s\" and a separate \"remove the `cpp_std` holding you back\".)",
+      "revId": "c4e5ea7a5b76c2987cb22d99e7b45c61db457d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
