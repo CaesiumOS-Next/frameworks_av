@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a036ce2e_f24d4825",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-10T00:52:53Z",
+      "side": 1,
+      "message": "These 2 features are protected by flags in Java. Do we need to also flag them in native? @lajos@google.com",
+      "revId": "c99c4df73c6a3d82571422fbe113c25d328573b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
