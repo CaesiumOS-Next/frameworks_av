@@ -16,6 +16,29 @@
       "message": "Dear @tonihei@google.com, I file a Bug: 388723642 to explain this issue.",
       "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e0b8ecb_cc078283",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2090,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-01-10T16:31:34Z",
+      "side": 1,
+      "message": "would this have been even better if we validated the values in the parsed crop* fields?\n\ncropLeft \u003e\u003d 0, cropRight \u003c width, etc.",
+      "range": {
+        "startLine": 2089,
+        "startChar": 12,
+        "endLine": 2090,
+        "endChar": 53
+      },
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
