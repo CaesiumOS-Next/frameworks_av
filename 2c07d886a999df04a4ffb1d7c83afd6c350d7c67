@@ -40,6 +40,30 @@
       ],
       "revId": "2c07d886a999df04a4ffb1d7c83afd6c350d7c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636e642b_209ab1cd",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-11T03:23:11Z",
+      "side": 1,
+      "message": "The issue I want to address is that setting Spatialization::Level::NONE does not trigger the release of the spatializer output.\n\nThe reason is that Line 608 requires mSpatializer-\u003egetOutput() !\u003d AUDIO_IO_HANDLE_NONE to release the output. Before the modification, after detaching the spatializer at Line 599, if the releaseSpatializerOutput() on Line 605 returns a bad value, it will not proceed to release the spatializer output. At this point, since the spatializer has already set the output to AUDIO_IO_HANDLE_NONE due to detachOutput(), the APM\u0027s output remains open but cannot be closed using set Spatialization::Level::NONE.",
+      "parentUuid": "4f236639_814230a1",
+      "range": {
+        "startLine": 599,
+        "startChar": 0,
+        "endLine": 599,
+        "endChar": 74
+      },
+      "revId": "2c07d886a999df04a4ffb1d7c83afd6c350d7c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
