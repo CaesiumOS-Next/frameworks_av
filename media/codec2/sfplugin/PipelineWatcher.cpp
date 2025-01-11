@@ -92,6 +92,15 @@ void PipelineWatcher::onWorkDone(uint64_t frameIndex) {
         return;
     }
     (void)mFramesInPipeline.erase(it);
+
+    if (frameIndex > kSkipFrameThreshold) {
+        it = mFramesInPipeline.find(frameIndex - kSkipFrameThreshold);
+        if (it != mFramesInPipeline.end()) {
+            (void)mFramesInPipeline.erase(it);
+            ALOGD("onWorkDone: frameIndex skip detected (%llu); stop watching",
+              (unsigned long long)(frameIndex - kSkipFrameThreshold));
+        }
+    }
 }
 
 void PipelineWatcher::flush() {

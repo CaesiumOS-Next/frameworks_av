@@ -25,6 +25,13 @@
 
 namespace android {
 
+/*
+ The number of frame to drop Watching
+ constexpr std::chrono::steady_clock::duration kWorkDurationThreshold = 3s;
+ kSkipFrameIndex = FPS * kWorkDurationThreshold
+*/
+constexpr size_t kSkipFrameThreshold = 60 * 3;
+
 /**
  * PipelineWatcher watches the pipeline and infers the status of work items from
  * events.
