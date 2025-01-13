@@ -18,6 +18,63 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "155992d4_de7a283f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-13T14:29:00Z",
+      "side": 1,
+      "message": "Naive drive-by.  I don\u0027t know this code in depth, but at a naive look it seems like we might have introduced a path that has us using uninitialized stack contents.",
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d090f9ec_6d797b77",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-13T14:29:00Z",
+      "side": 1,
+      "message": "We have `displayWidth` and `displayHeight` uninitialized here...",
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "055cb232_ef0fba16",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-13T14:29:00Z",
+      "side": 1,
+      "message": "...and now without the CHECKs, it looks like it\u0027s valid to come through here, have these calls fail, and leave `displayWidth` and `displayHeight` uninitialized...",
+      "range": {
+        "startLine": 2083,
+        "startChar": 0,
+        "endLine": 2085,
+        "endChar": 0
+      },
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e0b8ecb_cc078283",
@@ -60,6 +117,46 @@
         "startChar": 12,
         "endLine": 2090,
         "endChar": 53
+      },
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6978879a_59ec1d61",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-13T14:29:00Z",
+      "side": 1,
+      "message": "...and that has us using these variable uninitialized later in the code like here...",
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56884d43_73c99ae6",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2149,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-13T14:29:00Z",
+      "side": 1,
+      "message": "...and ultimately here.\n\nMaybe at the least we should initialize `displayWidth` and `displayHeight` to some value, so the code will have consistent results and not changed based on the contents of stack memory?",
+      "range": {
+        "startLine": 2148,
+        "startChar": 0,
+        "endLine": 2149,
+        "endChar": 27
       },
       "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
