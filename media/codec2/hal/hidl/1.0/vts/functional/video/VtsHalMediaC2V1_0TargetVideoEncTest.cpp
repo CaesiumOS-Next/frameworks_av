@@ -831,8 +831,9 @@ TEST_P(Codec2VideoEncHidlTest, AdaptiveBitrateTest) {
     description("Encodes input file for different bitrates");
     if (mDisableTest) GTEST_SKIP() << "Test is disabled";
     if (mMime != "video/avc" && mMime != "video/hevc" && mMime != "video/x-vnd.on2.vp8" &&
-        mMime != "video/x-vnd.on2.vp9") {
-        GTEST_SKIP() << "AdaptiveBitrateTest is enabled only for avc, hevc, vp8 and vp9 encoders";
+        mMime != "video/x-vnd.on2.vp9" && mMime != "video/apv") {
+        GTEST_SKIP() << "AdaptiveBitrateTest is enabled only for avc, hevc, vp8, vp9 and apv"
+                        "encoders";
     }
 
     std::ifstream eleStream;
@@ -848,6 +849,11 @@ TEST_P(Codec2VideoEncHidlTest, AdaptiveBitrateTest) {
 
     uint64_t prevOutputSize = 0u;
     uint32_t bitrateValues[] = {100000, 64000, 200000};
+    if (mMime == "video/apv") {
+        bitrateValues[0] = 5000000;
+        bitrateValues[1] = 3000000;
+        bitrateValues[2] = 7000000;
+    }
     uint32_t prevBitrate = 0;
     int32_t inputFrameId = 0;
 
