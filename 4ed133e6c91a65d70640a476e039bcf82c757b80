@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c814bde_1f0a5716",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 3309800
+      },
+      "writtenOn": "2025-01-13T09:52:26Z",
+      "side": 1,
+      "message": "Can this check `mIsHeif` instead? Seems more future-proof to only apply this check for the specific codec that\u0027s affected.\n\nAdd spec link. Should this number be 23 like further down in this file?",
+      "revId": "4ed133e6c91a65d70640a476e039bcf82c757b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0073ad1a_1315de50",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3170,
+      "author": {
+        "id": 3309800
+      },
+      "writtenOn": "2025-01-13T09:52:26Z",
+      "side": 1,
+      "message": "Can your change reference the docs, similar to this line?",
+      "revId": "4ed133e6c91a65d70640a476e039bcf82c757b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
