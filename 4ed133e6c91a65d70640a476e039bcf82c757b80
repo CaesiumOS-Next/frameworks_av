@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c284775_d05064c8",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 3263990
+      },
+      "writtenOn": "2025-01-13T18:46:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c814bde_1f0a5716",
+      "revId": "4ed133e6c91a65d70640a476e039bcf82c757b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0073ad1a_1315de50",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-01-13T09:52:26Z",
       "side": 1,
       "message": "Can your change reference the docs, similar to this line?",
+      "revId": "4ed133e6c91a65d70640a476e039bcf82c757b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb7717ba_2b2600b6",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3170,
+      "author": {
+        "id": 3263990
+      },
+      "writtenOn": "2025-01-13T18:46:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0073ad1a_1315de50",
       "revId": "4ed133e6c91a65d70640a476e039bcf82c757b80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
