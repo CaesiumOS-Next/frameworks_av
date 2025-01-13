@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2968b97_31e2ec88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-01-13T20:01:24Z",
+      "side": 1,
+      "message": "fix: https://android-review.git.corp.google.com/c/device/generic/goldfish-opengl/+/3449329",
+      "revId": "ff31d00fe4da7bd7c4e8afed52fdd81cc7e0f117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
