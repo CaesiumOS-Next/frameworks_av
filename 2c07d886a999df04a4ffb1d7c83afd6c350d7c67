@@ -64,6 +64,30 @@
       },
       "revId": "2c07d886a999df04a4ffb1d7c83afd6c350d7c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8217ad5d_4119fbd6",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-13T15:17:38Z",
+      "side": 1,
+      "message": "Then what shoudl be fixed is that if mSpatializer-\u003eattachOutput() returns an error, mOutput in Spatializer must be reset to AUDIO_IO_HANDLE_NONE like detachOutput() does",
+      "parentUuid": "636e642b_209ab1cd",
+      "range": {
+        "startLine": 599,
+        "startChar": 0,
+        "endLine": 599,
+        "endChar": 74
+      },
+      "revId": "2c07d886a999df04a4ffb1d7c83afd6c350d7c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
