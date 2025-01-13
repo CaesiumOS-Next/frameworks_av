@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc641276_5b95020d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-13T18:11:29Z",
+      "side": 1,
+      "message": "CP of aosp/3428763. I believe, android14-gsi is used to run CTS/VTS for GKIs related to Android 14 release.",
+      "revId": "79b9d6eee83fa5a658e60ae30506d4760799c15b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
