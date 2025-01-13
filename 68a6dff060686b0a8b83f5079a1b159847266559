@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c262745_3ca5f851",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-01-13T19:58:51Z",
+      "side": 1,
+      "message": "need to update the CL to include these files in\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/codec2/hal/hidl/1.0/vts/functional/res/",
+      "range": {
+        "startLine": 89,
+        "startChar": 17,
+        "endLine": 89,
+        "endChar": 60
+      },
+      "revId": "68a6dff060686b0a8b83f5079a1b159847266559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
