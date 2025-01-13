@@ -83,6 +83,7 @@
 #include <map>
 #include <mutex>
 #include <optional>
+#include <ranges>
 #include <sstream>
 #include <thread>
 #include <type_traits>
