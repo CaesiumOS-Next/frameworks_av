@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf0136b_add1a5a9",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-13T21:11:42Z",
+      "side": 0,
+      "message": "Note: the original code has getNumber().doubleValue(). We used double to be able to represent both float and int32. (float has less precision than int32). That said, we don\u0027t need that amount of flexibility for frame rate, and float was used to allow fractional - but small - framerates, e.g. 59.94. Therefore, I recommend to adding a comment here: \"We convert to a double since that can represent both i32 and float without precision loss.\"\n\n We end up checking against an i32 range, but converting to i32 is tricky as the fractional part influences whether we are in the range or not. For correctness, let\u0027s convert to a double.",
+      "range": {
+        "startLine": 414,
+        "startChar": 41,
+        "endLine": 414,
+        "endChar": 51
+      },
+      "revId": "22a38c537f0d5cadd49937a09fcd711086178d6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
