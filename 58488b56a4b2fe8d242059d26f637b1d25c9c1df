@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb9075c_6a01965a",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2540,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-01-13T18:52:45Z",
+      "side": 1,
+      "message": "what is the size of av1C?\n\nmaybe mention both the sizes as comment above?\nalso list av1C reference above?",
+      "range": {
+        "startLine": 2540,
+        "startChar": 24,
+        "endLine": 2540,
+        "endChar": 28
+      },
+      "revId": "58488b56a4b2fe8d242059d26f637b1d25c9c1df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
