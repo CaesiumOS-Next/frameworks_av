@@ -2079,23 +2079,32 @@ void NuPlayer::updateVideoSize(
 
     int32_t displayWidth, displayHeight;
     if (outputFormat != NULL) {
-        int32_t width, height, cropLeft, cropTop, cropRight, cropBottom;
-        if (outputFormat->findInt32("width", &width)
-                && outputFormat->findInt32("height", &height)
-                && outputFormat->findRect(
-                    "crop",
-                    &cropLeft, &cropTop, &cropRight, &cropBottom)) {
+        int32_t width, height;
+        if (!outputFormat->findInt32("width", &width)
+                || !outputFormat->findInt32("height", &height)) {
+            ALOGW("Video output format missing dimension: %s",
+                    outputFormat->debugString().c_str());
+            notifyListener(MEDIA_SET_VIDEO_SIZE, 0, 0);
+            return;
+        }
 
-            displayWidth = cropRight - cropLeft + 1;
-            displayHeight = cropBottom - cropTop + 1;
+        int32_t cropLeft, cropTop, cropRight, cropBottom;
+        if (!outputFormat->findRect(
+                "crop",
+                &cropLeft, &cropTop, &cropRight, &cropBottom)) {
+            cropLeft = cropTop = 0;
+            cropRight = width - 1;
+            cropBottom = height - 1;
+        }
+        displayWidth = cropRight - cropLeft + 1;
+        displayHeight = cropBottom - cropTop + 1;
 
-            ALOGV("Video output format changed to %d x %d "
+        ALOGV("Video output format changed to %d x %d "
                 "(crop: %d x %d @ (%d, %d))",
                 width, height,
                 displayWidth,
                 displayHeight,
                 cropLeft, cropTop);
-        }
     } else {
         if (!inputFormat->findInt32("width", &displayWidth)
             || !inputFormat->findInt32("height", &displayHeight)) {
