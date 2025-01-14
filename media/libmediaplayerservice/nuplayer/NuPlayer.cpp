@@ -2077,25 +2077,34 @@ void NuPlayer::updateVideoSize(
         return;
     }
 
-    int32_t displayWidth, displayHeight;
+    int32_t displayWidth = 0, displayHeight = 0;
     if (outputFormat != NULL) {
-        int32_t width, height, cropLeft, cropTop, cropRight, cropBottom;
-        if (outputFormat->findInt32("width", &width)
-                && outputFormat->findInt32("height", &height)
-                && outputFormat->findRect(
-                    "crop",
-                    &cropLeft, &cropTop, &cropRight, &cropBottom)) {
+        int32_t width, height;
+        if (!outputFormat->findInt32("width", &width)
+                || !outputFormat->findInt32("height", &height)) {
+            ALOGW("Video output format missing dimension: %s",
+                    outputFormat->debugString().c_str());
+            notifyListener(MEDIA_SET_VIDEO_SIZE, 0, 0);
+            return;
+        }
 
+        int32_t cropLeft, cropTop, cropRight, cropBottom;
+        if (outputFormat->findRect(
+                "crop",
+                &cropLeft, &cropTop, &cropRight, &cropBottom)) {
             displayWidth = cropRight - cropLeft + 1;
             displayHeight = cropBottom - cropTop + 1;
+        } else {
+            displayWidth = width;
+            displayHeight = height;
+        }
 
-            ALOGV("Video output format changed to %d x %d "
+        ALOGV("Video output format changed to %d x %d "
                 "(crop: %d x %d @ (%d, %d))",
                 width, height,
                 displayWidth,
                 displayHeight,
                 cropLeft, cropTop);
-        }
     } else {
         if (!inputFormat->findInt32("width", &displayWidth)
             || !inputFormat->findInt32("height", &displayHeight)) {
@@ -2104,6 +2113,12 @@ void NuPlayer::updateVideoSize(
             return;
         }
         ALOGV("Video input format %d x %d", displayWidth, displayHeight);
+    }
+
+    if (displayWidth == 0 || displayHeight == 0) {
+        ALOGW("Video size(displayWidth or displayHeight) is 0, reporting 0x0!");
+        notifyListener(MEDIA_SET_VIDEO_SIZE, 0, 0);
+        return;
     }
 
     // Take into account sample aspect ratio if necessary:
