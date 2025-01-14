@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05ea6561_84768c13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-01-14T21:49:17Z",
+      "side": 1,
+      "message": "John, could you help do NDK-API review? This CL has been merged internally. We would like share it earlier on AOSP. Thanks,",
+      "revId": "241b8ad811351d533928d11ae82b5512bdf8fc4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
