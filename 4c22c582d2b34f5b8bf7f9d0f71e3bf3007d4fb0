@@ -22,6 +22,30 @@
       },
       "revId": "4c22c582d2b34f5b8bf7f9d0f71e3bf3007d4fb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f26b9c_02fbbb64",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-14T03:13:42Z",
+      "side": 1,
+      "message": "Thanks for your reply, I revised it and first try to find width/height, if they do not exist, then notify the error. \nThen calculate displayWidth/displayHeight by finding crop info.",
+      "parentUuid": "224d8103_41eacbe1",
+      "range": {
+        "startLine": 2091,
+        "startChar": 6,
+        "endLine": 2093,
+        "endChar": 0
+      },
+      "revId": "4c22c582d2b34f5b8bf7f9d0f71e3bf3007d4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
