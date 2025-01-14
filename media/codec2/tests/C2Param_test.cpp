@@ -24,6 +24,12 @@
 
 #include <list>
 
+// This file uses offsetof on non-standard-layout types,
+// but the whole point of those static_assert()s is to ensure we're
+// getting the expected behavior _despite_ it not being strictly
+// guaranteed.
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+
 void PrintTo(const _C2FieldId &id, ::std::ostream* os) {
     *os << "@" << id._mOffset << "+" << id._mSize;
 }
