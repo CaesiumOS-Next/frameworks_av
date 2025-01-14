@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fd8bd4d_85d30bda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-14T02:03:28Z",
+      "side": 1,
+      "message": "I re-modified the way to obtain displayWidth/displayHeight, make sure the video displayWidth and displayHeight are parsed\nfrom outputFormat or inputFormat,\nCL: https://android-review.googlesource.com/c/platform/frameworks/av/+/3451868",
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d090f9ec_6d797b77",
@@ -52,6 +69,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9af7013_9c4cd14a",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-14T02:03:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d090f9ec_6d797b77",
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "055cb232_ef0fba16",
@@ -65,6 +100,30 @@
       "writtenOn": "2025-01-13T14:29:00Z",
       "side": 1,
       "message": "...and now without the CHECKs, it looks like it\u0027s valid to come through here, have these calls fail, and leave `displayWidth` and `displayHeight` uninitialized...",
+      "range": {
+        "startLine": 2083,
+        "startChar": 0,
+        "endLine": 2085,
+        "endChar": 0
+      },
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3893e176_c19f7bf1",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-14T02:03:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "055cb232_ef0fba16",
       "range": {
         "startLine": 2083,
         "startChar": 0,
@@ -139,6 +198,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff23d9d_29e26f96",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-14T02:03:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6978879a_59ec1d61",
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56884d43_73c99ae6",
@@ -152,6 +229,30 @@
       "writtenOn": "2025-01-13T14:29:00Z",
       "side": 1,
       "message": "...and ultimately here.\n\nMaybe at the least we should initialize `displayWidth` and `displayHeight` to some value, so the code will have consistent results and not changed based on the contents of stack memory?",
+      "range": {
+        "startLine": 2148,
+        "startChar": 0,
+        "endLine": 2149,
+        "endChar": 27
+      },
+      "revId": "41bbc3c706e6fc60434e9049f47d98af493a28d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3229bd5a_93c1bbb9",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2149,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-01-14T02:03:28Z",
+      "side": 1,
+      "message": "I re-modified the way to obtain displayWidth/displayHeight:\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3451868",
+      "parentUuid": "56884d43_73c99ae6",
       "range": {
         "startLine": 2148,
         "startChar": 0,
