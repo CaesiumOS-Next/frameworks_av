@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224d8103_41eacbe1",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-01-14T02:11:21Z",
+      "side": 1,
+      "message": "it seems that we\u0027ll only parse width/height from the outputformat if the output format includes a crop setting.  I don\u0027t know that we\u0027ve required a crop field\nto be included in output formats if the crop was \"entire frame\".\n\nphrased differently:  if the outputformat doesn\u0027t include crop, we won\u0027t parse width/height from the output format -- instead falling back to input format.\n\nThis seems wrong to me.\n\nI think that we should parse height/width first; complaining if they are\nnot present.  Then we can look at cropping (if provided).",
+      "range": {
+        "startLine": 2091,
+        "startChar": 6,
+        "endLine": 2093,
+        "endChar": 0
+      },
+      "revId": "4c22c582d2b34f5b8bf7f9d0f71e3bf3007d4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
