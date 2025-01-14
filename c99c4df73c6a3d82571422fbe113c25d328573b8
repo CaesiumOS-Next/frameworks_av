@@ -34,6 +34,24 @@
       "parentUuid": "a036ce2e_f24d4825",
       "revId": "c99c4df73c6a3d82571422fbe113c25d328573b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f2e423_e1b497ec",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-01-14T22:57:28Z",
+      "side": 1,
+      "message": "Got it",
+      "parentUuid": "11d250a2_c5642bdb",
+      "revId": "c99c4df73c6a3d82571422fbe113c25d328573b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
