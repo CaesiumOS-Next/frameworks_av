@@ -179,9 +179,9 @@ struct EventTracker {
         auto startTime = std::chrono::system_clock::now();
         int64_t remainingUs = timeoutUs;
 
-        std::list<Event>::iterator it;
-        while (((it = std::find(mEventQueue.begin(), mEventQueue.end(), target)) ==
-                mEventQueue.end()) &&
+        std::list<Event>::const_iterator it;
+        while (((it = std::find(mEventQueue.cbegin(), mEventQueue.cend(), target)) ==
+                mEventQueue.cend()) &&
                remainingUs > 0) {
             std::cv_status status =
                     mCondition.wait_for(lock, std::chrono::microseconds(remainingUs));
@@ -192,11 +192,11 @@ struct EventTracker {
             remainingUs = timeoutUs - elapsedTime.count();
         }
 
-        if (it == mEventQueue.end()) {
+        if (it == mEventQueue.cend()) {
             return false;
         }
-        *outEvents = std::list<Event>(mEventQueue.begin(), std::next(it));
-        mEventQueue.erase(mEventQueue.begin(), std::next(it));
+        *outEvents = std::list<Event>(mEventQueue.cbegin(), std::next(it));
+        mEventQueue.erase(mEventQueue.cbegin(), std::next(it));
         return true;
     }
 
