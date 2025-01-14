@@ -86,6 +86,7 @@ typedef void (*record_config_callback)(int event,
                                        audio_source_t source);
 typedef void (*routing_callback)();
 typedef void (*vol_range_init_req_callback)();
+typedef void (*audio_server_ready_callback)(int audioServerInstanceId);
 
 class CaptureStateListenerImpl;
 class IAudioFlinger;
@@ -182,6 +183,7 @@ public:
     static void setRecordConfigCallback(record_config_callback);
     static void setRoutingCallback(routing_callback cb);
     static void setVolInitReqCallback(vol_range_init_req_callback cb);
+    static void setAudioServerReadyCallback(audio_server_ready_callback cb);
 
     // Sets the binder to use for accessing the AudioFlinger service. This enables the system server
     // to grant specific isolated processes access to the audio system. Currently used only for the
@@ -922,6 +924,7 @@ public:
 
     // Invokes all registered error callbacks with the given error code.
     static void reportError(status_t err);
+    static void onAudioServerReady();
 
     [[clang::no_destroy]] static std::mutex gMutex;
     static dynamic_policy_callback gDynPolicyCallback GUARDED_BY(gMutex);
@@ -933,6 +936,7 @@ public:
     [[clang::no_destroy]] static std::mutex gErrorCallbacksMutex;
     [[clang::no_destroy]] static std::set<audio_error_callback> gAudioErrorCallbacks
             GUARDED_BY(gErrorCallbacksMutex);
+    [[clang::no_destroy]] static audio_server_ready_callback gAudioServerReadyCallback;
 
     [[clang::no_destroy]] static std::mutex gSoundTriggerMutex;
     [[clang::no_destroy]] static sp<CaptureStateListenerImpl> gSoundTriggerCaptureStateListener

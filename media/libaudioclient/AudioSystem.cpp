@@ -15,7 +15,7 @@
  */
 
 #define LOG_TAG "AudioSystem"
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 
 #include <utils/Log.h>
 
@@ -70,6 +70,7 @@ dynamic_policy_callback AudioSystem::gDynPolicyCallback = NULL;
 record_config_callback AudioSystem::gRecordConfigCallback = NULL;
 routing_callback AudioSystem::gRoutingCallback = NULL;
 vol_range_init_req_callback AudioSystem::gVolRangeInitReqCallback = NULL;
+audio_server_ready_callback AudioSystem::gAudioServerReadyCallback = NULL;
 
 std::mutex AudioSystem::gApsCallbackMutex;
 std::mutex AudioSystem::gErrorCallbacksMutex;
@@ -207,6 +208,8 @@ struct AudioFlingerTraits {
         const int64_t token = IPCThreadState::self()->clearCallingIdentity();
         af->registerClient(afc);
         IPCThreadState::self()->restoreCallingIdentity(token);
+
+        onAudioServerReady();
     }
 
     static sp<IAudioFlinger> createServiceAdapter(
@@ -244,6 +247,21 @@ void AudioSystem::setAudioFlingerBinder(const sp<IBinder>& audioFlinger) {
 
 status_t AudioSystem::setLocalAudioFlinger(const sp<IAudioFlinger>& af) {
     return gAudioFlingerServiceHandler.setLocalService(af);
+}
+
+/*static*/ void AudioSystem::onAudioServerReady() {
+    Mutex::Autolock _l(gLock);
+    static int audioServerInstanceId = 0;
+    ++audioServerInstanceId;
+    if (!gAudioServerReadyCallback) {
+        return;
+    }
+    gAudioServerReadyCallback(audioServerInstanceId);
+}
+
+/*static*/ void AudioSystem::setAudioServerReadyCallback(audio_server_ready_callback cb) {
+    Mutex::Autolock _l(gLock);
+    gAudioServerReadyCallback = cb;
 }
 
 sp<AudioIoDescriptor> AudioSystem::getIoDescriptor(audio_io_handle_t ioHandle) {
