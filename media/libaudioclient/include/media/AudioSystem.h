@@ -793,6 +793,9 @@ public:
     static status_t removeSupportedLatencyModesCallback(
             const sp<SupportedLatencyModesCallback>& callback);
 
+    static status_t addAudioServerReadyCallback(const wp<AudioServerReadyCallback>& callback);
+    static status_t removeAudioServerReadyCallback(const wp<AudioServerReadyCallback>& callback);
+
     static audio_port_handle_t getDeviceIdForIo(audio_io_handle_t audioIo);
 
     static status_t setVibratorInfos(const std::vector<media::AudioVibratorInfo>& vibratorInfos);
@@ -922,6 +925,7 @@ public:
 
     // Invokes all registered error callbacks with the given error code.
     static void reportError(status_t err);
+    static void onAudioServerReady();
 
     [[clang::no_destroy]] static std::mutex gMutex;
     static dynamic_policy_callback gDynPolicyCallback GUARDED_BY(gMutex);

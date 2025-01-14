@@ -15,7 +15,7 @@
  */
 
 #define LOG_TAG "AudioSystem"
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 
 #include <utils/Log.h>
 
@@ -70,6 +70,7 @@ dynamic_policy_callback AudioSystem::gDynPolicyCallback = NULL;
 record_config_callback AudioSystem::gRecordConfigCallback = NULL;
 routing_callback AudioSystem::gRoutingCallback = NULL;
 vol_range_init_req_callback AudioSystem::gVolRangeInitReqCallback = NULL;
+audio_server_ready_callback AudioSystem::gAudioServerReadyCallback = NULL;
 
 std::mutex AudioSystem::gApsCallbackMutex;
 std::mutex AudioSystem::gErrorCallbacksMutex;
@@ -207,6 +208,8 @@ struct AudioFlingerTraits {
         const int64_t token = IPCThreadState::self()->clearCallingIdentity();
         af->registerClient(afc);
         IPCThreadState::self()->restoreCallingIdentity(token);
+
+        onAudioServerReady();
     }
 
     static sp<IAudioFlinger> createServiceAdapter(
@@ -244,6 +247,21 @@ void AudioSystem::setAudioFlingerBinder(const sp<IBinder>& audioFlinger) {
 
 status_t AudioSystem::setLocalAudioFlinger(const sp<IAudioFlinger>& af) {
     return gAudioFlingerServiceHandler.setLocalService(af);
+}
+
+/*static*/ void AudioSystem::onAudioServerReady() {
+    Mutex::Autolock _l(gLock);
+    static int audioServerInstanceId = 0;
+    ++audioServerInstanceId;
+    if (!gAudioServerReadyCallback) {
+        return;
+    }
+    gAudioServerReadyCallback(audioServerInstanceId);
+}
+
+/*static*/ void AudioSystem::setAudioServerReadyCallback(audio_server_ready_callback cb) {
+    Mutex::Autolock _l(gLock);
+    gAudioServerReadyCallback = cb;
 }
 
 sp<AudioIoDescriptor> AudioSystem::getIoDescriptor(audio_io_handle_t ioHandle) {
@@ -881,6 +899,32 @@ status_t AudioSystem::AudioFlingerClient::removeSupportedLatencyModesCallback(
         return INVALID_OPERATION;
     }
     mSupportedLatencyModesCallbacks.erase(it);
+    return NO_ERROR;
+}
+
+status_t AudioSystem::AudioFlingerClient::addAudioServerReadyCallback(const wp<AudioServerReadyCallback>& callback) {
+    Mutex::Autolock _l(mLock);
+    for (size_t i = 0; i < mAudioServerReadyCallback.size(); i++) {
+        if (mAudioServerReadyCallback[i] == callback) {
+            return INVALID_OPERATION;
+        }
+    }
+    mAudioServerReadyCallback.add(callback);
+    return NO_ERROR;
+}
+
+status_t AudioSystem::AudioFlingerClient::removeAudioServerReadyCallback(const wp<AudioServerReadyCallback>& callback) {
+    Mutex::Autolock _l(mLock);
+    size_t i;
+    for (i = 0; i < mAudioServerReadyCallback.size(); i++) {
+        if (mAudioServerReadyCallback[i] == callback) {
+            break;
+        }
+    }
+    if (i == mAudioServerReadyCallback.size()) {
+        return INVALID_OPERATION;
+    }
+    mAudioServerReadyCallback.removeAt(i);
     return NO_ERROR;
 }
 
@@ -1833,6 +1877,29 @@ status_t AudioSystem::removeSupportedLatencyModesCallback(
         return NO_INIT;
     }
     return afc->removeSupportedLatencyModesCallback(callback);
+}
+
+status_t AudioSystem::addAudioServerReadyCallback(const wp<AudioServerReadyCallback>& callback) {
+    const sp<AudioFlingerClient> afc = getAudioFlingerClient();
+    if (afc == 0) {
+        return NO_INIT;
+    }
+    status_t status = afc->addAudioServerReadyCallback(callback);
+    if (status == NO_ERROR) {
+        const sp<IAudioFlinger>& af = AudioSystem::get_audio_flinger();
+        if (af != 0) {
+            af->registerClient(afc);
+        }
+    }
+    return status;
+}
+
+status_t AudioSystem::removeAudioServerReadyCallback(const wp<AudioServerReadyCallback>& callback) {
+    const sp<AudioFlingerClient> afc = getAudioFlingerClient();
+    if (afc == 0) {
+        return NO_INIT;
+    }
+    return afc->removeAudioServerReadyCallback(callback);
 }
 
 audio_port_handle_t AudioSystem::getDeviceIdForIo(audio_io_handle_t audioIo) {
