@@ -16,6 +16,29 @@
       "message": "Thanks for the follow-up!",
       "revId": "9b760233439f8e113a6442c5ca7ba1a063a52d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23575022_59d732a0",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2100,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-01-14T20:49:46Z",
+      "side": 1,
+      "message": "i\u0027d have probably gone with a flow like:\nfindInt32() both width \u0026 height\ndisplaywidth\u003dwidth; displayheight \u003d height\nif (there is crop info) {amend displaywidth/height}\n\nfunctionally, your code generates the same final values for display width/height,\nbut I find the negation on the findRect() call for crop to be overlooked too easily. i prefer the \"if we find\" rather than \"if we did not find\" form",
+      "range": {
+        "startLine": 2091,
+        "startChar": 8,
+        "endLine": 2100,
+        "endChar": 49
+      },
+      "revId": "9b760233439f8e113a6442c5ca7ba1a063a52d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
