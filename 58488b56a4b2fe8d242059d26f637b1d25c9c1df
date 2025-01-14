@@ -22,6 +22,30 @@
       },
       "revId": "58488b56a4b2fe8d242059d26f637b1d25c9c1df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d94976f_f083da07",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2540,
+      "author": {
+        "id": 3309800
+      },
+      "writtenOn": "2025-01-14T09:51:00Z",
+      "side": 1,
+      "message": "Do we care about av1C? This is inside `if (mIsHeif \u0026\u0026...)`",
+      "parentUuid": "fbb9075c_6a01965a",
+      "range": {
+        "startLine": 2540,
+        "startChar": 24,
+        "endLine": 2540,
+        "endChar": 28
+      },
+      "revId": "58488b56a4b2fe8d242059d26f637b1d25c9c1df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
