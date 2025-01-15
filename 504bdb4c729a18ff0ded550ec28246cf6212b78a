@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1f55b0_d4aab1b9",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7488,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-01-15T19:12:47Z",
+      "side": 1,
+      "message": "I think this can be const, same for `clientConfig` and `config`",
+      "range": {
+        "startLine": 7488,
+        "startChar": 20,
+        "endLine": 7488,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d82fb13b_caf5af07",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7488,
+                "startChar": 0,
+                "endLine": 7491,
+                "endChar": 0
+              },
+              "replacement": "                    const audio_attributes_t clientAttr \u003d client-\u003eattributes();\n                    const audio_config_base_t clientConfig \u003d client-\u003econfig();\n                    const audio_config_t config \u003d audio_config_initializer(\u0026clientConfig);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df42a648_34e1b3e5",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7492,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-01-15T19:12:47Z",
+      "side": 1,
+      "message": "I think we already have `srcOutputs !\u003d dstOutputs` check at line#7473, isn\u0027t it enough for this case?",
+      "range": {
+        "startLine": 7492,
+        "startChar": 31,
+        "endLine": 7492,
+        "endChar": 55
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd81984_bc04ea91",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7498,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-01-15T19:12:47Z",
+      "side": 1,
+      "message": "Ideally I think this added if logic should be in the `selectOutput` implementation instead, WDYT @elaurent@google.com",
+      "range": {
+        "startLine": 7498,
+        "startChar": 24,
+        "endLine": 7498,
+        "endChar": 65
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
