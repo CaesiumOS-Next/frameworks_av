@@ -16,6 +16,23 @@
       "message": "discussed with Lajos and he is fine in increasing the bitrate range for c2.android.avc.encoder for slow-cpu variants.",
       "revId": "8daf774641e4d6f6cd1b4f9b163b43d907bcfcca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea98e7f0_c940f2c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-16T19:20:14Z",
+      "side": 1,
+      "message": "note that this is not the case. We don\u0027t require 10Mbps even if level 3 supports that bitrate.",
+      "revId": "8daf774641e4d6f6cd1b4f9b163b43d907bcfcca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
