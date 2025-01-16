@@ -44,6 +44,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61701034_71db518c",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7488,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-16T06:02:12Z",
+      "side": 1,
+      "message": "OK, once the solution is confirmed, I can upload a new patch",
+      "parentUuid": "6c1f55b0_d4aab1b9",
+      "range": {
+        "startLine": 7488,
+        "startChar": 20,
+        "endLine": 7488,
+        "endChar": 38
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84ac2bbb_87770a8c",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7488,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-16T06:02:12Z",
+      "side": 1,
+      "message": "OK, once the solution is confirmed, I can upload a new one",
+      "parentUuid": "6c1f55b0_d4aab1b9",
+      "range": {
+        "startLine": 7488,
+        "startChar": 20,
+        "endLine": 7488,
+        "endChar": 38
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df42a648_34e1b3e5",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 1
@@ -55,6 +103,30 @@
       "writtenOn": "2025-01-15T19:12:47Z",
       "side": 1,
       "message": "I think we already have `srcOutputs !\u003d dstOutputs` check at line#7473, isn\u0027t it enough for this case?",
+      "range": {
+        "startLine": 7492,
+        "startChar": 31,
+        "endLine": 7492,
+        "endChar": 55
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fdc4f51_1db66f45",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7492,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-16T06:02:12Z",
+      "side": 1,
+      "message": "srcOutputs !\u003d dstOutputs often occurs when the connected device supports direct output, as direct output will open when the device is connected and close when there are no active clients on it. I\u0027m curious if #7473 should be changed to newDevices \u003d\u003d oldDevices to reduce invalidate checking? but this change has a broader impact, so I\u0027m concerned that there might be scenarios I haven\u0027t considered",
+      "parentUuid": "df42a648_34e1b3e5",
       "range": {
         "startLine": 7492,
         "startChar": 31,
