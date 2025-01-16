@@ -16,6 +16,29 @@
       "message": "We could instead use static size_t getAudioSampleSize(AudioEncoding e)\nif we move getAudioSampleSize and getAudioFormat to libstagefright/include/DataConverter.h for instance.\n\nThen we do not need have the switch statement.",
       "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b43550f3_ba5b338d",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-01-16T11:29:08Z",
+      "side": 1,
+      "message": "Should this be changed to\nAudioEncoding encodeType?",
+      "range": {
+        "startLine": 396,
+        "startChar": 12,
+        "endLine": 396,
+        "endChar": 20
+      },
+      "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
