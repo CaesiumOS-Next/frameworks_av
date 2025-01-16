@@ -139,6 +139,221 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29700d88_56b024ca",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7492,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-16T09:23:46Z",
+      "side": 1,
+      "message": "I donl;t understadn how testing newDevices \u003d\u003d oldDevices instead of srcOutputs !\u003d dstOutputs helps detect if client must be moved from one output to another and invalidated?",
+      "parentUuid": "4fdc4f51_1db66f45",
+      "range": {
+        "startLine": 7492,
+        "startChar": 31,
+        "endLine": 7492,
+        "endChar": 55
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e1aaf03_f4f7c68b",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7497,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-16T09:23:46Z",
+      "side": 1,
+      "message": "I don\u0027t thing the spatializer output can be created in the context where checkOutputForAttributes() is called. This means that the spatializer output if it is open is in srcOutputs and if a client can be spatialized, it is already attache to the spatializer output. \nSo insgead we can do at line 7479\nif (desc \u003d\u003d mSpatializerOutput \u0026\u0026 newDevices \u003d\u003d oldDevices) {\n   continue;\n}",
+      "range": {
+        "startLine": 7491,
+        "startChar": 20,
+        "endLine": 7497,
+        "endChar": 94
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4a9ccb67_bb4dae68",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6444,
+                "startChar": 0,
+                "endLine": 6472,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6492,
+                "startChar": 0,
+                "endLine": 6514,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6592,
+                "startChar": 0,
+                "endLine": 6610,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6635,
+                "startChar": 0,
+                "endLine": 6636,
+                "endChar": 0
+              },
+              "replacement": "    mMusicEffectOutput(AUDIO_IO_HANDLE_NONE),\n    mSpatializerOutput(nullptr)\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6872,
+                "startChar": 0,
+                "endLine": 6874,
+                "endChar": 0
+              },
+              "replacement": "        if ((desc-\u003emFlags \u0026 AUDIO_OUTPUT_FLAG_SPATIALIZER) !\u003d 0) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6898,
+                "startChar": 0,
+                "endLine": 6899,
+                "endChar": 0
+              },
+              "replacement": "    selectOutputForMusicEffects(outputDesc);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6909,
+                "startChar": 0,
+                "endLine": 6910,
+                "endChar": 0
+              },
+              "replacement": "    selectOutputForMusicEffects(outputDesc);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7425,
+                "startChar": 0,
+                "endLine": 7426,
+                "endChar": 0
+              },
+              "replacement": "void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t \u0026attr,\n                                                  const sp\u003cSwAudioOutputDescriptor\u003e\u0026 spatializerOutput)\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7491,
+                "startChar": 0,
+                "endLine": 7492,
+                "endChar": 0
+              },
+              "replacement": "                    if (spatializerOutput !\u003d nullptr\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7495,
+                "startChar": 0,
+                "endLine": 7499,
+                "endChar": 0
+              },
+              "replacement": "                                                   newDevices.toTypeAddrVector())) {\n                        newOutput \u003d spatializerOutput-\u003emIoHandle;\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7548,
+                "startChar": 0,
+                "endLine": 7549,
+                "endChar": 0
+              },
+              "replacement": "            selectOutputForMusicEffects(spatializerOutput);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7564,
+                "startChar": 0,
+                "endLine": 7565,
+                "endChar": 0
+              },
+              "replacement": "        checkOutputForAttributes(attributes, mSpatializerOutput);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7573,
+                "startChar": 0,
+                "endLine": 7573,
+                "endChar": 0
+              },
+              "replacement": "    sp\u003cSwAudioOutputDescriptor\u003e spatializerOutput \u003d mSpatializerOutput;\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7582,
+                "startChar": 0,
+                "endLine": 7582,
+                "endChar": 0
+              },
+              "replacement": "            if (status \u003d\u003d OK \u0026\u0026 client-\u003egetPrimaryMix() \u003d\u003d primaryMix) {\n                spatializerOutput \u003d outputDescriptor;\n            }\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7626,
+                "startChar": 0,
+                "endLine": 7626,
+                "endChar": 0
+              },
+              "replacement": "    if (spatializerOutput !\u003d nullptr) {\n        checkOutputForAttributes(attributes_initializer(AUDIO_USAGE_MEDIA), spatializerOutput);\n    }\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7843,
+                "startChar": 0,
+                "endLine": 7844,
+                "endChar": 0
+              },
+              "replacement": "        checkOutputForAttributes(attributes_initializer(AUDIO_USAGE_NOTIFICATION), mSpatializerOutput);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bd81984_bc04ea91",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 1
