@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e16e09b_a5f6de00",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7492,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-17T08:55:05Z",
+      "side": 1,
+      "message": "OK, I thought about it again, and it indeed could be problematic",
+      "parentUuid": "29700d88_56b024ca",
+      "range": {
+        "startLine": 7492,
+        "startChar": 31,
+        "endLine": 7492,
+        "endChar": 55
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e1aaf03_f4f7c68b",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 1
@@ -348,6 +372,30 @@
           ]
         }
       ],
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "296bdda3_4efa5829",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7497,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-17T08:55:05Z",
+      "side": 1,
+      "message": "Understood, I will update a new patch, thanks!!",
+      "parentUuid": "3e1aaf03_f4f7c68b",
+      "range": {
+        "startLine": 7491,
+        "startChar": 20,
+        "endLine": 7497,
+        "endChar": 94
+      },
       "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
