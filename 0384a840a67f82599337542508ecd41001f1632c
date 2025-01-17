@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a04be5_660cc3cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-17T23:30:57Z",
+      "side": 1,
+      "message": "JM, please review. I had to modify the CP to avoid adding the new usage into the map of product strategies. That\u0027s because I\u0027m not upstreaming the SDK API changes, and the Java layer was panicking when receiving unknown usage id from the native side.",
+      "revId": "0384a840a67f82599337542508ecd41001f1632c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
