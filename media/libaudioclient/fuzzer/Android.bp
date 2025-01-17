@@ -38,13 +38,10 @@ cc_fuzz {
         "libaudioclient",
         "libbase",
         "libcutils",
-        "libjsoncpp",
         "liblog",
         "libmedia_helper",
         "libmediametrics",
         "libmediametricsservice",
-        "libprocessgroup",
-        "libprocessgroup_util",
         "shared-file-region-aidl-cpp",
     ],
     shared_libs: [
