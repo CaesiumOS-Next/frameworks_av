@@ -93,6 +93,30 @@
       },
       "revId": "90da499aa9df616f5590732736eb0f6a6e10cbd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c1b4c1c_b42f2bb4",
+        "filename": "services/audiopolicy/engineconfigurable/data/etc/Structure/CapProductStrategies.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-20T19:36:27Z",
+      "side": 1,
+      "message": "Sounds reasonable.",
+      "parentUuid": "8df7fefa_2ee847a7",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 93
+      },
+      "revId": "90da499aa9df616f5590732736eb0f6a6e10cbd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
