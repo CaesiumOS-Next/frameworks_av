@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b77dbaf_88dd5c29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-20T08:56:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "623756dc_1f82417d",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 59
+      },
+      "revId": "90da499aa9df616f5590732736eb0f6a6e10cbd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9968e66_f86059be",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-17T19:11:31Z",
       "side": 1,
       "message": "Is this enought with MZ support?",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 93
+      },
+      "revId": "90da499aa9df616f5590732736eb0f6a6e10cbd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8df7fefa_2ee847a7",
+        "filename": "services/audiopolicy/engineconfigurable/data/etc/Structure/CapProductStrategies.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-20T08:56:25Z",
+      "side": 1,
+      "message": "This is an excellent remark, I guess you do have better visibility than me on needs with MZ, just having in mind that with Cap, we need to have new strategies for each zone, we cannot reuse Car Contexts.\nI would propose to reconsider the provisioning when merging MZ CLs?",
+      "parentUuid": "c9968e66_f86059be",
       "range": {
         "startLine": 70,
         "startChar": 4,
