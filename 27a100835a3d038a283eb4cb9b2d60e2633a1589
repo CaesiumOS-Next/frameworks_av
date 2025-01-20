@@ -183,6 +183,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82871616_20a9d093",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4026,
+      "author": {
+        "id": 3814868
+      },
+      "writtenOn": "2025-01-20T07:26:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1a553af_40cc55d1",
+      "range": {
+        "startLine": 4026,
+        "startChar": 8,
+        "endLine": 4026,
+        "endChar": 34
+      },
+      "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "985de070_2378701b",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4026,
+      "author": {
+        "id": 3814868
+      },
+      "writtenOn": "2025-01-20T07:26:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b82a9bbc_1509a663",
+      "range": {
+        "startLine": 4026,
+        "startChar": 35,
+        "endLine": 4026,
+        "endChar": 40
+      },
+      "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c95d1fb_4b9d4d8a",
@@ -229,6 +277,24 @@
         "id": 1512908
       },
       "writtenOn": "2025-01-08T22:33:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c95d1fb_4b9d4d8a",
+      "revId": "27a100835a3d038a283eb4cb9b2d60e2633a1589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "169dbc8d_6b24fb9f",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4478,
+      "author": {
+        "id": 3814868
+      },
+      "writtenOn": "2025-01-20T07:26:01Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "0c95d1fb_4b9d4d8a",
