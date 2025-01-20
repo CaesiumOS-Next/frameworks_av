@@ -94,6 +94,30 @@
       },
       "revId": "e613e2f7e4b546c1de03d4698fad16dc502581a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2044710e_907e8c24",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 4027,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-20T09:27:43Z",
+      "side": 1,
+      "message": "At line 3958 we get a DeviceDescriptor for the registered mix.\nAt the same time at line 3965 , we can create an AudioDeviceTypeAddr object with this contructor\nAudioDeviceTypeAddr(mix-\u003emDeviceType, mix-\u003emDeviceAddress.c_str())\n\nand then add it to a AudioDeviceTypeAddrVector at line 4011",
+      "parentUuid": "36944c18_efbd6f70",
+      "range": {
+        "startLine": 4027,
+        "startChar": 0,
+        "endLine": 4027,
+        "endChar": 35
+      },
+      "revId": "e613e2f7e4b546c1de03d4698fad16dc502581a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
