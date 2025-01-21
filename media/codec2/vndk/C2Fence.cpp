@@ -17,6 +17,7 @@
 //#define LOG_NDEBUG 0
 #define LOG_TAG "C2FenceFactory"
 #include <poll.h>
+#include <signal.h>
 
 #include <android-base/unique_fd.h>
 #include <cutils/native_handle.h>
@@ -623,6 +624,28 @@ C2Fence _C2FenceFactory::CreateMultiSyncFence(
     return C2Fence(p);
 }
 
+struct SignalBlocker {
+    bool mInit;
+    sigset64_t mOldSet;
+    sigset64_t mNewSet;
+
+    explicit SignalBlocker() : mInit(false) {
+        sigemptyset64(&mOldSet);
+        sigfillset64(&mNewSet);
+        int ret = pthread_sigmask64(SIG_BLOCK, &mNewSet, &mOldSet);
+        mInit = (ret == 0);
+        if (!mInit) {
+            ALOGE("sigprocmask() fail %d", ret);
+        }
+    }
+
+    ~SignalBlocker() {
+        if (mInit) {
+            pthread_sigmask64(SIG_SETMASK, &mOldSet, nullptr);
+        }
+    }
+};
+
 /**
  * Fence implementation for notifying # of events available based on
  * file descriptors created by pipe()/pipe2(). The writing end of the
@@ -636,6 +659,8 @@ private:
             *hangUp = true;
             return true;
         }
+
+        SignalBlocker sigBlocker;
 
         struct pollfd pfd;
         pfd.fd = mPipeFd.get();
