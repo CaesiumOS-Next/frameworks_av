@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26970911_42282a78",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceSource.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-21T23:49:52Z",
+      "side": 1,
+      "message": "nit: on `cit` / `bit` / `cres` etc. naming:\n\nplease spell out the prefix (e.g. `codecBufferRes` or `bufferIt`) or just use `it` / `res` when appropriate.",
+      "revId": "eb7bb99a123793fa5a8c3d888b06e9025673ba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
