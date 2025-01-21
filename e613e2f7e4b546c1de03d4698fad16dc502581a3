@@ -118,6 +118,30 @@
       },
       "revId": "e613e2f7e4b546c1de03d4698fad16dc502581a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745eb3f0_0caceb76",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 4027,
+      "author": {
+        "id": 3814868
+      },
+      "writtenOn": "2025-01-21T05:17:23Z",
+      "side": 1,
+      "message": "I updated the patch set. \nPlease review the code.",
+      "parentUuid": "2044710e_907e8c24",
+      "range": {
+        "startLine": 4027,
+        "startChar": 0,
+        "endLine": 4027,
+        "endChar": 35
+      },
+      "revId": "e613e2f7e4b546c1de03d4698fad16dc502581a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
