@@ -3259,7 +3259,8 @@ audio_io_handle_t AudioPolicyManager::getInputForDevice(const sp<DeviceDescripto
                  }
                 // if sound trigger, reuse input if used by other sound trigger on same session
                 // else
-                //    reuse input if active client app is not in IDLE state
+                //    reuse input if any active client (whatever the app state is since it may be
+                //    silenced.
                 //
                 RecordClientVector clients = desc->clientsList();
                 bool doClose = false;
@@ -3273,7 +3274,9 @@ audio_io_handle_t AudioPolicyManager::getInputForDevice(const sp<DeviceDescripto
                         }
                         continue;
                     }
-                    if (client->active() && client->appState() != APP_STATE_IDLE) {
+                    if (client->active()) {
+                        ALOGV_IF(client->appState() == APP_STATE_IDLE,
+                                 "%s reusing same input hosting a silenced client", __func__);
                         return desc->mIoHandle;
                     }
                     doClose = true;
