@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "15883764_32b6614b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-22T02:16:51Z",
+      "side": 1,
+      "message": "Looks like the bug number was removed,\n\nCan you add this on line 11 before the `Change-Id...` line\n\nBug: 381957270",
+      "revId": "5b72b001c8e53b2a5c09d661595094d4a47981b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a2167b9d_43b9f84c",
