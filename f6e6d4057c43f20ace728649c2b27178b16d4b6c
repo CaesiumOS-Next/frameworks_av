@@ -39,6 +39,30 @@
       },
       "revId": "f6e6d4057c43f20ace728649c2b27178b16d4b6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac386723_88778376",
+        "filename": "services/audiopolicy/engine/common/src/EngineDefaultConfig.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-22T21:57:37Z",
+      "side": 1,
+      "message": "Also getting a couple of failures here:\n```\narm64-v8a audiorouting_tests:audiorouting_tests: Passed: 1, Failed: 3, Ignored: 0, Assumption Failed: 0  \narm64-v8a audiosystem_tests:audiosystem_tests: Passed: 12, Failed: 2, Ignored: 2, Assumption Failed: 0  \n```\n\nI\u0027ll add a logcat to the bug for this CL.",
+      "parentUuid": "9c423ab5_107598b3",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 24
+      },
+      "revId": "f6e6d4057c43f20ace728649c2b27178b16d4b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
