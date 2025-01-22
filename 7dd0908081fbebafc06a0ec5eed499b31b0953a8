@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "290444b7_03290524",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-22T20:34:45Z",
+      "side": 1,
+      "message": "C2Fence: properly handle signal interruption of pipe fence wait",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "7dd0908081fbebafc06a0ec5eed499b31b0953a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c035e5a3_30d4a528",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-22T20:34:45Z",
+      "side": 1,
+      "message": "this is really about wait, so can we mention that? E.g.\n\nPipeFenceImpl::wait can be interrupted by signals. We used to\nreturn C2_CANCELED which is not allowed by the spec. Instead,\nretry wait until timeout.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "7dd0908081fbebafc06a0ec5eed499b31b0953a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "633f3a51_58f1f6a2",
         "filename": "media/codec2/vndk/C2Fence.cpp",
         "patchSetId": 8
