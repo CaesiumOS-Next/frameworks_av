@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7dedddc_09e0f118",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-22T20:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "290444b7_03290524",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "7dd0908081fbebafc06a0ec5eed499b31b0953a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c035e5a3_30d4a528",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02edec54_75c5cf40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-22T20:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c035e5a3_30d4a528",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "7dd0908081fbebafc06a0ec5eed499b31b0953a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "633f3a51_58f1f6a2",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-01-22T19:23:56Z",
       "side": 1,
       "message": "nit: could we clarify these 2 comment blocks as a single comment:\n\n// Wait for an event using ::ppoll() and handle any interruptions by signals \n// (EINTR) by retrying and accounting for time already waited.\n// Note: while ppoll in theory supports blocking signals, Linux NPTL library does\n// not allow blocking 2 realtime signals (see man nptl), so we do need to handle\n// signal interruptions.",
+      "range": {
+        "startLine": 636,
+        "startChar": 7,
+        "endLine": 643,
+        "endChar": 68
+      },
+      "revId": "7dd0908081fbebafc06a0ec5eed499b31b0953a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00fbe182_54b53476",
+        "filename": "media/codec2/vndk/C2Fence.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-01-22T20:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "633f3a51_58f1f6a2",
       "range": {
         "startLine": 636,
         "startChar": 7,
