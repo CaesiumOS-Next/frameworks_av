@@ -16,6 +16,29 @@
       "message": "@oscarazu@google.com Could you please test these changes.",
       "revId": "f6e6d4057c43f20ace728649c2b27178b16d4b6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c423ab5_107598b3",
+        "filename": "services/audiopolicy/engine/common/src/EngineDefaultConfig.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-22T20:58:32Z",
+      "side": 1,
+      "message": "This seems to be causing an error with `audiopolicy_tests`:\n\n```\n Build fingerprint: \u0027generic/aosp_cf_x86_64_only_phone/vsoc_x86_64_only:Baklava/MAIN.daeec1f8/P88755081:userdebug/test-keys\u0027 \n Revision: \u00270\u0027 \n ABI: \u0027x86_64\u0027 \n Timestamp: 2025-01-22 18:22:46.765357211+0000 \n Process uptime: 1s \n Cmdline: /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests --gtest_print_time \n pid: 4595, tid: 4595, name: audiopolicy_tes  \u003e\u003e\u003e /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \u003c\u003c\u003c \n uid: 2000 \n signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr -------- \n Abort message: \u0027group name AUDIO_STREAM_MUSIC defined twice, review the configuration\u0027 \n     rax 0000000000000000  rbx 00000000000011f3  rcx 000073435ff4f374  rdx 0000000000000006 \n     r8  00007fffd883ec90  r9  00007fffd883ec90  r10 00007fffd883ec50  r11 0000000000000217 \n     r12 00007341b4a92010  r13 554d5f4d41455201  r14 00000000000011f3  r15 0000000000000024 \n     rdi 00000000000011f3  rsi 00000000000011f3 \n     rbp 00007fffd883ecf0  rsp 00007fffd883ec50  rip 000073435ff4f374 \n 19 total frames \n backtrace: \n   NOTE: Function names and BuildId information is missing for some frames due \n   NOTE: to unreadable libraries. For unwinds of apps, only shared libraries \n   NOTE: found under the lib/ directory are readable. \n   NOTE: On this device, run setenforce 0 to make the libraries readable. \n   NOTE: Unreadable libraries: \n   NOTE:   /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #00 pc 000000000005a374  /apex/com.android.runtime/lib64/bionic/libc.so (abort+196) (BuildId: ec395c55119bd0d881e63a5ec2a8ddf5) \n       #01 pc 000000000000c86d  /system/lib64/liblog.so (__android_log_default_aborter+13) (BuildId: bfc8061a973a1299a544d3e0d5745a14) \n       #02 pc 000000000000c9de  /system/lib64/liblog.so (__android_log_assert+318) (BuildId: bfc8061a973a1299a544d3e0d5745a14) \n       #03 pc 00000000000267c5  /system/lib64/libaudiopolicyenginedefault.so (_ZZN7android12audio_policy10EngineBase20processParsingResultEONS_12engineConfig13ParsingResultEENK3$_0clINS_14VolumeGroupMapENS2_11VolumeGroupEEEDaRT_RT0_+1733) (BuildId: 9b00ab8b465afea46121ca607c8b0f7f) \n       #04 pc 0000000000024d22  /system/lib64/libaudiopolicyenginedefault.so (android::audio_policy::EngineBase::processParsingResult(android::engineConfig::ParsingResult\u0026\u0026)+882) (BuildId: 9b00ab8b465afea46121ca607c8b0f7f) \n       #05 pc 00000000000286c5  /system/lib64/libaudiopolicyenginedefault.so (android::audio_policy::EngineBase::loadAudioPolicyEngineConfig(std::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e\u003e const\u0026, bool)+885) (BuildId: 9b00ab8b465afea46121ca607c8b0f7f) \n       #06 pc 0000000000016dbf  /system/lib64/libaudiopolicyenginedefault.so (int android::audio_policy::Engine::loadWithFallback\u003cstd::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e\u003e\u003e(std::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e\u003e const\u0026)+111) (BuildId: 9b00ab8b465afea46121ca607c8b0f7f) \n       #07 pc 00000000000a234c  /system/lib64/libaudiopolicymanagerdefault.so (android::EngineLibrary::createEngineUsingXmlConfig(std::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e\u003e const\u0026)+108) (BuildId: 067670f3302beffac79dc99bd528f7f2) \n       #08 pc 00000000000a1fba  /system/lib64/libaudiopolicymanagerdefault.so (android::loadApmEngineLibraryAndCreateEngine(std::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e\u003e const\u0026, std::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e\u003e const\u0026) (.cfi)+90) (BuildId: 067670f3302beffac79dc99bd528f7f2) \n       #09 pc 000000000007f11f  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #10 pc 00000000001074a3  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #11 pc 00000000001071fd  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #12 pc 0000000000191ba9  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #13 pc 000000000019283b  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #14 pc 0000000000193c89  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #15 pc 00000000001a5b40  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #16 pc 00000000001a5486  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #17 pc 0000000000109466  /data/local/tmp/audiopolicy_tests/x86_64/audiopolicy_tests \n       #18 pc 0000000000054cdf  /apex/com.android.runtime/lib64/bionic/libc.so (__libc_init+111) (BuildId: ec395c55119bd0d881e63a5ec2a8ddf5) \n```\n\nFrancois, could you please check.",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 24
+      },
+      "revId": "f6e6d4057c43f20ace728649c2b27178b16d4b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
