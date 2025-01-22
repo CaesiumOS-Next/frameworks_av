@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "026426ec_f30af8bb",
+        "filename": "services/audiopolicy/engineconfigurable/tools/capBuildCommonTypesStructureFile.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-22T13:56:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6882d7c3_f946c25b",
+      "range": {
+        "startLine": 30,
+        "startChar": 64,
+        "endLine": 30,
+        "endChar": 71
+      },
+      "revId": "1f2f7b27f910009c24777d088a94ecd170e79c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78bb91e0_58722382",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-22T13:50:46Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 159,
+        "startChar": 30,
+        "endLine": 159,
+        "endChar": 37
+      },
+      "revId": "1f2f7b27f910009c24777d088a94ecd170e79c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "916ca45e_9cd1569d",
+        "filename": "services/audiopolicy/engineconfigurable/tools/capBuildCommonTypesStructureFile.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-22T13:56:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78bb91e0_58722382",
       "range": {
         "startLine": 159,
         "startChar": 30,
