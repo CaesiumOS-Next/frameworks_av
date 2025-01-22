@@ -592,8 +592,13 @@ sp<OpPlayAudioMonitor> OpPlayAudioMonitor::createIfNeeded(
 {
     Vector<String16> packages;
     const uid_t uid = VALUE_OR_FATAL(aidl2legacy_int32_t_uid_t(attributionSource.uid));
-    getPackagesForUid(uid, packages);
     if (isServiceUid(uid)) {
+        if(attributionSource.packageName.has_value() && attributionSource.packageName.value().size() != 0) {
+            String16 package = VALUE_OR_FATAL(aidl2legacy_string_view_String16(attributionSource.packageName.value_or("")));
+            packages.push_back(package);
+        } else {
+            getPackagesForUid(uid, packages);
+        }
         if (packages.isEmpty()) {
             ALOGW("OpPlayAudio: not muting track:%d usage:%d for service UID %d", id, attr.usage,
                   uid);
