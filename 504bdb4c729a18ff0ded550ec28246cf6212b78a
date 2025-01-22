@@ -90,6 +90,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b4a118_9e081490",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7488,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-22T03:12:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84ac2bbb_87770a8c",
+      "range": {
+        "startLine": 7488,
+        "startChar": 20,
+        "endLine": 7488,
+        "endChar": 38
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df42a648_34e1b3e5",
@@ -175,6 +199,30 @@
       "side": 1,
       "message": "OK, I thought about it again, and it indeed could be problematic",
       "parentUuid": "29700d88_56b024ca",
+      "range": {
+        "startLine": 7492,
+        "startChar": 31,
+        "endLine": 7492,
+        "endChar": 55
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d04e0f3_62fed054",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7492,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-22T03:12:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e16e09b_a5f6de00",
       "range": {
         "startLine": 7492,
         "startChar": 31,
@@ -400,6 +448,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e714017a_7324e06f",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7497,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-22T03:12:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "296bdda3_4efa5829",
+      "range": {
+        "startLine": 7491,
+        "startChar": 20,
+        "endLine": 7497,
+        "endChar": 94
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bd81984_bc04ea91",
@@ -413,6 +485,30 @@
       "writtenOn": "2025-01-15T19:12:47Z",
       "side": 1,
       "message": "Ideally I think this added if logic should be in the `selectOutput` implementation instead, WDYT @elaurent@google.com",
+      "range": {
+        "startLine": 7498,
+        "startChar": 24,
+        "endLine": 7498,
+        "endChar": 65
+      },
+      "revId": "504bdb4c729a18ff0ded550ec28246cf6212b78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "135f7553_0409a208",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7498,
+      "author": {
+        "id": 3464765
+      },
+      "writtenOn": "2025-01-22T03:12:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bd81984_bc04ea91",
       "range": {
         "startLine": 7498,
         "startChar": 24,
