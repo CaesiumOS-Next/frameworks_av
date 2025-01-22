@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac46ea0d_614f7cf8",
+        "filename": "media/libmedia/CodecCapabilities.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-22T18:48:18Z",
+      "side": 1,
+      "message": "nit: this could technically overflow int32, but this is controlled by the OEM so no guarding is technically required.",
+      "range": {
+        "startLine": 413,
+        "startChar": 23,
+        "endLine": 413,
+        "endChar": 29
+      },
+      "revId": "f328463760a02a79b0378e08ae27403c04c3c61a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
