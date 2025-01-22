@@ -143,13 +143,13 @@ status_t EffectConversionHelperAidl::handleGetParameter(uint32_t cmdSize, const 
     }
 
     const auto reader = EffectParamReader(*(effect_param_t*)pCmdData);
-    if (*replySize < sizeof(effect_param_t) + reader.getParameterSize()) {
+    if (*replySize < reader.getTotalSize()) {
         ALOGE("%s illegal param %s, replySize %u", __func__, reader.toString().c_str(), *replySize);
         return BAD_VALUE;
     }
 
     // copy effect_param_t and parameters
-    memcpy(pReplyData, pCmdData, sizeof(effect_param_t) + reader.getParameterSize());
+    memcpy(pReplyData, pCmdData, reader.getTotalSize());
     auto writer = EffectParamWriter(*(effect_param_t*)pReplyData);
     status_t ret = getParameter(writer);
     writer.finishValueWrite();
