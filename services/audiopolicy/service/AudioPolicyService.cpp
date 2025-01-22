@@ -1270,7 +1270,7 @@ NO_THREAD_SAFETY_ANALYSIS  // update for trylock.
             std::string dumpString = mSpatializer->toString(1 /* level */);
             write(fd, dumpString.c_str(), dumpString.size());
         } else {
-            String8 spatializerPtr = String8::format("Spatializer no supportted on this device\n");
+            String8 spatializerPtr = String8::format("Spatializer not supported on this device\n");
             write(fd, spatializerPtr.c_str(), spatializerPtr.size());
         }
 
