@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2167b9d_43b9f84c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3814868
+      },
+      "writtenOn": "2025-01-22T00:58:18Z",
+      "side": 1,
+      "message": "I updated the patch set.\nPlease review the code.",
+      "revId": "5b72b001c8e53b2a5c09d661595094d4a47981b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
