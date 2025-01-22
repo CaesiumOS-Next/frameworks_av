@@ -17,7 +17,7 @@
 #pragma once
 
 #include <aidl/android/hardware/media/c2/BnInputSurfaceConnection.h>
-#include <media/NdkImage.h>
+// #include <media/NdkImage.h>
 
 #include <C2.h>
 
@@ -35,12 +35,14 @@ struct InputSurfaceConnection : public BnInputSurfaceConnection {
 
     // implementation specific interface.
 
+    /*
     // Submit a buffer to the connected component.
     c2_status_t submitBuffer(
             int32_t bufferId,
             const AImage *buffer = nullptr,
             int64_t timestamp = 0,
             int fenceFd = -1);
+            */
 
     // Submit eos to the connected component.
     c2_status_t submitEos(int32_t bufferId);

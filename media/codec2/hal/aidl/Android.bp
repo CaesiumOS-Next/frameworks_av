@@ -100,7 +100,7 @@ cc_library {
         "libhidlbase",
         "liblog",
         "libnativewindow",
-        "libmediandk",
+        // "libmediandk",
         "libstagefright_aidl_bufferpool2",
         "libstagefright_bufferpool@2.0.1",
         "libui",

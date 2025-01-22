@@ -36,6 +36,7 @@ InputSurfaceConnection::~InputSurfaceConnection() {
     return ::ndk::ScopedAStatus::ok();
 }
 
+/*
 c2_status_t InputSurfaceConnection::submitBuffer(
         int32_t bufferId, const AImage *buffer, int64_t timestamp, int fenceFd) {
     (void)bufferId;
@@ -44,6 +45,7 @@ c2_status_t InputSurfaceConnection::submitBuffer(
     (void)fenceFd;
     return C2_OK;
 }
+*/
 
 c2_status_t InputSurfaceConnection::submitEos(int32_t bufferId) {
     (void)bufferId;
