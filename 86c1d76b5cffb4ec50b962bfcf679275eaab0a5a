@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76eb6540_424bcb39",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-23T00:35:33Z",
+      "side": 0,
+      "message": "should we make it const with VBR?",
+      "revId": "86c1d76b5cffb4ec50b962bfcf679275eaab0a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
