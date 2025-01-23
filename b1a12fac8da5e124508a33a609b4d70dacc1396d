@@ -34,6 +34,24 @@
       ],
       "revId": "b1a12fac8da5e124508a33a609b4d70dacc1396d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59db2c4b_1a86046e",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-01-23T06:46:57Z",
+      "side": 1,
+      "message": "In the earlier code, https://android-review.googlesource.com/c/platform/frameworks/av/+/3392607/5/media/codec2/components/aac/C2SoftAacEnc.cpp#b607\n\neven though the call is made the returned results are not used. They are ignored. Further this call needs to happen until aacEncEncode() returns AACENC_ENCODE_EOF instead of AACENC_OK. This was not happening as well.",
+      "parentUuid": "3c951f6c_71aa0078",
+      "revId": "b1a12fac8da5e124508a33a609b4d70dacc1396d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
