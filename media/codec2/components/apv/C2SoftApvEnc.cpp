@@ -981,15 +981,19 @@ c2_status_t C2SoftApvEnc::setEncodeArgs(oapv_frms_t* inputFrames, const C2Graphi
         }
         case C2PlanarLayout::TYPE_YUVA: {
             ALOGV("Convert from ABGR2101010 to P210");
-            uint16_t *dstY, *dstU, *dstV;
-            dstY = (uint16_t*)inputFrames->frm[0].imgb->a[0];
-            dstU = (uint16_t*)inputFrames->frm[0].imgb->a[1];
-            dstV = (uint16_t*)inputFrames->frm[0].imgb->a[2];
-            convertRGBA1010102ToYUV420Planar16(dstY, dstU, dstV, (uint32_t*)(input->data()[0]),
+            if (mColorFormat == OAPV_CF_PLANAR2) {
+                uint16_t *dstY, *dstUV;
+                dstY = (uint16_t*)inputFrames->frm[0].imgb->a[0];
+                dstUV = (uint16_t*)inputFrames->frm[0].imgb->a[1];
+                convertRGBA1010102ToP210(dstY, dstUV, (uint32_t*)(input->data()[0]),
                                                 layout.planes[layout.PLANE_Y].rowInc / 4, width,
                                                 height, mColorAspects->matrix,
                                                 mColorAspects->range);
-            break;
+                break;
+            } else {
+                ALOGE("Not supported color format. %d", mColorFormat);
+                return C2_BAD_VALUE;
+            }
         }
         case C2PlanarLayout::TYPE_YUV: {
             if (IsP010(*input)) {
