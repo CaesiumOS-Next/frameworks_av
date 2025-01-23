@@ -63,6 +63,30 @@
       },
       "revId": "f6e6d4057c43f20ace728649c2b27178b16d4b6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3b64a0_a1bfbdf9",
+        "filename": "services/audiopolicy/engine/common/src/EngineDefaultConfig.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-23T09:25:55Z",
+      "side": 1,
+      "message": "got it, defaut config uses... legacy xml file for volume. \nAligning default on phone even for volume, and adding hardcoded default if xml not found.",
+      "parentUuid": "ac386723_88778376",
+      "range": {
+        "startLine": 187,
+        "startChar": 6,
+        "endLine": 187,
+        "endChar": 24
+      },
+      "revId": "f6e6d4057c43f20ace728649c2b27178b16d4b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
