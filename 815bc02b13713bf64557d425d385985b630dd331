@@ -1,0 +1,131 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04460a66_c0178cc5",
+        "filename": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-23T21:21:30Z",
+      "side": 1,
+      "message": "Nit: since this method seems to be parsing and setting the default confgi, I would call it `parseAndSetDefaultConfiguration()` or something along those lines.",
+      "fixSuggestions": [
+        {
+          "fixId": "a8ae3772_217ea78d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 128,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "engineConfig::ParsingResult EngineBase::parseAndSetDefaultConfiguration() {\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 169,
+                "startChar": 0,
+                "endLine": 170,
+                "endChar": 0
+              },
+              "replacement": "        return parseAndSetDefaultConfiguration();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "815bc02b13713bf64557d425d385985b630dd331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6504d873_e852603d",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-23T21:21:30Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 102,
+        "startChar": 42,
+        "endLine": 102,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "07f2ab80_24303f90",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+              "range": {
+                "startLine": 102,
+                "startChar": 0,
+                "endLine": 103,
+                "endChar": 0
+              },
+              "replacement": "        return result.nbSkippedElement \u003d\u003d 0 ? NO_ERROR : BAD_VALUE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "815bc02b13713bf64557d425d385985b630dd331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7639de6a_e19db951",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-23T21:21:30Z",
+      "side": 1,
+      "message": "Nit space after 0",
+      "range": {
+        "startLine": 115,
+        "startChar": 42,
+        "endLine": 115,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e4fbee2e_cabb5fbc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+              "range": {
+                "startLine": 115,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": "        return result.nbSkippedElement \u003d\u003d 0 ? NO_ERROR : BAD_VALUE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "815bc02b13713bf64557d425d385985b630dd331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
