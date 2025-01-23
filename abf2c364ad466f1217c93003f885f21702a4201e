@@ -1,0 +1,382 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7cc7bc1_5a0b4077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-23T21:29:47Z",
+      "side": 1,
+      "message": "Ran locally on seahawk and it seems to be working fine.",
+      "revId": "abf2c364ad466f1217c93003f885f21702a4201e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabb363c_891884b0",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-23T21:29:47Z",
+      "side": 1,
+      "message": "This repeats since `__func__` will have the info already. Maybe just keep the `__func__` with generic message.\n\n```\nALOGE(\"%s failed, CAP not initialized\", __func__);\n```\n\nSame for other error message.",
+      "range": {
+        "startLine": 435,
+        "startChar": 29,
+        "endLine": 435,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c61a46d0_00ccf3eb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed, cannot init Cap.\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed, Cap not initialized\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 116,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "        ALOGV(\"%s Adding pair %\" PRIu64\", %s for criterionType %s\", __func__, std::get\u003c0\u003e(pair),\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 121,
+                "startChar": 0,
+                "endLine": 122,
+                "endChar": 0
+              },
+              "replacement": "            ALOGV(\"%s Adding mOutputDeviceToCriterionTypeMap %d %\" PRIu64\" for criterionType %s\",\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "            ALOGV(\"%s Adding mInputDeviceToCriterionTypeMap %d %\" PRIu64\" for criterionType %s\",\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "                \"%s Criterion %s already added\", __FUNCTION__, name.c_str());\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 142,
+                "startChar": 0,
+                "endLine": 143,
+                "endChar": 0
+              },
+              "replacement": "            ALOGE(\"%s trying to apply invalid default literal value (%s)\", __FUNCTION__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 164,
+                "startChar": 0,
+                "endLine": 165,
+                "endChar": 0
+              },
+              "replacement": "    ALOGD(\"%s in\", __FUNCTION__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 167,
+                "startChar": 0,
+                "endLine": 168,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s Policy PFW start error: %s\", __FUNCTION__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 171,
+                "startChar": 0,
+                "endLine": 172,
+                "endChar": 0
+              },
+              "replacement": "    ALOGD(\"%s Policy PFW successfully started!\", __FUNCTION__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 203,
+                "startChar": 0,
+                "endLine": 204,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s no criterion found for %s\", __FUNCTION__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 220,
+                "startChar": 0,
+                "endLine": 221,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s no criterion found for %s\", __FUNCTION__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s no criterion found for %s\", __FUNCTION__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 259,
+                "startChar": 0,
+                "endLine": 260,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s no criterion found for %s\", __FUNCTION__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 280,
+                "startChar": 0,
+                "endLine": 281,
+                "endChar": 0
+              },
+              "replacement": "    ALOGV(\"%s device with address %s %s\", __FUNCTION__, address.c_str(),\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 286,
+                "startChar": 0,
+                "endLine": 287,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s no criterion found for %s\", __FUNCTION__, criterionName.c_str());\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 293,
+                "startChar": 0,
+                "endLine": 294,
+                "endChar": 0
+              },
+              "replacement": "        ALOGW(\"%s unknown device address reported (%s) for criterion %s\", __FUNCTION__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 312,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s no criterion found for %s\", __func__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 325,
+                "startChar": 0,
+                "endLine": 326,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s no criterion found for %s\", __func__,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 337,
+                "startChar": 0,
+                "endLine": 338,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed to apply configuration, Cap not initialized\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 348,
+                "startChar": 0,
+                "endLine": 349,
+                "endChar": 0
+              },
+              "replacement": "        ALOGV(\"%s multibit device %d converted to criterion %\" PRIu64, __func__, type,\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 352,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": "    ALOGE(\"%s failed to find map for multibit device %d\", __func__, type);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 380,
+                "startChar": 0,
+                "endLine": 381,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed to createDomain, Cap not initialized\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 386,
+                "startChar": 0,
+                "endLine": 387,
+                "endChar": 0
+              },
+              "replacement": "        ALOGD(\"%s failed to create domain %s (error\u003d%s)\", __func__, domain.c_str(),\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 395,
+                "startChar": 0,
+                "endLine": 396,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed to addConfigurableElementToDomain, Cap not initialized\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 400,
+                "startChar": 0,
+                "endLine": 401,
+                "endChar": 0
+              },
+              "replacement": "    ALOGE_IF(!ret, \"%s failed to add parameter %s for domain %s (error\u003d%s)\",\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 408,
+                "startChar": 0,
+                "endLine": 409,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed to createConfiguration, Cap not initialized\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 413,
+                "startChar": 0,
+                "endLine": 414,
+                "endChar": 0
+              },
+              "replacement": "    ALOGE_IF(!ret, \"%s failed to create configuration %s for domain %s (error\u003d%s)\",\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 421,
+                "startChar": 0,
+                "endLine": 422,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed to setApplicationRule, Cap not initialized\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 426,
+                "startChar": 0,
+                "endLine": 427,
+                "endChar": 0
+              },
+              "replacement": "    ALOGE_IF(!ret, \"%s failed to set rule %s for domain %s and configuration %s (error\u003d%s)\",\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 435,
+                "startChar": 0,
+                "endLine": 436,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"%s failed to accessConfigurationValue, Cap not initialized\", __func__);\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 441,
+                "startChar": 0,
+                "endLine": 442,
+                "endChar": 0
+              },
+              "replacement": "    ALOGE_IF(!ret, \"%s failed to set value %s for parameter %s on domain %s and configuration %s \"\n"
+            },
+            {
+              "path": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+              "range": {
+                "startLine": 454,
+                "startChar": 0,
+                "endLine": 455,
+                "endChar": 0
+              },
+              "replacement": "        ALOGD(\"%s failed to set Tuning Mode error\u003d%s\", __FUNCTION__, error.c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "abf2c364ad466f1217c93003f885f21702a4201e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
