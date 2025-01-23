@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c79aaabc_b7ce553d",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-01-23T21:14:17Z",
+      "side": 1,
+      "message": "This could be problematic as the size of the vector is 0 here and C++ standard doesn\u0027t give quarantee about std::vector::data() returing a valid pointer in this case (when this buffer needs to be deferenced later)\n\n\u003e If size() is ​0​, data() may or may not return a null pointer.",
+      "range": {
+        "startLine": 641,
+        "startChar": 0,
+        "endLine": 641,
+        "endChar": 29
+      },
+      "revId": "a58f7bd2f5262b83ffb1b4fbf085adc1786302c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
