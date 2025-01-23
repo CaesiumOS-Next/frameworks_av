@@ -16,6 +16,24 @@
       "message": "should we make it const with VBR?",
       "revId": "86c1d76b5cffb4ec50b962bfcf679275eaab0a5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbd7c63_f6e9fa6b",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-01-23T05:21:40Z",
+      "side": 0,
+      "message": "Do we really need it? VBR is default isn\u0027t it?",
+      "parentUuid": "76eb6540_424bcb39",
+      "revId": "86c1d76b5cffb4ec50b962bfcf679275eaab0a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
