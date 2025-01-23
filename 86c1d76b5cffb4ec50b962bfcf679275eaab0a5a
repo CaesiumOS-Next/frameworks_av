@@ -34,6 +34,24 @@
       "parentUuid": "76eb6540_424bcb39",
       "revId": "86c1d76b5cffb4ec50b962bfcf679275eaab0a5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db841ec3_4d942faf",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-23T22:36:49Z",
+      "side": 0,
+      "message": "I\u0027m okay with not specifying it and let the default take over, but the intent is clearer if the code has the definition explicitly. Please add a comment that only VBR is supported here otherwise.",
+      "parentUuid": "7dbd7c63_f6e9fa6b",
+      "revId": "86c1d76b5cffb4ec50b962bfcf679275eaab0a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
