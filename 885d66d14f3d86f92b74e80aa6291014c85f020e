@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f74eea_e4ec4ede",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2278,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-01-23T19:19:53Z",
+      "side": 1,
+      "message": "Where is mNalLengthBitstream defined and used? (Couldn\u0027t see it in this file\u0027s context)",
+      "range": {
+        "startLine": 2276,
+        "startChar": 4,
+        "endLine": 2278,
+        "endChar": 5
+      },
+      "revId": "885d66d14f3d86f92b74e80aa6291014c85f020e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22779dc3_b2da86a2",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6991,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-01-23T19:19:53Z",
+      "side": 1,
+      "message": "Why are we setting nalLengthBistream if we are not using it here?",
+      "range": {
+        "startLine": 6986,
+        "startChar": 4,
+        "endLine": 6991,
+        "endChar": 0
+      },
+      "revId": "885d66d14f3d86f92b74e80aa6291014c85f020e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8572d9be_9db1196d",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-01-23T19:19:53Z",
+      "side": 1,
+      "message": "Why are we setting nalLengthBistream if we are not using it here?",
+      "range": {
+        "startLine": 2067,
+        "startChar": 4,
+        "endLine": 2070,
+        "endChar": 5
+      },
+      "revId": "885d66d14f3d86f92b74e80aa6291014c85f020e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
