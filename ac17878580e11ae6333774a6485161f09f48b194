@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47fa22f8_ea655cae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-24T19:58:09Z",
+      "side": 1,
+      "message": "Oscar, could you please test these CLs on the relevant configurations before we submit them?",
+      "revId": "ac17878580e11ae6333774a6485161f09f48b194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
