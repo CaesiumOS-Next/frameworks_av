@@ -22,6 +22,30 @@
       },
       "revId": "63e23fe30e64165d9fa8791ca846c4ad7f329303",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9ec04e1_1859c635",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-01-24T20:25:28Z",
+      "side": 0,
+      "message": "That\u0027s similar to what other encoders are doing for TYPE_YUVA (that is by some reason is an acronym for RGBA). https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/codec2/components/aom/C2SoftAomEnc.cpp;drc\u003db6bad9b230be9d118fd47b02f62deda7d698783b;l\u003d1000\nThe difference is that APV needs P210 input to its core library (AOM for example needs Planar 16 bit 420). Hence the additional function",
+      "parentUuid": "55d160a9_ad7a5c5a",
+      "range": {
+        "startLine": 988,
+        "startChar": 12,
+        "endLine": 988,
+        "endChar": 46
+      },
+      "revId": "63e23fe30e64165d9fa8791ca846c4ad7f329303",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
