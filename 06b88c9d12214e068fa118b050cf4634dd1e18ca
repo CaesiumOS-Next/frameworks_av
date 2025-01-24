@@ -22,6 +22,30 @@
       },
       "revId": "06b88c9d12214e068fa118b050cf4634dd1e18ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40561087_21b624bc",
+        "filename": "media/libaudiohal/impl/EffectConversionHelperAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 3670787
+      },
+      "writtenOn": "2025-01-24T14:40:13Z",
+      "side": 1,
+      "message": "Hi, thanks. Yes we have a vendor effect as VendorExtension in this case. I can confirm that passing down the full size solves our use case. However I wanted to start this discussion with Google to know if this is really intended to have different behaviours on HIDL compared to AIDL with effect_param_t. I commented a bit longer in https://partnerissuetracker.corp.google.com/issues/391660114 please have a look at that.",
+      "parentUuid": "1b853d4b_7a5d8978",
+      "range": {
+        "startLine": 154,
+        "startChar": 19,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "06b88c9d12214e068fa118b050cf4634dd1e18ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
