@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1a103db_3b362e60",
+        "filename": "services/audiopolicy/common/managerdefinitions/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-24T04:27:01Z",
+      "side": 1,
+      "message": "Francois, there should be 2 defines. One is unconditional to mark the hybrid mode code—just to mark, to simplify backporting. The state of the build flag should not affect the hybrid mode define, it should always be enabled.\n\nAnd there should be another define, to disable the use of the CAP AIDL that we have added. It is needed because CAP AIDL is a \"feature\" and there should be a way to turn it off via a flag.\n\nI have outlined that in the doc. This is how the Android.bp should look like:\n\n```\n        \"-DENABLE_CAP_AIDL_HYBRID_MODE\",\n    ] + select(release_flag(\"RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL\"), {\n        true: [],\n        default: [“-DDISABLE_CAP_AIDL”],\n    }),\n```",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 7
+      },
+      "revId": "abf2c364ad466f1217c93003f885f21702a4201e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cabb363c_891884b0",
         "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
         "patchSetId": 4
