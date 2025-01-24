@@ -52,6 +52,24 @@
       "parentUuid": "3c951f6c_71aa0078",
       "revId": "b1a12fac8da5e124508a33a609b4d70dacc1396d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500e70ad_464292e6",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2025-01-24T00:36:29Z",
+      "side": 1,
+      "message": "After flush, we are only handling AACENC_OK, Will it return some bytes with AACENC_ENCODE_EOF ? Should we handle that part?",
+      "parentUuid": "59db2c4b_1a86046e",
+      "revId": "b1a12fac8da5e124508a33a609b4d70dacc1396d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
