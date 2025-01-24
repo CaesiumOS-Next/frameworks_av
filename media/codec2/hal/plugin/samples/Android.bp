@@ -32,7 +32,6 @@ cc_defaults {
         "libbase",
         "libcodec2",
         "libcutils",
-        "libprocessgroup",
         "libsfplugin_ccodec_utils",
         "libsync",
         "libui",
