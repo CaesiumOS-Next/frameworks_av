@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "Utils"
 #include <utils/Log.h>
 #include <ctype.h>
@@ -741,13 +741,17 @@ static void parseAPVProfileLevelFromCsd(const sp<ABuffer>& csd, sp<AMessage>& fo
     // https://github.com/openapv/openapv/blob/main/readme/apv_isobmff.md#syntax-1
     const uint8_t* data = csd->data();
     size_t csdSize = csd->size();
-    if (csdSize < 21 || data[5] != 0x01) {  // configurationVersion == 1
+    for(int i = 0; i < csdSize; i++) {
+        ALOGE("CSD data %d",data[i]);
+    }
+    if (csdSize < 22 || data[0] != 0x01) {  // configurationVersion == 1
+        ALOGE("Incorrect CSD is present");
         return;
     }
-    uint8_t profileData = data[9];           // profile_idc
-    uint8_t levelData = data[10];            // level_idc
-    uint8_t band = data[11];                 // band_idc
-    uint8_t bitDepth = (data[20] >> 4) + 8;  // bit_depth_minus8
+    uint8_t profileData = data[5];           // profile_idc
+    uint8_t levelData = data[6];            // level_idc
+    uint8_t band = data[7];                 // band_idc
+    uint8_t bitDepth = (data[16] >> 4) + 8;  // bit_depth_minus8
     const static ALookup<std::pair<uint8_t, uint8_t>, int32_t> profiles{
             {{33, 10}, APVProfile422_10},
             {{44, 12}, APVProfile422_10HDR10Plus},
