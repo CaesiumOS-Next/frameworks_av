@@ -70,6 +70,24 @@
       "parentUuid": "59db2c4b_1a86046e",
       "revId": "b1a12fac8da5e124508a33a609b4d70dacc1396d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "402e7eb6_2c0aee63",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-01-24T06:55:10Z",
+      "side": 1,
+      "message": "AACENC_ENCODE_EOF is indicative of end of file reached. No data is received in this call. we will break out of the encode loop at this point.",
+      "parentUuid": "500e70ad_464292e6",
+      "revId": "b1a12fac8da5e124508a33a609b4d70dacc1396d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
