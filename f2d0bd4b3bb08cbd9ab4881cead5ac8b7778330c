@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c071351_201a1c74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-24T19:57:21Z",
+      "side": 1,
+      "message": "Looks good but I have a question.",
+      "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6943e901_45970ffb",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-24T19:57:21Z",
+      "side": 1,
+      "message": "@francois.gaffie@ampere.cars If CAP AIDL is enabled (`DISABLE_CAP_AIDL` not defined), but the AIDL CAP config is not provided (`AudioHalEngineConfig.capSpecificConfig.criteriaV2` not set) will hybrid mode still be able to use the PFW config from the vendor partition?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
