@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "Utils"
 #include <utils/Log.h>
 #include <ctype.h>
@@ -741,13 +741,26 @@ static void parseAPVProfileLevelFromCsd(const sp<ABuffer>& csd, sp<AMessage>& fo
     // https://github.com/openapv/openapv/blob/main/readme/apv_isobmff.md#syntax-1
     const uint8_t* data = csd->data();
     size_t csdSize = csd->size();
-    if (csdSize < 21 || data[5] != 0x01) {  // configurationVersion == 1
+    for (int i = 0; i < csdSize; i++) {
+        ALOGE("CSD data %d", data[i]);
+    }
+    int versionFlagOffset = 0;
+    if (data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 0) {
+        versionFlagOffset = 4;
+    }
+    if (csdSize < 17 || data[versionFlagOffset] != 0x01) {  // configurationVersion == 1
+        ALOGE("CSD is not according APV Configuration Standard");
         return;
     }
-    uint8_t profileData = data[9];           // profile_idc
-    uint8_t levelData = data[10];            // level_idc
-    uint8_t band = data[11];                 // band_idc
-    uint8_t bitDepth = (data[20] >> 4) + 8;  // bit_depth_minus8
+    uint8_t profileData = data[versionFlagOffset + 5];           // profile_idc
+    uint8_t levelData = data[versionFlagOffset + 6];             // level_idc
+    uint8_t band = data[versionFlagOffset + 7];                  // band_idc
+    uint8_t bitDepth = (versionFlagOffset + data[16] & 0x0F) + 8;  // bit_depth_minus8
+    ALOGE("profileData %d",profileData);
+    ALOGE("profileData %d",levelData);
+    ALOGE("band %d",band);
+    ALOGE("bitDepth %d",bitDepth);
+
     const static ALookup<std::pair<uint8_t, uint8_t>, int32_t> profiles{
             {{33, 10}, APVProfile422_10},
             {{44, 12}, APVProfile422_10HDR10Plus},
@@ -761,13 +774,17 @@ static void parseAPVProfileLevelFromCsd(const sp<ABuffer>& csd, sp<AMessage>& fo
             }
         }
         format->setInt32("profile", profile);
+        ALOGE("Profile is set");
     }
+    format->setInt32("profile", APVProfile422_10);
+    ALOGE("Profile is not set");
     int level_num = (levelData / 30) * 2;
     if (levelData % 30 == 0) {
         level_num -= 1;
     }
     int32_t level = ((0x100 << (level_num - 1)) | (1 << band));
     format->setInt32("level", level);
+    ALOGE("Level is not set");
 }
 
 static std::vector<std::pair<const char *, uint32_t>> stringMappings {
@@ -1478,8 +1495,7 @@ status_t convertMetaDataToMessage(
         buffer->meta()->setInt64("timeUs", 0);
         msg->setBuffer("csd-0", buffer);
         parseAV1ProfileLevelFromCsd(buffer, msg);
-    } else if (com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-               meta->findData(kKeyAPVC, &type, &data, &size)) {
+    } else if (meta->findData(kKeyAPVC, &type, &data, &size)) {
         sp<ABuffer> buffer = new (std::nothrow) ABuffer(size);
         if (buffer.get() == NULL || buffer->base() == NULL) {
             return NO_MEMORY;
@@ -2138,8 +2154,7 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
         } else if (mime == MEDIA_MIMETYPE_VIDEO_AV1 ||
                    mime == MEDIA_MIMETYPE_IMAGE_AVIF) {
             meta->setData(kKeyAV1C, 0, csd0->data(), csd0->size());
-        } else if (com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-                   mime == MEDIA_MIMETYPE_VIDEO_APV) {
+        } else if (mime == MEDIA_MIMETYPE_VIDEO_APV) {
             meta->setData(kKeyAPVC, 0, csd0->data(), csd0->size());
         } else if (mime == MEDIA_MIMETYPE_VIDEO_DOLBY_VISION) {
             int32_t profile = -1;
