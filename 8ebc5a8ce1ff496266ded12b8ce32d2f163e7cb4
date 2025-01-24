@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d69baf01_69fe9ca1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-24T20:01:32Z",
+      "side": 1,
+      "message": "this should be fixed as the new client should open an input from the second profile and not reuse the same profile as device #1",
+      "range": {
+        "startLine": 16,
+        "startChar": 14,
+        "endLine": 17,
+        "endChar": 35
+      },
+      "revId": "8ebc5a8ce1ff496266ded12b8ce32d2f163e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb05a5df_2e7765ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-24T20:01:32Z",
+      "side": 1,
+      "message": "If the second client was attached a different input stream we would not have to recompute the first clients device when the second client starts",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 34
+      },
+      "revId": "8ebc5a8ce1ff496266ded12b8ce32d2f163e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e8b16d9_2bdcdaad",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -36,6 +82,52 @@
         "startChar": 11,
         "endLine": 23,
         "endChar": 16
+      },
+      "revId": "8ebc5a8ce1ff496266ded12b8ce32d2f163e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7690fed_730f22cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-24T20:01:32Z",
+      "side": 1,
+      "message": "AAudio",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 16
+      },
+      "revId": "8ebc5a8ce1ff496266ded12b8ce32d2f163e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef7b218d_42492c26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-24T20:01:32Z",
+      "side": 1,
+      "message": "This is problematic because it breaks the symmetry with output device selection",
+      "range": {
+        "startLine": 27,
+        "startChar": 32,
+        "endLine": 28,
+        "endChar": 56
       },
       "revId": "8ebc5a8ce1ff496266ded12b8ce32d2f163e7cb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -60,6 +152,23 @@
         "endLine": 31,
         "endChar": 5
       },
+      "revId": "8ebc5a8ce1ff496266ded12b8ce32d2f163e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ac7e6d_976c7fb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-24T20:01:32Z",
+      "side": 1,
+      "message": "After looking into the probem it looks hard to find an ideal solution given the number of possible conflicting situations that can arise from having mutliple active clients, on different inptu streams or not, cpturing from the same device or not . We do not have enough info from the HAL implementaiton on which combinations are possible or not to implement a solid behavior.\nWhat we can try to do is being consistent in getInputForAttr: when a preferred device is requested, getInptuForAttr will use it (igoring the preferred device rules applied by the engine when findPreferredDevice() is called by getInputDeviceForAttributes(). This kind of makes snese as it allows to pick the rihgt device that \"should\" be used if all condiitons allow and therefore pick the right input profile and input stream .\nWe could do the same thing for the case wher no preferred device is selected and in the context of getInputforAttr, ignore any preferred device logic",
       "revId": "8ebc5a8ce1ff496266ded12b8ce32d2f163e7cb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
