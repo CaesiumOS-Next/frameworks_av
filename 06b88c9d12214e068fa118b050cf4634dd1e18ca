@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b853d4b_7a5d8978",
+        "filename": "media/libaudiohal/impl/EffectConversionHelperAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-01-24T00:32:20Z",
+      "side": 1,
+      "message": "Thanks for the CL!\n\nEven the vsize copy into the writer, the AIDL interface can only pass the `Parameter.ID` to the HAL as per definition:\n```\ninterface IEffect {\n    Parameter getParameter(in Parameter.Id paramId);\n}\n```\n\nSo from the effect HAL point of view, the vsize part will not pass down, right?\nOr are you trying to address a VendorExtension use case?",
+      "range": {
+        "startLine": 154,
+        "startChar": 19,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "06b88c9d12214e068fa118b050cf4634dd1e18ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
