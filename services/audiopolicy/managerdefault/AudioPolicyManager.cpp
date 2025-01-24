@@ -3022,7 +3022,8 @@ status_t AudioPolicyManager::getInputForAttr(const audio_attributes_t *attr,
         } else {
             // Prevent from storing invalid requested device id in clients
             requestedDeviceId = AUDIO_PORT_HANDLE_NONE;
-            device = mEngine->getInputDeviceForAttributes(attributes, uid, session, &policyMix);
+            device = mEngine->getInputDeviceForAttributes(
+                    attributes, true /*ignorePreferredDevice*/, uid, session, &policyMix);
             ALOGV_IF(device != nullptr, "%s found device type is 0x%X",
                 __FUNCTION__, device->type());
         }
@@ -3201,6 +3202,11 @@ audio_io_handle_t AudioPolicyManager::getInputForDevice(const sp<DeviceDescripto
                 if (topPrio < source_priority(attributes.source)
                       || (topPrio == source_priority(attributes.source)
                           && !desc->isPreemptor())) {
+                    if (topPrioClient->source() == attributes.source && desc->getDevice() == device) {
+                        // prefer reuse than close, otherwise current client will restore its record
+                        // and in the end, reuse logic will lead to both client to coexist.
+                        continue;
+                    }
                     int closeRank = (desc->isActive() ? sCloseActive : 0) + topPrio;
                     if (closeRank < leastCloseRank) {
                         leastCloseRank = closeRank;
@@ -3513,8 +3519,9 @@ bool AudioPolicyManager::checkCloseInput(const sp<AudioInputDescriptor>& input) 
     }
     for (const auto& client : input->clientsList()) {
         sp<DeviceDescriptor> device =
-            mEngine->getInputDeviceForAttributes(client->attributes(), client->uid(),
-                                                 client->session());
+            mEngine->getInputDeviceForAttributes(
+                    client->attributes(), false /*ignorePreferredDevice*/, client->uid(),
+                    client->session());
         if (!input->supportedDevices().contains(device)) {
             return true;
         }
@@ -7809,7 +7816,8 @@ sp<DeviceDescriptor> AudioPolicyManager::getNewInputDevice(
         attributes.source = AUDIO_SOURCE_VOICE_COMMUNICATION;
     }
     if (attributes.source != AUDIO_SOURCE_DEFAULT) {
-        device = mEngine->getInputDeviceForAttributes(attributes, uid, session);
+        device = mEngine->getInputDeviceForAttributes(
+                attributes, false /*ignorePreferredDevice*/, uid, session);
     }
 
     return device;
@@ -9208,10 +9216,7 @@ status_t AudioPolicyManager::getDevicesForAttributes(
 
 status_t AudioPolicyManager::getInputDevicesForAttributes(
         const audio_attributes_t &attr, DeviceVector &devices) {
-    devices = DeviceVector(
-            mEngine->getInputDeviceForAttributes(attr, 0 /*uid unknown here*/,
-                                                 AUDIO_SESSION_NONE,
-                                                 nullptr /* mix */));
+    devices = DeviceVector(mEngine->getInputDeviceForAttributes(attr));
     return NO_ERROR;
 }
 
