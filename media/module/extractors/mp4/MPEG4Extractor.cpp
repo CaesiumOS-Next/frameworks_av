@@ -369,10 +369,10 @@ static const char *FourCC2MIME(uint32_t fourcc) {
             return MEDIA_MIMETYPE_VIDEO_HEVC;
 
         case FOURCC("apv1"):
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
-                ALOGV("APV support not enabled");
-                return "application/octet-stream";
-            }
+            //            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
+            //                ALOGV("APV support not enabled");
+            //                return "application/octet-stream";
+            //            }
             return MEDIA_MIMETYPE_VIDEO_APV;
 
         case FOURCC("dvav"):
@@ -2636,12 +2636,12 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
         case FOURCC("apvC"):
         case FOURCC("av1C"):
         {
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-                chunk_type == FOURCC("apvC")) {
-                ALOGV("APV support not enabled");
-                *offset += chunk_size;
-                break;
-            }
+            //            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
+            //                chunk_type == FOURCC("apvC")) {
+            //                ALOGV("APV support not enabled");
+            //                *offset += chunk_size;
+            //                break;
+            //            }
 
             auto buffer = heapbuffer<uint8_t>(chunk_data_size);
 
@@ -5206,8 +5206,7 @@ MPEG4Source::MPEG4Source(
     mIsAVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
     mIsHEVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
               !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC);
-    mIsAPV = com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-             !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
+    mIsAPV = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
     mIsAC4 = !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_AC4);
     mIsDolbyVision = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_DOLBY_VISION);
     mIsHeif = !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC) && mItemTable != NULL;
