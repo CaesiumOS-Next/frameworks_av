@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23d186c6_82963259",
+        "filename": "services/audiopolicy/common/managerdefinitions/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-24T07:22:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1a103db_3b362e60",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 7
+      },
+      "revId": "abf2c364ad466f1217c93003f885f21702a4201e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cabb363c_891884b0",
@@ -398,6 +422,30 @@
           ]
         }
       ],
+      "revId": "abf2c364ad466f1217c93003f885f21702a4201e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d781660_b9e48ea1",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-24T07:22:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cabb363c_891884b0",
+      "range": {
+        "startLine": 435,
+        "startChar": 29,
+        "endLine": 435,
+        "endChar": 53
+      },
       "revId": "abf2c364ad466f1217c93003f885f21702a4201e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
