@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f8e661_18bb5e72",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyConfig.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-24T19:50:46Z",
+      "side": 1,
+      "message": "Removed this because the hybrid mode must depend only on the `ENABLE_CAP_AIDL_HYBRID_MODE` define, it should be available regardless of CAP AIDL enablement.",
+      "range": {
+        "startLine": 275,
+        "startChar": 41,
+        "endLine": 275,
+        "endChar": 70
+      },
+      "revId": "2395c9b74aafecf85b3dc18530c5d5505a3a8600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
