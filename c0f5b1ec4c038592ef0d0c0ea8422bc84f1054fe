@@ -16,6 +16,24 @@
       "message": "Francois, can you test this solution and review?",
       "revId": "c0f5b1ec4c038592ef0d0c0ea8422bc84f1054fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f2ba723_52bc221d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-27T17:21:52Z",
+      "side": 1,
+      "message": "Sure Eric, I will check. I see one potential failure if 2 assistant apps requests a preferred device (but they are 2 different devices) with the same input source. As the findPreferredDevice called from APM checks upon all inputs (where I had limited to the considered input the check of preferred device),\n\nIt will be let s say a current limitation of the system.\n\nBut it will perfectly serve the issue of default versus specific preferred. Except of course if an app request the default as the preferred.",
+      "parentUuid": "6609f31e_15dabb65",
+      "revId": "c0f5b1ec4c038592ef0d0c0ea8422bc84f1054fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
