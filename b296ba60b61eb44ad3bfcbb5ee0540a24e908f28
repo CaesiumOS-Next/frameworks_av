@@ -16,6 +16,24 @@
       "message": "Wonsik,\nWould this need to be done under a flag?\nAre flags now being used for swcodec modules?",
       "revId": "b296ba60b61eb44ad3bfcbb5ee0540a24e908f28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16f320c_04e58054",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-27T23:37:06Z",
+      "side": 1,
+      "message": "we are using flags in swcodec modules https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/aconfig/swcodec_flags.aconfig\n\nIf we don\u0027t put this behavior behind flag, we will be shipping this feature with the next mainline release. I am okay with it (and I think it\u0027s safe because fwk ignores unrecognized config). We should check if it works with older Android version to be sure (e.g. swcodec module containing this change running on U should not break).",
+      "parentUuid": "bd1cbe2a_d1d36919",
+      "revId": "b296ba60b61eb44ad3bfcbb5ee0540a24e908f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
