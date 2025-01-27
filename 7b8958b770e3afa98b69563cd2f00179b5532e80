@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0539ca0_b71fd734",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-27T23:38:18Z",
+      "side": 1,
+      "message": "is this fatal? we could perhaps just print a warning and move forward.",
+      "fixSuggestions": [
+        {
+          "fixId": "ba60ce97_9e47d536",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 385,
+                "startChar": 0,
+                "endLine": 390,
+                "endChar": 0
+              },
+              "replacement": "                ALOGW(\"Config update encoderDelay failed\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7b8958b770e3afa98b69563cd2f00179b5532e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
