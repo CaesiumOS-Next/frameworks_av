@@ -80,6 +80,30 @@
       },
       "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fc40d7a_1440ea7a",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-27T17:58:29Z",
+      "side": 1,
+      "message": "OK, let\u0027s fix that and then submit. Thank you Francois!",
+      "parentUuid": "05ef42ce_edb8e591",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
