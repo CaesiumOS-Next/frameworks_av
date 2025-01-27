@@ -56,6 +56,30 @@
       },
       "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ef42ce_edb8e591",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-27T17:49:35Z",
+      "side": 1,
+      "message": "I was stuck on this affirmation \" the code related to it should be disabled when RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL is true\" and did not consider hybrid mode allowed inconditionnaly here.\n\nSo, I need to rework here also to match the behavior of the last paragraph\n\n\n\"For clarity, we can use a C++ preprocessor define called ENABLE_CAP_AIDL_HYBRID_MODE as Francois does in https://r.android.com/3438629. However, if we make this define to follow the value of RELEASE_HARDWARE_AUDIO_USE_CAP_AIDL, it will contradict with our intent to keep the hybrid mode always enabled. It seems that the build flag should only control how the vendor partition is built and the behavior of using the value of capSpecificConfig on the system side (if the build flag is false, use of capSpecificConfig is disabled). Which means, we actually need another C++ define called, for example, DISABLE_CAP_AIDL just for that purpose.\n\"",
+      "parentUuid": "6943e901_45970ffb",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
