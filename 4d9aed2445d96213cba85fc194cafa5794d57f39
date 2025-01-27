@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "087aadde_e9707e85",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1975040
+      },
+      "writtenOn": "2025-01-27T02:31:55Z",
+      "side": 1,
+      "message": "This should be corrected as per the suggestion below.",
+      "range": {
+        "startLine": 754,
+        "startChar": 24,
+        "endLine": 754,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "be2a21c9_8fc2dd07",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/Utils.cpp",
+              "range": {
+                "startLine": 754,
+                "startChar": 0,
+                "endLine": 755,
+                "endChar": 0
+              },
+              "replacement": "    uint8_t bitDepth \u003d (data[16] \u0026 0x0F) + 8;  // bit_depth_minus8\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4d9aed2445d96213cba85fc194cafa5794d57f39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
