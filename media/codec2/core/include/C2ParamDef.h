@@ -154,6 +154,8 @@ struct C2_HIDE _C2FlexHelper<S[],
     enum : uint32_t { FLEX_SIZE = sizeof(S) };
 };
 
+enum class FlexCount : size_t {};
+
 /**
  * \brief Helper class to check flexible struct requirements and add common operations.
  *
@@ -202,9 +204,9 @@ protected:
     }
 
     /// dynamic new operator usable for params of type S
-    inline void* operator new(size_t size, size_t flexCount) noexcept {
+    inline void* operator new(size_t size, FlexCount flexCount) noexcept {
         // TODO: assert(size == BASE_SIZE);
-        size = CalcSize(flexCount, size);
+        size = CalcSize(static_cast<size_t>(flexCount), size);
         if (size > 0) {
             return ::operator new(size);
         }
@@ -262,21 +264,24 @@ protected:
 #define DEFINE_FLEXIBLE_ALLOC(_Type, S, ptr, Ptr) \
     template<typename ...Args> \
     inline static std::ptr##_ptr<_Type> Alloc##Ptr(size_t flexCount, const Args(&... args)) { \
-        return std::ptr##_ptr<_Type>(new(flexCount) _Type(flexCount, args...)); \
+        return std::ptr##_ptr<_Type>(new(static_cast<FlexCount>(flexCount)) \
+            _Type(flexCount, args...)); \
     } \
     template<typename ...Args, typename U=typename S::FlexType> \
     inline static std::ptr##_ptr<_Type> Alloc##Ptr( \
             const std::initializer_list<U> &init, const Args(&... args)) { \
-        return std::ptr##_ptr<_Type>(new(init.size()) _Type(init.size(), args..., init)); \
+        return std::ptr##_ptr<_Type>(new(static_cast<FlexCount>(init.size())) \
+            _Type(init.size(), args..., init)); \
     } \
     template<typename ...Args, typename U=typename S::FlexType> \
     inline static std::ptr##_ptr<_Type> Alloc##Ptr( \
             const std::vector<U> &init, const Args(&... args)) { \
-        return std::ptr##_ptr<_Type>(new(init.size()) _Type(init.size(), args..., init)); \
+        return std::ptr##_ptr<_Type>(new(static_cast<FlexCount>(init.size())) \
+            _Type(init.size(), args..., init)); \
     } \
     template<typename ...Args, typename U=typename S::FlexType, unsigned N> \
     inline static std::ptr##_ptr<_Type> Alloc##Ptr(const U(&init)[N], const Args(&... args)) { \
-        return std::ptr##_ptr<_Type>(new(N) _Type(N, args..., init)); \
+        return std::ptr##_ptr<_Type>(new(static_cast<FlexCount>(N)) _Type(N, args..., init)); \
     } \
 
 /**
