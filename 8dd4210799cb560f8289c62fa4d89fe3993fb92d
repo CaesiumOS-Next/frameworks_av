@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba72b9bc_cef97215",
+        "filename": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2025-01-28T01:46:25Z",
+      "side": 1,
+      "message": "I would avoid using the `pffft:detail`, since `detail` namespaces generally aren\u0027t considered public APIs.\n\nI think the correct type is `TransformType::PFFFT_REAL`\n\nThat being said, I think this is an artifact of using a mix of the C and C++ API. @mnaganov@google.com do you have any thoughts/preference?",
+      "fixSuggestions": [
+        {
+          "fixId": "d4d85234_3fea06b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+              "range": {
+                "startLine": 219,
+                "startChar": 0,
+                "endLine": 220,
+                "endChar": 0
+              },
+              "replacement": "    pffft::TransformType::PFFFT_Setup* handle \u003d pffft_new_setup(nPointFft, pffft::TransformType::PFFFT_REAL);\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+              "range": {
+                "startLine": 225,
+                "startChar": 0,
+                "endLine": 226,
+                "endChar": 0
+              },
+              "replacement": "                            pffft::TransformType::PFFFT_FORWARD);\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+              "range": {
+                "startLine": 298,
+                "startChar": 0,
+                "endLine": 299,
+                "endChar": 0
+              },
+              "replacement": "    pffft::TransformType::PFFFT_Setup* handle \u003d pffft_new_setup(kNPointFFT, pffft::TransformType::PFFFT_REAL);\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+              "range": {
+                "startLine": 300,
+                "startChar": 0,
+                "endLine": 301,
+                "endChar": 0
+              },
+              "replacement": "                            pffft::TransformType::PFFFT_FORWARD);\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+              "range": {
+                "startLine": 403,
+                "startChar": 0,
+                "endLine": 404,
+                "endChar": 0
+              },
+              "replacement": "    pffft::TransformType::PFFFT_Setup* handle \u003d pffft_new_setup(kNPointFFT, pffft::TransformType::PFFFT_REAL);\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+              "range": {
+                "startLine": 405,
+                "startChar": 0,
+                "endLine": 406,
+                "endChar": 0
+              },
+              "replacement": "                            pffft::TransformType::PFFFT_FORWARD);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8dd4210799cb560f8289c62fa4d89fe3993fb92d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
