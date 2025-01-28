@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce42832_5e88cb3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2025-01-28T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddd2fd2b_1f250f8e",
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca7520ba_c2078d49",
@@ -49,6 +67,30 @@
       "writtenOn": "2025-01-28T20:53:20Z",
       "side": 1,
       "message": "Can we rephrase this to:\n\nC++ does not allow defining a class-specific `operator new(size_t, size_t)` placement allocation method as that would call the non-placement `operator delete(void*, size_t)`. While the new operator is used as an allocating allocation method, after upgrading to clang-r547379, ...",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "510f66fc_b4c09e0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2025-01-28T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca7520ba_c2078d49",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -94,6 +136,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a866986_7c4b6e30",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2025-01-28T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5ae5c78_a3c31b65",
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7eff0f95_074ff450",
@@ -107,6 +167,30 @@
       "writtenOn": "2025-01-28T20:53:20Z",
       "side": 1,
       "message": "please prefix with _C2, e.g. _C2FlexCount.",
+      "range": {
+        "startLine": 157,
+        "startChar": 11,
+        "endLine": 157,
+        "endChar": 20
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "730538bc_e6085955",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2025-01-28T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eff0f95_074ff450",
       "range": {
         "startLine": 157,
         "startChar": 11,
@@ -202,6 +286,30 @@
       "side": 1,
       "message": "So perhaps just a comment saying: // no need to define a matching deleter T::operator delete(void *, _C2FlexSize) as per spec the default delete is called in not defined.",
       "parentUuid": "763211b6_ae01e69d",
+      "range": {
+        "startLine": 207,
+        "startChar": 26,
+        "endLine": 207,
+        "endChar": 63
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d1ae829_203101af",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2025-01-28T22:19:47Z",
+      "side": 1,
+      "message": "I think if `operator delete(void*, _C2FlexCount)` isn\u0027t defined, then no deallocation function is called.\n\nhttps://eel.is/c++draft/expr.new#29:\n\n\u003e [...] If the lookup finds a single matching deallocation function, that function will be called; otherwise, no deallocation function will be called. [...]",
+      "parentUuid": "efda5a0d_12b821e1",
       "range": {
         "startLine": 207,
         "startChar": 26,
