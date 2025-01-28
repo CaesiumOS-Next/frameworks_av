@@ -162,6 +162,30 @@
       },
       "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "763211b6_ae01e69d",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-28T20:58:02Z",
+      "side": 1,
+      "message": "Actually, no need for the delete operator: per the spec: If a class-specific delete(void*, _C2FlexCount) is defined, it is called in preference to the default delete operator.",
+      "parentUuid": "35fa5d01_408baa74",
+      "range": {
+        "startLine": 207,
+        "startChar": 26,
+        "endLine": 207,
+        "endChar": 63
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
