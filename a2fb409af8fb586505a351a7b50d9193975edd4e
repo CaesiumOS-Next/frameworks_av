@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb948b0_24821311",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-28T19:25:42Z",
+      "side": 1,
+      "message": "Can you please explain the rationale behind this change? If the issue is the missing delete operator matching the custom placement operator, shouldn\u0027t we instead add that? I\u0027m afraid soon the compiler will complain of not having a delete(void*, FlexCount) method.",
+      "range": {
+        "startLine": 207,
+        "startChar": 26,
+        "endLine": 207,
+        "endChar": 63
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
