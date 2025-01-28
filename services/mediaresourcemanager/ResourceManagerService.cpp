@@ -597,6 +597,7 @@ Status ResourceManagerService::reclaimResource(const ClientInfoParcel& clientInf
     String8 log = String8::format("reclaimResource(callingPid %d, uid %d resources %s)",
             clientInfo.pid, clientInfo.uid, getString(resources).c_str());
     mServiceLog->add(log);
+    ALOGI("%s", log.c_str());
     *_aidl_return = false;
 
     // Check if there are any resources to be reclaimed before processing.
@@ -931,6 +932,7 @@ bool ResourceManagerService::getAllClients_l(
     MediaResource::Type type = resourceRequestInfo.mResource->type;
     MediaResource::SubType subType = resourceRequestInfo.mResource->subType;
 
+    ALOGI("%s: Looking for clients with resource %s", __func__, asString(type));
     for (auto& [pid, infos] : mMap) {
         for (const auto& [id, info] : infos) {
             if (pid == resourceRequestInfo.mCallingPid && id == resourceRequestInfo.mClientId) {
@@ -952,7 +954,7 @@ bool ResourceManagerService::getAllClients_l(
         }
     }
     if (clientsInfo.size() == 0) {
-        ALOGV("%s: didn't find any resource %s", __func__, asString(type));
+        ALOGI("%s: didn't find any resource %s", __func__, asString(type));
     }
     return true;
 }
@@ -975,6 +977,9 @@ bool ResourceManagerService::getLowestPriorityBiggestClient_l(
         return false;
     }
     if (!getLowestPriorityPid_l(type, subType, &lowestPriorityPid, &lowestPriority)) {
+        ALOGE("%s: Calling Process(pid: %d priority: %d)"
+              " failed to find lowest lowest priority process(pid: %d, priority: %d)",
+              __func__, callingPid, callingPriority, lowestPriorityPid, lowestPriority);
         return false;
     }
     if (lowestPriority <= callingPriority) {
@@ -984,6 +989,10 @@ bool ResourceManagerService::getLowestPriorityBiggestClient_l(
     }
 
     if (!getBiggestClient_l(lowestPriorityPid, type, subType, clientInfo)) {
+        ALOGE("%s: Failed to get a biggest client for the"
+              " Calling Process(pid: %d priority: %d)"
+              " from the lowest priority process(pid: %d, priority: %d)",
+              __func__, callingPid, callingPriority, lowestPriorityPid, lowestPriority);
         return false;
     }
 
@@ -996,6 +1005,7 @@ bool ResourceManagerService::getLowestPriorityPid_l(MediaResource::Type type,
         MediaResource::SubType subType, int *lowestPriorityPid, int *lowestPriority) {
     int pid = -1;
     int priority = -1;
+
     for (auto& [tempPid, infos] : mMap) {
         if (infos.size() == 0) {
             // no client on this process.
@@ -1007,10 +1017,11 @@ bool ResourceManagerService::getLowestPriorityPid_l(MediaResource::Type type,
         }
         int tempPriority = -1;
         if (!getPriority_l(tempPid, &tempPriority)) {
-            ALOGV("getLowestPriorityPid_l: can't get priority of pid %d, skipped", tempPid);
+            ALOGI("%s: getLowestPriorityPid_l: can't get priority of pid %d, skipped", __func__, tempPid);
             // TODO: remove this pid from mMap?
             continue;
         }
+        ALOGI("%s: Process(pid: %d priority: %d) has the resources", __func__, tempPid, tempPriority);
         if (pid == -1 || tempPriority > priority) {
             // initial the value
             pid = tempPid;
