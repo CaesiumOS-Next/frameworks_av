@@ -102,6 +102,24 @@
       "parentUuid": "ba72b9bc_cef97215",
       "revId": "8dd4210799cb560f8289c62fa4d89fe3993fb92d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9220f521_08d1d446",
+        "filename": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2025-01-28T02:32:30Z",
+      "side": 1,
+      "message": "I think the reason it doesn\u0027t have shorthand is that these constants are associated with the C interface only (and the function we are calling is in the C interface).\n\nI think the design of the API is that you have to pick, C or C++, and if using the C APIs, then you shouldn\u0027t include the `hpp`\n\n\nI.e. you would instantiate the `Fft\u003cfloat\u003e object {kNPointFFT}`.\n\nThat all being said, given the way the code is used here, probably switching to the `h` from the `hpp` is easier.",
+      "parentUuid": "c56175df_4e432b4c",
+      "revId": "8dd4210799cb560f8289c62fa4d89fe3993fb92d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
