@@ -46,6 +46,30 @@
       },
       "revId": "06b88c9d12214e068fa118b050cf4634dd1e18ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3e1e6f_3b6b1a6d",
+        "filename": "media/libaudiohal/impl/EffectConversionHelperAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-01-28T23:14:29Z",
+      "side": 1,
+      "message": "As mentioned in the bug: \nhttps://partnerissuetracker.corp.google.com/issues/391660114#comment7\n\nIf only psize is append to the cmd buffer, then I think we will get a OOB memory access with the memcpy in the CL (pCmdData does not have a valid vsize part)\n\nIt might be okay for your case if passing directly to audioserver, but this change will break other use cases from libaudioclient.\nI suggest we abandon this change, and investigate other approaches like \"pass it as part of the parameter (psize of effect_param_t)\".\nThanks!",
+      "parentUuid": "40561087_21b624bc",
+      "range": {
+        "startLine": 154,
+        "startChar": 19,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "06b88c9d12214e068fa118b050cf4634dd1e18ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
