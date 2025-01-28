@@ -318,6 +318,30 @@
       },
       "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d073f2_6b69588c",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2025-01-28T22:31:45Z",
+      "side": 1,
+      "message": "I think we probably do want to define an `operator delete(void*, _C2FlexCount)`, though it will only be used if the constructor throws an exception. I\u0027ll add one.",
+      "parentUuid": "5d1ae829_203101af",
+      "range": {
+        "startLine": 207,
+        "startChar": 26,
+        "endLine": 207,
+        "endChar": 63
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
