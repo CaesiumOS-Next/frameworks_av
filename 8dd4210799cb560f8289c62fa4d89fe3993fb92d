@@ -84,6 +84,24 @@
       ],
       "revId": "8dd4210799cb560f8289c62fa4d89fe3993fb92d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c56175df_4e432b4c",
+        "filename": "media/libaudioclient/tests/audioeffect_analyser.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-28T02:05:34Z",
+      "side": 1,
+      "message": "Agree that we can replace `pffft::detail::PFFFT_REAL` with `pffft::TransformType::PFFFT_REAL`. However, `PFFFT_FORWARD` does not seem to have a proper shorthand, so is `PFFFT_Setup`. So for uniformity we can use `pffft::detail` everywhere. In my view, the non-canonical NS name problem is on the pffft\u0027s side. Usually \"implementation detail\" namespaces tend to be made less accessible to external code.",
+      "parentUuid": "ba72b9bc_cef97215",
+      "revId": "8dd4210799cb560f8289c62fa4d89fe3993fb92d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
