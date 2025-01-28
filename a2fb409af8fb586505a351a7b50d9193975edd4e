@@ -3,6 +3,104 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6e223cf_6389f897",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-28T20:53:20Z",
+      "side": 1,
+      "message": "can we say: Change size_t flexCount type to FlexCount",
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7520ba_c2078d49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-28T20:53:20Z",
+      "side": 1,
+      "message": "Can we rephrase this to:\n\nC++ does not allow defining a class-specific `operator new(size_t, size_t)` placement allocation method as that would call the non-placement `operator delete(void*, size_t)`. While the new operator is used as an allocating allocation method, after upgrading to clang-r547379, ...",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ae5c78_a3c31b65",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-28T20:53:20Z",
+      "side": 1,
+      "message": "can we add a javadoc?\n\nSimple wrapper class for size_t, so that we can define a T::operator new(size_t, _C2FlexCount) because T::operator new(size_t, size_t) is disallowed by the C++ standard.",
+      "fixSuggestions": [
+        {
+          "fixId": "0d61e28d_7b199e83",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/core/include/C2ParamDef.h",
+              "range": {
+                "startLine": 157,
+                "startChar": 0,
+                "endLine": 157,
+                "endChar": 0
+              },
+              "replacement": "/// Simple wrapper class for size_t, so that we can define a T::operator\n/// new(size_t, _C2FlexCount) because T::operator new(size_t, size_t) is\n/// disallowed by the C++ standard.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eff0f95_074ff450",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-28T20:53:20Z",
+      "side": 1,
+      "message": "please prefix with _C2, e.g. _C2FlexCount.",
+      "range": {
+        "startLine": 157,
+        "startChar": 11,
+        "endLine": 157,
+        "endChar": 20
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecb948b0_24821311",
         "filename": "media/codec2/core/include/C2ParamDef.h",
         "patchSetId": 2
@@ -14,6 +112,30 @@
       "writtenOn": "2025-01-28T19:25:42Z",
       "side": 1,
       "message": "Can you please explain the rationale behind this change? If the issue is the missing delete operator matching the custom placement operator, shouldn\u0027t we instead add that? I\u0027m afraid soon the compiler will complain of not having a delete(void*, FlexCount) method.",
+      "range": {
+        "startLine": 207,
+        "startChar": 26,
+        "endLine": 207,
+        "endChar": 63
+      },
+      "revId": "a2fb409af8fb586505a351a7b50d9193975edd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35fa5d01_408baa74",
+        "filename": "media/codec2/core/include/C2ParamDef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-01-28T20:53:20Z",
+      "side": 1,
+      "message": "I understand now. Can we update the javadocs to be more descriptive? Can we also add an operator delete(void*, _C2FlexCount) { ::operator delete(ptr); }",
+      "parentUuid": "ecb948b0_24821311",
       "range": {
         "startLine": 207,
         "startChar": 26,
