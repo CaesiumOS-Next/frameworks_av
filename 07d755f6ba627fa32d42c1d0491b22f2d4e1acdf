@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "549b9976_2efebf7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-29T21:55:53Z",
+      "side": 1,
+      "message": "The code here: https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/audio/policy/1.0/vts/functional/ValidateEngineConfiguration.cpp;l\u003d81;drc\u003d5a6ffb21a59d6575a359eb30f35855615839a9c2 is not updated.\n\nI can update it. It should always use the vendor config.",
+      "parentUuid": "caabeb72_9ab712a9",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 4
+      },
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "30f99d4d_e02275a5",
