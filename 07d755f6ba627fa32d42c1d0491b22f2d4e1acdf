@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "caabeb72_9ab712a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-29T21:46:23Z",
+      "side": 1,
+      "message": "I am getting the same error as the pre-submit:\n```\n[ 89% 445/495] \n//hardware/interfaces/audio/policy/1.0/vts/functional:VtsHalAudioPolicyV1_0TargetTest clang++ ValidateEngineConfiguration.cpp [x86]\nFAILED: out/soong/.intermediates/hardware/interfaces/audio/policy/1.0/vts/functional/VtsHalAudioPolicyV1_0TargetTest/android_x86_silvermont/obj/hardware/inte\nrfaces/audio/policy/1.0/vts/functional/ValidateEngineConfiguration.o\nhardware/interfaces/audio/policy/1.0/vts/functional/ValidateEngineConfiguration.cpp:81:21: error: no matching constructor for initialization of \u0027android::aud\nio_policy::ParameterManagerWrapper\u0027\n   81 |                 new android::audio_policy::ParameterManagerWrapper(validateSchema, schemasUri));\n```\n\nIt probably just means we need to add another parameter for legacy configuration file:\n```\nParameterManagerWrapper(bool useLegacyConfigurationFile \u003d false,...)\n```\n\nThis probably needs to follow the same rules we described in Mikhail\u0027s document.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 4
+      },
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "30f99d4d_e02275a5",
