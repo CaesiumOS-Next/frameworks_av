@@ -128,6 +128,30 @@
       },
       "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c599c5e_de0335e1",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-29T07:55:30Z",
+      "side": 1,
+      "message": "No, not complicated, will use domains availability in capSpecificConfig as it is also part of full Cap AIDL new contract.",
+      "parentUuid": "0fc40d7a_1440ea7a",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
