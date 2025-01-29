@@ -1177,6 +1177,18 @@ void C2SoftApvEnc::createCsdData(const std::unique_ptr<C2Work>& work,
     number_of_frame_info = 1;  // The real-time encoding on the device is assumed to be 1.
 
     std::vector<uint8_t> csdData;
+
+    //TODO(kyslov): These 4 lines need to be removed once test data are fixed.
+    //Look at b/392976813 for more info.
+    csdData.push_back((uint8_t)0x0);
+    csdData.push_back((uint8_t)0x0);
+    csdData.push_back((uint8_t)0x0);
+    csdData.push_back((uint8_t)0x0);
+
+    //TODO(kyslov) This need to be removed once OpenAPV is fixed.
+    //See b/392976819 for more info.
+    bit_depth_minus8 = 2;
+
     csdData.push_back((uint8_t)0x1);
     csdData.push_back(number_of_configuration_entry);
 

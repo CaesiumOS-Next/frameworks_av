@@ -747,7 +747,7 @@ static void parseAPVProfileLevelFromCsd(const sp<ABuffer>& csd, sp<AMessage>& fo
     uint8_t profileData = data[9];           // profile_idc
     uint8_t levelData = data[10];            // level_idc
     uint8_t band = data[11];                 // band_idc
-    uint8_t bitDepth = (data[20] >> 4) + 8;  // bit_depth_minus8
+    uint8_t bitDepth = (data[20] & 0xf) + 8; // bit_depth_minus8
     const static ALookup<std::pair<uint8_t, uint8_t>, int32_t> profiles{
             {{33, 10}, APVProfile422_10},
             {{44, 12}, APVProfile422_10HDR10Plus},
