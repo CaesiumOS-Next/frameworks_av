@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f069009b_9a19857a",
+        "filename": "media/libaudioclient/tests/audiosystem_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-01-29T02:25:22Z",
+      "side": 1,
+      "message": "Coul we use speaker or bus if available (any other device that is available)?",
+      "range": {
+        "startLine": 567,
+        "startChar": 34,
+        "endLine": 567,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "380da753_baf777c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 566,
+                "startChar": 0,
+                "endLine": 570,
+                "endChar": 0
+              },
+              "replacement": "    std::vector\u003cstruct audio_port_v7\u003e ports;\n    status_t status \u003d listAudioPorts(ports);\n    ASSERT_EQ(OK, status);\n    if (ports.empty()) {\n        GTEST_SKIP() \u003c\u003c \"No ports returned by the audio system\";\n    }\n    for (const auto\u0026 port : ports) {\n        if (port.role !\u003d AUDIO_PORT_ROLE_SINK || port.type !\u003d AUDIO_PORT_TYPE_DEVICE) continue;\n        if (port.ext.device.type \u003d\u003d AUDIO_DEVICE_OUT_SPEAKER) continue;\n        AudioDeviceTypeAddr outputDevice(port.ext.device.type, \"\");\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 573,
+                "startChar": 0,
+                "endLine": 573,
+                "endChar": 0
+              },
+              "replacement": "        break;\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 574,
+                "startChar": 0,
+                "endLine": 574,
+                "endChar": 0
+              },
+              "replacement": "    GTEST_SKIP() \u003c\u003c \"No ports suitable for testing\";\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 585,
+                "startChar": 0,
+                "endLine": 589,
+                "endChar": 0
+              },
+              "replacement": "    std::vector\u003cstruct audio_port_v7\u003e ports;\n    status_t status \u003d listAudioPorts(ports);\n    ASSERT_EQ(OK, status);\n    if (ports.empty()) {\n        GTEST_SKIP() \u003c\u003c \"No ports returned by the audio system\";\n    }\n    for (const auto\u0026 port : ports) {\n        if (port.role !\u003d AUDIO_PORT_ROLE_SINK || port.type !\u003d AUDIO_PORT_TYPE_DEVICE) continue;\n        if (port.ext.device.type \u003d\u003d AUDIO_DEVICE_OUT_SPEAKER) continue;\n        AudioDeviceTypeAddr outputDevice(port.ext.device.type, \"\");\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 592,
+                "startChar": 0,
+                "endLine": 592,
+                "endChar": 0
+              },
+              "replacement": "        break;\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 593,
+                "startChar": 0,
+                "endLine": 593,
+                "endChar": 0
+              },
+              "replacement": "    GTEST_SKIP() \u003c\u003c \"No ports suitable for testing\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "efa48840db5f977299decf9c55a2b97cd13ec133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
