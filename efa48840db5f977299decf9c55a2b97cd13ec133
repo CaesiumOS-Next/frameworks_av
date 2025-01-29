@@ -90,6 +90,30 @@
       ],
       "revId": "efa48840db5f977299decf9c55a2b97cd13ec133",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90804ca1_59175f85",
+        "filename": "media/libaudioclient/tests/audiosystem_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-29T18:17:00Z",
+      "side": 1,
+      "message": "OK, switched to use any available output device.",
+      "parentUuid": "f069009b_9a19857a",
+      "range": {
+        "startLine": 567,
+        "startChar": 34,
+        "endLine": 567,
+        "endChar": 58
+      },
+      "revId": "efa48840db5f977299decf9c55a2b97cd13ec133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
