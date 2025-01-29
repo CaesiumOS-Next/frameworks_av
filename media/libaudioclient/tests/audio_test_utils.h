@@ -52,6 +52,7 @@ status_t getPortByAttributes(audio_port_role_t role, audio_port_type_t type,
                              audio_port_v7& port);
 status_t getPatchForOutputMix(audio_io_handle_t audioIo, audio_patch& patch);
 status_t getPatchForInputMix(audio_io_handle_t audioIo, audio_patch& patch);
+status_t isAutomotivePlatform(bool* isAutomotive);
 bool patchContainsOutputDevice(audio_port_handle_t deviceId, audio_patch patch);
 bool patchContainsInputDevice(audio_port_handle_t deviceId, audio_patch patch);
 bool checkPatchPlayback(audio_io_handle_t audioIo, audio_port_handle_t deviceId);

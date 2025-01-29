@@ -18,6 +18,8 @@
 #define LOG_TAG "AudioTestUtils"
 
 #include <android-base/file.h>
+#include <android/content/pm/IPackageManagerNative.h>
+#include <binder/IServiceManager.h>
 #include <system/audio_config.h>
 #include <utils/Log.h>
 
@@ -759,6 +761,28 @@ status_t getPatchForInputMix(audio_io_handle_t audioIo, audio_patch& patch) {
         }
     }
     return BAD_VALUE;
+}
+
+status_t isAutomotivePlatform(bool* isAutomotive) {
+    const sp<IServiceManager> sm = defaultServiceManager();
+    if (sm == nullptr) {
+        ALOGE("%s: failed to retrieve defaultServiceManager", __func__);
+        return NO_INIT;
+    }
+    sp<IBinder> binder = sm->checkService(String16{"package_native"});
+    if (binder == nullptr) {
+        ALOGE("%s: failed to retrieve native package manager", __func__);
+        return NO_INIT;
+    }
+    *isAutomotive = false;
+    const auto pm = interface_cast<content::pm::IPackageManagerNative>(binder);
+    if (pm != nullptr) {
+        const auto status =
+                pm->hasSystemFeature(String16("android.hardware.type.automotive"), 0, isAutomotive);
+        return status.isOk() ? OK : status.transactionError();
+    }
+    ALOGE("%s: failed to cast to IPackageManagerNative", __func__);
+    return NO_INIT;
 }
 
 bool patchContainsOutputDevice(audio_port_handle_t deviceId, audio_patch patch) {
