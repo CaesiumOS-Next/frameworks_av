@@ -18,6 +18,8 @@
 #define LOG_TAG "AudioTestUtils"
 
 #include <android-base/file.h>
+#include <android/content/pm/IPackageManagerNative.h>
+#include <binder/IServiceManager.h>
 #include <system/audio_config.h>
 #include <utils/Log.h>
 
@@ -639,6 +641,28 @@ uint32_t AudioCapture::waitAndGetReceivedCbMarkerCount() const {
         return mReceivedCbMarkerCount.has_value();
     });
     return mReceivedCbMarkerCount.value_or(0);
+}
+
+status_t isAutomotivePlatform(bool* isAutomotive) {
+    const sp<IServiceManager> sm = defaultServiceManager();
+    if (sm == nullptr) {
+        ALOGE("%s: failed to retrieve defaultServiceManager", __func__);
+        return NO_INIT;
+    }
+    sp<IBinder> binder = sm->checkService(String16{"package_native"});
+    if (binder == nullptr) {
+        ALOGE("%s: failed to retrieve native package manager", __func__);
+        return NO_INIT;
+    }
+    *isAutomotive = false;
+    const auto pm = interface_cast<content::pm::IPackageManagerNative>(binder);
+    if (pm != nullptr) {
+        const auto status =
+                pm->hasSystemFeature(String16("android.hardware.type.automotive"), 0, isAutomotive);
+        return status.isOk() ? OK : status.transactionError();
+    }
+    ALOGE("%s: failed to cast to IPackageManagerNative", __func__);
+    return NO_INIT;
 }
 
 status_t listAudioPorts(std::vector<audio_port_v7>& portsVec) {

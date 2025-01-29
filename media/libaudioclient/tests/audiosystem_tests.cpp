@@ -562,11 +562,15 @@ TEST_F(AudioSystemTest, UidDeviceAffinities) {
     AudioDeviceTypeAddrVector inputDevices = {inputDevice};
     EXPECT_EQ(BAD_VALUE, AudioSystem::setUidDeviceAffinities(uid, inputDevices));
 
-    // Test valid device for example audio_is_output_device
-    AudioDeviceTypeAddr outputDevice(AUDIO_DEVICE_OUT_SPEAKER, "");
-    AudioDeviceTypeAddrVector outputDevices = {outputDevice};
-    EXPECT_EQ(NO_ERROR, AudioSystem::setUidDeviceAffinities(uid, outputDevices));
-    EXPECT_EQ(NO_ERROR, AudioSystem::removeUidDeviceAffinities(uid));
+    audio_port_v7 port;
+    if (OK == getPortByAttributes(AUDIO_PORT_ROLE_SINK, AUDIO_PORT_TYPE_DEVICE,
+                                  AUDIO_DEVICE_OUT_SPEAKER, "", port)) {
+        // Test valid device for example audio_is_output_device
+        AudioDeviceTypeAddr outputDevice(AUDIO_DEVICE_OUT_SPEAKER, "");
+        AudioDeviceTypeAddrVector outputDevices = {outputDevice};
+        EXPECT_EQ(NO_ERROR, AudioSystem::setUidDeviceAffinities(uid, outputDevices));
+        EXPECT_EQ(NO_ERROR, AudioSystem::removeUidDeviceAffinities(uid));
+    }
 }
 
 TEST_F(AudioSystemTest, UserIdDeviceAffinities) {
@@ -577,11 +581,15 @@ TEST_F(AudioSystemTest, UserIdDeviceAffinities) {
     AudioDeviceTypeAddrVector inputDevices = {inputDevice};
     EXPECT_EQ(BAD_VALUE, AudioSystem::setUserIdDeviceAffinities(userId, inputDevices));
 
-    // Test valid device for ezample audio_is_output_device
-    AudioDeviceTypeAddr outputDevice(AUDIO_DEVICE_OUT_SPEAKER, "");
-    AudioDeviceTypeAddrVector outputDevices = {outputDevice};
-    EXPECT_EQ(NO_ERROR, AudioSystem::setUserIdDeviceAffinities(userId, outputDevices));
-    EXPECT_EQ(NO_ERROR, AudioSystem::removeUserIdDeviceAffinities(userId));
+    audio_port_v7 port;
+    if (OK == getPortByAttributes(AUDIO_PORT_ROLE_SINK, AUDIO_PORT_TYPE_DEVICE,
+                                  AUDIO_DEVICE_OUT_SPEAKER, "", port)) {
+        // Test valid device for example audio_is_output_device
+        AudioDeviceTypeAddr outputDevice(AUDIO_DEVICE_OUT_SPEAKER, "");
+        AudioDeviceTypeAddrVector outputDevices = {outputDevice};
+        EXPECT_EQ(NO_ERROR, AudioSystem::setUserIdDeviceAffinities(userId, outputDevices));
+        EXPECT_EQ(NO_ERROR, AudioSystem::removeUserIdDeviceAffinities(userId));
+    }
 }
 
 namespace {
