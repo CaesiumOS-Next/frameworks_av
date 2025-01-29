@@ -104,6 +104,30 @@
       },
       "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312b2c1f_f10a0630",
+        "filename": "services/audiopolicy/engineconfigurable/wrapper/ParameterManagerWrapper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-29T01:41:10Z",
+      "side": 1,
+      "message": "Francois, is it complicated to make this change?",
+      "parentUuid": "0fc40d7a_1440ea7a",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "f2d0bd4b3bb08cbd9ab4881cead5ac8b7778330c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
