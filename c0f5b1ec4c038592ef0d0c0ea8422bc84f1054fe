@@ -34,6 +34,24 @@
       "parentUuid": "6609f31e_15dabb65",
       "revId": "c0f5b1ec4c038592ef0d0c0ea8422bc84f1054fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db025bc_ff05630d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-30T12:35:41Z",
+      "side": 1,
+      "message": "Sorry for late answer (was in TCR in Paris). My bad, I had forgotten that getNewInputDevice was looking for preferred device on prior of calling engine getInputForAttriubtes, regardless of the source. I had also forgotten that findPreferredDevice would only honor preferred if all active clients have an preferred device for the given filter (input source)\nSo the patch works perfectly well.\n\nI have just a remarked an unrouting case, I d like to propose a small fix in the fix_input_sharing_logic introduced:\n\nwe can improve the reuse strategy instead of closing candidate. It prevents a preemption, and so a closure, followed by restoreRecord_l that finally would reuse the input.",
+      "parentUuid": "7f2ba723_52bc221d",
+      "revId": "c0f5b1ec4c038592ef0d0c0ea8422bc84f1054fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
