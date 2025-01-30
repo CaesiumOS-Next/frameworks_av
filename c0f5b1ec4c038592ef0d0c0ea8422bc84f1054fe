@@ -52,6 +52,24 @@
       "parentUuid": "7f2ba723_52bc221d",
       "revId": "c0f5b1ec4c038592ef0d0c0ea8422bc84f1054fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff29e1b_eef158c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-01-30T12:53:18Z",
+      "side": 1,
+      "message": "CL to fix spurious close\n\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3469216",
+      "parentUuid": "9db025bc_ff05630d",
+      "revId": "c0f5b1ec4c038592ef0d0c0ea8422bc84f1054fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
