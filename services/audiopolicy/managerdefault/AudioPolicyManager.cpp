@@ -3202,6 +3202,11 @@ audio_io_handle_t AudioPolicyManager::getInputForDevice(const sp<DeviceDescripto
                 if (topPrio < source_priority(attributes.source)
                       || (topPrio == source_priority(attributes.source)
                           && !desc->isPreemptor())) {
+                    if (topPrioClient->source() == attributes.source && desc->getDevice() == device) {
+                        // prefer reuse than close, otherwise current client will restore its record
+                        // and in the end, reuse logic will lead to both client to coexist.
+                        continue;
+                    }
                     int closeRank = (desc->isActive() ? sCloseActive : 0) + topPrio;
                     if (closeRank < leastCloseRank) {
                         leastCloseRank = closeRank;
