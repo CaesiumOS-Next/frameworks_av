@@ -16,6 +16,23 @@
       "message": "@kyslov@google.com is the bitrate value reasonable for APV codecs? IIUC APV is specialized for very high bitrate use cases.",
       "revId": "1b771d87237d6c7631024a899f3d0664a3f3b85e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85084b0_faf03bac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-01-30T18:24:47Z",
+      "side": 1,
+      "message": "Given that APV is not supporting CBR, we can ignore this CL for now.\nwithout this the adaptive bitrate test doesn\u0027t run for APV encoder.",
+      "revId": "1b771d87237d6c7631024a899f3d0664a3f3b85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
