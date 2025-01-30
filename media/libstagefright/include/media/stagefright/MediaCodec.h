@@ -381,6 +381,9 @@ private:
                                              uint32_t flags,
                                              status_t* err);
 
+    // Convert all resource counts into const type.
+    void updateResources(std::vector<InstanceResourceInfo>& resources);
+
 private:
     enum State {
         UNINITIALIZED,
@@ -819,6 +822,9 @@ private:
     CodecErrorLog mErrorLog;
     // Required resource info for this codec.
     Mutexed<std::vector<InstanceResourceInfo>> mRequiredResourceInfo;
+
+    // Default frame-rate.
+    float mFrameRate = 30.0;
 
     DISALLOW_EVIL_CONSTRUCTORS(MediaCodec);
 };
