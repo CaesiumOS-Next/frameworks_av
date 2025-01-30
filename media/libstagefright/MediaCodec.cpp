@@ -1218,6 +1218,54 @@ inline MediaResourceType getResourceType(const std::string& resourceName) {
     return MediaResourceType::kUnspecified;
 }
 
+/*
+ * Use frame rate for per frame resource calculation as below:
+ * - Check if operating-rate is available. If so, use it.
+ * - If its encoder and if we have capture-rate, use that as frame rate.
+ * - Else, check if frame-rate is available. If so, use it.
+ * - Else, use the default value.
+ */
+static float getFrameRate(const sp<AMessage>& format, float defaultFrameRate, bool isEncoder) {
+    float operatingRate = 0;
+    if (format->findFloat("operating-rate", &operatingRate)) {
+        // Use operating rate to convert per-frame resources into a whole.
+        return operatingRate;
+    }
+
+    float captureRate = 0;
+    if (isEncoder && format->findFloat("capture-rate", &captureRate)) {
+        // Use capture rate to convert per-frame resources into a whole.
+        return captureRate;
+    }
+
+    // Otherwise use frame-rate (or fallback to the default framerate passed)
+    float frameRate = defaultFrameRate;
+    format->findFloat("frame-rate", &frameRate);
+    return frameRate;
+}
+
+/**
+ * Convert per frame/input/output resources into static_count
+ *
+ * TODO: (girishshetty): In the future, change InstanceResourceInfo to hold:
+ * - resource type (const, per frame, per input/output)
+ * - resource count
+ */
+void MediaCodec::updateResources(std::vector<InstanceResourceInfo>& resources) {
+    for (InstanceResourceInfo& resource : resources) {
+        // If mStaticCount isn't 0, nothing to be changed.
+        if (resource.mStaticCount != 0) {
+            continue;
+        }
+        if (resource.mPerFrameCount != 0) {
+            resource.mStaticCount = resource.mPerFrameCount * mFrameRate;
+            // We are tracking everything as static count here. So set this to 0.
+            resource.mPerFrameCount = 0;
+        }
+        // TODO: (girishshetty): Add per input/output resource conversion here.
+    }
+}
+
 //static
 status_t MediaCodec::getGloballyAvailableResources(std::vector<GlobalResourceInfo>& resources) {
     resources.clear();
@@ -2634,6 +2682,10 @@ status_t MediaCodec::configure(
         }
     }
 
+    if (err == OK && mDomain == DOMAIN_VIDEO) {
+        bool isEncoder = mFlags & kFlagIsEncoder;
+        mFrameRate = getFrameRate(format, mFrameRate, isEncoder);
+    }
     return err;
 }
 
@@ -4416,6 +4468,8 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                         Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(
                                 mRequiredResourceInfo);
                         *resourcesLocked = mCodec->getRequiredSystemResources();
+                        // Convert per frame/input/output resources into static_count
+                        updateResources(*resourcesLocked);
                     }
 
                     setState(CONFIGURED);
@@ -6167,6 +6221,11 @@ void MediaCodec::handleOutputFormatChangeIfNeeded(const sp<MediaCodecBuffer> &bu
     }
 
     updateHdrMetrics(false /* isConfig */);
+
+    if (mDomain == DOMAIN_VIDEO) {
+        bool isEncoder = mFlags & kFlagIsEncoder;
+        mFrameRate = getFrameRate(mOutputFormat, mFrameRate, isEncoder);
+    }
 }
 
 // always called from the looper thread (and therefore not mutexed)
@@ -7205,6 +7264,8 @@ void MediaCodec::onRequiredResourcesChanged(
         android::media::codec::codec_availability_support()) {
         Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mRequiredResourceInfo);
         *resourcesLocked = resourceInfo;
+        // Convert per frame/input/output resources into static_count
+        updateResources(*resourcesLocked);
         canIssueCallback = true;
     }
     // Make sure codec availability feature is on.
