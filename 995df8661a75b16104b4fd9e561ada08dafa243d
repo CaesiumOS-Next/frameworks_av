@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a66035b0_8b69c390",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3206,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-30T15:10:46Z",
+      "side": 1,
+      "message": "given topPrioClient-\u003esource() \u003d\u003d attributes.source is the same condition as topPrio \u003d\u003d source_priority(attributes.source) hee, can we combine this into the first if as:\nif (topPrio \u003c source_priority(attributes.source)\n       || ((topPrio \u003d\u003d source_priority(attributes.source))\n                          \u0026\u0026 !(desc-\u003eisPreemptor() || (desc-\u003egetDevice() \u003d\u003d device))))",
+      "range": {
+        "startLine": 3205,
+        "startChar": 20,
+        "endLine": 3206,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d237805a_b992c80b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 3203,
+                "startChar": 0,
+                "endLine": 3211,
+                "endChar": 0
+              },
+              "replacement": "                      || (topPrio \u003d\u003d source_priority(attributes.source) \u0026\u0026 !desc-\u003eisPreemptor()\n                          \u0026\u0026 topPrioClient-\u003esource() !\u003d attributes.source)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "995df8661a75b16104b4fd9e561ada08dafa243d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
