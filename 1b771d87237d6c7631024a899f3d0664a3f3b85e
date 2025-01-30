@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95116932_f7ca3aa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-01-30T17:31:37Z",
+      "side": 1,
+      "message": "@kyslov@google.com is the bitrate value reasonable for APV codecs? IIUC APV is specialized for very high bitrate use cases.",
+      "revId": "1b771d87237d6c7631024a899f3d0664a3f3b85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
