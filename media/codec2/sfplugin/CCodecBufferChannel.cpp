@@ -1238,6 +1238,13 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
 
 status_t CCodecBufferChannel::renderOutputBuffer(
         const sp<MediaCodecBuffer> &buffer, int64_t timestampNs) {
+    std::string traceStr;
+    if (ATRACE_ENABLED()) {
+        traceStr = android::base::StringPrintf(
+                "CCodecBufferChannel::renderOutputBuffer-%s", mName);
+    }
+    ScopedTrace trace(ATRACE_TAG, traceStr.c_str());
+
     ALOGV("[%s] renderOutputBuffer: %p", mName, buffer.get());
     std::shared_ptr<C2Buffer> c2Buffer;
     bool released = false;
@@ -2363,6 +2370,12 @@ void CCodecBufferChannel::onWorkDone(
         const sp<AMessage> &inputFormat,
         const sp<AMessage> &outputFormat,
         const C2StreamInitDataInfo::output *initData) {
+    std::string traceStr;
+    if (ATRACE_ENABLED()) {
+        traceStr = android::base::StringPrintf(
+                "CCodecBufferChannel::onWorkDone-%s", mName).c_str();
+    }
+    ScopedTrace trace(ATRACE_TAG, traceStr.c_str());
     if (handleWork(std::move(work), inputFormat, outputFormat, initData)) {
         feedInputBufferIfAvailable();
     }
@@ -2396,6 +2409,12 @@ bool CCodecBufferChannel::handleWork(
         const sp<AMessage> &inputFormat,
         const sp<AMessage> &outputFormat,
         const C2StreamInitDataInfo::output *initData) {
+    std::string traceStr;
+    if (ATRACE_ENABLED()) {
+        traceStr = android::base::StringPrintf(
+                "CCodecBufferChannel::handleWork-%s", mName).c_str();
+    }
+    ScopedTrace atrace(ATRACE_TAG, traceStr.c_str());
     {
         Mutexed<Output>::Locked output(mOutput);
         if (!output->buffers) {
@@ -2746,6 +2765,7 @@ bool CCodecBufferChannel::handleWork(
 }
 
 void CCodecBufferChannel::sendOutputBuffers() {
+    ScopedTrace trace(ATRACE_TAG, "CCodecBufferChannel::sendOutputBuffers");
     OutputBuffers::BufferAction action;
     size_t index;
     sp<MediaCodecBuffer> outBuffer;
