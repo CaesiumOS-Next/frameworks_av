@@ -1,0 +1,115 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3872e012_bd14c08c",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 4278,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-01-31T17:53:16Z",
+      "side": 1,
+      "message": "the indentation looks wrong?",
+      "range": {
+        "startLine": 4259,
+        "startChar": 0,
+        "endLine": 4278,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c4cc71f5_7289225d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4257,
+                "startChar": 0,
+                "endLine": 4258,
+                "endChar": 0
+              },
+              "replacement": "                ACONFIG_FLAG(com::android::media::audioserver, fix_input_sharing_logic))\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4259,
+                "startChar": 0,
+                "endLine": 4260,
+                "endChar": 0
+              },
+              "replacement": "    mClient-\u003eresetInputApiCallsCounters();\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4261,
+                "startChar": 0,
+                "endLine": 4268,
+                "endChar": 0
+              },
+              "replacement": "    audio_attributes_t attr \u003d AUDIO_ATTRIBUTES_INITIALIZER;\n    attr.source \u003d AUDIO_SOURCE_VOICE_RECOGNITION;\n    audio_port_handle_t selectedDeviceId \u003d AUDIO_PORT_HANDLE_NONE;\n    audio_io_handle_t input1 \u003d AUDIO_PORT_HANDLE_NONE;\n    ASSERT_NO_FATAL_FAILURE(getInputForAttr(attr, \u0026input1, TEST_SESSION_ID, 1, \u0026selectedDeviceId,\n                                            AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_IN_STEREO,\n                                            k48000SamplingRate));\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4269,
+                "startChar": 0,
+                "endLine": 4270,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(1, mClient-\u003egetOpenInputCallsCount());\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4271,
+                "startChar": 0,
+                "endLine": 4275,
+                "endChar": 0
+              },
+              "replacement": "    audio_io_handle_t input2 \u003d AUDIO_PORT_HANDLE_NONE;\n    ASSERT_NO_FATAL_FAILURE(getInputForAttr(attr, \u0026input2, OTHER_SESSION_ID, 1, \u0026selectedDeviceId,\n                                            AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_IN_STEREO,\n                                            k48000SamplingRate));\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4276,
+                "startChar": 0,
+                "endLine": 4279,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(1, mClient-\u003egetOpenInputCallsCount());\n    EXPECT_EQ(0, mClient-\u003egetCloseInputCallsCount());\n    EXPECT_EQ(input1, input2);\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4302,
+                "startChar": 0,
+                "endLine": 4304,
+                "endChar": 0
+              },
+              "replacement": "                                            AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_IN_STEREO,\n                                            k48000SamplingRate));\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4332,
+                "startChar": 0,
+                "endLine": 4333,
+                "endChar": 0
+              },
+              "replacement": "                                            k48000SamplingRate));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2a68ef65fa01aa737bc528f7d4329f5d1909b2b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
