@@ -87,6 +87,23 @@
       "message": "Build are running fine with no failures with the latest. Only CF failure is still happening, I\u0027ll update the bug. That seems to be more related to the configuration which we can fix on the CF host CLs.",
       "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734cf92b_f2c22222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-01-31T01:09:11Z",
+      "side": 1,
+      "message": "Oscar, could you please review / approve.",
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
