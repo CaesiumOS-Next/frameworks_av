@@ -104,6 +104,91 @@
       "message": "Oscar, could you please review / approve.",
       "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "903c2a67_47b3729a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-31T17:54:46Z",
+      "side": 1,
+      "message": "Thanks for the contribution to Android!\n\nI\u0027m coming in with some post-submit drive-by comments, because it looks like the current code has both potential use of uninitialized memory, as well as memory leaks.\n\nI don\u0027t know this code, so I might be misreading things.  But hopefully this is helpful, and I think we can fix things up by just changing a couple lines of code.\n\nThanks!",
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393b6404_a33f7234",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-31T17:54:46Z",
+      "side": 1,
+      "message": "...are to also avoid memory leaks here.  Note that if `mPolicyParamterMgr` has already been allocated, we leak that here.  And since the destructor doesn\u0027t handle this field, this new instance here also leaks.\n\nIf we switch to `std::unique_ptr`, then we\u0027d make this:\n\n```\nmPolicyParameterMgr \u003d std::make_unique\u003cParameterManagerWrapper\u003e();\n```\n\nThat would destruct any preexisting instance stored in `mPolicyParameterMgr`, avoiding a leak of that.  And this new instance would also be destroyed when this class instance is destructed.",
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd38ed4_7de6d2f4",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-31T17:54:46Z",
+      "side": 1,
+      "message": "We\u0027d need to make a similar change here, doing:\n\n```\nmPolicyParameterMgr \u003d std::make_unique\u003cParameterManagerWrapper\u003e(/* useLegacyVendorFile\u003d */ true);\n```\n\nNote that this current code has the same memory leak issues as mentioned with the other location.",
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de4c6326_542f70a4",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-31T17:54:46Z",
+      "side": 1,
+      "message": "Note that we don\u0027t initialize `mPolicyParameterMgr` to `nullptr` here, so we\u0027re not assured that the logic we have which assumes a `nullptr` value means unused isn\u0027t assured to work.\n\nHowever, instead of initializing the pointer here, it\u0027s probably better if we...",
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb5fee7a_fda0faf1",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2025-01-31T17:54:46Z",
+      "side": 1,
+      "message": "...make this:\n\n```\nstd::unique_ptr\u003cParameterManagerWrapper\u003e mPolicyParameterMgr;\n```\n\nWe\u0027d need to then also add `#include \u003cmemory\u003e` for this header.\n\nI suggest this because it looks like this field is a private member of this class, we never pass the pointer itself out of this class, and don\u0027t expect its contents to live beyond the life of the instance of this class.  I don\u0027t have deep context on this code, so if my assumptions here are wrong, then we should avoid this.\n\nBut assuming we do this, the advantages, besides making sure this is initialized to `nullptr` by default...",
+      "revId": "07d755f6ba627fa32d42c1d0491b22f2d4e1acdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
