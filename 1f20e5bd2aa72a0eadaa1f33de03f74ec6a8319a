@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3078face_99e53c34",
+        "filename": "media/libaudioclient/AudioTrack.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2025-01-31T13:19:49Z",
+      "side": 1,
+      "message": "for compressed formats ideally bit_width shouldn\u0027t matter. Anyway, this is case when client is explicitly not setting any offload info.\n\nfor compressed audio_bytes_per_sample will return 0, so bit_width will be 0.",
+      "revId": "1f20e5bd2aa72a0eadaa1f33de03f74ec6a8319a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
