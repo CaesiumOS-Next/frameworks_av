@@ -34,6 +34,24 @@
       ],
       "revId": "61112e2c5fa1049c30122ad0567822289ca169a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa4199a_3707b7fa",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5131,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-02-03T21:54:07Z",
+      "side": 1,
+      "message": "Yes, av1C extends ISBMFF \u0027Box\u0027, apvC extends ISOBMFF \u0027FullBox\u0027. \u0027FullBox\u0027 has extra 32bits of data before payload",
+      "parentUuid": "b78c1715_97da1a6a",
+      "revId": "61112e2c5fa1049c30122ad0567822289ca169a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
