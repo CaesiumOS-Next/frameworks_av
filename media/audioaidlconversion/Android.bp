@@ -218,6 +218,9 @@ cc_library {
     ],
     cflags: [
         "-DBACKEND_NDK",
+        "-mllvm",
+		"-enable-jump-table-to-switch=false",
+		"-fno-merge-all-constants",
     ],
     min_sdk_version: "31", //AParcelableHolder has been introduced in 31
 }
