@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b78c1715_97da1a6a",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5131,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-03T21:52:35Z",
+      "side": 1,
+      "message": "Fyodor,\nThis doesn\u0027t look correct.\nav1C creation above in line 5121, doesn\u0027t do this.",
+      "fixSuggestions": [
+        {
+          "fixId": "22e70394_7a1e5849",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MPEG4Writer.cpp",
+              "range": {
+                "startLine": 5131,
+                "startChar": 0,
+                "endLine": 5132,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "61112e2c5fa1049c30122ad0567822289ca169a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
