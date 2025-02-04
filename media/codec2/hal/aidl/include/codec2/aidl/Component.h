@@ -102,6 +102,8 @@ protected:
 
     void initListener(const std::shared_ptr<Component>& self);
 
+    bool isBlockFenceSupported();
+
     virtual ~Component() override;
 
     friend struct ComponentStore;

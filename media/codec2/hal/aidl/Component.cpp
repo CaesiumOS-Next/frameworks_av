@@ -363,6 +363,7 @@ ScopedAStatus Component::createBlockPool(
             allocatorParam.igba = allocator.gbAllocator->igba;
             allocatorParam.waitableFd.reset(
                     allocator.gbAllocator->waitableFd.dup().release());
+            allocatorParam.blockFenceSupport = isBlockFenceSupported();
         }
         break;
         default: {
@@ -519,6 +520,21 @@ void Component::initListener(const std::shared_ptr<Component>& self) {
     } else {
         mInit = C2_NO_INIT;
     }
+}
+
+bool Component::isBlockFenceSupported() {
+    static std::once_flag sCheckOnce;
+    static bool sBlockFenceSupported {false};
+
+    std::call_once(sCheckOnce, [&](){
+        if (!mComponent || mInit != C2_OK) {
+            return;
+        }
+        std::shared_ptr<C2ComponentInterface> intf = mComponent->intf();
+        (void)intf;
+        sBlockFenceSupported = true;
+    });
+    return sBlockFenceSupported;
 }
 
 // static
