@@ -1037,7 +1037,11 @@ void NuPlayer::onMessageReceived(const sp<AMessage> &msg) {
                 if (instantiateDecoder(false, &mVideoDecoder) == -EWOULDBLOCK) {
                     rescan = true;
                 }
-            }
+		 // Check if video track is present
+                if (mVideoDecoder != NULL && NULL != mRenderer.get()) {
+                   mRenderer->setFlag(NuPlayer::Renderer::FLAG_HAS_VIDEO_TRACK);
+		}
+	    }
 
             // Don't try to re-open audio sink if there's an existing decoder.
             if (mAudioSink != NULL && mAudioDecoder == NULL) {

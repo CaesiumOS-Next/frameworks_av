@@ -90,6 +90,8 @@ static const int64_t kMinimumAudioClockUpdatePeriodUs = 20 /* msec */ * 1000;
 // Used to set max media time in MediaClock.
 static const int64_t kDefaultVideoFrameIntervalUs = 100000LL;
 
+static const int64_t kMaxDrainAudioQueueDelayUs =  250 /* msec */ * 1000;
+
 // static
 const NuPlayer::Renderer::PcmInfo NuPlayer::Renderer::AUDIO_PCMINFO_INITIALIZER = {
         AUDIO_CHANNEL_NONE,
@@ -127,6 +129,7 @@ NuPlayer::Renderer::Renderer(
       mAnchorNumFramesWritten(-1),
       mVideoLateByUs(0LL),
       mNextVideoTimeMediaUs(-1),
+      mDrainAudioQueueDelay(0),
       mHasAudio(false),
       mHasVideo(false),
       mNotifyCompleteAudio(false),
@@ -605,6 +608,16 @@ void NuPlayer::Renderer::onMessageReceived(const sp<AMessage> &msg) {
             CHECK(msg->findInt32("drainGeneration", &generation));
             if (generation != getDrainGeneration(true /* audio */)) {
                 break;
+            }
+             // Postpone the draining of audio queue if video track is present
+            // and video rendering is not started.
+            if ((mFlags & FLAG_HAS_VIDEO_TRACK) && false == mVideoRenderingStarted) {
+                // Introduce one audio sample delay for every iteration
+                mDrainAudioQueueDelay += (mAudioSink->msecsPerFrame()*1000ll);
+                if (mDrainAudioQueueDelay < kMaxDrainAudioQueueDelayUs) {
+                    postDrainAudioQueue_l(mAudioSink->msecsPerFrame()*1000ll);
+                    break;
+                }
             }
 
             if (onDrainAudioQueue()) {
@@ -1746,10 +1759,12 @@ void NuPlayer::Renderer::onFlush(const sp<AMessage> &msg) {
             mAudioSink->start();
         }
         mNextAudioClockUpdateTimeUs = -1;
+	mDrainAudioQueueDelay = 0;
     } else {
         flushQueue(&mVideoQueue);
 
         mDrainVideoQueuePending = false;
+	mVideoRenderingStarted = false;
 
         if (mVideoScheduler != NULL) {
             mVideoScheduler->restart();
@@ -2234,6 +2249,10 @@ void NuPlayer::Renderer::WakeLockEvent::dump(AString& logString) {
   logString.append(",");
   logString.append(mRendererTimeoutGeneration);
   logString.append("]");
+}
+
+void NuPlayer::Renderer::setFlag(uint32_t flag) {
+    mFlags |= flag;
 }
 
 }  // namespace android

@@ -36,6 +36,7 @@ struct NuPlayer::Renderer : public AHandler {
     enum Flags {
         FLAG_REAL_TIME = 1,
         FLAG_OFFLOAD_AUDIO = 2,
+	FLAG_HAS_VIDEO_TRACK = 4,
     };
     Renderer(const sp<MediaPlayerBase::AudioSink> &sink,
              const sp<MediaClock> &mediaClock,
@@ -93,6 +94,9 @@ struct NuPlayer::Renderer : public AHandler {
             uint32_t flags,
             bool isStreaming,
             const sp<AMessage> &notify);
+
+    //An api to set the renderer flags
+    void setFlag(uint32_t flag)
 
     enum {
         kWhatEOS                      = 'eos ',
@@ -186,6 +190,7 @@ private:
     int64_t mAnchorNumFramesWritten;
     int64_t mVideoLateByUs;
     int64_t mNextVideoTimeMediaUs;
+    int64_t mDrainAudioQueueDelay;
     bool mHasAudio;
     bool mHasVideo;
 
