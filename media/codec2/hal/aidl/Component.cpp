@@ -363,6 +363,7 @@ ScopedAStatus Component::createBlockPool(
             allocatorParam.igba = allocator.gbAllocator->igba;
             allocatorParam.waitableFd.reset(
                     allocator.gbAllocator->waitableFd.dup().release());
+            allocatorParam.blockFenceSupport = isBlockFenceSupported();
         }
         break;
         default: {
@@ -519,6 +520,30 @@ void Component::initListener(const std::shared_ptr<Component>& self) {
     } else {
         mInit = C2_NO_INIT;
     }
+}
+
+bool Component::isBlockFenceSupported() {
+    static std::once_flag sCheckOnce;
+    static bool sBlockFenceSupported {false};
+
+    std::call_once(sCheckOnce, [&](){
+        if (!mComponent || mInit != C2_OK) {
+            return;
+        }
+        std::shared_ptr<C2ComponentInterface> intf = mComponent->intf();
+        if (!intf) {
+            return;
+        }
+        c2_status_t err = C2_OK;
+        std::vector<std::unique_ptr<C2Param>> heapParams;
+        C2ApiFeaturesSetting features = (C2Config::api_feature_t)0;
+        err = intf->query_vb({&features}, {}, C2_MAY_BLOCK, &heapParams);
+        if (err == C2_OK &&
+                ((features.value & C2Config::api_feature_t::API_BLOCK_FENCES) != 0)) {
+            sBlockFenceSupported = true;
+        }
+    });
+    return sBlockFenceSupported;
 }
 
 // static
