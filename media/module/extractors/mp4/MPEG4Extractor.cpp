@@ -2633,16 +2633,38 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
             break;
         }
 
-        case FOURCC("apvC"):
-        case FOURCC("av1C"):
-        {
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-                chunk_type == FOURCC("apvC")) {
+        case FOURCC("apvC"): {
+            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
                 ALOGV("APV support not enabled");
                 *offset += chunk_size;
                 break;
             }
 
+            auto buffer = heapbuffer<uint8_t>(chunk_data_size);
+
+            if (buffer.get() == NULL) {
+                ALOGE("b/28471206");
+                return NO_MEMORY;
+            }
+
+            if (mDataSource->readAt(data_offset, buffer.get(), chunk_data_size) < chunk_data_size) {
+                return ERROR_IO;
+            }
+
+            // apvC extends FullBox so first 4 bytes of version and flag should be zero.
+            if (mLastTrack == NULL ||
+                (buffer[0] != 0 && buffer[1] != 0 && buffer[2] != 0 && buffer[3] != 0))
+                return ERROR_MALFORMED;
+
+            // Advance the buffer pointer by 4 bytes as it contains 4 bytes of flag and version.
+            int bytes_to_skip = 4;
+            AMediaFormat_setBuffer(mLastTrack->meta, AMEDIAFORMAT_KEY_CSD_0,
+                                   buffer.get() + bytes_to_skip, chunk_data_size - bytes_to_skip);
+
+            *offset += chunk_size;
+            break;
+        }
+        case FOURCC("av1C"): {
             auto buffer = heapbuffer<uint8_t>(chunk_data_size);
 
             if (buffer.get() == NULL) {
