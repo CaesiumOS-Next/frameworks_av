@@ -16,6 +16,24 @@
       "message": "We may also need to fix NuPlayer to prevent restarting in non-offloaded (PCM) mode if playback params speed is 1.",
       "revId": "c95fdd7fad39a4271f8d6a4b1a69ddec189cfe68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9311ae2f_91842f81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2025-02-04T08:51:15Z",
+      "side": 1,
+      "message": "in AudioTrack.cpp\u0027 setPlaybackParam, intially default params are checked are not processed further.\n\n    if (isAudioPlaybackRateEqual(playbackRate, mPlaybackRate)) {\n        return NO_ERROR;\n    }\n    \nso, i think it doesn\u0027t process further.\n\n\nI tried with sample test, it plays fine on compressed offload and doesn\u0027t restart in non-offload mode.\n\n\n                mMediaPlayer.setDataSource(getApplicationContext(),\n                        Uri.parse(\"android.resource://audio.qti.testmediaplayer/raw/\"+ R.raw.file_to_play));\n                mMediaPlayer.prepare();\n                \n                // Try setting speed to 1.0f before start.\n                mMediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(1.0f));\n                Thread.sleep(50);\n                mMediaPlayer.start();\n                Log.i(TAG, \"setting playback param with speed 1.0f\");\n                \n                // try setting 1.0f speed after start.\n                mMediaPlayer.setPlaybackParams(new PlaybackParams().setSpeed(1.0f));\n                setVolume();",
+      "parentUuid": "aba89428_e949ab4f",
+      "revId": "c95fdd7fad39a4271f8d6a4b1a69ddec189cfe68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
