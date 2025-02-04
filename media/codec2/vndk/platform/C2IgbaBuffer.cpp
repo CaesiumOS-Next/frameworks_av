@@ -167,7 +167,10 @@ C2IgbaBlockPool::C2IgbaBlockPool(
         const std::shared_ptr<C2Allocator> &allocator,
         const std::shared_ptr<C2IGBA> &igba,
         ::android::base::unique_fd &&ufd,
-        const local_id_t localId) : mAllocator(allocator), mIgba(igba), mLocalId(localId) {
+        const bool blockFence,
+        const local_id_t localId) :
+                mAllocator(allocator), mIgba(igba),
+                mBlockFence(blockFence), mLocalId(localId) {
     if (!mIgba) {
         mValid = false;
         return;
@@ -263,32 +266,38 @@ c2_status_t C2IgbaBlockPool::_fetchGraphicBlock(
         C2Fence syncFence  = _C2FenceFactory::CreateSyncFence(allocation.fence.release());
         AHardwareBuffer *ahwb = allocation.buffer.release(); // This is acquired.
         CHECK(AHardwareBuffer_getId(ahwb, origId) == ::android::OK);
+        bool syncFenceSignaled = false;
 
-        // We are waiting for SyncFence here for backward compatibility.
-        // H/W based Sync Fence could be returned to improve pipeline latency.
-        //
-        // TODO: Add a component configuration for returning sync fence
-        // from fetchGraphicBlock() as the C2Fence output param(b/322283520).
-        // In the case C2_OK along with GraphicBlock must be returned together.
-        c2_status_t res = syncFence.wait(kSyncFenceWaitNs);
-        if (res != C2_OK) {
-            AHardwareBuffer_release(ahwb);
-            bool aidlRet = true;
-            ::ndk::ScopedAStatus status = mIgba->deallocate(*origId, &aidlRet);
-            ALOGE("Waiting a sync fence failed %d aidl(%d: %d)",
-                  res, status.isOk(), aidlRet);
-            return C2_TIMED_OUT;
+        if (!mBlockFence) {
+            // If a sync fence is not supposed to return along with a block,
+            // We are waiting for SyncFence here for backward compatibility.
+            c2_status_t res = syncFence.wait(kSyncFenceWaitNs);
+            if (res != C2_OK) {
+                AHardwareBuffer_release(ahwb);
+                bool aidlRet = true;
+                ::ndk::ScopedAStatus status = mIgba->deallocate(*origId, &aidlRet);
+                ALOGE("Waiting a sync fence failed %d aidl(%d: %d)",
+                      res, status.isOk(), aidlRet);
+                return C2_TIMED_OUT;
+            }
+            syncFenceSignaled = true;
         }
 
-        res = CreateGraphicBlockFromAhwb(ahwb, mAllocator, mIgba, block);
+        c2_status_t res = CreateGraphicBlockFromAhwb(ahwb, mAllocator, mIgba, block);
         AHardwareBuffer_release(ahwb);
         if (res != C2_OK) {
             bool aidlRet = true;
             ::ndk::ScopedAStatus status = mIgba->deallocate(*origId, &aidlRet);
             ALOGE("We got AHWB via AIDL but failed to created C2GraphicBlock err(%d) aidl(%d, %d)",
                   res, status.isOk(), aidlRet);
+            return res;
         }
-        return res;
+        if (!syncFenceSignaled) {
+            // Block Fence Support.
+            // H/W based Sync Fence could be returned to improve pipeline latency,
+            *fence = syncFence;
+        }
+        return C2_OK;
     } else {
         return C2_OMITTED;
     }

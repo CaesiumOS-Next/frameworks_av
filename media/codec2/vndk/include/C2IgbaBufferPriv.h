@@ -37,6 +37,7 @@ public:
             const std::shared_ptr<::aidl::android::hardware::media::c2::IGraphicBufferAllocator>
                     &igba,
             ::android::base::unique_fd &&ufd,
+            const bool blockFence,
             const local_id_t localId);
 
     virtual ~C2IgbaBlockPool() = default;
@@ -81,6 +82,7 @@ private:
 
     const std::shared_ptr<C2Allocator> mAllocator;
     const std::shared_ptr<::aidl::android::hardware::media::c2::IGraphicBufferAllocator> mIgba;
+    const bool mBlockFence;
     const local_id_t mLocalId;
     std::atomic<bool> mValid;
     C2Fence mWaitFence;
