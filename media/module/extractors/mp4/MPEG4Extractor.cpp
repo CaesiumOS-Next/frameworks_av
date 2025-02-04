@@ -2633,16 +2633,46 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
             break;
         }
 
-        case FOURCC("apvC"):
-        case FOURCC("av1C"):
-        {
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-                chunk_type == FOURCC("apvC")) {
+        case FOURCC("apvC"): {
+            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
                 ALOGV("APV support not enabled");
                 *offset += chunk_size;
                 break;
             }
 
+            auto buffer = heapbuffer<uint8_t>(chunk_data_size);
+
+            if (buffer.get() == NULL) {
+                ALOGE("b/28471206");
+                return NO_MEMORY;
+            }
+
+            if (mDataSource->readAt(data_offset, buffer.get(), chunk_data_size) < chunk_data_size) {
+                return ERROR_IO;
+            }
+
+            if (mLastTrack == NULL) return ERROR_MALFORMED;
+
+            if (chunk_data_size > 4 && buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0 &&
+                buffer[3] == 0) {
+                chunk_data_size -= 4;
+                AMediaFormat_setBuffer(mLastTrack->meta, AMEDIAFORMAT_KEY_CSD_0, buffer.get() + 4,
+                                       chunk_data_size);
+                for (int i = 0; i < chunk_data_size; i++) {
+                    ALOGE(" if CSD data %d", buffer[i]);
+                }
+            } else {
+                AMediaFormat_setBuffer(mLastTrack->meta, AMEDIAFORMAT_KEY_CSD_0, buffer.get(),
+                                       chunk_data_size);
+                for (int i = 0; i < chunk_data_size; i++) {
+                    ALOGE(" else CSD data %d", buffer[i]);
+                }
+            }
+
+            *offset += chunk_size;
+            break;
+        }
+        case FOURCC("av1C"): {
             auto buffer = heapbuffer<uint8_t>(chunk_data_size);
 
             if (buffer.get() == NULL) {
