@@ -741,13 +741,15 @@ static void parseAPVProfileLevelFromCsd(const sp<ABuffer>& csd, sp<AMessage>& fo
     // https://github.com/openapv/openapv/blob/main/readme/apv_isobmff.md#syntax-1
     const uint8_t* data = csd->data();
     size_t csdSize = csd->size();
-    if (csdSize < 21 || data[5] != 0x01) {  // configurationVersion == 1
+    if (csdSize < 17 || data[0] != 0x01) {  // configurationVersion == 1
+        ALOGE("CSD is not according APV Configuration Standard");
         return;
     }
-    uint8_t profileData = data[9];           // profile_idc
-    uint8_t levelData = data[10];            // level_idc
-    uint8_t band = data[11];                 // band_idc
-    uint8_t bitDepth = (data[20] >> 4) + 8;  // bit_depth_minus8
+    uint8_t profileData = data[5];             // profile_idc
+    uint8_t levelData = data[6];               // level_idc
+    uint8_t band = data[7];                    // band_idc
+    uint8_t bitDepth = (data[16] & 0x0F) + 8;  // bit_depth_minus8
+
     const static ALookup<std::pair<uint8_t, uint8_t>, int32_t> profiles{
             {{33, 10}, APVProfile422_10},
             {{44, 12}, APVProfile422_10HDR10Plus},
@@ -1479,12 +1481,17 @@ status_t convertMetaDataToMessage(
         msg->setBuffer("csd-0", buffer);
         parseAV1ProfileLevelFromCsd(buffer, msg);
     } else if (com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-               meta->findData(kKeyAPVC, &type, &data, &size)) {
+               mime == MEDIA_MIMETYPE_VIDEO_APV) {
         sp<ABuffer> buffer = new (std::nothrow) ABuffer(size);
         if (buffer.get() == NULL || buffer->base() == NULL) {
             return NO_MEMORY;
         }
-        memcpy(buffer->data(), data, size);
+        const uint8_t* csdData = static_cast<const uint8_t*>(data);
+        if (csdData[0] == 0 && csdData[1] == 0 && csdData[2] == 0 && csdData[3] == 0) {
+            csdData += 4;  // Move pointer forward by 4 bytes because of flag and version.
+            size -= 4;
+        }
+        memcpy(buffer->data(), csdData, size);
 
         buffer->meta()->setInt32("csd", true);
         buffer->meta()->setInt64("timeUs", 0);
@@ -2139,7 +2146,7 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
                    mime == MEDIA_MIMETYPE_IMAGE_AVIF) {
             meta->setData(kKeyAV1C, 0, csd0->data(), csd0->size());
         } else if (com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-                   mime == MEDIA_MIMETYPE_VIDEO_APV) {
+                   mime == MEDIA_MIMETYPE_VIDEO_APV)
             meta->setData(kKeyAPVC, 0, csd0->data(), csd0->size());
         } else if (mime == MEDIA_MIMETYPE_VIDEO_DOLBY_VISION) {
             int32_t profile = -1;
