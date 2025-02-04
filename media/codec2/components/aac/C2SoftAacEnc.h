@@ -58,6 +58,7 @@ private:
     UINT mOutBufferSize;
 
     bool mSentCodecSpecificData;
+    size_t mInputSize;
     std::optional<c2_cntr64_t> mNextFrameTimestampUs;
     std::optional<c2_cntr64_t> mLastFrameEndTimestampUs;
 
