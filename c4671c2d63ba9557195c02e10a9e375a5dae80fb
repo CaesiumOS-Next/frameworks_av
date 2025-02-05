@@ -54,6 +54,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2760394c_979fff92",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-05T20:46:28Z",
+      "side": 1,
+      "message": "I will rename this as getOperatingFrameRate.\nSince I call the same function multiple times:\n- using format configuring: to calculate initial/default operating frame rate\n- using input and output format after succeful configuration \n- using output format, everytime there is a change/update on output format.",
+      "parentUuid": "b773ad6a_cf65f945",
+      "range": {
+        "startLine": 1228,
+        "startChar": 13,
+        "endLine": 1228,
+        "endChar": 25
+      },
+      "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a695220_3420c5a1",
         "filename": "media/libstagefright/MediaCodec.cpp",
         "patchSetId": 4
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21d1bc76_b24a3651",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4472,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-05T20:46:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a695220_3420c5a1",
+      "range": {
+        "startLine": 4472,
+        "startChar": 51,
+        "endLine": 4472,
+        "endChar": 57
+      },
       "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -130,6 +178,30 @@
           ]
         }
       ],
+      "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "465c19bb_cdf4dab3",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodec.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-05T20:46:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "33d06572_cbf13bb6",
+      "range": {
+        "startLine": 385,
+        "startChar": 9,
+        "endLine": 385,
+        "endChar": 24
+      },
       "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
