@@ -4101,18 +4101,22 @@ status_t AudioPolicyManager::registerPolicyMixes(const Vector<AudioMix>& mixes)
 
             bool foundOutput = false;
             // First try to find an already opened output supporting the device
-            for (size_t j = 0 ; j < mOutputs.size() && !foundOutput && res == NO_ERROR; j++) {
+            for (size_t j = 0 ; j < mOutputs.size() && !foundOutput; j++) {
                 sp<SwAudioOutputDescriptor> desc = mOutputs.valueAt(j);
 
                 if (!desc->isDuplicated() && desc->supportedDevices().contains(device)) {
                     if (mPolicyMixes.registerMix(mix, desc) != NO_ERROR) {
-                        ALOGE("Could not register mix RENDER,  dev=0x%X addr=%s", type,
-                              address.c_str());
                         res = INVALID_OPERATION;
                     } else {
                         foundOutput = true;
+                        res = NO_ERROR;
+                        break;
                     }
                 }
+            }
+            if (res != NO_ERROR) {
+                ALOGE("Could not register mix RENDER,  dev=0x%X addr=%s", type,
+                      address.c_str());
             }
             // If no output found, try to find a direct output profile supporting the device
             for (size_t i = 0; i < mHwModules.size() && !foundOutput && res == NO_ERROR; i++) {
