@@ -1323,6 +1323,7 @@ status_t AudioPolicyManagerTestDynamicPolicy::addPolicyMix(int mixType, int mixF
     myAudioMix.mToken = sp<BBinder>::make();
     // Clear mAudioMix before add new one to make sure we don't add already exist mixes.
     mAudioMixes.clear();
+    ALOGD("dwhea after clear audio mixes");
     return addPolicyMix(myAudioMix);
 }
 
@@ -1332,6 +1333,7 @@ status_t AudioPolicyManagerTestDynamicPolicy::addPolicyMix(const AudioMix& mix) 
     // As the policy mixes registration may fail at some case,
     // caller need to check the returned status.
     status_t ret = mManager->registerPolicyMixes(mAudioMixes);
+    ALOGD("dwhea after manager register audio mixes");
     return ret;
 }
 
@@ -2735,6 +2737,9 @@ TEST_F(AudioPolicyManagerCarTest, Dump) {
 TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrAtmosOutputAfterRegisteringPolicyMix) {
     status_t ret;
     audio_config_t audioConfig = AUDIO_CONFIG_INITIALIZER;
+    audioConfig.format = AUDIO_FORMAT_PCM_16_BIT;
+    audioConfig.channel_mask = AUDIO_CHANNEL_OUT_STEREO;
+    audioConfig.sample_rate = k48000SamplingRate;
     ret = addPolicyMix(MIX_TYPE_PLAYERS, MIX_ROUTE_FLAG_RENDER,
             AUDIO_DEVICE_OUT_BUS, sCarBusMediaOutput, audioConfig);
     ASSERT_EQ(NO_ERROR, ret);
@@ -2762,6 +2767,24 @@ TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrAtmosOutputAfterRegisteringPol
     ASSERT_EQ(AUDIO_FORMAT_PCM_16_BIT, outDesc->getFormat());
     ASSERT_EQ(AUDIO_CHANNEL_OUT_7POINT1POINT4, outDesc->getChannelMask());
     ASSERT_EQ(k48000SamplingRate, outDesc->getSamplingRate());
+
+    audioConfig.channel_mask = AUDIO_CHANNEL_OUT_5POINT1;
+    ret = addPolicyMix(MIX_TYPE_PLAYERS, MIX_ROUTE_FLAG_RENDER,
+            AUDIO_DEVICE_OUT_BUS, sCarBusMediaOutput, audioConfig);
+    ASSERT_EQ(NO_ERROR, ret);
+
+    selectedDeviceId = AUDIO_PORT_HANDLE_NONE;
+    output = AUDIO_IO_HANDLE_NONE;
+    portId = AUDIO_PORT_HANDLE_NONE;
+    getOutputForAttr(&selectedDeviceId, AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_OUT_5POINT1,
+            k48000SamplingRate, AUDIO_OUTPUT_FLAG_NONE, &output, &portId);
+    ASSERT_NE(AUDIO_PORT_HANDLE_NONE, selectedDeviceId);
+    outDesc = mManager->getOutputs().valueFor(output);
+    ASSERT_NE(nullptr, outDesc.get());
+    ASSERT_EQ(AUDIO_FORMAT_PCM_16_BIT, outDesc->getFormat());
+    ASSERT_EQ(AUDIO_CHANNEL_OUT_5POINT1, outDesc->getChannelMask());
+    ASSERT_EQ(k48000SamplingRate, outDesc->getSamplingRate());
+    ASSERT_EQ(AUDIO_OUTPUT_FLAG_NONE, outDesc->getFlags().output);
 }
 
 TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrAfterRegisteringPolicyMix) {
