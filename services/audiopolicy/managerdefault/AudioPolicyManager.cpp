@@ -1161,6 +1161,12 @@ sp<IOProfile> AudioPolicyManager::searchCompatibleProfileHwModules (
                 continue;
              }
              profile = curProfile;
+
+            // if requested profile is "direct only" then provide "direct only" profile specifically
+             if (profile->getFlags() == AUDIO_OUTPUT_FLAG_DIRECT) {
+                break;
+             }
+
              if ((profile->getFlags() & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) != 0) {
                  break;
              }
