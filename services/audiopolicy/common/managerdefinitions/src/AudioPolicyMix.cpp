@@ -205,6 +205,16 @@ status_t AudioPolicyMixCollection::registerMix(const AudioMix& mix,
               "(MATCH & EXCLUDE criteria of the same type)");
         return BAD_VALUE;
     }
+
+    if (desc != nullptr) {
+        if (mix.mFormat.channel_mask != desc->getChannelMask()
+            || mix.mFormat.format != desc->getFormat()
+            || mix.mFormat.sample_rate != desc->getSamplingRate()) {
+            ALOGE("registerMix(): mix format not equal to output config");
+            return BAD_VALUE;
+        }
+    }
+
     sp<AudioPolicyMix> policyMix = sp<AudioPolicyMix>::make(mix);
     add(policyMix);
     ALOGD("registerMix(): adding mix for dev=0x%x addr=%s",
@@ -335,8 +345,16 @@ status_t AudioPolicyMixCollection::getOutputForAttr(
     primaryMix.clear();
     bool mixesDisallowsRequestedDevice = false;
     const bool isMmapRequested = (flags & AUDIO_OUTPUT_FLAG_MMAP_NOIRQ);
+
+    // select one primary mix among several
+    // The priority is as follows:
+    // 1: the output supporting the exact channel mask
+    // 2: the output with a higher channel count than requested
+    std::vector<uint32_t> bestMatchCriteria(2, 0);
+    const uint32_t channelCount = audio_channel_count_from_out_mask(config.channel_mask);
     for (size_t i = 0; i < size(); i++) {
         sp<AudioPolicyMix> policyMix = itemAt(i);
+        std::vector<uint32_t> currentMatchCriteria(2, 0);
         const bool primaryOutputMix = !is_mix_loopback_render(policyMix->mRouteFlags);
         sp<DeviceDescriptor> mixDevice = getOutputDeviceForMix(policyMix.get(),
             availableOutputDevices);
@@ -354,11 +372,6 @@ status_t AudioPolicyMixCollection::getOutputForAttr(
             // render policy is registered.
             ALOGD("%s: Rejecting MMAP_NOIRQ request due to LOOPBACK|RENDER mix present.", __func__);
             return INVALID_OPERATION;
-        }
-
-        if (primaryOutputMix && primaryMix != nullptr) {
-            ALOGV("%s: Skiping %zu: Primary output already found", __func__, i);
-            continue; // Primary output already found
         }
 
         if(!mixMatch(policyMix.get(), i, attributes, flags, config, uid, session)) {
@@ -381,9 +394,54 @@ status_t AudioPolicyMixCollection::getOutputForAttr(
             mixesDisallowsRequestedDevice = false;
         }
 
+       // if (primaryOutputMix && primaryMix != nullptr) {
+
+       // }
+
         if (primaryOutputMix) {
-            primaryMix = policyMix;
-            ALOGV("%s: Mix %zu: set primary desc", __func__, i);
+
+            if (policyMix->getOutput() != nullptr) {
+                // channel mask and channel count match
+                uint32_t outputChannelCount = audio_channel_count_from_out_mask(
+                        policyMix->getOutput()->getChannelMask());
+                ALOGD("%s channelCount:%d, outputChannelCount:%d", __func__, channelCount,
+                      outputChannelCount);
+                if (config.channel_mask != AUDIO_CHANNEL_NONE && channelCount > 2 &&
+                    channelCount <= outputChannelCount) {
+                    if ((audio_channel_mask_get_representation(config.channel_mask) ==
+                         audio_channel_mask_get_representation(
+                                 policyMix->getOutput()->getChannelMask())) &&
+                        ((config.channel_mask & policyMix->getOutput()->getChannelMask()) ==
+                         config.channel_mask)) {
+                        currentMatchCriteria[0] = outputChannelCount;
+                        ALOGD("%s currentMatchCriteria[0]:%d", __func__, currentMatchCriteria[0]);
+                    }
+                    currentMatchCriteria[1] = outputChannelCount;
+                    ALOGD("%s currentMatchCriteria[1]:%d", __func__, currentMatchCriteria[1]);
+
+                }
+            }
+
+            // compare match criteria by priority then value
+            if (std::lexicographical_compare(bestMatchCriteria.begin(), bestMatchCriteria.end(),
+                                             currentMatchCriteria.begin(), currentMatchCriteria.end())) {
+                bestMatchCriteria = currentMatchCriteria;
+                std::stringstream result;
+                std::copy(bestMatchCriteria.begin(), bestMatchCriteria.end(),
+                          std::ostream_iterator<int>(result, " "));
+                ALOGV("%s new best primary mix %d criteria %s",
+                      __func__, policyMix->getOutput()->mIoHandle, result.str().c_str());
+
+                primaryMix = policyMix;
+                ALOGV("%s: Mix %zu: set primary desc", __func__, i);
+
+            } else {
+                ALOGV("%s: Skiping %zu: primary output not bettered", __func__, i);
+                continue; // Primary output not bettered
+            }
+
+
+
         } else {
             ALOGV("%s: Add a secondary desc %zu", __func__, i);
             if (secondaryMixes != nullptr) {
