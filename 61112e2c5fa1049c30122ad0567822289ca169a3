@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "545cc487_85b34c6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-02-05T21:10:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c98d81a2_b27510c0",
+      "revId": "61112e2c5fa1049c30122ad0567822289ca169a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b78c1715_97da1a6a",
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "Harish. These 4 bytes are not part of CSD, but rather part of FullBox header. Encoder should not emmit these 4 bytes and Muxer should add them. Similirally, Decoder should not expect those  4 byes, and extractory should remove those 4 bytes as part of FullBox header",
       "parentUuid": "84ca1840_b259fbfe",
+      "revId": "61112e2c5fa1049c30122ad0567822289ca169a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da13061c_22a13fea",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5131,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-02-05T21:10:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d7b22c13_e70880cd",
       "revId": "61112e2c5fa1049c30122ad0567822289ca169a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
