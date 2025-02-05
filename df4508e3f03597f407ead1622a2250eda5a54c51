@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f28748f5_d0c89f19",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-05T19:35:03Z",
+      "side": 1,
+      "message": "Does the order of checks assume a particular order for the profiles in `getOutputProfiles`? I can imagine two cases:\n\nin the first, the order is:\n  - AUDIO_OUTPUT_FLAG_DIRECT\n  - AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD | AUDIO_OUTPUT_FLAG_DIRECT \n\nIn this case, on the first iteration:\n  - profile \u003d\u003d nullptr, then profile :\u003d curProfile; then exit the loop due to the new code (check on the line 1166); thus the direct port will be chosen.\n  \nAnother possibility is:\n  - AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD | AUDIO_OUTPUT_FLAG_DIRECT \n  - AUDIO_OUTPUT_FLAG_DIRECT\n\nIn this case, on the first iteration:\n  - profile \u003d\u003d nullptr, then profile :\u003d curProfile; then exit the loop due to the condition on the line 1170; thus the compress offload port will be chosen.",
+      "range": {
+        "startLine": 1165,
+        "startChar": 0,
+        "endLine": 1165,
+        "endChar": 100
+      },
+      "revId": "df4508e3f03597f407ead1622a2250eda5a54c51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
