@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2dbf1e_fd6e84ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-02-05T21:50:50Z",
+      "side": 1,
+      "message": "One nit but nothing major.",
+      "revId": "a5ecef61cb5456add8089d926f30a96bc4d79645",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db30f380_87dfddf7",
+        "filename": "media/libaudioclient/tests/audiosystem_tests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-02-05T21:50:50Z",
+      "side": 1,
+      "message": "Nit: Could invert and use continue to reduce indentation.",
+      "fixSuggestions": [
+        {
+          "fixId": "d43206cd_543dfa9d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 449,
+                "startChar": 0,
+                "endLine": 458,
+                "endChar": 0
+              },
+              "replacement": "        if (!speakerPort.has_value()) continue;\n        int index;\n        EXPECT_EQ(OK, AudioSystem::getVolumeIndexForAttributes(attr, index,\n                                                               speakerPort-\u003eext.device.type));\n        int indexTest;\n        EXPECT_EQ(OK, AudioSystem::getStreamVolumeIndex(streamType, \u0026indexTest,\n                                                        speakerPort-\u003eext.device.type));\n        EXPECT_EQ(index, indexTest);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a5ecef61cb5456add8089d926f30a96bc4d79645",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
