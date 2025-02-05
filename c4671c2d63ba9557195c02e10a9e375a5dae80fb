@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b773ad6a_cf65f945",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-05T09:36:47Z",
+      "side": 1,
+      "message": "getInitialFrameRate?\n\nEventually we will do this ongoingly, but by that point we may not use the \"format\", but perhaps either the input or output format",
+      "range": {
+        "startLine": 1228,
+        "startChar": 13,
+        "endLine": 1228,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "59005d42_d3c06b8d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1228,
+                "startChar": 0,
+                "endLine": 1229,
+                "endChar": 0
+              },
+              "replacement": "static float getInitialFrameRate(const sp\u003cAMessage\u003e\u0026 format, float defaultFrameRate, bool isEncoder) {\n"
+            },
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 2647,
+                "startChar": 0,
+                "endLine": 2648,
+                "endChar": 0
+              },
+              "replacement": "        mFrameRate \u003d getInitialFrameRate(format, mFrameRate, isEncoder);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a695220_3420c5a1",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4472,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-05T09:36:47Z",
+      "side": 1,
+      "message": "add a note that we are doing it once and in-place (*resourcesLocked \u003d compute...) since we are not yet tracking current frame rate.",
+      "range": {
+        "startLine": 4472,
+        "startChar": 51,
+        "endLine": 4472,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "62e531d1_78760be4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 4472,
+                "startChar": 0,
+                "endLine": 4473,
+                "endChar": 0
+              },
+              "replacement": "                        // Convert per frame/input/output resources into static_count.\n                        // This is done once and in-place (*resourcesLocked \u003d compute...) since we\n                        // are not yet tracking current frame rate.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d06572_cbf13bb6",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodec.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-05T09:36:47Z",
+      "side": 1,
+      "message": "the name of this function does not seem to reflect the comment. Also, it does not scale for the future, where the frame rate will be measured/estimated.\n\nhow about:\n\nstd::vector\u003cIRI\u003e computeDynamicResources(const std::vector\u003cIRI\u003e \u0026)",
+      "range": {
+        "startLine": 385,
+        "startChar": 9,
+        "endLine": 385,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ae1e5c20_7289799c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/include/media/stagefright/MediaCodec.h",
+              "range": {
+                "startLine": 385,
+                "startChar": 0,
+                "endLine": 386,
+                "endChar": 0
+              },
+              "replacement": "    std::vector\u003cInstanceResourceInfo\u003e computeDynamicResources(\n            const std::vector\u003cInstanceResourceInfo\u003e\u0026 resources);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4671c2d63ba9557195c02e10a9e375a5dae80fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
