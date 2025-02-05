@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8625788_a96c1961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963880
+      },
+      "writtenOn": "2025-02-05T06:22:23Z",
+      "side": 1,
+      "message": "Hi AOSP team, can you help me to review? thank you!\n\n// write 882 (44.1k 20ms)\nLine 27902: 01-26 20:49:14.406  1470 11232 D FastMixer: FastMixer::onWork() framesReady\u003d2380\nLine 27905: 01-26 20:49:14.406  1348 11231 E AHAL_BluetoothAudioPort: writeDataOutWritePcmData before\nLine 27906: 01-26 20:49:14.406  1348 11231 E AHAL_BluetoothAudioPort: writeDataOutWritePcmData after5292\n// sleep \nLine 27913: 01-26 20:49:14.406  1470 11232 D FastThread: sleeping 18469506  mForceNs 19000000 nsec 530494 mOverrunNs 10000000\n// write 882 (44.1k 20ms) after sleep\nLine 28031: 01-26 20:49:14.425  1470 11232 D FastMixer: FastMixer::onWork() framesReady\u003d1498\nLine 28039: 01-26 20:49:14.425  1348 11231 E AHAL_BluetoothAudioPort: writeDataOutWritePcmData before\nLine 28040: 01-26 20:49:14.425  1348 11231 E AHAL_BluetoothAudioPort: writeDataOutWritePcmData after5292\n// Because of sleep, the interval between two data writes is not less than 20ms.\n// Write data again within 1ms.\n// write 882 (44.1k 20ms). Insufficient data and noise.(616\u003c882)\nLine 28057: 01-26 20:49:14.425  1470 11232 D FastMixer: FastMixer::onWork() framesReady\u003d616\nLine 28060: 01-26 20:49:14.426  1348 11231 E AHAL_BluetoothAudioPort: writeDataOutWritePcmData before\nLine 28264: 01-26 20:49:14.446  1348 11231 E AHAL_BluetoothAudioPort: writeDataOutWritePcmData after5292",
+      "revId": "7ca42570e776d80389fabe11ae9e974d19a234e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
