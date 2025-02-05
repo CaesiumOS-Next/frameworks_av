@@ -54,6 +54,7 @@ bool FastThread::threadLoop()
         // either nanosleep, sched_yield, or busy wait
         if (mSleepNs >= 0) {
             if (mSleepNs > 0) {
+                mOldTs.tv_nsec += mSleepNs;
                 ALOG_ASSERT(mSleepNs < 1000000000);
                 const struct timespec req = {
                     0, // tv_sec
