@@ -4099,20 +4099,35 @@ status_t AudioPolicyManager::registerPolicyMixes(const Vector<AudioMix>& mixes)
                 break;
             }
 
+            // just check how many already opened outputs support the device
+            for (size_t j = 0 ; j < mOutputs.size() && res == NO_ERROR; j++) {
+                sp<SwAudioOutputDescriptor> desc = mOutputs.valueAt(j);
+                if (!desc->isDuplicated() && desc->supportedDevices().contains(device)) {
+                    ALOGD("%s: output %d supports device %s for dev=0x%X addr=%s",
+                          __func__, desc->mIoHandle,
+                          device->getName().c_str(),
+                          mix.mDeviceType, mix.mDeviceAddress.c_str());
+                }
+            }
+
             bool foundOutput = false;
             // First try to find an already opened output supporting the device
-            for (size_t j = 0 ; j < mOutputs.size() && !foundOutput && res == NO_ERROR; j++) {
+            for (size_t j = 0 ; j < mOutputs.size() && !foundOutput; j++) {
                 sp<SwAudioOutputDescriptor> desc = mOutputs.valueAt(j);
 
                 if (!desc->isDuplicated() && desc->supportedDevices().contains(device)) {
                     if (mPolicyMixes.registerMix(mix, desc) != NO_ERROR) {
-                        ALOGE("Could not register mix RENDER,  dev=0x%X addr=%s", type,
-                              address.c_str());
                         res = INVALID_OPERATION;
                     } else {
                         foundOutput = true;
+                        res = NO_ERROR;
+                        break;
                     }
                 }
+            }
+            if (res != NO_ERROR) {
+                ALOGE("Could not register mix RENDER,  dev=0x%X addr=%s", type,
+                      address.c_str());
             }
             // If no output found, try to find a direct output profile supporting the device
             for (size_t i = 0; i < mHwModules.size() && !foundOutput && res == NO_ERROR; i++) {
