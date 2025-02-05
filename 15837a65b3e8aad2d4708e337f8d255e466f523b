@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f221108_72d7b222",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-02-05T02:39:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52307cb3_a91473eb",
+      "range": {
+        "startLine": 2080,
+        "startChar": 3,
+        "endLine": 2080,
+        "endChar": 40
+      },
+      "revId": "15837a65b3e8aad2d4708e337f8d255e466f523b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b05cffb_eea6f681",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-01-28T14:53:46Z",
       "side": 1,
       "message": "i would like us to validate displayWidth \u003e 0 and displayHeight \u003e 0\nat this point, after we\u0027ve gone through our logic of \"getting this values\".\n \nfor example:  no outputformat, inputformat has one of width\u003d\u003d0,\nwill get to this point with displayWidth \u003d\u003d 0",
+      "revId": "15837a65b3e8aad2d4708e337f8d255e466f523b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff9638cc_e8fa7960",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-02-05T02:39:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b05cffb_eea6f681",
       "revId": "15837a65b3e8aad2d4708e337f8d255e466f523b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
