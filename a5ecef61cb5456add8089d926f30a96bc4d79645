@@ -51,6 +51,24 @@
       ],
       "revId": "a5ecef61cb5456add8089d926f30a96bc4d79645",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45ead0b_b983bad9",
+        "filename": "media/libaudioclient/tests/audiosystem_tests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-05T21:55:50Z",
+      "side": 1,
+      "message": "The current way we also scope these `index` variables to the area where they are used.",
+      "parentUuid": "db30f380_87dfddf7",
+      "revId": "a5ecef61cb5456add8089d926f30a96bc4d79645",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
