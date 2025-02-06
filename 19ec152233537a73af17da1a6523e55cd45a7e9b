@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f277fc_a7d6ad9a",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-06T17:23:03Z",
+      "side": 1,
+      "message": "we should only send the contents of ApvDecoderConfigurationBox in the CSD.",
+      "range": {
+        "startLine": 1498,
+        "startChar": 0,
+        "endLine": 1498,
+        "endChar": 40
+      },
+      "revId": "19ec152233537a73af17da1a6523e55cd45a7e9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
