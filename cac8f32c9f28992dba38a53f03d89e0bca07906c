@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1449fcda_2451044e",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2118,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-02-06T01:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e929bf95_af293e58",
+      "range": {
+        "startLine": 2118,
+        "startChar": 20,
+        "endLine": 2118,
+        "endChar": 26
+      },
+      "revId": "cac8f32c9f28992dba38a53f03d89e0bca07906c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8da1c7f_672202c1",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-02-05T21:06:38Z",
       "side": 1,
       "message": "I think it make more sense to put the new lines 2118..2122 here.\nit simplifies the flow (one less special cased early-exit in the routine).\n\nit seems like it would be correct behavior.\nthe new code would look like:\n\nif (displaywidth\u003c\u003d0 || displayHeight \u003c\u003d 0) {\n   ALOGE(\"something about bad/corrupt width information\");\n   displayWidth \u003d displayHeight \u003d 0;\n}\n\nand then fall into the existing notifyListener call.",
+      "revId": "cac8f32c9f28992dba38a53f03d89e0bca07906c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5572cdaf_8c25dc65",
+        "filename": "media/libmediaplayerservice/nuplayer/NuPlayer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2025-02-06T01:49:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8da1c7f_672202c1",
       "revId": "cac8f32c9f28992dba38a53f03d89e0bca07906c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
