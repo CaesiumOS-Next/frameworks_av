@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b539270_e29cbe2b",
+        "filename": "media/codec2/hal/aidl/Component.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-02-06T19:02:33Z",
+      "side": 1,
+      "message": "nit: I think you can just use `C2Config::API_BLOCK_FENCES` here.",
+      "range": {
+        "startLine": 542,
+        "startChar": 45,
+        "endLine": 542,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f4ac4723_5136fd4a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/Component.cpp",
+              "range": {
+                "startLine": 542,
+                "startChar": 0,
+                "endLine": 543,
+                "endChar": 0
+              },
+              "replacement": "                ((features.value \u0026 C2Config::API_BLOCK_FENCES) !\u003d 0)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d53cabbe38fcc43894db9a85e25574a2d56a0a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
