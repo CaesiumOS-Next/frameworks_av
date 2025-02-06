@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "93720976_01f250ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1971115
+      },
+      "writtenOn": "2025-02-06T06:47:01Z",
+      "side": 1,
+      "message": "can you please add a bug reference? I.e. why is this change needed and why the new calls preferred over the existing ones?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "f8a72caeb2ecab37f579fa8bd4885f0336cd8405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "56946425_4450b58d",
@@ -14,6 +37,29 @@
       "writtenOn": "2025-02-05T21:58:35Z",
       "side": 1,
       "message": "U",
+      "revId": "f8a72caeb2ecab37f579fa8bd4885f0336cd8405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b67ff55a_e63cdbea",
+        "filename": "services/camera/virtualcamera/VirtualCameraService.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1971115
+      },
+      "writtenOn": "2025-02-06T06:47:01Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 330,
+        "startChar": 42,
+        "endLine": 330,
+        "endChar": 44
+      },
       "revId": "f8a72caeb2ecab37f579fa8bd4885f0336cd8405",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
