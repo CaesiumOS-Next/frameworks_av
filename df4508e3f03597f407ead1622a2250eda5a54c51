@@ -22,6 +22,30 @@
       },
       "revId": "df4508e3f03597f407ead1622a2250eda5a54c51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d275af6_740abb0f",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2025-02-06T09:47:29Z",
+      "side": 1,
+      "message": "Thanks, seems like my earlier change was working when DIRECT comes before DIRECT | COMPRESS_OFFLOAD in list of profiles.\n\nI tried by changing order in XML, desired profile was not selected.\n\nProbably, we need to iterate all the profiles,\nreturn profiles based on direct/compressoffload/\u003canyOtherProfile\u003e availability.",
+      "parentUuid": "f28748f5_d0c89f19",
+      "range": {
+        "startLine": 1165,
+        "startChar": 0,
+        "endLine": 1165,
+        "endChar": 100
+      },
+      "revId": "df4508e3f03597f407ead1622a2250eda5a54c51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
