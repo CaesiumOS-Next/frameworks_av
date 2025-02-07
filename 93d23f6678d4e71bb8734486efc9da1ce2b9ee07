@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9e8f2cd_195622d9",
+        "filename": "media/libaudioprocessing/AudioResampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-07T15:44:47Z",
+      "side": 1,
+      "message": "We can add more information if that is wanted but right now we just post Quality",
+      "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdea90fe_4a762dd8",
+        "filename": "media/libaudioprocessing/AudioResampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-07T15:44:47Z",
+      "side": 1,
+      "message": "This just checks so that the value is always at the same place, padding with spaces.\nIf we want to add more headers/values I have a helper function that I can add here as well but since its just 1 value right now I didn\u0027t think it was necessary.",
+      "range": {
+        "startLine": 327,
+        "startChar": 4,
+        "endLine": 327,
+        "endChar": 58
+      },
+      "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f1c8f40_12c52054",
         "filename": "media/libaudioprocessing/include/media/AudioResampler.h",
         "patchSetId": 3
@@ -14,6 +54,40 @@
       "writtenOn": "2025-02-07T15:41:00Z",
       "side": 1,
       "message": "This is not used in the track dump since it takes to much space but its a good addition in general.\nWe can remove it if its not needed.",
+      "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643ed2ae_7d90356e",
+        "filename": "services/audioflinger/IAfTrack.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-07T15:44:47Z",
+      "side": 1,
+      "message": "Maybe wrong place?",
+      "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfab46f6_f38243db",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6151,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-07T15:44:47Z",
+      "side": 1,
+      "message": "This is very spammy but I have had troubles finding a place where we get the resampler when it is created.\nI atleast said that once the pointer is established we are done.",
       "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
