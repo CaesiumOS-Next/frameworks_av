@@ -88,6 +88,30 @@
       },
       "revId": "4d9aed2445d96213cba85fc194cafa5794d57f39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17145d54_2d892e7a",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-02-07T18:00:05Z",
+      "side": 1,
+      "message": "It was wrong before. Yes it is not related to skipping logic.",
+      "parentUuid": "4ec24fd3_56c80f9c",
+      "range": {
+        "startLine": 754,
+        "startChar": 24,
+        "endLine": 754,
+        "endChar": 37
+      },
+      "revId": "4d9aed2445d96213cba85fc194cafa5794d57f39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
