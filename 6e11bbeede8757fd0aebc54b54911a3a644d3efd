@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "6e11bbeede8757fd0aebc54b54911a3a644d3efd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a91240_ddca433f",
+        "filename": "media/libstagefright/MPEG4Writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5131,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-07T14:58:59Z",
+      "side": 1,
+      "message": "// apvC extends FullBox and hence the need to write first\n    // 4 bytes here when compared with av1C which extends Box",
+      "revId": "6e11bbeede8757fd0aebc54b54911a3a644d3efd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
