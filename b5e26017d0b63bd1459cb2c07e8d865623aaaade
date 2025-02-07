@@ -110,6 +110,30 @@
       },
       "revId": "b5e26017d0b63bd1459cb2c07e8d865623aaaade",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fcb23e3_c4642bfb",
+        "filename": "services/audiopolicy/tests/resources/test_phone_apm_configuration.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-07T17:15:47Z",
+      "side": 1,
+      "message": "elaurent@google.com@ Eric, I\u0027m also considering adding support for playback of PCM on the async compressed offload path in Cuttlefish in order to enable verifying that VTS and the libaudiohal logic works correctly for these cases, without using actual physical devices with DSP.\n\nHowever, I had a question about this: in order to mimic the handling of actual compressed streams, should the framework send to HAL a **WAV file** (in chunks) instead of just raw PCM data? The difference is in the existence of the header. For MP3s for example, we send an entire MP3 file into the HAL (also chunked), so the HAL gets the metadata along with the compressed audio data. And I think this helps the HAL to handle the transition between clips because it can then know when the previous clip ends, and the next begins. The similar logic IMO can be used for handling clip transitions between \"offloaded\" WAV files.",
+      "parentUuid": "a5dc49f2_7b4e488d",
+      "range": {
+        "startLine": 46,
+        "startChar": 45,
+        "endLine": 46,
+        "endChar": 67
+      },
+      "revId": "b5e26017d0b63bd1459cb2c07e8d865623aaaade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
