@@ -64,6 +64,30 @@
       },
       "revId": "4d9aed2445d96213cba85fc194cafa5794d57f39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec24fd3_56c80f9c",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-02-07T17:15:55Z",
+      "side": 1,
+      "message": "Just to check I understand - was this code just always wrong before, and it\u0027s not directly related to the rest of this change of skipping the 4 bytes at the start of the CSD?",
+      "parentUuid": "a250cad6_af028439",
+      "range": {
+        "startLine": 754,
+        "startChar": 24,
+        "endLine": 754,
+        "endChar": 37
+      },
+      "revId": "4d9aed2445d96213cba85fc194cafa5794d57f39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

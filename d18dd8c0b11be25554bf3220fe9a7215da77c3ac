@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd933725_4c62d5d2",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 2666,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-02-07T17:15:55Z",
+      "side": 1,
+      "message": "optional: this could be a little more concise by computing the number of bytes to skip (unless the mutation to `chunk_data_size` is important after this `case` block?):\n\n```cc\nint bytes_to_skip \u003d \n    (chunk_data_size \u003e 4 \n        \u0026\u0026 buffer[0] \u003d\u003d 0 \n        \u0026\u0026 buffer[1] \u003d\u003d 0 \n        \u0026\u0026 buffer[2] \u003d\u003d 0 \n        \u0026\u0026 buffer[3] \u003d\u003d 0) \n    ? 4 \n    : 0;\nAMediaFormat_setBuffer(\n    mLastTrack-\u003emeta,\n    AMEDIAFORMAT_KEY_CSD_0,\n    buffer.get() + bytes_to_skip,\n    chunk_data_size - bytes_to_skip);\n```",
+      "range": {
+        "startLine": 2662,
+        "startChar": 0,
+        "endLine": 2666,
+        "endChar": 56
+      },
+      "revId": "d18dd8c0b11be25554bf3220fe9a7215da77c3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
