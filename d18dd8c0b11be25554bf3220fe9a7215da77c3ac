@@ -22,6 +22,30 @@
       },
       "revId": "d18dd8c0b11be25554bf3220fe9a7215da77c3ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42fb464_f6311e71",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 2666,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-07T17:23:14Z",
+      "side": 1,
+      "message": "Sham,\nIf the first 4 bytes are not 0, then it is malformed.\n\nPlease update to add that error check and always skip the first 4 bytes and send the rest as CSD.",
+      "parentUuid": "dd933725_4c62d5d2",
+      "range": {
+        "startLine": 2662,
+        "startChar": 0,
+        "endLine": 2666,
+        "endChar": 56
+      },
+      "revId": "d18dd8c0b11be25554bf3220fe9a7215da77c3ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
