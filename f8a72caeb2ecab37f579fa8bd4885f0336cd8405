@@ -41,6 +41,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06723918_40268505",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143408
+      },
+      "writtenOn": "2025-02-07T14:21:07Z",
+      "side": 1,
+      "message": "Thank you for sending this change ! \n\nCan you please explain why it is necessry ?",
+      "revId": "f8a72caeb2ecab37f579fa8bd4885f0336cd8405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b67ff55a_e63cdbea",
