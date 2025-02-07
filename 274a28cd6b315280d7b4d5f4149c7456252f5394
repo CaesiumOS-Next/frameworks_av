@@ -16,6 +16,23 @@
       "message": "Dear google Engineer,\n\nPlease help to review, I also create a issue for this patch review\nhttps://partnerissuetracker.corp.google.com/u/0/issues/395005214",
       "revId": "274a28cd6b315280d7b4d5f4149c7456252f5394",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc014a42_e9b6898d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1092583
+      },
+      "writtenOn": "2025-02-07T10:39:06Z",
+      "side": 1,
+      "message": "Asked a question on the bug on the size of the CaptureResult metadata.",
+      "revId": "274a28cd6b315280d7b4d5f4149c7456252f5394",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
