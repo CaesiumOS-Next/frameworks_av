@@ -68,6 +68,23 @@
       "message": "Dear Shuzhen,\n\nI have replied you on the issues/395005214",
       "revId": "274a28cd6b315280d7b4d5f4149c7456252f5394",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13c9526a_1259368f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-02-07T22:23:56Z",
+      "side": 1,
+      "message": "I double-checked which validate paths are security-critical, and these are not; readFromParcel is still covered.",
+      "revId": "274a28cd6b315280d7b4d5f4149c7456252f5394",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
