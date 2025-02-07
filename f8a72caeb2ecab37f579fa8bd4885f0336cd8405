@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8999553_dee4ba39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2025-02-07T23:02:40Z",
+      "side": 1,
+      "message": "This is a small improvement i.e. the logging on quest devices was reporting the service\u0027s pid and not the calling threads pid.",
+      "parentUuid": "93720976_01f250ea",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "f8a72caeb2ecab37f579fa8bd4885f0336cd8405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "56946425_4450b58d",
