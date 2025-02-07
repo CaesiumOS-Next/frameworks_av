@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "645f0041_2e91daea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2025-02-07T07:49:33Z",
+      "side": 1,
+      "message": "I will try those.",
+      "parentUuid": "de36d196_4a0db23c",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "b5e26017d0b63bd1459cb2c07e8d865623aaaade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5e0fd575_6bddf566",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-02-06T17:45:49Z",
       "side": 1,
       "message": "This is atypical. How can there be plain PCM in a compressed offload mix port? Why is this change needed? Maybe the test results need to be updated instead?",
+      "range": {
+        "startLine": 46,
+        "startChar": 45,
+        "endLine": 46,
+        "endChar": 67
+      },
+      "revId": "b5e26017d0b63bd1459cb2c07e8d865623aaaade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5dc49f2_7b4e488d",
+        "filename": "services/audiopolicy/tests/resources/test_phone_apm_configuration.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2025-02-07T07:49:33Z",
+      "side": 1,
+      "message": "This is to support the pcm offload, Eric suggested us that to support pcm offload we can have simply add pcm profiles in the compress mix ports, and this way any pcm played can leverage async path if clients can support async method for playback.",
+      "parentUuid": "e214cf4a_02940d95",
       "range": {
         "startLine": 46,
         "startChar": 45,
