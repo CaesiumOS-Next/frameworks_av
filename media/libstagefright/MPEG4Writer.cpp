@@ -5128,6 +5128,7 @@ void MPEG4Writer::Track::writeApvcBox() {
     CHECK_GE(mCodecSpecificDataSize, 4u);
 
     mOwner->beginBox("apvC");
+    mOwner->writeInt32(0); // version=0, flags=0
     mOwner->write(mCodecSpecificData, mCodecSpecificDataSize);
     mOwner->endBox();  // apvC
 }
