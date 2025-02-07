@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f1c8f40_12c52054",
+        "filename": "media/libaudioprocessing/include/media/AudioResampler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-07T15:41:00Z",
+      "side": 1,
+      "message": "This is not used in the track dump since it takes to much space but its a good addition in general.\nWe can remove it if its not needed.",
+      "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
