@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd144ca6_c5a922c0",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2768,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-02-07T19:44:05Z",
+      "side": 1,
+      "message": "maybe also want to include the name here?",
+      "fixSuggestions": [
+        {
+          "fixId": "d84e75f6_34fc1057",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+              "range": {
+                "startLine": 2768,
+                "startChar": 0,
+                "endLine": 2769,
+                "endChar": 0
+              },
+              "replacement": "    ScopedTrace trace(ATRACE_TAG, android::base::StringPrintf(\n            \"CCodecBufferChannel::sendOutputBuffers-%s\", mName).c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5af5f3cee16ef523de6845aa6b520ef6d1699394",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
