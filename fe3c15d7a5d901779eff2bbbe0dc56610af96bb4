@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c11ca43_223001c6",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 2655,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-08T01:57:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "371d6564_611699af",
+      "revId": "fe3c15d7a5d901779eff2bbbe0dc56610af96bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e29d0f5_8523f379",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-02-07T18:04:32Z",
       "side": 1,
       "message": "add a check chunk_data_size \u003c bytes_to_skip and move this below bytes_to_skip initialization",
+      "revId": "fe3c15d7a5d901779eff2bbbe0dc56610af96bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c6e1921_31b3928e",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 2657,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-08T01:57:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e29d0f5_8523f379",
       "revId": "fe3c15d7a5d901779eff2bbbe0dc56610af96bb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
