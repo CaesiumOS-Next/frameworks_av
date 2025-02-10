@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "926fe9cb_7a1d2fc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-10T17:00:00Z",
+      "side": 1,
+      "message": "waiting on lajos as sole code owner.",
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
