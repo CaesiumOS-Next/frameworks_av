@@ -2666,7 +2666,7 @@ TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrAtmosOutputAfterRegisteringPol
     audio_io_handle_t output;
     audio_port_handle_t portId;
     getOutputForAttr(&selectedDeviceId, AUDIO_FORMAT_E_AC3_JOC, AUDIO_CHANNEL_OUT_5POINT1,
-            k48000SamplingRate, AUDIO_OUTPUT_FLAG_DIRECT, &output, &portId);
+           k48000SamplingRate, AUDIO_OUTPUT_FLAG_DIRECT, &output, &portId);
     ASSERT_NE(AUDIO_PORT_HANDLE_NONE, selectedDeviceId);
     sp<SwAudioOutputDescriptor> outDesc = mManager->getOutputs().valueFor(output);
     ASSERT_NE(nullptr, outDesc.get());
@@ -2679,6 +2679,18 @@ TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrAtmosOutputAfterRegisteringPol
     portId = AUDIO_PORT_HANDLE_NONE;
     getOutputForAttr(&selectedDeviceId, AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_OUT_7POINT1POINT4,
             k48000SamplingRate, AUDIO_OUTPUT_FLAG_DIRECT, &output, &portId);
+    ASSERT_NE(AUDIO_PORT_HANDLE_NONE, selectedDeviceId);
+    outDesc = mManager->getOutputs().valueFor(output);
+    ASSERT_NE(nullptr, outDesc.get());
+    ASSERT_EQ(AUDIO_FORMAT_PCM_16_BIT, outDesc->getFormat());
+    ASSERT_EQ(AUDIO_CHANNEL_OUT_7POINT1POINT4, outDesc->getChannelMask());
+    ASSERT_EQ(k48000SamplingRate, outDesc->getSamplingRate());
+
+    selectedDeviceId = AUDIO_PORT_HANDLE_NONE;
+    output = AUDIO_IO_HANDLE_NONE;
+    portId = AUDIO_PORT_HANDLE_NONE;
+    getOutputForAttr(&selectedDeviceId, AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_OUT_7POINT1POINT4,
+            k48000SamplingRate, AUDIO_OUTPUT_FLAG_DEEP_BUFFER, &output, &portId);
     ASSERT_NE(AUDIO_PORT_HANDLE_NONE, selectedDeviceId);
     outDesc = mManager->getOutputs().valueFor(output);
     ASSERT_NE(nullptr, outDesc.get());
