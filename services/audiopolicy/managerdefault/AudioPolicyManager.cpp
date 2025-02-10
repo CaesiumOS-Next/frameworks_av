@@ -1327,13 +1327,23 @@ status_t AudioPolicyManager::getOutputForAttrInt(
                         audio_channel_count_from_out_mask(config->channel_mask));
         if (policyMixDevice != nullptr && (tryDirectForFlags || tryDirectForChannelMask)) {
             audio_io_handle_t newOutput;
+            // In case of an audio track created with DEEP_BUFFER input attributes in order to
+            // enable the power saving mode, a DIRECT output cannot be opened for multi-channel
+            // outputs.
+            // In order to prioritize channel fidelity over the power saving mode, clear the
+            // DEEP_BUFFER request while requesting for direct output.
+            const audio_output_flags_t newFlags = (audio_output_flags_t)((*flags |
+                    AUDIO_OUTPUT_FLAG_DIRECT) & ~AUDIO_OUTPUT_FLAG_DEEP_BUFFER);
             status = openDirectOutput(
                     *stream, session, config,
-                    (audio_output_flags_t)(*flags | AUDIO_OUTPUT_FLAG_DIRECT),
+                    newFlags,
                     DeviceVector(policyMixDevice), &newOutput, *resultAttr);
             if (status == NO_ERROR) {
                 policyDesc = mOutputs.valueFor(newOutput);
                 primaryMix->setOutput(policyDesc);
+                // Upon successfully opening a direct output, update the flags with DIRECT and
+                // negated DEEP_BUFFER.
+                *flags = newFlags;
             } else if (tryDirectForFlags) {
                 ALOGW("%s, failed open direct, status: %d", __func__, status);
                 policyDesc = nullptr;
