@@ -87,6 +87,71 @@
       },
       "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f817be27_51191e97",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2660,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-02-10T15:19:01Z",
+      "side": 1,
+      "message": "Ah OK - that makes a bit more sense. However, using `bytes_to_skip` in such a size check is probbaly only useful/consistent if we then used that same value for the reading, something like:\n\n```cc\nif (chunk_data_size \u003c bytes_to_skip) {\n  return ERROR_MALFORMED;\n}\nfor (int i \u003d 0; i \u003c bytes_to_skip; i++) {\n  if (buffer[i] !\u003d 0) {\n    return ERROR_MALFORMED;\n  }\n}\n```\n\nBut while we\u0027re hard-coding the `0` to `3` indices, i think we might as well hard-code the `4` too:\n\n```cc\nif (chunk_data_size \u003c 4 \n    || buffer[0] !\u003d 0\n    || buffer[1] !\u003d 0\n    || buffer[2] !\u003d 0\n    || buffer[3] !\u003d 0) {\n  return ERROR_MALFORMED;\n}\nAMediaFormat_setBuffer(\n    mLastTrack-\u003emeta,\n    AMEDIAFORMAT_KEY_CSD_0,\n    buffer.get() + 4,\n    chunk_data_size - 4);\n```",
+      "parentUuid": "e5c57d5d_483534a4",
+      "range": {
+        "startLine": 2660,
+        "startChar": 16,
+        "endLine": 2660,
+        "endChar": 33
+      },
+      "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc6b4e50_98062c6b",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-02-10T15:19:01Z",
+      "side": 1,
+      "message": "if we want to check that the first 4 bytes are all zero, and otherwise we return `ERROR_MALFORMED`, should these be OR\u0027d together? This is the behaviour I assume we\u0027re aiming for from the comment above:\n\n\u003e apvC extends FullBox so first 4 bytes of version and flag should be zero.\n\natm a `buffer` array starting with `0x00010000` would not return `ERROR_MALFORMED` because this logic would be:\n\n```\n  0 !\u003d 0 \u0026\u0026 1 !\u003d 0 \u0026\u0026 0 !\u003d 0 \u0026\u0026 0 !\u003d 0\n\u003d false  \u0026\u0026  true  \u0026\u0026 false  \u0026\u0026 false\n\u003d false\n```",
+      "range": {
+        "startLine": 2661,
+        "startChar": 32,
+        "endLine": 2661,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c306ce4c_f38b559f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 2661,
+                "startChar": 0,
+                "endLine": 2662,
+                "endChar": 0
+              },
+              "replacement": "                (buffer[0] !\u003d 0 || buffer[1] !\u003d 0 || buffer[2] !\u003d 0 || buffer[3] !\u003d 0)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
