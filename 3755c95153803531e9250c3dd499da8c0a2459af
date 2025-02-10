@@ -16,6 +16,98 @@
       "message": "waiting on lajos as sole code owner.",
       "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c0101c_0a0bc74b",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-10T22:43:17Z",
+      "side": 1,
+      "message": "seems like \"uint32\" is more appropriate here.\nsince that it what we in the new lines 2413..2433\n\nor we don\u0027t specify it here and only specify it below.\n\ni\u0027m pretty much -- if we\u0027re doing it in both places, we need to make sure it\nis consistent.",
+      "range": {
+        "startLine": 253,
+        "startChar": 38,
+        "endLine": 253,
+        "endChar": 42
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523d4799_231918ad",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-10T22:43:17Z",
+      "side": 1,
+      "message": "the units are frames? or something time-based like miliseconds?\nI had thought that the units were milliseconds.",
+      "range": {
+        "startLine": 2415,
+        "startChar": 45,
+        "endLine": 2415,
+        "endChar": 51
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e315964_edb67e86",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-10T22:43:17Z",
+      "side": 1,
+      "message": "first I\u0027ve seen this \"initial priming\u0027 terminology.\nprobably needs to be defined or rethought.",
+      "range": {
+        "startLine": 2415,
+        "startChar": 7,
+        "endLine": 2415,
+        "endChar": 30
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d244ea85_50092e7c",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2426,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-10T22:43:17Z",
+      "side": 1,
+      "message": "i think this needs to be tightened up. It should either frames or time.",
+      "range": {
+        "startLine": 2426,
+        "startChar": 32,
+        "endLine": 2426,
+        "endChar": 67
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
