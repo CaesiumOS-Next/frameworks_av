@@ -2685,6 +2685,18 @@ TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrAtmosOutputAfterRegisteringPol
     ASSERT_EQ(AUDIO_FORMAT_PCM_16_BIT, outDesc->getFormat());
     ASSERT_EQ(AUDIO_CHANNEL_OUT_7POINT1POINT4, outDesc->getChannelMask());
     ASSERT_EQ(k48000SamplingRate, outDesc->getSamplingRate());
+
+    selectedDeviceId = AUDIO_PORT_HANDLE_NONE;
+    output = AUDIO_IO_HANDLE_NONE;
+    portId = AUDIO_PORT_HANDLE_NONE;
+    getOutputForAttr(&selectedDeviceId, AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_OUT_7POINT1POINT4,
+            k48000SamplingRate, AUDIO_OUTPUT_FLAG_DEEP_BUFFER, &output, &portId);
+    ASSERT_NE(AUDIO_PORT_HANDLE_NONE, selectedDeviceId);
+    outDesc = mManager->getOutputs().valueFor(output);
+    ASSERT_NE(nullptr, outDesc.get());
+    ASSERT_EQ(AUDIO_FORMAT_PCM_16_BIT, outDesc->getFormat());
+    ASSERT_EQ(AUDIO_CHANNEL_OUT_7POINT1POINT4, outDesc->getChannelMask());
+    ASSERT_EQ(k48000SamplingRate, outDesc->getSamplingRate());
 }
 
 TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrAfterRegisteringPolicyMix) {
