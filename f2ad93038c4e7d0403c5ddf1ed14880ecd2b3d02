@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "370cd396_2b2d5401",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2660,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-10T15:21:55Z",
+      "side": 1,
+      "message": "I agree, loop is better.",
+      "parentUuid": "f817be27_51191e97",
+      "range": {
+        "startLine": 2660,
+        "startChar": 16,
+        "endLine": 2660,
+        "endChar": 33
+      },
+      "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc6b4e50_98062c6b",
         "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
         "patchSetId": 23
@@ -150,6 +174,30 @@
           ]
         }
       ],
+      "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca610c33_64c4e9ac",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-10T15:21:55Z",
+      "side": 1,
+      "message": "Ian,\nThank you for catching this.\n\nSham,\nPlease update this to a loop as suggested above.",
+      "parentUuid": "cc6b4e50_98062c6b",
+      "range": {
+        "startLine": 2661,
+        "startChar": 32,
+        "endLine": 2661,
+        "endChar": 34
+      },
       "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
