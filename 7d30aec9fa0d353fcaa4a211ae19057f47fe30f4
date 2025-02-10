@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e773cc65_b9bcc17c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-10T17:50:14Z",
+      "side": 1,
+      "message": "we\u0027ll make sure that presubmit works before bothering folks for reviews.",
+      "revId": "7d30aec9fa0d353fcaa4a211ae19057f47fe30f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
