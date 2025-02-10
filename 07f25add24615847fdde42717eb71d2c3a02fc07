@@ -39,6 +39,30 @@
       },
       "revId": "07f25add24615847fdde42717eb71d2c3a02fc07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a68ddd_5d0815a6",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-10T16:57:22Z",
+      "side": 1,
+      "message": "Actually, this should be removed completely.\nAt this stage kKeyAPVC data should not have the 4 zero bytes as CSD doesn\u0027t contain the 4 bytes.\n\n\nSham,\nCan you please remove these lines completely and restore the following and confirm if the extractor and muxer tests work as intended?\n\n```\nmemcpy(buffer-\u003edata(), data, size);\n```",
+      "parentUuid": "78b66016_6bafeede",
+      "range": {
+        "startLine": 1490,
+        "startChar": 0,
+        "endLine": 1490,
+        "endChar": 87
+      },
+      "revId": "07f25add24615847fdde42717eb71d2c3a02fc07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
