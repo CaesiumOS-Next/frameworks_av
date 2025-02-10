@@ -39,6 +39,30 @@
       },
       "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5c57d5d_483534a4",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2660,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-10T15:08:47Z",
+      "side": 1,
+      "message": "Ian,\nI had asked it to be `if (chunk_data_size \u003c bytes_to_skip)`\nNeed a check to ensure the chunk_data_size is at least as much as bytes_to_skip to avoid OOB access when checking the first four bytes and to avoid integer overflow in the call to _setBuffer().\n\nSham,\nPlease change to `if (chunk_data_size \u003c bytes_to_skip)`.",
+      "parentUuid": "f6af072b_428cb7f8",
+      "range": {
+        "startLine": 2660,
+        "startChar": 16,
+        "endLine": 2660,
+        "endChar": 33
+      },
+      "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
