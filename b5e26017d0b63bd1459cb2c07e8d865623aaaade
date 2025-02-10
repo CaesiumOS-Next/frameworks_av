@@ -134,6 +134,30 @@
       },
       "revId": "b5e26017d0b63bd1459cb2c07e8d865623aaaade",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10490bed_cefe248c",
+        "filename": "services/audiopolicy/tests/resources/test_phone_apm_configuration.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-10T08:13:31Z",
+      "side": 1,
+      "message": "Adding and audio profile with pcm format is a correct way of adding PCM offload support.\n\nWe should not send he wave file header to the audio HAL. The PCM offload design expects that raw PCM data is sent fromthe app down tot he HAL.",
+      "parentUuid": "a5dc49f2_7b4e488d",
+      "range": {
+        "startLine": 46,
+        "startChar": 45,
+        "endLine": 46,
+        "endChar": 67
+      },
+      "revId": "b5e26017d0b63bd1459cb2c07e8d865623aaaade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
