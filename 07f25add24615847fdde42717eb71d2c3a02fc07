@@ -63,6 +63,30 @@
       },
       "revId": "07f25add24615847fdde42717eb71d2c3a02fc07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68b449af_1ef69a04",
+        "filename": "media/libstagefright/Utils.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-02-10T17:59:32Z",
+      "side": 1,
+      "message": "Restored the changes. I have verified that CSD does not contain 4 byte of version and flag. Apv MediaExtractor and MediaMuxer test are working as intended.",
+      "parentUuid": "f9a68ddd_5d0815a6",
+      "range": {
+        "startLine": 1490,
+        "startChar": 0,
+        "endLine": 1490,
+        "endChar": 87
+      },
+      "revId": "07f25add24615847fdde42717eb71d2c3a02fc07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
