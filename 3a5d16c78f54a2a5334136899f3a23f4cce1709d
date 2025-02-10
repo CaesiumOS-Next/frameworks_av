@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24518a0_c3295367",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 2659,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-02-10T16:10:48Z",
+      "side": 1,
+      "message": "Please also fix the typo - \"bytes_to_skip\" not \"byte_to_skip\"",
+      "fixSuggestions": [
+        {
+          "fixId": "a042e62b_99242c58",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 2659,
+                "startChar": 0,
+                "endLine": 2660,
+                "endChar": 0
+              },
+              "replacement": "            if (chunk_data_size \u003c bytes_to_skip ||\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3a5d16c78f54a2a5334136899f3a23f4cce1709d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
