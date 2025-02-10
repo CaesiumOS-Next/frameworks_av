@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6af072b_428cb7f8",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2660,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-02-10T10:33:59Z",
+      "side": 1,
+      "message": "not sure i understand this condition - won\u0027t it always be false? since we unconditionally declare and initialize `bytes_to_skip` to 4 on the previous line.\n\n----\n\nAssuming this can be removed, then I think we can also:\n1. Move `bytes_to_skip` declaration below this `if`\n2. Since now `bytes_to_skip` is now only used on a single line, seems reasonable to in-line it for the two usages:\n\n```\nAMediaFormat_setBuffer(\n    mLastTrack-\u003emeta,\n    AMEDIAFORMAT_KEY_CSD_0,\n    buffer.get() + 4,\n    chunk_data_size - 4);\n```",
+      "range": {
+        "startLine": 2660,
+        "startChar": 16,
+        "endLine": 2660,
+        "endChar": 33
+      },
+      "revId": "f2ad93038c4e7d0403c5ddf1ed14880ecd2b3d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
