@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "526af411_a8f9ae36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-11T03:51:04Z",
+      "side": 1,
+      "message": "Can you please open a bug and attach more details?  Add the Bug: ### here.\n\nUnfortunately the original author is not available to review the code. So please add more details, specifically on the steps that occur:\n\n1) Audio write occurs and returns immediately.  newTs is set to the current clock.\n2) newTs is close to the prior mOldTs?\n3) mSleepNs is set to a large value?\n4) mOldTs is set to the newTs.\n5) sleep occurs but the old timestamp for last delivery is not updated...  What occurs here?  mSleepNs is small and we don\u0027t wait for the buffer to fill?",
+      "revId": "7ca42570e776d80389fabe11ae9e974d19a234e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a8625788_a96c1961",
@@ -31,6 +48,47 @@
       "writtenOn": "2025-02-11T02:09:39Z",
       "side": 1,
       "message": "hi Andy Hung, can you help me to review? thank you!",
+      "revId": "7ca42570e776d80389fabe11ae9e974d19a234e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4039f082_b865e401",
+        "filename": "services/audioflinger/fastpath/FastThread.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-11T03:51:04Z",
+      "side": 1,
+      "message": "nit: overflow not accounted for.\n\ncould check if mOldTsValid.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8def295c_ba668540",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/fastpath/FastThread.cpp",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "                if (mOldTsValid) {\n                    mOldTs.tv_nsec +\u003d mSleepNs;\n                    if (mOldTs.tv_nsec \u003e\u003d 1000000000) {\n                        mOldTs.tv_sec++;\n                        mOldTs.tv_nsec -\u003d 1000000000;\n                    }\n                }\n"
+            }
+          ]
+        }
+      ],
       "revId": "7ca42570e776d80389fabe11ae9e974d19a234e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
