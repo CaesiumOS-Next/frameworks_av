@@ -87,6 +87,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "feecd651_0d021a0d",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-11T01:20:48Z",
+      "side": 1,
+      "message": "these are frames.",
+      "parentUuid": "523d4799_231918ad",
+      "range": {
+        "startLine": 2415,
+        "startChar": 45,
+        "endLine": 2415,
+        "endChar": 51
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f7b890_beb5c66e",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-11T01:20:48Z",
+      "side": 1,
+      "message": "Haripriya,\nLet us use the documentation that is used for KEY_ENCODER_DELAY \n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/MediaFormat.java;l\u003d920;drc\u003d1ba0be0c7a755dc016fa2bd95be2c0473dfac983\n\nSame for the padding variable too.",
+      "parentUuid": "6e315964_edb67e86",
+      "range": {
+        "startLine": 2415,
+        "startChar": 7,
+        "endLine": 2415,
+        "endChar": 30
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d244ea85_50092e7c",
@@ -100,6 +148,30 @@
       "writtenOn": "2025-02-10T22:43:17Z",
       "side": 1,
       "message": "i think this needs to be tightened up. It should either frames or time.",
+      "range": {
+        "startLine": 2426,
+        "startChar": 32,
+        "endLine": 2426,
+        "endChar": 67
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "336c1e57_6d12176e",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2426,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-11T01:20:48Z",
+      "side": 1,
+      "message": "these are frames.",
+      "parentUuid": "d244ea85_50092e7c",
       "range": {
         "startLine": 2426,
         "startChar": 32,
