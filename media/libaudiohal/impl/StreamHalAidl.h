@@ -306,6 +306,9 @@ class StreamHalAidl : public virtual StreamHalInterface, public ConversionHelper
     // queues as they are thread-safe, only send/receive operation must be protected.
     std::mutex mCommandReplyLock;
 
+    // This lock is used to serialize the access IStreamCommon and IStream[Out|In]
+    std::mutex mStreamMutex;
+
   private:
     static audio_config_base_t configToBase(const audio_config& config) {
         audio_config_base_t result = AUDIO_CONFIG_BASE_INITIALIZER;
