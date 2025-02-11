@@ -252,6 +252,30 @@
       },
       "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25565a7_1ba2ee10",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2426,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-11T19:15:58Z",
+      "side": 1,
+      "message": "Ray,\nLajos was saying that the terminology used in C2 is different from the one in media codec.\nWe will wait for his review comments and update the documentation accordingly.",
+      "parentUuid": "31f9c77e_3eb8a312",
+      "range": {
+        "startLine": 2426,
+        "startChar": 32,
+        "endLine": 2426,
+        "endChar": 67
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
