@@ -1,0 +1,132 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb046ada_eecd7868",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:30:10Z",
+      "side": 1,
+      "message": "note that all of these can be either int or float (see CCodecConfig::makeFloat for how we map these to C2).",
+      "range": {
+        "startLine": 1232,
+        "startChar": 16,
+        "endLine": 1232,
+        "endChar": 25
+      },
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "542f0136_d778962d",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:30:10Z",
+      "side": 1,
+      "message": "note that output format will never have \"capture-rate\", this is currently only used in configureFormat (not in input or output).\n\nThat said, for encoders we would expect operating rate to be set for high-speed capture, but I am fairly certain it isn\u0027t.  Perhaps a note that this is only used during configuration.",
+      "range": {
+        "startLine": 1238,
+        "startChar": 39,
+        "endLine": 1238,
+        "endChar": 54
+      },
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61e52443_8a41c183",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:30:10Z",
+      "side": 1,
+      "message": "because effectively this is a union...",
+      "range": {
+        "startLine": 1260,
+        "startChar": 50,
+        "endLine": 1260,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "31a03540_abd55a9b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1260,
+                "startChar": 0,
+                "endLine": 1261,
+                "endChar": 0
+              },
+              "replacement": "        // If mStaticCount isn\u0027t 0, nothing to be changed because effectively this is a union.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1abfd4b_5fedec23",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 4485,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:30:10Z",
+      "side": 1,
+      "message": "this effectively prefers output format (which may overwrite any frame rate gotten from the input format). Note that operating-rate is write only, so it will show up in neither input nor output format.",
+      "range": {
+        "startLine": 4485,
+        "startChar": 37,
+        "endLine": 4485,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "85e73455_5ac6c9b7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 4484,
+                "startChar": 0,
+                "endLine": 4486,
+                "endChar": 0
+              },
+              "replacement": "                        mFrameRate \u003d std::max(\n                                getOperatingFrameRate(mInputFormat, mFrameRate, isEncoder),\n                                getOperatingFrameRate(mOutputFormat, mFrameRate, isEncoder));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
