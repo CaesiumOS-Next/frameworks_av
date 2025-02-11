@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ad3c84_e2cd6d4e",
+        "filename": "services/camera/virtualcamera/VirtualCameraService.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1971115
+      },
+      "writtenOn": "2025-02-11T06:56:28Z",
+      "side": 1,
+      "message": "please remove this include, it is unused",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d7b478cf_b509e377",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/camera/virtualcamera/VirtualCameraService.cc",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c3b3f618eba3002666ae2b11819743444166eead",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
