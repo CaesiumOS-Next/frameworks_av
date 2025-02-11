@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f60fb219_162255ee",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2976,
+      "author": {
+        "id": 3670787
+      },
+      "writtenOn": "2025-02-11T06:18:34Z",
+      "side": 1,
+      "message": "Use flag here instead:\nEFFECT_FLAG_NOT_ELIGIBLE_SUSPEND",
+      "range": {
+        "startLine": 2976,
+        "startChar": 23,
+        "endLine": 2976,
+        "endChar": 60
+      },
+      "revId": "06c69b2b0bbcc76dc570e774d2489ff214d5996f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
