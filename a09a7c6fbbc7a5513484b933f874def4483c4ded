@@ -1,0 +1,154 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121afed9_3f0acb11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-11T22:19:32Z",
+      "side": 1,
+      "message": "I\u0027m OK with the approach, just some comments on the code.",
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83030df5_27663afb",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-11T22:19:32Z",
+      "side": 1,
+      "message": "Probably `SERIALIZE_CALL` is more straightforward name.",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 23
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "584ff20a_7ded1a56",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-11T22:19:32Z",
+      "side": 1,
+      "message": "`std::lock_guard lock(mtx)` is simpler. `scoped_lock` is for more complex cases.",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c3459d9_b34eead0",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-11T22:19:32Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s a good idea to serialize calls to `dump` because it can be called during a TimeCheck dump generation which often occurs when another call to the HAL got stuck. Thus this attempt to take a mutex will deadlock.",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 0
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689761d9_b957b304",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-11T22:19:32Z",
+      "side": 1,
+      "message": "Please add an explanation that this mutex serializes remote calls, rather than protects access to the class field, that\u0027s why there are no associated `GUARDED_BY` annotations.",
+      "range": {
+        "startLine": 309,
+        "startChar": 81,
+        "endLine": 309,
+        "endChar": 82
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea76c951_f4799fcf",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-11T22:19:32Z",
+      "side": 1,
+      "message": "For consistency and clarity, call this `mCallLock`.",
+      "range": {
+        "startLine": 310,
+        "startChar": 15,
+        "endLine": 310,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2501fd3a_edb1231b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.h",
+              "range": {
+                "startLine": 310,
+                "startChar": 0,
+                "endLine": 311,
+                "endChar": 0
+              },
+              "replacement": "    std::mutex mCallLock;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
