@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8b11533_d8065c98",
+        "filename": "media/audioaidlconversion/AidlConversionEffect.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-11T06:26:28Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 189,
+        "startChar": 75,
+        "endLine": 189,
+        "endChar": 76
+      },
+      "revId": "06c69b2b0bbcc76dc570e774d2489ff214d5996f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f60fb219_162255ee",
         "filename": "services/audioflinger/Effects.cpp",
         "patchSetId": 2
