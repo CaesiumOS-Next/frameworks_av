@@ -40,6 +40,54 @@
       ],
       "revId": "c3b3f618eba3002666ae2b11819743444166eead",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59cecf95_5b684b71",
+        "filename": "services/camera/virtualcamera/VirtualCameraService.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2025-02-11T19:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05ad3c84_e2cd6d4e",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 35
+      },
+      "revId": "c3b3f618eba3002666ae2b11819743444166eead",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d800741_4299e7c8",
+        "filename": "services/camera/virtualcamera/VirtualCameraService.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2025-02-11T19:11:35Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "05ad3c84_e2cd6d4e",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 35
+      },
+      "revId": "c3b3f618eba3002666ae2b11819743444166eead",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
