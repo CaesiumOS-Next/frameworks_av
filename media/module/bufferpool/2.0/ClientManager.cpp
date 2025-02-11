@@ -130,7 +130,7 @@ public:
     ResultStatus getAccessor(ConnectionId connectionId,
                              sp<IAccessor> *accessor);
 
-    void cleanUp(bool clearCache = false);
+    void cleanUp(bool clearCache = false, bool deadClient = false);
 
 private:
     // In order to prevent deadlock between multiple locks,
@@ -429,7 +429,7 @@ ResultStatus ClientManager::Impl::getAccessor(
     return client->getAccessor(accessor);
 }
 
-void ClientManager::Impl::cleanUp(bool clearCache) {
+void ClientManager::Impl::cleanUp(bool clearCache, bool deadClient) {
     int64_t now = getTimestampNow();
     int64_t lastTransactionUs;
     std::lock_guard<std::mutex> lock1(mCache.mMutex);
@@ -437,8 +437,8 @@ void ClientManager::Impl::cleanUp(bool clearCache) {
         std::lock_guard<std::mutex> lock2(mActive.mMutex);
         int cleaned = 0;
         for (auto it = mActive.mClients.begin(); it != mActive.mClients.end();) {
-            if (!it->second->isActive(&lastTransactionUs, clearCache)) {
-                if (lastTransactionUs + kClientTimeoutUs < now) {
+            if (!it->second->isActive(&lastTransactionUs, clearCache) || deadClient) {
+                if (lastTransactionUs + kClientTimeoutUs < now || deadClient) {
                     sp<IAccessor> accessor;
                     it->second->getAccessor(&accessor);
                     it = mActive.mClients.erase(it);
@@ -555,9 +555,9 @@ ResultStatus ClientManager::postSend(
     return ResultStatus::CRITICAL_ERROR;
 }
 
-void ClientManager::cleanUp() {
+void ClientManager::cleanUp(bool clientDead = false) {
     if (mImpl) {
-        mImpl->cleanUp(true);
+        mImpl->cleanUp(true, clientDead);
     }
 }
 

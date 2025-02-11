@@ -542,6 +542,11 @@ bool displayBufferQueueBlock(const C2ConstGraphicBlock& block) {
     return ::android::DisplayBufferQueueBlock(block);
 }
 
+void cleanUpClientManager() {
+    sp<ClientManager> bp = ClientManager::getInstance();
+    bp->cleanUp(true);
+}
+
 }  // namespace utils
 }  // namespace V1_0
 }  // namespace c2

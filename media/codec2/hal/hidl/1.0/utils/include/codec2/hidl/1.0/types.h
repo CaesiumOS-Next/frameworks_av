@@ -329,6 +329,8 @@ void endTransferBufferQueueBlocks(
 // not to render.
 bool displayBufferQueueBlock(const C2ConstGraphicBlock& block);
 
+void cleanUpClientManager();
+
 }  // namespace utils
 }  // namespace V1_0
 }  // namespace c2

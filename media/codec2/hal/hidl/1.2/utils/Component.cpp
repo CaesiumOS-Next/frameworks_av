@@ -286,6 +286,7 @@ void Component::onDeathReceived() {
                 std::make_shared<C2BqPoolInvalidateItem>(std::move(bqPools));
         bqInvalidateItem->invalidate();
     }
+    V1_0::utils::cleanUpClientManager();
     release();
 }
 

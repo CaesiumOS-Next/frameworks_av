@@ -92,6 +92,7 @@ using ::android::hardware::media::c2::V1_0::utils::beginTransferBufferQueueBlock
 using ::android::hardware::media::c2::V1_0::utils::endTransferBufferQueueBlock;
 using ::android::hardware::media::c2::V1_0::utils::endTransferBufferQueueBlocks;
 using ::android::hardware::media::c2::V1_0::utils::displayBufferQueueBlock;
+using ::android::hardware::media::c2::V1_0::utils::cleanUpClientManager;
 
 using ::android::hardware::media::c2::V1_0::utils::operator<<;
 

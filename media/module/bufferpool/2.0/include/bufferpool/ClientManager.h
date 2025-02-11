@@ -171,7 +171,7 @@ struct ClientManager : public IClientManager {
     /**
      *  Time out inactive lingering connections and close.
      */
-    void cleanUp();
+    void cleanUp(bool clientDead);
 
     /** Destructs the manager of buffer pool clients.  */
     ~ClientManager();
