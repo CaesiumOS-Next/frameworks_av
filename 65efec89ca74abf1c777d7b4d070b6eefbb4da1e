@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a45f5a_fb906dd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-11T21:38:42Z",
+      "side": 1,
+      "message": "b/395939325 for bypassing presbubmit.",
+      "revId": "65efec89ca74abf1c777d7b4d070b6eefbb4da1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
