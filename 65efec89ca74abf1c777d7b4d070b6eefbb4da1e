@@ -3,6 +3,75 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fc18b856_35c47331",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:40:19Z",
+      "side": 1,
+      "message": "nit: pass fence with blocks fetched from video decoder HAL\n\n(without \"fetched\" the meaning is opposite, e.g. to video decoder HAL)",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "65efec89ca74abf1c777d7b4d070b6eefbb4da1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f58e60_3ddbdf9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:40:19Z",
+      "side": 1,
+      "message": "typo: Return",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "65efec89ca74abf1c777d7b4d070b6eefbb4da1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdbc791e_582034f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:40:19Z",
+      "side": 1,
+      "message": "from?",
+      "range": {
+        "startLine": 10,
+        "startChar": 33,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "65efec89ca74abf1c777d7b4d070b6eefbb4da1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "97a45f5a_fb906dd6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -14,6 +83,29 @@
       "writtenOn": "2025-02-11T21:38:42Z",
       "side": 1,
       "message": "b/395939325 for bypassing presbubmit.",
+      "revId": "65efec89ca74abf1c777d7b4d070b6eefbb4da1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35cb38b_20618714",
+        "filename": "media/codec2/vndk/platform/C2IgbaBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-11T22:40:19Z",
+      "side": 1,
+      "message": "nit: this belong to the header file where we define the parameter blockFence",
+      "range": {
+        "startLine": 299,
+        "startChar": 12,
+        "endLine": 300,
+        "endChar": 82
+      },
       "revId": "65efec89ca74abf1c777d7b4d070b6eefbb4da1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
