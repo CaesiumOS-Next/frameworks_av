@@ -6466,7 +6466,7 @@ status_t MediaCodec::onQueueInputBuffer(const sp<AMessage> &msg) {
     CryptoPlugin::Pattern pattern;
 
     if (android::media::codec::provider_->secure_codecs_require_crypto()
-            && (mFlags & kFlagIsSecure) && !hasCryptoOrDescrambler()) {
+            && !(mFlags & kFlagIsEncoder) && (mFlags & kFlagIsSecure) && !hasCryptoOrDescrambler()) {
         mErrorLog.log(LOG_TAG, "Crypto or descrambler must be given for secure codec");
         return INVALID_OPERATION;
     }
