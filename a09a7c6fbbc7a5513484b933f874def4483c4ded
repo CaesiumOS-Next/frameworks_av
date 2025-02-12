@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "498d397a_ec1018b1",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-12T10:23:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83030df5_27663afb",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 23
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "584ff20a_7ded1a56",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-02-11T22:19:32Z",
       "side": 1,
       "message": "`std::lock_guard lock(mtx)` is simpler. `scoped_lock` is for more complex cases.",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d229be_c31fd609",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-12T10:23:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "584ff20a_7ded1a56",
       "range": {
         "startLine": 54,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ebc709_bc558d91",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-12T10:23:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c3459d9_b34eead0",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 0
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "689761d9_b957b304",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-02-11T22:19:32Z",
       "side": 1,
       "message": "Please add an explanation that this mutex serializes remote calls, rather than protects access to the class field, that\u0027s why there are no associated `GUARDED_BY` annotations.",
+      "range": {
+        "startLine": 309,
+        "startChar": 81,
+        "endLine": 309,
+        "endChar": 82
+      },
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f38ace44_20ad4f68",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-12T10:23:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "689761d9_b957b304",
       "range": {
         "startLine": 309,
         "startChar": 81,
@@ -147,6 +243,30 @@
           ]
         }
       ],
+      "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63bea0cd_3f0c762c",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-12T10:23:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ea76c951_f4799fcf",
+      "range": {
+        "startLine": 310,
+        "startChar": 15,
+        "endLine": 310,
+        "endChar": 27
+      },
       "revId": "a09a7c6fbbc7a5513484b933f874def4483c4ded",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
