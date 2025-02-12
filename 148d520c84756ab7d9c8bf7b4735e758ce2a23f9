@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f2716d_80cb3edb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-02-12T20:06:32Z",
+      "side": 1,
+      "message": "Please add `Flag: EXEMPT bugfix` after line18",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "148d520c84756ab7d9c8bf7b4735e758ce2a23f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b2965c_46847ae6",
+        "filename": "services/oboeservice/AAudioClientTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-02-12T20:06:32Z",
+      "side": 1,
+      "message": "nullptr is preferred.",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8705a818_8ce3c6e5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/oboeservice/AAudioClientTracker.cpp",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "    if (mNotificationClients.count(pid) \u003d\u003d nullptr) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "148d520c84756ab7d9c8bf7b4735e758ce2a23f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d073d178_90fc8c77",
+        "filename": "services/oboeservice/AAudioClientTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-02-12T20:06:32Z",
+      "side": 1,
+      "message": "Please use spaces instead of tab.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4835d78e_f77faeb9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/oboeservice/AAudioClientTracker.h",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "        }\n"
+            },
+            {
+              "path": "services/oboeservice/AAudioClientTracker.h",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": "        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "148d520c84756ab7d9c8bf7b4735e758ce2a23f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f82af96_be87ca45",
+        "filename": "services/oboeservice/AAudioClientTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-02-12T20:06:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d3de3fa0_bf418451",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/oboeservice/AAudioClientTracker.h",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "        }\n"
+            },
+            {
+              "path": "services/oboeservice/AAudioClientTracker.h",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": "        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "148d520c84756ab7d9c8bf7b4735e758ce2a23f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
