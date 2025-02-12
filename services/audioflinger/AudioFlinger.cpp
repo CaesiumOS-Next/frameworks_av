@@ -3456,7 +3456,7 @@ sp<IAfThreadBase> AudioFlinger::openInput_l(audio_module_handle_t module,
             // IAfRecordThread requires both input and output device indication
             // to forward to audio pre processing modules
             const sp<IAfRecordThread> thread =
-                    IAfRecordThread::create(this, inputStream, *input, mSystemReady);
+                    IAfRecordThread::create(this, flags, inputStream, *input, mSystemReady);
             mRecordThreads.add(*input, thread);
             ALOGV("openInput_l() created record thread: ID %d thread %p", *input, thread.get());
             return thread;

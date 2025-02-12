@@ -581,7 +581,8 @@ public:
 class IAfRecordThread : public virtual IAfThreadBase {
 public:
     static sp<IAfRecordThread> create(
-            const sp<IAfThreadCallback>& afThreadCallback, AudioStreamIn* input,
+            const sp<IAfThreadCallback>& afThreadCallback, audio_input_flags_t flags,
+            AudioStreamIn* input,
             audio_io_handle_t id, bool systemReady);
 
     virtual sp<IAfRecordTrack> createRecordTrack_l(
