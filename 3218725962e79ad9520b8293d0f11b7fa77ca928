@@ -63,6 +63,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea0ff7e6_5e467e70",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-12T22:44:54Z",
+      "side": 1,
+      "message": "I think, macro allows for more natural expression of an interface method call—it looks like a normal call, for example `mStream-\u003esetHwVolume(volumes)`, just wrapped into a macro. Whereas, with a template we have to provide separately the object, the method, and the arguments: `serializeCall(mStream, IStreamOut::setHwVolume, volumes)`. This looks much less natural. With our use case we don\u0027t run into any limitations of macro parameters parsing. I do not really see much benefit from using the template implementation over a macro here. Shunkai, do you still think use of template code is preferred?",
+      "parentUuid": "23857e01_972276a2",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
