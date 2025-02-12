@@ -289,6 +289,14 @@ class StreamHalAidl : public virtual StreamHalInterface, public ConversionHelper
 
     status_t exit();
 
+    template <typename T, typename Callable, typename... Args>
+    auto serializeCall(const std::shared_ptr<T>& obj, Callable&& func, Args&&... args) {
+        std::lock_guard lock(mCallLock);
+        return std::invoke(std::forward<Callable&&>(func),
+                           std::forward<const std::shared_ptr<T>&>(obj),
+                           std::forward<Args&&>(args)...);
+    }
+
     void onAsyncTransferReady();
     void onAsyncDrainReady();
     void onAsyncError();
