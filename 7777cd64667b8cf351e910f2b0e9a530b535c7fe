@@ -40,6 +40,30 @@
       ],
       "revId": "7777cd64667b8cf351e910f2b0e9a530b535c7fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5509bce_9fde57f9",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-02-12T19:56:16Z",
+      "side": 1,
+      "message": "Just wanted to be explicit....",
+      "parentUuid": "03fce4cb_cd574fa3",
+      "range": {
+        "startLine": 1252,
+        "startChar": 10,
+        "endLine": 1254,
+        "endChar": 9
+      },
+      "revId": "7777cd64667b8cf351e910f2b0e9a530b535c7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
