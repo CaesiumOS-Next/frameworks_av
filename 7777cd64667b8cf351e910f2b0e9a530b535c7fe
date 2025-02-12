@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fce4cb_cd574fa3",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-12T18:56:24Z",
+      "side": 1,
+      "message": "Do we need this? (sine this is not changing the preset format.)",
+      "range": {
+        "startLine": 1252,
+        "startChar": 10,
+        "endLine": 1254,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "50c1515f_05dbc51c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/apv/C2SoftApvDec.cpp",
+              "range": {
+                "startLine": 1252,
+                "startChar": 0,
+                "endLine": 1254,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7777cd64667b8cf351e910f2b0e9a530b535c7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
