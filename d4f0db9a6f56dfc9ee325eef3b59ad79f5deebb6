@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "feb6ddd3_88bf0e62",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-12T02:32:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb046ada_eecd7868",
+      "range": {
+        "startLine": 1232,
+        "startChar": 16,
+        "endLine": 1232,
+        "endChar": 25
+      },
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "542f0136_d778962d",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-11T22:30:10Z",
       "side": 1,
       "message": "note that output format will never have \"capture-rate\", this is currently only used in configureFormat (not in input or output).\n\nThat said, for encoders we would expect operating rate to be set for high-speed capture, but I am fairly certain it isn\u0027t.  Perhaps a note that this is only used during configuration.",
+      "range": {
+        "startLine": 1238,
+        "startChar": 39,
+        "endLine": 1238,
+        "endChar": 54
+      },
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30977936_af9fe189",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-12T02:32:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "542f0136_d778962d",
       "range": {
         "startLine": 1238,
         "startChar": 39,
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f9d4c5_25f41ce3",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-12T02:32:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61e52443_8a41c183",
+      "range": {
+        "startLine": 1260,
+        "startChar": 50,
+        "endLine": 1260,
+        "endChar": 57
+      },
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1abfd4b_5fedec23",
@@ -125,6 +197,30 @@
           ]
         }
       ],
+      "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdab9691_6a49c616",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 4485,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-12T02:32:54Z",
+      "side": 1,
+      "message": "Should we be having any preference over from which format (format from the configuration or input or output) to retrive the operating rate?",
+      "parentUuid": "a1abfd4b_5fedec23",
+      "range": {
+        "startLine": 4485,
+        "startChar": 37,
+        "endLine": 4485,
+        "endChar": 58
+      },
       "revId": "d4f0db9a6f56dfc9ee325eef3b59ad79f5deebb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
