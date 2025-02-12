@@ -39,6 +39,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23857e01_972276a2",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-12T21:43:44Z",
+      "side": 1,
+      "message": "sure, since this gerrit is already in Pre-submit verification.\n\nPlease review this, https://android-review.googlesource.com/c/platform/frameworks/av/+/3493390/",
+      "parentUuid": "5b364f30_febf68ce",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
