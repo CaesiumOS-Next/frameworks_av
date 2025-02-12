@@ -55,6 +55,13 @@ c2_status_t retrieveAHardwareBufferId(const C2ConstGraphicBlock &blk, uint64_t *
     }
 }
 
+uint64_t clearReadWriteFlagsFromHardwareBufferUsage(uint64_t usage) {
+    uint64_t readWriteMask = (AHARDWAREBUFFER_USAGE_CPU_READ_MASK |
+                              AHARDWAREBUFFER_USAGE_CPU_WRITE_MASK);
+    uint64_t clearMask = ~readWriteMask;
+    return (usage & clearMask);
+}
+
 } // anonymous namespace
 
 GraphicsTracker::BufferItem::BufferItem(
@@ -783,6 +790,13 @@ c2_status_t GraphicsTracker::allocate(
         std::unique_lock<std::mutex> l(mLock);
         if (mStopRequested) {
             l.unlock();
+            // TODO: remove this usage flag conversion.
+            // Note: this conversion should not exist.
+            // To resolve b/382882341, clearing incompatible bits flag
+            // from AHardwareBuffer usage is done here.
+            if (usage & AHARDWAREBUFFER_USAGE_PROTECTED_CONTENT) {
+                usage = clearReadWriteFlagsFromHardwareBufferUsage(usage);
+            }
             res = _allocateDirect(width, height, format, usage, buf, rFence);
             // Delay a little bit for HAL to receive stop()/release() request.
             ::usleep(kAllocateDirectDelayUs);
