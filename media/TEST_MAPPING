@@ -3,20 +3,10 @@
     "presubmit-large": [
         // runs whenever we change something in this tree
         {
-            "name": "CtsMediaCodecTestCases",
-            "options": [
-                {
-                    "include-filter": "android.media.codec.cts.EncodeDecodeTest"
-                }
-            ]
+            "name": "CtsMediaCodecTestCases_cts_encodedecodetest"
         },
         {
-            "name": "CtsMediaCodecTestCases",
-            "options": [
-                {
-                    "include-filter": "android.media.codec.cts.DecodeEditEncodeTest"
-                }
-            ]
+            "name": "CtsMediaCodecTestCases_cts_decodeeditencodetest"
         }
     ],
     "presubmit": [
@@ -36,48 +26,23 @@
             "file_patterns": ["(?i)drm|crypto"]
         },
         {
-            "name": "CtsMediaDrmFrameworkTestCases",
-            "options" : [
-                {
-                    "include-annotation": "android.platform.test.annotations.Presubmit"
-                }
-            ],
+            "name": "CtsMediaDrmFrameworkTestCases_Presubmit",
             "file_patterns": ["(?i)drm|crypto"]
         },
         {
-            "name": "MctsMediaCodecTestCases",
-            "options": [
-                {
-                    "include-filter": "android.media.codec.cts.EncodeDecodeTest"
-                }
-            ]
+            "name": "MctsMediaCodecTestCases_cts_encodedecodetest"
         },
         {
-            "name": "MctsMediaCodecTestCases",
-            "options": [
-                {
-                    "include-filter": "android.media.codec.cts.DecodeEditEncodeTest"
-                }
-            ]
+            "name": "MctsMediaCodecTestCases_cts_decodeeditencodetest"
         },
         {
-            "name": "MctsMediaCodecTestCases",
-            "options": [
-                {
-                    "include-filter": "android.media.codec.cts.ExtractDecodeEditEncodeMuxTest"
-                }
-            ]
+            "name": "MctsMediaCodecTestCases_cts_extractdecodeeditencodemuxtest"
         }
     ],
     // Postsubmit tests for TV devices
     "tv-postsubmit": [
         {
-            "name": "CtsMediaDecoderTestCases",
-            "options": [
-                {
-                    "include-filter": "android.media.decoder.cts.DecoderRenderTest"
-                }
-            ]
+            "name": "CtsMediaDecoderTestCases_cts_decoderrendertest"
         }
     ]
 }
