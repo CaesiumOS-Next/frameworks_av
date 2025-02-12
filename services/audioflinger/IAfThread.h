@@ -144,6 +144,7 @@ public:
         MMAP_CAPTURE,   // Thread class for MMAP capture stream
         SPATIALIZER,    //
         BIT_PERFECT,    // Thread class for BitPerfectThread
+        DIRECT_RECORD,  // Thread class for DirectRecordThread
         // When adding a value, also update IAfThreadBase::threadTypeToString()
     };
 
@@ -581,7 +582,8 @@ public:
 class IAfRecordThread : public virtual IAfThreadBase {
 public:
     static sp<IAfRecordThread> create(
-            const sp<IAfThreadCallback>& afThreadCallback, AudioStreamIn* input,
+            const sp<IAfThreadCallback>& afThreadCallback, audio_input_flags_t flags,
+            AudioStreamIn* input,
             audio_io_handle_t id, bool systemReady);
 
     virtual sp<IAfRecordTrack> createRecordTrack_l(
