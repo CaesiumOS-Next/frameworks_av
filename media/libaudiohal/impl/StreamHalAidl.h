@@ -289,6 +289,12 @@ class StreamHalAidl : public virtual StreamHalInterface, public ConversionHelper
 
     status_t exit();
 
+    template <typename Callable>
+    auto serializeCall(Callable&& func) {
+        std::lock_guard lock(mCallLock);
+        return std::invoke(std::forward<Callable>(func));
+    }
+
     void onAsyncTransferReady();
     void onAsyncDrainReady();
     void onAsyncError();
@@ -333,6 +339,12 @@ class StreamHalAidl : public virtual StreamHalInterface, public ConversionHelper
     status_t updateCountersIfNeeded(
             ::aidl::android::hardware::audio::core::StreamDescriptor::Reply* reply = nullptr,
             StatePositions* statePositions = nullptr);
+
+    template <typename IStreamCommonMemberFn, typename... Args>
+    auto bindToStream(IStreamCommonMemberFn&& mf, Args&&... args) {
+        return std::bind(std::forward<IStreamCommonMemberFn>(mf), mStream,
+                         std::forward<Args>(args)...);
+    }
 
     const std::shared_ptr<::aidl::android::hardware::audio::core::IStreamCommon> mStream;
     const std::shared_ptr<::aidl::android::media::audio::IHalAdapterVendorExtension> mVendorExt;
@@ -445,6 +457,12 @@ class StreamOutHalAidl : public virtual StreamOutHalInterface,
     static ConversionResult<::aidl::android::hardware::audio::common::SourceMetadata>
     legacy2aidl_SourceMetadata(const StreamOutHalInterface::SourceMetadata& legacy);
 
+    template <typename IStreamOutMemberFn, typename... Args>
+    auto bindToStream(IStreamOutMemberFn&& mf, Args&&... args) {
+        return std::bind(std::forward<IStreamOutMemberFn>(mf), mStream,
+                         std::forward<Args>(args)...);
+    }
+
     const std::shared_ptr<::aidl::android::hardware::audio::core::IStreamOut> mStream;
     const wp<CallbackBroker> mCallbackBroker;
     mediautils::atomic_wp<StreamOutHalInterfaceCallback> mClientCallback;
@@ -501,6 +519,11 @@ class StreamInHalAidl : public StreamInHalInterface, public StreamHalAidl {
 
     static ConversionResult<::aidl::android::hardware::audio::common::SinkMetadata>
     legacy2aidl_SinkMetadata(const StreamInHalInterface::SinkMetadata& legacy);
+
+    template <typename IStreamInMemberFn, typename... Args>
+    auto bindToStream(IStreamInMemberFn&& mf, Args&&... args) {
+        return std::bind(std::forward<IStreamInMemberFn>(mf), mStream, std::forward<Args>(args)...);
+    }
 
     const std::shared_ptr<::aidl::android::hardware::audio::core::IStreamIn> mStream;
     const wp<MicrophoneInfoProvider> mMicInfoProvider;
