@@ -16,6 +16,29 @@
       "message": "Shunkai, could you please review.",
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b364f30_febf68ce",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-02-12T19:22:14Z",
+      "side": 1,
+      "message": "Is it better to define a member method, and always serialize it with `mCallLock`?\n```\ntemplate \u003ctypename Func, typename... Args\u003e\nauto StreamHalAidl::serializeCall(Func\u0026\u0026 func, Args\u0026\u0026... args) {\n    std::lock_guard l_(mCallLock);\n    return std::invoke(std::forward\u003cCallable\u003e(callable), std::forward\u003cArgs\u003e(args)...);\n}\n```",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
