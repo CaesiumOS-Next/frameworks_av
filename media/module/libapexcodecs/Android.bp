@@ -28,13 +28,17 @@ cc_defaults {
 
     shared_libs: [
         "libbase",
+        "libcodec2",
         "libnativewindow",
     ],
 
     export_include_dirs: ["include"],
 
+    local_include_dirs: ["private"],
+
     export_shared_lib_headers: [
         "libbase",
+        "libcodec2",
         "libnativewindow",
     ],
 
@@ -66,6 +70,8 @@ cc_library {
         "//frameworks/av/apex:__subpackages__",
         "//frameworks/av/media/codec2/hal/client",
     ],
+
+    srcs: ["ApexCodecsStoreImpl.cpp"],
 
     min_sdk_version: "apex_inherit",
     version_script: "libcom.android.media.swcodec.apexcodecs.map.txt",
