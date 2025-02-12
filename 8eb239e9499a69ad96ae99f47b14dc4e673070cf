@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455cfa91_1e11acfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2025-02-12T21:38:57Z",
+      "side": 1,
+      "message": "Does the full audiopolicy_tests suite pass with this change? If yes, please update commit message to reflect that.",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 108
+      },
+      "revId": "8eb239e9499a69ad96ae99f47b14dc4e673070cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
