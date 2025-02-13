@@ -22,6 +22,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4eca4c3_0a540965",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-13T21:08:21Z",
+      "side": 0,
+      "message": "And together with harcoding, we can also add a comment on the lock saying \"do not use in manual code\". This should help to avoid an attempt of re-taking the lock for most cases.",
+      "parentUuid": "525f21e0_7f2cfb89",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
