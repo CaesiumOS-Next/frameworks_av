@@ -68,6 +68,29 @@
       "parentUuid": "bb5d22c5_720b4852",
       "revId": "8b7cd774b9f491383460bdd22a18347075edf0bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "226acfd7_4257fe35",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 8176,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-13T23:19:35Z",
+      "side": 1,
+      "message": "what is the difference between flags and AudioStreamIn-\u003eflags at this point?  Do we need to pass them in?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/datapath/AudioStreamIn.h;drc\u003d6c00951fd2f22fa0b31a49b2b7be747b44dfabbb;l\u003d41\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/Threads.cpp;drc\u003df914d810f521aaafd90412d92c724f3b8b8bf152;l\u003d9512",
+      "range": {
+        "startLine": 8175,
+        "startChar": 11,
+        "endLine": 8176,
+        "endChar": 42
+      },
+      "revId": "8b7cd774b9f491383460bdd22a18347075edf0bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
