@@ -64,6 +64,14 @@ flag {
 }
 
 flag {
+    name: "dolby_ac4_levels_5_to_7_encoding_api"
+    namespace: "media_audio"
+    description: "Feature flag for Dolby AC-4 levels 5 to 7 support."
+    is_fixed_read_only: true
+    bug: "395670649"
+}
+
+flag {
     name: "sony_360ra_mpegh_3d_format"
     namespace: "media_audio"
     description: "360 Reality Audio MPEG-H 3D Format"

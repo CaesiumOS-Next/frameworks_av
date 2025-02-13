@@ -354,7 +354,10 @@ void AudioPolicyConfig::setDefaultSurroundFormats() {
         {AUDIO_FORMAT_DOLBY_TRUEHD, {}},
         {AUDIO_FORMAT_E_AC3_JOC, {}},
         {AUDIO_FORMAT_AC4, {}},     // L0-3
-        {AUDIO_FORMAT_AC4_L4, {}}};
+        {AUDIO_FORMAT_AC4_L4, {}},
+        {AUDIO_FORMAT_AC4_L5, {}},
+        {AUDIO_FORMAT_AC4_L6, {}},
+        {AUDIO_FORMAT_AC4_L7, {}}};
 }
 
 bool AudioPolicyConfig::useDeepBufferForMedia() const {
