@@ -87,6 +87,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb8359e_c7b501e4",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-02-13T00:38:46Z",
+      "side": 1,
+      "message": "I agree it\u0027s less natural to read `serializeCall(mStream, IStreamOut::setHwVolume, volumes)`. :)\n\nI was a little hesitating with macro approach, because it\u0027s not type safe. Do you think if it\u0027s a good idea to remove the `mtx,` parameter from `SERIALIZE_CALL` MACRO?\n\nI\u0027m fine with merge this one as is if Mikhail think it\u0027s okay.\nThanks Ajender for address my comment and put extra effect in https://android-review.googlesource.com/c/platform/frameworks/av/+/3493390/.",
+      "parentUuid": "ea0ff7e6_5e467e70",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
