@@ -16,6 +16,23 @@
       "message": "@hunga@google.com, please review",
       "revId": "8b7cd774b9f491383460bdd22a18347075edf0bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c435fda_88b38167",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-13T13:18:01Z",
+      "side": 1,
+      "message": "If a direct record thread has the same behavior as a regular record thread (e.g. no overriden virtual methods or if(DRIECT)... type logic) why not just add an API to get the input flags to the IAfRecordThread interface and use this?",
+      "revId": "8b7cd774b9f491383460bdd22a18347075edf0bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
