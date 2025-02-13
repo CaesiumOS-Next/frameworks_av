@@ -6145,6 +6145,18 @@ void MediaCodec::handleOutputFormatChangeIfNeeded(const sp<MediaCodecBuffer> &bu
         // consider a new subsession if the width or height changes.
         newSubsession = true;
     }
+    if (android::media::codec::provider_->subsession_metrics()) {
+        // consider a new subsession if the width or height changes.
+        if (mOutputFormat->findRect("crop", &left, &top, &right, &bottom)) {
+            if ((right - left + 1) != mWidth || (bottom - top + 1) != mHeight) {
+                newSubsession = true;
+            }
+        } else if (mOutputFormat->findInt32("width", &width) &&
+                   mOutputFormat->findInt32("height", &height) &&
+                   (width != mWidth || height != mHeight)) {
+            newSubsession = true;
+        }
+    }
     // TODO: properly detect new audio subsession
 
     // Only consider a new subsession if we already have output (from a previous subsession).
