@@ -111,6 +111,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07ce2900_3eaf50c4",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-13T00:55:00Z",
+      "side": 1,
+      "message": "Yes, I think it\u0027s a good idea to hardcode use of `mCallLock` into the macro in a subsequent CL.",
+      "parentUuid": "0fb8359e_c7b501e4",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
