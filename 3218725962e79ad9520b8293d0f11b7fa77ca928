@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "525f21e0_7f2cfb89",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-13T18:57:57Z",
+      "side": 0,
+      "message": "As noted in the previous CL, maybe just hardcode use of `mCallLock` in this macro, so that uses of it become cleaner.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
