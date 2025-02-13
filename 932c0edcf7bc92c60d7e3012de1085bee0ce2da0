@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dec0e3d6_b7010472",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-13T23:11:48Z",
+      "side": 1,
+      "message": "please always use a domain here (and also this subject line does not clarify that this is about subsessions.):\n\ne.g.\n\nMediaCodec: use crop attributes if present to detect new subsession for metrics",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "932c0edcf7bc92c60d7e3012de1085bee0ce2da0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7999b99_21e26dfa",
         "filename": "media/libstagefright/MediaCodec.cpp",
         "patchSetId": 1
