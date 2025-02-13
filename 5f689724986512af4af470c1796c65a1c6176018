@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef366c66_70ce8cb2",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-13T17:57:35Z",
+      "side": 1,
+      "message": "Is there a #define in external/libopenapv that we could get via #include\nrather than hard-coding 4k for these?\n\n(1) a number from external/libopenapv would tell us what the codec supports\n(2) whatever we define here is a throttle on top of that -- the plugin won\u0027t\nallow larger than this.\nand then there\u0027s \n(3) the number in the media_codec.xml file that is what the\nmediacodec.configure() will allow.\nand all of those should be in a codec \u003e\u003d plugin \u003e\u003d xml relationship.\n\nand knowing that the oem can screw with the xml to break that relationship.\n\ni\u0027d love to see #2 driven by #1;  or at least bounded by #1.",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "5f689724986512af4af470c1796c65a1c6176018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d642164f_e1936d78",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-02-13T17:57:35Z",
+      "side": 1,
+      "message": "this is so that the plugin doesn\u0027t blow past any of its tables, right?\n\nthis assumes that the MAX_SUPPORTED_WIDTH that we have here is \u003c\u003d what\nthe underlying codec implementation allows.",
+      "range": {
+        "startLine": 971,
+        "startChar": 12,
+        "endLine": 971,
+        "endChar": 21
+      },
+      "revId": "5f689724986512af4af470c1796c65a1c6176018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
