@@ -16,6 +16,24 @@
       "message": "wouldn\u0027t it be beetter to solve this by providing a better AudioTrack documentation about the fact the powewr saving mode has precedence over the channel mask when chosing the playback path and if an app wants to play multichannel PCM content in an optimal maner they shold not use power saving mode?\nCurrent implementation of openDirectOutput() clearly prevents a deep buffer request from using a direct output so it would be inconsistent to not do this when dynamic audio policies are used.",
       "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "230fbd64_dc1e3163",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1633017
+      },
+      "writtenOn": "2025-02-13T23:16:30Z",
+      "side": 1,
+      "message": "Hi Eric,\n\n1. Regarding the precedence :\nas described here for AudioPolicyManager::selectOutput() - https://cs.android.com/android/platform/superproject/+/android15-qpr1-release:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d2183?q\u003dAudioPolicyManager.cpp\u0026ss\u003dandroid%2Fplatform%2Fsuperproject\n   * output with higher channel count has precedence over the power saving mode.\n\n   This works well for the mixer multi-channel output path (non-direct path). \n\nHowever, for the DIRECT output path, same priorities aren\u0027t applied by the Audio Policy Manager.\nDirect output request for multi-channel track is rejected as it\u0027s requested with power saving mode. \n\n2. Regarding power saving mode:\n   The app doesn\u0027t request for power saving mode while creating a multi-channel audio track.The track buffer size (10 x frame size) set during AudioTrack creation forces the power saving mode because of this code in the frameworks: \n\nhttps://cs.android.com/android/platform/superproject/+/android15-qpr1-release:frameworks/base/media/java/android/media/AudioTrack.java;l\u003d1820?q\u003dshouldEnablePowerSaving\u0026ss\u003dandroid%2Fplatform%2Fsuperproject",
+      "parentUuid": "dd8fd6d2_4bfacefa",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
