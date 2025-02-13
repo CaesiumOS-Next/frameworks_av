@@ -380,6 +380,7 @@ TEST(MediaCodecTest, DeadWhileAsyncReleasing) {
                 .WillByDefault([mockCodec](bool) {
                     // 2)
                     mockCodec->callback()->onError(DEAD_OBJECT, ACTION_CODE_FATAL);
+                    mockCodec->callback()->onReleaseCompleted();
                     // Codec service has died, no callback.
                 });
             return mockCodec;
