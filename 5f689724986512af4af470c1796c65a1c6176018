@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a2030a8_996a1250",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-02-13T19:51:34Z",
+      "side": 1,
+      "message": "1. There is no strict limit in openAPV for this. Anything that fits into frame_header (24bits) could be passed. OpenAPV has its own fuzzing running to cover possible issues there.\n\n2. So 4096 is lower than what openAPV theoretically allow\n3. further throttling is happening in media_codec.xml - the current is 1920, but OEMs can overwrite this.\n\nSo, yes,\nopenAPV_limit \u003e MAX_SUPPORTED_WIDTH \u003e media_codec_max_with",
+      "parentUuid": "ef366c66_70ce8cb2",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "5f689724986512af4af470c1796c65a1c6176018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d642164f_e1936d78",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-13T17:57:35Z",
       "side": 1,
       "message": "this is so that the plugin doesn\u0027t blow past any of its tables, right?\n\nthis assumes that the MAX_SUPPORTED_WIDTH that we have here is \u003c\u003d what\nthe underlying codec implementation allows.",
+      "range": {
+        "startLine": 971,
+        "startChar": 12,
+        "endLine": 971,
+        "endChar": 21
+      },
+      "revId": "5f689724986512af4af470c1796c65a1c6176018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ef64086_e27a4cbc",
+        "filename": "media/codec2/components/apv/C2SoftApvDec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1939986
+      },
+      "writtenOn": "2025-02-13T19:51:34Z",
+      "side": 1,
+      "message": "Yes, MAX_SUPPORTED_* here is less than what openAPV allows",
+      "parentUuid": "d642164f_e1936d78",
       "range": {
         "startLine": 971,
         "startChar": 12,
