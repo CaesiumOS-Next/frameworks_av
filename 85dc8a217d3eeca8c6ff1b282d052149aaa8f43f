@@ -1,0 +1,215 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1454b072_a1664bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-13T03:01:13Z",
+      "side": 1,
+      "message": "Each exposed Thread class should have a unique type, so DIRECT_RECORD makes the most sense here.  Can you please adjust the code appropriately?",
+      "revId": "85dc8a217d3eeca8c6ff1b282d052149aaa8f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f812a06_c6ef2589",
+        "filename": "services/audioflinger/IAfThread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-13T03:01:13Z",
+      "side": 1,
+      "message": "nit: please do not reuse this, make DIRECT_RECORD  here.  Also modify threadTypeToString() to add it.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4f457a48_e0593773",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/IAfThread.h",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "        DIRECT_RECORD,   // Thread class is DirectOutputThread\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85dc8a217d3eeca8c6ff1b282d052149aaa8f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "537820bc_cefea496",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 8175,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-13T03:01:13Z",
+      "side": 1,
+      "message": "nit: spaces",
+      "range": {
+        "startLine": 8175,
+        "startChar": 59,
+        "endLine": 8175,
+        "endChar": 62
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5030da23_89d9790c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 8175,
+                "startChar": 0,
+                "endLine": 8176,
+                "endChar": 0
+              },
+              "replacement": "        return sp\u003cDirectInputThread\u003e::make(afThreadCallback, input, id, systemReady);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85dc8a217d3eeca8c6ff1b282d052149aaa8f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92112b0b_3c059275",
+        "filename": "services/audioflinger/Threads.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-13T03:01:13Z",
+      "side": 1,
+      "message": "nit: why is this DirectInputThread and not DirectRecordThread?",
+      "range": {
+        "startLine": 2225,
+        "startChar": 6,
+        "endLine": 2225,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fe83bd6b_f4791370",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.h",
+              "range": {
+                "startLine": 2225,
+                "startChar": 0,
+                "endLine": 2226,
+                "endChar": 0
+              },
+              "replacement": "class DirectRecordThread final : public RecordThread {\n"
+            },
+            {
+              "path": "services/audioflinger/Threads.h",
+              "range": {
+                "startLine": 2227,
+                "startChar": 0,
+                "endLine": 2228,
+                "endChar": 0
+              },
+              "replacement": "    DirectRecordThread(const sp\u003cIAfThreadCallback\u003e\u0026 afThreadCallback,\n"
+            },
+            {
+              "path": "services/audioflinger/Threads.h",
+              "range": {
+                "startLine": 2229,
+                "startChar": 0,
+                "endLine": 2230,
+                "endChar": 0
+              },
+              "replacement": "    ~DirectRecordThread() override;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85dc8a217d3eeca8c6ff1b282d052149aaa8f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c986b918_91f9a9e0",
+        "filename": "services/audioflinger/Threads.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2226,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-13T03:01:13Z",
+      "side": 1,
+      "message": "nit: this is not indented, and line 2228 should be indented 12 spaces.",
+      "range": {
+        "startLine": 2226,
+        "startChar": 0,
+        "endLine": 2226,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "430100bb_3f6c7ce4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.h",
+              "range": {
+                "startLine": 2226,
+                "startChar": 0,
+                "endLine": 2227,
+                "endChar": 0
+              },
+              "replacement": "public:\n"
+            },
+            {
+              "path": "services/audioflinger/Threads.h",
+              "range": {
+                "startLine": 2228,
+                "startChar": 0,
+                "endLine": 2229,
+                "endChar": 0
+              },
+              "replacement": "                        AudioStreamIn* input, audio_io_handle_t id, bool systemReady);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85dc8a217d3eeca8c6ff1b282d052149aaa8f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
