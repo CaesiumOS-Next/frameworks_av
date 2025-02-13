@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3e5c6d3_52a974a0",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4232,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-02-13T21:37:05Z",
+      "side": 0,
+      "message": "mComponentName will be cleared when mediaCodec receive releaseComplete notification. This code block never execute before as the sate is set to UNINITIALIZED befroe it.",
+      "range": {
+        "startLine": 4232,
+        "startChar": 36,
+        "endLine": 4232,
+        "endChar": 59
+      },
+      "revId": "57bd63426b213173721772a1fecb6414afb90787",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
