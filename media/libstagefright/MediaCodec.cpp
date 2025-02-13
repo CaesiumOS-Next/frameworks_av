@@ -4212,14 +4212,21 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                             // the shutdown complete notification. If we
                             // don't, we'll timeout and force release.
                             sendErrorResponse = false;
-                            FALLTHROUGH_INTENDED;
+                            if (mFlags & kFlagSawMediaServerDie) {
+                                if (mReplyID) {
+                                    postPendingRepliesAndDeferredMessages(origin + ":dead");
+                                } else {
+                                    ALOGD("Releasing asynchronously, so nothing to reply here.");
+                                    ALOGD("no pending replies: %s:dead following %s",
+                                            origin.c_str(), mLastReplyOrigin.c_str());
+                                }
+                            }
+                            break;
                         }
+
                         case STOPPING:
                         {
                             if (mFlags & kFlagSawMediaServerDie) {
-                                if (mState == RELEASING && !mReplyID) {
-                                    ALOGD("Releasing asynchronously, so nothing to reply here.");
-                                }
                                 // MediaServer died, there definitely won't
                                 // be a shutdown complete notification after
                                 // all.
@@ -4228,9 +4235,6 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                                 // STOPPING->UNINITIALIZED, instead of the
                                 // usual STOPPING->INITIALIZED state.
                                 setState(UNINITIALIZED);
-                                if (mState == RELEASING) {
-                                    mComponentName.clear();
-                                }
                                 if (mReplyID) {
                                     postPendingRepliesAndDeferredMessages(origin + ":dead");
                                 } else {
