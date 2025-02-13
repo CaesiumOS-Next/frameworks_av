@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7999b99_21e26dfa",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6147,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-13T23:06:39Z",
+      "side": 1,
+      "message": "this needs to be deleted as it is replaced by below logic. Perhaps we need to track \"width\"/\"height\" in addition to mWidth/mHeight to detect when crop stays the same but underlying frame size changes. Can we add a TODO? (as we are not (yet) logging underlying width/height.)",
+      "range": {
+        "startLine": 6141,
+        "startChar": 3,
+        "endLine": 6147,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a8e614b2_4c6c9f97",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 6141,
+                "startChar": 0,
+                "endLine": 6148,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "932c0edcf7bc92c60d7e3012de1085bee0ce2da0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
