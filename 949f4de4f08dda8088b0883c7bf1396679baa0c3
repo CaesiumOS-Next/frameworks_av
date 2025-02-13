@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd8fd6d2_4bfacefa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-13T18:58:11Z",
+      "side": 1,
+      "message": "wouldn\u0027t it be beetter to solve this by providing a better AudioTrack documentation about the fact the powewr saving mode has precedence over the channel mask when chosing the playback path and if an app wants to play multichannel PCM content in an optimal maner they shold not use power saving mode?\nCurrent implementation of openDirectOutput() clearly prevents a deep buffer request from using a direct output so it would be inconsistent to not do this when dynamic audio policies are used.",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
