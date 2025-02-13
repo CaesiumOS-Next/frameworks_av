@@ -50,6 +50,24 @@
       "message": "Hi @elaurent@google.com,\n\nI agree that currently, DirectRecordThread is identical to RecordThread. Previously, we chose DIRECT to allow setting and getting parameters for the record side.\n\nRecently, I realized there is no DIRECT thread. After examining the flinger design and source code, I found that each thread is associated with a specific thread type (one-to-one association). Therefore, DirectRecordThread intuitively aligns with the existing design. As of now, DirectRecordThread is the same as RecordThread. We can use this code space for any future features and modify it accordingly.\n\nDo you still feel this boilerplate code?",
       "revId": "8b7cd774b9f491383460bdd22a18347075edf0bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b197b343_633bdcde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-13T19:51:40Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion on this.\nAdding an API to epose the input or output flag can be useful but thre is no use currently as well.\nI am Ok with adding a new record thread type for consistency",
+      "parentUuid": "bb5d22c5_720b4852",
+      "revId": "8b7cd774b9f491383460bdd22a18347075edf0bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
