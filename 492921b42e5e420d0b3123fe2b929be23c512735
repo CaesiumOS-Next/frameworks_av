@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99e147a_0e316014",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945317
+      },
+      "writtenOn": "2025-02-13T23:49:45Z",
+      "side": 1,
+      "message": "@mnaganov@google.com Is there any risk breaking OEMs who are using this?",
+      "revId": "492921b42e5e420d0b3123fe2b929be23c512735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
