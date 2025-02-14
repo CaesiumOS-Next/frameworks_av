@@ -371,6 +371,9 @@ std::vector<DynamicsProcessing::EqBandConfig> DynamicsProcessingContext::getEqBa
     std::vector<DynamicsProcessing::EqBandConfig> eqBands;
 
     auto maxBand = mEngineArchitecture.preEqStage.bandCount;
+    if (type == StageType::POSTEQ) {
+         maxBand = mEngineArchitecture.postEqStage.bandCount;
+     }
     for (int32_t ch = 0; ch < mChannelCount; ch++) {
         auto eq = getEqWithType_l(type, ch);
         if (!eq) {
