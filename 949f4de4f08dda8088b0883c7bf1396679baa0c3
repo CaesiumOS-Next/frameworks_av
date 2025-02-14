@@ -34,6 +34,23 @@
       "parentUuid": "dd8fd6d2_4bfacefa",
       "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5505ebb_8bb75803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-14T10:24:07Z",
+      "side": 1,
+      "message": "The DEEP buffer flag rejection in openDirectOutput() was added to fix b/357522537 which is actually a similar problem wehre both DEEP BUFFER and DIRECT flags were set when opening the audio HAL stream.\n\nWe need to define a policy for precendence between direct output and deep buffer and have a consisten implementaiton between routes using a DAP mix and other routes handled by getOutputForDevices.\n\nI can suggest that a direct output has precedence over a deep buffer request if there is a match on channel mask, sampling rate or format and that in this case we clear the DEEP buffer flag when opening the direct output.\n\nMikhail,\n\nyou have more context on b/357522537, what do you think?",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
