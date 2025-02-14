@@ -51,6 +51,24 @@
       "parentUuid": "d99e147a_0e316014",
       "revId": "492921b42e5e420d0b3123fe2b929be23c512735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e51c0b7_e3e9a266",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945317
+      },
+      "writtenOn": "2025-02-14T19:08:31Z",
+      "side": 1,
+      "message": "This CL works on Seahawk.",
+      "parentUuid": "c0f24034_bd4c71a9",
+      "revId": "492921b42e5e420d0b3123fe2b929be23c512735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
