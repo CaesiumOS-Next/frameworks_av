@@ -70,6 +70,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfb81271_c0e0e802",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-14T17:53:59Z",
+      "side": 0,
+      "message": "\u003e As you know, macros offer both readability and error-proneness\n\nI agree with the first part but not with the second :) It\u0027s quite easy to run into a weird issue with macros that are not carefully written because they lack ability to check types of their parameters, and also because they may end up evaluating their argument multiple times. Template code offers much better protection against such mistakes. That\u0027s why we generally prefer to use them over macros.\n\nThe latest proposal to use a template which hardcodes `mCallLock` makes sense to me.\n\nOne thing I would like to try to get rid of in the spirit of readability is repetition of the interface type use, like `IStreamCommon`. Step 1 may be to create a type alias for the stream interface type:\n\n```\nusing Stream \u003d ::aidl::android::hardware::audio::core::IStreamCommon\n```\n\nand respectively, for `IStreamIn` and `IStreamOut` in `StreamIn` and `StreamOut` wrappers. That will make the calls look a bit shorter and uniform:\n\n```\nserializeCall(mStream, \u0026Stream::updateHwAvSyncId, hwAvSyncId))\n```\n\nAnd then, step 2, we can employ a macro over it to make it look even shorter:\n\n```\n#define SERIALIZE_STREAM_CALL(method, ...) serializeCall(mStream, \u0026Stream::method,  __VA_OPT__(,) __VA_ARGS__)\n```\n\n(I\u0027m not sure about the exact syntax for the macro, but you get the idea)\n\nso the call site becomes something like:\n\n```\nSERIALIZE_STREAM_CALL(updateHwAvSyncId, hwAvSyncId)\n```\n\nMaybe Step 1 is enough already, up to you.",
+      "parentUuid": "5a595ecc_cd071cb6",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
