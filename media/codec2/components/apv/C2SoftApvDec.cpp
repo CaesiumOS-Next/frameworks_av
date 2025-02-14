@@ -1258,6 +1258,9 @@ status_t C2SoftApvDec::outputBuffer(const std::shared_ptr<C2BlockPool>& pool,
         } else if (isHalPixelFormatSupported(
                         (AHardwareBuffer_Format)HAL_PIXEL_FORMAT_YCBCR_P010)) {
             format = HAL_PIXEL_FORMAT_YCBCR_P010;
+        } else if (isHalPixelFormatSupported(
+                        (AHardwareBuffer_Format)HAL_PIXEL_FORMAT_RGBA_1010102)) {
+            format = HAL_PIXEL_FORMAT_RGBA_1010102;
         } else {
             format = HAL_PIXEL_FORMAT_YV12;
         }
