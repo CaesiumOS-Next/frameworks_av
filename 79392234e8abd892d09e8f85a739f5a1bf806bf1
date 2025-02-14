@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a48d7b_f23bc0d0",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-02-14T19:24:05Z",
+      "side": 1,
+      "message": "and... we can prevent the case of someone accidently taking the `mCallLock` before `serializeCall` by annotate this method with clang thread safty `EXCLUDES(mCallLock)`",
+      "range": {
+        "startLine": 293,
+        "startChar": 86,
+        "endLine": 293,
+        "endChar": 87
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "305c197b_9efa9a34",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.h",
+              "range": {
+                "startLine": 293,
+                "startChar": 0,
+                "endLine": 294,
+                "endChar": 0
+              },
+              "replacement": "    auto serializeCall(const std::shared_ptr\u003cT\u003e\u0026 obj, Callable\u0026\u0026 func, Args\u0026\u0026... args)\n            EXCLUDES(mCallLock) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "79392234e8abd892d09e8f85a739f5a1bf806bf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
