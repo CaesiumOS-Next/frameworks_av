@@ -16,6 +16,41 @@
       "message": "@mnaganov@google.com Is there any risk breaking OEMs who are using this?",
       "revId": "492921b42e5e420d0b3123fe2b929be23c512735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f24b02_ddd85bca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-14T00:24:27Z",
+      "side": 1,
+      "message": "I would r",
+      "revId": "492921b42e5e420d0b3123fe2b929be23c512735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f24034_bd4c71a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-14T00:24:27Z",
+      "side": 1,
+      "message": "I would recommend testing this CL on Seahawk. If these example files are used for building the configuration on the vendor partition, then vendor-specific files that have this misspelling also need to be corrected. But if this change will not affect Seahawk then I doubt it\u0027s a problem for anyone.",
+      "parentUuid": "d99e147a_0e316014",
+      "revId": "492921b42e5e420d0b3123fe2b929be23c512735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
