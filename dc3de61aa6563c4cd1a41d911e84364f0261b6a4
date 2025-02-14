@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc43d6a_58deb11d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-14T01:33:06Z",
+      "side": 1,
+      "message": "The CL is basically copied from GraphicBufferSource and etc for convinience of code reviewing.\nlint error was fixed on aosp/3368808.",
+      "revId": "dc3de61aa6563c4cd1a41d911e84364f0261b6a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
