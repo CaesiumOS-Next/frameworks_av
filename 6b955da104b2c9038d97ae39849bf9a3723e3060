@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c324cef6_1bacb006",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-14T00:50:06Z",
+      "side": 1,
+      "message": "`audioaidlconversion` and `audiopolicy` LGTM",
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a86758e_c8995815",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-14T00:50:06Z",
+      "side": 1,
+      "message": "You likely also want to add them into the AIDL equivalent of this: https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/audio/aidl/default/AudioPolicyConfigXmlConverter.cpp;l\u003d138;drc\u003da60b8c1f6f5539de4c8f464c1eaa11242ffb8729",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 35
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
