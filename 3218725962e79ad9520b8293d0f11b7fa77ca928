@@ -46,6 +46,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a595ecc_cd071cb6",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-14T09:38:52Z",
+      "side": 0,
+      "message": "sure, Mikhail.\n\nI feel that hardcoding mCallLock in the macro still has the same potential for misuse. As you know, macros offer both readability and error-proneness, but in the Audio AOSP source code, I see minimal usage of macros.\n\nPatchset 3 offers type safety with a little sacrifice in readability. Please review it.\n\nIf you still feel that hardcoding the macro is better, I will change it in the next patchset.",
+      "parentUuid": "f4eca4c3_0a540965",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
