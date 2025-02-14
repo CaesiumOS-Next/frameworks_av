@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b19e80c_79cec55f",
+        "filename": "media/libeffects/dynamicsproc/aidl/DynamicsProcessingContext.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-14T17:24:51Z",
+      "side": 1,
+      "message": "What do you think about writing this using `?:`?",
+      "range": {
+        "startLine": 373,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6055ada5_dcd0fa1b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/dynamicsproc/aidl/DynamicsProcessingContext.cpp",
+              "range": {
+                "startLine": 373,
+                "startChar": 0,
+                "endLine": 377,
+                "endChar": 0
+              },
+              "replacement": "    auto maxBand \u003d type \u003d\u003d StageType::POSTEQ ? mEngineArchitecture.postEqStage.bandCount\n                                             : mEngineArchitecture.preEqStage.bandCount;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e9cefd5c810c1e7962714aac2e755d23b453b12a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
