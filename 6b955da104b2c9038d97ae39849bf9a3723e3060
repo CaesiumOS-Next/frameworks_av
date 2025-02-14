@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f2fc1d6_8749b1a9",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-14T02:39:08Z",
+      "side": 1,
+      "message": "why don\u0027t we define these levels in the other CLs?  one is going to presume they are defined everywhere.",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 562,
+        "endChar": 41
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "293cbcd9_7767f373",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-14T02:39:08Z",
+      "side": 1,
+      "message": "is this constexpr?",
+      "range": {
+        "startLine": 742,
+        "startChar": 13,
+        "endLine": 742,
+        "endChar": 15
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a86758e_c8995815",
         "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyConfig.cpp",
         "patchSetId": 1
