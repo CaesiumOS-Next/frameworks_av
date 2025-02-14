@@ -51,6 +51,24 @@
       "message": "The DEEP buffer flag rejection in openDirectOutput() was added to fix b/357522537 which is actually a similar problem wehre both DEEP BUFFER and DIRECT flags were set when opening the audio HAL stream.\n\nWe need to define a policy for precendence between direct output and deep buffer and have a consisten implementaiton between routes using a DAP mix and other routes handled by getOutputForDevices.\n\nI can suggest that a direct output has precedence over a deep buffer request if there is a match on channel mask, sampling rate or format and that in this case we clear the DEEP buffer flag when opening the direct output.\n\nMikhail,\n\nyou have more context on b/357522537, what do you think?",
       "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3dff5e5_d833b00f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-14T19:22:54Z",
+      "side": 1,
+      "message": "I agree that we need to provide a centralized description for the audio policy rules. Currently they are fragmented and, at least for the channel count / direct / deep buffer choices, lack some central guiding idea. As I can see from the code history, the rules for preferring the output with best matching channel count (pointed out by Sampath) was a result of fixing multichannel playback over USB: b/131685020. Then, the \u0027audio.deep_buffer.media\u0027 property was added to address some power regression issue: b/21198655. Again, then with addition of \"Direct PCM\" we have encountered another issue that you are referring to: b/357522537.\n\nSo, in the short term we at least need to align the DAP and non-DAP behavior. I think, DAP should behave the same as non-DAP. Is the non-DAP behavior to prefer the mix port with the matching channel count and ignore `DEEP_BUFFER` flag set by the framework or the app?\n\nThen, in the long term, we need to express clearly the policy and specify the parameters that vendors can customize for achieving the behavior they want. For example, if the vendor has turned on `audio.deep_buffer.media`, they probably prefer power saving over fidelity. Maybe this property needs to be enhanced so that vendors can also say that they want to prefer fidelity over power savings, even if the app says that it wants to use deep buffer. Or, as in this case, if the app uses a huge buffer size which induces use of deep buffer by the framework (again—should the vendor be able to control this behavior?).",
+      "parentUuid": "d5505ebb_8bb75803",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
