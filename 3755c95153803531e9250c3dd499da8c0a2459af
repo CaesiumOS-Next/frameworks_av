@@ -107,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8676b9ef_639bf24f",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-02-17T11:37:20Z",
+      "side": 1,
+      "message": "Lajos, this information is not part of the bitstream. This information is indicated via edit list box of mp4. This information is useful for getting the exact audio signal without additional silent samples at the start or end. Helps for proper a/v synchronization and gapless playback.\n\nBriefly,\nDue to the nature of the encoding algorithm, the encoder basing on the configuration param (key-profile, type of encoder (aac / ac-3 / ...) would append silent samples before the first actual audio sample. Also as the encoding happens as a set of samples (for example 1024) if the input does not have an integral multiple of 1024 samples then silence is appended at the end.\n\nKEY_ENCODER_DELAY indicates the start silent samples and \nKEY_PADDING indicates the end silent samples.\n\nThis change was done so that c2 plugin can communicate this information to muxers for writing desired information in edit list box of muxer.",
+      "parentUuid": "aa90688b_e9dca4c9",
+      "range": {
+        "startLine": 252,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 35
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "523d4799_231918ad",
         "filename": "media/codec2/core/include/C2Config.h",
         "patchSetId": 2
