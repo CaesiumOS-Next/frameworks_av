@@ -69,6 +69,24 @@
       "parentUuid": "d5505ebb_8bb75803",
       "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f0fac5_dcf54b43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-17T11:10:05Z",
+      "side": 1,
+      "message": "I agree with aligning DAP and non DAP policy and to favor channel mask match for more than stereo and sampling rate match for more than 48kHz. If the channel mask is stereo and SR is \u003c 48, then we shiould favor the low power request.",
+      "parentUuid": "b3dff5e5_d833b00f",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
