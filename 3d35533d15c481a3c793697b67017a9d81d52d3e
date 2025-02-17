@@ -16,6 +16,24 @@
       "message": "APV extractor is being updated in aosp/3464381.\nNeed to regenerate these files once the extractor is updated.",
       "revId": "3d35533d15c481a3c793697b67017a9d81d52d3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "231d5e49_fad9f5c7",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/res/trim_pattern_1280x720_30fps_30mbps_apv_10bit.info",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2025-02-17T10:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b292f155_0cdee248",
+      "revId": "3d35533d15c481a3c793697b67017a9d81d52d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
