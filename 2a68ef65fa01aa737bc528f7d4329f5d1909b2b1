@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8305007_c9d312e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-17T15:28:36Z",
+      "side": 1,
+      "message": "Please abandon, this was merged to internal repo",
+      "revId": "2a68ef65fa01aa737bc528f7d4329f5d1909b2b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3872e012_bd14c08c",
