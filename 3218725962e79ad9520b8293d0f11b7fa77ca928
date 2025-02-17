@@ -94,6 +94,30 @@
       },
       "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d0251f4_bc09765d",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-02-17T01:19:08Z",
+      "side": 0,
+      "message": "Thanks, Mikhail, step 1 feels good enough.\n\n\nrefactored as step 1 suggested.",
+      "parentUuid": "dfb81271_c0e0e802",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "3218725962e79ad9520b8293d0f11b7fa77ca928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
