@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca053a29_86a0aa1a",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1281351
+      },
+      "writtenOn": "2025-02-17T21:03:53Z",
+      "side": 1,
+      "message": "Hi Andy, which CLs were you referring to specifically?",
+      "parentUuid": "5f2fc1d6_8749b1a9",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 562,
+        "endChar": 41
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "293cbcd9_7767f373",
         "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2025-02-14T02:39:08Z",
       "side": 1,
       "message": "is this constexpr?",
+      "range": {
+        "startLine": 742,
+        "startChar": 13,
+        "endLine": 742,
+        "endChar": 15
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa290d9_6b64d916",
+        "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1281351
+      },
+      "writtenOn": "2025-02-17T21:03:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "293cbcd9_7767f373",
       "range": {
         "startLine": 742,
         "startChar": 13,
@@ -77,6 +125,30 @@
       "writtenOn": "2025-02-14T00:50:06Z",
       "side": 1,
       "message": "You likely also want to add them into the AIDL equivalent of this: https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/audio/aidl/default/AudioPolicyConfigXmlConverter.cpp;l\u003d138;drc\u003da60b8c1f6f5539de4c8f464c1eaa11242ffb8729",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 35
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d45f5e2b_54712c30",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioPolicyConfig.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1281351
+      },
+      "writtenOn": "2025-02-17T21:03:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2a86758e_c8995815",
       "range": {
         "startLine": 357,
         "startChar": 0,
