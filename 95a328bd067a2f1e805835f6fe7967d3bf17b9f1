@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982c5122_896eadb7",
+        "filename": "media/audioaidlconversion/AidlConversionEffect.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-17T05:52:45Z",
+      "side": 1,
+      "message": "Getting build errors\n\nframeworks/av/media/audioaidlconversion/AidlConversionEffect.cpp:171:14: error: no member named \u0027notEligibleForSuspend\u0027 in \u0027aidl::android::hardware::audio::effect::Flags\u0027\n  171 |     if (aidl.notEligibleForSuspend) {",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 5
+      },
+      "revId": "95a328bd067a2f1e805835f6fe7967d3bf17b9f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
