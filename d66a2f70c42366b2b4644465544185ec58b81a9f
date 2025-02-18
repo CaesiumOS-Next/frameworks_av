@@ -16,6 +16,24 @@
       "message": "The main issue with system API is that it\u0027s supposed to be guarded by a privileged permission, which isn\u0027t feasible in this instance.  So making setUage system API is basically just making it an obfuscated public API, so are we OK with that?",
       "revId": "d66a2f70c42366b2b4644465544185ec58b81a9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8293c116_010bfb46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-18T22:04:30Z",
+      "side": 1,
+      "message": "We originally tried to make it this systemapi, but in the case the interface is not accessible from vendor partition. per smoreland@\u0027s suggesion made it llndk.\n\nBut building RISC-V mainline requires sysmteapi as of now. (don\u0027t understand 100% yet.)",
+      "parentUuid": "7330e035_123529f5",
+      "revId": "d66a2f70c42366b2b4644465544185ec58b81a9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
