@@ -87,6 +87,23 @@
       "parentUuid": "b3dff5e5_d833b00f",
       "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1532160_f04166da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2025-02-18T06:07:05Z",
+      "side": 1,
+      "message": "Can a targeted fix for V/15 and B/16 be merged using this CL if the wholistic solution cannot make it into those branches?",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
