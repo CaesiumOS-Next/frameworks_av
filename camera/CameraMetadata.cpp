@@ -132,11 +132,9 @@ void CameraMetadata::acquire(camera_metadata_t *buffer) {
     clear();
     mBuffer = buffer;
 
-    IF_ALOGV() {
-        ALOGE_IF(validate_camera_metadata_structure(mBuffer, /*size*/NULL) != OK,
-                 "%s: Failed to validate metadata structure %p",
-                 __FUNCTION__, buffer);
-    }
+    ALOGE_IF(validate_camera_metadata_structure(mBuffer, /*size*/NULL) != OK,
+             "%s: Failed to validate metadata structure %p",
+             __FUNCTION__, buffer);
 }
 
 void CameraMetadata::acquire(CameraMetadata &other) {
@@ -714,11 +712,9 @@ status_t CameraMetadata::writeToParcel(Parcel& data,
 
         // Not too big of a problem since receiving side does hard validation
         // Don't check the size since the compact size could be larger
-        IF_ALOGV() {
-            if (validate_camera_metadata_structure(metadata, /*size*/NULL) != OK) {
-                ALOGW("%s: Failed to validate metadata %p before writing blob",
-                       __FUNCTION__, metadata);
-            }
+        if (validate_camera_metadata_structure(metadata, /*size*/NULL) != OK) {
+            ALOGW("%s: Failed to validate metadata %p before writing blob",
+                   __FUNCTION__, metadata);
         }
 
     } while(false);
