@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1414477f_487c7544",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-02-18T23:10:09Z",
+      "side": 1,
+      "message": "please make sure the failed build target builds now and add it to the Test: line",
+      "revId": "d66a2f70c42366b2b4644465544185ec58b81a9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7330e035_123529f5",
