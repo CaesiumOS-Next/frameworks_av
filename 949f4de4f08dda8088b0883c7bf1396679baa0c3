@@ -104,6 +104,24 @@
       "message": "Can a targeted fix for V/15 and B/16 be merged using this CL if the wholistic solution cannot make it into those branches?",
       "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "481e098c_cd68e6f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-18T21:41:43Z",
+      "side": 1,
+      "message": "I\u0027m afraid, even a targeted fix can\u0027t make it into Android V (15) because it\u0027s not a critical security fix. For Android 16 it is possible of course.\n\n\u003e  to favor channel mask match for more than stereo and sampling rate match for more than 48kHz\n\nDean, will this work for your case? I think Dolby multichannel content is usually at 48 kHz, not above that (unless it\u0027s some \"master\" type source or whatever it\u0027s called). Thus, it must be \"channel count \u003e 2 \u0026\u0026 sampling rate \u003e\u003d 48000\" for \"channel fidelity\" condition.",
+      "parentUuid": "d1532160_f04166da",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
