@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7643dd9_ac4cc73d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3605130
+      },
+      "writtenOn": "2025-02-18T21:28:50Z",
+      "side": 1,
+      "message": "Hi Wonsik, \n\nDo you mind taking a look?\n\nThanks in advance!",
+      "revId": "e0cf6c4137630334baa194acf736b1a10e9c86f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
