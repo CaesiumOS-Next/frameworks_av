@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba98f5b_cfb3d86e",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-18T23:22:35Z",
+      "side": 1,
+      "message": "nit: we will move this to AMessage::findAsFloat(key, float* out), or as part of a rework to return std::optional\u003cfloat\u003e",
+      "fixSuggestions": [
+        {
+          "fixId": "51fba504_e0392c12",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1222,
+                "startChar": 0,
+                "endLine": 1244,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1268,
+                "startChar": 0,
+                "endLine": 1269,
+                "endChar": 0
+              },
+              "replacement": "    if (format-\u003efindAsFloat(\"operating-rate\", \u0026operatingRate)) {\n"
+            },
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1274,
+                "startChar": 0,
+                "endLine": 1275,
+                "endChar": 0
+              },
+              "replacement": "    if (isEncoder \u0026\u0026 format-\u003efindAsFloat(\"capture-rate\", \u0026captureRate)) {\n"
+            },
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1281,
+                "startChar": 0,
+                "endLine": 1282,
+                "endChar": 0
+              },
+              "replacement": "    format-\u003efindAsFloat(\"frame-rate\", \u0026frameRate);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "96939a5efcc8fbf68e46aca7d52d22495a1ca6fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
