@@ -16,6 +16,24 @@
       "message": "should apv codec support this stream encapsulated in ISOBMFF rather than Elementary Stream?",
       "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2906b1f1_ff86e0c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-18T15:13:44Z",
+      "side": 1,
+      "message": "Taehwan,\nThis is not a true elementary stream.\nCSD is contents of APVCDecoderConfigurationBox (to be defined as APVCDecoderConfigurationRecord).\nSince VTS doesn\u0027t invoke an extractor, input to the decoder is stored in two files, one for the sample data from the extractor and another file that contains timestamps, flags and sizes for each of the access units.",
+      "parentUuid": "520ebc0e_3a8b53d8",
+      "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
