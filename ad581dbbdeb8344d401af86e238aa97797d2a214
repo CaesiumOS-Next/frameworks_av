@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "520ebc0e_3a8b53d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765237
+      },
+      "writtenOn": "2025-02-18T08:39:08Z",
+      "side": 1,
+      "message": "should apv codec support this stream encapsulated in ISOBMFF rather than Elementary Stream?",
+      "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
