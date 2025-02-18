@@ -717,7 +717,7 @@ private:
     void onCryptoError(const sp<AMessage> &msg);
     void onError(status_t err, int32_t actionCode, const char *detail = NULL);
     void onOutputFormatChanged();
-    void onRequiredResourcesChanged(const std::vector<InstanceResourceInfo>& resourceInfo);
+    void onRequiredResourcesChanged();
 
     status_t onSetParameters(const sp<AMessage> &params);
 

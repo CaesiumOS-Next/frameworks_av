@@ -821,6 +821,7 @@ enum {
     kWhatFirstTunnelFrameReady = 'ftfR',
     kWhatPollForRenderedBuffers = 'plrb',
     kWhatMetricsUpdated      = 'mtru',
+    kWhatRequiredResourcesChanged = 'reqR',
 };
 
 class CryptoAsyncCallback : public CryptoAsync::CryptoAsyncCallback {
@@ -968,6 +969,7 @@ public:
     virtual void onOutputBuffersChanged() override;
     virtual void onFirstTunnelFrameReady() override;
     virtual void onMetricsUpdated(const sp<AMessage> &updatedMetrics) override;
+    virtual void onRequiredResourcesChanged() override;
 private:
     const sp<AMessage> mNotify;
 };
@@ -1098,6 +1100,12 @@ void CodecCallback::onMetricsUpdated(const sp<AMessage> &updatedMetrics) {
     sp<AMessage> notify(mNotify->dup());
     notify->setInt32("what", kWhatMetricsUpdated);
     notify->setMessage("updated-metrics", updatedMetrics);
+    notify->post();
+}
+
+void CodecCallback::onRequiredResourcesChanged() {
+    sp<AMessage> notify(mNotify->dup());
+    notify->setInt32("what", kWhatRequiredResourcesChanged);
     notify->post();
 }
 
@@ -4869,6 +4877,25 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                     break;
                 }
 
+                case kWhatRequiredResourcesChanged:
+                {
+                    bool issueCallback = false;
+                    if (android::media::codec::codec_availability() &&
+                        android::media::codec::codec_availability_support()) {
+                        // Get the updated required system resources.
+                        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(
+                                mRequiredResourceInfo);
+                        *resourcesLocked = mCodec->getRequiredSystemResources();
+                        issueCallback = !(*resourcesLocked).empty();
+                    }
+
+                    if (issueCallback) {
+                        onRequiredResourcesChanged();
+                    }
+
+                    break;
+                }
+
                 case kWhatEOS:
                 {
                     // We already notify the client of this by using the
@@ -7220,17 +7247,8 @@ void MediaCodec::onOutputFormatChanged() {
     }
 }
 
-void MediaCodec::onRequiredResourcesChanged(
-        const std::vector<InstanceResourceInfo>& resourceInfo) {
-    bool canIssueCallback = false;
-    if (android::media::codec::codec_availability() &&
-        android::media::codec::codec_availability_support()) {
-        Mutexed<std::vector<InstanceResourceInfo>>::Locked resourcesLocked(mRequiredResourceInfo);
-        *resourcesLocked = resourceInfo;
-        canIssueCallback = true;
-    }
-    // Make sure codec availability feature is on.
-    if (mCallback != nullptr && canIssueCallback) {
+void MediaCodec::onRequiredResourcesChanged() {
+    if (mCallback != nullptr) {
         // Post the callback
         sp<AMessage> msg = mCallback->dup();
         msg->setInt32("callbackID", CB_REQUIRED_RESOURCES_CHANGED);
