@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1226d379_80791652",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-19T07:04:36Z",
+      "side": 1,
+      "message": "verfied with manual build for riscv.",
+      "parentUuid": "1414477f_487c7544",
+      "revId": "d66a2f70c42366b2b4644465544185ec58b81a9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7330e035_123529f5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
