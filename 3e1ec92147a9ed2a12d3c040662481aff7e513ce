@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db12615c_f8dbdd5b",
+        "filename": "media/codec2/components/apv/C2SoftApvEnc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-02-19T17:23:51Z",
+      "side": 1,
+      "message": "should we check the return value?",
+      "revId": "3e1ec92147a9ed2a12d3c040662481aff7e513ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
