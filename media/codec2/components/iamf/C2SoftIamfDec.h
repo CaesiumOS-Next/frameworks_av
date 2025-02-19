@@ -42,6 +42,8 @@ class C2SoftIamfDec : public SimpleC2Component {
   private:
     std::shared_ptr<IntfImpl> mIntf;
 
+   mChannelMask;
+
     C2_DO_NOT_COPY(C2SoftIamfDec);
 };
 
