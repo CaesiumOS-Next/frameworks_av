@@ -74,6 +74,30 @@
       },
       "revId": "4e217aaa73417fc255969af747eab32d0e3ed68b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccaa191_42f5019e",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2927,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-19T22:51:56Z",
+      "side": 1,
+      "message": "I know, but I am just wondering if we have initial settings for the resource manager when a codec starts. And do we need that?",
+      "parentUuid": "f991544f_d6110641",
+      "range": {
+        "startLine": 2921,
+        "startChar": 0,
+        "endLine": 2927,
+        "endChar": 33
+      },
+      "revId": "4e217aaa73417fc255969af747eab32d0e3ed68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
