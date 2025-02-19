@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62fe125f_129ced47",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2927,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-19T22:20:45Z",
+      "side": 1,
+      "message": "Is this done on CCodec::start() also?",
+      "range": {
+        "startLine": 2921,
+        "startChar": 0,
+        "endLine": 2927,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d7f08d8c_9049433e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodec.cpp",
+              "range": {
+                "startLine": 1102,
+                "startChar": 0,
+                "endLine": 1103,
+                "endChar": 0
+              },
+              "replacement": "    if (android::media::codec::codec_availability_support()\n            \u0026\u0026 (config-\u003emDomain \u0026 Config::IS_ENCODER)) {\n"
+            },
+            {
+              "path": "media/codec2/sfplugin/CCodec.cpp",
+              "range": {
+                "startLine": 2920,
+                "startChar": 0,
+                "endLine": 2921,
+                "endChar": 0
+              },
+              "replacement": "                    if (!updates.empty()\n                            \u0026\u0026 android::media::codec::codec_availability_support()\n                            \u0026\u0026 (config-\u003emDomain \u0026 Config::IS_ENCODER)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4e217aaa73417fc255969af747eab32d0e3ed68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
