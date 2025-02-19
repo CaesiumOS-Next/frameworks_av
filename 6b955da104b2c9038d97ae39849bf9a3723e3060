@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9aaf6d6_f14fbb65",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-19T16:33:49Z",
+      "side": 1,
+      "message": "The best time to align values is now, but at the very least we should clarify the comments properly.\n\nFrom frameworks/base/media/java/android/media/AudioFormat.java.\n\n    /** Audio data format: AC-4 level 4 sync frame transport format\n     * AC-4 level 4 corresponds to mdcompat 4 as per ETSI TS 103 190-2 v1.2.1.\n     */\n    @FlaggedApi(FLAG_DOLBY_AC4_LEVEL4_ENCODING_API)\n    public static final int ENCODING_AC4_L4 \u003d 32;\n    /** Audio data format: AC-4 level 5 sync frame transport format\n     * AC-4 level 5 corresponds to mdcompat 5 as per ETSI TS 103 190-2 v1.2.1.\n     */\n    @FlaggedApi(FLAG_DOLBY_AC4_LEVELS_5_TO_7_ENCODING_API)\n    public static final int ENCODING_AC4_L5 \u003d 33;\n    /** Audio data format: AC-4 level 6 sync frame transport format\n     * AC-4 level 6 corresponds to mdcompat 6 as per ETSI TS 103 190-2 v1.2.1.\n     */\n    @FlaggedApi(FLAG_DOLBY_AC4_LEVELS_5_TO_7_ENCODING_API)\n    public static final int ENCODING_AC4_L6 \u003d 34;\n    /** Audio data format: AC-4 level 7 sync frame transport format\n     * AC-4 level 7 corresponds to mdcompat 7 as per ETSI TS 103 190-2 v1.2.1.\n     */\n    @FlaggedApi(FLAG_DOLBY_AC4_LEVELS_5_TO_7_ENCODING_API)\n    public static final int ENCODING_AC4_L7 \u003d 35;",
+      "parentUuid": "b99b4555_b53b3db3",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 562,
+        "endChar": 41
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "293cbcd9_7767f373",
         "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
         "patchSetId": 1
