@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b99b4555_b53b3db3",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-02-19T03:38:43Z",
+      "side": 1,
+      "message": "in system/media/audio/include/system/audio-hal-enums.h\n\n    AUDIO_FORMAT_AC4_SUB_L4            \u003d 0x1u,\n    AUDIO_FORMAT_AC4_SUB_L5            \u003d 0x2u,\n    AUDIO_FORMAT_AC4_SUB_L6            \u003d 0x3u,\n    AUDIO_FORMAT_AC4_SUB_L7            \u003d 0x4u,",
+      "parentUuid": "ca053a29_86a0aa1a",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 562,
+        "endChar": 41
+      },
+      "revId": "6b955da104b2c9038d97ae39849bf9a3723e3060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "293cbcd9_7767f373",
         "filename": "media/libstagefright/include/media/stagefright/MediaCodecConstants.h",
         "patchSetId": 1
