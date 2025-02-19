@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1957b7e8_5fe92662",
+        "filename": "media/libaudioclient/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-02-19T00:18:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e63102a7_6492c00d",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 39
+      },
+      "revId": "a48549879c16e5badfbc5c057445da5eb3027dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ac3ccbd_6429c07f",
