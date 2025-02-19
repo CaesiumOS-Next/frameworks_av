@@ -34,6 +34,24 @@
       "parentUuid": "520ebc0e_3a8b53d8",
       "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fd1a198_f758cd1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765237
+      },
+      "writtenOn": "2025-02-19T03:09:45Z",
+      "side": 1,
+      "message": "thanks for your explanation.\nI understand that this change only affects CSD data.\nI have a request to remove au_size in stream data when giving it to codec component in VTS.\nfor this, I think test vector and info file should be updated.\nyou can see that MPEG4Extractor skips au_size(4 bytes) in APV case.",
+      "parentUuid": "2906b1f1_ff86e0c7",
+      "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
