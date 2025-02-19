@@ -122,6 +122,24 @@
       "parentUuid": "d1532160_f04166da",
       "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36085174_15d1431b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2025-02-19T10:03:42Z",
+      "side": 1,
+      "message": "Hi Mikhail, I think the condition should be OR (channel count \u003e 2 || sampling rate \u003e\u003d 48000) to qualify for fidelity over low power, in a similar way to the preference order implemented in AudioPolicyManager::selectOutput()\n```\n    // The priority is as follows:\n...\n    // 3: the output supporting the exact channel mask\n    // 4: the output with a higher channel count than requested\n    // 5: the output with the highest sampling rate if the requested sample rate is\n    //    greater than default sampling rate\n    // 6: the output with the highest number of requested performance flags\n...\n\nYes, Dolby multichannel content is usually 48kHz.",
+      "parentUuid": "481e098c_cd68e6f8",
+      "revId": "949f4de4f08dda8088b0883c7bf1396679baa0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
