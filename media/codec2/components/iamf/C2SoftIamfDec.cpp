@@ -32,13 +32,56 @@ constexpr char COMPONENT_NAME[] = "c2.android.iamf.decoder";
 class C2SoftIamfDec::IntfImpl : public SimpleInterface<void>::BaseParams {
   public:
     explicit IntfImpl(const std::shared_ptr<C2ReflectorHelper>& helper)
-        : SimpleInterface<void>::BaseParams(helper, COMPONENT_NAME, C2Component::KIND_DECODER,
-                                            C2Component::DOMAIN_AUDIO,
-                                            // Replace with IAMF mimetype when available
-                                            "audio/iamf") {
-        // Configure (e.g. noPrivateBuffers(), etc.)
-        // Add parameters.
+        : SimpleInterface<void>::BaseParams(
+                  helper, COMPONENT_NAME, C2Component::KIND_DECODER, C2Component::DOMAIN_AUDIO,
+                  // Replace with MEDIA_MIMETYPE_AUDIO_IAMF when available in MediaDefs.h
+                  "audio/iamf") {
+        noInputLatency();
+        noPrivateBuffers();
+        noInputReferences();
+        noOutputReferences();
+        noTimeStretch();
+        setDerivedInstance(this);
+
+        // Not sure if this is necessary or correct, but it seems to be in all the audio decoders.
+        addParameter(DefineParam(mAttrib, C2_PARAMKEY_COMPONENT_ATTRIBUTES)
+                             .withConstValue(new C2ComponentAttributesSetting(
+                                     C2Component::ATTRIB_IS_TEMPORAL))
+                             .build());
+
+        addParameter(
+                DefineParam(mProfileLevel, C2_PARAMKEY_PROFILE_LEVEL)
+                        .withDefault(new C2StreamProfileLevelInfo::input(
+                                0u, C2Config::PROFILE_AAC_LC, C2Config::LEVEL_UNUSED))
+                        .withFields({C2F(mProfileLevel, profile)
+                                             .oneOf({
+                                                     C2Config::PROFILE_IAMF_SIMPLE_AAC,
+                                                     C2Config::PROFILE_IAMF_SIMPLE_FLAC,
+                                                     C2Config::PROFILE_IAMF_SIMPLE_OPUS,
+                                                     C2Config::PROFILE_IAMF_SIMPLE_PCM,
+                                                     C2Config::PROFILE_IAMF_BASE_AAC,
+                                                     C2Config::PROFILE_IAMF_BASE_FLAC,
+                                                     C2Config::PROFILE_IAMF_BASE_OPUS,
+                                                     C2Config::PROFILE_IAMF_BASE_PCM,
+                                                     C2Config::PROFILE_IAMF_BASE_ENHANCED_AAC,
+                                                     C2Config::PROFILE_IAMF_BASE_ENHANCED_FLAC,
+                                                     C2Config::PROFILE_IAMF_BASE_ENHANCED_OPUS,
+                                                     C2Config::PROFILE_IAMF_BASE_ENHANCED_PCM,
+                                             }),
+                                     C2F(mProfileLevel, level).oneOf({C2Config::LEVEL_UNUSED})})
+                        .withSetter(ProfileLevelSetter)
+                        .build());
+
+        addParameter(DefineParam(mChannelMask, C2_PARAMKEY_CHANNEL_MASK)
+                             .withDefault(new C2StreamChannelMaskInfo::output(0u, 0))
+                             .withFields({C2F(mChannelMask, value).inRange(0, 4294967292)})
+                             .withSetter(Setter<decltype(*mChannelMask)>::StrictValueWithNoDeps)
+                             .build());
     }
+
+  private:
+    std::shared_ptr<C2StreamProfileLevelInfo::input> mProfileLevel;
+    std::shared_ptr<C2StreamChannelMaskInfo::output> mChannelMask;
 };
 
 C2SoftIamfDec::C2SoftIamfDec(const char* name, c2_node_id_t id,
