@@ -50,6 +50,30 @@
       ],
       "revId": "4e217aaa73417fc255969af747eab32d0e3ed68b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f991544f_d6110641",
+        "filename": "media/codec2/sfplugin/CCodec.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2927,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-19T22:31:35Z",
+      "side": 1,
+      "message": "The change in resource requiement can happen when the codec is in executing state. (For example: if the resolution changes, in case of adaptive playback). So onWorkDone would be a good place to monitor for it right?",
+      "parentUuid": "62fe125f_129ced47",
+      "range": {
+        "startLine": 2921,
+        "startChar": 0,
+        "endLine": 2927,
+        "endChar": 33
+      },
+      "revId": "4e217aaa73417fc255969af747eab32d0e3ed68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
