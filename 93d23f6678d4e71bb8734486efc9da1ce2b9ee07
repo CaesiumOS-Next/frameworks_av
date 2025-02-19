@@ -90,6 +90,29 @@
       "message": "This is very spammy but I have had troubles finding a place where we get the resampler when it is created.\nI atleast said that once the pointer is established we are done.",
       "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda75aba_99dc4735",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6151,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-02-19T09:23:01Z",
+      "side": 1,
+      "message": "We are a little bit concerned about the lifespan of track-\u003emResampler pointer compared to mAudioMixer-\u003egetResampler(trackId)\n\nShould this be done with another type of pointer such as StrongPointer, WeakPointer etc?",
+      "range": {
+        "startLine": 6151,
+        "startChar": 16,
+        "endLine": 6151,
+        "endChar": 71
+      },
+      "revId": "93d23f6678d4e71bb8734486efc9da1ce2b9ee07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
