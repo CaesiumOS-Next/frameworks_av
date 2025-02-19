@@ -88,6 +88,24 @@
       "parentUuid": "c3828cc8_91fdcb57",
       "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b256d81_1ccf5e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-19T03:48:58Z",
+      "side": 1,
+      "message": "`APVDecoderConfigurationRecord` defined in https://github.com/AcademySoftwareFoundation/openapv/blob/main/readme/apv_isobmff.md#syntax-1 is what will be sent as CSD.\n\nExtractors will return APVDecoderConfigurationRecord as CSD and decoders will get this as CSD and encoders are expected to generate this in CSD.",
+      "parentUuid": "369a1385_b8592c40",
+      "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
