@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a39a24ab_a05e58ca",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-19T22:45:09Z",
+      "side": 1,
+      "message": "nit: remove",
+      "revId": "290331ce400a789441dacf525ee2aeee6b5a73f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
