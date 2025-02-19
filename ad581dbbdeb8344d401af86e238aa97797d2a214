@@ -70,6 +70,24 @@
       "parentUuid": "6fd1a198_f758cd1d",
       "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369a1385_b8592c40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765237
+      },
+      "writtenOn": "2025-02-19T03:15:26Z",
+      "side": 1,
+      "message": "oh, I am sorry that I mentioned wrong case.\nI just wonder that does should codec component support stream data with au_size?\nour engineer expects to get stream data only except for au_size.",
+      "parentUuid": "c3828cc8_91fdcb57",
+      "revId": "ad581dbbdeb8344d401af86e238aa97797d2a214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
