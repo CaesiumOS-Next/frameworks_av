@@ -16,6 +16,23 @@
       "message": "Hi Wonsik, \n\nDo you mind taking a look?\n\nThanks in advance!",
       "revId": "e0cf6c4137630334baa194acf736b1a10e9c86f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636f796f_c3808fc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-02-19T22:48:50Z",
+      "side": 1,
+      "message": "Would it be better to get some basic decoding working? \nThat way few more changes that are necessary to invoke this library from C2 framework would be uploaded and also gives an idea on what all changes are needed?",
+      "revId": "e0cf6c4137630334baa194acf736b1a10e9c86f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
