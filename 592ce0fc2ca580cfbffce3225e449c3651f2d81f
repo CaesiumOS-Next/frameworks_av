@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df19acca_5924e800",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4224,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-02-20T00:35:18Z",
+      "side": 1,
+      "message": "This fix will make the error handling process for Releasing and Stopping different. For releasing, codes under kWhatReleaseCompleted will be executed as we do not set the state to Uninitialized. However for stopping, codes under kWhatStopComplete will not be executed as it set state to Uninitialized.\nDo we want to unify the behavior of them?\nOn the other hand, by concept, the release operation will always finish while the stop operation may return an error. So it make sense to let kWhatReleaseCompleted to execute while kWhatStopComplete not to.",
+      "revId": "592ce0fc2ca580cfbffce3225e449c3651f2d81f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91ebd22d_95b79adc",
         "filename": "media/libstagefright/MediaCodec.cpp",
         "patchSetId": 4
