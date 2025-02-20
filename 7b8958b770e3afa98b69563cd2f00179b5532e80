@@ -34,6 +34,24 @@
       ],
       "revId": "7b8958b770e3afa98b69563cd2f00179b5532e80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8e7bfc3_241ddd3c",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1958927
+      },
+      "writtenOn": "2025-02-20T12:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0539ca0_b71fd734",
+      "revId": "7b8958b770e3afa98b69563cd2f00179b5532e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
