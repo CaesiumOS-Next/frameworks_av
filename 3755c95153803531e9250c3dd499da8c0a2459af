@@ -155,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2134781_83e6a243",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-02-20T12:49:38Z",
+      "side": 1,
+      "message": "Further, android currently handles this metadata during decode path. If the clip contains this information, then extractor populates keys (encoder-delay and encoder-padding), then after decode, framework uses skipCutBuffer to remove the silent samples.\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libstagefright/ACodec.cpp;l\u003d5888\n\nBut as encoder plugins have no way of communicating this information, the clips generated on android devices do not have this metadata, making to players play the silent samples at the start and at the end. This change helps plugin to configure these keys which later can be used by muxer to generate the necessary boxes.",
+      "parentUuid": "8676b9ef_639bf24f",
+      "range": {
+        "startLine": 252,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 35
+      },
+      "revId": "3755c95153803531e9250c3dd499da8c0a2459af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "523d4799_231918ad",
         "filename": "media/codec2/core/include/C2Config.h",
         "patchSetId": 2
