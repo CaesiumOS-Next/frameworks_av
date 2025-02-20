@@ -4159,8 +4159,16 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
                     codecErrorState = kCodecErrorState;
                     origin += stateString(mState);
                     if (mCryptoAsync) {
-                        //TODO: do some book keeping on the buffers
-                        mCryptoAsync->stop();
+                        sp<RefBase> obj;
+                        sp<MediaCodecBuffer> buffer;
+                        std::list<sp<AMessage>> stalebuffers;
+                        mCryptoAsync->stop(&stalebuffers);
+                        for (sp<AMessage> &msg : stalebuffers) {
+                            if (msg->findObject("buffer", &obj)) {
+                                buffer = decltype(buffer.get())(obj.get());
+                                mBufferChannel->discardBuffer(buffer);
+                            }
+                        }
                     }
                     switch (mState) {
                         case INITIALIZING:
@@ -5451,7 +5459,16 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
             sp<AReplyToken> replyID;
             CHECK(msg->senderAwaitsResponse(&replyID));
             if (mCryptoAsync) {
-                mCryptoAsync->stop();
+                sp<RefBase> obj;
+                sp<MediaCodecBuffer> buffer;
+                std::list<sp<AMessage>> stalebuffers;
+                mCryptoAsync->stop(&stalebuffers);
+                for (sp<AMessage> &msg : stalebuffers) {
+                    if (msg->findObject("buffer", &obj)) {
+                        buffer = decltype(buffer.get())(obj.get());
+                        mBufferChannel->discardBuffer(buffer);
+                    }
+                }
             }
             sp<AMessage> asyncNotify;
             (void)msg->findMessage("async", &asyncNotify);
@@ -5921,9 +5938,16 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
             // TODO: skip flushing if already FLUSHED
             setState(FLUSHING);
             if (mCryptoAsync) {
+                sp<RefBase> obj;
+                sp<MediaCodecBuffer> buffer;
                 std::list<sp<AMessage>> pendingBuffers;
                 mCryptoAsync->stop(&pendingBuffers);
-                //TODO: do something with these buffers
+                for (sp<AMessage> &msg : pendingBuffers) {
+                    if (msg->findObject("buffer", &obj)) {
+                        buffer = decltype(buffer.get())(obj.get());
+                        mBufferChannel->discardBuffer(buffer);
+                    }
+                }
             }
             mCodec->signalFlush();
             returnBuffersToCodec();
@@ -6725,7 +6749,7 @@ status_t MediaCodec::onQueueInputBuffer(const sp<AMessage> &msg) {
             // prepare a message and enqueue
             sp<AMessage> cryptoInfo = new AMessage();
             buildCryptoInfoAMessage(cryptoInfo, CryptoAsync::kActionDecrypt);
-            mCryptoAsync->decrypt(cryptoInfo);
+            err = mCryptoAsync->decrypt(cryptoInfo);
         } else if (msg->findObject("cryptoInfos", &obj)) {
                 buffer->meta()->setObject("cryptoInfos", obj);
                 err = mBufferChannel->queueSecureInputBuffers(
