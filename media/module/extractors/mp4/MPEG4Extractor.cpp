@@ -41,6 +41,7 @@
 #include <media/stagefright/foundation/ABitReader.h>
 #include <media/stagefright/foundation/ABuffer.h>
 #include <media/stagefright/foundation/ADebug.h>
+#include <media/stagefright/foundation/ALookup.h>
 #include <media/stagefright/foundation/AMessage.h>
 #include <media/stagefright/foundation/AudioPresentationInfo.h>
 #include <media/stagefright/foundation/AUtils.h>
@@ -862,6 +863,59 @@ static bool convertTimeToDate(int64_t time_1904, String8 *s) {
         return true;
     }
     return false;
+}
+
+// crack the APV profile/level here instead of the framework
+// framework *does* pass it through
+static void parseAPVProfileLevel(AMediaFormat *meta, uint8_t* data, size_t csdSize) {
+
+    // Parse CSD structure to extract profile level information
+    // https://github.com/openapv/openapv/blob/main/readme/apv_isobmff.md#syntax-1
+    ALOGD("RBE: parseAPVProfileLevel() in extractor");
+    // const uint8_t* data = meta->data();
+    // size_t csdSize = csd->size();
+    if (data == nullptr) {
+        ALOGE("no CSD provided");
+        return;
+    }
+    if (csdSize < 17 || data[0] != 0x01) {  // configurationVersion == 1
+        ALOGE("CSD is not according APV Configuration Standard");
+        return;
+    }
+
+    uint8_t profileData = data[5];             // profile_idc
+    uint8_t levelData = data[6];               // level_idc
+    uint8_t band = data[7];                    // band_idc
+    uint8_t bitDepth = (data[16] & 0x0F) + 8;  // bit_depth_minus8
+
+    const static ALookup<std::pair<uint8_t, uint8_t>, int32_t> profiles{
+            {{33, 10}, 0x01 /*APVProfile422_10*/},
+            {{44, 12}, 0x2000 /*APVProfile422_10HDR10Plus*/},
+    };
+    int32_t profile;
+    if (profiles.map(std::make_pair(profileData, bitDepth), &profile)) {
+        // bump to HDR profile
+#if 1
+        ALOGD("RBE -- skipping the HDR profile upgrade check");
+#else
+        if (isHdr10or10Plus(format) && profile == APVProfile422_10) {
+            if (format->contains("hdr-static-info")) {
+                profile = APVProfile422_10HDR10;
+            }
+        }
+#endif
+        ALOGD("RBE -- extractor sets APV's profile %d", profile);
+        // format->setInt32("profile", profile);
+        AMediaFormat_setInt32(meta, AMEDIAFORMAT_KEY_PROFILE, profile);
+    }
+    int level_num = (levelData / 30) * 2;
+    if (levelData % 30 == 0) {
+        level_num -= 1;
+    }
+    int32_t level = ((0x100 << (level_num - 1)) | (1 << band));
+        ALOGD("RBE -- extractor sets APV's level %d", level);
+    // format->setInt32("level", level);
+    AMediaFormat_setInt32(meta, AMEDIAFORMAT_KEY_LEVEL, level);
 }
 
 status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
@@ -2149,6 +2203,7 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
                 // if the chunk type is encv, we'll get the type from the frma box later
                 AMediaFormat_setString(mLastTrack->meta,
                         AMEDIAFORMAT_KEY_MIME, FourCC2MIME(chunk_type));
+                ALOGD("RBE -- extractor sets mediaformat.mime to %s", FourCC2MIME(chunk_type));
             }
             AMediaFormat_setInt32(mLastTrack->meta, AMEDIAFORMAT_KEY_WIDTH, width);
             AMediaFormat_setInt32(mLastTrack->meta, AMEDIAFORMAT_KEY_HEIGHT, height);
@@ -2666,8 +2721,23 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
             }
 
             // Advance the buffer pointer by 4 bytes as it contains 4 bytes of flag and version.
+            ALOGD("RBE -- setBuffer for %s", AMEDIAFORMAT_KEY_CSD_0);
             AMediaFormat_setBuffer(mLastTrack->meta, AMEDIAFORMAT_KEY_CSD_0,
                                    buffer.get() + bytes_to_skip, chunk_data_size - bytes_to_skip);
+
+            // we can crack the CSD to read profile/level and inject them here.
+            // This ensures we have that information even if the framework side doesn't
+            // have the stuff to crack the CSD.
+            // which is the entire point of having updatable extractors...
+
+            ALOGD("RBE -- in apv-specific extractor code, set dummy profile=123, level=456");
+            AMediaFormat_setInt32(mLastTrack->meta, AMEDIAFORMAT_KEY_PROFILE, 123);
+            AMediaFormat_setInt32(mLastTrack->meta, AMEDIAFORMAT_KEY_LEVEL, 456);
+
+            // get the data from 
+            parseAPVProfileLevel(mLastTrack->meta,
+                                 buffer.get() + bytes_to_skip,
+                                 chunk_data_size - bytes_to_skip);
 
             *offset += chunk_size;
             break;
