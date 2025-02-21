@@ -639,7 +639,12 @@ void SampleTable::buildSampleEntriesTable() {
         return;
     }
 
-    mTotalSize += (uint64_t)mNumSampleSizes * sizeof(SampleTimeEntry);
+    uint64_t sampleTimeEntriesSize;
+    if (__builtin_mul_overflow(mNumSampleSizes, sizeof(SampleTimeEntry), &sampleTimeEntriesSize) ||
+        __builtin_add_overflow(mTotalSize, sampleTimeEntriesSize, &mTotalSize)) {
+        ALOGE("mNumSamplesSizes(%u) is too large to build sample entries table", mNumSampleSizes);
+        return;
+    }
     if (mTotalSize > kMaxTotalSize) {
         ALOGE("Sample entry table size would make sample table too large.\n"
               "    Requested sample entry table size = %llu\n"
