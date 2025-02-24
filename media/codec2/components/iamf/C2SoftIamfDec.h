@@ -41,6 +41,16 @@ class C2SoftIamfDec : public SimpleC2Component {
 
   private:
     std::shared_ptr<IntfImpl> mIntf;
+    std::unique_ptr<IamfDecoder> mIamfDecoder;
+
+    int64_t mCodecDelay;
+    int64_t mSeekPreRoll;
+    int64_t mSamplesToDiscard;
+    size_t mInputBufferCount;
+    bool mSignalledError;
+    bool mSignalledOutputEos;
+
+    c2_status_t initDecoder();
 
     C2_DO_NOT_COPY(C2SoftIamfDec);
 };
