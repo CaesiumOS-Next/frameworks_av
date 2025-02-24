@@ -29,8 +29,8 @@
  * Enumerated boolean.
  */
 C2ENUM(c2_bool_t, uint32_t,
-    C2_FALSE, ///< true
-    C2_TRUE,  ///< false
+    C2_FALSE, ///< false
+    C2_TRUE,  ///< true
 )
 
 typedef C2SimpleValueStruct<c2_bool_t> C2BoolValue;
@@ -435,18 +435,19 @@ namespace {
 
 // Codec bases are ordered by their date of introduction to the code base.
 enum : uint32_t {
-    _C2_PL_MP2V_BASE = 0x1000,
-    _C2_PL_AAC_BASE  = 0x2000,
-    _C2_PL_H263_BASE = 0x3000,
-    _C2_PL_MP4V_BASE = 0x4000,
-    _C2_PL_AVC_BASE  = 0x5000,
-    _C2_PL_HEVC_BASE = 0x6000,
-    _C2_PL_VP9_BASE  = 0x7000,
-    _C2_PL_DV_BASE   = 0x8000,
-    _C2_PL_AV1_BASE  = 0x9000,
-    _C2_PL_VP8_BASE  = 0xA000,
-    _C2_PL_MPEGH_BASE = 0xB000,     // MPEG-H 3D Audio
-    _C2_PL_APV_BASE = 0xC000,     // APV
+    _C2_PL_MP2V_BASE   = 0x1000,
+    _C2_PL_AAC_BASE    = 0x2000,
+    _C2_PL_H263_BASE   = 0x3000,
+    _C2_PL_MP4V_BASE   = 0x4000,
+    _C2_PL_AVC_BASE    = 0x5000,
+    _C2_PL_HEVC_BASE   = 0x6000,
+    _C2_PL_VP9_BASE    = 0x7000,
+    _C2_PL_DV_BASE     = 0x8000,
+    _C2_PL_AV1_BASE    = 0x9000,
+    _C2_PL_VP8_BASE    = 0xA000,
+    _C2_PL_MPEGH_BASE  = 0xB000,  // MPEG-H 3D Audio
+    _C2_PL_APV_BASE    = 0xC000,  // APV
+    _C2_PL_IAMF_START  = 0xD000,  // IAMF
 
     C2_PROFILE_LEVEL_VENDOR_START = 0x70000000,
 };
@@ -623,6 +624,20 @@ enum C2Config::profile_t : uint32_t {
     PROFILE_APV_4444_10,                        ///< APV 4444-10 Profile
     PROFILE_APV_4444_12,                        ///< APV 4444-12 Profile
     PROFILE_APV_400_10,                         ///< APV 400-10 Profile
+
+    // IAMF Profiles
+    PROFILE_IAMF_SIMPLE_AAC = _C2_PL_IAMF_START, ///< IAMF Simple Profile with AAC
+    PROFILE_IAMF_SIMPLE_FLAC,                    ///< IAMF Simple Profile with FLAC
+    PROFILE_IAMF_SIMPLE_OPUS,                    ///< IAMF Simple Profile with Opus
+    PROFILE_IAMF_SIMPLE_PCM,                     ///< IAMF Simple Profile with PCM
+    PROFILE_IAMF_BASE_AAC,                       ///< IAMF Base Profile with AAC
+    PROFILE_IAMF_BASE_FLAC,                      ///< IAMF Base Profile with FLAC
+    PROFILE_IAMF_BASE_OPUS,                      ///< IAMF Base Profile with Opus
+    PROFILE_IAMF_BASE_PCM,                       ///< IAMF Base Profile with PCM
+    PROFILE_IAMF_BASE_ENHANCED_AAC,              ///< IAMF Base Enhanced with AAC
+    PROFILE_IAMF_BASE_ENHANCED_FLAC,             ///< IAMF Base Enhanced with FLAC
+    PROFILE_IAMF_BASE_ENHANCED_OPUS,             ///< IAMF Base Enhanced with Opus
+    PROFILE_IAMF_BASE_ENHANCED_PCM,              ///< IAMF Base Enhanced with PCM
 };
 
 enum C2Config::level_t : uint32_t {
