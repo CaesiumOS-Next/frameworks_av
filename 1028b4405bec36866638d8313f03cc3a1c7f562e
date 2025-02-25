@@ -16,6 +16,29 @@
       "message": "Adding Jean-Michel for owner review",
       "revId": "1028b4405bec36866638d8313f03cc3a1c7f562e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b9fc042_0b7e9029",
+        "filename": "services/camera/libcameraservice/libcameraservice_fuzzer/camera_service_fuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-02-25T17:20:35Z",
+      "side": 1,
+      "message": "following the naming style in this file, this should be `gFsm`",
+      "range": {
+        "startLine": 118,
+        "startChar": 23,
+        "endLine": 118,
+        "endChar": 26
+      },
+      "revId": "1028b4405bec36866638d8313f03cc3a1c7f562e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
