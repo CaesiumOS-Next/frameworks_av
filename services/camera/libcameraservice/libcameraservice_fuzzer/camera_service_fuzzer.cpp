@@ -26,6 +26,7 @@
 #include <ISchedulingPolicyService.h>
 #include <MediaPlayerService.h>
 #include <android-base/logging.h>
+#include <android/binder_manager.h>
 #include <android/content/AttributionSourceState.h>
 #include <android/hardware/BnCameraServiceListener.h>
 #include <android/hardware/ICameraServiceListener.h>
@@ -36,7 +37,10 @@
 #include <camera/CameraUtils.h>
 #include <camera/camera2/OutputConfiguration.h>
 #include <com_android_graphics_libgui_flags.h>
+#include <core-mock/ConfigMock.h>
+#include <core-mock/ModuleMock.h>
 #include <device3/Camera3StreamInterface.h>
+#include <effect-mock/FactoryMock.h>
 #include <fakeservicemanager/FakeServiceManager.h>
 #include <fuzzbinder/random_binder.h>
 #include <gui/BufferItemConsumer.h>
@@ -111,6 +115,7 @@ const size_t kNumSoundKind = size(kSoundKind);
 const size_t kNumShellCmd = size(kShellCmd);
 static std::once_flag gSmOnce;
 sp<CameraService> gCameraService;
+sp<FakeServiceManager> fsm;
 
 void addService(const String16& serviceName, const sp<FakeServiceManager>& fakeServiceManager,
                 FuzzedDataProvider* fdp) {
@@ -880,22 +885,44 @@ void Camera2Fuzzer::process() {
     }
 }
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+extern "C" int LLVMFuzzerInitialize(int* /*argc*/, char*** /*argv*/) {
+    /* Create a FakeServiceManager instance and add required services */
+    fsm = sp<FakeServiceManager>::make();
+    setDefaultServiceManager(fsm);
+
+    auto configService = ndk::SharedRefBase::make<ConfigMock>();
+    CHECK_EQ(NO_ERROR, AServiceManager_addService(configService.get()->asBinder().get(),
+                                                  "android.hardware.audio.core.IConfig/default"));
+
+    auto factoryService = ndk::SharedRefBase::make<FactoryMock>();
+    CHECK_EQ(NO_ERROR,
+             AServiceManager_addService(factoryService.get()->asBinder().get(),
+                                        "android.hardware.audio.effect.IFactory/default"));
+
+    auto moduleService = ndk::SharedRefBase::make<ModuleMock>();
+    CHECK_EQ(NO_ERROR, AServiceManager_addService(moduleService.get()->asBinder().get(),
+                                                  "android.hardware.audio.core.IModule/default"));
+
+    // Disable creating thread pool for fuzzer instance of audio flinger
+    AudioSystem::disableThreadPool();
+
+    return 0;
+}
+
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     if (size < 1) {
         return 0;
     }
     setuid(AID_CAMERASERVER);
     std::shared_ptr<FuzzedDataProvider> fp = std::make_shared<FuzzedDataProvider>(data, size);
 
+    for (const char* service :
+         {"sensor_privacy", "permission", "media.camera.proxy", "batterystats", "media.metrics",
+          "media.extractor", "drm.drmManager", "permission_checker"}) {
+        addService(String16(service), fsm, fp.get());
+    }
+
     std::call_once(gSmOnce, [&] {
-        /* Create a FakeServiceManager instance and add required services */
-        sp<FakeServiceManager> fsm = sp<FakeServiceManager>::make();
-        setDefaultServiceManager(fsm);
-        for (const char* service :
-             {"sensor_privacy", "permission", "media.camera.proxy", "batterystats", "media.metrics",
-              "media.extractor", "drm.drmManager", "permission_checker"}) {
-            addService(String16(service), fsm, fp.get());
-        }
         const auto audioFlinger = sp<AudioFlinger>::make();
         const auto afAdapter = sp<AudioFlingerServerAdapter>::make(audioFlinger);
         CHECK_EQ(NO_ERROR,
