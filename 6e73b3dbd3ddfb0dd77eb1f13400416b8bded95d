@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ee9b2c2_8039f400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-02-25T06:52:31Z",
+      "side": 1,
+      "message": "Hi! Dear Harish Mahendrakar. Could you please help review the change?",
+      "revId": "6e73b3dbd3ddfb0dd77eb1f13400416b8bded95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
