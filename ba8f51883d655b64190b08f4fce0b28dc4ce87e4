@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "136d0bca_1a860c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-26T19:07:04Z",
+      "side": 1,
+      "message": "In case of declaration of AImageReader_setUsage() as systemapi getting reverted due to the timeline.",
+      "revId": "ba8f51883d655b64190b08f4fce0b28dc4ce87e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
