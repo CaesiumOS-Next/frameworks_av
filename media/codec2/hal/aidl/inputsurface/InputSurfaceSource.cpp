@@ -1278,6 +1278,7 @@ c2_status_t InputSurfaceSource::configure(
 
         consumerUsage |= AHARDWAREBUFFER_USAGE_VIDEO_ENCODE;
         if (consumerUsage != mImageReaderConfig.usage) {
+#ifndef __ANDROID_APEX__
             if (__builtin_available(android 36, *)) {
                 media_status_t err = AImageReader_setUsage(mImageReader, consumerUsage);
                 if (err != AMEDIA_OK) {
@@ -1288,6 +1289,7 @@ c2_status_t InputSurfaceSource::configure(
                 }
             }
             mImageReaderConfig.usage = consumerUsage;
+#endif
         }
 
         // Set impl. defined format as default. Depending on the usage flags
