@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "251e68ec_4afbce21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-02-26T21:48:49Z",
+      "side": 1,
+      "message": "Though `sys/cdefs.h` was included transitively. Some android static analysis tool requires the header to be included explicitely.",
+      "revId": "57254817f23613fd12e2e5a06a63210633ebe382",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
