@@ -17,12 +17,14 @@
 #include <charconv>
 #include <inttypes.h>
 #include <mutex>
+#include <regex>
 #include <set>
 
 //#define LOG_NDEBUG 0
 #define LOG_TAG "NdkMediaCodec"
 
 #include <media/NdkMediaCodecPlatform.h>
+#include <media/NdkMediaCodecStore.h>
 #include <media/NdkMediaError.h>
 #include <media/NdkMediaFormatPriv.h>
 #include "NdkMediaCryptoPriv.h"
@@ -429,9 +431,29 @@ static AMediaCodec * createAMediaCodec(const char *name,
                 pid,
                 uid);
     } else {
+        // Map the NDK codec name to SDK codec name.
+        std::string sdkName = std::string(name);
+        const AMediaCodecInfo* codecInfo = nullptr;
+        if (AMediaCodecStore_getCodecInfo(name, &codecInfo) != AMEDIA_OK) {
+            return NULL;
+        }
+        std::string mediaType = std::string(AMediaCodecInfo_getMediaType(codecInfo));
+        // get the type name after the slash. e.g. video/x.on2.vp8
+        size_t slashIx = mediaType.find_last_of('/');
+        if (slashIx == std::string::npos) {
+            slashIx = 0;
+        } else {
+            slashIx++;
+        }
+        std::regex regex("^(*)." + mediaType.substr(slashIx) + "(.[0-9]+)?$");
+        std::smatch match;
+        if (std::regex_match(sdkName, match, regex)) {  // NDK name is different from SDK name
+            sdkName = match[1].str();
+        }
+
         mData->mCodec = android::MediaCodec::CreateByComponentName(
                 mData->mLooper,
-                name,
+                sdkName.c_str(),
                 nullptr /* err */,
                 pid,
                 uid);
