@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16979fad_b250585b",
+        "filename": "media/codec2/vndk/C2Store.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-26T21:57:05Z",
+      "side": 1,
+      "message": "can we demonstrate the parallel resource tuning that vendors will likely have to do?\n\ne.g.\n\n```\n#include \u003cC2Config.h\u003e\n\nenum my_resource_id_t : uint32_t {\n  INSTANCE \u003d C2PlatformConfig::resource_id_t::VENDOR_START,\n  MACROBLOCK_RATE,\n  PROCESSING_RATE\n}\n\nstruct MyC2SystemResourceStruct {\n    MyC2SystemResourceStruct(my_resource_id_t id_,\n                           C2Config::resource_kind_t kind_,\n                           uint64_t amount_)\n        : id(id_), kind(kind_), amount(amount_) { }\n    C2SystemResourceStruct() : C2SystemResourceStruct(0, CONST, 0) {}\n    my_resource_id_t id;\n    C2Config::resource_kind_t kind;\n    uint64_t amount;\n\n    DEFINE_AND_DESCRIBE_C2STRUCT(SystemResource)\n    C2FIELD(id, \"id\")\n    C2FIELD(kind, \"kind\")\n    C2FIELD(amount, \"amount\")\n};\n\ntypedef C2GlobalParam\u003cC2Tuning,\n                      C2SimpleArrayStruct\u003cMyC2SystemResourceStruct\u003e,\n                      kParamIndexResourcesCapacity\u003e MyC2ResourcesCapacityTuning;\n                      \ntypedef C2GlobalParam\u003cC2Tuning,\n                      C2SimpleArrayStruct\u003cMyC2SystemResourceStruct\u003e,\n                      kParamIndexResourcesExcluded\u003e MyC2ResourcesExcludedTuning;\n\ntypedef C2GlobalParam\u003cC2Tuning,\n                      C2SimpleArrayStruct\u003cMyC2SystemResourceStruct\u003e,\n                      kParamIndexResourcesNeeded\u003e MyC2ResourcesNeededTuning;\n```",
+      "range": {
+        "startLine": 938,
+        "startChar": 24,
+        "endLine": 938,
+        "endChar": 49
+      },
+      "revId": "0f0cdbf619abf36cb1c8e838453b5a8053b2ebdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
