@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "259e2aa9_0e551f13",
+        "filename": "services/audioflinger/IAfThread.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-02-27T01:55:36Z",
+      "side": 1,
+      "message": "maybe use a std::vector instead",
+      "range": {
+        "startLine": 540,
+        "startChar": 12,
+        "endLine": 540,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "99bbc77a_0e710c85",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/IAfThread.h",
+              "range": {
+                "startLine": 540,
+                "startChar": 0,
+                "endLine": 541,
+                "endChar": 0
+              },
+              "replacement": "    virtual std::vector\u003csp\u003cIAfTrack\u003e\u003e getTracks_l() REQUIRES(mutex()) \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e6eb1495eee6913b84c5e0fdf3ed2120a3073700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
