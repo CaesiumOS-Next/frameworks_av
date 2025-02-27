@@ -243,6 +243,22 @@ Status ResourceManagerServiceNew::getMediaResourceUsageReport(
     return Status::ok();
 }
 
+Status ResourceManagerServiceNew::updateResource(
+        const ClientInfoParcel& clientInfo,
+        const std::vector<MediaResourceParcel>& resources) {
+    int32_t pid = clientInfo.pid;
+    int32_t uid = clientInfo.uid;
+    int64_t clientId = clientInfo.id;
+    String8 log = String8::format("updateResource(pid %d, uid %d clientId %lld, resources %s)",
+            pid, uid, (long long) clientId, getString(resources).c_str());
+    mServiceLog->add(log);
+
+    std::scoped_lock lock{mLock};
+    mResourceTracker->updateResource(clientInfo, resources);
+
+    return Status::ok();
+}
+
 void ResourceManagerServiceNew::getResourceDump(std::string& resourceLog) const {
     std::scoped_lock lock{mLock};
     mResourceTracker->dump(resourceLog);

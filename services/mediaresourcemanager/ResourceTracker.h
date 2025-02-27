@@ -70,6 +70,10 @@ public:
     // Update the resource info, if there is any changes.
     bool updateResource(const aidl::android::media::ClientInfoParcel& clientInfo);
 
+    // Update the resource info for given list of resources.
+    bool updateResource(const aidl::android::media::ClientInfoParcel& clientInfo,
+                        const std::vector<::aidl::android::media::MediaResourceParcel>& resources);
+
     // Remove a set of resources from the given client.
     // returns true on success, false otherwise.
     bool removeResource(const aidl::android::media::ClientInfoParcel& clientInfo,
