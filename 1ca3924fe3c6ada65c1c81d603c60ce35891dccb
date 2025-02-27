@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0645427_d4eee262",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1307008
+      },
+      "writtenOn": "2025-02-27T14:17:03Z",
+      "side": 1,
+      "message": "should it move to line#1362 }?",
+      "range": {
+        "startLine": 1364,
+        "startChar": 0,
+        "endLine": 1368,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fbb7c690_cc1cb020",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1361,
+                "startChar": 0,
+                "endLine": 1362,
+                "endChar": 0
+              },
+              "replacement": "        success \u003d !newResources.empty();\n\n        // Since the required resoruces has been updated/changed,\n        // we should update/notify the RM with the updated usage.\n        if (!oldResources.empty()) {\n            updateResourceUsage(oldResources, newResources);\n        }\n"
+            },
+            {
+              "path": "media/libstagefright/MediaCodec.cpp",
+              "range": {
+                "startLine": 1364,
+                "startChar": 0,
+                "endLine": 1369,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1ca3924fe3c6ada65c1c81d603c60ce35891dccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
