@@ -22,6 +22,30 @@
       },
       "revId": "0f0cdbf619abf36cb1c8e838453b5a8053b2ebdc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "792803e1_c66ffcdb",
+        "filename": "media/codec2/vndk/C2Store.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-27T17:56:09Z",
+      "side": 1,
+      "message": "C2SystemResources.h already shadows my_resource_id_t by exending C2PlatformConfig::resource_id_t.\nI will look into your MyC2SystemResourceStruct suggestion",
+      "parentUuid": "16979fad_b250585b",
+      "range": {
+        "startLine": 938,
+        "startChar": 24,
+        "endLine": 938,
+        "endChar": 49
+      },
+      "revId": "0f0cdbf619abf36cb1c8e838453b5a8053b2ebdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
