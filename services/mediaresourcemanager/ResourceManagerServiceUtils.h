@@ -117,6 +117,15 @@ struct ResourceList {
     bool remove(const ::aidl::android::media::MediaResourceParcel& res,
                 long* removedEntryValue = nullptr);
 
+    // updates the resource usage by performing one of the following operations:
+    //  - If the resource is already there:
+    //    - If the new value is 0, remove the entry.
+    //    - Else update the resource value with the new value
+    //    - return true
+    //  - Else, add it as a new entry and return false.
+    bool update(const ::aidl::android::media::MediaResourceParcel& res,
+                long* removedEntryValue = nullptr);
+
     // Returns true if there aren't any resource entries.
     bool empty() const {
         return mResourceList.empty();
