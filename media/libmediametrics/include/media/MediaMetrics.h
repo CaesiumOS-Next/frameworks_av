@@ -97,9 +97,12 @@ __END_DECLS
 
 #ifdef __cplusplus
 #include <string>
+#include <strstream>
 void mediametrics_setString(mediametrics_handle_t handle, attr_t attr,
                             const std::string &value);
 bool mediametrics_getString(mediametrics_handle_t handle, attr_t attr, std::string *value);
+
+void mediametrics_str(mediametrics_handle_t handle, std::string &str);
 #endif // __cplusplus
 
 #endif

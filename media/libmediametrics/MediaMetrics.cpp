@@ -214,3 +214,29 @@ bool mediametrics_getAttributes(mediametrics_handle_t handle, char **buffer, siz
     return item->writeToByteString(buffer, length) == android::NO_ERROR;
 
 }
+
+template<class... T>
+        struct overloads : T... { using T::operator()...; };
+
+void mediametrics_str(mediametrics_handle_t handle, std::string &str) {
+    const auto visitor = overloads {
+            [](std::monostate) { },
+            [&str](const int32_t &v) { str += std::to_string(v); },
+            [&str](const int64_t &v) { str += std::to_string(v); },
+            [&str](const double &v) { str += std::to_string(v); },
+            [&str](const std::string &v) { str += v; },
+            [&str](const std::pair<int64_t, int64_t> &v) {
+                    str += '<' + std::to_string(v.first) + ','
+                            + std::to_string(v.second) + '>'; },
+    };
+    Item *item = (Item *)handle;
+    std::string::size_type n;
+    const std::string string_to_trim("android.media.mediacodec.");
+    for (auto &prop : *item) {
+        std::string prop_name(prop.getName());
+        n = prop_name.find(string_to_trim);
+        str += prop_name.substr(n != std::string::npos ? n + string_to_trim.size() : 0) + '=';
+        std::visit(visitor, prop.get()); str += ';';
+    }
+    return;
+}
