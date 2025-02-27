@@ -50,6 +50,30 @@
       ],
       "revId": "1ca3924fe3c6ada65c1c81d603c60ce35891dccb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa4d3118_cc9ae190",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-27T16:17:19Z",
+      "side": 1,
+      "message": "Yeah, it can, but I am avoiding doing it intentionally to not to hold on to mRequiredResourceInfo for more time than needed (especially updateResourceUsage is going to make a synchronous binder call to the resource manager)",
+      "parentUuid": "a0645427_d4eee262",
+      "range": {
+        "startLine": 1364,
+        "startChar": 0,
+        "endLine": 1368,
+        "endChar": 5
+      },
+      "revId": "1ca3924fe3c6ada65c1c81d603c60ce35891dccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
