@@ -57,6 +57,8 @@ cc_library {
     name: "libcom.android.media.swcodec.apexcodecs-testing",
     defaults: ["libcom.android.media.swcodec.apexcodecs-defaults"],
 
+    srcs: ["ApexCodecsStoreTestImpl.cpp"],
+
     visibility: [
         ":__subpackages__",
     ],
