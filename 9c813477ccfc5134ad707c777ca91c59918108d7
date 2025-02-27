@@ -1,0 +1,150 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc4727f_c34dee2f",
+        "filename": "services/mediaresourcemanager/ResourceTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-27T23:35:28Z",
+      "side": 1,
+      "message": "is this the special value from line 159? Perhaps add a comment on line 159:\n\nlong removedEntryValue \u003d -1; // we are using this magic value to detect if this was not updated as this is an invalid value",
+      "range": {
+        "startLine": 161,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "309d9022_137f0d7d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/mediaresourcemanager/ResourceTracker.cpp",
+              "range": {
+                "startLine": 159,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "        long removedEntryValue \u003d -1; // we are using this magic value to detect if\n                                      // this was not updated as this is an invalid value\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ec80d0_5e34b2ba",
+        "filename": "services/mediaresourcemanager/ResourceTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-27T23:35:28Z",
+      "side": 1,
+      "message": "do we need to track a non added/removed event? e.g. if the value changed? why/why not?",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 5
+      },
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53553b84_9974a78d",
+        "filename": "services/mediaresourcemanager/ResourceTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-27T23:35:28Z",
+      "side": 1,
+      "message": "this method has an eerily similar name but does something very different.",
+      "range": {
+        "startLine": 188,
+        "startChar": 22,
+        "endLine": 188,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "449566f3_47a80161",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/mediaresourcemanager/ResourceTracker.cpp",
+              "range": {
+                "startLine": 188,
+                "startChar": 0,
+                "endLine": 189,
+                "endChar": 0
+              },
+              "replacement": "bool ResourceTracker::updateClientImportance(const aidl::android::media::ClientInfoParcel\u0026 clientInfo) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9097d5e5_26bacbfe",
+        "filename": "services/mediaresourcemanager/test/ResourceManagerService_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-02-27T23:35:28Z",
+      "side": 1,
+      "message": "does this require arm64? I have not seen this use in our code base. The spec says this is intmax_t. We\u0027ve been doing %lld before and casing value to (long long) to avoid using PRIi64",
+      "range": {
+        "startLine": 1921,
+        "startChar": 67,
+        "endLine": 1921,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b3c30e67_3539caf5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/mediaresourcemanager/test/ResourceManagerService_test.cpp",
+              "range": {
+                "startLine": 1921,
+                "startChar": 0,
+                "endLine": 1923,
+                "endChar": 0
+              },
+              "replacement": "                ALOGE(\"%s: Expected resource [%d] to be 0 but its %lld\",\n                      __func__, res.type, (long long)res.value);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
