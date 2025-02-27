@@ -74,6 +74,30 @@
       },
       "revId": "1ca3924fe3c6ada65c1c81d603c60ce35891dccb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86829653_0729a5b5",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1307008
+      },
+      "writtenOn": "2025-02-27T16:26:28Z",
+      "side": 1,
+      "message": "when I test it I found \"!oldResources.empty()\" will be empty after exit LINE#1362 } so I am not able to update the new resources. Don\u0027t you meet the any issue ?",
+      "parentUuid": "aa4d3118_cc9ae190",
+      "range": {
+        "startLine": 1364,
+        "startChar": 0,
+        "endLine": 1368,
+        "endChar": 5
+      },
+      "revId": "1ca3924fe3c6ada65c1c81d603c60ce35891dccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
