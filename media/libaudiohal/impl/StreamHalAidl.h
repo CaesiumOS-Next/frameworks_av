@@ -298,6 +298,12 @@ class StreamHalAidl : public virtual StreamHalInterface, public ConversionHelper
                            std::forward<Args&&>(args)...);
     }
 
+    template <typename Callable, typename... Args>
+    auto serializeCall(Callable&& func, Args&&... args) EXCLUDES(mCallLock) {
+        std::lock_guard lock(mCallLock);
+        return std::invoke(std::forward<Callable&&>(func), std::forward<Args&&>(args)...);
+    }
+
     void onAsyncTransferReady();
     void onAsyncDrainReady();
     void onAsyncError();
