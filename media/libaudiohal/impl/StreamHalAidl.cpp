@@ -170,7 +170,7 @@ status_t StreamHalAidl::setParameters(const String8& kvPairs) {
                 return statusTFromBinderStatus(
                         serializeCall(mStream, &Stream::updateHwAvSyncId, hwAvSyncId));
             }));
-    return parseAndSetVendorParameters(mVendorExt, mStream, parameters);
+    return serializeCall(&parseAndSetVendorParameters, mVendorExt, mStream, parameters);
 }
 
 status_t StreamHalAidl::getParameters(const String8& keys __unused, String8 *values) {
@@ -182,7 +182,7 @@ status_t StreamHalAidl::getParameters(const String8& keys __unused, String8 *val
     }
     AudioParameter parameterKeys(keys), result;
     *values = result.toString();
-    return parseAndGetVendorParameters(mVendorExt, mStream, parameterKeys, values);
+    return serializeCall(&parseAndGetVendorParameters, mVendorExt, mStream, parameterKeys, values);
 }
 
 status_t StreamHalAidl::getFrameSize(size_t *size) {
