@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5273b2a_d033dc3e",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 6298,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-02-28T10:14:14Z",
+      "side": 0,
+      "message": "the previous code cast to a floating point before doing the multiply by `1_000_000`, because the max `long double` is larger than the max `int64_t`, and the expectation is that the value then gets smaller again when divided by `mTimescale`.\n\nThe new code tries to fit the result of `mElstInitialEmptyEditTicks * 1000000` into `int64_t`, which is overly restrictive - because only the result of **both** the multiplication and division needs to fit into `int64_t`. In the proposed code, if the intermediate value doesn\u0027t fit in int64, the code ignores the calculation completely.\n\nYou can see [androidx.media3\u0027s implementation](https://github.com/androidx/media/blob/76088cd6af7f263aba238b7a48d64bd4f060cb8b/libraries/common/src/main/java/androidx/media3/common/util/Util.java#L1731) of this same \u0027scale to timescale\u0027 operation  which is deliberately designed to do the calculation in different orders to minimize the risk of overflow while maximising the accuracy of the result. It also has a different behaviour to the proposed code here when the result won\u0027t fit in 64 bits: return the \u0027saturated\u0027 value (either max or min), rather than abandoning the calculation.\n\n---\n\nI guess the overflow reported in b/397619415 is happening when storing the result back into `elstInitialEmptyEditUs`? What are the concrete values of `mElstInitialEmptyEditTicks` and `mTimescale` which cause this overflow?\n\nI\u0027d like to understand if we should be aiming for the \u0027saturated result\u0027 approach here (same as media3).",
+      "range": {
+        "startLine": 6297,
+        "startChar": 45,
+        "endLine": 6298,
+        "endChar": 56
+      },
+      "revId": "a14c84490e2b7aab990c1b12d6b541c621d7be5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
