@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57e6b6a_7b2b6a1c",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-02-28T17:37:38Z",
+      "side": 1,
+      "message": "Since inside that function we are calling into the vendor service, which may delay the operation, it\u0027s better to serialize only the moment inside `parseAndSetVendorParameters` when we are actually calling into the stream. So let\u0027s pass the lock as a parameter so that `parseAndSet...` can do this job.\n\nIn fact, we should do the same for `DeviceHalAidl` for calls into `IModule`, too: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudiohal/impl/DeviceHalAidl.cpp;l\u003d303;drc\u003d12ee7d7ddad324d2dd53e9362f8c9edbe931ff8c",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 88
+      },
+      "revId": "675389464ad5661bc2c951d773b36606509c6a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
