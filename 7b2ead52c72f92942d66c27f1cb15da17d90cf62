@@ -16,6 +16,23 @@
       "message": "Hi Google Team ,\nPls help to review this changes .",
       "revId": "7b2ead52c72f92942d66c27f1cb15da17d90cf62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c256adc_e5254d08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643016
+      },
+      "writtenOn": "2025-02-28T13:37:35Z",
+      "side": 1,
+      "message": "We are not accepting functional changes to MediaPlayer at the moment as it is in maintenance mode.",
+      "revId": "7b2ead52c72f92942d66c27f1cb15da17d90cf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
