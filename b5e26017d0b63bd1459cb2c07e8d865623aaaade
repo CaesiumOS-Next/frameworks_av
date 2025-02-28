@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "be6dea96_52488843",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2025-02-28T09:33:27Z",
+      "side": 1,
+      "message": "Hi Mikhail,\n\nI tested suggested tests and I don\u0027t see any regression.\nI don\u0027t have Cuttlefish env to test, could you please help to test on that once as well.",
+      "parentUuid": "53eaf01b_2edd5b32",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "b5e26017d0b63bd1459cb2c07e8d865623aaaade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5e0fd575_6bddf566",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
