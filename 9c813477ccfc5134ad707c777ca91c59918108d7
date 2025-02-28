@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa7aa233_73dab3bb",
+        "filename": "services/mediaresourcemanager/ResourceTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-28T00:05:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2dc4727f_c34dee2f",
+      "range": {
+        "startLine": 161,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 33
+      },
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15ec80d0_5e34b2ba",
@@ -55,6 +79,30 @@
       "writtenOn": "2025-02-27T23:35:28Z",
       "side": 1,
       "message": "do we need to track a non added/removed event? e.g. if the value changed? why/why not?",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 5
+      },
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f2d64f_eee2c394",
+        "filename": "services/mediaresourcemanager/ResourceTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-28T00:05:26Z",
+      "side": 1,
+      "message": "Currently the ResourceObserverService monitors (and notifies the observers) about video codecs only.\n\nAnd the events it generates are Busy (when a resource is added) or Idle (resource is removed). Since it doesn\u0027t generate any event for update/change in value, I don\u0027t think that needs any kind of monitoring.",
+      "parentUuid": "15ec80d0_5e34b2ba",
       "range": {
         "startLine": 183,
         "startChar": 0,
@@ -106,6 +154,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc32be36_486babe9",
+        "filename": "services/mediaresourcemanager/ResourceTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-28T00:05:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "53553b84_9974a78d",
+      "range": {
+        "startLine": 188,
+        "startChar": 22,
+        "endLine": 188,
+        "endChar": 36
+      },
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9097d5e5_26bacbfe",
@@ -143,6 +215,30 @@
           ]
         }
       ],
+      "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ca2336_3b93e6c5",
+        "filename": "services/mediaresourcemanager/test/ResourceManagerService_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-02-28T00:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9097d5e5_26bacbfe",
+      "range": {
+        "startLine": 1921,
+        "startChar": 67,
+        "endLine": 1921,
+        "endChar": 68
+      },
       "revId": "9c813477ccfc5134ad707c777ca91c59918108d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
