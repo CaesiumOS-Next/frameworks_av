@@ -48,6 +48,7 @@ cc_library {
         "libstagefright_foundation",
         "libstagefright_id3",
         "libutils",
+        "libbase",
     ],
 
     shared_libs: [
