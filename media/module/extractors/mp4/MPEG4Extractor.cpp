@@ -28,6 +28,7 @@
 
 #include <utils/Log.h>
 
+#include <android/api-level.h>
 #include "AC4Parser.h"
 #include "MPEG4Extractor.h"
 #include "SampleTable.h"
@@ -369,7 +370,9 @@ static const char *FourCC2MIME(uint32_t fourcc) {
             return MEDIA_MIMETYPE_VIDEO_HEVC;
 
         case FOURCC("apv1"):
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
+            // Enable APV codec support from Android Baklava
+            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
+                android_get_device_api_level() < 36) {
                 ALOGV("APV support not enabled");
                 return "application/octet-stream";
             }
@@ -2634,7 +2637,9 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
         }
 
         case FOURCC("apvC"): {
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
+            // Enable APV codec support from Android Baklava
+            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
+                android_get_device_api_level() < 36) {
                 ALOGV("APV support not enabled");
                 *offset += chunk_size;
                 break;
@@ -5236,8 +5241,9 @@ MPEG4Source::MPEG4Source(
     mIsAVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
     mIsHEVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
               !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC);
+    // Enable APV codec support from Android Baklava
     mIsAPV = com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-             !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
+             android_get_device_api_level() < 36 && !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
     mIsAC4 = !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_AC4);
     mIsDolbyVision = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_DOLBY_VISION);
     mIsHeif = !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC) && mItemTable != NULL;
