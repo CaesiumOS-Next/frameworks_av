@@ -85,6 +85,13 @@ enum {
     kMaxAtomSize = 64 * 1024 * 1024,
 };
 
+static bool isAtLeastBaklava() {
+    if (__builtin_available(android 36, *)) {
+        return true;
+    }
+    return false;
+}
+
 class MPEG4Source : public MediaTrackHelper {
 static const size_t  kMaxPcmFrameSize = 8192;
 public:
@@ -372,7 +379,9 @@ static const char *FourCC2MIME(uint32_t fourcc) {
             return MEDIA_MIMETYPE_VIDEO_HEVC;
 
         case FOURCC("apv1"):
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
+            // Enable APV codec support from Android Baklava
+            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() ||
+                !isAtLeastBaklava()) {
                 ALOGV("APV support not enabled");
                 return "application/octet-stream";
             }
@@ -2637,7 +2646,9 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
         }
 
         case FOURCC("apvC"): {
-            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv()) {
+            // Enable APV codec support from Android Baklava
+            if (!com::android::media::extractor::flags::extractor_mp4_enable_apv() ||
+                !isAtLeastBaklava()) {
                 ALOGV("APV support not enabled");
                 *offset += chunk_size;
                 break;
@@ -5239,8 +5250,9 @@ MPEG4Source::MPEG4Source(
     mIsAVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
     mIsHEVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
               !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC);
+    // Enable APV codec support from Android Baklava
     mIsAPV = com::android::media::extractor::flags::extractor_mp4_enable_apv() &&
-             !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
+             isAtLeastBaklava() && !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
     mIsAC4 = !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_AC4);
     mIsDolbyVision = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_DOLBY_VISION);
     mIsHeif = !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC) && mItemTable != NULL;
