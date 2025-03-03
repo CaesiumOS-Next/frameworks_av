@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "906107b2_5e90564b",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-03T18:17:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "058bc0e2_144e7a3c",
+      "range": {
+        "startLine": 103,
+        "startChar": 17,
+        "endLine": 103,
+        "endChar": 18
+      },
+      "revId": "09c8a2ee19cc40bfff0b0c019c5cab862f5fe078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d20254d2_0cbfd099",
@@ -113,6 +137,30 @@
           ]
         }
       ],
+      "revId": "09c8a2ee19cc40bfff0b0c019c5cab862f5fe078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c13c1eb_68514b07",
+        "filename": "media/libaudioclient/tests/audiotrack_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-03T18:17:51Z",
+      "side": 1,
+      "message": "Because there is a property which sets the minimum duration for a clip to be offloaded, this is the code in APM which checks it:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d4830;drc\u003dbd205f23c74d7498c9958d2bfa8622aacfe59517\n\nSo if we want offload not to be rejected based on that, we need to set a rather long duration, this is what the system code actually does:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/jni/android_media_AudioSystem.cpp;l\u003d2546;drc\u003d3d1050f4d0b79b3824f8b3c4a7bb97b2ad6a32dc\n\nIt would arguably be better if we actually read the value of the property instead of using hardcoded 2 minutes, but I think that should be done in all places not just in this test, for consistency.",
+      "parentUuid": "d20254d2_0cbfd099",
+      "range": {
+        "startLine": 190,
+        "startChar": 42,
+        "endLine": 190,
+        "endChar": 81
+      },
       "revId": "09c8a2ee19cc40bfff0b0c019c5cab862f5fe078",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
