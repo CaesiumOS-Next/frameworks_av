@@ -133,7 +133,7 @@ cc_fuzz {
         "libaconfig_storage_read_api_cc",
         "libstagefright_id3",
         "libstagefright_esds",
-        "libmp4extractor",
+        "libmp4extractorhost",
         "libstagefright_metadatautils",
     ],
 

@@ -13,7 +13,7 @@ cc_test_host {
     ],
 
     static_libs: [
-        "libmp4extractor",
+        "libmp4extractorhost",
     ],
 
     target: {
