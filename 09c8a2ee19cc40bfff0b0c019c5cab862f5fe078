@@ -16,6 +16,105 @@
       "message": "Looks like the removal of `#include \u003cthread\u003e` from `audio_test_utils.h` has caused build failures for some other tests. I think the removal was the right step because the header code does not use it, so I will fix these tests instead to comply with \"include what you use\" coding style policy.",
       "revId": "09c8a2ee19cc40bfff0b0c019c5cab862f5fe078",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7dba496_bcb36ce4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-03-03T17:18:11Z",
+      "side": 1,
+      "message": "Please fix build error.",
+      "revId": "09c8a2ee19cc40bfff0b0c019c5cab862f5fe078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "058bc0e2_144e7a3c",
+        "filename": "media/libaudioclient/tests/audio_test_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-03-03T17:18:11Z",
+      "side": 1,
+      "message": "nit, do we prefer nullptr?",
+      "range": {
+        "startLine": 103,
+        "startChar": 17,
+        "endLine": 103,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "18f7bee7_35069228",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audio_test_utils.h",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "        if (t !\u003d nullptr) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "09c8a2ee19cc40bfff0b0c019c5cab862f5fe078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d20254d2_0cbfd099",
+        "filename": "media/libaudioclient/tests/audiotrack_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-03-03T17:18:11Z",
+      "side": 1,
+      "message": "Q: why this is required? Isn\u0027t the framework choose offload when offload is supported on the device and offload flag is requested?",
+      "range": {
+        "startLine": 190,
+        "startChar": 42,
+        "endLine": 190,
+        "endChar": 81
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4da16409_cc533111",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audiotrack_tests.cpp",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 191,
+                "endChar": 0
+              },
+              "replacement": "    info.duration_us \u003d 120 * 1000000;  // 120 sec to ensure the offloading choice is not affected by the duration\n"
+            }
+          ]
+        }
+      ],
+      "revId": "09c8a2ee19cc40bfff0b0c019c5cab862f5fe078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
