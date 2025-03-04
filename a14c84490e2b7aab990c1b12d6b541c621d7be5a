@@ -22,6 +22,30 @@
       },
       "revId": "a14c84490e2b7aab990c1b12d6b541c621d7be5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d903debb_ccacf5e0",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 6298,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-03-04T07:15:47Z",
+      "side": 0,
+      "message": "Thanks for the review and suggestion.The last patch was indeed a bit too strict in its calculations, as the subsequent division by ```mTimescale``` could result in the actual target value falling within the allowed range, even though an overflow occurred during the intermediate calculations.\nI reference ```media3``` to implement rescale time: trying to ensure that precision isn\u0027t lost during the calculation and to handle overflow cases.\nCould you please help review it?\n\nAbout the issue, I can\u0027t get the elst value, due to the crash is collected by Our quality daemon program which would collect the anr and tombstone files.",
+      "parentUuid": "e5273b2a_d033dc3e",
+      "range": {
+        "startLine": 6297,
+        "startChar": 45,
+        "endLine": 6298,
+        "endChar": 56
+      },
+      "revId": "a14c84490e2b7aab990c1b12d6b541c621d7be5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
