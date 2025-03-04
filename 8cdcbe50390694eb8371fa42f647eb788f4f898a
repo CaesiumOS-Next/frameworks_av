@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b01c9c9_bb5deab5",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 6274,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-03-04T20:49:19Z",
+      "side": 1,
+      "message": "nit: rename this to include \u0027simple\u0027, so probably `gcdOfValueAndSimpleOriginScale`",
+      "range": {
+        "startLine": 6274,
+        "startChar": 20,
+        "endLine": 6274,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6214aff2_00f43be8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 6274,
+                "startChar": 0,
+                "endLine": 6277,
+                "endChar": 0
+              },
+              "replacement": "            int64_t gcdOfValueAndSimpleOriginScale \u003d std::gcd(value, simpleOriginScale);\n            int64_t simpleValue \u003d value / gcdOfValueAndSimpleOriginScale;\n            simpleOriginScale /\u003d gcdOfValueAndSimpleOriginScale;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8cdcbe50390694eb8371fa42f647eb788f4f898a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "346bd4c0_36cfbfaf",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 6365,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2025-03-04T20:49:19Z",
+      "side": 1,
+      "message": "nit: typo, should be \u0027bogus\u0027",
+      "range": {
+        "startLine": 6365,
+        "startChar": 65,
+        "endLine": 6365,
+        "endChar": 70
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "77bb38a2_1e42b8e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 6365,
+                "startChar": 0,
+                "endLine": 6366,
+                "endChar": 0
+              },
+              "replacement": "                        ALOGW(\"seekTimeUs:%\" PRId64 \" would be a bogus value, set to 0\",\n"
+            },
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 6822,
+                "startChar": 0,
+                "endLine": 6823,
+                "endChar": 0
+              },
+              "replacement": "                ALOGW(\"seekTimeUs:%\" PRId64 \" would be a bogus value, set to 0\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8cdcbe50390694eb8371fa42f647eb788f4f898a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
