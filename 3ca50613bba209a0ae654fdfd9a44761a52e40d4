@@ -40,6 +40,30 @@
       ],
       "revId": "3ca50613bba209a0ae654fdfd9a44761a52e40d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597a5f5c_8c6c0352",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3787,
+      "author": {
+        "id": 3670787
+      },
+      "writtenOn": "2025-03-05T07:19:48Z",
+      "side": 1,
+      "message": "Sure but do we want to return an Android specific type instead of standard. This could be made as:\n\nreturn std::vector(mTracks.begin(), mTracks.end());\ninstead I guess.",
+      "parentUuid": "1acbbbc8_b1e7c5c4",
+      "range": {
+        "startLine": 3783,
+        "startChar": 0,
+        "endLine": 3787,
+        "endChar": 18
+      },
+      "revId": "3ca50613bba209a0ae654fdfd9a44761a52e40d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
