@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe5d375b_4ba83454",
+        "filename": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-05T22:32:05Z",
+      "side": 1,
+      "message": "nit: expectParam_ or mExpectParam?",
+      "range": {
+        "startLine": 108,
+        "startChar": 14,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f92f1c3d_43685ba7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "        if (param \u003d\u003d mExpectParam)\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": "                  mExpectParam.toString().c_str());\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "    void setExpectParameter(const Parameter\u0026 param) { mExpectParam \u003d param; }\n"
+            },
+            {
+              "path": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "    Parameter mExpectParam;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfe25a8dfcd71cffcec76377d03b65c6620cf395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28aca0ee_3455565a",
+        "filename": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-05T22:32:05Z",
+      "side": 1,
+      "message": "nit: emplace_back with actual arguments?\n\nhttps://en.cppreference.com/w/cpp/container/vector/emplace_back",
+      "range": {
+        "startLine": 302,
+        "startChar": 28,
+        "endLine": 302,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1c23ac1f_4764b6a7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+              "range": {
+                "startLine": 298,
+                "startChar": 0,
+                "endLine": 304,
+                "endChar": 0
+              },
+              "replacement": "                deviceTypes.emplace_back(kAudioDevicePairs[i + w].first /* audio_device_t */, \"\");\n                deviceDescs.emplace_back(kAudioDevicePairs[i + w].second /* AudioDeviceDescription */);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfe25a8dfcd71cffcec76377d03b65c6620cf395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb5d5e4_9fb9a066",
+        "filename": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-05T22:32:05Z",
+      "side": 1,
+      "message": "nit: use emplace_back with actual forwarded arguments?",
+      "range": {
+        "startLine": 302,
+        "startChar": 28,
+        "endLine": 302,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "65fd7180_a34b4531",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+              "range": {
+                "startLine": 298,
+                "startChar": 0,
+                "endLine": 304,
+                "endChar": 0
+              },
+              "replacement": "                deviceTypes.emplace_back(kAudioDevicePairs[i + w].first /* audio_device_t */, \"\");\n                deviceDescs.emplace_back(kAudioDevicePairs[i + w].second /* AudioDeviceDescription */);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfe25a8dfcd71cffcec76377d03b65c6620cf395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
