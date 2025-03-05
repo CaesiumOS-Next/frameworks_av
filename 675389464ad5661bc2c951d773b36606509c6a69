@@ -70,6 +70,30 @@
       },
       "revId": "675389464ad5661bc2c951d773b36606509c6a69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d97f8a3_69d04163",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-05T16:54:20Z",
+      "side": 1,
+      "message": "\u003e are suspecting calls into IHalAdapterVendorExtension service might be delayed?\n\nAnything can happen. It\u0027s better to limit the scope of locking to the minimum possible operations.\n\n\u003e I feel passing mutex outside the class, breaks simplicity.\n\u003e\n\u003e I could break functions ParseAnd... so that only calls into IModule and IStream* are serialized.\n\nThe common pattern in STL is to pass a mutex wrapped into `unique_lock` (`std::unique_lock\u003cstd::mutex\u003e\u0026`) so that both the caller and callee can see what is the state of the mutex (locked or not). I think that\u0027s totally fine.\n\nYou can try and see which approach produces simpler code.\n\n\u003e Are you also saying we should serialize all IModule calls like how we did for IStream* ones?\n\nNot all, only the part dealing with parameters (since we anyway have to change `parseAndSetVendorParameters` to operate the lock). All other calls are naturally serialized due to the fact that they are handled via `Hal2AidlMapper` access to which is serialized.",
+      "parentUuid": "ec82f833_462eb837",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 88
+      },
+      "revId": "675389464ad5661bc2c951d773b36606509c6a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
