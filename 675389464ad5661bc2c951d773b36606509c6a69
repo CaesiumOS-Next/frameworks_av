@@ -22,6 +22,30 @@
       },
       "revId": "675389464ad5661bc2c951d773b36606509c6a69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1670119_c2091b70",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-03-05T13:39:30Z",
+      "side": 1,
+      "message": "are suspecting calls into ```IHalAdapterVendorExtension``` service might be delayed? if so then it is a service problem.\n\nI feel passing mutex outside the class, breaks simplicity.\n\nI could break functions ```ParseAnd...``` so that only calls into IModule and IStream* are serialized.",
+      "parentUuid": "f57e6b6a_7b2b6a1c",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 88
+      },
+      "revId": "675389464ad5661bc2c951d773b36606509c6a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
