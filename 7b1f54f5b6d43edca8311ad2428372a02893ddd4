@@ -1,0 +1,125 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1aad4c_2456488d",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-05T14:26:58Z",
+      "side": 1,
+      "message": "ideally we should provide the informaiton that the DIRECT bit in the flags argument came form the client and was not added by APM (for instance for OFFLOAD or HW AV SYNC ...). Can we also check that flags \u003d\u003d DIRECT?",
+      "range": {
+        "startLine": 1160,
+        "startChar": 0,
+        "endLine": 1160,
+        "endChar": 70
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e08ed1a9_9b5127cb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1098,
+                "startChar": 0,
+                "endLine": 1100,
+                "endChar": 0
+              },
+              "replacement": "// Find an output profile compatible with the parameters passed.\n// When \"directOnly\" is set, restrict search to profiles for direct outputs.\n// When \"clientRequestedDirect\" is set, the client explicitly requested a direct output.\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1106,
+                "startChar": 0,
+                "endLine": 1107,
+                "endChar": 0
+              },
+              "replacement": "                                                   bool directOnly,\n                                                   bool clientRequestedDirect)\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1108,
+                "startChar": 0,
+                "endLine": 1109,
+                "endChar": 0
+              },
+              "replacement": "    flags \u003d getRelevantFlags(flags, directOnly, clientRequestedDirect);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1111,
+                "startChar": 0,
+                "endLine": 1112,
+                "endChar": 0
+              },
+              "replacement": "            mHwModules, devices, samplingRate, format, channelMask, flags, directOnly,\n            clientRequestedDirect);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1115,
+                "startChar": 0,
+                "endLine": 1116,
+                "endChar": 0
+              },
+              "replacement": "                                            audio_output_flags_t flags, bool directOnly,\n                                            bool clientRequestedDirect) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1122,
+                "startChar": 0,
+                "endLine": 1123,
+                "endChar": 0
+              },
+              "replacement": "         flags \u003d (audio_output_flags_t)((flags \u0026 kRelevantFlags) |\n                 (clientRequestedDirect ? AUDIO_OUTPUT_FLAG_DIRECT : 0));\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1134,
+                "startChar": 0,
+                "endLine": 1135,
+                "endChar": 0
+              },
+              "replacement": "                                        bool directOnly,\n                                        bool clientRequestedDirect) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1160,
+                "startChar": 0,
+                "endLine": 1161,
+                "endChar": 0
+              },
+              "replacement": "             if (curProfile-\u003egetFlags() \u003d\u003d AUDIO_OUTPUT_FLAG_DIRECT \u0026\u0026 clientRequestedDirect) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1609,
+                "startChar": 0,
+                "endLine": 1610,
+                "endChar": 0
+              },
+              "replacement": "                flags, true /* directOnly */, true /* clientRequestedDirect */);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7b1f54f5b6d43edca8311ad2428372a02893ddd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
