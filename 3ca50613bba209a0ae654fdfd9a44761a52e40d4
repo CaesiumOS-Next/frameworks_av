@@ -64,6 +64,30 @@
       },
       "revId": "3ca50613bba209a0ae654fdfd9a44761a52e40d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10db5adf_12c1c6ee",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3787,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-05T19:01:22Z",
+      "side": 1,
+      "message": "ah right, it is a special container.  Agree with return std::vector(mTracks.begin(), mTracks.end()); Thanks!",
+      "parentUuid": "597a5f5c_8c6c0352",
+      "range": {
+        "startLine": 3783,
+        "startChar": 0,
+        "endLine": 3787,
+        "endChar": 18
+      },
+      "revId": "3ca50613bba209a0ae654fdfd9a44761a52e40d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
