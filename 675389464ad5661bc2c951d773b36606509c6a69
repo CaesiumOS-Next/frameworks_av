@@ -46,6 +46,30 @@
       },
       "revId": "675389464ad5661bc2c951d773b36606509c6a69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec82f833_462eb837",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 2020342
+      },
+      "writtenOn": "2025-03-05T13:41:57Z",
+      "side": 1,
+      "message": "Are you also saying we should serialize all ```IModule``` calls like how we did for ```IStream*``` ones?",
+      "parentUuid": "b1670119_c2091b70",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 88
+      },
+      "revId": "675389464ad5661bc2c951d773b36606509c6a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
