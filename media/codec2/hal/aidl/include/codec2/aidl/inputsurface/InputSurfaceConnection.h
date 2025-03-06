@@ -27,6 +27,7 @@
 
 namespace aidl::android::hardware::media::c2::implementation {
 class InputSurfaceSource;
+class FrameQueueThread;
 }
 
 namespace aidl::android::hardware::media::c2::utils {
@@ -63,6 +64,7 @@ protected:
 private:
     std::weak_ptr<IInputSink> mSink;
     ::android::sp<c2::implementation::InputSurfaceSource> mSource;
+    std::shared_ptr<c2::implementation::FrameQueueThread> mQueueThread;
 };
 
 }  // namespace aidl::android::hardware::media::c2::utils
