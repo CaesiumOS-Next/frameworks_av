@@ -18,6 +18,7 @@
 #define LOG_TAG "Codec2-InputSurface"
 #include <android-base/logging.h>
 
+#include <codec2/aidl/inputsurface/FrameQueueThread.h>
 #include <codec2/aidl/inputsurface/InputSurfaceConnection.h>
 #include <codec2/aidl/inputsurface/InputSurfaceSource.h>
 
