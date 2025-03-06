@@ -33,6 +33,24 @@
       "message": "I assume this is based on Media3\u0027s Util.scaleLargeValueFallback. In there we also check against Long.MIN_VALUE in Java. Do we need to do the equivalent here or is there a reason this can be left out?",
       "revId": "98cb79094e61a2822bf6a4ff6290749e1dfda6f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14661516_f899872b",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 6283,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-03-06T06:23:56Z",
+      "side": 1,
+      "message": "Hi, I think the check against Long.MIN_VALUE can be left out in this current case. ```rescaleTime``` is not a generic function like Media3\u0027s scaleLargeValueFallback designed for handling large number calculations. Additionally, before performing the calculation, there is already a precondition check ensuring that ```rescaleTime```\u0027s input parameters MUST NOT be negative values.",
+      "parentUuid": "3021f01b_a616e456",
+      "revId": "98cb79094e61a2822bf6a4ff6290749e1dfda6f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
