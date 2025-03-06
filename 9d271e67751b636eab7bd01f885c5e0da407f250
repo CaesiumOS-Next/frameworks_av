@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa84609d_4b766d43",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 4213,
+      "author": {
+        "id": 1895465
+      },
+      "writtenOn": "2025-03-06T00:05:15Z",
+      "side": 1,
+      "message": "When codec comoponent died, the ClientListener in CCodec send this error message to MediaCodec. It won\u0027t block CCodec from sending kWhatReleaseCompleted|kWhatStopCompleted notification to MediaCodec. MediaCodec will get 2 messages. One for the error. Another for the release|stop complete.\nSetting state to Unintialized will prevent MediaCodec from executing codes under release|stop complete notifcation.",
+      "range": {
+        "startLine": 4211,
+        "startChar": 28,
+        "endLine": 4213,
+        "endChar": 70
+      },
+      "revId": "9d271e67751b636eab7bd01f885c5e0da407f250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
