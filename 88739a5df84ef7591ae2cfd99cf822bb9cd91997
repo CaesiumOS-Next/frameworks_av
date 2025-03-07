@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "88739a5df84ef7591ae2cfd99cf822bb9cd91997",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7e6378_caa83fff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-03-07T16:44:46Z",
+      "side": 1,
+      "message": "git_main + this patch, install media apex (where this code lives) on a V device:\n\n\"atest ExtractorUnitTest\"\n\nrm64-v8a ExtractorUnitTest\n---------------------------\nExtractorUnitTest (0 Tests)\nRUNNER ERROR: ExtractorUnitTest did not report any run:\nCANNOT LINK EXECUTABLE \"/data/local/tmp/ExtractorUnitTest/arm64/ExtractorUnitTest\": cannot locate symbol \"_ZN7android24MEDIA_MIMETYPE_VIDEO_APVE\" referenced by \"/data/local/tmp/ExtractorUnitTest/arm64/ExtractorUnitTest\"...",
+      "revId": "88739a5df84ef7591ae2cfd99cf822bb9cd91997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7aebd4e_265e4144",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 5255,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-03-07T16:44:46Z",
+      "side": 1,
+      "message": "i expect this is what causes that ExtractorUnitTest failure\n\nthe __builtin_available() and how it works with symbol resolution is pretty\nlimited.  It only recognizes a a very stylized code structure:\n\n if (builtin_available()) { ...reference-to-the-symbol-were-protecting }\n \n so while semantically we know that we won\u0027t run the strcasecmp() on devices\n before B, the tools aren\u0027t up to calculate that.\n [the fact that the builtin_available() call is in a nested routine is also\n beyond its capabilities]\n \n you probably need to restructure this as:\n \n mIsAPV\u003dfalse;\n if (android_builtin(36)) { mIsApV \u003d flag() \u0026\u0026 strcasecmp() }\n \nif you want to keep all the android_builtin calls together, you could do that\nconstruct in a new static routine next to the isAtLeastBaklava() routine and\nthen do \"mIsApv \u003d thatNewRoutine()\" here.",
+      "range": {
+        "startLine": 5255,
+        "startChar": 13,
+        "endLine": 5255,
+        "endChar": 79
+      },
+      "revId": "88739a5df84ef7591ae2cfd99cf822bb9cd91997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
