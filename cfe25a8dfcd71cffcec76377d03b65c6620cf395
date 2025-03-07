@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc8643e_754cdb96",
+        "filename": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-03-07T01:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe5d375b_4ba83454",
+      "range": {
+        "startLine": 108,
+        "startChar": 14,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "cfe25a8dfcd71cffcec76377d03b65c6620cf395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28aca0ee_3455565a",
@@ -150,6 +174,54 @@
           ]
         }
       ],
+      "revId": "cfe25a8dfcd71cffcec76377d03b65c6620cf395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee5c91c_484b3003",
+        "filename": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-03-07T01:44:23Z",
+      "side": 1,
+      "message": "addressed with aosp/3528508",
+      "parentUuid": "9eb5d5e4_9fb9a066",
+      "range": {
+        "startLine": 302,
+        "startChar": 28,
+        "endLine": 302,
+        "endChar": 40
+      },
+      "revId": "cfe25a8dfcd71cffcec76377d03b65c6620cf395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ca8950_35e99563",
+        "filename": "media/libaudiohal/tests/EffectHalAidl_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-03-07T01:44:23Z",
+      "side": 1,
+      "message": "addressed with aosp/3528508",
+      "parentUuid": "28aca0ee_3455565a",
+      "range": {
+        "startLine": 302,
+        "startChar": 28,
+        "endLine": 302,
+        "endChar": 40
+      },
       "revId": "cfe25a8dfcd71cffcec76377d03b65c6620cf395",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
