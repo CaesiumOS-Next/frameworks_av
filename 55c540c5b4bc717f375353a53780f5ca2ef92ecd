@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55a8b12_14e0e8a9",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-07T21:10:37Z",
+      "side": 1,
+      "message": "I don\u0027t know if calling this in the constructor is safe. Can we move these outside of the constructor and put in an init() method?",
+      "range": {
+        "startLine": 369,
+        "startChar": 54,
+        "endLine": 369,
+        "endChar": 80
+      },
+      "revId": "55c540c5b4bc717f375353a53780f5ca2ef92ecd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
