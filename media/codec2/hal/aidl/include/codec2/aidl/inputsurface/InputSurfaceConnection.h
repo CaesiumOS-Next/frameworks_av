@@ -58,13 +58,47 @@ struct InputSurfaceConnection : public BnInputSurfaceConnection {
     void dispatchDataSpaceChanged(
             int32_t dataSpace, int32_t aspects, int32_t pixelFormat);
 
+    void release();
+
+    // InputSurface config
+    void setAdjustTimestampGapUs(int32_t gapUs);
+
 protected:
     virtual ~InputSurfaceConnection() override;
 
 private:
+    c2_status_t mInit;
+    std::atomic<bool> mReleased;
+
     std::weak_ptr<IInputSink> mSink;
     ::android::sp<c2::implementation::InputSurfaceSource> mSource;
     std::shared_ptr<c2::implementation::FrameQueueThread> mQueueThread;
+
+    std::shared_ptr<C2Allocator> mAllocator;
+    std::atomic_uint64_t mFrameIndex;
+
+    // WORKAROUND: timestamp adjustment
+
+    // if >0: this is the max timestamp gap, if <0: this is -1 times the fixed timestamp gap
+    // if 0: no timestamp adjustment is made
+    // note that C2OMXNode can be recycled between encoding sessions.
+    int32_t mAdjustTimestampGapUs;
+    bool mFirstInputFrame; // true for first input
+    c2_cntr64_t mPrevInputTimestamp; // input timestamp for previous frame
+    c2_cntr64_t mPrevCodecTimestamp; // adjusted (codec) timestamp for previous frame
+
+    // Tracks the status of buffers
+    struct BuffersTracker {
+        BuffersTracker() = default;
+
+        // Keeps track of buffers that are used by the component. Maps timestamp -> ID
+        std::map<uint64_t, uint32_t> mIdsInUse;
+        // Keeps track of the buffer IDs that are available after being released from the component.
+        std::list<uint32_t> mAvailableIds;
+    };
+    Mutexed<BuffersTracker> mBuffersTracker;
+
+    void notifyInputBufferEmptied(int32_t bufferId);
 };
 
 }  // namespace aidl::android::hardware::media::c2::utils
