@@ -23,11 +23,16 @@
 
 #include <C2.h>
 
+#include <list>
+#include <map>
 #include <memory>
 
 namespace aidl::android::hardware::media::c2::implementation {
 class InputSurfaceSource;
+class FrameQueueThread;
 }
+
+class C2Allocator;
 
 namespace aidl::android::hardware::media::c2::utils {
 
@@ -57,10 +62,22 @@ struct InputSurfaceConnection : public BnInputSurfaceConnection {
     void dispatchDataSpaceChanged(
             int32_t dataSpace, int32_t aspects, int32_t pixelFormat);
 
+    void release();
+
+    // InputSurface config
+    void setAdjustTimestampGapUs(int32_t gapUs);
+
+    void onInputBufferDone(c2_cntr64_t index);
+
+    void onInputBufferEmptied();
+
 protected:
     virtual ~InputSurfaceConnection() override;
 
 private:
+    c2_status_t mInit;
+    std::atomic<bool> mReleased;
+
     std::weak_ptr<IInputSink> mSink;
     ::android::wp<c2::implementation::InputSurfaceSource> mSource;
     std::shared_ptr<c2::implementation::FrameQueueThread> mQueueThread;
@@ -94,8 +111,6 @@ private:
             int32_t bufferId, const AImage *buffer, int64_t timestamp, int fenceFd, bool eos);
 
     void notifyInputBufferEmptied(int32_t bufferId);
-    ::android::sp<c2::implementation::InputSurfaceSource> mSource;
-    std::shared_ptr<c2::implementation::FrameQueueThread> mQueueThread;
 };
 
 }  // namespace aidl::android::hardware::media::c2::utils
