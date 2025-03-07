@@ -16,6 +16,157 @@
       "message": "Adding Jean-Michel for approving the changes in `audioparameterparser`. There is a separate CL to add more owners for it.",
       "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22580fda_ed54bb01",
+        "filename": "media/libaudioclient/tests/audiotrack_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-07T03:17:34Z",
+      "side": 1,
+      "message": "is this const?",
+      "range": {
+        "startLine": 191,
+        "startChar": 34,
+        "endLine": 191,
+        "endChar": 37
+      },
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533c4cc3_27726388",
+        "filename": "media/libaudioclient/tests/audiotrack_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-07T03:17:34Z",
+      "side": 1,
+      "message": "ClipPreemption?",
+      "range": {
+        "startLine": 262,
+        "startChar": 30,
+        "endLine": 262,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e654d4d9_457636ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audiotrack_tests.cpp",
+              "range": {
+                "startLine": 262,
+                "startChar": 0,
+                "endLine": 263,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(AudioTrackOffloadTest, ClipPreemption) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8f6523_7d9f5d88",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-07T03:17:34Z",
+      "side": 1,
+      "message": "up to you, should some of these be const?",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c815b4d9_f91f0f46",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.h",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "                      bool isAsynchronous, int ioHandle, bool hasClipTransitionSupport \u003d false)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc6a33c_692caa7e",
+        "filename": "services/audioparameterparser/ParameterParser.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-07T03:17:34Z",
+      "side": 1,
+      "message": "any reason this got moved down?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 28
+      },
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcab861a_995006df",
+        "filename": "services/audioparameterparser/ParameterParser.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-07T03:17:34Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 103
+      },
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
