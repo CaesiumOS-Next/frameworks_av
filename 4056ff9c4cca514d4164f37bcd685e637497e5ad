@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1130069_2d96be95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-03-07T15:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6381a22b_bec853cf",
+      "revId": "4056ff9c4cca514d4164f37bcd685e637497e5ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0b22dc2_09e77968",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-05T15:45:37Z",
       "side": 1,
       "message": "does this work in devices flashed with latest builds?\nAnd is this used in any of the mainline media modules?\n\nif not, patchset 3 was fine.",
+      "revId": "4056ff9c4cca514d4164f37bcd685e637497e5ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ab36eff_b41d4e16",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-03-07T15:32:50Z",
+      "side": 1,
+      "message": "Yes I checked with latest build and __builtin_available is used in [Codec2CommonUtils.cpp](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/codec2/sfplugin/utils/Codec2CommonUtils.cpp;l\u003d35)",
+      "parentUuid": "a0b22dc2_09e77968",
       "revId": "4056ff9c4cca514d4164f37bcd685e637497e5ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
