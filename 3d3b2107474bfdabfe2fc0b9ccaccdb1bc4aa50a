@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4371c230_2f180845",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-07T09:29:32Z",
+      "side": 1,
+      "message": "Please add Bug: with a buganizer bug ID (create one if none exist for this issue and join a bug report) with a clear problme description and reproduction steps.\n\nAlso add Test: and Flag: lines in the commit message. The Flag can just be:\nFlag: EXEMPT bug fix",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 128
+      },
+      "revId": "3d3b2107474bfdabfe2fc0b9ccaccdb1bc4aa50a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e8572c76_51db7c4a",
