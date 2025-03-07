@@ -24,6 +24,15 @@
 
 namespace aidl::android::hardware::media::c2::utils {
 
+namespace {
+
+class Buffer2D : public C2Buffer {
+public:
+    explicit Buffer2D(C2ConstGraphicBlock block) : C2Buffer({ block }) {}
+};
+
+}  // namespace
+
 InputSurfaceConnection::InputSurfaceConnection(
         const std::shared_ptr<IInputSink>& sink,
         ::android::sp<c2::implementation::InputSurfaceSource> const &source)
@@ -39,25 +48,36 @@ c2_status_t InputSurfaceConnection::status() const {
 }
 
 ::ndk::ScopedAStatus InputSurfaceConnection::disconnect() {
+    auto source = mSource.promote();
+    if (source) {
+        return ::ndk::ScopedAStatus::fromServiceSpecificError(C2_CORRUPTED);
+    }
+    (void)source->stop();
+    (void)source->release();
+
     return ::ndk::ScopedAStatus::ok();
 }
 
 ::ndk::ScopedAStatus InputSurfaceConnection::signalEndOfStream() {
+    auto source = mSource.promote();
+    if (source) {
+        return ::ndk::ScopedAStatus::fromServiceSpecificError(C2_CORRUPTED);
+    }
+
+    c2_status_t status = source->signalEndOfInputStream();
+    if (status != C2_OK) {
+        return ::ndk::ScopedAStatus::fromServiceSpecificError(status);
+    }
     return ::ndk::ScopedAStatus::ok();
 }
 
 c2_status_t InputSurfaceConnection::submitBuffer(
         int32_t bufferId, const AImage *buffer, int64_t timestamp, int fenceFd) {
-    (void)bufferId;
-    (void)buffer;
-    (void)timestamp;
-    (void)fenceFd;
-    return C2_OK;
+    return submitBufferInternal(bufferId, buffer, timestamp, fenceFd, false);
 }
 
 c2_status_t InputSurfaceConnection::submitEos(int32_t bufferId) {
-    (void)bufferId;
-    return C2_OK;
+    return submitBufferInternal(bufferId, nullptr, 0, -1, true);
 }
 
 void InputSurfaceConnection::dispatchDataSpaceChanged(
@@ -65,6 +85,108 @@ void InputSurfaceConnection::dispatchDataSpaceChanged(
     (void)dataSpace;
     (void)aspects;
     (void)pixelFormat;
+    android_dataspace d = (android_dataspace)dataSpace;
+    mQueueThread->setDataspace(d);
+}
+
+void InputSurfaceConnection::setAdjustTimestampGapUs(int32_t gapUs) {
+    (void)gapUs;
+}
+
+
+void InputSurfaceConnection::onInputBufferDone(c2_cntr64_t index) {
+    (void)index;
+}
+
+void InputSurfaceConnection::onInputBufferEmptied() {
+}
+
+c2_status_t InputSurfaceConnection::submitBufferInternal(
+        int32_t bufferId, const AImage *buffer, int64_t timestamp, int fenceFd, bool eos) {
+    // close fenceFd on returning an error.
+    ::android::base::unique_fd ufd(fenceFd);
+    std::shared_ptr<IInputSink> sink = mSink.lock();
+    if (!sink) {
+        ALOGE("inputsurface does not have valid sink");
+        return C2_BAD_STATE;
+    }
+
+    uint32_t c2Flags = (eos == true) ? C2FrameData::FLAG_END_OF_STREAM : 0;
+    AHardwareBuffer *hwBuffer = nullptr;
+
+    if (buffer) {
+        if (AImage_getHardwareBuffer(buffer, &hwBuffer) != AMEDIA_OK) {
+            ALOGE("cannot get AHardwareBuffer form AImage");
+            return C2_CORRUPTED;
+        }
+    } else if (!eos) {
+        ALOGE("buffer should be submitted, but was nullptr");
+        return C2_BAD_VALUE;
+    }
+
+    std::shared_ptr<C2GraphicBlock> block;
+    if (hwBuffer) {
+        block = _C2BlockFactory::CreateGraphicBlock(hwBuffer);
+    }
+
+    std::unique_ptr<C2Work> work(new C2Work);
+    work->input.flags = (C2FrameData::flags_t)c2Flags;
+    work->input.ordinal.timestamp = timestamp;
+    {
+        work->input.ordinal.customOrdinal = timestamp; // save input timestamp
+        if (mFirstInputFrame) {
+            // grab timestamps on first frame
+            mPrevInputTimestamp = timestamp;
+            mPrevCodecTimestamp = timestamp;
+            mFirstInputFrame = false;
+        } else if (mAdjustTimestampGapUs > 0) {
+            work->input.ordinal.timestamp =
+                mPrevCodecTimestamp
+                        + c2_min((timestamp - mPrevInputTimestamp).peek(), mAdjustTimestampGapUs);
+        } else if (mAdjustTimestampGapUs < 0) {
+            work->input.ordinal.timestamp = mPrevCodecTimestamp - mAdjustTimestampGapUs;
+        }
+        mPrevInputTimestamp = work->input.ordinal.customOrdinal;
+        mPrevCodecTimestamp = work->input.ordinal.timestamp;
+        ALOGV("adjusting %lld to %lld (gap=%lld)",
+              work->input.ordinal.customOrdinal.peekll(),
+              work->input.ordinal.timestamp.peekll(),
+              (long long)mAdjustTimestampGapUs);
+    }
+
+    work->input.ordinal.frameIndex = mFrameIndex++;
+    work->input.buffers.clear();
+    if (block) {
+        std::shared_ptr<C2Buffer> c2Buffer(
+                new Buffer2D(block->share(
+                        C2Rect(block->width(), block->height()), ::C2Fence())));
+        work->input.buffers.push_back(c2Buffer);
+        std::shared_ptr<C2StreamHdrStaticInfo::input> staticInfo;
+        std::shared_ptr<C2StreamHdrDynamicMetadataInfo::input> dynamicInfo;
+        GetHdrMetadataFromGralloc4Handle(
+                block->handle(),
+                &staticInfo,
+                &dynamicInfo);
+        if (staticInfo && *staticInfo) {
+            c2Buffer->setInfo(staticInfo);
+        }
+        if (dynamicInfo && *dynamicInfo) {
+            c2Buffer->setInfo(dynamicInfo);
+        }
+    }
+    work->worklets.clear();
+    work->worklets.emplace_back(new C2Worklet);
+    {
+        std::unique_lock<std::mutex> l(mBuffersTracker.mMutex);
+        mBuffersTracker.mIdsInUse.emplace(work->input.ordinal.frameIndex.peeku(), bufferId);
+    }
+    mQueueThread->queue(std::move(work), ufd.release());
+
+    return C2_OK;
+}
+
+void InputSurfaceConnection::notifyInputBufferEmptied(int32_t bufferId) {
+    (void)bufferId;
 }
 
 }  // namespace aidl::android::hardware::media::c2::utils
