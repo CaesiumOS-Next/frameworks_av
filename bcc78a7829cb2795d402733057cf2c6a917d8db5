@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3e9e479_2f7ae3fa",
+        "filename": "media/libaudioclient/tests/audiotrack_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-07T18:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22580fda_ed54bb01",
+      "range": {
+        "startLine": 191,
+        "startChar": 34,
+        "endLine": 191,
+        "endChar": 37
+      },
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "533c4cc3_27726388",
@@ -78,6 +102,30 @@
           ]
         }
       ],
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0038fa_a4d5ad26",
+        "filename": "media/libaudioclient/tests/audiotrack_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-07T18:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "533c4cc3_27726388",
+      "range": {
+        "startLine": 262,
+        "startChar": 30,
+        "endLine": 262,
+        "endChar": 43
+      },
       "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -123,6 +171,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9caa36e_6a8a63ea",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-07T18:47:27Z",
+      "side": 1,
+      "message": "It\u0027s a move-only class (it has `unique_ptr` fields) supporting move assignment, thus using `const` fields is not possible w/o special tricks. However, all the fields are private and are accessed via methods marked as `const`.",
+      "parentUuid": "be8f6523_7d9f5d88",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 9
+      },
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fc6a33c_692caa7e",
@@ -146,6 +218,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "709c9216_9efa7ea6",
+        "filename": "services/audioparameterparser/ParameterParser.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-07T18:47:27Z",
+      "side": 1,
+      "message": "Moved to the beginning.",
+      "parentUuid": "5fc6a33c_692caa7e",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 28
+      },
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcab861a_995006df",
@@ -159,6 +255,30 @@
       "writtenOn": "2025-03-07T03:17:34Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 103
+      },
+      "revId": "bcc78a7829cb2795d402733057cf2c6a917d8db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a99b42a9_00db9bb3",
+        "filename": "services/audioparameterparser/ParameterParser.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-07T18:47:27Z",
+      "side": 1,
+      "message": "Done. I\u0027ve added this directory into the `clang-format` list.",
+      "parentUuid": "dcab861a_995006df",
       "range": {
         "startLine": 30,
         "startChar": 0,
