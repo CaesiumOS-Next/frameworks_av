@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6860f279_227a0e16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-03-08T21:31:40Z",
+      "side": 1,
+      "message": "Sorry for the inconvencience, I don\u0027t really know if this is necessary but I updated the feature flag name.\nIt wasn\u0027t perfectly clear that its only introducing 360RA channel mask.\nOlder flag made it seem like Sony had something to do with MPEG-H or am I wrong?\nhttps://android-review.googlesource.com/c/platform/frameworks/base/+/2581112",
+      "revId": "57d1b7668063504c8de477bb1c7aff55c1f7274b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
