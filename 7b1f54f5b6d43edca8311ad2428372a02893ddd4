@@ -120,6 +120,30 @@
       ],
       "revId": "7b1f54f5b6d43edca8311ad2428372a02893ddd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29394c4b_0c6a9cb2",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2025-03-10T09:14:22Z",
+      "side": 1,
+      "message": "I am not sure how adding whether it came from client / added internally helps in this case?\n\nThere could be cases of modifications when \"direct\" flags are internally added by APM, to prioritize the \"direct\" output.\n\nAlso, changing the API behavior for getProfileForOutput, whether it comes as from \"direct\" from client\nor not, can impact many of the usecases .\n\nfew listed as : \n* getOutputForAttrInt-\u003eopenDirectOutput  -\u003e getProfileForOutput\n* getOutputForDevices-\u003eopenDirectOutput  -\u003e getProfileForOutput\n* getOffloadSupport-\u003e getProfileForOutput\n* isDirectOutputSupported -\u003e getProfileForOutput\n* checkOutputForAllStrategies-\u003echeckOutputForAttributes -\u003e getProfileForOutput\n* handleNotificationRoutingForStream-\u003echeckOutputForAttributes -\u003e getProfileForOutput\n\nso, i think having flags \u003d\u003d DIRECT should be sufficient.\n\nLooking for your inputs.",
+      "parentUuid": "3f1aad4c_2456488d",
+      "range": {
+        "startLine": 1160,
+        "startChar": 0,
+        "endLine": 1160,
+        "endChar": 70
+      },
+      "revId": "7b1f54f5b6d43edca8311ad2428372a02893ddd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
