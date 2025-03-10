@@ -4765,6 +4765,78 @@ audio_offload_mode_t AudioPolicyManager::getOffloadSupport(const audio_offload_i
     return AUDIO_OFFLOAD_SUPPORTED;
 }
 
+bool AudioPolicyManager::isOffloadSupportedInternal(const audio_offload_info_t& offloadInfo)
+{
+    const bool audioExtensionFormatsEnabled =
+            property_get_bool("vendor.audio.extn.formats", true /* default_value */);
+    if (audioExtensionFormatsEnabled) {
+        const audio_format_t audioFormat = audio_get_main_format(offloadInfo.format);
+        if (property_get_bool("vendor.voice.dsd.playback.conc.disabled", true) &&
+            isInCall() && (audioFormat == AUDIO_FORMAT_DSD)) {
+            ALOGD("%s, Offload denied for DSD as in call", __func__);
+            return false;
+        }
+        int channelCount = popcount(offloadInfo.channel_mask);
+        if (channelCount > 2) {
+            if (audioFormat == AUDIO_FORMAT_FLAC || audioFormat == AUDIO_FORMAT_AAC_ADTS ||
+                audioFormat == AUDIO_FORMAT_AAC || audioFormat == AUDIO_FORMAT_VORBIS) {
+                ALOGD("%s, Offload denied for format %0x, channels %d",
+                        __func__, audioFormat, channelCount);
+                return false;
+            }
+            if (offloadInfo.sample_rate > 48000 &&
+                (audioFormat == AUDIO_FORMAT_ALAC || audioFormat == AUDIO_FORMAT_WMA ||
+                audioFormat == AUDIO_FORMAT_WMA_PRO)) {
+                ALOGD("%s, Offload denied for format %0x, channels %d, samplerate %d",
+                        __func__, audioFormat, channelCount, offloadInfo.sample_rate);
+                return false;
+            }
+        }
+        // check against wma std bit rate restriction
+        if (audioFormat == AUDIO_FORMAT_WMA) {
+            int32_t srIndex = -1;
+            for (int i = 0; i < kWmaStandardFrequencies; i++) {
+                if (offloadInfo.sample_rate == kWMASupportedSampleRates[i]) {
+                    srIndex = i;
+                    break;
+                }
+            }
+            if (srIndex < 0 || channelCount > 2 || channelCount <= 0) {
+                ALOGD("%s,Offload denied for WMA, invalid sampleRate/channelCount", __func__);
+                return false;
+            }
+
+            uint32_t minBitRate = kWMASupportedMinByteRates[srIndex][channelCount - 1];
+            uint32_t maxBitRate = kWMASupportedMaxByteRates[srIndex][channelCount - 1];
+            if ((offloadInfo.bit_rate > maxBitRate) || (offloadInfo.bit_rate < minBitRate)) {
+                ALOGD("%s Offload denied for WMA unsupported bitRate %d, maxBitRate %d,"
+                        "minBitRate%d", __func__, offloadInfo.bit_rate, maxBitRate, minBitRate);
+                return false;
+            }
+        }
+
+        // Safely choose the min bitrate as threshold and leave the restriction to NT decoder
+        // as we can't distinguish wma pro and wma lossless here.
+        if (audioFormat == AUDIO_FORMAT_WMA_PRO && (offloadInfo.bit_rate > kWmaProMaxBitrate ||
+                offloadInfo.bit_rate > kWmaLosslessMaxBitrate)) {
+            ALOGD("%s offload disabled for WMA_PRO/WMA_LOSSLESS bit rate exceeding", __func__);
+            return false;
+        }
+
+	if ((offloadInfo.format == AUDIO_FORMAT_MP3) ||
+	    ((offloadInfo.format & AUDIO_FORMAT_MAIN_MASK) == AUDIO_FORMAT_AAC) ||
+	    ((offloadInfo.format & AUDIO_FORMAT_MAIN_MASK) == AUDIO_FORMAT_FLAC) ||
+	    ((offloadInfo.format & AUDIO_FORMAT_MAIN_MASK) == AUDIO_FORMAT_VORBIS) ||
+	    ((offloadInfo.format & AUDIO_FORMAT_MAIN_MASK) == AUDIO_FORMAT_DSD) ||
+	    ((offloadInfo.format & AUDIO_FORMAT_MAIN_MASK) == AUDIO_FORMAT_AAC_ADTS)) {
+		ALOGD("Offload denied internal for MP3/AAC/VORBIS/FLAC format %0x",
+				offloadInfo.format & AUDIO_FORMAT_MAIN_MASK);
+		return false;
+	}
+    }
+    return true;
+}
+
 bool AudioPolicyManager::isDirectOutputSupported(const audio_config_base_t& config,
                                                  const audio_attributes_t& attributes) {
     audio_output_flags_t output_flags = AUDIO_OUTPUT_FLAG_NONE;
@@ -4826,20 +4898,24 @@ bool AudioPolicyManager::isOffloadPossible(const audio_offload_info_t &offloadIn
         return false;
     }
 
-    //If duration is less than minimum value defined in property, return false
-    const int min_duration_secs = property_get_int32(
-            "audio.offload.min.duration.secs", -1 /* default_value */);
-    if (!durationIgnored) {
-        if (min_duration_secs >= 0) {
-            if (offloadInfo.duration_us < min_duration_secs * 1000000LL) {
-                ALOGV("%s: Offload denied by duration < audio.offload.min.duration.secs(=%d)",
-                      __func__, min_duration_secs);
+    if (isOffloadSupportedInternal(offloadInfo)) {
+	    ALOGD("%s: offload is support internal, skip check duration", __func__);
+    } else {
+        //If duration is less than minimum value defined in property, return false
+        const int min_duration_secs = property_get_int32(
+                "audio.offload.min.duration.secs", -1 /* default_value */);
+        if (!durationIgnored) {
+            if (min_duration_secs >= 0) {
+                if (offloadInfo.duration_us < min_duration_secs * 1000000LL) {
+                    ALOGV("%s: Offload denied by duration < audio.offload.min.duration.secs(=%d)",
+                          __func__, min_duration_secs);
+                    return false;
+                }
+            } else if (offloadInfo.duration_us < OFFLOAD_DEFAULT_MIN_DURATION_SECS * 1000000) {
+                ALOGV("%s: Offload denied by duration < default min(=%u)",
+                      __func__, OFFLOAD_DEFAULT_MIN_DURATION_SECS);
                 return false;
             }
-        } else if (offloadInfo.duration_us < OFFLOAD_DEFAULT_MIN_DURATION_SECS * 1000000) {
-            ALOGV("%s: Offload denied by duration < default min(=%u)",
-                  __func__, OFFLOAD_DEFAULT_MIN_DURATION_SECS);
-            return false;
         }
     }
 
