@@ -4741,9 +4741,59 @@ audio_offload_mode_t AudioPolicyManager::getOffloadSupport(const audio_offload_i
      offloadInfo.stream_type, offloadInfo.bit_rate, offloadInfo.duration_us,
      offloadInfo.has_video);
 
-    if (!isOffloadPossible(offloadInfo)) {
-        return AUDIO_OFFLOAD_NOT_SUPPORTED;
-    }
+     if (mMasterMono) {
+         return AUDIO_OFFLOAD_NOT_SUPPORTED; // no offloading if mono is set.
+     }
+
+     // Check if offload has been disabled
+     if (property_get_bool("audio.offload.disable", false /* default_value */)) {
+         ALOGV("%s: offload disabled by audio.offload.disable", __func__);
+         return AUDIO_OFFLOAD_NOT_SUPPORTED;
+     }
+
+     // Check if stream type is music, then only allow offload as of now.
+     if (offloadInfo.stream_type != AUDIO_STREAM_MUSIC)
+     {
+         ALOGV("%s: stream_type != MUSIC, returning false", __func__);
+         return AUDIO_OFFLOAD_NOT_SUPPORTED;
+     }
+
+     //TODO: enable audio offloading with video when ready
+     const bool allowOffloadWithVideo =
+             property_get_bool("audio.offload.video", false /* default_value */);
+     if (offloadInfo.has_video && !allowOffloadWithVideo) {
+         ALOGV("%s: has_video == true, returning false", __func__);
+         return AUDIO_OFFLOAD_NOT_SUPPORTED;
+     }
+
+     if (isOffloadSupportedInternal(offloadInfo)) {
+         ALOGD("%s: offload is support internal, skip check duration", __func__);
+     } else {
+         //If duration is less than minimum value defined in property, return false
+         const int min_duration_secs = property_get_int32(
+             "audio.offload.min.duration.secs", -1 /* default_value */);
+         if (min_duration_secs >= 0) {
+             if (offloadInfo.duration_us < min_duration_secs * 1000000LL) {
+                 ALOGV("%s: Offload denied by duration < audio.offload.min.duration.secs(=%d)",
+                       __func__, min_duration_secs);
+                 return AUDIO_OFFLOAD_NOT_SUPPORTED;
+             }
+         } else if (offloadInfo.duration_us < OFFLOAD_DEFAULT_MIN_DURATION_SECS * 1000000) {
+             ALOGV("%s: Offload denied by duration < default min(=%u)",
+                   __func__, OFFLOAD_DEFAULT_MIN_DURATION_SECS);
+             return AUDIO_OFFLOAD_NOT_SUPPORTED;
+         }
+     }
+
+     // Do not allow offloading if one non offloadable effect is enabled. This prevents from
+     // creating an offloaded track and tearing it down immediately after start when audioflinger
+     // detects there is an active non offloadable effect.
+     // FIXME: We should check the audio session here but we do not have it in this context.
+     // This may prevent offloading in rare situations where effects are left active by apps
+     // in the background.
+     if (mEffects.isNonOffloadableEffectEnabled()) {
+         return AUDIO_OFFLOAD_NOT_SUPPORTED;
+     }
 
     // See if there is a profile to support this.
     // AUDIO_DEVICE_NONE
