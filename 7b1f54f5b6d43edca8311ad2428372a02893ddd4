@@ -144,6 +144,30 @@
       },
       "revId": "7b1f54f5b6d43edca8311ad2428372a02893ddd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d5fd9f_2f9f049d",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-10T13:29:13Z",
+      "side": 1,
+      "message": "The commit message states \"when client requests with\n\u0027AUDIO_OUTPUT_FLAG_DIRECT\u0027 APM logic gives priority to \u0027compress\noffload\u0027 profiles\".\nSo it implies that the fix should only ally to explicit Direct playback requests made by clients.\nIf it is not the case we should upadte the commit message.\n\nMy point is also that it is not abvious that the best thing to do is to always favor a direct PCM output over an offload output.\n\nThe addition of flags \u003d\u003d AUDIO_OUTPUT_FLAG_DIRECT helps and if you are OK with it I prefer to keep ti.",
+      "parentUuid": "29394c4b_0c6a9cb2",
+      "range": {
+        "startLine": 1160,
+        "startChar": 0,
+        "endLine": 1160,
+        "endChar": 70
+      },
+      "revId": "7b1f54f5b6d43edca8311ad2428372a02893ddd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
