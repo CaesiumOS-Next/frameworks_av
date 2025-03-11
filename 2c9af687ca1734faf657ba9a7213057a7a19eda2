@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e8afdf_d6d3dc02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2025-03-11T17:16:27Z",
+      "side": 1,
+      "message": "Global approval - safe change that\u0027s just adding missing headers.",
+      "revId": "2c9af687ca1734faf657ba9a7213057a7a19eda2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
