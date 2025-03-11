@@ -1995,7 +1995,6 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
                     return err;
                 }
                 *offset = data_offset;
-                CHECK_EQ(*offset, stop_offset);
             }
 
             if (chunk_type == FOURCC("fLaC")) {
