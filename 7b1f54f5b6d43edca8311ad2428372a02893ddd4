@@ -168,6 +168,30 @@
       },
       "revId": "7b1f54f5b6d43edca8311ad2428372a02893ddd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfa6986f_1d0f8c23",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2025-03-11T09:17:12Z",
+      "side": 1,
+      "message": "I wanted to highlight what the existing comment in APM mentions \n\n\"\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/managerdefault/AudioPolicyManager.cpp;l\u003d1164\n\n             // when searching for direct outputs, if several profiles are compatible, give priority\n             // to one with offload capability\n\n\"\n\nAnyway, I have updated the commit message to make it more clear.",
+      "parentUuid": "41d5fd9f_2f9f049d",
+      "range": {
+        "startLine": 1160,
+        "startChar": 0,
+        "endLine": 1160,
+        "endChar": 70
+      },
+      "revId": "7b1f54f5b6d43edca8311ad2428372a02893ddd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
