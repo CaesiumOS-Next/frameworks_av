@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bf87d2_f44da838",
+        "filename": "media/libstagefright/writer_fuzzers/WriterFuzzerBase.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-03-11T17:06:20Z",
+      "side": 1,
+      "message": "this doesn\u0027t look correct.\nWhy does size of csdBuffer have an issue in AMessage?\nCan you please check whether it is the size of the number of calls to setBuffer that is causing an issue?\nFor the case that causes the ABRT, can you please dump format before calling setBuffer and see how many entries are already present?",
+      "range": {
+        "startLine": 148,
+        "startChar": 16,
+        "endLine": 148,
+        "endChar": 59
+      },
+      "revId": "704e73dc7ed2e37dec23a48a9843f02161ba9b94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
