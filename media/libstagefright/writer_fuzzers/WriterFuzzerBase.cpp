@@ -144,7 +144,8 @@ void writeHeaderBuffers(vector<FrameData> &bufferInfo, sp<AMessage> &format, int
         if (flags == kCodecConfigFlag) {
             sp<ABuffer> csdBuffer =
                 ABuffer::CreateAsCopy((void *)bufferInfo[csdId].buf, bufferInfo[csdId].size);
-            if (csdBuffer.get() == nullptr || csdBuffer->base() == nullptr) {
+            if (csdBuffer.get() == nullptr || csdBuffer->base() == nullptr ||
+                csdBuffer->size() >= /* kMaxNumItems */ 256) {
                 return;
             }
             snprintf(csdName, sizeof(csdName), "csd-%d", csdId);
