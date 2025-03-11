@@ -69,6 +69,7 @@ std::optional<Range<int32_t>> VideoCapabilities::getSupportedWidthsFor(int32_t h
         ALOGE("unsupported height");
         return std::nullopt;
     }
+
     const int32_t heightInBlocks = divUp(height, mBlockHeight);
 
     // constrain by block count and by block aspect ratio
@@ -83,10 +84,16 @@ std::optional<Range<int32_t>> VideoCapabilities::getSupportedWidthsFor(int32_t h
     range = range.intersect(
             (minWidthInBlocks - 1) * mBlockWidth + mWidthAlignment,
             maxWidthInBlocks * mBlockWidth);
+    if (range.empty()) {
+        return std::nullopt;
+    }
 
     // constrain by smaller dimension limit
     if (height > mSmallerDimensionUpperLimit) {
         range = range.intersect(1, mSmallerDimensionUpperLimit);
+        if (range.empty()) {
+            return std::nullopt;
+        }
     }
 
     // constrain by aspect ratio
@@ -94,6 +101,10 @@ std::optional<Range<int32_t>> VideoCapabilities::getSupportedWidthsFor(int32_t h
             (int32_t)std::ceil(mAspectRatioRange.lower().asDouble()
                     * height),
             (int32_t)(mAspectRatioRange.upper().asDouble() * height));
+    if (range.empty()) {
+        return std::nullopt;
+    }
+
     return range;
 }
 
@@ -104,6 +115,7 @@ std::optional<Range<int32_t>> VideoCapabilities::getSupportedHeightsFor(int32_t 
         ALOGE("unsupported width");
         return std::nullopt;
     }
+
     const int32_t widthInBlocks = divUp(width, mBlockWidth);
 
     // constrain by block count and by block aspect ratio
@@ -118,10 +130,16 @@ std::optional<Range<int32_t>> VideoCapabilities::getSupportedHeightsFor(int32_t 
     range = range.intersect(
             (minHeightInBlocks - 1) * mBlockHeight + mHeightAlignment,
             maxHeightInBlocks * mBlockHeight);
+    if (range.empty()) {
+        return std::nullopt;
+    }
 
     // constrain by smaller dimension limit
     if (width > mSmallerDimensionUpperLimit) {
         range = range.intersect(1, mSmallerDimensionUpperLimit);
+        if (range.empty()) {
+            return std::nullopt;
+        }
     }
 
     // constrain by aspect ratio
@@ -129,6 +147,10 @@ std::optional<Range<int32_t>> VideoCapabilities::getSupportedHeightsFor(int32_t 
             (int32_t)std::ceil(width /
                     mAspectRatioRange.upper().asDouble()),
             (int32_t)(width / mAspectRatioRange.lower().asDouble()));
+    if (range.empty()) {
+        return std::nullopt;
+    }
+
     return range;
 }
 
