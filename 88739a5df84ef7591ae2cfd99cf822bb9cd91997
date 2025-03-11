@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7daa6184_475e7e12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-03-11T13:03:22Z",
+      "side": 1,
+      "message": "We are able to reproduce error ```CANNOT LINK EXECUTABLE \"/data/local/tmp/ExtractorUnitTest/arm64/ExtractorUnitTest\": cannot locate symbol \"_ZN7android24MEDIA_MIMETYPE_VIDEO_APVE\" referenced by \"/data/local/tmp/ExtractorUnitTest/arm64/ExtractorUnitTest``` on `AP3A.240614.004` (11973333)  shiba device(V). The unit test fails irrespective of this CL with or without apex update.",
+      "parentUuid": "9b7e6378_caa83fff",
+      "revId": "88739a5df84ef7591ae2cfd99cf822bb9cd91997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7aebd4e_265e4144",
         "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
         "patchSetId": 5
@@ -65,6 +83,30 @@
       "writtenOn": "2025-03-07T16:44:46Z",
       "side": 1,
       "message": "i expect this is what causes that ExtractorUnitTest failure\n\nthe __builtin_available() and how it works with symbol resolution is pretty\nlimited.  It only recognizes a a very stylized code structure:\n\n if (builtin_available()) { ...reference-to-the-symbol-were-protecting }\n \n so while semantically we know that we won\u0027t run the strcasecmp() on devices\n before B, the tools aren\u0027t up to calculate that.\n [the fact that the builtin_available() call is in a nested routine is also\n beyond its capabilities]\n \n you probably need to restructure this as:\n \n mIsAPV\u003dfalse;\n if (android_builtin(36)) { mIsApV \u003d flag() \u0026\u0026 strcasecmp() }\n \nif you want to keep all the android_builtin calls together, you could do that\nconstruct in a new static routine next to the isAtLeastBaklava() routine and\nthen do \"mIsApv \u003d thatNewRoutine()\" here.",
+      "range": {
+        "startLine": 5255,
+        "startChar": 13,
+        "endLine": 5255,
+        "endChar": 79
+      },
+      "revId": "88739a5df84ef7591ae2cfd99cf822bb9cd91997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b9c523_4df11850",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 5255,
+      "author": {
+        "id": 3226358
+      },
+      "writtenOn": "2025-03-11T13:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7aebd4e_265e4144",
       "range": {
         "startLine": 5255,
         "startChar": 13,
