@@ -1342,7 +1342,7 @@ void CCodec::configure(const sp<AMessage> &msg) {
             // Query vendor format for Flexible YUV
             std::vector<std::unique_ptr<C2Param>> heapParams;
             C2StoreFlexiblePixelFormatDescriptorsInfo *pixelFormatInfo = nullptr;
-            int vendorSdkVersion = base::GetIntProperty(
+            static const int kVendorSdkVersion = base::GetIntProperty(
                     "ro.vendor.build.version.sdk", android_get_device_api_level());
             if (mClient->query(
                         {},
@@ -1404,7 +1404,7 @@ void CCodec::configure(const sp<AMessage> &msg) {
                 }
             } else {
                 if ((config->mDomain & Config::IS_ENCODER) || !surface) {
-                    if (vendorSdkVersion < __ANDROID_API_S__ &&
+                    if (kVendorSdkVersion < __ANDROID_API_S__ &&
                             (format == COLOR_FormatYUV420Planar ||
                              format == COLOR_FormatYUV420PackedPlanar ||
                              format == COLOR_FormatYUV420SemiPlanar ||
