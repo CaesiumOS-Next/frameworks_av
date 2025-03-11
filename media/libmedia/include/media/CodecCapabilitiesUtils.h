@@ -124,12 +124,10 @@ struct Range {
      * @param lower a non-{@code null} {@code T} reference
      * @param upper a non-{@code null} {@code T} reference
      * @return the intersection of this range and the other range
-     *
-     * @throws NullPointerException if {@code lower} or {@code upper} was {@code null}
-     * @throws IllegalArgumentException if the ranges are disjoint.
      */
     Range<T> intersect(T lower, T upper) {
-        return Range(std::max(lower_, lower), std::min(upper_, upper));
+        Range<T> range = Range<T>(lower, upper);
+        return this->intersect(range);
     }
 
     /**
