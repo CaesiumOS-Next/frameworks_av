@@ -139,6 +139,8 @@ bool WriterFuzzerBase::BufferSource::getTrackInfo(int32_t trackIndex) {
 
 void writeHeaderBuffers(vector<FrameData> &bufferInfo, sp<AMessage> &format, int32_t numCsds) {
     char csdName[kMaxCSDStrlen];
+    // Limit the numcsds to Amessage kMaxNumItems.
+    numCsds = std::min(/* kMaxNumItems */ 256, numCsds);
     for (int csdId = 0; csdId < numCsds; ++csdId) {
         int32_t flags = bufferInfo[csdId].flags;
         if (flags == kCodecConfigFlag) {
