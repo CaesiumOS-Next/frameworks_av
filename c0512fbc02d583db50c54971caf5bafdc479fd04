@@ -1,0 +1,166 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af8d735_7717ca7d",
+        "filename": "media/libmedia/VideoCapabilities.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-03-12T05:03:36Z",
+      "side": 1,
+      "message": "you can actually just check in the end as an empty range will stay empty on intersection, so no need to bail early.",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab2e9fc0_0ccd4084",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 107,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": "    return range.empty() ? std::nullopt : std::make_optional(range);\n"
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 134,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 138,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 152,
+                "startChar": 0,
+                "endLine": 153,
+                "endChar": 0
+              },
+              "replacement": "    return range.empty() ? std::nullopt : std::make_optional(range);\n"
+            },
+            {
+              "path": "media/libmedia/VideoCapabilities.cpp",
+              "range": {
+                "startLine": 170,
+                "startChar": 0,
+                "endLine": 174,
+                "endChar": 0
+              },
+              "replacement": "\n    return result.empty() ? std::nullopt : std::make_optional(result);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c0512fbc02d583db50c54971caf5bafdc479fd04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7486598b_20af7081",
+        "filename": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-03-12T05:03:36Z",
+      "side": 1,
+      "message": "nit: this seems to be too strong as this is normal behavior. ALOGV?",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "23b3e94a_01cb141b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libmedia/include/media/CodecCapabilitiesUtils.h",
+              "range": {
+                "startLine": 112,
+                "startChar": 0,
+                "endLine": 113,
+                "endChar": 0
+              },
+              "replacement": "                ALOGV(\"Failed to intersect 2 ranges as they are disjoint\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c0512fbc02d583db50c54971caf5bafdc479fd04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
