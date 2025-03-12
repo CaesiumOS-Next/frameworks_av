@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76aa3130_1e52f41c",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-12T21:27:00Z",
+      "side": 1,
+      "message": "perhaps we could define `InputSurface::updateConfig(imageConfig, streamConfig, workStatusConfig, \u0026inputDelayUs);` and do something like:\n\n```suggestion\n        c2_status_t err;\n        {\n            std::lock_guard\u003cstd::mutex\u003e l(mConfigLock);\n            err \u003d mIntf-\u003econfig(params, mayBlock, failures);\n\n            mIntf-\u003egetImageConfig(\u0026imageConfig);\n            mIntf-\u003egetStreamConfig(\u0026streamConfig);\n            mIntf-\u003egetWorkStatusConfig(\u0026workStatusConfig);\n        }\n        if (surface-\u003eupdateConfig(imageConfig, streamConfig, workStatusConfig, \u0026inputDelayUs)) {\n            std::lock_guard\u003cstd::mutex\u003e l(mConfigLock);\n            C2PortStopTimeOffset::output offsetConfig(inputDelayUs);\n            std::vector\u003cstd::unique_ptr\u003cC2SettingResult\u003e\u003e fail;\n            c2_status_t updateErr \u003d mIntf-\u003econfig({\u0026offsetConfig}, mayBlock, \u0026fail);\n        }\n```\n\nWith this we could eliminate InputSurface::getLock().",
+      "range": {
+        "startLine": 322,
+        "startChar": 8,
+        "endLine": 340,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b2c8718d_b6121a64",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+              "range": {
+                "startLine": 322,
+                "startChar": 0,
+                "endLine": 333,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+              "range": {
+                "startLine": 334,
+                "startChar": 0,
+                "endLine": 342,
+                "endChar": 0
+              },
+              "replacement": "        return surface-\u003eupdateConfig(params, mayBlock, failures,\n                                     imageConfig, streamConfig, workStatusConfig,\n                                     inputDelayUs);\n"
+            },
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+              "range": {
+                "startLine": 410,
+                "startChar": 0,
+                "endLine": 411,
+                "endChar": 0
+              },
+              "replacement": "c2_status_t InputSurface::updateConfig(\n        const std::vector\u003cC2Param*\u003e \u0026params,\n        c2_blocking_t mayBlock,\n        std::vector\u003cstd::unique_ptr\u003cC2SettingResult\u003e\u003e* const failures,\n        ImageConfig \u0026imageConfig,\n        StreamConfig \u0026streamConfig,\n        WorkStatusConfig \u0026workStatusConfig,\n        int64_t \u0026inputDelayUs) {\n    std::lock_guard\u003cstd::mutex\u003e l(mLock);\n    c2_status_t err \u003d mIntf-\u003econfig(params, mayBlock, failures);\n\n    mIntf-\u003egetImageConfig(\u0026imageConfig);\n    mIntf-\u003egetStreamConfig(\u0026streamConfig);\n    mIntf-\u003egetWorkStatusConfig(\u0026workStatusConfig);\n\n    if (updateImageConfig(imageConfig)) {\n        if (updateStreamConfig(streamConfig, \u0026inputDelayUs)) {\n            C2PortStopTimeOffset::output offsetConfig(inputDelayUs);\n            std::vector\u003cstd::unique_ptr\u003cC2SettingResult\u003e\u003e fail;\n            c2_status_t updateErr \u003d mIntf-\u003econfig({\u0026offsetConfig}, mayBlock, \u0026fail);\n        }\n    }\n    updateWorkStatusConfig(workStatusConfig);\n    return err;\n}\n\nbool InputSurface::updateImageConfig(ImageConfig \u0026config) {\n"
+            },
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+              "range": {
+                "startLine": 433,
+                "startChar": 0,
+                "endLine": 433,
+                "endChar": 0
+              },
+              "replacement": "    return configChanged;\n"
+            },
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+              "range": {
+                "startLine": 435,
+                "startChar": 0,
+                "endLine": 436,
+                "endChar": 0
+              },
+              "replacement": "bool InputSurface::updateStreamConfig(\n"
+            },
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurface.cpp",
+              "range": {
+                "startLine": 546,
+                "startChar": 0,
+                "endLine": 547,
+                "endChar": 0
+              },
+              "replacement": "void InputSurface::updateWorkStatusConfig(WorkStatusConfig \u0026config) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "58c09df816aef8edcaf1ffb4829e07d4ace982f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
