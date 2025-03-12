@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8ed921_98c9dc1e",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-03-12T03:24:55Z",
+      "side": 1,
+      "message": "use android_get_device_api_level() instead:\n   return android_get_device_api_level() \u003e\u003d 36;\n\nthe __builtin_available() construct is primarily for helping decide\nwhether a particular symbol or function is available.",
+      "range": {
+        "startLine": 89,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 17
+      },
+      "revId": "1ba621c23a78b726779da294ea4e6e4c5e324c0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
