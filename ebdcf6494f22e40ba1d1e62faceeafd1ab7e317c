@@ -55,6 +55,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68b0a45d_d4aac708",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-03-13T23:54:36Z",
+      "side": 1,
+      "message": "How do we handle the case of older WebRTC client and system partition + new vendor HAL combination?",
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f649e8d1_3621c765",
         "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
         "patchSetId": 1
