@@ -1,0 +1,100 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c9f9bd_21f06da7",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-03-13T15:16:37Z",
+      "side": 1,
+      "message": "#ifdef __ANDROID__\n#include \u003candroid/api-level.h\u003e\n#endif",
+      "fixSuggestions": [
+        {
+          "fixId": "693779ae_d68c6d3f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "#ifdef __ANDROID__\n"
+            },
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e3ddf598d4ecb2673d4d582d69aba1cb207e8d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01dd53c1_f0272c52",
+        "filename": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-03-13T15:16:37Z",
+      "side": 1,
+      "message": "add this entire block in #ifdef __ANDROID__ \nand return true in the #else block",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 69
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b7fafbb0_4fe11c73",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "#ifdef __ANDROID__\n"
+            },
+            {
+              "path": "media/module/extractors/mp4/MPEG4Extractor.cpp",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "#else\n    return true;\n#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e3ddf598d4ecb2673d4d582d69aba1cb207e8d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
