@@ -1139,6 +1139,7 @@ void CCodec::configure(const sp<AMessage> &msg) {
     auto doConfig = [msg, comp, this]() -> status_t {
         AString mime;
         if (!msg->findString("mime", &mime)) {
+            ALOGD("mime is missing, which is required for configuration.");
             return BAD_VALUE;
         }
 
@@ -1149,6 +1150,7 @@ void CCodec::configure(const sp<AMessage> &msg) {
 
         int32_t flags;
         if (!msg->findInt32("flags", &flags)) {
+            ALOGD("flags are missing, which is required for configuration.");
             return BAD_VALUE;
         }
 
