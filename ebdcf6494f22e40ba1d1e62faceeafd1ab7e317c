@@ -102,6 +102,30 @@
       ],
       "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1b09f4_fd95d801",
+        "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-13T23:21:38Z",
+      "side": 1,
+      "message": "Oops, this isn\u0027t a fall through, I looked at it too quickly.  Just log a message here and ignore.\n\n\n    case AEC_PARAM_MOBILE_MODE:\n        ALOGI(\"%s: AEC_PARAM_MOBILE_MODE ignored\", __func__);\n        break;",
+      "parentUuid": "f649e8d1_3621c765",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 564,
+        "endChar": 34
+      },
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
