@@ -126,6 +126,30 @@
       },
       "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c78e94_ab238d15",
+        "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-13T23:23:44Z",
+      "side": 1,
+      "message": "Oops, responded quickly again, this is the getter, you need to save and retrieve the mobile mode locally, and ignore it.",
+      "parentUuid": "7f1b09f4_fd95d801",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 564,
+        "endChar": 34
+      },
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
