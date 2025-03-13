@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "931f1f06_5f7026d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-13T23:15:32Z",
+      "side": 1,
+      "message": "Add:\n\nTest: ./build_and_run_all_unit_tests.sh\nTest: atest preprocessing_benchmark",
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f73b973_d9dd4ee2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-13T23:15:32Z",
+      "side": 1,
+      "message": "Looks fine to me, with a minor change.",
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f649e8d1_3621c765",
+        "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-13T23:15:32Z",
+      "side": 1,
+      "message": "Perhaps we should fall through on moble mode here and on line 586 (instead of removing it).\n \n    case AEC_PARAM_MOBILE_MODE:",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 564,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "36022fa7_250419b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/preprocessing/PreProcessing.cpp",
+              "range": {
+                "startLine": 564,
+                "startChar": 0,
+                "endLine": 564,
+                "endChar": 0
+              },
+              "replacement": "        case AEC_PARAM_MOBILE_MODE:\n"
+            },
+            {
+              "path": "media/libeffects/preprocessing/PreProcessing.cpp",
+              "range": {
+                "startLine": 583,
+                "startChar": 0,
+                "endLine": 583,
+                "endChar": 0
+              },
+              "replacement": "        case AEC_PARAM_MOBILE_MODE:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
