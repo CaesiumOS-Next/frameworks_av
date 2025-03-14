@@ -920,12 +920,13 @@ static status_t recordScreen(const char* fileName) {
         gVideoHeight = floorToEven(layerStackSpaceRect.getHeight());
     }
 
-    RecordingData recordingData = RecordingData();
+    // use unique_ptr control recordingData, make it can be released before func exit
+    std::unique_ptr<RecordingData> recordingData = std::make_unique<RecordingData>();
     // Configure and start the encoder.
     sp<FrameOutput> frameOutput;
     sp<IGraphicBufferProducer> encoderInputSurface;
     if (gOutputFormat != FORMAT_FRAMES && gOutputFormat != FORMAT_RAW_FRAMES) {
-        err = prepareEncoder(displayMode.peakRefreshRate, &recordingData.encoder,
+        err = prepareEncoder(displayMode.peakRefreshRate, &recordingData->encoder,
                              &encoderInputSurface);
 
         if (err != NO_ERROR && !gSizeSpecified) {
@@ -939,7 +940,7 @@ static status_t recordScreen(const char* fileName) {
                         gVideoWidth, gVideoHeight, newWidth, newHeight);
                 gVideoWidth = newWidth;
                 gVideoHeight = newHeight;
-                err = prepareEncoder(displayMode.peakRefreshRate, &recordingData.encoder,
+                err = prepareEncoder(displayMode.peakRefreshRate, &recordingData->encoder,
                                      &encoderInputSurface);
             }
         }
@@ -969,8 +970,8 @@ static status_t recordScreen(const char* fileName) {
     sp<IGraphicBufferProducer> bufferProducer;
     if (gWantFrameTime) {
         // Send virtual display frames to an external texture.
-        recordingData.overlay = new Overlay(gMonotonicTime);
-        err = recordingData.overlay->start(encoderInputSurface, &bufferProducer);
+        recordingData->overlay = new Overlay(gMonotonicTime);
+        err = recordingData->overlay->start(encoderInputSurface, &bufferProducer);
         if (err != NO_ERROR) {
             return err;
         }
@@ -988,7 +989,7 @@ static status_t recordScreen(const char* fileName) {
     // the resource.
     sp<SurfaceControl> mirrorRoot;
     // Configure virtual display.
-    err = prepareVirtualDisplay(displayState, bufferProducer, &recordingData.dpy, &mirrorRoot);
+    err = prepareVirtualDisplay(displayState, bufferProducer, &recordingData->dpy, &mirrorRoot);
     if (err != NO_ERROR) {
         return err;
     }
@@ -1069,7 +1070,7 @@ static status_t recordScreen(const char* fileName) {
         }
     } else {
         // Main encoder loop.
-        err = runEncoder(recordingData.encoder, muxer, rawFp, recordingData.dpy, displayState);
+        err = runEncoder(recordingData->encoder, muxer, rawFp, recordingData->dpy, displayState);
         if (err != NO_ERROR) {
             fprintf(stderr, "Encoder failed (err=%d)\n", err);
             // fall through to cleanup
@@ -1083,6 +1084,9 @@ static status_t recordScreen(const char* fileName) {
 
     // Shut everything down, starting with the producer side.
     encoderInputSurface = NULL;
+    // destory virtual display and release encoder
+    recordingData.reset();
+
     if (muxer != NULL) {
         // If we don't stop muxer explicitly, i.e. let the destructor run,
         // it may hang (b/11050628).
