@@ -167,6 +167,30 @@
       },
       "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7231b081_e29a2995",
+        "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1940295
+      },
+      "writtenOn": "2025-03-14T12:15:35Z",
+      "side": 1,
+      "message": "Should be good enough to always return false here. What do you think ?",
+      "parentUuid": "f4c78e94_ab238d15",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 564,
+        "endChar": 34
+      },
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
