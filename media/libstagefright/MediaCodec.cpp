@@ -3782,6 +3782,7 @@ status_t MediaCodec::queueEncryptedBuffer(
 }
 
 status_t MediaCodec::dequeueInputBuffer(size_t *index, int64_t timeoutUs) {
+    ScopedTrace trace(ATRACE_TAG, "MediaCodec::dequeueInputBuffer#native");
     sp<AMessage> msg = new AMessage(kWhatDequeueInputBuffer, this);
     msg->setInt64("timeoutUs", timeoutUs);
 
@@ -7346,6 +7347,7 @@ status_t MediaCodec::handleSetSurface(const sp<Surface> &surface) {
 }
 
 void MediaCodec::onInputBufferAvailable() {
+    ScopedTrace trace(ATRACE_TAG, "MediaCodec::onInputBufferAvailable#native");
     int32_t index;
     while ((index = dequeuePortBuffer(kPortIndexInput)) >= 0) {
         sp<AMessage> msg = mCallback->dup();
