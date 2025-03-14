@@ -9198,7 +9198,12 @@ sp<SwAudioOutputDescriptor> AudioPolicyManager::openOutputWithProfileAndDevice(
     // The version check is essentially to avoid making this call in the case of the HIDL HAL.
     if (auto hwModule = mHwModules.getModuleFromHandle(mPrimaryModuleHandle); hwModule &&
             hwModule->getHalVersionMajor() >= 3) {
-        setOutputDevices(__func__, desc, devices, true, 0, NULL);
+        if (devices.size() ==1 && audio_is_bluetooth_out_sco_device(deviceType)
+                && !isScoRequestedForComm()) {
+            ALOGV("%s skip setOutputDevices when devices only sco and sco is not audio on", __func__);
+        } else {
+            setOutputDevices(__func__, desc, devices, true, 0, NULL);
+        }
     }
     sp<DeviceDescriptor> speaker = mAvailableOutputDevices.getDevice(
             AUDIO_DEVICE_OUT_SPEAKER, String8(""), AUDIO_FORMAT_DEFAULT);
