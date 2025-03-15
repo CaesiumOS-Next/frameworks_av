@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ef11432_0b15e527",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-03-15T00:07:54Z",
+      "side": 1,
+      "message": "Marking this as resolved as the behavior is same without this CL and the CL has Code-Review +2.",
+      "parentUuid": "7daa6184_475e7e12",
+      "revId": "88739a5df84ef7591ae2cfd99cf822bb9cd91997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7aebd4e_265e4144",
