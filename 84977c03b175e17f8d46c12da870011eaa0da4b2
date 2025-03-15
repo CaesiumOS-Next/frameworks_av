@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134d8eb4_9fb103f8",
+        "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-15T01:35:43Z",
+      "side": 1,
+      "message": "false \u003d\u003d OK, so you can simply break.  For consistency, I would prefer we save the mobile mode in a bool effect-\u003esession-\u003emobileMode \u003d value in this session, so you can return it on line 569 for consistency.  Maybe also log the \"value\" on line 592.\n\nWill need to initialize in Session_CreateEffect().",
+      "range": {
+        "startLine": 593,
+        "startChar": 1,
+        "endLine": 593,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1b85484f_ab1d1f33",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/preprocessing/PreProcessing.cpp",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": "    bool mobileMode;             // mobile mode\n"
+            },
+            {
+              "path": "media/libeffects/preprocessing/PreProcessing.cpp",
+              "range": {
+                "startLine": 569,
+                "startChar": 0,
+                "endLine": 571,
+                "endChar": 0
+              },
+              "replacement": "            *(uint32_t*)pValue \u003d effect-\u003emobileMode;\n            ALOGV(\"AecGetParameter() mobile mode %s\",\n                  effect-\u003emobileMode ? \"true\" : \"false\");\n"
+            },
+            {
+              "path": "media/libeffects/preprocessing/PreProcessing.cpp",
+              "range": {
+                "startLine": 592,
+                "startChar": 0,
+                "endLine": 594,
+                "endChar": 0
+              },
+              "replacement": "            effect-\u003emobileMode \u003d value;\n            ALOGV(\"AecSetParameter() mobile mode %s\",\n                  effect-\u003emobileMode ? \"true\" : \"false\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84977c03b175e17f8d46c12da870011eaa0da4b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
