@@ -155,6 +155,9 @@ C2SoftAacEnc::C2SoftAacEnc(
       mNumBytesPerInputFrame(0u),
       mOutBufferSize(0u),
       mSentCodecSpecificData(false),
+      mIsFirstFrame(true),
+      mAnchorTimeStamp(0),
+      mProcessedSamples(0u),
       mSignalledError(false),
       mOutIndex(0u),
       mRemainderLen(0u) {
@@ -179,7 +182,9 @@ status_t C2SoftAacEnc::initEncoder() {
 
 c2_status_t C2SoftAacEnc::onStop() {
     mSentCodecSpecificData = false;
-    mNextFrameTimestampUs.reset();
+    mIsFirstFrame = true;
+    mAnchorTimeStamp = 0;
+    mProcessedSamples = 0u;
     mLastFrameEndTimestampUs.reset();
     mSignalledError = false;
     mRemainderLen = 0;
@@ -203,7 +208,9 @@ c2_status_t C2SoftAacEnc::onFlush_sm() {
         }
     }
     mSentCodecSpecificData = false;
-    mNextFrameTimestampUs.reset();
+    mIsFirstFrame = true;
+    mAnchorTimeStamp = 0;
+    mProcessedSamples = 0u;
     mLastFrameEndTimestampUs.reset();
     mRemainderLen = 0;
     return C2_OK;
@@ -398,9 +405,12 @@ void C2SoftAacEnc::process(
         MaybeLogTimestampWarning(mLastFrameEndTimestampUs->peekll(), inputTimestampUs.peekll());
         inputTimestampUs = *mLastFrameEndTimestampUs;
     }
-    if (capacity > 0 || eos) {
-        if (!mNextFrameTimestampUs) {
-            mNextFrameTimestampUs = work->input.ordinal.timestamp;
+    if (capacity > 0) {
+        if (mIsFirstFrame ||
+            (mLastFrameEndTimestampUs.value_or(inputTimestampUs) - inputTimestampUs) > 2) {
+            mProcessedSamples = 0;
+            mAnchorTimeStamp = inputTimestampUs.peekll();
+            mIsFirstFrame = false;
         }
         mLastFrameEndTimestampUs = inputTimestampUs
                 + (capacity / sizeof(int16_t) * 1000000ll / channelCount / sampleRate);
@@ -498,7 +508,7 @@ void C2SoftAacEnc::process(
             inargs.numInSamples = 0;
         }
     }
-    int processedSampleCntInCurrBatch = 0;
+    int samplesPerFrame = mNumBytesPerInputFrame / (channelCount * sizeof(int16_t));
     while (encoderErr == AACENC_OK && (inargs.numInSamples >= channelCount || eos)) {
         if (!block) {
             C2MemoryUsage usage = { C2MemoryUsage::CPU_READ, C2MemoryUsage::CPU_WRITE };
@@ -532,14 +542,8 @@ void C2SoftAacEnc::process(
 
         if (encoderErr == AACENC_OK) {
             if (outargs.numOutBytes > 0) {
-                processedSampleCntInCurrBatch += mNumBytesPerInputFrame / sizeof(int16_t);
-                ALOGV("processedSampleCntInCurrBatch = %d, capacity = %zu, inSamples = %d, "
-                      "outSamples = %d",
-                      processedSampleCntInCurrBatch, capacity, inargs.numInSamples,
-                      outargs.numInSamples);
-                c2_cntr64_t currentFrameTimestampUs = *mNextFrameTimestampUs;
-                mNextFrameTimestampUs = inputTimestampUs + (processedSampleCntInCurrBatch *
-                                                            1000000ll / channelCount / sampleRate);
+                const int64_t outTimeStamp = mProcessedSamples * 1000000ll / sampleRate;
+                mProcessedSamples += samplesPerFrame;
                 std::shared_ptr<C2Buffer> buffer =
                         createLinearBuffer(block, 0, outargs.numOutBytes);
 #if 0
@@ -549,7 +553,7 @@ void C2SoftAacEnc::process(
                 outAvailable = 0;
                 block.reset();
 
-                outputBuffers.push_back({buffer, currentFrameTimestampUs});
+                outputBuffers.push_back({buffer, mAnchorTimeStamp + outTimeStamp});
             }
 
             if (inBuffer[0] == mRemainder) {
@@ -567,8 +571,6 @@ void C2SoftAacEnc::process(
             inBufferSize[0] = 0;
             inargs.numInSamples = 0;
         }
-        ALOGV("encoderErr = %d, inargs.numInSamples = %d, mNextFrameTimestampUs = %lld", encoderErr,
-              inargs.numInSamples, mNextFrameTimestampUs->peekll());
     }
 
     if (inBufferSize[0] > 0) {
@@ -626,7 +628,9 @@ c2_status_t C2SoftAacEnc::drain(
 
     (void)pool;
     mSentCodecSpecificData = false;
-    mNextFrameTimestampUs.reset();
+    mIsFirstFrame = true;
+    mAnchorTimeStamp = 0;
+    mProcessedSamples = 0u;
     mLastFrameEndTimestampUs.reset();
 
     // TODO: we don't have any pending work at this time to drain.
