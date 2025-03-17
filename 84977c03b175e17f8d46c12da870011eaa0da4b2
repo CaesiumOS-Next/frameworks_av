@@ -60,6 +60,30 @@
       ],
       "revId": "84977c03b175e17f8d46c12da870011eaa0da4b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c283cc12_21dcfdd5",
+        "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1940295
+      },
+      "writtenOn": "2025-03-17T13:45:53Z",
+      "side": 1,
+      "message": "I would rather not leave the impression this parameter is still in used saving the value. I would ideally make sure no call with AEC_PARAM_MOBILE_MODE can be made.\nThis is the reason I purely and simply log: \"AEC_PARAM_MOBILE_MODE ignored\" and disregard any value.",
+      "parentUuid": "134d8eb4_9fb103f8",
+      "range": {
+        "startLine": 593,
+        "startChar": 1,
+        "endLine": 593,
+        "endChar": 27
+      },
+      "revId": "84977c03b175e17f8d46c12da870011eaa0da4b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
