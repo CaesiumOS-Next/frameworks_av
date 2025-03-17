@@ -16,6 +16,64 @@
       "message": "Is there anything more we can do?",
       "revId": "a36d9dda08ac2d2a4bb4c721f93691fff618a4a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c976684c_79a5643f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-17T22:17:26Z",
+      "side": 1,
+      "message": "changes to the AAudio.h API require an update to\n\nmedia/libaaudio/src/libaaudio.map.txt\n\nthis may need to wait a few weeks.",
+      "revId": "a36d9dda08ac2d2a4bb4c721f93691fff618a4a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcbf597b_5e2544e2",
+        "filename": "media/libaaudio/include/aaudio/AAudio.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-17T22:17:26Z",
+      "side": 1,
+      "message": "Need to specify API level here, which would be 37.",
+      "range": {
+        "startLine": 880,
+        "startChar": 0,
+        "endLine": 880,
+        "endChar": 7
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a814bdaa_9e88fa62",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaaudio/include/aaudio/AAudio.h",
+              "range": {
+                "startLine": 880,
+                "startChar": 0,
+                "endLine": 880,
+                "endChar": 0
+              },
+              "replacement": "     *\n     * Available since API level 37.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a36d9dda08ac2d2a4bb4c721f93691fff618a4a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
