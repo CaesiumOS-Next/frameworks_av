@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f6aded_35ea7e2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2025-03-18T09:58:02Z",
+      "side": 1,
+      "message": "Mikhail, Eric, \ncould you please help to check why it is not merged yet?",
+      "revId": "11c148354cd123256a7a5129252d090ed6358124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
