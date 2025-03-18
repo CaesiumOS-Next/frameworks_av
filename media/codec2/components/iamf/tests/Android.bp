@@ -1,0 +1,22 @@
+package {
+    default_applicable_licenses: ["frameworks_av_license"],
+}
+
+
+cc_test {
+    name: "C2SoftIamfDec_LayoutTranslationTest",
+    gtest: true,
+    host_supported: false,
+    srcs: [
+        "LayoutTranslationTest.cpp",
+    ],
+
+  shared_libs: [
+    "libcodec2_soft_iamfdec"
+  ],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}

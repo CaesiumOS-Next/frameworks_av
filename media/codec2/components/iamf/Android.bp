@@ -10,9 +10,32 @@ cc_library {
     ],
     srcs: [
         "C2SoftIamfDec.cpp",
+        "LayoutTranslation.cpp"
+    ],
+    shared_libs: [
+        "iamf_tools",
+    ],
+    include_dirs: [
+        "external/iamf_tools",
+        "external/abseil-cpp"
+    ]
+}
+
+
+cc_library {
+    name: "libcodec2_soft_iamfdec_layout_translation",
+    // defaults: [
+    //     "libcodec2_soft-defaults",
+    //     "libcodec2_soft_sanitize_all-defaults",
+    // ],
+    srcs: [
+        "LayoutTranslation.cpp"
     ],
 
     shared_libs: [
         "iamf_tools",
     ],
+    include_dirs: [
+        "external/iamf_tools",
+    ]
 }
