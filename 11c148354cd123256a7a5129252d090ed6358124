@@ -16,6 +16,23 @@
       "message": "Mikhail, Eric, \ncould you please help to check why it is not merged yet?",
       "revId": "11c148354cd123256a7a5129252d090ed6358124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdff2719_c7191d92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-18T17:08:29Z",
+      "side": 1,
+      "message": "Sorry, I forgot to approve it. Merged now.",
+      "revId": "11c148354cd123256a7a5129252d090ed6358124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
