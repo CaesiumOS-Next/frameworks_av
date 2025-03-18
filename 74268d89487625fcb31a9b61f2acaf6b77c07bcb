@@ -16,6 +16,24 @@
       "message": "+ camera framework team. Just checking - Is this bug attributed correct ? It seems like its been closed already.",
       "revId": "74268d89487625fcb31a9b61f2acaf6b77c07bcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a377376_ee7f6ee8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2025-03-18T23:23:17Z",
+      "side": 1,
+      "message": "Bug link updated.",
+      "parentUuid": "bd17f733_eeeeed2f",
+      "revId": "74268d89487625fcb31a9b61f2acaf6b77c07bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
