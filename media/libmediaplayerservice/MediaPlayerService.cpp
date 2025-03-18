@@ -30,6 +30,12 @@
 
 #include <string.h>
 
+#include <condition_variable>
+#include <list>
+#include <mutex>
+#include <thread>
+#include <pthread.h>
+
 #include <cutils/atomic.h>
 #include <cutils/properties.h> // for property_get
 
@@ -800,6 +806,50 @@ MediaPlayerService::Client::~Client()
     mAudioDeviceUpdatedListener.clear();
 }
 
+static std::thread defer_thread;
+static std::list<sp<MediaPlayerBase>> pending;
+static std::mutex pending_mutex;
+static std::condition_variable pending_added;
+
+static void deferResetPlayerThread() {
+    if (pthread_setname_np(pthread_self(), "resetPlayer")) {
+        ALOGW("Failed to set thread name on thread for reset player");
+    }
+
+    while (true) {
+        sp<MediaPlayerBase> player = nullptr;
+        std::unique_lock _lk(pending_mutex);
+        pending_added.wait(_lk, [] { return !pending.empty(); });
+        ALOGV("Defer reset player thread wake up with %zu entries", pending.size());
+        if (!pending.empty()) {
+            player = pending.front();
+            pending.pop_front();
+        }
+        _lk.unlock();
+
+        if (player != nullptr) {
+            player->setNotifyCallback(0);
+            player->reset();
+        }
+    }
+
+    ALOGE("[unexpected] defer reset player thread exited");
+}
+
+static void asyncDeferResetPlayer(sp<MediaPlayerBase> &player) {
+    static std::once_flag sCheckOnce;
+    std::call_once(sCheckOnce, [&]() {
+        defer_thread = std::thread(deferResetPlayerThread);
+    });
+
+    {
+        std::unique_lock _lk(pending_mutex);
+        pending.push_back(player);
+    }
+
+    pending_added.notify_one();
+}
+
 void MediaPlayerService::Client::disconnect()
 {
     ALOGV("disconnect(%d) from AttributionSource %s", mConnId,
@@ -818,12 +868,12 @@ void MediaPlayerService::Client::disconnect()
     // and reset the player. We assume the player will serialize
     // access to itself if necessary.
     if (p != 0) {
-        p->setNotifyCallback(0);
 #if CALLBACK_ANTAGONIZER
         ALOGD("kill Antagonizer");
         mAntagonizer->kill();
 #endif
-        p->reset();
+        // defer reset player in a separate thread
+        asyncDeferResetPlayer(p);
     }
 
     {
