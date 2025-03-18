@@ -607,7 +607,8 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
             int gainMinValueInMb = gains[0]->getMinValueInMb();
             int gainMaxValueInMb = gains[0]->getMaxValueInMb();
             int gainStepValueInMb = gains[0]->getStepValueInMb();
-            int gainValueMb = ((volumeDb * 100)/ gainStepValueInMb) * gainStepValueInMb;
+            int gainValueMb = mutedByGroup ?
+                    gainMinValueInMb : ((volumeDb * 100)/ gainStepValueInMb) * gainStepValueInMb;
             gainValueMb = std::max(gainMinValueInMb, std::min(gainValueMb, gainMaxValueInMb));
 
             audio_port_config config = {};
