@@ -22,6 +22,75 @@
       },
       "revId": "9d271e67751b636eab7bd01f885c5e0da407f250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5d2a2b_a83db8ca",
+        "filename": "media/libstagefright/MediaCodec.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 4213,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-19T21:48:10Z",
+      "side": 1,
+      "message": "MediaCodec should behave properly with or without the callback from codec base.",
+      "parentUuid": "aa84609d_4b766d43",
+      "range": {
+        "startLine": 4211,
+        "startChar": 28,
+        "endLine": 4213,
+        "endChar": 70
+      },
+      "revId": "9d271e67751b636eab7bd01f885c5e0da407f250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7153722_8d909a68",
+        "filename": "media/libstagefright/tests/mediacodec/MediaCodecTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-19T21:48:10Z",
+      "side": 1,
+      "message": "We should test both behaviors: 1) the codec base does not send callback (current) \u0026 2) the codec base sends the callback (new)",
+      "fixSuggestions": [
+        {
+          "fixId": "649710db_2916ad92",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libstagefright/tests/mediacodec/MediaCodecTest.cpp",
+              "range": {
+                "startLine": 356,
+                "startChar": 0,
+                "endLine": 357,
+                "endChar": 0
+              },
+              "replacement": "TEST(MediaCodecTest, DeadWhileAsyncReleasingNoCallback) {\n"
+            },
+            {
+              "path": "media/libstagefright/tests/mediacodec/MediaCodecTest.cpp",
+              "range": {
+                "startLine": 400,
+                "startChar": 0,
+                "endLine": 400,
+                "endChar": 0
+              },
+              "replacement": "\nTEST(MediaCodecTest, DeadWhileAsyncReleasingWithCallback) {\n    // Test scenario:\n    //\n    // 1) Client thread calls release(); MediaCodec looper thread calls\n    //    initiateShutdown(); shutdown is being handled at the component thread.\n    // 2) Codec service died during the shutdown operation.\n    // 3) MediaCodec looper thread handles the death.\n    // 4) MediaCodec looper thread handles the death.\n\n    static const AString kCodecName{\"test.codec\"};\n    static const AString kCodecOwner{\"nobody\"};\n    static const AString kMediaType{\"video/x-test\"};\n\n    sp\u003cMockCodec\u003e mockCodec;\n    std::function\u003csp\u003cCodecBase\u003e(const AString \u0026name, const char *owner)\u003e getCodecBase \u003d\n        [\u0026mockCodec](const AString \u0026, const char *) {\n            mockCodec \u003d new MockCodec([](const std::shared_ptr\u003cMockBufferChannel\u003e \u0026) {\n                // No mock setup, as we don\u0027t expect any buffer operations\n                // in this scenario.\n            });\n            ON_CALL(*mockCodec, initiateAllocateComponent(_))\n                .WillByDefault([mockCodec](const sp\u003cAMessage\u003e \u0026) {\n                    mockCodec-\u003ecallback()-\u003eonComponentAllocated(kCodecName.c_str());\n                });\n            ON_CALL(*mockCodec, initiateShutdown(_))\n                .WillByDefault([mockCodec](bool) {\n                    // 2)\n                    mockCodec-\u003ecallback()-\u003eonError(DEAD_OBJECT, ACTION_CODE_FATAL);\n                    // 4)\n                    mockCodec-\u003ecallback()-\u003eonReleaseCompleted();\n                });\n            return mockCodec;\n        };\n\n    sp\u003cALooper\u003e looper{new ALooper};\n    sp\u003cMediaCodec\u003e codec \u003d SetupMediaCodec(\n            kCodecOwner, kCodecName, kMediaType, looper, getCodecBase);\n    ASSERT_NE(nullptr, codec) \u003c\u003c \"Codec must not be null\";\n    ASSERT_NE(nullptr, mockCodec) \u003c\u003c \"MockCodec must not be null\";\n\n    codec-\u003ereleaseAsync(new AMessage);\n    // sleep here so that the looper thread can handle the error\n    std::this_thread::sleep_for(std::chrono::milliseconds(100));\n    looper-\u003estop();\n}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9d271e67751b636eab7bd01f885c5e0da407f250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
