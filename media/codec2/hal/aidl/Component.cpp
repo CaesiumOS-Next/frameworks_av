@@ -487,7 +487,8 @@ ScopedAStatus Component::configureVideoTunnel(
 ScopedAStatus Component::connectToInputSurface(
         const std::shared_ptr<IInputSurface>& inputSurface,
         std::shared_ptr<IInputSurfaceConnection> *connection) {
-    // TODO
+    // Obsolete.
+    // IInputSurface::connect instead of this interface.
     (void)inputSurface;
     (void)connection;
     return ScopedAStatus::fromServiceSpecificError(Status::OMITTED);
@@ -495,9 +496,13 @@ ScopedAStatus Component::connectToInputSurface(
 
 ScopedAStatus Component::asInputSink(
         std::shared_ptr<IInputSink> *sink) {
-    // TODO
+#ifdef NO_C2_INPUT_SURFACE
     (void)sink;
     return ScopedAStatus::fromServiceSpecificError(Status::OMITTED);
+#else
+    *sink = SharedRefBase::make<InputSurface>(this->ref());
+    return ScopedAStatus::ok();
+#endif
 }
 
 void Component::initListener(const std::shared_ptr<Component>& self) {
