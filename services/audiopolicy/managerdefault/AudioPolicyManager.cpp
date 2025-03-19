@@ -1631,7 +1631,8 @@ status_t AudioPolicyManager::openDirectOutput(audio_stream_type_t stream,
     // This may prevent offloading in rare situations where effects are left active by apps
     // in the background.
     sp<IOProfile> profile;
-    if (((flags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) == 0) ||
+    if ((((flags & (AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD)) == 0) &&
+            flags != AUDIO_OUTPUT_FLAG_DIRECT) ||
             !(mEffects.isNonOffloadableEffectEnabled() || mMasterMono)) {
         profile = getProfileForOutput(
                 devices, config->sample_rate, config->format, config->channel_mask,
@@ -3938,6 +3939,7 @@ audio_io_handle_t AudioPolicyManager::selectOutputForMusicEffects()
         audio_io_handle_t outputSpatializer = AUDIO_IO_HANDLE_NONE;
         audio_io_handle_t outputDeepBuffer = AUDIO_IO_HANDLE_NONE;
         audio_io_handle_t outputPrimary = AUDIO_IO_HANDLE_NONE;
+        audio_io_handle_t outputDirect = AUDIO_IO_HANDLE_NONE;
 
         for (audio_io_handle_t outputLoop : outputs) {
             sp<SwAudioOutputDescriptor> desc = mOutputs.valueFor(outputLoop);
@@ -3954,6 +3956,9 @@ audio_io_handle_t AudioPolicyManager::selectOutputForMusicEffects()
                     outputSpatializer = outputLoop;
                 }
             }
+            if ((desc->mFlags == AUDIO_OUTPUT_FLAG_DIRECT) != 0) {
+                outputDirect = outputLoop;
+            }
             if ((desc->mFlags & AUDIO_OUTPUT_FLAG_DEEP_BUFFER) != 0) {
                 outputDeepBuffer = outputLoop;
             }
@@ -3965,6 +3970,8 @@ audio_io_handle_t AudioPolicyManager::selectOutputForMusicEffects()
             output = outputOffloaded;
         } else if (outputSpatializer != AUDIO_IO_HANDLE_NONE) {
             output = outputSpatializer;
+        } else if (outputDirect != AUDIO_IO_HANDLE_NONE) {
+            output = outputDirect;
         } else if (outputDeepBuffer != AUDIO_IO_HANDLE_NONE) {
             output = outputDeepBuffer;
         } else if (outputPrimary != AUDIO_IO_HANDLE_NONE) {
@@ -6176,7 +6183,8 @@ status_t AudioPolicyManager::setMasterMono(bool mono)
         Vector<audio_io_handle_t> offloaded;
         for (size_t i = 0; i < mOutputs.size(); ++i) {
             sp<SwAudioOutputDescriptor> desc = mOutputs.valueAt(i);
-            if (desc->mFlags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) {
+            if (desc->mFlags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD ||
+                desc->mFlags == AUDIO_OUTPUT_FLAG_DIRECT) {
                 offloaded.push(desc->mIoHandle);
             }
         }
