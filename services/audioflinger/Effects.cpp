@@ -593,7 +593,7 @@ EffectModule::EffectModule(const sp<EffectCallbackInterface>& callback, effect_d
         goto Error;
     }
 
-    setOffloaded_l(callback->isOffload(), callback->io());
+    setOffloaded_l(callback->isOffloadOrDirect(), callback->io());
     ALOGV("%s Constructor success name %s, Interface %p", __func__, mDescriptor.name,
           mEffectInterface.get());
 
@@ -2327,7 +2327,7 @@ void EffectChain::process_l() {
     // never process effects when:
     // - on an OFFLOAD thread
     // - no more tracks are on the session and the effect tail has been rendered
-    bool doProcess = !mEffectCallback->isOffloadOrMmap();
+    bool doProcess = !mEffectCallback->isOffloadOrMmap() && !mEffectCallback->isOffloadOrDirect();
     if (!audio_is_global_session(mSessionId)) {
         bool tracksOnSession = (trackCnt() != 0);
 
