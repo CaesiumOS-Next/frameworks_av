@@ -1563,18 +1563,16 @@ status_t PlaybackThread::checkEffectCompatibility_l(
             }
         }
     } break;
+    case DIRECT:
+        // Treat direct threads similar to offload threads,
+        // since direct threads should not be touched in framework and
+        // processing should be done at DSP side.
     case OFFLOAD:
         // nothing actionable on offload threads, if the effect:
         //   - is offloadable: the effect can be created
         //   - is NOT offloadable: the effect should still be created, but EffectHandle::enable()
         //     will take care of invalidating the tracks of the thread
         break;
-    case DIRECT:
-        // Reject any effect on Direct output threads for now, since the format of
-        // mSinkBuffer is not guaranteed to be compatible with effect processing (PCM 16 stereo).
-        ALOGW("%s: effect %s on DIRECT output thread %s",
-                __func__, desc->name, mThreadName);
-        return BAD_VALUE;
     case DUPLICATING:
         if (audio_is_global_session(sessionId)) {
             ALOGW("%s: global effect %s on DUPLICATING thread %s",
@@ -1785,12 +1783,12 @@ void ThreadBase::disconnectEffectHandle(IAfEffectHandle* handle,
 }
 
 void ThreadBase::onEffectEnable(const sp<IAfEffectModule>& effect) {
-    if (isOffloadOrMmap()) {
+    if (isOffloadOrMmap() || mType == DIRECT) {
         audio_utils::lock_guard _l(mutex());
         broadcast_l();
     }
     if (!effect->isOffloadable()) {
-        if (mType == ThreadBase::OFFLOAD) {
+        if (mType == ThreadBase::OFFLOAD || mType == ThreadBase::DIRECT) {
             PlaybackThread *t = (PlaybackThread *)this;
             t->invalidateTracks(AUDIO_STREAM_MUSIC);
         }
@@ -1801,7 +1799,7 @@ void ThreadBase::onEffectEnable(const sp<IAfEffectModule>& effect) {
 }
 
 void ThreadBase::onEffectDisable() {
-    if (isOffloadOrMmap()) {
+    if (isOffloadOrMmap() || mType == DIRECT) {
         audio_utils::lock_guard _l(mutex());
         broadcast_l();
     }
@@ -1836,7 +1834,7 @@ status_t ThreadBase::addEffect_ll(const sp<IAfEffectModule>& effect)
     sp<IAfEffectChain> chain = getEffectChain_l(sessionId);
     bool chainCreated = false;
 
-    ALOGD_IF((mType == OFFLOAD) && !effect->isOffloadable(),
+    ALOGD_IF((mType == OFFLOAD || mType == DIRECT) && !effect->isOffloadable(),
              "%s: on offloaded thread %p: effect %s does not support offload flags %#x",
              __func__, this, effect->desc().name, effect->desc().flags);
 
@@ -1856,7 +1854,7 @@ status_t ThreadBase::addEffect_ll(const sp<IAfEffectModule>& effect)
         return BAD_VALUE;
     }
 
-    effect->setOffloaded_l(mType == OFFLOAD, mId);
+    effect->setOffloaded_l((mType == OFFLOAD || mType == DIRECT), mId);
 
     status_t status = chain->addEffect(effect);
     if (status != NO_ERROR) {
@@ -4420,7 +4418,7 @@ NO_THREAD_SAFETY_ANALYSIS  // manual locking of AudioFlinger
             }
 
             // only process effects if we're going to write
-            if (mSleepTimeUs == 0 && mType != OFFLOAD) {
+            if (mSleepTimeUs == 0 && mType != OFFLOAD && mType != DIRECT) {
                 for (size_t i = 0; i < effectChains.size(); i ++) {
                     effectChains[i]->process_l();
                     // TODO: Write haptic data directly to sink buffer when mixing.
@@ -4451,7 +4449,7 @@ NO_THREAD_SAFETY_ANALYSIS  // manual locking of AudioFlinger
         // was read from audio track: process only updates effect state
         // and thus does have to be synchronized with audio writes but may have
         // to be called while waiting for async write callback
-        if (mType == OFFLOAD) {
+        if (mType == OFFLOAD || mType == DIRECT) {
             for (size_t i = 0; i < effectChains.size(); i ++) {
                 effectChains[i]->process_l();
             }
