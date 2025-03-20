@@ -1956,6 +1956,11 @@ void CCodec::createInputSurface() {
     }
 
     sp<PersistentSurface> persistentSurface = CreateCompatibleInputSurface();
+    if (!persistentSurface) {
+        ALOGE("Failed to create compatible input surface");
+        mCallback->onInputSurfaceCreationFailed(UNKNOWN_ERROR);
+        return;
+    }
     if (persistentSurface->isTargetAidl()) {
         ::ndk::SpAIBinder aidlTarget = persistentSurface->getAidlTarget();
         std::shared_ptr<AGraphicBufferSource> gbs = AGraphicBufferSource::fromBinder(aidlTarget);
