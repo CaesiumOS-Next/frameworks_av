@@ -94,6 +94,7 @@ private:
     const bool      mWriteCanBlock; // whether write() should block if the pipe is full
 
     bool            mIsShutdown;    // whether shutdown(true) was called, no barriers are needed
+    const int8_t    kMaxWriteRetries = 2; // when pipe is full, write actual equal zero, retry write
 
     ExtendedTimestampSingleStateQueue::Shared      mTimestampShared;
     ExtendedTimestampSingleStateQueue::Mutator     mTimestampMutator;

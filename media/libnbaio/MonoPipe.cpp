@@ -69,6 +69,8 @@ ssize_t MonoPipe::write(const void *buffer, size_t count)
         return NEGOTIATE;
     }
     size_t totalFramesWritten = 0;
+    int8_t retryCount = kMaxWriteRetries;
+    size_t totalCount = count;
     while (count > 0) {
         ssize_t actual = mFifoWriter.write(buffer, count);
         ALOG_ASSERT(actual <= count);
@@ -77,6 +79,13 @@ ssize_t MonoPipe::write(const void *buffer, size_t count)
                 return actual;
             }
             break;
+        }
+        if (actual == 0) {
+            ALOGD("actual = 0 , retryCount %d", retryCount);
+            if (totalFramesWritten <= totalCount && retryCount <= 0) {
+                return actual;
+            }
+            retryCount--;
         }
         size_t written = (size_t) actual;
         totalFramesWritten += written;
