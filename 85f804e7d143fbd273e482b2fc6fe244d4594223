@@ -131,6 +131,107 @@
       ],
       "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fbf3cac_961ebd14",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2025-03-21T19:55:23Z",
+      "side": 1,
+      "message": "good to see some comments above each to understand its intend?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "067a8510_9e17f61a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.h",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    // Flag to indicate if codec specific data has been sent to the encoder.\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.h",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "\n    // Flag to indicate if this is the first frame.\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.h",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "\n    // Anchor timestamp for the first frame.\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.h",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 63,
+                "endChar": 0
+              },
+              "replacement": "\n    // Number of samples processed so far.\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.h",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "    // Timestamp of the last frame end.\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.h",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": "    // Flag to indicate if an error has been signalled.\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.h",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "\n    // Index of the next output block.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
