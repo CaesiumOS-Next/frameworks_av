@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a89b223_37a3d1fb",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2025-03-21T19:54:04Z",
+      "side": 1,
+      "message": "isn\u0027t this a negative value always?",
+      "range": {
+        "startLine": 413,
+        "startChar": 13,
+        "endLine": 413,
+        "endChar": 83
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab8932be_89e06262",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 413,
+                "startChar": 0,
+                "endLine": 414,
+                "endChar": 0
+              },
+              "replacement": "            (inputTimestampUs - mLastFrameEndTimestampUs.value_or(inputTimestampUs)) \u003e 5) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf155a0_964c56f3",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2025-03-21T19:54:04Z",
+      "side": 1,
+      "message": "rename to mAnchorTimestampUs",
+      "range": {
+        "startLine": 415,
+        "startChar": 12,
+        "endLine": 415,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "abe2870f_bed49d30",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 159,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "      mAnch(0),\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 186,
+                "startChar": 0,
+                "endLine": 187,
+                "endChar": 0
+              },
+              "replacement": "    mAnch \u003d 0;\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 212,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": "    mAnch \u003d 0;\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 415,
+                "startChar": 0,
+                "endLine": 416,
+                "endChar": 0
+              },
+              "replacement": "            mAnch \u003d inputTimestampUs.peekll();\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 559,
+                "startChar": 0,
+                "endLine": 560,
+                "endChar": 0
+              },
+              "replacement": "                outputBuffers.push_back({buffer, mAnch + outTimeStamp});\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 635,
+                "startChar": 0,
+                "endLine": 636,
+                "endChar": 0
+              },
+              "replacement": "    mAnch \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
