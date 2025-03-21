@@ -18,6 +18,7 @@
 #define ANDROID_C2_SOFT_IAMF_DEC_H_
 
 #include <SimpleC2Component.h>
+#include "iamf/api/decoder/iamf_decoder.h"
 
 namespace android {
 
@@ -40,7 +41,21 @@ class C2SoftIamfDec : public SimpleC2Component {
     c2_status_t drain(uint32_t drainMode, const std::shared_ptr<C2BlockPool>& pool) override;
 
   private:
+
+    void resetState();
+
     std::shared_ptr<IntfImpl> mIntf;
+    std::unique_ptr<::iamf_tools::api::IamfDecoder> mIamfDecoder;
+
+    // int64_t mCodecDelay = 0;
+    // int64_t mSeekPreRoll = 0;
+    // int64_t mSamplesToDiscard = 0;
+    // size_t mInputBufferCount = 0;
+    // N.B.: Calculation of this number assumes int16_t samples.
+    size_t mOutputFrameSizeBytes = 0;
+    bool mDescriptorProcessingComplete = false;
+    bool mSignalledError = false;
+    bool mSignalledOutputEos = false;
 
     C2_DO_NOT_COPY(C2SoftIamfDec);
 };
