@@ -15,6 +15,8 @@
  */
 
 // #define LOG_NDEBUG 0
+#include <cstdint>
+#include <limits>
 #define LOG_TAG "VideoRenderQualityTracker_test"
 #include <utils/Log.h>
 
@@ -1216,6 +1218,38 @@ TEST_F(VideoRenderQualityTrackerTest, capturesMaximumContentDroppedAfterPause) {
     h.drop(11);
     h.render({20});
     EXPECT_EQ(h.getMetrics().maxContentDroppedAfterPauseMs, 12 * 20);
+}
+
+TEST_F(VideoRenderQualityTrackerTest, resilientToActualTimeDiscontinuity) {
+    Configuration c;
+    VideoRenderQualityTracker t(c);
+
+    int64_t mediaDurationUs = 33 * 1000; // 30 fps
+    int64_t mediaTimeUs = 0;
+
+    const auto render = [&](int64_t actualTimeNs){
+        t.onFrameReleased(mediaTimeUs);
+        t.onFrameRendered(mediaTimeUs, actualTimeNs);
+        mediaTimeUs += mediaDurationUs;
+    };
+
+    // clang-format off
+    auto inputTimesNs = {
+        INT64_MAX,
+        INT64_MAX,
+        INT64_MIN,
+        INT64_MAX,
+        INT64_MAX,
+        int64_t{0},
+        INT64_MAX,
+        INT64_MAX,
+    };
+    // clang-format on
+
+    // This shouldn't crash
+    for (auto actualTimeNs: inputTimesNs) {
+        render(actualTimeNs);
+    }
 }
 
 } // android
