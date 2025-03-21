@@ -1956,7 +1956,7 @@ void CCodec::createInputSurface() {
     }
 
     sp<PersistentSurface> persistentSurface = CreateCompatibleInputSurface();
-    if (persistentSurface->isTargetAidl()) {
+    if (persistentSurface->getType() == PersistentSurface::TYPE_AIDL) {
         ::ndk::SpAIBinder aidlTarget = persistentSurface->getAidlTarget();
         std::shared_ptr<AGraphicBufferSource> gbs = AGraphicBufferSource::fromBinder(aidlTarget);
         if (gbs) {
@@ -2090,7 +2090,7 @@ void CCodec::setInputSurface(const sp<PersistentSurface> &surface) {
         outputFormat = config->mOutputFormat;
         usage = config->mISConfig ? config->mISConfig->mUsage : 0;
     }
-    if (surface->isTargetAidl()) {
+    if (surface->getType() == PersistentSurface::TYPE_AIDL) {
         ::ndk::SpAIBinder aidlTarget = surface->getAidlTarget();
         std::shared_ptr<AGraphicBufferSource> gbs = AGraphicBufferSource::fromBinder(aidlTarget);
         if (gbs) {
