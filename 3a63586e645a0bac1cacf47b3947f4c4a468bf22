@@ -33,6 +33,24 @@
       "message": "@v-chongyin@xiaomi.com Please see my question on the bug",
       "revId": "3a63586e645a0bac1cacf47b3947f4c4a468bf22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f7a801_109c256f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-21T08:53:04Z",
+      "side": 1,
+      "message": "Okay,I have already answered your question on the bug",
+      "parentUuid": "0b4ec6b4_299ae50c",
+      "revId": "3a63586e645a0bac1cacf47b3947f4c4a468bf22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
