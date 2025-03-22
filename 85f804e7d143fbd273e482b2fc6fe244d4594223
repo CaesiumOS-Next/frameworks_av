@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d94d913d_3ad22d4b",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-22T01:43:46Z",
+      "side": 1,
+      "message": "In the first iteration, `mLastFrameEndTimestampUs` is not initialized, so this `mLastFrameEndTimestampUs.value_or(inputTimestampUs)` returns `inputTimestampUs` and the expression `mLastFrameEndTimestampUs.value_or(inputTimestampUs) - inputTimestampUs)` evaluates to zero.\n\nFurther, at line 418,\n``` \nmLastFrameEndTimestampUs \u003d inputTimestampUs\n                + (capacity / sizeof(int16_t) * 1000000ll / channelCount / sampleRate);\n```\nthis expression determines the next frames start timestamp.\n\nNow as the second process call is made, at line 404, if the input queued pts is less than this `mLastFrameEndTimestampUs`, then a warning is logged and the input queued pts is update to the `mLastFrameEndTimestampUs`.\n\nOn the other hand, if the input queued timestamp far exceeds the `mLastFrameEndTimestampUs` then perhaps some gap was intentionally introduced by the client. So the output timestamps are also need to make a similar adjustment. This is handled by resetting anchor timestamp.",
+      "parentUuid": "9a89b223_37a3d1fb",
+      "range": {
+        "startLine": 413,
+        "startChar": 13,
+        "endLine": 413,
+        "endChar": 83
+      },
+      "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcf155a0_964c56f3",
         "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
         "patchSetId": 2
@@ -129,6 +153,30 @@
           ]
         }
       ],
+      "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65223333_2028e789",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-22T01:43:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcf155a0_964c56f3",
+      "range": {
+        "startLine": 415,
+        "startChar": 12,
+        "endLine": 415,
+        "endChar": 28
+      },
       "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -230,6 +278,30 @@
           ]
         }
       ],
+      "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222beb9c_b7ef9941",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-22T01:43:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fbf3cac_961ebd14",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 0
+      },
       "revId": "85f804e7d143fbd273e482b2fc6fe244d4594223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
