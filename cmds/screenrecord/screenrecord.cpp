@@ -122,6 +122,7 @@ static uint32_t gVideoHeight = 0;
 static uint32_t gBitRate = 20000000;     // 20Mbps
 static uint32_t gTimeLimitSec = kMaxTimeLimitSec;
 static uint32_t gBframes = 0;
+static uint64_t gRepeatPreviousFrameAfterUs = 0;
 static std::optional<PhysicalDisplayId> gPhysicalDisplayId;
 // Set by signal handler to stop recording.
 static volatile bool gStopRequested = false;
@@ -201,6 +202,10 @@ static status_t prepareEncoder(float displayFps, sp<MediaCodec>* pCodec,
     format->setFloat(KEY_FRAME_RATE, displayFps);
     format->setInt32(KEY_I_FRAME_INTERVAL, 10);
     format->setInt32(KEY_MAX_B_FRAMES, gBframes);
+    if (gRepeatPreviousFrameAfterUs > 0) {
+        format->setInt64(KEY_REPEAT_PREVIOUS_FRAME_AFTER, gRepeatPreviousFrameAfterUs);
+    }
+    
     if (gBframes > 0) {
         format->setInt32(KEY_PROFILE, AVCProfileMain);
         format->setInt32(KEY_LEVEL, AVCLevel41);
@@ -1237,23 +1242,24 @@ static void usage() {
  */
 int main(int argc, char* const argv[]) {
     static const struct option longOptions[] = {
-        { "help",               no_argument,        NULL, 'h' },
-        { "verbose",            no_argument,        NULL, 'v' },
-        { "size",               required_argument,  NULL, 's' },
-        { "bit-rate",           required_argument,  NULL, 'b' },
-        { "time-limit",         required_argument,  NULL, 't' },
-        { "bugreport",          no_argument,        NULL, 'u' },
+        { "help",                        no_argument,        NULL, 'h' },
+        { "verbose",                     no_argument,        NULL, 'v' },
+        { "size",                        required_argument,  NULL, 's' },
+        { "bit-rate",                    required_argument,  NULL, 'b' },
+        { "time-limit",                  required_argument,  NULL, 't' },
+        { "bugreport",                   no_argument,        NULL, 'u' },
         // "unofficial" options
-        { "show-device-info",   no_argument,        NULL, 'i' },
-        { "show-frame-time",    no_argument,        NULL, 'f' },
-        { "rotate",             no_argument,        NULL, 'r' },
-        { "output-format",      required_argument,  NULL, 'o' },
-        { "codec-name",         required_argument,  NULL, 'N' },
-        { "monotonic-time",     no_argument,        NULL, 'm' },
-        { "persistent-surface", no_argument,        NULL, 'p' },
-        { "bframes",            required_argument,  NULL, 'B' },
-        { "display-id",         required_argument,  NULL, 'd' },
-        { NULL,                 0,                  NULL, 0 }
+        { "show-device-info",            no_argument,        NULL, 'i' },
+        { "show-frame-time",             no_argument,        NULL, 'f' },
+        { "rotate",                      no_argument,        NULL, 'r' },
+        { "output-format",               required_argument,  NULL, 'o' },
+        { "codec-name",                  required_argument,  NULL, 'N' },
+        { "monotonic-time",              no_argument,        NULL, 'm' },
+        { "persistent-surface",          no_argument,        NULL, 'p' },
+        { "bframes",                     required_argument,  NULL, 'B' },
+        { "display-id",                  required_argument,  NULL, 'd' },
+        { "repeat-previous-frame-after", required_argument,  NULL, 'R' },
+        { NULL,                          0,                  NULL, 0 }
     };
 
     while (true) {
@@ -1372,6 +1378,11 @@ int main(int argc, char* const argv[]) {
 
             fprintf(stderr, "Invalid physical display ID\n");
             return 2;
+        case 'R':
+            if (parseValueWithUnit(optarg, &gRepeatPreviousFrameAfterUs) != NO_ERROR) {
+                return 2;
+            }
+            break;
         default:
             if (ic != '?') {
                 fprintf(stderr, "getopt_long returned unexpected value 0x%x\n", ic);
