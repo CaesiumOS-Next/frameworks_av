@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7452222_7713d9df",
+        "filename": "media/codec2/hal/aidl/include/codec2/aidl/inputsurface/FrameQueueThread.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-22T00:50:21Z",
+      "side": 1,
+      "message": "please put implementation in cpp file",
+      "revId": "cd97a39eeb5e5c1f98ad02660bc2e782392eef82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
