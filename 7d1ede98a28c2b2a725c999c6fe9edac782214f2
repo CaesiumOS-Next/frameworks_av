@@ -1,0 +1,250 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60eae172_201f1b50",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-03-23T14:01:59Z",
+      "side": 1,
+      "message": "my preference would be instead of 2 variables here,\nthat we use a sentinel value in mAnchorTimeStamp...\n\ne.g. mAnchor \u003d\u003d -1 means we don\u0027t have an anchor (since 0 is a legitimate anchor).",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fc0cad56_b3135d2e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 158,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "      mAnchorTimeStampUs(std::numeric_limits\u003cint64_t\u003e::max()),\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 185,
+                "startChar": 0,
+                "endLine": 187,
+                "endChar": 0
+              },
+              "replacement": "    mAnchorTimeStampUs \u003d std::numeric_limits\u003cint64_t\u003e::max();\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 211,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": "    mAnchorTimeStampUs \u003d std::numeric_limits\u003cint64_t\u003e::max();\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 412,
+                "startChar": 0,
+                "endLine": 413,
+                "endChar": 0
+              },
+              "replacement": "        if (mAnchorTimeStampUs \u003d\u003d std::numeric_limits\u003cint64_t\u003e::max() ||\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 416,
+                "startChar": 0,
+                "endLine": 417,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 634,
+                "startChar": 0,
+                "endLine": 636,
+                "endChar": 0
+              },
+              "replacement": "    mAnchorTimeStampUs \u003d std::numeric_limits\u003cint64_t\u003e::max();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e5d444_a301bac8",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-03-23T14:01:59Z",
+      "side": 1,
+      "message": "the name implies that this is for the entire stream.\nthe semantics appear to be \"since the last gap in the input PTS\".\n\nthis should be renamed.",
+      "range": {
+        "startLine": 187,
+        "startChar": 3,
+        "endLine": 187,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "efa3d3af_efbc867e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 161,
+                "endChar": 0
+              },
+              "replacement": "      mSamplesSinceLastGap(0u),\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 187,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": "    mSamplesSinceLastGap \u003d 0u;\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 213,
+                "startChar": 0,
+                "endLine": 214,
+                "endChar": 0
+              },
+              "replacement": "    mSamplesSinceLastGap \u003d 0u;\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 414,
+                "startChar": 0,
+                "endLine": 415,
+                "endChar": 0
+              },
+              "replacement": "            mSamplesSinceLastGap \u003d 0;\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 548,
+                "startChar": 0,
+                "endLine": 550,
+                "endChar": 0
+              },
+              "replacement": "                const int64_t outTimeStamp \u003d mSamplesSinceLastGap * 1000000ll / sampleRate;\n                mSamplesSinceLastGap +\u003d samplesPerFrame;\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 636,
+                "startChar": 0,
+                "endLine": 637,
+                "endChar": 0
+              },
+              "replacement": "    mSamplesSinceLastGap \u003d 0u;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11029dc4_b24fd195",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-03-23T14:01:59Z",
+      "side": 1,
+      "message": "what does this magic number represent?\n\nfrom the comment it seems to be calculating the \"brief period of time\"\nwhere there\u0027s no data to encode (which to me implies silence).\n\n(1) magic numbers like this absolutely need to be defined constants somewhere.\nit sounds like this is a \"kMaxUncoveredTimeBetweenSamplesUs\" [there\u0027s likely a\nbetter name than that].\n\n(2) is it worth artificially injecting a buffer of silience of the appropriate length? so that there is no gap?",
+      "range": {
+        "startLine": 413,
+        "startChar": 83,
+        "endLine": 413,
+        "endChar": 90
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d0bfd029_7f61ef98",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 409,
+                "startChar": 0,
+                "endLine": 412,
+                "endChar": 0
+              },
+              "replacement": "        // At the start of encoding or at a point where no audio frames were sent for encoding for\n        // brief period of time (5us) and restarted again with a new pts, reset the anchor timestamp.\n        // Use tolerance during comparison to desensitize for rounding errors.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f45d7772_6835a828",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-03-23T14:01:59Z",
+      "side": 1,
+      "message": "\u0027outTimeStamp\u0027 is not a timestamp; it\u0027s a duration.\n\nas currently phrased, line 559 adds 2 timestamps -- which doesn\u0027t make sense.\nhowever, adding a timestamp + duration does make sense.",
+      "range": {
+        "startLine": 548,
+        "startChar": 30,
+        "endLine": 548,
+        "endChar": 43
+      },
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
