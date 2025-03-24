@@ -69,6 +69,24 @@
       "parentUuid": "a2f7a801_109c256f",
       "revId": "3a63586e645a0bac1cacf47b3947f4c4a468bf22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d10f2c83_44b10c6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-24T18:08:27Z",
+      "side": 1,
+      "message": "Sure, you can.",
+      "parentUuid": "7e08e44d_898e9e57",
+      "revId": "3a63586e645a0bac1cacf47b3947f4c4a468bf22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
