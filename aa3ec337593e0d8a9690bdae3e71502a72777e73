@@ -40,6 +40,30 @@
       ],
       "revId": "aa3ec337593e0d8a9690bdae3e71502a72777e73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "575bd5ba_2f49ca25",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4926,
+      "author": {
+        "id": 1630064
+      },
+      "writtenOn": "2025-03-24T12:29:59Z",
+      "side": 1,
+      "message": "ok, I have updated the patch.\n\nfor linear pcm, if property is defined use the value from new property, otherwise use the value from audio.offload.min.duration.secs",
+      "parentUuid": "c07c6cf1_4ab092ec",
+      "range": {
+        "startLine": 4926,
+        "startChar": 0,
+        "endLine": 4926,
+        "endChar": 68
+      },
+      "revId": "aa3ec337593e0d8a9690bdae3e71502a72777e73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
