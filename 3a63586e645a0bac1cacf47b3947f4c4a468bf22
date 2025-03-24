@@ -51,6 +51,24 @@
       "parentUuid": "0b4ec6b4_299ae50c",
       "revId": "3a63586e645a0bac1cacf47b3947f4c4a468bf22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e08e44d_898e9e57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-24T06:35:59Z",
+      "side": 1,
+      "message": "hello Mikhail Naganov, Do I need to merge this submission into my system （Android V） ？ https://r.android.com/3433644",
+      "parentUuid": "a2f7a801_109c256f",
+      "revId": "3a63586e645a0bac1cacf47b3947f4c4a468bf22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
