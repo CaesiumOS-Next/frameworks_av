@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d67a656_03bb005d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1122898
+      },
+      "writtenOn": "2025-03-24T03:30:55Z",
+      "side": 1,
+      "message": "I\u0027m so sorry to bother you guys. We implemented a feaure which depends on \"camera injection\" (Android U) and found this issue last year, but it seems that the issue still exists in Android V. In order to meet the \"Review-Enforcement\", may I get one more approvement from you guys? Thanks a lot.",
+      "revId": "3859cc10c5ad7e739bbbfc52c31f973a1654f347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
