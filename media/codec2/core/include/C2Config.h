@@ -29,8 +29,8 @@
  * Enumerated boolean.
  */
 C2ENUM(c2_bool_t, uint32_t,
-    C2_FALSE, ///< true
-    C2_TRUE,  ///< false
+    C2_FALSE, ///< false
+    C2_TRUE,  ///< true
 )
 
 typedef C2SimpleValueStruct<c2_bool_t> C2BoolValue;
@@ -634,6 +634,20 @@ enum C2Config::profile_t : uint32_t {
     PROFILE_AC4_1_1,                            ///< AC-4 Profile 01.01
     PROFILE_AC4_2_1,                            ///< AC-4 Profile 02.01
     PROFILE_AC4_2_2,                            ///< AC-4 Profile 02.02
+
+    // IAMF Profiles
+    PROFILE_IAMF_SIMPLE_AAC = _C2_PL_IAMF_START, ///< IAMF Simple Profile with AAC
+    PROFILE_IAMF_SIMPLE_FLAC,                    ///< IAMF Simple Profile with FLAC
+    PROFILE_IAMF_SIMPLE_OPUS,                    ///< IAMF Simple Profile with Opus
+    PROFILE_IAMF_SIMPLE_PCM,                     ///< IAMF Simple Profile with PCM
+    PROFILE_IAMF_BASE_AAC,                       ///< IAMF Base Profile with AAC
+    PROFILE_IAMF_BASE_FLAC,                      ///< IAMF Base Profile with FLAC
+    PROFILE_IAMF_BASE_OPUS,                      ///< IAMF Base Profile with Opus
+    PROFILE_IAMF_BASE_PCM,                       ///< IAMF Base Profile with PCM
+    PROFILE_IAMF_BASE_ENHANCED_AAC,              ///< IAMF Base Enhanced with AAC
+    PROFILE_IAMF_BASE_ENHANCED_FLAC,             ///< IAMF Base Enhanced with FLAC
+    PROFILE_IAMF_BASE_ENHANCED_OPUS,             ///< IAMF Base Enhanced with Opus
+    PROFILE_IAMF_BASE_ENHANCED_PCM,              ///< IAMF Base Enhanced with PCM
 };
 
 enum C2Config::level_t : uint32_t {
