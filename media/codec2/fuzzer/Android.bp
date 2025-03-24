@@ -309,6 +309,19 @@ cc_fuzz {
 }
 
 cc_fuzz {
+    name: "C2FuzzerIamfDec",
+    defaults: ["C2Fuzzer-defaults-shipped"],
+
+    cflags: [
+        "-DC2COMPONENTNAME=\"c2.android.iamf.decoder\"",
+    ],
+
+    static_libs: [
+        "libcodec2_soft_iamfdec",
+    ],
+}
+
+cc_fuzz {
     name: "C2FuzzerMp3Dec",
     defaults: ["C2Fuzzer-defaults-shipped"],
 
