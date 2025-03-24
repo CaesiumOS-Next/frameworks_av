@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07c6cf1_4ab092ec",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4926,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-24T10:57:02Z",
+      "side": 1,
+      "message": "PCM should fall back to the other property if the pcm specific one is not defined",
+      "range": {
+        "startLine": 4926,
+        "startChar": 0,
+        "endLine": 4926,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "90118d9f_3f35dbfd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 4925,
+                "startChar": 0,
+                "endLine": 4930,
+                "endChar": 0
+              },
+              "replacement": "    minDurationProperty \u003d \"audio.offload.min.duration.secs\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aa3ec337593e0d8a9690bdae3e71502a72777e73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
