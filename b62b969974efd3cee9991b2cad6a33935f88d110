@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c47c1ba_a85412c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-03-24T11:22:32Z",
+      "side": 1,
+      "message": "Hi, AOSP team. Could you please help me to review the patch? Thanks.",
+      "revId": "b62b969974efd3cee9991b2cad6a33935f88d110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
