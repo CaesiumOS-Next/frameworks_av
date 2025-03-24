@@ -76,6 +76,12 @@
             <Limit name="sample-rate" ranges="1-655350" />
             <Limit name="bitrate" range="1-21000000" />
         </MediaCodec>
+        <MediaCodec name="c2.android.iamf.decoder" type="audio/flac">
+            <Alias name="OMX.google.flac.decoder" />
+            <Limit name="channel-count" max="8" />
+            <Limit name="sample-rate" ranges="1-655350" />
+            <Limit name="bitrate" range="1-21000000" />
+        </MediaCodec>
     </Decoders>
     <Encoders>
         <MediaCodec name="c2.android.aac.encoder" type="audio/mp4a-latm">
