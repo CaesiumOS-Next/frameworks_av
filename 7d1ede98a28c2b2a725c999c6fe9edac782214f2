@@ -94,6 +94,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a78c4b82_5ad6bd80",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-24T13:00:09Z",
+      "side": 1,
+      "message": "As it is theoretically possible to get first time stamp as -1 as well, it is ok to keep it this way.",
+      "parentUuid": "60eae172_201f1b50",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 28
+      },
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26e5d444_a301bac8",
         "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
         "patchSetId": 4
@@ -183,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375bbbcc_c4f6fce3",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-24T13:00:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26e5d444_a301bac8",
+      "range": {
+        "startLine": 187,
+        "startChar": 3,
+        "endLine": 187,
+        "endChar": 27
+      },
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11029dc4_b24fd195",
@@ -226,6 +274,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37822121_0b4198f2",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-24T13:00:09Z",
+      "side": 1,
+      "message": "a check like\n```\n(inputTimestampUs !\u003d mLastFrameEndTimestampUs.value_or(inputTimestampUs)))\n```\nis very sensitive to rounding errors, i have added a tolerance of 5us.",
+      "parentUuid": "11029dc4_b24fd195",
+      "range": {
+        "startLine": 413,
+        "startChar": 83,
+        "endLine": 413,
+        "endChar": 90
+      },
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f45d7772_6835a828",
         "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
         "patchSetId": 4
@@ -237,6 +309,30 @@
       "writtenOn": "2025-03-23T14:01:59Z",
       "side": 1,
       "message": "\u0027outTimeStamp\u0027 is not a timestamp; it\u0027s a duration.\n\nas currently phrased, line 559 adds 2 timestamps -- which doesn\u0027t make sense.\nhowever, adding a timestamp + duration does make sense.",
+      "range": {
+        "startLine": 548,
+        "startChar": 30,
+        "endLine": 548,
+        "endChar": 43
+      },
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c51f9cf_098f2fab",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-24T13:00:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f45d7772_6835a828",
       "range": {
         "startLine": 548,
         "startChar": 30,
