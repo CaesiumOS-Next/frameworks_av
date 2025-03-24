@@ -761,10 +761,16 @@ void VideoRenderQualityTracker::updateFrameDurations(FrameDurationUs &durationUs
     for (int i = FrameDurationUs::SIZE - 1; i > 0; --i ) {
         durationUs[i] = durationUs[i - 1];
     }
-    if (newTimestampUs == -1) {
+    // Apart from the '-1' value for timestamp which has a special meaning, we should handle
+    // the cases where the negative timestamp value is provided by mistake.
+    // We have to handle the negative timestamp case to avoid bogus or negative duration values
+    // which may cause integer overflow in arithmetic operations.
+    // The same relates to timestamps that jump backwards in time compared to the previous
+    // timestamp.
+    if (newTimestampUs < 0) {
         durationUs[0] = -1;
     } else {
-        durationUs[0] = durationUs.priorTimestampUs == -1 ? -1 :
+        durationUs[0] = (durationUs.priorTimestampUs == -1 || newTimestampUs < durationUs.priorTimestampUs) ? -1 :
                 newTimestampUs - durationUs.priorTimestampUs;
         durationUs.priorTimestampUs = newTimestampUs;
     }
