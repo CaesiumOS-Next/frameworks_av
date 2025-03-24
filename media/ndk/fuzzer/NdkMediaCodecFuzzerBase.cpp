@@ -39,7 +39,9 @@ static const std::string kDecoderNames[] = {"c2.android.avc.decoder",
                                             "c2.android.opus.decoder",
                                             "c2.android.amrnb.decoder",
                                             "c2.android.flac.decoder",
-                                            "c2.android.av1-aom.decoder"};
+                                            "c2.android.av1-aom.decoder",
+                                            "c2.android.iamf.decoder",
+                                           };
 
 static const std::string kFormatIntKeys[] = {AMEDIAFORMAT_KEY_BIT_RATE,
                                              AMEDIAFORMAT_KEY_SAMPLE_RATE,
