@@ -10,9 +10,14 @@ cc_library {
     ],
     srcs: [
         "C2SoftIamfDec.cpp",
+        "LayoutTranslation.cpp",
     ],
-
     shared_libs: [
         "iamf_tools",
+        "liblog",
+    ],
+    include_dirs: [
+        "external/iamf_tools",
+        "external/abseil-cpp",
     ],
 }
