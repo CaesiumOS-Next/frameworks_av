@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edd2579_0803554b",
+        "filename": "media/codec2/hal/aidl/inputsurface/InputSurfaceConnection.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-24T20:03:15Z",
+      "side": 1,
+      "message": "nit: you may be able to use C2Buffer::CreateGraphicBuffer()",
+      "fixSuggestions": [
+        {
+          "fixId": "e7d867d3_df6ba803",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurfaceConnection.cpp",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/InputSurfaceConnection.cpp",
+              "range": {
+                "startLine": 221,
+                "startChar": 0,
+                "endLine": 224,
+                "endChar": 0
+              },
+              "replacement": "        std::shared_ptr\u003cC2Buffer\u003e c2Buffer \u003d C2Buffer::Create(\n                block-\u003eshare(C2Rect(block-\u003ewidth(), block-\u003eheight()), ::C2Fence()));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a8161c91ae28851b3b3dda6731ca3d6a0cdb907a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
