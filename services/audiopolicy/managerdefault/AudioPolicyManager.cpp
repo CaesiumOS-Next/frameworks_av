@@ -4920,13 +4920,21 @@ bool AudioPolicyManager::isOffloadPossible(const audio_offload_info_t &offloadIn
     }
 
     //If duration is less than minimum value defined in property, return false
-    const int min_duration_secs = property_get_int32(
-            "audio.offload.min.duration.secs", -1 /* default_value */);
+    int minDurationSeconds = -1;
+    std::string minDurationProperty {};
+    if (audio_is_linear_pcm(offloadInfo.format)) {
+        minDurationProperty = "audio.pcm-offload.min.duration.secs";
+    } else {
+        minDurationProperty = "audio.offload.min.duration.secs";
+    }
+
+    minDurationSeconds = property_get_int32(minDurationProperty.c_str(), -1 /* default_value */);
+
     if (!durationIgnored) {
-        if (min_duration_secs >= 0) {
-            if (offloadInfo.duration_us < min_duration_secs * 1000000LL) {
-                ALOGV("%s: Offload denied by duration < audio.offload.min.duration.secs(=%d)",
-                      __func__, min_duration_secs);
+        if (minDurationSeconds >= 0) {
+            if (offloadInfo.duration_us < minDurationSeconds * 1000000LL) {
+                ALOGV("%s: Offload denied by duration < (%s) (=%d)",
+                      __func__, minDurationProperty.c_str(), minDurationSeconds);
                 return false;
             }
         } else if (offloadInfo.duration_us < OFFLOAD_DEFAULT_MIN_DURATION_SECS * 1000000) {
