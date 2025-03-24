@@ -547,7 +547,6 @@ static const preproc_ops_t sAgc2Ops = {Agc2Create,       Agc2Init,    NULL,
 int AecInit(preproc_effect_t* effect) {
     ALOGV("AecInit");
     effect->session->config = effect->session->apm->GetConfig();
-    effect->session->config.echo_canceller.mobile_mode = true;
     effect->session->apm->ApplyConfig(effect->session->config);
     return 0;
 }
@@ -571,9 +570,8 @@ int AecGetParameter(preproc_effect_t* effect, void* pParam, uint32_t* pValueSize
             ALOGV("AecGetParameter() echo delay %d us", *(uint32_t*)pValue);
             break;
         case AEC_PARAM_MOBILE_MODE:
-            effect->session->config = effect->session->apm->GetConfig();
-            *(uint32_t*)pValue = effect->session->config.echo_canceller.mobile_mode;
-            ALOGV("AecGetParameter() mobile mode %d us", *(uint32_t*)pValue);
+            *(uint32_t*)pValue = false;
+            ALOGI("%s: AEC_PARAM_MOBILE_MODE ignored", __func__);
             break;
         default:
             ALOGW("AecGetParameter() unknown param %08x value %08x", param, *(uint32_t*)pValue);
@@ -595,10 +593,8 @@ int AecSetParameter(preproc_effect_t* effect, void* pParam, void* pValue) {
             ALOGV("AecSetParameter() echo delay %d us, status %d", value, status);
             break;
         case AEC_PARAM_MOBILE_MODE:
-            effect->session->config = effect->session->apm->GetConfig();
-            effect->session->config.echo_canceller.mobile_mode = value;
-            ALOGV("AecSetParameter() mobile mode %d us", value);
-            effect->session->apm->ApplyConfig(effect->session->config);
+            ALOGI("%s: AEC_PARAM_MOBILE_MODE ignored", __func__);
+            status = false;
             break;
         default:
             ALOGW("AecSetParameter() unknown param %08x value %08x", param, *(uint32_t*)pValue);
