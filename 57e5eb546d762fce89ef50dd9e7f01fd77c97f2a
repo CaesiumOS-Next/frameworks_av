@@ -16,6 +16,24 @@
       "message": "Test and upload to external.",
       "revId": "57e5eb546d762fce89ef50dd9e7f01fd77c97f2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c05c4e_bb913656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3538319
+      },
+      "writtenOn": "2025-03-25T09:06:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d101cdf0_0529535c",
+      "revId": "57e5eb546d762fce89ef50dd9e7f01fd77c97f2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
