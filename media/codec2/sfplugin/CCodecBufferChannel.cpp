@@ -325,6 +325,9 @@ CCodecBufferChannel::CCodecBufferChannel(
         android::base::ParseInt(value, &mRenderingDepth);
     }
     mOutputSurface.lock()->maxDequeueBuffers = kSmoothnessFactor + mRenderingDepth;
+
+    mNumOutputsPerInput = 1;
+    mNumOutputsPerInputReceived = 0;
 }
 
 CCodecBufferChannel::~CCodecBufferChannel() {
@@ -2790,6 +2793,7 @@ void CCodecBufferChannel::sendOutputBuffers() {
         if (action != OutputBuffers::REALLOCATE) {
             reallocTryNum = 0;
         }
+        ALOGV("popFromStashAndRegister action %d", action);
         switch (action) {
         case OutputBuffers::SKIP:
             return;
@@ -2825,9 +2829,19 @@ void CCodecBufferChannel::sendOutputBuffers() {
         case OutputBuffers::DISCARD: {
             if (mHasInputSurface && android::media::codec::provider_->input_surface_throttle()) {
                 Mutexed<InputSurface>::Locked inputSurface(mInputSurface);
-                --inputSurface->numProcessingBuffersBalance;
-                ALOGV("[%s] onWorkDone: numProcessingBuffersBalance = %lld",
-                        mName, static_cast<long long>(inputSurface->numProcessingBuffersBalance));
+                if (mNumOutputsPerInput == 1) {
+                    --inputSurface->numProcessingBuffersBalance;
+                    ALOGV("[%s] onWorkDone: numProcessingBuffersBalance = %lld",
+                            mName, static_cast<long long>(inputSurface->numProcessingBuffersBalance));
+                } else {
+                    ++mNumOutputsPerInputReceived;
+                    if (mNumOutputsPerInputReceived == mNumOutputsPerInput) {
+                        mNumOutputsPerInputReceived = 0;
+                        --inputSurface->numProcessingBuffersBalance;
+                        ALOGV("[%s] onWorkDone: numProcessingBuffersBalance = %lld",
+                                mName, static_cast<long long>(inputSurface->numProcessingBuffersBalance));
+                    }
+                }
             }
             break;
         }

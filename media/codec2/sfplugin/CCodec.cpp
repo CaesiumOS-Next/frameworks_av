@@ -1319,6 +1319,12 @@ void CCodec::configure(const sp<AMessage> &msg) {
                 if (captureFpsFound) {
                     (void)msg->findAsFloat(KEY_FRAME_RATE, &config->mISConfig->mCodedFps);
                 }
+                if (config->mISConfig->mCaptureFps > 0 && config->mISConfig->mCodedFps > 0
+                        && config->mISConfig->mCaptureFps > config->mISConfig->mCodedFps) {
+                    int32_t numOutputsPerInput = config->mISConfig->mCaptureFps / config->mISConfig->mCodedFps;
+                    mChannel->setNumOutputsPerInput(numOutputsPerInput);
+                    ALOGD("numOutputsPerInput = %d", numOutputsPerInput);
+                }
             }
 
             {

@@ -126,6 +126,11 @@ public:
     status_t setInputSurface(const std::shared_ptr<InputSurfaceWrapper> &surface);
 
     /**
+     * set number outputs per input.
+     */
+    void setNumOutputsPerInput(int32_t numOutputsPerInput) { mNumOutputsPerInput = numOutputsPerInput; }
+
+    /**
      * Signal EOS to input surface.
      */
     status_t signalEndOfInputStream();
@@ -411,6 +416,8 @@ private:
         int64_t numProcessingBuffersBalance;
     };
     Mutexed<InputSurface> mInputSurface;
+    int32_t mNumOutputsPerInput;
+    int32_t mNumOutputsPerInputReceived;
 
     MetaMode mMetaMode;
 
