@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eb807ef_30f851ad",
+        "filename": "media/codec2/components/iamf/Android.bp",
+        "patchSetId": 40
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-25T17:22:10Z",
+      "side": 1,
+      "message": "iamf_tools already export`\"iamf/api\"`, `\"iamf/api/decoder\"`, so maybe not needed",
+      "fixSuggestions": [
+        {
+          "fixId": "2ed6594d_285f999e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/iamf/Android.bp",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c83ae77fa4771b21154fbcc92d7859bbee7ed339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c42376_8373b6fa",
+        "filename": "media/codec2/components/iamf/Android.bp",
+        "patchSetId": 40
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-25T17:22:10Z",
+      "side": 1,
+      "message": "please export this from iamf_tools. i.e. add `export_static_lib_headers: [\"libabsl\"],` at https://cs.android.com/android/platform/superproject/main/+/main:external/iamf_tools/Android.bp;drc\u003d9b60e4ae0fc4a534fcf0d86e20cf22e39c72be29;l\u003d18",
+      "fixSuggestions": [
+        {
+          "fixId": "e8099700_4c925259",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/iamf/Android.bp",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c83ae77fa4771b21154fbcc92d7859bbee7ed339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e34174a_16ae20a9",
+        "filename": "media/codec2/components/iamf/tests/Android.bp",
+        "patchSetId": 40
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-25T17:22:10Z",
+      "side": 1,
+      "message": "please also add TEST_MAPPING file at components/iamf",
+      "revId": "c83ae77fa4771b21154fbcc92d7859bbee7ed339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
