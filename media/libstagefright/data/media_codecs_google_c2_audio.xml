@@ -76,6 +76,11 @@
             <Limit name="sample-rate" ranges="1-655350" />
             <Limit name="bitrate" range="1-21000000" />
         </MediaCodec>
+        <MediaCodec name="c2.android.iamf.decoder" type="audio/iamf">
+            <Limit name="channel-count" max="18" />
+            <Limit name="sample-rate" ranges="16000, 32000, 44100, 48000, 96000" />
+            <Limit name="bitrate" range="1-21000000" />
+        </MediaCodec>
     </Decoders>
     <Encoders>
         <MediaCodec name="c2.android.aac.encoder" type="audio/mp4a-latm">
