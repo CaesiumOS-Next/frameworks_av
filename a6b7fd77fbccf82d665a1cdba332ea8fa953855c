@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41251334_e78f5780",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2025-03-25T20:45:25Z",
+      "side": 1,
+      "message": "nit: please use a static const for this in this file.",
+      "range": {
+        "startLine": 413,
+        "startChar": 86,
+        "endLine": 413,
+        "endChar": 88
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3f59f963_822ef074",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "// Tolerance (5us) during comparison to desensitize for rounding errors\nconstexpr int64_t kTimestampToleranceUs \u003d 5;\n\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 411,
+                "startChar": 0,
+                "endLine": 412,
+                "endChar": 0
+              },
+              "replacement": "        // tolerance during comparison to desensitize for rounding errors\n"
+            },
+            {
+              "path": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+              "range": {
+                "startLine": 413,
+                "startChar": 0,
+                "endLine": 414,
+                "endChar": 0
+              },
+              "replacement": "            (inputTimestampUs - mLastFrameEndTimestampUs.value_or(inputTimestampUs)) \u003e kTimestampToleranceUs) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a6b7fd77fbccf82d665a1cdba332ea8fa953855c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
