@@ -20,6 +20,131 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4aab01a_538832c9",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-03-25T22:49:41Z",
+      "side": 1,
+      "message": "this is not consistent... AudioEncoding:: or not?",
+      "range": {
+        "startLine": 199,
+        "startChar": 17,
+        "endLine": 199,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6e0c4223_57954ba1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.cpp",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": "            case AudioEncoding::kAudioEncodingPcm24bitPacked:\n"
+            },
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.cpp",
+              "range": {
+                "startLine": 202,
+                "startChar": 0,
+                "endLine": 203,
+                "endChar": 0
+              },
+              "replacement": "            case AudioEncoding::kAudioEncodingPcm32bit:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f49f8e_7fdb9c12",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-03-25T22:49:41Z",
+      "side": 1,
+      "message": "thisis not needed. find only updates this if exists.\n \n We usually use the following construct:\n \n if (!mFormat || !Format-\u003efindInt32...) {\n   mEncoding \u003d kAudio",
+      "range": {
+        "startLine": 355,
+        "startChar": 16,
+        "endLine": 355,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "337398f5_b4ae6e79",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.cpp",
+              "range": {
+                "startLine": 353,
+                "startChar": 0,
+                "endLine": 359,
+                "endChar": 0
+              },
+              "replacement": "    if (!mFormat || !mFormat-\u003efindInt32(KEY_PCM_ENCODING, \u0026mEncodeType)) {\n        mEncodeType \u003d AudioEncoding::kAudioEncodingPcm16bit;\n"
+            },
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.cpp",
+              "range": {
+                "startLine": 360,
+                "startChar": 0,
+                "endLine": 360,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d84c06_f166502b",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-03-25T22:49:41Z",
+      "side": 1,
+      "message": "we don\u0027t allow changing the encoding mid-stream and skip cut buffer code also does not, only at the very beginning.",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 29
+      },
+      "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b43550f3_ba5b338d",
         "filename": "media/codec2/sfplugin/CCodecBuffers.h",
         "patchSetId": 5
@@ -37,6 +162,67 @@
         "endLine": 396,
         "endChar": 20
       },
+      "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98745eff_7482f271",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2025-03-25T22:49:41Z",
+      "side": 1,
+      "message": "we normally call this PCM encoding, so mPcmEncoding? or mEncoding?",
+      "range": {
+        "startLine": 420,
+        "startChar": 12,
+        "endLine": 420,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ecb86231_edc62bd1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.h",
+              "range": {
+                "startLine": 396,
+                "startChar": 0,
+                "endLine": 397,
+                "endChar": 0
+              },
+              "replacement": "            int32_t encoding \u003d AudioEncoding::kAudioEncodingPcm16bit);\n"
+            },
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.h",
+              "range": {
+                "startLine": 420,
+                "startChar": 0,
+                "endLine": 421,
+                "endChar": 0
+              },
+              "replacement": "    int32_t mEncoding;\n"
+            },
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.h",
+              "range": {
+                "startLine": 423,
+                "startChar": 0,
+                "endLine": 424,
+                "endChar": 0
+              },
+              "replacement": "            int32_t encoding \u003d AudioEncoding::kAudioEncodingPcm16bit);\n"
+            }
+          ]
+        }
+      ],
       "revId": "8736f17b6e85b17d035ec065d00a3dada6ae7879",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
