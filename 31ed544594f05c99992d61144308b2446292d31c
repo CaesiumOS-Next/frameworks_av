@@ -16,6 +16,24 @@
       "message": "There should be a corresponding addition to CTS.\nThe tests as they exist didn\u0027t flag this, so we need to add a test case.",
       "revId": "31ed544594f05c99992d61144308b2446292d31c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff651b62_aae1b609",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1546599
+      },
+      "writtenOn": "2025-03-25T20:40:45Z",
+      "side": 1,
+      "message": "Keeping this open for visibility.\nVivek,\nLet us create a CL that adds this test.\nWe can land the plugin update after the test is created.",
+      "parentUuid": "d5c75a2c_56f16071",
+      "revId": "31ed544594f05c99992d61144308b2446292d31c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
