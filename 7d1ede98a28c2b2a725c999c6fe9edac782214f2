@@ -116,6 +116,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5eb83b_2208b3da",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-25T21:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a78c4b82_5ad6bd80",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 28
+      },
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26e5d444_a301bac8",
@@ -286,6 +310,30 @@
       "side": 1,
       "message": "a check like\n```\n(inputTimestampUs !\u003d mLastFrameEndTimestampUs.value_or(inputTimestampUs)))\n```\nis very sensitive to rounding errors, i have added a tolerance of 5us.",
       "parentUuid": "11029dc4_b24fd195",
+      "range": {
+        "startLine": 413,
+        "startChar": 83,
+        "endLine": 413,
+        "endChar": 90
+      },
+      "revId": "7d1ede98a28c2b2a725c999c6fe9edac782214f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4df3108d_f4f25296",
+        "filename": "media/codec2/components/aac/C2SoftAacEnc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1150374
+      },
+      "writtenOn": "2025-03-25T21:15:50Z",
+      "side": 1,
+      "message": "instead of using magic number, updated with a const expr",
+      "parentUuid": "37822121_0b4198f2",
       "range": {
         "startLine": 413,
         "startChar": 83,
