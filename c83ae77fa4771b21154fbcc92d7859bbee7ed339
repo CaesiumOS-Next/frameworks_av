@@ -73,6 +73,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcb7707d_220a7c5e",
+        "filename": "media/codec2/components/iamf/C2SoftIamfDec.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-25T17:25:04Z",
+      "side": 1,
+      "message": "please add a flag guard similar to https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/codec2/components/apv/C2SoftApvDec.cpp;drc\u003d41ed5de29ceee6c4f0faa08187aa2cc61795a6eb;l\u003d1582",
+      "revId": "c83ae77fa4771b21154fbcc92d7859bbee7ed339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e34174a_16ae20a9",
         "filename": "media/codec2/components/iamf/tests/Android.bp",
         "patchSetId": 40
