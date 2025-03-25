@@ -197,6 +197,7 @@ Descriptor::Common EffectProxy::buildDescriptorCommon(
     Descriptor::Common swCommon;
     const Flags& firstFlag = subEffectDescs[0].common.flags;
     bool offloadExist = false;
+    auto tunnelMode = Flags::HardwareAccelerator::NONE;
     for (const auto& desc : subEffectDescs) {
         if (desc.common.flags.offloadIndication) {
             offloadExist = true;
@@ -211,9 +212,14 @@ Descriptor::Common EffectProxy::buildDescriptorCommon(
             ALOGW("Inconsistent flags %s vs %s", desc.common.flags.toString().c_str(),
                   firstFlag.toString().c_str());
         }
+
+        if (desc.common.flags.hwAcceleratorMode != Flags::HardwareAccelerator::NONE) {
+            tunnelMode = desc.common.flags.hwAcceleratorMode;
+        }
     }
 
     swCommon.flags.offloadIndication = offloadExist;
+    swCommon.flags.hwAcceleratorMode = tunnelMode;
     // replace implementation UUID with proxy UUID.
     swCommon.id.uuid = uuid;
     swCommon.id.proxy = std::nullopt;
