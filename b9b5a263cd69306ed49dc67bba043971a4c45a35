@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "416b9e52_eacf064c",
+        "filename": "media/libeffects/preprocessing/aidl/PreProcessingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-03-25T17:42:48Z",
+      "side": 1,
+      "message": "I think, output should be zero-initialized just in case.",
+      "range": {
+        "startLine": 276,
+        "startChar": 38,
+        "endLine": 276,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "47a76c19_d83d2a1c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/preprocessing/aidl/PreProcessingContext.cpp",
+              "range": {
+                "startLine": 276,
+                "startChar": 0,
+                "endLine": 277,
+                "endChar": 0
+              },
+              "replacement": "    std::vector\u003cint16_t\u003e out16(samples, 0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b9b5a263cd69306ed49dc67bba043971a4c45a35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
