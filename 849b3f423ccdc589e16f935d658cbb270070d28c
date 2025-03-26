@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d43e3c6_bce99e03",
+        "filename": "media/libaudioclient/AidlConversion.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-26T11:02:27Z",
+      "side": 1,
+      "message": "Is there a reason why this can not be moved to legacy2aidl_AudioPortExt?",
+      "range": {
+        "startLine": 713,
+        "startChar": 0,
+        "endLine": 716,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "142cf2b1_e731d141",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AidlConversion.cpp",
+              "range": {
+                "startLine": 710,
+                "startChar": 0,
+                "endLine": 710,
+                "endChar": 0
+              },
+              "replacement": "    aidl.sys.activeConfig \u003d VALUE_OR_RETURN(\n            legacy2aidl_audio_port_config_AudioPortConfigFw(legacy.active_config, legacy.id));\n    aidl.sys.activeConfig.hal.portId \u003d aidl.hal.id;\n    RETURN_IF_ERROR(\n            legacy2aidl_AudioPortExt(legacy.ext, legacy.type, \u0026aidl.hal.ext, \u0026aidl.sys.ext));\n"
+            },
+            {
+              "path": "media/libaudioclient/AidlConversion.cpp",
+              "range": {
+                "startLine": 717,
+                "startChar": 0,
+                "endLine": 722,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "849b3f423ccdc589e16f935d658cbb270070d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
