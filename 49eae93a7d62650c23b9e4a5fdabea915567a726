@@ -67,6 +67,47 @@
       "message": "Hi Eric Laurent, can you help me to review again? thank you!",
       "revId": "49eae93a7d62650c23b9e4a5fdabea915567a726",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e00534_1d4de7d6",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9201,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-26T13:26:10Z",
+      "side": 1,
+      "message": "It is necessary to call setOutput device explictely after opening an output. This was done to adapt to the AIDL HAL behavior.\nIf this call is causing unecessary reconfiguration then we need to investogate a fix upper in the call chain, before calling openOutputWithProfileAndDevice() and see if opening the output with the SCO device is necessary or not. It is sometimes mandatory to do it to retrieve the available audio profiles in case of dynamic profiles, but noth sure this is still needed for AIDL HAL. also a reason why we open outputs when a device is connectedis if the output profile is not a direct output and this output profile can only be routed to SCO, it has to be opened now as otherwize it will not be opened dynamcially later.",
+      "range": {
+        "startLine": 9201,
+        "startChar": 0,
+        "endLine": 9201,
+        "endChar": 79
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "07876f31_87f9f5f9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 9201,
+                "startChar": 0,
+                "endLine": 9207,
+                "endChar": 0
+              },
+              "replacement": "        setOutputDevices(__func__, desc, devices, true, 0, NULL);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49eae93a7d62650c23b9e4a5fdabea915567a726",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
