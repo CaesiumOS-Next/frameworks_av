@@ -7600,6 +7600,9 @@ void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t &attr
             bool invalidate = false;
             for (auto client : desc->clientsList(false /*activeOnly*/)) {
                 if (desc->isDuplicated() || !desc->mProfile->isDirectOutput()) {
+                    if (mEngine->getProductStrategyForAttributes(client->attributes()) != psId) {
+                        continue;
+                    }
                     // a client on a non direct outputs has necessarily a linear PCM format
                     // so we can call selectOutput() safely
                     const audio_io_handle_t newOutput = selectOutput(dstOutputs,
