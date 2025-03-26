@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4743e881_cf2f4ba6",
+        "filename": "media/libaudiohal/impl/EffectProxy.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1527754
+      },
+      "writtenOn": "2025-03-26T05:17:16Z",
+      "side": 1,
+      "message": "for proxy effect the way offloadIndication will come from hw effect, tunnel mode is expected to come from hw effect.",
+      "revId": "0231f775e08c4b09d5516b2b9ae8aca7383e50bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
