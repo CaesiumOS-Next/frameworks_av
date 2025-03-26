@@ -16,6 +16,160 @@
       "message": "hi Eric Laurent,Shunkai Yao,Mikhail Naganov,Could you help me to review? thank you",
       "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98d16964_85f543a2",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7613,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-26T10:57:04Z",
+      "side": 1,
+      "message": "the fact that the client can still be spatialized when routed to the new device does not mean that the same spatializer output can be used. We have to make sure that the new devices can be routed to current mSpatializerOutput by checking desc-\u003emProfile-\u003egetSupportedDevices().containsAllDevices(newDevices)",
+      "range": {
+        "startLine": 7613,
+        "startChar": 0,
+        "endLine": 7613,
+        "endChar": 103
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "26804586_a739a13b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6509,
+                "startChar": 0,
+                "endLine": 6512,
+                "endChar": 0
+              },
+              "replacement": "bool AudioPolicyManager::canBeSpatializedInt(const audio_attributes_t *attr, const audio_config_t *config,\n                                             const AudioDeviceTypeAddrVector \u0026devices) const\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6540,
+                "startChar": 0,
+                "endLine": 6541,
+                "endChar": 0
+              },
+              "replacement": "        if (!audio_is_linear_pcm(config-\u003eformat) || config-\u003eformat \u003d\u003d AUDIO_FORMAT_INVALID) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6586,
+                "startChar": 0,
+                "endLine": 6587,
+                "endChar": 0
+              },
+              "replacement": "void AudioPolicyManager::checkVirtualizerClientRoutes(const audio_config_t *config) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6592,
+                "startChar": 0,
+                "endLine": 6593,
+                "endChar": 0
+              },
+              "replacement": "            DeviceVector devices \u003d mEngine-\u003egetOutputDevicesForAttributes(attr, config, false);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6595,
+                "startChar": 0,
+                "endLine": 6596,
+                "endChar": 0
+              },
+              "replacement": "            audio_config_t clientConfigCopy \u003d audio_config_initializer(\u0026clientConfig);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6597,
+                "startChar": 0,
+                "endLine": 6598,
+                "endChar": 0
+              },
+              "replacement": "                    \u0026\u0026 canBeSpatializedInt(\u0026attr, \u0026clientConfigCopy, devicesTypeAddress)) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6690,
+                "startChar": 0,
+                "endLine": 6691,
+                "endChar": 0
+              },
+              "replacement": "    checkVirtualizerClientRoutes(configPtr);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6718,
+                "startChar": 0,
+                "endLine": 6719,
+                "endChar": 0
+              },
+              "replacement": "        checkVirtualizerClientRoutes(nullptr);\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7592,
+                "startChar": 0,
+                "endLine": 7595,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7606,
+                "startChar": 0,
+                "endLine": 7617,
+                "endChar": 0
+              },
+              "replacement": "                    \n"
+            }
+          ]
+        }
+      ],
+      "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d898226a_c5183e87",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7613,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-26T10:57:04Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 7613,
+        "startChar": 0,
+        "endLine": 7613,
+        "endChar": 103
+      },
+      "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
