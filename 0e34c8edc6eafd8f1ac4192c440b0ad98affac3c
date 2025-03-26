@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1930f07f_bef997c0",
+        "filename": "media/codec2/hal/aidl/inputsurface/FrameQueueThread.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-26T16:05:42Z",
+      "side": 1,
+      "message": "nit: the next two lines can be joined",
+      "fixSuggestions": [
+        {
+          "fixId": "5e070479_33daa613",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/hal/aidl/inputsurface/FrameQueueThread.cpp",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "void FrameQueueThread::queueItems(std::deque\u003cItem\u003e \u0026items) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0e34c8edc6eafd8f1ac4192c440b0ad98affac3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277e8b08_64832a4e",
+        "filename": "media/codec2/hal/aidl/inputsurface/FrameQueueThread.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-26T16:05:42Z",
+      "side": 1,
+      "message": "please add TODO here to pass the fences to the encoder if supported",
+      "revId": "0e34c8edc6eafd8f1ac4192c440b0ad98affac3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
