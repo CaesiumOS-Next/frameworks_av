@@ -6507,8 +6507,8 @@ sp<SourceClientDescriptor> AudioPolicyManager::getSourceForAttributesOnOutput(
 }
 
 bool AudioPolicyManager::canBeSpatializedInt(const audio_attributes_t *attr,
-                                      const audio_config_t *config,
-                                      const AudioDeviceTypeAddrVector &devices)  const
+                                             const audio_config_t *config,
+                                             const AudioDeviceTypeAddrVector &devices) const
 {
     // The caller can have the audio attributes criteria ignored by either passing a null ptr or
     // the AUDIO_ATTRIBUTES_INITIALIZER value.
@@ -6537,7 +6537,7 @@ bool AudioPolicyManager::canBeSpatializedInt(const audio_attributes_t *attr,
         if (!channel_mask_spatialized) {
             return false;
         }
-        if (!audio_is_linear_pcm(config->format)) {
+        if (!audio_is_linear_pcm(config->format) || config->format == AUDIO_FORMAT_INVALID) {
             return false;
         }
         if (config->channel_mask == AUDIO_CHANNEL_OUT_STEREO
@@ -6583,18 +6583,18 @@ bool AudioPolicyManager::checkHapticCompatibilityOnSpatializerOutput(
     }
 }
 
-void AudioPolicyManager::checkVirtualizerClientRoutes() {
+void AudioPolicyManager::checkVirtualizerClientRoutes(const audio_config_t *config) {
     std::set<audio_stream_type_t> streamsToInvalidate;
     for (size_t i = 0; i < mOutputs.size(); i++) {
         const sp<SwAudioOutputDescriptor>& desc = mOutputs[i];
         for (const sp<TrackClientDescriptor>& client : desc->getClientIterable()) {
             audio_attributes_t attr = client->attributes();
-            DeviceVector devices = mEngine->getOutputDevicesForAttributes(attr, nullptr, false);
+            DeviceVector devices = mEngine->getOutputDevicesForAttributes(attr, config, false);
             AudioDeviceTypeAddrVector devicesTypeAddress = devices.toTypeAddrVector();
             audio_config_base_t clientConfig = client->config();
-            audio_config_t config = audio_config_initializer(&clientConfig);
+            audio_config_t clientConfigCopy = audio_config_initializer(&clientConfig);
             if (desc != mSpatializerOutput
-                    && canBeSpatializedInt(&attr, &config, devicesTypeAddress)) {
+                    && canBeSpatializedInt(&attr, &clientConfigCopy, devicesTypeAddress)) {
                 streamsToInvalidate.insert(client->stream());
             }
         }
@@ -6687,7 +6687,7 @@ status_t AudioPolicyManager::getSpatializerOutput(const audio_config_base_t *mix
         }
     }
 
-    checkVirtualizerClientRoutes();
+    checkVirtualizerClientRoutes(configPtr);
 
     if (outputsChanged) {
         mPreviousOutputs = mOutputs;
@@ -6715,7 +6715,7 @@ status_t AudioPolicyManager::releaseSpatializerOutput(audio_io_handle_t output) 
         ALOGV("%s closing spatializer output %d", __func__, mSpatializerOutput->mIoHandle);
         closeOutput(mSpatializerOutput->mIoHandle);
         //from now on mSpatializerOutput is null
-        checkVirtualizerClientRoutes();
+        checkVirtualizerClientRoutes(nullptr);
     }
 
     return NO_ERROR;
@@ -7589,9 +7589,6 @@ void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t &attr
         for (audio_io_handle_t srcOut : srcOutputs) {
             sp<SwAudioOutputDescriptor> desc = mPreviousOutputs.valueFor(srcOut);
             if (desc == nullptr) continue;
-            if (desc == mSpatializerOutput && newDevices == oldDevices) {
-                continue;
-            }
 
             if (desc->isStrategyActive(psId) && maxLatency < desc->latency()) {
                 maxLatency = desc->latency();
@@ -7600,6 +7597,21 @@ void AudioPolicyManager::checkOutputForAttributes(const audio_attributes_t &attr
             bool invalidate = false;
             for (auto client : desc->clientsList(false /*activeOnly*/)) {
                 if (desc->isDuplicated() || !desc->mProfile->isDirectOutput()) {
+                    if (mEngine->getProductStrategyForAttributes(client->attributes()) != psId) {
+                        continue;
+                    }
+                    if (desc == mSpatializerOutput) {
+                        audio_attributes_t attributes = client->attributes();
+                        audio_config_t config = AUDIO_CONFIG_INITIALIZER;
+                        config.sample_rate = client->config().sample_rate;
+                        config.channel_mask = client->config().channel_mask;
+                        config.format = client->config().format;
+                        if (canBeSpatializedInt(&attributes,
+                                                &config,
+                                                newDevices.toTypeAddrVector())) {
+                            continue;
+                        }
+                    }
                     // a client on a non direct outputs has necessarily a linear PCM format
                     // so we can call selectOutput() safely
                     const audio_io_handle_t newOutput = selectOutput(dstOutputs,
