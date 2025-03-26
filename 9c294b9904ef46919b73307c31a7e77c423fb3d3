@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "336147c2_90ffee0e",
+        "filename": "media/libstagefright/include/media/stagefright/PersistentSurface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-26T16:01:16Z",
+      "side": 1,
+      "message": "please document what exactly this is. Is this NDK ANativeWindow binderized?",
+      "revId": "9c294b9904ef46919b73307c31a7e77c423fb3d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b313ea_c3d77433",
+        "filename": "media/libstagefright/include/media/stagefright/PersistentSurface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-03-26T16:01:16Z",
+      "side": 1,
+      "message": "nit: please change the param name to be more descriptive",
+      "range": {
+        "startLine": 64,
+        "startChar": 37,
+        "endLine": 64,
+        "endChar": 47
+      },
+      "revId": "9c294b9904ef46919b73307c31a7e77c423fb3d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
