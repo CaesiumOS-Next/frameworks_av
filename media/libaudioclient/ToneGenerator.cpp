@@ -1323,13 +1323,16 @@ bool ToneGenerator::initAudioTrack() {
     }
     attr = AudioSystem::streamTypeToAttributes(streamType);
     attr.flags = static_cast<audio_flags_mask_t>(attr.flags | AUDIO_FLAG_LOW_LATENCY);
-
+    size_t frameCount = 0;
+    if (AudioSystem::getOutputSamplingRate(&mSamplingRate, streamType) == NO_ERROR) {
+        frameCount = (mSamplingRate * 20) / 1000;
+    }
     status_t status = mpAudioTrack->set(
             AUDIO_STREAM_DEFAULT,
             0,    // sampleRate
             AUDIO_FORMAT_PCM_16_BIT,
             AUDIO_CHANNEL_OUT_MONO,
-            0,    // frameCount
+            frameCount,
             AUDIO_OUTPUT_FLAG_NONE,
             wp<AudioTrack::IAudioTrackCallback>::fromExisting(this),
             0,    // notificationFrames
