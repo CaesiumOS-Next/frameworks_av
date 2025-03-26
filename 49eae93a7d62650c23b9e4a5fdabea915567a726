@@ -108,6 +108,30 @@
       ],
       "revId": "49eae93a7d62650c23b9e4a5fdabea915567a726",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9d172e_661bf148",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9201,
+      "author": {
+        "id": 2062957
+      },
+      "writtenOn": "2025-03-26T14:24:28Z",
+      "side": 1,
+      "message": "Hi Eric Laurent\n\nBut this time-consuming process does bring many problems. I uploaded a new log to issues/403464012. We have a pair of Bluetooth glasses called O95. When wearing it, it will connect to a2dp and sco and notify the app to play at the same time. At this time, the sound will come out from the speaker first and then switch to A2DP. In addition, if you want to switch to the sco device when connecting, isScoRequestedForComm will be true. If you choose sco after sco is connected, setDevicesRoleForStrategy-\u003eupdateCallAndOutputRouting-\u003esetOutputDevices will be triggered to switch to the sco device.",
+      "parentUuid": "31e00534_1d4de7d6",
+      "range": {
+        "startLine": 9201,
+        "startChar": 0,
+        "endLine": 9201,
+        "endChar": 79
+      },
+      "revId": "49eae93a7d62650c23b9e4a5fdabea915567a726",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
