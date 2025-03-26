@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1177fa1a_fff809dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-03-26T21:57:58Z",
+      "side": 1,
+      "message": "moved to git_main resolving comments.",
+      "revId": "9c294b9904ef46919b73307c31a7e77c423fb3d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "336147c2_90ffee0e",
