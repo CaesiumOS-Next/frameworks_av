@@ -50,6 +50,115 @@
       "message": "Oi",
       "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66314dcf_bce34ce8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-26T10:33:01Z",
+      "side": 1,
+      "message": "The fraemwount returned by the audio framework should be",
+      "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5427dd50_09541d7f",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-26T10:33:01Z",
+      "side": 1,
+      "message": "We should define this duyration in a constant that is used here and at line 1357",
+      "range": {
+        "startLine": 1328,
+        "startChar": 38,
+        "endLine": 1328,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "aa673655_30a520a5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/ToneGenerator.cpp",
+              "range": {
+                "startLine": 1328,
+                "startChar": 0,
+                "endLine": 1329,
+                "endChar": 0
+              },
+              "replacement": "        frameCount \u003d (mSamplingRate * kCadenceMs) / 1000;\n"
+            },
+            {
+              "path": "media/libaudioclient/ToneGenerator.cpp",
+              "range": {
+                "startLine": 1356,
+                "startChar": 0,
+                "endLine": 1358,
+                "endChar": 0
+              },
+              "replacement": "    // Generate tone by chunks of kCadenceMs ms to keep cadencing precision\n    mProcessSize \u003d (mSamplingRate * kCadenceMs) / 1000;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec41de20_3eb33789",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-26T10:33:01Z",
+      "side": 1,
+      "message": "use mSamplingRate then if set at line 1327",
+      "range": {
+        "startLine": 1332,
+        "startChar": 0,
+        "endLine": 1332,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7083c7b8_02153112",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/ToneGenerator.cpp",
+              "range": {
+                "startLine": 1332,
+                "startChar": 0,
+                "endLine": 1333,
+                "endChar": 0
+              },
+              "replacement": "            mSamplingRate,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
