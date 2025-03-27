@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea6af78_0b3ee7fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-03-27T08:16:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9aefb81_e1c7959c",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "849b3f423ccdc589e16f935d658cbb270070d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d43e3c6_bce99e03",
@@ -161,6 +185,30 @@
       "side": 1,
       "message": "Yes, I think so.",
       "parentUuid": "692ac3fc_6e69e1c8",
+      "range": {
+        "startLine": 713,
+        "startChar": 0,
+        "endLine": 716,
+        "endChar": 5
+      },
+      "revId": "849b3f423ccdc589e16f935d658cbb270070d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0f3e4f_86cf7e3f",
+        "filename": "media/libaudioclient/AidlConversion.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-03-27T08:16:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "172a9cf2_2c4f3a82",
       "range": {
         "startLine": 713,
         "startChar": 0,
