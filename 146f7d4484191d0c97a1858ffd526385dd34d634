@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d79cae9_abaab5af",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-27T07:22:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "5427dd50_09541d7f",
+      "range": {
+        "startLine": 1328,
+        "startChar": 38,
+        "endLine": 1328,
+        "endChar": 40
+      },
+      "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec41de20_3eb33789",
@@ -157,6 +181,54 @@
           ]
         }
       ],
+      "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d967755d_d7dd9e58",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-27T07:22:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ec41de20_3eb33789",
+      "range": {
+        "startLine": 1332,
+        "startChar": 0,
+        "endLine": 1332,
+        "endChar": 31
+      },
+      "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a40330_f4166768",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-27T07:22:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ec41de20_3eb33789",
+      "range": {
+        "startLine": 1332,
+        "startChar": 0,
+        "endLine": 1332,
+        "endChar": 31
+      },
       "revId": "146f7d4484191d0c97a1858ffd526385dd34d634",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
