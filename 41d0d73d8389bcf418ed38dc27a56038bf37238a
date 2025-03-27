@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b518065_dbf15061",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-03-27T04:58:52Z",
+      "side": 1,
+      "message": "Should we remove encoding here?\nSince channelcount is not passed in here?",
+      "revId": "41d0d73d8389bcf418ed38dc27a56038bf37238a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ecb2b4_4123b16d",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-03-27T04:58:52Z",
+      "side": 1,
+      "message": "Here mChannelCount is used\nShould we instead remove \"encoding\" as an input to setSkipCutBuffer and instead use mEncoding?",
+      "range": {
+        "startLine": 420,
+        "startChar": 65,
+        "endLine": 420,
+        "endChar": 78
+      },
+      "revId": "41d0d73d8389bcf418ed38dc27a56038bf37238a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
