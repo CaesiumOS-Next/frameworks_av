@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5af7aa1c_6d2bf535",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-03-27T08:26:35Z",
+      "side": 1,
+      "message": "I removed encoding as input for the places where we didn\u0027t have channel as input\nRebuilt and tested it and at least for playback for the testcontent we have to test this pcm float issue it sounds fine.",
+      "parentUuid": "0b518065_dbf15061",
+      "revId": "41d0d73d8389bcf418ed38dc27a56038bf37238a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1ecb2b4_4123b16d",
         "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2025-03-27T04:58:52Z",
       "side": 1,
       "message": "Here mChannelCount is used\nShould we instead remove \"encoding\" as an input to setSkipCutBuffer and instead use mEncoding?",
+      "range": {
+        "startLine": 420,
+        "startChar": 65,
+        "endLine": 420,
+        "endChar": 78
+      },
+      "revId": "41d0d73d8389bcf418ed38dc27a56038bf37238a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa7ae775_5fbcc638",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-03-27T08:26:35Z",
+      "side": 1,
+      "message": "I removed encoding as input for the places where we didn\u0027t have channel as input\nRebuilt and tested it and at least for playback for the testcontent we have to test this pcm float issue it sounds fine.",
+      "parentUuid": "c1ecb2b4_4123b16d",
       "range": {
         "startLine": 420,
         "startChar": 65,
