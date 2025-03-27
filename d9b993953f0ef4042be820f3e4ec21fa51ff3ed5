@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dbc16d9_9d4d2fd2",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1951601
+      },
+      "writtenOn": "2025-03-27T18:19:32Z",
+      "side": 1,
+      "message": "nit: Since if statement takes care of the defualt value, this assignment isn\u0027t required.",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e2640b35_39e2ec15",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/CCodecBuffers.cpp",
+              "range": {
+                "startLine": 355,
+                "startChar": 0,
+                "endLine": 356,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d9b993953f0ef4042be820f3e4ec21fa51ff3ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
