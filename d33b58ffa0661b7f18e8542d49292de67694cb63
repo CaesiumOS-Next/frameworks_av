@@ -218,6 +218,30 @@
       },
       "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf68f905_33e02754",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7613,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-27T12:12:58Z",
+      "side": 1,
+      "message": "canBeSpatializedInt will navigate to the getSpatializerOutputProfile method based on the incoming new device, ensuring that the new device can be routed to the current mSpaceizerOutput in the getSpatializerOutputProfile method",
+      "parentUuid": "661f63be_1e3946e3",
+      "range": {
+        "startLine": 7613,
+        "startChar": 0,
+        "endLine": 7613,
+        "endChar": 103
+      },
+      "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
