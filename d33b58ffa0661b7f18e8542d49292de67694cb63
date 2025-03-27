@@ -242,6 +242,30 @@
       },
       "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a52fa7_ac7023b0",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7613,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-27T14:05:14Z",
+      "side": 1,
+      "message": "\"ensuring that the new device can be routed to the current mSpaceizerOutput in the getSpatializerOutputProfile method\"\nThis not true: getSpatializerOutputProfile() just makes sure a valid profile exists for sptail audio and that it supports the devices provided. But we do not check that this is the same profile as mSpatializerOutput-\u003emProfile. If several output profiles support spatialization (which is true for a device where the SW encoder path for BT supports spatial audio and the primary HAL also supports spatial audio) then we may have to move the spatialized audio tracks from mSpatializerOutput to another one",
+      "parentUuid": "bf68f905_33e02754",
+      "range": {
+        "startLine": 7613,
+        "startChar": 0,
+        "endLine": 7613,
+        "endChar": 103
+      },
+      "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
