@@ -799,8 +799,13 @@ void convertPlanar8ToP210(uint16_t *dstY, uint16_t *dstUV,
     return;
   }
 
-  for (int32_t y = 0; y < height; ++y) {
-    for (int32_t x = 0; x < width; ++x) {
+  if (!dstY || !dstUV || !srcY || !srcU || !srcV) {
+    ALOGE("Invalid input pointers");
+    return;
+  }
+
+  for (uint32_t y = 0; y < height; ++y) {
+    for (uint32_t x = 0; x < width; ++x) {
       dstY[x] = ((uint16_t)((double)srcY[x] * 1023 / 255 + 0.5) << 6) & 0xFFC0;
     }
     dstY += dstYStride;
