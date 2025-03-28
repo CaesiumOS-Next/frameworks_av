@@ -3375,7 +3375,9 @@ void EffectChain::EffectCallback::checkSuspendOnEffectEnabled(const sp<IAfEffect
         return;
     }
     // in EffectChain context, an EffectBase is always from an EffectModule so static cast is safe
+    t->mutex().lock();
     c->checkSuspendOnEffectEnabled_l(effect->asEffectModule(), enabled);
+    t->mutex().unlock();
 }
 
 void EffectChain::EffectCallback::onEffectEnable(const sp<IAfEffectBase>& effect) {
