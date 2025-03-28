@@ -20,6 +20,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25abada9_015f4e06",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7592,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-28T11:40:02Z",
+      "side": 1,
+      "message": "why remove this? If there is no device change, what other criteria would make that we need to invlaidate the output? A difference in auido formats supported by the profile?",
+      "range": {
+        "startLine": 7592,
+        "startChar": 0,
+        "endLine": 7592,
+        "endChar": 73
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "81971117_dfc0cd93",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 7592,
+                "startChar": 0,
+                "endLine": 7595,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d33b58ffa0661b7f18e8542d49292de67694cb63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98d16964_85f543a2",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 1

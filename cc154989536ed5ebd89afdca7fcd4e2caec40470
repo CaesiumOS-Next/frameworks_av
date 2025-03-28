@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1da942a1_0c7053e6",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6540,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-28T11:40:02Z",
+      "side": 1,
+      "message": "audio_is_linear_pcm(foramt) cannot be TRUE if format \u003d\u003d AUDIO_FORMAT_INVALID",
+      "range": {
+        "startLine": 6540,
+        "startChar": 52,
+        "endLine": 6540,
+        "endChar": 90
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bf70219a_b1c3b2f9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6540,
+                "startChar": 0,
+                "endLine": 6541,
+                "endChar": 0
+              },
+              "replacement": "        if (!audio_is_linear_pcm(config-\u003eformat)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cc154989536ed5ebd89afdca7fcd4e2caec40470",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7486dc27_cdade83f",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6592,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-28T11:40:02Z",
+      "side": 1,
+      "message": "getOutputDevicesForAttributes takes a sp\u003cDeviceDescriptor\u003e as 2nd argument and here you pass a const audio_config_t *config?\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/engine/interface/EngineInterface.h;l\u003d160?q\u003dgetOutputDevicesForAttributes\n\nPlease explain what you are trying to do.",
+      "range": {
+        "startLine": 6592,
+        "startChar": 80,
+        "endLine": 6592,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cf013667_e61866de",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6586,
+                "startChar": 0,
+                "endLine": 6587,
+                "endChar": 0
+              },
+              "replacement": "void AudioPolicyManager::checkVirtualizerClientRoutes(const audio_config_base_t *config) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6594,
+                "startChar": 0,
+                "endLine": 6596,
+                "endChar": 0
+              },
+              "replacement": "            audio_config_t clientConfig \u003d audio_config_initializer(\u0026client-\u003econfig());\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6597,
+                "startChar": 0,
+                "endLine": 6598,
+                "endChar": 0
+              },
+              "replacement": "                    \u0026\u0026 canBeSpatializedInt(\u0026attr, \u0026clientConfig, devicesTypeAddress)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cc154989536ed5ebd89afdca7fcd4e2caec40470",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
