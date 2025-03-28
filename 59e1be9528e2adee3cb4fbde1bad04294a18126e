@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "587063dc_22904376",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+        "patchSetId": 19
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-28T11:21:22Z",
+      "side": 1,
+      "message": "shioldn;t we also have a method to init the min and max values of the volume group by Id?\nI know for non legacy volume groups the range is defined in the volume group devinition but for legacy groups, the rnage is forced by AudioService. So for a full trnasition to volume group API between AudioService and APM we need an init method for group IDs.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 7
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ddef0d18_c6371a1e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 147,
+                "endChar": 0
+              },
+              "replacement": "    /**\n     * @FlaggedApi(\"android.media.audiopolicy.volume_group_management_update\")\n     */\n    void initVolumeGroupVolume(int /* volume_group_id */ groupId,\n                                int indexMin,\n                                int indexMax);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "59e1be9528e2adee3cb4fbde1bad04294a18126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22099112_35677492",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 19
