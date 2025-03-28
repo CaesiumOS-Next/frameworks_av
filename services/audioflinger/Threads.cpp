@@ -2140,6 +2140,14 @@ void ThreadBase::stopMelComputation_l()
     ALOGW("%s: ThreadBase does not support CSD", __func__);
 }
 
+void ThreadBase::AcquireThreadBaseLock() {
+    mMutex.lock();
+}
+
+void ThreadBase::ReleaseThreadBaseLock() {
+    mMutex.unlock();
+}
+
 // ----------------------------------------------------------------------------
 //      Playback
 // ----------------------------------------------------------------------------
