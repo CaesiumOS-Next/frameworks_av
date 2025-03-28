@@ -104,6 +104,29 @@
       },
       "revId": "59e1be9528e2adee3cb4fbde1bad04294a18126e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3679979_fa9f90cc",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 3895,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-28T11:10:35Z",
+      "side": 1,
+      "message": "we can also refactor this on top of getVolumeIndexForGroup like we did for setVolumeIndexForAttributes",
+      "range": {
+        "startLine": 3895,
+        "startChar": 29,
+        "endLine": 3895,
+        "endChar": 56
+      },
+      "revId": "59e1be9528e2adee3cb4fbde1bad04294a18126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
