@@ -42,6 +42,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "085b4ef2_0c5b2b3c",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-28T09:25:34Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "f96a89a4_cb9124bb",
+      "range": {
+        "startLine": 1330,
+        "startChar": 24,
+        "endLine": 1330,
+        "endChar": 29
+      },
+      "revId": "864311b1a3338e3f923f9e7ea82b50db2c4f7bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc852a6b_f186b251",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-28T09:25:34Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "f96a89a4_cb9124bb",
+      "range": {
+        "startLine": 1330,
+        "startChar": 24,
+        "endLine": 1330,
+        "endChar": 29
+      },
+      "revId": "864311b1a3338e3f923f9e7ea82b50db2c4f7bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee4c2455_3b7ceda9",
@@ -79,6 +127,54 @@
           ]
         }
       ],
+      "revId": "864311b1a3338e3f923f9e7ea82b50db2c4f7bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "376ea1b2_82004057",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-28T09:25:34Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ee4c2455_3b7ceda9",
+      "range": {
+        "startLine": 1357,
+        "startChar": 4,
+        "endLine": 1357,
+        "endChar": 59
+      },
+      "revId": "864311b1a3338e3f923f9e7ea82b50db2c4f7bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b844c7e_61b9c494",
+        "filename": "media/libaudioclient/ToneGenerator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-03-28T09:25:34Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ee4c2455_3b7ceda9",
+      "range": {
+        "startLine": 1357,
+        "startChar": 4,
+        "endLine": 1357,
+        "endChar": 59
+      },
       "revId": "864311b1a3338e3f923f9e7ea82b50db2c4f7bde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
