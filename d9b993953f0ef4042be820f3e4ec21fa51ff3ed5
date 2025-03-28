@@ -40,6 +40,30 @@
       ],
       "revId": "d9b993953f0ef4042be820f3e4ec21fa51ff3ed5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "208d21aa_e109d617",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-03-28T06:07:19Z",
+      "side": 1,
+      "message": "Sorry, sloppy by me",
+      "parentUuid": "0dbc16d9_9d4d2fd2",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 54
+      },
+      "revId": "d9b993953f0ef4042be820f3e4ec21fa51ff3ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
