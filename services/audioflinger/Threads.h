@@ -580,6 +580,9 @@ public:
     // Used to print the header for the local log on a particular thread type
     virtual std::string getLocalLogHeader() const { return {}; };
 
+    void AcquireThreadBaseLock() EXCLUSIVE_LOCK_FUNCTION(mMutex);
+    void ReleaseThreadBaseLock() UNLOCK_FUNCTION(mMutex);
+
 protected:
 
                 // entry describing an effect being suspended in mSuspendedSessions keyed vector
