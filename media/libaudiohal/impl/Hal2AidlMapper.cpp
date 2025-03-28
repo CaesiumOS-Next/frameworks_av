@@ -1176,8 +1176,7 @@ status_t Hal2AidlMapper::updateRoutes() {
 }
 
 void Hal2AidlMapper::updateDynamicMixPorts() {
-    const auto dynamicMixPortIds = mDynamicMixPortIds;
-    for (int32_t portId : dynamicMixPortIds) {
+    for (int32_t portId : mDynamicMixPortIds) {
         if (auto it = mPorts.find(portId); it != mPorts.end()) {
             updateAudioPort(portId, &it->second);
         } else {
