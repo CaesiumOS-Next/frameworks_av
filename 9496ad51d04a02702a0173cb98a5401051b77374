@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed481d06_1f8b330f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-31T15:58:30Z",
+      "side": 1,
+      "message": "thanks for the submission, some comments.",
+      "revId": "9496ad51d04a02702a0173cb98a5401051b77374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820a6323_7219a9c9",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3366,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-31T15:58:30Z",
+      "side": 1,
+      "message": "this is one of the methods we needed to consider carefully on a rewrite.  can we remove this and enable thread safety on the method?",
+      "range": {
+        "startLine": 3366,
+        "startChar": 8,
+        "endLine": 3366,
+        "endChar": 33
+      },
+      "revId": "9496ad51d04a02702a0173cb98a5401051b77374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8af4c90_4c142131",
+        "filename": "services/audioflinger/IAfThread.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-03-31T15:58:30Z",
+      "side": 1,
+      "message": "suggest using this instead.",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 0
+      },
+      "revId": "9496ad51d04a02702a0173cb98a5401051b77374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
