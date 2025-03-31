@@ -152,6 +152,24 @@
       "message": "Hi AOSP teams, this change does not seem to meet the \"Code-Review\" criteria. What do I need to do?",
       "revId": "6914877e6e96fdc453bb6b663e1f78f7016c0c4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203f642d_a61ba519",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-03-31T13:20:39Z",
+      "side": 1,
+      "message": "We cannot merge changes into AOSP anymore.\nWe are cherry-picking this change to internal gerrit and will update buganizer when done",
+      "parentUuid": "76c3b11e_56b2c070",
+      "revId": "6914877e6e96fdc453bb6b663e1f78f7016c0c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
