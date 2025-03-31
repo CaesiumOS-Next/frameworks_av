@@ -170,6 +170,23 @@
       "parentUuid": "76c3b11e_56b2c070",
       "revId": "6914877e6e96fdc453bb6b663e1f78f7016c0c4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6faedc_fea918a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2025-03-31T13:28:15Z",
+      "side": 1,
+      "message": "Hi Eric Laurent, will this be the model in the future? We submit the isuee and the initial changes, and you cherry-pick and merge them into AOSP?",
+      "revId": "6914877e6e96fdc453bb6b663e1f78f7016c0c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
