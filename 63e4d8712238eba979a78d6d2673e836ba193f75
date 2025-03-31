@@ -16,6 +16,23 @@
       "message": "hi Andy Hung,Shunkai Yao,please review +1/2 and submit, because \"Two Google employees must approve the change.\", thank you",
       "revId": "63e4d8712238eba979a78d6d2673e836ba193f75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1fb0c23_04b46300",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-03-31T20:28:29Z",
+      "side": 1,
+      "message": "Thanks for the contribution!\nHowever I think `aosp-main` does not accept change merge now:\nhttps://source.android.com/docs/whatsnew/site-updates#aosp-changes",
+      "revId": "63e4d8712238eba979a78d6d2673e836ba193f75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
