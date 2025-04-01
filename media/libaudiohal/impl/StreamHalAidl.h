@@ -20,7 +20,8 @@
 #include <memory>
 #include <mutex>
 #include <string_view>
-
+#include <queue>
+#include <condition_variable>
 #include <aidl/android/hardware/audio/common/AudioOffloadMetadata.h>
 #include <aidl/android/hardware/audio/core/BpStreamCommon.h>
 #include <aidl/android/hardware/audio/core/BpStreamIn.h>
@@ -41,6 +42,28 @@ using ::aidl::android::hardware::audio::common::AudioOffloadMetadata;
 using ::aidl::android::hardware::audio::core::MmapBufferDescriptor;
 
 namespace android {
+
+class FairLock {
+public:
+    void lock() {
+        std::unique_lock<std::mutex> lk(mtx);
+        uint64_t my_seq = next_seq++;
+        queue.push(my_seq);
+        cv.wait(lk, [&] { return queue.front() == my_seq; });
+    }
+
+    void unlock() {
+        std::lock_guard<std::mutex> lk(mtx);
+        queue.pop();
+        cv.notify_all();
+    }
+
+private:
+    std::mutex mtx;
+    std::condition_variable cv;
+    std::queue<uint64_t> queue;
+    std::atomic<uint64_t> next_seq{0};
+};
 
 class StreamContextAidl {
   public:
