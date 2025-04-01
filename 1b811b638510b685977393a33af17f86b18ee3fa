@@ -16,6 +16,23 @@
       "message": "hi Eric Laurent,Shunkai Yao,Mikhail Naganov,Could you help me to review and merge? thank you",
       "revId": "1b811b638510b685977393a33af17f86b18ee3fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cf2a921_ebc8b6cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-01T09:21:38Z",
+      "side": 1,
+      "message": "no need to CP to this branch, it is read only.\nReviews will happen on main branch only",
+      "revId": "1b811b638510b685977393a33af17f86b18ee3fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
