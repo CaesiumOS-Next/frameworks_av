@@ -559,7 +559,7 @@ status_t StreamHalAidl::exit() {
 void StreamHalAidl::onAsyncTransferReady() {
     StreamDescriptor::State state;
     {
-        // Use 'mCommandReplyLock' to ensure that 'sendCommand' has finished updating the state
+        // Use 'mCommandReplyLockFair' to ensure that 'sendCommand' has finished updating the state
         // after the reply from the 'burst' command.
         std::lock_guard l(mCommandReplyLock);
         state = getState();
@@ -577,7 +577,7 @@ void StreamHalAidl::onAsyncTransferReady() {
 void StreamHalAidl::onAsyncDrainReady() {
     StreamDescriptor::State state;
     {
-        // Use 'mCommandReplyLock' to ensure that 'sendCommand' has finished updating the state
+        // Use 'mCommandReplyLockFair' to ensure that 'sendCommand' has finished updating the state
         // after the reply from the 'drain' command.
         std::lock_guard l(mCommandReplyLock);
         state = getState();
