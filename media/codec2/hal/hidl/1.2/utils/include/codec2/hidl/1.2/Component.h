@@ -153,6 +153,7 @@ protected:
 
     friend struct MultiAccessUnitListener;
 
+    bool  mRelease;
     using HwDeathRecipient = ::android::hardware::hidl_death_recipient;
     sp<HwDeathRecipient> mDeathRecipient;
     bool mClientDied{false};

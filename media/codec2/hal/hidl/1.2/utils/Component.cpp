@@ -267,6 +267,7 @@ Component::Component(
     mInterface = new ComponentInterface(
             component->intf(), mMultiAccessUnitIntf, store->getParameterCache());
     mInit = mInterface->status();
+    mRelease = false;
 }
 
 c2_status_t Component::status() const {
@@ -568,6 +569,7 @@ Return<Status> Component::release() {
         bqInvalidateItem = std::make_shared<C2BqPoolInvalidateItem>(std::move(bqPools));
         C2BqPoolInvalidator::getInstance().queue(bqInvalidateItem);
     }
+    mRelease = true;
     Status status = static_cast<Status>(mComponent->release());
     if (bqInvalidateItem) {
         // If release is not blocked,
@@ -710,6 +712,8 @@ Component::~Component() {
                 std::make_shared<C2BqPoolInvalidateItem>(std::move(bqPools));
         C2BqPoolInvalidator::getInstance().queue(bqInvalidateItem);
     }
+    if (!mRelease)
+        mComponent->release();
     InputBufferManager::unregisterFrameData(mListener);
     mStore->reportComponentDeath(this);
 }
