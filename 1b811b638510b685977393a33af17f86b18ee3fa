@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b73afac3_7beaff58",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-01T15:32:24Z",
+      "side": 1,
+      "message": "That\u0027s a reproduction symptom and it lacks a lot of details: which app is used for the VoIP call, which app is used for spatial audio, what kind of content does it play, etc, so it\u0027s not very helpful. I would suggest providing an automated test via https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "1b811b638510b685977393a33af17f86b18ee3fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0452564c_1fc45fe7",
