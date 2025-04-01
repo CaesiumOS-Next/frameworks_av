@@ -664,7 +664,7 @@ status_t StreamHalAidl::sendCommand(
     }
     StreamDescriptor::Reply localReply{};
     {
-        std::lock_guard l(mCommandReplyLock);
+        std::lock_guard<FairLock> lock(mCommandReplyLockFair);
         if (!mContext.getCommandMQ()->writeBlocking(&command, 1)) {
             AUGMENT_LOG(E, "failed to write command %s to MQ", command.toString().c_str());
             return NOT_ENOUGH_DATA;
