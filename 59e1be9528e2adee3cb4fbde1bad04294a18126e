@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7873fbdb_7b2f2e59",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 3718,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-04-01T14:12:11Z",
+      "side": 1,
+      "message": "agree, one check is enougth. But in this case, need to dispatch option attributes input param to setVolumeGroupVolumeIndex",
+      "parentUuid": "22099112_35677492",
+      "range": {
+        "startLine": 3718,
+        "startChar": 0,
+        "endLine": 3718,
+        "endChar": 37
+      },
+      "revId": "59e1be9528e2adee3cb4fbde1bad04294a18126e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4efcbebf_2bebf830",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 19
