@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb3b4c7_c46496bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2025-04-01T02:56:03Z",
+      "side": 1,
+      "message": "Hi AOSP team, can you help me to review? thank you!\nhttps://source.android.com/docs/whatsnew/site-updates?year\u003d2025",
+      "revId": "db359a0697166efdaab3b7cdfbe3362c9ff0cd5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
