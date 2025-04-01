@@ -392,6 +392,10 @@ private:
 
     void *mCodecSpecificData;
     size_t mCodecSpecificDataSize;
+
+    void *mCodecSpecificDataLHVC;
+    size_t mCodecSpecificDataSizeLHVC;
+
     bool mGotAllCodecSpecificData;
     bool mTrackingProgressStatus;
 
@@ -432,6 +436,8 @@ private:
         const uint8_t *data, size_t length, int type, size_t *paramSetLen);
 
     status_t copyCodecSpecificData(const uint8_t *data, size_t size, size_t minLength = 0);
+
+    status_t copyCodecSpecificDataLHVC(const uint8_t *data, size_t size, size_t minLength = 0);
 
     status_t makeAVCCodecSpecificData(const uint8_t *data, size_t size);
     status_t copyAVCCodecSpecificData(const uint8_t *data, size_t size);
@@ -481,6 +487,15 @@ private:
     void writePaspBox();
     void writeAvccBox();
     void writeHvccBox();
+
+    void writeLhvcBox();
+    void writeVexuBox();
+    void writeEyesBox();
+    void writeCamsBox();
+    void writeCmfyBox();
+    void writeProjBox();
+    void writeHfovBox();
+
     void writeAv1cBox();
     void writeApvcBox();
     void writeDoviConfigBox();
@@ -2248,6 +2263,8 @@ MPEG4Writer::Track::Track(
       mDoviProfile(0),
       mCodecSpecificData(NULL),
       mCodecSpecificDataSize(0),
+      mCodecSpecificDataLHVC(NULL),
+      mCodecSpecificDataSizeLHVC(0),
       mGotAllCodecSpecificData(false),
       mReachedEOS(false),
       mStartTimestampUs(-1),
@@ -2710,14 +2727,17 @@ void MPEG4Writer::Track::getCodecSpecificDataFromInputFormatIfPossible() {
 
     CHECK(mMeta->findCString(kKeyMIMEType, &mime));
 
-    uint32_t type;
+    uint32_t type, typeLHVC;
     const void *data = NULL;
+    const void *dataLHVC = NULL;
     size_t size = 0;
+    size_t sizeLHVC = 0;
     if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC)) {
         mMeta->findData(kKeyAVCC, &type, &data, &size);
     } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
                !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC)) {
         mMeta->findData(kKeyHVCC, &type, &data, &size);
+        mMeta->findData(kKeyLHVC, &typeLHVC, &dataLHVC, &sizeLHVC);
     } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AV1) ||
                !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_AVIF)) {
         mMeta->findData(kKeyAV1C, &type, &data, &size);
@@ -2745,6 +2765,8 @@ void MPEG4Writer::Track::getCodecSpecificDataFromInputFormatIfPossible() {
     }
     if (data != NULL && copyCodecSpecificData((uint8_t *)data, size) == OK) {
         mGotAllCodecSpecificData = true;
+        if (dataLHVC != NULL && copyCodecSpecificDataLHVC((uint8_t *)dataLHVC, sizeLHVC) != OK)
+             mGotAllCodecSpecificData = false;
     }
 }
 
@@ -2771,7 +2793,10 @@ MPEG4Writer::Track::~Track() {
         free(mCodecSpecificData);
         mCodecSpecificData = NULL;
     }
-
+    if (mCodecSpecificDataLHVC != NULL) {
+        free(mCodecSpecificDataLHVC);
+        mCodecSpecificDataLHVC = NULL;
+    }
 }
 
 void MPEG4Writer::Track::initTrackingProgressStatus(MetaData *params) {
@@ -3186,6 +3211,24 @@ status_t MPEG4Writer::Track::copyCodecSpecificData(
     }
     mCodecSpecificDataSize = size;
     memcpy(mCodecSpecificData, data, size);
+    return OK;
+}
+
+status_t MPEG4Writer::Track::copyCodecSpecificDataLHVC(
+        const uint8_t *data, size_t size, size_t minLength){
+    ALOGD("copy lhvc data： %d", size);
+    if (size < minLength) {
+        ALOGE("Codec specific data length too short: %zu", size);
+        return ERROR_MALFORMED;
+    }
+
+    mCodecSpecificDataLHVC = malloc(size);
+    if (mCodecSpecificDataLHVC == NULL) {
+        ALOGE("Failed allocating codec specific data");
+        return NO_MEMORY;
+    }
+    mCodecSpecificDataSizeLHVC = size;
+    memcpy(mCodecSpecificDataLHVC, data, size);
     return OK;
 }
 
@@ -4527,6 +4570,11 @@ void MPEG4Writer::Track::writeVideoFourCCBox() {
         writeAvccBox();
     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_HEVC, mime)) {
         writeHvccBox();
+        if(mCodecSpecificDataSizeLHVC > 0){
+            writeLhvcBox();
+            writeVexuBox();
+            writeHfovBox();
+        }
     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_AV1, mime)) {
         writeAv1cBox();
     } else if (editing_flags::muxer_mp4_enable_apv() &&
@@ -5112,6 +5160,82 @@ void MPEG4Writer::Track::writeHvccBox() {
     mOwner->beginBox("hvcC");
     mOwner->write(mCodecSpecificData, mCodecSpecificDataSize);
     mOwner->endBox();  // hvcC
+}
+
+void MPEG4Writer::Track::writeLhvcBox() {
+    CHECK(mCodecSpecificDataLHVC);
+    CHECK_GE(mCodecSpecificDataSizeLHVC, 5u);
+    ALOGI("write lhvc box : %d",mCodecSpecificDataSizeLHVC);
+    // Patch hvcc's lengthSize field to match the number
+    // of bytes we use to indicate the size of a nal unit.
+    uint8_t *ptr = (uint8_t *)mCodecSpecificDataLHVC;
+    ptr[4] = (ptr[4] & 0xfc) | (mOwner->useNalLengthFour() ? 3 : 1);
+    mOwner->beginBox("lhvC");
+    mOwner->write(mCodecSpecificDataLHVC, mCodecSpecificDataSizeLHVC);
+    mOwner->endBox();  // lhvC
+}
+
+void MPEG4Writer::Track:: writeEyesBox(){
+    int32_t value = 0;
+    mMeta->findInt32(kKeyMvHevcStri, &value);
+    mOwner->beginBox("eyes");
+    mOwner->beginBox("stri");
+    mOwner->writeInt32(0);
+    mOwner->writeInt8(value);
+    mOwner->endBox();
+    writeCamsBox();
+    writeCmfyBox();
+    mOwner->endBox();
+    ALOGD("writeEyesBox value:%d",value);
+}
+void MPEG4Writer::Track:: writeCamsBox(){
+    int32_t value = 0;
+    if(mMeta->findInt32(kKeyMvHevcBlin, &value)){
+        mOwner->beginBox("cams");
+        mOwner->beginBox("blin");
+        mOwner->writeInt32(0);
+        mOwner->writeInt32(value);
+        mOwner->endBox();
+        mOwner->endBox();
+        ALOGD("writeCamsBox value:%d",value);
+    }
+}
+void MPEG4Writer::Track:: writeCmfyBox(){
+    int32_t value = 0;
+    mMeta->findInt32(kKeyMvHevcDadj, &value);
+    mOwner->beginBox("cmfy");
+    mOwner->beginBox("dadj");
+    mOwner->writeInt32(0);
+    mOwner->writeInt32(value);
+    mOwner->endBox();
+    mOwner->endBox();
+    ALOGD("writeCmfyBox value:%d",value);
+}
+void MPEG4Writer::Track:: writeProjBox(){
+    const char *value = "none";
+    mMeta->findCString(kKeyMvHevcPrji, &value);
+    mOwner->beginBox("proj");
+    mOwner->beginBox("prji");
+    mOwner->writeInt32(0);
+    mOwner->writeFourcc(value);
+    mOwner->endBox();
+    mOwner->endBox();
+    ALOGD("writeProjBox value:%s",value);
+}
+void MPEG4Writer::Track::writeVexuBox(){
+    mOwner->beginBox("vexu");
+    writeEyesBox();
+    writeProjBox();
+    mOwner->endBox();
+}
+
+void MPEG4Writer::Track::writeHfovBox(){
+    int32_t value = 0;
+    mMeta->findInt32(kKeyMvHevcHfov, &value);
+    mOwner->beginBox("hfov");
+    mOwner->writeInt32(value);
+    mOwner->endBox();
+    ALOGD("writeHfovBox value:%d",value);
 }
 
 void MPEG4Writer::Track::writeAv1cBox() {
