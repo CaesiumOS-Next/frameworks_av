@@ -59,6 +59,7 @@ enum {
     kKeyAACProfile        = 'aacp',  // int32_t
     kKeyAVCC              = 'avcc',  // raw data
     kKeyHVCC              = 'hvcc',  // raw data
+    kKeyLHVC              = 'lhvc',  // raw data
     kKeyDVCC              = 'dvcc',  // raw data
     kKeyDVVC              = 'dvvc',  // raw data
     kKeyDVWC              = 'dvwc',  // raw data
@@ -297,12 +298,21 @@ enum {
 
     // DVB teletext page number
     kKeyDvbTeletextPageNumber = 'ttxp', // int32_t, DVB teletext page number
+
+    //MV-HEVC indetifier and metadata
+    kKeyMvHevcIdentifier = 'mhvc', // int32_t(bool), MV-HEVC indetifier
+    kKeyMvHevcStri = 'stri',       // int32_t, MV-HEVC stri  1:left 2:right 3:both
+    kKeyMvHevcBlin = 'blin',       // int32_t, MV-HEVC IPD
+    kKeyMvHevcDadj = 'dadj',       // int32_t, MV-HEVC Disparity Adjustment
+    kKeyMvHevcHfov = 'hfov',       // int32_t, MV-HEVC Field of View
+    kKeyMvHevcPrji = 'prji',       // cstring, MV-HEVC Projection kind
 };
 
 enum {
     kTypeESDS        = 'esds',
     kTypeAVCC        = 'avcc',
     kTypeHVCC        = 'hvcc',
+    kTypeLHVC        = 'lhvc',
     kTypeAV1C        = 'av1c',
     kTypeDVCC        = 'dvcc',
     kTypeDVVC        = 'dvvc',

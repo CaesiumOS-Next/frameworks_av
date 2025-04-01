@@ -789,6 +789,7 @@ static std::vector<std::pair<const char *, uint32_t>> stringMappings {
         { "manufacturer", kKeyManufacturer },
         { "title", kKeyTitle },
         { "year", kKeyYear },
+        { "prji",  kKeyMvHevcPrji },
     }
 };
 
@@ -837,6 +838,11 @@ static std::vector<std::pair<const char *, uint32_t>> int32Mappings {
         { "dvb-teletext-page-number", kKeyDvbTeletextPageNumber},
         { "profile", kKeyAudioProfile },
         { "level", kKeyAudioLevel },
+        { "mv-hevc", kKeyMvHevcIdentifier },
+        { "hfov", kKeyMvHevcHfov },
+        { "dadj", kKeyMvHevcDadj },
+        { "blin", kKeyMvHevcBlin },
+        { "stri", kKeyMvHevcStri },
     }
 };
 
