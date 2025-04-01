@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db7b727_8b519b17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-01T15:29:06Z",
+      "side": 1,
+      "message": "Could you please provide more details about your testing methodology. How can I reproduce this issue on a Pixel phone? I suggest creating a bug where you can supply your test data and reference it in this CL.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 251
+      },
+      "revId": "d3e0bacd4cbcf9d1f587940659b4321d60511ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef49967_f1c7fa53",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-01T15:29:06Z",
+      "side": 1,
+      "message": "That\u0027s very interesting. Could you please provide links to the theory behind the proposed mechanism. Also, this is likely not the best place for it. It should probably be placed in `system/media/audio_utils` along with tests.",
+      "revId": "d3e0bacd4cbcf9d1f587940659b4321d60511ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
