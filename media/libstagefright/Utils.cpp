@@ -314,6 +314,61 @@ static void parseDolbyVisionProfileLevelFromDvcc(const uint8_t *ptr, size_t size
     }
 }
 
+static void parseLHVC(sp<ABuffer> *buffer, const uint8_t *ptr, size_t size){
+
+        if (size < 6 || (ptr[0] != 1 && ptr[0] != 0)) {
+            // configurationVersion == 1 or 0
+            // 1 is what the standard dictates, but some old muxers may have used 0.
+            ALOGE("b/23680780");
+            return ;
+        }
+
+        ptr += 5;
+        size -= 5;
+
+        size_t numofArrays = (char)ptr[0];
+        ptr += 1;
+        size -= 1;
+        size_t j = 0, i = 0;
+
+        for (i = 0; i < numofArrays; i++) {
+            if (size < 3) {
+                ALOGE("b/23680780");
+                return;
+            }
+            ptr += 1;
+            size -= 1;
+
+            //Num of nals
+            size_t numofNals = U16_AT(ptr);
+
+            ptr += 2;
+            size -= 2;
+
+            for (j = 0; j < numofNals; j++) {
+                if (size < 2) {
+                    ALOGE("b/23680780");
+                    return;
+                }
+                size_t length = U16_AT(ptr);
+
+                ptr += 2;
+                size -= 2;
+
+                if (size < length) {
+                    return;
+                }
+                status_t err = copyNALUToABuffer(buffer, ptr, length);
+                if (err != OK) {
+                    return;
+                }
+
+                ptr += length;
+                size -= length;
+            }
+        }
+}
+
 static void parseH263ProfileLevelFromD263(const uint8_t *ptr, size_t size, sp<AMessage> &format) {
     if (size < 7) {
         return;
@@ -1415,7 +1470,6 @@ status_t convertMetaDataToMessage(
         }
         buffer->meta()->setInt32("csd", true);
         buffer->meta()->setInt64("timeUs", 0);
-        msg->setBuffer("csd-0", buffer);
 
         // if we saw VUI color information we know whether this is HDR because VUI trumps other
         // format parameters for HEVC.
@@ -1475,6 +1529,12 @@ status_t convertMetaDataToMessage(
         }
 
         parseHevcProfileLevelFromHvcc((const uint8_t *)data, dataSize, msg);
+
+        if( meta->findData(kKeyLHVC, &type, &data, &size)){
+            parseLHVC(&buffer, (const uint8_t *)data, size);
+        }
+        msg->setBuffer("csd-0", buffer);
+
     } else if (meta->findData(kKeyAV1C, &type, &data, &size)) {
         sp<ABuffer> buffer = new (std::nothrow) ABuffer(size);
         if (buffer.get() == NULL || buffer->base() == NULL) {
@@ -2409,6 +2469,12 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
     } else if ((mime == MEDIA_MIMETYPE_VIDEO_HEVC || mime == MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC)
             && msg->findBuffer("csd-hevc", &csd0)) {
         meta->setData(kKeyHVCC, kTypeHVCC, csd0->data(), csd0->size());
+
+        if(msg->findBuffer("csd-lhvc", &csd1)){
+            ALOGD("[%s] csd-lhvc found", __func__);
+            meta->setData(kKeyLHVC, kTypeLHVC, csd1->data(), csd1->size());
+        }
+
     } else if (msg->findBuffer("esds", &csd0)) {
         meta->setData(kKeyESDS, kTypeESDS, csd0->data(), csd0->size());
     } else if (msg->findBuffer("mpeg2-stream-header", &csd0)) {

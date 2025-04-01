@@ -151,6 +151,7 @@ private:
     bool mIsAPV;
     bool mIsDolbyVision;
     bool mIsAC4;
+    int32_t mIsMVHevc;
     bool mIsMpegH = false;
     bool mIsPcm;
     size_t mNALLengthSize;
@@ -2583,6 +2584,105 @@ status_t MPEG4Extractor::parseChunk(off64_t *offset, int depth) {
                     AMEDIAFORMAT_KEY_CSD_AVC, buffer.get(), chunk_data_size);
 
             break;
+        }
+        case FOURCC("lhvC"):
+        {
+            ALOGV("found lhvc, set mhvc indetifier to track");
+            *offset += chunk_size;
+            auto buffer = heapbuffer<uint8_t>(chunk_data_size);
+
+            if (buffer.get() == NULL) {
+                ALOGE("b/28471206");
+                return NO_MEMORY;
+            }
+
+            if (mDataSource->readAt(
+                        data_offset, buffer.get(), chunk_data_size) < chunk_data_size) {
+                return ERROR_IO;
+            }
+
+            if (mLastTrack == NULL)
+                return ERROR_MALFORMED;
+            AMediaFormat_setInt32(mLastTrack->meta, "mv-hevc", 1);
+            AMediaFormat_setBuffer(mLastTrack->meta,
+                    "csd-lhvc", buffer.get(), chunk_data_size);
+            break;
+        }
+        case FOURCC("vexu"):
+        case FOURCC("eyes"):
+        case FOURCC("cams"):
+        case FOURCC("cmfy"):
+        case FOURCC("proj"):
+        {
+            off64_t stop_offset = *offset + chunk_size;
+            *offset = data_offset;
+            while (*offset < stop_offset) {
+                status_t err = parseChunk(offset, depth + 1);
+                if(err != OK)
+                    return err;
+             }
+             if (*offset != stop_offset) {
+                 return ERROR_MALFORMED;
+             }
+             break;
+        }
+        case FOURCC("stri"):
+        {
+            *offset += chunk_size;
+            uint8_t buffer[5];
+            if (mDataSource->readAt(
+                     data_offset, buffer, sizeof(buffer)) < (ssize_t)sizeof(buffer)) {
+                return ERROR_IO;
+            }
+            AMediaFormat_setInt32(mLastTrack->meta, "stri", buffer[4]);
+            ALOGV("stri: %d",buffer[4]);
+            break;
+        }
+        case FOURCC("dadj"):
+        {
+            *offset += chunk_size;
+            uint32_t value;
+            if (mDataSource->readAt(data_offset + 4, &value, 4) < 4) {
+                return ERROR_IO;
+            }
+            AMediaFormat_setInt32(mLastTrack->meta, "dadj", ntohl(value));
+            ALOGV("dadj:%d",ntohl(value));
+            break;
+        }
+        case FOURCC("blin"):
+        {
+            *offset += chunk_size;
+            uint32_t value;
+            if (mDataSource->readAt(data_offset + 4, &value, 4) < 4) {
+                return ERROR_IO;
+            }
+            AMediaFormat_setInt32(mLastTrack->meta, "blin", ntohl(value));
+            ALOGV("blin:%d",ntohl(value));
+            break;
+        }
+        case FOURCC("prji"):
+        {
+            *offset += chunk_size;
+            char chunk[5];
+            uint32_t value;
+            if (mDataSource->readAt(data_offset + 4, &value, 4) < 4) {
+                return ERROR_IO;
+            }
+            MakeFourCCString(ntohl(value), chunk);
+            ALOGV("prji:%s",chunk);
+            AMediaFormat_setString(mLastTrack->meta, "prji", chunk);
+            break;
+        }
+        case FOURCC("hfov"):
+        {
+            *offset += chunk_size;
+             uint32_t value;
+             if (mDataSource->readAt(data_offset, &value, 4) < 4) {
+                 return ERROR_IO;
+             }
+             AMediaFormat_setInt32(mLastTrack->meta, "hfov", ntohl(value));
+             ALOGV("hfov:%d",ntohl(value));
+             break;
         }
         case FOURCC("hvcC"):
         {
@@ -5193,6 +5293,7 @@ MPEG4Source::MPEG4Source(
       mCurrentSampleInfoOffsets(NULL),
       mIsAVC(false),
       mIsHEVC(false),
+      mIsMVHevc(0),
       mIsAPV(false),
       mIsDolbyVision(false),
       mIsAC4(false),
@@ -5226,6 +5327,7 @@ MPEG4Source::MPEG4Source(
             AMEDIAFORMAT_KEY_CRYPTO_ENCRYPTED_BYTE_BLOCK, &mDefaultEncryptedByteBlock);
     AMediaFormat_getInt32(mFormat,
             AMEDIAFORMAT_KEY_CRYPTO_SKIP_BYTE_BLOCK, &mDefaultSkipByteBlock);
+    AMediaFormat_getInt32(mFormat, "mv-hevc", &mIsMVHevc);
 
     const char *mime;
     bool success = AMediaFormat_getString(mFormat, AMEDIAFORMAT_KEY_MIME, &mime);
@@ -6633,49 +6735,52 @@ media_status_t MPEG4Source::read(
         uint8_t *dstData = (uint8_t *)mBuffer->data();
         size_t srcOffset = 0;
         size_t dstOffset = 0;
+        if(mIsMVHevc){
+             memcpy(dstData, mSrcBuffer, size);
+             mBuffer->set_range(0, size);
+        } else {
+            while (srcOffset < size) {
+                bool isMalFormed = !isInRange((size_t)0u, size, srcOffset, mNALLengthSize);
+                size_t nalLength = 0;
+                if (!isMalFormed) {
+                    nalLength = parseNALSize(&mSrcBuffer[srcOffset]);
+                    srcOffset += mNALLengthSize;
+                    isMalFormed = !isInRange((size_t)0u, size, srcOffset, nalLength);
+                }
 
-        while (srcOffset < size) {
-            bool isMalFormed = !isInRange((size_t)0u, size, srcOffset, mNALLengthSize);
-            size_t nalLength = 0;
-            if (!isMalFormed) {
-                nalLength = parseNALSize(&mSrcBuffer[srcOffset]);
-                srcOffset += mNALLengthSize;
-                isMalFormed = !isInRange((size_t)0u, size, srcOffset, nalLength);
+                if (isMalFormed) {
+                    //if nallength abnormal,ignore it.
+                    ALOGW("abnormal nallength, ignore this NAL");
+                    srcOffset = size;
+                    break;
+                }
+
+                if (nalLength == 0) {
+                    continue;
+                }
+
+                if (dstOffset > SIZE_MAX - 4 ||
+                        dstOffset + 4 > SIZE_MAX - nalLength ||
+                        dstOffset + 4 + nalLength > mBuffer->size()) {
+                    ALOGE("b/27208621 : %zu %zu", dstOffset, mBuffer->size());
+                    android_errorWriteLog(0x534e4554, "27208621");
+                    mBuffer->release();
+                    mBuffer = NULL;
+                    return AMEDIA_ERROR_MALFORMED;
+                }
+
+                dstData[dstOffset++] = 0;
+                dstData[dstOffset++] = 0;
+                dstData[dstOffset++] = 0;
+                dstData[dstOffset++] = 1;
+                memcpy(&dstData[dstOffset], &mSrcBuffer[srcOffset], nalLength);
+                srcOffset += nalLength;
+                dstOffset += nalLength;
             }
-
-            if (isMalFormed) {
-                //if nallength abnormal,ignore it.
-                ALOGW("abnormal nallength, ignore this NAL");
-                srcOffset = size;
-                break;
-            }
-
-            if (nalLength == 0) {
-                continue;
-            }
-
-            if (dstOffset > SIZE_MAX - 4 ||
-                    dstOffset + 4 > SIZE_MAX - nalLength ||
-                    dstOffset + 4 + nalLength > mBuffer->size()) {
-                ALOGE("b/27208621 : %zu %zu", dstOffset, mBuffer->size());
-                android_errorWriteLog(0x534e4554, "27208621");
-                mBuffer->release();
-                mBuffer = NULL;
-                return AMEDIA_ERROR_MALFORMED;
-            }
-
-            dstData[dstOffset++] = 0;
-            dstData[dstOffset++] = 0;
-            dstData[dstOffset++] = 0;
-            dstData[dstOffset++] = 1;
-            memcpy(&dstData[dstOffset], &mSrcBuffer[srcOffset], nalLength);
-            srcOffset += nalLength;
-            dstOffset += nalLength;
+            CHECK_EQ(srcOffset, size);
+            CHECK(mBuffer != NULL);
+            mBuffer->set_range(0, dstOffset);
         }
-        CHECK_EQ(srcOffset, size);
-        CHECK(mBuffer != NULL);
-        mBuffer->set_range(0, dstOffset);
-
         AMediaFormat *meta = mBuffer->meta_data();
         AMediaFormat_clear(meta);
         AMediaFormat_setInt64(
