@@ -1,0 +1,75 @@
+From b7802511a7dd5b0b310e4763d58a5a6d17d82064 Mon Sep 17 00:00:00 2001
+From: liujingsong <liujingsong.nw@bytedance.com>
+Date: Tue, 1 Apr 2025 16:15:39 +0800
+Subject: [PATCH] add metadata for MV-HEVC
+
+define lhvc for CSD of sencond layer and vexu for spatial meta
+
+Change-Id: I49c29f8a178f34068d7868eb58219bd610f2dd0b
+Signed-off-by: liujingsong <liujingsong.nw@bytedance.com>
+---
+ media/libstagefright/Utils.cpp                         |  6 ++++++
+ .../include/media/stagefright/MetaDataBase.h           | 10 ++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/media/libstagefright/Utils.cpp b/media/libstagefright/Utils.cpp
+index 11c21b812b..da59c7cfbe 100644
+--- a/media/libstagefright/Utils.cpp
++++ b/media/libstagefright/Utils.cpp
+@@ -789,6 +789,7 @@ static std::vector<std::pair<const char *, uint32_t>> stringMappings {
+         { "manufacturer", kKeyManufacturer },
+         { "title", kKeyTitle },
+         { "year", kKeyYear },
++        { "prji",  kKeyMvHevcPrji },
+     }
+ };
+ 
+@@ -837,6 +838,11 @@ static std::vector<std::pair<const char *, uint32_t>> int32Mappings {
+         { "dvb-teletext-page-number", kKeyDvbTeletextPageNumber},
+         { "profile", kKeyAudioProfile },
+         { "level", kKeyAudioLevel },
++        { "mv-hevc", kKeyMvHevcIdentifier },
++        { "hfov", kKeyMvHevcHfov },
++        { "dadj", kKeyMvHevcDadj },
++        { "blin", kKeyMvHevcBlin },
++        { "stri", kKeyMvHevcStri },
+     }
+ };
+ 
+diff --git a/media/libstagefright/include/media/stagefright/MetaDataBase.h b/media/libstagefright/include/media/stagefright/MetaDataBase.h
+index 9dce55bf65..30a86f94e8 100644
+--- a/media/libstagefright/include/media/stagefright/MetaDataBase.h
++++ b/media/libstagefright/include/media/stagefright/MetaDataBase.h
+@@ -59,6 +59,7 @@ enum {
+     kKeyAACProfile        = 'aacp',  // int32_t
+     kKeyAVCC              = 'avcc',  // raw data
+     kKeyHVCC              = 'hvcc',  // raw data
++    kKeyLHVC              = 'lhvc',  // raw data
+     kKeyDVCC              = 'dvcc',  // raw data
+     kKeyDVVC              = 'dvvc',  // raw data
+     kKeyDVWC              = 'dvwc',  // raw data
+@@ -297,12 +298,21 @@ enum {
+ 
+     // DVB teletext page number
+     kKeyDvbTeletextPageNumber = 'ttxp', // int32_t, DVB teletext page number
++
++    //MV-HEVC indetifier and metadata
++    kKeyMvHevcIdentifier = 'mhvc', // int32_t(bool), MV-HEVC indetifier
++    kKeyMvHevcStri = 'stri',       // int32_t, MV-HEVC stri  1:left 2:right 3:both
++    kKeyMvHevcBlin = 'blin',       // int32_t, MV-HEVC IPD
++    kKeyMvHevcDadj = 'dadj',       // int32_t, MV-HEVC Disparity Adjustment
++    kKeyMvHevcHfov = 'hfov',       // int32_t, MV-HEVC Field of View
++    kKeyMvHevcPrji = 'prji',       // cstring, MV-HEVC Projection kind
+ };
+ 
+ enum {
+     kTypeESDS        = 'esds',
+     kTypeAVCC        = 'avcc',
+     kTypeHVCC        = 'hvcc',
++    kTypeLHVC        = 'lhvc',
+     kTypeAV1C        = 'av1c',
+     kTypeDVCC        = 'dvcc',
+     kTypeDVVC        = 'dvvc',
+-- 
+2.25.1
+

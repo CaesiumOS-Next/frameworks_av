@@ -1,0 +1,319 @@
+From 2d44558066cb63e114e3ed36a0eb4054807e8203 Mon Sep 17 00:00:00 2001
+From: liujingsong <liujingsong.nw@bytedance.com>
+Date: Tue, 1 Apr 2025 16:20:23 +0800
+Subject: [PATCH] mvhevc: add muxer
+
+Change-Id: I84ff8e552934799cd0094e61dccb7ad37c513f38
+Signed-off-by: liujingsong <liujingsong.nw@bytedance.com>
+---
+ media/libstagefright/MPEG4Writer.cpp | 128 ++++++++++++++++++++++++++-
+ media/libstagefright/Utils.cpp       |  77 ++++++++++++++++
+ 2 files changed, 203 insertions(+), 2 deletions(-)
+
+diff --git a/media/libstagefright/MPEG4Writer.cpp b/media/libstagefright/MPEG4Writer.cpp
+index 1cf60786ac..cc56648f42 100644
+--- a/media/libstagefright/MPEG4Writer.cpp
++++ b/media/libstagefright/MPEG4Writer.cpp
+@@ -392,6 +392,10 @@ private:
+ 
+     void *mCodecSpecificData;
+     size_t mCodecSpecificDataSize;
++
++    void *mCodecSpecificDataLHVC;
++    size_t mCodecSpecificDataSizeLHVC;
++
+     bool mGotAllCodecSpecificData;
+     bool mTrackingProgressStatus;
+ 
+@@ -433,6 +437,8 @@ private:
+ 
+     status_t copyCodecSpecificData(const uint8_t *data, size_t size, size_t minLength = 0);
+ 
++    status_t copyCodecSpecificDataLHVC(const uint8_t *data, size_t size, size_t minLength = 0);
++
+     status_t makeAVCCodecSpecificData(const uint8_t *data, size_t size);
+     status_t copyAVCCodecSpecificData(const uint8_t *data, size_t size);
+     status_t parseAVCCodecSpecificData(const uint8_t *data, size_t size);
+@@ -481,6 +487,15 @@ private:
+     void writePaspBox();
+     void writeAvccBox();
+     void writeHvccBox();
++
++    void writeLhvcBox();
++    void writeVexuBox();
++    void writeEyesBox();
++    void writeCamsBox();
++    void writeCmfyBox();
++    void writeProjBox();
++    void writeHfovBox();
++
+     void writeAv1cBox();
+     void writeApvcBox();
+     void writeDoviConfigBox();
+@@ -2248,6 +2263,8 @@ MPEG4Writer::Track::Track(
+       mDoviProfile(0),
+       mCodecSpecificData(NULL),
+       mCodecSpecificDataSize(0),
++      mCodecSpecificDataLHVC(NULL),
++      mCodecSpecificDataSizeLHVC(0),
+       mGotAllCodecSpecificData(false),
+       mReachedEOS(false),
+       mStartTimestampUs(-1),
+@@ -2710,14 +2727,17 @@ void MPEG4Writer::Track::getCodecSpecificDataFromInputFormatIfPossible() {
+ 
+     CHECK(mMeta->findCString(kKeyMIMEType, &mime));
+ 
+-    uint32_t type;
++    uint32_t type, typeLHVC;
+     const void *data = NULL;
++    const void *dataLHVC = NULL;
+     size_t size = 0;
++    size_t sizeLHVC = 0;
+     if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC)) {
+         mMeta->findData(kKeyAVCC, &type, &data, &size);
+     } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
+                !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC)) {
+         mMeta->findData(kKeyHVCC, &type, &data, &size);
++        mMeta->findData(kKeyLHVC, &typeLHVC, &dataLHVC, &sizeLHVC);
+     } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AV1) ||
+                !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_AVIF)) {
+         mMeta->findData(kKeyAV1C, &type, &data, &size);
+@@ -2745,6 +2765,8 @@ void MPEG4Writer::Track::getCodecSpecificDataFromInputFormatIfPossible() {
+     }
+     if (data != NULL && copyCodecSpecificData((uint8_t *)data, size) == OK) {
+         mGotAllCodecSpecificData = true;
++        if (dataLHVC != NULL && copyCodecSpecificDataLHVC((uint8_t *)dataLHVC, sizeLHVC) != OK)
++             mGotAllCodecSpecificData = false;
+     }
+ }
+ 
+@@ -2771,7 +2793,10 @@ MPEG4Writer::Track::~Track() {
+         free(mCodecSpecificData);
+         mCodecSpecificData = NULL;
+     }
+-
++    if (mCodecSpecificDataLHVC != NULL) {
++        free(mCodecSpecificDataLHVC);
++        mCodecSpecificDataLHVC = NULL;
++    }
+ }
+ 
+ void MPEG4Writer::Track::initTrackingProgressStatus(MetaData *params) {
+@@ -3189,6 +3214,24 @@ status_t MPEG4Writer::Track::copyCodecSpecificData(
+     return OK;
+ }
+ 
++status_t MPEG4Writer::Track::copyCodecSpecificDataLHVC(
++        const uint8_t *data, size_t size, size_t minLength){
++    ALOGD("copy lhvc data： %d", size);
++    if (size < minLength) {
++        ALOGE("Codec specific data length too short: %zu", size);
++        return ERROR_MALFORMED;
++    }
++
++    mCodecSpecificDataLHVC = malloc(size);
++    if (mCodecSpecificDataLHVC == NULL) {
++        ALOGE("Failed allocating codec specific data");
++        return NO_MEMORY;
++    }
++    mCodecSpecificDataSizeLHVC = size;
++    memcpy(mCodecSpecificDataLHVC, data, size);
++    return OK;
++}
++
+ status_t MPEG4Writer::Track::parseAVCCodecSpecificData(
+         const uint8_t *data, size_t size) {
+ 
+@@ -4527,6 +4570,11 @@ void MPEG4Writer::Track::writeVideoFourCCBox() {
+         writeAvccBox();
+     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_HEVC, mime)) {
+         writeHvccBox();
++        if(mCodecSpecificDataSizeLHVC > 0){
++            writeLhvcBox();
++            writeVexuBox();
++            writeHfovBox();
++        }
+     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_AV1, mime)) {
+         writeAv1cBox();
+     } else if (editing_flags::muxer_mp4_enable_apv() &&
+@@ -5114,6 +5162,82 @@ void MPEG4Writer::Track::writeHvccBox() {
+     mOwner->endBox();  // hvcC
+ }
+ 
++void MPEG4Writer::Track::writeLhvcBox() {
++    CHECK(mCodecSpecificDataLHVC);
++    CHECK_GE(mCodecSpecificDataSizeLHVC, 5u);
++    ALOGI("write lhvc box : %d",mCodecSpecificDataSizeLHVC);
++    // Patch hvcc's lengthSize field to match the number
++    // of bytes we use to indicate the size of a nal unit.
++    uint8_t *ptr = (uint8_t *)mCodecSpecificDataLHVC;
++    ptr[4] = (ptr[4] & 0xfc) | (mOwner->useNalLengthFour() ? 3 : 1);
++    mOwner->beginBox("lhvC");
++    mOwner->write(mCodecSpecificDataLHVC, mCodecSpecificDataSizeLHVC);
++    mOwner->endBox();  // lhvC
++}
++
++void MPEG4Writer::Track:: writeEyesBox(){
++    int32_t value = 0;
++    mMeta->findInt32(kKeyMvHevcStri, &value);
++    mOwner->beginBox("eyes");
++    mOwner->beginBox("stri");
++    mOwner->writeInt32(0);
++    mOwner->writeInt8(value);
++    mOwner->endBox();
++    writeCamsBox();
++    writeCmfyBox();
++    mOwner->endBox();
++    ALOGD("writeEyesBox value:%d",value);
++}
++void MPEG4Writer::Track:: writeCamsBox(){
++    int32_t value = 0;
++    if(mMeta->findInt32(kKeyMvHevcBlin, &value)){
++        mOwner->beginBox("cams");
++        mOwner->beginBox("blin");
++        mOwner->writeInt32(0);
++        mOwner->writeInt32(value);
++        mOwner->endBox();
++        mOwner->endBox();
++        ALOGD("writeCamsBox value:%d",value);
++    }
++}
++void MPEG4Writer::Track:: writeCmfyBox(){
++    int32_t value = 0;
++    mMeta->findInt32(kKeyMvHevcDadj, &value);
++    mOwner->beginBox("cmfy");
++    mOwner->beginBox("dadj");
++    mOwner->writeInt32(0);
++    mOwner->writeInt32(value);
++    mOwner->endBox();
++    mOwner->endBox();
++    ALOGD("writeCmfyBox value:%d",value);
++}
++void MPEG4Writer::Track:: writeProjBox(){
++    const char *value = "none";
++    mMeta->findCString(kKeyMvHevcPrji, &value);
++    mOwner->beginBox("proj");
++    mOwner->beginBox("prji");
++    mOwner->writeInt32(0);
++    mOwner->writeFourcc(value);
++    mOwner->endBox();
++    mOwner->endBox();
++    ALOGD("writeProjBox value:%s",value);
++}
++void MPEG4Writer::Track::writeVexuBox(){
++    mOwner->beginBox("vexu");
++    writeEyesBox();
++    writeProjBox();
++    mOwner->endBox();
++}
++
++void MPEG4Writer::Track::writeHfovBox(){
++    int32_t value = 0;
++    mMeta->findInt32(kKeyMvHevcHfov, &value);
++    mOwner->beginBox("hfov");
++    mOwner->writeInt32(value);
++    mOwner->endBox();
++    ALOGD("writeHfovBox value:%d",value);
++}
++
+ void MPEG4Writer::Track::writeAv1cBox() {
+     CHECK(mCodecSpecificData);
+     CHECK_GE(mCodecSpecificDataSize, 4u);
+diff --git a/media/libstagefright/Utils.cpp b/media/libstagefright/Utils.cpp
+index da59c7cfbe..67f981a9df 100644
+--- a/media/libstagefright/Utils.cpp
++++ b/media/libstagefright/Utils.cpp
+@@ -1744,6 +1744,75 @@ static void reassembleESDS(const sp<ABuffer> &csd0, char *esds) {
+     // data following this is ignored, so don't bother appending it
+ }
+ 
++
++static size_t reassembleLHVC(const sp<ABuffer> &csd0, uint8_t *lhvc, size_t lhvcSize, size_t nalSizeLength) {
++    uint32_t SPS_PPS_MAX_LENGTH = 100;
++    uint8_t* data = csd0->data();
++    std::vector<uint8_t> sps(SPS_PPS_MAX_LENGTH);
++    std::vector<uint8_t> pps(SPS_PPS_MAX_LENGTH);
++    uint32_t offset = 0;
++    uint32_t spsSize = 0;
++    uint32_t ppsSize = 0;
++    if (csd0->size() < 4) {
++        ALOGE("csd lhvc too small");
++        return 0;
++    }
++    if (memcmp(data, "\x00\x00\x00\x01", 4) != 0) {
++        ALOGE("csd0 doesn't start with a start code");
++        return 0;
++    }
++    size_t prevNalOffset = 4;
++    status_t err = OK;
++    ALOGI("lhvc:");
++    for (size_t i = 1; i < csd0->size() - 4; ++i) {
++        if (memcmp(&data[i], "\x00\x00\x00\x01", 4) != 0) {
++            continue;
++        }
++        if(data[prevNalOffset] == 0x42){
++            spsSize = i - prevNalOffset;
++            if(spsSize < SPS_PPS_MAX_LENGTH){
++                memcpy(sps.data(), &data[prevNalOffset], spsSize);
++            }
++        }
++
++        //err = paramSets.addNalUnit(&data[prevNalOffset], i - prevNalOffset);
++        prevNalOffset = i + 4;
++    }
++    if(data[prevNalOffset] == 0x44){
++        ppsSize = csd0->size() - prevNalOffset;
++        if(ppsSize < SPS_PPS_MAX_LENGTH){
++            memcpy(pps.data(), &data[prevNalOffset],ppsSize);
++        }
++    }
++    lhvc[0] = 0x01;
++    lhvc[1] = 0xF0;
++    lhvc[2] = 0x00;
++    lhvc[3] = 0xFC;
++    lhvc[4] = 0xCB;
++    lhvc[5] = 0x02;
++
++    offset += 6;
++    lhvc[6] = 0xA1;
++    lhvc[7] = 0x00;
++    lhvc[8] = 0x01;
++    lhvc[9] = (spsSize >> 8) & 0xff;
++    lhvc[10] = spsSize & 0xff;
++
++    offset += 5;
++    memcpy(lhvc+offset, sps.data(), spsSize);
++    offset += spsSize;
++
++    lhvc[offset] = 0xA2;
++    lhvc[offset+1] = 0x00;
++    lhvc[offset+2] = 0x01;
++    lhvc[offset+3] = (ppsSize >> 8) & 0xff;
++    lhvc[offset+4] = ppsSize & 0xff;
++    offset +=5;
++
++    memcpy(lhvc+offset, pps.data(), ppsSize);
++    return offset+ppsSize;
++}
++
+ static size_t reassembleHVCC(const sp<ABuffer> &csd0, uint8_t *hvcc, size_t hvccSize, size_t nalSizeLength) {
+     HevcParameterSets paramSets;
+     uint8_t* data = csd0->data();
+@@ -2143,6 +2212,14 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
+             std::vector<uint8_t> hvcc(csd0size + 1024);
+             size_t outsize = reassembleHVCC(csd0, hvcc.data(), hvcc.size(), 4);
+             meta->setData(kKeyHVCC, kTypeHVCC, hvcc.data(), outsize);
++
++            sp<ABuffer> csdlhvC;
++            if(msg->findBuffer("csd-lhvc", &csdlhvC)){
++                std::vector<uint8_t> lvcc(csdlhvC->size() + 1024);
++                ALOGV("reassemblehvcC: %d",csdlhvC->size());
++                size_t outsizelhvc = reassembleLHVC(csdlhvC, lvcc.data(), lvcc.size(), 4);
++                meta->setData(kKeyLHVC, kTypeLHVC, lvcc.data(), outsizelhvc);
++            }
+         } else if (mime == MEDIA_MIMETYPE_VIDEO_AV1 ||
+                    mime == MEDIA_MIMETYPE_IMAGE_AVIF) {
+             meta->setData(kKeyAV1C, 0, csd0->data(), csd0->size());
+-- 
+2.25.1
+
