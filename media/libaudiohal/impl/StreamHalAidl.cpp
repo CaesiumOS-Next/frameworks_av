@@ -561,7 +561,7 @@ void StreamHalAidl::onAsyncTransferReady() {
     {
         // Use 'mCommandReplyLock' to ensure that 'sendCommand' has finished updating the state
         // after the reply from the 'burst' command.
-        std::lock_guard l(mCommandReplyLock);
+        std::lock_guard l(mCommandReplyLockFair);
         state = getState();
     }
     if (state == StreamDescriptor::State::TRANSFERRING) {
@@ -579,7 +579,7 @@ void StreamHalAidl::onAsyncDrainReady() {
     {
         // Use 'mCommandReplyLock' to ensure that 'sendCommand' has finished updating the state
         // after the reply from the 'drain' command.
-        std::lock_guard l(mCommandReplyLock);
+        std::lock_guard l(mCommandReplyLockFair);
         state = getState();
     }
     if (state == StreamDescriptor::State::DRAINING) {
@@ -664,7 +664,7 @@ status_t StreamHalAidl::sendCommand(
     }
     StreamDescriptor::Reply localReply{};
     {
-        std::lock_guard l(mCommandReplyLock);
+        std::lock_guard<audio_utils::FairLock> lock(mCommandReplyLockFair);
         if (!mContext.getCommandMQ()->writeBlocking(&command, 1)) {
             AUGMENT_LOG(E, "failed to write command %s to MQ", command.toString().c_str());
             return NOT_ENOUGH_DATA;
