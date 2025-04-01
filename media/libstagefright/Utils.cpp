@@ -1738,6 +1738,75 @@ static void reassembleESDS(const sp<ABuffer> &csd0, char *esds) {
     // data following this is ignored, so don't bother appending it
 }
 
+
+static size_t reassembleLHVC(const sp<ABuffer> &csd0, uint8_t *lhvc) {
+    uint32_t SPS_PPS_MAX_LENGTH = 100;
+    uint8_t* data = csd0->data();
+    std::vector<uint8_t> sps(SPS_PPS_MAX_LENGTH);
+    std::vector<uint8_t> pps(SPS_PPS_MAX_LENGTH);
+    uint32_t offset = 0;
+    uint32_t spsSize = 0;
+    uint32_t ppsSize = 0;
+    if (csd0->size() < 4) {
+        ALOGE("csd lhvc too small");
+        return 0;
+    }
+    if (memcmp(data, "\x00\x00\x00\x01", 4) != 0) {
+        ALOGE("csd0 doesn't start with a start code");
+        return 0;
+    }
+    size_t prevNalOffset = 4;
+    status_t err = OK;
+    ALOGI("lhvc:");
+    for (size_t i = 1; i < csd0->size() - 4; ++i) {
+        if (memcmp(&data[i], "\x00\x00\x00\x01", 4) != 0) {
+            continue;
+        }
+        if(data[prevNalOffset] == 0x42){
+            spsSize = i - prevNalOffset;
+            if(spsSize < SPS_PPS_MAX_LENGTH){
+                memcpy(sps.data(), &data[prevNalOffset], spsSize);
+            }
+        }
+
+        //err = paramSets.addNalUnit(&data[prevNalOffset], i - prevNalOffset);
+        prevNalOffset = i + 4;
+    }
+    if(data[prevNalOffset] == 0x44){
+        ppsSize = csd0->size() - prevNalOffset;
+        if(ppsSize < SPS_PPS_MAX_LENGTH){
+            memcpy(pps.data(), &data[prevNalOffset],ppsSize);
+        }
+    }
+    lhvc[0] = 0x01;
+    lhvc[1] = 0xF0;
+    lhvc[2] = 0x00;
+    lhvc[3] = 0xFC;
+    lhvc[4] = 0xCB;
+    lhvc[5] = 0x02;
+
+    offset += 6;
+    lhvc[6] = 0xA1;
+    lhvc[7] = 0x00;
+    lhvc[8] = 0x01;
+    lhvc[9] = (spsSize >> 8) & 0xff;
+    lhvc[10] = spsSize & 0xff;
+
+    offset += 5;
+    memcpy(lhvc+offset, sps.data(), spsSize);
+    offset += spsSize;
+
+    lhvc[offset] = 0xA2;
+    lhvc[offset+1] = 0x00;
+    lhvc[offset+2] = 0x01;
+    lhvc[offset+3] = (ppsSize >> 8) & 0xff;
+    lhvc[offset+4] = ppsSize & 0xff;
+    offset +=5;
+
+    memcpy(lhvc+offset, pps.data(), ppsSize);
+    return offset+ppsSize;
+}
+
 static size_t reassembleHVCC(const sp<ABuffer> &csd0, uint8_t *hvcc, size_t hvccSize, size_t nalSizeLength) {
     HevcParameterSets paramSets;
     uint8_t* data = csd0->data();
@@ -2137,6 +2206,14 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
             std::vector<uint8_t> hvcc(csd0size + 1024);
             size_t outsize = reassembleHVCC(csd0, hvcc.data(), hvcc.size(), 4);
             meta->setData(kKeyHVCC, kTypeHVCC, hvcc.data(), outsize);
+
+            sp<ABuffer> csdlhvC;
+            if(msg->findBuffer("csd-lhvc", &csdlhvC)){
+                std::vector<uint8_t> lvcc(csdlhvC->size() + 1024);
+                ALOGV("reassemblehvcC: %zu",csdlhvC->size());
+                size_t outsizelhvc = reassembleLHVC(csdlhvC, lvcc.data());
+                meta->setData(kKeyLHVC, kTypeLHVC, lvcc.data(), outsizelhvc);
+            }
         } else if (mime == MEDIA_MIMETYPE_VIDEO_AV1 ||
                    mime == MEDIA_MIMETYPE_IMAGE_AVIF) {
             meta->setData(kKeyAV1C, 0, csd0->data(), csd0->size());
