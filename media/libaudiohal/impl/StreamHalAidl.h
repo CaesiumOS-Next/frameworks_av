@@ -33,6 +33,7 @@
 #include <media/AidlConversionUtil.h>
 #include <media/AudioParameter.h>
 #include <mediautils/Synchronization.h>
+#include <audio_utils/mutex.h>
 
 #include "ConversionHelperAidl.h"
 #include "StreamPowerLog.h"
@@ -305,6 +306,7 @@ class StreamHalAidl : public virtual StreamHalInterface, public ConversionHelper
     // only accessed by the I/O thread. Also, there is no need to protect lookup operations on the
     // queues as they are thread-safe, only send/receive operation must be protected.
     std::mutex mCommandReplyLock;
+    audio_utils::FairLock mCommandReplyLockFair;
 
   private:
     static audio_config_base_t configToBase(const audio_config& config) {
