@@ -40,6 +40,30 @@
       ],
       "revId": "5761d154412e073e2d0679371fb7493e68f8a090",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d21506a7_35c07845",
+        "filename": "media/utils/include/mediautils/ServiceSingleton.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-04-02T23:22:29Z",
+      "side": 1,
+      "message": "I placed the internal patches needed on the bug tracker b/407797648 for your review.",
+      "parentUuid": "ce11960b_533babaf",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 38
+      },
+      "revId": "5761d154412e073e2d0679371fb7493e68f8a090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
