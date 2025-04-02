@@ -83,6 +83,27 @@ struct AImage {
     media_status_t getPlaneData(int planeIdx,/*out*/uint8_t** data, /*out*/int* dataLength) const;
     media_status_t getHardwareBuffer(/*out*/AHardwareBuffer** buffer) const;
     media_status_t getDataSpace(/*out*/android_dataspace* dataSpace) const;
+    media_status_t getTransformMatrix(/*out*/float mtx[16]);
+
+    /**
+     * setFilteringEnabled sets whether the transform matrix should be computed
+     * for use with bilinear filtering.
+     */
+    media_status_t setFilteringEnabled(bool enabled);
+
+
+    /**
+     * Computes the transform matrix documented by getTransformMatrix
+     * from the BufferItem sub parts.
+     */
+    static void computeTransformMatrix(float outTransform[16], const sp<GraphicBuffer>& buf,
+                                       const Rect& cropRect, uint32_t transform);
+
+    /**
+     * computeCurrentTransformMatrixLocked computes the transform matrix for the
+     * current image and stores it in mCurrentTransformMatrix.
+     */
+    media_status_t computeCurrentTransformMatrixLocked();
 
   private:
     // AImage should be deleted through free() API.
@@ -105,6 +126,18 @@ struct AImage {
     android_dataspace          mHalDataSpace = HAL_DATASPACE_UNKNOWN;
     bool                       mIsClosed = false;
     mutable Mutex              mLock;
+
+    /**
+     * mTransformMatrixComputed indicates whether the transform matrix has been
+     * computed.
+     */
+    bool mTransformMatrixComputed;
+
+    /**
+     * mCurrentTransformMatrix is the transform matrix for the current image.
+     * It gets computed by computeTransformMatrix when the image is created.
+     */
+    float mCurrentTransformMatrix[16];
 };
 
 #endif // _NDK_IMAGE_PRIV_H
