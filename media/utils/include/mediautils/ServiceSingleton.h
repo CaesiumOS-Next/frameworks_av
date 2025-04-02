@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -184,7 +184,6 @@ public:
                     auto service_new = checkServicePassThrough<Service>(
                             traits->getServiceName());
                     if (service_new) {
-                        mValid = true;
                         service = std::move(service_new);
                         // service is a reference, so we copy to service_fixed as
                         // we're releasing the mutex.
@@ -192,6 +191,7 @@ public:
                         ul.unlock();
                         traits->onNewService(interfaceFromBase<Service>(service_fixed));
                         ul.lock();
+                        mValid = true;
                         setDeathNotifier_l<Service>(service_fixed);
                         ul.unlock();
                         mCv.notify_all();
