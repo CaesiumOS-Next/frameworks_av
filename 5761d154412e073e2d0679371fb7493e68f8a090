@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce11960b_533babaf",
+        "filename": "media/utils/include/mediautils/ServiceSingleton.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-04-02T15:35:05Z",
+      "side": 1,
+      "message": "This does not prevent multiple calls into the onNewService.  We ignore them in AudioSystem if it is the same service, but the service Singleton should not do so.\n\nWe have an internal patch that resolves this issue correctly with unit tests.  I will look into making that available shortly.",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5f085cc3_6ab9d884",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/utils/include/mediautils/ServiceSingleton.h",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 194,
+                "endChar": 0
+              },
+              "replacement": "                        // TODO: prevent multiple calls into onNewService.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5761d154412e073e2d0679371fb7493e68f8a090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
