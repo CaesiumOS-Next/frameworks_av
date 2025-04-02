@@ -845,6 +845,24 @@ media_status_t AImage_getHardwareBuffer(const AImage* image, /*out*/AHardwareBuf
 media_status_t AImage_getDataSpace(const AImage* image,
                                    /*out*/int32_t* dataSpace) __INTRODUCED_IN(34);
 
+/**
+ * Query the transform matrix of the input {@link AImage}.
+ *
+ * Available since API level 37.
+ *
+ * @param image the {@link AImage} of interest.
+ * @param mtx the transform matrix of the image will be filled here if the
+ * method call succeeds.
+ *
+ * @return <ul>
+ *         <li>{@link AMEDIA_OK} if the method call succeeds.</li>
+ *         <li>{@link AMEDIA_ERROR_INVALID_PARAMETER} if image is NULL.</li>
+ *         <li>{@link AMEDIA_ERROR_INVALID_OBJECT} if the {@link AImageReader}
+ * generated this image has been deleted.</li></ul>
+ */
+media_status_t AImage_getTransformMatrix(AImage* _Nonnull image,
+                                         /*out*/ float mtx[_Nonnull 16]) __INTRODUCED_IN(37);
+
 __END_DECLS
 
 #endif //_NDK_IMAGE_H

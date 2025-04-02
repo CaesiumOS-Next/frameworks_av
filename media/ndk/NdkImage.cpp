@@ -23,7 +23,9 @@
 #include "NdkImageReaderPriv.h"
 
 #include <android_media_Utils.h>
+#include <math/mat4.h>
 #include <private/android/AHardwareBufferHelpers.h>
+#include <system/window.h>
 #include <ui/PublicFormat.h>
 #include <utils/Log.h>
 
@@ -31,12 +33,16 @@ using namespace android;
 
 #define ALIGN(x, mask) ( ((x) + (mask) - 1) & ~((mask) - 1) )
 
+static const mat4 mtxIdentity;
+
 AImage::AImage(AImageReader* reader, int32_t format, uint64_t usage, BufferItem* buffer,
         int64_t timestamp, int32_t width, int32_t height, int32_t numPlanes) :
         mReader(reader), mFormat(format), mUsage(usage), mBuffer(buffer), mLockedBuffer(nullptr),
-        mTimestamp(timestamp), mWidth(width), mHeight(height), mNumPlanes(numPlanes) {
+        mTimestamp(timestamp), mWidth(width), mHeight(height), mNumPlanes(numPlanes),
+        mTransformMatrixComputed(false) {
     PublicFormat publicFormat = static_cast<PublicFormat>(format);
     mHalDataSpace = mapPublicFormatToHalDataspace(publicFormat);
+    memcpy(mCurrentTransformMatrix, mtxIdentity.asArray(), sizeof(mCurrentTransformMatrix));
     LOG_FATAL_IF(reader == nullptr, "AImageReader shouldn't be null while creating AImage");
 }
 
@@ -665,6 +671,112 @@ AImage::getHardwareBuffer(/*out*/AHardwareBuffer** buffer) const {
     return AMEDIA_OK;
 }
 
+media_status_t AImage::getTransformMatrix(float mtx[16]) {
+    if (isClosed()) {
+        ALOGE("%s: image %p has been closed!", __FUNCTION__, this);
+        return AMEDIA_ERROR_INVALID_OBJECT;
+    }
+
+    Mutex::Autolock _l(mLock);
+    if (!mTransformMatrixComputed) {
+        media_status_t ret = computeCurrentTransformMatrixLocked();
+        if (ret != AMEDIA_OK) {
+            return ret;
+        }
+    }
+    memcpy(mtx, mCurrentTransformMatrix, sizeof(mCurrentTransformMatrix));
+    return AMEDIA_OK;
+}
+
+media_status_t AImage::computeCurrentTransformMatrixLocked() {
+    ALOGV("computeCurrentTransformMatrixLocked", __FUNCTION__, this);
+    if (mBuffer == nullptr) {
+        LOG_ALWAYS_FATAL("%s: AImage %p has no buffer.", __FUNCTION__, this);
+        return AMEDIA_ERROR_INVALID_OBJECT;
+    }
+
+    sp<GraphicBuffer> buf = mBuffer->mGraphicBuffer;
+    if (buf == nullptr) {
+        ALOGD("computeCurrentTransformMatrixLocked: no current item", __FUNCTION__, this);
+    }
+    computeTransformMatrix(mCurrentTransformMatrix, buf, mBuffer->mCrop, mBuffer->mTransform);
+    mTransformMatrixComputed = true;
+    return AMEDIA_OK;
+}
+
+void AImage::computeTransformMatrix(float outTransform[16], const sp<GraphicBuffer>& buf,
+                                            const Rect& cropRect, uint32_t transform) {
+    // Transform matrices
+    static const mat4 mtxFlipH(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1);
+    static const mat4 mtxFlipV(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1);
+    static const mat4 mtxRot90(0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1);
+
+    mat4 xform;
+    if (transform & NATIVE_WINDOW_TRANSFORM_FLIP_H) {
+        xform *= mtxFlipH;
+    }
+    if (transform & NATIVE_WINDOW_TRANSFORM_FLIP_V) {
+        xform *= mtxFlipV;
+    }
+    if (transform & NATIVE_WINDOW_TRANSFORM_ROT_90) {
+        xform *= mtxRot90;
+    }
+
+    if (!cropRect.isEmpty() && buf.get()) {
+        float tx = 0.0f, ty = 0.0f, sx = 1.0f, sy = 1.0f;
+        float bufferWidth = buf->getWidth();
+        float bufferHeight = buf->getHeight();
+        float shrinkAmount = 0.0f;
+
+        // In order to prevent bilinear sampling beyond the edge of the
+        // crop rectangle we may need to shrink it by 2 texels in each
+        // dimension.  Normally this would just need to take 1/2 a texel
+        // off each end, but because the chroma channels of YUV420 images
+        // are subsampled we may need to shrink the crop region by a whole
+        // texel on each side.
+        switch (buf->getPixelFormat()) {
+            case PIXEL_FORMAT_RGBA_8888:
+            case PIXEL_FORMAT_RGBX_8888:
+            case PIXEL_FORMAT_RGBA_FP16:
+            case PIXEL_FORMAT_RGBA_1010102:
+            case PIXEL_FORMAT_RGB_888:
+            case PIXEL_FORMAT_RGB_565:
+            case PIXEL_FORMAT_BGRA_8888:
+                // We know there's no subsampling of any channels, so we
+                // only need to shrink by a half a pixel.
+                shrinkAmount = 0.5;
+                break;
+
+            default:
+                // If we don't recognize the format, we must assume the
+                // worst case (that we care about), which is YUV420.
+                shrinkAmount = 1.0;
+                break;
+        }
+
+        // Only shrink the dimensions that are not the size of the buffer.
+        if (cropRect.width() < bufferWidth) {
+            tx = (float(cropRect.left) + shrinkAmount) / bufferWidth;
+            sx = (float(cropRect.width()) - (2.0f * shrinkAmount)) / bufferWidth;
+        }
+        if (cropRect.height() < bufferHeight) {
+            ty = (float(bufferHeight - cropRect.bottom) + shrinkAmount) / bufferHeight;
+            sy = (float(cropRect.height()) - (2.0f * shrinkAmount)) / bufferHeight;
+        }
+
+        mat4 crop(sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, 1, 0, tx, ty, 0, 1);
+        xform = crop * xform;
+    }
+
+    // SurfaceFlinger expects the top of its window textures to be at a Y
+    // coordinate of 0, so SurfaceTexture must behave the same way.  We don't
+    // want to expose this to applications, however, so we must add an
+    // additional vertical flip to the transform after all the other transforms.
+    xform = mtxFlipV * xform;
+
+    memcpy(outTransform, xform.asArray(), sizeof(xform));
+}
+
 EXPORT
 void AImage_delete(AImage* image) {
     ALOGV("%s", __FUNCTION__);
@@ -845,4 +957,16 @@ media_status_t AImage_getDataSpace(
         return AMEDIA_ERROR_INVALID_PARAMETER;
     }
     return image->getDataSpace((android_dataspace*)(dataSpace));
+}
+
+EXPORT
+media_status_t AImage_getTransformMatrix(
+    AImage* image, /*out*/float mtx[16]) {
+    ALOGV("%s", __FUNCTION__);
+
+    if (image == nullptr) {
+        ALOGE("%s: bad argument. image %p", __FUNCTION__, image);
+        return AMEDIA_ERROR_INVALID_PARAMETER;
+    }
+    return image->getTransformMatrix(mtx);
 }
