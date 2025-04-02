@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9252f84d_04e23ec4",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3366,
+      "author": {
+        "id": 3960636
+      },
+      "writtenOn": "2025-04-02T03:00:00Z",
+      "side": 1,
+      "message": "// Declared in class EffectChain  as follows:\n\nclass EffectChain : public IAfEffectChain {\npublic:\nvoid checkSuspendOnEffectEnabled_l(const sp\u0026 effect, bool enabled) final\nREQUIRES(audio_utils::ThreadBase_Mutex);\n\nThis indicates: The caller ​must hold the ThreadBase_Mutex lock before invoking checkSuspendOnEffectEnabled_l.\n\nAs example:the call path in thread2 does not hold ThreadBase_Mutex. Therefore, the EffectChain::EffectCallback::checkSuspendOnEffectEnabled method definition is annotated with \"NO_THREAD_SAFETY_ANALYSIS\" to disable thread safety analysis.\n\nIf we add ThreadBase_Mutex here with condition (!threadLocked) ,I think delete \n \"NO_THREAD_SAFETY_ANALYSIS\" would be okay.\n \n Plz help check.\n BRs!",
+      "parentUuid": "820a6323_7219a9c9",
+      "range": {
+        "startLine": 3366,
+        "startChar": 8,
+        "endLine": 3366,
+        "endChar": 33
+      },
+      "revId": "9496ad51d04a02702a0173cb98a5401051b77374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8af4c90_4c142131",
         "filename": "services/audioflinger/IAfThread.h",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2025-03-31T15:58:30Z",
       "side": 1,
       "message": "suggest using this instead.",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 0
+      },
+      "revId": "9496ad51d04a02702a0173cb98a5401051b77374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20e4d164_5e6bc871",
+        "filename": "services/audioflinger/IAfThread.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 3960636
+      },
+      "writtenOn": "2025-04-02T03:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8af4c90_4c142131",
       "range": {
         "startLine": 377,
         "startChar": 0,
