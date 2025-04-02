@@ -84,6 +84,45 @@ struct AImage {
     media_status_t getHardwareBuffer(/*out*/AHardwareBuffer** buffer) const;
     media_status_t getDataSpace(/*out*/android_dataspace* dataSpace) const;
 
+    /**
+     * setFilteringEnabled sets whether the transform matrix should be computed
+     * for use with bilinear filtering.
+     */
+    media_status_t setFilteringEnabled(bool enabled);
+
+    /**
+     * getTransformMatrix retrieves the 4x4 texture coordinate transform matrix
+     * associated with the image set by the most recent call to updateTexImage.
+     *
+     * This transform matrix maps 2D homogeneous texture coordinates of the form
+     * (s, t, 0, 1) with s and t in the inclusive range [0, 1] to the texture
+     * coordinate that should be used to sample that location from the texture.
+     * Sampling the texture outside of the range of this transform is undefined.
+     *
+     * This transform is necessary to compensate for transforms that the stream
+     * content producer may implicitly apply to the content. By forcing users of
+     * an AImage to apply this transform we avoid performing an extracopy of the
+     * data that would be needed to hide the transform from the user.
+     *
+     * The matrix is stored in column-major order so that it may be passed
+     * directly to OpenGL ES via the glLoadMatrixf or glUniformMatrix4fv
+     * functions.
+     */
+    media_status_t getTransformMatrix(float mtx[16]);
+
+    /**
+     * Computes the transform matrix documented by getTransformMatrix
+     * from the BufferItem sub parts.
+     */
+    static void computeTransformMatrix(float outTransform[16], const sp<GraphicBuffer>& buf,
+                                       const Rect& cropRect, uint32_t transform);
+
+    /**
+     * computeCurrentTransformMatrixLocked computes the transform matrix for the
+     * current image and stores it in mCurrentTransformMatrix.
+     */
+    media_status_t computeCurrentTransformMatrixLocked();
+
   private:
     // AImage should be deleted through free() API.
     ~AImage();
@@ -105,6 +144,18 @@ struct AImage {
     android_dataspace          mHalDataSpace = HAL_DATASPACE_UNKNOWN;
     bool                       mIsClosed = false;
     mutable Mutex              mLock;
+
+    /**
+     * mTransformMatrixComputed indicates whether the transform matrix has been
+     * computed.
+     */
+    bool mTransformMatrixComputed;
+
+    /**
+     * mCurrentTransformMatrix is the transform matrix for the current image.
+     * It gets computed by computeTransformMatrix when the image is created.
+     */
+    float mCurrentTransformMatrix[16];
 };
 
 #endif // _NDK_IMAGE_PRIV_H
