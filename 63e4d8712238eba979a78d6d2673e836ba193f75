@@ -33,6 +33,23 @@
       "message": "Thanks for the contribution!\nHowever I think `aosp-main` does not accept change merge now:\nhttps://source.android.com/docs/whatsnew/site-updates#aosp-changes",
       "revId": "63e4d8712238eba979a78d6d2673e836ba193f75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c74bf8a2_cca14557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-04-03T00:36:18Z",
+      "side": 1,
+      "message": "yes, this needs to be cherry-picked to internal main.",
+      "revId": "63e4d8712238eba979a78d6d2673e836ba193f75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
