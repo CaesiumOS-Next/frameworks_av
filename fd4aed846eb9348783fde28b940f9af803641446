@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f428bfd7_0cb94bac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1527730
+      },
+      "writtenOn": "2025-04-03T14:55:15Z",
+      "side": 1,
+      "message": "Here is the situation of this API on the SDK side:\n\n- class Image has a hidden getTransform: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/Image.java;l\u003d232?q\u003dcase:yes%20getTransform\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:frameworks%2Fbase%2Fmedia%2Fjava%2F\nWhen I talked to John in February he said he believes this was a miss (since the API exists in SurfaceTexture)\n\n- SurfaceImage that extends Image implements this here: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/ImageReader.java;l\u003d1252?q\u003dcase:yes%20getTransform\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:frameworks%2Fbase%2Fmedia%2Fjava%2F\n\n- WriterSurfaceImage implements it here:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/ImageWriter.java;l\u003d1112?q\u003dcase:yes%20getTransform\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:frameworks%2Fbase%2Fmedia%2Fjava%2F\n\nI chose to go with AImage::getTransformMatrix() to match the existing SurfaceTexture::getTransformMatrix(), but if you think we should go with AImage::getTransform() to match Image::getTransform(), let me know. I\u0027m not very familiar with the Java side, but I believe I can put a CL together for that part too. Since the documentation mentions mTransform is set during nativeImageSetup():\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/media/java/android/media/ImageReader.java;l\u003d1425\nI believe this should be a simple change (basically moving the implementation up to the Image and making the API public),",
+      "parentUuid": "6abbce5a_4d3a6c12",
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d38a118_13096bbd",
         "filename": "media/ndk/NdkImagePriv.h",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-03T00:35:39Z",
       "side": 1,
       "message": "this documentation should be on the public header docs.",
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6d0f52_7897d248",
+        "filename": "media/ndk/NdkImagePriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1527730
+      },
+      "writtenOn": "2025-04-03T14:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d38a118_13096bbd",
       "revId": "fd4aed846eb9348783fde28b940f9af803641446",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -80,6 +116,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf4f2b9_08d4433e",
+        "filename": "media/ndk/include/media/NdkImage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1527730
+      },
+      "writtenOn": "2025-04-03T14:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a45c49d_71b2f720",
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95321ee4_d7ac8056",
@@ -111,6 +165,24 @@
           ]
         }
       ],
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99889b80_60f56034",
+        "filename": "media/ndk/include/media/NdkImage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1527730
+      },
+      "writtenOn": "2025-04-03T14:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95321ee4_d7ac8056",
       "revId": "fd4aed846eb9348783fde28b940f9af803641446",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
