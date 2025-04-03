@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d4f0aa_be065004",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-04-03T00:51:56Z",
+      "side": 1,
+      "message": "lgtm, this will need to be cherry-picked to our internal main.\n\nit is odd that we should fail while returning a success to the client AudioTrack, this is typically called through binder here:\n\nhttps://cs.android.com/android/platform/superproject/+/android15-qpr2-release:frameworks/av/media/libaudioclient/AudioTrack.cpp;drc\u003d3a1a5382b61fba94bb553e6aff6999f232a646e0;l\u003d1967",
+      "revId": "b8c976ba2551edead3d2f592f41b89b674c68610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
