@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17bdb9a7_bc055014",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1527730
+      },
+      "writtenOn": "2025-04-03T15:08:31Z",
+      "side": 1,
+      "message": "https://android-review.git.corp.google.com/c/platform/frameworks/base/+/3574364 for the SDK side. I changed the public API to getTransformMatrix() to match SurfaceTexture, but let me know if you prefer changing both CLs to use getTransform() instead.",
+      "parentUuid": "f428bfd7_0cb94bac",
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d38a118_13096bbd",
         "filename": "media/ndk/NdkImagePriv.h",
         "patchSetId": 4
