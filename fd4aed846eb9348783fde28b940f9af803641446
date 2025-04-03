@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6abbce5a_4d3a6c12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-04-03T00:35:39Z",
+      "side": 1,
+      "message": "We don\u0027t have this method in the SDK API either, so it seems like if we\u0027re adding it here, we should add it to the SDK as well. Thoughts?\n\nA few quick review notes otherwise, not a complete review though.",
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d38a118_13096bbd",
+        "filename": "media/ndk/NdkImagePriv.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-04-03T00:35:39Z",
+      "side": 1,
+      "message": "this documentation should be on the public header docs.",
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a45c49d_71b2f720",
+        "filename": "media/ndk/include/media/NdkImage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-04-03T00:35:39Z",
+      "side": 1,
+      "message": "Delete methods should accept null pointers, and this one already does.",
+      "fixSuggestions": [
+        {
+          "fixId": "81a7d841_cd50829f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkImage.h",
+              "range": {
+                "startLine": 578,
+                "startChar": 0,
+                "endLine": 579,
+                "endChar": 0
+              },
+              "replacement": "void AImage_delete(AImage* _Nullable image) __INTRODUCED_IN(24);\n"
+            },
+            {
+              "path": "media/ndk/include/media/NdkImage.h",
+              "range": {
+                "startLine": 804,
+                "startChar": 0,
+                "endLine": 805,
+                "endChar": 0
+              },
+              "replacement": "void AImage_deleteAsync(AImage* _Nullable image, int releaseFenceFd) __INTRODUCED_IN(26);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95321ee4_d7ac8056",
+        "filename": "media/ndk/include/media/NdkImage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2025-04-03T00:35:39Z",
+      "side": 1,
+      "message": "Same here, image should be Nullable",
+      "fixSuggestions": [
+        {
+          "fixId": "09114e23_d1fdb8f6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/ndk/include/media/NdkImage.h",
+              "range": {
+                "startLine": 804,
+                "startChar": 0,
+                "endLine": 805,
+                "endChar": 0
+              },
+              "replacement": "void AImage_deleteAsync(AImage* _Nullable image, int releaseFenceFd) __INTRODUCED_IN(26);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
