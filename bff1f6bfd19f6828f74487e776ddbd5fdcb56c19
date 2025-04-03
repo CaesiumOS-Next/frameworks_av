@@ -34,6 +34,24 @@
       "parentUuid": "1f4226c8_f9c3415b",
       "revId": "bff1f6bfd19f6828f74487e776ddbd5fdcb56c19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32e239a9_7d6110ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-03T17:04:58Z",
+      "side": 1,
+      "message": "Francois, this CL has been merged into internal main. On partner, there is no \"main\" for frameworks/av. I can only see snapshot branches for quarterly releases, and they are read-only. I\u0027m not sure which branches you see on your side though.",
+      "parentUuid": "610d6c21_d554208c",
+      "revId": "bff1f6bfd19f6828f74487e776ddbd5fdcb56c19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
