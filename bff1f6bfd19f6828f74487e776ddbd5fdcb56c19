@@ -16,6 +16,24 @@
       "message": "Submitting via internal as AOSP main is permanently closed.",
       "revId": "bff1f6bfd19f6828f74487e776ddbd5fdcb56c19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610d6c21_d554208c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-04-03T16:00:36Z",
+      "side": 1,
+      "message": "ACK, so shall I better push on partner?",
+      "parentUuid": "1f4226c8_f9c3415b",
+      "revId": "bff1f6bfd19f6828f74487e776ddbd5fdcb56c19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
