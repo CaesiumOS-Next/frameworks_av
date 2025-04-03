@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e64539a_966e58f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-04-03T15:29:45Z",
+      "side": 1,
+      "message": "SurfaceTexture is conceptually a specialization of ImageReader. So Image::getTransformMatrix and AImage_getTransformMatrix should both exist to match SurfaceTexture imo.",
+      "parentUuid": "17bdb9a7_bc055014",
+      "revId": "fd4aed846eb9348783fde28b940f9af803641446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d38a118_13096bbd",
         "filename": "media/ndk/NdkImagePriv.h",
         "patchSetId": 4
