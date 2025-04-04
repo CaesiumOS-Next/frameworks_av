@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0e675cd_481ffcdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-04-04T19:44:37Z",
+      "side": 1,
+      "message": "Thank you for the proposed change. I think I would probably take a different route. Let\u0027s discuss more at the bug.",
+      "revId": "e7c4ca0e889c813138e9d339758d1cb8c44bcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
