@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2830f01_bf0dae8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1527730
+      },
+      "writtenOn": "2025-04-06T22:08:11Z",
+      "side": 1,
+      "message": "go/oag/3574364 for the SDK side implementation. Thanks.",
+      "revId": "93bdf7bb2d600603919d083114b3dcae17aaf466",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
