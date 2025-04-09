@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ab87f2c_2fdd69a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1551097
+      },
+      "writtenOn": "2025-04-09T17:28:20Z",
+      "side": 1,
+      "message": "Fix the licensing error",
+      "revId": "c4d564e0a82d32cf63117e0fbf7cd0fe36706da8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
