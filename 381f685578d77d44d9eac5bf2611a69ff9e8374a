@@ -16,6 +16,24 @@
       "message": "Regarding AImage::getTransform(Matrix), I noted that there are contradictory suggestions from John and Alec on which way to go (getTransform vs. getTransformMatrix). As an end-user, since we already have the code path for doing SurfaceTexture::getTransformMatrix, it would be easier for us to get the same API from AImage and avoid adding new code to extract the transform matrix by ourselves (which like every other code can be error prone too). However, getTransform is a much simpler impl on the NDK side. Since I\u0027m just an external contributor here, I appreciate if we get a final decision here and move forward. Thanks.",
       "revId": "381f685578d77d44d9eac5bf2611a69ff9e8374a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38235cc0_538380f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-04-10T20:10:23Z",
+      "side": 1,
+      "message": "I think John\u0027s right that getTransform is a better api. the transform matrix is a bit sneaky in how it tries to handle YUV + cropping, and there\u0027s subtle differences in how this would interact with a vulkan renderer (you\u0027d have to flip the coordinates I think)\n\nThe most important part is that the transform concept present on the api.",
+      "parentUuid": "d2133314_48ab8b98",
+      "revId": "381f685578d77d44d9eac5bf2611a69ff9e8374a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
