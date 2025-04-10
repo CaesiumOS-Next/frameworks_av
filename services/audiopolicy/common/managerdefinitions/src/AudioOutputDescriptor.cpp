@@ -168,7 +168,8 @@ bool AudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
                                       const DeviceTypeSet& deviceTypes,
                                       uint32_t delayMs,
                                       bool force,
-                                      bool isVoiceVolSrc)
+                                      bool isVoiceVolSrc,
+                                      bool /*hasVolSrcPriority*/)
 {
     if (!supportedDevices().containsDeviceAmongTypes(deviceTypes)) {
         ALOGV("%s output ID %d unsupported device %s",
@@ -259,33 +260,6 @@ sp<TrackClientDescriptor> AudioOutputDescriptor::getHighestPriorityClientForVolu
         }
     }
     return clientForVolume;
-}
-
-bool AudioOutputDescriptor::canSetHwVolumeForVolumeSource(android::VolumeSource vs) const {
-    if (!useHwGain()) {
-        return true;
-    }
-    auto highestPrioActiveClientForVolume =
-            getHighestPriorityClientForVolumeSource(vs, /* active= */ true);
-    if (highestPrioActiveClientForVolume == nullptr) {
-        ALOGV("%s trying to set volume for inactive volume source %d", __func__, vs);
-        return false;
-    }
-    for (const auto &client: clientsList(true /*activeOnly*/)) {
-        bool isHigherPriority = client->strategy() < highestPrioActiveClientForVolume->strategy();
-        if (isHigherPriority && (client->volumeSource() != vs)) {
-            ALOGV("%s: found higher priority client on output with \n"
-                    "Strategy=%d volumeGroup=%d attributes=%s\n"
-                    "(\nrequester:\n strategy=%d volumeGroup=%d attributes=%s)\n"
-                    " on output, bailing out", __func__, client->strategy(),
-                    client->volumeSource(), toString(client->attributes()).c_str(),
-                    highestPrioActiveClientForVolume->strategy(),
-                    highestPrioActiveClientForVolume->volumeSource(),
-                    toString(highestPrioActiveClientForVolume->attributes()).c_str());
-            return false;
-        }
-    }
-    return true;
 }
 
 size_t AudioOutputDescriptor::sameExclusivePreferredDevicesCount() const
@@ -585,7 +559,8 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
                                         const DeviceTypeSet& deviceTypes,
                                         uint32_t delayMs,
                                         bool force,
-                                        bool isVoiceVolSrc)
+                                        bool isVoiceVolSrc,
+                                        bool hasVolSrcPriority)
 {
     StreamTypeVector streams = streamTypes;
     if (!AudioOutputDescriptor::setVolume(
@@ -644,6 +619,11 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
                       mIoHandle, vs, getActiveVolumeSources().size());
                 mClientInterface->setPortsVolume(
                         getPortsForVolumeSource(vs), volumeAmpl, mutedByGroup, mIoHandle, delayMs);
+            }
+            if (!hasVolSrcPriority) {
+                ALOGV("%s: output: %d, vs: %d does not have priority, skipping hw gain ctrl",
+                      __func__, mIoHandle, vs);
+                return NO_ERROR;
             }
             AudioGains gains = devicePort->getGains();
             int gainMinValueInMb = gains[0]->getMinValueInMb();
@@ -961,7 +941,8 @@ bool HwAudioOutputDescriptor::setVolume(float volumeDb, bool muted,
                                         const DeviceTypeSet& deviceTypes,
                                         uint32_t delayMs,
                                         bool force,
-                                        bool isVoiceVolSrc)
+                                        bool isVoiceVolSrc,
+                                        bool /*hasVolSrcPriority*/)
 {
     bool changed = AudioOutputDescriptor::setVolume(
             volumeDb, muted, volumeSource, streams, deviceTypes, delayMs, force, isVoiceVolSrc);
@@ -1174,6 +1155,68 @@ std::string SwAudioOutputDescriptor::info() const {
     result.append(isDuplicated() ? "duplicating" : mProfile->getTagName());
     result.append("]]");
     return result;
+}
+
+TrackClientVector SwAudioOutputCollection::clientsList(const sp<DeviceDescriptor> &routedDevice,
+        bool activeOnly) const {
+    TrackClientVector clients{};
+    for (size_t i = 0; i < this->size(); i++) {
+        const sp<SwAudioOutputDescriptor> desc = this->valueAt(i);
+        if (routedDevice != nullptr
+                && (desc->devices().empty() || desc->devices().itemAt(0) != routedDevice)) {
+            continue;
+        }
+        auto descClients = desc->clientsList(activeOnly);
+        clients.insert(clients.end(), descClients.begin(), descClients.end());
+    }
+    return clients;
+}
+
+sp<TrackClientDescriptor> SwAudioOutputCollection::getHighestPriorityClientForVolumeSource(
+        VolumeSource vs, const sp<DeviceDescriptor> &deviceUsingHwGain, bool activeOnly) const {
+    sp<TrackClientDescriptor> clientForVolume = nullptr;
+    for (size_t i = 0; i < this->size(); i++) {
+        const sp <SwAudioOutputDescriptor> desc = this->valueAt(i);
+        if (deviceUsingHwGain != nullptr
+                && (desc->devices().empty() || desc->devices().itemAt(0) != deviceUsingHwGain)) {
+            continue;
+        }
+        auto client = desc->getHighestPriorityClientForVolumeSource(vs, activeOnly);
+        if (client == nullptr) {
+            continue;
+        }
+        if (clientForVolume == nullptr || clientForVolume->strategy() > client->strategy()) {
+            clientForVolume = client;
+        }
+    }
+    return clientForVolume;
+}
+
+bool SwAudioOutputCollection::canSetHwVolumeForVolumeSource(
+        const sp<DeviceDescriptor> &deviceUsingHwGain, VolumeSource vs) const {
+    auto highestPrioActiveClientForVolume =
+            getHighestPriorityClientForVolumeSource(vs, deviceUsingHwGain, /* active= */ true);
+    if (highestPrioActiveClientForVolume == nullptr) {
+        return false;
+    }
+    auto activeClientsForSink = clientsList(deviceUsingHwGain, /* active= */ true);
+    for (const auto& activeClientForSink: activeClientsForSink) {
+        bool isHigherPriority =
+                activeClientForSink->strategy() < highestPrioActiveClientForVolume->strategy();
+        if (isHigherPriority && (activeClientForSink->volumeSource() != vs)) {
+            ALOGV("%s: found higher priority client on output with \n"
+                  "Strategy=%d volumeGroup=%d attributes=%s\n"
+                  "(\nrequester:\n strategy=%d volumeGroup=%d attributes=%s)\n"
+                  " on output, bailing out", __func__, activeClientForSink->strategy(),
+                  activeClientForSink->volumeSource(),
+                  toString(activeClientForSink->attributes()).c_str(),
+                  highestPrioActiveClientForVolume->strategy(),
+                  highestPrioActiveClientForVolume->volumeSource(),
+                  toString(highestPrioActiveClientForVolume->attributes()).c_str());
+            return false;
+        }
+    }
+    return true;
 }
 
 void SwAudioOutputCollection::dump(String8 *dst) const

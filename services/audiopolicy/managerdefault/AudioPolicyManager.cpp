@@ -3788,13 +3788,9 @@ status_t AudioPolicyManager::setVolumeGroupVolumeIndex(volume_group_t group,
         // If a higher priority strategy is active, and the output is routed to a device with a
         // HW Gain management, do not change the volume
         if (desc->useHwGain()) {
-            applyVolume = false;
             bool swMute = com_android_media_audio_ring_my_car() ? curves.isMuted() : (index == 0);
             // If the volume source is active with higher priority source, ensure at least Sw Muted
             desc->setSwMute(swMute, vs, curves.getStreamTypes(), curDevices, 0 /*delayMs*/);
-            if (!desc->canSetHwVolumeForVolumeSource(activityVs)) {
-                continue; // next output
-            }
         }
         //FIXME: workaround for truncated touch sounds
         // delayed volume change for system stream to be removed when the problem is
@@ -8631,8 +8627,12 @@ status_t AudioPolicyManager::checkAndSetVolume(IVolumeCurves &curves,
                outputDesc->getMuteCount(volumeSource), outputDesc->isActive(volumeSource));
         return NO_ERROR;
     }
-    if (!outputDesc->canSetHwVolumeForVolumeSource(volumeSource)) {
-        return NO_ERROR;
+    bool hasVolSrcPriorty = true;
+    if (outputDesc->useHwGain()) {
+        auto routedDevice = outputDesc->devices().itemAt(0);
+        if (!mOutputs.canSetHwVolumeForVolumeSource(routedDevice, volumeSource)) {
+            hasVolSrcPriorty = false;
+        }
     }
     bool isVoiceVolSrc;
     bool isBtScoVolSrc;
@@ -8678,7 +8678,7 @@ status_t AudioPolicyManager::checkAndSetVolume(IVolumeCurves &curves,
         muted = curves.isMuted();
     }
     outputDesc->setVolume(volumeDb, muted, volumeSource, curves.getStreamTypes(),
-            deviceTypes, delayMs, force, isVoiceVolSrc);
+            deviceTypes, delayMs, force, isVoiceVolSrc, hasVolSrcPriorty);
 
     if (outputDesc == mPrimaryOutput && (isVoiceVolSrc || isBtScoVolSrc)) {
         bool voiceVolumeManagedByHost = !isBtScoVolSrc &&
