@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f1afcc_b7c93e60",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-04-10T03:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5af7aa1c_6d2bf535",
+      "revId": "41d0d73d8389bcf418ed38dc27a56038bf37238a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1ecb2b4_4123b16d",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "I removed encoding as input for the places where we didn\u0027t have channel as input\nRebuilt and tested it and at least for playback for the testcontent we have to test this pcm float issue it sounds fine.",
       "parentUuid": "c1ecb2b4_4123b16d",
+      "range": {
+        "startLine": 420,
+        "startChar": 65,
+        "endLine": 420,
+        "endChar": 78
+      },
+      "revId": "41d0d73d8389bcf418ed38dc27a56038bf37238a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a00608_bb595adf",
+        "filename": "media/codec2/sfplugin/CCodecBuffers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 3401713
+      },
+      "writtenOn": "2025-04-10T03:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa7ae775_5fbcc638",
       "range": {
         "startLine": 420,
         "startChar": 65,
