@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2133314_48ab8b98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1527730
+      },
+      "writtenOn": "2025-04-10T14:36:14Z",
+      "side": 1,
+      "message": "Regarding AImage::getTransform(Matrix), I noted that there are contradictory suggestions from John and Alec on which way to go (getTransform vs. getTransformMatrix). As an end-user, since we already have the code path for doing SurfaceTexture::getTransformMatrix, it would be easier for us to get the same API from AImage and avoid adding new code to extract the transform matrix by ourselves (which like every other code can be error prone too). However, getTransform is a much simpler impl on the NDK side. Since I\u0027m just an external contributor here, I appreciate if we get a final decision here and move forward. Thanks.",
+      "revId": "381f685578d77d44d9eac5bf2611a69ff9e8374a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
