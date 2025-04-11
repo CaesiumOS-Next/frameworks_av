@@ -304,6 +304,10 @@ private:
     static inline constinit std::atomic_bool mDisableThreadPoolStart = false;
 };
 
+
+audio_io_handle_t lastIoHandle = AUDIO_IO_HANDLE_NONE;
+audio_port_handle_t lastDeviceId = AUDIO_PORT_HANDLE_NONE;
+
 sp<IAudioFlinger> AudioSystem::get_audio_flinger() {
     return AudioFlingerServiceTraits::getService();
 }
@@ -817,6 +821,13 @@ Status AudioSystem::AudioFlingerClient::ioConfigChanged(
     // Callbacks must be called without mMutex held. May lead to dead lock if calling for
     // example getRoutedDevice that updates the device and tries to acquire mMutex.
     for (auto cb  : callbacksToCall) {
+        if (event == AUDIO_CLIENT_STARTED) {
+            if (lastIoHandle == ioDesc->getIoHandle() && lastDeviceId == ioDesc->getDeviceId()) {
+                continue;
+            }
+            lastIoHandle = ioDesc->getIoHandle();
+            lastDeviceId = ioDesc->getDeviceId();
+        }
         // If callbacksToCall is not empty, it implies ioDesc->getIoHandle() and deviceId are valid
         cb->onAudioDeviceUpdate(ioDesc->getIoHandle(), deviceIds);
     }
