@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da07acbb_cbf03dd8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3581185
+      },
+      "writtenOn": "2025-04-11T03:23:17Z",
+      "side": 1,
+      "message": "https://partnerissuetracker.corp.google.com/issues/409887529",
+      "parentUuid": "2db7b727_8b519b17",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 251
+      },
+      "revId": "d3e0bacd4cbcf9d1f587940659b4321d60511ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cef49967_f1c7fa53",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-04-01T15:29:06Z",
       "side": 1,
       "message": "That\u0027s very interesting. Could you please provide links to the theory behind the proposed mechanism. Also, this is likely not the best place for it. It should probably be placed in `system/media/audio_utils` along with tests.",
+      "revId": "d3e0bacd4cbcf9d1f587940659b4321d60511ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7882435a_37805846",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3581185
+      },
+      "writtenOn": "2025-04-11T03:23:17Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/platform/system/media/+/3584110\n\nUnder the ARM architecture, the default lock allocation mechanism in the C++ standard library is non-fair by default, consistent with non-ARM architectures like x86.",
+      "parentUuid": "cef49967_f1c7fa53",
       "revId": "d3e0bacd4cbcf9d1f587940659b4321d60511ca1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
