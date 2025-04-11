@@ -16,6 +16,77 @@
       "message": "Why is this on `android15-release`? Did you mean `main`?",
       "revId": "d6cdbe8a0d0d5d6c084a5b954805d640ed1fcb21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16a06af2_3ebea0d8",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-11T09:25:39Z",
+      "side": 1,
+      "message": "In theory nothing should prevent an OEM to have multiple MMAP outputs, one of which would be specialize for VOIP.\nSo Ideally we should still force the the VOIP flag for MMAP but handle the priority\nfurther down, likely in profile-\u003egetCompatibilityScore().",
+      "range": {
+        "startLine": 1675,
+        "startChar": 0,
+        "endLine": 1675,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b7dbcaa5_cb5e932b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1673,
+                "startChar": 0,
+                "endLine": 1681,
+                "endChar": 0
+              },
+              "replacement": "               (*flags \u0026 AUDIO_OUTPUT_FLAG_INCALL_MUSIC) \u003d\u003d 0 \u0026\u0026\n               !(*flags \u0026 AUDIO_OUTPUT_FLAG_MMAP_NOIRQ)) {\n        *flags \u003d (audio_output_flags_t)(AUDIO_OUTPUT_FLAG_VOIP_RX |\n                                       AUDIO_OUTPUT_FLAG_DIRECT);\n        ALOGV(\"Set VoIP and Direct output flags for PCM format\");\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 1711,
+                "startChar": 0,
+                "endLine": 1711,
+                "endChar": 0
+              },
+              "replacement": "        if (stream \u003d\u003d AUDIO_STREAM_VOICE_CALL \u0026\u0026\n            audio_is_linear_pcm(config-\u003eformat) \u0026\u0026\n            (*flags \u0026 AUDIO_OUTPUT_FLAG_INCALL_MUSIC) \u003d\u003d 0) {\n            *flags \u003d (audio_output_flags_t)(*flags | AUDIO_OUTPUT_FLAG_VOIP_RX |\n                                           AUDIO_OUTPUT_FLAG_DIRECT);\n            ALOGV(\"Set VoIP and Direct output flags for PCM format\");\n        }\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 2101,
+                "startChar": 0,
+                "endLine": 2101,
+                "endChar": 0
+              },
+              "replacement": "    static const audio_output_flags_t kMmapFlags \u003d (audio_output_flags_t)\n        AUDIO_OUTPUT_FLAG_MMAP_NOIRQ;\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 2157,
+                "startChar": 0,
+                "endLine": 2157,
+                "endChar": 0
+              },
+              "replacement": "        if ((kMmapFlags \u0026 flags) !\u003d 0 \u0026\u0026 (kMmapFlags \u0026 outputDesc-\u003emFlags) \u003d\u003d 0) {\n            continue;\n        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d6cdbe8a0d0d5d6c084a5b954805d640ed1fcb21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
