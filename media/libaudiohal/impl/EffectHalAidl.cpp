@@ -185,13 +185,11 @@ status_t EffectHalAidl::setOutBuffer(const sp<EffectBufferHalInterface>& buffer)
 
 // write to input FMQ here, wait for statusMQ STATUS_OK, and read from output FMQ
 status_t EffectHalAidl::process() {
-    State state = State::INIT;
-    if (mConversion->isBypassing() || !mEffect->getState(&state).isOk() ||
-        (state != State::PROCESSING && state != State::DRAINING)) {
-        ALOGI("%s skipping process because it's %s", mEffectName.c_str(),
+    if (mConversion->isBypassing() || mState != State::PROCESSING) {
+        ALOGI("%s yytest: skipping process because it's %s", mEffectName.c_str(),
               mConversion->isBypassing()
                       ? "bypassing"
-                      : aidl::android::hardware::audio::effect::toString(state).c_str());
+                      : aidl::android::hardware::audio::effect::toString(mState).c_str());
         return -ENODATA;
     }
 
@@ -363,7 +361,17 @@ status_t EffectHalAidl::command(uint32_t cmdCode, uint32_t cmdSize, void* pCmdDa
         return INVALID_OPERATION;
     }
 
-    return mConversion->handleCommand(cmdCode, cmdSize, pCmdData, replySize, pReplyData);
+    status_t res = mConversion->handleCommand(cmdCode, cmdSize, pCmdData, replySize, pReplyData);
+    switch (cmdCode) {
+        case EFFECT_CMD_ENABLE:
+            mState = State::PROCESSING;
+            break;
+        case EFFECT_CMD_DISABLE:
+        case EFFECT_CMD_RESET:
+            mState = State::IDLE;
+            break;
+    }
+    return res;
 }
 
 status_t EffectHalAidl::getDescriptor(effect_descriptor_t* pDescriptor) {
@@ -382,8 +390,10 @@ status_t EffectHalAidl::getDescriptor(effect_descriptor_t* pDescriptor) {
 
 status_t EffectHalAidl::close() {
     TIME_CHECK();
-    mEffect->command(CommandId::STOP);
-    return statusTFromBinderStatus(mEffect->close());
+    mState = State::IDLE;
+    status_t status = statusTFromBinderStatus(mEffect->close());
+    mState = State::INIT;
+    return status;
 }
 
 status_t EffectHalAidl::dump(int fd) {

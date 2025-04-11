@@ -26,6 +26,7 @@
 #include <system/audio_effects/aidl_effects_utils.h>
 
 #include "EffectConversionHelperAidl.h"
+using ::aidl::android::hardware::audio::effect::State;
 
 namespace android {
 namespace effect {
@@ -108,7 +109,7 @@ class EffectHalAidl : public EffectHalInterface {
             const std::shared_ptr<android::hardware::EventFlag>& efGroup) const;
     status_t waitHalStatusFmq(size_t samplesWritten) const;
     status_t readFromHalOutputFmq(size_t samplesWritten) const;
-
+    State mState = State::INIT;
     // The destructor automatically releases the effect.
     virtual ~EffectHalAidl();
 };
