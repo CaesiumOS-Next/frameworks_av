@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8795625_5efd75a8",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-14T21:30:58Z",
+      "side": 1,
+      "message": "There are places where we\n\n```\n        // Use \u0027mCommandReplyLock\u0027 to ensure that \u0027sendCommand\u0027 has finished updating the state\n        // after the reply from the \u0027burst\u0027 command.\n```\n\nI suppose, we need to use `mCommandReplyLockFair` in those places as well?",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 33
+      },
+      "revId": "1ce09c48c7c20e057fe0cd95b05edb5527bddf56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
