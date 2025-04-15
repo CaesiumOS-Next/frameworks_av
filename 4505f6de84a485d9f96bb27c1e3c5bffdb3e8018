@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "392c7035_043b534f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2025-04-15T11:28:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c2fa5bf_e5380b31",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "4505f6de84a485d9f96bb27c1e3c5bffdb3e8018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70f64cae_c454e1dd",
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "4505f6de84a485d9f96bb27c1e3c5bffdb3e8018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6200c4_9fb3eec8",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8274,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2025-04-15T11:28:42Z",
+      "side": 1,
+      "message": "Done\n\nThe current code might not be supported.\nhttps://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/audio/aidl/default/usb/ModuleUsb.cpp;l\u003d99\nndk::ScopedAStatus ModuleUsb::checkAudioPatchEndpointsMatch(\nconst std::vector\u003cAudioPortConfig\u003e\u0026 sources, const std::vector\u003cAudioPortConfig\u003e\u0026 sinks) {\nfor (const auto\u0026 source : sources) {\nfor (const auto\u0026 sink : sinks) {\nif (source-\u003esampleRate !\u003d sink-\u003esampleRate ||\nsource-\u003echannelMask !\u003d sink-\u003echannelMask || source-\u003eformat !\u003d sink-\u003eformat) {\nLOG(ERROR) \u003c\u003c func\n\u003c\u003c \": mismatch port configuration, source\u003d\" \u003c\u003c source-\u003etoString()\n\u003c\u003c \", sink\u003d\" \u003c\u003c sink-\u003etoString();\nreturn ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);\n}\n}\n}\nreturn ndk::ScopedAStatus::ok();\n}",
+      "parentUuid": "70f64cae_c454e1dd",
+      "range": {
+        "startLine": 8274,
+        "startChar": 0,
+        "endLine": 8274,
+        "endChar": 64
+      },
       "revId": "4505f6de84a485d9f96bb27c1e3c5bffdb3e8018",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
