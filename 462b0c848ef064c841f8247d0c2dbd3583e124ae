@@ -22,6 +22,77 @@
       },
       "revId": "462b0c848ef064c841f8247d0c2dbd3583e124ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ece6e529_aeee1f34",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-15T09:01:27Z",
+      "side": 1,
+      "message": "lastIoHandle and lastDeviceIds cannot be global. This logic of throttling the number of device updates must be per audio track client, not per AudioSystem instance.\n\nI wold be better to move this fix to AudioTrack::onAudioDeviceUpdate() and only call callback-\u003eonAudioDeviceUpdate(mOutput, mRoutedDeviceIds) if mRoutedDeviceIds actually changes or if it is the first time we receive this callback. (I think the java side implementation needs this callback to to update the actual device used after start even if it did not change from the initial device used when the track was created.",
+      "range": {
+        "startLine": 828,
+        "startChar": 0,
+        "endLine": 828,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bd0b0bb1_63bbd9f4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AudioSystem.cpp",
+              "range": {
+                "startLine": 307,
+                "startChar": 0,
+                "endLine": 311,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libaudioclient/AudioSystem.cpp",
+              "range": {
+                "startLine": 824,
+                "startChar": 0,
+                "endLine": 824,
+                "endChar": 0
+              },
+              "replacement": "        audio_io_handle_t lastIoHandle \u003d AUDIO_IO_HANDLE_NONE;\n        audio_port_handle_t lastDeviceIds \u003d AUDIO_PORT_HANDLE_NONE;\n"
+            },
+            {
+              "path": "media/libaudioclient/AudioSystem.cpp",
+              "range": {
+                "startLine": 828,
+                "startChar": 0,
+                "endLine": 830,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "media/libaudioclient/AudioSystem.cpp",
+              "range": {
+                "startLine": 833,
+                "startChar": 0,
+                "endLine": 833,
+                "endChar": 0
+              },
+              "replacement": "        if (event \u003d\u003d AUDIO_CLIENT_STARTED) {\n            lastIoHandle \u003d ioDesc-\u003egetIoHandle();\n            lastDeviceIds \u003d ioDesc-\u003egetDeviceIds();\n        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "462b0c848ef064c841f8247d0c2dbd3583e124ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
