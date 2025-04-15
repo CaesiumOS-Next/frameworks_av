@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c2fa5bf_e5380b31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-15T08:48:47Z",
+      "side": 1,
+      "message": "This is not true if the USB device is handled by he primary HAL.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "4505f6de84a485d9f96bb27c1e3c5bffdb3e8018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f64cae_c454e1dd",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8274,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-15T08:48:47Z",
+      "side": 1,
+      "message": "The USB audio HAL should be able to reconfigure the ALSA PCM driver with any configuration supported by the AudioPort corresponding to the USB device. \nIf the UAOSP USB HAL does not do this, it should be fixed.",
+      "range": {
+        "startLine": 8274,
+        "startChar": 0,
+        "endLine": 8274,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "47d96be4_306b90d5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 8275,
+                "startChar": 0,
+                "endLine": 8275,
+                "endChar": 0
+              },
+              "replacement": "                // The USB audio HAL should be able to reconfigure the ALSA PCM driver with\n                // any configuration supported by the AudioPort corresponding to the USB\n                // device.\n                // If the UAOSP USB HAL does not do this, it should\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4505f6de84a485d9f96bb27c1e3c5bffdb3e8018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
