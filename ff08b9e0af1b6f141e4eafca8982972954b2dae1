@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e527bf36_366657de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-04-15T18:46:15Z",
+      "side": 1,
+      "message": "One alternative way will be setting the preferred configuration when the input becomes active and the mix port it opened with is the only mix port that can be connected to the device and max active count is 1.",
+      "revId": "ff08b9e0af1b6f141e4eafca8982972954b2dae1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f253d26_bf8b955a",
@@ -14,6 +31,30 @@
       "writtenOn": "2025-04-15T17:22:11Z",
       "side": 1,
       "message": "Please add a test into https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/tests/audiopolicymanager_tests.cpp which will fail if these lines get removed.",
+      "range": {
+        "startLine": 8271,
+        "startChar": 20,
+        "endLine": 8272,
+        "endChar": 59
+      },
+      "revId": "ff08b9e0af1b6f141e4eafca8982972954b2dae1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93d9f10_dd346fc8",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 8272,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-04-15T18:46:15Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8f253d26_bf8b955a",
       "range": {
         "startLine": 8271,
         "startChar": 20,
