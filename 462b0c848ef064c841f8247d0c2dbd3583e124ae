@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9230f5a0_7fde2df3",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 2036261
+      },
+      "writtenOn": "2025-04-15T07:15:13Z",
+      "side": 1,
+      "message": "Dear google:\nCould you please help explain why need to callback when audio_client_started?There\u0027re some problems when apps are designed im-perfectly.\n\nCould we avoid callback to reduce binder while the devices and iohandle are not changed? \n\nthe issue id is 408943592",
+      "range": {
+        "startLine": 790,
+        "startChar": 0,
+        "endLine": 810,
+        "endChar": 22
+      },
+      "revId": "462b0c848ef064c841f8247d0c2dbd3583e124ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
