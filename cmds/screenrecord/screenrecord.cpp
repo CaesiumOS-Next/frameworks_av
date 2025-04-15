@@ -1003,11 +1003,12 @@ static status_t recordScreen(const char* fileName) {
             // before we can start it.
             err = unlink(fileName);
             if (err != 0 && errno != ENOENT) {
+                ALOGE("couldn't remove existing file: %s\n", strerror(errno));
                 fprintf(stderr, "ERROR: couldn't remove existing file\n");
-                abort();
             }
             int fd = open(fileName, O_CREAT | O_LARGEFILE | O_TRUNC | O_RDWR, S_IRUSR | S_IWUSR);
             if (fd < 0) {
+                ALOGE("couldn't open file: %s\n", strerror(errno));
                 fprintf(stderr, "ERROR: couldn't open file\n");
                 abort();
             }
