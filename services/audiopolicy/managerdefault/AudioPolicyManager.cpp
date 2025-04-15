@@ -8267,10 +8267,16 @@ status_t AudioPolicyManager::setInputDevice(audio_io_handle_t input,
                         }
                         return result; });
             //only one input device for now
-            if (audio_is_remote_submix_device(device->type())) {
-                // remote submix HAL does not support audio conversion, need source device
-                // audio config to match the sink input descriptor audio config, otherwise AIDL
-                // HAL patching will fail
+            if (audio_is_remote_submix_device(device->type()) ||
+                    ((strcmp(device->getModuleName(), AUDIO_HARDWARE_MODULE_ID_USB) == 0) &&
+                     audio_is_usb_in_device(device->type()))) {
+                // remote submix HAL and usb hal does not support audio conversion, need
+                // source device audio config to match the sink input descriptor audio
+                // config, otherwise AIDL HAL patching will fail
+                // The USB audio HAL should be able to reconfigure the ALSA PCM driver with
+                // any configuration supported by the AudioPort corresponding to the USB
+                // device.
+                // If the UAOSP USB HAL does not do this, it should be fixed.
                 audio_port_config srcDevicePortConfig = {};
                 device->toAudioPortConfig(&srcDevicePortConfig, nullptr);
                 srcDevicePortConfig.sample_rate = inputDesc->getSamplingRate();
