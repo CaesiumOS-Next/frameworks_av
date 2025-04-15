@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad35eac7_1379dcda",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-15T20:52:50Z",
+      "side": 1,
+      "message": "What I mean is that there exist both `mCommandReplyLock` and `mCommandReplyLockFair`. So we might just change the type of `mCommandReplyLock` to `audio_utils::FairLock`.",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "530419a6_5cdf4034",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.h",
+              "range": {
+                "startLine": 308,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": "    audio_utils::FairLock mCommandReplyLock;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "56d010872abb58aeaa5766ce119a4c40b59ec577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
