@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3192215_5a8d0acc",
+        "filename": "cmds/screenrecord/screenrecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-04-16T13:43:01Z",
+      "side": 0,
+      "message": "i\u0027m inclined to leave the abort() call in place.",
+      "range": {
+        "startLine": 1007,
+        "startChar": 13,
+        "endLine": 1007,
+        "endChar": 24
+      },
+      "revId": "ec779b8e0859a360c3d303172224686826e6e0e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

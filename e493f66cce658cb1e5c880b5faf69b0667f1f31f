@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd40f12_02186d76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-04-16T13:43:01Z",
+      "side": 1,
+      "message": "Need more information about your scenario.\nin particular, why is the unlink failing?\nthe code already covers the non-existent file case.\n\nthat leaves primarily \"you don\u0027t have permission in the directory\" which raises other questions about whether the app should be writing to that directory in the first place.\n\nWith the current explanations, I\u0027m not inclined to accept this.",
+      "range": {
+        "startLine": 9,
+        "startChar": 9,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "e493f66cce658cb1e5c880b5faf69b0667f1f31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec03f80_1fc17617",
+        "filename": "cmds/screenrecord/screenrecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-04-16T13:43:01Z",
+      "side": 1,
+      "message": "if we\u0027re going to add diagnostics here,\nthe diagnostics should include the filename.\n\nI\u0027m absolutely in favor of improving diagnostics.",
+      "range": {
+        "startLine": 1011,
+        "startChar": 27,
+        "endLine": 1011,
+        "endChar": 67
+      },
+      "revId": "e493f66cce658cb1e5c880b5faf69b0667f1f31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
