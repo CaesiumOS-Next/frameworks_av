@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f1146b4_ff83c849",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-04-17T15:44:23Z",
+      "side": 1,
+      "message": "Thanks for the fix Sampath!\n\nI think we don\u0027t merge change directly to android15-qpr2-release. Mikhail, do you know if it is still possible to make change to android15?",
+      "revId": "dc6fa03b4bbd5d69f62805ce62023d2974f14d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
