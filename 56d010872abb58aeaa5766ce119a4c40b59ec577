@@ -40,6 +40,72 @@
       ],
       "revId": "56d010872abb58aeaa5766ce119a4c40b59ec577",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e2847c1_96f6e3b4",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 3581185
+      },
+      "writtenOn": "2025-04-17T01:40:38Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ad35eac7_1379dcda",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "79d267b5_ae0cf7cd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.h",
+              "range": {
+                "startLine": 308,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": "    audio_utils::FairLock mCommandReplyLock;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "56d010872abb58aeaa5766ce119a4c40b59ec577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bed25c6_66adeaa5",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 3581185
+      },
+      "writtenOn": "2025-04-17T01:40:38Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ad35eac7_1379dcda",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 48
+      },
+      "revId": "56d010872abb58aeaa5766ce119a4c40b59ec577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
