@@ -16,6 +16,23 @@
       "message": "@weiling already has a fix for this. Weilin can you follow up here.",
       "revId": "a1a231bd29c399663f50a9a529a9747e2e2a3974",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c0dc9a_553f5c76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945317
+      },
+      "writtenOn": "2025-04-17T17:48:46Z",
+      "side": 1,
+      "message": "This flag is only for internal use, so it will be skipped in the conversion by I520930180fed3775b5a2c0a44755637a241ac474",
+      "revId": "a1a231bd29c399663f50a9a529a9747e2e2a3974",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
