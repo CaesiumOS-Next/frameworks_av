@@ -87,6 +87,30 @@
       },
       "revId": "ff08b9e0af1b6f141e4eafca8982972954b2dae1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb8166c8_4a53e64a",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 8272,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-17T16:19:58Z",
+      "side": 1,
+      "message": "These are unit tests for the APM. They provide a dummy implementation of the APM Client, so you can validate the parameters of the operations that the APM calls on the AudioFlinger. Also, it is possible to create a custom APM configuration (although it might not be needed in this case). You can run these tests with `atest audiopolicy_tests`. You can check the existing tests, for example this one simulates connection of an USB device: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/tests/audiopolicymanager_tests.cpp;l\u003d1063;drc\u003da0fe70939b7b3d5ca5dbba09b6f884017a61387c. The idea is that first you add a test for this functionality and it expected to be failing until you add this fix to APM.",
+      "parentUuid": "2f4eb713_be928715",
+      "range": {
+        "startLine": 8271,
+        "startChar": 20,
+        "endLine": 8272,
+        "endChar": 59
+      },
+      "revId": "ff08b9e0af1b6f141e4eafca8982972954b2dae1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
