@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbfd2c39_e7c45ea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2036261
+      },
+      "writtenOn": "2025-04-18T03:34:01Z",
+      "side": 1,
+      "message": "Dear Eric,\nThank you for your reply, and I am trying to understand it fully.\nCould you please give some suggestions to help make judgments whether the java side needs this callback, or is there risk to apply this fix? From my humble perspective, I\u0027m not entirely clear why the Java side needs to callback even when the device remains unchanged.",
+      "revId": "44c361dbe1de56381bed84481d5e2a1886e9e3d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
