@@ -644,8 +644,8 @@ public:
                 mLastDqLogTs = now;
             }
         }
+        clearDeferredBlocks_l();
         if (mProducerId == 0) {
-            clearDeferredBlocks_l();
             std::shared_ptr<C2GraphicAllocation> alloc;
             c2_status_t err = mAllocator->newGraphicAllocation(
                     width, height, format, usage, &alloc);
@@ -704,7 +704,6 @@ public:
                            uint32_t generation,
                            uint64_t usage,
                            bool bqInformation) {
-        bool toNullSurface = false;
         std::shared_ptr<C2SurfaceSyncMemory> c2SyncMem;
         if (syncHandle) {
             if (!producer) {
@@ -727,9 +726,6 @@ public:
                 mProducerId = producerId;
                 mGeneration = bqInformation ? generation : 0;
             } else {
-                if (mProducer) {
-                    toNullSurface = true;
-                }
                 mProducer = nullptr;
                 mProducerId = 0;
                 mGeneration = 0;
@@ -757,6 +753,17 @@ public:
                 syncVar->setSyncStatusLocked(C2SyncVariables::STATUS_ACTIVE);
                 syncVar->unlock();
             }
+            if (mDeferDeallocationAfterStop) {
+                // Note: If there is pending deferred deallocations,
+                // there is no allocation request so far yet. So in the case,
+                // there should be no allocatios to de-alloc.
+                if (!mHavingDeallocationDeferred) {
+                    mHavingDeallocationDeferred = true;
+                    for (int i = 0; i < NUM_BUFFER_SLOTS; ++i) {
+                        mBuffersWithDeallocationDeferred[i] = mBuffers[i];
+                    }
+                }
+            }
             if (mProducer && bqInformation) { // migrate buffers
                 for (int i = 0; i < NUM_BUFFER_SLOTS; ++i) {
                     std::shared_ptr<C2BufferQueueBlockPoolData> data =
@@ -776,17 +783,6 @@ public:
                 // old buffers should not be cancelled since the associated IGBP
                 // is no longer valid.
                 mIgbpValidityToken = std::make_shared<int>(0);
-                if (mDeferDeallocationAfterStop) {
-                    if (toNullSurface) {
-                        mHavingDeallocationDeferred = true;
-                        for (int i = 0; i < NUM_BUFFER_SLOTS; ++i) {
-                            mBuffersWithDeallocationDeferred[i] = mBuffers[i];
-                        }
-                    }
-                }
-            }
-            if (!toNullSurface) {
-                clearDeferredBlocks_l();
             }
             if (mInvalidated) {
                 mIgbpValidityToken = std::make_shared<int>(0);
