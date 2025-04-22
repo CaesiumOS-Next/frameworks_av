@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d555c66_471d0e26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958109
+      },
+      "writtenOn": "2025-04-22T20:40:58Z",
+      "side": 1,
+      "message": "Downstream issue: https://gitlab.com/CalyxOS/calyxos/-/issues/3123",
+      "revId": "006e5417fc01e78b92f199cbe46258e5fea76bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
