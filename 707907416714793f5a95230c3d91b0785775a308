@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15cb880c_54c828cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-23T13:07:42Z",
+      "side": 1,
+      "message": "mCurrentEncodedFormat",
+      "range": {
+        "startLine": 9,
+        "startChar": 361,
+        "endLine": 9,
+        "endChar": 383
+      },
+      "revId": "707907416714793f5a95230c3d91b0785775a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49f22d6_6fea4e34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-23T13:07:42Z",
+      "side": 1,
+      "message": "hasCurrentEncodedFormat",
+      "range": {
+        "startLine": 9,
+        "startChar": 271,
+        "endLine": 9,
+        "endChar": 295
+      },
+      "revId": "707907416714793f5a95230c3d91b0785775a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69ee3ea3_a6e8c3da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-23T13:07:42Z",
+      "side": 1,
+      "message": "please indicate the call site where hasCurrentEncodedFormat() \u003d\u003d false causes a problem.\n\nIf a screen mirroring is active, it should not matter whether a wired or wireless headset is connected or not: audio should always got to the screen mirroring path.",
+      "range": {
+        "startLine": 9,
+        "startChar": 470,
+        "endLine": 9,
+        "endChar": 494
+      },
+      "revId": "707907416714793f5a95230c3d91b0785775a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b87b3ce_4e17bf9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-23T13:07:42Z",
+      "side": 1,
+      "message": "Bug",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "707907416714793f5a95230c3d91b0785775a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
