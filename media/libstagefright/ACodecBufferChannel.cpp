@@ -295,7 +295,7 @@ status_t ACodecBufferChannel::attachBuffer(
             C2ReadView view{block.map().get()};
             size_t copyLength = std::min(size_t(view.capacity()), buffer->capacity());
             ALOGV_IF(view.capacity() > buffer->capacity(),
-                    "view.capacity() = %zu, buffer->capacity() = %zu",
+                    "view.capacity() = %u, buffer->capacity() = %zu",
                     view.capacity(), buffer->capacity());
             memcpy(buffer->base(), view.data(), copyLength);
             buffer->setRange(0, copyLength);
