@@ -106,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1bf8f4e_f26d1b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-04-25T22:28:28Z",
+      "side": 1,
+      "message": "I\u0027m fine with this change after Andy\u0027s comment addressed, thanks!",
+      "parentUuid": "2454f92d_37c57df7",
+      "revId": "ebdcf6494f22e40ba1d1e62faceeafd1ab7e317c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f649e8d1_3621c765",
