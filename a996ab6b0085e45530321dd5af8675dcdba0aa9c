@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1fa015_94ed9066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-04-25T13:32:51Z",
+      "side": 1,
+      "message": "Hi, dear aosp team.\nCould you please take a look at this? And the referenced bug: 412946306\nThanks.",
+      "revId": "a996ab6b0085e45530321dd5af8675dcdba0aa9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
