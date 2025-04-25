@@ -84,6 +84,30 @@
       },
       "revId": "84977c03b175e17f8d46c12da870011eaa0da4b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e791b93e_6acbb2d1",
+        "filename": "media/libeffects/preprocessing/PreProcessing.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-04-25T19:32:47Z",
+      "side": 1,
+      "message": "status is not a bool, so you could reject \n\n    status \u003d (value !\u003d 0) ? -EINVAL : OK;",
+      "parentUuid": "c283cc12_21dcfdd5",
+      "range": {
+        "startLine": 593,
+        "startChar": 1,
+        "endLine": 593,
+        "endChar": 27
+      },
+      "revId": "84977c03b175e17f8d46c12da870011eaa0da4b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
