@@ -63,6 +63,7 @@ void FastCapture::onIdle()
 void FastCapture::onExit()
 {
     free(mReadBuffer);
+    mReadBuffer = NULL;
 }
 
 bool FastCapture::isSubClassCommand(FastThreadState::Command command)
