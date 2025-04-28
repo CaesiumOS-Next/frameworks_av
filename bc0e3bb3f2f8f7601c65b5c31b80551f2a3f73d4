@@ -94,6 +94,30 @@
       },
       "revId": "bc0e3bb3f2f8f7601c65b5c31b80551f2a3f73d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b818ef_84f72b94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-04-28T21:42:01Z",
+      "side": 1,
+      "message": "We figured out the old versions of libfintf on devices won\u0027t be able to read the newer manifest files that get packed into the apex like this. This will need work in the build system/libvintf before we can support it.\nhttps://b.corp.google.com/issues/399527905",
+      "parentUuid": "80533c2f_eae0c234",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "bc0e3bb3f2f8f7601c65b5c31b80551f2a3f73d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
