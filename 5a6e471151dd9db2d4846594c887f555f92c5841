@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0c145ee_cbd58925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-28T07:58:16Z",
+      "side": 1,
+      "message": "Please reference a buganizer issue describing the problem",
+      "revId": "5a6e471151dd9db2d4846594c887f555f92c5841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
