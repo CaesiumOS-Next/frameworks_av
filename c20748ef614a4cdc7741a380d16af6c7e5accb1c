@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80c44b15_695279ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-28T17:22:19Z",
+      "side": 1,
+      "message": "Please file a partner bug for this and specify `Bug: \u003cbug number\u003e` here.",
+      "revId": "c20748ef614a4cdc7741a380d16af6c7e5accb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8694b471_7071df33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-04-28T17:22:19Z",
+      "side": 1,
+      "message": "Shunkai should have more context about this code. Shunkai, PTAL!",
+      "revId": "c20748ef614a4cdc7741a380d16af6c7e5accb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
