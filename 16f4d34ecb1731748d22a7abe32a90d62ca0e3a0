@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd04c83_0f70db4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-04-28T17:16:11Z",
+      "side": 1,
+      "message": "This looks good, can you please open a tracking bug and add it to the commit message as\n\nBug: xxxxx\n\nPerhaps use this category?\n\nAndroid \u003e Partner \u003e External \u003e Xiaomi \u003e Handheld \u003e Android OS\n\nIn the bug, can you also please indicate how you discovered the problem?  That would help us duplicate future bugs to this one.  Thanks!",
+      "revId": "16f4d34ecb1731748d22a7abe32a90d62ca0e3a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
