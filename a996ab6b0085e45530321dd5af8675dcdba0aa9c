@@ -16,6 +16,23 @@
       "message": "Hi, dear aosp team.\nCould you please take a look at this? And the referenced bug: 412946306\nThanks.",
       "revId": "a996ab6b0085e45530321dd5af8675dcdba0aa9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ec7dc22_4a4b64c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-04-29T03:10:47Z",
+      "side": 1,
+      "message": "Hi, aosp team. Could you please help take a look at this?\nThe bug 412946306 is due to the output format message would be modified and accessed in different threads: MediaCodec thread and NuPlayer thread.\nEven if the modified in MediaCodec thread is our dolby vision custom modification,  I think make copy of the output format message before async callback to the client would be more reasonable.\nThanks.",
+      "revId": "a996ab6b0085e45530321dd5af8675dcdba0aa9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
