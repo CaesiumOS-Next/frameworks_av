@@ -33,6 +33,23 @@
       "message": "Shunkai should have more context about this code. Shunkai, PTAL!",
       "revId": "c20748ef614a4cdc7741a380d16af6c7e5accb1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ef2cb6_35cc2c64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-04-29T17:43:15Z",
+      "side": 1,
+      "message": "Thanks for the code submission, pls file a bug (with reproduce steps if possible) as Mikhail mentioned",
+      "revId": "c20748ef614a4cdc7741a380d16af6c7e5accb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
