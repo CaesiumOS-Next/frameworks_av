@@ -82,8 +82,28 @@ public:
 
         addParameter(
                 DefineParam(mInputMaxBufSize, C2_PARAMKEY_INPUT_MAX_BUFFER_SIZE)
-                .withConstValue(new C2StreamMaxBufferSizeInfo::input(0u, 960 * 6))
+                .withDefault(new C2StreamMaxBufferSizeInfo::input(0u, 1275 * 6))
+                .withFields({
+                    C2F(mInputMaxBufSize, value).any()
+                })
+                .withSetter(MaxInputSizeSetter)
                 .build());
+    }
+
+    static C2R MaxInputSizeSetter(bool mayBlock, C2P<C2StreamMaxBufferSizeInfo::input> &me) {
+        (void)mayBlock;
+        // As per RFC6716, the maximum length of frame size 1275 bytes.
+        // Opus packet can constitute multiple frames, the packet duration must not exceed 120ms.
+        // Opus frame duration can be one of (2.5ms, 5ms, 10ms, 20ms, 40ms, 60ms)
+        // The worst case packet size will be 1275 * 120 / 2.5 = 61200 bytes
+        // SILK supports frame size 10ms, 20ms, 40ms, 60ms,
+        // CELT supports frame size 2.5ms, 5ms, 10ms, 20ms.
+        // A hybrid of both 20ms, would result in 1275 * 120 / 20 = 7650 bytes
+        const size_t expSize = 7650;
+        if (me.v.value < expSize) {
+            me.set().value = expSize;
+        }
+        return C2R::Ok();
     }
 
 private:
