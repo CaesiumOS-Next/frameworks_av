@@ -143,7 +143,6 @@ TrackBase::TrackBase(
     // battery usage on it.
     mUid = clientUid;
 
-    // ALOGD("Creating track with %d buffers @ %d bytes", bufferCount, bufferSize);
 
     size_t minBufferSize = buffer == NULL ? roundup(frameCount) : frameCount;
     // check overflow when computing bufferSize due to multiplication by mFrameSize.
@@ -161,6 +160,7 @@ TrackBase::TrackBase(
         android_errorWriteLog(0x534e4554, "38340117");
         return;
     }
+    // ALOGD("Creating track with %d bytes", bufferSize);
 
     size_t size = sizeof(audio_track_cblk_t);
     if (buffer == NULL && alloc == ALLOC_CBLK) {
