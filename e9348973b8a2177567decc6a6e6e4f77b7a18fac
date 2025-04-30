@@ -16,6 +16,24 @@
       "message": "Hi Tommy, thanks for the analysis and patch.\n\nLooking at the public Calyx issue tracker, this patch is addressing the unblock mic leaking the indicator. \n\nThat was a regression in 25Q1 which will be resolved in 25Q2 (incl public beta 4 forwards) with change-ids:\n\nframeworks/av: Change-Id: Ie7d2661b4027b5ce6bee9b6c63b70f0b120dcbcc\n\nframeworks/base: Change-Id: I509e7f8da501f5e32d336adb412662e078eab500\n\nBy working around the behavior difference in AppOps behind SOFT_DENIED\n\nAs you have noted (and you can probably tell by my commit history here), there are some issues with the API contract between AppOps and audio re ref counting. That should be fixed more durably in an upcoming release, in a manner which doesn\u0027t require the workaround of detecting if there are any other active clients in the same uid.",
       "revId": "e9348973b8a2177567decc6a6e6e4f77b7a18fac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7ee5fa6_8e2aea66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958109
+      },
+      "writtenOn": "2025-04-30T14:17:57Z",
+      "side": 1,
+      "message": "Thanks for the info and reply! I will check out public beta 4 and look forward to these fixes being released.",
+      "parentUuid": "1d6dc981_8a8bd4ca",
+      "revId": "e9348973b8a2177567decc6a6e6e4f77b7a18fac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
