@@ -97,7 +97,7 @@
 #define LVM_CS_MAX_REVERB_LEVEL 100          /*CS Maximum Reverb Level*/
 #define LVM_VIRTUALIZER_MAX_REVERB_LEVEL 100 /*Vitrualizer Maximum Reverb Level*/
 
-#define LVM_VC_MIXER_TIME 100    /*VC mixer time*/
+#define LVM_VC_MIXER_TIME 20    /*VC mixer time*/
 #define LVM_VC_BALANCE_MAX 96    /*VC balance max value*/
 #define LVM_VC_BALANCE_MIN (-96) /*VC balance min value*/
 
