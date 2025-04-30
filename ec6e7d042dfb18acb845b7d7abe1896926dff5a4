@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96708018_d9429e0d",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-04-30T07:50:52Z",
+      "side": 1,
+      "message": "please ad function name and track Id in the log:\n\n\"%s(%d): ...\", __func__, mId, ...",
+      "range": {
+        "startLine": 163,
+        "startChar": 14,
+        "endLine": 163,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4d333e8a_5e335d72",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Tracks.cpp",
+              "range": {
+                "startLine": 163,
+                "startChar": 0,
+                "endLine": 164,
+                "endChar": 0
+              },
+              "replacement": "    // ALOGD(\"%s(%d): Creating track with %d bytes\", __func__, mId, bufferSize);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ec6e7d042dfb18acb845b7d7abe1896926dff5a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
