@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e105e96_8848b112",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3507701
+      },
+      "writtenOn": "2025-05-01T00:54:12Z",
+      "side": 1,
+      "message": "filed a bug, added to the commit message.",
+      "parentUuid": "80c44b15_695279ec",
+      "revId": "c20748ef614a4cdc7741a380d16af6c7e5accb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8694b471_7071df33",
