@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65993a7_48890c23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-05-03T01:24:40Z",
+      "side": 1,
+      "message": "The logic seems reasonable.  Can you please open a partner bug with the reproduction steps?  That would help us identify bug duplicates in the future.  Perhaps under the following category:\n\nAndroid \u003e Partner \u003e External \u003e Xiaomi \u003e Handheld \u003e Android OS\n\nand then add the bug number here.\n\nBug: XXXXXX\n\nThanks!",
+      "revId": "43d2f307a889d1cb64d2d7fa28ef5dd8ca6df7be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18071b40_4665f45f",
