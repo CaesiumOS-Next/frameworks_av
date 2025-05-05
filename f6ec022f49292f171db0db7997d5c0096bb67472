@@ -87,6 +87,30 @@
       },
       "revId": "f6ec022f49292f171db0db7997d5c0096bb67472",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf2c8123_b7cc499e",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2305,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-05-05T17:44:34Z",
+      "side": 1,
+      "message": "I\u0027m not sure if you have the access, but the commit ID is `76ae7950ab61f93f08fc5cb7b713b3d47fd03c7a`:\nhttps://googleplex-android.googlesource.com/platform/frameworks/av/+/76ae7950ab61f93f08fc5cb7b713b3d47fd03c7a",
+      "parentUuid": "1dd66eac_4b6da7af",
+      "range": {
+        "startLine": 2305,
+        "startChar": 9,
+        "endLine": 2305,
+        "endChar": 13
+      },
+      "revId": "f6ec022f49292f171db0db7997d5c0096bb67472",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
