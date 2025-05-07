@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "936a3802_2021f1cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-05-07T17:32:36Z",
+      "side": 1,
+      "message": "Thank you for the analysis and fix, change was merged in internal gerrit, commit hash: 4b1286de7668ef22df1f2ae4d1f28d8af16c862e",
+      "revId": "c698dbc06e1ed62fbf5ab848fd0942f17ab3364e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
