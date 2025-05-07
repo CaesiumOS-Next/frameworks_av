@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d190431b_a55c68ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060104
+      },
+      "writtenOn": "2025-05-07T09:58:07Z",
+      "side": 1,
+      "message": "For the record, this was followed up on in internal change ag/33423452.",
+      "revId": "f754377fac830139f63231d836d2b742027dd950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
