@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "adeb6075_026f0c00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3949636
+      },
+      "writtenOn": "2025-05-08T08:05:13Z",
+      "side": 1,
+      "message": "ok，I update the bug number on comments\n416364490",
+      "parentUuid": "d65993a7_48890c23",
+      "revId": "43d2f307a889d1cb64d2d7fa28ef5dd8ca6df7be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18071b40_4665f45f",
