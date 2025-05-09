@@ -1011,7 +1011,7 @@ void AudioPolicyManager::setPhoneState(audio_mode_t state)
             outputsToReopen.emplace(mOutputs.keyAt(i), newDevices);
             continue;
         }
-        if (state != AUDIO_MODE_IN_CALL || (desc != mPrimaryOutput && !isTelephonyRxOrTx(desc))) {
+        if ((state != AUDIO_MODE_IN_CALL || && !isStreamActive(AUDIO_STREAM_ALARM,0)) || (desc != mPrimaryOutput && !isTelephonyRxOrTx(desc))) {
             bool forceRouting = !newDevices.isEmpty();
             setOutputDevices(__func__, desc, newDevices, forceRouting, 0 /*delayMs*/, nullptr,
                              true /*requiresMuteCheck*/, !forceRouting /*requiresVolumeCheck*/);
