@@ -16,6 +16,24 @@
       "message": "Hi Mikhail, are there any issues with these code changes?",
       "revId": "ec00532b2b047d5a6405f4721c05f483f40fe8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b206a8c1_9d2e5133",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-05-09T15:07:50Z",
+      "side": 1,
+      "message": "No issues, we are in the process of submitting them via internal `main` branch.",
+      "parentUuid": "41d6a368_9f2fa5fc",
+      "revId": "ec00532b2b047d5a6405f4721c05f483f40fe8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
