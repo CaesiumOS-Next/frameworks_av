@@ -33,6 +33,23 @@
       "message": "This issue did not reproduce after we merge it.\nVerified, Thanks!",
       "revId": "e6f4f390a52ba1f331d16500adb65a63c3f8ad98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72863572_7d7ea116",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-05-13T15:08:14Z",
+      "side": 1,
+      "message": "Thanks for confirming! Merging into internal `main`.",
+      "revId": "e6f4f390a52ba1f331d16500adb65a63c3f8ad98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
