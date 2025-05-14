@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc846d50_2d5e82d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961425
+      },
+      "writtenOn": "2025-05-14T17:28:29Z",
+      "side": 1,
+      "message": "Hello Mikhail,\n\nFor now we\u0027re targeting this for A15 compliance.  If this applies to main, we can ask for porting to all Android versions.",
+      "parentUuid": "7540be79_f8f369a5",
+      "revId": "d6cdbe8a0d0d5d6c084a5b954805d640ed1fcb21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16a06af2_3ebea0d8",
