@@ -87,6 +87,30 @@
       ],
       "revId": "d6cdbe8a0d0d5d6c084a5b954805d640ed1fcb21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb310f7a_952a5ad3",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1961425
+      },
+      "writtenOn": "2025-05-14T17:14:25Z",
+      "side": 1,
+      "message": "Hello @elaurent@google.com - could you please help us by being specific of a location you feel would be more appropriate? \n\nWe would like to leverage your expertise in this matter to best address your concerns with our change.  As is, it satisfies the test cases in entirety.",
+      "parentUuid": "16a06af2_3ebea0d8",
+      "range": {
+        "startLine": 1675,
+        "startChar": 0,
+        "endLine": 1675,
+        "endChar": 72
+      },
+      "revId": "d6cdbe8a0d0d5d6c084a5b954805d640ed1fcb21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
