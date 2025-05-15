@@ -57,6 +57,47 @@
       },
       "revId": "7c3bcba557db1e4e7df29b8c3f7a1c8f87e596d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b745d8e_fd36b252",
+        "filename": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-05-15T16:16:20Z",
+      "side": 1,
+      "message": "Francois, if I replace STRATEGY_NONE by productStrategy here for non default strategies, will the order be correct and fix you concern on getOrderedProductStrategies() ?",
+      "range": {
+        "startLine": 869,
+        "startChar": 0,
+        "endLine": 869,
+        "endChar": 70
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a1d2e5f2_3c5f5130",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 869,
+                "startChar": 0,
+                "endLine": 870,
+                "endChar": 0
+              },
+              "replacement": "    return it !\u003d end(mLegacyStrategyMap) ? it-\u003esecond :\n            static_cast\u003clegacy_strategy\u003e(productStrategy);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7c3bcba557db1e4e7df29b8c3f7a1c8f87e596d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
