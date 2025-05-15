@@ -34,6 +34,29 @@
       "parentUuid": "46b5fa7f_fe047cc4",
       "revId": "7c3bcba557db1e4e7df29b8c3f7a1c8f87e596d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07b480f3_1ee7b8df",
+        "filename": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-05-15T13:14:28Z",
+      "side": 1,
+      "message": "I have one concern here, this API was not intended to address only legacy strategies but all the strategies. There is here a regression since it considers now only legacies.",
+      "range": {
+        "startLine": 301,
+        "startChar": 27,
+        "endLine": 301,
+        "endChar": 54
+      },
+      "revId": "7c3bcba557db1e4e7df29b8c3f7a1c8f87e596d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
