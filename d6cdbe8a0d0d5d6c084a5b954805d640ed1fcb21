@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ee37a12_642a367a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961425
+      },
+      "writtenOn": "2025-05-16T17:15:05Z",
+      "side": 1,
+      "message": "Hello Eric,\n\nI doubt this can be done just for Automotive, since this is frameworks/av",
+      "parentUuid": "5d10a716_380762f5",
+      "revId": "d6cdbe8a0d0d5d6c084a5b954805d640ed1fcb21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16a06af2_3ebea0d8",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 5
@@ -162,6 +180,30 @@
       "side": 1,
       "message": "If this change unblocks your release we can take it but we need to open a buganizer issue to track a proper fix.\n\nAdd:\n//TODO b/418144806: define a proper routing policy when multiple output profiles can be used for voice communication use case.",
       "parentUuid": "bb310f7a_952a5ad3",
+      "range": {
+        "startLine": 1675,
+        "startChar": 0,
+        "endLine": 1675,
+        "endChar": 72
+      },
+      "revId": "d6cdbe8a0d0d5d6c084a5b954805d640ed1fcb21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c8e740_289ca4ac",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1961425
+      },
+      "writtenOn": "2025-05-16T17:15:05Z",
+      "side": 1,
+      "message": "thanks.  we\u0027ll revise this and upload for review",
+      "parentUuid": "852055ad_7245a887",
       "range": {
         "startLine": 1675,
         "startChar": 0,
