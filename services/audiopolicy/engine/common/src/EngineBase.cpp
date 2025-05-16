@@ -312,7 +312,7 @@ StrategyVector EngineBase::getOrderedProductStrategies() const
         });
     };
 
-    auto strategies = mOrderedStrategyMap;
+    auto strategies = mProductStrategies;
 
     auto enforcedAudibleStrategyIter = findByFlag(strategies, AUDIO_FLAG_AUDIBILITY_ENFORCED);
 
@@ -854,13 +854,13 @@ void EngineBase::initializeLegacyStrategyMaps() {
     }
     // this loop must be executed after mLegacyStrategyMap is fully initialized
     for (const auto &iter : mProductStrategies) {
-        mOrderedStrategyMap[getLegacyStrategyFromProduct(iter.first)] = iter.second;
+        mOrderedLegacyStrategyMap[getLegacyStrategyFromProduct(iter.first)] = iter.second;
     }
 }
 
 product_strategy_t EngineBase::getProductStrategyFromLegacy(legacy_strategy legacyStrategy) const {
-    auto it = mOrderedStrategyMap.find(legacyStrategy);
-    return it != end(mOrderedStrategyMap) ? it->second->getId() : PRODUCT_STRATEGY_NONE;
+    auto it = mOrderedLegacyStrategyMap.find(legacyStrategy);
+    return it != end(mOrderedLegacyStrategyMap) ? it->second->getId() : PRODUCT_STRATEGY_NONE;
 }
 
 legacy_strategy EngineBase::getLegacyStrategyFromProduct(

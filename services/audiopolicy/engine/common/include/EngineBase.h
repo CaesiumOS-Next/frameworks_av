@@ -249,7 +249,7 @@ protected:
     // map between product strategy IDs and legacy strategy Ids
     std::map<product_strategy_t, legacy_strategy> mLegacyStrategyMap;
     // Ordered map (by legacy strategy priority) between legacy strategy IDs and Product strategies
-    std::map<legacy_strategy, sp<ProductStrategy>> mOrderedStrategyMap;
+    std::map<legacy_strategy, sp<ProductStrategy>> mOrderedLegacyStrategyMap;
 
 };
 
