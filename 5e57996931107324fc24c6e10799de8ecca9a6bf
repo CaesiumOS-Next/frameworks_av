@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7754d208_4ac8736a",
+        "filename": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-05-16T12:14:13Z",
+      "side": 1,
+      "message": "this does not work because the legacy strategies are not ordered in mProductStrategies",
+      "range": {
+        "startLine": 315,
+        "startChar": 22,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6520d842_872d11a2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 314,
+                "startChar": 0,
+                "endLine": 325,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 327,
+                "startChar": 0,
+                "endLine": 328,
+                "endChar": 0
+              },
+              "replacement": "    for (const auto \u0026iter : mOrderedLegacyStrategyMap) {\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 334,
+                "startChar": 0,
+                "endLine": 334,
+                "endChar": 0
+              },
+              "replacement": "    auto enforcedAudibleStrategyIter \u003d\n            findByFlag(mProductStrategies, AUDIO_FLAG_AUDIBILITY_ENFORCED);\n\n    if (getForceUse(AUDIO_POLICY_FORCE_FOR_SYSTEM) \u003d\u003d AUDIO_POLICY_FORCE_SYSTEM_ENFORCED \u0026\u0026\n            enforcedAudibleStrategyIter !\u003d mProductStrategies.end()) {\n        auto enforcedAudibleStrategy \u003d *enforcedAudibleStrategyIter;\n        auto strategyId \u003d enforcedAudibleStrategy.second-\u003egetId();\n        auto it \u003d std::find(orderedStrategies.begin(), orderedStrategies.end(), strategyId);\n        if (it !\u003d orderedStrategies.begin()) {\n            orderedStrategies.erase(it);\n            orderedStrategies.insert(orderedStrategies.begin(), strategyId);\n        }\n    }\n\n"
+            },
+            {
+              "path": "services/audiopolicy/engine/common/src/EngineBase.cpp",
+              "range": {
+                "startLine": 857,
+                "startChar": 0,
+                "endLine": 858,
+                "endChar": 0
+              },
+              "replacement": "        auto legacyStrategy \u003d getLegacyStrategyFromProduct(iter.first);\n        if (legacyStrategy !\u003d STRATEGY_NONE) {\n            mOrderedLegacyStrategyMap[legacyStrategy] \u003d iter.second;\n        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5e57996931107324fc24c6e10799de8ecca9a6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
