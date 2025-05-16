@@ -245,11 +245,16 @@ protected:
     void initializeLegacyStrategyMaps();
     product_strategy_t getProductStrategyFromLegacy(legacy_strategy legacyStrategy) const;
     legacy_strategy getLegacyStrategyFromProduct(product_strategy_t productStrategy) const;
+    uint32_t getStrategyPriority(product_strategy_t productStrategy) const;
 
     // map between product strategy IDs and legacy strategy Ids
     std::map<product_strategy_t, legacy_strategy> mLegacyStrategyMap;
-    // Ordered map (by legacy strategy priority) between legacy strategy IDs and Product strategies
-    std::map<legacy_strategy, sp<ProductStrategy>> mOrderedStrategyMap;
+    /**
+     * Ordered map by strategy priority of strategies.
+     * For legacy strategies: priority is the legacy strategy id.
+     * For vendor strategies: priority is the strategy id.
+     */
+    std::map<uint32_t, sp<ProductStrategy>> mOrderedStrategyMap;
 
 };
 

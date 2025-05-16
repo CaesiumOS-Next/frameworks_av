@@ -854,13 +854,18 @@ void EngineBase::initializeLegacyStrategyMaps() {
     }
     // this loop must be executed after mLegacyStrategyMap is fully initialized
     for (const auto &iter : mProductStrategies) {
-        mOrderedStrategyMap[getLegacyStrategyFromProduct(iter.first)] = iter.second;
+        mOrderedStrategyMap[getStrategyPriority(iter.first)] = iter.second;
     }
 }
 
 product_strategy_t EngineBase::getProductStrategyFromLegacy(legacy_strategy legacyStrategy) const {
-    auto it = mOrderedStrategyMap.find(legacyStrategy);
+    auto it = mOrderedStrategyMap.find(static_cast<uint32_t>(legacyStrategy));
     return it != end(mOrderedStrategyMap) ? it->second->getId() : PRODUCT_STRATEGY_NONE;
+}
+
+uint32_t EngineBase::getStrategyPriority(product_strategy_t productStrategy) const {
+    auto legacyStrategy = getLegacyStrategyFromProduct(productStrategy);
+    return static_cast<uint32_t>(legacyStrategy != STRATEGY_NONE? legacyStrategy : productStrategy);
 }
 
 legacy_strategy EngineBase::getLegacyStrategyFromProduct(
