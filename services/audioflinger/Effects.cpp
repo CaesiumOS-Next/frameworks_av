@@ -157,6 +157,7 @@ status_t EffectBase::setEnabled_l(bool enabled)
 status_t EffectBase::setEnabled(bool enabled, bool fromHandle)
 {
     status_t status;
+    sp<EffectBase> spThis(this);
     {
         audio_utils::lock_guard _l(mutex());
         status = setEnabled_l(enabled);
@@ -164,12 +165,12 @@ status_t EffectBase::setEnabled(bool enabled, bool fromHandle)
     if (fromHandle) {
         if (enabled) {
             if (status != NO_ERROR) {
-                getCallback()->checkSuspendOnEffectEnabled(this, false, false /*threadLocked*/);
+                getCallback()->checkSuspendOnEffectEnabled(spThis, false, false /*threadLocked*/);
             } else {
-                getCallback()->onEffectEnable(this);
+                getCallback()->onEffectEnable(spThis);
             }
         } else {
-            getCallback()->onEffectDisable(this);
+            getCallback()->onEffectDisable(spThis);
         }
     }
     return status;
