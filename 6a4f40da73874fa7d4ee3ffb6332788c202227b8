@@ -33,6 +33,46 @@
       "message": "jmtrivi@google.com elaurent@google.com could you please help on reviewing this patch? Thank you in advance!",
       "revId": "6a4f40da73874fa7d4ee3ffb6332788c202227b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8327a8_2a3c94c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-05-17T00:38:21Z",
+      "side": 1,
+      "message": "thanks for the CL.  our internal main has recently changed in the handling of the tracks and active tracks (unifying among all the Thread base classes).   i am not sure the exact CFI error (there are multiple potential causes), but i am bit puzzled why stop() is called after destroy().   would it be possible to open a bug on this?",
+      "revId": "6a4f40da73874fa7d4ee3ffb6332788c202227b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f537f42_84a66bee",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9220,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-05-17T00:38:21Z",
+      "side": 1,
+      "message": "is it failing here?",
+      "range": {
+        "startLine": 9220,
+        "startChar": 1,
+        "endLine": 9220,
+        "endChar": 29
+      },
+      "revId": "6a4f40da73874fa7d4ee3ffb6332788c202227b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
