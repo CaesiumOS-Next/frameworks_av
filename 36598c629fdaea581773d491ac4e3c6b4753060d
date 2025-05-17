@@ -33,6 +33,57 @@
       "message": "elaurent@google.com could you please help on reviewing this patch? Thank you in advance!",
       "revId": "36598c629fdaea581773d491ac4e3c6b4753060d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "095372e0_c271df88",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9221,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-05-17T00:45:30Z",
+      "side": 1,
+      "message": "please use the logcat form on line 9240 here, which logs the function and the id.  if we reorder this with line 9214, do we still have the CFI error?",
+      "range": {
+        "startLine": 9221,
+        "startChar": 15,
+        "endLine": 9221,
+        "endChar": 71
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "82db64c2_8dd2550a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 9221,
+                "startChar": 0,
+                "endLine": 9222,
+                "endChar": 0
+              },
+              "replacement": "        ALOGW(\"%s(%d): unsychronized stop. Destroy track executed prior to stop\",\n                __func__, recordTrack-\u003eid());\n"
+            },
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 9240,
+                "startChar": 0,
+                "endLine": 9241,
+                "endChar": 0
+              },
+              "replacement": "    ALOGW(\"%s(%d): unsynchronized stop, state: %d\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "36598c629fdaea581773d491ac4e3c6b4753060d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
