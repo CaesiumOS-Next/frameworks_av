@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ada30a_c476184e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-05-19T17:13:11Z",
+      "side": 1,
+      "message": "On internal main as CL ag/33630173, undergoing test and review.",
+      "revId": "2306f61c668dac80b08abc1358260fcc6570bf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
