@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e911cdd7_51f2dcb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2025-05-19T21:27:21Z",
+      "side": 1,
+      "message": "no vendor-specific reference in framework",
+      "revId": "c8e50c9d8d6fcd69fa8cab11f6fe303409e68fce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
