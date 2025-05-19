@@ -33,6 +33,29 @@
       "message": "jmtrivi@google.com elaurent@google.com could you please help on reviewing this patch? Thank you in advance!",
       "revId": "263e21d9703b6c985b4ed3b1665dbbdb5cecf84c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f25d62a_81685a8a",
+        "filename": "media/libaudioprocessing/BufferProviders.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-05-19T18:05:04Z",
+      "side": 1,
+      "message": "fpclassify is potentially expensive as it requires transitioning between the ARM FP pipeline and INT pipeline.  Subnormals are not an issue on ARM performance-wise, but they are expensive on x86-64.  Are there any reasons to exclude them?\n https://cs.android.com/android/platform/superproject/main/+/main:external/musl/src/math/__fpclassifyf.c;drc\u003d8dba5486288e719ed290cccefcd932ed32756d7c;l\u003d4\n\nperhaps something like the following (moved to audio_utils).\n\n    inline constexpr float clampVolume(float volume) {\n        // Note: we use explicit comparison to control nan handling.\n        \n        constexpr float maxInternalVolume \u003d 1.f;\n        if (volume \u003e\u003d FLT_MIN) { // minimum normal float\n            if (volume \u003c\u003d maxInternalVolume) return volume; // FP_NORMAL\n            return maxInternalVolume; // FP_INFINITE, FP_NORMAL\n        } \n        return 0.f;  // FP_SUBNORMAL, FP_NAN, FP_ZERO, FP_NORMAL\n    }",
+      "range": {
+        "startLine": 931,
+        "startChar": 0,
+        "endLine": 943,
+        "endChar": 5
+      },
+      "revId": "263e21d9703b6c985b4ed3b1665dbbdb5cecf84c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
