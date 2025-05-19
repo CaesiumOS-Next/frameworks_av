@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72e00304_9f28597d",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9220,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-05-19T16:17:42Z",
+      "side": 1,
+      "message": "can you please move this above line 9214?\n\nI believe that may also fix the CFI issue you have.\n\nhttps://android-review.git.corp.google.com/c/platform/frameworks/av/+/3349125",
+      "range": {
+        "startLine": 9220,
+        "startChar": 0,
+        "endLine": 9220,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d30b6daa_b1a66b60",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 9213,
+                "startChar": 0,
+                "endLine": 9217,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 9225,
+                "startChar": 0,
+                "endLine": 9225,
+                "endChar": 0
+              },
+              "replacement": "    // if we\u0027re invalid, we can\u0027t be on the ActiveTracks.\n    if (mActiveTracks.indexOf(recordTrack) \u003c 0 || recordTrack-\u003estate() \u003d\u003d IAfTrackBase::PAUSING) {\n        return false;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d8dcf90ade27b6ca149c9d6c2e1427acc79433e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
