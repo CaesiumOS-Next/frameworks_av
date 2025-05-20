@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e1f94b_5509c653",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060750
+      },
+      "writtenOn": "2025-05-20T14:35:04Z",
+      "side": 1,
+      "message": "Please add:\n\nMerged-In: Id54823cfbb30a2735b9014333def3bd2eb586008\n\nto prevent merge conflict with the CL that elaurent@ merged into main in ag/33594108",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "56d2cc0e6df3c988376c4d2f49da08bb4cf41e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
