@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "897e2ad1_55abc9a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143408
+      },
+      "writtenOn": "2025-05-20T12:55:19Z",
+      "side": 1,
+      "message": "Again, thanks a lot for the upstream. I\u0027ll cherry pick it internally.",
+      "revId": "d85cacb2e139ba7d340f8a040114bdb445c4d1fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
