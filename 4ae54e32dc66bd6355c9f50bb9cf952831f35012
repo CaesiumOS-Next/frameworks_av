@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57538f4e_687e2854",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143408
+      },
+      "writtenOn": "2025-05-20T12:43:40Z",
+      "side": 1,
+      "message": "Thanks a lot for the fix. We\u0027ll be cherry-picking it internally since this is a read only branch.",
+      "revId": "4ae54e32dc66bd6355c9f50bb9cf952831f35012",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
