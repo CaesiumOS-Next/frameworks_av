@@ -286,6 +286,9 @@ GraphicsTracker::GraphicsTracker(int maxDequeueCount)
     // ctor does not require lock to be held.
     writeIncDequeueableLocked(mDequeueable);
 
+    mMaxFilterDequeueCount = 0;
+    mMaxNonFilterDequeueCount = mMaxDequeue;
+
     CHECK(ret >= 0);
 }
 
@@ -416,19 +419,46 @@ c2_status_t GraphicsTracker::configureGraphics(
     return C2_OK;
 }
 
-c2_status_t GraphicsTracker::configureMaxDequeueCount(int maxDequeueCount) {
+c2_status_t GraphicsTracker::configureFilterMaxDequeueCount(int maxFilterDequeueCount) {
+    return configureMaxDequeueCount(maxFilterDequeueCount, true);
+}
+
+c2_status_t GraphicsTracker::configureMaxDequeueCount(int maxDequeueCount, bool filter) {
     std::shared_ptr<BufferCache> cache;
 
-    if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
-        ALOGE("max dequeue count %d is not valid", maxDequeueCount);
-        return C2_BAD_VALUE;
+    if (!filter) {
+        if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
+            ALOGE("max dequeue count %d is not valid", maxDequeueCount);
+            return C2_BAD_VALUE;
+        }
+    } else {
+        if (maxDequeueCount < 0 || maxDequeueCount > kMaxDequeueMax) {
+            ALOGE("max filter dequeue count %d is not valid", maxDequeueCount);
+            return C2_BAD_VALUE;
+        }
     }
 
     // max dequeue count which can be committed to IGBP.
     // (Sometimes maxDequeueCount cannot be committed if the number of
     // dequeued buffer count is bigger.)
     int maxDequeueToCommit;
+    int oldDequeueCount = maxDequeueCount;
     std::unique_lock<std::mutex> cl(mConfigLock);
+    if (!filter) {
+        maxDequeueCount += mMaxFilterDequeueCount;
+        if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
+            ALOGE("total max dequeue count %d is not valid", maxDequeueCount);
+            return C2_BAD_VALUE;
+        }
+        mMaxNonFilterDequeueCount = oldDequeueCount;
+    } else {
+        maxDequeueCount += mMaxNonFilterDequeueCount;
+        if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
+            ALOGE("total max dequeue count %d is not valid", maxDequeueCount);
+            return C2_BAD_VALUE;
+        }
+        mMaxFilterDequeueCount = oldDequeueCount;
+    }
     {
         std::unique_lock<std::mutex> l(mLock);
         if (mMaxDequeueRequested.has_value()) {

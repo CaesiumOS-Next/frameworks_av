@@ -84,7 +84,10 @@ public:
      *
      * @param[in] maxDequeueCount    max # of outstanding allocation to configure
      */
-    c2_status_t configureMaxDequeueCount(int maxDequeueCount);
+    c2_status_t configureMaxDequeueCount(int maxDequeueCount, bool filter = false);
+
+    // POC filter work.
+    c2_status_t configureFilterMaxDequeueCount(int maxFilterDequeueCount);
 
     /**
      * Allocates a AHardwareBuffer.
@@ -277,6 +280,10 @@ private:
     std::optional<int> mMaxDequeueRequested;
 
     int mDequeueable;
+
+    // POC filter work
+    int mMaxFilterDequeueCount;
+    int mMaxNonFilterDequeueCount;
 
     // TODO: statistics
     uint64_t mTotalDequeued;
