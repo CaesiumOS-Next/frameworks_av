@@ -162,6 +162,7 @@ status_t EffectBase::setEnabled(bool enabled, bool fromHandle)
         status = setEnabled_l(enabled);
     }
     if (fromHandle) {
+        auto spThis = sp<EffectBase>::fromExisting(this);
         if (enabled) {
             if (status != NO_ERROR) {
                 getCallback()->checkSuspendOnEffectEnabled(this, false, false /*threadLocked*/);
