@@ -84,7 +84,10 @@ public:
      *
      * @param[in] maxDequeueCount    max # of outstanding allocation to configure
      */
-    c2_status_t configureMaxDequeueCount(int maxDequeueCount);
+    c2_status_t configureMaxDequeueCount(int maxDequeueCount, bool filter = false);
+
+    // POC filter work.
+    c2_status_t configureFilterMaxDequeueCount(int maxFilterDequeueCount);
 
     /**
      * Allocates a AHardwareBuffer.
@@ -102,7 +105,7 @@ public:
      *          C2_CORRUPTED
      */
     c2_status_t allocate(uint32_t width, uint32_t height, PixelFormat format, uint64_t usage,
-                         AHardwareBuffer **buf, sp<Fence> *fence);
+                         AHardwareBuffer **buf, sp<Fence> *fence, bool filter = false);
 
     /**
      * Deallocates a AHardwareBuffer
@@ -267,6 +270,8 @@ private:
     std::set<uint64_t> mDeallocating;
     int mNumDequeueing;
 
+    std::set<uint64_t> mFilterDequeued;
+
     // These member variables are read and modified accessed as follows.
     // 1. mConfigLock being held
     //    Set mInConfig true with mLock in the beginning
@@ -277,6 +282,10 @@ private:
     std::optional<int> mMaxDequeueRequested;
 
     int mDequeueable;
+
+    // POC filter work
+    int mMaxFilterDequeueCount;
+    int mMaxNonFilterDequeueCount;
 
     // TODO: statistics
     uint64_t mTotalDequeued;
@@ -329,7 +338,7 @@ private:
             const std::shared_ptr<BufferCache> &cache,
             int maxDequeueCommitted);
 
-    c2_status_t requestAllocateLocked(std::shared_ptr<BufferCache> *cache);
+    c2_status_t requestAllocateLocked(std::shared_ptr<BufferCache> *cache, bool filter);
     c2_status_t requestDeallocate(uint64_t bid, const sp<Fence> &fence,
                                   bool *completed, bool *updateDequeue,
                                   std::shared_ptr<BufferCache> *cache, int *slotId,
@@ -343,7 +352,8 @@ private:
                         const std::shared_ptr<BufferCache> &cache,
                         bool cached, int slotId, const sp<Fence> &fence,
                         std::shared_ptr<BufferItem> *buffer,
-                        bool *updateDequeue);
+                        bool *updateDequeue,
+                        bool filter);
     void commitDeallocate(std::shared_ptr<BufferCache> &cache,
                           int slotId, uint64_t bid,
                           bool *updateDequeue);

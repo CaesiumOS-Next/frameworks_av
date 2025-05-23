@@ -286,6 +286,9 @@ GraphicsTracker::GraphicsTracker(int maxDequeueCount)
     // ctor does not require lock to be held.
     writeIncDequeueableLocked(mDequeueable);
 
+    mMaxFilterDequeueCount = 0;
+    mMaxNonFilterDequeueCount = mMaxDequeue;
+
     CHECK(ret >= 0);
 }
 
@@ -416,21 +419,49 @@ c2_status_t GraphicsTracker::configureGraphics(
     return C2_OK;
 }
 
-c2_status_t GraphicsTracker::configureMaxDequeueCount(int maxDequeueCount) {
+c2_status_t GraphicsTracker::configureFilterMaxDequeueCount(int maxFilterDequeueCount) {
+    return configureMaxDequeueCount(maxFilterDequeueCount, true);
+}
+
+c2_status_t GraphicsTracker::configureMaxDequeueCount(int maxDequeueCount, bool filter) {
     std::shared_ptr<BufferCache> cache;
 
-    if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
-        ALOGE("max dequeue count %d is not valid", maxDequeueCount);
-        return C2_BAD_VALUE;
+    if (!filter) {
+        if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
+            ALOGE("max dequeue count %d is not valid", maxDequeueCount);
+            return C2_BAD_VALUE;
+        }
+    } else {
+        if (maxDequeueCount < 0 || maxDequeueCount > kMaxDequeueMax) {
+            ALOGE("max filter dequeue count %d is not valid", maxDequeueCount);
+            return C2_BAD_VALUE;
+        }
     }
 
     // max dequeue count which can be committed to IGBP.
     // (Sometimes maxDequeueCount cannot be committed if the number of
     // dequeued buffer count is bigger.)
     int maxDequeueToCommit;
+    int oldDequeueCount = maxDequeueCount;
     std::unique_lock<std::mutex> cl(mConfigLock);
     {
         std::unique_lock<std::mutex> l(mLock);
+        if (!filter) {
+            maxDequeueCount += mMaxFilterDequeueCount;
+            if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
+                ALOGE("total max dequeue count %d is not valid", maxDequeueCount);
+                return C2_BAD_VALUE;
+            }
+            mMaxNonFilterDequeueCount = oldDequeueCount;
+        } else {
+            maxDequeueCount += mMaxNonFilterDequeueCount;
+            if (maxDequeueCount < kMaxDequeueMin || maxDequeueCount > kMaxDequeueMax) {
+                ALOGE("total max dequeue count %d is not valid", maxDequeueCount);
+                return C2_BAD_VALUE;
+            }
+            mMaxFilterDequeueCount = oldDequeueCount;
+        }
+
         if (mMaxDequeueRequested.has_value()) {
             if (mMaxDequeueRequested == maxDequeueCount) {
                 ALOGD("maxDequeueCount requested with %d already", maxDequeueCount);
@@ -654,7 +685,12 @@ c2_status_t GraphicsTracker::getWaitableFd(int *pipeFd) {
     return C2_OK;
 }
 
-c2_status_t GraphicsTracker::requestAllocateLocked(std::shared_ptr<BufferCache> *cache) {
+c2_status_t GraphicsTracker::requestAllocateLocked(
+        std::shared_ptr<BufferCache> *cache,
+        bool filter) {
+    if (filter && mFilterDequeued.size() >= mMaxFilterDequeueCount) {
+        return C2_BLOCKING;
+    }
     if (mDequeueable > 0) {
         char buf[1];
         int ret = ::read(mReadPipeFd.get(), buf, 1);
@@ -688,7 +724,7 @@ c2_status_t GraphicsTracker::requestAllocateLocked(std::shared_ptr<BufferCache> 
 // current caches status.
 void GraphicsTracker::commitAllocate(c2_status_t res, const std::shared_ptr<BufferCache> &cache,
                     bool cached, int slot, const sp<Fence> &fence,
-                    std::shared_ptr<BufferItem> *pBuffer, bool *updateDequeue) {
+                    std::shared_ptr<BufferItem> *pBuffer, bool *updateDequeue, bool filter) {
     std::unique_lock<std::mutex> l(mLock);
     mNumDequeueing--;
     if (res == C2_OK) {
@@ -710,6 +746,9 @@ void GraphicsTracker::commitAllocate(c2_status_t res, const std::shared_ptr<Buff
         uint64_t bid = (*pBuffer)->mId;
         auto mapRet = mDequeued.emplace(bid, *pBuffer);
         CHECK(mapRet.second);
+        if (filter) {
+            mFilterDequeued.emplace(bid);
+        }
     } else {
         ALOGD("allocate error(%d): Dequeued(%zu), Dequeuable(%d)",
               (int)res, mDequeued.size(), mDequeueable + 1);
@@ -865,7 +904,7 @@ c2_status_t GraphicsTracker::_allocateDirect(
 
 c2_status_t GraphicsTracker::allocate(
         uint32_t width, uint32_t height, PixelFormat format, uint64_t usage,
-        AHardwareBuffer **buf, sp<Fence> *rFence) {
+        AHardwareBuffer **buf, sp<Fence> *rFence, bool filter) {
     if (mStopped.load() == true) {
         ALOGE("cannot allocate due to being stopped");
         return C2_BAD_STATE;
@@ -888,7 +927,7 @@ c2_status_t GraphicsTracker::allocate(
             ::usleep(kAllocateDirectDelayUs);
             return res;
         }
-        c2_status_t res = requestAllocateLocked(&cache);
+        c2_status_t res = requestAllocateLocked(&cache, filter);
         if (res != C2_OK) {
             return res;
         }
@@ -901,7 +940,7 @@ c2_status_t GraphicsTracker::allocate(
     std::shared_ptr<BufferItem> buffer;
     bool updateDequeue;
     res = _allocate(cache, width, height, format, usage, &cached, &slotId, &fence, &buffer);
-    commitAllocate(res, cache, cached, slotId, fence, &buffer, &updateDequeue);
+    commitAllocate(res, cache, cached, slotId, fence, &buffer, &updateDequeue, filter);
     if (res == C2_OK) {
         ALOGV("allocated a buffer width:%u height:%u pixelformat:%d usage:%llu",
               width, height, format, (unsigned long long)usage);
@@ -944,6 +983,7 @@ c2_status_t GraphicsTracker::requestDeallocate(uint64_t bid, const sp<Fence> &fe
         *completed = false;
     } else { // buffer is not from the current underlying Graphics.
         mDequeued.erase(bid);
+        mFilterDequeued.erase(bid);
         *completed = true;
         if (adjustDequeueConfLocked(updateDequeue)) {
             return C2_OK;
@@ -960,6 +1000,7 @@ void GraphicsTracker::commitDeallocate(
     size_t del1 = mDequeued.erase(bid);
     size_t del2 = mDeallocating.erase(bid);
     CHECK(del1 > 0 && del2 > 0);
+    mFilterDequeued.erase(bid);
     if (cache) {
         cache->unblockSlot(slotId);
     }
@@ -1023,6 +1064,7 @@ c2_status_t GraphicsTracker::requestRender(uint64_t bid, std::shared_ptr<BufferC
         // reclaim the buffer for dequeue.
         // TODO: is this correct for API wise?
         mDequeued.erase(it);
+        mFilterDequeued.erase(bid);
         if (adjustDequeueConfLocked(updateDequeue)) {
             return C2_BAD_STATE;
         }
@@ -1065,6 +1107,7 @@ void GraphicsTracker::commitRender(const std::shared_ptr<BufferCache> &cache,
     }
     mDeallocating.erase(origBid);
     mDequeued.erase(origBid);
+    mFilterDequeued.erase(origBid);
 
     if (cache.get() != mBufferCache.get() || bufferReplaced) {
         // Surface changed, no need to wait for buffer being released.
