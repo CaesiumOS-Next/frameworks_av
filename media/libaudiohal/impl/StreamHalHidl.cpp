@@ -303,10 +303,8 @@ status_t StreamHalHidl::legacyCreateAudioPatch(const struct audio_port_config& p
         // FIXME: we only support address on first sink with HAL version < 3.0
         address.reset(
                 audio_device_address_to_parameter(port.ext.device.type, port.ext.device.address));
-    } else {
-        address.reset((char*)calloc(1, 1));
     }
-    AudioParameter param = AudioParameter(String8(address.get()));
+    AudioParameter param = AudioParameter(String8(address.get() ?: ""));
     param.addInt(String8(AudioParameter::keyRouting), (int)type);
     if (source.has_value()) {
         param.addInt(String8(AudioParameter::keyInputSource), (int)source.value());
