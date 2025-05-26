@@ -266,7 +266,7 @@ static int FwdLockConv_DeriveKeys(FwdLockConv_Session_t *pSession) {
             status = FwdLockConv_Status_OK;
         }
     }
-    memset(&data, 0, sizeof(data)); // Zero out key data.
+    memset_explicit(&data, 0, sizeof(data)); // Zero out key data.
     return status;
 }
 
