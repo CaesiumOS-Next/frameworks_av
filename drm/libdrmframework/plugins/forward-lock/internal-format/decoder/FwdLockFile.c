@@ -372,36 +372,29 @@ int FwdLockFile_CheckDataIntegrity(int fileDesc) {
     if (sessionId < 0) {
         result = FALSE;
     } else {
-        struct FwdLockFile_CheckDataIntegrity_Data {
-            unsigned char signature[SHA1_HASH_SIZE];
-            unsigned char buffer[SIG_CALC_BUFFER_SIZE];
-        } *pData = malloc(sizeof *pData);
-        if (pData == NULL) {
+        unsigned char signature[SHA1_HASH_SIZE];
+        unsigned char buffer[SIG_CALC_BUFFER_SIZE];
+        FwdLockFile_Session_t *pSession = sessionPtrs[sessionId];
+        if (lseek64(pSession->fileDesc, pSession->dataOffset, SEEK_SET) !=
+                pSession->dataOffset) {
             result = FALSE;
         } else {
-            FwdLockFile_Session_t *pSession = sessionPtrs[sessionId];
-            if (lseek64(pSession->fileDesc, pSession->dataOffset, SEEK_SET) !=
-                    pSession->dataOffset) {
+            ssize_t numBytesRead;
+            unsigned int signatureSize = SHA1_HASH_SIZE;
+            while ((numBytesRead =
+                    read(pSession->fileDesc, buffer, SIG_CALC_BUFFER_SIZE)) > 0) {
+                HMAC_Update(&pSession->signingContext, buffer, (size_t)numBytesRead);
+            }
+            if (numBytesRead < 0) {
                 result = FALSE;
             } else {
-                ssize_t numBytesRead;
-                unsigned int signatureSize = SHA1_HASH_SIZE;
-                while ((numBytesRead =
-                        read(pSession->fileDesc, pData->buffer, SIG_CALC_BUFFER_SIZE)) > 0) {
-                    HMAC_Update(&pSession->signingContext, pData->buffer, (size_t)numBytesRead);
-                }
-                if (numBytesRead < 0) {
-                    result = FALSE;
-                } else {
-                    HMAC_Final(&pSession->signingContext, pData->signature, &signatureSize);
-                    assert(signatureSize == SHA1_HASH_SIZE);
-                    result = memcmp(pData->signature, pSession->dataSignature, SHA1_HASH_SIZE) == 0;
-                }
-                HMAC_Init_ex(&pSession->signingContext, NULL, KEY_SIZE, NULL, NULL);
-                (void)lseek64(pSession->fileDesc, pSession->dataOffset + pSession->filePos,
-                              SEEK_SET);
+                HMAC_Final(&pSession->signingContext, signature, &signatureSize);
+                assert(signatureSize == SHA1_HASH_SIZE);
+                result = memcmp(signature, pSession->dataSignature, SHA1_HASH_SIZE) == 0;
             }
-            free(pData);
+            HMAC_Init_ex(&pSession->signingContext, NULL, KEY_SIZE, NULL, NULL);
+            (void)lseek64(pSession->fileDesc, pSession->dataOffset + pSession->filePos,
+                          SEEK_SET);
         }
     }
     return result;
