@@ -639,7 +639,7 @@ std::variant<status_t, RouteTraits::Element> PolicySerializer::deserialize<Route
     PolicyAudioPortVector sources;
     UniqueCPtr<char> sourcesLiteral{strndup(
                 sourcesAttr.c_str(), strlen(sourcesAttr.c_str()))};
-    char *devTag = strtok(sourcesLiteral.get(), ",");
+    char *save, *devTag = strtok_r(sourcesLiteral.get(), ",", &save);
     while (devTag != NULL) {
         if (strlen(devTag) != 0) {
             sp<PolicyAudioPort> source = ctx->findPortByTagName(devTag);
@@ -655,7 +655,7 @@ std::variant<status_t, RouteTraits::Element> PolicySerializer::deserialize<Route
                 sources.add(source);
             }
         }
-        devTag = strtok(NULL, ",");
+        devTag = strtok_r(NULL, ",", &save);
     }
 
     sink->addRoute(route);

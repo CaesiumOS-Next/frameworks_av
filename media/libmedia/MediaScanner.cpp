@@ -66,11 +66,11 @@ void MediaScanner::loadSkipList() {
         // dup it because strtok will modify the string
         char *skipList = strdup(mSkipList);
         if (skipList) {
-            char * path = strtok(skipList, ",");
+            char * save, * path = strtok_r(skipList, ",", &save);
             int i = 0;
             while (path) {
                 mSkipIndex[i++] = strlen(path);
-                path = strtok(NULL, ",");
+                path = strtok_r(NULL, ",", &save);
             }
             mSkipIndex[i] = -1;
             free(skipList);
