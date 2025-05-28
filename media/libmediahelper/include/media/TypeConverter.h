@@ -71,17 +71,16 @@ using SourceTraits = DefaultTraits<audio_source_t>;
 struct AudioFlagTraits : public DefaultTraits<audio_flags_mask_t> {};
 
 template <class Traits>
-static void collectionFromString(const std::string &str, typename Traits::Collection &collection,
+static void collectionFromString(std::string str, typename Traits::Collection &collection,
                                  const char *del = AudioParameter::valueListSeparator)
 {
-    char *literal = strdup(str.c_str());
+    char *literal = str.data();
     for (const char *cstr = strtok(literal, del); cstr != NULL; cstr = strtok(NULL, del)) {
         typename Traits::Type value;
         if (utilities::convertTo<std::string, typename Traits::Type >(cstr, value)) {
             Traits::add(collection, value);
         }
     }
-    free(literal);
 }
 
 template <class Traits>
@@ -92,12 +91,12 @@ public:
 
     static bool fromString(const std::string &str, typename Traits::Type &result);
 
-    static void collectionFromString(const std::string &str,
+    static void collectionFromString(std::string str,
                                      typename Traits::Collection &collection,
                                      const char *del = AudioParameter::valueListSeparator);
 
     static typename Traits::Type maskFromString(
-            const std::string &str, const char *del = AudioParameter::valueListSeparator);
+            std::string str, const char *del = AudioParameter::valueListSeparator);
 
     static void maskToString(
             typename Traits::Type mask, std::string &str,
@@ -163,26 +162,24 @@ inline bool TypeConverter<Traits>::fromString(const std::string &str, typename T
 }
 
 template <class Traits>
-inline void TypeConverter<Traits>::collectionFromString(const std::string &str,
+inline void TypeConverter<Traits>::collectionFromString(std::string str,
         typename Traits::Collection &collection,
         const char *del)
 {
-    char *literal = strdup(str.c_str());
-
+    char *literal = str.data();
     for (const char *cstr = strtok(literal, del); cstr != NULL; cstr = strtok(NULL, del)) {
         typename Traits::Type value;
         if (fromString(cstr, value)) {
             Traits::add(collection, value);
         }
     }
-    free(literal);
 }
 
 template <class Traits>
 inline typename Traits::Type TypeConverter<Traits>::maskFromString(
-        const std::string &str, const char *del)
+        std::string str, const char *del)
 {
-    char *literal = strdup(str.c_str());
+    char *literal = str.data();
     uint32_t value = 0;
     for (const char *cstr = strtok(literal, del); cstr != NULL; cstr = strtok(NULL, del)) {
         typename Traits::Type type;
@@ -190,7 +187,6 @@ inline typename Traits::Type TypeConverter<Traits>::maskFromString(
             value |= static_cast<uint32_t>(type);
         }
     }
-    free(literal);
     return static_cast<typename Traits::Type>(value);
 }
 
