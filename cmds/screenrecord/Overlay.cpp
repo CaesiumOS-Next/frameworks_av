@@ -37,7 +37,7 @@
 using namespace android;
 
 // System properties to look up and display on the info screen.
-const char* Overlay::kPropertyNames[] = {
+const char* const Overlay::kPropertyNames[] = {
         "ro.build.description",
         // includes ro.build.id, ro.build.product, ro.build.tags, ro.build.type,
         // and ro.build.version.release

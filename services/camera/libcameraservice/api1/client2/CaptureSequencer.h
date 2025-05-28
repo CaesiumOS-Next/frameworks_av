@@ -134,7 +134,7 @@ class CaptureSequencer:
         ERROR,
         NUM_CAPTURE_STATES
     } mCaptureState;
-    static const char* kStateNames[];
+    static const char* const kStateNames[];
     int mStateTransitionCount;
     Mutex mStateMutex; // Guards mCaptureState
     Condition mStateChanged;

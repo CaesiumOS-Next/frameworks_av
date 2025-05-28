@@ -193,7 +193,7 @@ void CaptureSequencer::dump(int fd, const Vector<String16>& /*args*/) {
 
 /** Private members */
 
-const char* CaptureSequencer::kStateNames[CaptureSequencer::NUM_CAPTURE_STATES+1] =
+const char* const CaptureSequencer::kStateNames[CaptureSequencer::NUM_CAPTURE_STATES+1] =
 {
     "IDLE",
     "START",

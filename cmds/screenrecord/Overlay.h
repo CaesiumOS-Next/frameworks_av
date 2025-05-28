@@ -154,7 +154,7 @@ private:
 
     bool mUseMonotonicTimestamps;
 
-    static const char* kPropertyNames[];
+    static const char* const kPropertyNames[];
 };
 
 }; // namespace android
