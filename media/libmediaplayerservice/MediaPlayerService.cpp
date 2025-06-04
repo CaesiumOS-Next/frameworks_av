@@ -794,6 +794,9 @@ MediaPlayerService::Client::~Client()
 {
     ALOGV("Client(%d) destructor AttributionSource = %s", mConnId,
             mAttributionSource.toString().c_str());
+    if (mAudioOutput != nullptr) {
+        mAudioOutput->setIsReset(true);
+    }
     mAudioOutput.clear();
     wp<Client> client(this);
     disconnect();
@@ -827,6 +830,10 @@ void MediaPlayerService::Client::disconnect()
         ALOGD("kill Antagonizer");
         mAntagonizer->kill();
 #endif
+        if (mAudioOutput != nullptr) {
+            mAudioOutput->setIsReset(true);
+        }
+
         p->reset();
     }
 
@@ -1838,7 +1845,8 @@ MediaPlayerService::AudioOutput::AudioOutput(audio_session_t sessionId,
       mVolumeHandler(new media::VolumeHandler()),
       mSelectedDeviceId(AUDIO_PORT_HANDLE_NONE),
       mDeviceCallbackEnabled(false),
-      mDeviceCallback(deviceCallback)
+      mDeviceCallback(deviceCallback),
+      mIsReset(false)
 {
     ALOGV("AudioOutput(%d)", sessionId);
     if (attr != NULL) {
@@ -2638,6 +2646,12 @@ status_t MediaPlayerService::AudioOutput::enableAudioDeviceCallback(bool enabled
     return NO_ERROR;
 }
 
+void MediaPlayerService::AudioOutput::setIsReset(bool isReset)
+{
+    ALOGD("setIsReset(%s)", isReset ? "true" : "false");
+    mIsReset.store(isReset);
+}
+
 VolumeShaper::Status MediaPlayerService::AudioOutput::applyVolumeShaper(
                 const sp<VolumeShaper::Configuration>& configuration,
                 const sp<VolumeShaper::Operation>& operation)
@@ -2717,6 +2731,13 @@ size_t MediaPlayerService::AudioOutput::CallbackData::onMoreData(const AudioTrac
         unlock();
         return 0;
     }
+
+    if (me->mIsReset.load()) {
+        ALOGD("onMoreData: NuPlayer already reset, do not callback.");
+        unlock();
+        return 0;
+    }
+
     size_t actualSize = (*me->mCallback)(
             me, buffer.data(), buffer.size(), me->mCallbackCookie,
             CB_EVENT_FILL_BUFFER);
@@ -2742,6 +2763,13 @@ void MediaPlayerService::AudioOutput::CallbackData::onStreamEnd() {
         unlock();
         return;
     }
+
+    if (me->mIsReset.load()) {
+        ALOGD("onStreamEnd: NuPlayer already reset, do not callback.");
+        unlock();
+        return;
+    }
+
     ALOGV("callbackwrapper: deliver EVENT_STREAM_END");
     (*me->mCallback)(me, nullptr /* buffer */, 0 /* size */,
             me->mCallbackCookie, CB_EVENT_STREAM_END);
@@ -2756,6 +2784,13 @@ void MediaPlayerService::AudioOutput::CallbackData::onNewIAudioTrack() {
         unlock();
         return;
     }
+
+    if (me->mIsReset.load()) {
+        ALOGD("onNewIAudioTrack: NuPlayer already reset, do not callback.");
+        unlock();
+        return;
+    }
+
     ALOGV("callbackwrapper: deliver EVENT_TEAR_DOWN");
     (*me->mCallback)(me, nullptr /* buffer */, 0 /* size */,
             me->mCallbackCookie, CB_EVENT_TEAR_DOWN);

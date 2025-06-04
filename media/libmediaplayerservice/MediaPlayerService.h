@@ -20,6 +20,7 @@
 
 #include <arpa/inet.h>
 #include <string>
+#include <atomic>
 
 #include <utils/threads.h>
 #include <utils/Errors.h>
@@ -152,6 +153,8 @@ class MediaPlayerService : public BnMediaPlayerService
         virtual status_t        getRoutedDeviceIds(DeviceIdVector& deviceIds);
         virtual status_t        enableAudioDeviceCallback(bool enabled);
 
+                void            setIsReset(bool isReset);   // add for AudioTrack callback
+
     private:
         static void             setMinBufferCount();
         static void             CallbackWrapper(
@@ -186,6 +189,7 @@ class MediaPlayerService : public BnMediaPlayerService
         bool                    mDeviceCallbackEnabled;
         wp<AudioSystem::AudioDeviceCallback>        mDeviceCallback;
         mutable Mutex           mLock;
+        std::atomic_bool        mIsReset;   // add for AudioTrack callback
 
         // static variables below not protected by mutex
         static bool             mIsOnEmulator;
