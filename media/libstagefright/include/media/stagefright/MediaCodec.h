@@ -503,10 +503,20 @@ private:
 
     Domain mDomain;
     AString mLogSessionId;
+    int32_t mLogLevel;
+    static int32_t mInstId;
+    int32_t mCurrentInstId;
     int32_t mWidth;
     int32_t mHeight;
     int32_t mRotationDegrees;
     int32_t mAllowFrameDroppingBySurface;
+
+    struct FrameStat {
+        int64_t renderFrameCnt;
+        int64_t dropFrameCnt;
+        int64_t allFrameCnt;
+    };
+    FrameStat mFrameStat;
 
     enum {
         kFlagHasHdrStaticInfo   = 1,

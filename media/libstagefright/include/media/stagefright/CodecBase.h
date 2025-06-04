@@ -248,6 +248,8 @@ struct CodecBase : public AHandler, /* static */ ColorUtils {
          */
         virtual void onOutputBufferAvailable(
                 size_t index, const sp<MediaCodecBuffer> &buffer) = 0;
+        virtual void setCodecInstId(int32_t id) {mCurrentInstId = id;}
+        int32_t mCurrentInstId;
     };
     enum {
         kMaxCodecBufferSize = 8192 * 4096 * 4, // 8K RGBA
@@ -547,7 +549,10 @@ public:
             int32_t heapSeqNum,
             hardware::drm::V1_0::SharedBuffer *buf);
 
+    virtual void setCodecInstId(int32_t id) {mCurrentInstId = id;}
+    CodecBase::BufferCallback* getCallback() { return mCallback.get(); }
 protected:
+    int32_t mCurrentInstId;
     std::unique_ptr<CodecBase::BufferCallback> mCallback;
 };
 

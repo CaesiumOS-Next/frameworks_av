@@ -28,6 +28,9 @@
 #include <thread>
 #include <chrono>
 
+#define ATRACE_TAG ATRACE_TAG_VIDEO
+#include <utils/Trace.h>
+
 #include <C2AllocatorGralloc.h>
 #include <C2PlatformSupport.h>
 #include <C2BlockInternal.h>
@@ -76,6 +79,31 @@ using namespace hardware::cas::native::V1_0;
 
 using CasStatus = hardware::cas::V1_0::Status;
 using DrmBufferType = hardware::drm::V1_0::BufferType;
+
+#define MC_DEBUG_PROPERTY "debug.stagefright.c2-debug"
+#define MC_DEBUG_INFO 0
+#define MC_DEBUG_DROP_LOG_LEVEL1 1
+#define MC_DEBUG_LOG_LEVEL2 2
+
+#define MC_DEBUG_TRACE 16
+#define MC_LOG(level, format, str...) \
+    do {\
+        if (level == MC_DEBUG_INFO)\
+            ALOGD("[%d]" format, mCurrentInstId, ##str);\
+        else if ((mLogLevel & level) == level)\
+            ALOGD("[%d]" format, mCurrentInstId, ##str);\
+    } while (0)
+
+#define MC_TRACE(level, str, val) \
+    do {\
+        if ((mLogLevel & level) == level) {\
+            AString str_;\
+            str_.append(mCurrentInstId);\
+            str_.append("_");\
+            str_.append(str);\
+            ATRACE_INT64(str_.c_str(), val);\
+        }\
+    } while (0)
 
 namespace {
 
@@ -208,6 +236,8 @@ CCodecBufferChannel::CCodecBufferChannel(
     std::string value = GetServerConfigurableFlag("media_native", "ccodec_rendering_depth", "3");
     android::base::ParseInt(value, &mRenderingDepth);
     mOutputSurface.lock()->maxDequeueBuffers = kSmoothnessFactor + mRenderingDepth;
+    mLogLevel = property_get_int32(MC_DEBUG_PROPERTY, 0);
+    mIsVideo = false;
 }
 
 CCodecBufferChannel::~CCodecBufferChannel() {
@@ -659,9 +689,19 @@ status_t CCodecBufferChannel::attachEncryptedBuffer(
             IMemoryToSharedBuffer(
                     mDecryptDestination, mHeapSeqNum, &dst.nonsecureMemory);
         }
+
+        int64_t time = ALooper::GetNowUs();
+        if (mIsVideo)
+            MC_TRACE(MC_DEBUG_TRACE, "decrypt", 1);
         result = mCrypto->decrypt(
                 key, iv, mode, pattern, src, 0, subSamples, numSubSamples,
                 dst, errorDetailMsg);
+        if (mIsVideo) {
+            MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] decrypt cost %lld us",
+                   __func__, __LINE__, mComponentName.c_str(), (long long)(ALooper::GetNowUs() - time));
+            MC_TRACE(MC_DEBUG_TRACE, "decrypt", 0);
+        }
+
         if (result < 0) {
             ALOGI("[%s] attachEncryptedBuffer: decrypt failed: result = %zd", mName, result);
             return result;
@@ -825,9 +865,19 @@ status_t CCodecBufferChannel::queueSecureInputBuffer(
         }
         hardware::drm::V1_0::SharedBuffer source;
         encryptedBuffer->fillSourceBuffer(&source);
+
+        int64_t time = ALooper::GetNowUs();
+        if (mIsVideo)
+            MC_TRACE(MC_DEBUG_TRACE, "decrypt", 1);
         result = mCrypto->decrypt(
                 key, iv, mode, pattern, source, buffer->offset(),
                 subSamples, numSubSamples, destination, errorDetailMsg);
+        if (mIsVideo) {
+            MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] decrypt cost %lld us",
+                __func__, __LINE__, mComponentName.c_str(), (long long)(ALooper::GetNowUs() - time));
+            MC_TRACE(MC_DEBUG_TRACE, "decrypt", 0);
+        }
+
         if (result < 0) {
             ALOGI("[%s] decrypt failed: result=%zd", mName, result);
             return result;
@@ -1070,6 +1120,7 @@ void CCodecBufferChannel::feedInputBufferIfAvailableInternal() {
             }
         }
         ALOGV("[%s] new input index = %zu [%p]", mName, index, inBuffer.get());
+        MC_TRACE(MC_DEBUG_TRACE, "inputbufAvailIndex", index);
         mCallback->onInputBufferAvailable(index, inBuffer);
     }
     ALOGV("[%s] # active slots after feedInputBufferIfAvailable = %zu", mName, numActiveSlots);
@@ -1085,6 +1136,18 @@ status_t CCodecBufferChannel::renderOutputBuffer(
         if (output->buffers) {
             released = output->buffers->releaseBuffer(buffer, &c2Buffer);
         }
+    }
+    {
+        int64_t mediaTimeUs = 0;
+        int64_t timediffMs = (timestampNs/1000 - ALooper::GetNowUs())/1000;
+        (void)buffer->meta()->findInt64("timeUs", &mediaTimeUs);
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] mediatime:%lld, timestampNs:%lld, timediff=%lldms",
+                __func__, __LINE__, mComponentName.c_str(),
+               (long long)mediaTimeUs, (long long)timestampNs, (long long)timediffMs);
+        MC_TRACE(MC_DEBUG_TRACE, "frame-render", mediaTimeUs);
+        MC_TRACE(MC_DEBUG_TRACE, "timediffMs", timediffMs);
+        MC_TRACE(MC_DEBUG_TRACE, "frame-drop", 0);
+        MC_TRACE(MC_DEBUG_TRACE, "frame-render", 0);
     }
     // NOTE: some apps try to releaseOutputBuffer() with timestamp and/or render
     //       set to true.
@@ -1557,6 +1620,13 @@ status_t CCodecBufferChannel::start(
     int poolMask = GetCodec2PoolMask();
     C2PlatformAllocatorStore::id_t preferredLinearId = GetPreferredLinearAllocatorId(poolMask);
 
+    if (inputFormat && strstr(mComponentName.c_str(), "decoder") != NULL) {
+        AString mime;
+        inputFormat->findString("mime", &mime);
+        if (strstr(mime.c_str(), "video") != NULL) {
+            mIsVideo = true;
+        }
+    }
     if (inputFormat != nullptr) {
         bool graphic = (iStreamFormat.value == C2BufferData::GRAPHIC);
         bool audioEncoder = !graphic && (kind.value == C2Component::KIND_ENCODER);
@@ -2443,6 +2513,8 @@ bool CCodecBufferChannel::handleWork(
         // When using input surface we need to restore the original input timestamp.
         timestamp = work->input.ordinal.customOrdinal;
     }
+    if (mIsVideo)
+        MC_TRACE(MC_DEBUG_TRACE, "onWorkDone", timestamp.peekll());
     ScopedTrace trace(ATRACE_TAG, android::base::StringPrintf(
             "CCodecBufferChannel::onWorkDone(%s@ts=%lld)", mName, timestamp.peekll()).c_str());
     ALOGV("[%s] onWorkDone: input %lld, codec %lld => output %lld => %lld",

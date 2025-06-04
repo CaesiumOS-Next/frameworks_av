@@ -323,6 +323,8 @@ private:
     std::shared_ptr<Codec2Client::Component> mComponent;
     std::string mComponentName; ///< component name for debugging
     const char *mName; ///< C-string version of component name
+    int32_t mLogLevel;
+    bool mIsVideo;
     std::shared_ptr<CCodecCallback> mCCodecCallback;
     std::shared_ptr<C2BlockPool> mInputAllocator;
     QueueSync mQueueSync;

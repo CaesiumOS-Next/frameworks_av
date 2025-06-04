@@ -28,6 +28,9 @@
 
 #include <C2Buffer.h>
 
+#define ATRACE_TAG ATRACE_TAG_VIDEO
+#include <utils/Trace.h>
+
 #include "include/SoftwareRenderer.h"
 
 #include <android/api-level.h>
@@ -94,6 +97,61 @@ using aidl::android::media::ClientInfoParcel;
 using server_configurable_flags::GetServerConfigurableFlag;
 using FreezeEvent = VideoRenderQualityTracker::FreezeEvent;
 using JudderEvent = VideoRenderQualityTracker::JudderEvent;
+
+#define MC_DEBUG_PROPERTY "debug.stagefright.c2-debug"
+#define MC_DEBUG_INFO 0
+#define MC_DEBUG_DROP_LOG_LEVEL1 1
+#define MC_DEBUG_LOG_LEVEL2 2
+#define MC_DEBUG_TRACE 16
+#define MC_LOG(level, format, str...) \
+    do {\
+        if (level == MC_DEBUG_INFO)\
+            ALOGD("[%d]" format, mCurrentInstId, ##str);\
+        else if ((mLogLevel & level) == level)\
+            ALOGD("[%d]" format, mCurrentInstId, ##str);\
+    } while (0)
+
+#define MC_TRACE(level, str, val) \
+    do {\
+        if ((mLogLevel & level) == level) {\
+            AString str_;\
+            str_.append(mCurrentInstId);\
+            str_.append("_");\
+            str_.append(str);\
+            ATRACE_INT64(str_.c_str(), val);\
+        }\
+    } while (0)
+
+#define MC_TRACE_BEGIN(level, str) \
+    do {\
+        if ((mLogLevel & level) == level) {\
+            AString str_;\
+            str_.append(mCurrentInstId);\
+            str_.append("_");\
+            str_.append(str);\
+            ATRACE_BEGIN(str_.c_str());\
+        }\
+    } while (0)
+
+#define MC_TRACE_BEGIN2(level, str1, str2) \
+    do {\
+        if ((mLogLevel & level) == level) {\
+            AString str_;\
+            str_.append(mCurrentInstId);\
+            str_.append("_");\
+            str_.append(str1);\
+            str_.append("#");\
+            str_.append(str2);\
+            ATRACE_BEGIN(str_.c_str());\
+        }\
+    } while (0)
+
+#define MC_TRACE_END(level) \
+    do {\
+        if ((mLogLevel & level) == level) {\
+            ATRACE_END();\
+        }\
+    } while (0)
 
 // key for media statistics
 static const char *kCodecKeyName = "codec";
@@ -778,6 +836,8 @@ private:
     sp<Surface> mSurface;
 };
 
+int32_t android::MediaCodec::mInstId = 0;
+
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace {
@@ -880,10 +940,13 @@ public:
             size_t index, const sp<MediaCodecBuffer> &buffer) override;
 private:
     const sp<AMessage> mNotify;
+    int32_t mLogLevel;
 };
 
 BufferCallback::BufferCallback(const sp<AMessage> &notify)
-    : mNotify(notify) {}
+    : mNotify(notify) {
+    mLogLevel = property_get_int32(MC_DEBUG_PROPERTY, 0);
+}
 
 void BufferCallback::onInputBufferAvailable(
         size_t index, const sp<MediaCodecBuffer> &buffer) {
@@ -901,6 +964,9 @@ void BufferCallback::onOutputBufferAvailable(
     notify->setSize("index", index);
     notify->setObject("buffer", buffer);
     notify->post();
+    int64_t timeUs;
+    buffer->meta()->findInt64("timeUs", &timeUs);
+    MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s]timeus:%lld", __FUNCTION__,(long long)timeUs);
 }
 
 class CodecCallback : public CodecBase::CodecCallback {
@@ -1202,6 +1268,7 @@ MediaCodec::MediaCodec(
       mStickyError(OK),
       mSoftRenderer(NULL),
       mDomain(DOMAIN_UNKNOWN),
+      mLogLevel(0),
       mWidth(0),
       mHeight(0),
       mRotationDegrees(0),
@@ -1287,6 +1354,9 @@ MediaCodec::~MediaCodec() {
             mediametrics_delete(metricsHandle);
         }
     }
+    if (mDomain == DOMAIN_VIDEO && mFrameStat.allFrameCnt > 0)
+        MC_LOG(MC_DEBUG_INFO, "%lld frames(dropframenum:%lld, renderframenum:%lld), droprate:%6f", (long long)mFrameStat.allFrameCnt, (long long)mFrameStat.dropFrameCnt, (long long)mFrameStat.renderFrameCnt,
+        (float)mFrameStat.dropFrameCnt / mFrameStat.allFrameCnt);
 }
 
 // except for in constructor, called from the looper thread (and therefore mutexed)
@@ -2169,9 +2239,24 @@ status_t MediaCodec::init(const AString &name) {
             std::unique_ptr<CodecBase::CodecCallback>(
                     new CodecCallback(new AMessage(kWhatCodecNotify, this))));
     mBufferChannel = mCodec->getBufferChannel();
+#if 0
     mBufferChannel->setCallback(
             std::unique_ptr<CodecBase::BufferCallback>(
                     new BufferCallback(new AMessage(kWhatCodecNotify, this))));
+#else
+    //now only used for video codec debug
+    std::unique_ptr<CodecBase::BufferCallback> bufCb(new BufferCallback(new AMessage(kWhatCodecNotify, this)));
+    if (mDomain == DOMAIN_VIDEO) {
+        mCurrentInstId = mInstId;
+        mBufferChannel->setCodecInstId(mCurrentInstId);
+        bufCb->setCodecInstId(mCurrentInstId);
+        mInstId ++;
+    }
+    mBufferChannel->setCallback(std::move(bufCb));
+    mLogLevel = property_get_int32(MC_DEBUG_PROPERTY, 0);
+    memset(&mFrameStat, 0, sizeof(FrameStat));
+#endif
+
     sp<AMessage> msg = new AMessage(kWhatInit, this);
     if (mCodecInfo) {
         msg->setObject("codecInfo", mCodecInfo);
@@ -2394,6 +2479,18 @@ mediametrics_handle_t MediaCodec::createMediaMetrics(const sp<AMessage>& format,
         int32_t qpBMax = -1;
         if (format->findInt32("video-qp-b-max", &qpBMax)) {
             mediametrics_setInt32(nextMetricsHandle, kCodecRequestedVideoQPBMax, qpBMax);
+        }
+    }
+
+    if (mDomain == DOMAIN_VIDEO) {
+        int playerId = -1;
+        if (format->findInt32("vendor.player-id.value", &playerId)) {
+            mCurrentInstId = playerId;
+            mBufferChannel->setCodecInstId(mCurrentInstId);
+            mBufferChannel->getCallback()->setCodecInstId(mCurrentInstId);
+            MC_LOG(MC_DEBUG_LOG_LEVEL2, "set player-id:%d", playerId);
+        } else {
+            format->setInt32("vendor.player-id.value", mCurrentInstId);
         }
     }
 
@@ -3205,6 +3302,8 @@ status_t MediaCodec::queueInputBuffer(
     if (errorDetailMsg != NULL) {
         errorDetailMsg->clear();
     }
+    if (mDomain == DOMAIN_VIDEO)
+        MC_TRACE(MC_DEBUG_TRACE,"queuebuffer", presentationTimeUs);
 
     sp<AMessage> msg = new AMessage(kWhatQueueInputBuffer, this);
     msg->setSize("index", index);
@@ -3256,6 +3355,10 @@ status_t MediaCodec::queueInputBuffers(
     msg->setInt32("flags", bufferFlags);
     msg->setObject("accessUnitInfo", infos);
     msg->setPointer("errorDetailMsg", errorDetailMsg);
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] pts=%lld", mComponentName.c_str(), __LINE__,__FUNCTION__, (long long)presentationTimeUs);
+    }
+
     sp<AMessage> response;
     return PostAndAwaitResponse(msg, &response);
 }
@@ -3276,6 +3379,9 @@ status_t MediaCodec::queueSecureInputBuffer(
         errorDetailMsg->clear();
     }
 
+    if (mDomain == DOMAIN_VIDEO)
+        MC_TRACE(MC_DEBUG_TRACE,"queuesecurebuffer", presentationTimeUs);
+
     sp<AMessage> msg = new AMessage(kWhatQueueInputBuffer, this);
     msg->setSize("index", index);
     msg->setSize("offset", offset);
@@ -3289,6 +3395,10 @@ status_t MediaCodec::queueSecureInputBuffer(
     msg->setInt64("timeUs", presentationTimeUs);
     msg->setInt32("flags", flags);
     msg->setPointer("errorDetailMsg", errorDetailMsg);
+
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] pts=%lld", mComponentName.c_str(), __LINE__,__FUNCTION__, (long long)presentationTimeUs);
+    }
 
     sp<AMessage> response;
     status_t err = PostAndAwaitResponse(msg, &response);
@@ -3361,6 +3471,10 @@ status_t MediaCodec::queueBuffer(
         return BAD_VALUE;
     }
     status_t err = OK;
+
+    if (mDomain == DOMAIN_VIDEO)
+        MC_TRACE(MC_DEBUG_TRACE,"queuebuffer", presentationTimeUs);
+
     sp<AMessage> msg = new AMessage(kWhatQueueInputBuffer, this);
     msg->setSize("index", index);
     sp<WrapperObject<std::shared_ptr<C2Buffer>>> obj{
@@ -3374,6 +3488,11 @@ status_t MediaCodec::queueBuffer(
         msg->setMessage("tunings", tunings);
     }
     msg->setPointer("errorDetailMsg", errorDetailMsg);
+
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] pts=%lld", mComponentName.c_str(), __LINE__, __FUNCTION__, (long long)presentationTimeUs);
+    }
+
     sp<AMessage> response;
     err = PostAndAwaitResponse(msg, &response);
 
@@ -3399,6 +3518,10 @@ status_t MediaCodec::queueEncryptedBuffer(
         return BAD_VALUE;
     }
     status_t err = OK;
+
+    if (mDomain == DOMAIN_VIDEO)
+        MC_TRACE(MC_DEBUG_TRACE,"queuesecurebuffer", presentationTimeUs);
+
     sp<AMessage> msg = new AMessage(kWhatQueueInputBuffer, this);
     msg->setSize("index", index);
     sp<WrapperObject<sp<hardware::HidlMemory>>> memory{
@@ -3415,6 +3538,10 @@ status_t MediaCodec::queueEncryptedBuffer(
         msg->setMessage("tunings", tunings);
     }
     msg->setPointer("errorDetailMsg", errorDetailMsg);
+
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] pts=%lld", mComponentName.c_str(), __LINE__, __FUNCTION__, (long long)presentationTimeUs);
+    }
 
     sp<AMessage> response;
     err = PostAndAwaitResponse(msg, &response);
@@ -3459,6 +3586,10 @@ status_t MediaCodec::dequeueOutputBuffer(
     CHECK(response->findInt64("timeUs", presentationTimeUs));
     CHECK(response->findInt32("flags", (int32_t *)flags));
 
+    if (mDomain == DOMAIN_VIDEO)
+        MC_TRACE(MC_DEBUG_TRACE,"dequeueOutputBuffer", *presentationTimeUs);
+    MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] pts=%lld", mComponentName.c_str(), __LINE__, __FUNCTION__, (long long)(*presentationTimeUs));
+
     return OK;
 }
 
@@ -3467,6 +3598,11 @@ status_t MediaCodec::renderOutputBufferAndRelease(size_t index) {
     msg->setSize("index", index);
     msg->setInt32("render", true);
 
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_TRACE_BEGIN2(MC_DEBUG_TRACE, "renderAndRelease", index);
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] index=%zu", mComponentName.c_str(), __LINE__, __FUNCTION__, index);
+        MC_TRACE_END(MC_DEBUG_TRACE);
+    }
     sp<AMessage> response;
     return PostAndAwaitResponse(msg, &response);
 }
@@ -3477,6 +3613,11 @@ status_t MediaCodec::renderOutputBufferAndRelease(size_t index, int64_t timestam
     msg->setInt32("render", true);
     msg->setInt64("timestampNs", timestampNs);
 
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_TRACE_BEGIN2(MC_DEBUG_TRACE, "renderAndRelease", index);
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] index=%zu", mComponentName.c_str(), __LINE__, __FUNCTION__, index);
+        MC_TRACE_END(MC_DEBUG_TRACE);
+    }
     sp<AMessage> response;
     return PostAndAwaitResponse(msg, &response);
 }
@@ -3485,6 +3626,11 @@ status_t MediaCodec::releaseOutputBuffer(size_t index) {
     sp<AMessage> msg = new AMessage(kWhatReleaseOutputBuffer, this);
     msg->setSize("index", index);
 
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_TRACE_BEGIN2(MC_DEBUG_TRACE, "release", index);
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s:%d@%s] index=%zu", mComponentName.c_str(), __LINE__, __FUNCTION__, index);
+        MC_TRACE_END(MC_DEBUG_TRACE);
+    }
     sp<AMessage> response;
     return PostAndAwaitResponse(msg, &response);
 }
@@ -3927,6 +4073,10 @@ inline void MediaCodec::initClientConfigParcel(ClientConfigParcel& clientConfig)
 }
 
 void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_TRACE_BEGIN(MC_DEBUG_TRACE, msg->debugString().c_str());
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "%s@%s msg:%s", mComponentName.c_str(), __func__, msg->debugString().c_str());
+    }
     switch (msg->what()) {
         case kWhatCodecNotify:
         {
@@ -5741,6 +5891,10 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
         default:
             TRESPASS();
     }
+    if (mDomain == DOMAIN_VIDEO) {
+        MC_TRACE_END(MC_DEBUG_TRACE);
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "%s@%s msg end", mComponentName.c_str(), __func__);
+    }
 }
 
 void MediaCodec::handleOutputFormatChangeIfNeeded(const sp<MediaCodecBuffer> &buffer) {
@@ -6449,6 +6603,8 @@ status_t MediaCodec::onReleaseOutputBuffer(const sp<AMessage> &msg) {
     if (!msg->findInt32("render", &render)) {
         render = 0;
     }
+    MC_TRACE_BEGIN2(MC_DEBUG_TRACE, "onReleaseOut", index);
+    MC_TRACE_END(MC_DEBUG_TRACE);
 
     if (!isExecuting()) {
         mErrorLog.log(LOG_TAG, base::StringPrintf(
@@ -6543,7 +6699,10 @@ status_t MediaCodec::onReleaseOutputBuffer(const sp<AMessage> &msg) {
                 ALOGE("unexpected failure to post pollForRenderedBuffers: %d", err);
             }
         }
+        MC_LOG(MC_DEBUG_LOG_LEVEL2, "[%s] render timeus:%lld", __FUNCTION__, (long long)mediaTimeUs);
         status_t err = mBufferChannel->renderOutputBuffer(buffer, renderTimeNs);
+        mFrameStat.renderFrameCnt ++;
+        mFrameStat.allFrameCnt ++;
 
         if (err == NO_INIT) {
             mErrorLog.log(LOG_TAG, "rendering to non-initialized(obsolete) surface");
@@ -6557,6 +6716,13 @@ status_t MediaCodec::onReleaseOutputBuffer(const sp<AMessage> &msg) {
             int64_t mediaTimeUs = INT64_MIN;
             if (buffer->meta()->findInt64("timeUs", &mediaTimeUs)) {
                 mVideoRenderQualityTracker.onFrameSkipped(mediaTimeUs);
+                MC_TRACE(MC_DEBUG_TRACE,"frame-drop", mediaTimeUs);
+                MC_LOG(MC_DEBUG_DROP_LOG_LEVEL1, "[%s:%d@%s] drop pts:%lld",
+                                __func__, __LINE__, mComponentName.c_str(),
+                                (long long)mediaTimeUs);
+                MC_TRACE(MC_DEBUG_TRACE,"frame-drop", 0);
+                mFrameStat.allFrameCnt ++;
+                mFrameStat.dropFrameCnt ++;
             }
         }
         mBufferChannel->discardBuffer(buffer);
@@ -6703,6 +6869,7 @@ status_t MediaCodec::handleSetSurface(const sp<Surface> &surface) {
 void MediaCodec::onInputBufferAvailable() {
     int32_t index;
     while ((index = dequeuePortBuffer(kPortIndexInput)) >= 0) {
+        MC_TRACE(MC_DEBUG_TRACE,"mc_onInputBufferAvailable", index);
         sp<AMessage> msg = mCallback->dup();
         msg->setInt32("callbackID", CB_INPUT_AVAILABLE);
         msg->setInt32("index", index);
@@ -6728,6 +6895,7 @@ void MediaCodec::onOutputBufferAvailable() {
         int64_t timeUs;
         CHECK(buffer->meta()->findInt64("timeUs", &timeUs));
 
+        MC_TRACE(MC_DEBUG_TRACE,"mc_onOutputBufferAvailable", timeUs);
         msg->setInt64("timeUs", timeUs);
 
         int32_t flags;
