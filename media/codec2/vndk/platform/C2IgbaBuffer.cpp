@@ -19,6 +19,7 @@
 #include <aidl/android/hardware/media/c2/IGraphicBufferAllocator.h>
 #include <vndk/hardware_buffer.h>
 #include <utils/Log.h>
+#include <utils/SystemClock.h>
 
 #include <C2AllocatorGralloc.h>
 #include <C2BlockInternal.h>
@@ -170,7 +171,8 @@ C2IgbaBlockPool::C2IgbaBlockPool(
         const bool blockFence,
         const local_id_t localId) :
                 mAllocator(allocator), mIgba(igba),
-                mBlockFence(blockFence), mLocalId(localId) {
+                mBlockFence(blockFence), mLocalId(localId),
+                mSyncFenceTimeoutStamp(0), mSyncFenceTimeoutCnt(0) {
     if (!mIgba) {
         mValid = false;
         return;
@@ -279,8 +281,14 @@ c2_status_t C2IgbaBlockPool::_fetchGraphicBlock(
                 AHardwareBuffer_release(ahwb);
                 bool aidlRet = true;
                 ::ndk::ScopedAStatus status = mIgba->deallocate(*origId, &aidlRet);
-                ALOGE("Waiting a sync fence failed %d aidl(%d: %d)",
-                      res, status.isOk(), aidlRet);
+                int64_t now = ::android::elapsedRealtime();
+                ++mSyncFenceTimeoutCnt;
+                if (now - mSyncFenceTimeoutStamp > 5000) {
+                    ALOGW("Waiting a sync fence failed %d aidl(%d: %d), failure_count: %d",
+                            res, status.isOk(), aidlRet, mSyncFenceTimeoutCnt);
+                    mSyncFenceTimeoutCnt = 0;
+                    mSyncFenceTimeoutStamp = now;
+                }
                 return C2_TIMED_OUT;
             }
             syncFenceSignaled = true;
