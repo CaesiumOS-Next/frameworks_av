@@ -39,6 +39,30 @@
       },
       "revId": "238522e23736fca27c2241e1ebb1c1b11eb9c370",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a95eb0_2229ed55",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1924,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2025-06-13T10:38:10Z",
+      "side": 1,
+      "message": "Hello @mnaganov@google.com,\n\nSorry of late response, so far this task had low prio assigned in the project I am currently working.\nPlease take a look on the changes I have just uploaded with patchset #5.\nI have also noticed that \u0027android-latest-release\u0027(android15-qpr2-release) branch shall be used instead of \u0027main\u0027, but wanted to upload the changes first into this review because of the comments already given.",
+      "parentUuid": "cf80651b_482d8069",
+      "range": {
+        "startLine": 1924,
+        "startChar": 25,
+        "endLine": 1924,
+        "endChar": 50
+      },
+      "revId": "238522e23736fca27c2241e1ebb1c1b11eb9c370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
