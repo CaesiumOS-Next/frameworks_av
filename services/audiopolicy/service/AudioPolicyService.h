@@ -648,7 +648,7 @@ private:
                     void        stopOutputCommand(audio_port_handle_t portId);
                     void        releaseOutputCommand(audio_port_handle_t portId);
                     status_t    sendCommand(sp<AudioCommand>& command, int delayMs = 0);
-                    void        insertCommand_l(sp<AudioCommand>& command, int delayMs = 0);
+                    nsecs_t     insertCommand_l(sp<AudioCommand>& command, int delayMs = 0);
                     status_t    createAudioPatchCommand(const struct audio_patch *patch,
                                                         audio_patch_handle_t *handle,
                                                         int delayMs);
@@ -680,7 +680,7 @@ private:
                     void        updateActiveSpatializerTracksCommand();
                     void        volRangeInitReqCommand();
 
-                    void        insertCommand_l(AudioCommand *command, int delayMs = 0);
+                    nsecs_t     insertCommand_l(AudioCommand *command, int delayMs = 0);
     private:
         class AudioCommandData;
 
@@ -688,18 +688,18 @@ private:
         class AudioCommand: public RefBase {
 
         public:
-            AudioCommand()
-            : mCommand(-1), mStatus(NO_ERROR), mWaitStatus(false) {}
+            AudioCommand(int command, bool waitStatus, sp<AudioCommandData> param)
+            : mCommand(command), mStatus(NO_ERROR), mWaitStatus(waitStatus), mParam(param) {}
 
-            void dump(char* buffer, size_t size);
+            void dump(char* buffer, size_t size) const;
 
-            int mCommand;   // SET_VOLUME, SET_PARAMETERS...
+            const int mCommand;   // SET_VOLUME, SET_PARAMETERS...
             nsecs_t mTime;  // time stamp
-            audio_utils::mutex mMutex{audio_utils::MutexOrder::kAudioCommand_Mutex};
-            audio_utils::condition_variable mCond; // condition for status return
-            status_t mStatus; // command status
-            bool mWaitStatus; // true if caller is waiting for status
-            sp<AudioCommandData> mParam;     // command specific parameter data
+            mutable audio_utils::mutex mMutex{audio_utils::MutexOrder::kAudioCommand_Mutex};
+            mutable audio_utils::condition_variable mCond; // condition for status return
+            status_t mStatus GUARDED_BY(mMutex); // command status
+            bool mWaitStatus GUARDED_BY(mMutex); // true if caller is waiting for status
+            const sp<AudioCommandData> mParam;     // command specific parameter data
         };
 
         class AudioCommandData: public RefBase {
