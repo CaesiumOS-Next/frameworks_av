@@ -1816,7 +1816,7 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                   ++numTimesBecameEmpty;
                 }
                 mLastCommand = command;
-                status_t createAudioPatchStatus;
+                status_t status = NO_ERROR;
 
                 switch (command->mCommand) {
                 case SET_VOLUME: {
@@ -1824,10 +1824,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set volume stream %d, \
                             volume %f, output %d", data->mStream, data->mVolume, data->mIO);
                     ul.unlock();
-                    command->mStatus = AudioSystem::setStreamVolume(data->mStream,
-                                                                    data->mVolume,
-                                                                    data->mIsMuted,
-                                                                    data->mIO);
+                    status = AudioSystem::setStreamVolume(data->mStream,
+                                                          data->mVolume,
+                                                          data->mIsMuted,
+                                                          data->mIO);
                     ul.lock();
                     }break;
                 case SET_PORTS_VOLUME: {
@@ -1835,10 +1835,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set volume Ports %s volume %f, \
                             output %d", data->dumpPorts().c_str(), data->mVolume, data->mIO);
                     ul.unlock();
-                    command->mStatus = AudioSystem::setPortsVolume(data->mPorts,
-                                                                   data->mVolume,
-                                                                   data->mMuted,
-                                                                   data->mIO);
+                    status = AudioSystem::setPortsVolume(data->mPorts,
+                                                         data->mVolume,
+                                                         data->mMuted,
+                                                         data->mIO);
                     ul.lock();
                     } break;
                 case SET_PARAMETERS: {
@@ -1846,7 +1846,7 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set parameters string %s, io %d",
                             data->mKeyValuePairs.c_str(), data->mIO);
                     ul.unlock();
-                    command->mStatus = AudioSystem::setParameters(data->mIO, data->mKeyValuePairs);
+                    status = AudioSystem::setParameters(data->mIO, data->mKeyValuePairs);
                     ul.lock();
                     }break;
                 case SET_VOICE_VOLUME: {
@@ -1854,7 +1854,7 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set voice volume volume %f",
                             data->mVolume);
                     ul.unlock();
-                    command->mStatus = AudioSystem::setVoiceVolume(data->mVolume);
+                    status = AudioSystem::setVoiceVolume(data->mVolume);
                     ul.lock();
                     }break;
                 case STOP_OUTPUT: {
@@ -1886,11 +1886,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing create audio patch");
                     sp<IAudioFlinger> af = AudioSystem::get_audio_flinger();
                     if (af == 0) {
-                        createAudioPatchStatus = PERMISSION_DENIED;
+                        status = PERMISSION_DENIED;
                     } else {
                         ul.unlock();
-                        createAudioPatchStatus = af->createAudioPatch(&data->mPatch,
-                                                                      &data->mHandle);
+                        status = af->createAudioPatch(&data->mPatch, &data->mHandle);
                         ul.lock();
                     }
                     } break;
@@ -1899,10 +1898,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing release audio patch");
                     sp<IAudioFlinger> af = AudioSystem::get_audio_flinger();
                     if (af == 0) {
-                        command->mStatus = PERMISSION_DENIED;
+                        status = PERMISSION_DENIED;
                     } else {
                         ul.unlock();
-                        command->mStatus = af->releaseAudioPatch(data->mHandle);
+                        status = af->releaseAudioPatch(data->mHandle);
                         ul.lock();
                     }
                     } break;
@@ -1943,10 +1942,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                     ALOGV("AudioCommandThread() processing set port config");
                     sp<IAudioFlinger> af = AudioSystem::get_audio_flinger();
                     if (af == 0) {
-                        command->mStatus = PERMISSION_DENIED;
+                        status = PERMISSION_DENIED;
                     } else {
                         ul.unlock();
-                        command->mStatus = af->setAudioPortConfig(&data->mConfig);
+                        status = af->setAudioPortConfig(&data->mConfig);
                         ul.lock();
                     }
                     } break;
@@ -2059,14 +2058,11 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                 {
                     audio_utils::lock_guard _l(command->mMutex);
                     if (command->mWaitStatus) {
-                        if (command->mCommand == CREATE_AUDIO_PATCH) {
-                            command->mStatus = createAudioPatchStatus;
-                        }
+                        command->mStatus = status;
                         command->mWaitStatus = false;
                         command->mCond.notify_one();
                     } else if (command->mCommand == CREATE_AUDIO_PATCH &&
-                               command->mStatus == TIMED_OUT &&
-                               createAudioPatchStatus == NO_ERROR) {
+                               command->mStatus == TIMED_OUT && status == NO_ERROR) {
                         // Because of special handling in insertCommand_l() the CREATE_AUDIO_PATCH
                         // command wait status can be only false in case timeout (see TIMED_OUT)
                         // happened.
@@ -2075,11 +2071,10 @@ bool AudioPolicyService::AudioCommandThread::threadLoop()
                         ALOGW("AudioCommandThread() no caller awaiting for handle(%d) after \
                                 processing create audio patch, going to release it",
                                 createData->mHandle);
-                        sp<AudioCommand> releaseCommand = new AudioCommand();
-                        releaseCommand->mCommand = RELEASE_AUDIO_PATCH;
                         ReleaseAudioPatchData *releaseData = new ReleaseAudioPatchData();
                         releaseData->mHandle = createData->mHandle;
-                        releaseCommand->mParam = releaseData;
+                        sp<AudioCommand> releaseCommand =
+                                new AudioCommand(RELEASE_AUDIO_PATCH, false, releaseData);
                         insertCommand_l(releaseCommand, 0);
                     }
                 }
@@ -2162,15 +2157,12 @@ status_t AudioPolicyService::AudioCommandThread::volumeCommand(audio_stream_type
                                                                audio_io_handle_t output,
                                                                int delayMs)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = SET_VOLUME;
     sp<VolumeData> data = new VolumeData();
     data->mStream = stream;
     data->mVolume = volume;
     data->mIsMuted = muted;
     data->mIO = output;
-    command->mParam = data;
-    command->mWaitStatus = true;
+    sp<AudioCommand> command = new AudioCommand(SET_VOLUME, true, data);
     ALOGV("AudioCommandThread() adding set volume stream %d, volume %f, output %d",
             stream, volume, output);
     return sendCommand(command, delayMs);
@@ -2180,15 +2172,12 @@ status_t AudioPolicyService::AudioCommandThread::volumePortsCommand(
         const std::vector<audio_port_handle_t> &ports, float volume, bool muted,
         audio_io_handle_t output, int delayMs)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = SET_PORTS_VOLUME;
     sp<VolumePortsData> data = new VolumePortsData();
     data->mPorts = ports;
     data->mVolume = volume;
     data->mMuted = muted;
     data->mIO = output;
-    command->mParam = data;
-    command->mWaitStatus = true;
+    sp<AudioCommand> command = new AudioCommand(SET_PORTS_VOLUME, true, data);
     ALOGV("AudioCommandThread() adding set volume ports %s, volume %f, output %d",
             data->dumpPorts().c_str(), volume, output);
     return sendCommand(command, delayMs);
@@ -2198,13 +2187,10 @@ status_t AudioPolicyService::AudioCommandThread::parametersCommand(audio_io_hand
                                                                    const char *keyValuePairs,
                                                                    int delayMs)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = SET_PARAMETERS;
     sp<ParametersData> data = new ParametersData();
     data->mIO = ioHandle;
     data->mKeyValuePairs = String8(keyValuePairs);
-    command->mParam = data;
-    command->mWaitStatus = true;
+    sp<AudioCommand> command = new AudioCommand(SET_PARAMETERS, true, data);
     ALOGV("AudioCommandThread() adding set parameter string %s, io %d ,delay %d",
             keyValuePairs, ioHandle, delayMs);
     return sendCommand(command, delayMs);
@@ -2212,12 +2198,9 @@ status_t AudioPolicyService::AudioCommandThread::parametersCommand(audio_io_hand
 
 status_t AudioPolicyService::AudioCommandThread::voiceVolumeCommand(float volume, int delayMs)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = SET_VOICE_VOLUME;
     sp<VoiceVolumeData> data = new VoiceVolumeData();
     data->mVolume = volume;
-    command->mParam = data;
-    command->mWaitStatus = true;
+    sp<AudioCommand> command = new AudioCommand(SET_VOICE_VOLUME, true, data);
     ALOGV("AudioCommandThread() adding set voice volume volume %f", volume);
     return sendCommand(command, delayMs);
 }
@@ -2226,13 +2209,11 @@ void AudioPolicyService::AudioCommandThread::setEffectSuspendedCommand(int effec
                                                                        audio_session_t sessionId,
                                                                        bool suspended)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = SET_EFFECT_SUSPENDED;
     sp<SetEffectSuspendedData> data = new SetEffectSuspendedData();
     data->mEffectId = effectId;
     data->mSessionId = sessionId;
     data->mSuspended = suspended;
-    command->mParam = data;
+    sp<AudioCommand> command = new AudioCommand(SET_EFFECT_SUSPENDED, false, data);
     ALOGV("AudioCommandThread() adding set suspended effectId %d sessionId %d suspended %d",
         effectId, sessionId, suspended);
     sendCommand(command);
@@ -2241,22 +2222,18 @@ void AudioPolicyService::AudioCommandThread::setEffectSuspendedCommand(int effec
 
 void AudioPolicyService::AudioCommandThread::stopOutputCommand(audio_port_handle_t portId)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = STOP_OUTPUT;
     sp<StopOutputData> data = new StopOutputData();
     data->mPortId = portId;
-    command->mParam = data;
+    sp<AudioCommand> command = new AudioCommand(STOP_OUTPUT, false, data);
     ALOGV("AudioCommandThread() adding stop output portId %d", portId);
     sendCommand(command);
 }
 
 void AudioPolicyService::AudioCommandThread::releaseOutputCommand(audio_port_handle_t portId)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = RELEASE_OUTPUT;
     sp<ReleaseOutputData> data = new ReleaseOutputData();
     data->mPortId = portId;
-    command->mParam = data;
+    sp<AudioCommand> command = new AudioCommand(RELEASE_OUTPUT, false, data);
     ALOGV("AudioCommandThread() adding release output portId %d", portId);
     sendCommand(command);
 }
@@ -2267,14 +2244,10 @@ status_t AudioPolicyService::AudioCommandThread::createAudioPatchCommand(
                                                 int delayMs)
 {
     status_t status = NO_ERROR;
-
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = CREATE_AUDIO_PATCH;
     CreateAudioPatchData *data = new CreateAudioPatchData();
     data->mPatch = *patch;
     data->mHandle = *handle;
-    command->mParam = data;
-    command->mWaitStatus = true;
+    sp<AudioCommand> command = new AudioCommand(CREATE_AUDIO_PATCH, true, data);
     ALOGV("AudioCommandThread() adding create patch delay %d", delayMs);
     status = sendCommand(command, delayMs);
     if (status == NO_ERROR) {
@@ -2286,36 +2259,30 @@ status_t AudioPolicyService::AudioCommandThread::createAudioPatchCommand(
 status_t AudioPolicyService::AudioCommandThread::releaseAudioPatchCommand(audio_patch_handle_t handle,
                                                  int delayMs)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = RELEASE_AUDIO_PATCH;
     ReleaseAudioPatchData *data = new ReleaseAudioPatchData();
     data->mHandle = handle;
-    command->mParam = data;
-    command->mWaitStatus = true;
+    sp<AudioCommand> command = new AudioCommand(RELEASE_AUDIO_PATCH, true, data);
     ALOGV("AudioCommandThread() adding release patch delay %d", delayMs);
     return sendCommand(command, delayMs);
 }
 
 void AudioPolicyService::AudioCommandThread::updateAudioPortListCommand()
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = UPDATE_AUDIOPORT_LIST;
+    sp<AudioCommand> command = new AudioCommand(UPDATE_AUDIOPORT_LIST, false, nullptr);
     ALOGV("AudioCommandThread() adding update audio port list");
     sendCommand(command);
 }
 
 void AudioPolicyService::AudioCommandThread::updateUidStatesCommand()
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = UPDATE_UID_STATES;
+    sp<AudioCommand> command = new AudioCommand(UPDATE_UID_STATES, false, nullptr);
     ALOGV("AudioCommandThread() adding update UID states");
     sendCommand(command);
 }
 
 void AudioPolicyService::AudioCommandThread::updateAudioPatchListCommand()
 {
-    sp<AudioCommand>command = new AudioCommand();
-    command->mCommand = UPDATE_AUDIOPATCH_LIST;
+    sp<AudioCommand>command = new AudioCommand(UPDATE_AUDIOPATCH_LIST, false, nullptr);
     ALOGV("AudioCommandThread() adding update audio patch list");
     sendCommand(command);
 }
@@ -2323,12 +2290,10 @@ void AudioPolicyService::AudioCommandThread::updateAudioPatchListCommand()
 void AudioPolicyService::AudioCommandThread::changeAudioVolumeGroupCommand(volume_group_t group,
                                                                            int flags)
 {
-    sp<AudioCommand>command = new AudioCommand();
-    command->mCommand = CHANGED_AUDIOVOLUMEGROUP;
     AudioVolumeGroupData *data= new AudioVolumeGroupData();
     data->mGroup = group;
     data->mFlags = flags;
-    command->mParam = data;
+    sp<AudioCommand>command = new AudioCommand(CHANGED_AUDIOVOLUMEGROUP, false, data);
     ALOGV("AudioCommandThread() adding audio volume group changed");
     sendCommand(command);
 }
@@ -2336,12 +2301,9 @@ void AudioPolicyService::AudioCommandThread::changeAudioVolumeGroupCommand(volum
 status_t AudioPolicyService::AudioCommandThread::setAudioPortConfigCommand(
                                             const struct audio_port_config *config, int delayMs)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = SET_AUDIOPORT_CONFIG;
     SetAudioPortConfigData *data = new SetAudioPortConfigData();
     data->mConfig = *config;
-    command->mParam = data;
-    command->mWaitStatus = true;
+    sp<AudioCommand> command = new AudioCommand(SET_AUDIOPORT_CONFIG, true, data);
     ALOGV("AudioCommandThread() adding set port config delay %d", delayMs);
     return sendCommand(command, delayMs);
 }
@@ -2349,12 +2311,10 @@ status_t AudioPolicyService::AudioCommandThread::setAudioPortConfigCommand(
 void AudioPolicyService::AudioCommandThread::dynamicPolicyMixStateUpdateCommand(
         const String8& regId, int32_t state)
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = DYN_POLICY_MIX_STATE_UPDATE;
     DynPolicyMixStateUpdateData *data = new DynPolicyMixStateUpdateData();
     data->mRegId = regId;
     data->mState = state;
-    command->mParam = data;
+    sp<AudioCommand> command = new AudioCommand(DYN_POLICY_MIX_STATE_UPDATE, false, data);
     ALOGV("AudioCommandThread() sending dynamic policy mix (id=%s) state update to %d",
             regId.c_str(), state);
     sendCommand(command);
@@ -2370,8 +2330,6 @@ void AudioPolicyService::AudioCommandThread::recordingConfigurationUpdateCommand
                                                 audio_patch_handle_t patchHandle,
                                                 audio_source_t source)
 {
-    sp<AudioCommand>command = new AudioCommand();
-    command->mCommand = RECORDING_CONFIGURATION_UPDATE;
     RecordingConfigurationUpdateData *data = new RecordingConfigurationUpdateData();
     data->mEvent = event;
     data->mClientInfo = *clientInfo;
@@ -2381,7 +2339,7 @@ void AudioPolicyService::AudioCommandThread::recordingConfigurationUpdateCommand
     data->mEffects = effects;
     data->mPatchHandle = patchHandle;
     data->mSource = source;
-    command->mParam = data;
+    sp<AudioCommand>command = new AudioCommand(RECORDING_CONFIGURATION_UPDATE, false, data);
     ALOGV("AudioCommandThread() adding recording configuration update event %d, source %d uid %u",
             event, clientInfo->source, clientInfo->uid);
     sendCommand(command);
@@ -2389,39 +2347,34 @@ void AudioPolicyService::AudioCommandThread::recordingConfigurationUpdateCommand
 
 void AudioPolicyService::AudioCommandThread::audioModulesUpdateCommand()
 {
-    sp<AudioCommand> command = new AudioCommand();
-    command->mCommand = AUDIO_MODULES_UPDATE;
+    sp<AudioCommand> command = new AudioCommand(AUDIO_MODULES_UPDATE, false, nullptr);
     sendCommand(command);
 }
 
 void AudioPolicyService::AudioCommandThread::routingChangedCommand()
 {
-    sp<AudioCommand>command = new AudioCommand();
-    command->mCommand = ROUTING_UPDATED;
+    sp<AudioCommand>command = new AudioCommand(ROUTING_UPDATED, false, nullptr);
     ALOGV("AudioCommandThread() adding routing update");
     sendCommand(command);
 }
 
 void AudioPolicyService::AudioCommandThread::checkSpatializerCommand()
 {
-    sp<AudioCommand>command = new AudioCommand();
-    command->mCommand = CHECK_SPATIALIZER_OUTPUT;
+    sp<AudioCommand>command = new AudioCommand(CHECK_SPATIALIZER_OUTPUT, false, nullptr);
     ALOGV("AudioCommandThread() adding check spatializer");
     sendCommand(command);
 }
 
 void AudioPolicyService::AudioCommandThread::updateActiveSpatializerTracksCommand()
 {
-    sp<AudioCommand>command = new AudioCommand();
-    command->mCommand = UPDATE_ACTIVE_SPATIALIZER_TRACKS;
+    sp<AudioCommand>command = new AudioCommand(UPDATE_ACTIVE_SPATIALIZER_TRACKS, false, nullptr);
     ALOGV("AudioCommandThread() adding update active spatializer tracks");
     sendCommand(command);
 }
 
 void AudioPolicyService::AudioCommandThread::volRangeInitReqCommand()
 {
-    sp<AudioCommand>command = new AudioCommand();
-    command->mCommand = VOL_RANGE_INIT_REQUEST;
+    sp<AudioCommand>command = new AudioCommand(VOL_RANGE_INIT_REQUEST, false, nullptr);
     ALOGV("AudioCommandThread() adding volume range init request");
     sendCommand(command);
 }
@@ -2646,6 +2599,7 @@ void AudioPolicyService::AudioCommandThread::insertCommand_l(sp<AudioCommand>& c
     // is needed by audio policy manager. Audio patch created after timeout
     // (see TIMED_OUT) will be released from threadLoop().
     if (delayMs != 0 && command->mCommand != CREATE_AUDIO_PATCH) {
+        audio_utils::lock_guard _l(command->mMutex);
         command->mWaitStatus = false;
     }
 
@@ -2668,8 +2622,9 @@ void AudioPolicyService::AudioCommandThread::exit()
     requestExitAndWait();
 }
 
-void AudioPolicyService::AudioCommandThread::AudioCommand::dump(char* buffer, size_t size)
+void AudioPolicyService::AudioCommandThread::AudioCommand::dump(char* buffer, size_t size) const
 {
+    audio_utils::lock_guard _l(mMutex);
     snprintf(buffer, size, "   %02d      %06d.%03d  %01u    %p\n",
             mCommand,
             (int)ns2s(mTime),
