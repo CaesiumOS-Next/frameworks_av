@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453c876e_afdcc2ea",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-06-13T13:15:01Z",
+      "side": 1,
+      "message": "maybe better to use try lock for dump",
+      "range": {
+        "startLine": 2627,
+        "startChar": 31,
+        "endLine": 2627,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e719b21f_233e8c3b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.cpp",
+              "range": {
+                "startLine": 2137,
+                "startChar": 0,
+                "endLine": 2138,
+                "endChar": 0
+              },
+              "replacement": "        if (strlen(buffer) \u003e 0) {\n            result.append(buffer);\n        }\n"
+            },
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.cpp",
+              "range": {
+                "startLine": 2142,
+                "startChar": 0,
+                "endLine": 2143,
+                "endChar": 0
+              },
+              "replacement": "        if (strlen(buffer) \u003e 0) {\n            result.append(buffer);\n        }\n"
+            },
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.cpp",
+              "range": {
+                "startLine": 2627,
+                "startChar": 0,
+                "endLine": 2634,
+                "endChar": 0
+              },
+              "replacement": "    if (mMutex.try_lock_for(std::chrono::nanoseconds(kDumpLockTimeoutNs))) {\n        snprintf(buffer, size, \"   %02d      %06d.%03d  %01u    %p\\n\",\n                mCommand,\n                (int)ns2s(mTime),\n                (int)ns2ms(mTime)%1000,\n                mWaitStatus,\n                mParam.get());\n        mMutex.unlock();\n    } else {\n        snprintf(buffer, size, \"   %s\\n\", kCmdDeadlockedString);\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
