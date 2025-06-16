@@ -60,6 +60,30 @@
       ],
       "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5e4e90_c6f11e30",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 3235735
+      },
+      "writtenOn": "2025-06-16T18:20:06Z",
+      "side": 1,
+      "message": "I think we could anyway print(dump) the fields that are not guarded by mutex. I made such proposal in patch #7 modifying your suggestion.",
+      "parentUuid": "453c876e_afdcc2ea",
+      "range": {
+        "startLine": 2627,
+        "startChar": 31,
+        "endLine": 2627,
+        "endChar": 37
+      },
+      "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
