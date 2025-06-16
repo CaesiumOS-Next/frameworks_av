@@ -37,6 +37,7 @@
 // active output devices in isStreamActiveRemotely()
 
 namespace audioserver_flags = com::android::media::audioserver;
+namespace audio_flags = com::android::media::audio;
 
 namespace android {
 
@@ -558,8 +559,10 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
                 setCurVolume(callVolSrc, volumeDb, mutedByGroup, true);
                 float volumeAmpl = Volume::DbToAmpl(volumeDb);
                 if (audioserver_flags::portid_volume_management()) {
-                    mClientInterface->setPortsVolume(getPortsForVolumeSource(callVolSrc),
-                            volumeAmpl, mutedByGroup, mIoHandle, delayMs);
+                    if (!audio_flags::replace_stream_bt_sco()) {
+                        mClientInterface->setPortsVolume(getPortsForVolumeSource(callVolSrc),
+                                volumeAmpl, mutedByGroup, mIoHandle, delayMs);
+                    }
                 } else {
                     mClientInterface->setStreamVolume(AUDIO_STREAM_VOICE_CALL,
                             volumeAmpl, mutedByGroup, mIoHandle, delayMs);
@@ -623,7 +626,7 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
     if (hasStream(streams, AUDIO_STREAM_BLUETOOTH_SCO)) {
         VolumeSource callVolSrc = getVoiceSource();
         if (audioserver_flags::portid_volume_management()) {
-            if (callVolSrc != VOLUME_SOURCE_NONE) {
+            if (callVolSrc != VOLUME_SOURCE_NONE && !audio_flags::replace_stream_bt_sco()) {
                 mClientInterface->setPortsVolume(getPortsForVolumeSource(callVolSrc), volumeAmpl,
                                                  mutedByGroup, mIoHandle, delayMs);
             }
