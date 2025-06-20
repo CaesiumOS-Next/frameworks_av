@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8cefda4_d3e365d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-06-20T16:22:57Z",
+      "side": 1,
+      "message": "Please find first draf of helper tool legacy -\u003e AIDL Cap engine",
+      "revId": "d4a45a0f6250b43250b596f325784c19be3e91d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
