@@ -190,6 +190,18 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(audio_devices_t deviceT
 status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescriptor> &device,
                                                          audio_policy_dev_state_t state)
 {
+    auto skipCheckingConnect = [] (auto type) {
+        // SAD update behavior:
+        // 1. Connect ARC/eARC with empty SAD.
+        // 2. Disconnect ARC/eARC.
+        // 3. Reconnect ARC/eARC with SAD.
+        //
+        // When ARC/eARC is disconnected, audio briefly plays through the speakers.
+        // Skip "device already connected" checks for ARC/eARC devices, as ARC/eARC
+        // can update SAD without requiring a disconnect first.
+        return (type & AUDIO_DEVICE_OUT_HDMI_ARC || type & AUDIO_DEVICE_OUT_HDMI_EARC);
+    };
+
     // handle output devices
     if (audio_is_output_device(device->type())) {
         SortedVector <audio_io_handle_t> outputs;
@@ -206,16 +218,25 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
         {
         // handle output device connection
         case AUDIO_POLICY_DEVICE_STATE_AVAILABLE: {
-            if (index >= 0) {
-                ALOGW("%s() device already connected: %s", __func__, device->toString().c_str());
-                return INVALID_OPERATION;
-            }
-            ALOGV("%s() connecting device %s format %x",
-                    __func__, device->toString().c_str(), device->getEncodedFormat());
+            if (!skipCheckingConnect(device->type())) {
+                if (index >= 0) {
+                    ALOGW("%s() device already connected: %s",
+                        __func__, device->toString().c_str());
+                    return INVALID_OPERATION;
+                }
+                ALOGV("%s() connecting device %s format %x",
+                        __func__, device->toString().c_str(), device->getEncodedFormat());
 
-            // register new device as available
-            if (mAvailableOutputDevices.add(device) < 0) {
-                return NO_MEMORY;
+                // register new device as available
+                if (mAvailableOutputDevices.add(device) < 0) {
+                    return NO_MEMORY;
+                }
+            } else {
+                ALOGV("%s() connecting device %s format %x",
+                        __func__, device->toString().c_str(), device->getEncodedFormat());
+
+                // register new device as available
+                mAvailableOutputDevices.add(device);
             }
 
             // Before checking outputs, broadcast connect event to allow HAL to retrieve dynamic
