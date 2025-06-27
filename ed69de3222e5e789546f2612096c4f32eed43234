@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b78d3dc_f0624b67",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2606,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2025-06-27T14:57:23Z",
+      "side": 1,
+      "message": "Taking this(command\u0027s) mutex seems to be not needed for real, only has to be taken to fix thread safety compiler errors. \ninsertCommand_l() is called by the one that created a command and wants to insert this command to processing thread.\nAs it is now, insertCommand_l() needs only to lock kCommandThread_Mutex exclusively.\n\nTo avoid confusion, maybe it would be better to remove this line:\n...\naudio_utils::lock_guard _l(command-\u003emMutex);\n...\n\nand add below annotations ?\n...\n                    void        insertCommand_l(AudioCommand *command, int delayMs \u003d 0)\n                                        REQUIRES(mMutex) NO_THREAD_SAFETY_ANALYSIS;\n...\n\nFrom the other hand, it would introduce risk for not detecting thread safety violations in case of future insertCommand_l() modifications.\n\nWhat do you think ?\n\nBTW, @elaurent@google.com, @mnaganov@google.com, did you have chance to check changes I have already uploaded ?",
+      "revId": "ed69de3222e5e789546f2612096c4f32eed43234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
