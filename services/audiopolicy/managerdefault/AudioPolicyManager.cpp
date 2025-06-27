@@ -6619,6 +6619,10 @@ bool AudioPolicyManager::isOutputOnlyAvailableRouteToSomeDevice(
         if (!sharedDevices.isEmpty()
                 && (desc->devicesSupportEncodedFormats(sharedDevices.types())
                     == outputDesc->devicesSupportEncodedFormats(sharedDevices.types()))) {
+            if ((desc->mFlags & AUDIO_OUTPUT_FLAG_DIRECT)
+                    && areAllOfSameDeviceType(sharedDevices.types(), audio_is_a2dp_out_device)) {
+                continue;
+            }
             return false;
         }
     }
