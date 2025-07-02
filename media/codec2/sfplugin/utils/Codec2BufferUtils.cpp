@@ -1197,7 +1197,9 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
     mediaImage->mBitDepth = bitDepth;
     mediaImage->mBitDepthAllocated = mAllocatedDepth;
 
-    uint32_t bufferSize = 0;
+    const uint8_t *minPtr = mView.data()[0];
+    const uint8_t *maxPtr = mView.data()[0];
+    int32_t planeSize = 0;
     for (uint32_t i = 0; i < layout.numPlanes; ++i) {
         const C2PlaneInfo &plane = layout.planes[i];
         if (plane.allocatedDepth < plane.bitDepth
@@ -1217,10 +1219,22 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
             return;
         }
         // stride is in bytes
-        bufferSize += stride * vStride / plane.rowSampling / plane.colSampling;
+        int64_t planeStride = std::abs(plane.rowInc / plane.colInc);
+        ssize_t minOffset = plane.minOffset(
+                mWidth / plane.colSampling, mHeight / plane.rowSampling);
+        ssize_t maxOffset = plane.maxOffset(
+                mWidth / plane.colSampling, mHeight / plane.rowSampling);
+        if (minPtr > mView.data()[i] + minOffset) {
+            minPtr = mView.data()[i] + minOffset;
+        }
+        if (maxPtr < mView.data()[i] + maxOffset) {
+            maxPtr = mView.data()[i] + maxOffset;
+        }
+        planeSize += planeStride * divUp(mAllocatedDepth, 8u)
+                * align(mHeight, 64) / plane.rowSampling;
     }
 
-    mBackBufferSize = bufferSize;
+    mBackBufferSize = planeSize;
     mInitCheck = OK;
 }
 
