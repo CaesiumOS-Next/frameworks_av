@@ -90,6 +90,9 @@ TEST_P(Codec2MasterHalTest, MustUseAidlBeyond202404) {
         GTEST_SKIP() << "vendor api level less than 202404: " << sVendorApiLevel;
     }
     ALOGV("MustUseAidlBeyond202404 Test");
+    if (mClient->getServiceName() == "__ApexCodecs__") {
+        GTEST_SKIP() << "Apexcodecs will not have AidlBase so SKIP";
+    }
 
     EXPECT_NE(mClient->getAidlBase(), nullptr) << "android.hardware.media.c2 MUST use AIDL "
                                                << "for chipsets launching at 202404 or above";
