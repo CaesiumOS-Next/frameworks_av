@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6530d209_44791f49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:19:33Z",
+      "side": 1,
+      "message": "Could you please put up a more formal description.",
+      "revId": "e9fdc51977b5ad03f037c8b12d25fe731c4ca69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d78b4026_57dd822a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:19:33Z",
+      "side": 1,
+      "message": "I believe, there is no target for this. Did you mean `CtsMediaAudioTestCases` with some filter clause?",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "e9fdc51977b5ad03f037c8b12d25fe731c4ca69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "441f231b_78a7fa8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:19:33Z",
+      "side": 1,
+      "message": "Thank you Abdelrahman! A couple of comments.",
+      "revId": "e9fdc51977b5ad03f037c8b12d25fe731c4ca69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e8d993_d2d66551",
+        "filename": "include/media/VolumeShaper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:19:33Z",
+      "side": 1,
+      "message": "`auto`?",
+      "range": {
+        "startLine": 937,
+        "startChar": 8,
+        "endLine": 937,
+        "endChar": 35
+      },
+      "revId": "e9fdc51977b5ad03f037c8b12d25fe731c4ca69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
