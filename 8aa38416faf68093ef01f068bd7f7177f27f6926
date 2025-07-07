@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83f6d71_8d1c280e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:15:41Z",
+      "side": 1,
+      "message": "Should the last two argument names also be in camelCase similar to others?",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 28
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "315f8aef_e2627744",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:15:41Z",
+      "side": 1,
+      "message": "Just back from OOO. Thank you Francois! Some comments.",
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56534471_ce15dc8e",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:15:41Z",
+      "side": 1,
+      "message": "nit: follows",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 48
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a64c4baa_645550cc",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:15:41Z",
+      "side": 1,
+      "message": "nit: is this a directory name? Perhaps, add `/` suffix to directory names for clarity.",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f62458_2471448f",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:15:41Z",
+      "side": 1,
+      "message": "I would also suggest adding a high level description for the conversions.",
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0003b89a_7bce4d33",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:15:41Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"occured\" -- should it be \"occurred\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"occured\" -- should it be \"occurred\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 48,
+        "startChar": 51,
+        "endLine": 48,
+        "endChar": 58
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b32f89_58dd4a0d",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-07T17:15:41Z",
+      "side": 1,
+      "message": "Could you please add the actual names of the header files?",
+      "range": {
+        "startLine": 62,
+        "startChar": 41,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
