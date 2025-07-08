@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f394c3b0_1e57ae8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-08T13:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c83f6d71_8d1c280e",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 28
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "315f8aef_e2627744",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94170cb4_5c94ebb0",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-08T13:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56534471_ce15dc8e",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 48
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a64c4baa_645550cc",
@@ -77,6 +125,30 @@
       "writtenOn": "2025-07-07T17:15:41Z",
       "side": 1,
       "message": "nit: is this a directory name? Perhaps, add `/` suffix to directory names for clarity.",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae21f88_81bea6b7",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-08T13:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64c4baa_645550cc",
       "range": {
         "startLine": 30,
         "startChar": 6,
@@ -104,6 +176,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b07b8f_9c1d1e7b",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-08T13:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81f62458_2471448f",
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0003b89a_7bce4d33",
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e75fa4d7_f2bc6cf6",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-08T13:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0003b89a_7bce4d33",
+      "range": {
+        "startLine": 48,
+        "startChar": 51,
+        "endLine": 48,
+        "endChar": 58
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4b32f89_58dd4a0d",
@@ -140,6 +254,30 @@
       "writtenOn": "2025-07-07T17:15:41Z",
       "side": 1,
       "message": "Could you please add the actual names of the header files?",
+      "range": {
+        "startLine": 62,
+        "startChar": 41,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "8aa38416faf68093ef01f068bd7f7177f27f6926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b11ea1_3e8f7008",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConvertion.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-08T13:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4b32f89_58dd4a0d",
       "range": {
         "startLine": 62,
         "startChar": 41,
