@@ -95,6 +95,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45c67168_b378a293",
+        "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConversion.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-09T00:48:52Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"occurence\" -- should it be \"occurrence\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"occurence\" -- should it be \"occurrence\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 77,
+        "startChar": 16,
+        "endLine": 77,
+        "endChar": 25
+      },
+      "revId": "966bc901dcb324784b7bcea0293a631e93fcd9de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65c8313e_d485e2d7",
         "filename": "services/audiopolicy/engineconfigurable/tools/legacyToAidlCapEngineConfigConversion.py",
         "patchSetId": 3
