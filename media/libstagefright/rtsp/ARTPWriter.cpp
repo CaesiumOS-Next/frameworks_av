@@ -289,7 +289,7 @@ status_t ARTPWriter::start(MetaData * params) {
     if (params->findInt64(kKeySocketNetwork, &sockNetwork))
         updateSocketNetwork(sockNetwork);
 
-    if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC)) {
+    if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC) || !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_SVC)) {
         // rfc6184: RTP Payload Format for H.264 Video
         // The clock rate in the "a=rtpmap" line MUST be 90000.
         mMode = H264;
