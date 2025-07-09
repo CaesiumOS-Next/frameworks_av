@@ -3543,6 +3543,7 @@ static const struct VideoCodingMapEntry {
     OMX_VIDEO_CODINGTYPE mVideoCodingType;
 } kVideoCodingMapEntry[] = {
     { MEDIA_MIMETYPE_VIDEO_AVC, OMX_VIDEO_CodingAVC },
+    { MEDIA_MIMETYPE_VIDEO_SVC, OMX_VIDEO_CodingAVC },
     { MEDIA_MIMETYPE_VIDEO_HEVC, OMX_VIDEO_CodingHEVC },
     { MEDIA_MIMETYPE_VIDEO_MPEG4, OMX_VIDEO_CodingMPEG4 },
     { MEDIA_MIMETYPE_VIDEO_H263, OMX_VIDEO_CodingH263 },
@@ -9242,7 +9243,7 @@ status_t ACodec::queryCapabilities(
             // AVC components may not list the constrained profiles explicitly, but
             // decoders that support a profile also support its constrained version.
             // Encoders must explicitly support constrained profiles.
-            if (!isEncoder && strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC) == 0) {
+            if (!isEncoder && (strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC) == 0 || strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_SVC) == 0)) {
                 if (param.eProfile == OMX_VIDEO_AVCProfileHigh) {
                     caps->addProfileLevel(OMX_VIDEO_AVCProfileConstrainedHigh, param.eLevel);
                 } else if (param.eProfile == OMX_VIDEO_AVCProfileBaseline) {

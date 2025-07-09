@@ -12,6 +12,7 @@ cc_defaults {
     runtime_libs: [
         "libcodec2_soft_avcdec",
         "libcodec2_soft_avcenc",
+        "libcodec2_soft_svcenc",
         "libcodec2_soft_aacdec",
         "libcodec2_soft_aacenc",
         "libcodec2_soft_amrnbdec",
