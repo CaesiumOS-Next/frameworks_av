@@ -7490,7 +7490,7 @@ status_t MediaCodec::amendOutputFormatWithCodecSpecificData(
     AString mime;
     CHECK(mOutputFormat->findString("mime", &mime));
 
-    if (!strcasecmp(mime.c_str(), MEDIA_MIMETYPE_VIDEO_AVC)) {
+    if (!strcasecmp(mime.c_str(), MEDIA_MIMETYPE_VIDEO_AVC) || !strcasecmp(mime.c_str(), MEDIA_MIMETYPE_VIDEO_SVC)) {
         // Codec specific data should be SPS and PPS in a single buffer,
         // each prefixed by a startcode (0x00 0x00 0x00 0x01).
         // We separate the two and put them into the output format

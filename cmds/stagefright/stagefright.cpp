@@ -461,7 +461,7 @@ DetectSyncSource::DetectSyncSource(const sp<MediaSource> &source)
     const char *mime;
     CHECK(mSource->getFormat()->findCString(kKeyMIMEType, &mime));
 
-    if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC)) {
+    if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC) || !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_SVC)) {
         mStreamType = AVC;
     } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_MPEG4)) {
         mStreamType = MPEG4;
