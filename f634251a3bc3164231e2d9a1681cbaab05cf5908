@@ -34,6 +34,24 @@
       "parentUuid": "807ceed1_adb29905",
       "revId": "f634251a3bc3164231e2d9a1681cbaab05cf5908",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "479107fc_41a68bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-07-10T17:24:21Z",
+      "side": 1,
+      "message": "Francois I added this to our meeting document, I asked in an internal group chat and Mikhail suggested to use this path `hardware/interfaces/audio/aidl/default/config/audioPolicy/`.\n@elaurent@google.com not sure if you have any suggestions here otherwise.",
+      "parentUuid": "cc974e61_e8d085d5",
+      "revId": "f634251a3bc3164231e2d9a1681cbaab05cf5908",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
