@@ -16,6 +16,24 @@
       "message": "Thank you Francois! Is this CL ready to be merged? Once you confirm, I will merge it into internal main.",
       "revId": "f634251a3bc3164231e2d9a1681cbaab05cf5908",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc974e61_e8d085d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-10T08:01:38Z",
+      "side": 1,
+      "message": "Before merging, we agreed last thuesday, I will run this script on aosp examples and provide MR in either frameworks/av (suggested by Eric) or hardware/interfaces (suggested by Oscar) with associated examples in AOSP. We wanted to ask also your opinion about the best location of aidl examples, as AHAL is now responsible to parse these XMLs",
+      "parentUuid": "807ceed1_adb29905",
+      "revId": "f634251a3bc3164231e2d9a1681cbaab05cf5908",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
