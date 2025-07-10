@@ -124,6 +124,9 @@ void VideoRenderQualityMetrics::clear() {
     frameRenderedCount = 0;
     frameDroppedCount = 0;
     frameSkippedCount = 0;
+    frameStagnantCount = 0;
+    frameJumpBackwardCount = 0;
+    frameJumpForwardCount = 0;
     contentFrameRate = FRAME_RATE_UNDETERMINED;
     desiredFrameRate = FRAME_RATE_UNDETERMINED;
     actualFrameRate = FRAME_RATE_UNDETERMINED;
@@ -433,10 +436,20 @@ bool VideoRenderQualityTracker::resetIfDiscontinuity(int64_t contentTimeUs,
         resetForDiscontinuity();
         return true;
     }
+    if (contentTimeUs == mLastContentTimeUs) {
+        if (++mMetrics.frameStagnantCount == 1) {
+            ALOGI("Video playback content time did not advance forward (%d)",
+                int(contentTimeUs / 1000));
+        }
+        resetForDiscontinuity();
+        return true;
+    }
     if (contentTimeUs < mLastContentTimeUs) {
-        ALOGI("Video playback jumped %d ms backwards in content time (%d -> %d)",
-              int((mLastContentTimeUs - contentTimeUs) / 1000), int(mLastContentTimeUs / 1000),
-              int(contentTimeUs / 1000));
+        if (++mMetrics.frameJumpBackwardCount == 1) {
+            ALOGI("Video playback content time jumped %d ms backwards (%d -> %d)",
+                int(mLastContentTimeUs - contentTimeUs) / 1000, int(mLastContentTimeUs / 1000),
+                int(contentTimeUs / 1000));
+        }
         resetForDiscontinuity();
         return true;
     }
@@ -457,9 +470,11 @@ bool VideoRenderQualityTracker::resetIfDiscontinuity(int64_t contentTimeUs,
                     mConfiguration.liveContentFrameDropToleranceUs;
         }
         if (!skippedForwardDueToLiveContentFrameDrops) {
-            ALOGI("Video playback jumped %d ms forward in content time (%d -> %d) ",
-                int((contentTimeUs - mLastContentTimeUs) / 1000), int(mLastContentTimeUs / 1000),
-                int(contentTimeUs / 1000));
+            if (++mMetrics.frameJumpForwardCount == 1) {
+                ALOGI("Video playback content time jumped %d ms forward (%d -> %d) ",
+                    int(contentTimeUs - mLastContentTimeUs) / 1000, int(mLastContentTimeUs / 1000),
+                    int(contentTimeUs / 1000));
+            }
             resetForDiscontinuity();
             return true;
         }
