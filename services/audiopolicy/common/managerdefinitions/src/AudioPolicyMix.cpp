@@ -681,16 +681,23 @@ status_t AudioPolicyMixCollection::setUserIdDeviceAffinities(int userId,
         for (size_t j = 0; j < devices.size(); j++) {
             if (mixDevice.equals(devices[j])) {
                 deviceMatch = true;
+                if (!mix->hasUserIdRule(true /* match */, userId))
+                    mix->setMatchUserId(userId);
                 break;
             }
         }
-        if (!deviceMatch && !mix->hasUserIdRule(true /*match*/)) {
+        // if (!deviceMatch && !mix->hasUserIdRule(true /*match*/)) {
+        if (!deviceMatch) {
             // this mix doesn't go to one of the listed devices for the given userId,
             // and it's not already restricting the mix on a userId,
             // modify its rules to exclude the userId
             if (!mix->hasUserIdRule(false /* match */, userId)) {
                 // no need to do it again if userId is already excluded
                 mix->setExcludeUserId(userId);
+            }
+            if (!mix->hasUserIdRule(true)) {
+                ALOGV("%s() this mix has never matched! mDeviceType: %x, mDeviceAddress: %s, mRouteFlags: %d", \
+                    __func__, mix->mDeviceType, mix->mDeviceAddress.c_str(), mix->mRouteFlags);
                 mix->mRouteFlags = mix->mRouteFlags | MIX_ROUTE_FLAG_DISALLOWS_PREFERRED_DEVICE;
             }
         }
@@ -710,12 +717,10 @@ status_t AudioPolicyMixCollection::removeUserIdDeviceAffinities(int userId) {
         // is this rule excluding the userId? (not considering userId match rules
         // as those are not used for userId-device affinity)
         EraseCriteriaIf(mix->mCriteria, [userId](const AudioMixMatchCriterion& c) {
-            return c.mRule == RULE_EXCLUDE_USERID && c.mValue.mUserId == userId;
+            return c.mValue.mUserId == userId;
         });
 
-        if (!mix->hasUserIdRule(false /* match */)) {
-            mix->mRouteFlags = mix->mRouteFlags & ~MIX_ROUTE_FLAG_DISALLOWS_PREFERRED_DEVICE;
-        }
+        mix->mRouteFlags = mix->mRouteFlags & ~MIX_ROUTE_FLAG_DISALLOWS_PREFERRED_DEVICE;
     }
     return NO_ERROR;
 }
