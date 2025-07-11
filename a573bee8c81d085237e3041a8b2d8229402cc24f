@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c107de68_e8eedd77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-07-11T00:45:12Z",
+      "side": 1,
+      "message": "Still reluctant to make this a canonical channel mask for channel count of 13 without allowing other alternatives.",
+      "revId": "a573bee8c81d085237e3041a8b2d8229402cc24f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
