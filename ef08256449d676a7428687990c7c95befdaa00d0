@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f05f1cba_3483f7e1",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 2427,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2025-07-11T23:10:01Z",
+      "side": 1,
+      "message": "Please remove empty line",
+      "range": {
+        "startLine": 2427,
+        "startChar": 0,
+        "endLine": 2427,
+        "endChar": 0
+      },
+      "revId": "ef08256449d676a7428687990c7c95befdaa00d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16cd4620_a12c21af",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 2463,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2025-07-11T23:10:01Z",
+      "side": 1,
+      "message": "shouldn\u0027t we check first the flag? same for the next function",
+      "range": {
+        "startLine": 2463,
+        "startChar": 4,
+        "endLine": 2463,
+        "endChar": 41
+      },
+      "revId": "ef08256449d676a7428687990c7c95befdaa00d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0781581b_7934a4a4",
+        "filename": "services/audiopolicy/engine/common/include/EngineBase.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2025-07-11T23:10:01Z",
+      "side": 1,
+      "message": "Does the order matter? If not a std::unordered_map is preferred.",
+      "range": {
+        "startLine": 229,
+        "startChar": 4,
+        "endLine": 229,
+        "endChar": 12
+      },
+      "revId": "ef08256449d676a7428687990c7c95befdaa00d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
