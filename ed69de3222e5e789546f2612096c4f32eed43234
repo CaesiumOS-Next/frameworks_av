@@ -16,6 +16,24 @@
       "message": "Taking this(command\u0027s) mutex seems to be not needed for real, only has to be taken to fix thread safety compiler errors. \ninsertCommand_l() is called by the one that created a command and wants to insert this command to processing thread.\nAs it is now, insertCommand_l() needs only to lock kCommandThread_Mutex exclusively.\n\nTo avoid confusion, maybe it would be better to remove this line:\n...\naudio_utils::lock_guard _l(command-\u003emMutex);\n...\n\nand add below annotations ?\n...\n                    void        insertCommand_l(AudioCommand *command, int delayMs \u003d 0)\n                                        REQUIRES(mMutex) NO_THREAD_SAFETY_ANALYSIS;\n...\n\nFrom the other hand, it would introduce risk for not detecting thread safety violations in case of future insertCommand_l() modifications.\n\nWhat do you think ?\n\nBTW, @elaurent@google.com, @mnaganov@google.com, did you have chance to check changes I have already uploaded ?",
       "revId": "ed69de3222e5e789546f2612096c4f32eed43234",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e05006f_2653286e",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2606,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-11T17:04:42Z",
+      "side": 1,
+      "message": "When you are saying \"mutex seems to be not needed for real\" do you mean that it is guaranteed that other threads hasn\u0027t yet seen this `command` thus there is no possibility for them to use a stale cached value of this field? I think this is not a safe assumption as CPU caches work in \"chunks\" so a possibility exists that another CPU has already fetched a copy of the chunk containing this `command` in its own cache, and thus without explicit synchronization it will possibly read the stale state of this variable. This will be extremely hard to diagnose. Thread safety analysis exists for a reason :)\n\nI would say that the approach with modifying `mWaitStatus` post-hoc in this method looks hacky to me. It would be better if `mWaitStatus` could be set correctly during creating of `Command` instead. Do you think that is possible to change?\n\nOverall, the CL makes sense to me, thank you for working on it!",
+      "parentUuid": "5b78d3dc_f0624b67",
+      "revId": "ed69de3222e5e789546f2612096c4f32eed43234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
