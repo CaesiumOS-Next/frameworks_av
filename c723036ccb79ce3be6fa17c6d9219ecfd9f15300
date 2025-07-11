@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98d21f7_0f5461cb",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1663,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2025-07-11T23:02:26Z",
+      "side": 1,
+      "message": "nit: out type should be last",
+      "range": {
+        "startLine": 1663,
+        "startChar": 46,
+        "endLine": 1663,
+        "endChar": 80
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "55b2fd10_c3ad16ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/AudioSystem.cpp",
+              "range": {
+                "startLine": 1662,
+                "startChar": 0,
+                "endLine": 1665,
+                "endChar": 0
+              },
+              "replacement": "status_t AudioSystem::getDevicesForAttributes(const audio_attributes_t\u0026 aa,\n                                              uid_t uid,\n                                              bool forVolume,\n                                              AudioDeviceTypeAddrVector* devices) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c723036ccb79ce3be6fa17c6d9219ecfd9f15300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a75000_77e5e01d",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 2799,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2025-07-11T23:02:26Z",
+      "side": 1,
+      "message": "super-nit:please use nullptr instead, same for other occurences",
+      "range": {
+        "startLine": 2799,
+        "startChar": 15,
+        "endLine": 2799,
+        "endChar": 16
+      },
+      "revId": "c723036ccb79ce3be6fa17c6d9219ecfd9f15300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
