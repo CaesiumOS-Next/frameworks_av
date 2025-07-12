@@ -1632,7 +1632,7 @@ status_t AudioPolicyManager::openDirectOutput(audio_stream_type_t stream,
     // in the background.
     sp<IOProfile> profile;
     if (((flags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) == 0) ||
-            !(mEffects.isNonOffloadableEffectEnabled() || mMasterMono)) {
+            !(mEffects.isNonOffloadableGlobalEffectEnabled() || mMasterMono)) {
         profile = getProfileForOutput(
                 devices, config->sample_rate, config->format, config->channel_mask,
                 flags, true /* directOnly */);
@@ -4942,7 +4942,7 @@ bool AudioPolicyManager::isOffloadPossible(const audio_offload_info_t &offloadIn
     // FIXME: We should check the audio session here but we do not have it in this context.
     // This may prevent offloading in rare situations where effects are left active by apps
     // in the background.
-    if (mEffects.isNonOffloadableEffectEnabled()) {
+    if (mEffects.isNonOffloadableGlobalEffectEnabled()) {
         return false;
     }
 
@@ -5029,7 +5029,7 @@ audio_direct_mode_t AudioPolicyManager::getDirectPlaybackSupport(const audio_att
 
 status_t AudioPolicyManager::getDirectProfilesForAttributes(const audio_attributes_t* attr,
                                                 AudioProfileVector& audioProfilesVector) {
-    if (mEffects.isNonOffloadableEffectEnabled()) {
+    if (mEffects.isNonOffloadableGlobalEffectEnabled()) {
         return OK;
     }
     DeviceVector devices;

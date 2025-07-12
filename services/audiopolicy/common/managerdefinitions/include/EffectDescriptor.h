@@ -75,7 +75,7 @@ public:
     bool     isEffectEnabled(int id) const;
     uint32_t getMaxEffectsCpuLoad() const;
     uint32_t getMaxEffectsMemory() const;
-    bool isNonOffloadableEffectEnabled(
+    bool isNonOffloadableGlobalEffectEnabled(
             const std::optional<const effect_uuid_t>& uuid = std::nullopt) const;
 
     void moveEffects(audio_session_t session,
