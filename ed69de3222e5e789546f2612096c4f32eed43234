@@ -34,6 +34,24 @@
       "parentUuid": "5b78d3dc_f0624b67",
       "revId": "ed69de3222e5e789546f2612096c4f32eed43234",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6231e3d2_55696815",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2606,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2025-07-14T12:50:47Z",
+      "side": 1,
+      "message": "\u003e do you mean that it is guaranteed that other threads hasn\u0027t yet seen this `command` thus there is no possibility for them to use a stale cached value of this field?\n\nYes, I just assumed that freshly created command setup \"is still in progress\" and until is not put into command thread queue for processing the command itself will be safe as nobody seen it. But I did not think of this problem from CPU cache point of view, thank you for highlighting this.\n\n\u003eIt would be better if mWaitStatus could be set correctly during creating of Command instead. Do you think that is possible to change?\n\nOK, I also agree this is valid point to check, I will investigate if things could be improved.",
+      "parentUuid": "6e05006f_2653286e",
+      "revId": "ed69de3222e5e789546f2612096c4f32eed43234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
