@@ -211,6 +211,30 @@
       },
       "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf2c425e_d2878814",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3833194
+      },
+      "writtenOn": "2025-07-16T18:31:31Z",
+      "side": 1,
+      "message": "Let me come up with a new patch that takes the session id (Eg. passed from opendirectoutput) into consideration, it would be something like \nbool isNonOffloadableEffectEnabled(\n            const audio_session_t session \u003d AUDIO_SESSION_NONE) const;\n            \n inside it the conditions below will be added:\n ((effectDesc-\u003emSession \u003d\u003d AUDIO_SESSION_OUTPUT_MIX) || (effectDesc-\u003emSession \u003d\u003d session))\nAny further comment?",
+      "parentUuid": "eed8418c_2ff5981d",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 66
+      },
+      "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
