@@ -187,6 +187,30 @@
       },
       "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed8418c_2ff5981d",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-16T15:49:50Z",
+      "side": 1,
+      "message": "I agree that the direct output case is also considered when the track starts but doing it in audio policy manger when creating the direct output removes some churn and useless work to create the direct output and not be able to use it in the end",
+      "parentUuid": "1dd2c148_174cc1a1",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 66
+      },
+      "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
