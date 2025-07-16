@@ -52,6 +52,24 @@
       "parentUuid": "6e05006f_2653286e",
       "revId": "ed69de3222e5e789546f2612096c4f32eed43234",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ac64e9_f13abec1",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2606,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2025-07-16T23:01:48Z",
+      "side": 1,
+      "message": "\u003e \u003e do you mean that it is guaranteed that other threads hasn\u0027t yet seen this `command` thus there is no possibility for them to use a stale cached value of this field?\n\u003e \n\u003e Yes, I just assumed that freshly created command setup \"is still in progress\" and until is not put into command thread queue for processing the command itself will be safe as nobody seen it. But I did not think of this problem from CPU cache point of view, thank you for highlighting this.\n\u003e \n\u003e \u003eIt would be better if mWaitStatus could be set correctly during creating of Command instead. Do you think that is possible to change?\n\u003e \n\u003e OK, I also agree this is valid point to check, I will investigate if things could be improved.\n\nCurrently general rule is that in case delay is applied for command execution (except CREATE_AUDIO_PATCH) there should be no waiting for it\u0027s status (where for the commands that do not return status there should be always no waiting). Beside explicitly set delay (delayMs args present in case of all status returing commands) the delay can be set implicitly by insertCommand_l() logic eliminating duplicates with greater timestamps (which might result in overriding command timestamp). According to this, to create a command with already correct mWaitStatus the overall look on the commands queue and their timestamps would be needed and since insertCommand_l() checks them all anyway (when inserting newly created command) it looks that\u0027s why this place was selected as efficient for canceling waiting state in case of delay confirmed for new inserted command.\nBut I think also that correction of command execution timeout is needed depending of command\u0027s final set delay. I propose some improvement regarding this, please check patch #8.",
+      "parentUuid": "6231e3d2_55696815",
+      "revId": "ed69de3222e5e789546f2612096c4f32eed43234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
