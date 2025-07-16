@@ -67,6 +67,30 @@
       ],
       "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01210981_d02d99cd",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3833194
+      },
+      "writtenOn": "2025-07-16T14:50:50Z",
+      "side": 1,
+      "message": "Thanks for the comment. IMO whether it is a music effect should not be decided by whether it is on a MIX output or not.\nAlso limiting session \u003d\u003d OUTPUT_MIX basically follows existing code logic elsewhere when a non-offloadable music effect should block offload playback. The code can be found as follows:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/Threads.cpp;drc\u003d39cc312f50befe2f96e926ad37457d4a651c6d27;l\u003d1797\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/AudioFlinger.cpp;drc\u003d61197364367c9e404c7da6900658f1b16c42d0da;l\u003d5021",
+      "parentUuid": "0889b975_9b925298",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 66
+      },
+      "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
