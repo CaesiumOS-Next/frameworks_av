@@ -163,6 +163,30 @@
       },
       "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd2c148_174cc1a1",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3833194
+      },
+      "writtenOn": "2025-07-16T15:44:56Z",
+      "side": 1,
+      "message": "Agree this would cover all aspects of the issue. I did a search and it seems for the case that a non-offloadable effect on an offload track session (on its own)  case, it has been handled in tracks.cpp:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audioflinger/Tracks.cpp;drc\u003d61197364367c9e404c7da6900658f1b16c42d0da;l\u003d1389\nif you agree, that would leave us only need to consider OUTPUT_MIX case with  isNonOffloadableEffectEnabled() right?",
+      "parentUuid": "893432b9_f1086139",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 66
+      },
+      "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
