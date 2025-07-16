@@ -115,6 +115,30 @@
       },
       "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa1fde3_f715db56",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3833194
+      },
+      "writtenOn": "2025-07-16T15:05:54Z",
+      "side": 1,
+      "message": "Hi Eric, the issue we\u0027re fixing here requires it not to be treated as a music effect (if follows your direction) so it can lift the bar and allow the offload playback on a different audio session to continue. Do you mean as long as the effect session is NOT on MIX OUTPUT it should not be treated as a music effect?",
+      "parentUuid": "7b474d6c_1b10405d",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 66
+      },
+      "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
