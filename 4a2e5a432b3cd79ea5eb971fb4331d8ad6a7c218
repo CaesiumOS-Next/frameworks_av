@@ -139,6 +139,30 @@
       },
       "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "893432b9_f1086139",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-16T15:22:49Z",
+      "side": 1,
+      "message": "It is actually more complex than I initially presented it.\nIn some contexts, isNonOffloadableEffectEnabled() should only consider effects on the OUTPUT MIX session (because no session ID is known and we can only care about global music effects) but in other contexts (like when called from openDirectOutput() what matters are also non offloadable effects on the track session.\nOs I think the right change is to remove any criteria based on the session from ho isMusicEffect is computed and modify isNonOffloadableEffectEnabled() to accept an optional sessionId argument and compare the effect session ID to the effect session ID when provided or AUDIO_SESSION_OUTPUT_MIX",
+      "parentUuid": "bfa1fde3_f715db56",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 66
+      },
+      "revId": "4a2e5a432b3cd79ea5eb971fb4331d8ad6a7c218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
