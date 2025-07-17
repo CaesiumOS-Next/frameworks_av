@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff2be3c_365383a3",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1663,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-17T13:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f98d21f7_0f5461cb",
+      "range": {
+        "startLine": 1663,
+        "startChar": 46,
+        "endLine": 1663,
+        "endChar": 80
+      },
+      "revId": "c723036ccb79ce3be6fa17c6d9219ecfd9f15300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37a75000_77e5e01d",
@@ -55,6 +79,30 @@
       "writtenOn": "2025-07-11T23:02:26Z",
       "side": 1,
       "message": "super-nit:please use nullptr instead, same for other occurences",
+      "range": {
+        "startLine": 2799,
+        "startChar": 15,
+        "endLine": 2799,
+        "endChar": 16
+      },
+      "revId": "c723036ccb79ce3be6fa17c6d9219ecfd9f15300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84e44f94_ca940aa7",
+        "filename": "media/libaudioclient/AudioSystem.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 2799,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-17T13:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37a75000_77e5e01d",
       "range": {
         "startLine": 2799,
         "startChar": 15,
