@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4376e7f_aca3f7f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2025-07-17T08:04:34Z",
+      "side": 1,
+      "message": "This aligns with the change proposed in https://android-review.googlesource.com/c/platform/frameworks/av/+/1420028 .",
+      "revId": "9e142bdbd144fa836374d8a341563e4b0be91373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
