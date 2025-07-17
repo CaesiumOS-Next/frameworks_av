@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf4cde1d_00eb36d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-17T23:36:47Z",
+      "side": 1,
+      "message": "Thank you Dariusz! The change makes sense to me.\n\n@elaurent@google.com Eric, do you have any comments?",
+      "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c9e4f3_bb2e7ab8",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-17T23:36:47Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have discouraged expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nTo rerun the analyzer locally, run: `alint -- -c CheckContents`\n\nFor more information, see go/alint.",
+      "range": {
+        "startLine": 2415,
+        "startChar": 0,
+        "endLine": 2415,
+        "endChar": 103
+      },
+      "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb2c22d2_3e14c5ed",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2419,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-17T23:36:47Z",
+      "side": 1,
+      "message": "Should we make it `const` and give a more descriptive name, like `baseTime`?",
+      "range": {
+        "startLine": 2419,
+        "startChar": 4,
+        "endLine": 2419,
+        "endChar": 16
+      },
+      "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e10857fc_e8ff340a",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2600,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-17T23:36:47Z",
+      "side": 1,
+      "message": "I would recommend an assert to prevent getting a negative result from subtraction.",
+      "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
