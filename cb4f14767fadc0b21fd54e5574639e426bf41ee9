@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef1c5b8b_28ce70e0",
+        "filename": "services/audiopolicy/common/managerdefinitions/include/EffectDescriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-18T09:50:42Z",
+      "side": 1,
+      "message": "if we have the session ID as argument, we cannot use \"Global\" in the method name.\nI suggest we keep the name isNonOffloadableEffectEnabled but document the method as checking of a non offloadable effect on the output mix session or the session ID is provided.",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "277a5fe1_0b48d1c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/common/managerdefinitions/include/EffectDescriptor.h",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "    /**\n     * @brief Checks if a non offloadable effect is enabled for a given session ID.\n     * @param sessionId The session ID to check.\n     * @return True if a non offloadable effect is enabled for the given session ID, false\n     * otherwise.\n     */\n    bool isNonOffloadableEffectEnabled(\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cb4f14767fadc0b21fd54e5574639e426bf41ee9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

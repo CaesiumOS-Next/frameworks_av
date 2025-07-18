@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "936796b4_3c7f7891",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1632,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-18T09:50:42Z",
+      "side": 1,
+      "message": "Yes, we can remove this comment",
+      "parentUuid": "c1cca900_063949d2",
+      "range": {
+        "startLine": 1630,
+        "startChar": 0,
+        "endLine": 1632,
+        "endChar": 25
+      },
+      "revId": "bac7444e40c4134e8a20aa57efe92f675342f8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0858396d_d5a390db",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 2
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Defer to Eric to comment",
       "parentUuid": "0858396d_d5a390db",
+      "range": {
+        "startLine": 4942,
+        "startChar": 0,
+        "endLine": 4944,
+        "endChar": 25
+      },
+      "revId": "bac7444e40c4134e8a20aa57efe92f675342f8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d907986c_52ec1079",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4944,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-18T09:50:42Z",
+      "side": 1,
+      "message": "Here we can replace the comment: remove the FIXME and state that given we do not have a session Id in this context we can only check if a global music effect is enabled. The check on the session will happen later when if an offload track is created",
+      "parentUuid": "1fcb1993_a1ab208b",
       "range": {
         "startLine": 4942,
         "startChar": 0,
