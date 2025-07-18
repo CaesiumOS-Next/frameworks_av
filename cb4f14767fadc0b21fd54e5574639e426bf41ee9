@@ -40,6 +40,30 @@
       ],
       "revId": "cb4f14767fadc0b21fd54e5574639e426bf41ee9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d50de1_fbee30f7",
+        "filename": "services/audiopolicy/common/managerdefinitions/include/EffectDescriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3833194
+      },
+      "writtenOn": "2025-07-18T13:18:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ef1c5b8b_28ce70e0",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "cb4f14767fadc0b21fd54e5574639e426bf41ee9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
