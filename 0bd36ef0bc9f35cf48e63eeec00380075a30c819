@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba2f6f04_14be1d59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-18T09:36:55Z",
+      "side": 1,
+      "message": "Can you explain how this CL relates to b/374186989 ?",
+      "revId": "0bd36ef0bc9f35cf48e63eeec00380075a30c819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9ac5e8_7919d55c",
+        "filename": "services/audioflinger/PatchPanel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-18T09:36:55Z",
+      "side": 1,
+      "message": "if reuseExistingHalPatch was set at line 182, reusedHandle is AUDIO_PATCH_HANDLE_NONE. We could just test reusedHandle !\u003d AUDIO_PATCH_HANDLE_NONE",
+      "range": {
+        "startLine": 441,
+        "startChar": 20,
+        "endLine": 441,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7a1be7e4_91d004eb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/PatchPanel.cpp",
+              "range": {
+                "startLine": 441,
+                "startChar": 0,
+                "endLine": 442,
+                "endChar": 0
+              },
+              "replacement": "                if (reusedHandle !\u003d AUDIO_PATCH_HANDLE_NONE) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0bd36ef0bc9f35cf48e63eeec00380075a30c819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
