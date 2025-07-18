@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "266898f0_28b67ff8",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2025-07-18T13:32:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96c9e4f3_bb2e7ab8",
+      "range": {
+        "startLine": 2415,
+        "startChar": 0,
+        "endLine": 2415,
+        "endChar": 103
+      },
+      "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb2c22d2_3e14c5ed",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b8ea753_a03f82fd",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2419,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2025-07-18T13:32:55Z",
+      "side": 1,
+      "message": "OK, good idea.",
+      "parentUuid": "eb2c22d2_3e14c5ed",
+      "range": {
+        "startLine": 2419,
+        "startChar": 4,
+        "endLine": 2419,
+        "endChar": 16
+      },
+      "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e10857fc_e8ff340a",
@@ -77,6 +125,24 @@
       "writtenOn": "2025-07-17T23:36:47Z",
       "side": 1,
       "message": "I would recommend an assert to prevent getting a negative result from subtraction.",
+      "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1301b0aa_a88fa487",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2600,
+      "author": {
+        "id": 3225096
+      },
+      "writtenOn": "2025-07-18T13:32:55Z",
+      "side": 1,
+      "message": "I added here \u0027ALOG_ASSERT\u0027 which is active only for debug builds (LOG_NDEBUG 0). Please reopen in case it would be better to change to something else like \u0027LOG_ALWAYS_FATAL_IF\u0027 (active for all builds, release as well).",
+      "parentUuid": "e10857fc_e8ff340a",
       "revId": "953433fb1e8b3112542d880bdd17c0b9c9971230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
