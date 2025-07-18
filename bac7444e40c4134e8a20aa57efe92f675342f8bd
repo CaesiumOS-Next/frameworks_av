@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5681a4_83371d3c",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/EffectDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-18T00:21:05Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have discouraged expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nTo rerun the analyzer locally, run: `alint -- -c CheckContents`\n\nFor more information, see go/alint.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 102
+      },
+      "revId": "bac7444e40c4134e8a20aa57efe92f675342f8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a025aab3_0e4245fc",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1632,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-18T00:21:05Z",
+      "side": 1,
+      "message": "Is this `FIXME` now fixed?",
+      "range": {
+        "startLine": 1630,
+        "startChar": 0,
+        "endLine": 1632,
+        "endChar": 25
+      },
+      "revId": "bac7444e40c4134e8a20aa57efe92f675342f8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0858396d_d5a390db",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4944,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-18T00:21:05Z",
+      "side": 1,
+      "message": "Is this still relevant?",
+      "range": {
+        "startLine": 4942,
+        "startChar": 0,
+        "endLine": 4944,
+        "endChar": 25
+      },
+      "revId": "bac7444e40c4134e8a20aa57efe92f675342f8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
