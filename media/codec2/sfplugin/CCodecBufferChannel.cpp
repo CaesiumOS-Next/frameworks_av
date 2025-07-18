@@ -2384,6 +2384,9 @@ void CCodecBufferChannel::onWorkDone(
 
 void CCodecBufferChannel::onInputBufferDone(
         uint64_t frameIndex, size_t arrayIndex) {
+    if (mHasInputSurface) {
+        return;
+    }
     std::shared_ptr<C2Buffer> buffer =
             mPipelineWatcher.lock()->onInputBufferReleased(frameIndex, arrayIndex);
     bool newInputSlotAvailable = false;
