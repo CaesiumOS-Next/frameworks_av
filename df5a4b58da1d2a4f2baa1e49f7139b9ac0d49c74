@@ -84,6 +84,30 @@
       },
       "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d4d797e_8b356449",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-18T16:30:57Z",
+      "side": 1,
+      "message": "I think was addressed. @elaurent@google.com please check.",
+      "parentUuid": "ce5e4e90_c6f11e30",
+      "range": {
+        "startLine": 2627,
+        "startChar": 31,
+        "endLine": 2627,
+        "endChar": 37
+      },
+      "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
