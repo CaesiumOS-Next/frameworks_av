@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b448a9_2d03ca07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1107261
+      },
+      "writtenOn": "2025-07-18T06:37:35Z",
+      "side": 1,
+      "message": "@elaurent@google.com Could you please review this change to see if it\u0027s acceptable?\n\nI\u0027ve found some tombstones in fastcapture:\n\nCmdline: /system/bin/audioserver\npid: 413, tid: 3278, name: FastCapture  \u003e\u003e\u003e /system/bin/audioserver \u003c\u003c\u003c\nuid: 1041\nsignal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------\nAbort message: \u0027ubsan: add-overflow by 0xeba539ff\u0027\n    r0  00000000  r1  00000cce  r2  00000006  r3  ea2bcfb8\n    r4  ea2bcfc8  r5  ea2bcfb0  r6  0000019d  r7  0000016b\n    r8  00000000  r9  ffffffff  r10 ea2bcfb8  r11 00000018\n    ip  00000cce  sp  ea2bcf98  lr  edfb4ae3  pc  edfb4af6\n\n7 total frames\nbacktrace:\n      #00 pc 00071af6  /apex/com.android.runtime/lib/bionic/libc.so (abort+138) (BuildId: f5604dd5db6e445ebfe57826ef2d81ab)\n      #01 pc 0003113c  /system/lib/libaudioflinger.so (__ubsan_handle_add_overflow_minimal_abort+108) (BuildId: b1eb719c9452339acbf9bddeca9ad948)\n      #02 pc 000819fb  /system/lib/libaudioflinger.so (android::FastCapture::onWork()+762) (BuildId: b1eb719c9452339acbf9bddeca9ad948)\n      #03 pc 00085071  /system/lib/libaudioflinger.so (android::FastThread::threadLoop()+552) (BuildId: b1eb719c9452339acbf9bddeca9ad948)\n      #04 pc 0001c7dd  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+164) (BuildId: 67b66a16db2a024449362855a819a41f)\n      #05 pc 000bbfef  /apex/com.android.runtime/lib/bionic/libc.so (__pthread_start(void*)+40) (BuildId: f5604dd5db6e445ebfe57826ef2d81ab)\n      #06 pc 00072af3  /apex/com.android.runtime/lib/bionic/libc.so (__start_thread+30) (BuildId: f5604dd5db6e445ebfe57826ef2d81ab)",
+      "revId": "d76283e39c4c46e03a8678712cda52f401b76a5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
