@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df5abad_4b86e325",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-22T12:29:48Z",
+      "side": 1,
+      "message": "please indicate both old and new behavior",
+      "range": {
+        "startLine": 194,
+        "startChar": 11,
+        "endLine": 194,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9c7c0fff_f6a08a5f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": "        // Skip \"device already connected\" checks for ARC/eARC devices to support SAD update\n        // behavior:\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 200,
+                "startChar": 0,
+                "endLine": 202,
+                "endChar": 0
+              },
+              "replacement": "        // ARC/eARC can update SAD without requiring a disconnect first.\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 2274,
+                "startChar": 0,
+                "endLine": 2275,
+                "endChar": 0
+              },
+              "replacement": "    const bool hasOrphanHaptic \u003d mEffects.hasOrphanForSession(sessionId, FX_IID_HAPTICGENERATOR);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7172ad4f0eae4a359e82f355816f984ef3a054a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb42be34_7ee3a17b",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-22T12:29:48Z",
+      "side": 1,
+      "message": "If you do that you will not add the new device with the new SADs in the list but just skip the addition.\nWe should remove the old device first and then add the new one:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/services/audiopolicy/common/managerdefinitions/src/DeviceDescriptor.cpp;l\u003d273?q\u003dDeviceVector::add",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "08628b63_b98e7ecd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 238,
+                "endChar": 0
+              },
+              "replacement": "                // remove old device from available output devices\n                mAvailableOutputDevices.remove(device);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7172ad4f0eae4a359e82f355816f984ef3a054a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
