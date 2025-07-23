@@ -16,6 +16,24 @@
       "message": "There seems to be a confusion between userId and UID.\n\nThe CLs and API names in frameworks/base are about mapping a user ID to a zone.\nIn frameworks/av we use a mix of user ID for some APIs and then we get the UID from an audio track client to map it to a zone.",
       "revId": "e85c0955c1efb07eef63387a76d07c8db1c4797c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd6d2b04_418c9522",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-23T08:39:43Z",
+      "side": 1,
+      "message": "Never mind I saw the resolution of UID to userID in the engine. \nMaybe more comments would help understanding which method takes which type of Id as input",
+      "parentUuid": "4c2b8b43_5eb5ee72",
+      "revId": "e85c0955c1efb07eef63387a76d07c8db1c4797c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
