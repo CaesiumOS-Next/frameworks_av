@@ -1,0 +1,221 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193befb6_96822dfd",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+        "patchSetId": 41
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-23T09:10:00Z",
+      "side": 1,
+      "message": "Can we add a TODO with an bug number tracking the merging of all volume APIs into just a volume group ID + UID APIs in the future.\n\nsetStreamVolumeIndex, setVolumeIndexForAttributes -\u003e setVolumeIndexForGroup",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 85
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0f8d27d4_0bd581ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "     * AudioPolicy will re-check the device for which the attenuation shall be taken. \n     * TODO(b/326563968): Merge all volume APIs into just a volume group ID + UID APIs.\n     * setStreamVolumeIndex, setVolumeIndexForAttributes -\u003e setVolumeIndexForGroup\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7e908ccab29a40d758772b56bb69ef9d513e4541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de8df3f_c00c7706",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+        "patchSetId": 41
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-23T09:10:00Z",
+      "side": 1,
+      "message": "could we just use only this new API and remove getDevicesForAttributes and call it with a valid UID or not depending on the context and flag value?\nSame for getDirectPlaybackSupport and getDirectProfilesForAttributes",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 81
+      },
+      "revId": "7e908ccab29a40d758772b56bb69ef9d513e4541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10c7ec4e_1b2b70b1",
+        "filename": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+        "patchSetId": 41
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-23T09:10:00Z",
+      "side": 1,
+      "message": "could we just use only this new API and remove getDirectPlaybackSupport and call it with a valid UID or not depending on the context and flag value?\nSame for getDirectProfilesForAttributes",
+      "range": {
+        "startLine": 448,
+        "startChar": 20,
+        "endLine": 448,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "255d60b1_df81ede4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 233,
+                "endChar": 0
+              },
+              "replacement": "   /**\n     * Query how the direct playback is currently supported on the device routed for the given\n     * attributes and UID (as routing rules may be registered on UID / User ID)\n     * If the UID is invalid, the routing will be done without taking into account any UID\n     * specific rule.\n     */\n    AudioDirectMode getDirectPlaybackSupport(in AudioAttributes attr, int uid,\n                    in AudioConfig config);\n\n   /**\n"
+            },
+            {
+              "path": "media/libaudioclient/aidl/android/media/IAudioPolicyService.aidl",
+              "range": {
+                "startLine": 438,
+                "startChar": 0,
+                "endLine": 451,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7e908ccab29a40d758772b56bb69ef9d513e4541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2312e045_c5225e20",
+        "filename": "media/libaudioclient/tests/audiosystem_tests.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-23T09:10:00Z",
+      "side": 1,
+      "message": "Why are we calling this twice?",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f7776cf1_4f05c229",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 115,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7e908ccab29a40d758772b56bb69ef9d513e4541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ac6ceb_034705fc",
+        "filename": "media/libaudioclient/tests/audiosystem_tests.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-23T09:10:00Z",
+      "side": 1,
+      "message": "Use macros here nd below:\nTEST_F_WITH_FLAGS(\n  AudioSystemTest,\n  VolumeIndexForAttributes,\n  REQUIRES_FLAGS_ENABLED(...),\n  REQUIRES_FLAGS_DISABLED(...))",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2c5e3ec3_0a80f551",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 451,
+                "startChar": 0,
+                "endLine": 455,
+                "endChar": 0
+              },
+              "replacement": "TEST_F_WITH_FLAGS(AudioSystemTest, VolumeIndexForAttributesWithoutZones,\n                  REQUIRES_FLAGS_DISABLED(audio_flags::multi_zone_audio)) {\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 485,
+                "startChar": 0,
+                "endLine": 492,
+                "endChar": 0
+              },
+              "replacement": "TEST_F_WITH_FLAGS(AudioSystemTest, VolumeIndexForVolumeGroup,\n                  REQUIRES_FLAGS_ENABLED(audio_flags::volume_group_management_update)) {\n"
+            },
+            {
+              "path": "media/libaudioclient/tests/audiosystem_tests.cpp",
+              "range": {
+                "startLine": 510,
+                "startChar": 0,
+                "endLine": 514,
+                "endChar": 0
+              },
+              "replacement": "TEST_F_WITH_FLAGS(AudioSystemTest, VolumeIndexForAttributes,\n                  REQUIRES_FLAGS_ENABLED(audio_flags::multi_zone_audio)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7e908ccab29a40d758772b56bb69ef9d513e4541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
