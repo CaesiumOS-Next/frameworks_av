@@ -298,6 +298,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e0c5576_3400a621",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 1389,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-23T16:05:17Z",
+      "side": 1,
+      "message": "What I mean is that they are many other places where we call getOutputDevicesForAttributes() : Is it OK to not use the uid in all other places (except those addressed by the next volume CL)",
+      "parentUuid": "9c6cbe45_2f36ea72",
+      "range": {
+        "startLine": 1389,
+        "startChar": 0,
+        "endLine": 1389,
+        "endChar": 97
+      },
+      "revId": "e85c0955c1efb07eef63387a76d07c8db1c4797c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25f216cb_2acac206",
         "filename": "services/audiopolicy/service/AudioPolicyInterfaceImpl.cpp",
         "patchSetId": 38
