@@ -1003,7 +1003,7 @@ void AudioPolicyManager::setPhoneState(audio_mode_t state)
     // reevaluate routing on all outputs in case tracks have been started during the call
     for (size_t i = 0; i < mOutputs.size(); i++) {
         sp<SwAudioOutputDescriptor> desc = mOutputs.valueAt(i);
-        DeviceVector newDevices = getNewOutputDevices(desc, true /*fromCache*/);
+        DeviceVector newDevices = getNewOutputDevices(desc, false /*fromCache*/);
         if (state != AUDIO_MODE_NORMAL && oldState == AUDIO_MODE_NORMAL
                 && desc->mPreferredAttrInfo != nullptr) {
             // If the output is using preferred mixer attributes and the audio mode is not normal,
