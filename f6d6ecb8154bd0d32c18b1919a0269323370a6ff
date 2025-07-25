@@ -22,6 +22,30 @@
       },
       "revId": "f6d6ecb8154bd0d32c18b1919a0269323370a6ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de568a1f_b2e59681",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-07-25T03:25:32Z",
+      "side": 1,
+      "message": "This Gerrit submission is a bug discovered internally by Xiaomi. No Google issue has been raised yet. Should we raise a Google issue? Also, are there any requirements for the content of the Flag: field? What would be an appropriate content for this change?",
+      "parentUuid": "63af7c31_75d008f7",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 162
+      },
+      "revId": "f6d6ecb8154bd0d32c18b1919a0269323370a6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
