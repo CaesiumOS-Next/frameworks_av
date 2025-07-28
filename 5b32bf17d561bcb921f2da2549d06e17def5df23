@@ -16,6 +16,23 @@
       "message": "Hi Phoenix, thank you for the patch! If possible, could you also submit a bug via: https://source.android.com/docs/setup/contribute/report-bugs\n\nand reference the bug id in the commit message. \n\nBug: \u003cbug id in buganizer\u003e",
       "revId": "5b32bf17d561bcb921f2da2549d06e17def5df23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42ee08b3_924e0ed1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1141048
+      },
+      "writtenOn": "2025-07-28T16:16:54Z",
+      "side": 1,
+      "message": "+ camera framework eng. for visibility",
+      "revId": "5b32bf17d561bcb921f2da2549d06e17def5df23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
