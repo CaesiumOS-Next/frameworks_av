@@ -69,6 +69,24 @@
       "parentUuid": "85c101aa_1192bd28",
       "revId": "5b32bf17d561bcb921f2da2549d06e17def5df23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a62436_2ed41d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1141048
+      },
+      "writtenOn": "2025-07-28T16:48:53Z",
+      "side": 1,
+      "message": "Thank you1 I cherry-picked the patch for approval and merge. The buganizer tracking bug will be updated once the change is merged.",
+      "parentUuid": "0de383b7_9829f83a",
+      "revId": "5b32bf17d561bcb921f2da2549d06e17def5df23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
