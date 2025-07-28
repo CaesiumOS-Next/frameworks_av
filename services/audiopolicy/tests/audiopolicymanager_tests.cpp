@@ -470,6 +470,31 @@ TEST_F(AudioPolicyManagerTest, BuiltInStrategyIdsAreValid) {
     verifyBuiltInStrategyIdsAreValid();
 }
 
+class NoCacheTestManager : public AudioPolicyTestManager {
+public:
+    using AudioPolicyTestManager::AudioPolicyTestManager;
+
+    DeviceVector getNewOutputDevices(const sp<SwAudioOutputDescriptor>& desc,
+                                     bool fromCache) override {
+        sawNoCache |= !fromCache;
+        return AudioPolicyTestManager::getNewOutputDevices(desc, fromCache);
+    }
+
+    bool sawNoCache = false;
+};
+
+TEST_F(AudioPolicyManagerTest, HangupReevaluatesWithNoCache) {
+    NoCacheTestManager mgr(mPrimaryOutputDescriptor, mTestClient, mTestClient);
+    mApm = &mgr;
+
+    ASSERT_FALSE(mgr.sawNoCache);
+    mgr.setPhoneState(AUDIO_MODE_IN_CALL);
+    ASSERT_FALSE(mgr.sawNoCache);
+    mgr.setPhoneState(AUDIO_MODE_NORMAL);
+
+    EXPECT_TRUE(mgr.sawNoCache);
+}
+
 class AudioPolicyManagerTestWithDefaultEngineConfig : public AudioPolicyManagerTest {
   protected:
     // The APM will use the default engine config from EngineDefaultConfig.h.
