@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0384d812_28779934",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-28T09:57:20Z",
+      "side": 1,
+      "message": "also add a Test stanza:\n\nTest: \u003cdescription of the tests performed with this CL\u003e",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "633e67a5ecd64948b12fac057c46bd525990e841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34264837_22a7ce32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-28T09:57:20Z",
+      "side": 1,
+      "message": "Jiabin,\n\nPlease follow up with this CL has this has to be reconciled with your change ID I5d8b1da888f15296855644240f35f444309d6678",
+      "revId": "633e67a5ecd64948b12fac057c46bd525990e841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
