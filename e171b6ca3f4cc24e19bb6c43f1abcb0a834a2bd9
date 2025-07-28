@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6c4591b_7d00f707",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-07-28T22:09:42Z",
+      "side": 1,
+      "message": "I noticed there was a following up CL for adding a unit test. Do you want to have them in the same CL?",
+      "revId": "e171b6ca3f4cc24e19bb6c43f1abcb0a834a2bd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
