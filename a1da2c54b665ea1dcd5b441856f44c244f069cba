@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fefa85e1_ebdfbff6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-28T18:17:31Z",
+      "side": 1,
+      "message": "Thanks for adding the test! Some comments.",
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1061ccc4_0b9df35c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-28T18:17:31Z",
+      "side": 1,
+      "message": "Thanks for adding the test! I have some comments.",
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2f388e8_caa77cc2",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4431,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-28T18:17:31Z",
+      "side": 1,
+      "message": "Please make this part of `AudioPolicyTestManager` class https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audiopolicy/tests/AudioPolicyTestManager.h\n\nAlso, for more general use, please use a getter for the flag you\u0027ve added.",
+      "range": {
+        "startLine": 4431,
+        "startChar": 6,
+        "endLine": 4431,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "21bda982_d3840358",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4430,
+                "startChar": 0,
+                "endLine": 4444,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4451,
+                "startChar": 0,
+                "endLine": 4452,
+                "endChar": 0
+              },
+              "replacement": "    ASSERT_TRUE(mgr.getSawNoCache());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d11ab2_ffce9995",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4444,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-28T18:17:31Z",
+      "side": 1,
+      "message": "Please group this with other `AudioPolicyManagerTest` tests, somewhere near the line `472`: https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audiopolicy/tests/audiopolicymanager_tests.cpp;l\u003d472;drc\u003d53277d0cc4c71c30c1eb580f76d6882559628a7e",
+      "range": {
+        "startLine": 4444,
+        "startChar": 0,
+        "endLine": 4444,
+        "endChar": 30
+      },
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ed71ad_55698b32",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4448,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-28T18:17:31Z",
+      "side": 1,
+      "message": "I would add a couple more checks for `mgr.sawNoCache` just to make sure that it is changing as we are expecting.",
+      "range": {
+        "startLine": 4447,
+        "startChar": 0,
+        "endLine": 4448,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "62299028_8a437de1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4448,
+                "startChar": 0,
+                "endLine": 4448,
+                "endChar": 0
+              },
+              "replacement": "    ASSERT_FALSE(mgr.sawNoCache);\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4449,
+                "startChar": 0,
+                "endLine": 4449,
+                "endChar": 0
+              },
+              "replacement": "    ASSERT_FALSE(mgr.sawNoCache);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf3399b_f8fd25d3",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4451,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-07-28T18:17:31Z",
+      "side": 1,
+      "message": "Note: This can be `EXPECT` (`ASSERT` is for the cases when the test can\u0027t continue if the condition is not satisfied).",
+      "range": {
+        "startLine": 4451,
+        "startChar": 0,
+        "endLine": 4451,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1f07a5c6_ea579498",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4451,
+                "startChar": 0,
+                "endLine": 4452,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_TRUE(mgr.sawNoCache);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
