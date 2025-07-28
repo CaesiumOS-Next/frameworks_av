@@ -88,6 +88,97 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4432b276_c73cb454",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4437,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-07-28T22:09:00Z",
+      "side": 1,
+      "message": "I would say this is able to verify if `getNewOutputDevices` is called with `fromCache` is false. But it doesn\u0027t really verify the device selection after changing the mode from `IN_CALL` to `NORMAL` is correct.",
+      "range": {
+        "startLine": 4437,
+        "startChar": 8,
+        "endLine": 4437,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f0d0c02f_f033a37a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 2943,
+                "startChar": 0,
+                "endLine": 2944,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(AudioPolicyManagerCarTest,\n       GetOutputForAttrWithSelectedOutputAfterUserAffinities_SelectedDeviceNotAffinity) {\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 2980,
+                "startChar": 0,
+                "endLine": 2981,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithExcludeUserIdCriteria_NotAffinity) {\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 3049,
+                "startChar": 0,
+                "endLine": 3051,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(\n        AudioPolicyManagerCarTest,\n        GetOutputForAttrWithMatchingMixAndSelectedOutputAfterUserAffinities_SelectedDeviceAffinity) {\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 3087,
+                "startChar": 0,
+                "endLine": 3089,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(\n        AudioPolicyManagerCarTest,\n        GetOutputForAttrWithNoMatchingMaxAndSelectedOutputAfterUserAffinities_SelectedDeviceNotAffinity) {\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 3251,
+                "startChar": 0,
+                "endLine": 3252,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithNoMatchingMix_SelectedDeviceNotAffinity) {\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 4451,
+                "startChar": 0,
+                "endLine": 4451,
+                "endChar": 0
+              },
+              "replacement": "    ASSERT_TRUE(mgr.sawNoCache);\n}\n\nTEST_F(AudioPolicyManagerTest, HangupReevaluatesWithNoCache_DeviceSelection) {\n    NoCacheTestManager mgr(mPrimaryOutputDescriptor, mTestClient, mTestClient);\n    mApm \u003d \u0026mgr;\n\n    audio_port_handle_t portId \u003d AUDIO_PORT_HANDLE_NONE;\n    audio_io_handle_t output \u003d AUDIO_IO_HANDLE_NONE;\n    DeviceIdVector selectedDeviceIds;\n    getOutputForAttr(\u0026selectedDeviceIds, AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_OUT_STEREO,\n                     k48000SamplingRate, AUDIO_OUTPUT_FLAG_NONE, \u0026output, \u0026portId);\n    ASSERT_EQ(1, selectedDeviceIds.size());\n    auto initialDevice \u003d mManager-\u003egetAvailableOutputDevices().getDeviceFromId(selectedDeviceIds[0]);\n    ASSERT_NE(nullptr, initialDevice);\n\n    mgr.setPhoneState(AUDIO_MODE_IN_CALL);\n    selectedDeviceIds.clear();\n    getOutputForAttr(\u0026selectedDeviceIds, AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_OUT_STEREO,\n                     k48000SamplingRate, AUDIO_OUTPUT_FLAG_NONE, \u0026output, \u0026portId);\n    ASSERT_EQ(1, selectedDeviceIds.size());\n    auto inCallDevice \u003d mManager-\u003egetAvailableOutputDevices().getDeviceFromId(selectedDeviceIds[0]);\n    ASSERT_NE(nullptr, inCallDevice);\n    ASSERT_NE(initialDevice, inCallDevice);\n\n    mgr.setPhoneState(AUDIO_MODE_NORMAL);\n    selectedDeviceIds.clear();\n    getOutputForAttr(\u0026selectedDeviceIds, AUDIO_FORMAT_PCM_16_BIT, AUDIO_CHANNEL_OUT_STEREO,\n                     k48000SamplingRate, AUDIO_OUTPUT_FLAG_NONE, \u0026output, \u0026portId);\n    ASSERT_EQ(1, selectedDeviceIds.size());\n    auto normalDevice \u003d mManager-\u003egetAvailableOutputDevices().getDeviceFromId(selectedDeviceIds[0]);\n    ASSERT_NE(nullptr, normalDevice);\n    ASSERT_EQ(initialDevice, normalDevice);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01d11ab2_ffce9995",
         "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
         "patchSetId": 2
