@@ -4427,3 +4427,26 @@ int main(int argc, char** argv) {
     ::testing::UnitTest::GetInstance()->listeners().Append(new TestExecutionTracer());
     return RUN_ALL_TESTS();
 }
+
+class NoCacheTestManager : public AudioPolicyTestManager {
+public:
+    using AudioPolicyTestManager::AudioPolicyTestManager;
+
+    DeviceVector getNewOutputDevices(const sp<SwAudioOutputDescriptor>& desc,
+                                     bool fromCache) override {
+        sawNoCache |= !fromCache;
+        return AudioPolicyTestManager::getNewOutputDevices(desc, fromCache);
+    }
+
+    bool sawNoCache = false;
+};
+
+TEST_F(AudioPolicyManagerTest, HangupReevaluatesWithNoCache) {
+    NoCacheTestManager mgr(mPrimaryOutputDescriptor, mTestClient, mTestClient);
+    mApm = &mgr;
+
+    mgr.setPhoneState(AUDIO_MODE_IN_CALL);
+    mgr.setPhoneState(AUDIO_MODE_NORMAL);
+
+    ASSERT_TRUE(mgr.sawNoCache);
+}
