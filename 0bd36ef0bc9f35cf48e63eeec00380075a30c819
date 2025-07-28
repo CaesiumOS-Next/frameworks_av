@@ -57,6 +57,30 @@
       ],
       "revId": "0bd36ef0bc9f35cf48e63eeec00380075a30c819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbea5870_d1bd7803",
+        "filename": "services/audioflinger/PatchPanel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 2013250
+      },
+      "writtenOn": "2025-07-28T06:10:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "dd9ac5e8_7919d55c",
+      "range": {
+        "startLine": 441,
+        "startChar": 20,
+        "endLine": 441,
+        "endChar": 41
+      },
+      "revId": "0bd36ef0bc9f35cf48e63eeec00380075a30c819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
