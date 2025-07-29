@@ -322,6 +322,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b13b015_5ad96dcf",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 1389,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-07-29T13:58:34Z",
+      "side": 1,
+      "message": "definitly it is a potential point of failure where some refactor may be required",
+      "parentUuid": "0e0c5576_3400a621",
+      "range": {
+        "startLine": 1389,
+        "startChar": 0,
+        "endLine": 1389,
+        "endChar": 97
+      },
+      "revId": "e85c0955c1efb07eef63387a76d07c8db1c4797c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25f216cb_2acac206",
         "filename": "services/audiopolicy/service/AudioPolicyInterfaceImpl.cpp",
         "patchSetId": 38
