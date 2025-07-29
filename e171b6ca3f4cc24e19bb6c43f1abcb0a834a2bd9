@@ -16,6 +16,24 @@
       "message": "I noticed there was a following up CL for adding a unit test. Do you want to have them in the same CL?",
       "revId": "e171b6ca3f4cc24e19bb6c43f1abcb0a834a2bd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd1ab792_38a2f7b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-07-29T07:44:02Z",
+      "side": 1,
+      "message": "yes we can squash the commits",
+      "parentUuid": "d6c4591b_7d00f707",
+      "revId": "e171b6ca3f4cc24e19bb6c43f1abcb0a834a2bd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
