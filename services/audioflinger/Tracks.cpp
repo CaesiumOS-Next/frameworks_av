@@ -2168,10 +2168,12 @@ status_t Track::getPlaybackRateParameters(
         if (thread != nullptr) {
             auto* const t = thread->asIAfPlaybackThread().get();
             audio_utils::lock_guard lock(t->mutex());
-            status = t->getOutput_l()->stream->getPlaybackRateParameters(playbackRate);
-            ALOGD_IF((status == NO_ERROR) &&
-                    !isAudioPlaybackRateEqual(mPlaybackRateParameters, *playbackRate),
-                    "%s: playbackRate inconsistent", __func__);
+            if (t->initCheck() == NO_ERROR) {
+                status = t->getOutput_l()->stream->getPlaybackRateParameters(playbackRate);
+                ALOGD_IF((status == NO_ERROR) &&
+                        !isAudioPlaybackRateEqual(mPlaybackRateParameters, *playbackRate),
+                        "%s: playbackRate inconsistent", __func__);
+            }
         }
     }
     return status;
