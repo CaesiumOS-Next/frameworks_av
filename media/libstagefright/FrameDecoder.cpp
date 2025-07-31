@@ -304,6 +304,10 @@ void AsyncCodecHandler::onMessageReceived(const sp<AMessage>& msg) {
                     msg->findString("detail", &detail);
                     ALOGI("Codec reported error(0x%x/%s), actionCode(%d), detail(%s)", err,
                           StrMediaError(err).c_str(), actionCode, detail.c_str());
+                    sp<FrameDecoder> frameDecoder = mFrameDecoder.promote();
+                    if (frameDecoder != nullptr) {
+                        frameDecoder->onDecoderError(err);
+                    }
                     break;
                 }
                 case MediaCodec::CB_REQUIRED_RESOURCES_CHANGED:
@@ -658,6 +662,13 @@ status_t FrameDecoder::extractInternal() {
     return err;
 }
 
+void FrameDecoder::onDecoderError(status_t err) {
+    std::lock_guard _lm(mMutex);
+    mDecoderError = true;
+    mDecoderErrorCode = err;
+    mOutputFramePending.notify_one();
+}
+
 status_t FrameDecoder::extractInternalUsingBlockModel() {
     status_t err = OK;
     MediaBufferBase* mediaBuffer = NULL;
@@ -665,6 +676,7 @@ status_t FrameDecoder::extractInternalUsingBlockModel() {
     uint32_t flags = 0;
     int32_t index;
     mHandleOutputBufferAsyncDone = false;
+    mDecoderError = false;
 
     err = mSource->read(&mediaBuffer, &mReadOptions);
     mReadOptions.clearSeekTo();
@@ -723,12 +735,12 @@ status_t FrameDecoder::extractInternalUsingBlockModel() {
     // wait for handleOutputBufferAsync() to finish
     std::unique_lock _lk(mMutex);
     if (!mOutputFramePending.wait_for(_lk, std::chrono::microseconds(kAsyncBufferTimeOutUs),
-                                 [this] { return mHandleOutputBufferAsyncDone; })) {
+                                 [this] { return mHandleOutputBufferAsyncDone || mDecoderError; })) {
         ALOGE("%s timed out waiting for handleOutputBufferAsync() to complete.", __func__);
         mSource->stop();
         mSourceStopped = true;
     }
-    return mHandleOutputBufferAsyncDone ? OK : TIMED_OUT;
+    return mDecoderError ? mDecoderErrorCode : (mHandleOutputBufferAsyncDone ? OK : TIMED_OUT);
 }
 
 //////////////////////////////////////////////////////////////////////
