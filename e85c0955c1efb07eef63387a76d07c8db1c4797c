@@ -346,6 +346,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "409dc663_2b82cc78",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 1389,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-01T08:41:37Z",
+      "side": 1,
+      "message": "Fixed on several call, some other are limited to default zone (call, abs device, msd). Will open a follow up for call as I guess we shall have a design with Oscar first",
+      "parentUuid": "3b13b015_5ad96dcf",
+      "range": {
+        "startLine": 1389,
+        "startChar": 0,
+        "endLine": 1389,
+        "endChar": 97
+      },
+      "revId": "e85c0955c1efb07eef63387a76d07c8db1c4797c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25f216cb_2acac206",
         "filename": "services/audiopolicy/service/AudioPolicyInterfaceImpl.cpp",
         "patchSetId": 38
