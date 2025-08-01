@@ -86,6 +86,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b13e3c_5002a297",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4431,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-01T03:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2f388e8_caa77cc2",
+      "range": {
+        "startLine": 4431,
+        "startChar": 6,
+        "endLine": 4431,
+        "endChar": 56
+      },
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4432b276_c73cb454",
@@ -177,6 +201,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b177075_c6f8e009",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4437,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-01T03:19:54Z",
+      "side": 1,
+      "message": "Hi Jiabin,\nI squash this commit and the test in same change:\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3716326\nplease check the new commit.",
+      "parentUuid": "4432b276_c73cb454",
+      "range": {
+        "startLine": 4437,
+        "startChar": 8,
+        "endLine": 4437,
+        "endChar": 33
+      },
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01d11ab2_ffce9995",
@@ -190,6 +238,30 @@
       "writtenOn": "2025-07-28T18:17:31Z",
       "side": 1,
       "message": "Please group this with other `AudioPolicyManagerTest` tests, somewhere near the line `472`: https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audiopolicy/tests/audiopolicymanager_tests.cpp;l\u003d472;drc\u003d53277d0cc4c71c30c1eb580f76d6882559628a7e",
+      "range": {
+        "startLine": 4444,
+        "startChar": 0,
+        "endLine": 4444,
+        "endChar": 30
+      },
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab98347_e5c75d4f",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4444,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-01T03:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01d11ab2_ffce9995",
       "range": {
         "startLine": 4444,
         "startChar": 0,
@@ -251,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd0c6768_cdc93b13",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4448,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-01T03:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60ed71ad_55698b32",
+      "range": {
+        "startLine": 4447,
+        "startChar": 0,
+        "endLine": 4448,
+        "endChar": 42
+      },
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddf3399b_f8fd25d3",
@@ -288,6 +384,30 @@
           ]
         }
       ],
+      "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "367464f1_162e03cb",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 4451,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-01T03:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddf3399b_f8fd25d3",
+      "range": {
+        "startLine": 4451,
+        "startChar": 0,
+        "endLine": 4451,
+        "endChar": 32
+      },
       "revId": "a1da2c54b665ea1dcd5b441856f44c244f069cba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
