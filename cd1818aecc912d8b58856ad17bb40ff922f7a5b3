@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba96754a_d8ae8e0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-08-01T02:30:34Z",
+      "side": 1,
+      "message": "shunkai, can you please help land this CL on internal main?  thanks!",
+      "revId": "cd1818aecc912d8b58856ad17bb40ff922f7a5b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e782dd07_076af2d0",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2171,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-08-01T02:30:34Z",
+      "side": 1,
+      "message": "more precise:\n\n    if (t-\u003eisStreamInitialized()) {\n\nsee\n\nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audioflinger/Threads.h;drc\u003ddfd9c5cc0c4a56e9cc078d9b23319e875f64d50a;l\u003d1164",
+      "range": {
+        "startLine": 2171,
+        "startChar": 19,
+        "endLine": 2171,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "200f7bcc_fbc7b2a9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Tracks.cpp",
+              "range": {
+                "startLine": 2171,
+                "startChar": 0,
+                "endLine": 2172,
+                "endChar": 0
+              },
+              "replacement": "            if (t-\u003eisStreamInitialized()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cd1818aecc912d8b58856ad17bb40ff922f7a5b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
