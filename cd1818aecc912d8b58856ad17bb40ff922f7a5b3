@@ -57,6 +57,30 @@
       ],
       "revId": "cd1818aecc912d8b58856ad17bb40ff922f7a5b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfeb108c_c3cab4a1",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2171,
+      "author": {
+        "id": 4255285
+      },
+      "writtenOn": "2025-08-01T05:45:48Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "e782dd07_076af2d0",
+      "range": {
+        "startLine": 2171,
+        "startChar": 19,
+        "endLine": 2171,
+        "endChar": 28
+      },
+      "revId": "cd1818aecc912d8b58856ad17bb40ff922f7a5b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
