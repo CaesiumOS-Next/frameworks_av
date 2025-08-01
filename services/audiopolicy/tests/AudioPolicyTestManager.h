@@ -49,6 +49,15 @@ class AudioPolicyTestManager : public AudioPolicyManager {
     using AudioPolicyManager::getInputProfile;
     uint32_t getAudioPortGeneration() const { return mAudioPortGeneration; }
     HwModuleCollection getHwModules() const { return mHwModules; }
+    bool sawNoCacheTriggered() const { return mSawNoCache; }
+
+    DeviceVector getNewOutputDevices(const sp<SwAudioOutputDescriptor>& desc,
+                                     bool fromCache) override {
+        mSawNoCache |= !fromCache;
+        return AudioPolicyManager::getNewOutputDevices(desc, fromCache);
+    }
+  private:
+    bool mSawNoCache = false;
 };
 
 }  // namespace android
