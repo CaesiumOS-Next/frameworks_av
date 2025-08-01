@@ -470,6 +470,49 @@ TEST_F(AudioPolicyManagerTest, BuiltInStrategyIdsAreValid) {
     verifyBuiltInStrategyIdsAreValid();
 }
 
+TEST_F(AudioPolicyManagerTest, HangupReevaluatesWithNoCache) {
+    NoCacheTestManager mgr(mPrimaryOutputDescriptor, mTestClient, mTestClient);
+    mApm = &mgr;
+
+    EXPECT_FALSE(mgr.getSawNoCache());
+    mgr.setPhoneState(AUDIO_MODE_IN_CALL);
+    EXPECT_FALSE(mgr.getSawNoCache());
+
+    mgr.setPhoneState(AUDIO_MODE_NORMAL);
+
+    EXPECT_TRUE(mgr.getSawNoCache());
+}
+
+TEST_F(AudioPolicyManagerTest, HangupReevaluatesAndRestoresDevice) {
+    NoCacheTestManager mgr(mPrimaryOutputDescriptor, mTestClient, mTestClient);
+    mApm = &mgr;
+
+    audio_attributes_t attr = {
+        .content_type = AUDIO_CONTENT_TYPE_MUSIC,
+        .usage = AUDIO_USAGE_MEDIA,
+        .source = AUDIO_SOURCE_DEFAULT,
+    };
+    audio_stream_type_t stream = AUDIO_STREAM_MUSIC;
+
+    audio_io_handle_t initialOutput = AUDIO_IO_HANDLE_NONE;
+    DeviceVector initialDevices = mApm->getOutputForAttr(&attr, &stream,
+            nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &initialOutput);
+
+    mgr.setPhoneState(AUDIO_MODE_IN_CALL);
+
+    DeviceVector inCallDevices = mApm->getOutputForAttr(&attr, &stream,
+            nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &initialOutput);
+
+    mgr.setPhoneState(AUDIO_MODE_NORMAL);
+
+    DeviceVector normalDevices = mApm->getOutputForAttr(&attr, &stream,
+            nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &initialOutput);
+
+    EXPECT_NE(inCallDevices, initialDevices);
+    EXPECT_EQ(normalDevices, initialDevices);
+    EXPECT_TRUE(mgr.getSawNoCache());
+}
+
 class AudioPolicyManagerTestWithDefaultEngineConfig : public AudioPolicyManagerTest {
   protected:
     // The APM will use the default engine config from EngineDefaultConfig.h.
@@ -2940,7 +2983,7 @@ TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithSelectedOutputAfterRegiste
     ASSERT_EQ(navDevicePort.id, selectedDeviceIds[0]);
 }
 
-TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithSelectedOutputAfterUserAffinities) {
+TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithSelectedOutputAfterUserAffinities_SelectedDeviceNotAffinity) {
     status_t ret;
     audio_config_t audioConfig = AUDIO_CONFIG_INITIALIZER;
     audioConfig.channel_mask = AUDIO_CHANNEL_OUT_STEREO;
@@ -2977,7 +3020,7 @@ TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithSelectedOutputAfterUserAff
     ASSERT_NE(navDevicePort.id, selectedDeviceIds[0]);
 }
 
-TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithExcludeUserIdCriteria) {
+TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithExcludeUserIdCriteria_NotAffinity) {
     status_t ret;
     audio_config_t audioConfig = AUDIO_CONFIG_INITIALIZER;
     audioConfig.channel_mask = AUDIO_CHANNEL_OUT_STEREO;
@@ -3047,7 +3090,7 @@ TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithSelectedOutputExcludeUserI
 }
 
 TEST_F(AudioPolicyManagerCarTest,
-       GetOutputForAttrWithMatchingMixAndSelectedOutputAfterUserAffinities) {
+       GetOutputForAttrWithMatchingMixAndSelectedOutputAfterUserAffinities_SelectedDeviceAffinity) {
     status_t ret;
     audio_config_t audioConfig = AUDIO_CONFIG_INITIALIZER;
     audioConfig.channel_mask = AUDIO_CHANNEL_OUT_STEREO;
@@ -3085,7 +3128,7 @@ TEST_F(AudioPolicyManagerCarTest,
 }
 
 TEST_F(AudioPolicyManagerCarTest,
-       GetOutputForAttrWithNoMatchingMaxAndSelectedOutputAfterUserAffinities) {
+       GetOutputForAttrWithNoMatchingMaxAndSelectedOutputAfterUserAffinities_SelectedDeviceNotAffinity) {
     status_t ret;
     audio_config_t audioConfig = AUDIO_CONFIG_INITIALIZER;
     audioConfig.channel_mask = AUDIO_CHANNEL_OUT_STEREO;
@@ -3248,7 +3291,7 @@ TEST_F(AudioPolicyManagerCarTest,
     ASSERT_EQ(tertiaryZoneDevicePort.id, selectedDeviceIds[0]);
 }
 
-TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithNoMatchingMix) {
+TEST_F(AudioPolicyManagerCarTest, GetOutputForAttrWithNoMatchingMix_SelectedDeviceNotAffinity) {
     status_t ret;
     audio_config_t audioConfig = AUDIO_CONFIG_INITIALIZER;
     audioConfig.channel_mask = AUDIO_CHANNEL_OUT_STEREO;
