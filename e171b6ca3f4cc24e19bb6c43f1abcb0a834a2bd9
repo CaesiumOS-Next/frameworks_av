@@ -70,6 +70,24 @@
       "parentUuid": "51577925_4fb7a1e0",
       "revId": "e171b6ca3f4cc24e19bb6c43f1abcb0a834a2bd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18e6af90_d3b76ebf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-01T01:44:29Z",
+      "side": 1,
+      "message": "Hi Jiabin,\nI squash this commit and the test in same change: https://android-review.googlesource.com/c/platform/frameworks/av/+/3716026\nplease check the new commit.",
+      "parentUuid": "5044382f_9fc5f0e6",
+      "revId": "e171b6ca3f4cc24e19bb6c43f1abcb0a834a2bd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
