@@ -470,6 +470,63 @@ TEST_F(AudioPolicyManagerTest, BuiltInStrategyIdsAreValid) {
     verifyBuiltInStrategyIdsAreValid();
 }
 
+TEST_F(AudioPolicyManagerTest, HangupReevaluatesWithNoCache) {
+    auto* testMgr = static_cast<AudioPolicyTestManager*>(mManager.get());
+
+    EXPECT_FALSE(testMgr->sawNoCacheTriggered());
+    mManager->setPhoneState(AUDIO_MODE_IN_CALL);
+
+    EXPECT_FALSE(testMgr->sawNoCacheTriggered());
+    mManager->setPhoneState(AUDIO_MODE_NORMAL);
+
+    EXPECT_TRUE(testMgr->sawNoCacheTriggered());
+}
+
+TEST_F(AudioPolicyManagerTest, HangupReevaluatesAndRestoresDevice) {
+    auto* testMgr = static_cast<AudioPolicyTestManager*>(mManager.get());
+
+    DeviceIdVector initialDeviceIds;
+    audio_io_handle_t outputHandle = AUDIO_IO_HANDLE_NONE;
+    audio_port_handle_t portId = AUDIO_PORT_HANDLE_NONE;
+    getOutputForAttr(&initialDeviceIds,
+                     AUDIO_FORMAT_PCM_16_BIT,
+                     AUDIO_CHANNEL_OUT_STEREO,
+                     k48000SamplingRate,
+                     AUDIO_OUTPUT_FLAG_NONE,
+                     &outputHandle,
+                     &portId,
+                     AUDIO_ATTRIBUTES_INITIALIZER,
+                     AUDIO_SESSION_NONE);
+
+    mManager->setPhoneState(AUDIO_MODE_IN_CALL);
+    DeviceIdVector inCallDeviceIds;
+    getOutputForAttr(&inCallDeviceIds,
+                     AUDIO_FORMAT_PCM_16_BIT,
+                     AUDIO_CHANNEL_OUT_STEREO,
+                     k48000SamplingRate,
+                     AUDIO_OUTPUT_FLAG_NONE,
+                     &outputHandle,
+                     &portId,
+                     AUDIO_ATTRIBUTES_INITIALIZER,
+                     AUDIO_SESSION_NONE);
+
+    mManager->setPhoneState(AUDIO_MODE_NORMAL);
+    DeviceIdVector normalDeviceIds;
+    getOutputForAttr(&normalDeviceIds,
+                     AUDIO_FORMAT_PCM_16_BIT,
+                     AUDIO_CHANNEL_OUT_STEREO,
+                     k48000SamplingRate,
+                     AUDIO_OUTPUT_FLAG_NONE,
+                     &outputHandle,
+                     &portId,
+                     AUDIO_ATTRIBUTES_INITIALIZER,
+                     AUDIO_SESSION_NONE);
+
+    EXPECT_NE(inCallDeviceIds, initialDeviceIds);
+    EXPECT_EQ(normalDeviceIds, initialDeviceIds);
+    EXPECT_TRUE(testMgr->sawNoCacheTriggered());
+}
+
 class AudioPolicyManagerTestWithDefaultEngineConfig : public AudioPolicyManagerTest {
   protected:
     // The APM will use the default engine config from EngineDefaultConfig.h.
