@@ -470,6 +470,65 @@ TEST_F(AudioPolicyManagerTest, BuiltInStrategyIdsAreValid) {
     verifyBuiltInStrategyIdsAreValid();
 }
 
+TEST_F(AudioPolicyManagerTest, HangupReevaluatesAndRestoresDevice) {
+
+    EXPECT_FALSE(mManager->sawFromCacheTriggered());
+    DeviceIdVector initialDeviceIds;
+    audio_io_handle_t outputHandle = AUDIO_IO_HANDLE_NONE;
+    audio_port_handle_t portId = AUDIO_PORT_HANDLE_NONE;
+    getOutputForAttr(&initialDeviceIds,
+                     AUDIO_FORMAT_PCM_16_BIT,
+                     AUDIO_CHANNEL_OUT_STEREO,
+                     k48000SamplingRate,
+                     AUDIO_OUTPUT_FLAG_NONE,
+                     &outputHandle,
+                     &portId,
+                     AUDIO_ATTRIBUTES_INITIALIZER,
+                     AUDIO_SESSION_NONE);
+
+    ASSERT_EQ(initialDeviceIds.size(), 1u);
+    auto initialDevice = mManager->getAvailableOutputDevices().getDeviceFromId(initialDeviceIds[0]);
+    ASSERT_NE(nullptr, initialDevice);
+
+    mManager->setPhoneState(AUDIO_MODE_IN_CALL);
+    EXPECT_TRUE(mManager->sawFromCacheTriggered());
+    DeviceIdVector inCallDeviceIds;
+    getOutputForAttr(&inCallDeviceIds,
+                     AUDIO_FORMAT_PCM_16_BIT,
+                     AUDIO_CHANNEL_OUT_STEREO,
+                     k48000SamplingRate,
+                     AUDIO_OUTPUT_FLAG_NONE,
+                     &outputHandle,
+                     &portId,
+                     AUDIO_ATTRIBUTES_INITIALIZER,
+                     AUDIO_SESSION_NONE);
+
+    ASSERT_EQ(inCallDeviceIds.size(), 1u);
+    auto inCallDevice = mManager->getAvailableOutputDevices().getDeviceFromId(inCallDeviceIds[0]);
+    ASSERT_NE(nullptr, inCallDevice);
+    EXPECT_NE(inCallDevice, initialDevice);
+
+    mManager->resetCacheObservation();
+    mManager->setPhoneState(AUDIO_MODE_NORMAL);
+    EXPECT_FALSE(mManager->sawFromCacheTriggered());
+
+    DeviceIdVector normalDeviceIds;
+    getOutputForAttr(&normalDeviceIds,
+                     AUDIO_FORMAT_PCM_16_BIT,
+                     AUDIO_CHANNEL_OUT_STEREO,
+                     k48000SamplingRate,
+                     AUDIO_OUTPUT_FLAG_NONE,
+                     &outputHandle,
+                     &portId,
+                     AUDIO_ATTRIBUTES_INITIALIZER,
+                     AUDIO_SESSION_NONE);
+
+    ASSERT_EQ(normalDeviceIds.size(), 1u);
+    auto normalDevice = mManager->getAvailableOutputDevices().getDeviceFromId(normalDeviceIds[0]);
+    ASSERT_NE(nullptr, normalDevice);
+    EXPECT_EQ(normalDevice, initialDevice);
+}
+
 class AudioPolicyManagerTestWithDefaultEngineConfig : public AudioPolicyManagerTest {
   protected:
     // The APM will use the default engine config from EngineDefaultConfig.h.
