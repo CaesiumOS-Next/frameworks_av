@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1bdc20_d5c9716f",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-04T18:40:39Z",
+      "side": 1,
+      "message": "No APM instance should be created in the test method. There is one managed by the test class, see `AudioPolicyManagerTest::SetUp`. It takes care of correct initialization.",
+      "range": {
+        "startLine": 474,
+        "startChar": 23,
+        "endLine": 474,
+        "endChar": 79
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf67e64_e0c558d3",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-04T18:40:39Z",
+      "side": 1,
+      "message": "There should be no class with this name anymore. Does this code compile?",
+      "range": {
+        "startLine": 474,
+        "startChar": 4,
+        "endLine": 474,
+        "endChar": 22
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f118bed3_b2c42bf5",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-04T18:40:39Z",
+      "side": 1,
+      "message": "Is this class field actually exist?",
+      "range": {
+        "startLine": 475,
+        "startChar": 4,
+        "endLine": 475,
+        "endChar": 8
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cee17d2_43f42d2a",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-04T18:40:39Z",
+      "side": 1,
+      "message": "This does not look correct at all. The 3rd argument is `audio_session_t`, not a pointer.\n\nAlso, please use `AudioPolicyManagerTest::getOutputForAttr` instead of calling into APM directly because test helpers do more checks.",
+      "range": {
+        "startLine": 499,
+        "startChar": 12,
+        "endLine": 499,
+        "endChar": 19
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78a460ee_06cd041e",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2986,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-04T18:40:39Z",
+      "side": 1,
+      "message": "Are these changes in test names intended?",
+      "range": {
+        "startLine": 2986,
+        "startChar": 87,
+        "endLine": 2986,
+        "endChar": 113
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
