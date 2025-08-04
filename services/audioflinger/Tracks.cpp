@@ -324,11 +324,12 @@ void TrackBase::deferRestartIfDisabled()
 {
     const auto thread = mThread.promote();
     if (thread == nullptr) return;
-    auto weakTrack = wp<TrackBase>::fromExisting(this);
-    thread->getThreadloopExecutor().defer([weakTrack] {
-            const auto actual = weakTrack.promote();
-            if (actual) actual->restartIfDisabled();
+    const auto actual = sp<TrackBase>::fromExisting(this);
+    if (actual) {
+        thread->getThreadloopExecutor().defer([actual] {
+            actual->restartIfDisabled();
         });
+    }
 }
 
 void TrackBase::beginBatteryAttribution() {
