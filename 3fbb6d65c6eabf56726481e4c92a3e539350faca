@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d03a8406_d2d9954a",
+        "filename": "services/audiopolicy/engine/interface/EngineInterface.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38f9be1d_fa61f1df",
+      "range": {
+        "startLine": 134,
+        "startChar": 21,
+        "endLine": 134,
+        "endChar": 29
+      },
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f3c1eec_bde345d4",
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd64148_a92d4d6d",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f3c1eec_bde345d4",
+      "range": {
+        "startLine": 499,
+        "startChar": 23,
+        "endLine": 499,
+        "endChar": 30
+      },
       "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -144,6 +192,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3459c10e_1ceed896",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ff0be62_a0a85dd2",
+      "range": {
+        "startLine": 504,
+        "startChar": 4,
+        "endLine": 504,
+        "endChar": 22
+      },
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d7a437c_dd42defc",
@@ -191,6 +263,30 @@
           ]
         }
       ],
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2bb8a7d_6c9cbc98",
+        "filename": "services/audiopolicy/engineconfigurable/src/Engine.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d7a437c_dd42defc",
+      "range": {
+        "startLine": 508,
+        "startChar": 4,
+        "endLine": 508,
+        "endChar": 12
+      },
       "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -246,6 +342,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "661e6419_c7bb971b",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4849366b_bc3338bb",
+      "range": {
+        "startLine": 844,
+        "startChar": 23,
+        "endLine": 844,
+        "endChar": 30
+      },
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bfa477d_1b90e168",
@@ -259,6 +379,30 @@
       "writtenOn": "2025-08-01T12:59:06Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"explict\" -- should it be \"explicit\"?\nNote: a line containing...\n\nCommon typo found: \"explict\" -- should it be \"explicit\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 870,
+        "startChar": 23,
+        "endLine": 870,
+        "endChar": 30
+      },
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95af03ed_3396eb9d",
+        "filename": "services/audiopolicy/enginedefault/src/Engine.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bfa477d_1b90e168",
       "range": {
         "startLine": 870,
         "startChar": 23,
@@ -310,6 +454,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d8f6cc8_acbc7077",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 3889,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdb0d165_6abc2c88",
+      "range": {
+        "startLine": 3889,
+        "startChar": 0,
+        "endLine": 3889,
+        "endChar": 61
+      },
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "355b775a_81b6790c",
@@ -347,6 +515,30 @@
           ]
         }
       ],
+      "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a604c4a5_4ac1fe5a",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 6138,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-04T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "355b775a_81b6790c",
+      "range": {
+        "startLine": 6138,
+        "startChar": 31,
+        "endLine": 6138,
+        "endChar": 60
+      },
       "revId": "3fbb6d65c6eabf56726481e4c92a3e539350faca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
