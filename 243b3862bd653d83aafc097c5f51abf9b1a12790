@@ -114,6 +114,30 @@
       },
       "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a605588f_8f11a7d2",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2986,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-05T02:56:56Z",
+      "side": 1,
+      "message": "Yes—those renames were intentional. They come from Jiabin Huang’s earlier review suggestions to make the test names more descriptive of the “SelectedDeviceNotAffinity” scenario.",
+      "parentUuid": "78a460ee_06cd041e",
+      "range": {
+        "startLine": 2986,
+        "startChar": 87,
+        "endLine": 2986,
+        "endChar": 113
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
