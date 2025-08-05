@@ -82,7 +82,7 @@ void AMessage::setTarget(const sp<const AHandler> &handler) {
     } else {
         mTarget = handler->id();
         mHandler = handler->getHandler();
-        mLooper = handler->getLooper();
+        mLooper = handler->looper();
     }
 }
 
