@@ -138,6 +138,30 @@
       },
       "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c959af1b_50a657e8",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2986,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-08-05T03:13:11Z",
+      "side": 1,
+      "message": "Oh, sorry for making the confusion. My previous comment is not about renaming these tests. My comment is that in previous test(from the other CL), verifying `getNewOutputDevices` receiving `fromCache` is false doesn\u0027t really make a good test. The more important is to verify that we are selecting the right route, that is what should be validated.",
+      "parentUuid": "a605588f_8f11a7d2",
+      "range": {
+        "startLine": 2986,
+        "startChar": 87,
+        "endLine": 2986,
+        "endChar": 113
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
