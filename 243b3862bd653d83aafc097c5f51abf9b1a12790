@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe10f92_90a934c1",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-05T05:47:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d1bdc20_d5c9716f",
+      "range": {
+        "startLine": 474,
+        "startChar": 23,
+        "endLine": 474,
+        "endChar": 79
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5867a2ae_6f06e00c",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-05T05:47:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcf67e64_e0c558d3",
+      "range": {
+        "startLine": 474,
+        "startChar": 4,
+        "endLine": 474,
+        "endChar": 22
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f118bed3_b2c42bf5",
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeaeb37d_86a890b4",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-05T05:47:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f118bed3_b2c42bf5",
+      "range": {
+        "startLine": 475,
+        "startChar": 4,
+        "endLine": 475,
+        "endChar": 8
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cee17d2_43f42d2a",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-08-04T18:40:39Z",
       "side": 1,
       "message": "This does not look correct at all. The 3rd argument is `audio_session_t`, not a pointer.\n\nAlso, please use `AudioPolicyManagerTest::getOutputForAttr` instead of calling into APM directly because test helpers do more checks.",
+      "range": {
+        "startLine": 499,
+        "startChar": 12,
+        "endLine": 499,
+        "endChar": 19
+      },
+      "revId": "243b3862bd653d83aafc097c5f51abf9b1a12790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da8d0fa_6b2b4b2f",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-05T05:47:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cee17d2_43f42d2a",
       "range": {
         "startLine": 499,
         "startChar": 12,
