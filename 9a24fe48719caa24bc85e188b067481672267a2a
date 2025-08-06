@@ -1,0 +1,189 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61ef310_7f975fbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-06T20:50:39Z",
+      "side": 1,
+      "message": "Thanks Hao! I think we are close.",
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169d6546_be3fb87f",
+        "filename": "services/audiopolicy/tests/AudioPolicyTestManager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-06T20:50:39Z",
+      "side": 1,
+      "message": "With the current code, once `mSawNoCache` is set to `true`, it will never be toggled back to `false` by calls to `getNewOutputDevices` with `fromCache` set to `true`. If our concern is that `getNewOutputDevices` may be called with `fromCache` set to `true`, it would make sense to inverse what we are storing in `mSawNoCache` (and rename it to `mSawFromCache`).",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25082bb_eaeb7147",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-06T20:50:39Z",
+      "side": 1,
+      "message": "`HangupReevaluatesAndRestoresDevice` effectively tests the same scenario, so you can just move the validation checks for `sawNoCacheTriggered` to it and remove this test.",
+      "range": {
+        "startLine": 473,
+        "startChar": 31,
+        "endLine": 473,
+        "endChar": 59
+      },
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f0c8ad_608d0ee5",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-06T20:50:39Z",
+      "side": 1,
+      "message": "Please just use `mManager`, this cast makes no practical sense.",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 73
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bf6f496f_698865ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 474,
+                "startChar": 0,
+                "endLine": 477,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_FALSE(mManager-\u003esawNoCacheTriggered());\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 479,
+                "startChar": 0,
+                "endLine": 480,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_FALSE(mManager-\u003esawNoCacheTriggered());\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 482,
+                "startChar": 0,
+                "endLine": 483,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_TRUE(mManager-\u003esawNoCacheTriggered());\n"
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 486,
+                "startChar": 0,
+                "endLine": 488,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 541,
+                "startChar": 0,
+                "endLine": 542,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_TRUE(mManager-\u003esawNoCacheTriggered());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab8c8b9_46c5bb72",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-06T20:50:39Z",
+      "side": 1,
+      "message": "Please remove extra blank lines.",
+      "range": {
+        "startLine": 533,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fbc658c0_4be672d2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+              "range": {
+                "startLine": 534,
+                "startChar": 0,
+                "endLine": 536,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
