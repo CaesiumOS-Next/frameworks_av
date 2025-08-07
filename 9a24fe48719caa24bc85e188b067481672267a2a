@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "506aa7bb_e9a31e70",
+        "filename": "services/audiopolicy/tests/AudioPolicyTestManager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-07T02:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "169d6546_be3fb87f",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a25082bb_eaeb7147",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-08-06T20:50:39Z",
       "side": 1,
       "message": "`HangupReevaluatesAndRestoresDevice` effectively tests the same scenario, so you can just move the validation checks for `sawNoCacheTriggered` to it and remove this test.",
+      "range": {
+        "startLine": 473,
+        "startChar": 31,
+        "endLine": 473,
+        "endChar": 59
+      },
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6242ddb9_34ebda7e",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-07T02:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a25082bb_eaeb7147",
       "range": {
         "startLine": 473,
         "startChar": 31,
@@ -145,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaa5eb1a_2e279d7a",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-07T02:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81f0c8ad_608d0ee5",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 73
+      },
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cab8c8b9_46c5bb72",
@@ -182,6 +254,30 @@
           ]
         }
       ],
+      "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23646ec5_7cf3c8ff",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 4251980
+      },
+      "writtenOn": "2025-08-07T02:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cab8c8b9_46c5bb72",
+      "range": {
+        "startLine": 533,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 0
+      },
       "revId": "9a24fe48719caa24bc85e188b067481672267a2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
