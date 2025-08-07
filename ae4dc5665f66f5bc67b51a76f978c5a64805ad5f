@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8525e05c_c93c53db",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-07T18:41:57Z",
+      "side": 1,
+      "message": "I think this is not what we actually want to check here.\n\nIn the previous version of the patch (PS6) we had the following check to verify that after switching back to `NORMAL` mode we see `getNewOutputDevices` called with `fromCache \u003d\u003d false`:\n\n```\n    EXPECT_FALSE(testMgr-\u003esawNoCacheTriggered());\n    mManager-\u003esetPhoneState(AUDIO_MODE_NORMAL);\n    EXPECT_TRUE(testMgr-\u003esawNoCacheTriggered());\n```\n\nIn this version we are checking the opposite! That\u0027s strange. I believe, what we want to do is to use `EXPECT_FALSE(mManager-\u003esawFromCacheTriggered())` here. If in some of our previous operations `sawFromCacheTriggered` was already switched to `true` and that was expected, then we likely need to add a method in `AudioPolicyTestManager` to reset this observation, and use it before changing the phone state.",
+      "range": {
+        "startLine": 527,
+        "startChar": 0,
+        "endLine": 527,
+        "endChar": 51
+      },
+      "revId": "ae4dc5665f66f5bc67b51a76f978c5a64805ad5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7149b0b1_ee25d134",
+        "filename": "services/audiopolicy/tests/audiopolicymanager_tests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-07T18:41:57Z",
+      "side": 1,
+      "message": "Also, we probably want to move this check right after `setPhoneState` call.",
+      "range": {
+        "startLine": 527,
+        "startChar": 4,
+        "endLine": 527,
+        "endChar": 51
+      },
+      "revId": "ae4dc5665f66f5bc67b51a76f978c5a64805ad5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
