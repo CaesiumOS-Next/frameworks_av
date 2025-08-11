@@ -1752,22 +1752,45 @@ void AudioPolicyService::UidPolicy::dumpInternals(int fd) {
 // -----------  AudioPolicyService::SensorPrivacyService implementation ----------
 void AudioPolicyService::SensorPrivacyPolicy::registerSelf() {
     SensorPrivacyManager spm;
-    mSensorPrivacyEnabled = spm.isSensorPrivacyEnabled();
+    bool sensorPrivacyEnabled = spm.isSensorPrivacyEnabled();
     spm.addSensorPrivacyListener(this);
+
+    mSwMicPrivacyEnabled = sensorPrivacyEnabled ||
+      spm.isToggleSensorPrivacyEnabled(SensorPrivacyManager::TOGGLE_TYPE_SOFTWARE,
+              SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE);
+    mHwMicPrivacyEnabled = sensorPrivacyEnabled ||
+      spm.isToggleSensorPrivacyEnabled(SensorPrivacyManager::TOGGLE_TYPE_HARDWARE,
+              SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE);
+    spm.addToggleSensorPrivacyListener(this);
 }
 
 void AudioPolicyService::SensorPrivacyPolicy::unregisterSelf() {
     SensorPrivacyManager spm;
     spm.removeSensorPrivacyListener(this);
+    spm.removeToggleSensorPrivacyListener(this);
 }
 
 bool AudioPolicyService::SensorPrivacyPolicy::isSensorPrivacyEnabled() {
-    return mSensorPrivacyEnabled;
+    return mSwMicPrivacyEnabled || mHwMicPrivacyEnabled;
 }
 
 binder::Status AudioPolicyService::SensorPrivacyPolicy::onSensorPrivacyChanged(
-    int toggleType __unused, int sensor __unused, bool enabled) {
-    mSensorPrivacyEnabled = enabled;
+    int toggleType, int sensor, bool enabled) {
+    if (sensor == SensorPrivacyManager::TOGGLE_SENSOR_UNKNOWN) {
+        mSwMicPrivacyEnabled = enabled;
+        mHwMicPrivacyEnabled = enabled;
+    } else if (sensor == SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE) {
+        if (toggleType == SensorPrivacyManager::TOGGLE_TYPE_UNKNOWN) {
+            mSwMicPrivacyEnabled = enabled;
+            mHwMicPrivacyEnabled = enabled;
+        } else if (toggleType == SensorPrivacyManager::TOGGLE_TYPE_SOFTWARE) {
+            mSwMicPrivacyEnabled = enabled;
+        } else {
+            mHwMicPrivacyEnabled = enabled;
+        }
+    } else {
+        return binder::Status::ok();
+    }
     sp<AudioPolicyService> service = mService.promote();
     if (service != nullptr) {
         service->updateUidStates();

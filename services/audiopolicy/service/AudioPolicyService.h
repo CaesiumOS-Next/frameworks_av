@@ -592,7 +592,8 @@ private:
 
         private:
             wp<AudioPolicyService> mService;
-            std::atomic_bool mSensorPrivacyEnabled = false;
+            std::atomic_bool mSwMicPrivacyEnabled = false;
+            std::atomic_bool mHwMicPrivacyEnabled = false;
     };
 
     // Thread used to send audio config commands to audio flinger
