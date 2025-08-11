@@ -167,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "148b6c87_18c57b1d",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-11T23:29:38Z",
+      "side": 1,
+      "message": "\u003e inside callback onSensorPrivacyChanged we issue a binder call to get Mic sensor state\n\nI would not recommend using this approach because the service takes locks both when issuing these notifications and when querying sensor statuses, and by creating nested call chains there is always a possibility to create a deadlock condition. Instead, I would recommend to query the sensor state for hardware and software toggles separately during the initialization.\n\nAs for the member variables, since we currently use atomic variables, I\u0027m concerned with extra memory fences which are issued whenever we read or write such a variable. Since the privacy service sends `onSensorPrivacyChanged` for each update individually, we can only save on synchronization by using `memory_order_release` when updating the variable. But for reading in `isSensorPrivacyEnabled`, since we are always interested in the values of all variables, we could save some synchronization efforts by avoiding issuing a fence for every read operation.\n\nI think, for the most understandable approach, it\u0027s better to use 3 separate non-atomic variables here and protect them with a lock.",
+      "parentUuid": "2b765361_4c6474ed",
+      "range": {
+        "startLine": 1773,
+        "startChar": 8,
+        "endLine": 1773,
+        "endChar": 27
+      },
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baad2a65_95b60f7d",
         "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
         "patchSetId": 1
