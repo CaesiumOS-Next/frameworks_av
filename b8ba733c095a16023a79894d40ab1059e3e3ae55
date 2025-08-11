@@ -143,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b765361_4c6474ed",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 4227719
+      },
+      "writtenOn": "2025-08-11T22:54:41Z",
+      "side": 1,
+      "message": "Ack.\nThere\u0027re two ways to fix this:\n - is to introduce one more member var that records Mic state for different toggle type . New member is needed as the existing bool mMicPrivacyEnabled is initiated by a single binder call hence we don\u0027t have toggleType information we can\u0027t reuse it.\n - if we don\u0027t mind having an extra binder call but want to save a member variable .. then replace the bool with a uint_8, call the api with toggle type (twice, for sw/hw respectively) inside registerSelf() to initiate its value; Actually have a third option with extra binder calls by keep using bool type: inside callback onSensorPrivacyChanged we issue a binder call to get Mic sensor state as it does inside registerSelf. onSensorPrivacyChanged is a oneway api so probably the impact can be acceptable ...\nPlease suggest.",
+      "parentUuid": "79cfad67_b6414bb0",
+      "range": {
+        "startLine": 1773,
+        "startChar": 8,
+        "endLine": 1773,
+        "endChar": 27
+      },
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baad2a65_95b60f7d",
         "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
         "patchSetId": 1
