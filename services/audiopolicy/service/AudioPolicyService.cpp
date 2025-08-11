@@ -1754,20 +1754,30 @@ void AudioPolicyService::SensorPrivacyPolicy::registerSelf() {
     SensorPrivacyManager spm;
     mSensorPrivacyEnabled = spm.isSensorPrivacyEnabled();
     spm.addSensorPrivacyListener(this);
+    mMicPrivacyEnabled =
+      spm.isToggleSensorPrivacyEnabled(SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE);
+    spm.addToggleSensorPrivacyListener(this);
 }
 
 void AudioPolicyService::SensorPrivacyPolicy::unregisterSelf() {
     SensorPrivacyManager spm;
     spm.removeSensorPrivacyListener(this);
+    spm.removeToggleSensorPrivacyListener(this);
 }
 
 bool AudioPolicyService::SensorPrivacyPolicy::isSensorPrivacyEnabled() {
-    return mSensorPrivacyEnabled;
+    return (mSensorPrivacyEnabled || mMicPrivacyEnabled);
 }
 
 binder::Status AudioPolicyService::SensorPrivacyPolicy::onSensorPrivacyChanged(
-    int toggleType __unused, int sensor __unused, bool enabled) {
-    mSensorPrivacyEnabled = enabled;
+    int toggleType __unused, int sensor, bool enabled) {
+    if (sensor == -1) {
+        mSensorPrivacyEnabled = enabled;
+    } else if (sensor == SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE) {
+        mMicPrivacyEnabled = enabled;
+    } else {
+        return binder::Status::ok();
+    }
     sp<AudioPolicyService> service = mService.promote();
     if (service != nullptr) {
         service->updateUidStates();
