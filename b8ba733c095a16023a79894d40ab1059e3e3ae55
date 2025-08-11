@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "61ccd751_96252cf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4227719
+      },
+      "writtenOn": "2025-08-11T20:54:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "01774c2e_47e03816",
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c9dbcb5b_9a70f94e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -76,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e22c4b0_8345872d",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1769,
+      "author": {
+        "id": 4227719
+      },
+      "writtenOn": "2025-08-11T20:54:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "baa5292f_e4aeadc7",
+      "range": {
+        "startLine": 1769,
+        "startChar": 11,
+        "endLine": 1769,
+        "endChar": 12
+      },
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baad2a65_95b60f7d",
@@ -89,6 +131,30 @@
       "writtenOn": "2025-08-11T20:48:19Z",
       "side": 1,
       "message": "`TOGGLE_SENSOR_UNKNOWN`?",
+      "range": {
+        "startLine": 1774,
+        "startChar": 18,
+        "endLine": 1774,
+        "endChar": 20
+      },
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33371740_a2d8bded",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1774,
+      "author": {
+        "id": 4227719
+      },
+      "writtenOn": "2025-08-11T20:54:54Z",
+      "side": 1,
+      "message": "Ack \u0026 thanks. Didn\u0027t find it on android-14 that\u0027s my active working version :)",
+      "parentUuid": "baad2a65_95b60f7d",
       "range": {
         "startLine": 1774,
         "startChar": 18,
