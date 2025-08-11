@@ -120,6 +120,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79cfad67_b6414bb0",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-11T21:03:31Z",
+      "side": 1,
+      "message": "Are the toggle types mutually exclusive or not? From the logs that you have provided, it looks like they both can be used. Then what happens if first we receive a notification that privacy was enabled on \"software\" toggle but then we receive a notification that privacy was disabled on \"hardware\" toggle? With the current code this will turn privacy off. However looking at the logic here:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/input/KeyboardLedController.java;l\u003d110;drc\u003d7bd2af8d8fa0280ca44738212f0a5b76b1583cc7\n\nand here:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/sensorprivacy/SensorPrivacyService.java;l\u003d1282;drc\u003d61197364367c9e404c7da6900658f1b16c42d0da\n\nit seems that if any of toggles is enabled, the privacy should be enabled.\n\nSo we probably need to make `mMicPrivacyEnabled` something like a bitfield where we have bits for each type of toggle.",
+      "range": {
+        "startLine": 1773,
+        "startChar": 8,
+        "endLine": 1773,
+        "endChar": 27
+      },
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baad2a65_95b60f7d",
         "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
         "patchSetId": 1
