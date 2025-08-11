@@ -3823,7 +3823,7 @@ status_t MediaCodec::dequeueOutputBuffer(
 }
 
 status_t MediaCodec::renderOutputBufferAndRelease(size_t index) {
-    ScopedTrace (ATRACE_TAG, "MediaCodec::renderOutputBufferAndRelease#native");
+    ScopedTrace trace(ATRACE_TAG, "MediaCodec::renderOutputBufferAndRelease#native");
     sp<AMessage> msg = new AMessage(kWhatReleaseOutputBuffer, this);
     msg->setSize("index", index);
     msg->setInt32("render", true);
