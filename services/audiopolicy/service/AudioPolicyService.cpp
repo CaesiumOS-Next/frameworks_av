@@ -1752,22 +1752,53 @@ void AudioPolicyService::UidPolicy::dumpInternals(int fd) {
 // -----------  AudioPolicyService::SensorPrivacyService implementation ----------
 void AudioPolicyService::SensorPrivacyPolicy::registerSelf() {
     SensorPrivacyManager spm;
-    mSensorPrivacyEnabled = spm.isSensorPrivacyEnabled();
     spm.addSensorPrivacyListener(this);
+    spm.addToggleSensorPrivacyListener(this);
+
+    bool sensorPrivacyEnabled = spm.isSensorPrivacyEnabled();
+    bool swMicPrivacyEnabled = spm.isToggleSensorPrivacyEnabled(SensorPrivacyManager::TOGGLE_TYPE_SOFTWARE,
+                  SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE);
+    bool hwMicPrivacyEnabled = spm.isToggleSensorPrivacyEnabled(SensorPrivacyManager::TOGGLE_TYPE_HARDWARE,
+                  SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE);
+    {
+        audio_utils::lock_guard _l(mMutex);
+        mSwMicPrivacyEnabled = sensorPrivacyEnabled || swMicPrivacyEnabled;
+        mHwMicPrivacyEnabled = sensorPrivacyEnabled || hwMicPrivacyEnabled;
+    }
 }
 
 void AudioPolicyService::SensorPrivacyPolicy::unregisterSelf() {
     SensorPrivacyManager spm;
     spm.removeSensorPrivacyListener(this);
+    spm.removeToggleSensorPrivacyListener(this);
 }
 
 bool AudioPolicyService::SensorPrivacyPolicy::isSensorPrivacyEnabled() {
-    return mSensorPrivacyEnabled;
+    return mSwMicPrivacyEnabled || mHwMicPrivacyEnabled;
 }
 
 binder::Status AudioPolicyService::SensorPrivacyPolicy::onSensorPrivacyChanged(
-    int toggleType __unused, int sensor __unused, bool enabled) {
-    mSensorPrivacyEnabled = enabled;
+    int toggleType, int sensor, bool enabled) {
+
+    if (sensor == SensorPrivacyManager::TOGGLE_SENSOR_CAMERA) {
+        return binder::Status::ok();
+    }
+    {
+        audio_utils::lock_guard _l(mMutex);
+        if (sensor == SensorPrivacyManager::TOGGLE_SENSOR_UNKNOWN) {
+            mSwMicPrivacyEnabled = enabled;
+            mHwMicPrivacyEnabled = enabled;
+        } else if (sensor == SensorPrivacyManager::TOGGLE_SENSOR_MICROPHONE) {
+            if (toggleType == SensorPrivacyManager::TOGGLE_TYPE_UNKNOWN) {
+                mSwMicPrivacyEnabled = enabled;
+                mHwMicPrivacyEnabled = enabled;
+            } else if (toggleType == SensorPrivacyManager::TOGGLE_TYPE_SOFTWARE) {
+                mSwMicPrivacyEnabled = enabled;
+            } else {
+                mHwMicPrivacyEnabled = enabled;
+            }
+        }
+    }
     sp<AudioPolicyService> service = mService.promote();
     if (service != nullptr) {
         service->updateUidStates();
