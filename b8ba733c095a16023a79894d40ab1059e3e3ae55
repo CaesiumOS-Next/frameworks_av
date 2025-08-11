@@ -1,0 +1,102 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01774c2e_47e03816",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-11T20:48:19Z",
+      "side": 1,
+      "message": "Please add `Flag: EXEMPT bugfix`",
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9dbcb5b_9a70f94e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-11T20:48:19Z",
+      "side": 1,
+      "message": "Makes sense, please address comments.",
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa5292f_e4aeadc7",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1769,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-11T20:48:19Z",
+      "side": 1,
+      "message": "nit: Parentheses are not needed",
+      "range": {
+        "startLine": 1769,
+        "startChar": 11,
+        "endLine": 1769,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "564eedbc_026ebf52",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.cpp",
+              "range": {
+                "startLine": 1769,
+                "startChar": 0,
+                "endLine": 1770,
+                "endChar": 0
+              },
+              "replacement": "    return mSensorPrivacyEnabled || mMicPrivacyEnabled;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baad2a65_95b60f7d",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1774,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-11T20:48:19Z",
+      "side": 1,
+      "message": "`TOGGLE_SENSOR_UNKNOWN`?",
+      "range": {
+        "startLine": 1774,
+        "startChar": 18,
+        "endLine": 1774,
+        "endChar": 20
+      },
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
