@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d5abd1_acd28404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4227719
+      },
+      "writtenOn": "2025-08-12T21:09:37Z",
+      "side": 1,
+      "message": "@mnaganov@google.com Please let me know if anything is needed from my side. Also you\u0027ll update the google ticket once the patch is merged right?  Thank you for your great review support!",
+      "revId": "7d7496ccc89949819b96acc29f74e0fcb32dddee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
