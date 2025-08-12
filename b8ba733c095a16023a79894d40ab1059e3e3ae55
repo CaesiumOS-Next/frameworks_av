@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b4d4b3_2a563517",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 4227719
+      },
+      "writtenOn": "2025-08-12T13:02:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "148b6c87_18c57b1d",
+      "range": {
+        "startLine": 1773,
+        "startChar": 8,
+        "endLine": 1773,
+        "endChar": 27
+      },
+      "revId": "b8ba733c095a16023a79894d40ab1059e3e3ae55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baad2a65_95b60f7d",
