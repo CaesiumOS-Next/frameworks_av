@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efa6b66a_7025619f",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-12T16:40:37Z",
+      "side": 1,
+      "message": "These initializations should also be done under a lock (one you add thread safety annotations that will be flagged by the compiler).",
+      "range": {
+        "startLine": 1756,
+        "startChar": 0,
+        "endLine": 1756,
+        "endChar": 26
+      },
+      "revId": "39b86f6c4d28dc932166b98a284a70f9cc814981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040c7d50_3af1e820",
+        "filename": "services/audiopolicy/service/AudioPolicyService.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-12T16:40:37Z",
+      "side": 1,
+      "message": "Please add `GUARDED_BY(mMutex)` annotation for static checks.",
+      "range": {
+        "startLine": 596,
+        "startChar": 38,
+        "endLine": 596,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b5857910_13636a69",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyService.h",
+              "range": {
+                "startLine": 596,
+                "startChar": 0,
+                "endLine": 599,
+                "endChar": 0
+              },
+              "replacement": "            bool mSensorPrivacyEnabled GUARDED_BY(mMutex) \u003d false;\n            bool mSwMicPrivacyEnabled GUARDED_BY(mMutex) \u003d false;\n            bool mHwMicPrivacyEnabled GUARDED_BY(mMutex) \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "39b86f6c4d28dc932166b98a284a70f9cc814981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
