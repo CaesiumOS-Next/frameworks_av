@@ -73,6 +73,30 @@
       },
       "revId": "6a4f40da73874fa7d4ee3ffb6332788c202227b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0348d4ea_fd0b0458",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9220,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2025-08-13T12:02:09Z",
+      "side": 1,
+      "message": "Yes this is where it was failing.",
+      "parentUuid": "4f537f42_84a66bee",
+      "range": {
+        "startLine": 9220,
+        "startChar": 1,
+        "endLine": 9220,
+        "endChar": 29
+      },
+      "revId": "6a4f40da73874fa7d4ee3ffb6332788c202227b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
