@@ -16,6 +16,23 @@
       "message": "Hey Mikhail thanks for the review. All comments addressed.",
       "revId": "55e5285031a7abac9470f95f1c7df9ff8437cb24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b15ec1f_0d20baba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-13T17:30:05Z",
+      "side": 1,
+      "message": "Thank you Abdelrahman! I will merge this via internal `main` branch because direct committing via AOSP has been turned down.",
+      "revId": "55e5285031a7abac9470f95f1c7df9ff8437cb24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
