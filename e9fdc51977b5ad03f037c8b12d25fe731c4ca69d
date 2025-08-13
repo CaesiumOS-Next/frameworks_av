@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3cc20ef_1da41535",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2025-08-13T11:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6530d209_44791f49",
+      "revId": "e9fdc51977b5ad03f037c8b12d25fe731c4ca69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d78b4026_57dd822a",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-07-07T17:19:33Z",
       "side": 1,
       "message": "I believe, there is no target for this. Did you mean `CtsMediaAudioTestCases` with some filter clause?",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "e9fdc51977b5ad03f037c8b12d25fe731c4ca69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa62637_3d24eeda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2025-08-13T11:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d78b4026_57dd822a",
       "range": {
         "startLine": 12,
         "startChar": 6,
@@ -71,6 +113,30 @@
       "writtenOn": "2025-07-07T17:19:33Z",
       "side": 1,
       "message": "`auto`?",
+      "range": {
+        "startLine": 937,
+        "startChar": 8,
+        "endLine": 937,
+        "endChar": 35
+      },
+      "revId": "e9fdc51977b5ad03f037c8b12d25fe731c4ca69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad327c54_1bac9efa",
+        "filename": "include/media/VolumeShaper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2025-08-13T11:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e8d993_d2d66551",
       "range": {
         "startLine": 937,
         "startChar": 8,
