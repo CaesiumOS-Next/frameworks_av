@@ -16,6 +16,24 @@
       "message": "@mnaganov@google.com Please let me know if anything is needed from my side. Also you\u0027ll update the google ticket once the patch is merged right?  Thank you for your great review support!",
       "revId": "7d7496ccc89949819b96acc29f74e0fcb32dddee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcbe5810_a241bd07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-13T00:38:46Z",
+      "side": 1,
+      "message": "Thanks Chun! I will upload your CL for submission via internal `main` branch (submissions via AOSP have been curbed down), and once it get submitted the bug will be updated automatically.",
+      "parentUuid": "12d5abd1_acd28404",
+      "revId": "7d7496ccc89949819b96acc29f74e0fcb32dddee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
