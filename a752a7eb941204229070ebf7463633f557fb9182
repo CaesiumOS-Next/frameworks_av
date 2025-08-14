@@ -16,6 +16,47 @@
       "message": "+ Avi, could you take a look? It looks like an interesting corner case.",
       "revId": "a752a7eb941204229070ebf7463633f557fb9182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5605e9_be5412ff",
+        "filename": "services/camera/libcameraservice/common/CameraProviderManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1121338
+      },
+      "writtenOn": "2025-08-14T22:55:40Z",
+      "side": 1,
+      "message": "while this would work - I\u0027d still think we should look for a better solution if its possible. Is there a way for us to map usb device id \u003c-\u003e camera id ? If we knew that, we wouldn\u0027t need to tear down all devices and the provider, only to start it again. This was suggested when lazy external USB hal support was added, but I don\u0027t think we got to it. Robin, lavor-Valentin, would you have an idea ? Or know who may  ?\n\nThank you",
+      "range": {
+        "startLine": 667,
+        "startChar": 6,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "48c4d76b_381abcad",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/camera/libcameraservice/common/CameraProviderManager.cpp",
+              "range": {
+                "startLine": 667,
+                "startChar": 0,
+                "endLine": 667,
+                "endChar": 0
+              },
+              "replacement": "        // TODO(b/329146788): Map usb device id to camera id to avoid tear down\n        // all devices.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a752a7eb941204229070ebf7463633f557fb9182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
