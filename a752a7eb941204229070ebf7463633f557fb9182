@@ -57,6 +57,30 @@
       ],
       "revId": "a752a7eb941204229070ebf7463633f557fb9182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e90b5a6_9951cfd1",
+        "filename": "services/camera/libcameraservice/common/CameraProviderManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1045544
+      },
+      "writtenOn": "2025-08-15T12:05:44Z",
+      "side": 1,
+      "message": "IIUC this patch might sometimes keep the HAL running as long as there\u0027s any USB device at all plugged in.\n\n- Without trying to map USB devices to camera IDs - would it be straightforward enough to just have the provider asynchronously report when it\u0027s not managing any cameras any more? So\n  - When device is attached, always try to start the provider\n  - When device is detached, do nothing until the provider comes back with `cameraDeviceStatusChange`\n\n- I\u0027m not sure whether the team is actively supporting the area any more (I know they would be unhappy to lose the memory optimisation from having a lazy hal, but not sure if there is motivation to fix the case of unplugging 1/2 plugged cameras)",
+      "parentUuid": "6b5605e9_be5412ff",
+      "range": {
+        "startLine": 667,
+        "startChar": 6,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "revId": "a752a7eb941204229070ebf7463633f557fb9182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
