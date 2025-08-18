@@ -566,8 +566,8 @@ Status TrackHandle::getTimestamp(media::AudioTimestampInternal* timestamp,
         return Status::ok();
     }
 
-    // restrict position modulo INT_MAX to avoid integer sanitization abort
-    legacy.mPosition &= INT_MAX;
+    // restrict position modulo INT64_MAX to avoid integer sanitization abort
+    legacy.mPosition &= INT64_MAX;
 
     *timestamp = legacy2aidl_AudioTimestamp_AudioTimestampInternal(legacy).value();
     return Status::ok();
