@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cba6fb_24d15e3b",
+        "filename": "media/libstagefright/MediaSync.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1223894
+      },
+      "writtenOn": "2025-08-18T08:10:05Z",
+      "side": 1,
+      "message": "Extra spaces",
+      "revId": "fd97bf50548105e10b73c8a02b71e65bdae5bb57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
