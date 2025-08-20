@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df4ee856_f898d6e7",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-20T15:47:38Z",
+      "side": 1,
+      "message": "Hi Aiugo!\n\nCould you please clarify on this: the `mPosition` has `uint32_t` type (see below). So when you are applying a 64-bit mask to it, the mask has to be truncated to fit 32-bits. Which 32-bit mask are you aiming to obtain? Maybe it can be expressed directly using 32-bit constants?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudioclient/include/media/AudioTimestamp.h;l\u003d33;drc\u003d5c68943239be52a3bb6d435239500b4c747a490a\n\n```c++\nclass AudioTimestamp {\npublic:\n...\n    uint32_t        mPosition; // a frame position in AudioTrack::getPosition() units\n...\n};\n```",
+      "range": {
+        "startLine": 570,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 40
+      },
+      "revId": "22f105b8a86e4bdd066fc11bf34a3f80e874615f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
