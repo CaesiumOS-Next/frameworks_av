@@ -97,6 +97,30 @@
       },
       "revId": "6a4f40da73874fa7d4ee3ffb6332788c202227b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca86e797_68839e4a",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9220,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-08-20T01:09:28Z",
+      "side": 1,
+      "message": "The code has been changed as of 25Q3 (no longer uses SortedVector but set, among other things) as part of an internal modernization and clean-up.  I am not sure if the problem still manifests itself.  Please wait a few weeks until the 25Q3 release to AOSP is out to recheck, thanks!\n\nIt is curious how this problem only appears on the RecordThread.",
+      "parentUuid": "0348d4ea_fd0b0458",
+      "range": {
+        "startLine": 9220,
+        "startChar": 1,
+        "endLine": 9220,
+        "endChar": 29
+      },
+      "revId": "6a4f40da73874fa7d4ee3ffb6332788c202227b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
