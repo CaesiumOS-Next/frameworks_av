@@ -64,6 +64,30 @@
       },
       "revId": "ffb0667344aca72be72ad4e60f333fc77c97b9f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b100837b_364ef7f5",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2025-08-20T05:34:52Z",
+      "side": 1,
+      "message": "this change might have solved the previous problem\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/2635069",
+      "parentUuid": "197e3dd0_f57242e9",
+      "range": {
+        "startLine": 570,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 34
+      },
+      "revId": "ffb0667344aca72be72ad4e60f333fc77c97b9f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
