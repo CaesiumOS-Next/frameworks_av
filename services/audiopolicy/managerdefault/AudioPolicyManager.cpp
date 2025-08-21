@@ -8404,7 +8404,15 @@ float AudioPolicyManager::computeVolume(IVolumeCurves &curves,
     // speaker is part of the select devices
     // - if music is playing, always limit the volume to current music volume,
     // with a minimum threshold at -36dB so that notification is always perceived.
-    if (!Intersection(deviceTypes,
+    bool isTvPlatform = false;
+    char value[PROP_VALUE_MAX] = {0};
+    property_get("ro.build.characteristics", value, NULL);
+    if(strstr(value, "tv")) {
+        isTvPlatform = true;
+    } else {
+        isTvPlatform = false;
+    }
+    if (!isTvPlatform && !Intersection(deviceTypes,
             {AUDIO_DEVICE_OUT_BLUETOOTH_A2DP, AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES,
              AUDIO_DEVICE_OUT_WIRED_HEADSET, AUDIO_DEVICE_OUT_WIRED_HEADPHONE,
              AUDIO_DEVICE_OUT_USB_HEADSET, AUDIO_DEVICE_OUT_HEARING_AID,
