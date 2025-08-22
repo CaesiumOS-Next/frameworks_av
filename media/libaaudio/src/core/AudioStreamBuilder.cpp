@@ -193,6 +193,18 @@ aaudio_result_t AudioStreamBuilder::build(AudioStream** streamPtr) {
         allowMMap = false;
     }
 
+    if (((getUsage() == AAUDIO_SYSTEM_USAGE_EMERGENCY )|| (getUsage() == AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT) || (getUsage() == AAUDIO_SYSTEM_USAGE_VEHICLE_STATUS) || (getUsage() == AAUDIO_SYSTEM_USAGE_SAFETY)) &&
+        getPerformanceMode() == AAUDIO_PERFORMANCE_MODE_LOW_LATENCY) {
+        ALOGD("%s() MMAP not used because usage: %d and perf: "
+              "AAUDIO_PERFORMANCE_MODE_LOW_LATENCY.",
+               __func__, getUsage());
+        allowMMap = false;
+        return AAUDIO_ERROR_ILLEGAL_ARGUMENT;
+	}
+    //|| AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT ||
+       //  AAUDIO_SYSTEM_USAGE_VEHICLE_STATUS || AAUDIO_SYSTEM_USAGE_SAFETY
+
+
     if (!allowMMap && !allowLegacy) {
         ALOGE("%s() no backend available: neither MMAP nor legacy path are allowed", __func__);
         return AAUDIO_ERROR_ILLEGAL_ARGUMENT;
