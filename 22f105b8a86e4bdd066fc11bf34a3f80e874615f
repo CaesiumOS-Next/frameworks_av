@@ -46,6 +46,30 @@
       },
       "revId": "22f105b8a86e4bdd066fc11bf34a3f80e874615f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fcbe7e5_f1a993e7",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-22T17:04:00Z",
+      "side": 1,
+      "message": "`INT_MAX` is `0x7FFFFFFF`, while `UINT_MAX` is `0xFFFFFFFF`. If we apply `\u0026 0xFFFFFFFF` mask to any 32-bit number that will give us the same number 😊\nMaybe we can remove this restriction completely because the conversion code has been updated since. The old version (from Android U) of aidl2legacy_AudioTimestampInternal_AudioTimestamp was like this:\n\n```c++\nConversionResult\u003cmedia::AudioTimestampInternal\u003e\nlegacy2aidl_AudioTimestamp_AudioTimestampInternal(const AudioTimestamp\u0026 legacy) {\n    media::AudioTimestampInternal aidl;\n\u003e   aidl.position \u003d VALUE_OR_RETURN(convertIntegral\u003cint32_t\u003e(legacy.mPosition));\n    aidl.sec \u003d VALUE_OR_RETURN(convertIntegral\u003cint64_t\u003e(legacy.mTime.tv_sec));\n    aidl.nsec \u003d VALUE_OR_RETURN(convertIntegral\u003cint32_t\u003e(legacy.mTime.tv_nsec));\n    return aidl;\n}\n```\n\nNote the use of `int32_t` for the position.\n\nNow it\u0027s like this:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/av/media/libaudioclient/AidlConversion.cpp;l\u003d531;drc\u003dc5f378e835c9278587c9d00c84e51ef38fdaf4a6\n```c++\nConversionResult\u003cmedia::AudioTimestampInternal\u003e\nlegacy2aidl_AudioTimestamp_AudioTimestampInternal(const AudioTimestamp\u0026 legacy) {\n    media::AudioTimestampInternal aidl;\n\u003e   aidl.position \u003d VALUE_OR_RETURN(convertIntegral\u003cint64_t\u003e(legacy.mPosition));\n    aidl.sec \u003d VALUE_OR_RETURN(convertIntegral\u003cint64_t\u003e(legacy.mTime.tv_sec));\n    aidl.nsec \u003d VALUE_OR_RETURN(convertIntegral\u003cint32_t\u003e(legacy.mTime.tv_nsec));\n    return aidl;\n```\n\nAnd it actually was me who updated the conversion :) Since `mPosition` is still a 32-bit field, any of its values will fit into `int64_t`. So yes, we can just remove that restriction.",
+      "parentUuid": "d9edfb97_9effa3a9",
+      "range": {
+        "startLine": 570,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 40
+      },
+      "revId": "22f105b8a86e4bdd066fc11bf34a3f80e874615f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
