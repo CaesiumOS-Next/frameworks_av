@@ -3786,6 +3786,17 @@ status_t MPEG4Writer::Track::threadEntry() {
                     err = copyCodecSpecificData((const uint8_t *)buffer->data() + buffer->range_offset(),
                             buffer->range_length());
                 }
+                if (mIsApv) {
+                    const void *data = NULL;
+                    size_t size = 0;
+                    uint32_t type = 0;
+                    mMeta->findData(kKeyAPVC, &type, &data, &size);
+                    if (data != NULL &&
+                            copyCodecSpecificData((uint8_t *)data, size) == OK) {
+                        mGotAllCodecSpecificData = true;
+                        err = OK;
+                    }
+                }
                 if (mIsDovi) {
                     err = getDolbyVisionProfile();
                     if(err == OK) {
