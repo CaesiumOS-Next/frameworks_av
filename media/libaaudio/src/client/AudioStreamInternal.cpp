@@ -687,6 +687,8 @@ aaudio_result_t AudioStreamInternal::onTimestampService(AAudioServiceMessage *me
 
 aaudio_result_t AudioStreamInternal::onTimestampHardware(AAudioServiceMessage *message) {
     Timestamp timestamp(message->timestamp.position, message->timestamp.timestamp);
+    ALOGI("%s: timestamp says framePosition = %jd at nanoTime %jd",
+          __func__, timestamp.getPosition(), timestamp.getNanoseconds());
     mAtomicInternalTimestamp.write(timestamp);
     return AAUDIO_OK;
 }
