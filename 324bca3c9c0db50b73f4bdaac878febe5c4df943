@@ -16,6 +16,23 @@
       "message": "@hunga@google.com Andy, are you OK with the last revision?",
       "revId": "324bca3c9c0db50b73f4bdaac878febe5c4df943",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a0d641_27716a0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-08-25T16:21:08Z",
+      "side": 1,
+      "message": "I am okay with it.  All I ask is that amlogic checks this with overnight playback.  The original bug b/297141696 (from partner amlogic) indicates there was some math after this that was potentially overflowing, which is why this was restricted smaller than uint32_t.  But I don\u0027t know what that is. See https://android-review.googlesource.com/c/platform/frameworks/av/+/2827570.   Adding Dorin for context.",
+      "revId": "324bca3c9c0db50b73f4bdaac878febe5c4df943",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
