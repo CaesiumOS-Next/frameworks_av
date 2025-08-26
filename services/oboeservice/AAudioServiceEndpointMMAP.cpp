@@ -423,7 +423,7 @@ aaudio_result_t AAudioServiceEndpointMMAP::getFreeRunningPosition(int64_t *posit
     }
     struct audio_mmap_position position;
     status_t status = mMmapStream->getMmapPosition(&position);
-    ALOGV("%s() status= %d, pos = %d, nanos = %lld\n",
+    ALOGI("%s() status= %d, pos = %d, nanos = %lld\n",
           __func__, status, position.position_frames, (long long) position.time_nanoseconds);
     if (status == INVALID_OPERATION) {
         // The HAL can return INVALID_OPERATION when the position is UNKNOWN.

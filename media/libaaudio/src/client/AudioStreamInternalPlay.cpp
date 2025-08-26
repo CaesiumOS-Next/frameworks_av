@@ -132,6 +132,7 @@ void AudioStreamInternalPlay::prepareBuffersForStop() {
         // Sleep for one extra burst as a safety margin because the IsochronousClockModel
         // is not perfectly accurate.
         int64_t positionInEmptyMemory = getFramesWritten() + getFramesPerBurst();
+        ALOGD("%s() positionInEmptyMemory = %jd", __func__, positionInEmptyMemory);
         int64_t timeAllConsumed = mClockModel.convertPositionToTime(positionInEmptyMemory);
         int64_t durationAllConsumed = timeAllConsumed - AudioClock::getNanoseconds();
         // Prevent sleeping for too long.
@@ -154,6 +155,7 @@ void AudioStreamInternalPlay::prepareBuffersForStop() {
         // This code assumes that timestamps are accurate.
         Timestamp timestamp = mAtomicInternalTimestamp.read();
         int64_t dacPosition = timestamp.getPosition();
+        ALOGD("%s() dacPosition = %jd", __func__, dacPosition);
         int64_t hardwareReadTime = mClockModel.convertPositionToTime(dacPosition);
         int64_t hardwareLatencyNanos = timestamp.getNanoseconds() - hardwareReadTime;
         ALOGD("%s() hardwareLatencyNanos = %lld", __func__,
