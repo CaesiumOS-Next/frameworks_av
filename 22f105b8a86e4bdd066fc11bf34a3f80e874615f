@@ -94,6 +94,30 @@
       },
       "revId": "22f105b8a86e4bdd066fc11bf34a3f80e874615f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c51389a_0e0d1f73",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2025-08-26T02:35:13Z",
+      "side": 1,
+      "message": "hi Mikhail Naganov \nCan the uint32_t here be modified to int64? Unify the type of psoition to int64.\nclass AudioTimestamp {\npublic:\n...\n    uint32_t        mPosition; // a frame position in AudioTrack::getPosition() units\n...\n};",
+      "parentUuid": "83183050_76a8dc14",
+      "range": {
+        "startLine": 570,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 40
+      },
+      "revId": "22f105b8a86e4bdd066fc11bf34a3f80e874615f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
