@@ -16,6 +16,24 @@
       "message": "This would crash, because the regexp change at L:131 grants below line as valid\n\n```\nV(AUDIO_DEVICE_OUT_DEFAULT, AUDIO_DEVICE_BIT_DEFAULT)\n```\n\nand AUDIO_DEVICE_BIT_DEFAULT can\u0027t be converted to integer",
       "revId": "546648826e85d991612de9f0fc5be90f7491b85d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "304bf962_775a6f04",
+        "filename": "services/audiopolicy/engineconfigurable/tools/capBuildCommonTypesStructureFile.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-08-26T11:57:16Z",
+      "side": 1,
+      "message": "It does not crash on my setup since I do have the patch \"capengine: fix output device selection\"  \nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3622817\n\nNormally it is merged internally according to Mikhail\n\n\"It\u0027s in the main branch since May 13, please see https://googleplex-android.googlesource.com/platform/frameworks/av/+/f51e53fa4393beece98b1c501530e8c336314dfc\"",
+      "parentUuid": "51208658_b38d0b4c",
+      "revId": "546648826e85d991612de9f0fc5be90f7491b85d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
