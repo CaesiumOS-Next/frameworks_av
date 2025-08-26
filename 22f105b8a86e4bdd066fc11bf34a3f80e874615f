@@ -118,6 +118,30 @@
       },
       "revId": "22f105b8a86e4bdd066fc11bf34a3f80e874615f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe904f9c_9f4d2edc",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-08-26T16:33:56Z",
+      "side": 1,
+      "message": "It should be IMO, but it\u0027s not a trivial change because for it to be useful we also need to update all the intermediate storage and functions where it is used, for example `AudioTrack::getPosition()`: https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/media/libaudioclient/AudioTrack.cpp;l\u003d1521;drc\u003d64cfcab78db47a5941beb64353bf4eb8b59a89d3\n\nJust changing the type of that field will not give much improvement.",
+      "parentUuid": "6c51389a_0e0d1f73",
+      "range": {
+        "startLine": 570,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 40
+      },
+      "revId": "22f105b8a86e4bdd066fc11bf34a3f80e874615f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
