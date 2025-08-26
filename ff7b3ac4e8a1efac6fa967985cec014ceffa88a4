@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57797d7c_ff5c44cf",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8411,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2025-08-26T17:07:21Z",
+      "side": 0,
+      "message": "From the original logic, this attenuation logic is only applied when headset is one of the selected device. On TV, it looks like headset is selected here. In that case, to avoid sound burst in user\u0027s ear, the attenuation logic should be applied.",
+      "range": {
+        "startLine": 8407,
+        "startChar": 8,
+        "endLine": 8411,
+        "endChar": 51
+      },
+      "revId": "ff7b3ac4e8a1efac6fa967985cec014ceffa88a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
