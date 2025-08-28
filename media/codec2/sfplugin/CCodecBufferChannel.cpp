@@ -85,6 +85,10 @@ namespace {
 
 constexpr size_t kSmoothnessFactor = 4;
 
+// Reference GraphicsTracker @kMaxDequeueMax
+// This max dequeue slots to let surface wouldn't IGBP::extendSlotCount
+constexpr size_t kMaxDequeueCount = ::android::BufferQueueDefs::NUM_BUFFER_SLOTS - 2;
+
 // This is for keeping IGBP's buffer dropping logic in legacy mode other
 // than making it non-blocking. Do not change this value.
 const static size_t kDequeueTimeoutNs = 0;
@@ -2591,15 +2595,12 @@ bool CCodecBufferChannel::handleWork(
             inputFormat->setInt32(KEY_NUM_SLOTS, input->numSlots);
         }
     }
-    size_t numOutputSlots = 0;
     uint32_t reorderDepth = 0;
-    bool outputBuffersChanged = false;
     if (newReorderKey || newReorderDepth || needMaxDequeueBufferCountUpdate) {
         Mutexed<Output>::Locked output(mOutput);
         if (!output->buffers) {
             return false;
         }
-        numOutputSlots = output->numSlots;
         if (newReorderKey) {
             output->buffers->setReorderKey(newReorderKey.value());
         }
@@ -2607,33 +2608,64 @@ bool CCodecBufferChannel::handleWork(
             output->buffers->setReorderDepth(newReorderDepth.value());
         }
         reorderDepth = output->buffers->getReorderDepth();
-        if (newOutputDelay) {
-            output->outputDelay = newOutputDelay.value();
-            numOutputSlots = newOutputDelay.value() + kSmoothnessFactor;
-            if (output->numSlots < numOutputSlots) {
-                output->numSlots = numOutputSlots;
-                if (output->buffers->isArrayMode()) {
-                    OutputBuffersArray *array =
-                        (OutputBuffersArray *)output->buffers.get();
-                    ALOGV("[%s] onWorkDone: growing output buffer array to %zu",
-                          mName, numOutputSlots);
-                    array->grow(numOutputSlots);
-                    outputBuffersChanged = true;
+    }
+    if (needMaxDequeueBufferCountUpdate) {
+        bool outputBuffersChanged = false;
+        int maxDequeueCount = 0;
+        {
+            Mutexed<Output>::Locked output(mOutput);
+            size_t numOutputSlots = output->numSlots;
+            if (newOutputDelay) {
+                numOutputSlots = newOutputDelay.value() + kSmoothnessFactor;
+            }
+            maxDequeueCount = numOutputSlots + reorderDepth + mRenderingDepth;
+
+            // GraphicBufferProducer supports unlimited slots with flag:
+            // WB_UNLIMITED_SLOTS, but GraphicsTracker doesn't support it.
+            //
+            // If the setted max dequeue count is greater than NUM_BUFFER_SLOTS,
+            // GBP extends slots count via surface->setMaxDequeuedBufferCount().
+            // Then IGBP::dequeueBuffer and IGBP::attachBuffer would return a
+            // slot which maybe greater than NUM_BUFFER_SLOTS.
+            // It causes GraphicsTracker CHECK(slot<NUM_BUFFER_SLOTS) FAIL.
+            //
+            // Don't extend BufferQueueProducer slots more than NUM_BUFFER_SLOTS.
+            if (maxDequeueCount > kMaxDequeueCount) {
+                ALOGW("[%s] onWorkDone: updating max output delay %d exceeds max allowed %zu",
+                        mName, maxDequeueCount, kMaxDequeueCount);
+                if (newOutputDelay) {
+                    newOutputDelay = kMaxDequeueCount -
+                            (reorderDepth + mRenderingDepth + kSmoothnessFactor);
+                }
+                maxDequeueCount  = kMaxDequeueCount;
+            }
+
+            if (newOutputDelay && newOutputDelay > 0) {
+                output->outputDelay = newOutputDelay.value();
+                numOutputSlots = newOutputDelay.value() + kSmoothnessFactor;
+                if (output->numSlots < numOutputSlots) {
+                    output->numSlots = numOutputSlots;
+                    if (output->buffers->isArrayMode()) {
+                        OutputBuffersArray *array =
+                            (OutputBuffersArray *)output->buffers.get();
+                        ALOGV("[%s] onWorkDone: growing output buffer array to %zu",
+                              mName, numOutputSlots);
+                        array->grow(numOutputSlots);
+                        outputBuffersChanged = true;
+                    }
                 }
             }
         }
-        numOutputSlots = output->numSlots;
-    }
-    if (outputBuffersChanged) {
-        mCCodecCallback->onOutputBuffersChanged();
-    }
-    if (needMaxDequeueBufferCountUpdate) {
-        int maxDequeueCount = 0;
+        if (outputBuffersChanged) {
+            mCCodecCallback->onOutputBuffersChanged();
+        }
+
         {
             Mutexed<OutputSurface>::Locked output(mOutputSurface);
-            maxDequeueCount = output->maxDequeueBuffers =
-                    numOutputSlots + reorderDepth + mRenderingDepth;
+            output->maxDequeueBuffers = maxDequeueCount;
             if (output->surface) {
+                ALOGV("[%s] onWorkDone: updating max output delay %d",
+                        mName, output->maxDequeueBuffers);
                 output->surface->setMaxDequeuedBufferCount(output->maxDequeueBuffers);
             }
         }
