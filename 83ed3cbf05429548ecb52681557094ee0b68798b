@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f7efd0e_388c8a30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-01T09:07:44Z",
+      "side": 1,
+      "message": "please indicate a buganizer issue tracking the problem this CL is fixing and describe how this is fixing the issue.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 90
+      },
+      "revId": "83ed3cbf05429548ecb52681557094ee0b68798b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
