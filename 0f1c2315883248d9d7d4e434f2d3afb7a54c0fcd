@@ -16,6 +16,23 @@
       "message": "Hi, aosp team. Could you please help take a look at this?",
       "revId": "0f1c2315883248d9d7d4e434f2d3afb7a54c0fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4621fb3f_ff2cb807",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2025-09-02T18:06:59Z",
+      "side": 1,
+      "message": "GraphicsTracker does not accept maxDequeue greater than kMaxDequeueMax.\nSo you may not see the crash by CHECK()\n\nBut GraphicsTracker rejects to configure the value, though.\nCould you let us know what you want?",
+      "revId": "0f1c2315883248d9d7d4e434f2d3afb7a54c0fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
