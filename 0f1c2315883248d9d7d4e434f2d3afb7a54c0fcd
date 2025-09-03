@@ -50,6 +50,24 @@
       "message": "This is a limitation of GraphicsTracker, currently.\n(And it should be addressed and aligned to Graphics system.)\nHowever you cannot set maxDequeue over the current limit.\nSo crashing by CHECK() does not happen.\n\nWhat do you want to achieve with this CL?",
       "revId": "0f1c2315883248d9d7d4e434f2d3afb7a54c0fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f7bbf21_6c3491b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-09-03T08:58:52Z",
+      "side": 1,
+      "message": "\u003eThis is a limitation of GraphicsTracker, currently.\n\u003e(And it should be addressed and aligned to Graphics system.)\n\nYes, I think so. Could please you let me try to impl GraphicsTracker\nsupport unlimited slot with flag(`WB_UNLIMITED_SLOTS`)?\n\n\u003e However you cannot set maxDequeue over the current limit.\n\u003e So crashing by CHECK() does not happen.\n\nYes, It\u0027s designed the max support is maxDequeue.\nBut CCodecBufferChannel supports HAL codec update `outputDelay` here: media/codec2/sfplugin/CCodecBufferChannel.cpp:2538\n\nA new maxDequeueCount would be calcuated based on the `outputDelay`\nand set it to BufferQueueProducer via `output-\u003esurface-\u003esetMaxDequeuedBufferCount`: media/codec2/sfplugin/CCodecBufferChannel.cpp:2364\n\nIf the HAL codec update a `outputDelay` which is greater than the maxDequeue,\nAnd there is no valid-check, it would be setted to BufferQueueProducer which is\nsupported unlimited slots.\n\nNext, it\u0027s possible get a slot which is greater than max from BufferQueueProducer.\n\nThere is a issue:431710660 in our devices, the hal codec has some post-process which update delay then max.\n\n\u003e What do you want to achieve with this CL?\n\nThis CL add valid-check to avoid to extend BufferQueueProducer slot count which is greater than max.",
+      "parentUuid": "218fa2b1_1a7aa397",
+      "revId": "0f1c2315883248d9d7d4e434f2d3afb7a54c0fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
