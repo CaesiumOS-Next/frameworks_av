@@ -68,6 +68,42 @@
       "parentUuid": "218fa2b1_1a7aa397",
       "revId": "0f1c2315883248d9d7d4e434f2d3afb7a54c0fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c40340b7_90193b23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-09-03T09:27:01Z",
+      "side": 1,
+      "message": "Hi, Thanks for you review.\n\nYes, GraphicsTracker would reject configure a value which is greater than max,\nBut BufferQueueProducer wouldn\u0027t reject it due to it supports unlimit slots with flag(WB_UNLIMITED_SLOTS).\nIf BufferQueueProducer is setted the value, it\u0027s possible GraphicsTracker dequeueBuffer a slot which is greater then max.\n\nThe configure callstack:\nHALCodec -\u003e handleWork(update outputDelay) -\u003e surface setMaxDequeuedBufferCount\n-\u003e GraphicsBufferProducer extendSlotCount if need with flag(WB_UNLIMITED_SLOTS)\n```\n2420 int Surface::setMaxDequeuedBufferCount(int maxDequeuedBuffers) {\n...\n2425 #if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(WB_UNLIMITED_SLOTS)\n...\n2439     if (maxDequeuedBuffers \u003e (int)mSlots.size()) {\n2440         int newSlotCount \u003d minUndequeuedBuffers + maxDequeuedBuffers;\n2441         err \u003d mGraphicBufferProducer-\u003eextendSlotCount(newSlotCount);\n...\n```",
+      "parentUuid": "4621fb3f_ff2cb807",
+      "revId": "0f1c2315883248d9d7d4e434f2d3afb7a54c0fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "669bb18e_e627db82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-09-03T09:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f7bbf21_6c3491b5",
+      "revId": "0f1c2315883248d9d7d4e434f2d3afb7a54c0fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
