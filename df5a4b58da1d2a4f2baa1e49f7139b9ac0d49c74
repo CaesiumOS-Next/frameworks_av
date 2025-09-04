@@ -132,6 +132,30 @@
       },
       "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4164cee9_1ed4e2fe",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-04T16:43:09Z",
+      "side": 1,
+      "message": "From my POV, it\u0027s all OK but it seems that Eric did not have time to give it another look. Since we anyway need to submit this via our internal `main` branch, let me upload you CL for an internal review with Eric.",
+      "parentUuid": "dd36c55c_5a7a2635",
+      "range": {
+        "startLine": 2627,
+        "startChar": 31,
+        "endLine": 2627,
+        "endChar": 37
+      },
+      "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
