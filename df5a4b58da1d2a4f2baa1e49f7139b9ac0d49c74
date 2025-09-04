@@ -108,6 +108,30 @@
       },
       "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd36c55c_5a7a2635",
+        "filename": "services/audiopolicy/service/AudioPolicyService.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 3579501
+      },
+      "writtenOn": "2025-09-04T08:27:46Z",
+      "side": 1,
+      "message": "Hi @elaurent@google.com, @mnaganov@google.com, do we miss anything here or are we good to proceed with approval and submission?",
+      "parentUuid": "1d4d797e_8b356449",
+      "range": {
+        "startLine": 2627,
+        "startChar": 31,
+        "endLine": 2627,
+        "endChar": 37
+      },
+      "revId": "df5a4b58da1d2a4f2baa1e49f7139b9ac0d49c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
