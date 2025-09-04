@@ -154,7 +154,8 @@ void AudioStreamInternalPlay::prepareBuffersForStop() {
         // This code assumes that timestamps are accurate.
         Timestamp timestamp = mAtomicInternalTimestamp.read();
         int64_t dacPosition = timestamp.getPosition();
-        int64_t hardwareReadTime = mClockModel.convertPositionToTime(dacPosition);
+        int64_t hardwareReadTime = mClockModel.convertPositionToTime(
+                dacPosition - mFramesOffsetFromService);
         int64_t hardwareLatencyNanos = timestamp.getNanoseconds() - hardwareReadTime;
         ALOGD("%s() hardwareLatencyNanos = %lld", __func__,
               (long long) hardwareLatencyNanos);
