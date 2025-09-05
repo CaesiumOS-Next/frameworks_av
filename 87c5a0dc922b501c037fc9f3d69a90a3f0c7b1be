@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91d3cdec_ab028efc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2025-09-05T06:14:28Z",
+      "side": 1,
+      "message": "I made already the change here:\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/3743670",
+      "revId": "87c5a0dc922b501c037fc9f3d69a90a3f0c7b1be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
