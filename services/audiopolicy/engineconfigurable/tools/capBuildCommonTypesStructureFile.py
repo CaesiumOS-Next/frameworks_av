@@ -186,10 +186,10 @@ def parseAndroidAudioFile(androidaudiobaseheaderFile):
             logging.debug("type:{}, literal:{}, values:{}.".format(component_type_name, component_type_literal, component_type_numerical_value))
 
     if "stub" not in all_component_types["OutputDevicesMask"]:
-        all_component_types["OutputDevicesMask"]["stub"] = 0x40000000
+        all_component_types["OutputDevicesMask"]["stub"] = 2 ** output_device_shift
         logging.info("added stub output device mask")
     if "stub" not in all_component_types["InputDevicesMask"]:
-        all_component_types["InputDevicesMask"]["stub"] = 0x40000000
+        all_component_types["InputDevicesMask"]["stub"] = 2 ** input_device_shift
         logging.info("added stub input device mask")
 
     # Transform input source in inclusive criterion
