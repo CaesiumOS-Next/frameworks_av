@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24a01983_a876aff4",
+        "filename": "services/audioflinger/Effects.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1684,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-09-08T23:27:05Z",
+      "side": 1,
+      "message": "nit: I think `NO_ERROR` would be a more appropriate return code in this case.",
+      "range": {
+        "startLine": 1684,
+        "startChar": 15,
+        "endLine": 1684,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "23af40d4_0a90d713",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Effects.cpp",
+              "range": {
+                "startLine": 1684,
+                "startChar": 0,
+                "endLine": 1685,
+                "endChar": 0
+              },
+              "replacement": "        return NO_ERROR;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1af3c26a4902b34ebe32a198448ff30631cd3671",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
