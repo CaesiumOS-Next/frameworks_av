@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84b7a59f_3e851f63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079709
+      },
+      "writtenOn": "2025-09-08T09:06:40Z",
+      "side": 1,
+      "message": "Thank you Francois. This works and LGTM.",
+      "revId": "409062e5e34b693eaf996788f6c0d7c6ebf81a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
