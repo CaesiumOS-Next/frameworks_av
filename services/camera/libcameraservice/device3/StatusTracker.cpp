@@ -262,7 +262,7 @@ bool StatusTracker::threadLoop() {
     }
 
     if (waitForIdleFence) {
-        auto ret = mIdleFence->wait(kWaitDuration);
+        auto ret = mIdleFence->wait(kWaitDuration/1000/1000);
         if (ret == NO_ERROR) {
             mComponentsChanged = true;
         }
