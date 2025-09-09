@@ -23,6 +23,7 @@
 #include "Threads.h"
 
 #include "Client.h"
+#include "EffectConfiguration.h"
 #include "IAfEffect.h"
 #include "MelReporter.h"
 #include "ResamplerBufferProvider.h"
@@ -7355,7 +7356,10 @@ void DirectOutputThread::flushHw_l()
     mFlushPending = false;
     mTimestampVerifier.discontinuity(discontinuityForStandbyOrFlush());
     mTimestamp.clear();
-    mMonotonicFrameCounter.onFlush();
+    // AIDL: if not PCM or encapsulated PCM, reset the counter
+    if (audioflinger::EffectConfiguration::isHidl() || !audio_has_proportional_frames(mHALFormat)) {
+        mMonotonicFrameCounter.onFlush();
+    }
     // We do not reset mHwPaused which is hidden from the Track client.
     // Note: the client track in Tracks.cpp and AudioTrack.cpp
     // has a FLUSHED state but the DirectOutputThread does not;
