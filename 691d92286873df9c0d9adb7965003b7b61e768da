@@ -16,6 +16,24 @@
       "message": "Thanks, I will upload this to internal main branch later.\nMay I know if this CL is to fix any issue on certain product, or just code improvement?",
       "revId": "691d92286873df9c0d9adb7965003b7b61e768da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e859e8c_0220e533",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3388692
+      },
+      "writtenOn": "2025-09-09T01:31:45Z",
+      "side": 1,
+      "message": "Thank you for reviewing my fix. This change is to fix a stability issue of spatilizer we encountered. Analysis of the callstack revealed that the size of the metadata is zero. Furthermore, I have uploaded the associated log files to the case and updated the case ID in the commit message.",
+      "parentUuid": "8a0cb3c7_7bc9e706",
+      "revId": "691d92286873df9c0d9adb7965003b7b61e768da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
