@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e43e2f7_e1120929",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-10T15:59:53Z",
+      "side": 1,
+      "message": "\u0026\u0026 state \u003d\u003d AUDIO_POLICY_DEVICE_STATE_AVAILABLE",
+      "range": {
+        "startLine": 216,
+        "startChar": 91,
+        "endLine": 216,
+        "endChar": 92
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2fbe6994_f381af0f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 193,
+                "startChar": 0,
+                "endLine": 194,
+                "endChar": 0
+              },
+              "replacement": "    auto skipCheckingConnect \u003d [\u0026](auto type) {\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 216,
+                "startChar": 0,
+                "endLine": 217,
+                "endChar": 0
+              },
+              "replacement": "        bool skip \u003d (type \u0026 AUDIO_DEVICE_OUT_HDMI_ARC || type \u0026 AUDIO_DEVICE_OUT_HDMI_EARC) \u0026\u0026\n                    state \u003d\u003d AUDIO_POLICY_DEVICE_STATE_AVAILABLE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "05349b6b1b5a752d45df9103eb4cb53081592d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7151b1d2_f37a6304",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-10T15:59:53Z",
+      "side": 1,
+      "message": "Here we need to verify that the device is already connected:\nif (index \u003c 0) {\n                    ALOGW(\"%s() device not connected: %s\",\n                        __func__, device-\u003etoString().c_str());\n                    return INVALID_OPERATION;\n                }",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1f721bae_37f3ceab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 258,
+                "startChar": 0,
+                "endLine": 258,
+                "endChar": 0
+              },
+              "replacement": "                    ALOGW(\"%s() device already connected (skipped check for ARC/eARC): %s\",\n                        __func__, device-\u003etoString().c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "05349b6b1b5a752d45df9103eb4cb53081592d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17c2891_44942a80",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-10T15:59:53Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see h...\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nTo rerun the analyzer locally, run: `alint -- -c CheckContents`\n\nFor more information, see go/alint.",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 102
+      },
+      "revId": "05349b6b1b5a752d45df9103eb4cb53081592d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d210fb_b2a65f5d",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-10T15:59:53Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see h...\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nTo rerun the analyzer locally, run: `alint -- -c CheckContents`\n\nFor more information, see go/alint.",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 110
+      },
+      "revId": "05349b6b1b5a752d45df9103eb4cb53081592d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b7eaa7_99e18665",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-10T15:59:53Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"skiping\" -- should it be \"skipping\"?\nNote: a line containing...\n\nCommon typo found: \"skiping\" -- should it be \"skipping\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 403,
+        "startChar": 53,
+        "endLine": 403,
+        "endChar": 60
+      },
+      "revId": "05349b6b1b5a752d45df9103eb4cb53081592d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
