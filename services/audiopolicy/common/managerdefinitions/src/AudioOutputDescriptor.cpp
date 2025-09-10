@@ -598,10 +598,28 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
                 }
             } else {
                 float volumeAmpl = Volume::DbToAmpl(0);
-                ALOGV("%s: output: %d, vs: %d, active vs count: %zu", __func__,
-                      mIoHandle, vs, getActiveVolumeSources().size());
-                mClientInterface->setPortsVolume(
-                        getPortsForVolumeSource(vs), volumeAmpl, mutedByGroup, mIoHandle, delayMs);
+                auto swVolumePortsForVolumeSource =
+                        getPortsForVolumeSource(vs, /* excludePortUsingHwVolume= */ true);
+                if (!swVolumePortsForVolumeSource.empty()) {
+                    ALOGV("%s: regular tracks on output: %d, vs: %d, active vs count: %zu",
+                          __func__, mIoHandle, vs, getActiveVolumeSources().size());
+                    mClientInterface->setPortsVolume(swVolumePortsForVolumeSource, volumeAmpl,
+                            mutedByGroup, mIoHandle, delayMs);
+                }
+            }
+            if (!hasVolSrcPriority) {
+                ALOGE("%s: output: %d, vs: %d does not have priority, skipping hw gain ctrl",
+                      __func__, mIoHandle, vs);
+                return NO_ERROR;
+            }
+            auto hwVolumePortsForVolumeSource = getPortForHwVolumeAndVolumeSource(vs);
+            if (!hwVolumePortsForVolumeSource.empty()) {
+                // AF uses AHAL setHwVolume, TODO how to ensure it is supported
+                ALOGV("%s: hw volume output: %d, vs: %d, active vs count: %zu, gain %f", __func__,
+                      mIoHandle, vs, getActiveVolumeSources().size(),
+                      Volume::DbToAmpl(getCurVolume(vs)));
+                mClientInterface->setPortsVolume(hwVolumePortsForVolumeSource,
+                        Volume::DbToAmpl(getCurVolume(vs)), mutedByGroup, mIoHandle, delayMs);
             }
             AudioGains gains = devicePort->getGains();
             int gainMinValueInMb = gains[0]->getMinValueInMb();
@@ -651,12 +669,25 @@ bool SwAudioOutputDescriptor::setVolume(float volumeDb, bool mutedByGroup,
     return true;
 }
 
-std::vector<audio_port_handle_t> SwAudioOutputDescriptor::getPortsForVolumeSource(
+std::vector<audio_port_handle_t> SwAudioOutputDescriptor::getPortForHwVolumeAndVolumeSource(
         const VolumeSource& vs)
 {
     std::vector<audio_port_handle_t> portsForVolumeSource;
     for (const auto& client : getClientIterable()) {
-        if (client->volumeSource() == vs) {
+        if (client->volumeSource() == vs && (useHwVolume() || client->isDirect())) {
+            portsForVolumeSource.push_back(client->portId());
+        }
+    }
+    return portsForVolumeSource;
+}
+
+std::vector<audio_port_handle_t> SwAudioOutputDescriptor::getPortsForVolumeSource(
+        const VolumeSource& vs, bool excludePortUsingHwVolume)
+{
+    std::vector<audio_port_handle_t> portsForVolumeSource;
+    for (const auto& client : getClientIterable()) {
+        if (client->volumeSource() == vs &&
+                (!excludePortUsingHwVolume || (!useHwVolume() && !client->isDirect()))) {
             portsForVolumeSource.push_back(client->portId());
         }
     }

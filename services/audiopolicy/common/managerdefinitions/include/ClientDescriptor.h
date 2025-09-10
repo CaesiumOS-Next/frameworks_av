@@ -120,7 +120,7 @@ public:
     using ClientDescriptor::dump;
     void dump(String8 *dst, int spaces) const override;
     std::string toShortString() const override;
-
+    bool isDirect() const { return (mFlags & AUDIO_OUTPUT_FLAG_DIRECT) != 0; }
     audio_output_flags_t flags() const { return mFlags; }
     audio_stream_type_t stream() const { return mStream; }
     product_strategy_t strategy() const { return mStrategy; }

@@ -495,6 +495,9 @@ public:
     bool isBitPerfect() const {
         return (getFlags().output & AUDIO_OUTPUT_FLAG_BIT_PERFECT) != AUDIO_OUTPUT_FLAG_NONE;
     }
+    bool isVoipRx() const {
+        return (getFlags().output & AUDIO_OUTPUT_FLAG_VOIP_RX) != AUDIO_OUTPUT_FLAG_NONE;
+    }
 
     /**
      * Return true if there is any client with the same usage active on the given device.
@@ -509,7 +512,10 @@ public:
      * @param vs to be considered
      * @return vector of ports following the given volume source.
      */
-    std::vector<audio_port_handle_t> getPortsForVolumeSource(const VolumeSource& vs);
+    std::vector<audio_port_handle_t> getPortsForVolumeSource(const VolumeSource& vs,
+            bool excludePortUsingHwVolume = false);
+    std::vector<audio_port_handle_t> getPortForHwVolumeAndVolumeSource(const VolumeSource& vs);
+    bool useHwVolume() { return isMmap() || isBitPerfect() || isVoipRx(); }
 
     const sp<IOProfile> mProfile;          // I/O profile this output derives from
     audio_io_handle_t mIoHandle;           // output handle
