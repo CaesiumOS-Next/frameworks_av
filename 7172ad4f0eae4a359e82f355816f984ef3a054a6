@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6a85a3_f50e51a5",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1889575
+      },
+      "writtenOn": "2025-09-10T11:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df5abad_4b86e325",
+      "range": {
+        "startLine": 194,
+        "startChar": 11,
+        "endLine": 194,
+        "endChar": 31
+      },
+      "revId": "7172ad4f0eae4a359e82f355816f984ef3a054a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb42be34_7ee3a17b",
@@ -99,6 +123,30 @@
           ]
         }
       ],
+      "revId": "7172ad4f0eae4a359e82f355816f984ef3a054a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519549c2_2d0adaa3",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1889575
+      },
+      "writtenOn": "2025-09-10T11:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb42be34_7ee3a17b",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 52
+      },
       "revId": "7172ad4f0eae4a359e82f355816f984ef3a054a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
