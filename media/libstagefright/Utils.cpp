@@ -2120,7 +2120,7 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
     sp<ABuffer> csd0, csd1, csd2;
     if (msg->findBuffer("csd-0", &csd0)) {
         int csd0size = csd0->size();
-        if (mime == MEDIA_MIMETYPE_VIDEO_AVC) {
+        if (mime == MEDIA_MIMETYPE_VIDEO_AVC || mime == MEDIA_MIMETYPE_VIDEO_MVC) {
             sp<ABuffer> csd1;
             if (msg->findBuffer("csd-1", &csd1)) {
                 std::vector<char> avcc(csd0size + csd1->size() + 1024);
@@ -2326,7 +2326,7 @@ status_t convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
         } else if (mime == MEDIA_MIMETYPE_AUDIO_ALAC) {
             meta->setData(kKeyAlacMagicCookie, 0, csd0->data(), csd0->size());
         }
-    } else if (mime == MEDIA_MIMETYPE_VIDEO_AVC && msg->findBuffer("csd-avc", &csd0)) {
+    } else if ((mime == MEDIA_MIMETYPE_VIDEO_AVC || mime == MEDIA_MIMETYPE_VIDEO_MVC) && msg->findBuffer("csd-avc", &csd0)) {
         meta->setData(kKeyAVCC, kTypeAVCC, csd0->data(), csd0->size());
     } else if ((mime == MEDIA_MIMETYPE_VIDEO_HEVC || mime == MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC)
             && msg->findBuffer("csd-hevc", &csd0)) {

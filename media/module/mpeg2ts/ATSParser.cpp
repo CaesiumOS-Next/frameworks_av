@@ -1875,7 +1875,7 @@ void ATSParser::Stream::onPayloadData(
 
                 const char *mime;
                 if (meta->findCString(kKeyMIMEType, &mime)
-                        && !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC)) {
+                        && (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC) || !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_MVC))) {
                     int32_t sync = 0;
                     if (!accessUnit->meta()->findInt32("isSync", &sync) || !sync) {
                         continue;

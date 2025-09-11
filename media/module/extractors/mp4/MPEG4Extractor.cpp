@@ -5260,7 +5260,8 @@ MPEG4Source::MPEG4Source(
 
     mIsMpegH = !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_MPEGH_MHA1) ||
                !strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_MPEGH_MHM1);
-    mIsAVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
+    mIsAVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC) ||
+              !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_MVC);
     mIsHEVC = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
               !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC);
     // Enable APV codec support from Android Baklava
