@@ -740,6 +740,7 @@ VideoFrameDecoder::VideoFrameDecoder(
     : FrameDecoder(componentName, trackMeta, source),
       mFrame(NULL),
       mIsAvc(false),
+      mIsMvc(false),
       mIsHevc(false),
       mSeekMode(MediaSource::ReadOptions::SEEK_PREVIOUS_SYNC),
       mTargetTimeUs(-1LL),
@@ -839,6 +840,7 @@ sp<AMessage> VideoFrameDecoder::onGetFormatAndSeekOptions(
     }
 
     mIsAvc = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
+    mIsMvc = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_MVC);
     mIsHevc = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC);
 
     if (frameTimeUs < 0) {
@@ -912,7 +914,7 @@ status_t VideoFrameDecoder::onInputReceived(uint8_t* data, size_t size, MetaData
         ALOGV("Seeking closest: targetTimeUs=%lld", (long long)mTargetTimeUs);
     }
 
-    if (!isSeekingClosest && ((mIsAvc && IsIDR(data, size)) || (mIsHevc && IsIDR(data, size)))) {
+    if (!isSeekingClosest && (((mIsAvc || mIsMvc) && IsIDR(data, size)) || (mIsHevc && IsIDR(data, size)))) {
         // Only need to decode one IDR frame, unless we're seeking with CLOSEST
         // option, in which case we need to actually decode to targetTimeUs.
         *flags |= MediaCodec::BUFFER_FLAG_EOS;

@@ -98,6 +98,7 @@ private:
     int32_t mVideoHeight;
     bool mIsAudio;
     bool mIsVideoAVC;
+    bool mIsVideoMVC;
     bool mIsSecure;
     bool mIsEncrypted;
     bool mIsEncryptedObservedEarlier;

@@ -164,6 +164,7 @@ public:
     int64_t getMinCttsOffsetTimeUs();
     void bufferChunk(int64_t timestampUs);
     bool isAvc() const { return mIsAvc; }
+    bool isMvc() const { return mIsMvc; }
     bool isHevc() const { return mIsHevc; }
     bool isAv1() const { return mIsAv1; }
     bool isApv() const { return mIsApv; }
@@ -172,7 +173,7 @@ public:
     bool isHeif() const { return mIsHeif; }
     bool isAudio() const { return mIsAudio; }
     bool isMPEG4() const { return mIsMPEG4; }
-    bool usePrefix() const { return mIsAvc || mIsHevc || mIsHeic || mIsDovi; }
+    bool usePrefix() const { return mIsAvc || mIsMvc || mIsHevc || mIsHeic || mIsDovi; }
     bool isExifData(MediaBufferBase *buffer, uint32_t *tiffHdrOffset) const;
     bool isGainmapMetaData(MediaBufferBase* buffer, uint32_t* offset) const;
     bool isGainmapData(MediaBufferBase* buffer, uint32_t* offset) const;
@@ -339,6 +340,7 @@ public:
     volatile bool mResumed;
     volatile bool mStarted;
     bool mIsAvc;
+    bool mIsMvc;
     bool mIsHevc;
     bool mIsAv1;
     bool mIsApv;
@@ -696,6 +698,8 @@ const char *MPEG4Writer::Track::getFourCCForMime(const char *mime) {
         } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_H263, mime)) {
             return "s263";
         } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_AVC, mime)) {
+            return "avc1";
+        } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_MVC, mime)) {
             return "avc1";
         } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_HEVC, mime)) {
             return "hvc1";
@@ -2305,6 +2309,7 @@ MPEG4Writer::Track::Track(MPEG4Writer* owner, const sp<MediaSource>& source, uin
     const char *mime;
     mMeta->findCString(kKeyMIMEType, &mime);
     mIsAvc = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC);
+    mIsMvc = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_MVC);
     mIsHevc = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC);
     mIsAv1 = !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AV1);
     mIsApv = editing_flags::muxer_mp4_enable_apv() && !strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_APV);
@@ -2871,6 +2876,8 @@ void MPEG4Writer::Track::getCodecSpecificDataFromInputFormatIfPossible() {
     const void *data = NULL;
     size_t size = 0;
     if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AVC)) {
+        mMeta->findData(kKeyAVCC, &type, &data, &size);
+    } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_MVC)) {
         mMeta->findData(kKeyAVCC, &type, &data, &size);
     } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC) ||
                !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_ANDROID_HEIC)) {
@@ -3772,7 +3779,7 @@ status_t MPEG4Writer::Track::threadEntry() {
             } else {
                 mMeta = mSource->getFormat(); // get output format after format change
                 status_t err;
-                if (mIsAvc) {
+                if (mIsAvc || mIsMvc) {
                     err = makeAVCCodecSpecificData(
                             (const uint8_t *)buffer->data()
                                 + buffer->range_offset(),
@@ -4583,6 +4590,7 @@ status_t MPEG4Writer::Track::checkCodecSpecificData() const {
     if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_AAC, mime) ||
         !strcasecmp(MEDIA_MIMETYPE_VIDEO_MPEG4, mime) ||
         !strcasecmp(MEDIA_MIMETYPE_VIDEO_AVC, mime) ||
+        !strcasecmp(MEDIA_MIMETYPE_VIDEO_MVC, mime) ||
         !strcasecmp(MEDIA_MIMETYPE_VIDEO_HEVC, mime) ||
         !strcasecmp(MEDIA_MIMETYPE_VIDEO_AV1, mime) ||
         (editing_flags::muxer_mp4_enable_apv() && !strcasecmp(MEDIA_MIMETYPE_VIDEO_APV, mime)) ||
@@ -4755,6 +4763,8 @@ void MPEG4Writer::Track::writeVideoFourCCBox() {
     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_H263, mime)) {
         writeD263Box();
     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_AVC, mime)) {
+        writeAvccBox();
+    } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_MVC, mime)) {
         writeAvccBox();
     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_HEVC, mime)) {
         writeHvccBox();

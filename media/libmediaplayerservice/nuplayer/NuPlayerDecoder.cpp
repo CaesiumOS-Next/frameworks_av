@@ -84,6 +84,7 @@ NuPlayer::Decoder::Decoder(
       mVideoHeight(0),
       mIsAudio(true),
       mIsVideoAVC(false),
+      mIsVideoMVC(false),
       mIsSecure(false),
       mIsEncrypted(false),
       mIsEncryptedObservedEarlier(false),
@@ -333,6 +334,7 @@ void NuPlayer::Decoder::onConfigure(const sp<AMessage> &format) {
 
     mIsAudio = !strncasecmp("audio/", mime.c_str(), 6);
     mIsVideoAVC = !strcasecmp(MEDIA_MIMETYPE_VIDEO_AVC, mime.c_str());
+    mIsVideoMVC = !strcasecmp(MEDIA_MIMETYPE_VIDEO_MVC, mime.c_str());
 
     mComponentName = mime;
     mComponentName.append(" decoder");
@@ -1006,7 +1008,7 @@ status_t NuPlayer::Decoder::fetchInputData(sp<AMessage> &reply) {
             int32_t layerId = 0;
             bool haveLayerId = accessUnit->meta()->findInt32("temporal-layer-id", &layerId);
             if (mRenderer->getVideoLateByUs() > 100000LL
-                    && mIsVideoAVC
+                    && (mIsVideoAVC || mIsVideoMVC)
                     && !IsAVCReferenceFrame(accessUnit)) {
                 dropAccessUnit = true;
             } else if (haveLayerId && mNumVideoTemporalLayerTotal > 1) {

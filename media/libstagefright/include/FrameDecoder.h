@@ -175,6 +175,7 @@ private:
     sp<FrameCaptureLayer> mCaptureLayer;
     VideoFrame *mFrame;
     bool mIsAvc;
+    bool mIsMvc;
     bool mIsHevc;
     MediaSource::ReadOptions::SeekMode mSeekMode;
     int64_t mTargetTimeUs;
