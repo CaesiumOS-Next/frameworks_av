@@ -132,6 +132,7 @@ private:
     off64_t mMoofOffset;
     bool mMoofFound;
     bool mMdatFound;
+    bool mSubSpsFound;
 
     Vector<PsshInfo> mPssh;
 
