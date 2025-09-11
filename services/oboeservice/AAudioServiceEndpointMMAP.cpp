@@ -351,8 +351,6 @@ aaudio_result_t AAudioServiceEndpointMMAP::startStream(sp<AAudioServiceStreamBas
 
 aaudio_result_t AAudioServiceEndpointMMAP::stopStream(sp<AAudioServiceStreamBase> /*stream*/,
                                                       audio_port_handle_t clientHandle) {
-    mFramesTransferred.reset32();
-
     // Round 64-bit counter up to a multiple of the buffer capacity.
     // This is required because the 64-bit counter is used as an index
     // into a circular buffer and the actual HW position is reset to zero
@@ -454,6 +452,11 @@ aaudio_result_t AAudioServiceEndpointMMAP::getFreeRunningPosition(int64_t *posit
     } else if (result != AAUDIO_OK) {
         ALOGE("%s(): getMmapPosition() returned status %d", __func__, status);
     } else {
+        if (position.position_frames < mFramesTransferred.get32()) {
+            // This should only happen when resuming.
+            ALOGI("%s reset the counter32 as it is going backwards", __func__);
+            mFramesTransferred.reset32();
+        }
         // Convert 32-bit position to 64-bit position.
         mFramesTransferred.update32(position.position_frames);
         *positionFrames = mFramesTransferred.get();
@@ -689,6 +692,8 @@ aaudio_result_t AAudioServiceEndpointMMAP::createMmapBuffer_l()
     mMmapStream->getMmapPosition(&position);
 
     mFramesPerBurst = mMmapBufferinfo.burst_size_frames;
+
+    mFramesTransferred.reset32();
 
     return AAUDIO_OK;
 }

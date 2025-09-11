@@ -89,6 +89,10 @@ public:
         return mCounter64;
     }
 
+    int32_t get32() {
+        return mCounter32;
+    }
+
     /**
      * Reset the stored value of the 32-bit counter.
      * This is used if your counter32 has been reset to zero.
