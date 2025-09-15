@@ -136,6 +136,8 @@ private:
     int32_t                                   mFrozenTimestampCount = 0;
     int64_t                                   mDataReportOffsetNanos = 0;
 
+    bool                                      mNeedToCatchUp GUARDED_BY(mMmapStreamLock) {false};
+
 };
 
 } /* namespace aaudio */
