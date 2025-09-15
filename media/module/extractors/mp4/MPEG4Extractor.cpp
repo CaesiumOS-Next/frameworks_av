@@ -6188,7 +6188,6 @@ status_t MPEG4Source::parseTrackFragmentRun(off64_t offset, off64_t size) {
 }
 
 media_status_t MPEG4Source::getFormat(AMediaFormat *meta) {
-    Mutex::Autolock autoLock(mLock);
     AMediaFormat_copy(meta, mFormat);
     return AMEDIA_OK;
 }
