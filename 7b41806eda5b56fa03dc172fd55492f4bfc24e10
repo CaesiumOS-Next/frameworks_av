@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b53e9905_838a03cc",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6622,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-16T13:35:47Z",
+      "side": 1,
+      "message": "The fix looks very specific to this particular issue.\n\nThere must be a more generic fix to this problem.",
+      "range": {
+        "startLine": 6622,
+        "startChar": 0,
+        "endLine": 6622,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a143198c_1f65a5d7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 6622,
+                "startChar": 0,
+                "endLine": 6624,
+                "endChar": 0
+              },
+              "replacement": "            if ((outputDesc-\u003emFlags \u0026 AUDIO_OUTPUT_FLAG_SPATIALIZER) !\u003d 0 \u0026\u0026\n                    (desc-\u003emFlags \u0026 AUDIO_OUTPUT_FLAG_SPATIALIZER) \u003d\u003d 0) {\n                // If the outputDesc is a spatializer output, another output can only be\n                // considered an alternative if it is also a spatializer output.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7b41806eda5b56fa03dc172fd55492f4bfc24e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
