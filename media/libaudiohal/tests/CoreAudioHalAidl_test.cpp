@@ -995,8 +995,8 @@ class StreamHalAidlVendorParametersTest : public testing::Test {
         mVendorExt = ndk::SharedRefBase::make<TestHalAdapterVendorExtension>();
         struct audio_config config = AUDIO_CONFIG_INITIALIZER;
         ::aidl::android::hardware::audio::core::StreamDescriptor descriptor;
-        StreamContextAidl context(descriptor, false /*isAsynchronous*/, 0,
-                                  false /*hasClipTransitionSupport*/);
+        StreamContextAidl context(descriptor, false /*isAsynchronous*/, false /*isDirect*/,
+                                  0, false /*hasClipTransitionSupport*/);
         mStream = sp<StreamHalAidl>::make("test", false /*isInput*/, config, 0 /*nominalLatency*/,
                                           std::move(context), mStreamCommon, mVendorExt);
         // The stream may check for some properties after creating.

@@ -148,22 +148,22 @@ protected:
  * meaning, 'getRenderPosition' does not exist in the AIDL HAL interface.
  * The table below summarizes frame count behavior for 'getPresentationPosition':
  *
- *               | Mixed      | Direct       | Direct
- *               |            | non-offload  | offload
- * ==============|============|==============|==============
- *  PCM          | Continuous |              |
- *               |            |              |
- *               |            |              |
- * --------------|------------| Continuous†  |
- *  Bitstream    |            |              | Reset on
- *  encapsulated |            |              | flush, drain
- *  into PCM     |            |              | and standby
- *               | Not        |              |
- * --------------| supported  |--------------|
- *  Bitstream    |            | Reset on     |
- *               |            | flush, drain |
- *               |            | and standby  |
- *               |            |              |
+ *               | Mixed      | Direct
+ *               |            |
+ * ==============|============|==============
+ *  PCM          | Continuous |
+ *               |            |
+ *               |            |
+ * --------------|------------|
+ *  Bitstream    |            | Reset on
+ *  encapsulated |            | flush, drain
+ *  into PCM     |            | and standby
+ *               | Not        |
+ * --------------| supported  |
+ *  Bitstream    |            |
+ *               |            |
+ *               |            |
+ *               |            |
  *
  * † - on standby, reset of the frame count happens at the framework level.
  */
