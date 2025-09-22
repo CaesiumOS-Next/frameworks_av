@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab8dc93_12096581",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-22T23:19:51Z",
+      "side": 1,
+      "message": "this belongs to a commit message that explains the change, not to a comment that explains current code.\nThe comment here should say that for EARC devices, a device connection can be received for an already connected device when the SADs are updated.",
+      "range": {
+        "startLine": 194,
+        "startChar": 8,
+        "endLine": 203,
+        "endChar": 88
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e668d4b7_3cc8fba1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": "        // For ARC/eARC devices, a device connection can be received for an already connected\n        // device when the SAD (Sink Audio Capabilities) changes.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282c4a5b_b8a43eab",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-22T23:19:51Z",
+      "side": 1,
+      "message": "index \u003e\u003d 0",
+      "range": {
+        "startLine": 255,
+        "startChar": 20,
+        "endLine": 255,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "26acfc52_8affbf55",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 256,
+                "endChar": 0
+              },
+              "replacement": "                if (index \u003e\u003d 0) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c45da27e_5f77f9e8",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-09-22T23:19:51Z",
+      "side": 1,
+      "message": "this is common to both branches of the if() else and can be moved after line 268 and suppressed at line 247",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eb5bbe7a_337e1d98",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 245,
+                "startChar": 0,
+                "endLine": 250,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 263,
+                "endChar": 0
+              },
+              "replacement": "            }\n"
+            },
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 264,
+                "startChar": 0,
+                "endLine": 268,
+                "endChar": 0
+              },
+              "replacement": "            // register new device as available\n            if (mAvailableOutputDevices.add(device) \u003c 0) {\n                return NO_MEMORY;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
