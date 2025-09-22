@@ -1,0 +1,189 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf4165f_89403d1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-22T18:31:06Z",
+      "side": 1,
+      "message": "Please add: `Flag: EXEMPT BUGFIX`",
+      "revId": "f63979dd26e56ba0d39f3c52345f467137b98245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd95bef_d0e6f544",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-22T18:31:06Z",
+      "side": 1,
+      "message": "Did you also run `CtsMediaAudioTestCases`? Please add `Test: atest CtsMediaAudioTestCases`.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "f63979dd26e56ba0d39f3c52345f467137b98245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2290d51b_477338e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-22T18:31:06Z",
+      "side": 1,
+      "message": "Thanks Kuowei! Please address comments and I will move it to the internal Gerrit for submission.",
+      "revId": "f63979dd26e56ba0d39f3c52345f467137b98245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c9889f9_cc8c043c",
+        "filename": "media/libaudiohal/impl/DeviceHalAidl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-22T18:31:06Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see h...\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nTo rerun the analyzer locally, run: `alint -- -c CheckContents`\n\nFor more information, see go/alint.",
+      "range": {
+        "startLine": 648,
+        "startChar": 0,
+        "endLine": 648,
+        "endChar": 107
+      },
+      "revId": "f63979dd26e56ba0d39f3c52345f467137b98245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e2a0a3d_a12c0bd2",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-22T18:31:06Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see h...\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nTo rerun the analyzer locally, run: `alint -- -c CheckContents`\n\nFor more information, see go/alint.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 102
+      },
+      "revId": "f63979dd26e56ba0d39f3c52345f467137b98245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e75767f_4c72a485",
+        "filename": "media/libaudiohal/include/media/audiohal/StreamHalInterface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-22T18:31:06Z",
+      "side": 1,
+      "message": "Remove this as it is not used.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dbe21f42_3e14ec1b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/include/media/audiohal/StreamHalInterface.h",
+              "range": {
+                "startLine": 167,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f63979dd26e56ba0d39f3c52345f467137b98245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff8dee32_3806cb0b",
+        "filename": "media/libaudiohal/include/media/audiohal/StreamHalInterface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-22T18:31:06Z",
+      "side": 1,
+      "message": "Also, please add a note that for HIDL HALs, in the case of \"direct non-offloaded\" streams, the HAL reporting is continuous, but the framework resets the frame count on standby.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2d876f79_a018b193",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/include/media/audiohal/StreamHalInterface.h",
+              "range": {
+                "startLine": 169,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": " * Note: For HIDL HALs, in the case of \"direct non-offloaded\" streams, the HAL\n * reporting is continuous, but the framework resets the frame count on standby.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f63979dd26e56ba0d39f3c52345f467137b98245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
