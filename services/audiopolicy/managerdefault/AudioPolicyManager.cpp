@@ -1163,13 +1163,14 @@ sp<IOProfile> AudioPolicyManager::searchCompatibleProfileHwModules (
                 return curProfile;
              }
 
-             profile = curProfile;
-             if ((flags == AUDIO_OUTPUT_FLAG_DIRECT) &&
+             profile = profile ? profile : curProfile;
+             if (directOnlyProfile == nullptr && flags == AUDIO_OUTPUT_FLAG_DIRECT &&
                  curProfile->getFlags() == AUDIO_OUTPUT_FLAG_DIRECT) {
                  directOnlyProfile = curProfile;
              }
 
-             if ((curProfile->getFlags() & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) != 0) {
+             if (compressOffloadProfile == nullptr &&
+                 (curProfile->getFlags() & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD) != 0) {
                  compressOffloadProfile = curProfile;
              }
         }
