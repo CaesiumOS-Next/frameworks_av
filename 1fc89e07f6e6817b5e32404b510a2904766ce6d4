@@ -16,6 +16,23 @@
       "message": "this case is ok before this cl change:  https://android-review.googlesource.com/c/platform/frameworks/av/+/3476972",
       "revId": "1fc89e07f6e6817b5e32404b510a2904766ce6d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e7e692_72ce1347",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-09-24T18:31:39Z",
+      "side": 1,
+      "message": "Sorry, this does not make sense. Please fix the configuration of your device.",
+      "revId": "1fc89e07f6e6817b5e32404b510a2904766ce6d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
