@@ -966,10 +966,13 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                     mediaImage->mPlane[mediaImage->V].mRowInc = stride / 2;
                     mediaImage->mPlane[mediaImage->V].mHorizSubsampling = 2;
                     mediaImage->mPlane[mediaImage->V].mVertSubsampling = 2;
-
-                    if (tryWrapping && mClientColorFormat != COLOR_FormatYUV420Flexible) {
+                   if (tryWrapping && mClientColorFormat != COLOR_FormatYUV420Flexible) {
+                        // Check if actual plane strides match the calculated stride
+                        // If stride is present and different from calculated stride, disable wrapping
                         tryWrapping = yuv420888 && uPlane.colInc == 1 && vPlane.colInc == 1
                                 && yPlane.rowInc == uPlane.rowInc * 2
+                                && yPlane.rowInc == stride
+                                && uPlane.rowInc == stride / 2
                                 && view.data()[0] < view.data()[1]
                                 && view.data()[1] < view.data()[2];
                     }
@@ -998,6 +1001,8 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                     if (tryWrapping && mClientColorFormat != COLOR_FormatYUV420Flexible) {
                         tryWrapping = yuv420888 && uPlane.colInc == 2 && vPlane.colInc == 2
                                 && yPlane.rowInc == uPlane.rowInc
+                                && yPlane.rowInc == stride
+                                && uPlane.rowInc == stride
                                 && view.data()[0] < view.data()[1]
                                 && view.data()[1] < view.data()[2];
                     }
@@ -1039,7 +1044,9 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                                 && uPlane.colInc == 4
                                 && vPlane.colInc == 4
                                 && yPlane.rowInc == uPlane.rowInc
-                                && yPlane.rowInc == vPlane.rowInc;
+                                && yPlane.rowInc == vPlane.rowInc
+                                && yPlane.rowInc == stride
+                                && uPlane.rowInc == stride;
                     }
                     break;
 
