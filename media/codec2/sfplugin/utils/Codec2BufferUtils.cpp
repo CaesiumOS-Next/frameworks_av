@@ -968,8 +968,14 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                     mediaImage->mPlane[mediaImage->V].mVertSubsampling = 2;
 
                     if (tryWrapping && mClientColorFormat != COLOR_FormatYUV420Flexible) {
+                        // The plane rowInc values must also match the stride we
+                        // calculated above, since that is the stride we report to
+                        // the client. A buffer with alignment padding must take
+                        // the copy path instead.
                         tryWrapping = yuv420888 && uPlane.colInc == 1 && vPlane.colInc == 1
                                 && yPlane.rowInc == uPlane.rowInc * 2
+                                && yPlane.rowInc == (int32_t)stride
+                                && uPlane.rowInc == (int32_t)(stride / 2)
                                 && view.data()[0] < view.data()[1]
                                 && view.data()[1] < view.data()[2];
                     }
@@ -998,6 +1004,8 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                     if (tryWrapping && mClientColorFormat != COLOR_FormatYUV420Flexible) {
                         tryWrapping = yuv420888 && uPlane.colInc == 2 && vPlane.colInc == 2
                                 && yPlane.rowInc == uPlane.rowInc
+                                && yPlane.rowInc == (int32_t)stride
+                                && uPlane.rowInc == (int32_t)stride
                                 && view.data()[0] < view.data()[1]
                                 && view.data()[1] < view.data()[2];
                     }
@@ -1039,7 +1047,9 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                                 && uPlane.colInc == 4
                                 && vPlane.colInc == 4
                                 && yPlane.rowInc == uPlane.rowInc
-                                && yPlane.rowInc == vPlane.rowInc;
+                                && yPlane.rowInc == vPlane.rowInc
+                                && yPlane.rowInc == (int32_t)stride
+                                && uPlane.rowInc == (int32_t)stride;
                     }
                     break;
 

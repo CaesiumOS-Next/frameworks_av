@@ -23,6 +23,7 @@
 
 #include <C2BlockInternal.h>
 #include <C2PlatformSupport.h>
+#include <Codec2BufferUtils.h>
 #include <Codec2Mapper.h>
 
 namespace android {
@@ -912,6 +913,296 @@ TEST(LinearOutputBuffersTest, PcmConvertFormat) {
     ASSERT_TRUE(clientBuffer->format()->findInt32(KEY_PCM_ENCODING, &pcmEncoding));
     EXPECT_EQ(kAudioEncodingPcm16bit, pcmEncoding);
     ASSERT_TRUE(buffers->releaseBuffer(clientBuffer, &c2Buffer));
+}
+
+// Coverage for the stride-consistency condition in
+// GraphicView2MediaImageConverter. The converter describes the buffer to the
+// client using a stride it calculates from the width, so it may only take the
+// wrap (zero-copy) path when the buffer's own plane rowInc values match that
+// calculated stride. A buffer carrying alignment padding must fall through to
+// the copy path; wrapping it would leave the client reading into the padding
+// at every row break.
+//
+// LayoutTest above cannot reach this code. It drives RawGraphicOutputBuffers,
+// which never sets KEY_COLOR_FORMAT, so mClientColorFormat stays
+// COLOR_FormatYUV420Flexible and all three refinement blocks are skipped.
+// These tests drive the converter directly with an explicit client format.
+class StrideValidationTest : public ::testing::Test {
+protected:
+    static constexpr uint32_t kWidth = 320;
+    static constexpr uint32_t kHeight = 240;
+
+    // Strides the converter calculates: align(width, 2) * bytes-per-sample.
+    static constexpr int32_t kExact8BitStride = 320;
+    static constexpr int32_t kExactP010Stride = 640;
+
+    // rowInc values with alignment padding, i.e. wider than the above.
+    static constexpr int32_t kPadded8BitStride = 512;
+    static constexpr int32_t kPaddedP010Stride = 768;
+
+    struct BlockSpec {
+        C2PlanarLayout layout;
+        size_t capacity;
+        std::vector<size_t> offsets;
+    };
+
+    static BlockSpec PlanarSpec(int32_t rowInc) {
+        C2PlanarLayout layout = {
+            C2PlanarLayout::TYPE_YUV,
+            3,  /* numPlanes */
+            3,  /* rootPlanes */
+            {},  /* planes --- to be filled below */
+        };
+        layout.planes[C2PlanarLayout::PLANE_Y] = {
+            C2PlaneInfo::CHANNEL_Y,
+            1,  /* colInc */
+            rowInc,  /* rowInc */
+            1,  /* colSampling */
+            1,  /* rowSampling */
+            8,  /* allocatedDepth */
+            8,  /* bitDepth */
+            0,  /* rightShift */
+            C2PlaneInfo::NATIVE,
+            C2PlanarLayout::PLANE_Y,  /* rootIx */
+            0,  /* offset */
+        };
+        layout.planes[C2PlanarLayout::PLANE_U] = {
+            C2PlaneInfo::CHANNEL_CB,
+            1,  /* colInc */
+            rowInc / 2,  /* rowInc */
+            2,  /* colSampling */
+            2,  /* rowSampling */
+            8,  /* allocatedDepth */
+            8,  /* bitDepth */
+            0,  /* rightShift */
+            C2PlaneInfo::NATIVE,
+            C2PlanarLayout::PLANE_U,  /* rootIx */
+            0,  /* offset */
+        };
+        layout.planes[C2PlanarLayout::PLANE_V] = {
+            C2PlaneInfo::CHANNEL_CR,
+            1,  /* colInc */
+            rowInc / 2,  /* rowInc */
+            2,  /* colSampling */
+            2,  /* rowSampling */
+            8,  /* allocatedDepth */
+            8,  /* bitDepth */
+            0,  /* rightShift */
+            C2PlaneInfo::NATIVE,
+            C2PlanarLayout::PLANE_V,  /* rootIx */
+            0,  /* offset */
+        };
+        size_t yPlaneSize = size_t(rowInc) * kHeight;
+        size_t uvPlaneSize = size_t(rowInc / 2) * (kHeight / 2);
+        return BlockSpec{
+            layout,
+            yPlaneSize + uvPlaneSize * 2,
+            {0, yPlaneSize, yPlaneSize + uvPlaneSize},
+        };
+    }
+
+    // Semi-planar 4:2:0 (NV12) for 8-bit, or P010 when allocatedDepth is 16.
+    // In both cases U and V interleave within one chroma plane, so V sits one
+    // sample after U and both advance by the same rowInc.
+    static BlockSpec SemiPlanarSpec(int32_t rowInc, uint32_t allocatedDepth) {
+        uint32_t bitDepth = (allocatedDepth == 16) ? 10 : 8;
+        uint32_t rightShift = allocatedDepth - bitDepth;
+        int32_t sampleSize = int32_t(allocatedDepth / 8);
+        C2PlanarLayout layout = {
+            C2PlanarLayout::TYPE_YUV,
+            3,  /* numPlanes */
+            2,  /* rootPlanes */
+            {},  /* planes --- to be filled below */
+        };
+        layout.planes[C2PlanarLayout::PLANE_Y] = {
+            C2PlaneInfo::CHANNEL_Y,
+            sampleSize,  /* colInc */
+            rowInc,  /* rowInc */
+            1,  /* colSampling */
+            1,  /* rowSampling */
+            allocatedDepth,
+            bitDepth,
+            rightShift,
+            C2PlaneInfo::NATIVE,
+            C2PlanarLayout::PLANE_Y,  /* rootIx */
+            0,  /* offset */
+        };
+        layout.planes[C2PlanarLayout::PLANE_U] = {
+            C2PlaneInfo::CHANNEL_CB,
+            sampleSize * 2,  /* colInc */
+            rowInc,  /* rowInc */
+            2,  /* colSampling */
+            2,  /* rowSampling */
+            allocatedDepth,
+            bitDepth,
+            rightShift,
+            C2PlaneInfo::NATIVE,
+            C2PlanarLayout::PLANE_U,  /* rootIx */
+            0,  /* offset */
+        };
+        layout.planes[C2PlanarLayout::PLANE_V] = {
+            C2PlaneInfo::CHANNEL_CR,
+            sampleSize * 2,  /* colInc */
+            rowInc,  /* rowInc */
+            2,  /* colSampling */
+            2,  /* rowSampling */
+            allocatedDepth,
+            bitDepth,
+            rightShift,
+            C2PlaneInfo::NATIVE,
+            C2PlanarLayout::PLANE_U,  /* rootIx */
+            uint32_t(sampleSize),  /* offset */
+        };
+        size_t yPlaneSize = size_t(rowInc) * kHeight;
+        size_t uvPlaneSize = size_t(rowInc) * (kHeight / 2);
+        return BlockSpec{
+            layout,
+            yPlaneSize + uvPlaneSize,
+            {0, yPlaneSize, yPlaneSize + size_t(sampleSize)},
+        };
+    }
+
+    // Distinct per-plane seed, and a value that varies with both row and
+    // column so that a row break landing in alignment padding is detectable.
+    static constexpr uint8_t kSeed[3] = {'Y', 'U', 'V'};
+
+    static uint8_t PixelValue(uint8_t seed, uint32_t row, uint32_t col, uint32_t byte) {
+        return (uint32_t(seed) * (row + 1) + col * 3 + byte * 17) & 0xFF;
+    }
+
+    static void FillView(C2GraphicView &view) {
+        const C2PlanarLayout &layout = view.layout();
+        for (uint32_t i = 0; i < layout.numPlanes; ++i) {
+            const C2PlaneInfo &plane = layout.planes[i];
+            uint32_t sampleSize = plane.allocatedDepth / 8;
+            uint8_t *rowPtr = view.data()[i];
+            for (uint32_t row = 0; row < view.height() / plane.rowSampling; ++row) {
+                uint8_t *colPtr = rowPtr;
+                for (uint32_t col = 0; col < view.width() / plane.colSampling; ++col) {
+                    for (uint32_t byte = 0; byte < sampleSize; ++byte) {
+                        colPtr[byte] = PixelValue(kSeed[i], row, col, byte);
+                    }
+                    colPtr += plane.colInc;
+                }
+                rowPtr += plane.rowInc;
+            }
+        }
+    }
+
+    static bool VerifyImage(
+            const MediaImage2 *image, const uint8_t *base, std::string *errorMsg) {
+        *errorMsg = "";
+        uint32_t sampleSize = (image->mBitDepthAllocated + 7) / 8;
+        for (uint32_t i = 0; i < image->mNumPlanes; ++i) {
+            const MediaImage2::PlaneInfo &plane = image->mPlane[i];
+            const uint8_t *rowPtr = base + plane.mOffset;
+            for (uint32_t row = 0; row < image->mHeight / plane.mVertSubsampling; ++row) {
+                const uint8_t *colPtr = rowPtr;
+                for (uint32_t col = 0; col < image->mWidth / plane.mHorizSubsampling; ++col) {
+                    for (uint32_t byte = 0; byte < sampleSize; ++byte) {
+                        uint8_t expected = PixelValue(kSeed[i], row, col, byte);
+                        if (expected != colPtr[byte]) {
+                            *errorMsg = AStringPrintf(
+                                    "plane=%u row=%u col=%u byte=%u expected=%02x actual=%02x",
+                                    i, row, col, byte, expected, colPtr[byte]).c_str();
+                            return false;
+                        }
+                    }
+                    colPtr += plane.mColInc;
+                }
+                rowPtr += plane.mRowInc;
+            }
+        }
+        return true;
+    }
+
+    static sp<AMessage> FormatWithColorFormat(int32_t colorFormat) {
+        sp<AMessage> format{new AMessage};
+        format->setInt32(KEY_WIDTH, kWidth);
+        format->setInt32(KEY_HEIGHT, kHeight);
+        format->setInt32(KEY_COLOR_FORMAT, colorFormat);
+        return format;
+    }
+
+    // A buffer whose rowInc carries alignment padding must not be wrapped, and
+    // the copy path must lay the pixels out at the stride actually reported to
+    // the client.
+    static void ExpectCopiedWhenPadded(
+            const BlockSpec &spec, int32_t colorFormat, int32_t expectedStride) {
+        std::shared_ptr<C2GraphicBlock> block = _C2BlockFactory::CreateGraphicBlock(
+                std::make_shared<TestGraphicAllocation>(
+                        kWidth, kHeight, spec.layout, spec.capacity, spec.offsets));
+        ASSERT_NE(nullptr, block);
+        C2GraphicView view = block->map().get();
+        ASSERT_EQ(C2_OK, view.error());
+        FillView(view);
+
+        GraphicView2MediaImageConverter converter(
+                view, FormatWithColorFormat(colorFormat), false /* copy */);
+        ASSERT_EQ(OK, converter.initCheck());
+        ASSERT_EQ(nullptr, converter.wrap())
+                << "padded rowInc must not take the zero-copy path";
+
+        sp<ABuffer> backBuffer = new ABuffer(converter.backBufferSize());
+        ASSERT_TRUE(converter.setBackBuffer(backBuffer));
+        ASSERT_EQ(OK, converter.copyToMediaImage());
+
+        MediaImage2 *image = (MediaImage2 *)converter.imageData()->data();
+        EXPECT_EQ(expectedStride, image->mPlane[MediaImage2::Y].mRowInc);
+        std::string errorMsg;
+        ASSERT_TRUE(VerifyImage(image, backBuffer->base(), &errorMsg)) << errorMsg;
+    }
+
+    // A buffer whose rowInc already matches the calculated stride must still be
+    // wrapped --- the new condition must not cost a copy in the common case.
+    static void ExpectWrappedWhenExact(const BlockSpec &spec, int32_t colorFormat) {
+        std::shared_ptr<C2GraphicBlock> block = _C2BlockFactory::CreateGraphicBlock(
+                std::make_shared<TestGraphicAllocation>(
+                        kWidth, kHeight, spec.layout, spec.capacity, spec.offsets));
+        ASSERT_NE(nullptr, block);
+        C2GraphicView view = block->map().get();
+        ASSERT_EQ(C2_OK, view.error());
+
+        GraphicView2MediaImageConverter converter(
+                view, FormatWithColorFormat(colorFormat), false /* copy */);
+        ASSERT_EQ(OK, converter.initCheck());
+        EXPECT_NE(nullptr, converter.wrap())
+                << "matching rowInc must still take the zero-copy path";
+    }
+};
+
+constexpr uint8_t StrideValidationTest::kSeed[3];
+
+TEST_F(StrideValidationTest, PlanarPaddedStrideIsCopied) {
+    ExpectCopiedWhenPadded(
+            PlanarSpec(kPadded8BitStride), COLOR_FormatYUV420Planar, kExact8BitStride);
+}
+
+TEST_F(StrideValidationTest, PlanarExactStrideIsWrapped) {
+    ExpectWrappedWhenExact(PlanarSpec(kExact8BitStride), COLOR_FormatYUV420Planar);
+}
+
+TEST_F(StrideValidationTest, SemiPlanarPaddedStrideIsCopied) {
+    ExpectCopiedWhenPadded(
+            SemiPlanarSpec(kPadded8BitStride, 8),
+            COLOR_FormatYUV420SemiPlanar,
+            kExact8BitStride);
+}
+
+TEST_F(StrideValidationTest, SemiPlanarExactStrideIsWrapped) {
+    ExpectWrappedWhenExact(
+            SemiPlanarSpec(kExact8BitStride, 8), COLOR_FormatYUV420SemiPlanar);
+}
+
+TEST_F(StrideValidationTest, P010PaddedStrideIsCopied) {
+    ExpectCopiedWhenPadded(
+            SemiPlanarSpec(kPaddedP010Stride, 16),
+            COLOR_FormatYUVP010,
+            kExactP010Stride);
+}
+
+TEST_F(StrideValidationTest, P010ExactStrideIsWrapped) {
+    ExpectWrappedWhenExact(SemiPlanarSpec(kExactP010Stride, 16), COLOR_FormatYUVP010);
 }
 
 } // namespace android
