@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62995b05_26be0197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2025-09-26T11:35:58Z",
+      "side": 1,
+      "message": "The explicit disabling for support for OPUS offload in MediaPlayer is by design.\n\nCompressed offload for Opus requires an encapsulation of the Opus frames in Ogg Packets so that the decoder can delimit the frames in the provided content stream. As MediaPlayer is a legacy product, it does not receive new features such as this. Hence that code was added so that applications using MediaPlayer can still play OPUS with the Decoding path.",
+      "revId": "8b71e9b2e6b82ca1b91a6618b9311068d019aa46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
