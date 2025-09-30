@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b3f73e9_5bea2164",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1889575
+      },
+      "writtenOn": "2025-09-30T08:56:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ab8dc93_12096581",
+      "range": {
+        "startLine": 194,
+        "startChar": 8,
+        "endLine": 203,
+        "endChar": 88
+      },
+      "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "282c4a5b_b8a43eab",
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08091a1c_339a0dbc",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1889575
+      },
+      "writtenOn": "2025-09-30T08:56:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "282c4a5b_b8a43eab",
+      "range": {
+        "startLine": 255,
+        "startChar": 20,
+        "endLine": 255,
+        "endChar": 60
+      },
       "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -140,6 +188,30 @@
           ]
         }
       ],
+      "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80191d31_1118a6b5",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1889575
+      },
+      "writtenOn": "2025-09-30T08:56:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c45da27e_5f77f9e8",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 17
+      },
       "revId": "2540e1589c44c2eee0f2015429357dbb116c0691",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
