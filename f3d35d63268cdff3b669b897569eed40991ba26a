@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a999650_fc6d625c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963226
+      },
+      "writtenOn": "2025-10-08T08:34:32Z",
+      "side": 1,
+      "message": "Hi Eric, Thanks for your code review. Could we merge this into internal branch since you have provided CR+1? Thanks!",
+      "revId": "f3d35d63268cdff3b669b897569eed40991ba26a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
