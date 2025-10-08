@@ -16,6 +16,24 @@
       "message": "Hi Eric, Thanks for your code review. Could we merge this into internal branch since you have provided CR+1? Thanks!",
       "revId": "f3d35d63268cdff3b669b897569eed40991ba26a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c58176_63fc9369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-10-08T13:06:55Z",
+      "side": 1,
+      "message": "the comments on the other CL in the topic have to be resolved first.",
+      "parentUuid": "2a999650_fc6d625c",
+      "revId": "f3d35d63268cdff3b669b897569eed40991ba26a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
