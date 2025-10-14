@@ -50,6 +50,29 @@
       "message": "Hey @essick@google.com could you please provide owner\u0027s approval?",
       "revId": "0ea4a6a9a02ea3e5bd1608279624420f67965023",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10249825_9c660b34",
+        "filename": "media/libstagefright/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2025-10-14T14:26:51Z",
+      "side": 1,
+      "message": "feels strange to me that we need extra header_libs clauses for something\nthat is a \u0027platform header\u0027 (where it does make sense that we need to list\nsomehing like media_ndk_headers).",
+      "range": {
+        "startLine": 402,
+        "startChar": 9,
+        "endLine": 402,
+        "endChar": 38
+      },
+      "revId": "0ea4a6a9a02ea3e5bd1608279624420f67965023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
