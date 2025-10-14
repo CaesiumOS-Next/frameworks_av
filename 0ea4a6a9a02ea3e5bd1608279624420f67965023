@@ -73,6 +73,30 @@
       },
       "revId": "0ea4a6a9a02ea3e5bd1608279624420f67965023",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "809c637b_83f6fe79",
+        "filename": "media/libstagefright/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1841165
+      },
+      "writtenOn": "2025-10-14T16:51:07Z",
+      "side": 1,
+      "message": "\"platform_headers\" here means the headers that are available only for platform\u0027s use. Dunno if that\u0027s what you meant.",
+      "parentUuid": "10249825_9c660b34",
+      "range": {
+        "startLine": 402,
+        "startChar": 9,
+        "endLine": 402,
+        "endChar": 38
+      },
+      "revId": "0ea4a6a9a02ea3e5bd1608279624420f67965023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
