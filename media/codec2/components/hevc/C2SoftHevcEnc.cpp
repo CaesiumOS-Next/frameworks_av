@@ -1182,7 +1182,7 @@ void C2SoftHevcEnc::process(const std::unique_ptr<C2Work>& work,
             for (size_t i = 0; i < resources->flexCount(); ++i) {
                 C2SystemResourceStruct& resource = resources->m.values[i];
                 // The Processing rate change already happens through the
-                // addParameter setter (ResourcesNeededSetter) already, but to force
+                // addParameter setter (ResourcesNeededSetter), but to force
                 // a demonstration of configUpdate to reflect change in resource
                 // requirement, this example forces Processing Rate change here.
                 if (resource.id == PROCESSING_RATE) {

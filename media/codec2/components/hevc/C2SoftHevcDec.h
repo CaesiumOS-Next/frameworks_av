@@ -107,6 +107,7 @@ struct C2SoftHevcDec : public SimpleC2Component {
     std::shared_ptr<IntfImpl> mIntf;
     iv_obj_t *mDecHandle;
     std::shared_ptr<C2GraphicBlock> mOutBlock;
+    std::shared_ptr<C2RealTimePriorityTuning> mPriority;
     uint8_t *mOutBufferFlush;
 
     size_t mNumCores;

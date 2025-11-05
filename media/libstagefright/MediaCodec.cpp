@@ -7465,6 +7465,7 @@ void MediaCodec::postActivityNotificationIfPossible() {
 }
 
 status_t MediaCodec::setParameters(const sp<AMessage> &params) {
+    ALOGI("%s:%d: params: {%s}", __func__, __LINE__, params->debugString().c_str());
     sp<AMessage> msg = new AMessage(kWhatSetParameters, this);
     msg->setMessage("params", params);
 

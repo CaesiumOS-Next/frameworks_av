@@ -1726,6 +1726,8 @@ ReflectedParamUpdater::Dict CCodecConfig::getReflectedFormat(
     // create a modifiable copy of params
     sp<AMessage> params = params_->dup();
     ALOGV("filtering with config domain %x", configDomain);
+    ALOGI("%s: filtering with config domain %x and params: {%s}",
+          __func__, configDomain, params->debugString().c_str());
 
     // convert some macro parameters to Codec 2.0 specific expressions
 
@@ -2089,6 +2091,7 @@ status_t CCodecConfig::setParameters(
         std::vector<std::unique_ptr<C2Param>> &configUpdate,
         c2_blocking_t blocking) {
     status_t result = OK;
+    ALOGI("%s: configUpdate(%zu)", __func__, configUpdate.size());
     if (configUpdate.empty()) {
         return OK;
     }

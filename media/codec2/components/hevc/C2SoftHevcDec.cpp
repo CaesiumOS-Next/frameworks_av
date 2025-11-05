@@ -197,6 +197,15 @@ public:
                                      0u, HAL_PIXEL_FORMAT_YCBCR_420_888))
                 .build());
 
+        // Add Frame-rate
+        addParameter(
+            DefineParam(mFrameRate, C2_PARAMKEY_FRAME_RATE)
+                .withDefault(new C2StreamFrameRateInfo::output(0u, 1.))
+                .withFields({C2F(mFrameRate, value).greaterThan(0.)})
+                .withSetter(
+                    Setter<decltype(*mFrameRate)>::StrictValueWithNoDeps)
+                .build());
+
         // Add needed resources
         addNeededResources();
 
@@ -218,6 +227,11 @@ public:
         resourcesNeeded.push_back(C2SystemResourceStruct(SESSION, CONST, 1));
         // Add internal memory needed as pixel count.
         resourcesNeeded.push_back(C2SystemResourceStruct(INTERNAL_MEMORY, CONST, width * height));
+        // Add processing rate as frame rate.
+        // NOTE: This should be KEY_OPERATING_RATE.
+        resourcesNeeded.push_back(C2SystemResourceStruct(PROCESSING_RATE,
+                                                         CONST,
+                                                         mFrameRate->value));
 
         addParameter(
                 DefineParam(mResourcesNeeded, C2_PARAMKEY_RESOURCES_NEEDED)
@@ -228,7 +242,7 @@ public:
                         C2F(mResourcesNeeded, m.values[0].kind).any(),
                         C2F(mResourcesNeeded, m.values[0].amount).any(),
                 })
-                .withSetter(ResourcesNeededSetter, mSize)
+                .withSetter(ResourcesNeededSetter, mSize, mFrameRate)
                 .build());
     }
 
@@ -324,21 +338,51 @@ public:
     static C2R ResourcesNeededSetter(bool mayBlock,
                                      C2P<C2ResourcesNeededTuning>& me,
                                      // dependencies
-                                     const C2P<C2StreamPictureSizeInfo::output>& size) {
+                                     const C2P<C2StreamPictureSizeInfo::output>& size,
+                                     const C2P<C2StreamFrameRateInfo::output>& frameRate) {
         (void)mayBlock;
         for (size_t i = 0; i < me.v.flexCount(); ++i) {
             const C2SystemResourceStruct& resource = me.v.m.values[i];
             // Update the momory requirement.
             if (resource.id == INTERNAL_MEMORY) {
                 me.set().m.values[i].amount = size.v.width * size.v.height;
+            } else if (resource.id == PROCESSING_RATE) {
+                // Update the processing rate.
+                me.set().m.values[i].amount = frameRate.v.value;
             }
         }
 
         return C2R::Ok();
     };
 
+    static C2R PrioritySetter(bool mayBlock,
+                             C2P<C2RealTimePriorityTuning>& me) {
+        (void)mayBlock;
+        C2R res = C2R::Ok();
+        if (me.v.value > 0) {
+            // Positive priority values are not defined at the moment and
+            // shall be treated equivalent to 0
+            me.set().value = 0;
+        }
+        ALOGI("%s: priority changed to %d", __func__, me.v.value);
+        return res;
+    }
+
+
     std::shared_ptr<C2StreamColorAspectsInfo::output> getColorAspects_l() {
         return mColorAspects;
+    }
+
+    std::shared_ptr<C2RealTimePriorityTuning> getPriority_l() const {
+        return mPriority;
+    }
+
+    std::shared_ptr<C2ResourcesNeededTuning> getResourcesNeeded_l() const {
+        return mResourcesNeeded;
+    }
+
+    std::shared_ptr<C2StreamFrameRateInfo::output> getFrameRate_l() const {
+        return mFrameRate;
     }
 
 private:
@@ -352,6 +396,8 @@ private:
     std::shared_ptr<C2StreamColorAspectsInfo::output> mColorAspects;
     std::shared_ptr<C2StreamPixelFormatInfo::output> mPixelFormat;
     std::shared_ptr<C2ResourcesNeededTuning> mResourcesNeeded;
+    std::shared_ptr<C2RealTimePriorityTuning> mPriority;
+    std::shared_ptr<C2StreamFrameRateInfo::output> mFrameRate;
 };
 
 static size_t getCpuCoreCount() {
@@ -564,6 +610,10 @@ status_t C2SoftHevcDec::initDecoder() {
     mSignalledError = false;
     resetPlugin();
     (void) setNumCores();
+    {
+        IntfImpl::Lock lock = mIntf->lock();
+        mPriority = mIntf->getPriority_l();
+    }
     if (OK != setParams(mStride, IVD_DECODE_FRAME)) return UNKNOWN_ERROR;
     (void) getVersion();
 
@@ -880,6 +930,69 @@ void C2SoftHevcDec::process(
             return;
         }
     }
+
+    // handle dynamic priority change
+    {
+        IntfImpl::Lock lock = mIntf->lock();
+        std::shared_ptr<C2RealTimePriorityTuning> priority = mIntf->getPriority_l();
+        lock.unlock();
+
+        if (priority != mPriority) {
+            ALOGI("%s: priority has changed from %d to %d",
+                  __func__, mPriority->value, priority->value);
+            mPriority = priority;
+            // Realign the resources based on the change in the operating mode!
+            // In this reference implementation, the resources associated with PROCESSING_RATE
+            // will change based on the operating mode (priority)
+            // If the component is to operate at realtime mode, the PROCESSING_RATE
+            // would be the "operating/frame rate"; where as if its to operate in non-realtime
+            // mode, the PROCESSING_RATE would be set to 1.
+            bool hasResourceChanged = false;
+            int newValue = 0;
+            std::shared_ptr<C2ResourcesNeededTuning> resources = mIntf->getResourcesNeeded_l();
+            for (size_t i = 0; i < resources->flexCount(); ++i) {
+                C2SystemResourceStruct& resource = resources->m.values[i];
+                if (resource.id == PROCESSING_RATE) {
+                    if (mPriority->value == 0) { //realtime
+                        std::shared_ptr<C2StreamFrameRateInfo::output> frameRate =
+                            mIntf->getFrameRate_l();
+                        // NOTE: The implementation should ensure that there are enough resources
+                        // to allow PROCESSING_RATE at current frame-rate for this realtime
+                        // mode switch.
+                        // Upon failure to commit the resources (insufficient resources),
+                        // the implementation MUST not switch to realtime.
+                        // This failure MUST be communicated through configUpdate.
+                        // But for the reference implementation, we are just assigning the value
+                        // without checking for the resource availability.
+                        newValue = frameRate->value;
+                    } else {  // non-realtime
+                        // NOTE: In non-realtime mode, the implementation MUST operate at
+                        // the highest possible throughput available, while still ensuring
+                        // that any other video codecs with KEY_PRIORITY = 0 (real-time mode)
+                        // are operating at their configured KEY_OPERATING_RATE.
+                        // But for the reference implementation, we are using 1 as processing rate.
+                        newValue = 1;
+                    }
+                    if (newValue != resource.amount) {
+                        resource.amount = newValue;
+                        hasResourceChanged = true;
+                    }
+                    break;
+                }
+            }
+
+            // Notify the framework about resource change through configUpdate
+            if (hasResourceChanged) {
+                std::vector<std::unique_ptr<C2SettingResult>> failures;
+                c2_status_t err = mIntf->config({resources.get()}, C2_MAY_BLOCK, &failures);
+                if (err == C2_OK) {
+                    work->worklets.front()->output.configUpdate.push_back(
+                            C2Param::Copy(*resources));
+                }
+            }
+        }
+    }
+
     bool eos = ((work->input.flags & C2FrameData::FLAG_END_OF_STREAM) != 0);
     bool hasPicture = false;
 

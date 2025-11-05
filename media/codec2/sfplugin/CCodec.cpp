@@ -2599,6 +2599,7 @@ void CCodec::signalResume() {
 }
 
 void CCodec::signalSetParameters(const sp<AMessage> &msg) {
+    ALOGI("%s:%d: params: {%s}", __func__, __LINE__, msg->debugString().c_str());
     std::shared_ptr<Codec2Client::Component> comp;
     auto checkState = [this, &comp] {
         Mutexed<State>::Locked state(mState);
