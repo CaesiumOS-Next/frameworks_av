@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ee2812_fcbb9cf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1141048
+      },
+      "writtenOn": "2025-11-05T17:36:28Z",
+      "side": 1,
+      "message": "Thank you for the feedback and fix! I cherry-picked the proposed change for code review and approval.",
+      "revId": "f8e0c37c6df507f80ac19a383e5db4cee272d735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
