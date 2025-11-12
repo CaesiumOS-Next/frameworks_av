@@ -8187,8 +8187,10 @@ uint32_t AudioPolicyManager::setOutputDevices(const char *caller,
 
         // Add half reported latency to delayMs when muteWaitMs is null in order
         // to avoid disordered sequence of muting volume and changing devices.
-        int actualDelayMs = !skipMuteDelay && muteWaitMs == 0
-                ? (delayMs + (outputDesc->latency() / 2)) : delayMs;
+        int actualDelayMs = delayMs;
+        if (!skipMuteDelay && muteWaitMs == 0 && outputDesc->isActive()) {
+            actualDelayMs += (outputDesc->latency() / 2);
+        }
         installPatch(__func__, patchHandle, outputDesc.get(), patchBuilder.patch(), actualDelayMs);
     }
 
