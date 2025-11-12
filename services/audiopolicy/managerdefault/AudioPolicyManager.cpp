@@ -8189,6 +8189,9 @@ uint32_t AudioPolicyManager::setOutputDevices(const char *caller,
         // to avoid disordered sequence of muting volume and changing devices.
         int actualDelayMs = !skipMuteDelay && muteWaitMs == 0
                 ? (delayMs + (outputDesc->latency() / 2)) : delayMs;
+        if (!outputDesc->isActive()) {
+            actualDelayMs = 0;
+        }
         installPatch(__func__, patchHandle, outputDesc.get(), patchBuilder.patch(), actualDelayMs);
     }
 
