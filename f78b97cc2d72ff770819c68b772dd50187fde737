@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc9a3af_32476cf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570284
+      },
+      "writtenOn": "2025-11-13T17:06:34Z",
+      "side": 1,
+      "message": "I think I might be missing the idea of this change.`setPortsVolume` is the new way of setting volumes which should work with replace_stream_bt_sco too",
+      "revId": "f78b97cc2d72ff770819c68b772dd50187fde737",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
