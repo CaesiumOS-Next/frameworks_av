@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50684ed8_a2e05eb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-11-14T17:13:40Z",
+      "side": 1,
+      "message": "@oscarazu@google.com Please provide a vote, this is a partial backport of Android 16 feature into Android 15 GSI.",
+      "revId": "3f6e3bffb570343cf33aaa977859f3bee3a43505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
