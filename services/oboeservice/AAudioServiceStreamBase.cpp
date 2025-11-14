@@ -35,6 +35,9 @@
 #include "AAudioService.h"
 #include "AAudioServiceEndpoint.h"
 #include "AAudioServiceStreamBase.h"
+#include <utils/ThreadDefs.h>
+#include <cutils/sched_policy.h>
+#include <sys/resource.h>
 
 using namespace android;  // TODO just import names needed
 using namespace aaudio;   // TODO just import names needed
@@ -417,7 +420,9 @@ void AAudioServiceStreamBase::run() {
     int64_t standbyTime = AudioClock::getNanoseconds() + IDLE_TIMEOUT_NANOS;
     // Balance the incStrong from when the thread was launched.
     holdStream->decStrong(nullptr);
-
+    // Increase the aaudio command thread priority, so that command executes faster.
+    int ret = setpriority(PRIO_PROCESS, 0, ANDROID_PRIORITY_AUDIO);
+    ALOGI("setpriority ANDROID_PRIORITY_AUDIO, ret = %d, errno=%d / %s", ret, errno, strerror(errno));
     // Taking mLock while starting the thread. All the operation must be able to
     // run with holding the lock.
     std::scoped_lock<std::mutex> _l(mLock);
