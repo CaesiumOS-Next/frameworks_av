@@ -16,6 +16,47 @@
       "message": "@oscarazu@google.com Please provide a vote, this is a partial backport of Android 16 feature into Android 15 GSI.",
       "revId": "3f6e3bffb570343cf33aaa977859f3bee3a43505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d707dfab_f87ddb65",
+        "filename": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1512908
+      },
+      "writtenOn": "2025-11-14T18:18:26Z",
+      "side": 1,
+      "message": "Internally this is \"\u003d\", we need to keep it as such. We could create a different CL to fix it later. I wonder if we want to do that since tags are inputted by first party app based on the \"key\u003dvalue\" format. Changing may cause some regressions.",
+      "range": {
+        "startLine": 359,
+        "startChar": 42,
+        "endLine": 359,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c83baf80_a00e43ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/engine/config/src/EngineConfig.cpp",
+              "range": {
+                "startLine": 359,
+                "startChar": 0,
+                "endLine": 360,
+                "endChar": 0
+              },
+              "replacement": "            std::string tags(bundleKey + \"\u003d\" + bundleValue);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3f6e3bffb570343cf33aaa977859f3bee3a43505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
