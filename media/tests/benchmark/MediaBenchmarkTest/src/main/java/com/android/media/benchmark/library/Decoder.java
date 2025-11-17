@@ -55,7 +55,7 @@ public class Decoder implements IBufferXfer.IReceiveBuffer {
     protected boolean mSignalledError;
 
     protected int mNumInFramesProvided;
-    protected int mNumInFramesRequired;
+    protected int mNumInFramesRequired = -1;
 
     protected int mNumOutputFrame;
     protected int mIndex;
@@ -247,6 +247,7 @@ public class Decoder implements IBufferXfer.IReceiveBuffer {
             mNumInFramesRequired = mInputBuffer.size();
         }
         long sTime = mStats.getCurTime();
+        mStats.setLaunchTimeNs(sTime);
         mCodec = createCodec(codecName, format);
         if (mCodec == null) {
             return DECODE_CREATE_ERROR;
