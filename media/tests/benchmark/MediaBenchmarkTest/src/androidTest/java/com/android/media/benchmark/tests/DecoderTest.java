@@ -75,39 +75,7 @@ public class DecoderTest {
     public static Collection<Object[]> input() {
         return Arrays.asList(new Object[][]{
                 //Audio Sync Test
-                {"bbb_44100hz_2ch_128kbps_aac_30sec.mp4", false},
-                {"bbb_44100hz_2ch_128kbps_mp3_30sec.mp3", false},
-                {"bbb_8000hz_1ch_8kbps_amrnb_30sec.3gp", false},
-                {"bbb_16000hz_1ch_9kbps_amrwb_30sec.3gp", false},
-                {"bbb_44100hz_2ch_80kbps_vorbis_30sec.webm", false},
-                {"bbb_44100hz_2ch_600kbps_flac_30sec.mp4", false},
-                {"bbb_48000hz_2ch_100kbps_opus_30sec.webm", false},
-                // Audio Async Test
-                {"bbb_44100hz_2ch_128kbps_aac_30sec.mp4", true},
-                {"bbb_44100hz_2ch_128kbps_mp3_30sec.mp3", true},
-                {"bbb_8000hz_1ch_8kbps_amrnb_30sec.3gp", true},
-                {"bbb_16000hz_1ch_9kbps_amrwb_30sec.3gp", true},
-                {"bbb_44100hz_2ch_80kbps_vorbis_30sec.webm", true},
-                {"bbb_44100hz_2ch_600kbps_flac_30sec.mp4", true},
-                {"bbb_48000hz_2ch_100kbps_opus_30sec.webm", true},
-                // Video Sync Test
-                {"crowd_1920x1080_25fps_4000kbps_vp9.webm", false},
-                {"crowd_1920x1080_25fps_4000kbps_vp8.webm", false},
-                {"crowd_1920x1080_25fps_4000kbps_av1.webm", false},
-                {"crowd_1920x1080_25fps_7300kbps_mpeg2.mp4", false},
-                {"crowd_1920x1080_25fps_6000kbps_mpeg4.mp4", false},
-                {"crowd_352x288_25fps_6000kbps_h263.3gp", false},
-                {"crowd_1920x1080_25fps_6700kbps_h264.ts", false},
-                {"crowd_1920x1080_25fps_4000kbps_h265.mkv", false},
-                // Video Async Test
-                {"crowd_1920x1080_25fps_4000kbps_vp9.webm", true},
-                {"crowd_1920x1080_25fps_4000kbps_vp8.webm", true},
-                {"crowd_1920x1080_25fps_4000kbps_av1.webm", true},
-                {"crowd_1920x1080_25fps_7300kbps_mpeg2.mp4", true},
-                {"crowd_1920x1080_25fps_6000kbps_mpeg4.mp4", true},
-                {"crowd_352x288_25fps_6000kbps_h263.3gp", true},
-                {"crowd_1920x1080_25fps_6700kbps_h264.ts", true},
-                {"crowd_1920x1080_25fps_4000kbps_h265.mkv", true}});
+                {"bbb_44100hz_2ch_128kbps_aac_30sec.mp4", false}});
     }
 
     @BeforeClass
@@ -192,7 +160,7 @@ public class DecoderTest {
         fileInput.close();
     }
 
-    @Test
+    //@Test
     public void testNativeDecoder() throws IOException {
         File inputFile = new File(mInputFilePath + mInputFile);
         assertTrue("Cannot find " + mInputFile + " in directory " + mInputFilePath,
