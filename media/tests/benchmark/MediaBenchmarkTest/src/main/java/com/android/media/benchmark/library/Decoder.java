@@ -55,7 +55,7 @@ public class Decoder implements IBufferXfer.IReceiveBuffer {
     protected boolean mSignalledError;
 
     protected int mNumInFramesProvided;
-    protected int mNumInFramesRequired;
+    protected int mNumInFramesRequired = -1;
 
     protected int mNumOutputFrame;
     protected int mIndex;
@@ -179,7 +179,7 @@ public class Decoder implements IBufferXfer.IReceiveBuffer {
         @Override
         public void onOutputBufferAvailable(@NonNull MediaCodec mediaCodec,
                 int outputBufferId, @NonNull MediaCodec.BufferInfo bufferInfo) {
-            mStats.addOutputTime();
+            mStats.addOutputTime(bufferInfo.presentationTimeUs);
             onOutputAvailable(mediaCodec, outputBufferId, bufferInfo);
             if (mSawOutputEOS) {
                 synchronized (mLock) { mLock.notify(); }
@@ -247,6 +247,7 @@ public class Decoder implements IBufferXfer.IReceiveBuffer {
             mNumInFramesRequired = mInputBuffer.size();
         }
         long sTime = mStats.getCurTime();
+        mStats.setLaunchTimeNs(sTime);
         mCodec = createCodec(codecName, format);
         if (mCodec == null) {
             return DECODE_CREATE_ERROR;
@@ -314,7 +315,7 @@ public class Decoder implements IBufferXfer.IReceiveBuffer {
                         return DECODE_DECODER_ERROR;
                     }
                 } else {
-                    mStats.addOutputTime();
+                    mStats.addOutputTime(outputBufferInfo.presentationTimeUs);
                     if (DEBUG) {
                         Log.d(TAG, "Dequeue O/P buffer with BufferID " + outputBufferId);
                     }
