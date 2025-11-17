@@ -57,65 +57,32 @@ public class DecoderTest {
             InstrumentationRegistry.getInstrumentation().getTargetContext();
     private static final String mInputFilePath = mContext.getString(R.string.input_file_path);
     private static final String mOutputFilePath = mContext.getString(R.string.output_file_path);
-    private static final String mStatsFile =
-            mContext.getExternalFilesDir(null) + "/Decoder." + System.currentTimeMillis() + ".csv";
     private static final String TAG = "DecoderTest";
     private static final long PER_TEST_TIMEOUT_MS = 60000;
     private static final boolean DEBUG = false;
     private static final boolean WRITE_OUTPUT = false;
-    private String mInputFile;
-    private boolean mAsyncMode;
 
-    public DecoderTest(String inputFile, boolean asyncMode) {
+    private final String mInputFile;
+    private final String mMediaType;
+    private final boolean mAsyncMode;
+
+    public DecoderTest(String inputFile, String mediaType, boolean asyncMode) {
         this.mInputFile = inputFile;
+        this.mMediaType = mediaType;
         this.mAsyncMode = asyncMode;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> input() {
         return Arrays.asList(new Object[][]{
-                //Audio Sync Test
-                {"bbb_44100hz_2ch_128kbps_aac_30sec.mp4", false},
-                {"bbb_44100hz_2ch_128kbps_mp3_30sec.mp3", false},
-                {"bbb_8000hz_1ch_8kbps_amrnb_30sec.3gp", false},
-                {"bbb_16000hz_1ch_9kbps_amrwb_30sec.3gp", false},
-                {"bbb_44100hz_2ch_80kbps_vorbis_30sec.webm", false},
-                {"bbb_44100hz_2ch_600kbps_flac_30sec.mp4", false},
-                {"bbb_48000hz_2ch_100kbps_opus_30sec.webm", false},
-                // Audio Async Test
-                {"bbb_44100hz_2ch_128kbps_aac_30sec.mp4", true},
-                {"bbb_44100hz_2ch_128kbps_mp3_30sec.mp3", true},
-                {"bbb_8000hz_1ch_8kbps_amrnb_30sec.3gp", true},
-                {"bbb_16000hz_1ch_9kbps_amrwb_30sec.3gp", true},
-                {"bbb_44100hz_2ch_80kbps_vorbis_30sec.webm", true},
-                {"bbb_44100hz_2ch_600kbps_flac_30sec.mp4", true},
-                {"bbb_48000hz_2ch_100kbps_opus_30sec.webm", true},
-                // Video Sync Test
-                {"crowd_1920x1080_25fps_4000kbps_vp9.webm", false},
-                {"crowd_1920x1080_25fps_4000kbps_vp8.webm", false},
-                {"crowd_1920x1080_25fps_4000kbps_av1.webm", false},
-                {"crowd_1920x1080_25fps_7300kbps_mpeg2.mp4", false},
-                {"crowd_1920x1080_25fps_6000kbps_mpeg4.mp4", false},
-                {"crowd_352x288_25fps_6000kbps_h263.3gp", false},
-                {"crowd_1920x1080_25fps_6700kbps_h264.ts", false},
-                {"crowd_1920x1080_25fps_4000kbps_h265.mkv", false},
-                // Video Async Test
-                {"crowd_1920x1080_25fps_4000kbps_vp9.webm", true},
-                {"crowd_1920x1080_25fps_4000kbps_vp8.webm", true},
-                {"crowd_1920x1080_25fps_4000kbps_av1.webm", true},
-                {"crowd_1920x1080_25fps_7300kbps_mpeg2.mp4", true},
-                {"crowd_1920x1080_25fps_6000kbps_mpeg4.mp4", true},
-                {"crowd_352x288_25fps_6000kbps_h263.3gp", true},
-                {"crowd_1920x1080_25fps_6700kbps_h264.ts", true},
-                {"crowd_1920x1080_25fps_4000kbps_h265.mkv", true}});
-    }
-
-    @BeforeClass
-    public static void writeStatsHeaderToFile() throws IOException {
-        Stats mStats = new Stats();
-        boolean status = mStats.writeStatsHeader(mStatsFile);
-        assertTrue("Unable to open stats file for writing!", status);
-        Log.d(TAG, "Saving Benchmark results in: " + mStatsFile);
+                //filename, mediatype, sync/async
+                {"meridian_b128kbps_rl64_dseOFF_av_aaclc.mp4", MediaFormat.MIMETYPE_AUDIO_AAC,
+                        false},
+                {"meridian_b16kbps_rl64_dseOFF_av_xheaac_v2.mp4", MediaFormat.MIMETYPE_AUDIO_AAC,
+                        false},
+                {"meridian_b128kbps_rl64_dseOFF_vorbis.mp4", MediaFormat.MIMETYPE_AUDIO_VORBIS,
+                        false},
+        });
     }
 
     @Test(timeout = PER_TEST_TIMEOUT_MS)
@@ -130,10 +97,12 @@ public class DecoderTest {
         assertTrue("Extraction failed. No tracks for file: " + mInputFile, (trackCount > 0));
         ArrayList<ByteBuffer> inputBuffer = new ArrayList<>();
         ArrayList<MediaCodec.BufferInfo> frameInfo = new ArrayList<>();
+        String prefix = mContext.getExternalFilesDir(null).toString() + "/";
         for (int currentTrack = 0; currentTrack < trackCount; currentTrack++) {
-            extractor.selectExtractorTrack(currentTrack);
             MediaFormat format = extractor.getFormat(currentTrack);
             String mime = format.getString(MediaFormat.KEY_MIME);
+            if (!mime.equalsIgnoreCase(mMediaType)) continue;
+            extractor.selectExtractorTrack(currentTrack);
             List<String> mediaCodecs = CodecUtils.selectCodecs(mime, false);
             assertTrue("No suitable codecs found for file: " + mInputFile + " track : " +
                     currentTrack + " mime: " + mime, (mediaCodecs.size() > 0));
@@ -154,7 +123,10 @@ public class DecoderTest {
                             bufInfo.presentationTimeUs + " size = " + bufInfo.size);
                 }
             } while (sampleSize > 0);
+
             for (String codecName : mediaCodecs) {
+                String mStatsFile =
+                        prefix + System.currentTimeMillis() + mInputFile + codecName + ".csv";
                 FileOutputStream decodeOutputStream = null;
                 if (WRITE_OUTPUT) {
                     if (!Paths.get(mOutputFilePath).toFile().exists()) {
@@ -189,33 +161,6 @@ public class DecoderTest {
             frameInfo.clear();
         }
         extractor.deinitExtractor();
-        fileInput.close();
-    }
-
-    @Test
-    public void testNativeDecoder() throws IOException {
-        File inputFile = new File(mInputFilePath + mInputFile);
-        assertTrue("Cannot find " + mInputFile + " in directory " + mInputFilePath,
-                inputFile.exists());
-        FileInputStream fileInput = new FileInputStream(inputFile);
-        FileDescriptor fileDescriptor = fileInput.getFD();
-        Extractor extractor = new Extractor();
-        int trackCount = extractor.setUpExtractor(fileDescriptor);
-        assertTrue("Extraction failed. No tracks for file: ", trackCount > 0);
-        for (int currentTrack = 0; currentTrack < trackCount; currentTrack++) {
-            extractor.selectExtractorTrack(currentTrack);
-            MediaFormat format = extractor.getFormat(currentTrack);
-            String mime = format.getString(MediaFormat.KEY_MIME);
-            List<String> mediaCodecs = CodecUtils.selectCodecs(mime, false);
-            for (String codecName : mediaCodecs) {
-                Log.i("Test: %s\n", mInputFile);
-                Native nativeDecoder = new Native();
-                int status = nativeDecoder.Decode(
-                        mInputFilePath, mInputFile, mStatsFile, codecName, mAsyncMode);
-                assertEquals("Decoder returned error " + status + " for file: " + mInputFile, 0,
-                        status);
-            }
-        }
         fileInput.close();
     }
 }

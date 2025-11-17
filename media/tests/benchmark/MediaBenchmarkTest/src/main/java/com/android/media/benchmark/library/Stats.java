@@ -23,6 +23,7 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ import java.util.List;
  */
 public class Stats {
     private static final String TAG = "Stats";
+    private long mLaunchTimeNs;
     private long mInitTimeNs;
     private long mDeInitTimeNs;
     private long mStartTimeNs;
@@ -51,11 +53,14 @@ public class Stats {
         mFrameSizes = new ArrayList<>();
         mInputTimer = new ArrayList<>();
         mOutputTimer = new ArrayList<>();
+        mLaunchTimeNs = 0;
         mInitTimeNs = 0;
         mDeInitTimeNs = 0;
     }
 
     public long getCurTime() { return System.nanoTime(); }
+
+    public void setLaunchTimeNs(long launchTimeNs) { mLaunchTimeNs = launchTimeNs; }
 
     public void setInitTime(long initTime) { mInitTimeNs = initTime; }
 
@@ -112,6 +117,22 @@ public class Stats {
     }
 
     /**
+     * Format time in appropriate units
+     */
+    private String formatTime(long nanoseconds) {
+        if (nanoseconds == 0) return "0";
+        double ms = nanoseconds / 1000000.0;
+        return String.format("%.3f", ms);
+    }
+
+    private String formatTime(double nanoseconds) {
+        if (nanoseconds == 0) return "0";
+        double ms = nanoseconds / 1000000.0;
+        return String.format("%.3f", ms);
+    }
+
+
+    /**
      * Writes the stats header to a file
      * <p>
      * \param statsFile    file where the stats data is to be written
@@ -121,12 +142,12 @@ public class Stats {
         FileOutputStream out = new FileOutputStream(outputFile, true);
         if (!outputFile.exists())
             return false;
-        String statsHeader =
+        /*String statsHeader =
                 "currentTime, fileName, operation, componentName, NDK/SDK, sync/async, setupTime, "
                         + "destroyTime, minimumTime, maximumTime, "
                         + "averageTime, timeToProcess1SecContent, totalBytesProcessedPerSec, "
                         + "timeToFirstFrame, totalSizeInBytes, totalTime\n";
-        out.write(statsHeader.getBytes());
+        out.write(statsHeader.getBytes());*/
         out.close();
         return true;
     }
@@ -144,52 +165,67 @@ public class Stats {
      */
     public void dumpStatistics(String inputReference, String operation, String componentName,
             String mode, long durationUs, String statsFile) throws IOException {
-        if (mOutputTimer.size() == 0) {
-            Log.e(TAG, "No output produced");
-            return;
-        }
-        long totalTimeTakenNs = getTotalTime();
-        long timeTakenPerSec = (totalTimeTakenNs * 1000000) / durationUs;
-        long timeToFirstFrameNs = mOutputTimer.get(0) - mStartTimeNs;
-        long size = getTotalSize();
-        // get min and max output intervals.
-        long intervalNs;
-        long minTimeTakenNs = Long.MAX_VALUE;
-        long maxTimeTakenNs = 0;
-        long prevIntervalNs = mStartTimeNs;
-        for (int idx = 0; idx < mOutputTimer.size() - 1; idx++) {
-            intervalNs = mOutputTimer.get(idx) - prevIntervalNs;
-            prevIntervalNs = mOutputTimer.get(idx);
-            if (minTimeTakenNs > intervalNs) {
-                minTimeTakenNs = intervalNs;
-            } else if (maxTimeTakenNs < intervalNs) {
-                maxTimeTakenNs = intervalNs;
-            }
-        }
-
-        // Write the stats row data to file
-        String rowData = "";
-        rowData += System.nanoTime() + ", ";
-        rowData += inputReference + ", ";
-        rowData += operation + ", ";
-        rowData += componentName + ", ";
-        rowData += "SDK, ";
-        rowData += mode + ", ";
-        rowData += mInitTimeNs + ", ";
-        rowData += mDeInitTimeNs + ", ";
-        rowData += minTimeTakenNs + ", ";
-        rowData += maxTimeTakenNs + ", ";
-        rowData += totalTimeTakenNs / mOutputTimer.size() + ", ";
-        rowData += timeTakenPerSec + ", ";
-        rowData += (size * 1000000000) / totalTimeTakenNs + ", ";
-        rowData += timeToFirstFrameNs + ", ";
-        rowData += size + ", ";
-        rowData += totalTimeTakenNs + "\n";
-
         File outputFile = new File(statsFile);
         FileOutputStream out = new FileOutputStream(outputFile, true);
-        assert outputFile.exists() : "Failed to open the stats file for writing!";
-        out.write(rowData.getBytes());
+        StringBuilder summary = new StringBuilder();
+        summary.append(String.format("filename: %s\ncodec name: %s\nmode: %s\n", inputReference,
+                componentName, mode));
+        summary.append(String.format(
+                "Start Time ms (Time taken to create configure start the codec and get first "
+                        + "valid output buffer to queue):, %s\n -> Time taken to create configure and "
+                        + "start codec (ms):, %s\n ->Time Taken to get the first valid output buffer to "
+                        + "queue after start (ms):, %s\n",
+                formatTime(mOutputTimer.getFirst() - mLaunchTimeNs), formatTime(mInitTimeNs),
+                formatTime(mOutputTimer.getFirst() - mStartTimeNs)));
+
+        StringBuilder log = new StringBuilder();
+        log.append("\n, ");
+        log.append("index, input enqueue time ms, output dequeue time ms, enqueue successive diff"
+                + " ms, dequeue successive diff ms \n");
+        int inputSize = mInputTimer.size();
+        int outputSize = mOutputTimer.size();
+        log.append(String.format(",%d, %s, %s\n", 0, formatTime(mInputTimer.getFirst()),
+                formatTime(mOutputTimer.getFirst())));
+        double[] enqueueTimes = new double[3];
+        Arrays.fill(enqueueTimes, 0);
+        enqueueTimes[0] = Float.MAX_VALUE;
+        double[] dequeueTimes = new double[3];
+        Arrays.fill(dequeueTimes, 0);
+        dequeueTimes[0] = Float.MAX_VALUE;
+        int index;
+        for (index = 1; index < (Math.max(inputSize, outputSize) - 1); index++) {
+            long inputTimerLast = mInputTimer.get(Math.min(index - 1, inputSize - 1));
+            long inputTimerCurrent = mInputTimer.get(Math.min(index, inputSize - 1));
+            long enqueueDiff = (inputTimerCurrent - inputTimerLast);
+            if (enqueueDiff != 0) {
+                enqueueTimes[0] = Math.min(enqueueTimes[0], enqueueDiff);
+            }
+            enqueueTimes[1] = Math.max(enqueueTimes[1], enqueueDiff);
+            enqueueTimes[2] += enqueueDiff;
+            long outputTimerLast = mOutputTimer.get(Math.min(index - 1, outputSize - 1));
+            long outputTimerCurrent = mOutputTimer.get(Math.min(index, outputSize - 1));
+            long dequeueDiff = (outputTimerCurrent - outputTimerLast);
+            if (dequeueDiff != 0) {
+                dequeueTimes[0] = Math.min(dequeueTimes[0], dequeueDiff);
+            }
+            dequeueTimes[1] = Math.max(dequeueTimes[1], dequeueDiff);
+            dequeueTimes[2] += dequeueDiff;
+            log.append(String.format(",%d, %s, %s, %s, %s\n", index, formatTime(inputTimerCurrent),
+                    formatTime(outputTimerCurrent), formatTime(enqueueDiff),
+                    formatTime(dequeueDiff)));
+        }
+        enqueueTimes[2] /= index;
+        dequeueTimes[2] /= index;
+        summary.append(String.format("enqueue times ms : \nmin =, %s\n max =, %s\n avg =, %s\n",
+                formatTime(enqueueTimes[0]), formatTime(enqueueTimes[1]),
+                formatTime(enqueueTimes[2])));
+        summary.append(String.format("dequeue times ms : \nmin =, %s\n max =, %s\n avg =, %s\n",
+                formatTime(dequeueTimes[0]), formatTime(dequeueTimes[1]),
+                formatTime(dequeueTimes[2])));
+        String msg = summary.toString();
+        out.write(msg.getBytes());
+        msg = log.toString();
+        out.write(msg.getBytes());
         out.close();
     }
 }
