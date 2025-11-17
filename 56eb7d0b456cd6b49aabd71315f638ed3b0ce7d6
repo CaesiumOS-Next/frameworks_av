@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb1acf06_c9078f04",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8192,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-11-17T10:35:23Z",
+      "side": 1,
+      "message": "the fact that the output is inactive should only affect the addition latency added by line 8190. Any decision about ignoring delayMs or skipMuteDelay should be made by the callers",
+      "range": {
+        "startLine": 8192,
+        "startChar": 0,
+        "endLine": 8192,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3ff51400_f1d962f3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+              "range": {
+                "startLine": 8190,
+                "startChar": 0,
+                "endLine": 8194,
+                "endChar": 0
+              },
+              "replacement": "        int actualDelayMs \u003d delayMs;\n        if (!skipMuteDelay \u0026\u0026 muteWaitMs \u003d\u003d 0 \u0026\u0026 outputDesc-\u003eisActive()) {\n            actualDelayMs +\u003d (outputDesc-\u003elatency() / 2);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "56eb7d0b456cd6b49aabd71315f638ed3b0ce7d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
