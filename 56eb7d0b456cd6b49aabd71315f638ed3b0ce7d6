@@ -40,6 +40,30 @@
       ],
       "revId": "56eb7d0b456cd6b49aabd71315f638ed3b0ce7d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a8fd09_a204f123",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8192,
+      "author": {
+        "id": 1969302
+      },
+      "writtenOn": "2025-11-17T13:31:58Z",
+      "side": 1,
+      "message": "Thank you for your reply and corrections. I have made the changes according to your instructions.",
+      "parentUuid": "bb1acf06_c9078f04",
+      "range": {
+        "startLine": 8192,
+        "startChar": 0,
+        "endLine": 8192,
+        "endChar": 38
+      },
+      "revId": "56eb7d0b456cd6b49aabd71315f638ed3b0ce7d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
