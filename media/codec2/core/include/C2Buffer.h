@@ -1677,7 +1677,7 @@ struct C2PlaneInfo {
     inline constexpr ssize_t maxOffset(uint32_t width, uint32_t height) const {
         ssize_t offs = (allocatedDepth + 7) >> 3;
         if (width > 0 && colInc > 0) {
-            offs += colInc * (ssize_t)(width - 1);
+            offs += rowInc - colInc;
         }
         if (height > 0 && rowInc > 0) {
             offs += rowInc * (ssize_t)(height - 1);
