@@ -16,6 +16,24 @@
       "message": "Please also add the bug number for cherry-picking this change",
       "revId": "8836679cbc30c316ae882734a2706d3d76a2362d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da775a24_19c8422e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2013250
+      },
+      "writtenOn": "2025-11-21T12:07:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57b0b960_13c760b9",
+      "revId": "8836679cbc30c316ae882734a2706d3d76a2362d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
