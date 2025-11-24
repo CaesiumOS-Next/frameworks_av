@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ff5bc5_9f4a9c9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583555
+      },
+      "writtenOn": "2025-11-24T13:13:38Z",
+      "side": 1,
+      "message": "Hi Sungtak, this is a cherry-pick for GSI. Could you review? Thanks",
+      "revId": "393df9f260b15657435c4de070031016b02cec20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
