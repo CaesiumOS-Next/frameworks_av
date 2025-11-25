@@ -49,6 +49,7 @@
 #include <linux/futex.h>
 #include <math.h>
 #include <sys/syscall.h>
+#include <cutils/properties.h> // for property_get
 
 // ----------------------------------------------------------------------------
 
@@ -58,7 +59,7 @@
 // are so verbose that we want to suppress them even when we have ALOG_ASSERT
 // turned on.  Do not uncomment the #def below unless you really know what you
 // are doing and want to see all of the extremely verbose messages.
-//#define VERY_VERY_VERBOSE_LOGGING
+#define VERY_VERY_VERBOSE_LOGGING
 #ifdef VERY_VERY_VERBOSE_LOGGING
 #define ALOGVV ALOGV
 #else
@@ -546,6 +547,9 @@ TrackHandle::~TrackHandle() {
     // will be freed from the main thread once all pending buffers have
     // been played. Unless it's not in the active track list, in which
     // case we free everything now...
+    ALOGW("TrackHandle dtor: track=%p id=%d state=%s terminated=%d",
+          mTrack.get(), mTrack->id(), mTrack->getTrackStateAsString(),
+          mTrack->isTerminated());
     mTrack->destroy();
 }
 
@@ -1101,6 +1105,9 @@ void Track::destroy()
     // On the other hand, as long as Track::destroy() is only called by
     // TrackHandle destructor, the TrackHandle still holds a strong ref on
     // this Track with its member mTrack.
+    ALOGW("%s(%d): state=%s isSpatialized=%d isOffloaded=%d isFastTrack=%d isDirect=%d",
+          __func__, mId, getTrackStateAsString(),
+          isSpatialized(), isOffloaded(), isFastTrack(), isDirect());
     sp<Track> keep(this);
     { // scope for mLock
         bool wasActive = false;
@@ -1273,6 +1280,22 @@ status_t Track::getNextBuffer(AudioBufferProvider::Buffer* buffer)
     status_t status = mServerProxy->obtainBuffer(&buf);
     buffer->frameCount = buf.mFrameCount;
     buffer->raw = buf.mRaw;
+
+    // Dump track raw data before mixer processing
+    char prop[PROPERTY_VALUE_MAX];
+    property_get("proxy.audiotrack.dump.before_effect", prop, NULL);
+    bool dump_track = !strcmp(prop, "true") || (atoi(prop) == 1);
+    if (dump_track && buffer->raw != nullptr && buffer->frameCount > 0) {
+        char fileName[128];
+        snprintf(fileName, sizeof(fileName), "/data/misc/audioserver/track%d.pcm", mId);
+        FILE *fd = fopen(fileName, "ab+");
+        if (fd != nullptr) {
+            size_t dumpSize = buffer->frameCount * mFrameSize;
+            fwrite(buffer->raw, 1, dumpSize, fd);
+            fclose(fd);
+        }
+    }
+
     if (buf.mFrameCount == 0 && !isStopping() && !isPausing()
         && !isStopped() && !isPaused() && !isOffloaded()) {
         ALOGV("%s(%d): underrun,  framesReady(%zu) < framesDesired(%zd), state: %d",

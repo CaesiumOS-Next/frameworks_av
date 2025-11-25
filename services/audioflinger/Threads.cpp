@@ -108,7 +108,7 @@
 // are so verbose that we want to suppress them even when we have ALOG_ASSERT
 // turned on.  Do not uncomment the #def below unless you really know what you
 // are doing and want to see all of the extremely verbose messages.
-//#define VERY_VERY_VERBOSE_LOGGING
+#define VERY_VERY_VERBOSE_LOGGING
 #ifdef VERY_VERY_VERBOSE_LOGGING
 #define ALOGVV ALOGV
 #else
@@ -3043,6 +3043,11 @@ bool PlaybackThread::destroyTrack_l(const sp<IAfTrack>& track)
     // active tracks are removed by threadLoop()
     bool trackActive = (mActiveTracks.count(track) > 0);
     track->setState(IAfTrackBase::STOPPED);
+    ALOGW("destroyTrack_l: id=%d active=%d type(fast=%d offload=%d direct=%d) -> %s",
+          track->id(), trackActive, track->isFastTrack(), track->isOffloaded(),
+          track->isDirect(),
+          (trackActive && (track->isFastTrack() || track->isOffloaded() || track->isDirect()))
+          ? "STOPPING_1" : "STOPPED");
     if (!trackActive) {
         removeTrack_l(track);
     } else if (track->isFastTrack() || track->isOffloaded() || track->isDirect()) {
@@ -4321,6 +4326,33 @@ NO_THREAD_SAFETY_ANALYSIS  // manual locking of AudioFlinger
 
             // only process effects if we're going to write
             if (mSleepTimeUs == 0 && mType != OFFLOAD) {
+                // Dump effect chain input buffer before processing start
+                char prop_before[PROPERTY_VALUE_MAX];
+                property_get("proxy.audiotrack.dump.before_effect", prop_before, NULL);
+
+                bool dump_before_effect = !strcmp(prop_before, "true") || (atoi(prop_before) == 1);
+
+                if (dump_before_effect && mType == SPATIALIZER && effectChains.size() > 0) {
+                    for (size_t i = 0; i < effectChains.size(); i++) {
+                        float *inBuf = effectChains[i]->inBuffer();
+                        if (inBuf != nullptr) {
+                            char fileName[128];
+                            snprintf(fileName, sizeof(fileName),
+                                    "/data/misc/audioserver/before_effect_session%d.pcm",
+                                    effectChains[i]->sessionId());
+                            FILE *fd = fopen(fileName, "ab+");
+                            if (fd != nullptr) {
+                                // For SPATIALIZER, use mMixerChannelMask for effect chain input
+                                uint32_t channelCount = audio_channel_count_from_out_mask(mMixerChannelMask);
+                                size_t dumpSize = mNormalFrameCount * channelCount * sizeof(float);
+                                fwrite((char *)inBuf, 1, dumpSize, fd);
+                                fclose(fd);
+                            }
+                        }
+                    }
+                }
+                // Dump effect chain input buffer before processing end
+
                 for (size_t i = 0; i < effectChains.size(); i ++) {
                     effectChains[i]->process_l();
                     // TODO: Write haptic data directly to sink buffer when mixing.
@@ -5906,6 +5938,11 @@ PlaybackThread::mixer_state MixerThread::prepareTracks_l(
         }
 
         size_t framesReady = track->framesReady();
+
+        ALOGI("track(%d) state=%s framesReady=%zu minFrames=%u mixerStatus=%d",trackId, track->getTrackStateAsString(),
+              framesReady, minFrames, mMixerStatus);
+
+
         if (ATRACE_ENABLED()) [[unlikely]] {
             ATRACE_INT(std::string(AUDIO_TRACE_PREFIX_AUDIO_TRACK_NRDY)
                     .append(track->getTraceSuffix()).c_str(), framesReady);
@@ -6224,6 +6261,7 @@ PlaybackThread::mixer_state MixerThread::prepareTracks_l(
             // previous audio buffer again to effects
             chain = getEffectChain_l(track->sessionId());
             if (chain != 0) {
+                ALOGD("clear per session effect chain input buffer");
                 chain->clearInputBuffer();
             }
 
@@ -6335,6 +6373,7 @@ PlaybackThread::mixer_state MixerThread::prepareTracks_l(
         if (mAudioMixer->exists(trackId)) { // Normal tracks here, fast tracks in FastMixer.
             mAudioMixer->setBufferProvider(trackId, nullptr /* bufferProvider */);
         }
+        ALOGI("remove track (%d)",trackId);
     }
 
     // remove all the tracks that need to be...

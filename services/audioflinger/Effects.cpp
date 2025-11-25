@@ -2342,6 +2342,8 @@ void EffectChain::clearInputBuffer_l()
             * mEffectCallback->inChannelCount(mEffects[0]->id());
 
     memset(mInBuffer->audioBuffer()->raw, 0, mEffectCallback->frameCount() * frameSize);
+    ALOGD("clearInputBuffer_l: session=%d channelCount=%u bufferSize=%zu",
+        mSessionId, mEffectCallback->inChannelCount(mEffects[0]->id()), mEffectCallback->frameCount() * frameSize);
     mInBuffer->commit();
 }
 
