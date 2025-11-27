@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "521db6f7_6d43868d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133568
+      },
+      "writtenOn": "2025-11-27T06:24:54Z",
+      "side": 1,
+      "message": "See https://android-review.googlesource.com/c/platform/frameworks/av/+/1420028 for previous related review that has been abandoned.",
+      "revId": "0aa8c26cacd2edd151358a4ea0b10233505ba3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
