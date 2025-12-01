@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0fc5bff_0a3286b5",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-12-01T17:13:30Z",
+      "side": 0,
+      "message": "maybe `mBufferSizeFrames` need to be updated with `updateMmapBufferDescriptor`? @mnaganov@google.com",
+      "range": {
+        "startLine": 700,
+        "startChar": 40,
+        "endLine": 700,
+        "endChar": 59
+      },
+      "revId": "fe21e33c9a5e6a38723efde55464b6343450555e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
