@@ -697,7 +697,7 @@ status_t StreamHalAidl::createMmapBuffer(int32_t minSizeFrames __unused,
     }
     const MmapBufferDescriptor& bufferDescriptor = mContext.getMmapBufferDescriptor();
     info->shared_memory_fd = bufferDescriptor.sharedMemory.fd.get();
-    info->buffer_size_frames = mContext.getBufferSizeFrames();
+    info->buffer_size_frames = bufferDescriptor.sharedMemory.size / mContext.getFrameSizeBytes();
     info->burst_size_frames = bufferDescriptor.burstSizeFrames;
     info->flags = static_cast<audio_mmap_buffer_flag>(bufferDescriptor.flags);
     return OK;
