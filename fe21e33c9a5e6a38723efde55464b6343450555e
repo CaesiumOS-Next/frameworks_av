@@ -22,6 +22,30 @@
       },
       "revId": "fe21e33c9a5e6a38723efde55464b6343450555e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30b1bdc5_f6ea0c3c",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-12-01T17:26:42Z",
+      "side": 0,
+      "message": "Agree. The information in the context needs to be consistent.",
+      "parentUuid": "f0fc5bff_0a3286b5",
+      "range": {
+        "startLine": 700,
+        "startChar": 40,
+        "endLine": 700,
+        "endChar": 59
+      },
+      "revId": "fe21e33c9a5e6a38723efde55464b6343450555e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
