@@ -34,6 +34,24 @@
       "parentUuid": "e0c145ee_cbd58925",
       "revId": "5a6e471151dd9db2d4846594c887f555f92c5841",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a83c275b_8ffda56a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-12-02T15:57:40Z",
+      "side": 1,
+      "message": "please use standard Bug stanza syntax:\nBug: 455911378",
+      "parentUuid": "e7771058_f3e5d8b9",
+      "revId": "5a6e471151dd9db2d4846594c887f555f92c5841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
