@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dae388e_09328172",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2025-12-02T10:05:33Z",
+      "side": 1,
+      "message": "This was merged internally. We can abandon unless not yet in AOSP",
+      "revId": "ac277ce3ffa11d3f8f0acdcc4442a71b0675482b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
