@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ff2a3f_83d7c8e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-12-02T18:30:23Z",
+      "side": 1,
+      "message": "I will merge this via internal `main`",
+      "revId": "dc5e7224c9599f8b9ca2bda73ae67cfb18d160de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
