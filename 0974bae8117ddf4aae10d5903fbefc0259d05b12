@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab36a8f0_99335c43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-12-04T00:28:48Z",
+      "side": 1,
+      "message": "Please also add `Flag: EXEMPT BUGFIX` so that I will not have to touch your CL while cherry-picking to internal `main`, this will speed up submission.",
+      "revId": "0974bae8117ddf4aae10d5903fbefc0259d05b12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef9c62d_fdd1c9d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-12-04T00:28:48Z",
+      "side": 1,
+      "message": "Thank you Dean, just two minor comments and I will be able to submit.",
+      "revId": "0974bae8117ddf4aae10d5903fbefc0259d05b12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7c4438_3cff9c09",
+        "filename": "media/libaudiohal/impl/StreamHalAidl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-12-04T00:28:48Z",
+      "side": 1,
+      "message": "add `const`",
+      "range": {
+        "startLine": 295,
+        "startChar": 38,
+        "endLine": 295,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fcd47ebf_a273423b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libaudiohal/impl/StreamHalAidl.h",
+              "range": {
+                "startLine": 295,
+                "startChar": 0,
+                "endLine": 296,
+                "endChar": 0
+              },
+              "replacement": "    int32_t getAidlInterfaceVersion() const { return mAidlInterfaceVersion; }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0974bae8117ddf4aae10d5903fbefc0259d05b12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
