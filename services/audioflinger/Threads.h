@@ -477,6 +477,7 @@ public:
         audio_utils::lock_guard _l(mutex());
         return hasAudioSession_l(sessionId);
     }
+    bool hasSpatializedTrack_l(audio_session_t sessionId) const override REQUIRES(mutex()) = 0;
 
                 template <typename T>
     uint32_t hasAudioSession_l(audio_session_t sessionId, const T& tracks) const
@@ -503,6 +504,19 @@ public:
                         }
                     }
                     return result;
+                }
+
+                template <typename T>
+    bool hasSpatializedTrack_l(audio_session_t sessionId, const T& tracks) const
+            REQUIRES(mutex()) {
+                    for (size_t i = 0; i < tracks.size(); ++i) {
+                        const sp<IAfTrackBase>& track = tracks[i];
+                        if (sessionId == track->sessionId() && !track->isInvalid()
+                                && track->isSpatialized()) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
 
                 // the value returned by default implementation is not important as the
@@ -1245,6 +1259,9 @@ public:
     size_t removeEffectChain_l(const sp<IAfEffectChain>& chain) final REQUIRES(mutex());
     uint32_t hasAudioSession_l(audio_session_t sessionId) const final REQUIRES(mutex()) {
                             return ThreadBase::hasAudioSession_l(sessionId, mTracks);
+                        }
+    bool hasSpatializedTrack_l(audio_session_t sessionId) const final REQUIRES(mutex()) {
+                            return ThreadBase::hasSpatializedTrack_l(sessionId, mTracks);
                         }
     product_strategy_t getStrategyForSession_l(audio_session_t sessionId) const final
             REQUIRES(mutex());
@@ -2140,6 +2157,9 @@ public:
     uint32_t hasAudioSession_l(audio_session_t sessionId) const override REQUIRES(mutex()) {
                          return ThreadBase::hasAudioSession_l(sessionId, mTracks);
                      }
+    bool hasSpatializedTrack_l(audio_session_t sessionId) const override REQUIRES(mutex()) {
+                        return ThreadBase::hasSpatializedTrack_l(sessionId, mTracks);
+                    }
 
     status_t setSyncEvent(const sp<audioflinger::SyncEvent>& event) override
             EXCLUDES_ThreadBase_Mutex;
@@ -2376,6 +2396,9 @@ class MmapThread : public ThreadBase, public virtual IAfMmapThread
     uint32_t hasAudioSession_l(audio_session_t sessionId) const override REQUIRES(mutex()) {
                                 // Note: using mActiveTracks as no mTracks here.
                                 return ThreadBase::hasAudioSession_l(sessionId, mActiveTracks);
+                            }
+    bool hasSpatializedTrack_l(audio_session_t sessionId) const override REQUIRES(mutex()) {
+                                return ThreadBase::hasSpatializedTrack_l(sessionId, mActiveTracks);
                             }
     status_t setSyncEvent(const sp<audioflinger::SyncEvent>& event) final;
     bool isValidSyncEvent(const sp<audioflinger::SyncEvent>& event) const final;

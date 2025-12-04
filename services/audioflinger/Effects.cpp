@@ -3284,8 +3284,9 @@ NO_THREAD_SAFETY_ANALYSIS
                 return t->channelMask();
             }
         } else if (!audio_is_global_session(c->sessionId())) {
-            if ((t->hasAudioSession_l(c->sessionId())
-                    & IAfThreadBase::SPATIALIZED_SESSION) != 0) {
+            // For per-session effects, use hasSpatializedTrack_l to get the correct
+            // channel mask even when track is terminated (e.g., during clearInputBuffer_l)
+            if (t->hasSpatializedTrack_l(c->sessionId())) {
                 return t->mixerChannelMask();
             } else {
                 return t->channelMask();

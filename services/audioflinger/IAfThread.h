@@ -327,6 +327,8 @@ public:
     virtual uint32_t hasAudioSession_l(audio_session_t sessionId) const REQUIRES(mutex()) = 0;
     virtual uint32_t hasAudioSession(audio_session_t sessionId) const
             EXCLUDES_ThreadBase_Mutex = 0;
+    // Check if session has valid spatialized track
+    virtual bool hasSpatializedTrack_l(audio_session_t sessionId) const REQUIRES(mutex()) = 0;
 
     // the value returned by default implementation is not important as the
     // strategy is only meaningful for PlaybackThread which implements this method
