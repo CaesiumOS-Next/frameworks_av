@@ -51,6 +51,24 @@
       "parentUuid": "9abebf64_a48eebcd",
       "revId": "ed78061ce3c7675054aa2943a43c8d6b2bd84345",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1ad1ab_42f3304c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4263411
+      },
+      "writtenOn": "2025-12-10T08:07:49Z",
+      "side": 1,
+      "message": "I think:\n[Root Cause]: The internal state of the EQ biquad filter was not properly reconstructed when the channel count changed. As a result, the filter retained incorrect states while processing data for the new channel configuration, leading to persistent noise artifacts.\n\n[Solution]: Clear and rebuild the biquad filter instances according to the updated channel count whenever the channel configuration changes.",
+      "parentUuid": "814ae020_d3179d12",
+      "revId": "ed78061ce3c7675054aa2943a43c8d6b2bd84345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
