@@ -568,10 +568,15 @@ Status Spatializer::setLevel(Spatialization::Level level) {
     }
     sp<media::INativeSpatializerCallback> callback;
     bool levelChanged = false;
+    bool levelMultiChannelAndEngineNotLoaded = false;
     {
         audio_utils::lock_guard lock(mMutex);
         levelChanged = mLevel != level;
         mLevel = level;
+        if (!levelChanged && level == Spatialization::Level::MULTICHANNEL && mEngine == nullptr) {
+            ALOGW("%s: level remains MULTICHANNEL but engine not loaded", __func__);
+            levelMultiChannelAndEngineNotLoaded = true;
+        }
         callback = mSpatializerCallback;
 
         if (levelChanged && mEngine != nullptr) {
@@ -580,7 +585,7 @@ Status Spatializer::setLevel(Spatialization::Level level) {
         checkSensorsState_l();
     }
 
-    if (levelChanged) {
+    if (levelChanged || levelMultiChannelAndEngineNotLoaded) {
         mPolicyCallback->onCheckSpatializer();
         if (callback != nullptr) {
             callback->onLevelChanged(level);
