@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5342eb4a_a28d7f01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4263411
+      },
+      "writtenOn": "2025-12-10T02:12:19Z",
+      "side": 1,
+      "message": "Hi Shunkai, kindly checking in on whether this patch can be merged.\nThe issue remains in the latest build/version. Thank you for your time.",
+      "revId": "ed78061ce3c7675054aa2943a43c8d6b2bd84345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
