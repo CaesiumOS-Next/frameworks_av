@@ -69,6 +69,65 @@
       "parentUuid": "814ae020_d3179d12",
       "revId": "ed78061ce3c7675054aa2943a43c8d6b2bd84345",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5cb123e_3b54dc72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-12-11T03:23:56Z",
+      "side": 1,
+      "message": "thanks for these context and details, pls see my comment in the code",
+      "parentUuid": "3d1ad1ab_42f3304c",
+      "revId": "ed78061ce3c7675054aa2943a43c8d6b2bd84345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca7b3b2_f942b177",
+        "filename": "media/libeffects/lvm/lib/Eq/src/LVEQNB_Control.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2025-12-11T03:23:56Z",
+      "side": 1,
+      "message": "would it make more sense to replace this with: `bChange \u003d LVM_TRUE;`\nAnd leave the pInstance-\u003eeqBiquad clear to `LVEQNB_ClearFilterHistory` so the reconfiguration logic is more consistence with other updates (i.e. samplerate/format/etc.)?",
+      "range": {
+        "startLine": 313,
+        "startChar": 8,
+        "endLine": 313,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "97c00aee_6e277683",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/libeffects/lvm/lib/Eq/src/LVEQNB_Control.cpp",
+              "range": {
+                "startLine": 313,
+                "startChar": 0,
+                "endLine": 314,
+                "endChar": 0
+              },
+              "replacement": "        bChange \u003d LVM_TRUE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ed78061ce3c7675054aa2943a43c8d6b2bd84345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
