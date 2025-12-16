@@ -998,7 +998,7 @@ private:
 
 CCodec::CCodec()
     : mChannel(new CCodecBufferChannel(std::make_shared<CCodecCallbackImpl>(this))),
-      mConfig(new CCodecConfig) {
+      mConfig(new CCodecConfig), mReleaseInProgress(true) {
 }
 
 CCodec::~CCodec() {
@@ -2387,6 +2387,10 @@ void CCodec::initiateRelease(bool sendCallback /* = true */) {
 
     mChannel->reset();
     bool pushBlankBuffer = mConfig.lock().get()->mPushBlankBuffersOnStop;
+    {
+        Mutexed<std::list<std::unique_ptr<C2Work>>>::Locked queue(mWorkDoneQueue);
+        mReleaseInProgress = true;
+    }
     // thiz holds strong ref to this while the thread is running.
     sp<CCodec> thiz(this);
     std::thread([thiz, sendCallback, pushBlankBuffer]
@@ -2797,6 +2801,9 @@ std::vector<InstanceResourceInfo> CCodec::getRequiredSystemResources() {
 void CCodec::onWorkDone(std::list<std::unique_ptr<C2Work>> &workItems) {
     if (!workItems.empty()) {
         Mutexed<std::list<std::unique_ptr<C2Work>>>::Locked queue(mWorkDoneQueue);
+        if (mReleaseInProgress) {
+            return;
+        }
         bool shouldPost = queue->empty();
         queue->splice(queue->end(), workItems);
         if (shouldPost) {

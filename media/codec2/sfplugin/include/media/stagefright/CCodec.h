@@ -210,6 +210,8 @@ private:
     Mutexed<std::unique_ptr<CCodecConfig>> mConfig;
     Mutexed<std::list<std::unique_ptr<C2Work>>> mWorkDoneQueue;
 
+    bool mReleaseInProgress;
+
     sp<AMessage> mMetrics;
     std::unique_ptr<CCodecResources> mCodecResources;
 
