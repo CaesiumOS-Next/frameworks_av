@@ -46,6 +46,7 @@ FastThread::FastThread(const char *cycleMs, const char *loadUs) : Thread(false /
 
 bool FastThread::threadLoop()
 {
+	int32_t errNum = 0;
     // LOGT now works even if tlNBLogWriter is nullptr, but we're considering changing that,
     // so this initialization permits a future change to remove the check for nullptr.
     aflog::setThreadWriter(mDummyNBLogWriter.get());
@@ -306,6 +307,14 @@ bool FastThread::threadLoop()
                     uint32_t kHz = mTcu.getCpukHz(cpuNum);
                     kHz = (kHz << 4) | (cpuNum & 0xF);
 #endif
+                    if(workDurationNs > 2 * mPeriodNs) {
+                        errNum = workDurationNs / mPeriodNs * 2 ;
+                    }
+                    if(errNum > 0) {
+                        mSleepNs = -1;
+                        mIgnoreNextOverrun = false;
+                        errNum --;
+                    }
                     // save values in FIFO queues for dumpsys
                     // these stores #1, #2, #3 are not atomic with respect to each other,
                     // or with respect to store #4 below
