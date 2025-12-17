@@ -26,31 +26,34 @@
 using aidl::android::aidl_utils::statusTFromBinderStatus;
 using aidl::android::hardware::audio::core::VendorParameter;
 using aidl::android::media::audio::IHalAdapterVendorExtension;
+using ParameterScope = IHalAdapterVendorExtension::ParameterScope;
+using ScopeType = IHalAdapterVendorExtension::ScopeType;
 
 namespace android {
 
 status_t parseAndGetVendorParameters(
+        const std::string& instanceName,
         std::shared_ptr<IHalAdapterVendorExtension> vendorExt,
         const VendorParametersRecipient& recipient,
         const AudioParameter& parameterKeys,
         String8* values) {
-    using ParameterScope = IHalAdapterVendorExtension::ParameterScope;
     if (parameterKeys.size() == 0) return OK;
     const String8 rawKeys = parameterKeys.keysToString();
 
     std::vector<std::string> parameterIds;
+    ParameterScope currentScope(static_cast<ScopeType>(recipient.index()), instanceName);
     RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(vendorExt->parseVendorParameterIds(
-                            ParameterScope(recipient.index()),
+                            currentScope,
                             std::string(rawKeys.c_str()), &parameterIds)));
     if (parameterIds.empty()) return OK;
 
     std::vector<VendorParameter> parameters;
-    if (recipient.index() == static_cast<int>(ParameterScope::MODULE)) {
-        auto module = std::get<static_cast<int>(ParameterScope::MODULE)>(recipient);
+    if (recipient.index() == static_cast<int>(ScopeType::MODULE)) {
+        auto module = std::get<static_cast<int>(ScopeType::MODULE)>(recipient);
         RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(module->getVendorParameters(
                                 parameterIds, &parameters)));
-    } else if (recipient.index() == static_cast<int>(ParameterScope::STREAM)) {
-        auto stream = std::get<static_cast<int>(ParameterScope::STREAM)>(recipient);
+    } else if (recipient.index() == static_cast<int>(ScopeType::STREAM)) {
+        auto stream = std::get<static_cast<int>(ScopeType::STREAM)>(recipient);
         RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(stream->getVendorParameters(
                                 parameterIds, &parameters)));
     } else {
@@ -60,7 +63,7 @@ status_t parseAndGetVendorParameters(
     if (!parameters.empty()) {
         std::string vendorParameters;
         RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(vendorExt->processVendorParameters(
-                                ParameterScope(recipient.index()),
+                                currentScope,
                                 parameters, &vendorParameters)));
         // Re-parse the vendor-provided string to ensure that it is correct.
         AudioParameter reparse(String8(vendorParameters.c_str()));
@@ -75,20 +78,21 @@ status_t parseAndGetVendorParameters(
 }
 
 status_t parseAndSetVendorParameters(
+        const std::string& instanceName,
         std::shared_ptr<IHalAdapterVendorExtension> vendorExt,
         const VendorParametersRecipient& recipient,
         const AudioParameter& parameters) {
-    using ParameterScope = IHalAdapterVendorExtension::ParameterScope;
     if (parameters.size() == 0) return OK;
     const String8 rawKeysAndValues = parameters.toString();
 
     std::vector<VendorParameter> syncParameters, asyncParameters;
+    ParameterScope currentScope(static_cast<ScopeType>(recipient.index()), instanceName);
     RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(vendorExt->parseVendorParameters(
-                            ParameterScope(recipient.index()),
+                            currentScope,
                             std::string(rawKeysAndValues.c_str()),
                             &syncParameters, &asyncParameters)));
-    if (recipient.index() == static_cast<int>(ParameterScope::MODULE)) {
-        auto module = std::get<static_cast<int>(ParameterScope::MODULE)>(recipient);
+    if (recipient.index() == static_cast<int>(ScopeType::MODULE)) {
+        auto module = std::get<static_cast<int>(ScopeType::MODULE)>(recipient);
         if (!syncParameters.empty()) {
             RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(module->setVendorParameters(
                                     syncParameters, false /*async*/)));
@@ -97,8 +101,8 @@ status_t parseAndSetVendorParameters(
             RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(module->setVendorParameters(
                                     asyncParameters, true /*async*/)));
         }
-    } else if (recipient.index() == static_cast<int>(ParameterScope::STREAM)) {
-        auto stream = std::get<static_cast<int>(ParameterScope::STREAM)>(recipient);
+    } else if (recipient.index() == static_cast<int>(ScopeType::STREAM)) {
+        auto stream = std::get<static_cast<int>(ScopeType::STREAM)>(recipient);
         if (!syncParameters.empty()) {
             RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(stream->setVendorParameters(
                                     syncParameters, false /*async*/)));

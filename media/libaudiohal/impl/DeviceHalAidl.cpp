@@ -187,7 +187,8 @@ status_t DeviceHalAidl::initCheck() {
         AudioParameter parameterKeys;
         parameterKeys.addKey(String8(AudioParameter::keyClipTransitionSupport));
         String8 values;
-        auto status = parseAndGetVendorParameters(mVendorExt, mModule, parameterKeys, &values);
+        auto status = parseAndGetVendorParameters(
+                getInstanceName(), mVendorExt, mModule, parameterKeys, &values);
         mHasClipTransitionSupport = status == OK && !values.empty();
     }
     return mMapper.initialize();
@@ -315,7 +316,7 @@ status_t DeviceHalAidl::setParameters(const String8& kvPairs) {
         AUGMENT_LOG(W, "filterAndUpdateTelephonyParameters failed: %d", status);
     }
     std::lock_guard l(mLock);
-    return parseAndSetVendorParameters(mVendorExt, mModule, parameters);
+    return parseAndSetVendorParameters(getInstanceName(), mVendorExt, mModule, parameters);
 }
 
 status_t DeviceHalAidl::getParameters(const String8& keys, String8 *values) {
@@ -336,7 +337,8 @@ status_t DeviceHalAidl::getParameters(const String8& keys, String8 *values) {
     }
     *values = result.toString();
     std::lock_guard l(mLock);
-    return parseAndGetVendorParameters(mVendorExt, mModule, parameterKeys, values);
+    return parseAndGetVendorParameters(
+            getInstanceName(), mVendorExt, mModule, parameterKeys, values);
 }
 
 status_t DeviceHalAidl::getInputBufferSize(struct audio_config* config, size_t* size) {
