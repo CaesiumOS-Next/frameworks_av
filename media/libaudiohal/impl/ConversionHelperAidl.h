@@ -107,11 +107,13 @@ using VendorParametersRecipient = std::variant<
         std::shared_ptr<::aidl::android::hardware::audio::core::IModule>,
         std::shared_ptr<::aidl::android::hardware::audio::core::IStreamCommon>>;
 status_t parseAndGetVendorParameters(
+        const std::string& instanceName,
         std::shared_ptr<::aidl::android::media::audio::IHalAdapterVendorExtension> vendorExt,
         const VendorParametersRecipient& recipient,
         const AudioParameter& parameterKeys,
         String8* values);
 status_t parseAndSetVendorParameters(
+        const std::string& instanceName,
         std::shared_ptr<::aidl::android::media::audio::IHalAdapterVendorExtension> vendorExt,
         const VendorParametersRecipient& recipient,
         const AudioParameter& parameters);
