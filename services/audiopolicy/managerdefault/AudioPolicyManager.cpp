@@ -7816,6 +7816,7 @@ uint32_t AudioPolicyManager::setOutputDevices(const char *caller,
                                               bool force,
                                               int delayMs,
                                               audio_patch_handle_t *patchHandle,
+<<<<<<< HEAD
                                               bool requiresMuteCheck, bool requiresVolumeCheck,
                                               bool skipMuteDelay)
 {
@@ -7826,6 +7827,34 @@ uint32_t AudioPolicyManager::setOutputDevices(const char *caller,
     uint32_t muteWaitMs;
 
     if (outputDesc->isDuplicated()) {
+=======
+                    || client->isInvalid()) {
+                continue;
+<<<<<<< HEAD
+            }
+            DeviceVector devices = newDevices;
+            sp<AudioPolicyMix> primaryMix;
+            status_t status = mPolicyMixes.getOutputForAttr(client->attributes(), client->config(),
+                    client->uid(), client->session(), client->flags(), mAvailableOutputDevices,
+>>>>>>> PATCH
+=======
+                    invalidatedOutputs.push_back(desc);
+                    break;
+                }
+                // If policy mix is active, update the devices from it before checking route.
+                sp<DeviceDescriptor> device =
+                        mPolicyMixes.getDeviceAndMixForOutput(desc, mAvailableOutputDevices);
+                if (device != nullptr) {
+                    devices = DeviceVector(device);
+                }
+            }
+            if (!desc->routesToAllDevices(devices)) {
+                invalidatedOutputs.push_back(desc);
+                break;
+            }
+        }
+    }
+>>>>>>> PATCH
         muteWaitMs = setOutputDevices(__func__, outputDesc->subOutput1(), devices, force, delayMs,
                 nullptr /* patchHandle */, requiresMuteCheck, skipMuteDelay);
         muteWaitMs += setOutputDevices(__func__, outputDesc->subOutput2(), devices, force, delayMs,
