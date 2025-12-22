@@ -211,10 +211,10 @@ status_t AudioPolicyEffects::addOutputSessionEffects(audio_io_handle_t output,
         procDesc = std::make_shared<EffectVector>(audioSession);
     }
     procDesc->mRefCount++;
-
     ALOGV("addOutputSessionEffects(): session: %d, refCount: %d",
           audioSession, procDesc->mRefCount);
     if (procDesc->mRefCount == 1) {
+        bool effectCreated = false;
         // make sure effects are associated to audio server even if we are executing a binder call
         int64_t token = IPCThreadState::self()->clearCallingIdentity();
         const std::shared_ptr<EffectDescVector>& effects = it->second;
@@ -235,9 +235,14 @@ status_t AudioPolicyEffects::addOutputSessionEffects(audio_io_handle_t output,
             ALOGV("addOutputSessionEffects(): added Fx %s on session: %d for stream: %d",
                   effect->mName.c_str(), audioSession, (int32_t)stream);
             procDesc->mEffects.push_back(std::move(fx));
+            effectCreated = true;
         }
-
-        procDesc->setProcessorEnabled(true);
+        if (effectCreated) {
+            procDesc->setProcessorEnabled(true);
+        } else {
+            mOutputSessions.erase(audioSession);
+            ALOGW("%s: no effect created for session %d on output %d", __func__, audioSession, output);
+        }
         IPCThreadState::self()->restoreCallingIdentity(token);
     }
     return status;
