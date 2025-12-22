@@ -214,10 +214,12 @@ status_t AudioPolicyEffects::addOutputSessionEffects(audio_io_handle_t output,
 
     ALOGV("addOutputSessionEffects(): session: %d, refCount: %d",
           audioSession, procDesc->mRefCount);
-    if (procDesc->mRefCount == 1) {
+    // We attempt to create effects on first time, or if no effects
+    // were able to be created previously.
+    if (const std::shared_ptr<EffectDescVector>& effects = it->second;
+        procDesc->mEffects.empty() && !(*effects).empty()) {
         // make sure effects are associated to audio server even if we are executing a binder call
         int64_t token = IPCThreadState::self()->clearCallingIdentity();
-        const std::shared_ptr<EffectDescVector>& effects = it->second;
         for (const std::shared_ptr<EffectDesc>& effect : *effects) {
             AttributionSourceState attributionSource;
             attributionSource.packageName = "android";
@@ -236,8 +238,9 @@ status_t AudioPolicyEffects::addOutputSessionEffects(audio_io_handle_t output,
                   effect->mName.c_str(), audioSession, (int32_t)stream);
             procDesc->mEffects.push_back(std::move(fx));
         }
-
-        procDesc->setProcessorEnabled(true);
+        if (!procDesc->mEffects.empty()) {
+            procDesc->setProcessorEnabled(true);
+        }
         IPCThreadState::self()->restoreCallingIdentity(token);
     }
     return status;
