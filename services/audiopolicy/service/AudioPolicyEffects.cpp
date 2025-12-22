@@ -211,7 +211,7 @@ status_t AudioPolicyEffects::addOutputSessionEffects(audio_io_handle_t output,
         procDesc = std::make_shared<EffectVector>(audioSession);
     }
     procDesc->mRefCount++;
-
+    bool effectCreated = false;
     ALOGV("addOutputSessionEffects(): session: %d, refCount: %d",
           audioSession, procDesc->mRefCount);
     if (procDesc->mRefCount == 1) {
@@ -235,9 +235,14 @@ status_t AudioPolicyEffects::addOutputSessionEffects(audio_io_handle_t output,
             ALOGV("addOutputSessionEffects(): added Fx %s on session: %d for stream: %d",
                   effect->mName.c_str(), audioSession, (int32_t)stream);
             procDesc->mEffects.push_back(std::move(fx));
+            effectCreated = true;
         }
-
-        procDesc->setProcessorEnabled(true);
+        if(effectCreated) {
+            procDesc->setProcessorEnabled(true);
+        } else {
+            procDesc->mRefCount--;
+            ALOGV("addOutputSessionEffects(): no effect created for session %d successfully", audioSession);
+        }
         IPCThreadState::self()->restoreCallingIdentity(token);
     }
     return status;
