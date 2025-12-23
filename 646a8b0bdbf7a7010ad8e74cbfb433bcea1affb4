@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1f8abf_e6bbb94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2025-12-23T18:05:38Z",
+      "side": 1,
+      "message": "The change looks good, however merging it will require some patience because there are many vendor implementations in our tree and I will need to make sure that they are not broken.",
+      "revId": "646a8b0bdbf7a7010ad8e74cbfb433bcea1affb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
