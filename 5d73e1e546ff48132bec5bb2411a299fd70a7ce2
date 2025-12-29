@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bedac48d_98eb3581",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "nit: can you please open a bug in\n\nAndroid \u003e Partner \u003e External \u003e Xiaomi \u003e Handheld \u003e Android OS\n\nBug: ###",
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0769501_a3f7a0bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "Thanks for the CL. Please see some minor nits below.",
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9d9f067_f5ccb521",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "slight preference to convert this to a value for safety.  otherwise if we erase it out, this becomes dangling.",
+      "range": {
+        "startLine": 209,
+        "startChar": 33,
+        "endLine": 209,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "909bcb79_022d58b7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+              "range": {
+                "startLine": 209,
+                "startChar": 0,
+                "endLine": 210,
+                "endChar": 0
+              },
+              "replacement": "    std::shared_ptr\u003cEffectVector\u003e procDesc \u003d mOutputSessions[audioSession];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9121723_41594081",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "delete this, always non-null.  mOutputSessions is now a map.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d8a22c36_9ad64b7d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54026a5e_86846543",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "nit: could be placed on line 220",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b7a8c085_b58947b9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+              "range": {
+                "startLine": 214,
+                "startChar": 0,
+                "endLine": 215,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 218,
+                "endChar": 0
+              },
+              "replacement": "        bool effectCreated \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce65d6c_2b0f2e0b",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "nit: space between if(.",
+      "range": {
+        "startLine": 240,
+        "startChar": 9,
+        "endLine": 240,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "19205db5_6a1b97d9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+              "range": {
+                "startLine": 240,
+                "startChar": 0,
+                "endLine": 241,
+                "endChar": 0
+              },
+              "replacement": "        if (effectCreated) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7102e849_6b731987",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "prefer to erase procDesc instead of leaving at 0.  it prevents orphaned session elements that are never removed.  then you don\u0027t need lines 266-268.\n\n    mOutputSessions.erase(audioSession);\n    ALOGW(\"%s: no effect created for session %d on output %d\",\n            __func__, audioSession, output);",
+      "range": {
+        "startLine": 243,
+        "startChar": 6,
+        "endLine": 244,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ef6850fd_d9a915ec",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+              "range": {
+                "startLine": 243,
+                "startChar": 0,
+                "endLine": 245,
+                "endChar": 0
+              },
+              "replacement": "            mOutputSessions.erase(audioSession);\n            ALOGW(\"%s: no effect created for session %d on output %d\",\n                    __func__, audioSession, output);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be183cd_7dce0696",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T18:11:12Z",
+      "side": 1,
+      "message": "no need.",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 6
+      },
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
