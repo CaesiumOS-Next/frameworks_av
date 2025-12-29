@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7d604da_dcafd2c9",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T23:36:54Z",
+      "side": 1,
+      "message": "oops, please ignore this comment. this needs to be a reference, as it returns a shared pointer that needs to be set below on lines 210-212.  I was reviewing too quickly here.",
+      "parentUuid": "a9d9f067_f5ccb521",
+      "range": {
+        "startLine": 209,
+        "startChar": 33,
+        "endLine": 209,
+        "endChar": 34
+      },
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9121723_41594081",
@@ -113,6 +137,30 @@
           ]
         }
       ],
+      "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d31db7a_a16abd11",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2025-12-29T23:36:54Z",
+      "side": 1,
+      "message": "sorry, this is still needed, was reviewing too quickly.",
+      "parentUuid": "d9121723_41594081",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 5
+      },
       "revId": "5d73e1e546ff48132bec5bb2411a299fd70a7ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
