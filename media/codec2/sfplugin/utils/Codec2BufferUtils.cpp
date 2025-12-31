@@ -876,6 +876,7 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
             std::optional<int> clientBitDepth = {};
             switch (mClientColorFormat) {
                 case COLOR_FormatYUVP010:
+                case COLOR_FormatYUVP210:
                     clientBitDepth = 10;
                     break;
                 case COLOR_FormatYUV411PackedPlanar:
@@ -1042,7 +1043,52 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                                 && yPlane.rowInc == vPlane.rowInc;
                     }
                     break;
+                case COLOR_FormatYUVP210:
+                    ALOGD("---djstrike matched, YUVP210");
+                    // stride is in bytes
+                    // Luma (Y) plane: 16-bit samples, full resolution
+                    mediaImage->mPlane[mediaImage->Y].mOffset = 0;
+                    mediaImage->mPlane[mediaImage->Y].mColInc = 2;              // 2 bytes per 16-bit Y sample
+                    mediaImage->mPlane[mediaImage->Y].mRowInc = stride;
+                    mediaImage->mPlane[mediaImage->Y].mHorizSubsampling = 1;    // no horizontal subsampling
+                    mediaImage->mPlane[mediaImage->Y].mVertSubsampling = 1;     // no vertical subsampling
 
+                    // Chroma (UV) plane: interleaved U,V; 4:2:2 => horizontal subsampling=2, vertical subsampling=1
+                    // Plane starts immediately after Y plane
+                    mediaImage->mPlane[mediaImage->U].mOffset = stride * vStride;
+                    mediaImage->mPlane[mediaImage->U].mColInc = 4;              // U is every 2 luma samples (2x16-bit => 4 bytes step)
+                    mediaImage->mPlane[mediaImage->U].mRowInc = stride;         // same stride as Y
+                    mediaImage->mPlane[mediaImage->U].mHorizSubsampling = 2;
+                    mediaImage->mPlane[mediaImage->U].mVertSubsampling = 1;     // same number of rows as Y
+
+                    // V within the interleaved UV: offset by +2 bytes from U for each pair
+                    mediaImage->mPlane[mediaImage->V].mOffset = stride * vStride + 2;
+                    mediaImage->mPlane[mediaImage->V].mColInc = 4;              // same as U
+                    mediaImage->mPlane[mediaImage->V].mRowInc = stride;
+                    mediaImage->mPlane[mediaImage->V].mHorizSubsampling = 2;
+                    mediaImage->mPlane[mediaImage->V].mVertSubsampling = 1;
+
+                    if (tryWrapping) {
+                        // Typical 10-bit-in-16-bit packing (lower 10 bits used), rightShift=6 to align to MSB if needed.
+                        tryWrapping = yPlane.allocatedDepth == 16
+                                && uPlane.allocatedDepth == 16
+                                && vPlane.allocatedDepth == 16
+                                && yPlane.bitDepth == 10
+                                && uPlane.bitDepth == 10
+                                && vPlane.bitDepth == 10
+                                && yPlane.rightShift == 6
+                                && uPlane.rightShift == 6
+                                && vPlane.rightShift == 6
+                                && yPlane.rowSampling == 1 && yPlane.colSampling == 1   // Y: full res
+                                && uPlane.rowSampling == 1 && uPlane.colSampling == 2   // UV: 4:2:2
+                                && vPlane.rowSampling == 1 && vPlane.colSampling == 2
+                                && yPlane.colInc == 2
+                                && uPlane.colInc == 4
+                                && vPlane.colInc == 4
+                                && yPlane.rowInc == uPlane.rowInc
+                                && yPlane.rowInc == vPlane.rowInc;
+                    }
+                    break;
                 default: {
                     // default to fully planar format --- this will be overridden if wrapping
                     // TODO: keep interleaved format
