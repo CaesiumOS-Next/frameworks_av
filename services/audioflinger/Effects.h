@@ -249,6 +249,8 @@ public:
                           bool* isOutput) const final
             REQUIRES(audio_utils::EffectHandle_Mutex) EXCLUDES_EffectBase_Mutex;
 
+    uint32_t getInChannelCountRequested() const { return mInChannelCountRequested; }
+
     void dump(int fd, const Vector<String16>& args) const final;
 
 protected:

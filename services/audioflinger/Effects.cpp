@@ -2315,9 +2315,9 @@ void EffectChain::clearInputBuffer_l()
     if (mInBuffer == NULL) {
         return;
     }
-    const size_t frameSize = audio_bytes_per_sample(AUDIO_FORMAT_PCM_FLOAT)
-            * mEffectCallback->inChannelCount(mEffects[0]->id());
-
+    //Get input channel count directly from the first effect module
+    uint32_t channelCount = mEffects[0]->getInChannelCountRequested();
+    const size_t frameSize = audio_bytes_per_sample(AUDIO_FORMAT_PCM_FLOAT) * channelCount;
     memset(mInBuffer->audioBuffer()->raw, 0, mEffectCallback->frameCount() * frameSize);
     mInBuffer->commit();
 }

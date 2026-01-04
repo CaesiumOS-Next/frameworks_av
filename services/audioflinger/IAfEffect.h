@@ -194,6 +194,7 @@ public:
     // chain will do a volume reset in these two cases
     virtual bool updateState_l()
             REQUIRES(audio_utils::EffectChain_Mutex) EXCLUDES_EffectBase_Mutex = 0;
+    virtual uint32_t getInChannelCountRequested() const = 0;
 
 private:
     virtual void process() = 0;
