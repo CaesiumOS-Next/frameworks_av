@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a7045b_14cc6f0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-01-06T23:11:41Z",
+      "side": 1,
+      "message": "thanks for the CL, some comments inline.",
+      "revId": "77d116f3c33acc02e88f2af09eb8c2923b35fe63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e783da_3df78fa2",
+        "filename": "services/audioflinger/fastpath/FastThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-01-06T23:11:41Z",
+      "side": 1,
+      "message": "nit: spaces instead of tab.  see comment about workDurationNs below.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "77d116f3c33acc02e88f2af09eb8c2923b35fe63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3deccc76_2a849dfe",
+        "filename": "services/audioflinger/fastpath/FastThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-01-06T23:11:41Z",
+      "side": 1,
+      "message": "workDurationNs doesn\u0027t seem to be defined, is this a cumulative quantity (if so, then errNum might not be needed)?  does it make sense to be handled on line 237 with the other underrun handling or does it require computation immediately above?",
+      "range": {
+        "startLine": 310,
+        "startChar": 16,
+        "endLine": 310,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6e33b5b1_4b0b9eef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/fastpath/FastThread.cpp",
+              "range": {
+                "startLine": 310,
+                "startChar": 0,
+                "endLine": 312,
+                "endChar": 0
+              },
+              "replacement": "                    if (monotonicNs \u003e 2 * mPeriodNs) {\n                        errNum \u003d monotonicNs / mPeriodNs * 2 ;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "77d116f3c33acc02e88f2af09eb8c2923b35fe63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
