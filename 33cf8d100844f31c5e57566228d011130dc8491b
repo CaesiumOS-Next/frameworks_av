@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b904db_691435df",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1956242
+      },
+      "writtenOn": "2026-01-06T19:42:44Z",
+      "side": 1,
+      "message": "We should decrease the `procDesc-\u003emRefCount`, and erase the session only when the mRefCount is 0.\nSee `AudioPolicyEffects::releaseOutputSessionEffects` logic, IMHO a clean way to do this is to reuse the part of logic in `AudioPolicyEffects::releaseOutputSessionEffects` (maybe remove the `mMutex` lock_guard and create a `releaseOutputSessionEffects _l` method)",
+      "range": {
+        "startLine": 244,
+        "startChar": 12,
+        "endLine": 244,
+        "endChar": 47
+      },
+      "revId": "33cf8d100844f31c5e57566228d011130dc8491b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
