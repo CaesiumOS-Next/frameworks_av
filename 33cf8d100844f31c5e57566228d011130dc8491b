@@ -22,6 +22,30 @@
       },
       "revId": "33cf8d100844f31c5e57566228d011130dc8491b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f353c268_248d05d6",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-01-07T01:26:11Z",
+      "side": 1,
+      "message": "Agree, there is no need to erase from mOutputSessions, we should leave it for consistency.",
+      "parentUuid": "81b904db_691435df",
+      "range": {
+        "startLine": 244,
+        "startChar": 12,
+        "endLine": 244,
+        "endChar": 47
+      },
+      "revId": "33cf8d100844f31c5e57566228d011130dc8491b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
