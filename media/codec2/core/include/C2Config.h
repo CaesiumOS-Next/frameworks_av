@@ -307,6 +307,9 @@ enum C2ParamIndexKind : C2Param::type_index_t {
 
     // display processing token
     kParamIndexDisplayProcessingToken, // int64_t
+
+    // audio hw syncid
+    kParamIndexAudioHWSyncID, // int32_t
 };
 
 }
@@ -2886,6 +2889,17 @@ typedef C2StreamParam<C2Tuning,
         kParamIndexTunnelPeekMode> C2StreamTunnelPeekModeTuning;
 constexpr char C2_PARAMKEY_TUNNEL_PEEK_MODE[] =
         "output.tunnel-peek-mode";
+
+/**
+  * Audio hardware sync ID.
+  *
+  * Associates the audio decoder instance with a hardware synchronization
+  * domain. This parameter is configured at initialization time and is
+  * applicable to both tunnel and non-tunnel playback.
+*/
+typedef C2PortParam<C2Setting, C2Int32Value, kParamIndexAudioHWSyncID>
+        C2AudioHWSyncID;
+constexpr char C2_PARAMKEY_AUDIO_HW_SYNC_ID[] = "config.audio-hw-sync-id";
 
 /**
  * Encoding quality level signaling.
