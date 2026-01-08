@@ -1052,6 +1052,11 @@ void CCodecConfig::initializeStandardParams() {
     KEY_AUDIO_SESSION_ID // we use "audio-hw-sync"
     KEY_OUTPUT_REORDER_DEPTH
     */
+    // Audio hardware synchronization ID
+    add(ConfigMapper("audio-hw-sync",
+                C2_PARAMKEY_AUDIO_HW_SYNC_ID,
+                "value")
+    .limitTo(D::DECODER & D::CONFIG));
 }
 
 status_t CCodecConfig::initialize(
