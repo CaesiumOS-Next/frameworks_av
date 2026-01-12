@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e3ef1a_d3f3a747",
+        "filename": "services/audiopolicy/service/AudioPolicyEffects.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2026-01-12T09:51:16Z",
+      "side": 0,
+      "message": "Given the problem description, it would be better to decrease mRefCount in case of failure to create one effect and also clean up all other effects created in the same loop",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 35
+      },
+      "revId": "e2f098935447ca4945946de5cb69db843fe3f003",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
