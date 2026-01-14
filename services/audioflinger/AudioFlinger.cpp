@@ -1311,7 +1311,8 @@ status_t AudioFlinger::createTrack(const media::CreateTrackRequest& _input,
             }
             ++it;
         }
-        if ((output.flags & AUDIO_OUTPUT_FLAG_HW_AV_SYNC) == AUDIO_OUTPUT_FLAG_HW_AV_SYNC) {
+        if ((output.flags & AUDIO_OUTPUT_FLAG_HW_AV_SYNC) == AUDIO_OUTPUT_FLAG_HW_AV_SYNC ||
+            (output.flags & AUDIO_OUTPUT_FLAG_DIRECT) == AUDIO_OUTPUT_FLAG_DIRECT) {
             setAudioHwSyncForSession_l(thread, sessionId);
         }
     }
