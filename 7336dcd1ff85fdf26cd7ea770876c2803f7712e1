@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d807513d_d852a4b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2026-01-15T00:37:48Z",
+      "side": 1,
+      "message": "Currently the HW AV Sync ID is documented as a parameter of tunneled playback only: https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/base/media/java/android/media/MediaFormat.java;l\u003d1457;drc\u003d19690771a6096317554f032563cd66a8ca3fed31\n\nIf we are \"officially\" (that is, in AOSP) enabling its use for non-tunneled use cases as well, that should be better documented. I would expect to see more changes in comment docs.",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "7336dcd1ff85fdf26cd7ea770876c2803f7712e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3681e4_865c39fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2026-01-15T00:37:48Z",
+      "side": 1,
+      "message": "Can you please create a bug which describes the problem that is being solved?",
+      "revId": "7336dcd1ff85fdf26cd7ea770876c2803f7712e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
