@@ -16,6 +16,23 @@
       "message": "fixes broken OMX on QPR2",
       "revId": "5318ea2ed04c44706a0a43b360b22129648db0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f478fec6_463b89f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1974385
+      },
+      "writtenOn": "2026-01-20T17:16:45Z",
+      "side": 1,
+      "message": "Thanks for the fix, this issue has been fixed internally already and will be part of the next aosp release. To keep the merging process simpler I would suggest not submitting this and waiting for the next aosp release.",
+      "revId": "5318ea2ed04c44706a0a43b360b22129648db0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
