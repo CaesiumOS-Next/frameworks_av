@@ -33,6 +33,24 @@
       "message": "Thanks for the fix, this issue has been fixed internally already and will be part of the next aosp release. To keep the merging process simpler I would suggest not submitting this and waiting for the next aosp release.",
       "revId": "5318ea2ed04c44706a0a43b360b22129648db0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab0c922_20398a51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2026-01-20T17:35:44Z",
+      "side": 1,
+      "message": "I expected as much, thanks for confirming, just wanted to be sure we wouldn\u0027t have to track this patch indefinitely in our fork.",
+      "parentUuid": "f478fec6_463b89f2",
+      "revId": "5318ea2ed04c44706a0a43b360b22129648db0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
