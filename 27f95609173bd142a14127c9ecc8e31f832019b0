@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a93c5ef_6b253837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2026-01-22T10:48:52Z",
+      "side": 1,
+      "message": "Same deal as r.android.com/3788574, but we need it in android12-dev too.",
+      "revId": "27f95609173bd142a14127c9ecc8e31f832019b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
