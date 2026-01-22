@@ -87,6 +87,9 @@ private:
     const local_id_t mLocalId;
     std::atomic<bool> mValid;
     C2Fence mWaitFence;
+
+    int64_t mSyncFenceTimeoutStamp;
+    int mSyncFenceTimeoutCnt;
 };
 
 typedef struct AHardwareBuffer AHardwareBuffer;

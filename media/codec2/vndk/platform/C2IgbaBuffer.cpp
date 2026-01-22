@@ -16,12 +16,22 @@
 //#define LOG_NDEBUG 0
 #define LOG_TAG "C2IgbaBuffer"
 #include <android-base/logging.h>
+<<<<<<< HEAD
 #include <aidl/android/hardware/media/c2/IGraphicBufferAllocator.h>
 #include <vndk/hardware_buffer.h>
 #include <utils/Log.h>
 
 #include <C2AllocatorGralloc.h>
 #include <C2BlockInternal.h>
+=======
+#include <vndk/hardware_buffer.h>
+#include <utils/Log.h>
+#include <utils/Errors.h>
+#include <utils/SystemClock.h>
+
+#include <C2AllocatorGralloc.h>
+#include <C2BlockInternal.h>
+>>>>>>> PATCH
 #include <C2FenceFactory.h>
 #include <C2IgbaBufferPriv.h>
 #include <C2PlatformSupport.h>
@@ -170,7 +180,8 @@ C2IgbaBlockPool::C2IgbaBlockPool(
         const bool blockFence,
         const local_id_t localId) :
                 mAllocator(allocator), mIgba(igba),
-                mBlockFence(blockFence), mLocalId(localId) {
+                mBlockFence(blockFence), mLocalId(localId),
+                mSyncFenceTimeoutStamp(0), mSyncFenceTimeoutCnt(0) {
     if (!mIgba) {
         mValid = false;
         return;
@@ -270,6 +281,7 @@ c2_status_t C2IgbaBlockPool::_fetchGraphicBlock(
         AHardwareBuffer *ahwb = allocation.buffer.release(); // This is acquired.
         CHECK(AHardwareBuffer_getId(ahwb, origId) == ::android::OK);
         bool syncFenceSignaled = false;
+<<<<<<< HEAD
 
         if (!blockFence) {
             // If a sync fence is not supposed to return along with a block,
@@ -278,6 +290,22 @@ c2_status_t C2IgbaBlockPool::_fetchGraphicBlock(
             if (res != C2_OK) {
                 AHardwareBuffer_release(ahwb);
                 bool aidlRet = true;
+=======
+                AHardwareBuffer_release(ahwb);
+                bool aidlRet = true;
+                c2_status_t status = mIgba->deallocate(*origId, &aidlRet);
+                int64_t now = ::android::elapsedRealtime();
+                ++mSyncFenceTimeoutCnt;
+                if (now - mSyncFenceTimeoutStamp > 5000) {
+                    ALOGW("Waiting a sync fence failed %d aidl(%d: %d), failure_count: %d",
+                            res, status == C2_OK, aidlRet, mSyncFenceTimeoutCnt);
+                    mSyncFenceTimeoutCnt = 0;
+                    mSyncFenceTimeoutStamp = now;
+                }
+                return C2_TIMED_OUT;
+            }
+            syncFenceSignaled = true;
+>>>>>>> PATCH
                 ::ndk::ScopedAStatus status = mIgba->deallocate(*origId, &aidlRet);
                 ALOGE("Waiting a sync fence failed %d aidl(%d: %d)",
                       res, status.isOk(), aidlRet);
