@@ -2790,6 +2790,7 @@ status_t AudioTrack::restoreTrack_l(const char *from, bool forceRestore)
             __func__, mPortId, isOffloadedOrDirect_l() ? "Offloaded or Direct" : "PCM", from);
     ++mSequence;
 
+    mDoNotReconnect = 0;
     if (!forceRestore &&
         (isOffloadedOrDirect_l() || mDoNotReconnect)) {
         // FIXME re-creation of offloaded and direct tracks is not yet implemented;
@@ -2862,7 +2863,8 @@ retry:
             // For now, we simply advance to the end of the VolumeShaper effect
             // if it has been started.
             if (shaper.isStarted()) {
-                operationToEnd->setNormalizedTime(1.f);
+                ALOGE("%s: shaper is started, hence we advance to beginning of VolumeShaper effect",__func__);
+                operationToEnd->setNormalizedTime(0.f);
             }
             media::VolumeShaperConfiguration config;
             shaper.mConfiguration->writeToParcelable(&config);
