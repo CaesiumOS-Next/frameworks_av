@@ -1735,7 +1735,7 @@ status_t AudioPolicyManager::openDirectOutput(audio_stream_type_t stream,
     // The version check is essentially to avoid making this call in the case of the HIDL HAL.
     if (auto hwModule = mHwModules.getModuleFromHandle(mPrimaryModuleHandle); hwModule &&
             hwModule->getHalVersionMajor() >= 3) {
-        setOutputDevices(__func__, outputDesc, devices, true, 0, NULL);
+        setOutputDevices(__func__, desc, devices, true, 0, NULL,false,false,true);
     }
     mPreviousOutputs = mOutputs;
     ALOGV("%s returns new direct output %d", __func__, *output);
