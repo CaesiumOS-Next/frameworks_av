@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1ea8d08_6011ca3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2026-01-23T06:31:33Z",
+      "side": 1,
+      "message": "hi Mikhail Naganov,\nFor more details, please refer to this issue.\nhttps://partnerissuetracker.corp.google.com/issues/462577636\nThanks",
+      "parentUuid": "d807513d_d852a4b0",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "7336dcd1ff85fdf26cd7ea770876c2803f7712e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e3681e4_865c39fd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -37,6 +61,24 @@
       "writtenOn": "2026-01-15T00:37:48Z",
       "side": 1,
       "message": "Can you please create a bug which describes the problem that is being solved?",
+      "revId": "7336dcd1ff85fdf26cd7ea770876c2803f7712e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8deb8ebf_ceddca1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2026-01-23T06:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e3681e4_865c39fd",
       "revId": "7336dcd1ff85fdf26cd7ea770876c2803f7712e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
