@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41f03f9d_b517deda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4502774
+      },
+      "writtenOn": "2026-02-03T14:26:49Z",
+      "side": 1,
+      "message": "The patch looks correct. One comment seems off but it can be fixed on cherry-pick conflicts resolution.",
+      "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c7a841_dc8dd63f",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3787,
+      "author": {
+        "id": 4502774
+      },
+      "writtenOn": "2026-02-03T14:26:49Z",
+      "side": 1,
+      "message": "This comment seems a little off now, considering the loop is moved to checkAndSetVolume()",
+      "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
