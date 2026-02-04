@@ -3311,7 +3311,9 @@ NO_THREAD_SAFETY_ANALYSIS
     // Originally this was int16_t[] array, need to remove legacy implications.
     free(mSinkBuffer);
     mSinkBuffer = NULL;
-
+    // Ensure we don't try to write "remaining" bytes to a new, different buffer
+    mBytesRemaining = 0;
+    mCurrentWriteLength = 0;
     // For sink buffer size, we use the frame size from the downstream sink to avoid problems
     // with non PCM formats for compressed music, e.g. AAC, and Offload threads.
     const size_t sinkBufferSize = mNormalFrameCount * mFrameSize;
