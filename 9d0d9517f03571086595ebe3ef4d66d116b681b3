@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6780b54_f80970bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2026-02-05T16:47:59Z",
+      "side": 1,
+      "message": "Moving to partner",
+      "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2a6aaad_bce04844",
@@ -61,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1acb4ed6_586e0de4",
+        "filename": "services/audiopolicy/common/managerdefinitions/src/AudioOutputDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2026-02-05T16:47:59Z",
+      "side": 1,
+      "message": "As priority are linked to strategies, and as nothing prevent strategies to follow he same volume group, it is completely possible that vs are equals. In this case, it makes sense to allow apply the volume.",
+      "parentUuid": "f2a6aaad_bce04844",
+      "range": {
+        "startLine": 1206,
+        "startChar": 32,
+        "endLine": 1206,
+        "endChar": 74
+      },
+      "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15c7a841_dc8dd63f",
         "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
         "patchSetId": 1
@@ -72,6 +113,24 @@
       "writtenOn": "2026-02-03T14:26:49Z",
       "side": 1,
       "message": "This comment seems a little off now, considering the loop is moved to checkAndSetVolume()",
+      "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b922b0b_7f08f96a",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3787,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2026-02-05T16:47:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15c7a841_dc8dd63f",
       "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -113,6 +172,30 @@
           ]
         }
       ],
+      "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce876a7e_800bcd86",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8635,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2026-02-05T16:47:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "125c26a0_65f2b6a7",
+      "range": {
+        "startLine": 8633,
+        "startChar": 0,
+        "endLine": 8635,
+        "endChar": 9
+      },
       "revId": "9d0d9517f03571086595ebe3ef4d66d116b681b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
