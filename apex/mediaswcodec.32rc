@@ -1,8 +1,27 @@
-##  for SDK releases >= 32
-##
+## Optimized for Android SDK releases >= 32
+## Focus: Reducing playback latency and preventing process preemption
+
 service media.swcodec /apex/com.android.media.swcodec/bin/mediaswcodec
     class main
-    user mediacodec
-    group camera drmrpc mediadrm
-    ioprio rt 4
-    task_profiles ProcessCapacityHigh
+        user mediacodec
+            group camera drmrpc mediadrm
+                
+                    # PERFORMANCE: Maximize I/O priority
+                        # Changed from 'rt 4' to 'rt 1' to ensure the highest priority for 
+                            # media data streams, preventing stutters during high disk activity.
+                                ioprio rt 1
+                                    
+                                        # SCHEDULING: Ensure maximum CPU resources
+                                            # Added 'MaxPerformance' to the task profiles to prevent the CPU 
+                                                # from throttling the software codec during heavy 4K/HDR decoding.
+                                                    task_profiles MaxPerformance ProcessCapacityHigh
+                                                        
+                                                            # STABILITY: Memory Management
+                                                                # Protects the process from being killed by the Low Memory Killer (LMK).
+                                                                    # -1000 is the highest protection level for critical system services.
+                                                                        oom_score_adj -1000
+
+                                                                            # RELIABILITY: Interface monitoring
+                                                                                # Ensures the hardware interface is ready before fully initializing.
+                                                                                    interface aidl android.hardware.media.c2.IComponentStore/software
+                                                                                    
