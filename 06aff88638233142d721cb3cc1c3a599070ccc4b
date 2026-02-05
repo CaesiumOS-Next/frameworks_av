@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfffd9ec_9bc855d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-02-05T01:50:05Z",
+      "side": 1,
+      "message": "this makes sense, thanks for the CL.  Yes, it is a possibility that the following threadLoop_write() would attempt to use those stale values. I can cherry-pick this to our internal main.",
+      "revId": "06aff88638233142d721cb3cc1c3a599070ccc4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
