@@ -6758,7 +6758,8 @@ void DirectOutputThread::processVolume_l(const sp<IAfTrack>& track, bool lastTra
 
     const auto amn = mAfThreadCallback->getAudioManagerNative();
 
-    if (mMasterMute || track->isPlaybackRestricted()) {
+    if (mMasterMute || ((!com_android_media_audio_ring_my_car() || !track->canBypassMute())
+            && (track->isPlaybackRestricted() || track->getPortMute()))) {
         left = right = 0;
     } else {
         float typeVolume = track->getPortVolume();
