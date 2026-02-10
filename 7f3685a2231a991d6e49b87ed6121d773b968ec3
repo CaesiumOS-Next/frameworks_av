@@ -133,6 +133,24 @@
       "parentUuid": "5630f7b7_c2c98700",
       "revId": "7f3685a2231a991d6e49b87ed6121d773b968ec3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee8308a_3eca1931",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6761,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-02-10T02:50:45Z",
+      "side": 1,
+      "message": "prefer the original version because it is easier to remove the flag later on (sorry, I forgot to remove the AI suggested fix):\n\n    if (mMasterMute || (com_android_media_audio_ring_my_car() ? \n        (!track-\u003ecanBypassMute()\n          \u0026\u0026 (track-\u003eisPlaybackRestricted() || track-\u003egetPortMute())) \n        : track-\u003eisPlaybackRestricted())) {",
+      "parentUuid": "457eda75_7b11b578",
+      "revId": "7f3685a2231a991d6e49b87ed6121d773b968ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
