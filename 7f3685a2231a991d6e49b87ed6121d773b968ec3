@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "37b0248f_813c3130",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-02-10T00:52:08Z",
+      "side": 1,
+      "message": "nit: can you please open a bug for tracking?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 6
+      },
+      "revId": "7f3685a2231a991d6e49b87ed6121d773b968ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ed213749_d5fe55b1",
@@ -14,6 +37,58 @@
       "writtenOn": "2026-02-09T03:09:49Z",
       "side": 1,
       "message": "Hi Andy Hung and Eric Laurent, can you help me to review? thank you!",
+      "revId": "7f3685a2231a991d6e49b87ed6121d773b968ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ad1fff_efef8823",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-02-10T00:52:08Z",
+      "side": 1,
+      "message": "Adding Jean-Michel as he helped write the original commit for this.\n\nhttps://cs.android.com/android/_/android/platform/frameworks/av/+/483a3297c7a977bac68ef34486891e91591f59f4",
+      "revId": "7f3685a2231a991d6e49b87ed6121d773b968ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5630f7b7_c2c98700",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6761,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-02-10T00:52:08Z",
+      "side": 1,
+      "message": "i would prefer consistent behavior with the other two instances of this code, but Jean-Michel, the original author, would know best.\n\n\n    if (mMasterMute || (com_android_media_audio_ring_my_car() ? \n            (!track-\u003ecanBypassMute()\n              \u0026\u0026 (track-\u003eisPlaybackRestricted() || track-\u003egetPortMute())) \n            : track-\u003eisPlaybackRestricted())) {\n\n    \nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audioflinger/Threads.cpp;drc\u003df491cc6f1a6f9dc4fdf68bb2b424bb33e86f9eae;l\u003d5762\n\nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audioflinger/Threads.cpp;drc\u003df491cc6f1a6f9dc4fdf68bb2b424bb33e86f9eae;l\u003d5971",
+      "fixSuggestions": [
+        {
+          "fixId": "70159cdd_6a5683f0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 6761,
+                "startChar": 0,
+                "endLine": 6763,
+                "endChar": 0
+              },
+              "replacement": "    if (mMasterMute || ((!com_android_media_audio_ring_my_car() || !track-\u003ecanBypassMute())\n            \u0026\u0026 (track-\u003eisPlaybackRestricted() || track-\u003egetPortMute()))) {\n"
+            }
+          ]
+        }
+      ],
       "revId": "7f3685a2231a991d6e49b87ed6121d773b968ec3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
