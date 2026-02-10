@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94dfd645_00344ad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970830
+      },
+      "writtenOn": "2026-02-10T02:36:23Z",
+      "side": 1,
+      "message": "Hi Andy Hung, the code and message has been modified, can you help me to review again? thank you!",
+      "revId": "0f8590ab207e0220bcb5a3dc6be9b17d8ba65241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
