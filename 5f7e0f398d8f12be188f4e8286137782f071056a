@@ -16,6 +16,23 @@
       "message": "Hi Andy Hung, the code has been modified, can you help me to review again? thank you!",
       "revId": "5f7e0f398d8f12be188f4e8286137782f071056a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed94fd99_60e55e81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-02-10T18:18:38Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "5f7e0f398d8f12be188f4e8286137782f071056a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
