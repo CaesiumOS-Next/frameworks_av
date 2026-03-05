@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <algorithm>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
 #include <asyncio/AsyncIO.h>
@@ -296,10 +297,11 @@ int MtpFfsHandle::start(bool ptp) {
 }
 
 void MtpFfsHandle::close() {
-    // Join all child threads before destruction
-    int count = mChildThreads.size();
-    for (int i = 0; i < count; i++) {
-        mChildThreads[i].join();
+    // Wait for all child threads to finish before destruction
+    for (auto& f : mChildThreads) {
+        if (f.valid()) {
+            f.wait();
+        }
     }
     mChildThreads.clear();
 
@@ -679,10 +681,19 @@ int MtpFfsHandle::sendEvent(mtp_event me) {
     memcpy(temp, me.data, me.length);
     me.data = temp;
 
-    std::thread t([this, me]() { return this->doSendEvent(me); });
+    // Clean up finished futures before adding a new one to prevent unbounded growth.
+    // Wait up to 10ms for each thread; if it hasn't finished, leave it for close() to handle.
+    mChildThreads.erase(
+        std::remove_if(mChildThreads.begin(), mChildThreads.end(),
+            [](std::future<void>& f) {
+                return f.valid() &&
+                       f.wait_for(std::chrono::milliseconds(10)) == std::future_status::ready;
+            }),
+        mChildThreads.end());
 
-    // Store the thread object for later joining
-    mChildThreads.emplace_back(std::move(t));
+    // Use std::async to launch thread and store future for lifecycle tracking
+    auto f = std::async(std::launch::async, [this, me]() { return this->doSendEvent(me); });
+    mChildThreads.emplace_back(std::move(f));
     return 0;
 }
 

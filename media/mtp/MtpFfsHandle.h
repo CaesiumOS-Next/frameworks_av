@@ -19,6 +19,7 @@
 
 #include <android-base/properties.h>
 #include <android-base/unique_fd.h>
+#include <future>
 #include <linux/aio_abi.h>
 #include <mutex>
 #include <sys/poll.h>
@@ -60,7 +61,7 @@ protected:
     bool mCanceled;
     bool mBatchCancel;
 
-    std::vector<std::thread> mChildThreads;
+    std::vector<std::future<void>> mChildThreads;
 
     android::base::unique_fd mControl;
     // "in" from the host's perspective => sink for mtp server
