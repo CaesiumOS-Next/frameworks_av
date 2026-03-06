@@ -1368,6 +1368,7 @@ bool Track::isReady() const {
 status_t Track::start(AudioSystem::sync_event_t event __unused,
                                                     audio_session_t triggerSession __unused)
 {
+    ALOGI("FEED_DATA_A: start usage=%d", mAttr.usage);
     if (ATRACE_ENABLED()) [[unlikely]] {
         ATRACE_INSTANT_FOR_TRACK(mTraceActionId.c_str(), audio_utils::trace::Object{}
                 .set(AUDIO_TRACE_OBJECT_KEY_EVENT, AUDIO_TRACE_EVENT_START)
@@ -1516,6 +1517,7 @@ status_t Track::start(AudioSystem::sync_event_t event __unused,
 
 void Track::stop()
 {
+    ALOGI("FEED_DATA_A: stop");
     ALOGV("%s(%d): calling pid %d", __func__, mId, IPCThreadState::self()->getCallingPid());
     if (ATRACE_ENABLED()) [[unlikely]] {
         ATRACE_INSTANT_FOR_TRACK(mTraceActionId.c_str(), audio_utils::trace::Object{}
@@ -1558,6 +1560,7 @@ void Track::stop()
 
 void Track::pause()
 {
+    ALOGI("FEED_DATA_A: stop");
     ALOGV("%s(%d): calling pid %d", __func__, mId, IPCThreadState::self()->getCallingPid());
     if (ATRACE_ENABLED()) [[unlikely]] {
         ATRACE_INSTANT_FOR_TRACK(mTraceActionId.c_str(), audio_utils::trace::Object{}
