@@ -2728,6 +2728,12 @@ status_t MediaCodec::configure(
         const sp<IDescrambler> &descrambler,
         uint32_t flags) {
     ScopedTrace trace(ATRACE_TAG, "MediaCodec::configure#native");
+
+    int32_t width, height;
+    if (format->findInt32("width", &width) && format->findInt32("height", &height)) {
+        ALOGI("FEED_DATA_V: res=%dx%d", width, height);
+    }
+
     // Update the codec importance.
     updateCodecImportance(format);
 
