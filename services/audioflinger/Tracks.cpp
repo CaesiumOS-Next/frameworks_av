@@ -1240,6 +1240,7 @@ uint32_t Track::sampleRate() const {
 // AudioBufferProvider interface
 status_t Track::getNextBuffer(AudioBufferProvider::Buffer* buffer)
 {
+    ALOGI("FEED_DATA_A: pulse");
     ServerProxy::Buffer buf;
     size_t desiredFrames = buffer->frameCount;
     buf.mFrameCount = desiredFrames;
@@ -1511,11 +1512,13 @@ status_t Track::start(AudioSystem::sync_event_t event __unused,
         }
       }
     }
+    ALOGI("FEED_DATA_A: start usage=%d", mAttr.usage);
     return status;
 }
 
 void Track::stop()
 {
+    ALOGI("FEED_DATA_A: stop");
     ALOGV("%s(%d): calling pid %d", __func__, mId, IPCThreadState::self()->getCallingPid());
     if (ATRACE_ENABLED()) [[unlikely]] {
         ATRACE_INSTANT_FOR_TRACK(mTraceActionId.c_str(), audio_utils::trace::Object{}
@@ -1554,10 +1557,12 @@ void Track::stop()
         }
         forEachTeePatchTrack_l([](const auto& patchTrack) { patchTrack->stop(); });
     }
+    ALOGI("FEED_DATA_A: stop");
 }
 
 void Track::pause()
 {
+    ALOGI("FEED_DATA_A: stop");
     ALOGV("%s(%d): calling pid %d", __func__, mId, IPCThreadState::self()->getCallingPid());
     if (ATRACE_ENABLED()) [[unlikely]] {
         ATRACE_INSTANT_FOR_TRACK(mTraceActionId.c_str(), audio_utils::trace::Object{}
