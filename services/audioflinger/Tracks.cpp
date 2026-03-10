@@ -1731,7 +1731,7 @@ status_t Track::selectPresentation(int presentationId,
         auto directOutputThread = thread->asIAfDirectOutputThread().get();
         return directOutputThread->selectPresentation(presentationId, programId);
     }
-    return INVALID_OPERATION;
+    return PERMISSION_DENIED;
 }
 
 void Track::setPortVolume(float volume) {
