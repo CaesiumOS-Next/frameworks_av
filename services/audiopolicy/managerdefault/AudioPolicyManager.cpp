@@ -4479,7 +4479,10 @@ status_t AudioPolicyManager::setDevicesRoleForStrategy(product_strategy_t strate
         updateInputRouting();
     }
     updateCallAndOutputRouting(forceVolumeReeval, delayMs);
-
+    //Notify TvInputHardwareManager.java to switch devices.
+    if (strategy == streamToStrategy(AUDIO_STREAM_MUSIC)) {
+        mpClientInterface->onAudioPortListUpdate();
+    }
     return NO_ERROR;
 }
 
