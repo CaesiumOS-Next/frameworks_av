@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d268e68c_ca48ebd2",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4483,
+      "author": {
+        "id": 1003259
+      },
+      "writtenOn": "2026-03-11T15:31:12Z",
+      "side": 1,
+      "message": "this fix looks too specific. There must be a reason why we miss this onAudioPortListUpdate callback somewhere else is a new devices is connected or a new output is opened.",
+      "range": {
+        "startLine": 4483,
+        "startChar": 20,
+        "endLine": 4483,
+        "endChar": 36
+      },
+      "revId": "e04d8e526c85b9d4e2bd2cbd5ea6f776470b0939",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
