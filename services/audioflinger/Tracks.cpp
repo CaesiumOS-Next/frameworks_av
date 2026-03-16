@@ -1730,8 +1730,9 @@ status_t Track::selectPresentation(int presentationId,
             || thread->type() == IAfThreadBase::OFFLOAD) {
         auto directOutputThread = thread->asIAfDirectOutputThread().get();
         return directOutputThread->selectPresentation(presentationId, programId);
+    } else {
+        return PERMISSION_DENIED;
     }
-    return INVALID_OPERATION;
 }
 
 void Track::setPortVolume(float volume) {
