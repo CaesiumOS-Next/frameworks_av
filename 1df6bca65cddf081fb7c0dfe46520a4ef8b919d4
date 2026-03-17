@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d479dcf2_3a8f18b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2026-03-17T19:27:31Z",
+      "side": 1,
+      "message": "If it\u0027s for CTS 16 or 16m1, please refer to the official fixes:\n\nhttps://partner-android.googlesource.com/platform/frameworks/base/+/db495f144362f586b05fd22c30945d2cf49d89e5\nhttps://partner-android.googlesource.com/platform/cts/+/789421e11775195f29650af096b5b25c49ee0f7d\nhttps://partner-android.googlesource.com/platform/cts/+/f12212eb0a7319a935a7c903d80a6748dfaa35c8\n\nFor earlier CTS, we will need to update it on the corresponding AOSP branch.",
+      "revId": "1df6bca65cddf081fb7c0dfe46520a4ef8b919d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
