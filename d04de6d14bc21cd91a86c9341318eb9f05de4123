@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689d5cf6_5d0b3a2a",
+        "filename": "services/audioflinger/Tracks.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1734,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-03-17T17:28:33Z",
+      "side": 1,
+      "message": "Can you please be more specific why AUDIO_JAVA_INVALID_OPERATION fails and  AUDIO_JAVA_PERMISSION_DENIED works in testSetPresentationDefaultTrack? Is it better to update the test here to allow any error?\n\nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:cts/tests/tests/media/audio/src/android/media/audio/cts/AudioTrackTest.java;drc\u003d2561caac8f913a739c43a7223b6e84fab91f331d;l\u003d2677\n\n\nThe documentation here doesn\u0027t include the PERMISSION_DENIED error:\nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/base/media/java/android/media/AudioTrack.java;drc\u003d5de1243e6bcb3e436b168c1e32f8f2aac6e18fc1;l\u003d2940",
+      "range": {
+        "startLine": 1734,
+        "startChar": 0,
+        "endLine": 1734,
+        "endChar": 33
+      },
+      "revId": "d04de6d14bc21cd91a86c9341318eb9f05de4123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
