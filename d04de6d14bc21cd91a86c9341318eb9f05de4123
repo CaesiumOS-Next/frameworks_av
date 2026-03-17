@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2c137a_f9ebc9f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-03-17T17:32:09Z",
+      "side": 1,
+      "message": "Just as I mentioned that, I see a similar CL reporting this issue: https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3976346",
+      "revId": "d04de6d14bc21cd91a86c9341318eb9f05de4123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "689d5cf6_5d0b3a2a",
