@@ -62,6 +62,15 @@ std::vector<To> asVectorOf(const From from) {
   return std::vector<To>({static_cast<To>(from)});
 }
 
+std::vector<uint8_t> asUint8Vector(const std::string& str) {
+  std::vector<uint8_t> vec;
+  vec.reserve(str.size() + 1);
+  std::copy(str.begin(), str.end(), std::back_inserter(vec));
+  // Add a null terminator.
+  vec.push_back(0);
+  return vec;
+}
+
 }  // namespace
 
 MetadataBuilder& MetadataBuilder::setSupportedHardwareLevel(
@@ -461,8 +470,8 @@ MetadataBuilder& MetadataBuilder::setJpegGpsCoordinates(
                            gpsCoordinates.altitude});
 
   if (!gpsCoordinates.provider.empty()) {
-    mEntryMap[ANDROID_JPEG_GPS_PROCESSING_METHOD] = std::vector<uint8_t>{
-        gpsCoordinates.provider.begin(), gpsCoordinates.provider.end()};
+    mEntryMap[ANDROID_JPEG_GPS_PROCESSING_METHOD] =
+        asUint8Vector(gpsCoordinates.provider);
   }
 
   if (gpsCoordinates.timestamp.has_value()) {
