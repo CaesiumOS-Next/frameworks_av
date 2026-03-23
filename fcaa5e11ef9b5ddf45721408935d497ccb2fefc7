@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "969a0eaa_72b54695",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1143408
+      },
+      "writtenOn": "2026-03-23T11:44:02Z",
+      "side": 1,
+      "message": "Thanks for the fix. \n\nCherry picking internally.",
+      "revId": "fcaa5e11ef9b5ddf45721408935d497ccb2fefc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
