@@ -20,7 +20,7 @@
 #include <utils/Log.h>
 
 #include <deque>
-#include <dirent.h>
+#include <filesystem>
 #include <future>
 #include <list>
 #include <vector>
@@ -36,6 +36,8 @@
 #ifdef TEE_SINK
 
 namespace android {
+
+namespace fs = std::filesystem;
 
 /*
  Tee filenames generated as follows:
@@ -118,7 +120,7 @@ private:
             const std::string &filename);
 
     static bool isDirectoryValid(const std::string &directory) {
-        return directory.size() > 0 && directory[0] == '/';
+        return !directory.empty() && fs::path(directory).is_absolute();
     }
 
     std::string generateFilename(const std::string &suffix, audio_format_t format) const {
@@ -263,7 +265,7 @@ std::string AudioFileHandler::create(
     std::string filename = generateFilename(suffix, format);
 
     if (mThreadPool.launch(std::string("create ") + filename,
-            [=]() { return createInternal(reader, sampleRate, channelCount, format, filename); })
+            [=, this]() { return createInternal(reader, sampleRate, channelCount, format, filename); })
             == NO_ERROR) {
         return filename;
     }
@@ -274,10 +276,8 @@ status_t AudioFileHandler::setDirectory(const std::string &directory)
 {
     if (!isDirectoryValid(directory)) return BAD_VALUE;
 
-    // TODO: consider using std::filesystem in C++17
-    DIR *dir = opendir(directory.c_str());
-
-    if (dir == nullptr) {
+    std::error_code ec;
+    if (!fs::exists(directory, ec) || !fs::is_directory(directory, ec)) {
         ALOGW("%s: cannot open directory %s", __func__, directory.c_str());
         return BAD_VALUE;
     }
@@ -285,20 +285,19 @@ status_t AudioFileHandler::setDirectory(const std::string &directory)
     size_t toRemove = 0;
     decltype(mFiles) files;
 
-    while (files.size() < MAX_FILES_READ) {
-        errno = 0;
-        const struct dirent *result = readdir(dir);
-        if (result == nullptr) {
-            ALOGW_IF(errno != 0, "%s: readdir failure %s", __func__, strerror(errno));
-            break;
-        }
+    for (const auto &entry : fs::directory_iterator(directory, ec)) {
+        if (files.size() >= MAX_FILES_READ) break;
+        const std::string filename = entry.path().filename().string();
         // is it a managed filename?
-        if (!isManagedFilename(result->d_name)) {
+        if (!isManagedFilename(filename.c_str())) {
             continue;
         }
-        files.emplace_back(result->d_name);
+        files.emplace_back(filename);
     }
-    (void)closedir(dir);
+
+    if (ec) {
+        ALOGW("%s: directory_iterator failure: %s", __func__, ec.message().c_str());
+    }
 
     // OPTIMIZATION: we don't need to stat each file, the filenames names are
     // already (roughly) ordered by creation date.  we use std::deque instead
@@ -348,10 +347,13 @@ status_t AudioFileHandler::clean(std::string *directory)
         }
     }
 
-    const std::string dirp = dir + "/";
+    const fs::path dirPath(dir);
     // remove files outside of lock for better concurrency.
     for (const auto &file : filesToRemove) {
-        (void)unlink((dirp + file).c_str());
+        std::error_code ec;
+        if (!fs::remove(dirPath / file, ec)) {
+            ALOGW("%s: failed to remove %s: %s", __func__, file.c_str(), ec.message().c_str());
+        }
     }
 
     // return the directory if requested.
@@ -433,9 +435,8 @@ status_t AudioFileHandler::createInternal(
     std::string directory;
     const status_t status = clean(&directory);
     if (status != NO_ERROR) return status;
-    const std::string dirPrefix = directory + "/";
 
-    const std::string path = dirPrefix + filename;
+    const fs::path path = fs::path(directory) / filename;
 
     /* const */ SF_INFO info = {
         .frames = 0,
@@ -499,7 +500,8 @@ status_t AudioFileHandler::createInternal(
     sf_close(sf);
     free(buffer);
     if (total == 0) {
-        (void)unlink(path.c_str());
+        std::error_code ec;
+        (void)fs::remove(path, ec);
         return NOT_ENOUGH_DATA;
     }
 
