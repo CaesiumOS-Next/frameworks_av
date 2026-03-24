@@ -6792,6 +6792,8 @@ DirectOutputThread::DirectOutputThread(const sp<IAfThreadCallback>& afThreadCall
         const audio_offload_info_t& offloadInfo)
     :   PlaybackThread(afThreadCallback, output, id, type, systemReady)
     , mOffloadInfo(offloadInfo)
+    , mPausedWriteLength(0)
+    , mPausedBytesRemaining(0)
 {
     setMasterBalance(afThreadCallback->getMasterBalance_l());
 }
@@ -6989,9 +6991,16 @@ PlaybackThread::mixer_state DirectOutputThread::prepareTracks_l(
             }
             // Always perform pause, as an immediate flush will change
             // the pause state to be no longer isPausing().
-            if (mHwSupportsPause && last && !mHwPaused) {
-                doHwPause = true;
-                mHwPaused = true;
+            if (last) {
+                if (mHwSupportsPause && !mHwPaused) {
+                    doHwPause = true;
+                    mHwPaused = true;
+                }
+                // If we were part way through writing the mixbuffer to
+                // the HAL we must save this until we resume
+                mPausedWriteLength = mCurrentWriteLength;
+                mPausedBytesRemaining = mBytesRemaining;
+                mBytesRemaining = 0;    // stop writing
             }
         } else if (track->isFlushPending()) {
             track->flushAck();
@@ -7001,11 +7010,19 @@ PlaybackThread::mixer_state DirectOutputThread::prepareTracks_l(
         } else if (track->isResumePending()) {
             track->resumeAck();
             if (last) {
+                if (mPausedBytesRemaining) {
+                    // Need to continue write that was interrupted
+                    mCurrentWriteLength = mPausedWriteLength;
+                    mBytesRemaining = mPausedBytesRemaining;
+                    mPausedBytesRemaining = 0;
+                }
                 mLeftVolFloat = mRightVolFloat = -1.0;
                 if (mHwPaused) {
                     doHwResume = true;
                     mHwPaused = false;
                 }
+                mSleepTimeUs = 0;
+                mixerStatus = MIXER_TRACKS_READY;   
             }
         }
 
@@ -7356,6 +7373,13 @@ void DirectOutputThread::flushHw_l()
     mTimestampVerifier.discontinuity(discontinuityForStandbyOrFlush());
     mTimestamp.clear();
     mMonotonicFrameCounter.onFlush();
+    // Flush anything still waiting in the mixbuffer
+    mCurrentWriteLength = 0;
+    mBytesRemaining = 0;
+    mPausedWriteLength = 0;
+    mPausedBytesRemaining = 0;
+    // reset bytes written count to reflect that DSP buffers are empty after flush.
+    mBytesWritten = 0;
     // We do not reset mHwPaused which is hidden from the Track client.
     // Note: the client track in Tracks.cpp and AudioTrack.cpp
     // has a FLUSHED state but the DirectOutputThread does not;
@@ -7496,7 +7520,7 @@ OffloadThread::OffloadThread(const sp<IAfThreadCallback>& afThreadCallback,
         AudioStreamOut* output, audio_io_handle_t id, bool systemReady,
         const audio_offload_info_t& offloadInfo)
     :   DirectOutputThread(afThreadCallback, output, id, OFFLOAD, systemReady, offloadInfo),
-        mPausedWriteLength(0), mPausedBytesRemaining(0), mKeepWakeLock(true)
+        mKeepWakeLock(true)
 {
     //FIXME: mStandby should be set to true by ThreadBase constructo
     mStandby = true;
@@ -7787,13 +7811,6 @@ bool OffloadThread::waitingAsyncCallback()
 void OffloadThread::flushHw_l()
 {
     DirectOutputThread::flushHw_l();
-    // Flush anything still waiting in the mixbuffer
-    mCurrentWriteLength = 0;
-    mBytesRemaining = 0;
-    mPausedWriteLength = 0;
-    mPausedBytesRemaining = 0;
-    // reset bytes written count to reflect that DSP buffers are empty after flush.
-    mBytesWritten = 0;
 
     if (mUseAsyncWrite) {
         // discard any pending drain or write ack by incrementing sequence
