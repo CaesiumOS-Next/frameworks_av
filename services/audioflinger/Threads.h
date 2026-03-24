@@ -1816,6 +1816,9 @@ protected:
     float                   mMasterBalanceLeft = 1.f;
     float                   mMasterBalanceRight = 1.f;
 
+    size_t                  mPausedWriteLength = 0;     // length in bytes of write interrupted by pause
+    size_t                  mPausedBytesRemaining = 0;  // bytes still waiting in mixbuffer after resume
+
 public:
     virtual     bool        hasFastMixer() const { return false; }
 
@@ -1862,8 +1865,6 @@ protected:
     bool keepWakeLock() const final { return (mKeepWakeLock || (mDrainSequence & 1)); }
 
 private:
-    size_t      mPausedWriteLength;     // length in bytes of write interrupted by pause
-    size_t      mPausedBytesRemaining;  // bytes still waiting in mixbuffer after resume
     bool        mKeepWakeLock;          // keep wake lock while waiting for write callback
 };
 
