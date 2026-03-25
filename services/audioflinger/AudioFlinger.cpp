@@ -327,6 +327,12 @@ AudioFlinger::AudioFlinger()
     mediametrics::LogItem(mMetricsId)
         .set(AMEDIAMETRICS_PROP_EVENT, AMEDIAMETRICS_PROP_EVENT_VALUE_CTOR)
         .record();
+
+    const int32_t persistHeapSizeKbyte =
+            property_get_int32("persist.af.client_heap_size_kbyte", 0);
+    if (persistHeapSizeKbyte > 0) {
+        mClientSharedHeapSize = (size_t)persistHeapSizeKbyte * 1024;
+    }
 }
 
 void AudioFlinger::onFirstRef()
@@ -2663,12 +2669,14 @@ status_t AudioFlinger::setLowRamDevice(bool isLowRamDevice, int64_t totalMemory)
                     : 32 * kMinimumClientSharedHeapSizeBytes;
     mIsDeviceTypeKnown = true;
 
-    // TODO: Cache the client shared heap size in a persistent property.
+    // Cache the client shared heap size in a persistent property.
     // It's possible that a native process or Java service or app accesses audioserver
     // after it is registered by system server, but before AudioService updates
     // the memory info.  This would occur immediately after boot or an audioserver
     // crash and restore. Before update from AudioService, the client would get the
     // minimum heap size.
+    property_set("persist.af.client_heap_size_kbyte",
+            std::to_string(mClientSharedHeapSize / 1024).c_str());
 
     ALOGD("isLowRamDevice:%s totalMemory:%lld mClientSharedHeapSize:%zu",
             (isLowRamDevice ? "true" : "false"),
