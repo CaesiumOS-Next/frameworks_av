@@ -65,6 +65,7 @@ sp<GraphicBlockBuffer> AllocateInputGraphicBuffer(
         ALOGD("fetch graphic block failed: %d", err);
         return nullptr;
     }
+    ALOGE("diagnostic requesting graphic buffer for res %dx%d", width, height);
 
     return GraphicBlockBuffer::Allocate(
             format,
@@ -622,6 +623,7 @@ sp<ABuffer> LocalBufferPool::newBuffer(size_t capacity) {
     if (it != mPool.end()) {
         sp<ABuffer> buffer = new VectorBuffer(std::move(*it), shared_from_this());
         mPool.erase(it);
+        ALOGE("diagnostic reusing buffer from the pool, capacity %d", (int)capacity);
         return buffer;
     }
     if (mUsedSize + capacity > mPoolCapacity) {
@@ -642,6 +644,7 @@ sp<ABuffer> LocalBufferPool::newBuffer(size_t capacity) {
     }
     std::vector<uint8_t> vec(capacity);
     mUsedSize += vec.capacity();
+    ALOGE("diagnostic allocating a fresh buffer for capacity %d", (int)capacity);
     return new VectorBuffer(std::move(vec), shared_from_this());
 }
 
@@ -654,6 +657,7 @@ LocalBufferPool::VectorBuffer::VectorBuffer(
 
 LocalBufferPool::VectorBuffer::~VectorBuffer() {
     std::shared_ptr<LocalBufferPool> pool = mPool.lock();
+    ALOGE("diagnostic destroying the VectorBuffer and adding it to pool %d", pool != nullptr);
     if (pool) {
         // If pool is alive, return the vector back to the pool so that
         // it can be recycled.
@@ -1233,6 +1237,7 @@ GraphicInputBuffers::GraphicInputBuffers(
       mPixelFormat(PIXEL_FORMAT_UNKNOWN) { }
 
 bool GraphicInputBuffers::requestNewBuffer(size_t *index, sp<MediaCodecBuffer> *buffer) {
+    ALOGE("diagnostic requestNewBuffer");
     sp<Codec2Buffer> newBuffer = createNewBuffer();
     if (newBuffer == nullptr) {
         return false;
@@ -1240,6 +1245,7 @@ bool GraphicInputBuffers::requestNewBuffer(size_t *index, sp<MediaCodecBuffer> *
     *index = mImpl.assignSlot(newBuffer);
     handleImageData(newBuffer);
     *buffer = newBuffer;
+    ALOGE("diagnostic slot index %d", (int)(*index));
     return true;
 }
 
@@ -1247,11 +1253,13 @@ bool GraphicInputBuffers::releaseBuffer(
         const sp<MediaCodecBuffer> &buffer,
         std::shared_ptr<C2Buffer> *c2buffer,
         bool release) {
+    ALOGE("diagnostic releaseBuffer");
     return mImpl.releaseSlot(buffer, c2buffer, release);
 }
 
 bool GraphicInputBuffers::expireComponentBuffer(
         const std::shared_ptr<C2Buffer> &c2buffer) {
+    ALOGE("diagnostic expireComponentBuffer");
     return mImpl.expireComponentBuffer(c2buffer);
 }
 
