@@ -622,6 +622,7 @@ sp<ABuffer> LocalBufferPool::newBuffer(size_t capacity) {
     if (it != mPool.end()) {
         sp<ABuffer> buffer = new VectorBuffer(std::move(*it), shared_from_this());
         mPool.erase(it);
+        ALOGE("diagnostic reusing buffer from the pool, capacity %d", (int)capacity);
         return buffer;
     }
     if (mUsedSize + capacity > mPoolCapacity) {
@@ -642,6 +643,7 @@ sp<ABuffer> LocalBufferPool::newBuffer(size_t capacity) {
     }
     std::vector<uint8_t> vec(capacity);
     mUsedSize += vec.capacity();
+    ALOGE("diagnostic allocating a fresh buffer for capacity %d", (int)capacity);
     return new VectorBuffer(std::move(vec), shared_from_this());
 }
 
@@ -654,6 +656,7 @@ LocalBufferPool::VectorBuffer::VectorBuffer(
 
 LocalBufferPool::VectorBuffer::~VectorBuffer() {
     std::shared_ptr<LocalBufferPool> pool = mPool.lock();
+    ALOGE("diagnostic destroying the VectorBuffer and adding it to pool %d", pool != nullptr);
     if (pool) {
         // If pool is alive, return the vector back to the pool so that
         // it can be recycled.
