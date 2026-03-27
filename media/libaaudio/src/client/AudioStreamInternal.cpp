@@ -30,6 +30,7 @@
 #include <media/AudioParameter.h>
 #include <media/AudioSystem.h>
 #include <media/MediaMetricsItem.h>
+#include <mediautils/ServiceUtilities.h>
 #include <utils/Trace.h>
 
 #include "AudioEndpointParcelable.h"
@@ -66,6 +67,18 @@ using namespace aaudio;
 
 // Minimum number of bursts to use when sample rate conversion is used.
 #define MIN_SAMPLE_RATE_CONVERSION_NUM_BURSTS    3
+
+const std::vector<aaudio_usage_t>& SYSTEM_USAGES = {
+    AAUDIO_SYSTEM_USAGE_EMERGENCY,
+    AAUDIO_SYSTEM_USAGE_SAFETY,
+    AAUDIO_SYSTEM_USAGE_VEHICLE_STATUS,
+    AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT
+};
+
+bool isSystemUsage(aaudio_usage_t usage) {
+    return std::find(std::begin(SYSTEM_USAGES), std::end(SYSTEM_USAGES), usage)
+        != std::end(SYSTEM_USAGES);
+}
 
 AudioStreamInternal::AudioStreamInternal(AAudioServiceInterface  &serviceInterface, bool inService)
         : AudioStream()
@@ -115,6 +128,18 @@ aaudio_result_t AudioStreamInternal::open(const AudioStreamBuilder &builder) {
     attributionSource.packageName = builder.getOpPackageName();
     attributionSource.attributionTag = builder.getAttributionTag();
     attributionSource.token = sp<android::BBinder>::make();
+
+    // When called by the client while trying to use mmap mode
+    // take a chance to check MODIDFY_AUDIO_ROUTING to open a stream
+    // using system usages. While called from service, permission will
+    // be checked against audioserver permission since the caller identity
+    // is cleared by AAudioEndpointManager for e.g. shared mode feature.
+    if (!mInService && isSystemUsage(getUsage()
+            && !modifyAudioRoutingAllowed(attributionSource))) {
+        ALOGE("%s: modify audio routing not allowed for attribution source: %s",
+                __func__, attributionSource.toString().c_str());
+        return AAUDIO_ERROR_INTERNAL;
+    }
 
     // Build the request to send to the server.
     request.setAttributionSource(attributionSource);
