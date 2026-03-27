@@ -26,6 +26,7 @@
 #include <media/MediaMetricsItem.h>
 #include <media/TypeConverter.h>
 #include <mediautils/SchedulingPolicyService.h>
+#include <mediautils/ServiceUtilities.h>
 
 #include "binding/AAudioServiceMessage.h"
 #include "core/AudioGlobal.h"
@@ -44,6 +45,14 @@ using content::AttributionSourceState;
 static const int64_t TIMEOUT_NANOS = 3LL * 1000 * 1000 * 1000;
 // If the stream is idle for more than `IDLE_TIMEOUT_NANOS`, the stream will be put into standby.
 static const int64_t IDLE_TIMEOUT_NANOS = 3e9;
+
+
+const std::vector<aaudio_usage_t>& SYSTEM_USAGES = {
+    AAUDIO_SYSTEM_USAGE_EMERGENCY,
+    AAUDIO_SYSTEM_USAGE_SAFETY,
+    AAUDIO_SYSTEM_USAGE_VEHICLE_STATUS,
+    AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT
+};
 
 /**
  * Base class for streams in the service.
@@ -139,6 +148,17 @@ aaudio_result_t AAudioServiceStreamBase::open(const aaudio::AAudioStreamRequest 
     AAudioEndpointManager &mEndpointManager = AAudioEndpointManager::getInstance();
     aaudio_result_t result = AAUDIO_OK;
 
+    // Take a chance to check MODIDFY_AUDIO_ROUTING to open a stream
+    // using system usages. Since the caller identity
+    // is cleared by AAudioEndpointManager for e.g. shared mode feature,
+    // permission check of native audioserver will pass.
+    auto usage = request.getConstantConfiguration().getUsage();
+    if (isSystemUsage(usage)
+            && !modifyAudioRoutingAllowed(request.getAttributionSource())) {
+        ALOGE("%s: modify audio routing not allowed for attribution source: %s",
+                __func__, request.getAttributionSource().toString().c_str());
+        return AAUDIO_ERROR_INTERNAL;
+    }
     mMmapClient.attributionSource = request.getAttributionSource();
     // TODO b/182392769: use attribution source util
     mMmapClient.attributionSource.uid = VALUE_OR_FATAL(
@@ -815,4 +835,9 @@ void AAudioServiceStreamBase::stopCommandThread() {
         mCommandQueue.stopWaiting();
         mCommandThread.stop();
     }
+}
+
+bool AAudioServiceStreamBase::isSystemUsage(aaudio_usage_t usage) {
+	return std::find(std::begin(SYSTEM_USAGES), std::end(SYSTEM_USAGES), usage)
+	    != std::end(SYSTEM_USAGES);
 }
