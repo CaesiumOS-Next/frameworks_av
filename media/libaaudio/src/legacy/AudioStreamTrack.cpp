@@ -54,11 +54,11 @@ AudioStreamTrack::~AudioStreamTrack()
     ALOGE_IF(bad, "stream not closed, in state %d", state);
 }
 
-aaudio_result_t AudioStreamTrack::open(const AudioStreamBuilder& builder)
-{
+aaudio_result_t AudioStreamTrack::open(const AudioStreamBuilder& builder,
+        const AttributionSourceState& attributionSourceState) {
     aaudio_result_t result = AAUDIO_OK;
 
-    result = AudioStream::open(builder);
+    result = AudioStream::open(builder, attributionSourceState);
     if (result != OK) {
         return result;
     }
@@ -170,7 +170,7 @@ aaudio_result_t AudioStreamTrack::open(const AudioStreamBuilder& builder)
             sessionId,
             streamTransferType,
             nullptr,    // DEFAULT audio_offload_info_t
-            AttributionSourceState(), // DEFAULT uid and pid
+            attributionSourceState, // DEFAULT uid and pid
             &attributes,
             // WARNING - If doNotReconnect set true then audio stops after plugging and unplugging
             // headphones a few times.

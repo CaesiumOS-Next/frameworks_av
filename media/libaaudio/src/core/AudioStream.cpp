@@ -66,8 +66,8 @@ AudioStream::~AudioStream() {
                         AudioGlobal_convertStreamStateToText(getState()), isDisconnected());
 }
 
-aaudio_result_t AudioStream::open(const AudioStreamBuilder& builder)
-{
+aaudio_result_t AudioStream::open(const AudioStreamBuilder& builder,
+        const AttributionSourceState& attributionSourceState) {
     // Call here as well because the AAudioService will call this without calling build().
     aaudio_result_t result = builder.validate();
     if (result != AAUDIO_OK) {

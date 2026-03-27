@@ -75,7 +75,7 @@ aaudio_result_t AAudioServiceEndpointShared::open(const aaudio::AAudioStreamRequ
 
     builder.setBufferCapacity(DEFAULT_BUFFER_CAPACITY);
 
-    result = mStreamInternal->open(builder);
+    result = mStreamInternal->open(builder, request.getAttributionSource());
 
     setSampleRate(mStreamInternal->getSampleRate());
     setChannelMask(mStreamInternal->getChannelMask());

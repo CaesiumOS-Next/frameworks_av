@@ -108,12 +108,6 @@ aaudio_result_t AAudioServiceEndpointMMAP::open(const aaudio::AAudioStreamReques
     mRequestedDeviceId = getDeviceId();
 
     mMmapClient.attributionSource = request.getAttributionSource();
-    // TODO b/182392769: use attribution source util
-    mMmapClient.attributionSource.uid = VALUE_OR_FATAL(
-        legacy2aidl_uid_t_int32_t(IPCThreadState::self()->getCallingUid()));
-    mMmapClient.attributionSource.pid = VALUE_OR_FATAL(
-        legacy2aidl_pid_t_int32_t(IPCThreadState::self()->getCallingPid()));
-
     audio_format_t audioFormat = getFormat();
     int32_t sampleRate = getSampleRate();
     if (sampleRate == AAUDIO_UNSPECIFIED) {

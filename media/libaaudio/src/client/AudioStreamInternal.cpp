@@ -83,7 +83,8 @@ AudioStreamInternal::~AudioStreamInternal() {
     ALOGD("%s() %p called", __func__, this);
 }
 
-aaudio_result_t AudioStreamInternal::open(const AudioStreamBuilder &builder) {
+aaudio_result_t AudioStreamInternal::open(const AudioStreamBuilder &builder,
+        const AttributionSourceState& attributionSourceState) {
 
     aaudio_result_t result = AAUDIO_OK;
     AAudioStreamRequest request;
@@ -109,13 +110,14 @@ aaudio_result_t AudioStreamInternal::open(const AudioStreamBuilder &builder) {
     request.getConfiguration().setFormat(AUDIO_FORMAT_PCM_FLOAT);
 
     // TODO b/182392769: use attribution source util
-    AttributionSourceState attributionSource;
-    attributionSource.uid = VALUE_OR_FATAL(android::legacy2aidl_uid_t_int32_t(getuid()));
-    attributionSource.pid = VALUE_OR_FATAL(android::legacy2aidl_pid_t_int32_t(getpid()));
-    attributionSource.packageName = builder.getOpPackageName();
-    attributionSource.attributionTag = builder.getAttributionTag();
-    attributionSource.token = sp<android::BBinder>::make();
-
+    AttributionSourceState attributionSource = attributionSourceState;
+    if (!mInService) {
+        attributionSource.uid = VALUE_OR_FATAL(android::legacy2aidl_uid_t_int32_t(getuid()));
+        attributionSource.pid = VALUE_OR_FATAL(android::legacy2aidl_pid_t_int32_t(getpid()));
+        attributionSource.packageName = builder.getOpPackageName();
+        attributionSource.attributionTag = builder.getAttributionTag();
+        attributionSource.token = sp<android::BBinder>::make();
+    }
     // Build the request to send to the server.
     request.setAttributionSource(attributionSource);
     request.setSharingModeMatchRequired(isSharingModeMatchRequired());

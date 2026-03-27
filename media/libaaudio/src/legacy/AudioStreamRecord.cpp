@@ -50,8 +50,8 @@ AudioStreamRecord::~AudioStreamRecord()
     ALOGE_IF(bad, "stream not closed, in state %d", state);
 }
 
-aaudio_result_t AudioStreamRecord::open(const AudioStreamBuilder& builder)
-{
+aaudio_result_t AudioStreamRecord::open(const AudioStreamBuilder& builder,
+        const AttributionSourceState& attributionSourceState) {
     aaudio_result_t result = AAUDIO_OK;
 
     result = AudioStream::open(builder);
@@ -132,7 +132,7 @@ aaudio_result_t AudioStreamRecord::open(const AudioStreamBuilder& builder)
     };
 
     // TODO b/182392769: use attribution source util
-    AttributionSourceState attributionSource;
+    AttributionSourceState attributionSource = attributionSourceState;
     attributionSource.uid = VALUE_OR_FATAL(legacy2aidl_uid_t_int32_t(getuid()));
     attributionSource.pid = VALUE_OR_FATAL(legacy2aidl_pid_t_int32_t(getpid()));
     attributionSource.packageName = builder.getOpPackageName();

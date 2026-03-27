@@ -48,8 +48,9 @@ AudioStreamInternalPlay::AudioStreamInternalPlay(AAudioServiceInterface  &servic
 
 constexpr int kRampMSec = 10; // time to apply a change in volume
 
-aaudio_result_t AudioStreamInternalPlay::open(const AudioStreamBuilder &builder) {
-    aaudio_result_t result = AudioStreamInternal::open(builder);
+aaudio_result_t AudioStreamInternalPlay::open(const AudioStreamBuilder &builder,
+        const AttributionSourceState& attributionSourceState) {
+    aaudio_result_t result = AudioStreamInternal::open(builder, attributionSourceState);
     const bool useVolumeRamps = (getSharingMode() == AAUDIO_SHARING_MODE_EXCLUSIVE);
     if (result == AAUDIO_OK) {
         result = mFlowGraph.configure(getFormat(),

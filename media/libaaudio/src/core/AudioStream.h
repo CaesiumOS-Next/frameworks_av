@@ -27,6 +27,7 @@
 #include <utils/StrongPointer.h>
 
 #include <aaudio/AAudio.h>
+#include <android/content/AttributionSourceState.h>
 #include <media/AudioSystem.h>
 #include <media/PlayerBase.h>
 #include <media/VolumeShaper.h>
@@ -122,7 +123,8 @@ public:
      * Open the stream using the parameters in the builder.
      * Allocate the necessary resources.
      */
-    virtual aaudio_result_t open(const AudioStreamBuilder& builder);
+    virtual aaudio_result_t open(const AudioStreamBuilder& builder,
+            const AttributionSourceState& attributionSourceState = {});
 
     // log to MediaMetrics
     virtual void logOpenActual();
