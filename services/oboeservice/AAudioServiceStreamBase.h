@@ -223,6 +223,8 @@ public:
 
     virtual const char *getTypeText() const { return "Base"; }
 
+    static bool isSystemUsage(aaudio_usage_t usage);
+
 protected:
 
     /**
