@@ -38,7 +38,8 @@ public:
 
     virtual ~AudioStreamRecord();
 
-    aaudio_result_t open(const AudioStreamBuilder & builder) override;
+    aaudio_result_t open(const AudioStreamBuilder & builder,
+            const AttributionSourceState& attributionSourceState) override;
     aaudio_result_t release_l() override;
     void close_l() override;
 

@@ -51,7 +51,8 @@ public:
 
     virtual aaudio_result_t processCommands() override;
 
-    aaudio_result_t open(const AudioStreamBuilder &builder) override;
+    aaudio_result_t open(const AudioStreamBuilder &builder,
+            const AttributionSourceState& attritutionSourceState) override;
 
     aaudio_result_t setBufferSize(int32_t requestedFrames) override;
 

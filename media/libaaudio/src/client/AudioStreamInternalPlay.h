@@ -33,7 +33,8 @@ public:
                                      bool inService = false);
     virtual ~AudioStreamInternalPlay() = default;
 
-    aaudio_result_t open(const AudioStreamBuilder &builder) override;
+    aaudio_result_t open(const AudioStreamBuilder &builder,
+            const AttributionSourceState& attributionSourceState) override;
 
     aaudio_result_t requestPause_l() override;
 
