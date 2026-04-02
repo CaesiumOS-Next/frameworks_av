@@ -22,6 +22,30 @@
       },
       "revId": "0e6813977212279860d013a7f5d85dfffebc3e97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d9d030c_1841fb84",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1585,
+      "author": {
+        "id": 1967241
+      },
+      "writtenOn": "2026-04-02T06:21:53Z",
+      "side": 1,
+      "message": "Also kind.value \u003d\u003d C2Component::KIND_ENCODER ?",
+      "parentUuid": "ea08eb4b_7f1876f3",
+      "range": {
+        "startLine": 1585,
+        "startChar": 5,
+        "endLine": 1585,
+        "endChar": 6
+      },
+      "revId": "0e6813977212279860d013a7f5d85dfffebc3e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
