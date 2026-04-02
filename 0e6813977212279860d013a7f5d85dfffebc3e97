@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea08eb4b_7f1876f3",
+        "filename": "media/codec2/sfplugin/CCodecBufferChannel.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1585,
+      "author": {
+        "id": 1967241
+      },
+      "writtenOn": "2026-04-02T06:16:05Z",
+      "side": 1,
+      "message": "```\nif (property_get_bool(\"ro.config.low_ram\", false) \u0026\u0026 (picSize.width * picSize.height) \u003e (4000 * 3000)) {\n    numInputSlots \u003d MAX(inputDelay + pipelineDelay, 1);\n}\n```",
+      "range": {
+        "startLine": 1585,
+        "startChar": 5,
+        "endLine": 1585,
+        "endChar": 6
+      },
+      "revId": "0e6813977212279860d013a7f5d85dfffebc3e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
