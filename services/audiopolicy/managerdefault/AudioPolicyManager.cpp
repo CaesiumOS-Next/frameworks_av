@@ -1648,7 +1648,8 @@ status_t AudioPolicyManager::openDirectOutput(audio_stream_type_t stream,
         if (!desc->isDuplicated() && (profile == desc->mProfile)) {
             // reuse direct output if currently open by the same client
             // and configured with same parameters
-            if ((config->sample_rate == desc->getSamplingRate()) &&
+            if ((config->format != AUDIO_FORMAT_E_AC3 && config->format != AUDIO_FORMAT_AC3) &&
+                (config->sample_rate == desc->getSamplingRate()) &&
                 (config->format == desc->getFormat()) &&
                 (config->channel_mask == desc->getChannelMask()) &&
                 (session == desc->mDirectClientSession)) {
