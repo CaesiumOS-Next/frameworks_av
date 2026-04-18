@@ -19,6 +19,7 @@
 
 #include <gui/IGraphicBufferProducer.h>
 #include <gui/IProducerListener.h>
+#include <gui/Surface.h>
 #include <gui/mock/GraphicBufferProducer.h>
 #include <media/stagefright/MediaSync.h>
 #include <system/window.h>
@@ -85,4 +86,23 @@ TEST_F(MediaSyncTest, DetachNextBufferReturnsNoInit) {
     ASSERT_EQ(OK, mMediaSync->createInputSurface(&inputProducer));
     EXPECT_CALL(*mMockProducer, detachNextBuffer(_, _)).WillOnce(Return(NO_INIT));
     mCapturedListener->onBufferReleased();
+}
+
+// Verify that renderOneBufferItem_l handles nullptr mOutput without
+// crashing. After setSurface(null), mOutput is nullptr but frames
+// queued to the input surface still trigger renderOneBufferItem_l
+// via onFrameAvailableFromInput → onDrainVideo_l.
+TEST_F(MediaSyncTest, SetSurfaceNullThenQueueBuffer) {
+    setSurfaceAndCaptureListener();
+    sp<IGraphicBufferProducer> inputProducer;
+    ASSERT_EQ(OK, mMediaSync->createInputSurface(&inputProducer));
+    AudioPlaybackRate rate;
+    mMediaSync->getPlaybackSettings(&rate);
+    rate.mSpeed = 1.0f;
+    ASSERT_EQ(OK, mMediaSync->setPlaybackSettings(rate));
+    ASSERT_EQ(OK, mMediaSync->setSurface(nullptr));
+    sp<Surface> inputSurface = sp<Surface>::make(inputProducer);
+    ANativeWindow_Buffer buffer;
+    ASSERT_EQ(OK, inputSurface->lock(&buffer, nullptr));
+    ASSERT_EQ(OK, inputSurface->unlockAndPost());
 }
