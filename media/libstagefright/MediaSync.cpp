@@ -717,6 +717,15 @@ void MediaSync::onFrameAvailableFromInput() {
 }
 
 void MediaSync::renderOneBufferItem_l(const BufferItem &bufferItem) {
+    if (mOutput == nullptr) {
+        // The output surface was removed via setSurface(null). Return the
+        // buffer to the input so the slot is not leaked. This is not an
+        // abandonment — the client may set a new surface later.
+        ALOGV("%s: no output surface, returning buffer to input", __func__);
+        returnBufferToInput_l(bufferItem.mGraphicBuffer, bufferItem.mFence);
+        return;
+    }
+
     IGraphicBufferProducer::QueueBufferInput queueInput(
             bufferItem.mTimestamp,
             bufferItem.mIsAutoTimestamp,
