@@ -226,8 +226,8 @@ void C2NodeImpl::getInputBufferParams(IAidlNode::InputBufferParams *params) {
 
     // WORKAROUND: having more slots improve performance while consuming
     // more memory. This is a temporary workaround to reduce memory for
-    // larger-than-4K scenario.
-    if (mWidth * mHeight > 4096 * 2340) {
+    // 4K scenario.
+    if (mWidth * mHeight >= 3840 * 2160) {
         std::shared_ptr<Codec2Client::Component> comp = mComp.lock();
         C2PortActualDelayTuning::input inputDelay(0);
         C2ActualPipelineDelayTuning pipelineDelay(0);
