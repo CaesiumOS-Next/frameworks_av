@@ -1071,7 +1071,8 @@ void VideoCapabilities::applyLevelLimits() {
         maxBps = 64000;
         maxDPBBlocks = 396;
         for (ProfileLevel profileLevel: mProfileLevels) {
-            int32_t MBPS = 0, FS = 0, BR = 0, DPB = 0;
+            int32_t MBPS = 0, FS = 0, DPB = 0;
+            int64_t BR = 0;
             bool supported = true;
             switch (profileLevel.mLevel) {
                 case AVCLevel1:
@@ -1148,7 +1149,7 @@ void VideoCapabilities::applyLevelLimits() {
             }
             maxBlocksPerSecond = std::max((int64_t)MBPS, maxBlocksPerSecond);
             maxBlocks = std::max(FS, maxBlocks);
-            maxBps = std::max(BR, maxBps);
+            maxBps = std::max((int32_t)std::min(BR, (int64_t)INT32_MAX), maxBps);
             maxDPBBlocks = std::max(maxDPBBlocks, DPB);
         }
 
