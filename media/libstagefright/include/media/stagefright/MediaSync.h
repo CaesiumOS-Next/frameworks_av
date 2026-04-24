@@ -174,7 +174,7 @@ private:
 #endif
 
       private:
-        sp<MediaSync> mSync;
+        wp<MediaSync> mSync;
     };
 
     // This is a thin wrapper class that lets us listen to
@@ -192,8 +192,8 @@ private:
         virtual void binderDied(const wp<IBinder> &who);
 
     private:
-        sp<MediaSync> mSync;
-        sp<IGraphicBufferProducer> mOutput;
+      wp<MediaSync> mSync;
+      sp<IGraphicBufferProducer> mOutput;
     };
 
     // mIsAbandoned is set to true when the input or output dies.

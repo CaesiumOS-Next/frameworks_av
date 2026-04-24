@@ -922,7 +922,10 @@ MediaSync::InputListener::InputListener(const sp<MediaSync> &sync)
 MediaSync::InputListener::~InputListener() {}
 
 void MediaSync::InputListener::onFrameAvailable(const BufferItem &/* item */) {
-    mSync->onFrameAvailableFromInput();
+    sp<MediaSync> sync = mSync.promote();
+    if (sync != nullptr) {
+        sync->onFrameAvailableFromInput();
+    }
 }
 
 #if !COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(WB_MEDIA_MIGRATION)
@@ -940,12 +943,18 @@ MediaSync::OutputListener::OutputListener(const sp<MediaSync> &sync,
 MediaSync::OutputListener::~OutputListener() {}
 
 void MediaSync::OutputListener::onBufferReleased() {
-    mSync->onBufferReleasedByOutput(mOutput);
+    sp<MediaSync> sync = mSync.promote();
+    if (sync != nullptr) {
+        sync->onBufferReleasedByOutput(mOutput);
+    }
 }
 
 void MediaSync::OutputListener::binderDied(const wp<IBinder> &/* who */) {
-    Mutex::Autolock lock(mSync->mMutex);
-    mSync->onAbandoned_l(false /* isInput */);
+    sp<MediaSync> sync = mSync.promote();
+    if (sync != nullptr) {
+        Mutex::Autolock lock(sync->mMutex);
+        sync->onAbandoned_l(false /* isInput */);
+    }
 }
 
 } // namespace android

@@ -106,3 +106,18 @@ TEST_F(MediaSyncTest, SetSurfaceNullThenQueueBuffer) {
     ASSERT_EQ(OK, inputSurface->lock(&buffer, nullptr));
     ASSERT_EQ(OK, inputSurface->unlockAndPost());
 }
+
+// Verify that MediaSync is destroyed when the last strong reference
+// is dropped, even after setSurface() and createInputSurface() have
+// been called.
+TEST_F(MediaSyncTest, DestroyedAfterSpClear) {
+    setSurfaceAndCaptureListener();
+    sp<IGraphicBufferProducer> inputProducer;
+    ASSERT_EQ(OK, mMediaSync->createInputSurface(&inputProducer));
+
+    wp<MediaSync> weakSync = mMediaSync;
+    mMediaSync.clear();
+
+    ASSERT_EQ(nullptr, weakSync.promote())
+            << "MediaSync should be destroyed after releasing the last strong reference.";
+}
