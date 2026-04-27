@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f48de1_957c467f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1733827
+      },
+      "writtenOn": "2026-04-27T03:43:35Z",
+      "side": 1,
+      "message": "Hi: I am checking the status and I do not know what block\u0027s the commit.\nDo I have to buy a physical security key and finish the ReAuth?",
+      "revId": "8efca7e1711ebc11b0ff2e476c2a2eff6769bc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
