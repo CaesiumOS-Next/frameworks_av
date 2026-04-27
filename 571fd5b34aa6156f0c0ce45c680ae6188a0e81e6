@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed3440d_94619b90",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2026-04-27T19:04:24Z",
+      "side": 1,
+      "message": "This solution looks suspicious to me because **most** formats played on `DIRECT` outputs are non-linear PCM or compressed. Thus, we essentially cancel the logic that existed since 2020, and was added specifically for TVs (that follows from the bug, not externally accessible, sorry):\n\nhttps://android.googlesource.com/platform/frameworks/av/+/c529cf6fa9b500506d675ec971909dba18cfb71b\n\nDid you investigate further why reusing the output creates a timestamp problem?\n\nDo you already employ limiting of open streams count by using `max{Open|Active}Count` on mix ports?\n\nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:hardware/interfaces/audio/7.0/config/audio_policy_configuration.xsd;l\u003d211;drc\u003d9072e5f0db8c2354d1e029ea960647c9f6322c66",
+      "range": {
+        "startLine": 1651,
+        "startChar": 16,
+        "endLine": 1651,
+        "endChar": 51
+      },
+      "revId": "571fd5b34aa6156f0c0ce45c680ae6188a0e81e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
