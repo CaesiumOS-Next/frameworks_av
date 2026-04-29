@@ -1006,6 +1006,7 @@ protected:
     virtual void checkOutputStageEffects()
             REQUIRES(ThreadBase_ThreadLoop) EXCLUDES_ThreadBase_Mutex {}
     virtual     void        setHalLatencyMode_l() {}
+    virtual     void        invalidateAudioMixerMainBuffer_l(int trackId, void *buffer) {}
 
 
     void dumpInternals_l(int fd, const Vector<String16>& args) override REQUIRES(mutex());
@@ -1751,6 +1752,13 @@ protected:
     void updateHalSupportedLatencyModes_l() REQUIRES(mutex());
     void onHalLatencyModesChanged_l() override REQUIRES(mutex());
     void setHalLatencyMode_l() override REQUIRES(mutex());
+
+    void invalidateAudioMixerMainBuffer_l(int trackId, void *buffer) override {
+      if (mAudioMixer != nullptr && mAudioMixer->exists(trackId)) {
+          mAudioMixer->setParameter(trackId,
+                  AudioMixer::TRACK, AudioMixer::MAIN_BUFFER, buffer);
+      }
+    }
 };
 
 class DirectOutputThread : public PlaybackThread, public virtual IAfDirectOutputThread {
