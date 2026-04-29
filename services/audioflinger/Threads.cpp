@@ -3965,6 +3965,43 @@ size_t PlaybackThread::removeEffectChain_l(const sp<IAfEffectChain>& chain)
                 sp<IAfTrack> track = mTracks[j];
                 if (session == track->sessionId()) {
                     track->setMainBuffer(reinterpret_cast<float*>(mSinkBuffer));
+                    // Fix use-after-free: when an effect chain is removed (e.g. during
+                    // moveEffectChain_ll), the chain's inBuffer will be freed. However,
+                    // AudioMixer maintains its own copy of mainBuffer (TrackBase::mainBuffer)
+                    // which was set to the chain's inBuffer by prepareTracks_l() earlier
+                    // in the same threadLoop iteration. Since removeEffectChain_l() can
+                    // execute while the thread mutex is temporarily released inside
+                    // removeTracks_l() (for external track stopOutput/releaseOutput calls),
+                    // and this happens BEFORE lockEffectChains_l(), the AudioMixer's stale
+                    // pointer would be dereferenced in the subsequent threadLoop_mix().
+                    //
+                    // By updating AudioMixer's mainBuffer here, we ensure the mixer never
+                    // holds a dangling pointer to a freed chain inBuffer. The setParameter
+                    // call also triggers invalidate(), which forces process__validate() to
+                    // rebuild mGroups on the next process() call, eliminating any stale
+                    // grouping entries that reference the old buffer address.
+                    //
+                    // Thread safety: this runs under thread mutex (held by moveEffectChain_ll),
+                    // and threadLoop_mix() runs only after mutex is released, so there is no
+                    // concurrent access to AudioMixer state.
+                    if (mAudioMixer != nullptr && mAudioMixer->exists(track->id())) {
+                        // Use mMixerBuffer (not mSinkBuffer) because prepareTracks_l() never
+                        // sets AudioMixer's mainBuffer to mSinkBuffer when mMixerBufferEnabled
+                        // is true (which is always the case since kEnableExtendedPrecision is
+                        // hardcoded to true). For SPATIALIZER threads, non-spatialized tracks
+                        // use mPostSpatializerBuffer as their mix output destination.
+                        void *newMainBuffer;
+                        if (mType == SPATIALIZER && !track->isSpatialized()) {
+                            newMainBuffer = mPostSpatializerBuffer;
+                        } else {
+                            newMainBuffer = mMixerBuffer;
+                        }
+                        mAudioMixer->setParameter(
+                                track->id(),
+                                AudioMixer::TRACK,
+                                AudioMixer::MAIN_BUFFER,
+                                newMainBuffer);
+                    }
                     chain->decTrackCnt();
                 }
             }
