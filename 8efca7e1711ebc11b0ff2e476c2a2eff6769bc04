@@ -16,6 +16,23 @@
       "message": "Hi: I am checking the status and I do not know what block\u0027s the commit.\nDo I have to buy a physical security key and finish the ReAuth?",
       "revId": "8efca7e1711ebc11b0ff2e476c2a2eff6769bc04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4224da20_6af954fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130869
+      },
+      "writtenOn": "2026-05-06T03:36:23Z",
+      "side": 1,
+      "message": "Hi, what\u0027s the status? Anything need we do for merging the patch? thanks!",
+      "revId": "8efca7e1711ebc11b0ff2e476c2a2eff6769bc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
