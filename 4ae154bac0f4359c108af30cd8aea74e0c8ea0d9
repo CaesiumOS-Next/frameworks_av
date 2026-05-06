@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a78ff28_203938b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2026-05-06T21:22:32Z",
+      "side": 1,
+      "message": "Straight CP from ag/39683992. However, since the Commit-Id already exists on AOSP `main` (aosp/3889363), I had to CP to the GSI branch manually.",
+      "revId": "4ae154bac0f4359c108af30cd8aea74e0c8ea0d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
