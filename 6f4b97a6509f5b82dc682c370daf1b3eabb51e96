@@ -1,0 +1,131 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad9e5e6_cf35a228",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-05-07T16:19:52Z",
+      "side": 1,
+      "message": "thank you for this super lucid diagram!",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 12
+      },
+      "revId": "6f4b97a6509f5b82dc682c370daf1b3eabb51e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9406ade_3c763f5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-05-07T16:19:52Z",
+      "side": 1,
+      "message": "Thanks for submitting this CL!  I\u0027ll follow up on the bug with additional comments.",
+      "revId": "6f4b97a6509f5b82dc682c370daf1b3eabb51e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ad0159_8b9a09bd",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 3986,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-05-07T16:19:52Z",
+      "side": 1,
+      "message": "as threadLoop_mix() runs without the thread mutex, it means invalidateAudioMixerMainBuffer_l() could interfere with the mAudioMixer-\u003eprocess() here:\n\nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audioflinger/Threads.cpp;drc\u003df491cc6f1a6f9dc4fdf68bb2b424bb33e86f9eae;l\u003d5450",
+      "range": {
+        "startLine": 3984,
+        "startChar": 0,
+        "endLine": 3986,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0c0cb561_772acd29",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/audioflinger/Threads.cpp",
+              "range": {
+                "startLine": 3984,
+                "startChar": 0,
+                "endLine": 3987,
+                "endChar": 0
+              },
+              "replacement": "                    // Thread safety: invalidateAudioMixerMainBuffer_l runs under thread mutex,\n                    // but threadLoop_mix() runs without the thread mutex, which means that any\n                    // changes to the AudioMixer state must be finalized before the mutex is\n                    // released.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6f4b97a6509f5b82dc682c370daf1b3eabb51e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48173c29_09553e19",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 4914,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-05-07T16:19:52Z",
+      "side": 1,
+      "message": "i would prefer instead to move this to a command worker thread.",
+      "range": {
+        "startLine": 4910,
+        "startChar": 7,
+        "endLine": 4914,
+        "endChar": 26
+      },
+      "revId": "6f4b97a6509f5b82dc682c370daf1b3eabb51e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae869a8b_46c1a40e",
+        "filename": "services/audioflinger/Threads.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 4923,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-05-07T16:19:52Z",
+      "side": 1,
+      "message": "this, too.",
+      "range": {
+        "startLine": 4919,
+        "startChar": 16,
+        "endLine": 4923,
+        "endChar": 27
+      },
+      "revId": "6f4b97a6509f5b82dc682c370daf1b3eabb51e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
