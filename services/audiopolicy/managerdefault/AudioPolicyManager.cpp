@@ -246,6 +246,19 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
                     "checkOutputsForDevice() returned no outputs but status OK");
             ALOGV("%s() checkOutputsForDevice() returned %zu outputs", __func__, outputs.size());
 
+            if (device->type() == AUDIO_DEVICE_OUT_HDMI && device->address().empty()) {
+                static const char* kHdmiExtraAddresses[] = {"HDMI2", "HDMI3", "HDMI4"};
+                for (const char* addr : kHdmiExtraAddresses) {
+                    if (mAvailableOutputDevices.getDevice(AUDIO_DEVICE_OUT_HDMI,
+                            String8(addr), AUDIO_FORMAT_DEFAULT) != nullptr) {
+                        continue;
+                    }
+                    setDeviceConnectionStateInt(AUDIO_DEVICE_OUT_HDMI,
+                            AUDIO_POLICY_DEVICE_STATE_AVAILABLE,
+                            addr, "", AUDIO_FORMAT_DEFAULT, true /*deviceSwitch*/);
+                }
+            }
+
             } break;
         // handle output device disconnection
         case AUDIO_POLICY_DEVICE_STATE_UNAVAILABLE: {

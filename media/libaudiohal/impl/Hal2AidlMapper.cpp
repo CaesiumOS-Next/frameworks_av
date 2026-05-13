@@ -1038,6 +1038,18 @@ status_t Hal2AidlMapper::setDevicePortConnectedState(const AudioPort& devicePort
                 matchDevice.type.type == AudioDeviceType::IN_SUBMIX) {
             templatePort = mRemoteSubmixIn;
         } else {
+            // Static addressed ports (non-empty address, fixed profiles) are always present;
+            // mark connected without calling connectExternalDevice.
+            if (matchDevice.address.getTag() == AudioDeviceAddress::id &&
+                    !matchDevice.address.get<AudioDeviceAddress::id>().empty()) {
+                auto staticPortsIt = findPort(matchDevice);
+                if (staticPortsIt != mPorts.end() &&
+                        !staticPortsIt->second.profiles.empty()) {
+                    mConnectedPorts.insert(staticPortsIt->first);
+                    updateDynamicMixPorts();
+                    return updateRoutes();
+                }
+            }
             // Reset the device address to find the "template" port.
             matchDevice.address = AudioDeviceAddress::make<AudioDeviceAddress::id>();
         }
@@ -1068,6 +1080,15 @@ status_t Hal2AidlMapper::setDevicePortConnectedState(const AudioPort& devicePort
         }
     } else {  // !connected
         AudioDevice matchDevice = devicePort.ext.get<AudioPortExt::device>().device;
+        if (matchDevice.address.getTag() == AudioDeviceAddress::id &&
+                !matchDevice.address.get<AudioDeviceAddress::id>().empty()) {
+            auto staticPortsIt = findPort(matchDevice);
+            if (staticPortsIt != mPorts.end() &&
+                    !staticPortsIt->second.profiles.empty()) {
+                mConnectedPorts.erase(staticPortsIt->first);
+                return updateRoutes();
+            }
+        }
         auto portsIt = findPort(matchDevice);
         if (portsIt == mPorts.end()) {
             // Since 'setConnectedState' is called for all modules, it is normal when the device
