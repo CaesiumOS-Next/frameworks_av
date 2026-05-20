@@ -16,8 +16,9 @@
 
 #ifndef ANDROID_COMPANION_VIRTUALCAMERA_EGLSURFACETEXTURE_H
 #define ANDROID_COMPANION_VIRTUALCAMERA_EGLSURFACETEXTURE_H
-
+#include <EGL/egl.h>
 #include <GLES/gl.h>
+#include <android/hardware_buffer.h>
 #include <gui/ConsumerBase.h>
 #include <gui/Surface.h>
 #include <utils/RefBase.h>
@@ -37,8 +38,9 @@ namespace virtualcamera {
 // Encapsulates GLConsumer & Surface for rendering into EGL texture.
 class EglSurfaceTexture {
  public:
-  // Create new EGL Texture with specified size.
-  EglSurfaceTexture(uint32_t width, uint32_t height);
+  // Create new EGL Texture with specified size and default buffer format.
+  EglSurfaceTexture(uint32_t width, uint32_t height,
+                    AHardwareBuffer_Format defaultFormat);
   ~EglSurfaceTexture();
 
   // Get Surface backing up the texture.
@@ -105,6 +107,7 @@ class EglSurfaceTexture {
   GLuint mTextureId;
   const uint32_t mWidth;
   const uint32_t mHeight;
+  const AHardwareBuffer_Format mFormat;
   std::atomic_long mLastWaitedFrame = 0;
   sp<FrameAvailableListenerProxy> mFrameAvailableListenerProxy;
   sp<ConsumerBase::FrameAvailableListener> mFrameAvailableListener;

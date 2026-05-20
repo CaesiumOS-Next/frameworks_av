@@ -30,6 +30,7 @@
 
 #include "VirtualCameraCaptureRequest.h"
 #include "VirtualCameraSessionContext.h"
+#include "aidl/android/companion/virtualcamera/Format.h"
 #include "aidl/android/hardware/camera/device/CameraMetadata.h"
 #include "aidl/android/hardware/camera/device/ICameraDeviceCallback.h"
 #include "android/binder_auto_utils.h"
@@ -118,7 +119,9 @@ class VirtualCameraRenderThread {
       Resolution reportedSensorSize,
       std::shared_ptr<
           ::aidl::android::hardware::camera::device::ICameraDeviceCallback>
-          cameraDeviceCallback);
+          cameraDeviceCallback,
+      ::aidl::android::companion::virtualcamera::Format inputFormat =
+          ::aidl::android::companion::virtualcamera::Format::UNKNOWN);
 
   ~VirtualCameraRenderThread();
 
@@ -238,6 +241,7 @@ class VirtualCameraRenderThread {
 
   const Resolution mInputSurfaceSize;
   const Resolution mReportedSensorSize;
+  const ::aidl::android::companion::virtualcamera::Format mInputFormat;
 
   VirtualCameraSessionContext& mSessionContext;
 

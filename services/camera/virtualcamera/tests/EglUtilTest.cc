@@ -94,7 +94,8 @@ TEST_F(EglTest, EglSurfaceCurrentBufferNullAfterInit) {
       GTEST_SKIP() << "Skipping test because of missing required GL extension " << kGlExtYuvTarget;
   }
 
-  EglSurfaceTexture surfaceTexture(kWidth, kHeight);
+  EglSurfaceTexture surfaceTexture(kWidth, kHeight,
+                                   AHARDWAREBUFFER_FORMAT_Y8Cb8Cr8_420);
   surfaceTexture.updateTexture();
   sp<GraphicBuffer> buffer = surfaceTexture.getCurrentBuffer();
 

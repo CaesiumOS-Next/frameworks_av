@@ -59,8 +59,10 @@ void EglSurfaceTexture::FrameAvailableListenerProxy::onFrameAvailable(
   }
 }
 
-EglSurfaceTexture::EglSurfaceTexture(const uint32_t width, const uint32_t height)
-    : mWidth(width), mHeight(height) {
+EglSurfaceTexture::EglSurfaceTexture(
+    const uint32_t width, const uint32_t height,
+    const AHardwareBuffer_Format defaultFormat)
+    : mWidth(width), mHeight(height), mFormat(defaultFormat) {
   glGenTextures(1, &mTextureId);
   if (checkEglError("EglSurfaceTexture(): glGenTextures")) {
     ALOGE("Failed to generate texture");
@@ -72,7 +74,7 @@ EglSurfaceTexture::EglSurfaceTexture(const uint32_t width, const uint32_t height
   mGlConsumer->setName(String8("VirtualCameraEglSurfaceTexture"));
   mGlConsumer->setDefaultBufferSize(mWidth, mHeight);
   mGlConsumer->setConsumerUsageBits(GRALLOC_USAGE_HW_TEXTURE);
-  mGlConsumer->setDefaultBufferFormat(AHARDWAREBUFFER_FORMAT_Y8Cb8Cr8_420);
+  mGlConsumer->setDefaultBufferFormat(mFormat);
 
   mSurface->setMaxDequeuedBufferCount(kBufferProducerMaxDequeueBufferCount);
 

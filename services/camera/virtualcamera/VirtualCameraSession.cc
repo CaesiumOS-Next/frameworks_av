@@ -443,7 +443,8 @@ ndk::ScopedAStatus VirtualCameraSession::configureStreams(
 
     mRenderThread = std::make_unique<VirtualCameraRenderThread>(
         mSessionContext, resolutionFromInputConfig(*inputConfig),
-        virtualCamera->getMaxInputResolution(), mCameraDeviceCallback);
+        virtualCamera->getMaxInputResolution(), mCameraDeviceCallback,
+        inputConfig->pixelFormat);
     mRenderThread->start();
     inputSurface = mRenderThread->getInputSurface();
     inputStreamId = mCurrentInputStreamId =

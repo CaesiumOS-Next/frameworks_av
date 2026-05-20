@@ -62,6 +62,7 @@ namespace android {
 namespace companion {
 namespace virtualcamera {
 
+using ::aidl::android::companion::virtualcamera::Format;
 using ::aidl::android::hardware::camera::common::Status;
 using ::aidl::android::hardware::camera::device::BufferStatus;
 using ::aidl::android::hardware::camera::device::CameraBlob;
@@ -177,6 +178,19 @@ bool isYuvFormat(const PixelFormat pixelFormat) {
   }
 }
 
+AHardwareBuffer_Format getHardwareFormat(const Format inputFormat) {
+  switch (inputFormat) {
+    case Format::RGBA_8888:
+      return AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM;
+    case Format::YUV_420_888:
+      return AHARDWAREBUFFER_FORMAT_Y8Cb8Cr8_420;
+    default:
+      ALOGE("%s: Invalid format defined in input stream configuration: %d",
+            __func__, inputFormat);
+      return AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM;
+  }
+}
+
 // By default, virtual camera will duplicate the last frame if the producer does
 // not post a new frame. When a frame is duplicated, the timestamp must still
 // increase to please the camera framework expectations. In some usecases, this
@@ -287,10 +301,12 @@ sp<Fence> CaptureRequestBuffer::getFence() const {
 VirtualCameraRenderThread::VirtualCameraRenderThread(
     VirtualCameraSessionContext& sessionContext,
     const Resolution inputSurfaceSize, const Resolution reportedSensorSize,
-    std::shared_ptr<ICameraDeviceCallback> cameraDeviceCallback)
+    std::shared_ptr<ICameraDeviceCallback> cameraDeviceCallback,
+    const Format inputFormat)
     : mCameraDeviceCallback(cameraDeviceCallback),
       mInputSurfaceSize(inputSurfaceSize),
       mReportedSensorSize(reportedSensorSize),
+      mInputFormat(inputFormat),
       mSessionContext(sessionContext),
       mInputSurfaceFuture(mInputSurfacePromise.get_future()) {
 }
@@ -410,7 +426,8 @@ void VirtualCameraRenderThread::threadLoop() {
   mEglTextureRgbProgram = std::make_unique<EglTextureProgram>(
       EglTextureProgram::TextureFormat::RGBA);
   mEglSurfaceTexture = std::make_unique<EglSurfaceTexture>(
-      mInputSurfaceSize.width, mInputSurfaceSize.height);
+      mInputSurfaceSize.width, mInputSurfaceSize.height,
+      getHardwareFormat(mInputFormat));
   mEglSurfaceTexture->setFrameAvailableListener(
       [this]() { requestTextureUpdate(); });
 
