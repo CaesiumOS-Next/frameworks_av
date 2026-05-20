@@ -84,6 +84,10 @@ class VirtualCameraSessionContext {
   std::shared_ptr<EglFrameBuffer> fetchOrCreateEglFramebuffer(
       const EGLDisplay eglDisplay, int streamId, int bufferId) EXCLUDES(mLock);
 
+  // Drop all cached EglFrameBuffers; call after the EGL context that created
+  // them has been destroyed (e.g. on render-thread restart).
+  void invalidateEglFramebufferCaches() EXCLUDES(mLock);
+
   // Returns set of all stream ids managed by this instance.
   std::set<int> getStreamIds() const EXCLUDES(mLock);
 

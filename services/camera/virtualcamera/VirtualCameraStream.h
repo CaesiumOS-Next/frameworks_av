@@ -60,6 +60,10 @@ class VirtualCameraStream {
   // Returns true if removal is successful, false otherwise.
   bool removeBuffer(int bufferId) EXCLUDES(mLock);
 
+  // Drop cached EglFrameBuffer wrappers; preserves the imported
+  // AHardwareBuffer cache so reconfiguration does not re-import buffers.
+  void clearEglFramebuffers() EXCLUDES(mLock);
+
   // Returns AIDL Stream instance containing configuration of this stream.
   ::aidl::android::hardware::camera::device::Stream getStreamConfig() const;
 

@@ -156,6 +156,11 @@ bool VirtualCameraStream::removeBuffer(int bufferId) {
   return mBuffers.erase(bufferId) == 1;
 }
 
+void VirtualCameraStream::clearEglFramebuffers() {
+  std::lock_guard<std::mutex> lock(mLock);
+  mEglFramebuffers.clear();
+}
+
 Stream VirtualCameraStream::getStreamConfig() const {
   return mStreamConfig;
 }
