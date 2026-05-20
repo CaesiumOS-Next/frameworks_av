@@ -161,6 +161,13 @@ VirtualCameraSessionContext::fetchOrCreateEglFramebuffer(
   return stream.getEglFrameBuffer(eglDisplay, bufferId);
 }
 
+void VirtualCameraSessionContext::invalidateEglFramebufferCaches() {
+  std::lock_guard<std::mutex> lock(mLock);
+  for (auto& [_, stream] : mStreams) {
+    stream->clearEglFramebuffers();
+  }
+}
+
 std::set<int> VirtualCameraSessionContext::getStreamIds() const {
   std::set<int> result;
   std::lock_guard<std::mutex> lock(mLock);

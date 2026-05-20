@@ -428,6 +428,10 @@ void VirtualCameraRenderThread::threadLoop() {
         task);
   }
 
+  // Destroy EGL-backed framebuffers while this thread's EGL context is still
+  // current. The session context only owns shared references to them.
+  mSessionContext.invalidateEglFramebufferCaches();
+
   // Destroy EGL utilities still on the render thread.
   mEglSurfaceTexture.reset();
   mEglTextureRgbProgram.reset();
