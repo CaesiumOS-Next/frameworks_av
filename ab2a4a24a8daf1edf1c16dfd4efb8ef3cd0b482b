@@ -16,6 +16,23 @@
       "message": "Hi",
       "revId": "ab2a4a24a8daf1edf1c16dfd4efb8ef3cd0b482b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a6c3fff_b3bf37b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659435
+      },
+      "writtenOn": "2026-05-20T17:22:19Z",
+      "side": 1,
+      "message": "No clean cp to current main, needs adaptation.",
+      "revId": "ab2a4a24a8daf1edf1c16dfd4efb8ef3cd0b482b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
