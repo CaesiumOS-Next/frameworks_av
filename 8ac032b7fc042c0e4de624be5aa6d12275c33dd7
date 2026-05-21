@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ef2921e_2899c515",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659435
+      },
+      "writtenOn": "2026-05-21T10:33:47Z",
+      "side": 1,
+      "message": "Code is refactored on main, mLastAcquisitionTimestampNanoseconds is no longer a part of the VirtualCameraRenderThread constructor. Obsolete.",
+      "revId": "8ac032b7fc042c0e4de624be5aa6d12275c33dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
