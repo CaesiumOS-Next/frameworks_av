@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08fc89d0_b818d175",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3728328
+      },
+      "writtenOn": "2026-05-21T04:07:43Z",
+      "side": 1,
+      "message": "Based on Judy\u0027s Guidance, dynamic hdmi node enumeration will be relooked during WCL timeframe.. for now deferring the review - https://partnerissuetracker.corp.google.com/issues/420766711#comment20",
+      "revId": "1563846e5469009476d8430b9ae267148b3e63ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
