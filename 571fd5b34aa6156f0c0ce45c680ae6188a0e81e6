@@ -22,6 +22,30 @@
       },
       "revId": "571fd5b34aa6156f0c0ce45c680ae6188a0e81e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "513a46a2_330f09f8",
+        "filename": "services/audiopolicy/managerdefault/AudioPolicyManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 3705885
+      },
+      "writtenOn": "2026-05-26T05:37:53Z",
+      "side": 1,
+      "message": "Did you investigate further why reusing the output creates a timestamp problem?\n\nThe reason for reusing is that the release of audiotrack and the （flush）close of the audio stream by audioflinger occur asynchronously.\nAfter the audio track was released, before audioflinger had executed the flush and close stream operations, the application had already created a new audio track, resulting in the reuse of the stream that should have been flush and closed. This led to incorrect position values being obtained by the application. \n\nDo you already employ limiting of open streams count by using max{Open|Active}Count on mix ports?\nYes, I have already configured. \n   \u003cmixPort name\u003d\"direct pcm\" role\u003d\"source\" flags\u003d\"AUDIO_OUTPUT_FLAG_DIRECT\" maxOpenCount \u003d \"3\" maxActiveCount\u003d\"2\"\u003e\n\nHowever, the code I modified is  before this, if the configuration is exactly the same, it will directly return the current output.",
+      "parentUuid": "1ed3440d_94619b90",
+      "range": {
+        "startLine": 1651,
+        "startChar": 16,
+        "endLine": 1651,
+        "endChar": 51
+      },
+      "revId": "571fd5b34aa6156f0c0ce45c680ae6188a0e81e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
