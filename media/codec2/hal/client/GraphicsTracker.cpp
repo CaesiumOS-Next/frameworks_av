@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "GraphicsTracker"
 #include <fcntl.h>
 #include <unistd.h>
@@ -1183,6 +1183,11 @@ void GraphicsTracker::onReleased(uint32_t generation) {
                 mDequeueable++;
                 writeIncDequeueableLocked(1);
             }
+            ALOGV("onReleased: buffer released from consumer. mDequeueable: %d, updateDequeue: %d",
+                  mDequeueable, updateDequeue);
+        } else {
+            ALOGV("onReleased: ignored due to generation mismatch. current: %u, expected: %u",
+                  mBufferCache->mGeneration, generation);
         }
     }
     if (updateDequeue) {
