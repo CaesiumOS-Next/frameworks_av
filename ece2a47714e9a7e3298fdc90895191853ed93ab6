@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d6c354_7779fb6a",
+        "filename": "services/oboeservice/AAudioServiceStreamBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2026-05-27T17:24:11Z",
+      "side": 1,
+      "message": "nit, can we have this method in `frameworks/av/media/libaaudio/src/utility/AAudioUtilities.h`?",
+      "range": {
+        "startLine": 833,
+        "startChar": 30,
+        "endLine": 833,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f4c18885_3cbfc57b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/oboeservice/AAudioServiceStreamBase.cpp",
+              "range": {
+                "startLine": 833,
+                "startChar": 0,
+                "endLine": 834,
+                "endChar": 0
+              },
+              "replacement": "namespace aaudio {\n\nbool isSystemUsage(aaudio_usage_t usage) {\n"
+            },
+            {
+              "path": "services/oboeservice/AAudioServiceStreamBase.cpp",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n} // namespace aaudio\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ece2a47714e9a7e3298fdc90895191853ed93ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
