@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7f0544d_f3f94fcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2026-05-27T17:31:05Z",
+      "side": 1,
+      "message": "Theoretically, this should be fixed by aaudio passing the right uid and pid to audio policy service for checking permissions. But it maybe a big one and not suitable for backporting.",
+      "revId": "ece2a47714e9a7e3298fdc90895191853ed93ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34d6c354_7779fb6a",
