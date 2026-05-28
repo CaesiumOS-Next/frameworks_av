@@ -65,8 +65,8 @@ static void getServerConfigurableFlag(GetServerConfigurableFlagFn getServerConfi
 
 static void getServerConfigurableFlag(GetServerConfigurableFlagFn getServerConfigurableFlagFn,
                                       char const *flagNameSuffix, int32_t *value) {
-    char defaultStr[11];
-    sprintf(defaultStr, "%d", int(*value));
+    char defaultStr[12];
+    snprintf(defaultStr, sizeof(defaultStr), "%d", int(*value));
     std::string flagName("render_metrics_");
     flagName.append(flagNameSuffix);
     std::string valueStr = (*getServerConfigurableFlagFn)("media_native", flagName, defaultStr);
