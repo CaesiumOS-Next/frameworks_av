@@ -387,7 +387,9 @@ std::string GetExceptionMessage(const DrmStatus &err, const char* defaultMsg,
         int ms = log.timeMs % 1000;
         char buf[64] = {0};
         std::string timeStr = "00-00 00:00:00";
-        if (strftime(buf, sizeof buf, "%m-%d %H:%M:%S", std::localtime(&seconds))) {
+        struct tm tm;
+        if (localtime_r(&seconds, &tm) != nullptr &&
+            strftime(buf, sizeof buf, "%m-%d %H:%M:%S", &tm)) {
             timeStr = buf;
         }
 

@@ -288,8 +288,13 @@ typedef struct {
 String8 ExtractorInstance::toString() const {
     String8 str;
     char timeString[32];
-    strftime(timeString, sizeof(timeString), "%m-%d %T", localtime(&when));
-    str.append(timeString);
+    struct tm tm;
+    if (localtime_r(&when, &tm) != nullptr &&
+        strftime(timeString, sizeof(timeString), "%m-%d %T", &tm)) {
+        str.append(timeString);
+    } else {
+        str.append("00-00 00:00:00");
+    }
     str.append(": ");
     str.append(name);
     str.append(" for mime ");
