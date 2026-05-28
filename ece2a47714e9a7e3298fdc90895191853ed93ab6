@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d3f27e_8260a199",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491204
+      },
+      "writtenOn": "2026-05-28T05:50:19Z",
+      "side": 1,
+      "message": "It was exactly my original idea and patch. But as you guess, huge change. And also, we could check only for shared endpoint the first one creating the shared. If the first one is gone, other client sharing track would potentially loose if they did not have permission. According to the IA Review agent, it was the purpose of this design clearing identity and using audioserver identity to create shared endpoint.",
+      "parentUuid": "f7f0544d_f3f94fcc",
+      "revId": "ece2a47714e9a7e3298fdc90895191853ed93ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34d6c354_7779fb6a",
