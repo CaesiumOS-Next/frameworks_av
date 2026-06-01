@@ -450,12 +450,99 @@ void setOutputSurface(const std::shared_ptr<android::Codec2Client::Component>& c
         texture = new GLConsumer(0 /* tex */, GLConsumer::TEXTURE_EXTERNAL, true /* useFenceSync */,
                                  false /* isControlledByApp */);
         sp<Surface> s = texture->getSurface();
+<<<<<<< HEAD
         surface = s;
         ASSERT_NE(surface, nullptr) << "failed to create Surface object";
 
         producer = s->getIGraphicBufferProducer();
 #else
         sp<IGraphicBufferConsumer> consumer = nullptr;
+=======
+    return false;
+}
+
+class VtsOnBufferReleasedListener : public ::android::SurfaceListener {
+private:
+    uint32_t mGeneration;
+    std::weak_ptr<::android::Codec2Client::Component> mComponent;
+
+    void notifyBufferReleased() {
+        auto p = mComponent.lock();
+        if (p) {
+            p->onBufferReleasedFromOutputSurface(mGeneration);
+        }
+    }
+
+    void notifyBufferAttached() {
+        auto p = mComponent.lock();
+        if (p) {
+            p->onBufferAttachedToOutputSurface(mGeneration);
+        }
+    }
+
+    void notifyBufferDetached(uint64_t bufferId) {
+        auto p = mComponent.lock();
+        if (p) {
+            p->onBufferDetachedFromOutputSurface(mGeneration, bufferId);
+        }
+    }
+
+    void notifyBuffersRemoved(const std::vector<uint64_t>& bufferIds) {
+        auto p = mComponent.lock();
+        if (p) {
+            p->onBuffersRemovedFromOutputSurface(mGeneration, bufferIds);
+        }
+    }
+
+public:
+    VtsOnBufferReleasedListener(
+            uint32_t generation,
+            const std::shared_ptr<::android::Codec2Client::Component> &component)
+            : mGeneration(generation), mComponent(component) {}
+
+    virtual ~VtsOnBufferReleasedListener() = default;
+
+    void onBufferReleased() override {
+        notifyBufferReleased();
+    }
+
+    void onBuffersDiscarded(const std::vector<::android::sp<::android::GraphicBuffer>>& buffers) override {
+#if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(WB_MEDIA_MIGRATION)
+        std::vector<uint64_t> bufferIds;
+        bufferIds.reserve(buffers.size());
+        for (const auto& buffer : buffers) {
+            bufferIds.push_back(buffer->getId());
+        }
+        notifyBuffersRemoved(bufferIds);
+#else
+        (void)buffers;
+#endif
+    }
+
+    void onBufferDetached(uint64_t bufferId) override {
+#if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(WB_MEDIA_MIGRATION)
+        notifyBufferDetached(bufferId);
+#else
+        (void)bufferId;
+        notifyBufferReleased();
+#endif
+    }
+
+    bool needsReleaseNotify() override { return true; }
+
+#if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_CONSUMER_ATTACH_CALLBACK)
+    void onBufferAttached() override {
+        notifyBufferAttached();
+    }
+
+    bool needsAttachNotify() override { return true; }
+#endif
+};
+
+void setOutputSurface(const std::shared_ptr<android::Codec2Client::Component>& component,
+                      surfaceMode_t surfMode, android::sp<android::Surface>& surface,
+                      android::sp<android::GLConsumer>& glConsumer, int& maxDequeueCount) {
+>>>>>>> PATCH
         BufferQueue::createBufferQueue(&producer, &consumer);
         ASSERT_NE(producer, nullptr) << "createBufferQueue returned invalid producer";
         ASSERT_NE(consumer, nullptr) << "createBufferQueue returned invalid consumer";
@@ -477,6 +564,7 @@ void setOutputSurface(const std::shared_ptr<android::Codec2Client::Component>& c
             (surfMode == NULL_SURFACE ? "NULL_SURFACE" : "WITH_SURFACE");
 
     ASSERT_EQ(err, C2_OK) << "setOutputSurface failed, surfMode: " << surfStr;
+<<<<<<< HEAD
 }
 
 void decodeNFrames(const std::shared_ptr<android::Codec2Client::Component>& component,
@@ -484,6 +572,16 @@ void decodeNFrames(const std::shared_ptr<android::Codec2Client::Component>& comp
                    std::list<std::unique_ptr<C2Work>>& workQueue,
                    std::list<uint64_t>& flushedIndices, std::shared_ptr<C2BlockPool>& linearPool,
                    std::ifstream& eleStream, android::Vector<FrameInfo>* Info, int offset,
+=======
+                                   true /* useFenceSync */, false /* isControlledByApp */);
+        ASSERT_NE(surface, nullptr) << "failed to create Surface object";
+
+        sp<SurfaceListener> listener = new VtsOnBufferReleasedListener(generation, component);
+        surface->connect(NATIVE_WINDOW_API_MEDIA, listener);
+        producer = surface->getIGraphicBufferProducer();
+        producer->setGenerationNumber(generation);
+    }
+>>>>>>> PATCH
                    int range, bool signalEOS = true) {
     typedef std::unique_lock<std::mutex> ULock;
     static const size_t kPageSize = getpagesize();
