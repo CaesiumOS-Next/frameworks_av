@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae64455_1def10e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2026-06-01T16:52:09Z",
+      "side": 1,
+      "message": "Could you please clarify why NON_BLOCKING must be a relevant flag? The NON_BLOCKING flag should only affect how the data transferring mode instead of routing.",
+      "revId": "88c1f4d2d12c12662224a48fe556b51d45b13c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
