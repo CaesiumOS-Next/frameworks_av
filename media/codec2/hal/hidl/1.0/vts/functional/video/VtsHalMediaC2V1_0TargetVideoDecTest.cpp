@@ -277,6 +277,7 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
                         C2PortReorderBufferDepthTuning::output reorderBufferDepth;
                         mComponent->query({&reorderBufferDepth}, {}, C2_MAY_BLOCK, nullptr);
                         mReorderDepth = reorderBufferDepth.value;
+<<<<<<< HEAD
                         if (mReorderDepth > 0) {
                             // TODO: Add validation for reordered output
                             mTimestampDevTest = false;
@@ -286,6 +287,19 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
                         EXPECT_GE((work->worklets.front()->output.ordinal.timestamp.peeku()),
                                   mTimestampUs);
                         mTimestampUs = work->worklets.front()->output.ordinal.timestamp.peeku();
+=======
+                                int newMaxDequeueCount = outputDelay.value + kSmoothnessFactor;
+                                ALOGD("handleWorkDone: output delay %u newMaxDequeueCount %d",
+                                      outputDelay.value, newMaxDequeueCount);
+                                if (newMaxDequeueCount != mMaxDequeueCount) {
+                                    mMaxDequeueCount = newMaxDequeueCount;
+                                    if (mSurface) {
+                                        mSurface->setMaxDequeuedBufferCount(mMaxDequeueCount);
+                                    }
+                                    mComponent->setOutputSurfaceMaxDequeueCount(mMaxDequeueCount);
+                                }
+                            }
+>>>>>>> PATCH
 
                         ULock l(mQueueLock);
                         {
