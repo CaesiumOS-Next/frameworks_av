@@ -16,6 +16,24 @@
       "message": "Code structure is a bit different for Android 17, there are conflicts cherry-picking on the current main. The fix is still worthwhile, will try to solve and update.",
       "revId": "d9d24fdd4456d06d95564ee1d17d02642ec5d952",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8984757_6a8f99c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659435
+      },
+      "writtenOn": "2026-06-04T14:41:08Z",
+      "side": 1,
+      "message": "Adapted and integrated in ag/40242506.",
+      "parentUuid": "8537d076_48fd1e9e",
+      "revId": "d9d24fdd4456d06d95564ee1d17d02642ec5d952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
