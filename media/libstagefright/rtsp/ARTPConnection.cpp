@@ -636,6 +636,15 @@ status_t ARTPConnection::receive(StreamInfo *s, bool receiveRTP) {
     sMsg.msg_controllen = sizeof(buf);
     sMsg.msg_flags = 0;
 
+    // For RTCP, capture sender address so we can reply (FIR / RR).
+    // Without this msg_name is NULL and recvmsg() never fills mRemoteRTCPAddr,
+    // leaving it zeroed → sendto() to 0.0.0.0:0 fails with EINVAL.
+    struct sockaddr_storage srcAddr = {};
+    if (!receiveRTP) {
+        sMsg.msg_name = &srcAddr;
+        sMsg.msg_namelen = sizeof(srcAddr);
+    }
+
     ssize_t nbytes;
     do {
         // Used recvmsg to get the TOS header of incoming packet
@@ -661,6 +670,22 @@ status_t ARTPConnection::receive(StreamInfo *s, bool receiveRTP) {
     buffer->setRange(0, nbytes);
 
     // ALOGI("received %d bytes.", buffer->size());
+
+    // Learn the server's RTCP source address from the first incoming RTCP
+    // packet so that FIR and receiver reports can be sent back correctly.
+    if (!receiveRTP && s->mNumRTCPPacketsReceived == 0
+            && sMsg.msg_namelen > 0) {
+        if (srcAddr.ss_family == AF_INET6) {
+            memcpy(&s->mRemoteRTCPAddr6, &srcAddr, sizeof(s->mRemoteRTCPAddr6));
+        } else {
+            memcpy(&s->mRemoteRTCPAddr, &srcAddr, sizeof(s->mRemoteRTCPAddr));
+        }
+        ALOGD("Learned server RTCP address (family=%d port=%u)",
+              srcAddr.ss_family,
+              (srcAddr.ss_family == AF_INET6)
+                  ? ntohs(reinterpret_cast<struct sockaddr_in6 *>(&srcAddr)->sin6_port)
+                  : ntohs(reinterpret_cast<struct sockaddr_in  *>(&srcAddr)->sin_port));
+    }
 
     status_t err;
     if (receiveRTP) {
