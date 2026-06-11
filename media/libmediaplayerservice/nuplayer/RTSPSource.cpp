@@ -839,6 +839,15 @@ void NuPlayer::RTSPSource::onDisconnected(const sp<AMessage> &msg) {
         // We're still in the preparation phase, signal that it
         // failed.
         notifyPrepared(err);
+    } else if (mInPreparationPhase) {
+        // Connection dropped after PLAY but before onPollBuffering() had a
+        // chance to call notifyPrepared(). The jitter buffer may already hold
+        // enough data to make checkBuffering() return prepared=true, so the
+        // next poll tick would fire notifyPrepared() with no error — handing
+        // the app a successful prepare on a dead source, causing
+        // MediaCodec::configure() to fail.  Surface the error here instead.
+        mInPreparationPhase = false;
+        notifyPrepared(err);
     }
 
     mState = DISCONNECTED;
