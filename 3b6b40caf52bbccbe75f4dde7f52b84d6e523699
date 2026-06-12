@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c20e7a_527a2e06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1392692
+      },
+      "writtenOn": "2026-06-12T19:09:18Z",
+      "side": 1,
+      "message": "Include the bugnumber in the CL descrition please.\n\nBug: 447580666",
+      "revId": "3b6b40caf52bbccbe75f4dde7f52b84d6e523699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
