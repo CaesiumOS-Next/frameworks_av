@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fbefab_c816ec02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2026-06-18T21:49:26Z",
+      "side": 1,
+      "message": "[Codec Auto Reviewer] ✅ **LGTM** — All checks pass. [[trajectory](go/traj/7334bd5c-d9b8-438a-bb2f-895ef1993acd)]",
+      "revId": "b866d64e749717bac786f6e7612fbe3c6ee132f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
