@@ -79,16 +79,23 @@ ARTPSource::ARTPSource(
 
     if (!strncmp(desc.c_str(), "H264/", 5)) {
         mAssembler = new AAVCAssembler(notify);
-        mIssueFIRRequests = true;
+        // Request one initial FIR to obtain the first IDR frame.
+        // Do NOT set mIssueFIRRequests=true: that sends FIR every 5 seconds
+        // unconditionally. Before Gerrit 6877251 this was harmless (FIRs sent
+        // to 0.0.0.0 => EINVAL), but with RTCP delivery fixed the server now
+        // restarts the stream on every FIR, preventing the 3-second buffer fill
+        // needed for prepareAsync to complete. AAVCAssembler requests further
+        // FIRs on-demand via onIssueFIRByAssembler() when IDR is genuinely lost.
+        mIssueFIRByAssembler = true;
     } else if (!strncmp(desc.c_str(), "H265/", 5)) {
         mAssembler = new AHEVCAssembler(notify);
-        mIssueFIRRequests = true;
+        mIssueFIRByAssembler = true;
     } else if (!strncmp(desc.c_str(), "MP4A-LATM/", 10)) {
         mAssembler = new AMPEG4AudioAssembler(notify, params);
     } else if (!strncmp(desc.c_str(), "H263-1998/", 10)
             || !strncmp(desc.c_str(), "H263-2000/", 10)) {
         mAssembler = new AH263Assembler(notify);
-        mIssueFIRRequests = true;
+        mIssueFIRByAssembler = true;
     } else if (!strncmp(desc.c_str(), "AMR/", 4)) {
         mAssembler = new AAMRAssembler(notify, false /* isWide */, params);
     } else  if (!strncmp(desc.c_str(), "AMR-WB/", 7)) {
