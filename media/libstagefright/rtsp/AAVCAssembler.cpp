@@ -351,12 +351,22 @@ void AAVCAssembler::addSingleNALUnit(const sp<ABuffer> &buffer) {
     uint32_t rtpTime;
     CHECK(buffer->meta()->findInt32("rtp-time", (int32_t *)&rtpTime));
 
-    if (dropFramesUntilIframe(buffer)) {
-        sp<ARTPSource> source = nullptr;
-        buffer->meta()->findObject("source", (sp<android::RefBase>*)&source);
-        if (source != nullptr) {
-            ALOGD("Issued FIR to get the I-frame");
-            source->onIssueFIRByAssembler();
+    bool hasNoSps = mWidth * mHeight == 0;
+    if (hasNoSps || dropFramesUntilIframe(buffer)) {
+        if (!hasNoSps) {
+            // Only request FIR when SPS has already been received (resolution known)
+            // but IDR frame is still missing. Do NOT send FIR before any in-band SPS
+            // has arrived: SPS arrives naturally from the server and issuing FIR at
+            // this stage causes the server to restart the IDR stream on every incoming
+            // packet, flooding the server with FIR requests every ~1-2 seconds. This
+            // prevents the video buffer from accumulating the 3 seconds needed for
+            // prepareAsync to complete, delaying preparation by the entire clip duration.
+            sp<ARTPSource> source = nullptr;
+            buffer->meta()->findObject("source", (sp<android::RefBase>*)&source);
+            if (source != nullptr) {
+                ALOGD("Issued FIR to get the I-frame");
+                source->onIssueFIRByAssembler();
+            }
         }
         ALOGV("Dropping P-frame till I-frame provided. rtpTime %u", rtpTime);
         return;
