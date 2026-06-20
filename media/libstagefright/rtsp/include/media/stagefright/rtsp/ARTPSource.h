@@ -31,7 +31,11 @@
 
 namespace android {
 
-const uint32_t kStaticJitterTimeMs = 100;   // 100ms
+// Increased from 100ms to 200ms to accommodate real-world RTSP server packet
+// delivery delay (~168-186ms observed). Previous 100ms caused jitterTimeMs=138ms
+// total window to expire valid in-flight packets as MALFORMED_PACKET, triggering
+// additional FIR cycles that further disrupted video stream assembly.
+const uint32_t kStaticJitterTimeMs = 200;   // 200ms
 
 struct ABuffer;
 struct AMessage;
