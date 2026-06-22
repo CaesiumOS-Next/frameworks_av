@@ -2335,7 +2335,16 @@ void CCodecBufferChannel::flush(const std::list<std::unique_ptr<C2Work>> &flushe
             copy->input.ordinal = work->input.ordinal;
             copy->input.ordinal.frameIndex = mFrameIndex++;
             for (size_t i = 0; i < work->input.buffers.size(); ++i) {
-                copy->input.buffers.push_back(watcher->onInputBufferReleased(frameIndex, i));
+                std::shared_ptr<C2Buffer> buf = watcher->onInputBufferReleased(frameIndex, i);
+                if (!buf) {
+                    // Frame may have already been completed by the component before flush;
+                    // fall back to the original work buffer so the copy carries valid data.
+                    ALOGD("[%s] flush: onInputBufferReleased returned null for frameIndex = %llu"
+                          ", arrayIndex = %zu; using original work buffer as fallback",
+                          mName, (unsigned long long)frameIndex, i);
+                    buf = work->input.buffers[i];
+                }
+                copy->input.buffers.push_back(buf);
             }
             for (const std::unique_ptr<C2Param> &param : work->input.configUpdate) {
                 copy->input.configUpdate.push_back(C2Param::Copy(*param));
@@ -2389,11 +2398,13 @@ void CCodecBufferChannel::onInputBufferDone(
     bool newInputSlotAvailable = false;
     {
         Mutexed<Input>::Locked input(mInput);
-        if (input->lastFlushIndex >= frameIndex) {
+        if (input->lastFlushIndex > frameIndex) {
             ALOGD("[%s] Ignoring stale input buffer done callback: "
                   "last flush index = %lld, frameIndex = %lld",
                   mName, input->lastFlushIndex.peekll(), (long long)frameIndex);
         } else {
+            ALOGD("[%s] onInputBufferDone: recycling input buffer frameIndex = %lld",
+                  mName, (long long)frameIndex);
             newInputSlotAvailable = input->buffers->expireComponentBuffer(buffer);
             if (!newInputSlotAvailable) {
                 (void)input->extraBuffers.expireComponentBuffer(buffer);
