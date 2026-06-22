@@ -526,7 +526,8 @@ void NuPlayer::RTSPSource::onMessageReceived(const sp<AMessage> &msg) {
         {
             onConnected();
 
-            notifyVideoSizeChanged();
+            ALOGD("RTSPSource: notifying video size changed with format from SDP on connect");
+            notifyVideoSizeChanged(getFormat(false /* audio */));
 
             uint32_t flags = 0;
 
