@@ -24,6 +24,7 @@
 
 #include <media/stagefright/foundation/ABuffer.h>
 #include <media/stagefright/foundation/ADebug.h>
+#include <media/stagefright/foundation/base64.h>
 #include <media/stagefright/foundation/AMessage.h>
 #include <media/stagefright/foundation/avc_utils.h>
 #include <media/stagefright/foundation/hexdump.h>
@@ -48,6 +49,26 @@ AAVCAssembler::AAVCAssembler(const sp<AMessage> &notify)
       mLastIFrameProvidedAtMs(0),
       mWidth(0),
       mHeight(0) {
+}
+
+AAVCAssembler::AAVCAssembler(const sp<AMessage> &notify, const AString &sdpParams)
+    : mNotifyMsg(notify){
+    // Seed mWidth/mHeight from the out-of-band SPS in sprop-parameter-sets so that
+    // addSingleNALUnit() does not drop all frames when the server provides SPS only
+    // in the SDP and never sends in-band SPS NAL units.
+    const char *p = sdpParams.c_str();
+    const char *key = "sprop-parameter-sets=";
+    const char *found = strcasestr(p, key);
+    if (found != nullptr) {
+        found += strlen(key);
+        const char *delim = strpbrk(found, ",;");
+        AString spsBase64(found, delim ? (size_t)(delim - found) : strlen(found));
+        sp<ABuffer> sps = decodeBase64(spsBase64);
+        if (sps != nullptr && sps->size() > 0 && (sps->data()[0] & 0x1f) == 7 /* SPS */) {
+            FindAVCDimensions(sps, &mWidth, &mHeight);
+            ALOGD("AAVCAssembler: seeded dimensions from SDP SPS: %dx%d", mWidth, mHeight);
+        }
+    }
 }
 
 AAVCAssembler::~AAVCAssembler() {

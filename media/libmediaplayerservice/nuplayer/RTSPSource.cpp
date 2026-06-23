@@ -137,6 +137,52 @@ void NuPlayer::RTSPSource::prepareAsync() {
 }
 
 void NuPlayer::RTSPSource::start() {
+    ALOGD("RTSPSource::start() mHandler=%p mState=%d", mHandler.get(), mState);
+
+    // The prepare-time buffering phase may have triggered signalSourceEOS() on
+    // the packet sources (e.g. overflow/underflow pump set mEOSResult=-ECONNABORTED).
+    // Once mEOSResult is non-OK, dequeueAccessUnit() returns EOS immediately even
+    // when frames are still queued.  Use resetEOS() to clear only the EOS latch
+    // while preserving all buffered frames and the format metadata.
+    // (clear() would also flush mBuffers and null mFormat, causing a crash in
+    // getDuration() which calls getFormat()->findInt64() after start().)
+    if (mVideoTrack != NULL) {
+        status_t videoEOS = OK;
+        bool videoHasBuf = mVideoTrack->hasBufferAvailable(&videoEOS);
+        int64_t videoDurUs = mVideoTrack->getBufferedDurationUs(&videoEOS);
+        ALOGD("RTSPSource::start() video before resetEOS: hasBuf=%d mEOSResult=%d bufferedUs=%lld",
+              videoHasBuf, videoEOS, (long long)videoDurUs);
+        mVideoTrack->resetEOS();
+        ALOGD("RTSPSource::start() video EOS latch reset");
+    }
+    if (mAudioTrack != NULL) {
+        status_t audioEOS = OK;
+        bool audioHasBuf = mAudioTrack->hasBufferAvailable(&audioEOS);
+        int64_t audioDurUs = mAudioTrack->getBufferedDurationUs(&audioEOS);
+        ALOGD("RTSPSource::start() audio before resetEOS: hasBuf=%d mEOSResult=%d bufferedUs=%lld",
+              audioHasBuf, audioEOS, (long long)audioDurUs);
+        mAudioTrack->resetEOS();
+        ALOGD("RTSPSource::start() audio EOS latch reset");
+    }
+    // Clear any pending EOS flags from the prepare-time buffering phase.
+    // kWhatSignalEOS messages that are already in-flight will be discarded
+    // because mEOSPending will be false when they are processed (onSignalEOS
+    // skips signalling when mEOSPending is false).
+    // postSourceEOSIfNecessary() will re-fire naturally ~2 s after start()
+    // once mLastQueuedTimeUs (now preserved by resetEOS) shows the stream is
+    // near its end — but by then audio has started and the EOS is benign.
+    {
+        Mutex::Autolock _l(mBufferingLock);
+        ALOGD("RTSPSource::start() mEOSPending=%d mEOSTimeoutAudio=%lld mEOSTimeoutVideo=%lld mBuffering=%d -- resetting all",
+              mEOSPending, (long long)mEOSTimeoutAudio, (long long)mEOSTimeoutVideo, mBuffering);
+    }
+    mEOSTimeoutAudio = 0;
+    mEOSTimeoutVideo = 0;
+    mEOSPending = false;
+    // Do NOT call mHandler->resume() here.  For pre-buffered streams the server
+    // is already done; an explicit PLAY causes TEARDOWN → error -1007.
+    // onPollBuffering calls resume() automatically when the buffer drops below
+    // startServerMarkUs (5.5s), which is the correct trigger point.
 }
 
 void NuPlayer::RTSPSource::stop() {
@@ -226,6 +272,8 @@ status_t NuPlayer::RTSPSource::dequeueAccessUnit(
 
             // If other source already signaled EOS, this source should also return EOS
             if (sourceReachedEOS(!audio)) {
+                ALOGD("RTSPSource::dequeueAccessUnit %s: returning EOS because other source reached EOS",
+                      audio ? "audio" : "video");
                 return ERROR_END_OF_STREAM;
             }
 
@@ -236,8 +284,12 @@ status_t NuPlayer::RTSPSource::dequeueAccessUnit(
             if (source->isFinished(mediaDurationUs)) {
                 int64_t eosTimeout = audio ? mEOSTimeoutAudio : mEOSTimeoutVideo;
                 if (eosTimeout == 0) {
+                    ALOGD("RTSPSource::dequeueAccessUnit %s: source isFinished, starting EOS timeout",
+                          audio ? "audio" : "video");
                     setEOSTimeout(audio, ALooper::GetNowUs());
                 } else if ((ALooper::GetNowUs() - eosTimeout) > kNearEOSTimeoutUs) {
+                    ALOGD("RTSPSource::dequeueAccessUnit %s: EOS timeout expired, returning EOS",
+                          audio ? "audio" : "video");
                     setEOSTimeout(audio, 0);
                     return ERROR_END_OF_STREAM;
                 }
@@ -252,11 +304,13 @@ status_t NuPlayer::RTSPSource::dequeueAccessUnit(
 
             return -EWOULDBLOCK;
         }
+        ALOGD("RTSPSource::dequeueAccessUnit %s: APacketSource mEOSResult=%d, returning it directly",
+              audio ? "audio" : "video", finalResult);
         return finalResult;
     }
 
     setEOSTimeout(audio, 0);
-
+    ALOGD("RTSPSource::dequeueAccessUnit %s: returning buffer OK", audio ? "audio" : "video");
     return source->dequeueAccessUnit(accessUnit);
 }
 
@@ -408,10 +462,16 @@ void NuPlayer::RTSPSource::onPollBuffering() {
     }
 
     if (overflow && mHandler != NULL) {
+        ALOGD("RTSPSource::onPollBuffering: overflow=1, pausing server");
         mHandler->pause();
     }
 
     if (startServer && mHandler != NULL) {
+        status_t err = OK;
+        int64_t audioBufUs = (mAudioTrack != NULL) ? mAudioTrack->getBufferedDurationUs(&err) : -1;
+        int64_t videoBufUs = (mVideoTrack != NULL) ? mVideoTrack->getBufferedDurationUs(&err) : -1;
+        ALOGD("RTSPSource::onPollBuffering: startServer=1, resuming server audioBufUs=%lld videoBufUs=%lld",
+              (long long)audioBufUs, (long long)videoBufUs);
         mHandler->resume();
     }
 
@@ -423,6 +483,7 @@ void NuPlayer::RTSPSource::onPollBuffering() {
 }
 
 void NuPlayer::RTSPSource::signalSourceEOS(status_t result) {
+    ALOGD("RTSPSource::signalSourceEOS result=%d", result);
     const bool audio = true;
     const bool video = false;
 
@@ -461,8 +522,11 @@ void NuPlayer::RTSPSource::onSignalEOS(const sp<AMessage> &msg) {
     }
 
     if (mEOSPending) {
+        ALOGD("RTSPSource::onSignalEOS: mEOSPending=true, signalling EOS to sources");
         signalSourceEOS(ERROR_END_OF_STREAM);
         mEOSPending = false;
+    } else {
+        ALOGD("RTSPSource::onSignalEOS: mEOSPending=false, EOS cancelled (start() cleared it)");
     }
 }
 
@@ -676,6 +740,11 @@ void NuPlayer::RTSPSource::onMessageReceived(const sp<AMessage> &msg) {
             TrackInfo *info = &mTracks.editItemAt(trackIndex);
             sp<AnotherPacketSource> source = info->mSource;
             if (source != NULL) {
+                status_t srcEOS = OK;
+                bool srcHasBuf = source->hasBufferAvailable(&srcEOS);
+                int64_t srcBufUs = source->getBufferedDurationUs(&srcEOS);
+                ALOGE("RTSPSource::kWhatEOS track=%zu finalResult=%d hasBuf=%d bufferedUs=%lld currentEOS=%d",
+                      trackIndex, finalResult, srcHasBuf, (long long)srcBufUs, srcEOS);
                 source->signalEOS(finalResult);
             }
 
@@ -895,6 +964,7 @@ bool NuPlayer::RTSPSource::stopBufferingIfNecessary() {
 
     if (mBuffering) {
         if (!haveSufficientDataOnAllTracks()) {
+            ALOGD("RTSPSource::stopBufferingIfNecessary: still buffering, blocking dequeue");
             return false;
         }
 
