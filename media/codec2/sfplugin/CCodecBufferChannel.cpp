@@ -381,7 +381,7 @@ status_t CCodecBufferChannel::queueInputBufferInternal(
     if (buffer->meta()->findInt32("eos", &tmp) && tmp) {
         eos = true;
         mInputMetEos = true;
-        ALOGV("[%s] input EOS", mName);
+        ALOGV("[%s] input EOS queued at timeUs=%lld us", mName, (long long)timeUs);
     }
     if (buffer->meta()->findInt32("csd", &tmp) && tmp) {
         flags |= C2FrameData::FLAG_CODEC_CONFIG;
