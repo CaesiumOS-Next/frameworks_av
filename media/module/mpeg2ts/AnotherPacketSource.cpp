@@ -357,6 +357,31 @@ void AnotherPacketSource::clear() {
     mEstimatedBufferDurationUs = -1;
 }
 
+void AnotherPacketSource::resetEOS() {
+    Mutex::Autolock autoLock(mLock);
+    mEOSResult = OK;
+    // Deliberately preserve mLastQueuedTimeUs.
+    //
+    // If the server pre-buffered everything during prepare (e.g. a VoD stream),
+    // mLastQueuedTimeUs will be near the stream duration.  Keeping it there has
+    // two desirable effects:
+    //
+    // 1. sourceNearEOS(audio) stays true, so the dequeueAccessUnit path for the
+    //    video track (which may have received 0 packets) does NOT call
+    //    startBufferingIfNecessary().  Calling it would set mBuffering=true with
+    //    no way out (haveSufficientDataOnAllTracks() requires both tracks ≥ 2s),
+    //    stalling both decoders.
+    //
+    // 2. haveSufficientDataOnAllTracks() checks isFinished(mediaDuration) for
+    //    each track.  With mLastQueuedTimeUs near duration, isFinished() returns
+    //    true for the audio track and the function returns true immediately,
+    //    ensuring any spurious mBuffering=true is cleared at once.
+    //
+    // postSourceEOSIfNecessary() will re-schedule EOS about 2 s after start()
+    // because the stream IS near its end; but by then enough audio frames have
+    // been decoded and the stall window is eliminated.
+}
+
 void AnotherPacketSource::queueDiscontinuity(
         ATSParser::DiscontinuityType type,
         const sp<AMessage> &extra,
@@ -410,6 +435,7 @@ void AnotherPacketSource::signalEOS(status_t result) {
     CHECK(result != OK);
 
     Mutex::Autolock autoLock(mLock);
+    ALOGD("AnotherPacketSource::signalEOS result=%d queueSize=%zu", result, mBuffers.size());
     mEOSResult = result;
     mCondition.signal();
 }

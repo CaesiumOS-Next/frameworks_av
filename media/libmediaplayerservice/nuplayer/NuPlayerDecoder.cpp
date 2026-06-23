@@ -1074,6 +1074,7 @@ bool NuPlayer::Decoder::onInputBufferFetched(const sp<AMessage> &msg) {
         CHECK(streamErr != OK);
 
         // attempt to queue EOS
+
         status_t err = mCodec->queueInputBuffer(
                 bufferIx,
                 0,
