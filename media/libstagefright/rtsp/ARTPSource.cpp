@@ -78,7 +78,7 @@ ARTPSource::ARTPSource(
     sessionDesc->getFormatType(index, &PT, &desc, &params);
 
     if (!strncmp(desc.c_str(), "H264/", 5)) {
-        mAssembler = new AAVCAssembler(notify);
+        mAssembler = new AAVCAssembler(notify, params);
         // Request one initial FIR to obtain the first IDR frame.
         // Do NOT set mIssueFIRRequests=true: that sends FIR every 5 seconds
         // unconditionally. Before Gerrit 6877251 this was harmless (FIRs sent
