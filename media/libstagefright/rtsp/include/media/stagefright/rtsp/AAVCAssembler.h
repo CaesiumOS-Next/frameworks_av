@@ -23,6 +23,7 @@
 #include <utils/List.h>
 #include <utils/RefBase.h>
 #include <utils/String8.h>
+#include <media/stagefright/foundation/AString.h>
 
 namespace android {
 
@@ -31,6 +32,10 @@ struct AMessage;
 
 struct AAVCAssembler : public ARTPAssembler {
     explicit AAVCAssembler(const sp<AMessage> &notify);
+    // Constructor that seeds mWidth/mHeight from sprop-parameter-sets in SDP params,
+    // preventing addSingleNALUnit() from discarding all frames when the server
+    // provides SPS only out-of-band (in the SDP) and never sends in-band SPS NALs.
+    AAVCAssembler(const sp<AMessage> &notify, const AString &sdpParams);
 
     typedef List<sp<ABuffer> > Queue;
 protected:

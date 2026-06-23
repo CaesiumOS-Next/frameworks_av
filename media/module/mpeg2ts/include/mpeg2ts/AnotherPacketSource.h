@@ -42,6 +42,7 @@ struct AnotherPacketSource : public MediaSource {
             MediaBufferBase **buffer, const ReadOptions *options = NULL);
 
     void clear();
+    void resetEOS(); // Reset only mEOSResult; preserves buffered frames and format
 
     // Returns true if we have any packets including discontinuities
     bool hasBufferAvailable(status_t *finalResult);
