@@ -32,6 +32,10 @@ struct AMessage;
 struct AHEVCAssembler : public ARTPAssembler {
     AHEVCAssembler(const sp<AMessage> &notify);
 
+    void setSdpSpsPps(const sp<ABuffer> &vpsNal,
+                      const sp<ABuffer> &spsNal,
+                      const sp<ABuffer> &ppsNal);
+
     typedef List<sp<ABuffer> > Queue;
 
 protected:
@@ -54,6 +58,12 @@ private:
     int32_t mWidth;
     int32_t mHeight;
     List<sp<ABuffer> > mNALUnits;
+
+    /* VPS, SPS and PPS NAL units from SDP sprop-vps/sprop-sps/sprop-pps (out-of-band).
+     * Used to prepend before IRAP when no in-band SPS has been seen. */
+    sp<ABuffer> mSdpVpsNal;
+    sp<ABuffer> mSdpSpsNal;
+    sp<ABuffer> mSdpPpsNal;
 
     int32_t addNack(const sp<ARTPSource> &source);
     void checkSpsUpdated(const sp<ABuffer> &buffer);

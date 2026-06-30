@@ -62,6 +62,14 @@ AHEVCAssembler::AHEVCAssembler(const sp<AMessage> &notify)
 AHEVCAssembler::~AHEVCAssembler() {
 }
 
+void AHEVCAssembler::setSdpSpsPps(const sp<ABuffer> &vpsNal,
+                                   const sp<ABuffer> &spsNal,
+                                   const sp<ABuffer> &ppsNal) {
+    mSdpVpsNal = vpsNal;
+    mSdpSpsNal = spsNal;
+    mSdpPpsNal = ppsNal;
+}
+
 int32_t AHEVCAssembler::addNack(
         const sp<ARTPSource> &source) {
     List<sp<ABuffer>> *queue = source->queue();
@@ -353,6 +361,30 @@ void AHEVCAssembler::addSingleNALUnit(const sp<ABuffer> &buffer) {
 
     bool hasNoSps = mWidth * mHeight == 0;
     if (hasNoSps || dropFramesUntilIframe(buffer)) {
+        unsigned nalType = (buffer->data()[0] >> 1) & H265_NALU_MASK;
+        bool isIrap = (nalType >= 0x10 && nalType <= 0x17);
+        if (hasNoSps && isIrap &&
+                mSdpVpsNal != NULL && mSdpSpsNal != NULL && mSdpPpsNal != NULL) {
+            if (!mNALUnits.empty() && rtpTime != mAccessUnitRTPTime) {
+                submitAccessUnit();
+            }
+            mAccessUnitRTPTime = rtpTime;
+            sp<ABuffer> vps = new ABuffer(mSdpVpsNal->size());
+            memcpy(vps->data(), mSdpVpsNal->data(), mSdpVpsNal->size());
+            CopyTimes(vps, buffer);
+            sp<ABuffer> sps = new ABuffer(mSdpSpsNal->size());
+            memcpy(sps->data(), mSdpSpsNal->data(), mSdpSpsNal->size());
+            CopyTimes(sps, buffer);
+            sp<ABuffer> pps = new ABuffer(mSdpPpsNal->size());
+            memcpy(pps->data(), mSdpPpsNal->data(), mSdpPpsNal->size());
+            CopyTimes(pps, buffer);
+            mNALUnits.push_back(vps);
+            mNALUnits.push_back(sps);
+            mNALUnits.push_back(pps);
+            mNALUnits.push_back(buffer);
+            checkSpsUpdated(sps);
+            return;
+        }
         sp<ARTPSource> source = nullptr;
         buffer->meta()->findObject("source", (sp<android::RefBase>*)&source);
         if (source != nullptr) {

@@ -33,6 +33,7 @@
 #include <media/stagefright/foundation/ABuffer.h>
 #include <media/stagefright/foundation/ADebug.h>
 #include <media/stagefright/foundation/AMessage.h>
+#include <media/stagefright/foundation/base64.h>
 
 #include <strings.h>
 
@@ -78,10 +79,65 @@ ARTPSource::ARTPSource(
     sessionDesc->getFormatType(index, &PT, &desc, &params);
 
     if (!strncmp(desc.c_str(), "H264/", 5)) {
-        mAssembler = new AAVCAssembler(notify);
+        sp<AAVCAssembler> avcAssembler = new AAVCAssembler(notify);
+        const char *spropp = strstr(params.c_str(), "sprop-parameter-sets=");
+        if (spropp != NULL) {
+            spropp += strlen("sprop-parameter-sets=");
+            const char *comma = strchr(spropp, ',');
+            if (comma != NULL) {
+                size_t spsLen = comma - spropp;
+                while (spsLen > 0 && (spropp[spsLen-1] == ';' ||
+                       spropp[spsLen-1] == '\r' || spropp[spsLen-1] == '\n'))
+                    --spsLen;
+                AString spsB64(spropp, spsLen);
+                sp<ABuffer> spsNal = decodeBase64(spsB64);
+
+                const char *ppsp = comma + 1;
+                size_t ppsLen = strlen(ppsp);
+                while (ppsLen > 0 && (ppsp[ppsLen-1] == ';' ||
+                       ppsp[ppsLen-1] == '\r' || ppsp[ppsLen-1] == '\n'))
+                    --ppsLen;
+                AString ppsB64(ppsp, ppsLen);
+                sp<ABuffer> ppsNal = decodeBase64(ppsB64);
+
+                if (spsNal != NULL && spsNal->size() > 0 &&
+                    ppsNal != NULL && ppsNal->size() > 0 &&
+                    (spsNal->data()[0] & 0x1f) == 7 &&
+                    (ppsNal->data()[0] & 0x1f) == 8) {
+                    ALOGD("H264: seeding assembler with SDP SPS(%zu) + PPS(%zu)",
+                          spsNal->size(), ppsNal->size());
+                    avcAssembler->setSdpSpsPps(spsNal, ppsNal);
+                }
+            }
+        }
+        mAssembler = avcAssembler;
         mIssueFIRRequests = true;
     } else if (!strncmp(desc.c_str(), "H265/", 5)) {
-        mAssembler = new AHEVCAssembler(notify);
+        sp<AHEVCAssembler> hevcAssembler = new AHEVCAssembler(notify);
+        auto parseSdpNal = [&](const char *tag) -> sp<ABuffer> {
+            const char *p = strstr(params.c_str(), tag);
+            if (p == NULL) return NULL;
+            p += strlen(tag);
+            size_t len = strcspn(p, "; \r\n");
+            while (len > 0 && (p[len-1] == ';' || p[len-1] == '\r' || p[len-1] == '\n'))
+                --len;
+            AString b64(p, len);
+            return decodeBase64(b64);
+        };
+        sp<ABuffer> vpsNal = parseSdpNal("sprop-vps=");
+        sp<ABuffer> spsNal = parseSdpNal("sprop-sps=");
+        sp<ABuffer> ppsNal = parseSdpNal("sprop-pps=");
+        if (vpsNal != NULL && vpsNal->size() > 0 &&
+            spsNal != NULL && spsNal->size() > 0 &&
+            ppsNal != NULL && ppsNal->size() > 0 &&
+            ((vpsNal->data()[0] >> 1) & 0x3f) == 0x20 &&
+            ((spsNal->data()[0] >> 1) & 0x3f) == 0x21 &&
+            ((ppsNal->data()[0] >> 1) & 0x3f) == 0x22) {
+            ALOGD("H265: seeding assembler with SDP VPS(%zu) + SPS(%zu) + PPS(%zu)",
+                  vpsNal->size(), spsNal->size(), ppsNal->size());
+            hevcAssembler->setSdpSpsPps(vpsNal, spsNal, ppsNal);
+        }
+        mAssembler = hevcAssembler;
         mIssueFIRRequests = true;
     } else if (!strncmp(desc.c_str(), "MP4A-LATM/", 10)) {
         mAssembler = new AMPEG4AudioAssembler(notify, params);

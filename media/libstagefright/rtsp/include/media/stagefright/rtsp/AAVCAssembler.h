@@ -32,6 +32,8 @@ struct AMessage;
 struct AAVCAssembler : public ARTPAssembler {
     explicit AAVCAssembler(const sp<AMessage> &notify);
 
+    void setSdpSpsPps(const sp<ABuffer> &spsNal, const sp<ABuffer> &ppsNal);
+
     typedef List<sp<ABuffer> > Queue;
 protected:
     virtual ~AAVCAssembler();
@@ -53,6 +55,11 @@ private:
     int32_t mWidth;
     int32_t mHeight;
     List<sp<ABuffer> > mNALUnits;
+
+    /* SPS and PPS NAL units from SDP sprop-parameter-sets (out-of-band).
+     * Used to prepend before IDR when no in-band SPS has been seen. */
+    sp<ABuffer> mSdpSpsNal;
+    sp<ABuffer> mSdpPpsNal;
 
     int32_t addNack(const sp<ARTPSource> &source);
     void checkSpsUpdated(const sp<ABuffer> &buffer);

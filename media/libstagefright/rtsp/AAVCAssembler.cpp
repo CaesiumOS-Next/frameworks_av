@@ -53,6 +53,11 @@ AAVCAssembler::AAVCAssembler(const sp<AMessage> &notify)
 AAVCAssembler::~AAVCAssembler() {
 }
 
+void AAVCAssembler::setSdpSpsPps(const sp<ABuffer> &spsNal, const sp<ABuffer> &ppsNal) {
+    mSdpSpsNal = spsNal;
+    mSdpPpsNal = ppsNal;
+}
+
 int32_t AAVCAssembler::addNack(
         const sp<ARTPSource> &source) {
     List<sp<ABuffer>> *queue = source->queue();
@@ -353,6 +358,25 @@ void AAVCAssembler::addSingleNALUnit(const sp<ABuffer> &buffer) {
 
     bool hasNoSps = mWidth * mHeight == 0;
     if (hasNoSps || dropFramesUntilIframe(buffer)) {
+        unsigned nalType = buffer->data()[0] & 0x1f;
+        if (hasNoSps && nalType == 0x5 &&
+                mSdpSpsNal != NULL && mSdpPpsNal != NULL) {
+            if (!mNALUnits.empty() && rtpTime != mAccessUnitRTPTime) {
+                submitAccessUnit();
+            }
+            mAccessUnitRTPTime = rtpTime;
+            sp<ABuffer> sps = new ABuffer(mSdpSpsNal->size());
+            memcpy(sps->data(), mSdpSpsNal->data(), mSdpSpsNal->size());
+            CopyTimes(sps, buffer);
+            sp<ABuffer> pps = new ABuffer(mSdpPpsNal->size());
+            memcpy(pps->data(), mSdpPpsNal->data(), mSdpPpsNal->size());
+            CopyTimes(pps, buffer);
+            mNALUnits.push_back(sps);
+            mNALUnits.push_back(pps);
+            mNALUnits.push_back(buffer);
+            checkSpsUpdated(sps);
+            return;
+        }
         sp<ARTPSource> source = nullptr;
         buffer->meta()->findObject("source", (sp<android::RefBase>*)&source);
         if (source != nullptr) {
