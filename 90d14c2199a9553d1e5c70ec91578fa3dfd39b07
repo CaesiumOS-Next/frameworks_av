@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fda47de_f1d98edb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105578
+      },
+      "writtenOn": "2026-06-30T07:07:17Z",
+      "side": 1,
+      "message": "Hi google engineers, can you help review this patch which resolves RTSP regression in android 17 ?",
+      "revId": "90d14c2199a9553d1e5c70ec91578fa3dfd39b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
