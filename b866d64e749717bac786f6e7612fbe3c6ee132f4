@@ -16,6 +16,24 @@
       "message": "[Codec Auto Reviewer] ✅ **LGTM** — All checks pass. [[trajectory](go/traj/7334bd5c-d9b8-438a-bb2f-895ef1993acd)]",
       "revId": "b866d64e749717bac786f6e7612fbe3c6ee132f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "673efb50_3a7c3248",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955441
+      },
+      "writtenOn": "2026-07-01T12:43:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c2fbefab_c816ec02",
+      "revId": "b866d64e749717bac786f6e7612fbe3c6ee132f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
