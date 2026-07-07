@@ -564,6 +564,7 @@ private:
                                 mProducerId, slot,
                                 mIgbpValidityToken, mProducer, mSyncMem);
                 mPoolDatas[slot] = poolData;
+                poolData->shadowBuffer(slotBuffer);
                 *block = _C2BlockFactory::CreateGraphicBlock(alloc, poolData);
                 return C2_OK;
             }
@@ -955,6 +956,11 @@ C2BufferQueueBlockPoolData::~C2BufferQueueBlockPoolData() {
 
 C2BufferQueueBlockPoolData::type_t C2BufferQueueBlockPoolData::getType() const {
     return TYPE_BUFFERQUEUE;
+}
+
+void C2BufferQueueBlockPoolData::shadowBuffer(
+        const android::sp<android::GraphicBuffer>& buffer) {
+    mShadowedBuffer = buffer;
 }
 
 int C2BufferQueueBlockPoolData::migrate(

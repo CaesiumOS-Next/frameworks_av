@@ -258,6 +258,8 @@ public:
 
     virtual type_t getType() const override;
 
+    void shadowBuffer(const android::sp<android::GraphicBuffer>& buffer);
+
     int migrate(const android::sp<HGraphicBufferProducer>& producer,
                 uint32_t toGeneration, uint64_t toUsage, uint64_t toBqId,
                 android::sp<android::GraphicBuffer>& graphicBuffer, uint32_t oldGeneration,
@@ -300,6 +302,13 @@ private:
     android::sp<HGraphicBufferProducer> mIgbp;
     std::shared_ptr<C2SurfaceSyncMemory> mSyncMem;
     mutable std::mutex mLock;
+
+    // Never use this Buffer, this is for only workaround(b/303059616 and b/408505123)
+    // migrate() should not update this. the original reference should be kept.
+    // migrate() is updating information only for transferring buffer to the client
+    // process and caching the buffer for the future usage. migrate() is not
+    // for current usage of the buffer in local process.
+    android::sp<android::RefBase> mShadowedBuffer;
 };
 
 #endif // STAGEFRIGHT_CODEC2_BUFFER_PRIV_H_
