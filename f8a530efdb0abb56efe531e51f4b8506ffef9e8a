@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab518c6_bf979a33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042638
+      },
+      "writtenOn": "2026-07-13T15:37:28Z",
+      "side": 1,
+      "message": "This has already been fixed. Please see the latest release source:\n\nhttps://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/services/audiopolicy/common/managerdefinitions/src/AudioPolicyMix.cpp;l\u003d308;drc\u003d0aa114bcea02af1acd4bc5b28e17d45fa4ff07f7",
+      "revId": "f8a530efdb0abb56efe531e51f4b8506ffef9e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
