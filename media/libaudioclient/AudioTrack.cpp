@@ -3478,6 +3478,16 @@ status_t AudioTrack::getTimestamp_l(AudioTimestamp& timestamp)
             int32_t deltaPosition = (Modulo<uint32_t>(timestamp.mPosition)
                     - mPreviousTimestamp.mPosition).signedValue();
             if (deltaPosition < 0) {
+                 if (isOffloaded_l() && mState == STATE_ACTIVE
+                        && timestamp.mPosition == 0) {
+                    ALOGD("%s(%d): position reset to 0 on active offloaded track (drain), "
+                            "resetting timestamp baseline (previous: %u)",
+                            __func__, mPortId, mPreviousTimestamp.mPosition);
+                    mPreviousTimestamp = timestamp;
+                    mPreviousTimestampValid = true;
+                    mStartFromZeroUs = 0; // skip startup glitch check for gapless transition
+                    return WOULD_BLOCK;
+                }
                 // Only report once per position instead of spamming the log.
                 if (!mTimestampRetrogradePositionReported) {
                     ALOGW("%s(%d): retrograde timestamp position corrected, %d = %u - %u",
