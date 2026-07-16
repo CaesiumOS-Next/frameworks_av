@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081086b2_0f38b878",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-07-16T01:17:15Z",
+      "side": 1,
+      "message": "missing a Bug: XYZ\n\nCan you please provide a bug in the Android bug tracker as to how this shows up for future reference and add this to the commit message?\n\nhttps://source.android.com/docs/setup/contribute/report-bugs",
+      "revId": "491fb89198a3c93bc66b98330debe6c40ab5465c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc3cd04_cca1d387",
+        "filename": "services/audioflinger/AudioFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1040213
+      },
+      "writtenOn": "2026-07-16T01:17:15Z",
+      "side": 1,
+      "message": "perhaps better is \"persist.audio.client_heap_size_kb\"",
+      "range": {
+        "startLine": 332,
+        "startChar": 32,
+        "endLine": 332,
+        "endChar": 42
+      },
+      "revId": "491fb89198a3c93bc66b98330debe6c40ab5465c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
