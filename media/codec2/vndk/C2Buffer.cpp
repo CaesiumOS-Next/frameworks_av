@@ -1256,9 +1256,12 @@ C2Acquirable<C2ReadView> _C2Block1DImpl::mapReadView(
     if (android::C2HandleIon::IsUsed()) {
         error = mAllocation->map(
                 offset, len, usage, nullptr, &base);
-    } else {
+    } else if (android::C2DmaBufAllocator::CheckHandle(mAllocation->handle())) {
         error = android::C2DmaBufAllocator::Map(
                 mAllocation, offset, len, usage, nullptr, &base, mapFn, unmapFn);
+    } else {
+        error = mAllocation->map(
+                offset, len, usage, nullptr, &base);
     }
     // TODO: wait on fence
     if (error == C2_OK) {
@@ -1285,9 +1288,12 @@ C2Acquirable<C2WriteView> _C2Block1DImpl::mapWriteView(
     if (android::C2HandleIon::IsUsed()) {
         error = mAllocation->map(
                 offset, len, usage, nullptr, &base);
-    } else {
+    } else if (android::C2DmaBufAllocator::CheckHandle(mAllocation->handle())) {
         error = android::C2DmaBufAllocator::Map(
                 mAllocation, offset, len, usage, nullptr, &base, mapFn, unmapFn);
+    } else {
+        error = mAllocation->map(
+                offset, len, usage, nullptr, &base);
     }
     // TODO: wait on fence
     if (error == C2_OK) {
