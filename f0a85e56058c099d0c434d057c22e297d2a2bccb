@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d45a0f_a8902655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2026-07-20T08:11:44Z",
+      "side": 1,
+      "message": "Are there any unit tests that you can add to verify this logic?",
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1a72f6_2aaeb3ae",
+        "filename": "media/libmediaplayerservice/nuplayer/RTSPSource.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2026-07-20T08:11:44Z",
+      "side": 1,
+      "message": "This is an informational log indicating the server is resuming. Consider using `ALOGI` or `ALOGD` instead of `ALOGE`.",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 473,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911e3bc9_54b4e606",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2026-07-20T08:11:44Z",
+      "side": 1,
+      "message": "Consider using a delegating constructor to avoid duplicating the initialization list.\n```cpp\nAAVCAssembler::AAVCAssembler(const sp\u003cAMessage\u003e \u0026notify, const AString \u0026sdpParams)\n    : AAVCAssembler(notify) {\n    // Dimension seeding logic...\n}\n```",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa845553_827e73e0",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2026-07-20T08:11:44Z",
+      "side": 1,
+      "message": "This logic assumes the SPS is followed by either a comma or the end of the string. However, in SDP fmtp lines, parameters are often separated by semicolons. If `sprop-parameter-sets` is not the last parameter, `strlen(found)` will include the rest of the fmtp string (e.g., `;profile-level-id\u003d...`), causing `decodeBase64` to fail.\n\nUse `strpbrk(found, \",;\")` to find the first delimiter.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
