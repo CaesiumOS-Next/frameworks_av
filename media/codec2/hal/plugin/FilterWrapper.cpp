@@ -392,7 +392,7 @@ private:
         std::vector<C2Param::Index> indices;
         for (const std::shared_ptr<C2ParamDescriptor> &paramDesc : paramDescs) {
             C2Param::Index index = paramDesc->index();
-            if (!index.forInput() || paramDesc->isReadOnly()) {
+            if ((index.forPort() && !index.forInput()) || paramDesc->isReadOnly()) {
                 continue;
             }
             if (index.forStream()) {
