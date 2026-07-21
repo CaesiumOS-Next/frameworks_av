@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c624474a_b23b3e1d",
+        "filename": "media/libmediaplayerservice/nuplayer/RTSPSource.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 4940726
+      },
+      "writtenOn": "2026-07-21T09:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b7b5091_2eef86b2",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 473,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "911e3bc9_54b4e606",
@@ -112,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2484c0_a807154e",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4940726
+      },
+      "writtenOn": "2026-07-21T09:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f58167fe_c11b0ebb",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa845553_827e73e0",
@@ -149,6 +197,30 @@
       "side": 1,
       "message": "sure. will update",
       "parentUuid": "aa845553_827e73e0",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aabd31c_f8ee78d2",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4940726
+      },
+      "writtenOn": "2026-07-21T09:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76ebc6ad_d00d2b7e",
       "range": {
         "startLine": 73,
         "startChar": 0,
