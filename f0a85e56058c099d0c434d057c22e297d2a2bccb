@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e46a886_73f2906d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4660819
+      },
+      "writtenOn": "2026-07-21T10:16:31Z",
+      "side": 1,
+      "message": "there are no unit tests as of now, we validated End-to-End RTSP playback.",
+      "parentUuid": "c2d45a0f_a8902655",
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d1a72f6_2aaeb3ae",
@@ -160,6 +178,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b1e569_23c90f2e",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4660819
+      },
+      "writtenOn": "2026-07-21T10:16:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "911e3bc9_54b4e606",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa845553_827e73e0",
@@ -221,6 +263,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "76ebc6ad_d00d2b7e",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "f0a85e56058c099d0c434d057c22e297d2a2bccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54003d6_3269177d",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4660819
+      },
+      "writtenOn": "2026-07-21T10:16:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "aa845553_827e73e0",
       "range": {
         "startLine": 73,
         "startChar": 0,
