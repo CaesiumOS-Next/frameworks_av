@@ -163,6 +163,12 @@ status_t RotateAndCropMapper::updateCaptureRequest(CameraMetadata *request) {
 
     for (auto regionTag : kMeteringRegionsToCorrect) {
         entry = request->find(regionTag);
+        if (entry.count % 5 != 0) {
+            ALOGW("%s: Malformed metering region tag 0x%x count %zu not a multiple of 5, "
+                  "skipping",
+                  __FUNCTION__, regionTag, entry.count);
+            continue;
+        }
         for (size_t i = 0; i < entry.count; i += 5) {
             int32_t weight = entry.data.i32[i + 4];
             if (weight == 0) {
@@ -292,6 +298,12 @@ status_t RotateAndCropMapper::updateCaptureResult(CameraMetadata *result) {
 
     for (auto regionTag : kMeteringRegionsToCorrect) {
         entry = result->find(regionTag);
+        if (entry.count % 5 != 0) {
+            ALOGW("%s: Malformed metering region tag 0x%x count %zu not a multiple of 5, "
+                  "skipping",
+                  __FUNCTION__, regionTag, entry.count);
+            continue;
+        }
         for (size_t i = 0; i < entry.count; i += 5) {
             int32_t weight = entry.data.i32[i + 4];
             if (weight == 0) {
