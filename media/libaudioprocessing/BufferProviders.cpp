@@ -79,7 +79,7 @@ status_t CopyBufferProvider::getNextBuffer(AudioBufferProvider::Buffer *pBuffer)
         return res;
     }
     if (mBuffer.frameCount == 0) {
-        mBuffer.frameCount = pBuffer->frameCount;
+        mBuffer.frameCount = std::min(pBuffer->frameCount, mLocalBufferFrameCount);
         status_t res = mTrackBufferProvider->getNextBuffer(&mBuffer);
         // At one time an upstream buffer provider had
         // res == OK and mBuffer.frameCount == 0, doesn't seem to happen now 7/18/2014.
