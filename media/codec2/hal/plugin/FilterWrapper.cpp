@@ -393,13 +393,13 @@ private:
         std::vector<C2Param::Index> indices;
         for (const std::shared_ptr<C2ParamDescriptor> &paramDesc : paramDescs) {
             C2Param::Index index = paramDesc->index();
-            if (!index.forInput() || paramDesc->isReadOnly()) {
+            if (index.forOutput() || paramDesc->isReadOnly()) {
                 continue;
             }
             if (index.forStream()) {
                 uint32_t stream = index.stream();
                 index = index.withPort(true /* output */).withStream(stream);
-            } else {
+            } else if (index.forPort()) {
                 index = index.withPort(true /* output */);
             }
             indices.push_back(index);
@@ -422,7 +422,7 @@ private:
             if (heapParams[i]->forStream()) {
                 heapParams[i] = C2Param::CopyAsStream(
                         *heapParams[i], false /* output */, heapParams[i]->stream());
-            } else {
+            } else if (heapParams[i]->forPort()) {
                 heapParams[i] = C2Param::CopyAsPort(*heapParams[i], false /* output */);
             }
             configParams.push_back(heapParams[i].get());
