@@ -23,12 +23,22 @@ cc_library {
     name: "libcodec2_client",
 
     srcs: [
+<<<<<<< HEAD
         "ApexCodecsLazy.cpp",
         "GraphicBufferAllocator.cpp",
         "GraphicsTracker.cpp",
         "client.cpp",
         "output.cpp",
     ],
+=======
+        "ApexCodecsLazy.cpp",
+        "GraphicBufferAllocator.cpp",
+        "GraphicsTracker.cpp",
+        "GraphicsTrackerLogger.cpp",
+        "LegacyGraphicBufferAllocator.cpp",
+        "LegacyGraphicsTracker.cpp",
+        "client.cpp",
+>>>>>>> PATCH
 
     defaults: [
         "libcodec2-aidl-client-defaults",
