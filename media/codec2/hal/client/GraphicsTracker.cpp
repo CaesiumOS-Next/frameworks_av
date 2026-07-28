@@ -16,12 +16,22 @@
 //#define LOG_NDEBUG 0
 #define LOG_TAG "GraphicsTracker"
 #include <fcntl.h>
+<<<<<<< HEAD
 #include <unistd.h>
 
 #include <gui/BufferItemConsumer.h>
 #include <gui/BufferQueue.h>
 #include <gui/Surface.h>
 #include <media/stagefright/foundation/ADebug.h>
+=======
+#include <unistd.h>
+#include <vector>
+
+#include <android-base/properties.h>
+#include <gui/BufferItemConsumer.h>
+#include <gui/BufferQueue.h>
+#include <gui/Flags.h>
+>>>>>>> PATCH
 #include <private/android/AHardwareBufferHelpers.h>
 #include <vndk/hardware_buffer.h>
 
@@ -267,7 +277,8 @@ GraphicsTracker::GraphicsTracker(int maxDequeueCount)
     mMaxDequeueCommitted{maxDequeueCount},
     mDequeueable{maxDequeueCount},
     mTotalDequeued{0}, mTotalCancelled{0}, mTotalDropped{0}, mTotalReleased{0},
-    mInConfig{false}, mStopped{false}, mStopRequested{false}, mAllocAfterStopRequested{0} {
+    mInConfig{false}, mStopped{false}, mStopRequested{false}, mAllocAfterStopRequested{0},
+    mLogger("GraphicsTracker", this, [this]() { return getCurDequeueable(); }) {
     if (maxDequeueCount < kMaxDequeueMin) {
         mMaxDequeue = kMaxDequeueMin;
         mMaxDequeueCommitted = kMaxDequeueMin;
@@ -287,9 +298,11 @@ GraphicsTracker::GraphicsTracker(int maxDequeueCount)
     writeIncDequeueableLocked(mDequeueable);
 
     CHECK(ret >= 0);
+    mLogger.start();
 }
 
 GraphicsTracker::~GraphicsTracker() {
+    mLogger.stop();
     stop();
 }
 
@@ -866,6 +879,7 @@ c2_status_t GraphicsTracker::_allocateDirect(
 c2_status_t GraphicsTracker::allocate(
         uint32_t width, uint32_t height, PixelFormat format, uint64_t usage,
         AHardwareBuffer **buf, sp<Fence> *rFence) {
+    mLogger.incAllocate();
     if (mStopped.load() == true) {
         ALOGE("cannot allocate due to being stopped");
         return C2_BAD_STATE;
@@ -975,12 +989,22 @@ c2_status_t GraphicsTracker::deallocate(uint64_t bid, const sp<Fence> &fence) {
     bool completed;
     bool updateDequeue;
     std::shared_ptr<BufferCache> cache;
+<<<<<<< HEAD
     int slotId;
     sp<Fence> rFence;
     if (mStopped.load() == true) {
         ALOGE("cannot deallocate due to being stopped");
         return C2_BAD_STATE;
     }
+=======
+}
+
+c2_status_t GraphicsTracker::deallocate(uint64_t bid, const sp<Fence> &fence) {
+    mLogger.incDeallocate();
+    bool completed;
+    bool updateDequeue;
+    std::shared_ptr<BufferCache> cache;
+>>>>>>> PATCH
     c2_status_t res = requestDeallocate(bid, fence, &completed, &updateDequeue,
                                         &cache, &slotId, &rFence);
     if (res != C2_OK) {
@@ -1147,12 +1171,22 @@ c2_status_t GraphicsTracker::render(const C2ConstGraphicBlock& blk,
             updateDequeueConf();
         }
         return C2_REFUSED;
+<<<<<<< HEAD
     }
 
     commitRender(cache, buffer, oldBuffer, output->bufferReplaced, &updateDequeue);
     if (updateDequeue) {
         updateDequeueConf();
     }
+=======
+c2_status_t GraphicsTracker::render(const C2ConstGraphicBlock& blk,
+                                    const ::android::SurfaceQueueBufferInput& input,
+                                    ::android::SurfaceQueueBufferOutput* output) {
+    mLogger.incRender();
+    std::shared_ptr<BufferCache> cache;
+    std::shared_ptr<BufferItem> buffer;
+    uint64_t bid;
+>>>>>>> PATCH
     return C2_OK;
 }
 
@@ -1199,3 +1233,20 @@ void GraphicsTracker::onAttached(uint32_t generation) {
 }
 
 } // namespace aidl::android::hardware::media::c2::implementation
+<<<<<<< HEAD
+=======
+#endif
+
+void GraphicsTracker::onReleased(uint32_t generation) {
+    mLogger.incReleased();
+    bool updateDequeue = false;
+    {
+        std::unique_lock<std::mutex> l(mLock);
+>>>>>>> PATCH
+<<<<<<< HEAD
+=======
+        }
+    }
+}
+} // namespace aidl::android::hardware::media::c2::implementation
+>>>>>>> PATCH
