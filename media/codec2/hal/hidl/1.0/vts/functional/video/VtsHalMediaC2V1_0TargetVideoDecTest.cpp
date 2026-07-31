@@ -280,9 +280,11 @@ class Codec2VideoDecHidlTestBase : public ::testing::Test {
                                 int newMaxDequeueCount = outputDelay.value + kSmoothnessFactor;
                                 ALOGD("handleWorkDone: output delay %u newMaxDequeueCount %d",
                                       outputDelay.value, newMaxDequeueCount);
-                                if (mSurface && newMaxDequeueCount != mMaxDequeueCount) {
+                                if (newMaxDequeueCount != mMaxDequeueCount) {
                                     mMaxDequeueCount = newMaxDequeueCount;
-                                    mSurface->setMaxDequeuedBufferCount(mMaxDequeueCount);
+                                    if (mSurface) {
+                                        mSurface->setMaxDequeuedBufferCount(mMaxDequeueCount);
+                                    }
                                     mComponent->setOutputSurfaceMaxDequeueCount(mMaxDequeueCount);
                                 }
                             }
