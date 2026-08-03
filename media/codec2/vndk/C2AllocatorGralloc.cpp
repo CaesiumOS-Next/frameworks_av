@@ -47,6 +47,7 @@
 #include <C2Buffer.h>
 #include <C2Debug.h>
 #include <C2PlatformSupport.h>
+#include <C2FenceFactory.h>
 
 using ::android::hardware::hidl_handle;
 using PixelFormat4 = ::android::hardware::graphics::common::V1_2::PixelFormat;
@@ -1382,17 +1383,26 @@ c2_status_t C2AllocationGralloc::map(
 
 c2_status_t C2AllocationGralloc::unmap(
         uint8_t **addr, C2Rect rect, C2Fence *fence /* nullable */) {
-    // TODO: check addr and size, use fence
+    // TODO: check addr and size
     (void)addr;
     (void)rect;
-    (void)fence;
 
     std::lock_guard<std::mutex> lock(mMappedLock);
-    // TODO: fence
-    status_t err = GraphicBufferMapper::get().unlock(mBuffer);
+    // Retrieve the unlock fence from gralloc to ensure PL→BL blit completion can be tracked
+    ::android::base::unique_fd releaseFenceFd;
+    status_t err = GraphicBufferMapper::get().unlock(mBuffer, &releaseFenceFd);
     if (err) {
         ALOGE("failed transaction: unlock");
         return C2_CORRUPTED;
+    }
+
+    // Propagate the fence to the caller if requested
+    if (fence) {
+        if (releaseFenceFd.get() >= 0) {
+            *fence = _C2FenceFactory::CreateSyncFence(::dup(releaseFenceFd.get()));
+        } else {
+            *fence = C2Fence();
+        }
     }
 
     mLocked = false;
@@ -1732,17 +1742,26 @@ c2_status_t C2AllocationAhwb::map(
 
 c2_status_t C2AllocationAhwb::unmap(
         uint8_t **addr, C2Rect rect, C2Fence *fence /* nullable */) {
-    // TODO: check addr and size, use fence
+    // TODO: check addr and size
     (void)addr;
     (void)rect;
-    (void)fence;
 
     std::lock_guard<std::mutex> lock(mMappedLock);
-    // TODO: fence
-    status_t err = GraphicBufferMapper::get().unlock(mBuffer);
+    // Retrieve the unlock fence from gralloc to ensure PL→BL blit completion can be tracked
+    ::android::base::unique_fd releaseFenceFd;
+    status_t err = GraphicBufferMapper::get().unlock(mBuffer, &releaseFenceFd);
     if (err) {
         ALOGE("failed transaction: unlock");
         return C2_CORRUPTED;
+    }
+
+    // Propagate the fence to the caller if requested
+    if (fence) {
+        if (releaseFenceFd.get() >= 0) {
+            *fence = _C2FenceFactory::CreateSyncFence(::dup(releaseFenceFd.get()));
+        } else {
+            *fence = C2Fence();
+        }
     }
 
     mLocked = false;

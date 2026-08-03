@@ -1015,21 +1015,31 @@ c2_status_t C2SoftAvcDec::drainInternal(
             work->result = C2_CORRUPTED;
             return C2_CORRUPTED;
         }
-        C2GraphicView wView = mOutBlock->map().get();
-        if (wView.error()) {
-            ALOGE("graphic view map failed %d", wView.error());
-            return C2_CORRUPTED;
-        }
+
+        // Declare decode structures outside wView scope so results persist
         ih264d_video_decode_ip_t s_h264d_decode_ip = {};
         ih264d_video_decode_op_t s_h264d_decode_op = {};
         ivd_video_decode_ip_t *ps_decode_ip = &s_h264d_decode_ip.s_ivd_video_decode_ip_t;
         ivd_video_decode_op_t *ps_decode_op = &s_h264d_decode_op.s_ivd_video_decode_op_t;
-        if (!setDecodeArgs(ps_decode_ip, ps_decode_op, nullptr, &wView, 0, 0, 0)) {
-            mSignalledError = true;
-            work->workletsProcessed = 1u;
-            return C2_CORRUPTED;
+
+        // Scope wView to ensure gralloc unlock (and fence creation) happens before finishWork
+        {
+            C2GraphicView wView = mOutBlock->map().get();
+            if (wView.error()) {
+                ALOGE("graphic view map failed %d", wView.error());
+                return C2_CORRUPTED;
+            }
+            if (!setDecodeArgs(ps_decode_ip, ps_decode_op, nullptr, &wView, 0, 0, 0)) {
+                mSignalledError = true;
+                work->workletsProcessed = 1u;
+                return C2_CORRUPTED;
+            }
+            (void) ivdec_api_function(mDecHandle, &s_h264d_decode_ip, &s_h264d_decode_op);
+
+            // wView destructor is called here at end of scope, triggering gralloc unlock
         }
-        (void) ivdec_api_function(mDecHandle, &s_h264d_decode_ip, &s_h264d_decode_op);
+
+        // Now it's safe to dispatch the buffer - unlock has completed
         if (ps_decode_op->u4_output_present) {
             finishWork(ps_decode_op->u4_ts, work);
         } else {
