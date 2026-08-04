@@ -423,7 +423,7 @@ void FastMixer::onWork()
 
         if (mMasterMono.load()) {  // memory_order_seq_cst
             mono_blend(mMixerBuffer, mMixerBufferFormat, Format_channelCount(mFormat), frameCount,
-                    true /*limit*/);
+                    false /*limit*/);
         }
 
         // Balance must take effect after mono conversion.

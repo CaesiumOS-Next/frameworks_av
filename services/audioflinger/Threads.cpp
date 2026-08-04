@@ -4378,7 +4378,7 @@ NO_THREAD_SAFETY_ANALYSIS  // manual locking of AudioFlinger
                     // and is handled here if we're going directly to the sink.
                     if (requireMonoBlend()) {
                         mono_blend(mMixerBuffer, mMixerBufferFormat, mChannelCount,
-                                mNormalFrameCount, true /*limit*/);
+                                mNormalFrameCount, false /*limit*/);
                     }
 
                     if (!hasFastMixer()) {
@@ -4463,7 +4463,7 @@ NO_THREAD_SAFETY_ANALYSIS  // manual locking of AudioFlinger
             void *effectBuffer = (mType == SPATIALIZER) ? mPostSpatializerBuffer : mEffectBuffer;
             if (requireMonoBlend()) {
                 mono_blend(effectBuffer, mEffectBufferFormat, mChannelCount, mNormalFrameCount,
-                           true /*limit*/);
+                           false /*limit*/);
             }
 
             if (!hasFastMixer()) {
