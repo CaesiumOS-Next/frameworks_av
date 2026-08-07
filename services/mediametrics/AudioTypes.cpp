@@ -268,9 +268,10 @@ const std::unordered_map<std::string, int32_t>& getAAudioPerformanceMode() {
     // This may be found in frameworks/av/media/libaaudio/include/aaudio/AAudio.h
     static std::unordered_map<std::string, int32_t> map {
         // UNKNOWN is 0
-        {"AAUDIO_PERFORMANCE_MODE_NONE",            10},
-        {"AAUDIO_PERFORMANCE_MODE_POWER_SAVING",    11},
-        {"AAUDIO_PERFORMANCE_MODE_LOW_LATENCY",     12},
+        {"AAUDIO_PERFORMANCE_MODE_NONE",                    10},
+        {"AAUDIO_PERFORMANCE_MODE_POWER_SAVING",            11},
+        {"AAUDIO_PERFORMANCE_MODE_LOW_LATENCY",             12},
+        {"AAUDIO_PERFORMANCE_MODE_POWER_SAVING_OFFLOADED",   13},
     };
     return map;
 }

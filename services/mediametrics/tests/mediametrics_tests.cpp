@@ -985,6 +985,8 @@ TEST(mediametrics_tests, audio_types_string) {
 TEST(mediametrics_tests, audio_types_integer) {
     using namespace android::mediametrics::types;
 
+    ASSERT_EQ(13, (lookup<AAUDIO_PERFORMANCE_MODE, int32_t>)(
+            "AAUDIO_PERFORMANCE_MODE_POWER_SAVING_OFFLOADED"));
     ASSERT_EQ(2, (lookup<CALLER_NAME, int32_t>)("java"));
     ASSERT_EQ(0, (lookup<CALLER_NAME, int32_t>)("random")); // 0 == unknown
 
