@@ -2998,7 +2998,8 @@ void CCodec::signalSetParameters(const sp<AMessage> &msg) {
                     || comp->getName().find("c2.android.") == 0)) {
         std::vector<std::unique_ptr<C2Param>> localConfigUpdate;
         for (const std::unique_ptr<C2Param> &param : configUpdate) {
-            if (param && param->coreIndex().coreIndex() == C2StreamSurfaceScalingInfo::CORE_INDEX) {
+            if (param && (param->coreIndex().coreIndex() == C2StreamSurfaceScalingInfo::CORE_INDEX
+                    || param->coreIndex().coreIndex() == C2StreamTunnelStartRender::CORE_INDEX)) {
                 localConfigUpdate.push_back(C2Param::Copy(*param));
             }
         }
