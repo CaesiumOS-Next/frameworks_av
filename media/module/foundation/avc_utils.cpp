@@ -79,7 +79,7 @@ static void skipScalingList(ABitReader *br, size_t sizeOfScalingList) {
     size_t nextScale = 8;
     for (size_t j = 0; j < sizeOfScalingList; ++j) {
         if (nextScale != 0) {
-            signed delta_scale = parseSE(br);
+            signed delta_scale = parseSEWithFallback(br, 0);
             // ISO_IEC_14496-10_201402-ITU, 7.4.2.1.1.1, The value of delta_scale
             // shall be in the range of −128 to +127, inclusive.
             if (delta_scale < -128) {
@@ -103,26 +103,32 @@ void FindAVCDimensions(
         int32_t *sarWidth, int32_t *sarHeight) {
     ABitReader br(seqParamSet->data() + 1, seqParamSet->size() - 1);
 
+    if (br.numBitsLeft() < 24) {
+        return;
+    }
+
     unsigned profile_idc = br.getBits(8);
     br.skipBits(16);
-    parseUE(&br);  // seq_parameter_set_id
+    if (parseUEWithFallback(&br, ~0U) == ~0U) return;  // seq_parameter_set_id
 
     unsigned chroma_format_idc = 1;  // 4:2:0 chroma format
 
     if (profile_idc == 100 || profile_idc == 110
             || profile_idc == 122 || profile_idc == 244
             || profile_idc == 44 || profile_idc == 83 || profile_idc == 86) {
-        chroma_format_idc = parseUE(&br);
+        chroma_format_idc = parseUEWithFallback(&br, 0);
         if (chroma_format_idc == 3) {
+            if (br.numBitsLeft() < 1) return;
             br.skipBits(1);  // residual_colour_transform_flag
         }
-        parseUE(&br);  // bit_depth_luma_minus8
-        parseUE(&br);  // bit_depth_chroma_minus8
+        parseUEWithFallback(&br, 0);  // bit_depth_luma_minus8
+        parseUEWithFallback(&br, 0);  // bit_depth_chroma_minus8
+        if (br.numBitsLeft() < 1) return;
         br.skipBits(1);  // qpprime_y_zero_transform_bypass_flag
 
-        if (br.getBits(1)) {  // seq_scaling_matrix_present_flag
+        if (br.numBitsLeft() >= 1 && br.getBits(1)) {
             for (size_t i = 0; i < 8; ++i) {
-                if (br.getBits(1)) {  // seq_scaling_list_present_flag[i]
+                if (br.numBitsLeft() >= 1 && br.getBits(1)) {
 
                     // WARNING: the code below has not ever been exercised...
                     // need a real-world example.
@@ -139,31 +145,34 @@ void FindAVCDimensions(
         }
     }
 
-    parseUE(&br);  // log2_max_frame_num_minus4
-    unsigned pic_order_cnt_type = parseUE(&br);
+    parseUEWithFallback(&br, 0);  // log2_max_frame_num_minus4
+    unsigned pic_order_cnt_type = parseUEWithFallback(&br, 0);
 
     if (pic_order_cnt_type == 0) {
-        parseUE(&br);  // log2_max_pic_order_cnt_lsb_minus4
+        parseUEWithFallback(&br, 0);  // log2_max_pic_order_cnt_lsb_minus4
     } else if (pic_order_cnt_type == 1) {
         // offset_for_non_ref_pic, offset_for_top_to_bottom_field and
         // offset_for_ref_frame are technically se(v), but since we are
         // just skipping over them the midpoint does not matter.
 
+        if (br.numBitsLeft() < 1) return;
         br.getBits(1);  // delta_pic_order_always_zero_flag
-        parseUE(&br);  // offset_for_non_ref_pic
-        parseUE(&br);  // offset_for_top_to_bottom_field
+        parseUEWithFallback(&br, 0);  // offset_for_non_ref_pic
+        parseUEWithFallback(&br, 0);  // offset_for_top_to_bottom_field
 
-        unsigned num_ref_frames_in_pic_order_cnt_cycle = parseUE(&br);
+        unsigned num_ref_frames_in_pic_order_cnt_cycle = parseUEWithFallback(&br, 0);
         for (unsigned i = 0; i < num_ref_frames_in_pic_order_cnt_cycle; ++i) {
-            parseUE(&br);  // offset_for_ref_frame
+            parseUEWithFallback(&br, 0);  // offset_for_ref_frame
         }
     }
 
-    parseUE(&br);  // num_ref_frames
+    parseUEWithFallback(&br, 0);  // num_ref_frames
+    if (br.numBitsLeft() < 1) return;
     br.getBits(1);  // gaps_in_frame_num_value_allowed_flag
 
-    unsigned pic_width_in_mbs_minus1 = parseUE(&br);
-    unsigned pic_height_in_map_units_minus1 = parseUE(&br);
+    unsigned pic_width_in_mbs_minus1 = parseUEWithFallback(&br, 0);
+    unsigned pic_height_in_map_units_minus1 = parseUEWithFallback(&br, 0);
+    if (br.numBitsLeft() < 1) return;
     unsigned frame_mbs_only_flag = br.getBits(1);
 
     //    *width = pic_width_in_mbs_minus1 * 16 + 16;
@@ -183,16 +192,18 @@ void FindAVCDimensions(
     }
 
     if (!frame_mbs_only_flag) {
+        if (br.numBitsLeft() < 1) return;
         br.getBits(1);  // mb_adaptive_frame_field_flag
     }
 
+    if (br.numBitsLeft() < 1) return;
     br.getBits(1);  // direct_8x8_inference_flag
 
-    if (br.getBits(1)) {  // frame_cropping_flag
-        unsigned frame_crop_left_offset = parseUE(&br);
-        unsigned frame_crop_right_offset = parseUE(&br);
-        unsigned frame_crop_top_offset = parseUE(&br);
-        unsigned frame_crop_bottom_offset = parseUE(&br);
+    if (br.numBitsLeft() >= 1 && br.getBits(1)) {
+        unsigned frame_crop_left_offset = parseUEWithFallback(&br, 0);
+        unsigned frame_crop_right_offset = parseUEWithFallback(&br, 0);
+        unsigned frame_crop_top_offset = parseUEWithFallback(&br, 0);
+        unsigned frame_crop_bottom_offset = parseUEWithFallback(&br, 0);
 
         unsigned cropUnitX, cropUnitY;
         if (chroma_format_idc == 0  /* monochrome */) {
@@ -239,10 +250,10 @@ void FindAVCDimensions(
         *sarHeight = 0;
     }
 
-    if (br.getBits(1)) {  // vui_parameters_present_flag
+    if (br.numBitsLeft() >= 1 && br.getBits(1)) {
         unsigned sar_width = 0, sar_height = 0;
 
-        if (br.getBits(1)) {  // aspect_ratio_info_present_flag
+        if (br.numBitsLeft() >= 1 && br.getBits(1)) {
             unsigned aspect_ratio_idc = br.getBits(8);
 
             if (aspect_ratio_idc == 255 /* extendedSAR */) {
@@ -411,7 +422,7 @@ sp<ABuffer> MakeAVCCodecSpecificData(
             seqParamSet, width, height, sarWidth, sarHeight);
 
     sp<ABuffer> picParamSet = FindNAL(data, size, 8);
-    CHECK(picParamSet != NULL);
+    if (picParamSet == NULL) return NULL;
 
     size_t csdSize =
         1 + 3 + 1 + 1
@@ -553,13 +564,14 @@ uint32_t FindAVCLayerId(const uint8_t *data, size_t size) {
 bool ExtractDimensionsFromVOLHeader(
         const uint8_t *data, size_t size, int32_t *width, int32_t *height) {
     ABitReader br(&data[4], size - 4);
+    if (br.numBitsLeft() < 1) return;
     br.skipBits(1);  // random_accessible_vol
     unsigned video_object_type_indication = br.getBits(8);
 
     CHECK_NE(video_object_type_indication,
              0x21u /* Fine Granularity Scalable */);
 
-    if (br.getBits(1)) {
+    if (br.numBitsLeft() >= 1 && br.getBits(1)) {
         br.skipBits(4); //video_object_layer_verid
         br.skipBits(3); //video_object_layer_priority
     }
@@ -568,31 +580,39 @@ bool ExtractDimensionsFromVOLHeader(
         br.skipBits(8);  // par_width
         br.skipBits(8);  // par_height
     }
-    if (br.getBits(1)) {  // vol_control_parameters
+    if (br.numBitsLeft() >= 1 && br.getBits(1)) {
         br.skipBits(2);  // chroma_format
+        if (br.numBitsLeft() < 1) return;
         br.skipBits(1);  // low_delay
-        if (br.getBits(1)) {  // vbv_parameters
+        if (br.numBitsLeft() >= 1 && br.getBits(1)) {
             br.skipBits(15);  // first_half_bit_rate
+            if (br.numBitsLeft() < 1) return;
             CHECK(br.getBits(1));  // marker_bit
             br.skipBits(15);  // latter_half_bit_rate
+            if (br.numBitsLeft() < 1) return;
             CHECK(br.getBits(1));  // marker_bit
             br.skipBits(15);  // first_half_vbv_buffer_size
+            if (br.numBitsLeft() < 1) return;
             CHECK(br.getBits(1));  // marker_bit
             br.skipBits(3);  // latter_half_vbv_buffer_size
             br.skipBits(11);  // first_half_vbv_occupancy
+            if (br.numBitsLeft() < 1) return;
             CHECK(br.getBits(1));  // marker_bit
             br.skipBits(15);  // latter_half_vbv_occupancy
+            if (br.numBitsLeft() < 1) return;
             CHECK(br.getBits(1));  // marker_bit
         }
     }
     unsigned video_object_layer_shape = br.getBits(2);
     CHECK_EQ(video_object_layer_shape, 0x00u /* rectangular */);
 
+    if (br.numBitsLeft() < 1) return;
     CHECK(br.getBits(1));  // marker_bit
     unsigned vop_time_increment_resolution = br.getBits(16);
+    if (br.numBitsLeft() < 1) return;
     CHECK(br.getBits(1));  // marker_bit
 
-    if (br.getBits(1)) {  // fixed_vop_rate
+    if (br.numBitsLeft() >= 1 && br.getBits(1)) {
         // range [0..vop_time_increment_resolution)
 
         // vop_time_increment_resolution
@@ -614,12 +634,16 @@ bool ExtractDimensionsFromVOLHeader(
         br.skipBits(numBits);  // fixed_vop_time_increment
     }
 
+    if (br.numBitsLeft() < 1) return;
     CHECK(br.getBits(1));  // marker_bit
     unsigned video_object_layer_width = br.getBits(13);
+    if (br.numBitsLeft() < 1) return;
     CHECK(br.getBits(1));  // marker_bit
     unsigned video_object_layer_height = br.getBits(13);
+    if (br.numBitsLeft() < 1) return;
     CHECK(br.getBits(1));  // marker_bit
 
+    if (br.numBitsLeft() < 1) return;
     br.skipBits(1); // interlaced
 
     *width = video_object_layer_width;
