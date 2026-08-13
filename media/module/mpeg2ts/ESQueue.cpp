@@ -101,6 +101,9 @@ static int32_t readVariableBits(ABitReader &bits, int32_t nbits) {
     int32_t more_bits = 1;
 
     while (more_bits) {
+        if (bits.numBitsLeft() < (size_t)(nbits + 1)) {
+            return value;
+        }
         value += bits.getBits(nbits);
         more_bits = bits.getBits(1);
         if (!more_bits)
@@ -331,22 +334,28 @@ static status_t parseAC4SyncFrame(
     ALOGV("AC4 frameSize = %u", frameSize);
 
     // ETSI TS 103 190-2 V1.1.1 6.2.1.1
+    RETURN_ERROR_IF_NOT_ENOUGH_BYTES_LEFT(bits, 2);
     uint32_t bitstreamVersion = bits.getBits(2);
     if (bitstreamVersion == 3) {
         bitstreamVersion += readVariableBits(bits, 2);
     }
 
+    RETURN_ERROR_IF_NOT_ENOUGH_BYTES_LEFT(bits, 10);
     bits.skipBits(10); // Sequence Counter
 
+    RETURN_ERROR_IF_NOT_ENOUGH_BYTES_LEFT(bits, 1);
     uint32_t bWaitFrames = bits.getBits(1);
     if (bWaitFrames) {
+        RETURN_ERROR_IF_NOT_ENOUGH_BYTES_LEFT(bits, 3);
         uint32_t waitFrames = bits.getBits(3);
         if (waitFrames > 0) {
+            RETURN_ERROR_IF_NOT_ENOUGH_BYTES_LEFT(bits, 2);
             bits.skipBits(2); // br_code;
         }
     }
 
     // ETSI TS 103 190 V1.1.1 Table 82
+    RETURN_ERROR_IF_NOT_ENOUGH_BYTES_LEFT(bits, 1);
     bool fsIndex = bits.getBits(1);
     uint32_t samplingRate = fsIndex ? 48000 : 44100;
 
