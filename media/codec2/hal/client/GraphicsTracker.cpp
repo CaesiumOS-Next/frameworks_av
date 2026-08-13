@@ -578,6 +578,7 @@ void GraphicsTracker::updateDequeueConf() {
 void GraphicsTracker::clearCacheIfNecessaryLocked(const std::shared_ptr<BufferCache> &cache,
                                             int maxDequeueCommitted) {
     int cleared = 0;
+    std::lock_guard<std::mutex> cl(cache->mCacheLock);
     size_t origCacheSize = cache->mBuffers.size();
     if (cache->mSurface && maxDequeueCommitted < mMaxDequeueCommitted) {
         // we are shrinking # of buffers in the case, so evict the previous
@@ -721,6 +722,7 @@ void GraphicsTracker::commitAllocate(c2_status_t res, const std::shared_ptr<Buff
                                      std::shared_ptr<BufferItem>* pBuffer, bool* updateDequeue) {
     std::unique_lock<std::mutex> l(mLock);
     mNumDequeueing--;
+    std::lock_guard<std::mutex> cl(cache->mCacheLock);
     if (res == C2_OK) {
         if (cached) {
             auto it = cache->mBuffers.find(bufferId);
@@ -862,6 +864,7 @@ c2_status_t GraphicsTracker::_allocate(const std::shared_ptr<BufferCache>& cache
     bool exists = false;
     {
         std::unique_lock<std::mutex> l(mLock);
+        std::lock_guard<std::mutex> cl(cache->mCacheLock);
         if (cache.get() == mBufferCache.get() &&
             cache->mBuffers.find(bufferId) != cache->mBuffers.end()) {
             exists = true;
@@ -988,9 +991,16 @@ c2_status_t GraphicsTracker::requestDeallocate(uint64_t bid, const sp<Fence>& fe
 
     std::shared_ptr<BufferItem> buffer = it->second;
     if (buffer->mGeneration == mBufferCache->mGeneration && mBufferCache->mSurface) {
-        auto cacheIt = mBufferCache->mBuffers.find(bid);
-        if (cacheIt != mBufferCache->mBuffers.end()) {
-            CHECK(cacheIt->second.get() == buffer.get());
+        bool foundInCache = false;
+        {
+            std::lock_guard<std::mutex> cl(mBufferCache->mCacheLock);
+            auto cacheIt = mBufferCache->mBuffers.find(bid);
+            if (cacheIt != mBufferCache->mBuffers.end()) {
+                CHECK(cacheIt->second.get() == buffer.get());
+                foundInCache = true;
+            }
+        }
+        if (foundInCache) {
             *cache = mBufferCache;
             *graphicBuffer = buffer->getGraphicBuffer();
             *rFence = (fence == Fence::NO_FENCE) ? buffer->mFence : fence;
@@ -1161,9 +1171,16 @@ c2_status_t GraphicsTracker::requestRender(uint64_t bid, std::shared_ptr<BufferC
     std::shared_ptr<BufferItem> buffer = it->second;
     *cache = mBufferCache;
     if (buffer->mGeneration == mBufferCache->mGeneration) {
-        auto cacheIt = mBufferCache->mBuffers.find(buffer->mId);
-        if (cacheIt != mBufferCache->mBuffers.end()) {
-            CHECK(cacheIt->second.get() == buffer.get());
+        bool foundInCache = false;
+        {
+            std::lock_guard<std::mutex> cl(mBufferCache->mCacheLock);
+            auto cacheIt = mBufferCache->mBuffers.find(buffer->mId);
+            if (cacheIt != mBufferCache->mBuffers.end()) {
+                CHECK(cacheIt->second.get() == buffer.get());
+                foundInCache = true;
+            }
+        }
+        if (foundInCache) {
             mBufferCache->blockBufferId(buffer->mId);
             *fromCache = true;
         } else {
@@ -1190,6 +1207,7 @@ void GraphicsTracker::commitRender(const std::shared_ptr<BufferCache> &cache,
         cache->unblockBufferId(buffer->mId);
         if (oldBuffer) {
             // migrated, register the new buffer to the cache.
+            std::lock_guard<std::mutex> cl(cache->mCacheLock);
             auto ret = cache->mBuffers.emplace(buffer->mId, buffer);
             if (!ret.second) {
                 ret.first->second = buffer;
