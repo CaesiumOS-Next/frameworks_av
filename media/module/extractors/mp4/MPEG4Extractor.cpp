@@ -4643,6 +4643,30 @@ MediaTrackHelper *MPEG4Extractor::getTrack(size_t index) {
         if ((ptr[0] != 1 || ptr[1] != 0) && (ptr[0] != 2 || ptr[1] != 1)) {
             return NULL;
         }
+
+        // Validate profile-specific CSD before MPEG4Source constructor,
+        // which uses CHECK macros that abort on missing/invalid CSD.
+        const uint8_t dvProfile = ptr[2] >> 1;
+        void *csdData;
+        size_t csdSize;
+        if (dvProfile > 3 && dvProfile < 9) {
+            // HEVC-based DV profiles require valid hvcC
+            if (!AMediaFormat_getBuffer(track->meta, AMEDIAFORMAT_KEY_CSD_HEVC,
+                                        &csdData, &csdSize)
+                    || csdSize < 22 || ((const uint8_t *)csdData)[0] != 1) {
+                return NULL;
+            }
+        } else if (dvProfile == 9) {
+            // AVC-based DV profile requires valid avcC
+            if (!AMediaFormat_getBuffer(track->meta, AMEDIAFORMAT_KEY_CSD_AVC,
+                                        &csdData, &csdSize)
+                    || csdSize < 7 || ((const uint8_t *)csdData)[0] != 1) {
+                return NULL;
+            }
+        } else if (dvProfile != 10) {
+            // Unknown profile
+            return NULL;
+        }
    } else if (!strcasecmp(mime, MEDIA_MIMETYPE_VIDEO_AV1)
            || !strcasecmp(mime, MEDIA_MIMETYPE_IMAGE_AVIF)) {
         void *data;
