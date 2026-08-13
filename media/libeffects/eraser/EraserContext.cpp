@@ -96,6 +96,9 @@ RetCode EraserContext::enable() {
         numClassifier = kSeparatorMaxSoundNum;
     }
 
+    if (mClassifiers.size() >= numClassifier) {
+        return RetCode::SUCCESS;
+    }
     numClassifier = numClassifier - mClassifiers.size();
     for (size_t soundId = 0; soundId < numClassifier; soundId ++) {
         auto classifierInstance = std::make_unique<Classifier>(kClassifierModelPath, soundId);
