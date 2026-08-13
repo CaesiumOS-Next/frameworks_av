@@ -353,6 +353,9 @@ status_t VvcParameterSets::parseSps(const uint8_t* data, size_t size) {
     }
     if (reader.getBitsWithFallback(1, 0)) { //sps_subpic_info_present_flag
         uint32_t sps_num_subpics_minus1 = parseUEWithFallback(&reader, 0);
+        if (sps_num_subpics_minus1 > 599) {
+            return ERROR_MALFORMED;
+        }
         bool sps_independent_subpics_flag = true;
         bool sps_subpic_same_size_flag = false;
         if (sps_num_subpics_minus1 > 0) {
