@@ -302,6 +302,11 @@ VirtualCameraImageTransformingHandler::renderIntoBlobStreamBuffer(
       createThumbnail(requestSettings.thumbnailResolution,
                       requestSettings.thumbnailJpegQuality));
 
+  if (stream->bufferSize < static_cast<int32_t>(sizeof(CameraBlob))) {
+    ALOGE("%s: Buffer size (%d) too small for CameraBlob footer", __func__,
+          stream->bufferSize);
+    return cameraStatus(Status::INTERNAL_ERROR);
+  }
   unsigned long outBufferSize = stream->bufferSize - sizeof(CameraBlob);
   void* outBuffer = (*planesLock).planes[0].data;
   std::optional<size_t> compressedSize = compressJpeg(

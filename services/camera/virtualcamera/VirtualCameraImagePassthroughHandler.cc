@@ -282,6 +282,11 @@ ndk::ScopedAStatus VirtualCameraImagePassthroughHandler::fillOutputBuffer(
   //
   // See
   // hardware/interfaces/camera/device/aidl/android/hardware/camera/device/CameraBlobId.aidl
+  if (halStreamConfig.bufferSize < static_cast<int32_t>(sizeof(CameraBlob))) {
+    ALOGE("%s: Buffer size (%d) too small for CameraBlob footer", __func__,
+          halStreamConfig.bufferSize);
+    return cameraStatus(Status::INTERNAL_ERROR);
+  }
   int32_t outBufferSize = halStreamConfig.bufferSize - sizeof(CameraBlob);
   uint8_t* outBuffer = reinterpret_cast<uint8_t*>((*planesLock).planes[0].data);
 
