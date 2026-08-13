@@ -17,6 +17,7 @@
 #define LOG_TAG "GraphicsTracker"
 #include <fcntl.h>
 #include <unistd.h>
+#include <algorithm>
 
 #include <gui/BufferItemConsumer.h>
 #include <gui/BufferQueue.h>
@@ -300,7 +301,7 @@ bool GraphicsTracker::adjustDequeueConfLocked(bool *updateDequeue) {
         int delta = mMaxDequeue - mMaxDequeueRequested.value();
         int drained = 0;
         // Since we are supposed to increase mDequeuable by one already
-        int adjustable = mDequeueable + 1;
+        int adjustable = std::max(0, mDequeueable + 1);
         if (adjustable >= delta) {
             mMaxDequeue = mMaxDequeueRequested.value();
             mDequeueable -= (delta - 1);
