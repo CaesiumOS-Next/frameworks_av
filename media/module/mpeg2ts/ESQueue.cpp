@@ -1965,9 +1965,11 @@ sp<ABuffer> ElementaryStreamQueue::dequeueAccessUnitH264() {
                 foundIDR = true;
             }
             if (foundSlice) {
-                //TODO: Shouldn't this have been called with nalSize-1?
-                ABitReader br(nalStart + 1, nalSize);
-                unsigned first_mb_in_slice = parseUE(&br);
+                if (nalSize < 2) {
+                    continue;
+                }
+                ABitReader br(nalStart + 1, nalSize - 1);
+                unsigned first_mb_in_slice = parseUEWithFallback(&br, 0);
 
                 if (first_mb_in_slice == 0) {
                     // This slice starts a new frame.
