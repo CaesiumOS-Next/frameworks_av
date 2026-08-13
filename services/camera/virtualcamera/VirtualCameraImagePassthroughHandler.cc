@@ -347,7 +347,12 @@ int32_t VirtualCameraImagePassthroughHandler::findActualPayloadSize(
         blob->blobId == kCameraBlobIdHeicClearOnRelease) {
       ALOGV("%s: Found CameraBlob footer. ID=0x%x, size=%d", __func__,
             static_cast<int>(blob->blobId), blob->blobSizeBytes);
-      return blob->blobSizeBytes;
+      if (blob->blobSizeBytes > 0 && blob->blobSizeBytes <= size) {
+        return blob->blobSizeBytes;
+      }
+      ALOGW("%s: CameraBlob footer blobSizeBytes (%d) out of range for buffer size (%d)",
+            __func__, blob->blobSizeBytes, size);
+      return size;
     }
   }
 
