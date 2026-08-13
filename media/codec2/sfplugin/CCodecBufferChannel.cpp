@@ -1090,6 +1090,11 @@ status_t CCodecBufferChannel::attachEncryptedBuffer(
                 ALOGE("Failed to map hidl_memory");
                 return UNKNOWN_ERROR;
             }
+            if (static_cast<size_t>(result) > im->getSize()) {
+                ALOGE("[%s] attachEncryptedBuffer: decrypt result (%zd) exceeds "
+                      "mapped memory size (%zu)", mName, result, im->getSize());
+                return UNKNOWN_ERROR;
+            }
             memcpy(view.data(), im->getPointer(), result);
         } else {
             memcpy(view.data(), mDecryptDestination->unsecurePointer(), result);
@@ -1116,6 +1121,13 @@ status_t CCodecBufferChannel::attachEncryptedBuffer(
         }
         if (im->getPointer() == nullptr) {
             ALOGE("Mapped memory is null");
+            return UNKNOWN_ERROR;
+        }
+
+        if (offset + size > im->getSize()) {
+            ALOGE("[%s] attachEncryptedBuffer: encrypted info range "
+                  "(offset=%zu size=%zu) exceeds mapped memory (%zu)",
+                  mName, offset, size, im->getSize());
             return UNKNOWN_ERROR;
         }
 
