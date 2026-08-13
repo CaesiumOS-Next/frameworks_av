@@ -899,7 +899,7 @@ c2_status_t GraphicsTracker::allocate(
     int slotId;
     sp<Fence> fence;
     std::shared_ptr<BufferItem> buffer;
-    bool updateDequeue;
+    bool updateDequeue = false;
     res = _allocate(cache, width, height, format, usage, &cached, &slotId, &fence, &buffer);
     commitAllocate(res, cache, cached, slotId, fence, &buffer, &updateDequeue);
     if (res == C2_OK) {
@@ -973,7 +973,7 @@ void GraphicsTracker::commitDeallocate(
 
 c2_status_t GraphicsTracker::deallocate(uint64_t bid, const sp<Fence> &fence) {
     bool completed;
-    bool updateDequeue;
+    bool updateDequeue = false;
     std::shared_ptr<BufferCache> cache;
     int slotId;
     sp<Fence> rFence;
