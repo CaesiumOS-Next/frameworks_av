@@ -503,6 +503,9 @@ status_t VvcParameterSets::parseSps(const uint8_t* data, size_t size) {
             skipSE(&reader);
             // sps_num_points_in_qp_table_minus1[i]
             uint32_t sps_num_points_in_qp_table_minus1 = parseUEWithFallback(&reader, 0);
+            if (sps_num_points_in_qp_table_minus1 > 36) {
+                return ERROR_MALFORMED;
+            }
             ALOGV("sps_num_points_in_qp_table_minus1:%u", sps_num_points_in_qp_table_minus1);
             for (uint32_t j = 0; j <= sps_num_points_in_qp_table_minus1; j++) {
                 // sps_delta_qp_in_val_minus1[i][j]
@@ -535,6 +538,9 @@ status_t VvcParameterSets::parseSps(const uint8_t* data, size_t size) {
     for (uint32_t i = 0; i < (sps_rpl1_same_as_rpl0_flag ? 1 : 2); i++) {
         // sps_num_ref_pic_lists[i];
         uint32_t sps_num_ref_pic_lists = parseUEWithFallback(&reader, 0);
+        if (sps_num_ref_pic_lists > 64) {
+            return ERROR_MALFORMED;
+        }
         ALOGV("sps_num_ref_pic_lists:%u", sps_num_ref_pic_lists);
         for (uint32_t j = 0; j < sps_num_ref_pic_lists; j++) {
             skipRefPicListStruct(&reader, j, sps_num_ref_pic_lists,
@@ -701,6 +707,9 @@ status_t VvcParameterSets::parseSps(const uint8_t* data, size_t size) {
 
                 // hrd_cpb_cnt_minus1
                 hrd_cpb_cnt_minus1 = parseUEWithFallback(&reader, 0);
+                if (hrd_cpb_cnt_minus1 > 31) {
+                    return ERROR_MALFORMED;
+                }
             }
             // general_timing_hrd_parameters end
             bool sps_sublayer_cpb_params_present_flag = false;
@@ -918,6 +927,9 @@ void VvcParameterSets::skipRefPicListStruct(ABitReader* br,
                                             uint8_t sps_log2_max_pic_order_cnt_lsb_minus4) {
     // parsing ref_pic_list as in ITU-T H.266 section 7.3.9
     uint32_t num_ref_entries = parseUEWithFallback(br, 0);
+    if (num_ref_entries > 4096) {
+        return;
+    }
     ALOGV("num_ref_entries:%u", num_ref_entries);
     bool ltrp_in_header_flag = false;
     if (sps_long_term_ref_pics_flag) {
