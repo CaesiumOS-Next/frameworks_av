@@ -90,7 +90,7 @@ status_t AudioTrackMmap::createTrack_l() {
 
     mStream = sp<aaudio::AudioStreamInternalPlay>::make(
             aaudio::AAudioBinderClient::getInstance(), false /*inService*/);
-    if (auto result = mStream->open(request) != AAUDIO_OK) {
+    if (auto result = mStream->open(request); result != AAUDIO_OK) {
         return logIfErrorAndReturnStatus(AAudioConvert_aaudioToAndroidStatus(result),
                                          "Failed to open aaudio stream");
     }
