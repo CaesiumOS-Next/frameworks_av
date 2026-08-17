@@ -165,6 +165,9 @@ status_t Camera3BufferManager::unregisterStream(int streamId, int streamSetId, b
 void Camera3BufferManager::notifyBufferRemoved(int streamId, int streamSetId, bool isMultiRes) {
     Mutex::Autolock l(mLock);
     StreamSetKey streamSetKey = {streamSetId, isMultiRes};
+    if (!checkIfStreamRegisteredLocked(streamId, streamSetKey)) {
+        return;
+    }
     StreamSet &streamSet = mStreamSetMap.editValueFor(streamSetKey);
     size_t& attachedBufferCount =
             streamSet.attachedBufferCountMap.editValueFor(streamId);
@@ -236,9 +239,10 @@ status_t Camera3BufferManager::checkAndFreeBufferOnOtherStreamsLocked(
             }
         }
         if (bufferFreed) {
-            size_t& otherAttachedBufferCount =
-                    streamSet.attachedBufferCountMap.editValueFor(firstOtherStreamId);
-            otherAttachedBufferCount--;
+            if (checkIfStreamRegisteredLocked(firstOtherStreamId, streamSetKey)) {
+                StreamSet& currentStreamSet = mStreamSetMap.editValueFor(streamSetKey);
+                currentStreamSet.attachedBufferCountMap.editValueFor(firstOtherStreamId)--;
+            }
         }
     }
 
