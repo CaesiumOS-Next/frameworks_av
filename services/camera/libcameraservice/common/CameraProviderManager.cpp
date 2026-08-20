@@ -2434,8 +2434,8 @@ status_t CameraProviderManager::tryToInitializeAidlProviderLocked(
         const std::string& providerName, const sp<ProviderInfo>& providerInfo) {
     using aidl::android::hardware::camera::provider::ICameraProvider;
 
-    // Only get remote instance if already running. Lazy Providers will be woken up later.
-    std::shared_ptr<ICameraProvider> interface = mAidlServiceProxy->tryGetService(providerName);
+    // Wake up lazy providers.
+    std::shared_ptr<ICameraProvider> interface = mAidlServiceProxy->getService(providerName);
 
     if (interface == nullptr) {
         ALOGW("%s: AIDL Camera provider HAL '%s' is not actually available", __FUNCTION__,
@@ -2753,6 +2753,12 @@ void CameraProviderManager::ProviderInfo::removeAllDevices() {
 
     auto itDevices = mDevices.begin();
     while (itDevices != mDevices.end()) {
+        // Skip available devices
+        if ((*itDevices)->mIsDeviceAvailable) {
+            ++itDevices;
+            continue;
+        }
+
         std::string id = (*itDevices)->mId;
         std::string deviceName = (*itDevices)->mName;
         removeDevice(id);
