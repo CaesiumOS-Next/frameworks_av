@@ -325,6 +325,10 @@ status_t AudioPolicyMixCollection::getOutputForAttr(
         bool& usePrimaryOutputFromPolicyMixes)
 {
     ALOGV("getOutputForAttr() querying %zu mixes:", size());
+    if(size() == 0) {
+        ALOGD("%s : Policy Mixes not available. Return INVALID_OPERATION", __func__);
+        return INVALID_OPERATION;
+    }
     primaryMix.clear();
     bool mixesDisallowsRequestedDevice = false;
     const bool isMmapRequested = (flags & AUDIO_OUTPUT_FLAG_MMAP_NOIRQ);
