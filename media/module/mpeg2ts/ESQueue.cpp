@@ -162,13 +162,13 @@ static unsigned parseAC3SyncFrame(
 
     unsigned frmsizecod = bits.getBits(6);
     if (frmsizecod > 37) {
-        ALOGW("Incorrect frmsizecod in AC3 header");
+        ALOGV("Incorrect frmsizecod in AC3 header");
         return 0;
     }
 
     unsigned bsid = bits.getBits(5);
     if (bsid > 8) {
-        ALOGW("Incorrect bsid in AC3 header. Possibly E-AC-3?");
+        ALOGV("Incorrect bsid in AC3 header. Possibly E-AC-3?");
         return 0;
     }
 
@@ -228,17 +228,17 @@ static unsigned parseEAC3SyncFrame(
 
     ABitReader bits(ptr, size);
     if (bits.numBitsLeft() < 16) {
-        ALOGE("Not enough bits left for further parsing");
+        ALOGV("Not enough bits left for further parsing");
         return 0;
     }
     if (bits.getBits(16) != 0x0B77) {
-        ALOGE("No valid sync word in EAC3 header");
+        ALOGV("No valid sync word in EAC3 header");
         return 0;
     }
 
     // we parse up to bsid so there needs to be at least that many bits
     if (bits.numBitsLeft() < 2 + 3 + 11 + 2 + 2 + 3 + 1 + 5) {
-        ALOGE("Not enough bits left for further parsing");
+        ALOGV("Not enough bits left for further parsing");
         return 0;
     }
 
@@ -307,7 +307,7 @@ static status_t parseAC4SyncFrame(
     ABitReader bits(ptr, size);
     int32_t syncWord = bits.getBits(16);
     if ((syncWord != kSyncWordAC40) && (syncWord != kSyncWordAC41)) {
-        ALOGE("Invalid syncword in AC4 header");
+        ALOGV("Invalid syncword in AC4 header");
         return ERROR_MALFORMED;
     }
     headerSize += 2;
@@ -365,7 +365,7 @@ static status_t parseAC4SyncFrame(
 #define RETURN_ERROR_IF_NOT_ENOUGH_BYTES_LEFT(bitstream, size) \
     do { \
         if ((bitstream).numBitsLeft() < (size)) { \
-        ALOGE("Not enough bits left for further parsing"); \
+        ALOGV("Not enough bits left for further parsing"); \
         return ERROR_MALFORMED; } \
     } while (0)
 
@@ -558,7 +558,7 @@ static status_t parseDTSHDSyncFrame(
         frameSize = extHeadersize + extSSFsize;
         isLBR = true;
     } else {
-        ALOGE("No valid sync word in DTS/DTSHD header");
+        ALOGV("No valid sync word in DTS/DTSHD header");
         return ERROR_MALFORMED;
     }
 
@@ -644,7 +644,7 @@ static status_t parseDTSUHDSyncFrame(
             isSyncFrameFlag = false;
             break;
         default:
-            ALOGE("No valid sync word in DTSUHD header");
+            ALOGV("No valid sync word in DTSUHD header");
             return ERROR_MALFORMED; // invalid sync word
     }
 
