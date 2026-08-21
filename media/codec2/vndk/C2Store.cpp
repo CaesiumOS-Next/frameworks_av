@@ -458,9 +458,11 @@ private:
             allocatorId = GetPreferredLinearAllocatorId(GetCodec2PoolMask());
         }
         auto deleter = [this, poolId](C2BlockPool *pool) {
-            std::unique_lock lock(mMutex);
-            mBlockPools.erase(poolId);
-            mComponents.erase(poolId);
+            {
+                std::unique_lock lock(mMutex);
+                mBlockPools.erase(poolId);
+                mComponents.erase(poolId);
+            }
             delete pool;
         };
         switch(allocatorId) {
