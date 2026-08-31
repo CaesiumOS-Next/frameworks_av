@@ -94,3 +94,12 @@ flag {
         "Play media strategy over Bluetooth SCO when active"
     bug: "292037886"
 }
+
+flag {
+    name: "auto_usb_bit_perfect"
+    namespace: "media_audio"
+    description:
+        "Opt-in automatic selection of bit-perfect playback for eligible media clients on "
+        "USB devices, without requiring the app to call setPreferredMixerAttributes."
+    bug: "554587000"
+}

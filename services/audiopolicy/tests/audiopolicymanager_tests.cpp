@@ -4141,6 +4141,297 @@ void AudioPolicyManagerTestBitPerfectBase::getBitPerfectOutput(status_t expected
                                          &isSpatialized, &isBitPerfect, &volume, &muted));
 }
 
+class AudioPolicyManagerTestAutoBitPerfect : public AudioPolicyManagerTestWithConfigurationFile {
+protected:
+    void SetUp() override {
+        ASSERT_NO_FATAL_FAILURE(AudioPolicyManagerTestWithConfigurationFile::SetUp());
+        mClient->addSupportedFormat(AUDIO_FORMAT_PCM_16_BIT);
+        mClient->addSupportedChannelMask(AUDIO_CHANNEL_OUT_STEREO);
+        mClient->addSupportedSamplingRate(k48000SamplingRate);
+        ASSERT_EQ(NO_ERROR, mManager->setDeviceConnectionState(AUDIO_DEVICE_OUT_USB_DEVICE,
+                AUDIO_POLICY_DEVICE_STATE_AVAILABLE, "", "", AUDIO_FORMAT_DEFAULT));
+        for (auto device : mManager->getAvailableOutputDevices()) {
+            if (device->type() == AUDIO_DEVICE_OUT_USB_DEVICE) {
+                mUsbPortId = device->getId();
+                break;
+            }
+        }
+        ASSERT_NE(AUDIO_PORT_HANDLE_NONE, mUsbPortId);
+        mManager->setAutoBitPerfectEnabled(true);
+    }
+
+    void TearDown() override {
+        mManager->setAutoBitPerfectEnabled(false);
+        ASSERT_EQ(NO_ERROR, mManager->setDeviceConnectionState(AUDIO_DEVICE_OUT_USB_DEVICE,
+                AUDIO_POLICY_DEVICE_STATE_UNAVAILABLE, "", "", AUDIO_FORMAT_LDAC));
+        ASSERT_NO_FATAL_FAILURE(AudioPolicyManagerTestWithConfigurationFile::TearDown());
+    }
+
+    void requestOutput(uid_t uid, uint32_t rate, audio_format_t format,
+                       audio_channel_mask_t channelMask, audio_io_handle_t* output,
+                       audio_port_handle_t* portId, bool* isBitPerfect) {
+        DeviceIdVector selectedDeviceIds;
+        *output = AUDIO_IO_HANDLE_NONE;
+        *portId = AUDIO_PORT_HANDLE_NONE;
+        getOutputForAttr(&selectedDeviceIds, format, channelMask, rate,
+                         AUDIO_OUTPUT_FLAG_NONE, output, portId, sAutoMediaAttr,
+                         AUDIO_SESSION_NONE, uid, isBitPerfect);
+    }
+
+    void enrollAndStart(uid_t uid, audio_io_handle_t* output, audio_port_handle_t* portId) {
+        bool isBitPerfect = false;
+        requestOutput(uid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                      AUDIO_CHANNEL_OUT_STEREO, output, portId, &isBitPerfect);
+        EXPECT_TRUE(isBitPerfect);
+        status_t status = mManager->startOutput(*portId);
+        if (status == DEAD_OBJECT) {
+            requestOutput(uid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                          AUDIO_CHANNEL_OUT_STEREO, output, portId, &isBitPerfect);
+            EXPECT_TRUE(isBitPerfect);
+            status = mManager->startOutput(*portId);
+        }
+        EXPECT_EQ(NO_ERROR, status);
+        EXPECT_EQ(1u, mManager->countAutoMixerAttrInfos());
+    }
+
+    audio_port_handle_t mUsbPortId = AUDIO_PORT_HANDLE_NONE;
+    const uid_t mOrdinaryUid = 4321;
+    static constexpr audio_attributes_t sAutoMediaAttr = {
+            .content_type = AUDIO_CONTENT_TYPE_MUSIC,
+            .usage = AUDIO_USAGE_MEDIA,
+    };
+};
+
+// Matrix #1-3 (mechanics at the fake device's supported rate)
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, AutoEnrollsEligibleClient) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    ASSERT_NO_FATAL_FAILURE(enrollAndStart(mOrdinaryUid, &output, &portId));
+    const auto desc = mManager->getOutputs().valueFor(output);
+    ASSERT_NE(nullptr, desc);
+    EXPECT_EQ(AUDIO_OUTPUT_FLAG_BIT_PERFECT, desc->mFlags & AUDIO_OUTPUT_FLAG_BIT_PERFECT);
+    EXPECT_EQ(NO_ERROR, mManager->stopOutput(portId));
+    mManager->releaseOutput(portId);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #4
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, FeatureDisabledKeepsLegacyPath) {
+    mManager->setAutoBitPerfectEnabled(false);
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    bool isBitPerfect = true;
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_FALSE(isBitPerfect);
+    EXPECT_NE(AUDIO_IO_HANDLE_NONE, output);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #5
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, UnsupportedConfigFallsBack) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    bool isBitPerfect = true;
+    // 44.1 kHz is not advertised by the fake USB device (48 kHz only).
+    requestOutput(mOrdinaryUid, 44100, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_FALSE(isBitPerfect);
+    EXPECT_NE(AUDIO_IO_HANDLE_NONE, output);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+    // 5.1 channel mask is also ineligible.
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_5POINT1, &output, &portId, &isBitPerfect);
+    EXPECT_FALSE(isBitPerfect);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #6
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, FloatClientNotEligible) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    bool isBitPerfect = true;
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_FLOAT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_FALSE(isBitPerfect);
+    EXPECT_NE(AUDIO_IO_HANDLE_NONE, output);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #7a/#7b
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, ManualRegistrationDisablesAuto) {
+    const uid_t manualUid = 1234;
+    std::vector<audio_mixer_attributes_t> mixerAttributes;
+    ASSERT_EQ(NO_ERROR, mManager->getSupportedMixerAttributes(mUsbPortId, mixerAttributes));
+    size_t bpIndex = 0;
+    for (; bpIndex < mixerAttributes.size(); ++bpIndex) {
+        if (mixerAttributes[bpIndex].mixer_behavior == AUDIO_MIXER_BEHAVIOR_BIT_PERFECT) {
+            break;
+        }
+    }
+    ASSERT_LT(bpIndex, mixerAttributes.size());
+    ASSERT_EQ(NO_ERROR, mManager->setPreferredMixerAttributes(
+            &sAutoMediaAttr, mUsbPortId, manualUid, &mixerAttributes[bpIndex]));
+
+    // A different uid must not auto-enroll while a manual registration exists.
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    bool isBitPerfect = true;
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_FALSE(isBitPerfect);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+
+    // The manual registration is still intact and readable through the public API.
+    audio_mixer_attributes_t readBack;
+    EXPECT_EQ(NO_ERROR, mManager->getPreferredMixerAttributes(
+            &sAutoMediaAttr, mUsbPortId, &readBack));
+    EXPECT_EQ(AUDIO_MIXER_BEHAVIOR_BIT_PERFECT, readBack.mixer_behavior);
+    EXPECT_EQ(NO_ERROR, mManager->clearPreferredMixerAttributes(
+            &sAutoMediaAttr, mUsbPortId, manualUid));
+}
+
+// Matrix #8
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, SecondUidDoesNotStealActiveAuto) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    ASSERT_NO_FATAL_FAILURE(enrollAndStart(mOrdinaryUid, &output, &portId));
+
+    const uid_t secondUid = 8765;
+    audio_io_handle_t output2;
+    audio_port_handle_t portId2;
+    bool isBitPerfect2 = true;
+    requestOutput(secondUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output2, &portId2, &isBitPerfect2);
+    EXPECT_FALSE(isBitPerfect2);
+    // Still exactly one auto entry, owned by the first client.
+    EXPECT_EQ(1u, mManager->countAutoMixerAttrInfos());
+
+    EXPECT_EQ(NO_ERROR, mManager->stopOutput(portId));
+    mManager->releaseOutput(portId);
+    mManager->releaseOutput(portId2);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #9 (phone-state portion)
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, NoEnrollmentDuringCall) {
+    mManager->setPhoneState(AUDIO_MODE_IN_CALL);
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    bool isBitPerfect = true;
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_FALSE(isBitPerfect);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+    mManager->setPhoneState(AUDIO_MODE_NORMAL);
+    // After the call ends, enrollment works again.
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_TRUE(isBitPerfect);
+    mManager->releaseOutput(portId);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #11
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, ReleaseWithoutStartCleansUp) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    bool isBitPerfect = false;
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_TRUE(isBitPerfect);
+    EXPECT_EQ(1u, mManager->countAutoMixerAttrInfos());
+    mManager->releaseOutput(portId);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #12
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, StopOfLastOwnerCleansAndReenrolls) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    ASSERT_NO_FATAL_FAILURE(enrollAndStart(mOrdinaryUid, &output, &portId));
+    EXPECT_EQ(NO_ERROR, mManager->stopOutput(portId));
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+    mManager->releaseOutput(portId);
+    // A new eligible client enrolls freshly.
+    audio_io_handle_t output2;
+    audio_port_handle_t portId2;
+    ASSERT_NO_FATAL_FAILURE(enrollAndStart(mOrdinaryUid, &output2, &portId2));
+    EXPECT_EQ(NO_ERROR, mManager->stopOutput(portId2));
+    mManager->releaseOutput(portId2);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
+// Matrix #13
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, UsbDetachCleansUp) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    ASSERT_NO_FATAL_FAILURE(enrollAndStart(mOrdinaryUid, &output, &portId));
+    ASSERT_EQ(NO_ERROR, mManager->setDeviceConnectionState(AUDIO_DEVICE_OUT_USB_DEVICE,
+            AUDIO_POLICY_DEVICE_STATE_UNAVAILABLE, "", "", AUDIO_FORMAT_LDAC));
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+    // Reconnect so TearDown's disconnect succeeds.
+    ASSERT_EQ(NO_ERROR, mManager->setDeviceConnectionState(AUDIO_DEVICE_OUT_USB_DEVICE,
+            AUDIO_POLICY_DEVICE_STATE_AVAILABLE, "", "", AUDIO_FORMAT_DEFAULT));
+}
+
+// Matrix #15 (manual persistence through auto churn)
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, ManualSurvivesAutoLifecycles) {
+    // Run an auto enroll/stop cycle first.
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    ASSERT_NO_FATAL_FAILURE(enrollAndStart(mOrdinaryUid, &output, &portId));
+    EXPECT_EQ(NO_ERROR, mManager->stopOutput(portId));
+    mManager->releaseOutput(portId);
+
+    // Now register manually and verify it survives another client's request cycle.
+    const uid_t manualUid = 1234;
+    std::vector<audio_mixer_attributes_t> mixerAttributes;
+    ASSERT_EQ(NO_ERROR, mManager->getSupportedMixerAttributes(mUsbPortId, mixerAttributes));
+    size_t bpIndex = 0;
+    for (; bpIndex < mixerAttributes.size(); ++bpIndex) {
+        if (mixerAttributes[bpIndex].mixer_behavior == AUDIO_MIXER_BEHAVIOR_BIT_PERFECT) {
+            break;
+        }
+    }
+    ASSERT_LT(bpIndex, mixerAttributes.size());
+    ASSERT_EQ(NO_ERROR, mManager->setPreferredMixerAttributes(
+            &sAutoMediaAttr, mUsbPortId, manualUid, &mixerAttributes[bpIndex]));
+
+    audio_io_handle_t output2;
+    audio_port_handle_t portId2;
+    bool isBitPerfect2 = true;
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output2, &portId2, &isBitPerfect2);
+    EXPECT_FALSE(isBitPerfect2);
+    mManager->releaseOutput(portId2);
+
+    audio_mixer_attributes_t readBack;
+    EXPECT_EQ(NO_ERROR, mManager->getPreferredMixerAttributes(
+            &sAutoMediaAttr, mUsbPortId, &readBack));
+    EXPECT_EQ(AUDIO_MIXER_BEHAVIOR_BIT_PERFECT, readBack.mixer_behavior);
+    EXPECT_EQ(NO_ERROR, mManager->clearPreferredMixerAttributes(
+            &sAutoMediaAttr, mUsbPortId, manualUid));
+}
+
+// Matrix #16
+TEST_F(AudioPolicyManagerTestAutoBitPerfect, ToggleOffMidSession) {
+    audio_io_handle_t output;
+    audio_port_handle_t portId;
+    ASSERT_NO_FATAL_FAILURE(enrollAndStart(mOrdinaryUid, &output, &portId));
+    mManager->setAutoBitPerfectEnabled(false);
+    // The live session finishes normally and is cleaned on stop.
+    EXPECT_EQ(NO_ERROR, mManager->stopOutput(portId));
+    mManager->releaseOutput(portId);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+    // No new enrollment afterward.
+    bool isBitPerfect = true;
+    requestOutput(mOrdinaryUid, k48000SamplingRate, AUDIO_FORMAT_PCM_16_BIT,
+                  AUDIO_CHANNEL_OUT_STEREO, &output, &portId, &isBitPerfect);
+    EXPECT_FALSE(isBitPerfect);
+    EXPECT_EQ(0u, mManager->countAutoMixerAttrInfos());
+}
+
 class AudioPolicyManagerTestBitPerfect : public AudioPolicyManagerTestBitPerfectBase {
 };
 

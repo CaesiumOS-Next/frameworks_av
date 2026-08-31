@@ -1061,6 +1061,35 @@ protected:
                  std::map<product_strategy_t,
                           sp<PreferredMixerAttributesInfo>>> mPreferredMixerAttrInfos;
 
+        // Mixer attributes selected automatically by the policy for eligible media
+        // clients on USB devices (auto USB bit-perfect). Kept separate from
+        // mPreferredMixerAttrInfos so the public preferred-mixer API can neither
+        // observe nor mutate policy-synthesized state.
+        std::map<audio_port_handle_t,
+                 std::map<product_strategy_t,
+                          sp<PreferredMixerAttributesInfo>>> mAutoMixerAttrInfos;
+        bool mAutoBitPerfectEnabled = false;
+
+        // Resolves the mixer-attributes entry for a device: an app-registered entry
+        // always wins; the auto store is consulted only when the device has no
+        // manual registration at all.
+        sp<PreferredMixerAttributesInfo> getMixerAttributesInfoForDevice(
+                audio_port_handle_t devicePortId, product_strategy_t strategy,
+                bool activeBitPerfectPreferred = false);
+        sp<PreferredMixerAttributesInfo> buildAutoBitPerfectCandidate(
+                const audio_attributes_t& attr, const sp<DeviceDescriptor>& device,
+                uid_t uid, const audio_config_t* config, audio_output_flags_t flags);
+        void eraseAutoMixerAttrInfo(audio_port_handle_t devicePortId,
+                                    const sp<PreferredMixerAttributesInfo>& info);
+
+public:
+        // Prototype toggle for automatic USB bit-perfect selection; also enabled by
+        // the persist.audio.usb.auto_bit_perfect system property.
+        void setAutoBitPerfectEnabled(bool enabled) { mAutoBitPerfectEnabled = enabled; }
+        size_t countAutoMixerAttrInfos() const;
+
+protected:
+
         // Support for Multi-Stream Decoder (MSD) module
         sp<DeviceDescriptor> getMsdAudioInDevice() const;
         DeviceVector getMsdAudioOutDevices() const;

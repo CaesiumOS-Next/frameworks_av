@@ -46,6 +46,11 @@ public:
     void decreaseActiveClient() { mActiveClientsCount--; }
     void resetActiveClient() { mActiveClientsCount = 0; }
 
+    // Marks an entry that was synthesized by the policy for automatic USB
+    // bit-perfect selection rather than registered through the public API.
+    void markAutoSelected() { mIsAutoSelected = true; }
+    bool isAutoSelected() const { return mIsAutoSelected; }
+
     bool isBitPerfect() const {
         return (getFlags() & AUDIO_OUTPUT_FLAG_BIT_PERFECT) != AUDIO_OUTPUT_FLAG_NONE;
     }
@@ -65,6 +70,7 @@ private:
     const audio_output_flags_t mOutputFlags;
     const audio_mixer_attributes_t mMixerAttributes;
     int mActiveClientsCount = 0;
+    bool mIsAutoSelected = false;
 };
 
 } // namespace android
