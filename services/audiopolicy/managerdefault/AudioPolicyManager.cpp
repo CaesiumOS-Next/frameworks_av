@@ -55,6 +55,8 @@
 #include <utils/Log.h>
 
 #include "AudioPolicyManager.h"
+
+#include <cutils/properties.h>
 #include "SpatializerHelper.h"
 #include "TypeConverter.h"
 
@@ -278,6 +280,7 @@ status_t AudioPolicyManager::setDeviceConnectionStateInt(const sp<DeviceDescript
 
             // remove preferred mixer configurations
             mPreferredMixerAttrInfos.erase(device->getId());
+            mAutoMixerAttrInfos.erase(device->getId());
 
             } break;
 
@@ -1423,7 +1426,7 @@ status_t AudioPolicyManager::getOutputForAttrInt(
     if (*output == AUDIO_IO_HANDLE_NONE) {
         sp<PreferredMixerAttributesInfo> info = nullptr;
         if (outputDevices.size() == 1) {
-            info = getPreferredMixerAttributesInfo(
+            info = getMixerAttributesInfoForDevice(
                     outputDevices.itemAt(0)->getId(),
                     mEngine->getProductStrategyForAttributes(*resultAttr),
                     true /*activeBitPerfectPreferred*/);
@@ -1458,6 +1461,12 @@ status_t AudioPolicyManager::getOutputForAttrInt(
                 }
             }
         }
+        sp<PreferredMixerAttributesInfo> autoCandidateInfo;
+        if (info == nullptr && outputDevices.size() == 1) {
+            info = buildAutoBitPerfectCandidate(*resultAttr, outputDevices.itemAt(0), uid,
+                                                config, *flags);
+            autoCandidateInfo = info;
+        }
         *output = getOutputForDevices(outputDevices, session, resultAttr, config,
                 flags, isSpatialized, info, resultAttr->flags & AUDIO_FLAG_MUTE_HAPTIC);
         // The client will be active if the client is currently preferred mixer owner and the
@@ -1473,6 +1482,28 @@ status_t AudioPolicyManager::getOutputForAttrInt(
 
         if (*isBitPerfect) {
             *flags = (audio_output_flags_t)(*flags | AUDIO_OUTPUT_FLAG_BIT_PERFECT);
+        }
+        if (autoCandidateInfo != nullptr) {
+            if (*isBitPerfect) {
+                // Two-phase commit: the bit-perfect output opened and matches, so the
+                // candidate becomes the device's auto entry now.
+                mAutoMixerAttrInfos[outputDevices.itemAt(0)->getId()]
+                        [mEngine->getProductStrategyForAttributes(*resultAttr)] =
+                                autoCandidateInfo;
+                sp<SwAudioOutputDescriptor> desc = mOutputs.valueFor(*output);
+                if (desc != nullptr) {
+                    desc->mPreferredAttrInfo = autoCandidateInfo;
+                }
+            } else {
+                // The bit-perfect open failed or the configuration did not match:
+                // discard the candidate (nothing was stored) and retry the normal
+                // mixer path within this same request.
+                info = nullptr;
+                *flags = (audio_output_flags_t)(*flags & ~AUDIO_OUTPUT_FLAG_BIT_PERFECT);
+                *output = getOutputForDevices(outputDevices, session, resultAttr, config,
+                        flags, isSpatialized, nullptr,
+                        resultAttr->flags & AUDIO_FLAG_MUTE_HAPTIC);
+            }
         }
     }
     if (*output == AUDIO_IO_HANDLE_NONE) {
@@ -2403,7 +2434,7 @@ status_t AudioPolicyManager::startOutput(audio_port_handle_t portId)
     // If the client is the first one active on preferred mixer parameters, reopen the output
     // if the current mixer parameters doesn't match the preferred one.
     if (outputDesc->devices().size() == 1) {
-        sp<PreferredMixerAttributesInfo> info = getPreferredMixerAttributesInfo(
+        sp<PreferredMixerAttributesInfo> info = getMixerAttributesInfoForDevice(
                 outputDesc->devices()[0]->getId(), client->strategy());
         if (info != nullptr && info->getUid() == client->uid()) {
             if (info->getActiveClientCount() == 0 && !outputDesc->isConfigurationMatched(
@@ -2755,7 +2786,7 @@ status_t AudioPolicyManager::stopOutput(audio_port_handle_t portId)
     }
 
     if (outputDesc->devices().size() == 1) {
-        sp<PreferredMixerAttributesInfo> info = getPreferredMixerAttributesInfo(
+        sp<PreferredMixerAttributesInfo> info = getMixerAttributesInfoForDevice(
                 outputDesc->devices()[0]->getId(), client->strategy());
         bool outputReopened = false;
         if (info != nullptr && info->getUid() == client->uid()) {
@@ -2763,6 +2794,11 @@ status_t AudioPolicyManager::stopOutput(audio_port_handle_t portId)
             if (info->getActiveClientCount() == 0) {
                 reopenOutput(outputDesc, nullptr /*config*/, AUDIO_OUTPUT_FLAG_NONE, __func__);
                 outputReopened = true;
+                if (info->isAutoSelected()) {
+                    // Auto entries do not persist across silence; the next eligible
+                    // client re-enrolls at its own configuration.
+                    eraseAutoMixerAttrInfo(outputDesc->devices()[0]->getId(), info);
+                }
             }
         }
         if (com::android::media::audioserver::
@@ -2918,6 +2954,14 @@ bool AudioPolicyManager::releaseOutput(audio_port_handle_t portId)
     }
 
     outputDesc->removeClient(portId);
+    if (client != nullptr && outputDesc->devices().size() == 1) {
+        sp<PreferredMixerAttributesInfo> info = getMixerAttributesInfoForDevice(
+                outputDesc->devices()[0]->getId(), client->strategy());
+        if (info != nullptr && info->isAutoSelected() && info->getUid() == client->uid() &&
+                info->getActiveClientCount() == 0) {
+            eraseAutoMixerAttrInfo(outputDesc->devices()[0]->getId(), info);
+        }
+    }
     if (outputDesc->mPendingReopenToQueryProfiles && outputDesc->getClientCount() == 0) {
         // The output is pending reopened to query dynamic profiles and
         // there is no active clients
@@ -4784,6 +4828,14 @@ void AudioPolicyManager::dump(String8 *dst) const
             preferredMixerInfoIt.second->dump(dst);
         }
     }
+    dst->appendFormat(" Auto (policy-selected) mixer audio configuration:\n");
+    for (const auto& it : mAutoMixerAttrInfos) {
+        dst->appendFormat("   - device port id: %d\n", it.first);
+        for (const auto& autoMixerInfoIt : it.second) {
+            dst->appendFormat("     - AUTO strategy: %d; ", autoMixerInfoIt.first);
+            autoMixerInfoIt.second->dump(dst);
+        }
+    }
 
     dst->appendFormat("\nPolicy Engine dump:\n");
     mEngine->dump(dst);
@@ -4973,7 +5025,7 @@ audio_direct_mode_t AudioPolicyManager::getDirectPlaybackSupport(const audio_att
     DeviceVector engineOutputDevices = mEngine->getOutputDevicesForAttributes(*attr);
     if (std::any_of(engineOutputDevices.begin(), engineOutputDevices.end(),
             [this, attr](sp<DeviceDescriptor> device) {
-                    return getPreferredMixerAttributesInfo(
+                    return getMixerAttributesInfoForDevice(
                             device->getId(),
                             mEngine->getProductStrategyForAttributes(*attr),
                             true /*activeBitPerfectPreferred*/) != nullptr;
@@ -5183,6 +5235,141 @@ sp<PreferredMixerAttributesInfo> AudioPolicyManager::getPreferredMixerAttributes
     auto strategyMatchedMixerAttrInfoIt = it->second.find(strategy);
     return strategyMatchedMixerAttrInfoIt == it->second.end()
             ? nullptr : strategyMatchedMixerAttrInfoIt->second;
+}
+
+sp<PreferredMixerAttributesInfo> AudioPolicyManager::getMixerAttributesInfoForDevice(
+        audio_port_handle_t devicePortId,
+        product_strategy_t strategy,
+        bool activeBitPerfectPreferred) {
+    // A manual (public-API) registration for the device always wins; the auto store
+    // applies only when the device has no manual entry at all.
+    if (mPreferredMixerAttrInfos.count(devicePortId) != 0) {
+        return getPreferredMixerAttributesInfo(devicePortId, strategy,
+                                               activeBitPerfectPreferred);
+    }
+    auto it = mAutoMixerAttrInfos.find(devicePortId);
+    if (it == mAutoMixerAttrInfos.end()) {
+        return nullptr;
+    }
+    if (activeBitPerfectPreferred) {
+        for (const auto& [str, info] : it->second) {
+            if (info->isBitPerfect() && info->getActiveClientCount() != 0) {
+                return info;
+            }
+        }
+    }
+    auto strategyIt = it->second.find(strategy);
+    return strategyIt == it->second.end() ? nullptr : strategyIt->second;
+}
+
+sp<PreferredMixerAttributesInfo> AudioPolicyManager::buildAutoBitPerfectCandidate(
+        const audio_attributes_t& attr,
+        const sp<DeviceDescriptor>& device,
+        uid_t uid,
+        const audio_config_t* config,
+        audio_output_flags_t flags) {
+    if (!mAutoBitPerfectEnabled &&
+            !property_get_bool("persist.audio.usb.auto_bit_perfect", false)) {
+        return nullptr;
+    }
+    if (attr.usage != AUDIO_USAGE_MEDIA) {
+        return nullptr;
+    }
+    if ((flags & (AUDIO_OUTPUT_FLAG_DIRECT | AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD |
+                  AUDIO_OUTPUT_FLAG_HW_AV_SYNC | AUDIO_OUTPUT_FLAG_MMAP_NOIRQ |
+                  AUDIO_OUTPUT_FLAG_FAST | AUDIO_OUTPUT_FLAG_RAW |
+                  AUDIO_OUTPUT_FLAG_INCALL_MUSIC)) != AUDIO_OUTPUT_FLAG_NONE) {
+        return nullptr;
+    }
+    if (!audio_is_usb_out_device(device->type())) {
+        return nullptr;
+    }
+    // Integer linear PCM only: converting float and calling it bit-perfect is out of
+    // scope by design.
+    if (!audio_is_linear_pcm(config->format) || config->format == AUDIO_FORMAT_PCM_FLOAT) {
+        return nullptr;
+    }
+    if (audio_channel_count_from_out_mask(config->channel_mask) != 2) {
+        return nullptr;
+    }
+    if (mEngine->getPhoneState() != AUDIO_MODE_NORMAL) {
+        return nullptr;
+    }
+    for (audio_usage_t usage : gHighPriorityUseCases) {
+        if (mOutputs.isUsageActiveOnDevice(usage, device)) {
+            return nullptr;
+        }
+    }
+    if (mPreferredMixerAttrInfos.count(device->getId()) != 0) {
+        return nullptr;
+    }
+
+    audio_output_flags_t bpFlags =
+            (audio_output_flags_t)(flags | AUDIO_OUTPUT_FLAG_BIT_PERFECT);
+    sp<IOProfile> profile = nullptr;
+    DeviceVector devices(device);
+    for (const auto& hwModule : mHwModules) {
+        for (const auto& curProfile : hwModule->getOutputProfiles()) {
+            if (curProfile->hasDynamicAudioProfile()
+                    && curProfile->getCompatibilityScore(
+                            devices,
+                            config->sample_rate,
+                            nullptr /*updatedSamplingRate*/,
+                            config->format,
+                            nullptr /*updatedFormat*/,
+                            config->channel_mask,
+                            nullptr /*updatedChannelMask*/,
+                            bpFlags)
+                            != IOProfile::NO_MATCH) {
+                profile = curProfile;
+                break;
+            }
+        }
+        if (profile != nullptr) {
+            break;
+        }
+    }
+    if (profile == nullptr) {
+        return nullptr;
+    }
+
+    audio_mixer_attributes_t mixerAttr{};
+    mixerAttr.config.sample_rate = config->sample_rate;
+    mixerAttr.config.channel_mask = config->channel_mask;
+    mixerAttr.config.format = config->format;
+    mixerAttr.mixer_behavior = AUDIO_MIXER_BEHAVIOR_BIT_PERFECT;
+    auto info = sp<PreferredMixerAttributesInfo>::make(
+            uid, device->getId(), profile, bpFlags, mixerAttr);
+    info->markAutoSelected();
+    ALOGD("%s: auto bit-perfect candidate uid=%d rate=%u format=%#x device port %d",
+          __func__, uid, config->sample_rate, config->format, device->getId());
+    return info;
+}
+
+void AudioPolicyManager::eraseAutoMixerAttrInfo(
+        audio_port_handle_t devicePortId, const sp<PreferredMixerAttributesInfo>& info) {
+    auto it = mAutoMixerAttrInfos.find(devicePortId);
+    if (it == mAutoMixerAttrInfos.end()) {
+        return;
+    }
+    for (auto strategyIt = it->second.begin(); strategyIt != it->second.end();) {
+        if (strategyIt->second == info) {
+            strategyIt = it->second.erase(strategyIt);
+        } else {
+            ++strategyIt;
+        }
+    }
+    if (it->second.empty()) {
+        mAutoMixerAttrInfos.erase(it);
+    }
+}
+
+size_t AudioPolicyManager::countAutoMixerAttrInfos() const {
+    size_t count = 0;
+    for (const auto& it : mAutoMixerAttrInfos) {
+        count += it.second.size();
+    }
+    return count;
 }
 
 status_t AudioPolicyManager::getPreferredMixerAttributes(
