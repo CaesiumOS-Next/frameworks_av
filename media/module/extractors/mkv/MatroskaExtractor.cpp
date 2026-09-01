@@ -177,6 +177,7 @@ private:
 
     status_t setWebmBlockCryptoInfo(MediaBufferHelper *mbuf);
     media_status_t readBlock();
+    void setHdr10PlusInfo(const mkvparser::Block *block, AMediaFormat *meta);
     void clearPendingFrames();
 
     MatroskaSource(const MatroskaSource &);
@@ -778,6 +779,43 @@ status_t MatroskaSource::setWebmBlockCryptoInfo(MediaBufferHelper *mbuf) {
     return OK;
 }
 
+// BlockAddID value denoting ITU-T T.35 metadata in the WebM Container Guideline.
+// AMEDIAFORMAT_KEY_HDR10_PLUS_INFO is __INTRODUCED_IN(31); this module builds
+// against an older min_sdk, so use its literal value (see NdkMediaFormat.cpp).
+static const char *kMediaFormatKeyHdr10PlusInfo = "hdr10-plus-info";
+
+static const long long kBlockAddIdItuT35 = 4;
+
+// ITU-T T.35 header identifying an HDR10+ payload: country code 0xB5,
+// terminal provider code 0x003C, oriented code 0x0001, application id 4.
+static bool isHdr10PlusPayload(const unsigned char *p, long size) {
+    return size >= 7 && p[0] == 0xB5 && p[1] == 0x00 && p[2] == 0x3C &&
+           p[3] == 0x00 && p[4] == 0x01 && p[5] == 0x04;
+}
+
+void MatroskaSource::setHdr10PlusInfo(
+        const mkvparser::Block *block, AMediaFormat *meta) {
+    if (block == NULL || meta == NULL) {
+        return;
+    }
+    const long count = block->GetAdditionCount();
+    for (long i = 0; i < count; ++i) {
+        const mkvparser::Block::Addition *addition = block->GetAddition(i);
+        if (addition == NULL || addition->data == NULL || addition->len <= 0) {
+            continue;
+        }
+        if (addition->id != kBlockAddIdItuT35) {
+            continue;
+        }
+        if (!isHdr10PlusPayload(addition->data, addition->len)) {
+            continue;
+        }
+        AMediaFormat_setBuffer(meta, kMediaFormatKeyHdr10PlusInfo,
+                               addition->data, addition->len);
+        return;
+    }
+}
+
 media_status_t MatroskaSource::readBlock() {
     CHECK(mPendingFrames.empty());
 
@@ -815,6 +853,13 @@ media_status_t MatroskaSource::readBlock() {
         AMediaFormat *meta = mbuf->meta_data();
         AMediaFormat_setInt64(meta, AMEDIAFORMAT_KEY_TIME_US, timeUs);
         AMediaFormat_setInt32(meta, AMEDIAFORMAT_KEY_IS_SYNC_FRAME, block->IsKey());
+
+        // HDR10+ (SMPTE ST 2094-40) dynamic metadata for VP9 is carried in the
+        // WebM container rather than in the bitstream, as BlockAdditional data
+        // under BlockAddID 4 (ITU-T T.35). See HDR10+ Technical Specification
+        // Part 1 section 3.4.3 and the WebM Container Guideline. Surface it per
+        // sample so the decoder can attach it to the matching output frame.
+        setHdr10PlusInfo(block, meta);
 
         if (mType == VORBIS) {
             int32_t sampleRate;
@@ -2382,7 +2427,7 @@ ExtractorDef GETEXTRACTORDEF() {
     return {
         EXTRACTORDEF_VERSION,
         UUID("abbedd92-38c4-4904-a4c1-b3f45f899980"),
-        1,
+        2,  // bumped: emits container-carried HDR10+ (ST 2094-40) per sample
         "Matroska Extractor",
         {
             .v3 = {
