@@ -1117,6 +1117,21 @@ bool NuPlayer::Decoder::onInputBufferFetched(const sp<AMessage> &msg) {
         uint32_t flags = 0;
         CHECK(buffer->meta()->findInt64("timeUs", &timeUs));
 
+        // Container-carried HDR10+ (ST 2094-40) applies to the access unit that
+        // follows, so it must be set on the codec before this buffer is queued.
+        // This is the same ingress the NDK/CTS use (AMEDIACODEC_KEY_HDR10_PLUS_INFO).
+        sp<ABuffer> hdr10PlusInfo;
+        if (buffer->meta()->findBuffer("hdr10-plus-info", &hdr10PlusInfo)
+                && hdr10PlusInfo != NULL && hdr10PlusInfo->size() > 0) {
+            sp<AMessage> params = new AMessage();
+            params->setBuffer("hdr10-plus-info", hdr10PlusInfo);
+            status_t err = mCodec->setParameters(params);
+            if (err != OK) {
+                ALOGW("[%s] failed to set hdr10-plus-info (err %d)",
+                        mComponentName.c_str(), err);
+            }
+        }
+
         int32_t eos, csd, cvo;
         // we do not expect SYNCFRAME for decoder
         if (buffer->meta()->findInt32("eos", &eos) && eos) {
