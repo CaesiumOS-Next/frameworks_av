@@ -1273,6 +1273,17 @@ sp<ABuffer> NuPlayer::GenericSource::mediaBufferToABuffer(
         meta->setBuffer("sei", sei);
     }
 
+    // HDR10+ dynamic metadata carried by the container (VP9 in WebM) rather
+    // than the bitstream. Forwarded per access unit so the decoder can be told
+    // about it before the matching frame is queued.
+    const void *hdr10PlusData;
+    size_t hdr10PlusLength;
+    if (mb->meta_data().findData(
+            kKeyHdr10PlusInfo, &dataType, &hdr10PlusData, &hdr10PlusLength)) {
+        sp<ABuffer> hdr10Plus = ABuffer::CreateAsCopy(hdr10PlusData, hdr10PlusLength);
+        meta->setBuffer("hdr10-plus-info", hdr10Plus);
+    }
+
     const void *mpegUserDataPointer;
     size_t mpegUserDataLength;
     if (mb->meta_data().findData(
