@@ -18,6 +18,7 @@
 #include "hidl/HidlSupport.h"
 #define LOG_TAG "MediaCodec"
 #define ATRACE_TAG  ATRACE_TAG_VIDEO
+#include <android-base/properties.h>
 #include <utils/Log.h>
 #include <utils/Trace.h>
 
@@ -5748,6 +5749,7 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
             }
 
             bool forceSync = false;
+            sp<Surface> preShutdownSurface = mSurface;
             if (asyncNotify != nullptr && mSurface != NULL) {
                 if (android::media::codec::provider_->null_output_surface_support()) {
                     if (handleSetSurface(getOrCreateDetachedSurface(), true /* callCodec */,
@@ -5800,8 +5802,11 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
             returnBuffersToCodec(reclaimed);
 
-            if (mSoftRenderer != NULL && (mFlags & kFlagPushBlankBuffersOnShutdown)) {
-                pushBlankBuffersToNativeWindow(mSurface.get());
+            bool forcePushBlank = preShutdownSurface.get() && ::android::base::GetBoolProperty(
+                    "debug.stagefright.flush-blank-on-shutdown", false);
+            if ((mSoftRenderer != NULL && (mFlags & kFlagPushBlankBuffersOnShutdown))
+                    || forcePushBlank) {
+                pushBlankBuffersToNativeWindow(preShutdownSurface.get());
             }
 
             if (asyncNotify != nullptr) {
