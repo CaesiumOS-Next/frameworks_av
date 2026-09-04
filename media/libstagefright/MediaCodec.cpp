@@ -18,6 +18,7 @@
 #include "hidl/HidlSupport.h"
 #define LOG_TAG "MediaCodec"
 #define ATRACE_TAG  ATRACE_TAG_VIDEO
+#include <android-base/properties.h>
 #include <utils/Log.h>
 #include <utils/Trace.h>
 
@@ -5800,7 +5801,10 @@ void MediaCodec::onMessageReceived(const sp<AMessage> &msg) {
 
             returnBuffersToCodec(reclaimed);
 
-            if (mSoftRenderer != NULL && (mFlags & kFlagPushBlankBuffersOnShutdown)) {
+            bool forcePushBlank = mSurface.get() && ::android::base::GetBoolProperty(
+                    "debug.stagefright.flush-blank-on-shutdown", false);
+            if ((mSoftRenderer != NULL && (mFlags & kFlagPushBlankBuffersOnShutdown))
+                    || forcePushBlank) {
                 pushBlankBuffersToNativeWindow(mSurface.get());
             }
 
