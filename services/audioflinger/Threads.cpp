@@ -6918,7 +6918,13 @@ void DirectOutputThread::processVolume_l(IAfTrack* track, bool lastTrack)
                 uint32_t vl = (uint32_t)(left * (1 << 24));
                 uint32_t vr = (uint32_t)(right * (1 << 24));
                 // Direct/Offload effect chains set output volume in setVolume().
-                (void)mEffectChains[0]->setVolume(&vl, &vr);
+                const size_t numChains = mEffectChains.size();
+                (void)mEffectChains[0]->setVolume(&vl, &vr, false /* force */,
+                                                 /* sendToHal */ numChains == 1);
+                for (size_t i = 1; i < numChains; i++) {
+                    (void)mEffectChains[i]->setVolume(&vl, &vr, false /* force */,
+                                                      /* sendToHal */ i == numChains - 1);
+                }
             } else {
                 // otherwise we directly set the volume.
                 setVolumeForOutput_l(left, right);
