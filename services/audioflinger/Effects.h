@@ -502,8 +502,10 @@ public:
     std::vector<int> getEffectIds_l() const final REQUIRES(audio_utils::ThreadBase_Mutex);
     // FIXME use float to improve the dynamic range
 
+    // MIUI MODIFY: Audio_VolumeCacheOnAllEffectChains, added sendToHal
     bool setVolume(uint32_t* left, uint32_t* right,
-                   bool force = false) final EXCLUDES_EffectChain_Mutex;
+                   bool force = false,
+                   bool sendToHal = true) final EXCLUDES_EffectChain_Mutex;
     void resetVolume_l() final REQUIRES(audio_utils::EffectChain_Mutex);
     void setDevices_l(const AudioDeviceTypeAddrVector& devices) final
             REQUIRES(audio_utils::ThreadBase_Mutex) EXCLUDES_EffectChain_Mutex;
@@ -615,7 +617,9 @@ public:
     void setThread(const sp<IAfThreadBase>& thread) final EXCLUDES_EffectChain_Mutex;
 
   private:
-    bool setVolume_l(uint32_t* left, uint32_t* right, bool force = false)
+    // MIUI MODIFY: Audio_VolumeCacheOnAllEffectChains, added sendToHal
+    bool setVolume_l(uint32_t* left, uint32_t* right, bool force = false,
+                     bool sendToHal = true)
             REQUIRES(audio_utils::EffectChain_Mutex);
 
     // For transaction consistency, please consider holding the EffectChain lock before

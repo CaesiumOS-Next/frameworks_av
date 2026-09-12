@@ -6918,7 +6918,30 @@ void DirectOutputThread::processVolume_l(IAfTrack* track, bool lastTrack)
                 uint32_t vl = (uint32_t)(left * (1 << 24));
                 uint32_t vr = (uint32_t)(right * (1 << 24));
                 // Direct/Offload effect chains set output volume in setVolume().
-                (void)mEffectChains[0]->setVolume(&vl, &vr);
+                // MIUI MODIFY: Audio_VolumeCacheOnAllEffectChains
+                // Only the last chain forwards the volume to the HAL, see the
+                // loop below.
+                const size_t numChains = mEffectChains.size();
+                (void)mEffectChains[0]->setVolume(&vl, &vr, false /* force */,
+                                                 /* sendToHal */ numChains == 1);
+                // END Audio_VolumeCacheOnAllEffectChains
+                // MIUI ADD: Audio_VolumeCacheOnAllEffectChains
+                // A direct/offload thread can host more than one chain: the track
+                // session chain plus the global AUDIO_SESSION_OUTPUT_MIX chain
+                // (MiSound/Dolby). addEffectChain_l() inserts non-global chains at
+                // the HEAD of the list, so the global chain stops being
+                // mEffectChains[0] once a track chain appears and its cached volume
+                // freezes - at 0 if the track was still ramping up from silence.
+                // A later resetVolume_l() replays that stale 0 to the HAL and
+                // playback goes silent. Feed every chain so no cache goes stale.
+                // vl/vr are threaded through so that volume already consumed by an
+                // earlier chain is accounted for, and only the last chain pushes the
+                // resulting value to the HAL.
+                for (size_t i = 1; i < numChains; i++) {
+                    (void)mEffectChains[i]->setVolume(&vl, &vr, false /* force */,
+                                                      /* sendToHal */ i == numChains - 1);
+                }
+                // END Audio_VolumeCacheOnAllEffectChains
             } else {
                 // otherwise we directly set the volume.
                 setVolumeForOutput_l(left, right);

@@ -2671,13 +2671,13 @@ bool EffectChain::hasVolumeControlEnabled_l() const {
 }
 
 // setVolume() must be called without EffectChain::mutex()
-bool EffectChain::setVolume(uint32_t* left, uint32_t* right, bool force) {
+bool EffectChain::setVolume(uint32_t* left, uint32_t* right, bool force, bool sendToHal) {
     audio_utils::lock_guard _l(mutex());
-    return setVolume_l(left, right, force);
+    return setVolume_l(left, right, force, sendToHal);
 }
 
 // setVolume_l() must be called with EffectChain::mutex() held
-bool EffectChain::setVolume_l(uint32_t* left, uint32_t* right, bool force) {
+bool EffectChain::setVolume_l(uint32_t* left, uint32_t* right, bool force, bool sendToHal) {
     uint32_t newLeft = *left;
     uint32_t newRight = *right;
     const size_t size = mEffects.size();
@@ -2753,7 +2753,15 @@ bool EffectChain::setVolume_l(uint32_t* left, uint32_t* right, bool force) {
     *left = newLeft;
     *right = newRight;
 
-    setVolumeForOutput_l(*left, *right);
+    // MIUI MODIFY: Audio_VolumeCacheOnAllEffectChains
+    // A direct/offload thread may hold several chains and each of them used to
+    // push the volume to the HAL, doubling pal_stream_set_volume() calls for
+    // identical values. The caller designates a single chain as the one that
+    // owns the HAL volume; the others only refresh their own cache.
+    if (sendToHal) {
+        setVolumeForOutput_l(*left, *right);
+    }
+    // END Audio_VolumeCacheOnAllEffectChains
 
     return volumeControlIndex.has_value();
 }
