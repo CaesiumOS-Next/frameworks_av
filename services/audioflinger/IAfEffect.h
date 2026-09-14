@@ -261,7 +261,8 @@ public:
             REQUIRES(audio_utils::ThreadBase_Mutex) EXCLUDES_EffectChain_Mutex = 0;
     virtual std::vector<int> getEffectIds_l() const = 0;
     virtual bool setVolume(uint32_t* left, uint32_t* right,
-                           bool force = false) EXCLUDES_EffectChain_Mutex = 0;
+                           bool force = false,
+                           bool sendToHal = true) EXCLUDES_EffectChain_Mutex = 0;
     virtual void resetVolume_l() REQUIRES(audio_utils::EffectChain_Mutex) = 0;
     virtual void setDevices_l(const AudioDeviceTypeAddrVector& devices)
             REQUIRES(audio_utils::ThreadBase_Mutex) EXCLUDES_EffectChain_Mutex = 0;

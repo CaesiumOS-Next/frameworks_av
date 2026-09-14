@@ -1805,6 +1805,7 @@ protected:
                        audio_io_handle_t id, ThreadBase::type_t type, bool systemReady,
                        const audio_offload_info_t& offloadInfo);
     void processVolume_l(IAfTrack *track, bool lastTrack) REQUIRES(mutex());
+    void refreshRemainingChainVolumes_l(uint32_t* vl, uint32_t* vr) REQUIRES(mutex());
     bool isTunerStream() const { return (mOffloadInfo.content_id > 0); }
 
     // prepareTracks_l() tells threadLoop_mix() the name of the single active track
