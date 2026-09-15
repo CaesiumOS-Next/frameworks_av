@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95586a6a_a4d7c2aa",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2026-09-15T11:14:49Z",
+      "side": 1,
+      "message": "What happens if the RTSP stream exclusively provides its sps/pps via SDP and never sent them in band?",
+      "range": {
+        "startLine": 354,
+        "startChar": 4,
+        "endLine": 354,
+        "endChar": 42
+      },
+      "revId": "57fbb9c5ffa6767c6245c884ce4c1c1754301537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1f7b5b_baa16999",
+        "filename": "media/libstagefright/rtsp/ARTPSource.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2026-09-15T11:14:49Z",
+      "side": 1,
+      "message": "Seems like a reasonable note. Does this need to be addressed?\n\nFrom AI Agent:\n\nSince mIssueFIRByAssembler was also enabled for H.265 and H.263, do AHEVCAssembler and AH263Assembler suffer from the exact same FIR flooding issue if they start receiving P-frames before an in-band VPS/SPS? Please verify if a similar check is needed in those assemblers to prevent them from flooding the server.",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 36
+      },
+      "revId": "57fbb9c5ffa6767c6245c884ce4c1c1754301537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
