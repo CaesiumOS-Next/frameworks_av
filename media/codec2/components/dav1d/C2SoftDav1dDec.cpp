@@ -1060,6 +1060,13 @@ bool C2SoftDav1dDec::outputBuffer(const std::shared_ptr<C2BlockPool>& pool,
         return false;
     }
 
+    // Scope the write view so the CPU mapping is released (gralloc unlock +
+    // release-fence wait) before the block is handed to finishWork(). Without
+    // this the consumer can acquire the buffer while the write mapping is still
+    // outstanding and sample a partially updated frame.
+    // NOTE: the body below is deliberately left un-reindented so that this stays a
+    // whitespace-free diff; it is a pure scope change.
+    {
     C2GraphicView wView = block->map().get();
 
     if (wView.error()) {
@@ -1190,6 +1197,7 @@ bool C2SoftDav1dDec::outputBuffer(const std::shared_ptr<C2BlockPool>& pool,
         convertPlanar8ToYV12(dstY, dstU, dstV, srcY, srcU, srcV, srcYStride, srcUStride, srcVStride,
                              dstYStride, dstUStride, dstVStride, mWidth, mHeight, isMonochrome,
                              convFormat);
+    }
     }
 
     finishWork(out_frameIndex, work, std::move(block), img);

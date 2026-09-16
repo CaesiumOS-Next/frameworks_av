@@ -1352,6 +1352,12 @@ private:
     std::shared_ptr<_C2BlockPoolData> mPoolData;
 };
 
+// Upper bound for waiting on the release fence returned by
+// C2GraphicAllocation::unmap(). The fence tracks a gralloc-internal blit, so it is
+// expected to signal in well under a frame time; the timeout only guards against a
+// wedged gralloc/GPU and must not be long enough to stall the codec pipeline.
+static constexpr c2_nsecs_t kUnmapFenceTimeoutNs = 100 * 1000 * 1000;  // 100ms
+
 class C2_HIDE _C2MappingBlock2DImpl
     : public _C2Block2DImpl, public std::enable_shared_from_this<_C2MappingBlock2DImpl> {
 public:
@@ -1416,7 +1422,16 @@ public:
     public:
         ~Mapped() {
             if (mData[0] != nullptr) {
-                mImpl->getAllocation()->unmap(mData, mImpl->crop(), nullptr);
+                // Ask the allocation for the release fence and wait for it before the
+                // mapping is torn down. Gralloc implementations that defer a
+                // pitch-linear -> block-linear blit to unlock() only signal this fence
+                // once the blit has landed; passing nullptr here dropped it, so the
+                // consumer could sample a partially updated buffer.
+                // A null/absent fence signals immediately, so this is a no-op on
+                // gralloc that does not return an unlock fence.
+                C2Fence releaseFence;
+                mImpl->getAllocation()->unmap(mData, mImpl->crop(), &releaseFence);
+                (void)releaseFence.wait(kUnmapFenceTimeoutNs);
             }
         }
 
