@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cfb87f3_d9ad98b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2026-09-16T06:31:42Z",
+      "side": 1,
+      "message": "Please",
+      "revId": "d32097b360003705adf048daffccd2fd3780af83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2dce1fb_a1dcb5d5",
+        "filename": "media/module/mpeg2ts/ESQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2026-09-16T06:31:42Z",
+      "side": 1,
+      "message": "should this be `ALOGV` too?\n\nIt seems arguably pointless to downgrade logs after this one, without downgrading this one, assuming we have got this far in \u0027random\u0027 audio data that isn\u0027t trying to be an AC3 header at all?",
+      "fixSuggestions": [
+        {
+          "fixId": "7dcef3bc_5cbaf81a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/module/mpeg2ts/ESQueue.cpp",
+              "range": {
+                "startLine": 159,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "        ALOGV(\"Incorrect fscod in AC3 header\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d32097b360003705adf048daffccd2fd3780af83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
