@@ -911,6 +911,11 @@ status_t PatchPanel::getDownstreamSoftwarePatches(
 void PatchPanel::notifyStreamOpened(
         AudioHwDevice *audioHwDevice, audio_io_handle_t stream, struct audio_patch *patch)
 {
+    // The downstream patch may not have been created yet. Define the output contract so callers
+    // never retain or serialize stale data when no software patch is currently available.
+    if (patch != nullptr) {
+        *patch = {};
+    }
     if (audioHwDevice->isInsert()) {
         mInsertedModules[audioHwDevice->handle()].streams.insert(stream);
         if (patch != nullptr) {

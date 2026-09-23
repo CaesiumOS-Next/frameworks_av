@@ -3157,7 +3157,10 @@ sp<IAfThreadBase> AudioFlinger::openOutput_l(audio_module_handle_t module,
                       *output, thread.get());
             }
             mPlaybackThreads.add(*output, thread);
-            struct audio_patch patch;
+            // notifyStreamOpened() may not find a downstream software patch yet. Keep the
+            // descriptor empty in that case instead of copying uninitialized stack data into
+            // an inserted-module thread and later parceling it in ioConfigChanged().
+            struct audio_patch patch = {};
             mPatchPanel->notifyStreamOpened(outHwDev, *output, &patch);
             if (thread->isMsdDevice()) {
                 thread->setDownStreamPatch(&patch);
