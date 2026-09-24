@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a62cf1_c5e63f36",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 4940726
+      },
+      "writtenOn": "2026-09-24T09:41:52Z",
+      "side": 1,
+      "message": "if RTSPstream provides SPS exclusively via SDP which is handled in below gerrit.\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/4156247",
+      "parentUuid": "95586a6a_a4d7c2aa",
+      "range": {
+        "startLine": 354,
+        "startChar": 4,
+        "endLine": 354,
+        "endChar": 42
+      },
+      "revId": "57fbb9c5ffa6767c6245c884ce4c1c1754301537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa1f7b5b_baa16999",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-15T11:14:49Z",
       "side": 1,
       "message": "Seems like a reasonable note. Does this need to be addressed?\n\nFrom AI Agent:\n\nSince mIssueFIRByAssembler was also enabled for H.265 and H.263, do AHEVCAssembler and AH263Assembler suffer from the exact same FIR flooding issue if they start receiving P-frames before an in-band VPS/SPS? Please verify if a similar check is needed in those assemblers to prevent them from flooding the server.",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 36
+      },
+      "revId": "57fbb9c5ffa6767c6245c884ce4c1c1754301537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a68bf7b_93fee0b0",
+        "filename": "media/libstagefright/rtsp/ARTPSource.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4940726
+      },
+      "writtenOn": "2026-09-24T09:41:52Z",
+      "side": 1,
+      "message": "AHEVCAssembler has the same flooding issue — its addSingleNALUnit calls onIssueFIRByAssembler() unconditionally without the !hasNoSps guard, so FIR fires on every incoming packet (rate-limited to 1/sec) before any in-band SPS/VPS arrives.\n\nSimilar check is added for AHEVCAssembler\nBug: 425785365\nTest: Manual test of VT call scenario on target device.\nFlag: EXEMPT BUGFIX\nChange-Id: I6d2c21e6b37c64a08f252333146df8fb3b40791a\n\nAH263Assembler is not affected — it has no SPS-based drop/FIR logic; its only FIR path is through the MALFORMED_PACKET return in assembleMore, not per-frame.",
+      "parentUuid": "aa1f7b5b_baa16999",
       "range": {
         "startLine": 92,
         "startChar": 8,
