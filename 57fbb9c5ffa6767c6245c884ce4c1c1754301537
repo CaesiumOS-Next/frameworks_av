@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e12c81b_89473599",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1969225
+      },
+      "writtenOn": "2026-09-28T14:10:45Z",
+      "side": 1,
+      "message": "The nested logic here can be simplified by handling the hasNoSps case with an early return, which avoids the extra level of indentation for the subsequent FIR request logic.\n\nExample:\nif (hasNoSps) {\n    ALOGV(\"Dropping frames until SPS arrived...\");\n    return;\n}\nif (dropFramesUntilIframe(buffer)) {\n    // ... FIR logic ...\n}",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 0
+      },
+      "revId": "57fbb9c5ffa6767c6245c884ce4c1c1754301537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa1f7b5b_baa16999",
         "filename": "media/libstagefright/rtsp/ARTPSource.cpp",
         "patchSetId": 5
