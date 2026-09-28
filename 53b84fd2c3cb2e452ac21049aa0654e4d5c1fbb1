@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3c7e3c_8673bbc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2026-09-28T20:19:42Z",
+      "side": 1,
+      "message": "+jshargo as author. looks like there\u0027s at least one other copy of this code in the tree too.",
+      "revId": "53b84fd2c3cb2e452ac21049aa0654e4d5c1fbb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
