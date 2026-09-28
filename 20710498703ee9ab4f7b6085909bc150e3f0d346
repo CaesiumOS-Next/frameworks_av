@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff471c48_68554d0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2026-09-28T22:43:18Z",
+      "side": 1,
+      "message": "Thanks for the CL! The fix looks reasonable to me. Could you double check if the bug number is the correct one? It shows an unrelated bug for me.",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "20710498703ee9ab4f7b6085909bc150e3f0d346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e627f613_111fa66a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
