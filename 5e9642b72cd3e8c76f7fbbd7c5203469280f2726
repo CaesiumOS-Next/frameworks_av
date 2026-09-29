@@ -16,6 +16,40 @@
       "message": "+ibaker reviewed recent changes to this code...",
       "revId": "5e9642b72cd3e8c76f7fbbd7c5203469280f2726",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb33233_c5987961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2026-09-29T10:50:50Z",
+      "side": 1,
+      "message": "Some of the changes in this commit were already merged internally: ag/40354715\n\nThe C++ `MediaExtractor` implementations are in maintenance mode, and we are generally not investigating non-security issues or merging low-priority stability changes.\n\nThe remaining changes in this commit that aren\u0027t part of ag/40354715 don\u0027t seem to be resolving a security issue, so I\u0027m afraid we don\u0027t plan to merge them (see above).\n\nIf you are encountering issues related to this change from an app, I recommend using media3\u0027s ExoPlayer for media playback rather than `MediaPlayer` and `MediaExtractor`.\n\nIf you believe you are fixing a security issue, please file a bug with more detail so we can evaluate the severity of the issue against the latest version of this code internally.",
+      "revId": "5e9642b72cd3e8c76f7fbbd7c5203469280f2726",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f057fe1e_55a44431",
+        "filename": "media/module/foundation/avc_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2026-09-29T10:50:50Z",
+      "side": 1,
+      "message": "this doesn\u0027t look like it compiles?",
+      "revId": "5e9642b72cd3e8c76f7fbbd7c5203469280f2726",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
