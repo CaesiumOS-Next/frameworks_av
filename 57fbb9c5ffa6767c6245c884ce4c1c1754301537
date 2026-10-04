@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b8c2e1_f7ae9316",
+        "filename": "media/libstagefright/rtsp/AAVCAssembler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 4940726
+      },
+      "writtenOn": "2026-10-04T08:56:22Z",
+      "side": 1,
+      "message": "Addressed the comment",
+      "parentUuid": "6e12c81b_89473599",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 0
+      },
+      "revId": "57fbb9c5ffa6767c6245c884ce4c1c1754301537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa1f7b5b_baa16999",
