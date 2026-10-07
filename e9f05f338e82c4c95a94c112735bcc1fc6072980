@@ -1,0 +1,52 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7747e99_565f0587",
+        "filename": "services/camera/libcameraservice/CameraService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6258,
+      "author": {
+        "id": 1605607
+      },
+      "writtenOn": "2026-10-07T23:27:19Z",
+      "side": 1,
+      "message": "1) Global \u0027Sensors Off\u0027 regression: blockAllClients() is also called by SensorPrivacyPolicy::onSensorPrivacyChanged(TOGGLE_TYPE_UNKNOWN, TOGGLE_SENSOR_UNKNOWN, true), which corresponds to the global Developer Options \u0027Sensors Off\u0027 switch (SensorPrivacyService.setSensorPrivacy(boolean)). Unlike per-sensor camera toggles, global \u0027Sensors Off\u0027 is intentionally a hard block across Android (see validateConnectLocked()) and does NOT call setGlobalRestriction() on AppOpsManager, meaning BasicClient::opChanged() never fires when \u0027Sensors Off\u0027 is toggled on or off. Muting clients here instead of disconnecting them leaves active camera sessions permanently stuck muted when global \u0027Sensors Off\u0027 is subsequently turned off. blockAllClients() should remain an unconditional hard block for global \u0027Sensors Off\u0027, while per-sensor camera toggle state changes in onSensorPrivacyStateChanged() should be handled separately.\n\n2) Proxy camera mute visibility check: basicClient-\u003egetClientUid() returns mClientAttribution.uid (the first UID in the attribution chain). In proxy camera streaming (e.g., CtsSecurityTestCases CameraPermissionTest#testProxyStreaming*_opChanged_softDenial_cameraMute), the proxy service (getClientUid()) runs in the background while the downstream consumer app at the tail of mClientAttribution (AttrSourceItr) is visible in the foreground. Checking getClientUid() causes isUidVisible to evaluate to false and still wrongly disconnects proxy clients instead of muting them. Also note that BasicClient::opChanged() skips muting/blocking when mUidIsTrusted is true.",
+      "range": {
+        "startLine": 6252,
+        "startChar": 0,
+        "endLine": 6258,
+        "endChar": 9999
+      },
+      "isAi": true,
+      "revId": "e9f05f338e82c4c95a94c112735bcc1fc6072980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78478cca_a7f37745",
+        "filename": "services/camera/libcameraservice/CameraService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6280,
+      "author": {
+        "id": 1605607
+      },
+      "writtenOn": "2026-10-07T23:27:19Z",
+      "side": 1,
+      "message": "1) Missing unmute handling across AAOS camera privacy state transitions: When transitioning between ENABLED and ENABLED_EXCEPT_ALLOWLISTED_APPS in onSensorPrivacyStateChanged(), SensorPrivacyService keeps isCombinedToggleSensorPrivacyEnabled(CAMERA) \u003d\u003d true, so AppOpsManager will not fire BasicClient::opChanged() to unmute allowlisted clients that were muted in ENABLED. Any handler for onSensorPrivacyStateChanged() that mutes clients via setCameraMute(true) must also restore setCameraMute(mOverrideCameraMuteMode) for active clients whose effective camera privacy is disabled in the new state (e.g., when transitioning to ENABLED_EXCEPT_ALLOWLISTED_APPS or DISABLED).\n\n2) Incomplete camera privacy check: Calling mSensorPrivacyPolicy-\u003eisCameraPrivacyEnabled(toString16(pkgName)) directly bypasses CameraService::isCameraPrivacyEnabled(...), which additionally accounts for automotive exterior system camera exemptions (isAutomotivePrivilegedClient \u0026\u0026 isAutomotiveExteriorSystemCamera) and android.permission.CAMERA_PRIVACY_ALLOWLIST (hasPermissionsForCameraPrivacyAllowlist). Consider encapsulating the shared per-client visibility/privacy/mute policy on BasicClient so opChanged() and onSensorPrivacyStateChanged() do not diverge.",
+      "range": {
+        "startLine": 6271,
+        "startChar": 0,
+        "endLine": 6280,
+        "endChar": 9999
+      },
+      "isAi": true,
+      "revId": "e9f05f338e82c4c95a94c112735bcc1fc6072980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
