@@ -6249,7 +6249,13 @@ void CameraService::blockAllClients() {
         if (current != nullptr) {
             const auto basicClient = current->getValue();
             if (basicClient.get() != nullptr) {
-                basicClient->block();
+                int32_t procState = getUidProcessState(basicClient->getClientUid());
+                bool isUidVisible = (procState <= ActivityManager::PROCESS_STATE_BOUND_TOP);
+                if (isUidVisible && basicClient->supportsCameraMute()) {
+                    basicClient->setCameraMute(true);
+                } else {
+                    basicClient->block();
+                }
             }
         }
     }
@@ -6265,7 +6271,13 @@ void CameraService::blockPrivacyEnabledClients() {
                 bool cameraPrivacyEnabled =
                         mSensorPrivacyPolicy->isCameraPrivacyEnabled(toString16(pkgName));
                 if (cameraPrivacyEnabled) {
-                    basicClient->block();
+                    int32_t procState = getUidProcessState(basicClient->getClientUid());
+                    bool isUidVisible = (procState <= ActivityManager::PROCESS_STATE_BOUND_TOP);
+                    if (isUidVisible && basicClient->supportsCameraMute()) {
+                        basicClient->setCameraMute(true);
+                    } else {
+                        basicClient->block();
+                    }
                 }
            }
         }
