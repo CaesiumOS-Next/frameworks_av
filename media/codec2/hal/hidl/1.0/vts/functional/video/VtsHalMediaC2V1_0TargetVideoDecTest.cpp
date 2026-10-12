@@ -472,6 +472,11 @@ void decodeNFrames(const std::shared_ptr<android::Codec2Client::Component>& comp
                    int range, bool signalEOS = true) {
     typedef std::unique_lock<std::mutex> ULock;
     static const size_t kPageSize = getpagesize();
+    C2StreamUsageTuning::input compUsage(0u, 0u);
+    std::vector<std::unique_ptr<C2Param>> heapParams;
+    c2_status_t usageErr = component->query({&compUsage}, {}, C2_DONT_BLOCK, &heapParams);
+    uint64_t inputUsage = (usageErr == C2_OK && compUsage) ? compUsage.value : 0u;
+    C2MemoryUsage usage(inputUsage | C2MemoryUsage::CPU_READ | C2MemoryUsage::CPU_WRITE);
     int frameID = offset;
     int maxRetry = 0;
     while (1) {
@@ -520,8 +525,7 @@ void decodeNFrames(const std::shared_ptr<android::Codec2Client::Component>& comp
         if (size) {
             std::shared_ptr<C2LinearBlock> block;
             ASSERT_EQ(C2_OK, linearPool->fetchLinearBlock(
-                                     alignedSize,
-                                     {C2MemoryUsage::CPU_READ, C2MemoryUsage::CPU_WRITE}, &block));
+                                     alignedSize, usage, &block));
             ASSERT_TRUE(block);
 
             // Write View
