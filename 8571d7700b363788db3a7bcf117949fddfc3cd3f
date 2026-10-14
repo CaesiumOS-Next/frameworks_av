@@ -16,6 +16,23 @@
       "message": "lajos@\nCould you please take a look, let me know if you are not the right owner for this",
       "revId": "8571d7700b363788db3a7bcf117949fddfc3cd3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae7b4c6_569e7150",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2026-10-14T20:22:32Z",
+      "side": 1,
+      "message": "VP8 levels are not actual levels (they are more akin to profiles), so we are not mapping them to profile/levels in C2. Can I ask why this is needed only now?",
+      "revId": "8571d7700b363788db3a7bcf117949fddfc3cd3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
