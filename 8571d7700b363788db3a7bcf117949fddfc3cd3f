@@ -56,6 +56,30 @@
       },
       "revId": "8571d7700b363788db3a7bcf117949fddfc3cd3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bd893e9_84b83426",
+        "filename": "media/codec2/core/include/C2Config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 4955411
+      },
+      "writtenOn": "2026-10-15T19:29:23Z",
+      "side": 1,
+      "message": "want to share some background why did this change,\n\nInitially when running below vp8 test cases:\nandroid.mediav2.cts.CodecInfoTest#testCodecProfileSupport[2_video/x-vnd.on2.vp8_c2.qti.vp8.decoder]\nandroid.mediav2.cts.CodecInfoTest#testCodecProfileSupport[9_video/x-vnd.on2.vp8_c2.qti.vp8.encoder]\n\ntest: https://cs.android.com/android/platform/superproject/+/android-latest-release:cts/tests/media/src/android/mediav2/cts/CodecInfoTest.java;drc\u003daaea5c88817f8e55cfaf731125f96d434a3589b1;l\u003d154\nhere, if we look at line.no:174, based on codec type, PROFILE_MAP returns profile \u0026 level for VP8 codec, mainly in this test profile will be compared against what MediaCodecInfo.CodecCapabilities returned. Here, PROFILE_MAP always returns fixed VP8ProfileMain. on the other side, whatever the profile codec2 configures, that will go through mapper function in AOSP - https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/media/codec2/sfplugin/utils/Codec2Mapper.cpp;drc\u003d7d25433e4465d2fb29e63d8c5051e85ac4492be2;l\u003d653, if vendor defined profile at a given instance(which are referred from https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/media/codec2/core/include/C2Config.h;drc\u003d0c647d9c619d1e42d23a61b3958a3b1b43cd1a57;l\u003d621) is either of one value form 0 to 3, it\u0027s always mapped to VP8ProfileMain.\n\ndue to this reason, above mentioned test cases are passing.\n\nbut for below vp8 encoder testcase( there are 3 tcs failed)\nandroid.media.v2.cts.EncoderLevelTest#testVideoEncodeLevels[162_c2.qti.vp8.encoder_video/x-vnd.on2.vp8_512kbps_352x288_30fps_yuv420flexible_0-level]\nwhile configuring codec with profile \u0026 level, when above mentioned mapper function invoked to convert mediacodec configured profile, level to C2Config marcos, always returned C2Config::PROFILE_UNUSED \u0026 C2Config::LEVEL_UNUSED. returned profile is not mapped to valid one which are listed at https://cs.android.com/android/platform/superproject/+/android-latest-release:frameworks/av/media/codec2/core/include/C2Config.h;drc\u003d0c647d9c619d1e42d23a61b3958a3b1b43cd1a57;l\u003d621\nthat\u0027s why CCodec configure failed and MediaCodec error observed and finally test case failed\n\n10-15 20:58:38.305 1010199 12778 12797 W CCodec  : failed to configure c2 params\n10-15 20:58:38.305 1010199 12778 12794 E MediaCodec: Codec reported err 0xffffffea/BAD_VALUE, actionCode 0, while in state 3/CONFIGURING\n10-15 20:58:38.307 1010199 12778 12793 E MediaCodec: configure failed with err 0xffffffea, resetting...\n\nhere, instead of sending C2Config::PROFILE_UNUSED, if sent PROFILE_VP8_0 which is like VP8ProfileMain, test case will pass.\n\nCould you please comment on this analysis?\ncodelinks might be not A16 open source project ones.\n\nabout added levels frameworks/av/media/codec2/core/include/C2Config.h and returning C2Config::LEVEL_VERSION_VP8_0 can be removed!",
+      "parentUuid": "209c3fa0_425de002",
+      "range": {
+        "startLine": 750,
+        "startChar": 4,
+        "endLine": 750,
+        "endChar": 23
+      },
+      "revId": "8571d7700b363788db3a7bcf117949fddfc3cd3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
