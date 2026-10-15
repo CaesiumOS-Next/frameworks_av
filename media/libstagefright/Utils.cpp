@@ -316,6 +316,30 @@ static void parseDolbyVisionProfileLevelFromDvcc(const uint8_t *ptr, size_t size
     }
 }
 
+// Reject a Dolby Vision stream with a known profile but an undefined
+// dv_bl_signal_compatibility_id. Defined values: 0 none, 1 HDR10, 2 SDR, 4 HLG,
+// 6 Blu-ray HDR10. A malformed box or an unknown profile is not handled here.
+static status_t checkDolbyVisionBlCompatibilityId(const uint8_t *ptr, size_t size) {
+    // dv_major.dv_minor Should be 1.0 or 2.1
+    if (size != 24 || ((ptr[0] != 1 || ptr[1] != 0) && (ptr[0] != 2 || ptr[1] != 1))) {
+        return OK;
+    }
+
+    const uint8_t profile = ptr[2] >> 1;
+    const uint8_t bl_compatibility_id = ptr[4] >> 4;
+
+    int32_t codecProfile;
+    if (getDolbyVisionProfileTable().map(profile, &codecProfile)
+            && bl_compatibility_id != 0 && bl_compatibility_id != 1
+            && bl_compatibility_id != 2 && bl_compatibility_id != 4
+            && bl_compatibility_id != 6) {
+        ALOGE("DV: undefined bl_compatibility_id %d for profile %d, rejecting",
+              bl_compatibility_id, profile);
+        return ERROR_UNSUPPORTED;
+    }
+    return OK;
+}
+
 static void parseH263ProfileLevelFromD263(const uint8_t *ptr, size_t size, sp<AMessage> &format) {
     if (size < 7) {
         return;
@@ -1847,6 +1871,10 @@ status_t convertMetaDataToMessage(
             || meta->findData(kKeyDVVC, &type, &data, &size)
             || meta->findData(kKeyDVWC, &type, &data, &size)) {
         const uint8_t *ptr = (const uint8_t *)data;
+        status_t dvErr = checkDolbyVisionBlCompatibilityId(ptr, size);
+        if (dvErr != OK) {
+            return dvErr;
+        }
         ALOGV("DV: calling parseDolbyVisionProfileLevelFromDvcc with data size %zu", size);
         parseDolbyVisionProfileLevelFromDvcc(ptr, size, msg);
         sp<ABuffer> buffer = new (std::nothrow) ABuffer(size);
