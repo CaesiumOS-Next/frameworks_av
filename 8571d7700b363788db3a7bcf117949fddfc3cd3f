@@ -80,6 +80,23 @@
       },
       "revId": "8571d7700b363788db3a7bcf117949fddfc3cd3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3e3979_d283329b",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 4955411
+      },
+      "writtenOn": "2026-10-16T03:26:48Z",
+      "side": 1,
+      "message": "returning C2Config::PROFILE_VP8_0 to C2 will make test pass which is valid point like taking VP8Level_Version0 for MediaCodec",
+      "revId": "8571d7700b363788db3a7bcf117949fddfc3cd3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
