@@ -132,6 +132,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28d8ffaa_c12b784c",
+        "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1021605
+      },
+      "writtenOn": "2026-10-17T00:32:22Z",
+      "side": 1,
+      "message": "this would still need to be UNUSED.\n\nHowever, based on the discussion, we would not be able to use a simple mapper (while still using it for this file), but map from the MediaCodec level versions to the profile versions. Then in CCodecConfig for VP8 we will need to map from the \"level\" key to the .profile field.",
+      "range": {
+        "startLine": 743,
+        "startChar": 24,
+        "endLine": 743,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "00014e95_ad97d2a4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
+              "range": {
+                "startLine": 743,
+                "startChar": 0,
+                "endLine": 744,
+                "endChar": 0
+              },
+              "replacement": "        *to \u003d C2Config::LEVEL_UNUSED;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8571d7700b363788db3a7bcf117949fddfc3cd3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf3e3979_d283329b",
         "filename": "media/codec2/sfplugin/utils/Codec2Mapper.cpp",
         "patchSetId": 2
