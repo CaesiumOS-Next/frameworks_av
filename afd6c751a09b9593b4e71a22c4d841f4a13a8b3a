@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669dc3c8_eca334ea",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1976460
+      },
+      "writtenOn": "2026-10-26T12:02:42Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by autoreview issue finding: The check `\u0026\u0026 compUsage` is redundant here because `compUsage` is a stack-allocated fixed-size parameter object, so its `operator bool()` (which checks if the parameter size \u003e 0) will always return true. Checking `usageErr \u003d\u003d C2_OK` is sufficient to determine if the parameter was successfully queried.",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 0
+      },
+      "revId": "afd6c751a09b9593b4e71a22c4d841f4a13a8b3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
