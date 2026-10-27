@@ -22,6 +22,30 @@
       },
       "revId": "afd6c751a09b9593b4e71a22c4d841f4a13a8b3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a34e36_eb7de709",
+        "filename": "media/codec2/hal/hidl/1.0/vts/functional/video/VtsHalMediaC2V1_0TargetVideoDecTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 5233682
+      },
+      "writtenOn": "2026-10-27T10:20:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "669dc3c8_eca334ea",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 0
+      },
+      "revId": "afd6c751a09b9593b4e71a22c4d841f4a13a8b3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
