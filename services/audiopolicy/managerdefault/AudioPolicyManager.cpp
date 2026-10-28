@@ -2241,7 +2241,8 @@ audio_io_handle_t AudioPolicyManager::selectOutput(const SortedVector<audio_io_h
     // 3: the output supporting the exact channel mask
     // 4: the output with a higher channel count than requested
     // 5: the output with the highest sampling rate if the requested sample rate is
-    //    greater than default sampling rate
+    //    greater than default sampling rate, otherwise the output whose sampling rate
+    //    is exactly the requested one (if any)
     // 6: the output with the highest number of requested performance flags
     // 7: the output with the bit depth the closest to the requested one
     // 8: the primary output
@@ -2318,6 +2319,12 @@ audio_io_handle_t AudioPolicyManager::selectOutput(const SortedVector<audio_io_h
             //
             // criteria is offset to make non-negative.
             currentMatchCriteria[4] = diff >= 0 ? -diff + 200'000'000 : diff + 100'000'000;
+        } else if (samplingRate != 0 && samplingRate == outputDesc->getSamplingRate()) {
+            // Any output is assumed to serve a request at or below the default sampling
+            // rate (the mixer resamples), but prefer the output running at exactly the
+            // requested rate to avoid an unnecessary resampling. Same value as an exact
+            // match (diff == 0) in the branch above.
+            currentMatchCriteria[4] = 200'000'000;
         }
 
         // performance flags match
