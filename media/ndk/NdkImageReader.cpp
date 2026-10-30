@@ -610,28 +610,31 @@ AImageReader::acquireLatestImage(/*out*/AImage** image, /*out*/int* acquireFence
     *image = nullptr;
     AImage* prevImage = nullptr;
     AImage* nextImage = nullptr;
-    media_status_t ret = acquireImageLocked(&prevImage, acquireFenceFd);
+    int prevAcquireFenceFd = -1;
+    media_status_t ret = acquireImageLocked(
+            &prevImage, acquireFenceFd == nullptr ? nullptr : &prevAcquireFenceFd);
     if (prevImage == nullptr) {
         return ret;
     }
     for (;;) {
-        ret = acquireImageLocked(&nextImage, acquireFenceFd);
+        int nextAcquireFenceFd = -1;
+        ret = acquireImageLocked(
+                &nextImage, acquireFenceFd == nullptr ? nullptr : &nextAcquireFenceFd);
         if (nextImage == nullptr) {
             *image = prevImage;
+            if (acquireFenceFd != nullptr) {
+                *acquireFenceFd = prevAcquireFenceFd;
+            }
             return AMEDIA_OK;
         }
 
-        if (acquireFenceFd == nullptr) {
-            // No need for release fence here since the prevImage is unused and acquireImageLocked
-            // has already waited for acquired fence to be signaled.
-            prevImage->close();
-        } else {
-            // Use the acquire fence as release fence, so that producer can wait before trying to
-            // refill the buffer.
-            prevImage->close(*acquireFenceFd);
-        }
+        // Release the discarded image with its own acquire fence, so that the producer can wait
+        // before trying to refill that buffer. In the synchronous case acquireImageLocked has
+        // already waited for the fence and prevAcquireFenceFd is -1.
+        prevImage->close(prevAcquireFenceFd);
         prevImage->free();
         prevImage = nextImage;
+        prevAcquireFenceFd = nextAcquireFenceFd;
         nextImage = nullptr;
     }
 }

@@ -26,7 +26,12 @@
 #include <gui/bufferqueue/1.0/H2BGraphicBufferProducer.h>
 #include <NdkImagePriv.h>
 #include <NdkImageReaderPriv.h>
+#include <ui/Fence.h>
 #include <vndk/hardware_buffer.h>
+#include <dirent.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <memory>
 
 namespace android {
@@ -214,6 +219,171 @@ TEST_F(AImageReaderWindowTest, CreateWindow) {
     sp<IGraphicBufferProducer> igbp = Surface::getIGraphicBufferProducer(window);
 
     validateIGBP(igbp);
+}
+
+// A fence only has to be a valid descriptor that never signals for this test,
+// so it can be faked without the sw_sync test APIs. BufferQueue_test.cpp uses
+// an eventfd for this; here the fences also have to be told apart with fstat(),
+// and every eventfd shares one anonymous inode. A memfd gets its own.
+static sp<Fence> createUnsignaledFence() {
+    return new Fence(memfd_create("fake fence", 0));
+}
+
+static ino_t inodeOf(int fd) {
+    struct stat info = {};
+    if (fd < 0 || fstat(fd, &info) != 0) {
+        return 0;
+    }
+    return info.st_ino;
+}
+
+// Counting every open descriptor is too noisy to assert on, because acquiring an
+// image also imports a gralloc buffer that carries descriptors of its own. Count
+// only the ones referring to a given fence.
+static int countFdsForInode(ino_t inode) {
+    std::unique_ptr<DIR, decltype(&closedir)> dir(opendir("/proc/self/fd"), closedir);
+    if (dir == nullptr) {
+        return -1;
+    }
+    int count = 0;
+    while (const dirent *entry = readdir(dir.get())) {
+        if (inodeOf(atoi(entry->d_name)) == inode) {
+            count++;
+        }
+    }
+    return count;
+}
+
+// acquireLatestImage walks the queue and must hold two images at once, so the
+// reader needs a larger pool than the tests above.
+static constexpr int kAcquireLatestMaxImages = 2;
+static constexpr int64_t kFirstTimeStamp = 1;
+static constexpr int64_t kSecondTimeStamp = 2;
+
+class AImageReaderAcquireLatestTest : public ::testing::Test {
+  public:
+    void SetUp() override {
+        ASSERT_EQ(AMEDIA_OK, AImageReader_newWithUsage(kImageWidth, kImageHeight, kImageFormat,
+                                                       kImageBufferUsage, kAcquireLatestMaxImages,
+                                                       &imageReader_));
+        ASSERT_NE(nullptr, imageReader_);
+
+        ANativeWindow *window = nullptr;
+        ASSERT_EQ(AMEDIA_OK, AImageReader_getWindow(imageReader_, &window));
+        ASSERT_NE(nullptr, window);
+        producer_ = Surface::getIGraphicBufferProducer(window);
+        ASSERT_NE(nullptr, producer_);
+        QueueBufferOutput connectOutput;
+        ASSERT_EQ(OK, producer_->connect(nullptr, NATIVE_WINDOW_API_CPU, false, &connectOutput));
+    }
+
+    void TearDown() override {
+        if (imageReader_) {
+            AImageReader_delete(imageReader_);
+        }
+    }
+
+    status_t queueBuffer(int64_t timestamp, const sp<Fence> &fence, int *slot) {
+        sp<Fence> dequeueFence;
+        status_t status = producer_->dequeueBuffer(slot, &dequeueFence, kImageWidth, kImageHeight,
+                                                   kImageFormat, kImageBufferUsage, nullptr,
+                                                   nullptr);
+        if ((status & ~IGraphicBufferProducer::BUFFER_NEEDS_REALLOCATION) != OK) {
+            return status;
+        }
+        sp<GraphicBuffer> buffer;
+        status = producer_->requestBuffer(*slot, &buffer);
+        if (status != OK) {
+            return status;
+        }
+        QueueBufferInput input(timestamp, kQueueBufferInputIsAutoTimeStamp,
+                               kQueueBufferInputDataspace, kQueueBufferInputRect,
+                               kQueueBufferInputScalingMode, kQueueBufferInputTransform, fence);
+        QueueBufferOutput queueOutput;
+        return producer_->queueBuffer(*slot, input, &queueOutput);
+    }
+
+    AImageReader *imageReader_ = nullptr;
+    sp<IGraphicBufferProducer> producer_;
+};
+
+TEST_F(AImageReaderAcquireLatestTest, AcquireLatestImageAsyncReturnsLatestFence) {
+    sp<Fence> firstFence = createUnsignaledFence();
+    sp<Fence> secondFence = createUnsignaledFence();
+    ASSERT_TRUE(firstFence->isValid());
+    ASSERT_TRUE(secondFence->isValid());
+    const ino_t firstFenceInode = inodeOf(firstFence->get());
+    const ino_t secondFenceInode = inodeOf(secondFence->get());
+    ASSERT_NE(0u, firstFenceInode);
+    ASSERT_NE(0u, secondFenceInode);
+    ASSERT_NE(firstFenceInode, secondFenceInode);
+
+    int firstSlot = -1;
+    int secondSlot = -1;
+    ASSERT_EQ(OK, queueBuffer(kFirstTimeStamp, firstFence, &firstSlot));
+    ASSERT_EQ(OK, queueBuffer(kSecondTimeStamp, secondFence, &secondSlot));
+    ASSERT_NE(firstSlot, secondSlot);
+
+    const int firstFenceFdsBefore = countFdsForInode(firstFenceInode);
+    ASSERT_LT(0, firstFenceFdsBefore);
+
+    AImage *image = nullptr;
+    int acquireFenceFd = -1;
+    ASSERT_EQ(AMEDIA_OK,
+              AImageReader_acquireLatestImageAsync(imageReader_, &image, &acquireFenceFd));
+    ASSERT_NE(nullptr, image);
+    auto imageDeleter = [](AImage *value) { AImage_delete(value); };
+    std::unique_ptr<AImage, decltype(imageDeleter)> latestImage(image, imageDeleter);
+
+    int64_t timestamp = 0;
+    ASSERT_EQ(AMEDIA_OK, AImage_getTimestamp(latestImage.get(), &timestamp));
+    EXPECT_EQ(kSecondTimeStamp, timestamp);
+
+    // The caller must be handed the latest image's own acquire fence. Reusing a
+    // single output descriptor gave the discarded image's release path ownership
+    // of this descriptor, closing it before it got back here.
+    EXPECT_EQ(secondFenceInode, inodeOf(acquireFenceFd));
+
+    if (acquireFenceFd >= 0) {
+        close(acquireFenceFd);
+    }
+    latestImage.reset();
+
+    // The discarded image's acquire fence is duplicated too, and must be consumed
+    // by its release rather than dropped on the floor.
+    EXPECT_EQ(firstFenceFdsBefore, countFdsForInode(firstFenceInode));
+}
+
+// The synchronous entry point shares the queue walk but passes no fence out, so
+// acquireImageLocked waits on the acquire fence itself and each discarded image
+// is released without one. Real fences are not usable here: the stand-ins above
+// are not sync files, and waiting on one fails.
+TEST_F(AImageReaderAcquireLatestTest, AcquireLatestImageReleasesDiscardedImage) {
+    int firstSlot = -1;
+    int secondSlot = -1;
+    ASSERT_EQ(OK, queueBuffer(kFirstTimeStamp, Fence::NO_FENCE, &firstSlot));
+    ASSERT_EQ(OK, queueBuffer(kSecondTimeStamp, Fence::NO_FENCE, &secondSlot));
+    ASSERT_NE(firstSlot, secondSlot);
+
+    AImage *image = nullptr;
+    ASSERT_EQ(AMEDIA_OK, AImageReader_acquireLatestImage(imageReader_, &image));
+    ASSERT_NE(nullptr, image);
+    auto imageDeleter = [](AImage *value) { AImage_delete(value); };
+    std::unique_ptr<AImage, decltype(imageDeleter)> latestImage(image, imageDeleter);
+
+    int64_t timestamp = 0;
+    ASSERT_EQ(AMEDIA_OK, AImage_getTimestamp(latestImage.get(), &timestamp));
+    EXPECT_EQ(kSecondTimeStamp, timestamp);
+
+    // Walking past the first image has to release it, handing its slot back to the
+    // producer rather than holding it for the lifetime of the reader.
+    int releasedSlot = -1;
+    sp<Fence> releaseFence;
+    status_t status = producer_->dequeueBuffer(&releasedSlot, &releaseFence, kImageWidth,
+                                               kImageHeight, kImageFormat, kImageBufferUsage,
+                                               nullptr, nullptr);
+    ASSERT_EQ(OK, status & ~IGraphicBufferProducer::BUFFER_NEEDS_REALLOCATION);
+    EXPECT_EQ(firstSlot, releasedSlot);
 }
 
 class AImageReaderPrivateFormatTest : public ::testing::Test {
