@@ -73,6 +73,8 @@ class PreProcessingContext final : public EffectContext {
 
     RetCode setNoiseSuppressionLevel(NoiseSuppression::Level level);
     NoiseSuppression::Level getNoiseSuppressionLevel() const;
+    RetCode setNoiseSuppressionType(NoiseSuppression::Type type);
+    NoiseSuppression::Type getNoiseSuppressionType() const;
 
     IEffect::Status process(float* in, float* out, int samples);
 
@@ -108,6 +110,8 @@ class PreProcessingContext final : public EffectContext {
     int mTargetPeakLevel = 0;
     int mMaxCompressionGain = 0;
     bool mEnableLimiter = false;
+
+    NoiseSuppression::Type mNsType = NoiseSuppression::Type::SINGLE_CHANNEL;
 
     // Automatic Gain Control V2
     int mDigitalGain = 0;
