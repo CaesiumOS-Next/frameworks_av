@@ -73,6 +73,8 @@ class PreProcessingContext final : public EffectContext {
 
     RetCode setNoiseSuppressionLevel(NoiseSuppression::Level level);
     NoiseSuppression::Level getNoiseSuppressionLevel() const;
+    RetCode setNoiseSuppressionType(NoiseSuppression::Type type);
+    NoiseSuppression::Type getNoiseSuppressionType() const;
 
     IEffect::Status process(float* in, float* out, int samples);
 
@@ -116,6 +118,7 @@ class PreProcessingContext final : public EffectContext {
     int mSaturationMargin = 2;
 
     // NoiseSuppression
+    NoiseSuppression::Type mNsType = NoiseSuppression::Type::SINGLE_CHANNEL;
     NoiseSuppression::Level mLevel = NoiseSuppression::Level::LOW;
 };
 

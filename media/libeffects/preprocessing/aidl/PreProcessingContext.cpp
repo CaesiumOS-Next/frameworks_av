@@ -244,6 +244,15 @@ int PreProcessingContext::getAutomaticGainControlV2SaturationMargin() const {
     return mSaturationMargin;
 }
 
+RetCode PreProcessingContext::setNoiseSuppressionType(NoiseSuppression::Type type) {
+    mNsType = type;
+    return RetCode::SUCCESS;
+}
+
+NoiseSuppression::Type PreProcessingContext::getNoiseSuppressionType() const {
+    return mNsType;
+}
+
 RetCode PreProcessingContext::setNoiseSuppressionLevel(NoiseSuppression::Level level) {
     mLevel = level;
     auto config = mAudioProcessingModule->GetConfig();
