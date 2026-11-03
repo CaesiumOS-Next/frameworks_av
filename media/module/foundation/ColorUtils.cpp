@@ -380,11 +380,19 @@ void ColorUtils::setDefaultCodecColorAspectsIfNeeded(
     ColorAspects::MatrixCoeffs coeffs;
     ColorAspects::Primaries primaries;
 
-    // Default to BT2020, BT709 or BT601 based on size. Allow 2.35:1 aspect ratio. Limit BT601
-    // to PAL or smaller, BT2020 to 4K or larger, leaving BT709 for all resolutions in between.
+    // Resolution alone does not establish BT2020 colorimetry. Use BT709 for UHD
+    // with unspecified primaries and matrix and an unspecified or SMPTE170M transfer.
+    // Keep the existing defaults for other transfers and partially specified aspects.
+    const bool defaultToBT709 =
+            aspects.mPrimaries == ColorAspects::PrimariesUnspecified
+            && aspects.mMatrixCoeffs == ColorAspects::MatrixUnspecified
+            && (aspects.mTransfer == ColorAspects::TransferUnspecified
+                    || aspects.mTransfer == ColorAspects::TransferSMPTE170M);
+
+    // Allow 2.35:1 UHD aspect ratios. Keep the BT601 defaults for PAL or smaller.
     if (width >= 3840 || height >= 3840 || width * (int64_t)height >= 3840 * 1634) {
-        primaries = ColorAspects::PrimariesBT2020;
-        coeffs = ColorAspects::MatrixBT2020;
+        primaries = defaultToBT709 ? ColorAspects::PrimariesBT709_5 : ColorAspects::PrimariesBT2020;
+        coeffs = defaultToBT709 ? ColorAspects::MatrixBT709_5 : ColorAspects::MatrixBT2020;
     } else if ((width <= 720 && height > 480 && height <= 576)
             || (height <= 720 && width > 480 && width <= 576)) {
         primaries = ColorAspects::PrimariesBT601_6_625;

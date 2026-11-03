@@ -292,6 +292,89 @@ TEST_P(DefaultColorAspectsTest, DefaultColorAspectsTest) {
     EXPECT_EQ(aspects.mTransfer, CA::TransferSMPTE170M) << "transfer not set to default";
 }
 
+TEST(ColorUtilsDefaultPolicyTest, UhdSdrTransferUsesBt709) {
+    for (auto range : {CA::RangeUnspecified, CA::RangeLimited, CA::RangeFull}) {
+        SCOPED_TRACE(range);
+        CA aspects = {range, CA::PrimariesUnspecified, CA::TransferSMPTE170M,
+                      CA::MatrixUnspecified};
+        ColorUtils::setDefaultCodecColorAspectsIfNeeded(aspects, 3840, 2160);
+        EXPECT_EQ(aspects.mPrimaries, CA::PrimariesBT709_5);
+        EXPECT_EQ(aspects.mMatrixCoeffs, CA::MatrixBT709_5);
+        EXPECT_EQ(aspects.mTransfer, CA::TransferSMPTE170M);
+        EXPECT_EQ(aspects.mRange, range == CA::RangeUnspecified ? CA::RangeLimited : range);
+    }
+}
+
+TEST(ColorUtilsDefaultPolicyTest, ExplicitAspectsArePreserved) {
+    const CA cases[] = {
+            {CA::RangeLimited, CA::PrimariesBT709_5, CA::TransferSMPTE170M, CA::MatrixBT709_5},
+            {CA::RangeFull, CA::PrimariesBT2020, CA::TransferSMPTE170M, CA::MatrixBT2020},
+            {CA::RangeLimited, CA::PrimariesBT2020, CA::TransferST2084, CA::MatrixBT2020},
+            {CA::RangeLimited, CA::PrimariesBT2020, CA::TransferHLG, CA::MatrixBT2020Constant},
+            {CA::RangeOther, CA::PrimariesOther, CA::TransferOther, CA::MatrixOther},
+    };
+    for (const auto &original : cases) {
+        CA aspects = original;
+        ColorUtils::setDefaultCodecColorAspectsIfNeeded(aspects, 3840, 2160);
+        EXPECT_EQ(aspects.mPrimaries, original.mPrimaries);
+        EXPECT_EQ(aspects.mMatrixCoeffs, original.mMatrixCoeffs);
+        EXPECT_EQ(aspects.mTransfer, original.mTransfer);
+        EXPECT_EQ(aspects.mRange, original.mRange);
+    }
+}
+
+TEST(ColorUtilsDefaultPolicyTest, OtherTransferFallbacksAreUnchanged) {
+    // This change does not redefine HDR or other transfer-specific fallback policy.
+    for (auto transfer : {CA::TransferST2084, CA::TransferHLG, CA::TransferLinear,
+                          CA::TransferSRGB, CA::TransferGamma22, CA::TransferGamma28,
+                          CA::TransferSMPTE240M, CA::TransferXvYCC, CA::TransferBT1361,
+                          CA::TransferST428, CA::TransferOther}) {
+        SCOPED_TRACE(transfer);
+        CA aspects = {CA::RangeUnspecified, CA::PrimariesUnspecified, transfer,
+                      CA::MatrixUnspecified};
+        ColorUtils::setDefaultCodecColorAspectsIfNeeded(aspects, 3840, 2160);
+        EXPECT_EQ(aspects.mPrimaries, CA::PrimariesBT2020);
+        EXPECT_EQ(aspects.mMatrixCoeffs, CA::MatrixBT2020);
+        EXPECT_EQ(aspects.mTransfer, transfer);
+        EXPECT_EQ(aspects.mRange, CA::RangeLimited);
+    }
+}
+
+TEST(ColorUtilsDefaultPolicyTest, PartialAspectsKeepExistingFallbacks) {
+    // Preserve the existing per-field policy; do not introduce cross-field inference.
+    for (auto primaries : {CA::PrimariesBT709_5, CA::PrimariesBT2020, CA::PrimariesOther}) {
+        CA aspects = {CA::RangeFull, primaries, CA::TransferSMPTE170M, CA::MatrixUnspecified};
+        ColorUtils::setDefaultCodecColorAspectsIfNeeded(aspects, 3840, 2160);
+        EXPECT_EQ(aspects.mPrimaries, primaries);
+        EXPECT_EQ(aspects.mMatrixCoeffs, CA::MatrixBT2020);
+        EXPECT_EQ(aspects.mTransfer, CA::TransferSMPTE170M);
+        EXPECT_EQ(aspects.mRange, CA::RangeFull);
+    }
+    for (auto matrix : {CA::MatrixBT709_5, CA::MatrixBT2020, CA::MatrixBT2020Constant,
+                        CA::MatrixOther}) {
+        CA aspects = {CA::RangeLimited, CA::PrimariesUnspecified, CA::TransferUnspecified, matrix};
+        ColorUtils::setDefaultCodecColorAspectsIfNeeded(aspects, 3840, 2160);
+        EXPECT_EQ(aspects.mPrimaries, CA::PrimariesBT2020);
+        EXPECT_EQ(aspects.mMatrixCoeffs, matrix);
+        EXPECT_EQ(aspects.mTransfer, CA::TransferSMPTE170M);
+        EXPECT_EQ(aspects.mRange, CA::RangeLimited);
+    }
+}
+
+TEST(ColorUtilsDefaultPolicyTest, FreshUnspecifiedAspectsStayBt709AcrossHdUhdChanges) {
+    for (auto size : {std::make_pair(1920, 1080), std::make_pair(3840, 2160),
+                      std::make_pair(1920, 1080), std::make_pair(3840, 2160)}) {
+        // Each new output format is defaulted from the unspecified source aspects.
+        CA aspects = {CA::RangeLimited, CA::PrimariesUnspecified, CA::TransferSMPTE170M,
+                      CA::MatrixUnspecified};
+        ColorUtils::setDefaultCodecColorAspectsIfNeeded(aspects, size.first, size.second);
+        EXPECT_EQ(aspects.mPrimaries, CA::PrimariesBT709_5);
+        EXPECT_EQ(aspects.mMatrixCoeffs, CA::MatrixBT709_5);
+        EXPECT_EQ(aspects.mTransfer, CA::TransferSMPTE170M);
+        EXPECT_EQ(aspects.mRange, CA::RangeLimited);
+    }
+}
+
 TEST_P(DataSpaceTest, DataSpaceTest) {
     CA aspects;
     aspects.mRange = mRange;
@@ -713,8 +796,17 @@ INSTANTIATE_TEST_SUITE_P(
         ColorUtilsUnitTest, DefaultColorAspectsTest,
         ::testing::Values(
                 // Width, Height, Primaries, MatrixCoeffs
-                std::make_tuple(3840, 3840, CA::PrimariesBT2020, CA::MatrixBT2020),
+                std::make_tuple(3840, 3840, CA::PrimariesBT709_5, CA::MatrixBT709_5),
+                std::make_tuple(3840, 2160, CA::PrimariesBT709_5, CA::MatrixBT709_5),
+                std::make_tuple(2160, 3840, CA::PrimariesBT709_5, CA::MatrixBT709_5),
+                std::make_tuple(3840, 1634, CA::PrimariesBT709_5, CA::MatrixBT709_5),
+                std::make_tuple(3200, 2160, CA::PrimariesBT709_5, CA::MatrixBT709_5),
+                std::make_tuple(7680, 4320, CA::PrimariesBT709_5, CA::MatrixBT709_5),
+                std::make_tuple(1920, 1080, CA::PrimariesBT709_5, CA::MatrixBT709_5),
                 std::make_tuple(720, 576, CA::PrimariesBT601_6_625, CA::MatrixBT601_6),
+                std::make_tuple(576, 720, CA::PrimariesBT601_6_625, CA::MatrixBT601_6),
+                std::make_tuple(720, 480, CA::PrimariesBT601_6_525, CA::MatrixBT601_6),
+                std::make_tuple(480, 720, CA::PrimariesBT601_6_525, CA::MatrixBT601_6),
                 std::make_tuple(480, 360, CA::PrimariesBT601_6_525, CA::MatrixBT601_6),
                 std::make_tuple(480, 1920, CA::PrimariesBT709_5, CA::MatrixBT709_5)));
 
