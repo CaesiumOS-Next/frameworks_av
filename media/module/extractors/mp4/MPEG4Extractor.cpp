@@ -5334,15 +5334,18 @@ MPEG4Source::MPEG4Source(
     if (mIsPcm) {
         int32_t numChannels = 0;
         int32_t bitsPerSample = 0;
-        CHECK(AMediaFormat_getInt32(mFormat, AMEDIAFORMAT_KEY_BITS_PER_SAMPLE, &bitsPerSample));
-        CHECK(AMediaFormat_getInt32(mFormat, AMEDIAFORMAT_KEY_CHANNEL_COUNT, &numChannels));
+        // An enca track can resolve to raw audio via frma without BITS_PER_SAMPLE
+        // ever being set; treat missing keys as unsupported instead of aborting.
+        const bool hasPcmInfo =
+                AMediaFormat_getInt32(mFormat, AMEDIAFORMAT_KEY_BITS_PER_SAMPLE, &bitsPerSample)
+                && AMediaFormat_getInt32(mFormat, AMEDIAFORMAT_KEY_CHANNEL_COUNT, &numChannels);
 
         int32_t bytesPerSample = bitsPerSample >> 3;
         int32_t pcmSampleSize = bytesPerSample * numChannels;
 
         size_t maxSampleSize;
         status_t err = mSampleTable->getMaxSampleSize(&maxSampleSize);
-        if (err != OK || maxSampleSize != static_cast<size_t>(pcmSampleSize)
+        if (!hasPcmInfo || err != OK || maxSampleSize != static_cast<size_t>(pcmSampleSize)
                || bitsPerSample != 16) {
             // Not supported
             mIsPcm = false;
