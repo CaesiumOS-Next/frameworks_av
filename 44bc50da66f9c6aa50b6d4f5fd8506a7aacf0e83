@@ -16,6 +16,23 @@
       "message": "Thanks for the proposal, but I\u0027m afraid we are not looking into bug fixes and logic changes in MPEG4Extractor at the moment.",
       "revId": "44bc50da66f9c6aa50b6d4f5fd8506a7aacf0e83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eddcc27_5a61f308",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962660
+      },
+      "writtenOn": "2026-11-05T16:28:54Z",
+      "side": 1,
+      "message": "Hi Anish,\n\nWe are in the process of migrating `MediaExtractor` to media3 extractors (more details in go/mediaextractor-media3-migration). We\u0027re only accepting security fixes at the moment.",
+      "revId": "44bc50da66f9c6aa50b6d4f5fd8506a7aacf0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
