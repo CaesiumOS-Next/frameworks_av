@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6df98b60_2b18206c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643016
+      },
+      "writtenOn": "2026-11-05T13:16:43Z",
+      "side": 1,
+      "message": "Thanks for the proposal, but I\u0027m afraid we are not looking into bug fixes and logic changes in MPEG4Extractor at the moment.",
+      "revId": "44bc50da66f9c6aa50b6d4f5fd8506a7aacf0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
