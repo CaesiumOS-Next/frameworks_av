@@ -113,7 +113,7 @@ public:
                                             MtpStorageID oldStorage, MtpStorageID newStorage,
                                             MtpObjectHandle handle, bool succeeded) = 0;
 
-    virtual MtpResponseCode         beginCopyObject(MtpObjectHandle handle, MtpObjectHandle newParent,
+    virtual MtpObjectHandle beginCopyObject(MtpObjectHandle handle, MtpObjectHandle newParent,
                                             MtpStorageID newStorage) = 0;
     virtual void                    endCopyObject(MtpObjectHandle handle, bool succeeded) = 0;
 };
