@@ -307,11 +307,16 @@ void MtpMockDatabase::endMoveObject(MtpObjectHandle oldParent, MtpObjectHandle n
     return;
 }
 
-MtpResponseCode MtpMockDatabase::beginCopyObject(MtpObjectHandle handle, MtpObjectHandle newParent,
+MtpObjectHandle MtpMockDatabase::beginCopyObject(MtpObjectHandle handle, MtpObjectHandle newParent,
                                                  MtpStorageID newStorage) {
+    if (!hasStorage(newStorage)) {
+        ALOGW("%s: Tried to lookup storageID %u, but doesn't exist\n", __func__, newStorage);
+        return kInvalidObjectHandle;
+    }
+
     ALOGD("MockDatabase %s: ohandle=%u newParent=%u newStorage=%u\n", __func__, handle, newParent,
           newStorage);
-    return MTP_RESPONSE_OK;
+    return mLastObjectHandle;
 }
 
 void MtpMockDatabase::endCopyObject(MtpObjectHandle handle, bool succeeded) {
