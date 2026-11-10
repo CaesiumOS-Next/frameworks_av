@@ -110,7 +110,7 @@ public:
                        MtpStorageID oldStorage, MtpStorageID newStorage, MtpObjectHandle handle,
                        bool succeeded);
 
-    MtpResponseCode beginCopyObject(MtpObjectHandle handle, MtpObjectHandle newParent,
+    MtpObjectHandle beginCopyObject(MtpObjectHandle handle, MtpObjectHandle newParent,
                                     MtpStorageID newStorage);
     void endCopyObject(MtpObjectHandle handle, bool succeeded);
 };
