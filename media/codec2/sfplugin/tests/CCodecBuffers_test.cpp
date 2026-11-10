@@ -20,9 +20,11 @@
 
 #include <codec2/hidl/client.h>
 #include <media/stagefright/MediaCodecConstants.h>
+#include <media/stagefright/foundation/ABuffer.h>
 
 #include <C2BlockInternal.h>
 #include <C2PlatformSupport.h>
+#include <Codec2BufferUtils.h>
 #include <Codec2Mapper.h>
 
 namespace android {
@@ -860,6 +862,240 @@ INSTANTIATE_TEST_SUITE_P(
                     + planar
                     + std::to_string(std::get<3>(info.param));
         });
+
+namespace {
+
+// Describes a YUV 4:2:0 graphic block laid out in one contiguous allocation. All offsets are in
+// bytes from the start of the Y plane.
+struct Yuv420Spec {
+    int32_t colorFormat;  // client color format
+    bool planar;          // separate U/V planes; otherwise U/V are interleaved
+    bool p010;            // 16-bit samples (only with !planar)
+    int32_t rowInc;       // Y row increment in bytes (the allocation's stride)
+    size_t uOffset;
+    size_t vOffset;
+};
+
+constexpr uint32_t kWrapTestWidth = 320;
+constexpr uint32_t kWrapTestHeight = 240;
+
+C2PlanarLayout MakeYuv420Layout(const Yuv420Spec &spec) {
+    const uint32_t depth = spec.p010 ? 16 : 8;
+    const uint32_t bitDepth = spec.p010 ? 10 : 8;
+    const uint32_t shift = spec.p010 ? 6 : 0;
+    const int32_t sampleSize = spec.p010 ? 2 : 1;  // bytes
+    const uint32_t vSampleOffset = spec.p010 ? 2 : 1;  // V follows U in interleaved layouts
+    C2PlanarLayout layout = {
+        C2PlanarLayout::TYPE_YUV,
+        3,  /* numPlanes */
+        spec.planar ? 3u : 2u,  /* rootPlanes */
+        {},  /* planes --- to be filled below */
+    };
+    layout.planes[C2PlanarLayout::PLANE_Y] = {
+        C2PlaneInfo::CHANNEL_Y, sampleSize, spec.rowInc, 1, 1, depth, bitDepth, shift,
+        C2PlaneInfo::NATIVE, C2PlanarLayout::PLANE_Y, 0,
+    };
+    if (spec.planar) {
+        layout.planes[C2PlanarLayout::PLANE_U] = {
+            C2PlaneInfo::CHANNEL_CB, 1, spec.rowInc / 2, 2, 2, depth, bitDepth, shift,
+            C2PlaneInfo::NATIVE, C2PlanarLayout::PLANE_U, 0,
+        };
+        layout.planes[C2PlanarLayout::PLANE_V] = {
+            C2PlaneInfo::CHANNEL_CR, 1, spec.rowInc / 2, 2, 2, depth, bitDepth, shift,
+            C2PlaneInfo::NATIVE, C2PlanarLayout::PLANE_V, 0,
+        };
+    } else {
+        layout.planes[C2PlanarLayout::PLANE_U] = {
+            C2PlaneInfo::CHANNEL_CB, 2 * sampleSize, spec.rowInc, 2, 2, depth, bitDepth, shift,
+            C2PlaneInfo::NATIVE, C2PlanarLayout::PLANE_U, 0,
+        };
+        layout.planes[C2PlanarLayout::PLANE_V] = {
+            C2PlaneInfo::CHANNEL_CR, 2 * sampleSize, spec.rowInc, 2, 2, depth, bitDepth, shift,
+            C2PlaneInfo::NATIVE, C2PlanarLayout::PLANE_U,  /* rootIx */
+            vSampleOffset,  /* offset */
+        };
+    }
+    return layout;
+}
+
+uint8_t WrapTestPixel(uint8_t value, uint32_t row, uint32_t col) {
+    return (uint32_t(value) * row + col) & 0xFF;
+}
+
+void FillWrapTestPlane(C2GraphicView &view, size_t index, uint8_t value) {
+    const C2PlaneInfo &plane = view.layout().planes[index];
+    uint8_t *rowPtr = view.data()[index];
+    for (uint32_t row = 0; row < view.height() / plane.rowSampling; ++row) {
+        uint8_t *colPtr = rowPtr;
+        for (uint32_t col = 0; col < view.width() / plane.colSampling; ++col) {
+            *colPtr = WrapTestPixel(value, row, col);
+            colPtr += plane.colInc;
+        }
+        rowPtr += plane.rowInc;
+    }
+}
+
+// Checks one plane of |image| (as laid out in |base|) against the pattern from FillWrapTestPlane.
+::testing::AssertionResult VerifyWrapTestPlane(
+        const MediaImage2 &image, const uint8_t *base, uint32_t index, uint8_t value) {
+    const MediaImage2::PlaneInfo &plane = image.mPlane[index];
+    const uint8_t *rowPtr = base + plane.mOffset;
+    for (uint32_t row = 0; row < image.mHeight / plane.mVertSubsampling; ++row) {
+        const uint8_t *colPtr = rowPtr;
+        for (uint32_t col = 0; col < image.mWidth / plane.mHorizSubsampling; ++col) {
+            if (*colPtr != WrapTestPixel(value, row, col)) {
+                return ::testing::AssertionFailure()
+                        << "plane " << index << " row=" << row << " col=" << col
+                        << " expected=" << int(WrapTestPixel(value, row, col))
+                        << " actual=" << int(*colPtr);
+            }
+            colPtr += plane.mColInc;
+        }
+        rowPtr += plane.mRowInc;
+    }
+    return ::testing::AssertionSuccess();
+}
+
+}  // namespace
+
+// Tests which of the layouts that gralloc can produce GraphicView2MediaImageConverter may expose
+// to the client as-is (wrap) and which it has to copy into the packed layout described by
+// KEY_STRIDE / KEY_SLICE_HEIGHT.
+class GraphicView2MediaImageConverterWrapTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        mFormat = new AMessage;
+    }
+
+    // Builds the converter for a 320x240 block described by |spec|.
+    void CreateConverter(const Yuv420Spec &spec) {
+        const C2PlanarLayout layout = MakeYuv420Layout(spec);
+        const size_t capacity = spec.vOffset + spec.rowInc * kWrapTestHeight;
+        std::vector<size_t> offsets = {0, spec.uOffset, spec.vOffset};
+        std::shared_ptr<C2GraphicAllocation> alloc = std::make_shared<TestGraphicAllocation>(
+                kWrapTestWidth, kWrapTestHeight, layout, capacity, offsets);
+        mBlock = _C2BlockFactory::CreateGraphicBlock(alloc);
+        ASSERT_NE(nullptr, mBlock);
+        C2GraphicView view = mBlock->map().get();
+        ASSERT_EQ(C2_OK, view.error());
+        FillWrapTestPlane(view, C2PlanarLayout::PLANE_Y, 'Y');
+        FillWrapTestPlane(view, C2PlanarLayout::PLANE_U, 'U');
+        FillWrapTestPlane(view, C2PlanarLayout::PLANE_V, 'V');
+        mFormat->setInt32(KEY_COLOR_FORMAT, spec.colorFormat);
+        mConverter = std::make_unique<GraphicView2MediaImageConverter>(
+                view, mFormat, false /* copy */);
+        ASSERT_EQ(OK, mConverter->initCheck());
+    }
+
+    const MediaImage2 &image() const {
+        return *(const MediaImage2 *)mConverter->imageData()->data();
+    }
+
+    // Slice height a client derives from the image data, as CCodecBuffers does.
+    int32_t sliceHeight() const {
+        return int32_t((int64_t(image().mPlane[MediaImage2::U].mOffset)
+                        - int64_t(image().mPlane[MediaImage2::Y].mOffset))
+                       / image().mPlane[MediaImage2::Y].mRowInc);
+    }
+
+    // The block must not be wrapped, and copying must yield the packed 8-bit planar layout with
+    // the content of every plane intact.
+    void ExpectCopiedToPackedLayout() {
+        ASSERT_EQ(nullptr, mConverter->wrap());
+        sp<ABuffer> backBuffer = new ABuffer(mConverter->backBufferSize());
+        ASSERT_TRUE(mConverter->setBackBuffer(backBuffer));
+        ASSERT_EQ(OK, mConverter->copyToMediaImage());
+        const MediaImage2 &img = image();
+        EXPECT_EQ(int32_t(kWrapTestWidth), img.mPlane[MediaImage2::Y].mRowInc);
+        EXPECT_EQ(kWrapTestWidth * kWrapTestHeight, img.mPlane[MediaImage2::U].mOffset);
+        EXPECT_EQ(kWrapTestHeight, uint32_t(sliceHeight()));
+        EXPECT_TRUE(VerifyWrapTestPlane(img, backBuffer->base(), MediaImage2::Y, 'Y'));
+        EXPECT_TRUE(VerifyWrapTestPlane(img, backBuffer->base(), MediaImage2::U, 'U'));
+        EXPECT_TRUE(VerifyWrapTestPlane(img, backBuffer->base(), MediaImage2::V, 'V'));
+    }
+
+    sp<AMessage> mFormat;
+    std::shared_ptr<C2GraphicBlock> mBlock;
+    std::unique_ptr<GraphicView2MediaImageConverter> mConverter;
+};
+
+// 1. Padded stride, chroma planes contiguous right after Y.
+TEST_F(GraphicView2MediaImageConverterWrapTest, PlanarPaddedStrideIsWrapped) {
+    const size_t u = 512 * kWrapTestHeight;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUV420Planar, true, false, 512, u, u + 256 * (kWrapTestHeight / 2)}));
+    ASSERT_NE(nullptr, mConverter->wrap());
+    EXPECT_EQ(512, image().mPlane[MediaImage2::Y].mRowInc);
+    EXPECT_EQ(int32_t(kWrapTestHeight), sliceHeight());
+}
+
+// 2. Padded Y slice height: U starts at stride * 256 and V follows (stride / 2) * 128 later.
+TEST_F(GraphicView2MediaImageConverterWrapTest, PlanarPaddedSliceHeightIsWrapped) {
+    const size_t u = 320 * 256;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUV420Planar, true, false, 320, u, u + 160 * 128}));
+    ASSERT_NE(nullptr, mConverter->wrap());
+    EXPECT_EQ(256, sliceHeight());
+}
+
+// 3. V is padded beyond (stride / 2) * (sliceHeight / 2): the chroma plane height is padded to 128
+// rows. KEY_STRIDE / KEY_SLICE_HEIGHT would put V 8 chroma rows early, so it has to be copied.
+TEST_F(GraphicView2MediaImageConverterWrapTest, PlanarPaddedChromaHeightIsCopied) {
+    const size_t u = 512 * kWrapTestHeight;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUV420Planar, true, false, 512, u, u + 256 * 128}));
+    ExpectCopiedToPackedLayout();
+}
+
+// 4. U does not start on a row boundary of Y.
+TEST_F(GraphicView2MediaImageConverterWrapTest, PlanarUOffsetNotMultipleOfStrideIsCopied) {
+    const size_t u = 320 * kWrapTestHeight + 16;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUV420Planar, true, false, 320, u, u + 160 * (kWrapTestHeight / 2)}));
+    ASSERT_EQ(nullptr, mConverter->wrap());
+}
+
+// Clients derive V from stride * sliceHeight / 4 or (stride / 2) * (sliceHeight / 2), which only
+// agree for an even slice height.
+TEST_F(GraphicView2MediaImageConverterWrapTest, PlanarOddSliceHeightIsCopied) {
+    const size_t u = 320 * (kWrapTestHeight + 1);
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUV420Planar, true, false, 320, u, u + 160 * (kWrapTestHeight / 2)}));
+    ASSERT_EQ(nullptr, mConverter->wrap());
+}
+
+TEST_F(GraphicView2MediaImageConverterWrapTest, SemiPlanarContiguousIsWrapped) {
+    const size_t u = 512 * kWrapTestHeight;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUV420SemiPlanar, false, false, 512, u, u + 1}));
+    ASSERT_NE(nullptr, mConverter->wrap());
+    EXPECT_EQ(int32_t(kWrapTestHeight), sliceHeight());
+}
+
+// 5. Semi-planar with V != U + 1.
+TEST_F(GraphicView2MediaImageConverterWrapTest, SemiPlanarVNotNextToUIsCopied) {
+    const size_t u = 320 * kWrapTestHeight;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUV420SemiPlanar, false, false, 320, u, u + 2}));
+    ASSERT_EQ(nullptr, mConverter->wrap());
+}
+
+// 6. P010 variants of 1 and of the "not described by stride / slice height" cases.
+TEST_F(GraphicView2MediaImageConverterWrapTest, P010PaddedStrideIsWrapped) {
+    const size_t u = 1024 * kWrapTestHeight;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUVP010, false, true, 1024, u, u + 2}));
+    ASSERT_NE(nullptr, mConverter->wrap());
+    EXPECT_EQ(1024, image().mPlane[MediaImage2::Y].mRowInc);
+    EXPECT_EQ(int32_t(kWrapTestHeight), sliceHeight());
+}
+
+TEST_F(GraphicView2MediaImageConverterWrapTest, P010UOffsetNotMultipleOfStrideIsCopied) {
+    const size_t u = 640 * kWrapTestHeight + 128;
+    ASSERT_NO_FATAL_FAILURE(CreateConverter(
+            {COLOR_FormatYUVP010, false, true, 640, u, u + 2}));
+    ASSERT_EQ(nullptr, mConverter->wrap());
+}
 
 TEST(LinearOutputBuffersTest, PcmConvertFormat) {
     // Prepare LinearOutputBuffers
