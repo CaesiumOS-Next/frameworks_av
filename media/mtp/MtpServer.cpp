@@ -1196,7 +1196,7 @@ MtpResponseCode MtpServer::doCopyObject() {
         }
     }
 
-    mDatabase->endCopyObject(handle, result);
+    mDatabase->endCopyObject(handle, result == MTP_RESPONSE_OK);
     mResponse.setParameter(1, handle);
     return result;
 }
