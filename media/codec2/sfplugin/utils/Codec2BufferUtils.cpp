@@ -827,6 +827,35 @@ MemoryBlock MemoryBlock::Allocate(size_t size) {
     return MemoryBlockPool().fetch(size);
 }
 
+// Clients of non-flexible YUV 4:2:0 color formats locate the chroma planes from KEY_STRIDE and
+// KEY_SLICE_HEIGHT alone: U starts at stride * sliceHeight, and V starts right after U (planar)
+// or |interleavedVOffset| bytes after U (semi-planar). Returns true if the planes of |view| are
+// laid out that way, i.e. the buffer can be wrapped without misleading such clients.
+static bool chromaPlanesMatchSliceHeight(const C2GraphicView& view, int32_t stride,
+                                         uint32_t minSliceHeight, int32_t interleavedVOffset) {
+    const int64_t uOffset =
+            view.data()[C2PlanarLayout::PLANE_U] - view.data()[C2PlanarLayout::PLANE_Y];
+    const int64_t vOffset =
+            view.data()[C2PlanarLayout::PLANE_V] - view.data()[C2PlanarLayout::PLANE_Y];
+    if (stride <= 0 || uOffset <= 0 || uOffset % stride != 0) {
+        return false;
+    }
+    const int64_t sliceHeight = uOffset / stride;
+    if (sliceHeight < minSliceHeight) {
+        return false;
+    }
+    const int64_t expectedVOffset = interleavedVOffset != 0
+                                            ? uOffset + interleavedVOffset
+                                            : uOffset + int64_t(stride / 2) * (sliceHeight / 2);
+    if (vOffset != expectedVOffset) {
+        ALOGD("Converter: chroma planes not described by slice height "
+              "(stride=%d u=%lld v=%lld expected v=%lld); copying",
+              stride, (long long)uOffset, (long long)vOffset, (long long)expectedVOffset);
+        return false;
+    }
+    return true;
+}
+
 GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
         const C2GraphicView &view, const sp<AMessage> &format, bool copy)
     : mInitCheck(NO_INIT),
@@ -971,7 +1000,8 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                         tryWrapping = yuv420888 && uPlane.colInc == 1 && vPlane.colInc == 1
                                 && yPlane.rowInc == uPlane.rowInc * 2
                                 && view.data()[0] < view.data()[1]
-                                && view.data()[1] < view.data()[2];
+                                && view.data()[1] < view.data()[2]
+                                && chromaPlanesMatchSliceHeight(view, yPlane.rowInc, vStride, 0);
                     }
                     break;
 
@@ -999,7 +1029,8 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                         tryWrapping = yuv420888 && uPlane.colInc == 2 && vPlane.colInc == 2
                                 && yPlane.rowInc == uPlane.rowInc
                                 && view.data()[0] < view.data()[1]
-                                && view.data()[1] < view.data()[2];
+                                && view.data()[1] < view.data()[2]
+                                && chromaPlanesMatchSliceHeight(view, yPlane.rowInc, vStride, 1);
                     }
                     break;
 
@@ -1039,7 +1070,8 @@ GraphicView2MediaImageConverter::GraphicView2MediaImageConverter(
                                 && uPlane.colInc == 4
                                 && vPlane.colInc == 4
                                 && yPlane.rowInc == uPlane.rowInc
-                                && yPlane.rowInc == vPlane.rowInc;
+                                && yPlane.rowInc == vPlane.rowInc
+                                && chromaPlanesMatchSliceHeight(view, yPlane.rowInc, vStride, 2);
                     }
                     break;
 
