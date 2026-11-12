@@ -598,9 +598,17 @@ status_t PatchPanel::Patch::createConnections_l(const sp<IAfPatchPanel>& panel)
     }
 
     // create a special record track to capture from record thread
-    uint32_t channelCount = mPlayback.thread()->channelCount();
-    audio_channel_mask_t inChannelMask = audio_channel_in_mask_from_count(channelCount);
-    audio_channel_mask_t outChannelMask = mPlayback.thread()->channelMask();
+    audio_channel_mask_t inChannelMask = mRecord.thread()->channelMask();
+    audio_channel_mask_t outChannelMask = audio_channel_mask_in_to_out(inChannelMask);
+    if (outChannelMask == AUDIO_CHANNEL_INVALID) {
+        uint32_t channelCount = mRecord.thread()->channelCount();
+        outChannelMask = audio_channel_out_mask_from_count(channelCount);
+    }
+    if (outChannelMask == AUDIO_CHANNEL_INVALID) {
+        uint32_t channelCount = mPlayback.thread()->channelCount();
+        inChannelMask = audio_channel_in_mask_from_count(channelCount);
+        outChannelMask = mPlayback.thread()->channelMask();
+    }
     uint32_t sampleRate = mPlayback.thread()->sampleRate();
     audio_format_t format = mPlayback.thread()->format();
 
