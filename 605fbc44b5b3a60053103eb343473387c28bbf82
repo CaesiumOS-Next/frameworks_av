@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "794f62d7_25a31455",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2026-11-17T13:16:09Z",
+      "side": 1,
+      "message": "Hi, dear aosp team.\nCould you please review this patch and the referenced bug?",
+      "revId": "605fbc44b5b3a60053103eb343473387c28bbf82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
