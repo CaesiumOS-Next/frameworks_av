@@ -55,6 +55,29 @@ cc_test {
 }
 
 cc_test {
+    name: "DrmUtils_test",
+    srcs: ["DrmUtils_test.cpp"],
+    header_libs: [
+        "libmedia_headers",
+        "libmediadrm_headers",
+    ],
+    shared_libs: [
+        "android.hardware.drm-V1-ndk",
+        "libbinder_ndk",
+        "liblog",
+        "libmediadrm",
+        "libutils",
+    ],
+    include_dirs: [
+        "frameworks/av/drm/libmediadrm/include",
+    ],
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+}
+
+cc_test {
     name: "EventMetric_test",
     srcs: ["EventMetric_test.cpp"],
     header_libs: [

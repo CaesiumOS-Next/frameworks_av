@@ -418,8 +418,11 @@ DrmStatus DrmHalAidl::isCryptoSchemeSupported(const uint8_t uuid[16], const Stri
     std::string mimeTypeStr = mimeType.c_str();
 
     for (ssize_t i = mFactories.size() - 1; i >= 0; i--) {
+        if (!mFactories[i]->mayHandle(uuid)) continue;
+        auto factory = mFactories[i]->get();
+        if (factory == nullptr) continue;
         CryptoSchemes schemes{};
-        auto err = mFactories[i]->getSupportedCryptoSchemes(&schemes);
+        auto err = factory->getSupportedCryptoSchemes(&schemes);
         if (!err.isOk() || !std::count(schemes.uuids.begin(), schemes.uuids.end(), uuidAidl)) {
             continue;
         }
@@ -466,14 +469,17 @@ DrmStatus DrmHalAidl::createPlugin(const uint8_t uuid[16], const String8& appPac
     mMetrics->SetAppPackageName(appPackageName);
     mMetrics->SetAppUid(AIBinder_getCallingUid());
     for (ssize_t i = mFactories.size() - 1; i >= 0; i--) {
+        if (!mFactories[i]->mayHandle(uuid)) continue;
+        auto factory = mFactories[i]->get();
+        if (factory == nullptr) continue;
         CryptoSchemes schemes{};
-        auto err = mFactories[i]->getSupportedCryptoSchemes(&schemes);
+        auto err = factory->getSupportedCryptoSchemes(&schemes);
         if (!err.isOk() || !std::count(schemes.uuids.begin(), schemes.uuids.end(), uuidAidl)) {
             continue;
         }
 
         ::ndk::ScopedAStatus status =
-                mFactories[i]->createDrmPlugin(uuidAidl, appPackageNameAidl, &pluginAidl);
+                factory->createDrmPlugin(uuidAidl, appPackageNameAidl, &pluginAidl);
         if (status.isOk()) {
             if (pluginAidl != NULL) {
                 mPlugin = pluginAidl;
@@ -1204,8 +1210,17 @@ DrmStatus DrmHalAidl::getSupportedSchemes(std::vector<uint8_t>& schemes) const {
 
     if (mFactories.empty()) return UNKNOWN_ERROR;
     for (ssize_t i = mFactories.size() - 1; i >= 0; i--) {
+        // Report the declared uuids without starting a HAL that may never be used.
+        if (const auto& known = mFactories[i]->knownUuids()) {
+            for (const auto& uuidObj : *known) {
+                schemes.insert(schemes.end(), uuidObj.uuid.begin(), uuidObj.uuid.end());
+            }
+            continue;
+        }
+        auto factory = mFactories[i]->get();
+        if (factory == nullptr) continue;
         CryptoSchemes curSchemes{};
-        auto err = mFactories[i]->getSupportedCryptoSchemes(&curSchemes);
+        auto err = factory->getSupportedCryptoSchemes(&curSchemes);
         if (!err.isOk()) {
             continue;
         }

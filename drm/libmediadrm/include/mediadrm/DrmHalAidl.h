@@ -35,6 +35,10 @@ using KeyStatusAidl = ::aidl::android::hardware::drm::KeyStatus;
 using ::aidl::android::hardware::drm::Uuid;
 
 namespace android {
+namespace DrmUtils {
+class DrmFactoryAidl;
+}  // namespace DrmUtils
+
 struct DrmHalAidl : public IDrm{
     struct DrmSessionClient;
     DrmHalAidl();
@@ -125,7 +129,7 @@ struct DrmHalAidl : public IDrm{
     static Mutex mLock;
     std::shared_ptr<MediaDrmMetrics> mMetrics;
     std::shared_ptr<DrmHalListener> mListener;
-    const std::vector<std::shared_ptr<IDrmFactoryAidl>> mFactories;
+    const std::vector<std::shared_ptr<DrmUtils::DrmFactoryAidl>> mFactories;
     std::shared_ptr<IDrmPluginAidl> mPlugin;
     status_t mInitCheck;
     std::vector<std::shared_ptr<DrmSessionClient>> mOpenSessions;

@@ -45,6 +45,7 @@
 #include <mediadrm/ICrypto.h>
 #include <mediadrm/IDrm.h>
 
+#include <fstream>
 #include <map>
 #include <string>
 
@@ -165,30 +166,118 @@ sp<::V1_0::ICryptoPlugin> MakeCryptoPlugin(const sp<::V1_0::ICryptoFactory>& fac
     }
 }
 
+constexpr char kUuidMapPath[] = "/vendor/etc/drm/hal_uuid_map.json";
+
+std::optional<Uuid> parseUuid(const std::string& str) {
+    Uuid uuid;
+    size_t pos = 0;
+    for (size_t i = 0; i < uuid.uuid.size(); i++) {
+        while (pos < str.size() && str[pos] == '-') pos++;
+        if (pos + 2 > str.size()) return std::nullopt;
+        char* end = nullptr;
+        const std::string byteStr = str.substr(pos, 2);
+        unsigned long value = strtoul(byteStr.c_str(), &end, 16);
+        if (end != byteStr.c_str() + 2) return std::nullopt;
+        uuid.uuid[i] = static_cast<uint8_t>(value);
+        pos += 2;
+    }
+    if (pos != str.size()) return std::nullopt;
+    return uuid;
+}
+
+// Loaded once per process; instances missing here are resolved eagerly as before.
+const std::map<std::string, std::vector<Uuid>>& getUuidMap() {
+    static const std::map<std::string, std::vector<Uuid>> sUuidMap = [] {
+        std::ifstream file(kUuidMapPath);
+        if (!file.is_open()) {
+            ALOGV("no drm hal uuid map at %s", kUuidMapPath);
+            return std::map<std::string, std::vector<Uuid>>();
+        }
+        return parseUuidMap(file, kUuidMapPath);
+    }();
+    return sUuidMap;
+}
+
 }  // namespace
+
+std::map<std::string, std::vector<Uuid>> parseUuidMap(std::istream& in, const char* source) {
+    std::map<std::string, std::vector<Uuid>> result;
+    Json::Value root;
+    Json::CharReaderBuilder builder;
+    std::string errors;
+    if (!Json::parseFromStream(builder, in, &root, &errors) || !root.isObject()) {
+        ALOGE("failed to parse %s: %s", source, errors.c_str());
+        return result;
+    }
+
+    for (const auto& name : root.getMemberNames()) {
+        const Json::Value& list = root[name];
+        if (!list.isArray()) {
+            ALOGE("%s: instance %s is not an array", source, name.c_str());
+            continue;
+        }
+        std::vector<Uuid> uuids;
+        bool valid = true;
+        for (const auto& item : list) {
+            auto uuid = item.isString() ? parseUuid(item.asString()) : std::nullopt;
+            if (!uuid) {
+                ALOGE("%s: invalid uuid for instance %s", source, name.c_str());
+                valid = false;
+                break;
+            }
+            uuids.push_back(*uuid);
+        }
+        // A broken entry is ignored so the instance falls back to eager resolution.
+        if (valid) result[name] = std::move(uuids);
+    }
+    return result;
+}
 
 bool UseDrmService() {
     return property_get_bool("mediadrm.use_mediadrmserver", true);
 }
 
-std::vector<std::shared_ptr<IDrmFactoryAidl>> makeDrmFactoriesAidl() {
-    std::vector<std::shared_ptr<IDrmFactoryAidl>> factories;
+DrmFactoryAidl::DrmFactoryAidl(std::string instance, std::optional<std::vector<Uuid>> knownUuids)
+    : mInstance(std::move(instance)), mKnownUuids(std::move(knownUuids)) {}
+
+bool DrmFactoryAidl::mayHandle(const uint8_t uuid[16]) const {
+    if (!mKnownUuids) return true;
+    const Uuid uuidAidl = toAidlUuid(uuid);
+    return std::find(mKnownUuids->begin(), mKnownUuids->end(), uuidAidl) != mKnownUuids->end();
+}
+
+std::shared_ptr<IDrmFactoryAidl> DrmFactoryAidl::get() {
+    std::lock_guard<std::mutex> lock(mMutex);
+    if (mResolved) return mFactory;
+
+    auto fullName = std::string(IDrmFactoryAidl::descriptor) + "/" + mInstance;
+    mFactory = IDrmFactoryAidl::fromBinder(
+            ::ndk::SpAIBinder(AServiceManager_waitForService(fullName.c_str())));
+    if (mFactory == nullptr) {
+        ALOGE("not found IDrmFactory. Instance name:[%s]", fullName.c_str());
+    } else {
+        ALOGI("found IDrmFactory. Instance name:[%s]", fullName.c_str());
+    }
+    mResolved = true;
+    return mFactory;
+}
+
+std::vector<std::shared_ptr<DrmFactoryAidl>> makeDrmFactoriesAidl() {
+    std::vector<std::shared_ptr<DrmFactoryAidl>> factories;
     AServiceManager_forEachDeclaredInstance(
-        IDrmFactoryAidl::descriptor, static_cast<void*>(&factories),
-        [](const char* instance, void* context) {
-            auto fullName = std::string(IDrmFactoryAidl::descriptor) + "/" + std::string(instance);
-            auto factory = IDrmFactoryAidl::fromBinder(
-                    ::ndk::SpAIBinder(AServiceManager_waitForService(fullName.c_str())));
-            if (factory == nullptr) {
-                ALOGE("not found IDrmFactory. Instance name:[%s]", fullName.c_str());
-                return;
-            }
-
-            ALOGI("found IDrmFactory. Instance name:[%s]", fullName.c_str());
-            static_cast<std::vector<std::shared_ptr<IDrmFactoryAidl>>*>(context)->emplace_back(
-                    factory);
-        });
-
+            IDrmFactoryAidl::descriptor, static_cast<void*>(&factories),
+            [](const char* instance, void* context) {
+                auto* list = static_cast<std::vector<std::shared_ptr<DrmFactoryAidl>>*>(context);
+                const auto& map = getUuidMap();
+                auto it = map.find(instance);
+                if (it == map.end()) {
+                    // Unknown uuids: resolve now so that a missing HAL is dropped as before.
+                    auto factory = std::make_shared<DrmFactoryAidl>(instance, std::nullopt);
+                    if (factory->get() != nullptr) list->emplace_back(std::move(factory));
+                    return;
+                }
+                list->emplace_back(std::make_shared<DrmFactoryAidl>(instance, it->second));
+            });
     return factories;
 }
 
