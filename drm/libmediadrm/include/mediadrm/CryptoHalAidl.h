@@ -39,6 +39,9 @@ using ::android::hardware::HidlMemory;
 class IMemoryHeap;
 
 namespace android {
+namespace DrmUtils {
+class DrmFactoryAidl;
+}  // namespace DrmUtils
 
 struct CryptoHalAidl : public ICrypto {
     CryptoHalAidl();
@@ -66,7 +69,7 @@ struct CryptoHalAidl : public ICrypto {
   private:
     mutable Mutex mLock;
 
-    const std::vector<std::shared_ptr<IDrmFactoryAidl>> mFactories;
+    const std::vector<std::shared_ptr<DrmUtils::DrmFactoryAidl>> mFactories;
     std::shared_ptr<ICryptoPluginAidl> mPlugin;
 
     /**

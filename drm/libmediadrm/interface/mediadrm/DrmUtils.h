@@ -38,8 +38,12 @@
 #include <deque>
 #include <endian.h>
 #include <inttypes.h>
+#include <istream>
 #include <iterator>
+#include <map>
+#include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <vector>
 #include <aidl/android/hardware/drm/LogMessage.h>
@@ -174,7 +178,33 @@ inline Uuid toAidlUuid(const uint8_t uuid[16]) {
     return uuidAidl;
 }
 
-std::vector<std::shared_ptr<IDrmFactoryAidl>> makeDrmFactoriesAidl();
+// Parses {"<instance>": ["<uuid>", ...], ...}. A malformed entry is dropped so that
+// the instance is treated as having unknown uuids; a malformed document yields an empty map.
+std::map<std::string, std::vector<Uuid>> parseUuidMap(std::istream& in, const char* source);
+
+// Lazily resolves an AIDL IDrmFactory instance so declaring a HAL does not start it.
+class DrmFactoryAidl {
+  public:
+    // knownUuids is nullopt when the instance is not in the vendor uuid map.
+    DrmFactoryAidl(std::string instance, std::optional<std::vector<Uuid>> knownUuids);
+
+    // True if this instance may support the uuid; always true when the uuids are unknown.
+    bool mayHandle(const uint8_t uuid[16]) const;
+    const std::optional<std::vector<Uuid>>& knownUuids() const { return mKnownUuids; }
+    const std::string& instance() const { return mInstance; }
+
+    // Starts the HAL on first use. Returns nullptr if it cannot be found.
+    std::shared_ptr<IDrmFactoryAidl> get();
+
+  private:
+    const std::string mInstance;
+    const std::optional<std::vector<Uuid>> mKnownUuids;
+    std::mutex mMutex;
+    std::shared_ptr<IDrmFactoryAidl> mFactory;
+    bool mResolved = false;
+};
+
+std::vector<std::shared_ptr<DrmFactoryAidl>> makeDrmFactoriesAidl();
 
 std::vector<sp<::V1_0::IDrmFactory>> MakeDrmFactories(const uint8_t uuid[16] = nullptr);
 

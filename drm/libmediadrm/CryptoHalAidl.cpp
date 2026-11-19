@@ -174,8 +174,11 @@ static std::vector<uint8_t> toStdVec(const uint8_t* ptr, size_t n) {
 bool CryptoHalAidl::isCryptoSchemeSupportedInternal(const uint8_t uuid[16], int* factoryIdx) {
     Uuid uuidAidl = DrmUtils::toAidlUuid(uuid);
     for (size_t i = 0; i < mFactories.size(); i++) {
+        if (!mFactories[i]->mayHandle(uuid)) continue;
+        auto factory = mFactories[i]->get();
+        if (factory == nullptr) continue;
         CryptoSchemes schemes{};
-        if (mFactories[i]->getSupportedCryptoSchemes(&schemes).isOk()) {
+        if (factory->getSupportedCryptoSchemes(&schemes).isOk()) {
             if (std::count(schemes.uuids.begin(), schemes.uuids.end(), uuidAidl)) {
                 if (factoryIdx != NULL) *factoryIdx = i;
                 return true;
@@ -210,7 +213,7 @@ status_t CryptoHalAidl::createPlugin(const uint8_t uuid[16], const void* data, s
     std::vector<uint8_t> dataAidl = toStdVec(toVector(toHidlVec(data, size)));
     int i = 0;
     if (isCryptoSchemeSupportedInternal(uuid, &i)) {
-        mPlugin = makeCryptoPlugin(mFactories[i], uuidAidl, dataAidl);
+        mPlugin = makeCryptoPlugin(mFactories[i]->get(), uuidAidl, dataAidl);
     }
 
     if (mInitCheck == NO_INIT) {
