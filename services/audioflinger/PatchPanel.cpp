@@ -601,6 +601,19 @@ status_t PatchPanel::Patch::createConnections_l(const sp<IAfPatchPanel>& panel)
     uint32_t channelCount = mPlayback.thread()->channelCount();
     audio_channel_mask_t inChannelMask = audio_channel_in_mask_from_count(channelCount);
     audio_channel_mask_t outChannelMask = mPlayback.thread()->channelMask();
+    if (mPlayback.thread()->type() != IAfThreadBase::DIRECT) {
+        audio_channel_mask_t recordInChannelMask = mRecord.thread()->channelMask();
+        audio_channel_mask_t recordOutChannelMask =
+                audio_channel_mask_in_to_out(recordInChannelMask);
+        if (recordOutChannelMask == AUDIO_CHANNEL_INVALID) {
+            recordOutChannelMask = audio_channel_out_mask_from_count(
+                    mRecord.thread()->channelCount());
+        }
+        if (recordOutChannelMask != AUDIO_CHANNEL_INVALID) {
+            inChannelMask = recordInChannelMask;
+            outChannelMask = recordOutChannelMask;
+        }
+    }
     uint32_t sampleRate = mPlayback.thread()->sampleRate();
     audio_format_t format = mPlayback.thread()->format();
 
