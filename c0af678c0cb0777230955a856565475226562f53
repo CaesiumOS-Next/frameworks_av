@@ -16,6 +16,78 @@
       "message": "Please help to review.",
       "revId": "c0af678c0cb0777230955a856565475226562f53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f491b006_43b31166",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2026-11-20T17:07:06Z",
+      "side": 1,
+      "message": "Could you rebase to up-to-date also?",
+      "isAi": true,
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bc1afd_0b709158",
+        "filename": "media/codec2/sfplugin/utils/Codec2BufferUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2026-11-20T17:07:06Z",
+      "side": 1,
+      "message": "Please add unit tests for this helper (the TestGraphicAllocation-based harness from aosp/4099133 PS4 in CCodecBuffers_test.cpp can be reused). Suggested cases:\n1. padded stride, contiguous chroma -\u003e wrap() !\u003d nullptr;\n2. padded Y slice height (e.g. 320x240, U at stride*256, V at U + (stride/2)*128) -\u003e wrapped, and image-data yields slice height 256;\n3. the Shield case (V padded beyond (stride/2)*(sliceHeight/2)) -\u003e wrap() \u003d\u003d nullptr and copyToMediaImage() produces the packed layout;\n4. uOffset % stride !\u003d 0 -\u003e copied;\n5. semi-planar with V !\u003d U + 1 -\u003e copied;\n6. a P010 variant of 1 and 3.",
+      "isAi": true,
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4f89f2_52ecdec4",
+        "filename": "media/codec2/sfplugin/utils/Codec2BufferUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2026-11-20T17:07:06Z",
+      "side": 1,
+      "message": "For the planar case please also require sliceHeight % 2 \u003d\u003d 0. Clients compute the V offset two ways - (stride/2) * (sliceHeight/2) (EncodeDecodeTest, this helper) and stride * sliceHeight / 4 (VideoCodecTestBase.PackYUV420, and the converter\u0027s own copy-path layout uses stride * vStride * 5 / 4) - and those agree only for an even slice height. Cheap to guarantee here rather than rely on gralloc never producing an odd one.",
+      "isAi": true,
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "151d1401_cf831d0f",
+        "filename": "media/codec2/sfplugin/utils/Codec2BufferUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2026-11-20T17:07:06Z",
+      "side": 1,
+      "message": "ALOGV please. GraphicInputBuffers constructs a converter per input buffer, so on an affected device this logs on every frame.",
+      "isAi": true,
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
