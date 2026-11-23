@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fead5a6_29e2a23a",
+        "filename": "media/codec2/sfplugin/utils/Codec2BufferUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1945140
+      },
+      "writtenOn": "2026-11-23T07:08:24Z",
+      "side": 1,
+      "message": "Done\nAdded GraphicView2MediaImageConverterWrapTest in CCodecBuffers_test.cpp, reusing TestGraphicAllocation.",
+      "parentUuid": "37bc1afd_0b709158",
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe4f89f2_52ecdec4",
@@ -72,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4226f3b_e2ab786f",
+        "filename": "media/codec2/sfplugin/utils/Codec2BufferUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1945140
+      },
+      "writtenOn": "2026-11-23T07:08:24Z",
+      "side": 1,
+      "message": "The planar case now also requires sliceHeight % 2 \u003d\u003d 0, with a comment explaining the two V-offset formulas. Odd slice heights take the copy path, and there is a test for it",
+      "parentUuid": "fe4f89f2_52ecdec4",
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "151d1401_cf831d0f",
@@ -86,6 +122,24 @@
       "side": 1,
       "message": "ALOGV please. GraphicInputBuffers constructs a converter per input buffer, so on an affected device this logs on every frame.",
       "isAi": true,
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2bc1e58_ce9b1fc8",
+        "filename": "media/codec2/sfplugin/utils/Codec2BufferUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1945140
+      },
+      "writtenOn": "2026-11-23T07:08:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "151d1401_cf831d0f",
       "revId": "c0af678c0cb0777230955a856565475226562f53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
