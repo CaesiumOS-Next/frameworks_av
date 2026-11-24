@@ -380,6 +380,15 @@ ssize_t MPEG2PSExtractor::dequeuePES() {
             && stream_id != 0xff  // program_stream_directory
             && stream_id != 0xf2  // DSMCC
             && stream_id != 0xf8) {  // H.222.1 type E
+        // The fixed part of the optional PES header, through
+        // PES_header_data_length, is 3 bytes. A packet whose declared
+        // PES_packet_length leaves fewer bits than that in the reader
+        // is malformed; bail out instead of over-reading the bit
+        // reader (which aborts) on the fixed header fields below.
+        if (br.numBitsLeft() < 3 * 8) {
+            return ERROR_MALFORMED;
+        }
+
         /* unsigned PES_marker_bits = */br.getBits(2);  // should be 0x2(hex)
         /* unsigned PES_scrambling_control = */br.getBits(2);
         /* unsigned PES_priority = */br.getBits(1);

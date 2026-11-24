@@ -1257,6 +1257,83 @@ INSTANTIATE_TEST_SUITE_P(
                         "video_480x360_mp4_h264_1350kbps_30fps_aac_stereo_128kbps_44100hz_dash.mp4",
                         2, true)));
 
+// Regression tests for MPEG2PSExtractor::dequeuePES(): a PES packet whose
+// declared PES_packet_length leaves fewer bytes than the fixed part of the
+// optional PES header (3 bytes, through PES_header_data_length) used to
+// abort the extractor via ABitReader::getBits() instead of being rejected
+// as malformed. The crafted streams are padded to one full 8192-byte read
+// chunk so that feedMore() actually dequeues the packet.
+static bool writePESStream(const string &path, bool malformed) {
+    static const uint8_t kPackHeader[14] = {0x00, 0x00, 0x01, 0xBA, 0x00, 0x00, 0x00,
+                                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    // stream_id 0xE0. Malformed: PES_packet_length is 1, so only a single
+    // byte follows the length field while the fixed header needs 3.
+    static const uint8_t kShortPES[7] = {0x00, 0x00, 0x01, 0xE0, 0x00, 0x01, 0x00};
+    // Boundary-valid: PES_packet_length is 7 = 3 header bytes
+    // (PES_header_data_length 0) + 4 payload bytes.
+    static const uint8_t kBoundaryPES[13] = {0x00, 0x00, 0x01, 0xE0, 0x00, 0x07, 0x80,
+                                             0x00, 0x00, 0xAA, 0xBB, 0xCC, 0xDD};
+    static const uint8_t kZeros[8192] = {0};
+
+    FILE *fp = fopen(path.c_str(), "wb");
+    if (!fp) return false;
+    fwrite(kPackHeader, 1, sizeof(kPackHeader), fp);
+    size_t pesSize;
+    if (malformed) {
+        fwrite(kShortPES, 1, sizeof(kShortPES), fp);
+        pesSize = sizeof(kShortPES);
+    } else {
+        fwrite(kBoundaryPES, 1, sizeof(kBoundaryPES), fp);
+        pesSize = sizeof(kBoundaryPES);
+    }
+    fwrite(kZeros, 1, sizeof(kZeros) - sizeof(kPackHeader) - pesSize, fp);
+    fclose(fp);
+    return true;
+}
+
+static MPEG2PSExtractor *createPSExtractor(const string &path, FILE **fpOut,
+                                           sp<DataSource> *sourceOut) {
+    FILE *fp = fopen(path.c_str(), "rb");
+    if (!fp) return nullptr;
+    struct stat buf;
+    stat(path.c_str(), &buf);
+    *sourceOut = new FileSource(dup(fileno(fp)), 0, buf.st_size);
+    *fpOut = fp;
+    if (!*sourceOut) return nullptr;
+    return new MPEG2PSExtractor(new DataSourceHelper((*sourceOut)->wrap()));
+}
+
+TEST(MPEG2PSExtractorUnitTest, ShortPESPacketDoesNotAbort) {
+    string path = gEnv->getRes() + "mpeg2ps_short_pes.mpg";
+    ASSERT_TRUE(writePESStream(path, true));
+
+    FILE *fp = nullptr;
+    sp<DataSource> source;
+    // Before the fix, this aborts inside the MPEG2PSExtractor constructor.
+    MPEG2PSExtractor *extractor = createPSExtractor(path, &fp, &source);
+    ASSERT_NE(extractor, nullptr);
+    EXPECT_EQ(extractor->countTracks(), static_cast<size_t>(0));
+    fclose(fp);
+    source.clear();
+    delete extractor;
+    remove(path.c_str());
+}
+
+TEST(MPEG2PSExtractorUnitTest, MinimalPESHeaderAccepted) {
+    string path = gEnv->getRes() + "mpeg2ps_boundary_pes.mpg";
+    ASSERT_TRUE(writePESStream(path, false));
+
+    FILE *fp = nullptr;
+    sp<DataSource> source;
+    MPEG2PSExtractor *extractor = createPSExtractor(path, &fp, &source);
+    ASSERT_NE(extractor, nullptr);
+    EXPECT_EQ(extractor->countTracks(), static_cast<size_t>(0));
+    fclose(fp);
+    source.clear();
+    delete extractor;
+    remove(path.c_str());
+}
+
 int main(int argc, char **argv) {
     gEnv = new ExtractorUnitTestEnvironment();
     ::testing::AddGlobalTestEnvironment(gEnv);
