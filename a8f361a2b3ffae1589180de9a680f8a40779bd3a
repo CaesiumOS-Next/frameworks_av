@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d9633d4_1a1c85ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1102563
+      },
+      "writtenOn": "2026-11-24T18:43:27Z",
+      "side": 1,
+      "message": "I have merge the change in internal main.",
+      "revId": "a8f361a2b3ffae1589180de9a680f8a40779bd3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
