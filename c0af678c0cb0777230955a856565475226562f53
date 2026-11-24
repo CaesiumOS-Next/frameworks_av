@@ -142,6 +142,24 @@
       "parentUuid": "151d1401_cf831d0f",
       "revId": "c0af678c0cb0777230955a856565475226562f53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70422812_6dcf9171",
+        "filename": "media/codec2/sfplugin/utils/Codec2BufferUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1945140
+      },
+      "writtenOn": "2026-11-24T16:12:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2bc1e58_ce9b1fc8",
+      "revId": "c0af678c0cb0777230955a856565475226562f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
