@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ea2d3b_8453e224",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1643005
+      },
+      "writtenOn": "2026-11-25T09:46:00Z",
+      "side": 1,
+      "message": "Quoting myself from 29th September:\n\n\u003e If you believe you are fixing a security issue, please file a bug with more detail so we can evaluate the severity of the issue against the latest version of this code internally.",
+      "revId": "57632676c464bb25b49ec81d1c9cbdef69b18161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
